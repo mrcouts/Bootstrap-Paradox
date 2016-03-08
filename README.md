@@ -1,2 +1,2 @@
 # Bootstrap-Paradox
-Dynamoc modelling of parallel robots in python \o/
+Dynamic modelling of parallel robots in python \o/
