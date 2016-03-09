@@ -44,14 +44,19 @@ H1 = H('y',0,symbols('l_0'),0,0)
 H2 = H('y',pi,-symbols('l_0'),0,0)
 
 #Vinculos de posicao:
-_q_ = SMatrix( Matrix([ qh_.M_ - (H1*Matrix([RR1.o__[2], Matrix([1]) ]))[0:2,0], qh_.M_ - (H2*Matrix([RR2.o__[2], Matrix([1]) ]))[0:2,0] ]) , range(4) )
+_q_ = SMatrix( Matrix([ qh_.M_ - (H1*Matrix([RR1.o__[2], Matrix([1]) ]))[0:2,0], qh_.M_ - (H2*Matrix([RR2.o__[2], Matrix([1]) ]))[0:2,0] ]) , list((RR1.dq_ + RR2.dq_).M_ ))
 
 Jh_ = SMatrix( _q_.M_.jacobian(qh_.M_), _q_.rowl_, list(qh_.M_.diff(symbols('t'))) )
 Jo_ = SMatrix( _q_.M_.jacobian(qo_.M_), _q_.rowl_, list(qo_.M_.diff(symbols('t'))) )
+J_ = Jh_ + Jo_
 
 Cch_ = SMatrix(1, ph_.rowl_, ph_.rowl_ ) + (-1*Jo_.inv()*Jh_).simplify()
 C_ = ( (P.C_ + RR1.C_ + RR2.C_)*Cch_ ).simplify()
 dC_ = SMatrix( C_.M_.diff(symbols('t')), C_.rowl_, C_.coll_ )
+A_ = J_ + RR1.A_ + RR2.A_
+Ah_ = A_.extract(A_.rowl_, ph_.rowl_)
+Ao_ = A_.extract(A_.rowl_, po_.rowl_)
+b_ = (-1*J_.diff(t)*(P.dq_ + RR1.dq_ + RR2.dq_)).simplify() + RR1.b_ + RR2.b_
 
 M_ = RR1.M_ + RR2.M_ + P.M_
 v_ = RR1.v_ + RR2.v_ + P.v_
@@ -62,4 +67,3 @@ u_ = SMatrix( 0, rho_.rowl_ ) + uh_
 
 Cch_T_u_ = Cch_.T()*u_
 Z_ = SMatrix( Cch_T_u_.M_.jacobian(uh_.M_), Cch_T_u_.rowl_, uh_.rowl_ )
-

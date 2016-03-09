@@ -19,18 +19,24 @@ PARAMETROS = {symbols('l_0'): par[l0],
 rep = lambda vec1,vec2: [(vec1[i],vec2[i]) for i in xrange(len(vec1))]
 
 C_s = C_.subs(PARAMETROS)
+Ah_s = Ah_.subs(PARAMETROS)
+Ao_s = Ao_.subs(PARAMETROS)
 Z_s = Z_.subs(PARAMETROS)
 dC_s = dC_.subs(PARAMETROS)
 M_s = M_.subs(PARAMETROS)
 v_s = v_.subs(PARAMETROS)
 g_s = g_.subs(PARAMETROS)
+b_s = b_.subs(PARAMETROS)
 
 C_n = lambda q_n:       SMatrix( ( C_s.M_.subs(rep( list(q_.M_) ,q_n))).evalf(), C_.rowl_, C_.coll_)
+Ah_n= lambda q_n:       SMatrix( (Ah_s.M_.subs(rep( list(q_.M_) ,q_n))).evalf(), Ah_.rowl_, Ah_.coll_)
+Ao_n= lambda q_n:       SMatrix( (Ao_s.M_.subs(rep( list(q_.M_) ,q_n))).evalf(), Ao_.rowl_, Ao_.coll_)
 Z_n = lambda q_n:       SMatrix( ( Z_s.M_.subs(rep( list(q_.M_) ,q_n))).evalf(), Z_.rowl_, Z_.coll_) 
 M_n = lambda q_n:       SMatrix( ( M_s.M_.subs(rep( list(q_.M_) ,q_n))).evalf(), M_.rowl_, M_.coll_)
 g_n = lambda q_n:       SMatrix( ( g_s.M_.subs(rep( list(q_.M_) ,q_n))).evalf(), g_.rowl_, g_.coll_)
 dC_n= lambda q_n, p_n:  SMatrix( (dC_s.M_.subs(rep( list(p_.M_), p_n)).subs(rep( list(q_.M_) ,q_n))).evalf(), dC_.rowl_, dC_.coll_)
-v_n = lambda q_n, p_n:  SMatrix( ( v_s.M_.subs(rep( list(p_.M_), p_n)).subs(rep( list(q_.M_) ,q_n))).evalf(), v_.rowl_, v_.coll_)
+v_n = lambda q_n, p_n:  SMatrix( ( v_s.M_.subs(rep( list(p_.M_), p_n)).subs(rep( list(q_.M_) ,q_n))).evalf(),  v_.rowl_,  v_.coll_)
+b_n = lambda q_n, p_n:  SMatrix( ( b_s.M_.subs(rep( list(p_.M_), p_n)).subs(rep( list(q_.M_) ,q_n))).evalf(),  b_.rowl_,  b_.coll_)
   
 def tau_n(qh_t, ph_t, dph_t):
     q_t = fInvKin(qh_t)
@@ -42,7 +48,44 @@ def tau_n(qh_t, ph_t, dph_t):
     M_t = M_n(q_t)
     v_t = v_n(q_t, p_t.M_)
     g_t = g_n(q_t)    
-    tau_t = Z_t.inv()*C_t.T()*( M_t*dp_t + v_t + g_t )
+    tau_t = Z_t.LDLsolve( C_t.T()*( M_t*dp_t + v_t + g_t ) )
+    return tau_t
+    
+def tau2_n(qh_t, ph_t, dph_t):
+    ph_t = SMatrix( ph_t, ph_.rowl_)
+    dph_t = SMatrix( dph_t, ph_.rowl_)
+    q_t = fInvKin(qh_t)
+    C_t = C_n(q_t)
+    Ah_t = Ah_n(q_t)
+    Ao_t = Ao_n(q_t)
+    p_t = C_t*ph_t
+    b_t = b_n(q_t, p_t.M_)
+    dpo_t = Ao_t.LDLsolve(-1*Ah_t*dph_t + b_t)
+    dp_t = dph_t + dpo_t
+    Z_t = Z_n(q_t)
+    M_t = M_n(q_t)
+    v_t = v_n(q_t, p_t.M_)
+    g_t = g_n(q_t)    
+    tau_t = Z_t.LDLsolve( C_t.T()*( M_t*dp_t + v_t + g_t ) )
+    return tau_t
+    
+def tau3_n(qh_t, ph_t, dph_t):
+    ph_t = SMatrix( ph_t, ph_.rowl_)
+    dph_t = SMatrix( dph_t, ph_.rowl_)
+    q_t = fInvKin(qh_t)
+    Ah_t = Ah_n(q_t)
+    Ao_t = Ao_n(q_t)
+    iAo_t = Ao_t.inv()
+    C_t = SMatrix(1, ph_.rowl_, ph_.rowl_) - iAo_t*Ah_t
+    p_t = C_t*ph_t
+    b_t = b_n(q_t, p_t.M_)
+    dpo_t = iAo_t*(-1*Ah_t*dph_t + b_t)
+    dp_t = dph_t + dpo_t
+    Z_t = Z_n(q_t)
+    M_t = M_n(q_t)
+    v_t = v_n(q_t, p_t.M_)
+    g_t = g_n(q_t)    
+    tau_t = Z_t.LDLsolve( C_t.T()*( M_t*dp_t + v_t + g_t ) )
     return tau_t
     
 #Parametros da trajetoria
@@ -52,8 +95,8 @@ y0 = 0.16
 
 v=1.0 #Velocidade tangencial
 w=v/r #velocidade angular
-p=3*0.6 #tempo total da simulacao
-dt=0.01 #dt
+p=0.6 #tempo total da simulacao
+dt=0.003 #dt
 nt=int(p/dt)+1 #tamanho do vetor de tempo
 t=[i*dt for i in xrange(nt)] #vetor de tempo
 
@@ -72,7 +115,7 @@ d2xt=[-(w**2)*r*cos(w*T) for T in t]
 d2yt=[-(w**2)*r*sin(w*T) for T in t]
 d2Xt=[Matrix([d2xt[i],d2yt[i]]) for i in xrange(nt)]
 
-tau_t = [tau_n(Xt[i], dXt[i], d2Xt[i]) for i in range(nt)]
+tau_t = [tau3_n(Xt[i], dXt[i], d2Xt[i]) for i in range(nt)]
 
 t_np = np.linspace(t[0], t[-1], len(t))
 tau1_np = t_np.copy()
