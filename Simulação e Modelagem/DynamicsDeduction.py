@@ -64,6 +64,8 @@ g_ = RR1.g_ + RR2.g_ + P.g_
 
 uh_ = SMatrix( Matrix([symbols('tau_1'),symbols('tau_2')]), [RR1.dq_.rowl_[0],RR2.dq_.rowl_[0]] )
 u_ = SMatrix( 0, rho_.rowl_ ) + uh_
+u2_ = SMatrix( 0, p_.rowl_ ) + uh_
+U_ = SMatrix(u2_.M_.jacobian(uh_.M_), u2_.rowl_, uh_.rowl_)
 
 Cch_T_u_ = Cch_.T()*u_
 Z_ = SMatrix( Cch_T_u_.M_.jacobian(uh_.M_), Cch_T_u_.rowl_, uh_.rowl_ )
