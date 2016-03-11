@@ -34,7 +34,7 @@ class SMatrix(object):
     """ Matrizes acessadas por simbolos """
     def __init__(self, M_, rowl_=['svector'], coll_=['vector']):
         if rowl_ == ['svector'] and M_.cols ==1:
-            rowl_ = M_
+            rowl_ = list(M_)
         rowl_ = list(rowl_)
         coll_ = list(coll_)
         self.rowl_ = rowl_
