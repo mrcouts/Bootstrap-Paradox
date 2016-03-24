@@ -51,7 +51,6 @@ for i in np.arange(np.size(t_np)):
 
 plt.figure()
 plt.plot(t_np, y_np, 'r')
-#plt.xscale('log')
 plt.xlabel('x')
 plt.ylabel('y')
 plt.title('title')
