@@ -10,7 +10,7 @@ y0 = 0.16
 v=0.4 #Velocidade tangencial
 w=v/r #velocidade angular
 p=0.6 #tempo total da simulacao
-dt=0.001 #dt
+dt=0.003 #dt
 #nt=int(p/dt)+1 #tamanho do vetor de tempo
 #t_=[i*dt for i in xrange(nt)] #vetor de tempo
 

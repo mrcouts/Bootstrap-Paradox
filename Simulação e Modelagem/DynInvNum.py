@@ -69,7 +69,7 @@ def dph_n(qh_t, ph_t, r, dr, d2r):
     v_t = v_n(q_t, p_t.M_)
     g_t = g_n(q_t)
     Mh_t = C_t.T()*M_t*C_t
-    uh_t = Mh_t*uh_lin_t
+    uh_t = Mh_t*uh_lin_t + C_t.T()*(M_t*dCph_t + v_t + g_t)
     u_t = SMatrix(0, p_.rowl_) + uh_t
     dph_t = Mh_t.LDLsolve( C_t.T()*( u_t - M_t*dCph_t - v_t - g_t ) )
     return dph_t
