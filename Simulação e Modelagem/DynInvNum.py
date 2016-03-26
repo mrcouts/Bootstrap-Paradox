@@ -52,9 +52,14 @@ def dph_n(qh_t, ph_t, r, dr, d2r):
     #Lei de controle linear
     e = r - qh_t
     de = dr - ph_t
-    kp = 1600.0*eye(2)
-    kv = 2.0*sqrt(1600.0)*eye(2)
-    uh_lin_t = SMatrix(d2r + kv*de + kp*e, ph_.rowl_)        
+    #kp = 1600.0*eye(2)
+    #kv = 2.0*sqrt(1600.0)*eye(2)
+    #uh_lin_t = SMatrix(d2r + kv*de + kp*e, ph_.rowl_)
+    lamda = 1600.0
+    k = 20.0
+    n = 20.0
+    Tanh = lambda x_: Matrix([tanh(x_[i]) for i in xrange(x_.rows)])
+    uh_lin_t = SMatrix(d2r + lamda*de + k*Tanh(n*(de + lamda*e)), ph_.rowl_)        
     
     ph_t = SMatrix( ph_t, ph_.rowl_)
     q_t = fInvKin(qh_t)

@@ -10,7 +10,7 @@ y0 = 0.16
 v=1.0 #Velocidade tangencial
 w=v/r #velocidade angular
 p=0.6 #tempo total da simulacao
-dt=0.003 #dt
+dt=0.001 #dt
 #nt=int(p/dt)+1 #tamanho do vetor de tempo
 #t_=[i*dt for i in xrange(nt)] #vetor de tempo
 
@@ -24,7 +24,7 @@ dr_ = lambda T: Matrix([-w*r*sin(w*T), w*r*cos(w*T)])
 d2r_ = lambda T: Matrix([-(w**2)*r*cos(w*T), -(w**2)*r*sin(w*T)])
 
 #Runge-Kutta
-y0_ = Matrix([r_(0.0),dr_(0.0)])
+y0_ = Matrix([r_(0.0),0.0*dr_(0.0)])
 f = lambda T, y_: Matrix([ y_[2:4, 0], dph_n( y_[0:2, 0] , y_[2:4, 0], r_(T), dr_(T), d2r_(T)).M_ ])
 
 h=dt
