@@ -52,8 +52,8 @@ def dph_n(qh_t, ph_t, r, dr, d2r):
     #Lei de controle linear
     e = r - qh_t
     de = dr - ph_t
-    kp = 100.0*eye(2)
-    kv = 20.0*eye(2)
+    kp = 800.0*eye(2)
+    kv = 2.0*sqrt(800.0)*eye(2)
     uh_lin_t = SMatrix(d2r + kv*de + kp*e, uh_.rowl_)        
     
     ph_t = SMatrix( ph_t, ph_.rowl_)

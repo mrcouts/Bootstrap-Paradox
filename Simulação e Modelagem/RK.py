@@ -25,12 +25,14 @@ class RK (object):
             for j in xrange(1,self.n):
                 k[j]=f(t[i]+self.c[j]*h, y[i]+h*dot(self.a[j], k[0:j]))
             y[i+1]=y[i]+h*dot(self.b,k)
-        
+            print(i)
+            pprint(y[i+1])
         return y,t
 
 ## f=lambda t,y: 1000.0*(sign(sin(1000.0*t))-y)
 ## y0=0.0
-wn=1000.0
+
+"""wn=1000.0
 z=0.5
 f=lambda t,y: Matrix([y[1], (wn**2)*(sign(sin(1000.0*t))-y[0])-2*wn*z*y[1]])
 y0 = zeros(2,1)
@@ -55,3 +57,5 @@ plt.xlabel('x')
 plt.ylabel('y')
 plt.title('title')
 plt.show()
+
+"""
