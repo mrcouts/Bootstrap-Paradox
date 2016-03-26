@@ -3,11 +3,11 @@ from RK import *
 from math import pi as Pi
    
 #Parametros da trajetoria
-r = 0.04
+r = 0.08
 x0 = 0.0
 y0 = 0.16
 
-v=0.4 #Velocidade tangencial
+v=1.0 #Velocidade tangencial
 w=v/r #velocidade angular
 p=0.6 #tempo total da simulacao
 dt=0.003 #dt
@@ -37,7 +37,7 @@ y_,t_=rk.aplic(h,tf,y0_,f)
 import matplotlib.pyplot as plt
 import numpy as np
 
-t_np = np.linspace(t[0], t[-1], len(t))
+t_np = np.linspace(t_[0], t_[-1], len(t_))
 ex_np = t_np.copy()
 ey_np = t_np.copy()
 

@@ -52,9 +52,9 @@ def dph_n(qh_t, ph_t, r, dr, d2r):
     #Lei de controle linear
     e = r - qh_t
     de = dr - ph_t
-    kp = 800.0*eye(2)
-    kv = 2.0*sqrt(800.0)*eye(2)
-    uh_lin_t = SMatrix(d2r + kv*de + kp*e, uh_.rowl_)        
+    kp = 1600.0*eye(2)
+    kv = 2.0*sqrt(1600.0)*eye(2)
+    uh_lin_t = SMatrix(d2r + kv*de + kp*e, ph_.rowl_)        
     
     ph_t = SMatrix( ph_t, ph_.rowl_)
     q_t = fInvKin(qh_t)
@@ -69,7 +69,7 @@ def dph_n(qh_t, ph_t, r, dr, d2r):
     v_t = v_n(q_t, p_t.M_)
     g_t = g_n(q_t)
     Mh_t = C_t.T()*M_t*C_t
-    uh_t = Mh_t*uh_lin_t + C_t.T()*(M_t*dCph_t + v_t + g_t)
+    uh_t = Mh_t*uh_lin_t #+ C_t.T()*(M_t*dCph_t + v_t + g_t)
     u_t = SMatrix(0, p_.rowl_) + uh_t
     dph_t = Mh_t.LDLsolve( C_t.T()*( u_t - M_t*dCph_t - v_t - g_t ) )
     return dph_t
