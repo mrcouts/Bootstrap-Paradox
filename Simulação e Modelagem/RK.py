@@ -10,7 +10,11 @@ class RK (object):
             self.b=[1.0/6, 1.0/3, 1.0/3, 1.0/6]
             self.c=[0.0]+[sum(x) for x in self.a]
             self.n=len(self.b)
-            
+        elif method=='RK6':
+            self.a=[[],[0.5],[2.0/9, 4.0/9],[7.0/36, 2.0/9, -1.0/12],[-35.0/144, -55.0/36, 35.0/48, 15.0/8],[-1.0/360, -11.0/36, -1.0/8, 0.5, 1.0/10 ],[-41.0/260, 22.0/13, 43.0/156, -118.0/39, 32.0/195, 80.0/39]]
+            self.b=[13.0/200, 0, 11.0/40, 11.0/40, 4.0/25, 4.0/25, 13.0/200]
+            self.c=[0.0]+[sum(x) for x in self.a]
+            self.n=len(self.b)
         else:
             raise ValueError('Este metodo nao esta disponivel')
     
