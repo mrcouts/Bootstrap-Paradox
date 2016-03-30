@@ -65,17 +65,19 @@ def tau_n(qh_t, ph_t, dph_t):
     return tau_t
     
 def dph_n(qh_t, ph_t, r, dr, d2r):
-    #Lei de controle linear
+    #Lei de controle
     e = r - qh_t
     de = dr - ph_t
-    #kp = 1600.0*eye(2)
-    #kv = 2.0*sqrt(1600.0)*eye(2)
-    #uh_lin_t = SMatrix(d2r + kv*de + kp*e, ph_.rowl_)
-    lamda = 500.0
-    k = 20.0
-    n = 100.0
-    Tanh = lambda x_: Matrix([tanh(x_[i]) for i in xrange(x_.rows)])
-    uh_lin_t = SMatrix(d2r + lamda*de + k*Tanh(n*(de + lamda*e)), ph_.rowl_)        
+    #Linear
+    kp = 1600.0*eye(2)
+    kv = 2.0*sqrt(1600.0)*eye(2)
+    uh_lin_t = SMatrix(d2r + kv*de + kp*e, ph_.rowl_)
+    #Modos deslizantes
+#    lamda = 500.0
+#    k = 20.0
+#    n = 100.0
+#    Tanh = lambda x_: Matrix([tanh(x_[i]) for i in xrange(x_.rows)])
+#    uh_lin_t = SMatrix(d2r + lamda*de + k*Tanh(n*(de + lamda*e)), ph_.rowl_)        
     
     ph_t = SMatrix( ph_t, ph_.rowl_)
     q_t = fInvKin(qh_t)
@@ -83,17 +85,19 @@ def dph_n(qh_t, ph_t, r, dr, d2r):
     Ao_t = Ao_n(q_t)
     iAo_t = Ao_t.inv()
     C_t = SMatrix(1, ph_.rowl_, ph_.rowl_) - iAo_t*Ah_t
+    Z_t = C_t.T()*U_
+    iZ_t = Z_t.inv()
     p_t = C_t*ph_t
     b_t = b_n(q_t, p_t.M_)
     dCph_t = SMatrix(0, ph_.rowl_) + iAo_t*b_t
     M_t = M_n(q_t)
     v_t = v_n(q_t, p_t.M_)
     g_t = g_n(q_t)
-    Mh_t = C_t.T()*M_t*C_t
-    uh_t = Mh_t*uh_lin_t #+ C_t.T()*(M_t*dCph_t + v_t + g_t)
-    u_t = SMatrix(0, p_.rowl_) + uh_t
-    dph_t = Mh_t.LDLsolve( C_t.T()*( u_t - M_t*dCph_t - v_t - g_t ) )
-    return dph_t
+    H_t = iZ_t*C_t.T()*M_t*C_t
+    h_t = iZ_t*C_t.T()*(M_t*dCph_t + v_t + g_t)
+    uh_t = H_t*uh_lin_t + h_t
+    dph_t = H_t.LDLsolve( uh_t - h_t )
+    return dph_t, uh_t
     
 #def dph_n2(qh_t, ph_t, r, dr, d2r):
 #    #Lei de controle linear

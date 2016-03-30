@@ -21,17 +21,20 @@ class RK (object):
     def aplic(self,h,tf,y0,f):
         nt=int(tf/h)
         t=[x*h for x in xrange(nt+1)]
-        y=[y0] + [0 for i in xrange(nt)]
-        k=[0 for i in xrange(self.n)]         
+        y=[y0 for i in xrange(nt+1)]
+        u=[zeros(2,1) for i in xrange(nt+1)]
+        k=[y0 for i in xrange(self.n)]         
         
         for i in xrange(nt):
-            k[0]=f(t[i],y[i])
+            k[0],u[i]=f(t[i],y[i])
             for j in xrange(1,self.n):
-                k[j]=f(t[i]+self.c[j]*h, y[i]+h*dot(self.a[j], k[0:j]))
+                k[j]=f(t[i]+self.c[j]*h, y[i]+h*dot(self.a[j], k[0:j]))[0]
             y[i+1]=y[i]+h*dot(self.b,k)
             print(i)
-            pprint(y[i+1])
-        return y,t
+            pprint(y[i])
+            pprint(u[i])
+        u[nt] = f(t[nt],y[nt])[1]
+        return y, u, t
 
 ## f=lambda t,y: 1000.0*(sign(sin(1000.0*t))-y)
 ## y0=0.0
