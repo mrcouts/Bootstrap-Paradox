@@ -3,39 +3,56 @@ from math import pi as Pi
 from numpy.linalg.linalg import dot
 init_printing(use_unicode=True)
 
-class RK (object):
-    def __init__(self, method='RK4'):
+class RK(object):
+    def __init__(self, method='RK6'):
         if method=='RK4':
-            self.a=[[],[0.5],[0,0.5],[0,0,1.0]]
+            self.a=[[0.5],
+                    [0,0.5],
+                    [0,0,1.0]]
             self.b=[1.0/6, 1.0/3, 1.0/3, 1.0/6]
-            self.c=[0.0]+[sum(x) for x in self.a]
-            self.n=len(self.b)
         elif method=='RK6':
-            self.a=[[],[0.5],[2.0/9, 4.0/9],[7.0/36, 2.0/9, -1.0/12],[-35.0/144, -55.0/36, 35.0/48, 15.0/8],[-1.0/360, -11.0/36, -1.0/8, 0.5, 1.0/10 ],[-41.0/260, 22.0/13, 43.0/156, -118.0/39, 32.0/195, 80.0/39]]
+            self.a=[[0.5],
+                    [2.0/9, 4.0/9],
+                    [7.0/36, 2.0/9, -1.0/12],
+                    [-35.0/144, -55.0/36, 35.0/48, 15.0/8],
+                    [-1.0/360, -11.0/36, -1.0/8, 0.5, 1.0/10],
+                    [-41.0/260, 22.0/13, 43.0/156, -118.0/39, 32.0/195, 80.0/39]]
             self.b=[13.0/200, 0, 11.0/40, 11.0/40, 4.0/25, 4.0/25, 13.0/200]
-            self.c=[0.0]+[sum(x) for x in self.a]
-            self.n=len(self.b)
         else:
             raise ValueError('Este metodo nao esta disponivel')
-    
-    def aplic(self,h,tf,y0,f):
+        self.c=[sum(x) for x in self.a]
+        self.n=len(self.b)
+     
+    def Apply(self,h,tf,y0_,f_):
         nt=int(tf/h)
-        t=[x*h for x in xrange(nt+1)]
-        y=[y0 for i in xrange(nt+1)]
-        u=[zeros(2,1) for i in xrange(nt+1)]
-        k=[y0 for i in xrange(self.n)]         
+        t_ = [i*h for i in xrange(nt+1)]
+        y__= [y0_ for i in xrange(nt+1)]
+        k__= [y0_ for i in xrange(self.n)]         
         
         for i in xrange(nt):
-            k[0],u[i]=f(t[i],y[i])
-            for j in xrange(1,self.n):
-                k[j]=f(t[i]+self.c[j]*h, y[i]+h*dot(self.a[j], k[0:j]))[0]
-            y[i+1]=y[i]+h*dot(self.b,k)
+            k__[0] = f_(t_[i],y__[i])
+            for j in xrange(1, self.n):
+                k__[j] = f_(t_[i] + self.c[j-1]*h, y__[i] + h*dot(self.a[j-1], k__[0:j]))
+            y__[i+1] = y__[i] + h*dot(self.b, k__)
             print(i)
-            pprint(y[i])
-            pprint(u[i])
-        u[nt] = f(t[nt],y[nt])[1]
-        return y, u, t
-
+        return y__, t_
+                
+    def Apply2(self,h,tf,y0_,f_):
+        nt=int(tf/h)
+        t_ = [i*h for i in xrange(nt+1)]
+        y__= [y0_ for i in xrange(nt+1)]
+        k__= [y0_ for i in xrange(self.n)]
+        u__= [None for i in xrange(nt+1)]         
+        
+        for i in xrange(nt):
+            k__[0], u__[i] = f_(t_[i], y__[i])
+            for j in xrange(1, self.n):
+                k__[j] = f_(t_[i] + self.c[j-1]*h, y__[i] + h*dot(self.a[j-1], k__[0:j]))[0]
+            y__[i+1] = y__[i] + h*dot(self.b, k__)
+            print(i)
+        u__[nt] = f_(t_[nt], y__[nt])[1]
+        return y__, u__, t_
+        
 ## f=lambda t,y: 1000.0*(sign(sin(1000.0*t))-y)
 ## y0=0.0
 
@@ -46,7 +63,7 @@ y0 = zeros(2,1)
 h=1.0e-4
 tf=4.0e-2
 v=RK()
-y,t=v.aplic(h,tf,y0,f)
+y,t=v.Apply(h,tf,y0,f)
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -63,6 +80,4 @@ plt.plot(t_np, y_np, 'r')
 plt.xlabel('x')
 plt.ylabel('y')
 plt.title('title')
-plt.show()
-
-"""
+plt.show()"""

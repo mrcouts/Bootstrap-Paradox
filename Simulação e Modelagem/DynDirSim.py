@@ -32,7 +32,7 @@ rk=RK('RK6')
 
 import time
 start = time.time()
-y_,u_t,t_=rk.aplic(h,tf,y0_,f)
+y_,u_t,t_=rk.Apply2(h,tf,y0_,f)
 end = time.time()
 print(end - start)
 
