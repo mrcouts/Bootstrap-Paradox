@@ -26,7 +26,7 @@ def f (T, y_):
      dph_t, uh_t = dph_n( y_[0:2, 0] , y_[2:4, 0], r_(T), dr_(T), d2r_(T))
      return Matrix([ y_[2:4, 0], dph_t.M_ ]), uh_t.M_
 
-h=0.0015 #dt
+h=0.002 #dt
 tf=2*0.6 #tempo total da simulacao
 rk=RK('RK6')
 
