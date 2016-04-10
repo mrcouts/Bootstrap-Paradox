@@ -5,7 +5,14 @@ init_printing(use_unicode=True)
 
 class RK(object):
     def __init__(self, method='RK6'):
-        if method=='RK4':
+        if method == 'Heun':
+            self.a = [[1.0]]
+            self.b = [0.5, 0.5]
+        elif method == 'RK3':
+            self.a = [[0.5],
+                      [-1.0, 2.0]]
+            self.b = [1.0/6, 2.0/3, 1.0/6]
+        elif method=='RK4':
             self.a=[[0.5],
                     [0,0.5],
                     [0,0,1.0]]
