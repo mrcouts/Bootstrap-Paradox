@@ -4,8 +4,11 @@ NAME = hello
 #extra functions
 FUNC = SomeUtilities
 
+#classes
+CLASS = Serial
+
 # objects
-OBJS = $(NAME).o $(FUNC).o
+OBJS = $(NAME).o $(FUNC).o $(CLASS).o
 
 # compiler and linker
 CC = g++
@@ -15,7 +18,7 @@ LD = g++
 DEBUG =
 
 # flags
-CFLAGS = -O3 -Wall -c $(DEBUG)
+CFLAGS = -O3 -std=c++11 -Wall -c $(DEBUG)
 LFLAGS = -Wall $(DEBUG)
 
 # libs
@@ -32,6 +35,9 @@ $(NAME).o: $(NAME).cpp $(FUNC).h
 
 $(FUNC).o: $(FUNC).h $(FUNC).cpp
 	$(CC) $(CFLAGS) $(FUNC).cpp
+
+$(CLASS).o: $(CLASS).h $(CLASS).cpp $(FUNC).h
+	$(CC) $(CFLAGS) $(CLASS).cpp
 
 clean:
 	$(RM) *.o *~ $(NAME)
