@@ -30,16 +30,11 @@ int main(void)
     cout << RR.og__ << endl;
     cout << RR.fDH(RR.l_, RR.l_, RR.lg_) << endl;
 
-    cube C; C.zeros(3,3,3);
-    cout << C << endl;
-    vec v = {1,2,3};
-    cout << v << endl;
-
-    C( span(0,2), span(0,0), span(0,0) ) = v;
-    cout << C << endl;
-
     cout << RR.Jv__ << endl;
     cout << RR.Jw__ << endl;
+
+    cout << RR.Jv_n_ << endl;
+    cout << RR.Jw_n_ << endl;
 
 
     return 0;

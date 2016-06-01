@@ -12,7 +12,9 @@ Serial::Serial(int dof, vec l_, vec lg_, mat (*fDH)(vec, vec, vec)){
 	o__.zeros(3,1,dof+1);
 	og__.zeros(3,1,dof);
 	Jv__.zeros(3,dof,dof);
-	Jw__.zeros(3,dof,dof); }
+	Jw__.zeros(3,dof,dof);
+	Jv_n_.zeros(3,dof);
+	Jw_n_.zeros(3,dof); }
 
 Serial::~Serial(){
 	l_.clear() ;
@@ -23,7 +25,9 @@ Serial::~Serial(){
 	o__.clear();
 	og__.clear();
 	Jv__.clear();
-	Jw__.clear(); }
+	Jw__.clear();
+	Jv_n_.clear();
+	Jw_n_.clear(); }
 
 void Serial::Doit(vec q0_){
 	vec ogh_; ogh_.zeros(4);
@@ -39,11 +43,16 @@ void Serial::Doit(vec q0_){
 
 	for(int i = 0; i<dof; i++){
 		for(int j = 0; j<=i; j++){
-			if(H(i,7)==true){
+			if(H(j,7)==true){
 				Jv__( span(0,2), span(j,j), span(i,i) ) = cross(z__.slice(j), og__.slice(i) - o__.slice(j));
 				Jw__( span(0,2), span(j,j), span(i,i) ) = z__.slice(j);}
 			else
-				Jv__( span(0,2), span(j,j), span(i,i) ) = z__.slice(j);}} 
+				Jv__( span(0,2), span(j,j), span(i,i) ) = z__.slice(j);}}
+
+	for(int i = 0; i<dof; i++)
+		Jv_n_( span(0,2), span(i,i)) = H(i,7)==true ? cross(z__.slice(i), o__.slice(dof) - o__.slice(i)) : z__.slice(i);
+
+	Jw_n_ = Jw__.slice(dof-1);
 
 	H.clear();
 	ogh_.clear();}

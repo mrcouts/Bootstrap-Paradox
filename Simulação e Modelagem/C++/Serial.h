@@ -22,4 +22,6 @@ public:
     cube og__;
     cube Jv__;
     cube Jw__;
+    mat Jv_n_;
+    mat Jw_n_;
     mat (*fDH)(vec, vec, vec); };
