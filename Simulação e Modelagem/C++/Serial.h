@@ -20,4 +20,6 @@ public:
     cube z__;
     cube o__;
     cube og__;
+    cube Jv__;
+    cube Jw__;
     mat (*fDH)(vec, vec, vec); };
