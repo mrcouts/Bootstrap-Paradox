@@ -16,26 +16,43 @@ int main(void)
     cout << "Hello! This is a C++ program." << endl;
     cout << H_d(1, 0.1, 2, 0.2) << endl;
 
+    cube I__; I__.zeros(3,3,2);
+    I__.slice(0) << 0 << 0      << 0      << endr
+                 << 0 << 0.0001 << 0      << endr
+                 << 0 << 0      << 0.0001 << endr;
+
+    I__.slice(1) << 0 << 0      << 0      << endr
+                 << 0 << 0.0001 << 0      << endr
+                 << 0 << 0      << 0.0001 << endr;
+
     //bool array[] = {true, true};
-    Serial RR = Serial(2, {0.1, 0.1}, {0.05, 0.05}, &fDH);
-    RR.Doit({PI/4, PI/4});
-    //	RR.fDH = fDH;
+    Serial RR = Serial(2, {0.1, 0.1}, {0.05, 0.05},{0.1, 0.1}, I__ , &fDH);
 
-    cout << RR.l_  << endl;
-    cout << RR.lg_ << endl;
-    cout << RR.Hr__ << endl;
-    cout << RR.H__ << endl;
-    cout << RR.z__ << endl;
-    cout << RR.o__ << endl;
-    cout << RR.og__ << endl;
-    cout << RR.fDH(RR.l_, RR.l_, RR.lg_) << endl;
+    double theta = PI/4;
+    for(int i = 0; i<10000; i++){
+    	RR.Doit({theta, theta});
+    	cout << RR.M_ << endl;
+    	theta += 0.03;
+    }
 
-    cout << RR.Jv__ << endl;
-    cout << RR.Jw__ << endl;
+    I__.clear();
 
-    cout << RR.Jv_n_ << endl;
-    cout << RR.Jw_n_ << endl;
-
+    //cout << RR.l_  << endl;
+    //cout << RR.lg_ << endl;
+    //cout << RR.Hr__ << endl;
+    //cout << RR.H__ << endl;
+    //cout << RR.z__ << endl;
+    //cout << RR.o__ << endl;
+    //cout << RR.og__ << endl;
+    //cout << RR.fDH(RR.l_, RR.l_, RR.lg_) << endl;
+    //cout << RR.Jv__ << endl;
+    //cout << RR.Jw__ << endl;
+    //cout << RR.Jv_n_ << endl;
+    //cout << RR.Jw_n_ << endl;
+    //cout << RR.m_ << endl;
+    //cout << RR.I__ << endl;
+    //cout << RR.Jw2__ << endl;
+    //cout << RR.M_ << endl;
 
     return 0;
 }
