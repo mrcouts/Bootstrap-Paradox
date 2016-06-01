@@ -26,12 +26,13 @@ int main(void)
                  << 0 << 0      << 0.0001 << endr;
 
     //bool array[] = {true, true};
-    Serial RR = Serial(2, {0.1, 0.1}, {0.05, 0.05},{0.1, 0.1}, I__ , &fDH);
+    Serial RR = Serial(2, {0.1, 0.1}, {0.05, 0.05},{0.1, 0.1}, I__ , {0, -9.8,0}, &fDH);
 
     double theta = PI/4;
     for(int i = 0; i<10000; i++){
     	RR.Doit({theta, theta});
     	cout << RR.M_ << endl;
+    	cout << RR.gh_ << endl;
     	theta += 0.03;
     }
 

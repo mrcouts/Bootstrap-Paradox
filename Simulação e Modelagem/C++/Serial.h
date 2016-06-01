@@ -8,7 +8,7 @@ using namespace arma;
 
 class Serial {
 public:
-    Serial(int dof, vec l_, vec lg_, vec m_, cube I__, mat (*fDH)(vec, vec, vec));
+    Serial(int dof, vec l_, vec lg_, vec m_, cube I__, vec g_, mat (*fDH)(vec, vec, vec));
     ~Serial();
     void Doit(vec q0_);
 
@@ -17,6 +17,7 @@ public:
     vec lg_;
     vec m_;
     cube I__;
+    vec g_;
     cube Hr__;
     cube H__;
     cube z__;
@@ -28,4 +29,5 @@ public:
     mat Jv_n_;
     mat Jw_n_;
     mat M_;
+    vec gh_;
     mat (*fDH)(vec, vec, vec); };

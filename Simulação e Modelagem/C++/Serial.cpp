@@ -1,11 +1,12 @@
 #include "Serial.h"
 
-Serial::Serial(int dof, vec l_, vec lg_, vec m_, cube I__, mat (*fDH)(vec, vec, vec)){
+Serial::Serial(int dof, vec l_, vec lg_, vec m_, cube I__, vec g_, mat (*fDH)(vec, vec, vec)){
 	this->dof = dof;
 	this->l_ = l_;
 	this->lg_= lg_;
 	this->m_= m_;
 	this->I__= I__;
+	this->g_ = g_;
 	this->fDH = fDH;
 	Hr__.zeros(4,4,dof);
 	H__.zeros(4,4,dof);
@@ -18,7 +19,8 @@ Serial::Serial(int dof, vec l_, vec lg_, vec m_, cube I__, mat (*fDH)(vec, vec, 
 	Jw2__.zeros(3,dof,dof);
 	Jv_n_.zeros(3,dof);
 	Jw_n_.zeros(3,dof);
-	M_.zeros(dof,dof); }
+	M_.zeros(dof,dof);
+	gh_.zeros(dof); }
 
 Serial::~Serial(){
 	l_.clear() ;
@@ -61,8 +63,10 @@ void Serial::Doit(vec q0_){
 	Jw_n_ = Jw__.slice(dof-1);
 
 	M_.zeros(dof,dof);
-	for(int i = 0; i<dof; i++)
+	gh_.zeros(dof);
+	for(int i = 0; i<dof; i++){
 		M_ += m_(i)*Jv__.slice(i).t()*Jv__.slice(i) + Jw2__.slice(i).t()*I__.slice(i)*Jw2__.slice(i);
+		gh_+= -m_(i)*Jv__.slice(i).t()*g_; }
 
 	H.clear();
 	ogh_.clear();}
