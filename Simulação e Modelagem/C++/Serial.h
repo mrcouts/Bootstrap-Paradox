@@ -28,7 +28,7 @@ public:
     cube Jw2__;
     mat Jv_n_;
     mat Jw_n_;
-    mat M_;
+    mat Mh_;
     vec vh_;
     vec gh_;
     mat (*fDH)(vec, vec, vec); };

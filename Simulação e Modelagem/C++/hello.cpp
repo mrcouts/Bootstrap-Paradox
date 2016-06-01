@@ -31,7 +31,7 @@ int main(void)
     double theta = PI/4;
     for(int i = 0; i<10000; i++){
     	RR.Doit({theta, theta},{1.0,1.0});
-    	cout << RR.M_ << endl;
+    	cout << RR.Mh_ << endl;
     	cout << RR.vh_ << endl;
     	cout << RR.gh_ << endl;
     	theta += 0.03;
