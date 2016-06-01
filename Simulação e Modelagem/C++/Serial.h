@@ -17,4 +17,7 @@ public:
     vec lg_;
     cube Hr__;
     cube H__;
+    cube z__;
+    cube o__;
+    cube og__;
     mat (*fDH)(vec, vec, vec); };

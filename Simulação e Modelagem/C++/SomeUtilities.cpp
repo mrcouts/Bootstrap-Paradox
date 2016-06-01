@@ -23,43 +23,27 @@ mat Rotz(double theta){
 
 mat Hx(double theta, double dx, double dy, double dz){
 	mat M = Rotx(theta);
-	mat v1;
-	v1 << dx << endr
-	   << dy << endr
-	   << dz << endr;
-	mat v2;
-	v2 << 0 << 0 << 0 << 1 << endr;
-	return join_vert(join_horiz(M,v1),v2);}
+	vec v1 = {dx,dy,dz};
+	vec v2 = {0,0,0,1};
+	return join_vert(join_horiz(M,v1),v2.t());}
 
 mat Hy(double theta, double dx, double dy, double dz){
 	mat M = Roty(theta);
-	mat v1;
-	v1 << dx << endr
-	   << dy << endr
-	   << dz << endr;
-	mat v2;
-	v2 << 0 << 0 << 0 << 1 << endr;
-	return join_vert(join_horiz(M,v1),v2);}
+	vec v1 = {dx,dy,dz};
+	vec v2 = {0,0,0,1};
+	return join_vert(join_horiz(M,v1),v2.t());}
 
 mat Hz(double theta, double dx, double dy, double dz){
 	mat M = Rotz(theta);
-	mat v1;
-	v1 << dx << endr
-	   << dy << endr
-	   << dz << endr;
-	mat v2;
-	v2 << 0 << 0 << 0 << 1 << endr;
-	return join_vert(join_horiz(M,v1),v2);}
+	vec v1 = {dx,dy,dz};
+	vec v2 = {0,0,0,1};
+	return join_vert(join_horiz(M,v1),v2.t());}
 
 mat Ht(double dx, double dy, double dz){
 	mat M = eye<mat>(3,3);
-	mat v1;
-	v1 << dx << endr
-	   << dy << endr
-	   << dz << endr;
-	mat v2;
-	v2 << 0 << 0 << 0 << 1 << endr;
-	return join_vert(join_horiz(M,v1),v2);}
+	vec v1 = {dx,dy,dz};
+	vec v2 = {0,0,0,1};
+	return join_vert(join_horiz(M,v1),v2.t());}
 
 mat H(char axis, double theta, double dx, double dy, double dz){
 	if(axis == 'x')

@@ -23,10 +23,12 @@ int main(void)
 
     cout << RR.l_  << endl;
     cout << RR.lg_ << endl;
-    cout << RR.fDH(RR.l_, RR.l_, RR.lg_) << endl;
     cout << RR.Hr__ << endl;
     cout << RR.H__ << endl;
-    cout << PI << endl;
+    cout << RR.z__ << endl;
+    cout << RR.o__ << endl;
+    cout << RR.og__ << endl;
+    cout << RR.fDH(RR.l_, RR.l_, RR.lg_) << endl;
 
     return 0;
 }
