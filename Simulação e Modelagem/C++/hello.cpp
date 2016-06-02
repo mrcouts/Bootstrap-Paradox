@@ -28,13 +28,22 @@ int main(void)
     //bool array[] = {true, true};
     Serial RR = Serial(2, {0.1, 0.1}, {0.05, 0.05},{0.1, 0.1}, I__ , {0, -9.8,0}, &fDH);
 
-    double theta = PI/4;
+    double t = 0;
+    vec q0_;
+    vec q1_;
+    vec q2_;
+    double w1 = 10;
+    double w2 = 15;
     for(int i = 0; i<10000; i++){
-    	RR.Doit({theta, theta},{2.0,3.0});
-    	cout << RR.Mh_ << endl;
-    	cout << RR.vh_ << endl;
-    	cout << RR.gh_ << endl;
-    	theta += 0.03;
+    	q0_ = {sin(w1*t),sin(w2*t)};
+    	q1_ = {w1*cos(w1*t),w2*cos(w2*t)};
+    	q2_ = {-w1*w1*sin(w1*t), -w2*w2*sin(w2*t)};
+    	RR.Doit(q0_,q1_);
+    	cout << RR.Mh_*q2_ + RR.vh_ + RR.gh_ << endl;
+    	//cout << RR.Mh_ << endl;
+    	//cout << RR.vh_ << endl;
+    	//cout << RR.gh_ << endl;
+    	t += 0.01;
     }
 
     I__.clear();
