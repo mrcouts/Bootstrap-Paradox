@@ -30,7 +30,7 @@ int main(void)
 
     double theta = PI/4;
     for(int i = 0; i<10000; i++){
-    	RR.Doit({theta, theta},{1.0,1.0});
+    	RR.Doit({theta, theta},{2.0,3.0});
     	cout << RR.Mh_ << endl;
     	cout << RR.vh_ << endl;
     	cout << RR.gh_ << endl;
@@ -55,6 +55,14 @@ int main(void)
     //cout << RR.I__ << endl;
     //cout << RR.Jw2__ << endl;
     //cout << RR.M_ << endl;
+    //cout << RR.w_rel__ << endl;
+    //cout << RR.w_arr__ << endl;
+    //cout << RR.dw_co__ << endl;
+    //cout << RR.a_cen__ << endl;
+    //cout << RR.a_cor__ << endl;
+    //cout << RR.a_co__ << endl;
+    //cout << RR.dw_co2__ << endl;
+
 
     return 0;
 }

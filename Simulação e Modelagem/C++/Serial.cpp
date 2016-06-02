@@ -21,7 +21,14 @@ Serial::Serial(int dof, vec l_, vec lg_, vec m_, cube I__, vec g_, mat (*fDH)(ve
 	Jw_n_.zeros(3,dof);
 	Mh_.zeros(dof,dof);
 	vh_.zeros(dof);
-	gh_.zeros(dof); }
+	gh_.zeros(dof);
+	w_rel__.zeros(3,1,dof);
+	w_arr__.zeros(3,1,dof);
+	dw_co__.zeros(3,1,dof);
+	dw_co2__.zeros(3,1,dof);
+	a_cen__.zeros(3,1,dof);
+	a_cor__.zeros(3,1,dof);
+	a_co__.zeros(3,1,dof); }
 
 Serial::~Serial(){
 	l_.clear() ;
@@ -38,7 +45,14 @@ Serial::~Serial(){
 	Jw_n_.clear();
 	Mh_.clear();
 	vh_.clear();
-	gh_.clear(); }
+	gh_.clear();
+	w_rel__.clear();
+	w_arr__.clear();
+	dw_co__.clear();
+	dw_co2__.clear();
+	a_cen__.clear();
+	a_cor__.clear();
+	a_co__.clear(); }
 
 void Serial::Doit(vec q0_, vec q1_){
 	vec ogh_; ogh_.zeros(4);
@@ -73,5 +87,29 @@ void Serial::Doit(vec q0_, vec q1_){
 		vh_+= Jw2__.slice(i).t()*cross(Jw2__.slice(i)*q1_, I__.slice(i)*Jw2__.slice(i)*q1_);
 		gh_+= -m_(i)*Jv__.slice(i).t()*g_; }
 
+	for(int i = 0; i<dof; i++)
+		w_rel__.slice(i) = Jw_n_( span(0,2), span(i,i) )*q1_(i);
+
+	for(int i = 1; i<dof; i++) {
+		w_arr__.slice(i) = w_arr__.slice(i-1) + w_rel__.slice(i-1);
+		dw_co__.slice(i) = dw_co__.slice(i-1) + cross(w_arr__.slice(i), w_rel__.slice(i));
+		dw_co2__.slice(i) = ((H__.slice(i))(span(0,2),span(0,2))).t()*dw_co__.slice(i); }
+
+	a_cen__.zeros();
+	a_cor__.zeros();
+	vec v_rel; v_rel.zeros(3);
+	for(int i = 0; i<dof; i++){
+		for(int j = 0; j<=i; j++){
+			v_rel = Jv__(span(0,2),span(j,j),span(i,i))*q1_(j);
+			a_cor__.slice(i) += 2*cross(w_arr__.slice(i), v_rel );
+			if(H(j,7)==true) 
+				a_cen__.slice(i) += cross(w_rel__.slice(j), cross(w_rel__.slice(j), og__.slice(i) - o__.slice(j)) ); }}
+	a_co__ = a_cen__ + a_cor__;
+
+	for(int i = 0; i<dof; i++)
+		vh_ += m_(i)*Jv__.slice(i).t()*a_co__.slice(i) + Jw2__.slice(i).t()*I__.slice(i)*dw_co2__.slice(i);
+
+
 	H.clear();
-	ogh_.clear();}
+	ogh_.clear();
+	v_rel.clear(); }

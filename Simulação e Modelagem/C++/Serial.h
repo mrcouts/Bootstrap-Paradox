@@ -31,4 +31,11 @@ public:
     mat Mh_;
     vec vh_;
     vec gh_;
+    cube w_rel__;
+    cube w_arr__;
+    cube dw_co__;
+    cube dw_co2__;
+    cube a_cen__;
+    cube a_cor__;
+    cube a_co__;
     mat (*fDH)(vec, vec, vec); };
