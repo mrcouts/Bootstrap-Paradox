@@ -101,7 +101,7 @@ void Serial::Doit(vec q0_, vec q1_){
 	for(int i = 0; i<dof; i++){
 		for(int j = 0; j<=i; j++){
 			v_rel = Jv__(span(0,2),span(j,j),span(i,i))*q1_(j);
-			a_cor__.slice(i) += 2*cross(w_arr__.slice(i), v_rel );
+			a_cor__.slice(i) += 2*cross(w_arr__.slice(j), v_rel );
 			if(H(j,7)==true) 
 				a_cen__.slice(i) += cross(w_rel__.slice(j), cross(w_rel__.slice(j), og__.slice(i) - o__.slice(j)) ); }}
 	a_co__ = a_cen__ + a_cor__;
