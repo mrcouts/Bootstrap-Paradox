@@ -168,6 +168,6 @@ class Serial(object):
         v_aux_ = (self.v_.subs(w_dq_replace)).simplify()
         
         self.Mh_ = (self.C_.T()*self.M_*self.C_).simplify()
-        self.vh_ = (self.C_.T()*(v_aux_ + self.M_*self.C_.diff(t)*self.dq_ )).simplify()
+        self.vh_ = (self.C_.T()*(v_aux_ + self.M_*self.C_.diff(t)*self.dq_ ))
         self.gh_ = (self.C_.T()*self.g_).simplify()
         self.fh_ = (self.C_.T()*self.f_).simplify()
