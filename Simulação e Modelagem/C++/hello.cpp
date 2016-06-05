@@ -53,9 +53,6 @@ int main(void)
     	q2_ = {-w1*w1*sin(w1*t), -w2*w2*sin(w2*t)};
     	RR.Doit(q0_,q1_);
     	cout << RR.Mh_*q2_ + RR.vh_ + RR.gh_ << endl;
-    	//cout << RR.Mh_ << endl;
-    	//cout << RR.vh_ << endl;
-    	//cout << RR.gh_ << endl;
     	t += 0.01;
     }
     */
@@ -100,26 +97,17 @@ int main(void)
     vec q2_; q2_.zeros(dof);
     double w1 = 10;
     double w2 = 15;
-    for(int i = 0; i<1000; i++){
+    for(int i = 0; i<2; i++){
     	q0_ = {sin(w1*t),sin(w2*t),sin(w1*t),sin(w2*t),sin(w1*t),sin(w2*t)};
     	q1_ = {w1*cos(w1*t),w2*cos(w2*t),w1*cos(w1*t),w2*cos(w2*t),w1*cos(w1*t),w2*cos(w2*t)};
     	q2_ = {-w1*w1*sin(w1*t), -w2*w2*sin(w2*t),-w1*w1*sin(w1*t), -w2*w2*sin(w2*t),-w1*w1*sin(w1*t), -w2*w2*sin(w2*t)};
     	R6.Doit(q0_,q1_);
     	cout << R6.Mh_*q2_ + R6.vh_ + R6.gh_ << endl;
-    	//cout << RR.Mh_ << endl;
-    	//cout << RR.vh_ << endl;
-    	//cout << RR.gh_ << endl;
     	t += 0.01;
     }
 
-    //RR.Doit({PI/6,PI/4},{20.0,30.0});
-    //cout << RR.Mh_ << endl;
-    //cout << RR.vh_ << endl;
-    //cout << RR.gh_ << endl;
-    //RR.Mh_.raw_print(cout, "Mh_=");
-    //RR.vh_.raw_print(cout, "vh_=");
-    //RR.gh_.raw_print(cout, "gh_=");
-
+    cout << R6.dw_co_n_ << endl;
+    cout << R6.a_co_n_ << endl;
 
     I__.clear();
 

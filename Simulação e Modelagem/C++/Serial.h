@@ -38,4 +38,6 @@ public:
     cube a_cen__;
     cube a_cor__;
     cube a_co__;
+    vec dw_co_n_;
+    vec a_co_n_;
     mat (*fDH)(vec, vec, vec); };
