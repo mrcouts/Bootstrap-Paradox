@@ -8,7 +8,7 @@ FUNC = SomeUtilities
 CLASS = Serial
 
 # objects
-OBJS = $(NAME).o $(FUNC).o $(CLASS).o
+OBJS = $(NAME).o $(FUNC).o $(CLASS).o RR.o 6R.o
 
 # compiler and linker
 CC = g++
@@ -38,6 +38,12 @@ $(FUNC).o: $(FUNC).h $(FUNC).cpp
 
 $(CLASS).o: $(CLASS).h $(CLASS).cpp $(FUNC).h
 	$(CC) $(CFLAGS) $(CLASS).cpp
+
+RR.o: RR.h RR.cpp
+	$(CC) $(CFLAGS) RR.cpp
+
+6R.o: 6R.h 6R.cpp
+	$(CC) $(CFLAGS) 6R.cpp
 
 clean:
 	$(RM) *.o *~ $(NAME)

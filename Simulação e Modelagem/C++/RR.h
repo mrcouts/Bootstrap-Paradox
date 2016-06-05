@@ -1,0 +1,10 @@
+#include <cmath>
+#include <algorithm>
+#include <armadillo>
+
+#define PI 3.14159265358979323846264338327950288
+
+using namespace std;
+using namespace arma;
+
+mat fDH_RR(vec q0_, vec l_, vec lg_);
