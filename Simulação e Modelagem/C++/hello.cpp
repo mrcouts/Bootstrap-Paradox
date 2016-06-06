@@ -109,7 +109,7 @@ int main(void)
     cout << str1 << endl;
 
     RK RK4 = RK("RK4");
-    cout << RK4.c << endl;
+    cout << RK4.c_ << endl;
 
     //bool array[] = {true, true};
 

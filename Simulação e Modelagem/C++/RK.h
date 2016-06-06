@@ -12,8 +12,9 @@ public:
     ~RK();
     void Doit();
 
-    vec *a;
-    vec b;
-    vec c;
     int N;
+    vec *a__;
+    vec b_;
+    vec c_;
+    
    };
