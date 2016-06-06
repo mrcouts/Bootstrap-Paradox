@@ -8,6 +8,9 @@
 #include "RK.h"
 
 //Simple C++ program
+vec f_(double t, vec y_){
+	return {y_(1), -20*y_(1) - 100*y_(0)}; }
+
 int main(void)
 {
 	//cout << setprecision(16);
@@ -105,11 +108,14 @@ int main(void)
     cout << vetor[0] << endl;
     cout << vetor[1] << endl;
 
-    string str1 = "RK4";
+    string str1 = "RK6";
     cout << str1 << endl;
 
-    RK RK4 = RK("RK4");
-    cout << RK4.c_ << endl;
+    RK RK6 = RK("RK6");
+    cout << RK6.c_ << endl;
+
+    RK6.Doit(0.1, 1, {100.0, 0}, &f_);
+    cout << RK6.y__ << endl;
 
     //bool array[] = {true, true};
 

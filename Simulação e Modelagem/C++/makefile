@@ -30,7 +30,7 @@ RM = rm -f
 $(NAME) : $(OBJS)
 	$(LD) $(LFLAGS) $(OBJS) -o $(NAME) $(LIBS)
 
-$(NAME).o: $(NAME).cpp $(FUNC).h $(CLASS).h
+$(NAME).o: $(NAME).cpp $(FUNC).h $(CLASS).h RR.h 6R.h RK.h
 	$(CC) $(CFLAGS) $(NAME).cpp
 
 $(FUNC).o: $(FUNC).h $(FUNC).cpp

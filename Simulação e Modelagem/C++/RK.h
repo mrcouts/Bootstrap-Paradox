@@ -10,11 +10,15 @@ class RK {
 public:
     RK(string method);
     ~RK();
-    void Doit();
+    void Doit(double h, double tf, vec y0_, vec (*f_)(double, vec));
 
     int N;
     vec *a__;
     vec b_;
     vec c_;
-    
-   };
+
+    vec t_;
+    cube y__;
+    cube u__;
+private:
+    cube k__; };

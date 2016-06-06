@@ -1,4 +1,5 @@
 #include "RK.h"
+#include <iostream>
 
 RK::RK(string method){
 	if(method == "Heun"){
@@ -39,6 +40,32 @@ RK::RK(string method){
 RK::~RK(){
 	delete[] a__;
 	b_.clear() ;
-	c_.clear(); }
+	c_.clear();
 
-void RK::Doit(){}
+	t_.clear();
+	y__.clear();
+	u__.clear();
+	k__.clear(); }
+
+void RK::Doit(double h, double tf, vec y0_, vec (*f_)(double, vec)){
+	int nt = int(tf/h);
+	t_.zeros(nt+1);
+	for(int i = 0; i<nt+1; i++)
+		t_(i) = i*h;
+	y__.zeros(y0_.n_rows, 1, nt+1);
+	y__.slice(0) = y0_;
+	k__.zeros(y0_.n_rows, 1, N);
+
+	vec aux_; aux_ = zeros(y0_.n_rows);
+	for(int i = 0; i<nt; i++){
+		k__.slice(0) = f_(t_(i),y__.slice(i));
+		for(int j = 1; j<N; j++){
+			aux_.zeros();
+			for(int k = 0; k<j; k++)
+				aux_ += a__[j-1](k)*k__.slice(k);
+			k__.slice(j) = f_(t_(i) + c_(j-1)*h, y__.slice(i) + h*aux_);
+		aux_.zeros();
+		for(int i = 0; i<N; i++)
+			aux_ += b_(i)*k__.slice(i);
+		y__.slice(i+1) = y__.slice(i) + h*aux_; }}}
+
