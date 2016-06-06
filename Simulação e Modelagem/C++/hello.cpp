@@ -1,9 +1,11 @@
 #include <iostream>
 #include <iomanip>
+#include <string>
 #include "SomeUtilities.h"
 #include "Serial.h"
 #include "RR.h"
 #include "6R.h"
+#include "RK.h"
 
 //Simple C++ program
 int main(void)
@@ -94,6 +96,22 @@ int main(void)
     cout << R6.a_co_n_ << endl;
 
     I__.clear();
+
+    vec *vetor;
+    vetor = new vec[2];
+    vetor[0] = {1};
+    vetor[1] = {1,2};
+
+    cout << vetor[0] << endl;
+    cout << vetor[1] << endl;
+
+    string str1 = "RK4";
+    cout << str1 << endl;
+
+    RK RK4 = RK("RK4");
+    cout << RK4.c << endl;
+
+    //bool array[] = {true, true};
 
     return 0;
 }
