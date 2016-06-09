@@ -46,12 +46,17 @@ int main(void) {
     vec q2_; q2_.zeros(dof);
     double w1 = 10;
     double w2 = 15;
-    for(int i = 0; i<10; i++){
+    vec u; u.zeros(dof);
+    for(int i = 0; i<1000; i++){
     	q0_ = {sin(w1*t),sin(w2*t),sin(w1*t),sin(w2*t),sin(w1*t),sin(w2*t)};
     	q1_ = {w1*cos(w1*t),w2*cos(w2*t),w1*cos(w1*t),w2*cos(w2*t),w1*cos(w1*t),w2*cos(w2*t)};
     	q2_ = {-w1*w1*sin(w1*t), -w2*w2*sin(w2*t),-w1*w1*sin(w1*t), -w2*w2*sin(w2*t),-w1*w1*sin(w1*t), -w2*w2*sin(w2*t)};
     	R6.Doit(q0_,q1_);
-    	cout << R6.Mh_*q2_ + R6.vh_ + R6.gh_ << endl;
+    	u = R6.Mh_*q2_ + R6.vh_ + R6.gh_;
+        cout << t << "; ";
+        for(int j = 0; j<dof; j++)
+            cout << u(j) << "; ";
+        cout << endl;
     	t += 0.01;
     }
 
