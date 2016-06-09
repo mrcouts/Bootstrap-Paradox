@@ -8,6 +8,7 @@ vec f_(double t, vec y_){
 
 int main(void){
     RK RK6 = RK("RK6");
-    RK6.Doit(0.1, 1, {100.0, 0}, &f_);
-    cout << RK6.y__ << endl;
+    RK6.Doit(0.01, 1.5, {100.0, 0}, &f_);
+    for(uint i = 0; i< RK6.t_.n_rows; i++)
+    	cout << RK6.t_(i) << "; " << RK6.y__(0,0,i)  << "; " << RK6.y__(1,0,i) << "; " << endl;
     return 0; }

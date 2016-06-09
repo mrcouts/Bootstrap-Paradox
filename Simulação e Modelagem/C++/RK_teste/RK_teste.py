@@ -1,19 +1,9 @@
 import matplotlib.pyplot as plt
 import numpy as np
 from math import pi as Pi
+from txt2py import *
 
-def txt2py(filename):
-    with open(filename, 'r') as MyFile:
-        A = []
-        cont = 0
-        for line in MyFile:
-            A.append(line.split(';'))
-            A[cont].pop()
-            cont += 1
-    return [[float(A[i][j]) for j in range(len(A[0]))] for i in range(len(A))]
-
-A = txt2py("sim.txt")
-print np.array([A[i][0] for i in range(len(A))])
+A = txt2py("RK_teste.txt")
 
 t_np = np.array([A[i][0] for i in range(len(A))])
 tau1_np = np.array([A[i][1] for i in range(len(A))])

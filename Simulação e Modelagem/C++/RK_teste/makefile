@@ -33,4 +33,4 @@ RK.o: RK.h RK.cpp
 	$(CC) $(CFLAGS) RK.cpp
 
 clean:
-	$(RM) *.o *~ $(NAME)
+	$(RM) *.o *~ $(NAME).txt $(NAME) txt2py.pyc

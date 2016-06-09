@@ -45,4 +45,4 @@ RR.o: RR.h RR.cpp
 	$(CC) $(CFLAGS) RR.cpp
 
 clean:
-	$(RM) *.o *~ $(NAME)
+	$(RM) *.o *~ $(NAME).txt $(NAME) txt2py.pyc

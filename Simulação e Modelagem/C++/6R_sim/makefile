@@ -45,4 +45,4 @@ $(CLASS).o: $(CLASS).h $(CLASS).cpp $(FUNC).h
 	$(CC) $(CFLAGS) 6R.cpp
 
 clean:
-	$(RM) *.o *~ $(NAME)
+	$(RM) *.o *~ $(NAME).txt $(NAME) txt2py.pyc
