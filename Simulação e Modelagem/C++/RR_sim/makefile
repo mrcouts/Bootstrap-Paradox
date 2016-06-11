@@ -6,9 +6,10 @@ FUNC = SomeUtilities
 
 #classes
 CLASS = Serial
+CLASS2 = Dy
 
 # objects
-OBJS = $(NAME).o $(FUNC).o $(CLASS).o RR.o
+OBJS = $(NAME).o $(FUNC).o $(CLASS).o $(CLASS2).o RR.o
 
 # compiler and linker
 CC = g++
@@ -38,8 +39,11 @@ $(NAME).o: $(NAME).cpp $(FUNC).h $(CLASS).h RR.h
 $(FUNC).o: $(FUNC).h $(FUNC).cpp
 	$(CC) $(CFLAGS) $(FUNC).cpp
 
-$(CLASS).o: $(CLASS).h $(CLASS).cpp $(FUNC).h
+$(CLASS).o: $(CLASS).h $(CLASS).cpp $(CLASS2).h $(FUNC).h
 	$(CC) $(CFLAGS) $(CLASS).cpp
+
+$(CLASS2).o: $(CLASS2).h $(CLASS2).cpp
+	$(CC) $(CFLAGS) $(CLASS2).cpp
 
 RR.o: RR.h RR.cpp
 	$(CC) $(CFLAGS) RR.cpp

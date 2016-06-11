@@ -2,6 +2,7 @@
 #include <algorithm>
 #include <armadillo>
 #include "SomeUtilities.h"
+#include "Dy.h"
 
 using namespace std;
 using namespace arma;
@@ -10,7 +11,7 @@ class Serial {
 public:
     Serial(int dof, vec l_, vec lg_, vec m_, cube I__, vec g_, mat (*fDH)(vec, vec, vec));
     ~Serial();
-    void Doit(vec q0_, vec q1_);
+    Dy* Doit(vec q0_, vec q1_);
 
     int dof;
     vec l_;
@@ -31,6 +32,7 @@ public:
     mat Mh_;
     vec vh_;
     vec gh_;
+    Dy *dy;
     cube w_rel__;
     cube w_arr__;
     cube dw_co__;

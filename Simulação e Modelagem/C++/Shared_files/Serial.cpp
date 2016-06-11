@@ -22,6 +22,7 @@ Serial::Serial(int dof, vec l_, vec lg_, vec m_, cube I__, vec g_, mat (*fDH)(ve
 	Mh_.zeros(dof,dof);
 	vh_.zeros(dof);
 	gh_.zeros(dof);
+	dy = new Dy(dof);
 	w_rel__.zeros(3,1,dof);
 	w_arr__.zeros(3,1,dof);
 	dw_co__.zeros(3,1,dof);
@@ -48,6 +49,7 @@ Serial::~Serial(){
 	Mh_.clear();
 	vh_.clear();
 	gh_.clear();
+	delete dy;
 	w_rel__.clear();
 	w_arr__.clear();
 	dw_co__.clear();
@@ -58,7 +60,7 @@ Serial::~Serial(){
 	dw_co_n_.clear();
 	a_co_n_.clear(); }
 
-void Serial::Doit(vec q0_, vec q1_){
+Dy* Serial::Doit(vec q0_, vec q1_){
 	vec ogh_; ogh_.zeros(4);
 	mat H = this->fDH(q0_, l_, lg_);
 	for(int i = 0; i<dof; i++){
@@ -112,6 +114,9 @@ void Serial::Doit(vec q0_, vec q1_){
 
 	for(int i = 0; i<dof; i++)
 		vh_ += m_(i)*Jv__.slice(i).t()*a_co__.slice(i) + Jw2__.slice(i).t()*I__.slice(i)*dw_co2__.slice(i);
+	dy->Mh_ = Mh_;
+	dy->vh_ = vh_;
+	dy->gh_ = gh_;
 
 	dw_co_n_ = dw_co__.slice(dof-1);
 
@@ -131,4 +136,6 @@ void Serial::Doit(vec q0_, vec q1_){
 	ogh_.clear();
 	a_cor_n_.clear();
 	a_cen_n_.clear();
-	v_rel.clear(); }
+	v_rel.clear();
+
+	return dy;}
