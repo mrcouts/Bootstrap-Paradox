@@ -7,6 +7,9 @@
 using namespace std;
 using namespace arma;
 
+#ifndef SERIAL_H
+#define SERIAL_H
+
 class Serial {
 public:
     Serial(int dof, vec l_, vec lg_, vec m_, cube I__, vec g_, mat (*fDH)(vec, vec, vec));
@@ -43,3 +46,5 @@ public:
     vec dw_co_n_;
     vec a_co_n_;
     mat (*fDH)(vec, vec, vec); };
+
+#endif
