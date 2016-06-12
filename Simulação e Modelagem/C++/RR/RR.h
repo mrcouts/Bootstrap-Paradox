@@ -1,3 +1,5 @@
+#ifndef RR_H
+#define RR_H
 #include <cmath>
 #include <algorithm>
 #include <armadillo>
@@ -8,3 +10,5 @@ using namespace std;
 using namespace arma;
 
 mat fDH_RR(vec q0_, vec l_, vec lg_);
+
+#endif

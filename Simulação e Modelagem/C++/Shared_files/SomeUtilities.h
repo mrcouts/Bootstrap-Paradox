@@ -1,3 +1,5 @@
+#ifndef SOMEUTILITIES_H
+#define SOMEUTILITIES_H
 #include <cmath>
 #include <armadillo>
 
@@ -13,3 +15,5 @@ mat Hz(double theta, double dx, double dy, double dz);
 mat Ht(double dx, double dy, double dz);
 mat H(char axis, double theta, double dx, double dy, double dz);
 mat H_d(double a, double alpha, double d, double theta);
+
+#endif

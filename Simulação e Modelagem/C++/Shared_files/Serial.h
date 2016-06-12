@@ -1,3 +1,5 @@
+#ifndef SERIAL_H
+#define SERIAL_H
 #include <cmath>
 #include <algorithm>
 #include <armadillo>
@@ -6,9 +8,6 @@
 
 using namespace std;
 using namespace arma;
-
-#ifndef SERIAL_H
-#define SERIAL_H
 
 class Serial {
 public:

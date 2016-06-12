@@ -1,3 +1,5 @@
+#ifndef RK_H
+#define RK_H
 #include <cmath>
 #include <algorithm>
 #include <armadillo>
@@ -22,3 +24,5 @@ public:
     cube u__;
 private:
     cube k__; };
+
+#endif

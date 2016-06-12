@@ -1,10 +1,9 @@
+#ifndef DY_H
+#define DY_H
 #include <cmath>
 #include <algorithm>
 #include <armadillo>
 #include "SomeUtilities.h"
-
-#ifndef DY_H
-#define DY_H
 
 using namespace std;
 using namespace arma;
