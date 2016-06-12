@@ -44,7 +44,8 @@ int main(void){
     vec u; u.zeros(dof);
     u = FL.Doit(0, r_(0.1), dr_(0.1));
     cout << u << endl;
-    u = AC.Doit(0, r_(0.1), dr_(0.1));
-    cout << u << endl;
+    vec v; v.zeros(2*dof);
+    v = AC.f_(0, r_(0.1), dr_(0.1));
+    cout << v << endl;
 
     return 0; }

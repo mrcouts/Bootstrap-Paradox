@@ -16,6 +16,7 @@ public:
     Acceleration(int dof, Serial *R, FLControlLaw *u);
     ~Acceleration();
     vec Doit(double t, vec q0_, vec q1_);
+    vec f_(double t, vec q0_, vec q1_);
     int dof;
     Serial *R;
     FLControlLaw *u; };
