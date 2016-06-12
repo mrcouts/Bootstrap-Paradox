@@ -38,10 +38,9 @@ int main(void){
                  << 0 << 0      << 0.0001 << endr;
 
     Serial RR = Serial(2, {0.1, 0.1}, {0.05, 0.05},{0.1, 0.1}, I__ , {0, -9.8,0}, &fDH_RR);
-    RR.Doit(r_(0), dr_(0));
     FLControlLaw FL = FLControlLaw(dof, 100.0, 20.0, &r_, &dr_, &d2r_, &RR);
     vec u; u.zeros(dof);
-    u = FL.Doit(0, r_(0.1), dr_(0.1));
+    u = FL.Doit(0, r_(0.0), dr_(0.0));
     cout << u << endl;
 
     return 0; }
