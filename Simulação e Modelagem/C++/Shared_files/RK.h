@@ -4,20 +4,25 @@
 #include <algorithm>
 #include <armadillo>
 #include <string>
+#include "Acceleration.h"
 
 using namespace std;
 using namespace arma;
 
 class RK {
 public:
-    RK(string method);
+    RK(string method, vec (*f_)(double, vec));
+    RK(string method, Acceleration *AC);
     ~RK();
-    void Doit(double h, double tf, vec y0_, vec (*f_)(double, vec));
+    void Doit(double h, double tf, vec y0_);
 
     int N;
     vec *a__;
     vec b_;
     vec c_;
+    vec (*f_)(double, vec);
+    Acceleration *AC;
+    int caso;
 
     vec t_;
     cube y__;

@@ -11,7 +11,7 @@ CLASS3 = FLControlLaw
 CLASS4 = Acceleration
 
 # objects
-OBJS = $(NAME).o $(FUNC).o $(CLASS).o $(CLASS2).o $(CLASS3).o $(CLASS4).o RR.o
+OBJS = $(NAME).o $(FUNC).o $(CLASS).o $(CLASS2).o $(CLASS3).o $(CLASS4).o RR.o RK.o
 
 # compiler and linker
 CC = g++
@@ -35,7 +35,7 @@ all: $(NAME)
 $(NAME) : $(OBJS)
 	$(LD) $(LFLAGS) $(OBJS) -o $(NAME) $(LIBS)
 
-$(NAME).o: $(NAME).cpp $(FUNC).h $(CLASS).h $(CLASS2).h $(CLASS3).h $(CLASS4).h RR.h
+$(NAME).o: $(NAME).cpp $(FUNC).h $(CLASS).h $(CLASS2).h $(CLASS3).h $(CLASS4).h RR.h RK.h
 	$(CC) $(CFLAGS) $(NAME).cpp
 
 $(FUNC).o: $(FUNC).h $(FUNC).cpp
@@ -53,9 +53,11 @@ $(CLASS3).o: $(CLASS3).h $(CLASS3).cpp $(CLASS2).h
 $(CLASS4).o: $(CLASS4).h $(CLASS4).cpp $(CLASS).h $(CLASS2).h $(CLASS3).h
 	$(CC) $(CFLAGS) $(CLASS4).cpp
 
-
 RR.o: RR.h RR.cpp
 	$(CC) $(CFLAGS) RR.cpp
+
+RK.o: RK.h RK.cpp $(CLASS4).h
+	$(CC) $(CFLAGS) RK.cpp
 
 clean:
 	$(RM) *.o *~ $(NAME).txt $(NAME) txt2py.pyc

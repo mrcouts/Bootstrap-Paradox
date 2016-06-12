@@ -1,8 +1,17 @@
 # program's name
 NAME = RK_teste
 
+#extra functions
+FUNC = SomeUtilities
+
+#classes
+CLASS = Serial
+CLASS2 = Dy
+CLASS3 = FLControlLaw
+CLASS4 = Acceleration
+
 # objects
-OBJS = $(NAME).o RK.o
+OBJS = $(NAME).o $(FUNC).o $(CLASS).o $(CLASS2).o $(CLASS3).o $(CLASS4).o RK.o
 
 # compiler and linker
 CC = g++
@@ -26,10 +35,26 @@ all: $(NAME)
 $(NAME) : $(OBJS)
 	$(LD) $(LFLAGS) $(OBJS) -o $(NAME) $(LIBS)
 
-$(NAME).o: $(NAME).cpp RK.h
+$(NAME).o: $(NAME).cpp $(FUNC).h $(CLASS).h $(CLASS2).h $(CLASS3).h $(CLASS4).h RK.h
 	$(CC) $(CFLAGS) $(NAME).cpp
 
-RK.o: RK.h RK.cpp
+$(FUNC).o: $(FUNC).h $(FUNC).cpp
+	$(CC) $(CFLAGS) $(FUNC).cpp
+
+$(CLASS).o: $(CLASS).h $(CLASS).cpp $(CLASS2).h $(FUNC).h
+	$(CC) $(CFLAGS) $(CLASS).cpp
+
+$(CLASS2).o: $(CLASS2).h $(CLASS2).cpp
+	$(CC) $(CFLAGS) $(CLASS2).cpp
+
+$(CLASS3).o: $(CLASS3).h $(CLASS3).cpp $(CLASS2).h
+	$(CC) $(CFLAGS) $(CLASS3).cpp
+
+$(CLASS4).o: $(CLASS4).h $(CLASS4).cpp $(CLASS).h $(CLASS2).h $(CLASS3).h
+	$(CC) $(CFLAGS) $(CLASS4).cpp
+
+
+RK.o: RK.h RK.cpp $(CLASS4).h
 	$(CC) $(CFLAGS) RK.cpp
 
 clean:

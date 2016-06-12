@@ -6,6 +6,7 @@
 #include "RR.h"
 #include "FLControlLaw.h"
 #include "Acceleration.h"
+#include "RK.h"
 
 vec r_(double t){
     double w1 = 10;
@@ -43,9 +44,14 @@ int main(void){
     Acceleration AC = Acceleration(dof, &RR, &FL);
     vec u; u.zeros(dof);
     u = FL.Doit(0, r_(0.1), dr_(0.1));
-    cout << u << endl;
+    //cout << u << endl;
     vec v; v.zeros(2*dof);
-    v = AC.f_(0, r_(0.1), dr_(0.1));
-    cout << v << endl;
+    v = AC.f_(0, join_vert(r_(0.1), dr_(0.1)) );
+    //cout << v << endl;
+
+    RK RK6 = RK("RK6", &AC);
+    RK6.Doit(0.01, 1.5, join_vert(r_(0.0), dr_(0.0)) );
+    for(uint i = 0; i< RK6.t_.n_rows; i++)
+        cout << RK6.t_(i) << "; " << RK6.y__(1,0,i)  << "; " << RK6.y__(3,0,i) << "; " << endl;
 
     return 0; }
