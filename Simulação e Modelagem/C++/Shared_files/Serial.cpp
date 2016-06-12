@@ -1,6 +1,15 @@
 #include "Serial.h"
 
-Serial::Serial(int dof, vec l_, vec lg_, vec m_, cube I__, vec g_, mat (*fDH)(vec, vec, vec)){
+Mecanismo::Mecanismo(int dof){
+	dy = new Dy(dof); }
+
+Mecanismo::~Mecanismo(){
+	delete dy; }
+
+Dy* Mecanismo::Doit(vec q0_, vec q1_){
+	return dy;}
+
+Serial::Serial(int dof, vec l_, vec lg_, vec m_, cube I__, vec g_, mat (*fDH)(vec, vec, vec)):Mecanismo(dof){
 	this->dof = dof;
 	this->l_ = l_;
 	this->lg_= lg_;
@@ -22,7 +31,7 @@ Serial::Serial(int dof, vec l_, vec lg_, vec m_, cube I__, vec g_, mat (*fDH)(ve
 	Mh_.zeros(dof,dof);
 	vh_.zeros(dof);
 	gh_.zeros(dof);
-	dy = new Dy(dof);
+	//dy = new Dy(dof);
 	w_rel__.zeros(3,1,dof);
 	w_arr__.zeros(3,1,dof);
 	dw_co__.zeros(3,1,dof);
@@ -49,7 +58,7 @@ Serial::~Serial(){
 	Mh_.clear();
 	vh_.clear();
 	gh_.clear();
-	delete dy;
+	//delete dy;
 	w_rel__.clear();
 	w_arr__.clear();
 	dw_co__.clear();
