@@ -23,6 +23,7 @@ FLControlLaw::FLControlLaw(int dof, double Kp, double Kv, vec (*r_)(double), vec
 FLControlLaw::~FLControlLaw(){}
 
 vec FLControlLaw::Doit(double t, vec q0_, vec q1_){
+	Dy *dy;
 	switch (caso){
 		case 1: dy = R->Doit(q0_, q1_); break;
 		case 2: dy = dy_comp(q0_, q1_); break; }

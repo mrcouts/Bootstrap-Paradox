@@ -22,7 +22,6 @@ public:
     vec (*r_)(double);
     vec (*dr_)(double);
     vec (*d2r_)(double);
-    Dy *dy;
     Serial *R;
     Dy* (*dy_comp)(vec, vec);
     int caso; };

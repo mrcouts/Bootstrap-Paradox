@@ -5,6 +5,7 @@
 #include "Serial.h"
 #include "RR.h"
 #include "FLControlLaw.h"
+#include "Acceleration.h"
 
 vec r_(double t){
     double w1 = 10;
@@ -39,8 +40,11 @@ int main(void){
 
     Serial RR = Serial(2, {0.1, 0.1}, {0.05, 0.05},{0.1, 0.1}, I__ , {0, -9.8,0}, &fDH_RR);
     FLControlLaw FL = FLControlLaw(dof, 100.0, 20.0, &r_, &dr_, &d2r_, &RR);
+    Acceleration AC = Acceleration(dof, &RR, &FL);
     vec u; u.zeros(dof);
-    u = FL.Doit(0, r_(0.0), dr_(0.0));
+    u = FL.Doit(0, r_(0.1), dr_(0.1));
+    cout << u << endl;
+    u = AC.Doit(0, r_(0.1), dr_(0.1));
     cout << u << endl;
 
     return 0; }
