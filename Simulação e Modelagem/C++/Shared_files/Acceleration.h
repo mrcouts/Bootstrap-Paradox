@@ -15,8 +15,9 @@ class Acceleration{
 public:
     Acceleration(int dof, Serial *R, FLControlLaw *u);
     ~Acceleration();
-    vec Doit(double t, vec q0_, vec q1_);
+    field<vec> Doit(double t, vec q0_, vec q1_);
     vec f_(double t, vec y_);
+    field<vec> f2_(double t, vec y_);
     int dof;
     Serial *R;
     FLControlLaw *u; };
