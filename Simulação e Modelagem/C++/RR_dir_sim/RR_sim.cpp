@@ -42,17 +42,17 @@ int main(void){
     Serial RR = Serial(2, {0.1, 0.1}, {0.05, 0.05},{0.1, 0.1}, I__ , {0, -9.8,0}, &fDH_RR);
     FLControlLaw FL = FLControlLaw(dof, 100.0, 20.0, &r_, &dr_, &d2r_, &RR);
     Acceleration AC = Acceleration(dof, &RR, &FL);
-    vec u; u.zeros(dof);
-    u = FL.Doit(0, r_(0.1), dr_(0.1));
+    //vec u; u.zeros(dof);
+    //u = FL.Doit(0, r_(0.1), dr_(0.1));
     //cout << u << endl;
-    vec v; v.zeros(2*dof);
-    v = AC.f_(0, join_vert(r_(0.1), dr_(0.1)) );
+    //vec v; v.zeros(2*dof);
+    //v = AC.f_(0, join_vert(r_(0.1), dr_(0.1)) );
     //cout << v << endl;
 
-    RK RK6 = RK("RK8", &AC);
-    RK6.Doit(0.001, 10.0, join_vert(r_(0.0), dr_(0.0)) );
-    for(uint i = 0; i< RK6.t_.n_rows; i++)
-        cout << RK6.t_(i) << "; " << RK6.u__(0,0,i)  << "; " << RK6.u__(1,0,i) << "; " << endl;
-        //cout << RK6.t_(i) << "; " << r_(RK6.t_(i))(1) - RK6.y__(1,0,i)  << "; " << dr_(RK6.t_(i))(1) - RK6.y__(3,0,i) << "; " << endl;
+    RK rk = RK("RK8", &AC);
+    rk.Doit(0.001, 10.0, join_vert(r_(0.0), dr_(0.0)) );
+    for(uint i = 0; i< rk.t_.n_rows; i++)
+        cout << rk.t_(i) << "; " << rk.u__(0,0,i)  << "; " << rk.u__(1,0,i) << "; " << endl;
+        //cout << rk.t_(i) << "; " << r_(rk.t_(i))(1) - rk.y__(1,0,i)  << "; " << dr_(rk.t_(i))(1) - rk.y__(3,0,i) << "; " << endl;
 
     return 0; }

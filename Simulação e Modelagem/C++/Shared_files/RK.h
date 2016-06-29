@@ -28,6 +28,7 @@ public:
     cube y__;
     cube u__;
 private:
+    void SetMethod(string method);
     cube k__; };
 
 #endif
