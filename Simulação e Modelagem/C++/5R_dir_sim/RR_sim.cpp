@@ -50,11 +50,12 @@ public:
     }
     ~_5R_(){}
     void Doit(vec q0_, vec q1_){
-        P.Doit(q0_(span(0,1)), q1_(span(0,1)));
-        RR1.Doit(q0_(span(2,3)), q1_(span(2,3)));
-        RR2.Doit(q0_(span(4,5)), q1_(span(4,5)));
-        v_ = join_cols(P->vh_, join_cols(RR1->vh_, RR2->vh_) );
-        g_ = join_cols(P->gh_, join_cols(RR1->gh_, RR2->gh_) );
+        P->Doit(q0_(span(0,1)), q1_(span(0,1)));
+        RR1->Doit(q0_(span(2,3)), q1_(span(2,3)));
+        RR2->Doit(q0_(span(4,5)), q1_(span(4,5)));
+        M_ = join_vert(P->dy->Mh_, join_vert(RR1->Mh_, RR2->Mh_) );
+        v_ = join_vert(P->dy->vh_, join_vert(RR1->vh_, RR2->vh_) );
+        g_ = join_diag(P->dy->gh_, join_diag(RR1->gh_, RR2->gh_) );
     }
     mat M_;
     vec v_;

@@ -15,5 +15,6 @@ mat Hz(double theta, double dx, double dy, double dz);
 mat Ht(double dx, double dy, double dz);
 mat H(char axis, double theta, double dx, double dy, double dz);
 mat H_d(double a, double alpha, double d, double theta);
+mat join_diag(mat A, mat B);
 
 #endif

@@ -57,3 +57,6 @@ mat H(char axis, double theta, double dx, double dy, double dz){
 
 mat H_d(double a, double alpha, double d, double theta){
 	return Hz(theta, 0, 0, 0)*Hx(alpha, a,0,d);}
+
+mat join_diag(mat A, mat B){
+    return join_vert( join_horiz(A, zeros(A.n_rows, B.n_cols)), join_horiz(zeros(B.n_rows, A.n_cols), B) ); }
