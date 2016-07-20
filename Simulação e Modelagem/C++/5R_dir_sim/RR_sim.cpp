@@ -41,6 +41,7 @@ public:
     mat A_;
     vec b_;
     mat C_;
+    mat Z_;
     mat Mh_;
     vec vh_;
     vec gh_;
@@ -59,6 +60,7 @@ public:
         A_.zeros(nq-dof,nq);
         b_.zeros(nq-dof);
         C_.zeros(nq,dof);
+        Z_.zeros(dof,dof);
         Mh_.zeros(dof,dof);
         vh_.zeros(dof);
         gh_.zeros(dof);
@@ -102,8 +104,9 @@ public:
         vec v1 = R1*RR1->a_co_n_;
         vec v2 = R2*RR2->a_co_n_;
         b_ = join_vert( v1(span(0,1)), v2(span(0,1)) );
-        // C_
+        // C_ e Z_
         C_ = join_vert( eye(2,2), -solve(Ao_,Ah_) );
+        Z_ = join_vert(C_.row(2), C_.row(4));
         // Mh_, vh_ e gh_
         Mh_ = C_.t()*M_*C_;
         vh_ = C_.t()*( M_*join_vert(zeros(2), solve(Ao_, b_) ) + v_ );
@@ -112,6 +115,7 @@ public:
         cout << Mh_ << endl;
         cout << vh_ << endl;
         cout << gh_ << endl;
+        cout << Z_ << endl;
     }
 };
 
