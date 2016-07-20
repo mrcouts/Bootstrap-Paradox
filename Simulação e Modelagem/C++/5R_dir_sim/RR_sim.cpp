@@ -45,6 +45,8 @@ public:
     mat Mh_;
     vec vh_;
     vec gh_;
+    mat H_;
+    mat h_;
     Mecanismo *P;
     Serial *RR1;
     Serial *RR2;
@@ -64,6 +66,8 @@ public:
         Mh_.zeros(dof,dof);
         vh_.zeros(dof);
         gh_.zeros(dof);
+        H_.zeros(dof,dof);
+        h_.zeros(dof);
 
         cube I__; I__.zeros(3,3,2);
         I__.slice(0) << 0 << 0        << 0        << endr
@@ -80,9 +84,16 @@ public:
     }
     ~_5R_(){}
     void Doit(vec q0_, vec q1_){
-        P->Doit(q0_(span(0,1)), q1_(span(0,1)));
-        RR1->Doit(q0_(span(2,3)), q1_(span(2,3)));
-        RR2->Doit(q0_(span(4,5)), q1_(span(4,5)));
+    	vec q0h_ = q0_(span(0,1));
+    	vec q1h_ = q1_(span(0,1));
+    	vec q0h1_ = q0_(span(2,3));
+    	vec q1h1_ = q1_(span(2,3));
+    	vec q0h2_ = q0_(span(4,5));
+    	vec q1h2_ = q1_(span(4,5));
+
+        P->Doit(q0h_, q1h_);
+        RR1->Doit(q0h1_, q1h1_);
+        RR2->Doit(q0h2_, q1h2_);
         //M_, v_ e g_
         M_ = join_diag(P->dy->Mh_, join_diag(RR1->Mh_, RR2->Mh_) );
         v_ = join_vert(P->dy->vh_, join_vert(RR1->vh_, RR2->vh_) );
@@ -90,12 +101,12 @@ public:
         // _q_, Ah_, Ao_ e A_
         mat H1 = Hy(0,0.05,0,0);
         mat R1 = Roty(0);
-        vec w1 = H1*join_vert(RR1->o__.slice(2),ones(1));
+        vec w1 = H1*join_vert(RR1->o__.slice(RR1->dof),ones(1));
         mat H2 = Hy(PI,-0.05,0,0);
         mat R2 = Roty(PI);
-        vec w2 = H2*join_vert(RR2->o__.slice(2),ones(1));
-        _q_ = join_vert(q0_(span(0,1)) - w1(span(0,1)), q0_(span(0,1)) - w2(span(0,1))) ;
-        Ah_ = join_vert(eye(2,2),eye(2,2));
+        vec w2 = H2*join_vert(RR2->o__.slice(RR2->dof),ones(1));
+        _q_ = join_vert(q0h_ - w1(span(0,1)), q0h_ - w2(span(0,1))) ;
+        Ah_ = join_vert(eye(dof,dof),eye(dof,dof));
         mat M1 = R1*RR1->Jv_n_;
         mat M2 = R2*RR2->Jv_n_;
         Ao_ = join_diag(-M1(span(0,1),span(0,1)), -M2(span(0,1),span(0,1)));
@@ -105,17 +116,23 @@ public:
         vec v2 = R2*RR2->a_co_n_;
         b_ = join_vert( v1(span(0,1)), v2(span(0,1)) );
         // C_ e Z_
-        C_ = join_vert( eye(2,2), -solve(Ao_,Ah_) );
+        C_ = join_vert( eye(dof,dof), -solve(Ao_,Ah_) );
         Z_ = join_vert(C_.row(2), C_.row(4));
         // Mh_, vh_ e gh_
         Mh_ = C_.t()*M_*C_;
-        vh_ = C_.t()*( M_*join_vert(zeros(2), solve(Ao_, b_) ) + v_ );
+        vh_ = C_.t()*( M_*join_vert(zeros(dof), solve(Ao_, b_) ) + v_ );
         gh_ = C_.t()*g_;
+        // H_ e h_
+        H_ = solve(Z_.t(), Mh_);
+        h_ = solve(Z_.t(), vh_ + gh_);
 
         cout << Mh_ << endl;
         cout << vh_ << endl;
         cout << gh_ << endl;
+        cout << C_ << endl;
         cout << Z_ << endl;
+        cout << H_ << endl;
+        cout << h_ << endl;
     }
 };
 
@@ -150,7 +167,8 @@ int main(void){
     //cout << RR.o__.slice(0) << endl;
 
     _5R_ Robot = _5R_();
-    Robot.Doit({0.0, 0.20,PI/4+0.001,PI/4-0.001,PI/4-0.001,PI/4+0.001},{1,2,3,4,5,6});
+    Robot.Doit({0.0, 0.20, 1.01377246756945, 1.41460649673445, 1.01377246756945, 1.41460649673445},{0,0,0,0,0,0});
+
 
     return 0;
 }
