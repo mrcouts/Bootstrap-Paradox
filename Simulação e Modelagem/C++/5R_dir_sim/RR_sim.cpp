@@ -30,16 +30,38 @@ Dy* (dy_comp)(vec q0_, vec q1_){
 
 class _5R_{
 public:
+	int dof;
+	int nq;
+	mat M_;
+    vec v_;
+    vec g_;
+    vec _q_;
+    mat Ah_;
+    mat Ao_;
+    mat A_;
+    vec b_;
+    mat C_;
+    mat Mh_;
+    vec vh_;
+    vec gh_;
+    Mecanismo *P;
+    Serial *RR1;
+    Serial *RR2;
     _5R_(){
-        M_.zeros(6,6);
-        v_.zeros(6);
-        g_.zeros(6);
-        _q_.zeros(4);
-        Ah_.zeros(4,2);
-        Ao_.zeros(4,4);
-        C_.zeros(6,2);
-        Mh_.zeros(2,2);
-        gh_.zeros(2);
+    	dof = 2;
+    	nq = 6;
+        M_.zeros(nq,nq);
+        v_.zeros(nq);
+        g_.zeros(nq);
+        _q_.zeros(nq-dof);
+        Ah_.zeros(nq-dof,dof);
+        Ao_.zeros(nq-dof,nq-dof);
+        A_.zeros(nq-dof,nq);
+        b_.zeros(nq-dof);
+        C_.zeros(nq,dof);
+        Mh_.zeros(dof,dof);
+        vh_.zeros(dof);
+        gh_.zeros(dof);
 
         cube I__; I__.zeros(3,3,2);
         I__.slice(0) << 0 << 0        << 0        << endr
@@ -52,17 +74,18 @@ public:
 
         RR1 = new Serial(2, {0.12, 0.15}, {0.5*0.12, 0.5*0.15},{0.143, 0.171}, I__ , {0, -9.8,0}, &fDH_RR);
         RR2 = new Serial(2, {0.12, 0.15}, {0.5*0.12, 0.5*0.15},{0.143, 0.171}, I__ , {0, -9.8,0}, &fDH_RR);
-        P = new Mecanismo(2); 
+        P = new Mecanismo(dof); 
     }
     ~_5R_(){}
     void Doit(vec q0_, vec q1_){
         P->Doit(q0_(span(0,1)), q1_(span(0,1)));
         RR1->Doit(q0_(span(2,3)), q1_(span(2,3)));
         RR2->Doit(q0_(span(4,5)), q1_(span(4,5)));
-        M_ = join_diag(0*P->dy->Mh_, join_diag(RR1->Mh_, RR2->Mh_) );
-        cout << M_ << endl;
+        //M_, v_ e g_
+        M_ = join_diag(P->dy->Mh_, join_diag(RR1->Mh_, RR2->Mh_) );
         v_ = join_vert(P->dy->vh_, join_vert(RR1->vh_, RR2->vh_) );
         g_ = join_vert(P->dy->gh_, join_vert(RR1->gh_, RR2->gh_) );
+        // _q_, Ah_, Ao_ e A_
         mat H1 = Hy(0,0.05,0,0);
         mat R1 = Roty(0);
         vec w1 = H1*join_vert(RR1->o__.slice(2),ones(1));
@@ -70,32 +93,26 @@ public:
         mat R2 = Roty(PI);
         vec w2 = H2*join_vert(RR2->o__.slice(2),ones(1));
         _q_ = join_vert(q0_(span(0,1)) - w1(span(0,1)), q0_(span(0,1)) - w2(span(0,1))) ;
-        cout << _q_ << endl;
         Ah_ = join_vert(eye(2,2),eye(2,2));
-        cout << Ah_ << endl;
         mat M1 = R1*RR1->Jv_n_;
         mat M2 = R2*RR2->Jv_n_;
         Ao_ = join_diag(-M1(span(0,1),span(0,1)), -M2(span(0,1),span(0,1)));
-        cout << Ao_ << endl;
+        A_ = join_horiz(Ah_, Ao_);
+        // b_
+        vec v1 = R1*RR1->a_co_n_;
+        vec v2 = R2*RR2->a_co_n_;
+        b_ = join_vert( v1(span(0,1)), v2(span(0,1)) );
+        // C_
         C_ = join_vert( eye(2,2), -solve(Ao_,Ah_) );
-        cout << C_ << endl;
+        // Mh_, vh_ e gh_
         Mh_ = C_.t()*M_*C_;
-        cout << Mh_ << endl;
+        vh_ = C_.t()*( M_*join_vert(zeros(2), solve(Ao_, b_) ) + v_ );
         gh_ = C_.t()*g_;
-        cout << gh_ << endl;    
+
+        cout << Mh_ << endl;
+        cout << vh_ << endl;
+        cout << gh_ << endl;
     }
-    mat M_;
-    vec v_;
-    vec g_;
-    vec _q_;
-    mat Ah_;
-    mat Ao_;
-    mat C_;
-    mat Mh_;
-    vec gh_;
-    Serial *RR1;
-    Serial *RR2;
-    Mecanismo *P;
 };
 
 int main(void){
@@ -129,6 +146,7 @@ int main(void){
     //cout << RR.o__.slice(0) << endl;
 
     _5R_ Robot = _5R_();
-    Robot.Doit({0.0, 0.20,PI/4+0.001,PI/4-0.001,PI/4-0.001,PI/4+0.001},{0,0,0,0,0,0});
+    Robot.Doit({0.0, 0.20,PI/4+0.001,PI/4-0.001,PI/4-0.001,PI/4+0.001},{1,2,3,4,5,6});
 
-    return 0; }
+    return 0;
+}

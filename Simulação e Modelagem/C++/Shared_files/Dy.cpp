@@ -1,7 +1,7 @@
 #include "Dy.h"
 
 Dy::Dy(int dof){
-	Mh_.eye(dof,dof);
+	Mh_.zeros(dof,dof);
 	vh_.zeros(dof);
 	gh_.zeros(dof); }
 
