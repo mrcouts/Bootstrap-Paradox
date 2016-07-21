@@ -3,6 +3,10 @@
 #include <cmath>
 #include <armadillo>
 
+#ifndef PI
+#define PI 3.14159265358979323846264338327950288
+#endif
+
 using namespace std;
 using namespace arma;
 
