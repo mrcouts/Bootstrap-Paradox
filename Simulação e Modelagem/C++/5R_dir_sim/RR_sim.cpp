@@ -10,19 +10,21 @@
 #include "_5R_.h"
 
 vec r_(double t){
-    double w1 = 10;
-    double w2 = 15;
-    return {sin(w1*t),sin(w2*t)}; }
+    double r = 0.08;
+    double x0 = 0.0;
+    double y0 = 0.16;
+    double w = 1/r;
+    return {x0+r*cos(w*t), y0+r*sin(w*t)}; }
 
 vec dr_(double t){
-    double w1 = 10;
-    double w2 = 15;
-    return {w1*cos(w1*t),w2*cos(w2*t)}; }
+    double r = 0.08;
+    double w = 1/r;
+    return {-w*r*sin(w*t), w*r*cos(w*t)}; }
 
 vec d2r_(double t){
-    double w1 = 10;
-    double w2 = 15;
-    return {-w1*w1*sin(w1*t), -w2*w2*sin(w2*t)}; }
+    double r = 0.08;
+    double w = 1/r;
+    return {-w*w*r*cos(w*t), -w*w*r*sin(w*t)}; }
 
 Dy* (dy_comp)(vec q0_, vec q1_){
     Dy *dy;
@@ -30,6 +32,7 @@ Dy* (dy_comp)(vec q0_, vec q1_){
     return dy; }
 
 int main(void){
+    /*
     int dof = 2;
     cube I__; I__.zeros(3,3,dof);
     I__.slice(0) << 0 << 0        << 0        << endr
@@ -59,9 +62,38 @@ int main(void){
 
     //cout << RR.o__.slice(0) << endl;
 
+    */
+
     _5R_ Robot = _5R_();
     Robot.Doit({0.0, 0.20, 1.01377246756945, 1.41460649673445, 1.01377246756945, 1.41460649673445},{0,0,0,0,0,0});
 
+    cout << Robot.dy->Mh_ << endl;
+    cout << Robot.dy->vh_ << endl;
+    cout << Robot.dy->gh_ << endl;
+
+    FLControlLaw FL = FLControlLaw(6, 100.0, 20.0, &r_, &dr_, &d2r_, &Robot);
+    Acceleration AC = Acceleration(6, &Robot, &FL);
+
+    cout << "Tow aki" << endl;
+
+    //vec u; u.zeros(2);
+    //u = FL.Doit(0, {0.08,  0.16, 0.305030291698133, 1.86386236511897, 1.45111035931733, 1.41460649673445}, zeros(6));
+    //cout << u << endl;
+
+    vec x0_ = {0.08,  0.16, 0.305030291698133, 1.86386236511897, 1.45111035931733, 1.41460649673445, 0, 0, 0, 0, 0, 0};
+
+    //vec v; v.zeros(2*6);
+    //v = AC.f_(0, x0_ );
+    //cout << v << endl;
+
+    //field<vec> F(2);
+    //F = AC.Doit(0, {0.08,  0.16, 0.305030291698133, 1.86386236511897, 1.45111035931733, 1.41460649673445}, {0, 0, 0, 0, 0, 0} );
+    //cout << F << endl;
+
+    RK rk = RK("RK4", &AC);
+    //rk.Doit(0.001, 0.01, x0_);
+    //for(uint i = 0; i< rk.t_.n_rows; i++)
+    //    cout << rk.t_(i) << "; " << rk.u__(0,0,i)  << "; " << rk.u__(1,0,i) << "; " << endl;
 
     return 0;
 }

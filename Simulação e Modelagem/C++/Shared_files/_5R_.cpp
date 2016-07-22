@@ -1,6 +1,6 @@
 #include "_5R_.h"
 
-_5R_::_5R_(){
+_5R_::_5R_():Mecanismo(2){
     dof = 2;
     nq = 6;
     M_.zeros(nq,nq);
@@ -35,7 +35,7 @@ _5R_::_5R_(){
 
 _5R_::~_5R_(){}
 
-void _5R_::Doit(vec q0_, vec q1_){
+Dy* _5R_::Doit(vec q0_, vec q1_){
    	vec q0h_ = q0_(span(0,1));
    	vec q1h_ = q1_(span(0,1));
    	vec q0h1_ = q0_(span(2,3));
@@ -74,14 +74,25 @@ void _5R_::Doit(vec q0_, vec q1_){
     Mh_ = C_.t()*M_*C_;
     vh_ = C_.t()*( M_*join_vert(zeros(dof), solve(Ao_, b_) ) + v_ );
     gh_ = C_.t()*g_;
+    dy->Mh_ = solve(Z_.t(),Mh_);
+    dy->vh_ = solve(Z_.t(),vh_);
+    dy->gh_ = solve(Z_.t(),gh_);
     // H_ e h_
-    H_ = solve(Z_.t(), Mh_);
-    h_ = solve(Z_.t(), vh_ + gh_);
-    cout << Mh_ << endl;
-    cout << vh_ << endl;
-    cout << gh_ << endl;
-    cout << C_ << endl;
-    cout << Z_ << endl;
-    cout << H_ << endl;
-    cout << h_ << endl;
+    //H_ = solve(Z_.t(), Mh_);
+    //h_ = solve(Z_.t(), vh_ + gh_);
+    //cout << Mh_ << endl;
+    //cout << vh_ << endl;
+    //cout << gh_ << endl;
+    //cout << C_ << endl;
+    //cout << Z_ << endl;
+    //cout << H_ << endl;
+    //cout << h_ << endl;
+    //cout << join_vert( C_.t()*M_, A_ ) << endl;
+    //cout << det(join_vert( C_.t()*M_, A_ )) << endl;
+    //cout << inv(join_vert( C_.t()*M_, A_ )) << endl;
+    //vec u_ = {0.5, 0.1};
+    //double lambda = 10.0;
+    //cout << join_vert( Z_.t()*u_ -C_.t()*(v_ + g_), b_ - 2*lambda*A_*q1_ - lambda*lambda*_q_ ) << endl;
+    //cout << solve(join_vert( C_.t()*M_, A_ ), join_vert( Z_.t()*u_ -C_.t()*(v_ + g_), b_ - 2*lambda*A_*q1_ - lambda*lambda*_q_ )) << endl;
+    return dy;
 }

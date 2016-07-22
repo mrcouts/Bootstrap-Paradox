@@ -5,11 +5,11 @@
 #include "SomeUtilities.h"
 #include "RR.h"
 
-class _5R_{
+class _5R_:public Mecanismo{
 public:
 	_5R_();
     ~_5R_();
-    void Doit(vec q0_, vec q1_);
+    Dy* Doit(vec q0_, vec q1_);
 
 	int dof;
 	int nq;
