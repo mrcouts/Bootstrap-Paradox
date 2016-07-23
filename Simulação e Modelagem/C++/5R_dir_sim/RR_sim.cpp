@@ -67,14 +67,12 @@ int main(void){
     _5R_ Robot = _5R_();
     Robot.Doit({0.0, 0.20, 1.01377246756945, 1.41460649673445, 1.01377246756945, 1.41460649673445},{0,0,0,0,0,0});
 
-    cout << Robot.dy->Mh_ << endl;
-    cout << Robot.dy->vh_ << endl;
-    cout << Robot.dy->gh_ << endl;
+    //cout << Robot.dy->Mh_ << endl;
+    //cout << Robot.dy->vh_ << endl;
+    //cout << Robot.dy->gh_ << endl;
 
     FLControlLaw FL = FLControlLaw(6, 100.0, 20.0, &r_, &dr_, &d2r_, &Robot);
     Acceleration AC = Acceleration(6, &Robot, &FL);
-
-    cout << "Tow aki" << endl;
 
     //vec u; u.zeros(2);
     //u = FL.Doit(0, {0.08,  0.16, 0.305030291698133, 1.86386236511897, 1.45111035931733, 1.41460649673445}, zeros(6));
@@ -90,10 +88,10 @@ int main(void){
     //F = AC.Doit(0, {0.08,  0.16, 0.305030291698133, 1.86386236511897, 1.45111035931733, 1.41460649673445}, {0, 0, 0, 0, 0, 0} );
     //cout << F << endl;
 
-    RK rk = RK("RK4", &AC);
-    //rk.Doit(0.001, 0.01, x0_);
-    //for(uint i = 0; i< rk.t_.n_rows; i++)
-    //    cout << rk.t_(i) << "; " << rk.u__(0,0,i)  << "; " << rk.u__(1,0,i) << "; " << endl;
+    RK rk = RK("RK8", &AC);
+    rk.Doit(0.001, 4*1.2, x0_);
+    for(uint i = 0; i< rk.t_.n_rows; i++)
+        cout << rk.t_(i) << "; " << rk.u__(0,0,i)  << "; " << rk.u__(1,0,i) << "; " << endl;
 
     return 0;
 }

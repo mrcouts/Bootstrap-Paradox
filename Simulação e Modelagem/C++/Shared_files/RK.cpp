@@ -159,7 +159,8 @@ void RK::Doit(double h, double tf, vec y0_){
 		    case 2:
 		        field<vec> F2(2);
 		        F2 = AC->f2_(t_(i),y__.slice(i));
-		        u__.slice(i) = F2(1); 
+		        for(uint j = 0; j< F2(1).n_rows; j++) u__(j,0,i) = F2(1)(j);
+		        //u__.slice(i) = F2(1); 
 		        k__.slice(0) = F2(0);
 		        break; }
 		for(int j = 1; j<N; j++){
@@ -173,5 +174,9 @@ void RK::Doit(double h, double tf, vec y0_){
 		for(int i = 0; i<N; i++)
 			aux_ += b_(i)*k__.slice(i);
 		y__.slice(i+1) = y__.slice(i) + h*aux_; }}
-	if(caso == 2)
-		u__.slice(nt) = AC->f2_(t_(nt),y__.slice(nt))(1); }
+	if(caso == 2){
+		vec aux2_ = AC->f2_(t_(nt),y__.slice(nt))(1);
+		for(uint j = 0; j< aux2_.n_rows; j++) u__(j,0,nt) = aux2_(j);
+		//u__.slice(nt) = AC->f2_(t_(nt),y__.slice(nt))(1);
+	}
+}
