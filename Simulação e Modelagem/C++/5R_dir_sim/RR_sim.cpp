@@ -46,13 +46,11 @@ int main(void){
 
     Serial RR1 = Serial(2, {0.12, 0.15}, {0.5*0.12, 0.5*0.15},{0.143, 0.171}, I__ , {0, -9.8,0}, &fDH_RR);
     Serial RR2 = Serial(2, {0.12, 0.15}, {0.5*0.12, 0.5*0.15},{0.143, 0.171}, I__ , {0, -9.8,0}, &fDH_RR);
-    //Serial RR_[] = {RR1, RR2};
     Serial **RR_ = new Serial* [2];
     RR_[0] = &RR1;
     RR_[1] = &RR2;
 
-
-    _5R_ Robot = _5R_(2, &P, RR_[0], RR_[1]);
+    _5R_ Robot = _5R_(2, &P, RR_);
 
     FLControlLaw FL = FLControlLaw(6, 400.0, 40.0, &r_, &dr_, &d2r_, &Robot);
     Acceleration AC = Acceleration(6, &Robot, &FL);
@@ -60,7 +58,7 @@ int main(void){
     vec x0_ = {0.08,  0.16, 0.305030291698133, 1.86386236511897, 1.45111035931733, 1.41460649673445, 0, 0, 0, 0, 0, 0};
 
     RK rk = RK("RK8", &AC);
-    rk.Doit(0.001, 4*1.2, x0_);
+    rk.Doit(0.001, 2*1.2, x0_);
     for(uint i = 0; i< rk.t_.n_rows; i++)
         //cout << rk.t_(i) << "; " << r_(rk.t_(i))(0) - rk.y__(0,0,i)  << "; " << r_(rk.t_(i))(1) - rk.y__(1,0,i) << "; " << endl;
         cout << rk.t_(i) << "; " << rk.u__(0,0,i)  << "; " << rk.u__(1,0,i) << "; " << endl;
