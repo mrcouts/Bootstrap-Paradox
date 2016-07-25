@@ -3,11 +3,10 @@
 
 #include "Serial.h"
 #include "SomeUtilities.h"
-#include "RR.h"
 
 class _5R_:public Mecanismo{
 public:
-	_5R_(uint dof, Mecanismo *P, Serial **RR_);
+	_5R_(uint dof, Mecanismo *P, Serial **R_, uint nR_);
     ~_5R_();
     Dy* Doit(vec q0_, vec q1_);
 
@@ -23,7 +22,8 @@ public:
     mat C_;
     mat Z_;
     Mecanismo *P;
-    Serial **RR_;
+    Serial **R_;
+    uint nR_;
 };
 
 #endif

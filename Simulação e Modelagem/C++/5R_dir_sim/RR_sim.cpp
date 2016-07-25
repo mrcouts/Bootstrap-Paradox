@@ -14,24 +14,28 @@ vec r_(double t){
     double x0 = 0.0;
     double y0 = 0.16;
     double w = 1/r;
-    return {x0+r*cos(w*t), y0+r*sin(w*t)}; }
+    return {x0+r*cos(w*t), y0+r*sin(w*t)};
+}
 
 vec dr_(double t){
     double r = 0.08;
     double w = 1/r;
-    return {-w*r*sin(w*t), w*r*cos(w*t)}; }
+    return {-w*r*sin(w*t), w*r*cos(w*t)};
+}
 
 vec d2r_(double t){
     double r = 0.08;
     double w = 1/r;
-    return {-w*w*r*cos(w*t), -w*w*r*sin(w*t)}; }
+    return {-w*w*r*cos(w*t), -w*w*r*sin(w*t)};
+}
 
 Dy* (dy_comp)(vec q0_, vec q1_){
     Dy *dy;
     dy = new Dy(2);
-    return dy; }
+    return dy;
+}
 
-int main(void){
+int main(){
 
     Mecanismo P = Mecanismo(2);
 
@@ -50,7 +54,7 @@ int main(void){
     RR_[0] = &RR1;
     RR_[1] = &RR2;
 
-    _5R_ Robot = _5R_(2, &P, RR_);
+    _5R_ Robot = _5R_(2, &P, RR_, 2);
 
     FLControlLaw FL = FLControlLaw(6, 400.0, 40.0, &r_, &dr_, &d2r_, &Robot);
     Acceleration AC = Acceleration(6, &Robot, &FL);
@@ -59,9 +63,8 @@ int main(void){
 
     RK rk = RK("RK8", &AC);
     rk.Doit(0.001, 2*1.2, x0_);
-    for(uint i = 0; i< rk.t_.n_rows; i++)
-        //cout << rk.t_(i) << "; " << r_(rk.t_(i))(0) - rk.y__(0,0,i)  << "; " << r_(rk.t_(i))(1) - rk.y__(1,0,i) << "; " << endl;
-        cout << rk.t_(i) << "; " << rk.u__(0,0,i)  << "; " << rk.u__(1,0,i) << "; " << endl;
-
+    for(uint i = 0; i< rk.t_.n_rows; i++) cout << rk.t_(i) << "; " << rk.u__(0,0,i)  << "; " << rk.u__(1,0,i) << "; " << endl;
+    //for(uint i = 0; i< rk.t_.n_rows; i++) cout << rk.t_(i) << "; " << r_(rk.t_(i))(0) - rk.y__(0,0,i)  << "; " << r_(rk.t_(i))(1) - rk.y__(1,0,i) << "; " << endl;
+        
     return 0;
 }
