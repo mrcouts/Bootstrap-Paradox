@@ -17,7 +17,18 @@ _5R_::_5R_(uint dof, Mecanismo *P, Serial **R_, uint nR_):Mecanismo(dof){
     Z_.zeros(dof,dof);
 }
 
-_5R_::~_5R_(){}
+_5R_::~_5R_(){
+    M_.clear();
+    v_.clear();
+    g_.clear();
+    _q_.clear();
+    Ah_.clear();
+    Ao_.clear();
+    A_.clear();
+    b_.clear();
+    C_.clear();
+    Z_.clear();
+}
 
 Dy* _5R_::Doit(vec q0_, vec q1_){
     field<vec> q0h__(nR_+1);
@@ -51,5 +62,11 @@ Dy* _5R_::Doit(vec q0_, vec q1_){
     dy->Mh_ = solve(Z_.t(), C_.t()*M_*C_);
     dy->vh_ = solve(Z_.t(), C_.t()*( M_*join_vert(zeros(dof), solve(Ao_, b_) ) + v_ ));
     dy->gh_ = solve(Z_.t(), C_.t()*g_);
+
+    A.clear();
+    b.clear();
+    q0h__.clear();
+    q1h__.clear();
+
     return dy;
 }
