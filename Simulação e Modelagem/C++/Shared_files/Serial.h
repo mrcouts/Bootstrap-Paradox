@@ -11,10 +11,12 @@ using namespace arma;
 
 class Mecanismo{
 public:
-    Mecanismo(int dof);
+    Mecanismo(uint dof);
     ~Mecanismo();
     Dy* Doit(vec q0_, vec q1_);
-    Dy *dy; };
+    uint dof;
+    Dy *dy;
+};
 
 class Serial:public Mecanismo {
 public:
@@ -22,7 +24,6 @@ public:
     ~Serial();
     Dy* Doit(vec q0_, vec q1_);
 
-    int dof;
     vec l_;
     vec lg_;
     vec m_;

@@ -1,8 +1,7 @@
 #include "_5R_.h"
 
-_5R_::_5R_():Mecanismo(2){
-    dof = 2;
-    nq = 6;
+_5R_::_5R_(uint dof, Mecanismo *P, Serial *RR1, Serial *RR2):Mecanismo(dof){
+    nq = P->dof + RR1->dof + RR2->dof;
     M_.zeros(nq,nq);
     v_.zeros(nq);
     g_.zeros(nq);
@@ -13,24 +12,10 @@ _5R_::_5R_():Mecanismo(2){
     b_.zeros(nq-dof);
     C_.zeros(nq,dof);
     Z_.zeros(dof,dof);
-    Mh_.zeros(dof,dof);
-    vh_.zeros(dof);
-    gh_.zeros(dof);
-    H_.zeros(dof,dof);
-    h_.zeros(dof);
 
-    cube I__; I__.zeros(3,3,2);
-    I__.slice(0) << 0 << 0        << 0        << endr
-                 << 0 << 171.6e-6 << 0        << endr
-                 << 0 << 0        << 171.6e-6 << endr;
-
-    I__.slice(1) << 0 << 0        << 0        << endr
-                 << 0 << 320.6e-6 << 0        << endr
-                 << 0 << 0        << 320.6e-6 << endr;
-
-    RR1 = new Serial(2, {0.12, 0.15}, {0.5*0.12, 0.5*0.15},{0.143, 0.171}, I__ , {0, -9.8,0}, &fDH_RR);
-    RR2 = new Serial(2, {0.12, 0.15}, {0.5*0.12, 0.5*0.15},{0.143, 0.171}, I__ , {0, -9.8,0}, &fDH_RR);
-    P = new Mecanismo(dof); 
+    this->RR1 = RR1;
+    this->RR2 = RR2;
+    this->P = P;
 }
 
 _5R_::~_5R_(){}
@@ -61,14 +46,8 @@ Dy* _5R_::Doit(vec q0_, vec q1_){
     C_ = join_vert( eye(dof,dof), -solve(Ao_,Ah_) );
     Z_ = join_vert(C_.row(2), C_.row(4));
     // Mh_, vh_ e gh_
-    Mh_ = C_.t()*M_*C_;
-    vh_ = C_.t()*( M_*join_vert(zeros(dof), solve(Ao_, b_) ) + v_ );
-    gh_ = C_.t()*g_;
-    dy->Mh_ = solve(Z_.t(),Mh_);
-    dy->vh_ = solve(Z_.t(),vh_);
-    dy->gh_ = solve(Z_.t(),gh_);
-    // H_ e h_
-    //H_ = solve(Z_.t(), Mh_);
-    //h_ = solve(Z_.t(), vh_ + gh_);
+    dy->Mh_ = solve(Z_.t(), C_.t()*M_*C_);
+    dy->vh_ = solve(Z_.t(), C_.t()*( M_*join_vert(zeros(dof), solve(Ao_, b_) ) + v_ ));
+    dy->gh_ = solve(Z_.t(), C_.t()*g_);
     return dy;
 }

@@ -33,7 +33,26 @@ Dy* (dy_comp)(vec q0_, vec q1_){
 
 int main(void){
 
-    _5R_ Robot = _5R_();
+    Mecanismo P = Mecanismo(2);
+
+        cube I__; I__.zeros(3,3,2);
+    I__.slice(0) << 0 << 0        << 0        << endr
+                 << 0 << 171.6e-6 << 0        << endr
+                 << 0 << 0        << 171.6e-6 << endr;
+
+    I__.slice(1) << 0 << 0        << 0        << endr
+                 << 0 << 320.6e-6 << 0        << endr
+                 << 0 << 0        << 320.6e-6 << endr;
+
+    Serial RR1 = Serial(2, {0.12, 0.15}, {0.5*0.12, 0.5*0.15},{0.143, 0.171}, I__ , {0, -9.8,0}, &fDH_RR);
+    Serial RR2 = Serial(2, {0.12, 0.15}, {0.5*0.12, 0.5*0.15},{0.143, 0.171}, I__ , {0, -9.8,0}, &fDH_RR);
+    //Serial RR_[] = {RR1, RR2};
+    Serial **RR_ = new Serial* [2];
+    RR_[0] = &RR1;
+    RR_[1] = &RR2;
+
+
+    _5R_ Robot = _5R_(2, &P, RR_[0], RR_[1]);
 
     FLControlLaw FL = FLControlLaw(6, 400.0, 40.0, &r_, &dr_, &d2r_, &Robot);
     Acceleration AC = Acceleration(6, &Robot, &FL);

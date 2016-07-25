@@ -15,6 +15,13 @@ vec join_vert(field<vec> F){
     return aux;
 }
 
+vec join_vert(vec *lista, uint n){
+    vec aux = lista[0];
+    for(uint i = 1; i<n; i++)
+        aux = join_vert(aux, lista[i]);
+    return aux;
+}
+
 int main(void){
 	cout << "Hello! This is a C++ program." << endl;
 	vec A = randn(4);
@@ -31,7 +38,6 @@ int main(void){
     cout << F << endl;
     cout << F(0) << endl;
     cout << F(1) << endl;
-
     mat C = randn(4,4);
     mat D = randn(2,2);
     cout << C << endl;
@@ -47,6 +53,10 @@ int main(void){
     cout << lista[1] << endl;
     cout << lista[2] << endl;
 
+    vec lista2[] = {lista[0], lista[1], lista[2]};
+
     cout << join_vert(F) << endl;
+    cout << join_vert(lista,3) << endl;
+    cout << join_vert(lista2,3) << endl;
 
     return 0; }
