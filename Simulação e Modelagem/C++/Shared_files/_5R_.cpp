@@ -20,16 +20,19 @@ _5R_::_5R_(uint dof, Mecanismo *P, Serial **R_, uint nR_):Mecanismo(dof){
 _5R_::~_5R_(){}
 
 Dy* _5R_::Doit(vec q0_, vec q1_){
-   	vec q0h_ = q0_(span(0,1));
-   	vec q1h_ = q1_(span(0,1));
-   	vec q0h1_ = q0_(span(2,3));
-   	vec q1h1_ = q1_(span(2,3));
-   	vec q0h2_ = q0_(span(4,5));
-   	vec q1h2_ = q1_(span(4,5));
+    field<vec> q0h__(nR_+1);
+    field<vec> q1h__(nR_+1);
+    q0h__(0) = q0_(span(0,dof-1));
+    q1h__(0) = q1_(span(0,dof-1));
+    uint soma = dof;
+    for(uint i=0; i<nR_; i++){
+        soma += R_[i]->dof;
+        q0h__(i+1) = q0_(span(soma-R_[i]->dof,soma-1));
+        q1h__(i+1) = q1_(span(soma-R_[i]->dof,soma-1));
+    }
 
-    P->Doit(q0h_, q1h_);
-    R_[0]->Doit(q0h1_, q1h1_);
-    R_[1]->Doit(q0h2_, q1h2_);
+    P->Doit(q0h__(0), q1h__(0));
+    for(uint i=0; i<nR_; i++) R_[i]->Doit(q0h__(i+1), q1h__(i+1));
     //M_, v_ e g_
     M_ = join_diag(P->dy->Mh_, join_diag(R_[0]->Mh_, R_[1]->Mh_) );
     v_ = join_vert(P->dy->vh_, join_vert(R_[0]->vh_, R_[1]->vh_) );
@@ -37,7 +40,7 @@ Dy* _5R_::Doit(vec q0_, vec q1_){
     // _q_, Ah_, Ao_, A_, b_, C_ e Z_
     mat A = join_diag( Roty(0)(span(0,1),span(0,2)), Roty(PI)(span(0,1),span(0,2)) );
     vec b = {0.05,0,-0.05,0};
-    _q_ = join_vert(q0h_, q0h_) - A*join_vert(R_[0]->o__.slice(R_[0]->dof), R_[1]->o__.slice(R_[1]->dof)) - b;
+    _q_ = join_vert(q0h__(0), q0h__(0)) - A*join_vert(R_[0]->o__.slice(R_[0]->dof), R_[1]->o__.slice(R_[1]->dof)) - b;
     Ah_ = join_vert(eye(dof,dof),eye(dof,dof));
     Ao_ = -A*join_diag(R_[0]->Jv_n_,R_[1]->Jv_n_);
     A_ = join_horiz(Ah_, Ao_);
