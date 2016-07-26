@@ -15,6 +15,13 @@ _5R_::_5R_(uint dof, Mecanismo *P, Serial **R_, uint nR_):Mecanismo(dof){
     b_.zeros(nq-dof);
     C_.zeros(nq,dof);
     Z_.zeros(dof,dof);
+
+    M__ = new mat* [nR_+1];
+    M__[0] = &(P->dy->Mh_); for(uint i = 0; i<nR_; i++) M__[i+1] = &(R_[i]->Mh_);
+    v__ = new vec* [nR_+1];
+    v__[0] = &(P->dy->vh_); for(uint i = 0; i<nR_; i++) v__[i+1] = &(R_[i]->vh_);
+    g__ = new vec* [nR_+1];
+    g__[0] = &(P->dy->gh_); for(uint i = 0; i<nR_; i++) g__[i+1] = &(R_[i]->gh_);
 }
 
 _5R_::~_5R_(){
@@ -45,9 +52,11 @@ Dy* _5R_::Doit(vec q0_, vec q1_){
     P->Doit(q0h__(0), q1h__(0));
     for(uint i=0; i<nR_; i++) R_[i]->Doit(q0h__(i+1), q1h__(i+1));
     //M_, v_ e g_
-    M_ = join_diag(P->dy->Mh_, join_diag(R_[0]->Mh_, R_[1]->Mh_) );
-    v_ = join_vert(P->dy->vh_, join_vert(R_[0]->vh_, R_[1]->vh_) );
-    g_ = join_vert(P->dy->gh_, join_vert(R_[0]->gh_, R_[1]->gh_) );
+    mat Aux_ = *M__[0]; for(uint i=1; i<nR_+1; i++) Aux_ = join_diag(Aux_, *M__[i]);
+    M_ = Aux_;
+    //M_ = join_diag(M__, nR_+1);
+    v_ = join_vert(v__, nR_+1);
+    g_ = join_vert(g__, nR_+1);
     // _q_, Ah_, Ao_, A_, b_, C_ e Z_
     mat A = join_diag( Roty(0)(span(0,1),span(0,2)), Roty(PI)(span(0,1),span(0,2)) );
     vec b = {0.05,0,-0.05,0};

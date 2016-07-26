@@ -14,6 +14,9 @@ public:
 	mat M_;
     vec v_;
     vec g_;
+    mat **M__;
+    vec **v__;
+    vec **g__;
     vec _q_;
     mat Ah_;
     mat Ao_;

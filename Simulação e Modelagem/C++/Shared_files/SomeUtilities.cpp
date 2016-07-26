@@ -60,3 +60,17 @@ mat H_d(double a, double alpha, double d, double theta){
 
 mat join_diag(mat A, mat B){
     return join_vert( join_horiz(A, zeros(A.n_rows, B.n_cols)), join_horiz(zeros(B.n_rows, A.n_cols), B) ); }
+
+vec join_vert(vec **lista, uint n){
+    vec aux = *lista[0];
+    for(uint i = 1; i<n; i++)
+        aux = join_vert(aux, *lista[i]);
+    return aux;
+}
+
+//vec join_diag(mat **lista, uint n){
+//    mat aux = *lista[0];
+//    for(uint i = 1; i<n; i++)
+//        aux = join_diag(aux, *lista[i]);
+//    return aux;
+//}
