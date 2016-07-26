@@ -6,7 +6,7 @@
 
 class _5R_:public Mecanismo{
 public:
-	_5R_(uint dof, Mecanismo *P, Serial **R_, uint nR_);
+	_5R_(uint dof, Mecanismo *P, Serial **R_, uint nR_, mat A, vec b);
     ~_5R_();
     Dy* Doit(vec q0_, vec q1_);
 
@@ -17,6 +17,7 @@ public:
     mat **M__;
     vec **v__;
     vec **g__;
+    mat **o__;
     vec _q_;
     mat Ah_;
     mat Ao_;
@@ -27,6 +28,9 @@ public:
     Mecanismo *P;
     Serial **R_;
     uint nR_;
+
+    mat A;
+    vec b;
 };
 
 #endif
