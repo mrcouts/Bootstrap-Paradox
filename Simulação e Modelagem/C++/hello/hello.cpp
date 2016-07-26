@@ -8,17 +8,12 @@ mat join_diag(mat A, mat B){
     return join_vert( join_horiz(A, zeros(A.n_rows, B.n_cols)), join_horiz(zeros(B.n_rows, A.n_cols), B) );
 }
 
-vec join_diag(mat **lista, uint n){
-    cout << -1 << endl;
+mat join_diag(mat **lista, uint n){
     mat aux = *lista[0];
-    cout << 0 << endl;
-    cout << aux << endl;
     for(uint i = 1; i<n; i++){
         aux = join_diag(aux, *lista[i]);
-        cout << i << endl;
-        cout << aux << endl;
     }
-    return *lista[0];
+    return aux;
 }
 
 vec join_vert(field<vec> F){
@@ -39,6 +34,20 @@ vec join_vert(vec **lista, uint n){
     vec aux = *lista[0];
     for(uint i = 1; i<n; i++)
         aux = join_vert(aux, *lista[i]);
+    return aux;
+}
+
+vec join_vert(vec v, uint n){
+    vec aux = v;
+    for(uint i = 1; i<n; i++)
+        aux = join_vert(aux, v);
+    return aux;
+}
+
+mat join_vert(mat v, uint n){
+    mat aux = v;
+    for(uint i = 1; i<n; i++)
+        aux = join_vert(aux, v);
     return aux;
 }
 
@@ -92,17 +101,9 @@ int main(void){
     cout << *lista3[0] << endl;
     cout << join_vert(*lista3[0], *lista3[1]) << endl;
     cout << join_vert(lista3, 3) << endl;
-
-    //mat aux = *lista4[0];
-    //cout << aux << endl;
-    //for(uint i = 1; i<3; i++){
-    //    aux = join_diag(aux, *lista4[i]);
-    //    cout << aux << endl;
-    //}
-    //cout << aux << endl;
-
-    mat M = join_diag(lista4, 2);
-
+    cout << join_diag(lista4, 3) << endl;
+    cout << join_vert(A, 3) << endl;
+    cout << join_vert(C, 3) << endl;
 
     return 0;
 }

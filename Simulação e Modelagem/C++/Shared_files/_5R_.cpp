@@ -23,7 +23,9 @@ _5R_::_5R_(uint dof, Mecanismo *P, Serial **R_, uint nR_, mat A, vec b):Mecanism
     g__ = new vec* [nR_+1];
     g__[0] = &(P->dy->gh_); for(uint i = 0; i<nR_; i++) g__[i+1] = &(R_[i]->gh_);
 
-    o__ = new mat* [nR_]; for(uint i = 0; i<nR_; i++) o__[i] = &(R_[i]->o__.slice(R_[i]->dof));
+    o__      = new mat* [nR_]; for(uint i = 0; i<nR_; i++)      o__[i] = &(R_[i]->o__.slice(R_[i]->dof));
+    Jv_n__   = new mat* [nR_]; for(uint i = 0; i<nR_; i++)   Jv_n__[i] = &(R_[i]->Jv_n_);
+    a_co_n__ = new mat* [nR_]; for(uint i = 0; i<nR_; i++) a_co_n__[i] = &(R_[i]->a_co_n_);
 
     this->A = A;
     this->b = b;
@@ -61,11 +63,11 @@ Dy* _5R_::Doit(vec q0_, vec q1_){
     v_ = join_vert(v__, nR_+1);
     g_ = join_vert(g__, nR_+1);
     // _q_, Ah_, Ao_, A_, b_, C_ e Z_
-    _q_ = join_vert(q0h__(0), q0h__(0)) - A*join_vert(o__, nR_) - b;
-    Ah_ = join_vert(eye(dof,dof),eye(dof,dof));
-    Ao_ = -A*join_diag(R_[0]->Jv_n_,R_[1]->Jv_n_);
+    _q_ = join_vert(q0h__(0), nR_) - A*join_vert(o__, nR_) - b;
+    Ah_ = join_vert((mat)eye(dof,dof),nR_);
+    Ao_ = -A*join_diag(Jv_n__, nR_);
     A_ = join_horiz(Ah_, Ao_);
-    b_ = A*join_vert(R_[0]->a_co_n_, R_[1]->a_co_n_);
+    b_ = A*join_vert(a_co_n__, nR_);
     C_ = join_vert( eye(dof,dof), -solve(Ao_,Ah_) );
     Z_ = join_vert(C_.row(2), C_.row(4));
     // Mh_, vh_ e gh_

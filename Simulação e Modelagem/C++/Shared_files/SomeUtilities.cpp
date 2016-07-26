@@ -81,3 +81,17 @@ mat join_diag(mat **lista, uint n){
         aux = join_diag(aux, *lista[i]);
     return aux;
 }
+
+vec join_vert(vec v, uint n){
+    vec aux = v;
+    for(uint i = 1; i<n; i++)
+        aux = join_vert(aux, v);
+    return aux;
+}
+
+mat join_vert(mat v, uint n){
+    mat aux = v;
+    for(uint i = 1; i<n; i++)
+        aux = join_vert(aux, v);
+    return aux;
+}

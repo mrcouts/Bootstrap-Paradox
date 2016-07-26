@@ -18,6 +18,8 @@ public:
     vec **v__;
     vec **g__;
     mat **o__;
+    mat **Jv_n__;
+    mat **a_co_n__;
     vec _q_;
     mat Ah_;
     mat Ao_;
