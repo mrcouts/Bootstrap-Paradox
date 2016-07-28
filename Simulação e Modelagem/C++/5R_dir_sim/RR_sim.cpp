@@ -55,10 +55,12 @@ int main(){
     RR_[1] = &RR2;
 
     //Matrizes que descrevem a arquitetura do mecanismo
-    mat A = join_diag( Roty(0)(span(0,1),span(0,2)), Roty(PI)(span(0,1),span(0,2)) );
-    vec b = {0.05,0,-0.05,0};
+    mat D_ = join_vert((mat)eye(2,2),2);
+    mat E_ = join_diag( Roty(0)(span(0,1),span(0,2)), Roty(PI)(span(0,1),span(0,2)) );
+    mat F_ = zeros(4,4);
+    vec f_ = {0.05,0,-0.05,0};
 
-    _5R_ Robot = _5R_(2, &P, RR_, 2, A, b);
+    _5R_ Robot = _5R_(2, &P, RR_, 2, D_, E_, F_, f_);
 
     FLControlLaw FL = FLControlLaw(6, 400.0, 40.0, &r_, &dr_, &d2r_, &Robot);
     Acceleration AC = Acceleration(6, &Robot, &FL);

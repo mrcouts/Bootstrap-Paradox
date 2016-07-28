@@ -3,13 +3,19 @@
 Mecanismo::Mecanismo(uint dof){
 	this->dof = dof;
 	dy = new Dy(dof);
+	q0_.zeros(dof);
+	q1_.zeros(dof);
 }
 
 Mecanismo::~Mecanismo(){
 	delete dy;
+	q0_.clear();
+	q1_.clear();
 }
 
 Dy* Mecanismo::Doit(vec q0_, vec q1_){
+	this->q0_ = q0_;
+	this->q1_ = q1_;
 	return dy;
 }
 
@@ -74,6 +80,8 @@ Serial::~Serial(){
 }
 
 Dy* Serial::Doit(vec q0_, vec q1_){
+	this->q0_ = q0_;
+	this->q1_ = q1_;
 	vec ogh_; ogh_.zeros(4);
 	mat H = this->fDH(q0_, l_, lg_);
 	for(uint i = 0; i<dof; i++){

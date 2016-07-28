@@ -16,6 +16,8 @@ public:
     Dy* Doit(vec q0_, vec q1_);
     uint dof;
     Dy *dy;
+    vec q0_;
+    vec q1_;
 };
 
 class Serial:public Mecanismo {
