@@ -1,0 +1,3 @@
+massa = 62g
+"largura" = 160mm
+altura = 7.8mm
