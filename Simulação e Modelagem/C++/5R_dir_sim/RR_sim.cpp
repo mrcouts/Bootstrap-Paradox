@@ -7,7 +7,7 @@
 #include "FLControlLaw.h"
 #include "Acceleration.h"
 #include "RK.h"
-#include "_5R_.h"
+#include "Parallel.h"
 
 vec r_(double t){
     double r = 0.08;
@@ -60,7 +60,7 @@ int main(){
     mat F_ = zeros(4,4);
     vec f_ = {0.05,0,-0.05,0};
 
-    _5R_ Robot = _5R_(2, &P, RR_, 2, {2,4}, D_, E_, F_, f_);
+    Parallel Robot = Parallel(2, &P, RR_, 2, {2,4}, D_, E_, F_, f_);
 
     FLControlLaw FL = FLControlLaw(6, 400.0, 40.0, &r_, &dr_, &d2r_, &Robot);
     Acceleration AC = Acceleration(6, &Robot, &FL);

@@ -20,11 +20,22 @@ FLControlLaw::FLControlLaw(int dof, double Kp, double Kv, vec (*r_)(double), vec
 	this->dy_comp = dy_comp;
 	caso = 2; }
 
+FLControlLaw::FLControlLaw(int dof, double Kp, double Kv, vec (*r_)(double), vec (*dr_)(double), vec (*d2r_)(double), Parallel *R2){
+	this->dof = dof;
+	this->Kp = Kp;
+	this->Kv = Kv;
+	this->r_ = r_;
+	this->dr_ = dr_;
+	this->d2r_ = d2r_;
+	this->R2 = R2;
+	caso = 3; }
+
 FLControlLaw::~FLControlLaw(){}
 
 vec FLControlLaw::Doit(double t, vec q0_, vec q1_){
 	Dy *dy;
 	switch (caso){
 		case 1: dy = R->Doit(q0_, q1_); break;
-		case 2: dy = dy_comp(q0_, q1_); break; }
+		case 2: dy = dy_comp(q0_, q1_); break;
+		case 3: dy = R2->Doit(q0_, q1_); return dy->vh_ + dy->gh_ + dy->Mh_*(d2r_(t) + Kv*(dr_(t) - q1_(span(0,1))) + Kp*(r_(t) - q0_(span(0,1))  ) ); }
 	return dy->vh_ + dy->gh_ + dy->Mh_*(d2r_(t) + Kv*(dr_(t) - q1_) + Kp*(r_(t) - q0_) ); }

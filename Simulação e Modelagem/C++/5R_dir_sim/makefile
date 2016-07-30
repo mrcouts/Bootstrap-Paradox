@@ -9,7 +9,7 @@ CLASS = Serial
 CLASS2 = Dy
 CLASS3 = FLControlLaw
 CLASS4 = Acceleration
-CLASS5 = _5R_
+CLASS5 = Parallel
 
 # objects
 OBJS = $(NAME).o $(FUNC).o $(CLASS).o $(CLASS2).o $(CLASS3).o $(CLASS4).o $(CLASS5).o RR.o RK.o
