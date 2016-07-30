@@ -9,7 +9,6 @@
 #include "Parallel.h"
 #include "FLControlLaw.h"
 
-using namespace std;
 using namespace arma;
 
 class Acceleration{

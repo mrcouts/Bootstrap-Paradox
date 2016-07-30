@@ -90,15 +90,13 @@ Dy* Parallel::Doit(vec q0_, vec q1_){
     	    break;
     	case 2:
     	    Ao_ = join_vert(-E_*join_diag(Jv_n__, nR_) - F_, -Q_*join_diag(Jw_n__, nR_) - S_);
-    	    b_ = join_vert(E_*join_vert(a_co_n__, nR_), F_*join_vert(dw_co_n__, nR_));
+    	    b_ = join_vert(E_*join_vert(a_co_n__, nR_), Q_*join_vert(dw_co_n__, nR_));
     	    break;
     }
-    
     A_ = join_horiz(Ah_, Ao_);
     C_ = join_vert( eye(dof,dof), -solve(Ao_,Ah_) );
     mat Aux_ = C_.row(u_nzi_(0)); for(uint i=1; i<u_nzi_.n_rows; i++) Aux_ = join_vert(Aux_, C_.row(u_nzi_(i)));
     Z_ = Aux_;
-    //Z_ = join_vert(C_.row(2), C_.row(4));
     // Mh_, vh_ e gh_
     dy->Mh_ = solve(Z_.t(), C_.t()*M_*C_);
     dy->vh_ = solve(Z_.t(), C_.t()*( M_*join_vert(zeros(dof), solve(Ao_, b_) ) + v_ ));
