@@ -11,26 +11,26 @@
 #include "Parallel.h"
 
 vec r_(double t){
-    //double r = 0.08;
-    //double x0 = 0.0;
-    //double y0 = 0.16;
-    //double w = 1/r;
-    return {0,0,0.480};
-    //return {x0+r*cos(w*t), y0+r*sin(w*t),0.480};
+    double r = 0.08;
+    double x0 = 0.0;
+    double y0 = 0.16;
+    double w = 1/r;
+    //return {0,0,0.480};
+    return {x0+r*cos(w*t), y0+r*sin(w*t),0.480};
 }
 
 vec dr_(double t){
-    //double r = 0.08;
-    //double w = 1/r;
-    return {0,0,0};
-    //return {-w*r*sin(w*t), w*r*cos(w*t),0};
+    double r = 0.08;
+    double w = 1/r;
+    //return {0,0,0};
+    return {-w*r*sin(w*t), w*r*cos(w*t),0};
 }
 
 vec d2r_(double t){
-    //double r = 0.08;
-    //double w = 1/r;
-    return {0,0,0};
-    //return {-w*w*r*cos(w*t), -w*w*r*sin(w*t),0};
+    double r = 0.08;
+    double w = 1/r;
+    //return {0,0,0};
+    return {-w*w*r*cos(w*t), -w*w*r*sin(w*t),0};
 }
 
 int main(){
@@ -66,8 +66,8 @@ int main(){
                  << 0 << 0 << 0 << endr
                  << 0 << 0 << 0 << endr;
 
-    Serial _6R1 = Serial(6, l_, lg_ , m_, I__ , {0, -9.8,0}, &fDH_6R);
-    Serial _6R2 = Serial(6, l_, lg_ , m_, I__ , {0, -9.8,0}, &fDH_6R);
+    Serial _6R1 = Serial(6, l_, lg_ , m_, I__ , {0, 9.8,0}, &fDH_6R);
+    Serial _6R2 = Serial(6, l_, lg_ , m_, I__ , {0, 9.8,0}, &fDH_6R);
 
     vec l2_ = {0.000, 0.380, 0.000, 0.200};
     vec lg2_= {0.000, 0.191, 0.000, 0.100};
@@ -90,7 +90,7 @@ int main(){
                   << 0  << 0  << 0 << endr
                   << 0  << 0  << 0 << endr;
 
-    Serial PRRP = Serial(4, l2_, lg2_ , m2_, I2__ , {-9.8,0, 0}, &fDH_PRRP);
+    Serial PRRP = Serial(4, l2_, lg2_ , m2_, I2__ , {9.8,0, 0}, &fDH_PRRP);
 
 
     Serial **R_ = new Serial* [3];
@@ -105,9 +105,9 @@ int main(){
 
     //Matrizes que descrevem a arquitetura do mecanismo
     mat D_ = join_vert(join_vert((mat)eye(3,3),3), zeros(1,3) );
-    mat E_ = join_vert( join_diag(join_diag( Rotx(-PI/2)*Rotz(-PI/2), Rotx(-PI/2)*Rotz(PI/2)), Roty(PI/2)*Rotz(PI)) , zeros(1,9) );
+    mat E_ = join_vert( join_diag(join_diag( Rotz(-PI/2).t()*Rotx(-PI/2).t(), Rotz(PI/2).t()*Rotx(-PI/2).t()), Rotz(PI).t()*Roty(PI/2).t()) , zeros(1,9) );
     mat F_ = zeros(10,16); F_(9, 13) = 1; F_(9, 14) = 1;
-    vec f_ = {0, b-l, h, 0, -(b-l), h, 0, 0, d, 0};
+    vec f_ = {0, b-l, h, 0, -(b-l), h, 0, 0, d, -PI/2};
     mat P_ = zeros(6,3);
     mat Q_ = join_horiz(eye(6,6), zeros(6,3) );
     mat S_ = zeros(6,16);
@@ -117,24 +117,24 @@ int main(){
     FLControlLaw FL = FLControlLaw(19, 400.0, 40.0, &r_, &dr_, &d2r_, &Robot);
     Acceleration AC = Acceleration(19, &Robot, &FL);
 
-    //vec x0_ = {0.0, 0.0, 0.480,
-    //           PI/4, 0, PI/2, 0, -PI/4, 0,
-    //           PI/4, 0, PI/2, 0, -PI/4, 0,
-    //           0, PI/2, -PI/2, 0.100,
-    //           0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+    vec q0_ = {0.0, 0.0, 0.480,
+               9.6321e-01, 0, 1.7529, 0, -1.1453, 0,
+               9.6321e-01, 0, 1.7529, 0, -1.1453, 0,
+               0, PI/2, 0, 9.6100e-02};
+    vec x0_ = join_vert(q0_, zeros(19,1));
 
-    vec x0_ = {0.0, 0.0, 0.480,
-               PI/4, 0, PI/2, 0, -PI/4, 0,
-               PI/4, 0, PI/2, 0, -PI/4, 0,
-               0, PI/2, -PI/2, 0.100,
-               0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+    //Robot.Doit(q0_, zeros(19,1));
+    //cout << Robot._q_ << endl;
+    //vec aux1_ = {0, b-l, h};
+    //vec aux2_ = {0, -(b-l), h};
+    //cout << Rotz(-PI/2).t()*Rotx(-PI/2).t()*(*Robot.o__[0]) + aux1_ << endl;
+    //cout <<  Rotz(PI/2).t()*Rotx(-PI/2).t()*(*Robot.o__[1]) + aux2_ << endl;
+    //cout <<  Rotz(PI).t()*Roty(PI/2).t()*(*Robot.o__[2]) << endl;
 
     RK rk = RK("RK8", &AC);
-    rk.Doit(0.001, 2*1.2, x0_);
-    //for(uint i = 0; i< rk.t_.n_rows; i++) cout << rk.t_(i) << "; " << rk.u__(0,0,i)  << "; " << rk.u__(1,0,i) << "; " << rk.u__(2,0,i) << "; " << endl;
-    for(uint i = 0; i< rk.t_.n_rows; i++) cout << rk.t_(i) << "; " << r_(rk.t_(i))(0) - rk.y__(0,0,i)  << "; " << r_(rk.t_(i))(1) - rk.y__(1,0,i) << "; " << r_(rk.t_(i))(2) - rk.y__(2,0,i) << "; " << endl;
-    cout << Robot.q0_ << endl;
-    cout << Robot._q_ << endl;
+    rk.Doit(0.01, 2*1.2, x0_);
+    for(uint i = 0; i< rk.t_.n_rows; i++) cout << rk.t_(i) << "; " << rk.u__(0,0,i)  << "; " << rk.u__(1,0,i) << "; " << rk.u__(2,0,i) << "; " << endl;
+    //for(uint i = 0; i< rk.t_.n_rows; i++) cout << rk.t_(i) << "; " << r_(rk.t_(i))(0) - rk.y__(0,0,i)  << "; " << r_(rk.t_(i))(1) - rk.y__(1,0,i) << "; " << r_(rk.t_(i))(2) - rk.y__(2,0,i) << "; " << endl;
         
     return 0;
 }

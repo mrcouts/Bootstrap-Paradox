@@ -8,7 +8,7 @@ A = txt2py("Laila_sim.txt")
 t_np = np.array([A[i][0] for i in range(len(A))])
 tau1_np = np.array([A[i][1] for i in range(len(A))])
 tau2_np = np.array([A[i][2] for i in range(len(A))])
-tau3_np = np.array([A[i][2] for i in range(len(A))])
+tau3_np = np.array([A[i][3] for i in range(len(A))])
 
 plt.figure()
 plt.plot(t_np, tau1_np, 'r')
