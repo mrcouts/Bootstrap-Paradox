@@ -1,13 +1,13 @@
 #include "_5R_.h"
 
-_5R_::_5R_(uint dof, Mecanismo *P, Serial **R_, uint nR_, mat D_, mat E_, mat F_, vec f_):Mecanismo(dof){
-    this->Construct(dof, P, R_, nR_, D_, E_, F_, f_);
+_5R_::_5R_(uint dof, Mecanismo *P, Serial **R_, uint nR_, Col<uint> u_nzi_, mat D_, mat E_, mat F_, vec f_):Mecanismo(dof){
+    this->Construct(dof, P, R_, nR_, u_nzi_, D_, E_, F_, f_);
     Ah_ = D_;
     caso = 1;
 }
 
-_5R_::_5R_(uint dof, Mecanismo *P, Serial **R_, uint nR_, mat D_, mat E_, mat F_, vec f_, mat P_, mat Q_, mat S_):Mecanismo(dof){
-    this->Construct(dof, P, R_, nR_, D_, E_, F_, f_);
+_5R_::_5R_(uint dof, Mecanismo *P, Serial **R_, uint nR_, Col<uint> u_nzi_, mat D_, mat E_, mat F_, vec f_, mat P_, mat Q_, mat S_):Mecanismo(dof){
+    this->Construct(dof, P, R_, nR_, u_nzi_, D_, E_, F_, f_);
     this->P_ = P_;
     this->Q_ = Q_;
     this->S_ = S_;
@@ -15,10 +15,11 @@ _5R_::_5R_(uint dof, Mecanismo *P, Serial **R_, uint nR_, mat D_, mat E_, mat F_
     caso = 2;
 }
 
-void _5R_::Construct(uint dof, Mecanismo *P, Serial **R_, uint nR_, mat D_, mat E_, mat F_, vec f_){
+void _5R_::Construct(uint dof, Mecanismo *P, Serial **R_, uint nR_, Col<uint> u_nzi_, mat D_, mat E_, mat F_, vec f_){
 	this->P = P;
     this->R_ = R_;
     this->nR_= nR_;
+    this->u_nzi_ = u_nzi_;
     nq = P->dof; for(uint i = 0; i<nR_; i++) nq += R_[i]->dof;
     M_.zeros(nq,nq);
     v_.zeros(nq);
@@ -95,7 +96,9 @@ Dy* _5R_::Doit(vec q0_, vec q1_){
     
     A_ = join_horiz(Ah_, Ao_);
     C_ = join_vert( eye(dof,dof), -solve(Ao_,Ah_) );
-    Z_ = join_vert(C_.row(2), C_.row(4));
+    mat Aux_ = C_.row(u_nzi_(0)); for(uint i=1; i<u_nzi_.n_rows; i++) Aux_ = join_vert(Aux_, C_.row(u_nzi_(i)));
+    Z_ = Aux_;
+    //Z_ = join_vert(C_.row(2), C_.row(4));
     // Mh_, vh_ e gh_
     dy->Mh_ = solve(Z_.t(), C_.t()*M_*C_);
     dy->vh_ = solve(Z_.t(), C_.t()*( M_*join_vert(zeros(dof), solve(Ao_, b_) ) + v_ ));
