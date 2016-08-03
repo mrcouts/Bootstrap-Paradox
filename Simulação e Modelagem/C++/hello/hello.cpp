@@ -4,51 +4,14 @@
 using namespace std;
 using namespace arma;
 
-mat join_diag(mat A, mat B){
-    return join_vert( join_horiz(A, zeros(A.n_rows, B.n_cols)), join_horiz(zeros(B.n_rows, A.n_cols), B) );
-}
-
-mat join_diag(mat **lista, uint n){
-    mat aux = *lista[0];
-    for(uint i = 1; i<n; i++){
-        aux = join_diag(aux, *lista[i]);
-    }
-    return aux;
-}
-
-vec join_vert(field<vec> F){
-    vec aux = F(0);
-    for(uint i = 1; i< F.n_rows; i++)
-        aux = join_vert(aux, F(i));
-    return aux;
-}
-
-vec join_vert(vec *lista, uint n){
-    vec aux = lista[0];
-    for(uint i = 1; i<n; i++)
-        aux = join_vert(aux, lista[i]);
-    return aux;
-}
-
-vec join_vert(vec **lista, uint n){
-    vec aux = *lista[0];
-    for(uint i = 1; i<n; i++)
-        aux = join_vert(aux, *lista[i]);
-    return aux;
-}
-
-vec join_vert(vec v, uint n){
-    vec aux = v;
-    for(uint i = 1; i<n; i++)
-        aux = join_vert(aux, v);
-    return aux;
-}
-
-mat join_vert(mat v, uint n){
-    mat aux = v;
-    for(uint i = 1; i<n; i++)
-        aux = join_vert(aux, v);
-    return aux;
+vec smooth_interpolate(double t, double tf, double x0, double xf){
+	double dx = xf - x0;
+	double t1 = t/tf;
+	double t2 = t1*t1;
+	double t3 = t2*t1;
+	double t4 = t3*t1;
+	double t5 = t4*t1;
+    return {x0 + dx*(10*t3 - 15*t4 + 6*t5), (30*dx/tf)*(t2 - 2*t3 + t4), (60*dx/(tf*tf))*(t1 - 3*t2 + 2*t3)};
 }
 
 int main(void){
@@ -62,48 +25,11 @@ int main(void){
     F(1) = B;
     F(2) = B2;
 
-    
     //F.print("F:");
     cout << F << endl;
     cout << F(0) << endl;
     cout << F(1) << endl;
-    mat C = randn(4,4);
-    mat D = randn(2,2);
-    cout << C << endl;
-    cout << D << endl;
-    cout << join_diag( join_diag(C,D), C ) << endl;
-
-    vec *lista;
-    lista = new vec[3];
-    lista[0] = {1,2};
-    lista[1] = {3,4,6};
-    lista[2] = {7,8};
-    cout << lista[0] << endl;
-    cout << lista[1] << endl;
-    cout << lista[2] << endl;
-
-    vec lista2[] = {lista[0], lista[1], lista[2]};
-
-    cout << join_vert(F) << endl;
-    cout << join_vert(lista,3) << endl;
-    cout << join_vert(lista2,3) << endl;
-
-    vec **lista3 = new vec* [3];
-    lista3[0] = &A;
-    lista3[1] = &B;
-    lista3[2] = &B2;
-
-    mat **lista4 = new mat* [3];
-    lista4[0] = &C;
-    lista4[1] = &D;
-    lista4[2] = &C;
-
-    cout << *lista3[0] << endl;
-    cout << join_vert(*lista3[0], *lista3[1]) << endl;
-    cout << join_vert(lista3, 3) << endl;
-    cout << join_diag(lista4, 3) << endl;
-    cout << join_vert(A, 3) << endl;
-    cout << join_vert(C, 3) << endl;
+    cout << smooth_interpolate(0.25, 1, 0, 1) << endl;
 
     return 0;
 }
