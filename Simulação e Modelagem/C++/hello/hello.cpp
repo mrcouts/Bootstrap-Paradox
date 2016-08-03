@@ -31,5 +31,13 @@ int main(void){
     cout << F(1) << endl;
     cout << smooth_interpolate(0.25, 1, 0, 1) << endl;
 
+    typedef int (*func2)(int a);
+    func2 f2 = [] (int a) -> int { return a; };
+    cout << f2(3) << endl;
+
+    typedef vec (*func3)(double t);
+    func3 f3 = [] (double t) -> vec { return smooth_interpolate(t,1,0,1); };
+    cout << f3(0.25) << endl;
+
     return 0;
 }
