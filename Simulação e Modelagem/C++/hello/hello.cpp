@@ -14,6 +14,12 @@ vec smooth_interpolate(double t, double tf, double x0, double xf){
     return {x0 + dx*(10*t3 - 15*t4 + 6*t5), (30*dx/tf)*(t2 - 2*t3 + t4), (60*dx/(tf*tf))*(t1 - 3*t2 + 2*t3)};
 }
 
+ //typedef vec (*func)(double t);
+ //func smooth2(double tf, double x0, double xf){
+ //    func f3 = [] (double t) -> vec { return smooth_interpolate(t,1,0,1); };
+ //    return f3;
+ //}
+
 int main(void){
 	cout << "Hello! This is a C++ program." << endl;
 	vec A = randn(4);
