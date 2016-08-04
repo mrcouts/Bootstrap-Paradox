@@ -6,6 +6,8 @@
 #include "Dy.h"
 #include "Serial.h"
 #include "Parallel.h"
+#include "Reference.h"
+
 
 using namespace std;
 using namespace arma;
