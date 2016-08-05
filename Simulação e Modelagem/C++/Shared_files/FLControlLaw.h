@@ -17,6 +17,9 @@ public:
     FLControlLaw(int dof, double Kp, double Kv, vec (*r_)(double), vec (*dr_)(double), vec (*d2r_)(double), Serial *R);
     FLControlLaw(int dof, double Kp, double Kv, vec (*r_)(double), vec (*dr_)(double), vec (*d2r_)(double), Parallel *R2);
     FLControlLaw(int dof, double Kp, double Kv, vec (*r_)(double), vec (*dr_)(double), vec (*d2r_)(double), Dy* (*dy_comp)(vec, vec));
+    FLControlLaw(int dof, double Kp, double Kv, Reference *RefObj, Serial *R);
+    FLControlLaw(int dof, double Kp, double Kv, Reference *RefObj, Parallel *R2);
+    FLControlLaw(int dof, double Kp, double Kv, Reference *RefObj, Dy* (*dy_comp)(vec, vec));
     ~FLControlLaw();
     vec Doit(double t, vec q0_, vec q1_);
 
@@ -29,6 +32,9 @@ public:
     Serial *R;
     Parallel *R2;
     Dy* (*dy_comp)(vec, vec);
-    int caso; };
+    int caso;
+    Reference *RefObj;
+    bool RefObjFlag;
+};
 
 #endif
