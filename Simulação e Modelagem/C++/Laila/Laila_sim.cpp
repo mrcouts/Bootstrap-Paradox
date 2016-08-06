@@ -114,17 +114,28 @@ int main(){
     mat S_ = zeros(6,16);
 
     Parallel Robot = Parallel(3, &P, R_, 3, {3,9,15}, D_, E_, F_, f_, P_, Q_, S_);
-    Reference RefObj = Reference(0.1*1.2, {0.0, 0.0, 0.480}, {-0.1, -0.1, 0.500});
+    Reference RefObj = Reference(0.1*1.2, {0.0, 0.0, 0.480}, {-0.010, -0.010, 0.500});
+
+    /*
     double lambda = 50.0;
     FLControlLaw FL = FLControlLaw(19, lambda*lambda, 2*lambda, &RefObj, &Robot);
     //FLControlLaw FL = FLControlLaw(19, 400.0, 40.0, &r_, &dr_, &d2r_, &Robot);
     Acceleration AC = Acceleration(19, &Robot, &FL);
+
 
     vec q0_ = {0.0, 0.0, 0.480,
                9.6321e-01, 0, 1.7529, 0, -1.1452, 0,
                9.6321e-01, 0, 1.7529, 0, -1.1452, 0,
                0, PI/2, 0, 9.6100e-02};
     vec x0_ = join_vert(q0_, zeros(19,1));
+    */
+
+    Acceleration AC = Acceleration(16, &Robot, &RefObj);
+    vec q0_ = {9.6321e-01, 0, 1.7529, 0, -1.1452, 0,
+               9.6321e-01, 0, 1.7529, 0, -1.1452, 0,
+               0, PI/2, 0, 9.6100e-02};
+    vec x0_ = join_vert(q0_, zeros(16,1));
+    
 
     //Robot.Doit(q0_, zeros(19,1));
     //cout << Robot._q_ << endl;
@@ -137,12 +148,17 @@ int main(){
 
     RK rk = RK("RK8", &AC);
     rk.Doit(0.001, 0.1*2*1.2, x0_);
-    for(uint i = 0; i< rk.t_.n_rows; i++) cout << rk.t_(i) << "; " << rk.u__(0,0,i)  << "; " << rk.u__(1,0,i) << "; " << rk.u__(2,0,i) << "; " << endl;
+    //for(uint i = 0; i< rk.t_.n_rows; i++) cout << rk.t_(i) << "; " << rk.u__(0,0,i)  << "; " << rk.u__(1,0,i) << "; " << rk.u__(2,0,i) << "; " << endl;
     //for(uint i = 0; i< rk.t_.n_rows; i++) cout << rk.t_(i) << "; " << r_(rk.t_(i))(0) - rk.y__(0,0,i)  << "; " << r_(rk.t_(i))(1) - rk.y__(1,0,i) << "; " << r_(rk.t_(i))(2) - rk.y__(2,0,i) << "; " << endl;
-    //for(uint i = 0; i< rk.t_.n_rows; i++)
-    //{
-    //  RefObj.Doit(rk.t_(i));
-    //  cout << rk.t_(i) << "; " << RefObj.r_(0) - rk.y__(0,0,i)  << "; " << RefObj.r_(1) - rk.y__(1,0,i) << "; " << RefObj.r_(2) - rk.y__(2,0,i) << "; " << endl;
-    //}
+    //for(uint i = 0; i< rk.t_.n_rows; i++) cout << rk.t_(i) << "; " << rk.y__(0+3,0,i)  << "; " << rk.y__(6+3,0,i) << "; " << rk.y__(12+3,0,i) << "; " << endl;
+
+    for(uint i = 0; i< rk.t_.n_rows; i++){
+      RefObj.Doit(rk.t_(i));
+      //cout << rk.t_(i) << "; " << RefObj.r_(0) - rk.y__(0,0,i)  << "; " << RefObj.r_(1) - rk.y__(1,0,i) << "; " << RefObj.r_(2) - rk.y__(2,0,i) << "; " << endl;
+      vec qo0_ = rk.y__(span(0,15) , span(0,0) , span(i,i) );
+      vec qo1_ = rk.y__(span(16,31) ,span(0,0) , span(i,i) );
+      Robot.Doit(join_vert(RefObj.r_,  qo0_), join_vert(RefObj.dr_, qo1_ ) );
+      cout << rk.t_(i) << "; " << norm(Robot._q_) << "; " << 0 << "; " << 0 << "; " <<  endl;
+    }
     return 0;
 }

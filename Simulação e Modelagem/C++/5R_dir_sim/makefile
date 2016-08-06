@@ -52,7 +52,7 @@ $(CLASS2).o: $(CLASS2).h $(CLASS2).cpp
 $(CLASS3).o: $(CLASS3).h $(CLASS3).cpp $(CLASS2).h $(CLASS5).h $(CLASS6).h
 	$(CC) $(CFLAGS) $(CLASS3).cpp
 
-$(CLASS4).o: $(CLASS4).h $(CLASS4).cpp $(CLASS).h $(CLASS2).h $(CLASS3).h $(CLASS5).h
+$(CLASS4).o: $(CLASS4).h $(CLASS4).cpp $(CLASS).h $(CLASS2).h $(CLASS3).h $(CLASS5).h $(CLASS6).h
 	$(CC) $(CFLAGS) $(CLASS4).cpp
 
 $(CLASS5).o: $(CLASS5).h $(CLASS5).cpp $(CLASS).h $(FUNC).h RR.h

@@ -8,6 +8,7 @@
 #include "Serial.h"
 #include "Parallel.h"
 #include "FLControlLaw.h"
+#include "Reference.h"
 
 using namespace arma;
 
@@ -15,6 +16,7 @@ class Acceleration{
 public:
     Acceleration(int dof, Serial *R, FLControlLaw *u);
     Acceleration(int dof, Parallel *R2, FLControlLaw *u);
+    Acceleration(int dof, Parallel *R2, Reference *RefObj);
     ~Acceleration();
     field<vec> Doit(double t, vec q0_, vec q1_);
     vec f_(double t, vec y_);
@@ -23,6 +25,8 @@ public:
     Serial *R;
     Parallel *R2;
     int caso;
-    FLControlLaw *u; };
+    FLControlLaw *u;
+    Reference *RefObj;
+};
 
 #endif
