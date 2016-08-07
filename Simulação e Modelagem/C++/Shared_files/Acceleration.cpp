@@ -40,6 +40,7 @@ field<vec> Acceleration::Doit(double t, vec q0_, vec q1_){
 		    if(R2->caso == 2) F(0) = solve(join_vert( R2->C_.t()*R2->M_, R2->A_ ), join_vert( R2->Z_.t()*F(1) -R2->C_.t()*(R2->v_ + R2->g_), R2->b_ - lambda*join_diag(2*eye(R2->_q_.n_rows,R2->_q_.n_rows), eye(R2->b_.n_rows - R2->_q_.n_rows,R2->b_.n_rows - R2->_q_.n_rows))*R2->A_*q1_ - lambda*lambda*join_vert(R2->_q_, zeros(R2->b_.n_rows - R2->_q_.n_rows) ) ));
 		    break;
 		case 3:
+		    RefObj->Doit(t);
 		    R2->Doit(join_vert(RefObj->r_, q0_) , join_vert(RefObj->dr_, q1_));
 		    F(1) = zeros(dof);
 		    if(R2->caso == 1) F(0) = solve(R2->Ao_, R2->b_ - R2->Ah_*RefObj->d2r_ - 2*lambda*R2->A_*join_vert(RefObj->dr_, q1_) - lambda*lambda*R2->_q_ );
