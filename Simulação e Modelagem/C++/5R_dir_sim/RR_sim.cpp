@@ -63,6 +63,14 @@ int main(){
     Parallel Robot = Parallel(2, &P, RR_, 2, {2,4}, D_, E_, F_, f_);
     Reference RefObj = Reference(0.12, {0.08, 0.16}, {-0.08, 0.4});
 
+    //Criando lista de Objetos tipo trajetória
+    Reference **RefObjVec = new Reference* [5];
+    for(uint i=0; i<5; i++) RefObjVec[i] = new Reference(0.12, {0.08, 0.16}, {-0.08, 0.13+0.1*i});
+    RefObjVec[2]->Doit(0.05);
+    cout << RefObjVec[2]->d2r_ << endl;
+    delete[] RefObjVec; 
+
+
     //Simulação dinâmica
     /*
     double lambda = 50.0;
@@ -80,16 +88,16 @@ int main(){
     vec x0_ = join_vert(q0_, zeros(4));
 
     RK rk = RK("RK8", &AC);
-    rk.Doit(0.001, 2*0.12, x0_);
+    //rk.Doit(0.001, 2*0.12, x0_);
     //for(uint i = 0; i< rk.t_.n_rows; i++) cout << rk.t_(i) << "; " << rk.u__(0,0,i)  << "; " << rk.u__(1,0,i) << "; " << endl;
     //for(uint i = 0; i< rk.t_.n_rows; i++) cout << rk.t_(i) << "; " << r_(rk.t_(i))(0) - rk.y__(0,0,i)  << "; " << r_(rk.t_(i))(1) - rk.y__(1,0,i) << "; " << endl;
-    for(uint i = 0; i< rk.t_.n_rows; i++){
-      RefObj.Doit(rk.t_(i));
-      //cout << rk.t_(i) << "; " << RefObj.r_(0) - rk.y__(0,0,i)  << "; " << RefObj.r_(1) - rk.y__(1,0,i) << "; " << RefObj.r_(2) - rk.y__(2,0,i) << "; " << endl;
-      vec qo0_ = rk.y__(span(0,3), span(0,0), span(i,i) );
-      vec qo1_ = rk.y__(span(4,7), span(0,0), span(i,i) );
-      Robot.Doit(join_vert(RefObj.r_,  qo0_), join_vert(RefObj.dr_, qo1_ ) );
-      cout << rk.t_(i) << "; " << norm(Robot._q_, "inf") << "; " << arma::rank(Robot.A_) << "; " <<  endl;
-    }
+    //for(uint i = 0; i< rk.t_.n_rows; i++){
+    //  RefObj.Doit(rk.t_(i));
+    //  //cout << rk.t_(i) << "; " << RefObj.r_(0) - rk.y__(0,0,i)  << "; " << RefObj.r_(1) - rk.y__(1,0,i) << "; " << RefObj.r_(2) - rk.y__(2,0,i) << "; " << endl;
+    //  vec qo0_ = rk.y__(span(0,3), span(0,0), span(i,i) );
+    //  vec qo1_ = rk.y__(span(4,7), span(0,0), span(i,i) );
+    //  Robot.Doit(join_vert(RefObj.r_,  qo0_), join_vert(RefObj.dr_, qo1_ ) );
+    //  cout << rk.t_(i) << "; " << norm(Robot._q_, "inf") << "; " << arma::rank(Robot.A_) << "; " <<  endl;
+    //}
     return 0;
 }
