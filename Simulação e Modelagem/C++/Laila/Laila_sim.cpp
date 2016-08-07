@@ -114,7 +114,7 @@ int main(){
     mat S_ = zeros(6,16);
 
     Parallel Robot = Parallel(3, &P, R_, 3, {3,9,15}, D_, E_, F_, f_, P_, Q_, S_);
-    Reference RefObj = Reference(0.1*1.2, {0.0, 0.0, 0.480}, {-0.010, -0.010, 0.500});
+    Reference RefObj = Reference(0.12, {0.0, 0.0, 0.480}, {-0.100, -0.100, 0.500});
 
     /*
     double lambda = 50.0;
@@ -147,18 +147,18 @@ int main(){
     //cout << Roty(-PI/2)*Rotx( PI  )*(*Robot.o__[2]) + aux3_ << endl;
 
     RK rk = RK("RK8", &AC);
-    rk.Doit(0.001, 0.1*2*1.2, x0_);
+    rk.Doit(0.001, 2*0.12, x0_);
     //for(uint i = 0; i< rk.t_.n_rows; i++) cout << rk.t_(i) << "; " << rk.u__(0,0,i)  << "; " << rk.u__(1,0,i) << "; " << rk.u__(2,0,i) << "; " << endl;
     //for(uint i = 0; i< rk.t_.n_rows; i++) cout << rk.t_(i) << "; " << r_(rk.t_(i))(0) - rk.y__(0,0,i)  << "; " << r_(rk.t_(i))(1) - rk.y__(1,0,i) << "; " << r_(rk.t_(i))(2) - rk.y__(2,0,i) << "; " << endl;
-    //for(uint i = 0; i< rk.t_.n_rows; i++) cout << rk.t_(i) << "; " << rk.y__(0+3,0,i)  << "; " << rk.y__(6+3,0,i) << "; " << rk.y__(12+3,0,i) << "; " << endl;
+    for(uint i = 0; i< rk.t_.n_rows; i++) cout << rk.t_(i) << "; " << rk.y__(0,0,i)  << "; " << rk.y__(6,0,i) << "; " << rk.y__(12,0,i) << "; " << endl;
 
-    for(uint i = 0; i< rk.t_.n_rows; i++){
-      RefObj.Doit(rk.t_(i));
-      //cout << rk.t_(i) << "; " << RefObj.r_(0) - rk.y__(0,0,i)  << "; " << RefObj.r_(1) - rk.y__(1,0,i) << "; " << RefObj.r_(2) - rk.y__(2,0,i) << "; " << endl;
-      vec qo0_ = rk.y__(span(0,15) , span(0,0) , span(i,i) );
-      vec qo1_ = rk.y__(span(16,31) ,span(0,0) , span(i,i) );
-      Robot.Doit(join_vert(RefObj.r_,  qo0_), join_vert(RefObj.dr_, qo1_ ) );
-      cout << rk.t_(i) << "; " << norm(Robot._q_) << "; " << 0 << "; " << 0 << "; " <<  endl;
-    }
+    //for(uint i = 0; i< rk.t_.n_rows; i++){
+    //  RefObj.Doit(rk.t_(i));
+    //  //cout << rk.t_(i) << "; " << RefObj.r_(0) - rk.y__(0,0,i)  << "; " << RefObj.r_(1) - rk.y__(1,0,i) << "; " << RefObj.r_(2) - rk.y__(2,0,i) << "; " << endl;
+    //  vec qo0_ = rk.y__(span(0,15) , span(0,0) , span(i,i) );
+    //  vec qo1_ = rk.y__(span(16,31) ,span(0,0) , span(i,i) );
+    //  Robot.Doit(join_vert(RefObj.r_,  qo0_), join_vert(RefObj.dr_, qo1_ ) );
+    //  cout << rk.t_(i) << "; " << norm(Robot._q_) << "; " << 0 << "; " << 0 << "; " <<  endl;
+    //}
     return 0;
 }
