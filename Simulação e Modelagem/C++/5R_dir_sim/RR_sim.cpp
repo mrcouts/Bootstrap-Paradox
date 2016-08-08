@@ -63,13 +63,43 @@ int main(){
     Parallel Robot = Parallel(2, &P, RR_, 2, {2,4}, D_, E_, F_, f_);
     Reference RefObj = Reference(0.12, {0.08, 0.16}, {-0.08, 0.4});
 
-    //Criando lista de Objetos tipo trajetória
-    Reference **RefObjVec = new Reference* [5];
-    for(uint i=0; i<5; i++) RefObjVec[i] = new Reference(0.12, {0.08, 0.16}, {-0.08, 0.13+0.1*i});
-    RefObjVec[2]->Doit(0.05);
-    cout << RefObjVec[2]->d2r_ << endl;
-    delete[] RefObjVec; 
+    //Plotar área de trabalho
+    double lx = 0.25;
+    double ly = 0.28;
+    double dl = 0.01;
+    uint nx = (lx/dl);
+    uint ny = (ly/dl);
+    mat M; M.zeros(ny,nx);
+    double r = 0.085;
+    double x0 = 0.0;
+    double y0 = 0.16;
 
+    uint rows = ny;
+    uint cols = nx;
+
+    vec q0_ = {0.305030291698133, 1.86386236511897, 1.45111035931733, 1.41460649673445};
+    vec x0_ = join_vert(q0_, zeros(4));
+
+    Reference ***RefObjMat = new Reference** [rows];
+    Acceleration ***ACMat = new Acceleration** [rows];
+    RK ***rkMat = new RK** [rows];
+    for(uint i=0; i<rows; i++){
+        RefObjMat[i] = new Reference* [cols];
+        ACMat[i] = new Acceleration* [cols];
+        rkMat[i] = new RK* [cols];
+        for(uint j=0; j<cols; j++){
+            RefObjMat[i][j] = new Reference(0.12, {0.08, 0.16}, {-0.08+0.001*i, 0.13+0.001*j});
+            ACMat[i][j] = new Acceleration(4, &Robot, RefObjMat[i][j]);
+            rkMat[i][j] = new RK("RK8", ACMat[i][j]);
+            rkMat[i][j]->Doit(0.001, 2*0.12, x0_);
+        }
+    }
+    RefObjMat[2][2]->Doit(0.05);
+    cout << RefObjMat[2][2]->d2r_ << endl;
+
+    for(uint i = 0; i < rows; i++)
+        delete [] RefObjMat[i];
+    delete [] RefObjMat;
 
     //Simulação dinâmica
     /*
@@ -84,8 +114,7 @@ int main(){
 
     //Simulação cinemática
     Acceleration AC = Acceleration(4, &Robot, &RefObj);
-    vec q0_ = {0.305030291698133, 1.86386236511897, 1.45111035931733, 1.41460649673445};
-    vec x0_ = join_vert(q0_, zeros(4));
+
 
     RK rk = RK("RK8", &AC);
     //rk.Doit(0.001, 2*0.12, x0_);
