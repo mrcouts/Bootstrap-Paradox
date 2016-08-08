@@ -64,12 +64,12 @@ int main(){
     Reference RefObj = Reference(0.12, {0.08, 0.16}, {-0.08, 0.4});
 
     //Plotar área de trabalho
-    double lx = 0.25;
-    double ly = 0.28;
-    double dl = 0.01;
+    double lx = 0.30;
+    double ly = 0.30;
+    double dl = 0.02;
     uint nx = (lx/dl);
     uint ny = (ly/dl);
-    mat M; M.zeros(ny,nx);
+    Mat<int> M; M.zeros(ny,nx);
     double r = 0.085;
     double x0 = 0.0;
     double y0 = 0.16;
@@ -88,14 +88,16 @@ int main(){
         ACMat[i] = new Acceleration* [cols];
         rkMat[i] = new RK* [cols];
         for(uint j=0; j<cols; j++){
-            RefObjMat[i][j] = new Reference(0.12, {0.08, 0.16}, {-0.08+0.001*i, 0.13+0.001*j});
+            RefObjMat[i][j] = new Reference(0.005, {0.08, 0.16}, {j*dl+0.5*dl, i*dl+0.5*dl});
             ACMat[i][j] = new Acceleration(4, &Robot, RefObjMat[i][j]);
             rkMat[i][j] = new RK("RK8", ACMat[i][j]);
-            rkMat[i][j]->Doit(0.001, 2*0.12, x0_);
+            rkMat[i][j]->Doit(0.001, 2*0.005, x0_);
+            M(i,j) = arma::rank(Robot.A_);
         }
     }
-    RefObjMat[2][2]->Doit(0.05);
+    RefObjMat[2][2]->Doit(0.001);
     cout << RefObjMat[2][2]->d2r_ << endl;
+    cout << M << endl;
 
     for(uint i = 0; i < rows; i++)
         delete [] RefObjMat[i];
