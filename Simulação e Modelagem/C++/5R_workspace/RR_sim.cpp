@@ -61,38 +61,56 @@ int main(){
     vec f_ = {0.05,0,-0.05,0};
 
     Parallel Robot = Parallel(2, &P, RR_, 2, {2,4}, D_, E_, F_, f_);
-    Reference RefObj = Reference(0.12, {0.08, 0.16}, {0.00, 0.16});
+    Reference RefObj = Reference(0.12, {0.08, 0.16}, {-0.08, 0.4});
 
-    //Simulação dinâmica
-    /*
-    double lambda = 50.0;
-    FLControlLaw FL = FLControlLaw(19, lambda*lambda, 2*lambda, &RefObj, &Robot);
-    //FLControlLaw FL = FLControlLaw(6, lambda*lambda, 2*lambda, &r_, &dr_, &d2r_, &Robot);
-    Acceleration AC = Acceleration(6, &Robot, &FL);
+    //Plotar área de trabalho
+    double lx = 0.25;
+    double ly = 0.28;
+    double dl = 0.005;
+    uint nx = (lx/dl);
+    uint ny = (ly/dl);
+    Mat<int> M; M.zeros(ny,nx);
+    double r = 0.085;
+    double x0 = 0.0;
+    double y0 = 0.16;
 
-    vec q0_ = {0.08,  0.16, 0.305030291698133, 1.86386236511897, 1.45111035931733, 1.41460649673445};
-    vec x0_ = join_vert(q0_, zeros(6));
-    */
+    uint rows = ny;
+    uint cols = nx;
 
-    //Simulação cinemática
-    Acceleration AC = Acceleration(4, &Robot, &RefObj);
-
-    vec q0_ = {0.305030291698133, 1.86386236511897, 1.45111035931733, 1.41460649673445};
+    vec q0_ = {0.823167, 1.81774, 0.823167, 1.81774};
     vec x0_ = join_vert(q0_, zeros(4));
 
-    RK rk = RK("RK8", &AC);
-    rk.Doit(0.001, 2*0.12, x0_);
-    //for(uint i = 0; i< rk.t_.n_rows; i++) cout << rk.t_(i) << "; " << rk.u__(0,0,i)  << "; " << rk.u__(1,0,i) << "; " << endl;
-    //for(uint i = 0; i< rk.t_.n_rows; i++) cout << rk.t_(i) << "; " << r_(rk.t_(i))(0) - rk.y__(0,0,i)  << "; " << r_(rk.t_(i))(1) - rk.y__(1,0,i) << "; " << endl;
-    //for(uint i = 0; i< rk.t_.n_rows; i++){
-    //  RefObj.Doit(rk.t_(i));
-    //  //cout << rk.t_(i) << "; " << RefObj.r_(0) - rk.y__(0,0,i)  << "; " << RefObj.r_(1) - rk.y__(1,0,i) << "; " << RefObj.r_(2) - rk.y__(2,0,i) << "; " << endl;
-    //  vec qo0_ = rk.y__(span(0,3), span(0,0), span(i,i) );
-    //  vec qo1_ = rk.y__(span(4,7), span(0,0), span(i,i) );
-    //  Robot.Doit(join_vert(RefObj.r_,  qo0_), join_vert(RefObj.dr_, qo1_ ) );
-    //  cout << rk.t_(i) << "; " << norm(Robot._q_, "inf") << "; " << arma::rank(Robot.A_) << "; " <<  endl;
-    //}
-    for(uint i=0; i<6; i++)
-        cout << Robot.q0_(i) << endl;
+    Reference ***RefObjMat = new Reference** [rows];
+    Acceleration ***ACMat = new Acceleration** [rows];
+    RK ***rkMat = new RK** [rows];
+    for(uint i=0; i<rows; i++){
+        RefObjMat[i] = new Reference* [cols];
+        ACMat[i] = new Acceleration* [cols];
+        rkMat[i] = new RK* [cols];
+        for(uint j=0; j<cols; j++){
+            RefObjMat[i][j] = new Reference(0.020, {0.00, 0.016}, {j*dl+0.5*dl, i*dl+0.5*dl});
+            ACMat[i][j] = new Acceleration(4, &Robot, RefObjMat[i][j]);
+            rkMat[i][j] = new RK("RK8", ACMat[i][j]);
+            rkMat[i][j]->Doit(0.001, 0.024, x0_);
+            if( arma::rank(Robot.A_) != 0 && abs(norm(Robot._q_, "inf") ) < 1e-4 ) M(i,j) = 1;
+        }
+    }
+
+    for(uint i=0; i<rows; i++){
+        for(uint j=0; j<cols; j++){
+            cout << M(i,j) << ";" ;
+            if(j==cols-1) cout << endl;
+        }
+    }
+
+    for(uint i = 0; i < rows; i++){
+        delete [] RefObjMat[i];
+        delete [] ACMat[i];
+        delete [] rkMat[i];
+    }
+    delete [] RefObjMat;
+    delete [] ACMat;
+    delete [] rkMat;
+
     return 0;
 }
