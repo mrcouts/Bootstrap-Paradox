@@ -1,5 +1,16 @@
 #include <iostream>
 #include <armadillo>
+#include "GNR.h"
+
+vec f_(vec x_){
+	return x_ % x_; 
+}
+
+mat J_(vec x_){
+	return 2*diagmat(x_);
+}
+
+
 
 using namespace std;
 using namespace arma;
@@ -25,6 +36,17 @@ int main(void){
       << 0 << 0 << 0 << endr;
     cout << C << endl;
     cout << arma::rank(C) << endl;
+
+    //vec x0_ = {1,2,3};
+    //cout << f_(x0_) << endl;
+    //cout << J_(x0_) << endl;
+    GNR gnr = GNR("Lalala", {1,2,3}, &f_, &J_, 1e-7, 100);
+    gnr.Doit();
+    cout << gnr.convergiu << endl;
+    cout << gnr.x_ << endl;
+    cout << gnr.res_ << endl;
+    cout << gnr.n << endl;
+
 
     return 0;
 }
