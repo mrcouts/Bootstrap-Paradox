@@ -4,32 +4,43 @@
 RK::RK(string method, vec (*f_)(double, vec)){
 	caso = 1;
 	this->f_ = f_;
-	this->SetMethod(method); }
+	this->SetMethod(method);
+}
 
 RK::RK(string method, Acceleration *AC){
 	caso = 2;
 	this->AC = AC;
-	this->SetMethod(method); }
+	this->SetMethod(method);
+}
+
+RK::RK(string method, GNR *gnr){
+	caso = 3;
+	this->gnr = gnr;
+	this->SetMethod(method);
+}
 
 void RK::SetMethod(string method){
 	if(method == "Heun"){
 		N = 2;
 		a__ = new vec[N-1];
 		a__[0] = {1.0};
-		b_ = {0.5, 0.5}; }
+		b_ = {0.5, 0.5};
+	}
 	else if(method == "RK3"){
 		N = 3;
 		a__ = new vec[N-1];
 		a__[0] = {0.5};
 		a__[1] = {-1.0, 2.0};
-		b_ = {1.0/6, 2.0/3, 1.0/6}; }
+		b_ = {1.0/6, 2.0/3, 1.0/6};
+	}
 	else if(method == "RK4"){
 		N = 4;
 		a__ = new vec[N-1];
 		a__[0] = {0.5};
 		a__[1] = {0, 0.5};
 		a__[2] = {0, 0, 1.0};
-		b_ = {1.0/6, 1.0/3, 1.0/3, 1.0/6}; }
+		b_ = {1.0/6, 1.0/3, 1.0/3, 1.0/6};
+	}
 	else if(method == "RK6"){
 		N = 7;
 		a__ = new vec[N-1];
@@ -39,7 +50,8 @@ void RK::SetMethod(string method){
 		a__[3] = {-35.0/144, -55.0/36, 35.0/48, 15.0/8};
 		a__[4] = {-1.0/360, -11.0/36, -1.0/8, 0.5, 1.0/10};
 		a__[5] = {-41.0/260, 22.0/13, 43.0/156, -118.0/39, 32.0/195, 80.0/39};
-		b_ = {13.0/200, 0, 11.0/40, 11.0/40, 4.0/25, 4.0/25, 13.0/200}; }
+		b_ = {13.0/200, 0, 11.0/40, 11.0/40, 4.0/25, 4.0/25, 13.0/200};
+	}
 	else if(method == "RK8"){
 		N = 13;
 		a__ = new vec[N-1];
@@ -124,13 +136,14 @@ void RK::SetMethod(string method){
 			  0.6605630309222863414613785948378206399404197125341442757648140724130090459250911959182,
 			  0.1581874825101233355296148386006854439728567324034642678211136427219891617064005758134,
 			 -0.2381095387528628044718635553056971935251390792174541593034967926060717257568905964800,
-			  0.25}; }
-	else
-		cout << "Método indisponível!" << endl;
+			  0.25};
+	}
+	else cout << "Método indisponível!" << endl;
 
 	c_.zeros(N-1);
 	for(int i = 0; i<N-1; i++)
-		c_(i) = sum(a__[i]); }
+		c_(i) = sum(a__[i]);
+}
 
 RK::~RK(){
 	delete[] a__;
@@ -140,7 +153,8 @@ RK::~RK(){
 	t_.clear();
 	y__.clear();
 	u__.clear();
-	k__.clear(); }
+	k__.clear();
+}
 
 void RK::Doit(double h, double tf, vec y0_){
 	int nt = int(tf/h);
@@ -154,26 +168,32 @@ void RK::Doit(double h, double tf, vec y0_){
 
 	vec aux_; aux_ = zeros(y0_.n_rows);
 	for(int i = 0; i<nt; i++){
+		field<vec> F2(2);
 		switch (caso){
 		    case 1: k__.slice(0) = f_(t_(i),y__.slice(i)); break;
 		    case 2:
-		        field<vec> F2(2);
 		        F2 = AC->f2_(t_(i),y__.slice(i));
 		        for(uint j = 0; j< F2(1).n_rows; j++) u__(j,0,i) = F2(1)(j);
 		        //u__.slice(i) = F2(1); 
 		        k__.slice(0) = F2(0);
-		        break; }
+		        break;
+		    case 3: k__.slice(0) = gnr->g_(y__.slice(i)); break;
+		}
 		for(int j = 1; j<N; j++){
 			aux_.zeros();
 			for(int k = 0; k<j; k++)
 				aux_ += a__[j-1](k)*k__.slice(k);
 			switch (caso){
 		        case 1: k__.slice(j) = f_(t_(i) + c_(j-1)*h, y__.slice(i) + h*aux_); break;
-		        case 2: k__.slice(j) = AC->f_(t_(i) + c_(j-1)*h, y__.slice(i) + h*aux_); break; }
+		        case 2: k__.slice(j) = AC->f_(t_(i) + c_(j-1)*h, y__.slice(i) + h*aux_); break;
+		        case 3: k__.slice(j) = gnr->g_(y__.slice(i) + h*aux_); break;
+		    }
 		aux_.zeros();
 		for(int i = 0; i<N; i++)
 			aux_ += b_(i)*k__.slice(i);
-		y__.slice(i+1) = y__.slice(i) + h*aux_; }}
+		y__.slice(i+1) = y__.slice(i) + h*aux_; 
+	    }
+	}
 	if(caso == 2){
 		vec aux2_ = AC->f2_(t_(nt),y__.slice(nt))(1);
 		for(uint j = 0; j< aux2_.n_rows; j++) u__(j,0,nt) = aux2_(j);

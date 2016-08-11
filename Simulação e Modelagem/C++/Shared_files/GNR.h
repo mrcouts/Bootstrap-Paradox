@@ -12,6 +12,7 @@ class GNR {
 public:
     GNR(string method, vec x0_, vec (*f_)(vec), mat (*J_)(vec), double tol, uint nmax);
     ~GNR();
+    vec g_(vec y_);
     void Doit();
 
     string method;

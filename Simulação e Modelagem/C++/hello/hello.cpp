@@ -46,6 +46,7 @@ int main(void){
     cout << gnr.x_ << endl;
     cout << gnr.res_ << endl;
     cout << gnr.n << endl;
+    cout << gnr.g_(gnr.x_) << endl;
 
 
     return 0;

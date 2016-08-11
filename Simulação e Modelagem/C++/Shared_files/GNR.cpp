@@ -18,6 +18,10 @@ GNR::GNR(string method, vec x0_, vec (*f_)(vec), mat (*J_)(vec), double tol, uin
 
 GNR::~GNR(){}
 
+vec GNR::g_(vec y_){
+	return -solve(J_(y_), f_(x0_) );
+}
+
 void GNR::Doit(){
 	for(uint i=0; i<nmax; i++){
 		if(convergiu) return;
