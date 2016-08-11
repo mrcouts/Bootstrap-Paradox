@@ -64,7 +64,6 @@ int main(){
     Reference RefObj = Reference(0.12, {0.08, 0.16}, {0.00, 0.16});
 
     //Simulação dinâmica
-    /*
     double lambda = 50.0;
     FLControlLaw FL = FLControlLaw(19, lambda*lambda, 2*lambda, &RefObj, &Robot);
     //FLControlLaw FL = FLControlLaw(6, lambda*lambda, 2*lambda, &r_, &dr_, &d2r_, &Robot);
@@ -72,27 +71,17 @@ int main(){
 
     vec q0_ = {0.08,  0.16, 0.305030291698133, 1.86386236511897, 1.45111035931733, 1.41460649673445};
     vec x0_ = join_vert(q0_, zeros(6));
-    */
 
     //Simulação cinemática
+    /*
     Acceleration AC = Acceleration(4, &Robot, &RefObj);
 
     vec q0_ = {0.305030291698133, 1.86386236511897, 1.45111035931733, 1.41460649673445};
     vec x0_ = join_vert(q0_, zeros(4));
+    */
 
-    RK rk = RK("RK8", &AC);
+    RK rk = RK("RK6", &AC);
     rk.Doit(0.001, 2*0.12, x0_);
-    //for(uint i = 0; i< rk.t_.n_rows; i++) cout << rk.t_(i) << "; " << rk.u__(0,0,i)  << "; " << rk.u__(1,0,i) << "; " << endl;
-    //for(uint i = 0; i< rk.t_.n_rows; i++) cout << rk.t_(i) << "; " << r_(rk.t_(i))(0) - rk.y__(0,0,i)  << "; " << r_(rk.t_(i))(1) - rk.y__(1,0,i) << "; " << endl;
-    //for(uint i = 0; i< rk.t_.n_rows; i++){
-    //  RefObj.Doit(rk.t_(i));
-    //  //cout << rk.t_(i) << "; " << RefObj.r_(0) - rk.y__(0,0,i)  << "; " << RefObj.r_(1) - rk.y__(1,0,i) << "; " << RefObj.r_(2) - rk.y__(2,0,i) << "; " << endl;
-    //  vec qo0_ = rk.y__(span(0,3), span(0,0), span(i,i) );
-    //  vec qo1_ = rk.y__(span(4,7), span(0,0), span(i,i) );
-    //  Robot.Doit(join_vert(RefObj.r_,  qo0_), join_vert(RefObj.dr_, qo1_ ) );
-    //  cout << rk.t_(i) << "; " << norm(Robot._q_, "inf") << "; " << arma::rank(Robot.A_) << "; " <<  endl;
-    //}
-    for(uint i=0; i<6; i++)
-        cout << Robot.q0_(i) << endl;
+    for(uint i = 0; i< rk.t_.n_rows; i++) cout << rk.t_(i) << "; " << rk.u__(0,0,i)  << "; " << rk.u__(1,0,i) << "; " << endl;
     return 0;
 }

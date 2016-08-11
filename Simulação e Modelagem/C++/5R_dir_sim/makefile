@@ -11,9 +11,10 @@ CLASS3 = FLControlLaw
 CLASS4 = Acceleration
 CLASS5 = Parallel
 CLASS6 = Reference
+CLASS7 = GNR
 
 # objects
-OBJS = $(NAME).o $(FUNC).o $(CLASS).o $(CLASS2).o $(CLASS3).o $(CLASS4).o $(CLASS5).o $(CLASS6).o RR.o RK.o
+OBJS = $(NAME).o $(FUNC).o $(CLASS).o $(CLASS2).o $(CLASS3).o $(CLASS4).o $(CLASS5).o $(CLASS6).o $(CLASS7).o RR.o RK.o
 
 # compiler and linker
 CC = g++
@@ -37,7 +38,7 @@ all: $(NAME)
 $(NAME) : $(OBJS)
 	$(LD) $(LFLAGS) $(OBJS) -o $(NAME) $(LIBS)
 
-$(NAME).o: $(NAME).cpp $(FUNC).h $(CLASS).h $(CLASS2).h $(CLASS3).h $(CLASS4).h $(CLASS5).h $(CLASS6).h RR.h RK.h
+$(NAME).o: $(NAME).cpp $(FUNC).h $(CLASS).h $(CLASS2).h $(CLASS3).h $(CLASS4).h $(CLASS5).h $(CLASS6).h $(CLASS7).h RR.h RK.h
 	$(CC) $(CFLAGS) $(NAME).cpp
 
 $(FUNC).o: $(FUNC).h $(FUNC).cpp
@@ -61,10 +62,13 @@ $(CLASS5).o: $(CLASS5).h $(CLASS5).cpp $(CLASS).h $(FUNC).h RR.h
 $(CLASS6).o: $(CLASS6).h $(CLASS6).cpp
 	$(CC) $(CFLAGS) $(CLASS6).cpp
 
+$(CLASS7).o: $(CLASS7).h $(CLASS7).cpp
+	$(CC) $(CFLAGS) $(CLASS7).cpp
+
 RR.o: RR.h RR.cpp
 	$(CC) $(CFLAGS) RR.cpp
 
-RK.o: RK.h RK.cpp $(CLASS4).h 
+RK.o: RK.h RK.cpp $(CLASS4).h $(CLASS7).h 
 	$(CC) $(CFLAGS) RK.cpp
 
 clean:
