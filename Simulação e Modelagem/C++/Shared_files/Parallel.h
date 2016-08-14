@@ -10,6 +10,7 @@ public:
     Parallel(uint dof, Mecanismo *P, Serial **R_, uint nR_, Col<uint> u_nzi_, mat D_, mat E_, mat F_, vec f_, mat P_, mat Q_, mat S_);
     ~Parallel();
     void Construct(uint dof, Mecanismo *P, Serial **R_, uint nR_, Col<uint> u_nzi_, mat D_, mat E_, mat F_, vec f_);
+    void DoitKin(vec q0_, vec q1_);
     Dy* Doit(vec q0_, vec q1_);
 
 	int nq;
@@ -28,8 +29,12 @@ public:
     vec **dw_co_n__;
     vec _q_;
     mat Ah_;
+    mat Ao1_;
+    mat Ao2_;
     mat Ao_;
     mat A_;
+    vec b1_;
+    vec b2_;
     vec b_;
     mat C_;
     mat Z_;

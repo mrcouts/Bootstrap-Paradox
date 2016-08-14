@@ -9,32 +9,6 @@
 #include "RK.h"
 #include "Parallel.h"
 
-vec r_(double t){
-    double r = 0.08;
-    double x0 = 0.0;
-    double y0 = 0.16;
-    double w = 1/r;
-    return {x0+r*cos(w*t), y0+r*sin(w*t)};
-}
-
-vec dr_(double t){
-    double r = 0.08;
-    double w = 1/r;
-    return {-w*r*sin(w*t), w*r*cos(w*t)};
-}
-
-vec d2r_(double t){
-    double r = 0.08;
-    double w = 1/r;
-    return {-w*w*r*cos(w*t), -w*w*r*sin(w*t)};
-}
-
-Dy* (dy_comp)(vec q0_, vec q1_){
-    Dy *dy;
-    dy = new Dy(2);
-    return dy;
-}
-
 int main(){
 
     Mecanismo P = Mecanismo(2);
