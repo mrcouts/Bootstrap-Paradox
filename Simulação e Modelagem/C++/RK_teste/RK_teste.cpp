@@ -18,16 +18,16 @@ mat J_(vec x_){
 }
 
 int main(void){
-	GNR gnr = GNR("Lalala", {2}, &f_, &J_, 1e-7, 100);
-    RK RK6 = RK("RK6", &gnr);
-    //RK6.Doit(0.01, 1.5, {100.0, 0});
-    RK6.Doit(1, 1, {2});
-    for(uint i = 0; i< RK6.t_.n_rows; i++)
-    	cout << RK6.t_(i) << "; " << RK6.y__(0,0,i)  << "; " << RK6.y__(0,0,i) << "; " << endl;
-    	//cout << RK6.t_(i) << "; " << RK6.y__(0,0,i)  << "; " << RK6.y__(1,0,i) << "; " << endl;
+	//GNR gnr = GNR({2}, &f_, &J_, 1e-7, 100);
+    //RK RK6 = RK("RK6", &gnr);
+    ////RK6.Doit(0.01, 1.5, {100.0, 0});
+    //RK6.Doit(1, 1, {2});
+    //for(uint i = 0; i< RK6.t_.n_rows; i++)
+    //	cout << RK6.t_(i) << "; " << RK6.y__(0,0,i)  << "; " << RK6.y__(0,0,i) << "; " << endl;
+    //	//cout << RK6.t_(i) << "; " << RK6.y__(0,0,i)  << "; " << RK6.y__(1,0,i) << "; " << endl;
 
-    GNR2 gnr2 = GNR2("RK6", {2}, &f_, &J_, 1e-10, 100);
-    gnr2.Doit();
+    GNR2 gnr2 = GNR2("RK6", &f_, &J_, 1e-10, 100);
+    gnr2.Doit({2});
     cout << gnr2.convergiu << endl;
     cout << gnr2.x_ << endl;
     cout << gnr2.res_ << endl;

@@ -4,18 +4,20 @@
 #include <algorithm>
 #include <armadillo>
 #include <string>
+#include "Parallel.h"
 
 using namespace std;
 using namespace arma;
 
 class GNR {
 public:
-    GNR(string method, vec x0_, vec (*f_)(vec), mat (*J_)(vec), double tol, uint nmax);
+    GNR(vec (*f_)(vec), mat (*J_)(vec), double tol, uint nmax);
+    GNR(Parallel *R, double tol, uint nmax);
     ~GNR();
     vec g_(vec y_);
-    void Doit();
+    void Doit(vec x0_);
 
-    string method;
+    Parallel *R;
     vec x0_;
     vec (*f_)(vec);
     mat (*J_)(vec);
@@ -25,6 +27,7 @@ public:
     bool convergiu;
     vec res_;
     uint n;
+    uint caso;
 };
 
 #endif

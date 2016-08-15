@@ -40,7 +40,7 @@ int main(void){
     //vec x0_ = {1,2,3};
     //cout << f_(x0_) << endl;
     //cout << J_(x0_) << endl;
-    GNR gnr = GNR("Lalala", {1,2,3}, &f_, &J_, 1e-7, 100);
+    GNR gnr = GNR({1,2,3}, &f_, &J_, 1e-7, 100);
     gnr.Doit();
     cout << gnr.convergiu << endl;
     cout << gnr.x_ << endl;

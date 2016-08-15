@@ -64,13 +64,13 @@ $(CLASS5).o: $(CLASS5).h $(CLASS5).cpp $(CLASS).h $(FUNC).h
 $(CLASS6).o: $(CLASS6).h $(CLASS6).cpp
 	$(CC) $(CFLAGS) $(CLASS6).cpp
 
-$(CLASS7).o: $(CLASS7).h $(CLASS7).cpp
+$(CLASS7).o: $(CLASS7).h $(CLASS7).cpp $(CLASS5).h
 	$(CC) $(CFLAGS) $(CLASS7).cpp
 
-RK.o: RK.h RK.cpp $(CLASS4).h $(CLASS7).h
+RK.o: RK.h RK.cpp $(CLASS4).h $(CLASS7).h 
 	$(CC) $(CFLAGS) RK.cpp
 
-$(CLASS8).o: $(CLASS8).h $(CLASS8).cpp
+$(CLASS8).o: $(CLASS8).h $(CLASS8).cpp $(CLASS7).h
 	$(CC) $(CFLAGS) $(CLASS8).cpp
 
 clean:
