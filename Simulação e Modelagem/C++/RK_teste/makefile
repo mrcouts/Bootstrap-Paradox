@@ -70,7 +70,7 @@ $(CLASS7).o: $(CLASS7).h $(CLASS7).cpp $(CLASS5).h
 RK.o: RK.h RK.cpp $(CLASS4).h $(CLASS7).h 
 	$(CC) $(CFLAGS) RK.cpp
 
-$(CLASS8).o: $(CLASS8).h $(CLASS8).cpp $(CLASS7).h
+$(CLASS8).o: $(CLASS8).h $(CLASS8).cpp $(CLASS7).h RK.h
 	$(CC) $(CFLAGS) $(CLASS8).cpp
 
 clean:

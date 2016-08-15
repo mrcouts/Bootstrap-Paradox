@@ -8,7 +8,6 @@
 #include "Acceleration.h"
 #include "RK.h"
 #include "Parallel.h"
-#include "GNR2.h"
 
 int main(){
 
@@ -41,31 +40,33 @@ int main(){
     //Plotar área de trabalho
     double lx = 0.25;
     double ly = 0.28;
-    double dl = 0.00125;
+    double dl = 0.005;
     uint nx = (lx/dl);
     uint ny = (ly/dl);
     Mat<int> M; M.zeros(ny,nx);
-    //double r = 0.085;
-    //double x0 = 0.0;
-    //double y0 = 0.16;
+    double r = 0.085;
+    double x0 = 0.0;
+    double y0 = 0.16;
 
     uint rows = ny;
     uint cols = nx;
 
     vec q0_ = {0.823167, 1.81774, 0.823167, 1.81774};
+    vec x0_ = join_vert(q0_, zeros(4));
 
-    GNR2 gnr2 = GNR2("RK6", &Robot, 1e-6, 30);
-    //gnr2.Doit(q0_, {0.05,0.08});
-    //cout << gnr2.convergiu << endl;
-    //cout << gnr2.x_ << endl;
-    //cout << gnr2.res_ << endl;
-    //cout << gnr2.n << endl;
-
+    Reference ***RefObjMat = new Reference** [rows];
+    Acceleration ***ACMat = new Acceleration** [rows];
+    RK ***rkMat = new RK** [rows];
     for(uint i=0; i<rows; i++){
+        RefObjMat[i] = new Reference* [cols];
+        ACMat[i] = new Acceleration* [cols];
+        rkMat[i] = new RK* [cols];
         for(uint j=0; j<cols; j++){
-            gnr2.Doit(q0_, {j*dl+0.5*dl, i*dl+0.5*dl});
-            if(gnr2.convergiu) M(i,j) = 1;
-            gnr2.convergiu = false;
+            RefObjMat[i][j] = new Reference(0.020, {0.00, 0.016}, {j*dl+0.5*dl, i*dl+0.5*dl});
+            ACMat[i][j] = new Acceleration(4, &Robot, RefObjMat[i][j]);
+            rkMat[i][j] = new RK("RK8", ACMat[i][j]);
+            rkMat[i][j]->Doit(0.001, 0.024, x0_);
+            if( arma::rank(Robot.A_) != 0 && abs(norm(Robot._q_, "inf") ) < 1e-4 ) M(i,j) = 1;
         }
     }
 
@@ -76,6 +77,14 @@ int main(){
         }
     }
 
+    for(uint i = 0; i < rows; i++){
+        delete [] RefObjMat[i];
+        delete [] ACMat[i];
+        delete [] rkMat[i];
+    }
+    delete [] RefObjMat;
+    delete [] ACMat;
+    delete [] rkMat;
 
     return 0;
 }
