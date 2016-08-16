@@ -45,9 +45,9 @@ int main(){
     uint nx = (lx/dl);
     uint ny = (ly/dl);
     Mat<int> M; M.zeros(ny,nx);
-    //double r = 0.085;
-    //double x0 = 0.0;
-    //double y0 = 0.16;
+    double r = 0.085;
+    double x0 = 0.0;
+    double y0 = 0.16;
 
     uint rows = ny;
     uint cols = nx;
@@ -61,11 +61,20 @@ int main(){
     //cout << gnr2.res_ << endl;
     //cout << gnr2.n << endl;
 
+    double x;
+    double y;
     for(uint i=0; i<rows; i++){
         for(uint j=0; j<cols; j++){
-            gnr2.Doit(q0_, {j*dl+0.5*dl, i*dl+0.5*dl});
-            if(gnr2.convergiu) M(i,j) = 1;
+            x = j*dl+0.5*dl;
+            y = i*dl+0.5*dl;
+            gnr2.Doit(q0_, {x, y});
+            if(gnr2.convergiu){
+                if(abs(det(Robot.Ao_)) < 1e-4 ) M(i,j) = 2;
+                else M(i,j) = 1;
+            }
             gnr2.convergiu = false;
+            if( (x - x0)*(x - x0) + (y - y0)*(y - y0) <= r*r )
+                M(i,j) = 3;
         }
     }
 
