@@ -1,9 +1,8 @@
 # program's name
 NAME = hello
-CLASS = GNR
 
 # objects
-OBJS = $(NAME).o $(CLASS).o
+OBJS = $(NAME).o
 
 # compiler and linker
 CC = g++
@@ -27,11 +26,8 @@ all: $(NAME)
 $(NAME) : $(OBJS)
 	$(LD) $(LFLAGS) $(OBJS) -o $(NAME) $(LIBS)
 
-$(NAME).o: $(NAME).cpp $(CLASS).h
+$(NAME).o: $(NAME).cpp
 	$(CC) $(CFLAGS) $(NAME).cpp
-
-$(CLASS).o: $(CLASS).h $(CLASS).cpp
-	$(CC) $(CFLAGS) $(CLASS).cpp
 
 clean:
 	$(RM) *.o *~ $(NAME)

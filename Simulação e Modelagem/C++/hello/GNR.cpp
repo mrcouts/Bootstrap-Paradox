@@ -1,1 +1,0 @@
-../Shared_files/GNR.cpp

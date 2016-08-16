@@ -63,17 +63,19 @@ int main(){
 
     double x;
     double y;
+    mat A2_;
     for(uint i=0; i<rows; i++){
         for(uint j=0; j<cols; j++){
             x = j*dl+0.5*dl;
             y = i*dl+0.5*dl;
             gnr2.Doit(q0_, {x, y});
             if(gnr2.convergiu){
-                if(abs(det(Robot.Ao_)) < 1e-4 ) M(i,j) = 2;
+                A2_ = join_horiz(Robot.Ah_, join_horiz(Robot.Ao_.col(1), Robot.Ao_.col(3)) );
+                if(abs(det(Robot.Ao_)) < 1e-4 || abs(det(A2_)) < 1e-3 ) M(i,j) = 2;
                 else M(i,j) = 1;
             }
             gnr2.convergiu = false;
-            if( (x - x0)*(x - x0) + (y - y0)*(y - y0) <= r*r )
+            if( ((x - x0)*(x - x0) + (y - y0)*(y - y0) <= r*r) && (M(i,j) != 2) )
                 M(i,j) = 3;
         }
     }
