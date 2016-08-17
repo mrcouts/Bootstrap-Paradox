@@ -39,15 +39,15 @@ int main(){
     Reference RefObj = Reference(0.12, {0.08, 0.16}, {-0.08, 0.4});
 
     //Plotar área de trabalho
-    double lx = 0.25;
-    double ly = 0.28;
-    double dl = 0.00125;
+    double lx = 0.23;
+    double ly = 0.27;
+    double dl = 0.01;
     uint nx = (lx/dl);
     uint ny = (ly/dl);
     Mat<int> M; M.zeros(ny,nx);
-    double r = 0.085;
+    double r = 0.07;
     double x0 = 0.0;
-    double y0 = 0.16;
+    double y0 = 0.17;
 
     uint rows = ny;
     uint cols = nx;
@@ -71,7 +71,7 @@ int main(){
             gnr2.Doit(q0_, {x, y});
             if(gnr2.convergiu){
                 A2_ = join_horiz(Robot.Ah_, join_horiz(Robot.Ao_.col(1), Robot.Ao_.col(3)) );
-                if(abs(det(Robot.Ao_)) < 1e-4 || abs(det(A2_)) < 1e-3 ) M(i,j) = 2;
+                if(abs(det(Robot.Ao_)) < 1.6*1e-4 || abs(det(A2_)) < 1e-3 ) M(i,j) = 2;
                 else M(i,j) = 1;
             }
             gnr2.convergiu = false;
