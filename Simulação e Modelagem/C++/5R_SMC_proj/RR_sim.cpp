@@ -22,8 +22,8 @@ int main(){
     double sigma2 = 0.1;
     double sigma3 = 0.1;
     double sigma4 = 0.1;
-    double sigma5 = 0.5;
-    double sigma6 = 0.5;
+    double sigma5 = 0.3;
+    double sigma6 = 0.3;
 
     cube I__; I__.zeros(3,3,2);
     I__.slice(0) << 0 << 0   << 0   << endr
@@ -132,6 +132,7 @@ int main(){
     vec a1_ = {0,0};
     vec a2_ = {0,0};
     vec a12_ = {0,0};
+
     for(uint i=0; i<rows; i++){
         for(uint j=0; j<cols; j++){
             x = j*dl+0.5*dl;
@@ -186,6 +187,26 @@ int main(){
     cout << delta1_ << endl;
     cout << delta2_ << endl;
     cout << delta12_ << endl;
+
+    vec den_ = ones(2) - sum(Delta_,1);
+    cout << den_ << endl;
+
+    double eta = max(delta_  /den_);
+    double a   = max(delta1_ /den_);
+    double b   = max(delta2_ /den_);
+    double c   = max(delta12_/den_);
+    double d1  = max(Delta_.col(0) / den_ );
+    double d2  = max(Delta_.col(1) / den_ );
+
+    mat K_; K_.zeros(2,2);
+    K_ << a << c << endr
+       << 0 << b << endr;
+
+    cout << eta << endl;
+    cout << K_ << endl;
+    cout << (vec){d1,d2} << endl;
+
+
 
 
     return 0;
