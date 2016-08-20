@@ -22,8 +22,8 @@ int main(){
     double sigma2 = 0.1;
     double sigma3 = 0.1;
     double sigma4 = 0.1;
-    double sigma5 = 0.3;
-    double sigma6 = 0.3;
+    double sigma5 = 0.5;
+    double sigma6 = 0.5;
 
     cube I__; I__.zeros(3,3,2);
     I__.slice(0) << 0 << 0   << 0   << endr
@@ -88,7 +88,7 @@ int main(){
     //Plotar área de trabalho
     double lx = 0.23;
     double ly = 0.27;
-    double dl = 0.001;
+    double dl = 0.01;
     uint nx = (lx/dl);
     uint ny = (ly/dl);
     Mat<int> M; M.zeros(ny,nx);
@@ -129,9 +129,9 @@ int main(){
     vec v1_ = {1,0};
     vec v2_ = {0,1};
     vec v12_ = {1,1};
-    vec a1_;
-    vec a2_;
-    vec a12_;
+    vec a1_ = {0,0};
+    vec a2_ = {0,0};
+    vec a12_ = {0,0};
     for(uint i=0; i<rows; i++){
         for(uint j=0; j<cols; j++){
             x = j*dl+0.5*dl;
@@ -142,7 +142,7 @@ int main(){
                 if(abs(det(Robot.Ao_)) < 1.6*1e-4 || abs(det(A2_)) < 1e-3 ) M(i,j) = 2;
                 else{
                     M(i,j) = 1;
-                    Robot.Doit(Robot.q0_, Robot.C_*v1_);
+                    Robot.Doit(Robot.q0_, join_vert(v1_, -solve(Robot.Ao_, Robot.Ah_*v1_)) );
                     fMh_(i,j) = Robot.dy->Mh_;
                     fgh_(i,j) = Robot.dy->gh_;
                     fa1_(i,j) = Robot.dy->vh_;
@@ -156,9 +156,11 @@ int main(){
                         delta_ = arma::max(delta_, abs(solve(Robot_[k]->dy->Mh_, fgh_(i,j) - Robot_[k]->dy->gh_)));
                         a1_ = Robot_[k]->dy->vh_;
                         delta1_ = arma::max(delta1_, abs(solve(Robot_[k]->dy->Mh_, fa1_(i,j) - a1_)));
+
                         Robot_[k]->Doit(Robot.q0_, Robot.C_*v2_);
                         a2_ = Robot_[k]->dy->vh_;
                         delta2_ = arma::max(delta2_, abs(solve(Robot_[k]->dy->Mh_, fa2_(i,j) - a2_)));
+
                         Robot_[k]->Doit(Robot.q0_, Robot.C_*v12_);
                         a12_ = Robot_[k]->dy->vh_ - a1_ - a2_;
                         delta12_ = arma::max(delta12_, abs(solve(Robot_[k]->dy->Mh_, fa12_(i,j) - a12_)));
