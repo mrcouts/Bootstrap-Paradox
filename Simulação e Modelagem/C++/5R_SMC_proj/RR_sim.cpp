@@ -18,12 +18,12 @@ int main(){
     double Jz1 = 171.6e-6;
     double Jz2 = 320.6e-6;
 
-    double sigma1 = 0.1;
+    double sigma1 = 0.3;
     double sigma2 = 0.1;
-    double sigma3 = 0.1;
+    double sigma3 = 0.2;
     double sigma4 = 0.1;
-    double sigma5 = 0.3;
-    double sigma6 = 0.3;
+    double sigma5 = 0.5;
+    double sigma6 = 0.1;
 
     cube I__; I__.zeros(3,3,2);
     I__.slice(0) << 0 << 0   << 0   << endr

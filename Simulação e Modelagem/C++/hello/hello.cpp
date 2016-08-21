@@ -68,6 +68,13 @@ int main(void){
 
     cout << Jz__ << endl;
 
+    vec v = {1,2};
+    mat M = ones(2,2);
+    mat Const = v.t()*M*v;
+    cout << Const(0,0) << endl;
+    cout << v.t()*v << endl;
+
+
 
 
     return 0;
