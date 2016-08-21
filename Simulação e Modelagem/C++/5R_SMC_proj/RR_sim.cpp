@@ -19,11 +19,11 @@ int main(){
     double Jz2 = 320.6e-6;
 
     double sigma1 = 0.3;
-    double sigma2 = 0.1;
+    double sigma2 = 0.15;
     double sigma3 = 0.2;
-    double sigma4 = 0.1;
+    double sigma4 = 0.15;
     double sigma5 = 0.5;
-    double sigma6 = 0.1;
+    double sigma6 = 0.15;
 
     cube I__; I__.zeros(3,3,2);
     I__.slice(0) << 0 << 0   << 0   << endr
@@ -88,7 +88,7 @@ int main(){
     //Plotar área de trabalho
     double lx = 0.23;
     double ly = 0.27;
-    double dl = 0.01;
+    double dl = 0.00125;
     uint nx = (lx/dl);
     uint ny = (ly/dl);
     Mat<int> M; M.zeros(ny,nx);

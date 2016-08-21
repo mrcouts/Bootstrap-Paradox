@@ -74,8 +74,7 @@ int main(void){
     cout << Const(0,0) << endl;
     cout << v.t()*v << endl;
 
-
-
-
+    cout << sign(randn(10)) << endl;
+    cout << randu(10) % sign(randn(10)) << endl;
     return 0;
 }
