@@ -117,9 +117,11 @@ int main(){
     Reference RefObj = Reference(0.12, {0.0, 0.0, 0.480}, {-0.2, -0.2, 0.500});
 
     double lambda = 50.0;
-    FLControlLaw FL = FLControlLaw(19, lambda*lambda, 2*lambda, &RefObj, &Robot);
-    //FLControlLaw FL = FLControlLaw(19, 400.0, 40.0, &r_, &dr_, &d2r_, &Robot);
-    Acceleration AC = Acceleration(19, &Robot, &FL);
+    //SMCLaw SMC = SMCLaw(3, lambda, 10.0, zeros(3,3), zeros(3), 100.0, &RefObj, &Robot);
+    SMCLaw SMC = SMCLaw(3, lambda, 10.0, zeros(3,3), zeros(3), 20.0, &r_, &dr_, &d2r_, &Robot);
+    //FLControlLaw FL = FLControlLaw(3, lambda*lambda, 2*lambda, &RefObj, &Robot);
+    //FLControlLaw FL = FLControlLaw(3, 400.0, 40.0, &r_, &dr_, &d2r_, &Robot);
+    Acceleration AC = Acceleration(19, &Robot, &SMC);
 
 
     vec q0_ = {0.0, 0.0, 0.480,
@@ -137,7 +139,21 @@ int main(){
     */
     
     RK rk = RK("RK8", &AC);
-    rk.Doit(0.001, 2*0.12, x0_);
-    for(uint i = 0; i< rk.t_.n_rows; i++) cout << rk.t_(i) << "; " << rk.u__(0,0,i)  << "; " << rk.u__(1,0,i) << "; " << rk.u__(2,0,i) << "; " << endl;
+    rk.Doit(0.0005, 2*1.2, x0_);
+    double t;
+    vec ref_; ref_.zeros(3);
+    vec dref_; dref_.zeros(3);
+    for(uint i = 0; i< rk.t_.n_rows; i++){
+        t = rk.t_(i);
+        cout << t << "; " << rk.u__(0,0,i)  << "; " << rk.u__(1,0,i) << "; " << rk.u__(2,0,i) << "; ";
+        ref_ = r_(t);
+        dref_ = dr_(t);
+        //RefObj.Doit(rk.t_(i));
+        //ref_ = RefObj.r_;
+        //dref_ = RefObj.dr_;
+        cout << ref_(0) - rk.y__(0,0,i)  << "; " << ref_(1) - rk.y__(1,0,i) << "; " << ref_(2) - rk.y__(2,0,i) << "; ";
+        cout << -( dref_(0) - rk.y__(19,0,i) + lambda*(ref_(0) - rk.y__(0,0,i)) ) << "; " << -( dref_(1) - rk.y__(20,0,i) + lambda*(ref_(1) - rk.y__(1,0,i))) << "; " << -( dref_(2) - rk.y__(21,0,i) + lambda*(ref_(2) - rk.y__(2,0,i))) << "; " << endl;
+    }
+    //for(uint i = 0; i< rk.t_.n_rows; i++) cout << rk.t_(i) << "; " << rk.u__(0,0,i)  << "; " << rk.u__(1,0,i) << "; " << rk.u__(2,0,i) << "; " << endl;
     return 0;
 }
