@@ -50,5 +50,5 @@ vec SMCLaw::Doit(double t, vec q0_, vec q1_){
 		sigma_ = d2r_(t) + Kp*(dr_(t) - R2->P->q1_ );
 	}
 	k = eta + abs(q1_).t()*K_*abs(q1_) + k_.t()*abs(sigma_);
-	return  dy->vh_ + dy->gh_ + dy->Mh_*(sigma_ - k*tanh(n*s_) );
+	return  dy->vh_ + dy->gh_ + dy->Mh_*(sigma_ - tanh(n*s_)*k );
 }
