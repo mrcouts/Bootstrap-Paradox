@@ -17,6 +17,7 @@ public:
     Acceleration(int dof, Serial *R, FLControlLaw *u);
     Acceleration(int dof, Parallel *R2, FLControlLaw *u);
     Acceleration(int dof, Parallel *R2, Reference *RefObj);
+    Acceleration(int dof, Parallel *R2, SMCLaw *u_smc); 
     ~Acceleration();
     field<vec> Doit(double t, vec q0_, vec q1_);
     vec f_(double t, vec y_);
@@ -26,6 +27,7 @@ public:
     Parallel *R2;
     int caso;
     FLControlLaw *u;
+    SMCLaw *u_smc;
     Reference *RefObj;
 };
 
