@@ -10,21 +10,21 @@
 #include "Parallel.h"
 
 vec r_(double t){
-    double r = 0.08;
+    double r = 0.07;
     double x0 = 0.0;
-    double y0 = 0.16;
+    double y0 = 0.17;
     double w = 1/r;
     return {x0+r*cos(w*t), y0+r*sin(w*t)};
 }
 
 vec dr_(double t){
-    double r = 0.08;
+    double r = 0.07;
     double w = 1/r;
     return {-w*r*sin(w*t), w*r*cos(w*t)};
 }
 
 vec d2r_(double t){
-    double r = 0.08;
+    double r = 0.07;
     double w = 1/r;
     return {-w*w*r*cos(w*t), -w*w*r*sin(w*t)};
 }
@@ -89,14 +89,14 @@ int main(){
     Acceleration AC = Acceleration(6, &Robot, &FL);
     */
 
-    double eta = 10.0 + 14.2258;
+    double eta = 14.2258;
     mat K_; K_.zeros(2,2);
     K_ << 47.0437 << 39.0942 << endr
        << 0.0     << 34.0699 << endr;
     vec k_ = {1.1790, 1.4260};
     
     //SMCLaw SMC = SMCLaw(2, lambda, eta, K_, k_, 100.0, &RefObj, &Robot);
-    SMCLaw SMC = SMCLaw(2, lambda, eta, K_, k_, 100.0, &r_, &dr_, &d2r_, &Robot);
+    SMCLaw SMC = SMCLaw(2, lambda, eta, K_, k_, 10.0, &r_, &dr_, &d2r_, &Robot);
     Acceleration AC = Acceleration(6, &_Robot, &SMC);
     
 
@@ -112,14 +112,20 @@ int main(){
     */
 
     RK rk = RK("RK8", &AC);
-    rk.Doit(0.00025, 2*1.2, x0_);
-    //for(uint i = 0; i< rk.t_.n_rows; i++) cout << rk.t_(i) << "; " << rk.u__(0,0,i)  << "; " << rk.u__(1,0,i) << "; " << endl;
+    rk.Doit(0.0002, 1.2, x0_);
+    double t;
+    vec ref_; ref_.zeros(2);
+    vec dref_; dref_.zeros(2);
     for(uint i = 0; i< rk.t_.n_rows; i++){
+        t = rk.t_(i);
+        cout << t << "; " << rk.u__(0,0,i)  << "; " << rk.u__(1,0,i) << "; ";
+        ref_ = r_(t);
+        dref_ = dr_(t);
         //RefObj.Doit(rk.t_(i));
-        //cout << rk.t_(i) << "; " << RefObj.r_(0) - rk.y__(0,0,i)  << "; " << RefObj.r_(1) - rk.y__(1,0,i) << "; " << endl;
-        //cout << rk.t_(i) << "; " << -( RefObj.dr_(0) - rk.y__(6,0,i) + lambda*(RefObj.r_(0) - rk.y__(0,0,i)) ) << "; " << -( RefObj.dr_(1) - rk.y__(7,0,i) + lambda*(RefObj.r_(1) - rk.y__(1,0,i))) << "; " << endl;
-        cout << rk.t_(i) << "; " << r_(rk.t_(i))(0) - rk.y__(0,0,i)  << "; " << r_(rk.t_(i))(1) - rk.y__(1,0,i) << "; " << endl;
-        //cout << rk.t_(i) << "; " << -( dr_(rk.t_(i))(0) - rk.y__(6,0,i) + lambda*(r_(rk.t_(i))(0) - rk.y__(0,0,i)) ) << "; " << -( dr_(rk.t_(i))(1) - rk.y__(7,0,i) + lambda*(r_(rk.t_(i))(1) - rk.y__(1,0,i))) << "; " << endl;
+        //ref_ = RefObj.r_;
+        //dref_ = RefObj.dr_;
+        cout << ref_(0) - rk.y__(0,0,i)  << "; " << ref_(1) - rk.y__(1,0,i) << "; ";
+        cout << -( dref_(0) - rk.y__(6,0,i) + lambda*(ref_(0) - rk.y__(0,0,i)) ) << "; " << -( dref_(1) - rk.y__(7,0,i) + lambda*(ref_(1) - rk.y__(1,0,i))) << "; " << endl;
     }
     return 0;
 }   
