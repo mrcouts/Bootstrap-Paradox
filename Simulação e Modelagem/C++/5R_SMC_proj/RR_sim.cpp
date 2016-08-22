@@ -88,7 +88,7 @@ int main(){
     //Plotar área de trabalho
     double lx = 0.23;
     double ly = 0.27;
-    double dl = 0.00125;
+    double dl = 0.01;
     uint nx = (lx/dl);
     uint ny = (ly/dl);
     Mat<int> M; M.zeros(ny,nx);
@@ -182,14 +182,15 @@ int main(){
     //    }
     //}
 
-    cout << Delta_ << endl;
-    cout << delta_ << endl;
-    cout << delta1_ << endl;
-    cout << delta2_ << endl;
-    cout << delta12_ << endl;
+    Delta_.print("Delta_ =");
+    delta_.print("delta_ =");
+    delta1_.print("delta1_ =");
+    delta2_.print("delta2_ =");
+    delta12_.print("delta12_ =");
 
     vec den_ = ones(2) - sum(Delta_,1);
-    cout << den_ << endl;
+    //cout << den_ << endl;
+    den_.print("den_ ="); 
 
     double eta = max(delta_  /den_);
     double a   = max(delta1_ /den_);
@@ -201,13 +202,15 @@ int main(){
     mat K_; K_.zeros(2,2);
     K_ << a << c << endr
        << 0 << b << endr;
+    vec k_ = {d1,d2};
 
-    cout << eta << endl;
-    cout << K_ << endl;
-    cout << (vec){d1,d2} << endl;
+    cout << "eta = " << eta << endl;
+    //cout << K_ << endl;
+    //cout << (vec){d1,d2} << endl;
+    K_.print("K_ =");
+    k_.print("k_ =");
 
-
-
-
+    cout << endl << inv(eye(2,2) - Delta_) << endl;
+ 
     return 0;
 }
