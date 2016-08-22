@@ -1,6 +1,6 @@
 #include "FLControlLaw.h"
 
-FLControlLaw::FLControlLaw(int dof, double Kp, double Kv, vec (*r_)(double), vec (*dr_)(double), vec (*d2r_)(double), Serial *R){
+FLControlLaw::FLControlLaw(uint dof, double Kp, double Kv, vec (*r_)(double), vec (*dr_)(double), vec (*d2r_)(double), Serial *R){
 	this->dof = dof;
 	this->Kp = Kp;
 	this->Kv = Kv;
@@ -12,7 +12,7 @@ FLControlLaw::FLControlLaw(int dof, double Kp, double Kv, vec (*r_)(double), vec
 	RefObjFlag = false;
 }
 
-FLControlLaw::FLControlLaw(int dof, double Kp, double Kv, vec (*r_)(double), vec (*dr_)(double), vec (*d2r_)(double), Dy* (*dy_comp)(vec, vec)){
+FLControlLaw::FLControlLaw(uint dof, double Kp, double Kv, vec (*r_)(double), vec (*dr_)(double), vec (*d2r_)(double), Dy* (*dy_comp)(vec, vec)){
 	this->dof = dof;
 	this->Kp = Kp;
 	this->Kv = Kv;
@@ -24,7 +24,7 @@ FLControlLaw::FLControlLaw(int dof, double Kp, double Kv, vec (*r_)(double), vec
 	RefObjFlag = false;
 }
 
-FLControlLaw::FLControlLaw(int dof, double Kp, double Kv, vec (*r_)(double), vec (*dr_)(double), vec (*d2r_)(double), Parallel *R2){
+FLControlLaw::FLControlLaw(uint dof, double Kp, double Kv, vec (*r_)(double), vec (*dr_)(double), vec (*d2r_)(double), Parallel *R2){
 	this->dof = dof;
 	this->Kp = Kp;
 	this->Kv = Kv;
@@ -36,7 +36,7 @@ FLControlLaw::FLControlLaw(int dof, double Kp, double Kv, vec (*r_)(double), vec
 	RefObjFlag = false;
 }
 
-FLControlLaw::FLControlLaw(int dof, double Kp, double Kv, Reference *RefObj, Serial *R){
+FLControlLaw::FLControlLaw(uint dof, double Kp, double Kv, Reference *RefObj, Serial *R){
 	this->dof = dof;
 	this->Kp = Kp;
 	this->Kv = Kv;
@@ -46,7 +46,7 @@ FLControlLaw::FLControlLaw(int dof, double Kp, double Kv, Reference *RefObj, Ser
 	RefObjFlag = true;
 }
 
-FLControlLaw::FLControlLaw(int dof, double Kp, double Kv, Reference *RefObj, Dy* (*dy_comp)(vec, vec)){
+FLControlLaw::FLControlLaw(uint dof, double Kp, double Kv, Reference *RefObj, Dy* (*dy_comp)(vec, vec)){
 	this->dof = dof;
 	this->Kp = Kp;
 	this->Kv = Kv;
@@ -56,7 +56,7 @@ FLControlLaw::FLControlLaw(int dof, double Kp, double Kv, Reference *RefObj, Dy*
 	RefObjFlag = true;
 }
 
-FLControlLaw::FLControlLaw(int dof, double Kp, double Kv, Reference *RefObj, Parallel *R2){
+FLControlLaw::FLControlLaw(uint dof, double Kp, double Kv, Reference *RefObj, Parallel *R2){
 	this->dof = dof;
 	this->Kp = Kp;
 	this->Kv = Kv;
@@ -91,38 +91,120 @@ vec FLControlLaw::Doit(double t, vec q0_, vec q1_){
 	}
 }
 
-SMCLaw::SMCLaw(int dof, double Kp, double eta, mat K_, vec k_, double n, vec (*r_)(double), vec (*dr_)(double), vec (*d2r_)(double), Parallel *R2){
+SMCLaw::SMCLaw(uint dof, double Kp, double eta, double n, vec (*r_)(double), vec (*dr_)(double), vec (*d2r_)(double), Parallel *R2){
 	this->dof = dof;
 	this->Kp = Kp;
 	this->eta = eta;
-	this->K_ = K_;
-	this->k_ = k_;
 	this->n = n;
 	this->r_ = r_;
 	this->dr_ = dr_;
 	this->d2r_ = d2r_;
 	this->R2 = R2;
-	RefObjFlag = false;
 
 	s_.zeros(dof);
 	sigma_.zeros(dof);
 	k.zeros(1,1);
+	k_.zeros(dof);
+
+	RefObjFlag = false;
+	caso = 1;
 }
 
-SMCLaw::SMCLaw(int dof, double Kp, double eta, mat K_, vec k_, double n, Reference *RefObj, Parallel *R2){
+SMCLaw::SMCLaw(uint dof, double Kp, double eta, double n, Reference *RefObj, Parallel *R2){
 	this->dof = dof;
 	this->Kp = Kp;
 	this->eta = eta;
-	this->K_ = K_;
-	this->k_ = k_;
 	this->n = n;
 	this->RefObj = RefObj;
 	this->R2 = R2;
-	RefObjFlag = true;
 
 	s_.zeros(dof);
 	sigma_.zeros(dof);
 	k.zeros(1,1);
+	k_.zeros(dof);
+
+	RefObjFlag = true;
+	caso = 1;
+}
+
+SMCLaw::SMCLaw(uint dof, double Kp, double eta, mat Lambda_, vec gamma_, double n, vec (*r_)(double), vec (*dr_)(double), vec (*d2r_)(double), Parallel *R2){
+	this->dof = dof;
+	this->Kp = Kp;
+	this->eta = eta;
+	this->Lambda_ = Lambda_;
+	this->gamma_ = gamma_;
+	this->n = n;
+	this->r_ = r_;
+	this->dr_ = dr_;
+	this->d2r_ = d2r_;
+	this->R2 = R2;
+
+	s_.zeros(dof);
+	sigma_.zeros(dof);
+	k.zeros(1,1);
+	k_.zeros(dof);
+
+	RefObjFlag = false;
+	caso = 2;
+}
+
+SMCLaw::SMCLaw(uint dof, double Kp, double eta, mat Lambda_, vec gamma_, double n, Reference *RefObj, Parallel *R2){
+	this->dof = dof;
+	this->Kp = Kp;
+	this->eta = eta;
+	this->Lambda_ = Lambda_;
+	this->gamma_ = gamma_;
+	this->n = n;
+	this->RefObj = RefObj;
+	this->R2 = R2;
+
+	s_.zeros(dof);
+	sigma_.zeros(dof);
+	k.zeros(1,1);
+	k_.zeros(dof);
+
+	RefObjFlag = true;
+	caso = 2;
+}
+
+SMCLaw::SMCLaw(uint dof, double Kp, vec eta_, cube Lambda__, mat Gamma_, double n, vec (*r_)(double), vec (*dr_)(double), vec (*d2r_)(double), Parallel *R2){
+	this->dof = dof;
+	this->Kp = Kp;
+	this->eta_ = eta_;
+	this->Lambda__ = Lambda__;
+	this->Gamma_ = Gamma_;
+	this->n = n;
+	this->r_ = r_;
+	this->dr_ = dr_;
+	this->d2r_ = d2r_;
+	this->R2 = R2;
+
+	s_.zeros(dof);
+	sigma_.zeros(dof);
+	k.zeros(1,1);
+	k_.zeros(dof);
+
+	RefObjFlag = false;
+	caso = 3;
+}
+
+SMCLaw::SMCLaw(uint dof, double Kp, vec eta_, cube Lambda__, mat Gamma_, double n, Reference *RefObj, Parallel *R2){
+	this->dof = dof;
+	this->Kp = Kp;
+	this->eta_ = eta_;
+	this->Lambda__ = Lambda__;
+	this->Gamma_ = Gamma_;
+	this->n = n;
+	this->RefObj = RefObj;
+	this->R2 = R2;
+
+	s_.zeros(dof);
+	sigma_.zeros(dof);
+	k.zeros(1,1);
+	k_.zeros(dof);
+
+	RefObjFlag = true;
+	caso = 3;
 }
 
 SMCLaw::~SMCLaw(){}
@@ -140,6 +222,18 @@ vec SMCLaw::Doit(double t, vec q0_, vec q1_){
 		s_ = - ( (dr_(t) - R2->P->q1_ ) + Kp*(r_(t) - R2->P->q0_  ) );
 		sigma_ = d2r_(t) + Kp*(dr_(t) - R2->P->q1_ );
 	}
-	k = eta + abs(R2->P->q1_).t()*K_*abs(R2->P->q1_) + k_.t()*abs(sigma_);
-	return  dy->vh_ + dy->gh_ + dy->Mh_*(sigma_ - tanh(n*s_)*k );
+	switch(caso){
+		case 1: k_ = eta*ones(dof);
+		        break;
+		case 2: k = eta + abs(R2->P->q1_).t()*Lambda_*abs(R2->P->q1_) + gamma_.t()*abs(sigma_);
+		        k_ = k(0,0)*ones(dof);
+		        break;
+		case 3: k_ = eta_ + Gamma_*abs(sigma_);
+				for(uint i=0; i<dof; i++){
+					k = abs(R2->P->q1_).t()*Lambda__.slice(i)*abs(R2->P->q1_);
+					k_(i) += k(0,0);
+				}
+				break;
+	}
+	return  dy->vh_ + dy->gh_ + dy->Mh_*(sigma_ - k_ % tanh(n*s_) );
 }

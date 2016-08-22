@@ -19,11 +19,11 @@ int main(){
     double Jz2 = 320.6e-6;
 
     double sigma1 = 0.3;
-    double sigma2 = 0.15;
+    double sigma2 = 0.18;
     double sigma3 = 0.2;
-    double sigma4 = 0.15;
+    double sigma4 = 0.18;
     double sigma5 = 0.5;
-    double sigma6 = 0.15;
+    double sigma6 = 0.18;
 
     cube I__; I__.zeros(3,3,2);
     I__.slice(0) << 0 << 0   << 0   << endr
@@ -88,7 +88,7 @@ int main(){
     //Plotar área de trabalho
     double lx = 0.23;
     double ly = 0.27;
-    double dl = 0.01;
+    double dl = 0.0025;
     uint nx = (lx/dl);
     uint ny = (ly/dl);
     Mat<int> M; M.zeros(ny,nx);
@@ -199,18 +199,38 @@ int main(){
     double d1  = max(Delta_.col(0) / den_ );
     double d2  = max(Delta_.col(1) / den_ );
 
-    mat K_; K_.zeros(2,2);
-    K_ << a << c << endr
+    mat Lambda_; Lambda_.zeros(2,2);
+    Lambda_ << a << c << endr
        << 0 << b << endr;
     vec k_ = {d1,d2};
 
     cout << "eta = " << eta << endl;
-    //cout << K_ << endl;
+    //cout << Lambda_ << endl;
     //cout << (vec){d1,d2} << endl;
-    K_.print("K_ =");
+    Lambda_.print("Lambda_ =");
     k_.print("k_ =");
 
-    cout << endl << inv(eye(2,2) - Delta_) << endl;
+    mat iI_Delta_ = inv(eye(2,2) - Delta_);
+    vec eta_  = iI_Delta_*delta_; 
+    vec eta1_  = iI_Delta_*delta1_; 
+    vec eta2_  = iI_Delta_*delta2_; 
+    vec eta12_ = iI_Delta_*delta12_; 
+    mat Gamma_ = iI_Delta_*Delta_;
+    iI_Delta_.print("iI_Delta_ =");
+    eta_.print("eta_ =");
+    eta1_.print("eta1_ =");
+    eta2_.print("eta2_ =");
+    eta12_.print("eta12_ =");
+    Gamma_.print("Gamma_ =");
+
+    cube Lambda__; Lambda__.zeros(2,2,2);
+    Lambda__.slice(0) << eta1_(0) << eta12_(0) << endr
+                         << 0            << eta2_(0)  << endr;
+    Lambda__.slice(1) << eta1_(1) << eta12_(1) << endr
+                         << 0            << eta2_(1)  << endr;
+
+    Lambda__.print("Lambda__ =");
+
  
     return 0;
 }

@@ -118,7 +118,7 @@ int main(){
 
     double lambda = 50.0;
     //SMCLaw SMC = SMCLaw(3, lambda, 10.0, zeros(3,3), zeros(3), 100.0, &RefObj, &Robot);
-    SMCLaw SMC = SMCLaw(3, lambda, 10.0, zeros(3,3), zeros(3), 20.0, &r_, &dr_, &d2r_, &Robot);
+    SMCLaw SMC = SMCLaw(3, lambda, 10.0, 20.0, &r_, &dr_, &d2r_, &Robot);
     //FLControlLaw FL = FLControlLaw(3, lambda*lambda, 2*lambda, &RefObj, &Robot);
     //FLControlLaw FL = FLControlLaw(3, 400.0, 40.0, &r_, &dr_, &d2r_, &Robot);
     Acceleration AC = Acceleration(19, &Robot, &SMC);

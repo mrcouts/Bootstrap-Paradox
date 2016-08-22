@@ -14,16 +14,16 @@ using namespace arma;
 
 class FLControlLaw {
 public:
-    FLControlLaw(int dof, double Kp, double Kv, vec (*r_)(double), vec (*dr_)(double), vec (*d2r_)(double), Serial *R);
-    FLControlLaw(int dof, double Kp, double Kv, vec (*r_)(double), vec (*dr_)(double), vec (*d2r_)(double), Parallel *R2);
-    FLControlLaw(int dof, double Kp, double Kv, vec (*r_)(double), vec (*dr_)(double), vec (*d2r_)(double), Dy* (*dy_comp)(vec, vec));
-    FLControlLaw(int dof, double Kp, double Kv, Reference *RefObj, Serial *R);
-    FLControlLaw(int dof, double Kp, double Kv, Reference *RefObj, Parallel *R2);
-    FLControlLaw(int dof, double Kp, double Kv, Reference *RefObj, Dy* (*dy_comp)(vec, vec));
+    FLControlLaw(uint dof, double Kp, double Kv, vec (*r_)(double), vec (*dr_)(double), vec (*d2r_)(double), Serial *R);
+    FLControlLaw(uint dof, double Kp, double Kv, vec (*r_)(double), vec (*dr_)(double), vec (*d2r_)(double), Parallel *R2);
+    FLControlLaw(uint dof, double Kp, double Kv, vec (*r_)(double), vec (*dr_)(double), vec (*d2r_)(double), Dy* (*dy_comp)(vec, vec));
+    FLControlLaw(uint dof, double Kp, double Kv, Reference *RefObj, Serial *R);
+    FLControlLaw(uint dof, double Kp, double Kv, Reference *RefObj, Parallel *R2);
+    FLControlLaw(uint dof, double Kp, double Kv, Reference *RefObj, Dy* (*dy_comp)(vec, vec));
     ~FLControlLaw();
     vec Doit(double t, vec q0_, vec q1_);
 
-    int dof;
+    uint dof;
     double Kp;
     double Kv;
     vec (*r_)(double);
@@ -39,26 +39,35 @@ public:
 
 class SMCLaw {
 public:
-    SMCLaw(int dof, double Kp, double eta, mat K_, vec k_, double n, vec (*r_)(double), vec (*dr_)(double), vec (*d2r_)(double), Parallel *R2);
-    SMCLaw(int dof, double Kp, double eta, mat K_, vec k_, double n, Reference *RefObj, Parallel *R2);
+    SMCLaw(uint dof, double Kp, double eta, double n, vec (*r_)(double), vec (*dr_)(double), vec (*d2r_)(double), Parallel *R2);
+    SMCLaw(uint dof, double Kp, double eta, double n, Reference *RefObj, Parallel *R2);
+    SMCLaw(uint dof, double Kp, double eta, mat Lambda_, vec gamma_, double n, vec (*r_)(double), vec (*dr_)(double), vec (*d2r_)(double), Parallel *R2);
+    SMCLaw(uint dof, double Kp, double eta, mat Lambda_, vec gamma_, double n, Reference *RefObj, Parallel *R2);
+    SMCLaw(uint dof, double Kp, vec eta_, cube Lambda__, mat Gamma_, double n, vec (*r_)(double), vec (*dr_)(double), vec (*d2r_)(double), Parallel *R2);
+    SMCLaw(uint dof, double Kp, vec eta_, cube Lambda__, mat Gamma_, double n, Reference *RefObj, Parallel *R2);
     ~SMCLaw();
     vec Doit(double t, vec q0_, vec q1_);
 
-    int dof;
+    uint dof;
     double Kp;
     double eta;
-    mat K_;
-    vec k_;
+    mat Lambda_;
+    vec gamma_;
+    vec eta_;
+    cube Lambda__;
+    mat Gamma_;
     double n;
     vec s_;
     vec sigma_;
     mat k;
+    vec k_;
     vec (*r_)(double);
     vec (*dr_)(double);
     vec (*d2r_)(double);
     Parallel *R2;
     Reference *RefObj;
     bool RefObjFlag;
+    int caso;
 };
 
 #endif
