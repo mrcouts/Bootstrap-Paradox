@@ -262,7 +262,7 @@ Além disso, como $\vct{\ttg_i}_{\ttB_i}$ são dados de entrada do algoritmo, obte
 \hvct{\ttg_i}_{\ttN} = \hvct{\vone}_{\ttN \rl \ttB_i} \cdot \hvct{\ttg_i}_{\ttB_i}, \, i=1,...,\nu\ssh
 \end{equation}
 
-\item[B)] Cinemática de velocidades
+\item[B1)] Cinemática de velocidades lineares
 
 A posição do efetuador em relação ao sistema base é função dos deslocamentos relativos das juntas, ou seja:
 \begin{equation} \label{eq:x_q_}
@@ -285,7 +285,12 @@ Sendo:
 \end{bmatrix}
 \end{equation}
 
-Analisando a equação \eqref{eq:dx_q_}, pode-se obersevar que o produto $\mj_{v,i} \dot{q}\ssh_i$ representa a contribuição da i-ésima junta na velocidade do efetuador, com todas as outras juntas paradas \cite{Cabral}. Essa contribuição é dada por:
+Analisando a equação \eqref{eq:dx_q_}, pode-se obersevar que o produto $\mj_{v,i} \dot{q}\ssh_i$ representa a contribuição da i-ésima junta na velocidade do efetuador, com todas as outras juntas paradas \cite{Cabral}. Note que esta constatação está de acordo com a aplicação recursiva do príncipio da composição de movimento para velocidades lineares:
+\begin{equation} \label{eq:Composição_v}
+\vv_{abs} = \vv_{arr} + \vv_{rel}
+\end{equation}
+
+Sendo assim, a contribuição de cada junta na velocidade do efetuador é dada por:
 \begin{equation} \label{eq:ContribuiçãoVelocidadeLinear}
 \mj_{v,i} \dot{q}\ssh_i = \begin{cases}
 \vct{\vk_{i-1}}_{\ttN} \dot{q}\ssh_i, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; \text{se a i-ésima junta for prismática} \\
@@ -304,7 +309,7 @@ Ou seja:
 Para obter as velocidades dos centros de massa dos ligamentos, o raciocínio é análogo:
 
 \begin{equation} \label{eq:dgi_q_}
-\frac{\dd}{\dd t} \vct{\ttg_i}_{\ttN} = \mJ_{vi}(\mq\ssh) \cdot \dot{\mq}\ssh = \sum_{j=1}^{\nu\ssh} \mj_{vi,j}(\mq\ssh) \cdot \dot{q}\ssh_i, \, i=1,...,\nu\ssh
+\frac{\dd}{\dd t} \vct{\ttg_i}_{\ttN} = \mJ_{vi}(\mq\ssh) \cdot \dot{\mq}\ssh = \sum_{j=1}^{\nu\ssh} \mj_{vi,j}(\mq\ssh) \cdot \dot{q}\ssh_j, \, i=1,...,\nu\ssh
 \end{equation}
 
 Sendo:
@@ -323,6 +328,57 @@ Sendo:
 \end{cases} \, i,j=1,...,\nu\ssh
 \end{equation}
 
+\item[B2)] Cinemática de velocidades angulares
+
+A velocidade angular de cada ligamento pode ser obtida aplicando recursivamente o príncipio da composição de movimentos para velocidades angulares:
+\begin{equation} \label{eq:Composição_w}
+\vomega_{abs} = \vomega_{arr} + \vomega_{rel}
+\end{equation}
+\begin{equation} \label{eq:Composição_w_rec}
+\vct{\vomega_i}_{\ttN} = \begin{cases}
+\mzr, \text{se } i=0 \\
+\vct{\vomega_{i-1}}_{\ttN}, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; \text{se } i>0  \text{ e a i-ésima junta for prismática} \\
+\vct{\vomega_{i-1}}_{\ttN} + \vct{\vk_{i-1}}_{\ttN} \dot{q}\ssh_i,  \text{se } i>0  \text{ e a i-ésima junta for de revolução} \\
+\end{cases}\, i=0,...,\nu\ssh
+\end{equation}
+
+Sendo assim, a velocidade angular de cada ligamento pode ser obtida pelas seguintes expressões:
+
+\begin{equation}
+\vct{\vomega_i}_{\ttN} = \mJ_{\omega i}(\mq\ssh) \cdot \dot{\mq}\ssh = \sum_{j=1}^{\nu\ssh} \mj_{\omega i,j}(\mq\ssh) \cdot \dot{q}\ssh_j, \, i=1,...,\nu\ssh
+\end{equation}
+
+\begin{equation}
+\mJ_{\omega i}(\mq\ssh) = \begin{bmatrix}
+\mj_{\omega i,1}(\mq\ssh) & ... & \mj_{\omega i,\nu\ssh}(\mq\ssh)
+\end{bmatrix}, \, i=1,...,\nu\ssh
+\end{equation}
+
+\begin{equation}
+\mj_{\omega i,j} = \begin{cases}
+\mzr, \;\;\;\;\;\;\;\;\; \text{se } j>i  \text{ ou a j-ésima junta for prismática} \\
+\vct{\vk_{j-1}}_{\ttN}, \text{se } j\leq i \text{ e a j-ésima junta for de revolução} \\
+\end{cases} \, i,j=1,...,\nu\ssh
+\end{equation}
+
+\item[C2)] Cinemática de acelerações angulares
+
+A aceleração angular de cada ligamento pode ser obtida aplicando recursivamente o príncipio da composição de movimentos para acelerações angulares:
+\begin{equation} \label{eq:Composição_dw}
+\dot{\vomega}_{abs} = \dot{\vomega}_{arr} + \dot{\vomega}_{rel} + \vomega_{arr} \wedge \vomega_{rel} 
+\end{equation}
+\begin{equation} \label{eq:Composição_dw_rec}
+\vct{\dot{\vomega}_i}_{\ttN} = \begin{cases}
+\mzr, \text{se } i=0 \\
+\vct{\dot{\vomega}_{i-1}}_{\ttN} + \mj_{\omega i,i} \ddot{q}\ssh_i + \vct{\vomega_{i-1}}_{\ttN} \wedge \mj_{\omega i,i} \dot{q}\ssh_i ,  \text{se } i>0 \\
+\end{cases}\, i=0,...,\nu\ssh
+\end{equation}
+
+Sendo assim, a aceleração angular de cada ligamento pode ser obtida pelas seguintes expressões:
+
+\begin{equation}
+\vct{\dot{\vomega_i}}_{\ttN} = \mJ_{\omega i}(\mq\ssh) \cdot \ddot{\mq}\ssh + \sum_{j=2}^{i} \vct{\vomega_{j-1}}_{\ttN} \wedge \mj_{\omega j,j}(\mq\ssh) \cdot \dot{q}\ssh_j, \, i=1,...,\nu\ssh
+\end{equation}
 
 \end{itemize}
 
