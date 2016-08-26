@@ -195,8 +195,8 @@ Esta se\c{c}\~ao apresenta uma s\'intese dos principais resultados te\'oricos ob
 %---ALGORITMO PARA MODELAGEM DE PLATAFORMAS ROBÓTICAS------------------------------------------------------------------------------------------
 \subsection{Algoritmo para modelagem de mecanismos seriais - Novo}\label{S04-0}
 
-Esta subseção tem o intuito de apresentar um algoritmo genérico para a obtenção do modelo cinemático e dinâmico de mecanismos seriais. O algoritmo apresentado é implementável em linguagens de programação comumente usadas atualmente, como C++, Java e Python, sem necessitar recursos de manipulação simbólica. \\
-Para a obtenção do modelo, são necessários apenas os parametros de Denavit-Hartemberg do mecanismo e as posições dos centros de massa dos ligamentos em relação aos sistemas de coordenadas fixos aos ligamentos. \\ 
+Esta subseção tem o intuito de apresentar um algoritmo genérico para a obtenção do modelo cinemático e dinâmico de mecanismos seriais. O algoritmo apresentado é implementável em linguagens de programação comumente usadas atualmente, como C++, Java e Python, sem necessitar de recursos de manipulação simbólica. \\
+Para a obtenção do modelo, são necessários apenas os parametros de Denavit-Hartemberg \cite{Craig, Denavit, Lipkin, Cabral} do mecanismo e as posições dos centros de massa dos ligamentos em relação aos sistemas de coordenadas fixos aos ligamentos. \\ 
 
 Seja $\ssB$ um sistema mecânico serial de $\nu\ssh$ graus de liberdade. Primeiramente, fazemos as seguintes definições:
 
@@ -212,12 +212,16 @@ Seja $\ssB$ um sistema mecânico serial de $\nu\ssh$ graus de liberdade. Primeira
 \item $\vomega_i, \,i=1,...,\nu\ssh$: vetor velocidade angular absoluta de $\llB_i$.
 \item $\vv_i, \,i=1,...,\nu\ssh$: vetor velocidade linear absoluta do centro de massa de $\llB_i$.
 \item $\va_i, \,i=1,...,\nu\ssh$: vetor acelera\c{c}\~ao linear absoluta do centro de $\llB_i$.
+\item $q\ssh_i, \,i=1,...,\nu\ssh$: deslocamento relativo (angular ou linear) da i-ésima junta.
+\item  $\mq\ssh$: matriz-coluna de $\nu\ssh$ coordenadas generalizadas independentes. É dada por $\mq\ssh = \begin{bmatrix}
+q\ssh_1 & ... & {q\ssh}_{\nu\ssh}
+\end{bmatrix}^\msT $.
 \end{itemize}
 
 \begin{itemize}
 \item[A)] Cinemática de posição
 
-Dados os parâmetros de Denavit-Hartemberg $a_i$, $\alpha_i$, $d_i$ e $\theta_i$, com $1 \leq i \leq \nu\ssh$, é possível obter as matrizes de transformação homogênea $\hvct{\vone}_{\ttB_{i-1} \rl \ttB_i}$ a partir da seguinte expressão:
+Dados os parâmetros de Denavit-Hartemberg $a_i$, $\alpha_i$, $d_i$ e $\theta_i$, com $1 \leq i \leq \nu\ssh$, é possível obter as matrizes de transformação homogênea $\hvct{\vone}_{\ttB_{i-1} \rl \ttB_i}$ a partir da seguinte expressão \cite{Cabral} :
 
 \begin{equation} \label{eq:TransformacaoHomogeneaDH}
 \hvct{\vone}_{\ttB_{i-1} \rl \ttB_i} =
@@ -260,7 +264,65 @@ Além disso, como $\vct{\ttg_i}_{\ttB_i}$ são dados de entrada do algoritmo, obte
 
 \item[B)] Cinemática de velocidades
 
-As velocidades lineares e angulares dos centros de massa e do efetuador podem ser obtidas.
+A posição do efetuador em relação ao sistema base é função dos deslocamentos relativos das juntas, ou seja:
+\begin{equation} \label{eq:x_q_}
+\vct{\ttx}_{\ttN} = \underline{\mx}(\mq\ssh)
+\end{equation}
+
+Derivando no tempo, obtemos:
+\begin{equation} \label{eq:dx_q_}
+\frac{\dd}{\dd t} \vct{\ttx}_{\ttN} = \mJ_v(\mq\ssh) \cdot \dot{\mq}\ssh = \sum_{i=1}^{\nu\ssh} \mj_{v,i}(\mq\ssh) \cdot \dot{q}\ssh_i
+\end{equation}
+
+Sendo:
+\begin{equation} \label{eq:jv_}
+\mj_{v,i}(\mq\ssh) = \frac{\partial \underline{\mx}}{q\ssh_i}, \, i=1,...,\nu\ssh
+\end{equation}
+
+\begin{equation} \label{eq:Jv_}
+\mJ_v(\mq\ssh) = \frac{\partial \underline{\mx}}{\mq\ssh} = \begin{bmatrix}
+\mj_{v,1}(\mq\ssh) & ... & \mj_{v,\nu\ssh}(\mq\ssh)
+\end{bmatrix}
+\end{equation}
+
+Analisando a equação \eqref{eq:dx_q_}, pode-se obersevar que o produto $\mj_{v,i} \dot{q}\ssh_i$ representa a contribuição da i-ésima junta na velocidade do efetuador, com todas as outras juntas paradas \cite{Cabral}. Essa contribuição é dada por:
+\begin{equation} \label{eq:ContribuiçãoVelocidadeLinear}
+\mj_{v,i} \dot{q}\ssh_i = \begin{cases}
+\vct{\vk_{i-1}}_{\ttN} \dot{q}\ssh_i, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; \text{se a i-ésima junta for prismática} \\
+(\vct{\vk_{i-1}}_{\ttN} \dot{q}\ssh_i)\wedge (\vct{\ttx}_{\ttN}-\vct{\tto_{i-1}}_{\ttN}) , \text{se a i-ésima junta for de revolução} \\
+\end{cases}\, i=1,...,\nu\ssh
+\end{equation}
+
+Ou seja:
+\begin{equation} \label{eq:jvi_}
+\mj_{vi} = \begin{cases}
+\vct{\vk_{i-1}}_{\ttN}, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; \text{se a i-ésima junta for prismática} \\
+\vct{\vk_{i-1}}_{\ttN}\wedge (\vct{\ttx}_{\ttN}-\vct{\tto_{i-1}}_{\ttN}) , \text{se a i-ésima junta for de revolução} \\
+\end{cases} \, i=1,...,\nu\ssh
+\end{equation}
+
+Para obter as velocidades dos centros de massa dos ligamentos, o raciocínio é análogo:
+
+\begin{equation} \label{eq:dgi_q_}
+\frac{\dd}{\dd t} \vct{\ttg_i}_{\ttN} = \mJ_{vi}(\mq\ssh) \cdot \dot{\mq}\ssh = \sum_{j=1}^{\nu\ssh} \mj_{vi,j}(\mq\ssh) \cdot \dot{q}\ssh_i, \, i=1,...,\nu\ssh
+\end{equation}
+
+Sendo:
+
+\begin{equation} \label{eq:Jvi_}
+\mJ_{vi}(\mq\ssh) = \begin{bmatrix}
+\mj_{vi,1}(\mq\ssh) & ... & \mj_{vi,\nu\ssh}(\mq\ssh)
+\end{bmatrix}, \, i=1,...,\nu\ssh
+\end{equation}
+
+\begin{equation} \label{eq:jvij_}
+\mj_{vi,j} = \begin{cases}
+\mzr, \text{se j>i} \\
+\vct{\vk_{j-1}}_{\ttN}, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; \text{se } j\leq i  \text{ e a j-ésima junta for prismática} \\
+\vct{\vk_{j-1}}_{\ttN}\wedge (\vct{\ttg_i}_{\ttN}-\vct{\tto_{j-1}}_{\ttN}) , \text{se } j\leq i \text{ e a j-ésima junta for de revolução} \\
+\end{cases} \, i,j=1,...,\nu\ssh
+\end{equation}
+
 
 \end{itemize}
 
