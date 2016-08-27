@@ -475,7 +475,17 @@ m_i \vct{\vg}_{\ttN} \\
 
 \eqref{eq:Newton-EulerMat} pode ser reescrita como:
 \begin{equation}
-\overline{\md}_i(\mp_i, \dot{\mp}_i)  = \mM_i \dot{\mp}_i + \mv_i(\mp_i) + \mg_i = \mzr, \, i = 1,...,\nu
+\mM_i \dot{\mp}_i + \mv_i(\mp_i) + \mg_i = \mzr, \, i = 1,...,\nu
+\end{equation}
+
+Definindo:
+\begin{equation}
+\overline{\mf}_i(\mp_i, \dot{\mp}_i)  = - (\mM_i\dot{\mp}_i + \mv_i(\mp_i) + \mg_i), \, i = 1,...,\nu
+\end{equation}
+
+O modelo dinâmico de cada subsistema é dado por:
+\begin{equation}
+\overline{\mf}_i(\mp_i, \dot{\mp}_i) = \mzr, \, i = 1,...,\nu
 \end{equation}
 
 
