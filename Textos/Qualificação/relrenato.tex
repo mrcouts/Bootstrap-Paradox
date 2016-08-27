@@ -198,30 +198,32 @@ Esta se\c{c}\~ao apresenta uma s\'intese dos principais resultados te\'oricos ob
 Esta subseção tem o intuito de apresentar um algoritmo genérico para a obtenção do modelo cinemático e dinâmico de mecanismos seriais. O algoritmo apresentado é implementável em linguagens de programação comumente usadas atualmente, como C++, Java e Python, sem necessitar de recursos de manipulação simbólica. \\
 Para a obtenção do modelo, são necessários apenas os parametros de Denavit-Hartemberg \cite{Craig, Denavit, Lipkin, Cabral} do mecanismo e as posições dos centros de massa dos ligamentos em relação aos sistemas de coordenadas fixos aos ligamentos. \\ 
 
-Seja $\ssB$ um sistema mecânico serial de $\nu\ssh$ graus de liberdade. Primeiramente, fazemos as seguintes definições:
+Seja $\ssB$ um sistema mecânico serial de $\nu$ graus de liberdade. Primeiramente, fazemos as seguintes definições:
 
 \begin{itemize}
 \item $\llN$: referencial inercial.
 \item $\ttN, \ttB_0$: sistema de coordenadas da base, fixo a $\llN$.
-\item $\llB_i, \,i=1,...,\nu\ssh$: i-ésimo ligamento.
-\item $\ttB_i, \,i=1,...,\nu\ssh$: sistema de coordenadas solid\'ario a $\llB_i$.
-\item $\tto_i, \,i=0,...,\nu\ssh$: origem do sistema $\ttB_i$.
-\item $\{\vi_i, \vj_i, \vk_i\}, \,i=0,...,\nu\ssh$: base ortonormal do sistema $\ttB_i$.
-\item $\ttg_i, \,i=1,...,\nu\ssh$: centro de massa de $\llB_i$.
+\item $\llB_i, \,i=1,...,\nu$: i-ésimo ligamento.
+\item $\ttB_i, \,i=1,...,\nu$: sistema de coordenadas solid\'ario a $\llB_i$.
+\item $\tto_i, \,i=0,...,\nu$: origem do sistema $\ttB_i$.
+\item $\{\vi_i, \vj_i, \vk_i\}, \,i=0,...,\nu$: base ortonormal do sistema $\ttB_i$.
+\item $\ttg_i, \,i=1,...,\nu$: centro de massa de $\llB_i$.
 \item $\ttx$: ponto no espa\c{c}o fixo ao efetuador.
-\item $\vomega_i, \,i=1,...,\nu\ssh$: vetor velocidade angular absoluta de $\llB_i$.
-\item $\vv_i, \,i=1,...,\nu\ssh$: vetor velocidade linear absoluta do centro de massa de $\llB_i$.
-\item $\va_i, \,i=1,...,\nu\ssh$: vetor acelera\c{c}\~ao linear absoluta do centro de $\llB_i$.
-\item $q\ssh_i, \,i=1,...,\nu\ssh$: deslocamento relativo (angular ou linear) da i-ésima junta.
-\item  $\mq\ssh$: matriz-coluna de $\nu\ssh$ coordenadas generalizadas independentes. É dada por $\mq\ssh = \begin{bmatrix}
-q\ssh_1 & ... & {q\ssh}_{\nu\ssh}
+\item $\vomega_i, \,i=1,...,\nu$: vetor velocidade angular absoluta de $\llB_i$.
+\item $\vv_i, \,i=1,...,\nu$: vetor velocidade linear absoluta do centro de massa de $\llB_i$.
+\item $\va_i, \,i=1,...,\nu$: vetor acelera\c{c}\~ao linear absoluta do centro de $\llB_i$.
+\item $m_i$: massa da barra $\llB_i$.
+\item $\vI_i$: tensor de in\'ercia da barra $\llB_i$ em relação a seu centro de massa.
+\item $q_i, \,i=1,...,\nu$: deslocamento relativo (angular ou linear) da i-ésima junta.
+\item  $\mq$: matriz-coluna de $\nu$ coordenadas generalizadas independentes. É dada por $\mq = \begin{bmatrix}
+q_1 & ... & {q}_{\nu}
 \end{bmatrix}^\msT $.
 \end{itemize}
 
 \begin{itemize}
 \item[A)] Cinemática de posição
 
-Dados os parâmetros de Denavit-Hartemberg $a_i$, $\alpha_i$, $d_i$ e $\theta_i$, com $1 \leq i \leq \nu\ssh$, é possível obter as matrizes de transformação homogênea $\hvct{\vone}_{\ttB_{i-1} \rl \ttB_i}$ a partir da seguinte expressão \cite{Cabral} :
+Dados os parâmetros de Denavit-Hartemberg $a_i$, $\alpha_i$, $d_i$ e $\theta_i$, com $1 \leq i \leq \nu$, é possível obter as matrizes de transformação homogênea $\hvct{\vone}_{\ttB_{i-1} \rl \ttB_i}$ a partir da seguinte expressão \cite{Cabral} :
 
 \begin{equation} \label{eq:TransformacaoHomogeneaDH}
 \hvct{\vone}_{\ttB_{i-1} \rl \ttB_i} =
@@ -230,7 +232,7 @@ Dados os parâmetros de Denavit-Hartemberg $a_i$, $\alpha_i$, $d_i$ e $\theta_i$,
 \ssin\theta_i &  \ccos\theta_i \ccos\alpha_i & -\ccos\theta_i \ssin\alpha_i & a_i\ssin\theta_i \\
 0             &  \ssin\alpha_i               &  \ccos\alpha_i               & d_i \\
 0             & 0                            & 0                            & 1
-\end{bmatrix},\, i=1,...,\nu\ssh
+\end{bmatrix},\, i=1,...,\nu
 \end{equation}
 
 Tendo obtido $\hvct{\vone}_{\ttB_{i-1} \rl \ttB_i}$, é possível obter as transformações homogêneas que relacionam os sistemas solidários aos ligamentos ($\ttB_i$) ao sistema da base ($\ttN$) pela seguinte expressão recursiva:
@@ -240,7 +242,7 @@ Tendo obtido $\hvct{\vone}_{\ttB_{i-1} \rl \ttB_i}$, é possível obter as transfo
 \begin{cases}
 \hvct{\vone}_{\ttB_0 \rl \ttB_1}, \text{se } i=1 \\
 \hvct{\vone}_{\ttN \rl \ttB_{i-1}} \cdot \hvct{\vone}_{\ttB_{i-1} \rl \ttB_i}  , \text{se } i>1
-\end{cases} \, i=1,...,\nu\ssh
+\end{cases} \, i=1,...,\nu
 \end{equation}
 
 As matrizes  $\hvct{\vone}_{\ttN \rl \ttB_i}$ apresentam o seguinte formato:
@@ -249,83 +251,83 @@ As matrizes  $\hvct{\vone}_{\ttN \rl \ttB_i}$ apresentam o seguinte formato:
 \begin{bmatrix}
 \vct{\vi_{i}}_{\ttN} & \vct{\vj_{i}}_{\ttN} & \vct{\vk_{i}}_{\ttN} & \vct{\tto_i}_{\ttN} \\
 0 & 0 & 0 & 1
-\end{bmatrix}, \, i=1,...,\nu\ssh
+\end{bmatrix}, \, i=1,...,\nu
 \end{equation}
 
 Sendo assim, tendo obtido $\hvct{\vone}_{\ttN \rl \ttB_i}$, automaticamente obtemos $\vct{\vi_{i}}_{\ttN}, \vct{\vj_{i}}_{\ttN}, \vct{\vk_{i}}_{\ttN}$ e $\vct{\tto_i}_{\ttN}$. Note que também obtemos as coordenadas do efetuador no sistema da base, pois
 \begin{equation} \label{eq:x_}
-\vct{\ttx}_{\ttN} = \vct{\tto_{\nu\ssh}}_{\ttN}
+\vct{\ttx}_{\ttN} = \vct{\tto_{\nu}}_{\ttN}
 \end{equation}
 
 Além disso, como $\vct{\ttg_i}_{\ttB_i}$ são dados de entrada do algoritmo, obtemos as coordenadas dos centros de massa dos ligamentos no sistema da base através da seguinte expressão:
 \begin{equation} \label{eq:og__}
-\hvct{\ttg_i}_{\ttN} = \hvct{\vone}_{\ttN \rl \ttB_i} \cdot \hvct{\ttg_i}_{\ttB_i}, \, i=1,...,\nu\ssh
+\hvct{\ttg_i}_{\ttN} = \hvct{\vone}_{\ttN \rl \ttB_i} \cdot \hvct{\ttg_i}_{\ttB_i}, \, i=1,...,\nu
 \end{equation}
 
 \item[B1)] Cinemática de velocidades lineares
 
 A posição do efetuador em relação ao sistema base é função dos deslocamentos relativos das juntas, ou seja:
 \begin{equation} \label{eq:x_q_}
-\vct{\ttx}_{\ttN} = \underline{\mx}(\mq\ssh)
+\vct{\ttx}_{\ttN} = \underline{\mx}(\mq)
 \end{equation}
 
 Derivando no tempo, obtemos:
 \begin{equation} \label{eq:dx_q_}
-\frac{\dd}{\dd t} \vct{\ttx}_{\ttN} = \mJ_v \cdot \dot{\mq}\ssh = \sum_{i=1}^{\nu\ssh} \mj_{v\,i} \cdot \dot{q}\ssh_i
+\frac{\dd}{\dd t} \vct{\ttx}_{\ttN} = \mJ_v \cdot \dot{\mq} = \sum_{i=1}^{\nu} \mj_{v\,i} \cdot \dot{q}_i
 \end{equation}
 
 Sendo:
 \begin{equation} \label{eq:jv_}
-\mj_{v\,i}(\mq\ssh) = \frac{\partial \underline{\mx}}{q\ssh_i}, \, i=1,...,\nu\ssh
+\mj_{v\,i}(\mq) = \frac{\partial \underline{\mx}}{q_i}, \, i=1,...,\nu
 \end{equation}
 
 \begin{equation} \label{eq:Jv_}
-\mJ_v(\mq\ssh) = \frac{\partial \underline{\mx}}{\mq\ssh} = \begin{bmatrix}
-\mj_{v\,1}(\mq\ssh) & ... & \mj_{v\,\nu\ssh}(\mq\ssh)
+\mJ_v(\mq) = \frac{\partial \underline{\mx}}{\mq} = \begin{bmatrix}
+\mj_{v\,1}(\mq) & ... & \mj_{v\,\nu}(\mq)
 \end{bmatrix}
 \end{equation}
 
-Analisando a equação \eqref{eq:dx_q_}, pode-se obersevar que o produto $\mj_{v,i} \dot{q}\ssh_i$ representa a contribuição da i-ésima junta na velocidade do efetuador, com todas as outras juntas paradas \cite{Cabral}. Note que esta constatação está de acordo com a aplicação recursiva do príncipio da composição de movimento para velocidades lineares:
+Analisando a equação \eqref{eq:dx_q_}, pode-se obersevar que o produto $\mj_{v,i} \dot{q}_i$ representa a contribuição da i-ésima junta na velocidade do efetuador, com todas as outras juntas paradas \cite{Cabral}. Note que esta constatação está de acordo com a aplicação recursiva do príncipio da composição de movimento para velocidades lineares:
 \begin{equation} \label{eq:Composição_v}
 \vv_{abs} = \vv_{arr} + \vv_{rel}
 \end{equation}
 
 Sendo assim, a contribuição de cada junta na velocidade do efetuador é dada por:
 \begin{equation} \label{eq:ContribuiçãoVelocidadeLinear}
-\mj_{v\,i} \cdot \dot{q}\ssh_i = \begin{cases}
-\vct{\vk_{i-1}}_{\ttN} \dot{q}\ssh_i, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; \text{se a i-ésima junta for prismática} \\
-(\vct{\vk_{i-1}}_{\ttN} \dot{q}\ssh_i)\wedge (\vct{\ttx}_{\ttN}-\vct{\tto_{i-1}}_{\ttN}) , \text{se a i-ésima junta for de revolução} \\
-\end{cases}\, i=1,...,\nu\ssh
+\mj_{v\,i} \cdot \dot{q}_i = \begin{cases}
+\vct{\vk_{i-1}}_{\ttN} \dot{q}_i, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; \text{se a i-ésima junta for prismática} \\
+(\vct{\vk_{i-1}}_{\ttN} \dot{q}_i)\wedge (\vct{\ttx}_{\ttN}-\vct{\tto_{i-1}}_{\ttN}) , \text{se a i-ésima junta for de revolução} \\
+\end{cases}\, i=1,...,\nu
 \end{equation}
 
 Ou seja:
 \begin{equation} \label{eq:jvi_}
-\mj_{v\,i}(\mq\ssh) = \begin{cases}
+\mj_{v\,i}(\mq) = \begin{cases}
 \vct{\vk_{i-1}}_{\ttN}, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; \text{se a i-ésima junta for prismática} \\
 \vct{\vk_{i-1}}_{\ttN}\wedge (\vct{\ttx}_{\ttN}-\vct{\tto_{i-1}}_{\ttN}) , \text{se a i-ésima junta for de revolução} \\
-\end{cases} \, i=1,...,\nu\ssh
+\end{cases} \, i=1,...,\nu
 \end{equation}
 
 Para obter as velocidades dos centros de massa dos ligamentos, o raciocínio é análogo:
 
 \begin{equation} \label{eq:dgi_q_}
-\vct{\vv_i}_{\ttN} = \frac{\dd}{\dd t} \vct{\ttg_i}_{\ttN}  = \mJ_{v\,i} \cdot \dot{\mq}\ssh = \sum_{j=1}^{\nu\ssh} \mj_{v\,i,j} \cdot \dot{q}\ssh_j, \, i=1,...,\nu\ssh
+\vct{\vv_i}_{\ttN} = \frac{\dd}{\dd t} \vct{\ttg_i}_{\ttN}  = \mJ_{v\,i} \cdot \dot{\mq} = \sum_{j=1}^{\nu} \mj_{v\,i,j} \cdot \dot{q}_j, \, i=1,...,\nu
 \end{equation}
 
 Sendo:
 
 \begin{equation} \label{eq:Jvi_}
-\mJ_{v\,i}(\mq\ssh) = \begin{bmatrix}
-\mj_{v\,i,1}(\mq\ssh) & ... & \mj_{v\,i,\nu\ssh}(\mq\ssh)
-\end{bmatrix}, \, i=1,...,\nu\ssh
+\mJ_{v\,i}(\mq) = \begin{bmatrix}
+\mj_{v\,i,1}(\mq) & ... & \mj_{v\,i,\nu}(\mq)
+\end{bmatrix}, \, i=1,...,\nu
 \end{equation}
 
 \begin{equation} \label{eq:jvij_}
-\mj_{v\,i,j}(\mq\ssh) = \begin{cases}
+\mj_{v\,i,j}(\mq) = \begin{cases}
 \mzr, \text{se j>i} \\
 \vct{\vk_{j-1}}_{\ttN}, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; \text{se } j\leq i  \text{ e a j-ésima junta for prismática} \\
 \vct{\vk_{j-1}}_{\ttN}\wedge (\vct{\ttg_i}_{\ttN}-\vct{\tto_{j-1}}_{\ttN}) , \text{se } j\leq i \text{ e a j-ésima junta for de revolução} \\
-\end{cases} \, i,j=1,...,\nu\ssh
+\end{cases} \, i,j=1,...,\nu
 \end{equation}
 
 \item[B2)] Cinemática de velocidades angulares
@@ -338,27 +340,27 @@ A velocidade angular de cada ligamento pode ser obtida aplicando recursivamente 
 \vct{\vomega_i}_{\ttN} = \begin{cases}
 \mzr, \text{se } i=0 \\
 \vct{\vomega_{i-1}}_{\ttN}, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; \text{se } i>0  \text{ e a i-ésima junta for prismática} \\
-\vct{\vomega_{i-1}}_{\ttN} + \vct{\vk_{i-1}}_{\ttN} \dot{q}\ssh_i,  \text{se } i>0  \text{ e a i-ésima junta for de revolução} \\
-\end{cases}\, i=0,...,\nu\ssh
+\vct{\vomega_{i-1}}_{\ttN} + \vct{\vk_{i-1}}_{\ttN} \dot{q}_i,  \text{se } i>0  \text{ e a i-ésima junta for de revolução} \\
+\end{cases}\, i=0,...,\nu
 \end{equation}
 
 Sendo assim, a velocidade angular de cada ligamento pode ser obtida pelas seguintes expressões:
 
 \begin{equation}
-\vct{\vomega_i}_{\ttN} = \mJ_{\omega\,i} \cdot \dot{\mq}\ssh = \sum_{j=1}^{\nu\ssh} \mj_{\omega\,i,j} \cdot \dot{q}\ssh_j, \, i=1,...,\nu\ssh
+\vct{\vomega_i}_{\ttN} = \mJ_{\omega\,i} \cdot \dot{\mq} = \sum_{j=1}^{\nu} \mj_{\omega\,i,j} \cdot \dot{q}_j, \, i=1,...,\nu
 \end{equation}
 
 \begin{equation}
-\mJ_{\omega\,i}(\mq\ssh) = \begin{bmatrix}
-\mj_{\omega\,i,1}(\mq\ssh) & ... & \mj_{\omega\,i,\nu\ssh}(\mq\ssh)
-\end{bmatrix}, \, i=1,...,\nu\ssh
+\mJ_{\omega\,i}(\mq) = \begin{bmatrix}
+\mj_{\omega\,i,1}(\mq) & ... & \mj_{\omega\,i,\nu}(\mq)
+\end{bmatrix}, \, i=1,...,\nu
 \end{equation}
 
 \begin{equation}
-\mj_{\omega\,i,j}(\mq\ssh) = \begin{cases}
+\mj_{\omega\,i,j}(\mq) = \begin{cases}
 \mzr, \;\;\;\;\;\;\;\;\; \text{se } j>i  \text{ ou a j-ésima junta for prismática} \\
 \vct{\vk_{j-1}}_{\ttN}, \text{se } j\leq i \text{ e a j-ésima junta for de revolução} \\
-\end{cases} \, i,j=1,...,\nu\ssh
+\end{cases} \, i,j=1,...,\nu
 \end{equation}
 
 \item[C1)] Cinemática de acelerações lineares
@@ -370,22 +372,22 @@ A aceleração do centro de massa de cada ligamento pode ser obtida aplicando recu
 \begin{equation} \label{eq:Composição_a_rec}
 \vct{\va_{i,j}}_{\ttN} = \begin{cases}
 \mzr, \text{se } j=0 \\
-\vct{\va_{i,j-1}}_{\ttN} + \mj_{v\,i,j} \ddot{q}\ssh_i + \mj_{\omega\,i,j}  \wedge [\mj_{\omega\,i,j} \wedge (\vct{\ttg_i}_{\ttN} - \vct{\tto_{j-1}}_{\ttN}) ] (\dot{q}\ssh_j)^2 + 2 \vct{\vomega_{j-1}}_{\ttN} \wedge \mj_{v\,i,j} \dot{q}\ssh_j ,  \text{se } j>0 \\
+\vct{\va_{i,j-1}}_{\ttN} + \mj_{v\,i,j} \ddot{q}_i + \mj_{\omega\,i,j}  \wedge [\mj_{\omega\,i,j} \wedge (\vct{\ttg_i}_{\ttN} - \vct{\tto_{j-1}}_{\ttN}) ] \dot{q}_j^2 + 2 \vct{\vomega_{j-1}}_{\ttN} \wedge \mj_{v\,i,j} \dot{q}_j ,  \text{se } j>0 \\
 \end{cases} 
 \end{equation}
-$$ \text{Com } i=1,...,\nu\ssh \text{ e } j=1,...,i$$
+$$ \text{Com } i=1,...,\nu \text{ e } j=1,...,i$$
 \begin{equation}
-\vct{\va_i}_{\ttN} = \vct{\va_{i,i}}_{\ttN}, \, i=1,...,\nu\ssh
+\vct{\va_i}_{\ttN} = \vct{\va_{i,i}}_{\ttN}, \, i=1,...,\nu
 \end{equation}
 
 Sendo assim, a aceleração do centro de massa de cada ligamento pode ser obtida pela seguinte expressão:
 \begin{equation}
-\vct{\va_i}_{\ttN} = \mJ_{v\,i} \cdot \ddot{\mq}\ssh + \sum_{j=1}^{i} \mj_{\omega\,i,j}  \wedge [\mj_{\omega\,i,j} \wedge (\vct{\ttg_i}_{\ttN} - \vct{\tto_{j-1}}_{\ttN}) ] (\dot{q}\ssh_j)^2 + 2 \vct{\vomega_{j-1}}_{\ttN} \wedge \mj_{v\,i,j} \dot{q}\ssh_j, \, i=1,...,\nu\ssh
+\vct{\va_i}_{\ttN} = \mJ_{v\,i} \cdot \ddot{\mq} + \sum_{j=1}^{i} \mj_{\omega\,i,j}  \wedge [\mj_{\omega\,i,j} \wedge (\vct{\ttg_i}_{\ttN} - \vct{\tto_{j-1}}_{\ttN}) ] \dot{q}_j^2 + 2 \vct{\vomega_{j-1}}_{\ttN} \wedge \mj_{v\,i,j} \dot{q}_j, \, i=1,...,\nu
 \end{equation}
 
 Analogamente, para a aceleração do efetuador, temos:
 \begin{equation}
-\frac{\dd^2}{\dd t^2} \vct{\ttx}_{\ttN} = \mJ_{v} \cdot \ddot{\mq}\ssh + \sum_{j=1}^{\nu\ssh} \mj_{\omega\,j}  \wedge [\mj_{\omega\,j} \wedge (\vct{\ttx}_{\ttN} - \vct{\tto_{j-1}}_{\ttN}) ] (\dot{q}\ssh_j)^2 + 2 \vct{\vomega_{j-1}}_{\ttN} \wedge \mj_{v\,j} \dot{q}\ssh_j, \, i=1,...,\nu\ssh
+\frac{\dd^2}{\dd t^2} \vct{\ttx}_{\ttN} = \mJ_{v} \cdot \ddot{\mq} + \sum_{j=1}^{\nu} \mj_{\omega\,j}  \wedge [\mj_{\omega\,j} \wedge (\vct{\ttx}_{\ttN} - \vct{\tto_{j-1}}_{\ttN}) ] \dot{q}_j^2 + 2 \vct{\vomega_{j-1}}_{\ttN} \wedge \mj_{v\,j} \dot{q}_j, \, i=1,...,\nu
 \end{equation}
 
 \item[C2)] Cinemática de acelerações angulares
@@ -397,15 +399,85 @@ A aceleração angular de cada ligamento pode ser obtida aplicando recursivamente 
 \begin{equation} \label{eq:Composição_dw_rec}
 \vct{\dot{\vomega}_i}_{\ttN} = \begin{cases}
 \mzr, \text{se } i=0 \\
-\vct{\dot{\vomega}_{i-1}}_{\ttN} + \mj_{\omega\,i} \ddot{q}\ssh_i + \vct{\vomega_{i-1}}_{\ttN} \wedge \mj_{\omega\,i,i} \dot{q}\ssh_i ,  \text{se } i>0 \\
-\end{cases}\, i=0,...,\nu\ssh
+\vct{\dot{\vomega}_{i-1}}_{\ttN} + \mj_{\omega\,i} \ddot{q}_i + \vct{\vomega_{i-1}}_{\ttN} \wedge \mj_{\omega\,i,i} \dot{q}_i ,  \text{se } i>0 \\
+\end{cases}\, i=0,...,\nu
 \end{equation}
 
 Sendo assim, a aceleração angular de cada ligamento pode ser obtida pelas seguintes expressões:
 
 \begin{equation}
-\vct{\dot{\vomega_i}}_{\ttN} = \mJ_{\omega\,i} \cdot \ddot{\mq}\ssh + \sum_{j=1}^{i} \vct{\vomega_{j-1}}_{\ttN} \wedge \mj_{\omega\,i,j} \cdot \dot{q}\ssh_j, \, i=1,...,\nu\ssh
+\vct{\dot{\vomega_i}}_{\ttN} = \mJ_{\omega\,i} \cdot \ddot{\mq} + \sum_{j=1}^{i} \vct{\vomega_{j-1}}_{\ttN} \wedge \mj_{\omega\,i,j} \cdot \dot{q}_j, \, i=1,...,\nu
 \end{equation}
+
+\item[D)] Dinâmica
+
+O modelo dinâmico de $\ssB$ é obtido utilizando o método Orsino de acoplamento de subsistemas \cite{23orsino}. A idéia é obter o modelo dinâmico do sistema acoplado através dos modelos dos subsistemas desacoplados e dos vínculos cinemáticos entre eles.
+
+O modelo dinâmico desacoplado de cada ligamento pode ser obtido facilmente por Newton-Euler, pois são considerados como corpos rígidos livres no espaço, sujeitos apenas à força peso. Sendo assim, aplicando o Teorema do Movimentos do Baricentro e o Teorema do Momento Angular para cada ligamento, temos:
+
+\begin{equation} \label{eq:Newton-Euler}
+\begin{cases}
+m_i \va_i + m_i \vg = \vzr \\
+\vI_i \cdot \dot{\vomega}_i + \vomega_i \wedge (\vI_i \cdot \vomega_i) = \vzr
+\end{cases} \, i = 1,...,\nu
+\end{equation}
+
+Aplicando a primeira equação vetorial no sistema $\ttN$ e a segunda no sistema $\ttB_i$, temos:
+\begin{equation} \label{eq:Newton-EulerMat}
+\begin{bmatrix}
+m_i \mone & \mzr \\
+\mzr      & \vct{\vI_i}_{\ttB_i \rl \ttB_i}
+\end{bmatrix}
+\cdot
+\begin{bmatrix}
+\vct{\va_i}_{\ttN} \\
+\vct{\dot{\vomega}_i}_{\ttB_i}
+\end{bmatrix}
++
+\begin{bmatrix}
+\mzr \\
+\vct{\vomega_i}_{\ttB_i} \wedge (\vct{\vI_i}_{\ttB_i \rl \ttB_i} \cdot \vct{\vomega_i}_{\ttB_i})
+\end{bmatrix}
++
+\begin{bmatrix}
+m_i \vct{\vg}_{\ttN} \\
+\mzr
+\end{bmatrix}
+=
+\mzr, \, i = 1,...,\nu
+\end{equation}
+
+Definindo:
+\begin{equation}
+\mM_i = \begin{bmatrix}
+m_i \mone & \mzr \\
+\mzr      & \vct{\vI_i}_{\ttB_i \rl \ttB_i}
+\end{bmatrix}, \, i = 1,...,\nu
+\end{equation}
+\begin{equation}
+\mv_i = \begin{bmatrix}
+\mzr \\
+\vct{\vomega_i}_{\ttB_i} \wedge (\vct{\vI_i}_{\ttB_i \rl \ttB_i} \cdot \vct{\vomega_i}_{\ttB_i})
+\end{bmatrix}, \, i = 1,...,\nu
+\end{equation}
+\begin{equation}
+\mg_i = \begin{bmatrix}
+m_i \vct{\vg}_{\ttN} \\
+\mzr
+\end{bmatrix}, \, i = 1,...,\nu
+\end{equation}
+\begin{equation}
+\mp_i = \begin{bmatrix}
+\vct{\vv_i}_{\ttN} \\
+\vct{\vomega_i}_{\ttB_i}
+\end{bmatrix}, \, i = 1,...,\nu
+\end{equation}
+
+\eqref{eq:Newton-EulerMat} pode ser reescrita como:
+\begin{equation}
+\overline{\md}_i(\mp_i, \dot{\mp}_i)  = \mM_i \dot{\mp}_i + \mv_i(\mp_i) + \mg_i = \mzr, \, i = 1,...,\nu
+\end{equation}
+
 
 \end{itemize}
 
