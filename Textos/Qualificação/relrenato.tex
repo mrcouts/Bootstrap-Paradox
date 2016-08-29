@@ -310,7 +310,7 @@ Ou seja:
 
 Para obter as velocidades dos centros de massa dos ligamentos, o raciocínio é análogo:
 
-\begin{equation} \label{eq:dgi_q_}
+\begin{equation} \label{eq:vi_q_}
 \vct{\vv_i}_{\ttN} = \frac{\dd}{\dd t} \vct{\ttg_i}_{\ttN}  = \mJ_{v\,i} (\mq) \cdot \dot{\mq} = \sum_{j=1}^{\nu} \mj_{v\,i,j} (\mq) \cdot \dot{q}_j, \, i=1,...,\nu
 \end{equation}
 
@@ -362,7 +362,7 @@ Sendo assim, a velocidade angular de cada ligamento pode ser obtida pelas seguin
 \end{equation}
 
 As velocidades angulares dos ligamentos escritas nas bases dos sistemas de coordenadas solidários aos ligamentos, podem ser obtidas pelas seguintes expressões:
-\begin{equation}
+\begin{equation} \label{eq:wi_q_}
 \vct{\vomega_i}_{\ttB_i} = \vct{\vone}_{\ttN \rl \ttB_i}^\msT \cdot \vct{\vomega_i}_{\ttN} = \mJ_{w\,i} (\mq) \cdot \dot{\mq}, \, i = 1,...,\nu
 \end{equation}
 Sendo:
@@ -511,7 +511,8 @@ m_i \mone & \mzr \\
 \mM_i \dot{\mp}_i + \mv_i(\mp_i) + \mg_i = \mzr, \, i = 1,...,\nu
 \end{equation}
 
-Sendo assim, os sistemas de forças (considerando forças ativas e de inércia) aplicados em cada subsistema são dados por:
+Seja $\mf_i$ o sistema de forças (considerando esforços ativos e de inércia) aplicado no i-ésimo subsistema, na direção das quasi-velocidades $\mp_i$. $\mf_i$ pode ser obtido pela seguinte expressão:
+%Sendo assim, os sistemas de forças (considerando esforços ativos e de inércia) aplicados em cada subsistema são dados por:
 \begin{equation}
 \overline{\mf}_i(\mp_i, \dot{\mp}_i)  = - (\mM_i\dot{\mp}_i + \mv_i(\mp_i) + \mg_i), \, i = 1,...,\nu
 \end{equation}
@@ -526,15 +527,168 @@ Portanto, o modelo dinâmico de cada subsistema pode ser escrito como:
 Muitas vezes é conveniente definir um conjunto de quasi-velocidades adicionais $\mp_0$, as quais só fazem sentido para o sistema acoplado, e sistemas de forças adicionais $\mf_0$ aplicados na direção das quasi-velocidades adicionais. \\
 
 Neste algoritmo de modelagem, serão considerados como quasi-velocidades adicionais as derivadas temporais das coordenadas das juntas, o seja:
-\begin{equation}
+\begin{equation} \label{eq:mp_0}
 \mp_0 = \dot{\mq}
 \end{equation}
 
-Neste caso, os sistemas de forças adicionais serão os esforços que os atuadores aplicam nas juntas, ou seja:
+Nesse caso, os sistemas de forças adicionais serão os esforços que os atuadores aplicam nas juntas, ou seja:
 \begin{equation}
 \mf_0 = \mu
 \end{equation}
 
+\item[iii)] Vínculos cinemáticos entre sub-sistemas
+
+Através das equações \eqref{eq:vi_q_}, \eqref{eq:wi_q_} e \eqref{eq:mp_0}, é possível relacionar as quasi-velocidades de cada sub-sistema com as quasi-velocidades adicionais da seguinte maneira:
+\begin{equation}
+\underline{\mp_i}(\mq, \mp_0) = \mJ_i (\mq) \cdot \mp_0, \, i=1,...,\nu
+\end{equation}
+Sendo:
+\begin{equation}
+\mJ_i(\mq) = \begin{bmatrix}
+\mJ_{v\,i}(\mq) \\
+\mJ_{w\,i}(\mq)
+\end{bmatrix}, \, i=1,...,\nu
+\end{equation}
+
+Seja $\mp\cir$ a matriz coluna que contém as quasi-velocidades de todos os ligamentos:
+\begin{equation}
+\mp\cir = \begin{bmatrix}
+\mp_1^\msT & ... & \mp_{\nu}^\msT
+\end{bmatrix}^\msT
+\end{equation}
+
+$\mp\cir$ pode ser expresso em função apenas das quasi-velocidades $\mp_0$ da seguinte forma:
+\begin{equation}
+\underline{\mp\cir}(\mq,\mp_0) = \mJ(\mq) \mp_0
+\end{equation}
+Sendo:
+\begin{equation}
+\mJ(\mq) = \begin{bmatrix}
+\mJ_1(\mq)^\msT & ... & \mJ_{\nu}(\mq)^\msT
+\end{bmatrix}^\msT
+\end{equation}
+
+Sendo assim, as vínculos de quasi-velocidades entre subsistemas podem ser expressos como:
+\begin{equation}
+\overline{\mp}(\mq,\mp) = \mJ(\mq) \mp_0 - \mp\cir = \mzr
+\end{equation}
+
+\item[iv)] Acoplamento de sub-sistemas
+
+Seja $\mf$ a matriz-coluna contendo todos os sistemas de forças:
+\begin{equation}
+\mf = \begin{bmatrix}
+\mf_0^\msT & \overline{\mf}_1^\msT & ... & \overline{\mf}_\nu^\msT  
+\end{bmatrix}^\msT
+\end{equation}
+
+E seja $\mA$ o jacobiano dos vínculos de quasi-velocidades:
+\begin{equation}
+\mA(\mq) = \frac{\partial \overline{\mp}}{\partial \mp} = \begin{bmatrix}
+\mJ(\mq) & -\mone
+\end{bmatrix}
+\end{equation}
+
+Seja $\mC$ a seguinte matriz:
+\begin{equation}
+\mC(\mq) =
+\begin{bmatrix}
+\mone \\
+\mJ(\mq)
+\end{bmatrix}
+\end{equation}
+
+Note que $\mC$ é complemento ortogonal de $\mA$, visto que para configurações não singulares:
+\begin{equation}
+\mA(\mq) \cdot \mC(\mq) = \mJ(\mq) - \mJ(\mq) = \mzr
+\end{equation}
+\begin{equation}
+\det\Bigg(\begin{bmatrix}
+\mC(\mq)^\msT \\
+\mA(\mq)
+\end{bmatrix} \Bigg) \neq 0 
+\end{equation}
+
+Sendo assim, o modelo dinâmico do mecanismo serial pode ser escrito como:
+\begin{equation}
+\overline{\mf} = \mC^\msT \mf = \mzr
+\end{equation}
+
+Ou seja:
+\begin{equation}
+\mu - \sum_{i=1}^\nu \mJ_i(\mq)^\msT (\mM_i \dot{\mp}_i + \mv_i(\mp_i) + \mg_i) = \mzr
+\end{equation}
+\begin{equation}
+\sum_{i=1}^\nu
+\begin{bmatrix}
+\mJ_{v\,i} \\
+\mJ_{w\,i}
+\end{bmatrix}^\msT
+\begin{Bmatrix}
+\begin{bmatrix}
+m_i \mone & \mzr \\
+\mzr      & \vct{\vI_i}_{\ttB_i \rl \ttB_i}
+\end{bmatrix}
+\cdot
+\begin{bmatrix}
+\vct{\va_i}_{\ttN} \\
+\vct{\dot{\vomega}_i}_{\ttB_i}
+\end{bmatrix}
++
+\begin{bmatrix}
+\mzr \\
+\vct{\vomega_i}_{\ttB_i} \wedge (\vct{\vI_i}_{\ttB_i \rl \ttB_i} \cdot \vct{\vomega_i}_{\ttB_i})
+\end{bmatrix}
++
+\begin{bmatrix}
+-m_i \vct{\vg}_{\ttN} \\
+\mzr
+\end{bmatrix}
+\end{Bmatrix}
+=\mu
+\end{equation}
+\begin{equation}
+\sum_{i=1}^\nu
+\begin{bmatrix}
+\mJ_{v\,i} \\
+\mJ_{w\,i}
+\end{bmatrix}^\msT
+\begin{Bmatrix}
+\begin{bmatrix}
+m_i (\mJ_{v\,i} \ddot{\mq} + \ma_i ) \\
+\vct{\vI_i}_{\ttB_i \rl \ttB_i} (\mJ_{w\,i} \ddot{\mq} + \dot{\mw}_i)
+\end{bmatrix}
++
+\begin{bmatrix}
+\mzr \\
+(\mJ_{w\,i} \dot{\mq}) \wedge (\vct{\vI_i}_{\ttB_i \rl \ttB_i}  \mJ_{w\,i} \dot{\mq})
+\end{bmatrix}
++
+\begin{bmatrix}
+-m_i \vct{\vg}_{\ttN} \\
+\mzr
+\end{bmatrix}
+\end{Bmatrix}
+=\mu
+\end{equation}
+
+Sendo assim, o modelo dinâmico do mecanismo serial pode ser reescrito como:
+\begin{equation}
+\mM(\mq) \ddot{\mq} + \mv(\mq,\dot{\mq}) + \mg(\mq) = \mu
+\end{equation}
+
+Sendo:
+\begin{equation}
+\mM(\mq) = \sum_{i=1}^\nu
+m_i \mJ_{v\,i}^\msT \mJ_{v\,i} + \mJ_{w\,i}^\msT \vct{\vI_i}_{\ttB_i \rl \ttB_i} \mJ_{w\,i}
+\end{equation}
+\begin{equation}
+\mv(\mq, \dot{\mq}) = \sum_{i=1}^\nu
+ m_i \mJ_{v\,i}^\msT \ma_i + \mJ_{w\,i}^\msT\{\vct{\vI_i}_{\ttB_i \rl \ttB_i} \dot{\mw}_i + (\mJ_{w\,i} \dot{\mq}) \wedge (\vct{\vI_i}_{\ttB_i \rl \ttB_i}  \mJ_{w\,i} \dot{\mq}) \}
+\end{equation}
+\begin{equation}
+\mg(\mq) = - \sum_{i=1}^\nu m_i \mJ_{v\,i} \vct{\mg}_{\ttN}
+\end{equation}
 
 \end{itemize}
 
