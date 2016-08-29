@@ -273,7 +273,7 @@ A posição do efetuador em relação ao sistema base é função dos deslocamentos rel
 
 Derivando no tempo, obtemos:
 \begin{equation} \label{eq:dx_q_}
-\frac{\dd}{\dd t} \vct{\ttx}_{\ttN} = \mJ_v \cdot \dot{\mq} = \sum_{i=1}^{\nu} \mj_{v\,i} \cdot \dot{q}_i
+\frac{\dd}{\dd t} \vct{\ttx}_{\ttN} = \mJ_v (\mq) \cdot \dot{\mq} = \sum_{i=1}^{\nu} \mj_{v\,i} (\mq) \cdot \dot{q}_i
 \end{equation}
 
 Sendo:
@@ -287,7 +287,7 @@ Sendo:
 \end{bmatrix}
 \end{equation}
 
-Analisando a equação \eqref{eq:dx_q_}, pode-se obersevar que o produto $\mj_{v,i} \dot{q}_i$ representa a contribuição da i-ésima junta na velocidade do efetuador, com todas as outras juntas paradas \cite{Cabral}. Note que esta constatação está de acordo com a aplicação recursiva do príncipio da composição de movimento para velocidades lineares:
+Analisando a equação \eqref{eq:dx_q_}, pode-se obersevar que o produto $\mj_{v\,i} \dot{q}_i$ representa a contribuição da i-ésima junta na velocidade do efetuador, com todas as outras juntas paradas \cite{Cabral}. Note que esta constatação está de acordo com a aplicação recursiva do príncipio da composição de movimento para velocidades lineares:
 \begin{equation} \label{eq:Composição_v}
 \vv_{abs} = \vv_{arr} + \vv_{rel}
 \end{equation}
@@ -311,7 +311,7 @@ Ou seja:
 Para obter as velocidades dos centros de massa dos ligamentos, o raciocínio é análogo:
 
 \begin{equation} \label{eq:dgi_q_}
-\vct{\vv_i}_{\ttN} = \frac{\dd}{\dd t} \vct{\ttg_i}_{\ttN}  = \mJ_{v\,i} \cdot \dot{\mq} = \sum_{j=1}^{\nu} \mj_{v\,i,j} \cdot \dot{q}_j, \, i=1,...,\nu
+\vct{\vv_i}_{\ttN} = \frac{\dd}{\dd t} \vct{\ttg_i}_{\ttN}  = \mJ_{v\,i} (\mq) \cdot \dot{\mq} = \sum_{j=1}^{\nu} \mj_{v\,i,j} (\mq) \cdot \dot{q}_j, \, i=1,...,\nu
 \end{equation}
 
 Sendo:
@@ -347,21 +347,29 @@ A velocidade angular de cada ligamento pode ser obtida aplicando recursivamente 
 Sendo assim, a velocidade angular de cada ligamento pode ser obtida pelas seguintes expressões:
 
 \begin{equation}
-\vct{\vomega_i}_{\ttN} = \mJ_{\omega\,i} \cdot \dot{\mq} = \sum_{j=1}^{\nu} \mj_{\omega\,i,j} \cdot \dot{q}_j, \, i=1,...,\nu
+\vct{\vomega_i}_{\ttN} = \mJ_{\omega\,i} (\mq) \cdot \dot{\mq} = \sum_{j=1}^{\nu} \mj_{\omega\,i,j} (\mq) \cdot \dot{q}_j, \, i=1,...,\nu
 \end{equation}
-
 \begin{equation}
 \mJ_{\omega\,i}(\mq) = \begin{bmatrix}
 \mj_{\omega\,i,1}(\mq) & ... & \mj_{\omega\,i,\nu}(\mq)
 \end{bmatrix}, \, i=1,...,\nu
 \end{equation}
-
 \begin{equation}
 \mj_{\omega\,i,j}(\mq) = \begin{cases}
 \mzr, \;\;\;\;\;\;\;\;\; \text{se } j>i  \text{ ou a j-ésima junta for prismática} \\
 \vct{\vk_{j-1}}_{\ttN}, \text{se } j\leq i \text{ e a j-ésima junta for de revolução} \\
 \end{cases} \, i,j=1,...,\nu
 \end{equation}
+
+As velocidades angulares dos ligamentos escritas nas bases dos sistemas de coordenadas solidários aos ligamentos, podem ser obtidas pelas seguintes expressões:
+\begin{equation}
+\vct{\vomega_i}_{\ttB_i} = \vct{\vone}_{\ttN \rl \ttB_i}^\msT \cdot \vct{\vomega_i}_{\ttN} = \mJ_{w\,i} (\mq) \cdot \dot{\mq}, \, i = 1,...,\nu
+\end{equation}
+Sendo:
+\begin{equation}
+\mJ_{w\,i} (\mq) = \vct{\vone}_{\ttN \rl \ttB_i}^\msT \cdot \mJ_{\omega\,i} (\mq), \, i = 1,...,\nu
+\end{equation}
+
 
 \item[C1)] Cinemática de acelerações lineares
 
@@ -382,12 +390,20 @@ $$ \text{Com } i=1,...,\nu \text{ e } j=1,...,i$$
 
 Sendo assim, a aceleração do centro de massa de cada ligamento pode ser obtida pela seguinte expressão:
 \begin{equation}
-\vct{\va_i}_{\ttN} = \mJ_{v\,i} \cdot \ddot{\mq} + \sum_{j=1}^{i} \mj_{\omega\,i,j}  \wedge [\mj_{\omega\,i,j} \wedge (\vct{\ttg_i}_{\ttN} - \vct{\tto_{j-1}}_{\ttN}) ] \dot{q}_j^2 + 2 \vct{\vomega_{j-1}}_{\ttN} \wedge \mj_{v\,i,j} \dot{q}_j, \, i=1,...,\nu
+\vct{\va_i}_{\ttN} = \mJ_{v\,i}(\mq) \cdot \ddot{\mq} + \ma_i (\mq, \dot{\mq}), \, i=1,...,\nu
+\end{equation}
+Sendo:
+\begin{equation}
+\ma_i (\mq, \dot{\mq}) = \sum_{j=1}^{i} \mj_{\omega\,i,j}  \wedge [\mj_{\omega\,i,j} \wedge (\vct{\ttg_i}_{\ttN} - \vct{\tto_{j-1}}_{\ttN}) ] \dot{q}_j^2 + 2 \vct{\vomega_{j-1}}_{\ttN} \wedge \mj_{v\,i,j} \dot{q}_j, \, i=1,...,\nu
 \end{equation}
 
 Analogamente, para a aceleração do efetuador, temos:
 \begin{equation}
-\frac{\dd^2}{\dd t^2} \vct{\ttx}_{\ttN} = \mJ_{v} \cdot \ddot{\mq} + \sum_{j=1}^{\nu} \mj_{\omega\,j}  \wedge [\mj_{\omega\,j} \wedge (\vct{\ttx}_{\ttN} - \vct{\tto_{j-1}}_{\ttN}) ] \dot{q}_j^2 + 2 \vct{\vomega_{j-1}}_{\ttN} \wedge \mj_{v\,j} \dot{q}_j, \, i=1,...,\nu
+\frac{\dd^2}{\dd t^2} \vct{\ttx}_{\ttN} = \mJ_{v} (\mq) \cdot \ddot{\mq} + \ma(\mq,\dot{\mq}), \, i=1,...,\nu
+\end{equation}
+Sendo:
+\begin{equation}
+\ma(\mq,\dot{\mq}) = \sum_{j=1}^{\nu} \mj_{\omega\,j}  \wedge [\mj_{\omega\,j} \wedge (\vct{\ttx}_{\ttN} - \vct{\tto_{j-1}}_{\ttN}) ] \dot{q}_j^2 + 2 \vct{\vomega_{j-1}}_{\ttN} \wedge \mj_{v\,j} \dot{q}_j, \, i=1,...,\nu
 \end{equation}
 
 \item[C2)] Cinemática de acelerações angulares
@@ -399,25 +415,42 @@ A aceleração angular de cada ligamento pode ser obtida aplicando recursivamente 
 \begin{equation} \label{eq:Composição_dw_rec}
 \vct{\dot{\vomega}_i}_{\ttN} = \begin{cases}
 \mzr, \text{se } i=0 \\
-\vct{\dot{\vomega}_{i-1}}_{\ttN} + \mj_{\omega\,i} \ddot{q}_i + \vct{\vomega_{i-1}}_{\ttN} \wedge \mj_{\omega\,i,i} \dot{q}_i ,  \text{se } i>0 \\
+\vct{\dot{\vomega}_{i-1}}_{\ttN} + \mj_{\omega\,i,i} \ddot{q}_i + \vct{\vomega_{i-1}}_{\ttN} \wedge \mj_{\omega\,i,i} \dot{q}_i ,  \text{se } i>0 \\
 \end{cases}\, i=0,...,\nu
 \end{equation}
 
 Sendo assim, a aceleração angular de cada ligamento pode ser obtida pelas seguintes expressões:
 
 \begin{equation}
-\vct{\dot{\vomega_i}}_{\ttN} = \mJ_{\omega\,i} \cdot \ddot{\mq} + \sum_{j=1}^{i} \vct{\vomega_{j-1}}_{\ttN} \wedge \mj_{\omega\,i,j} \cdot \dot{q}_j, \, i=1,...,\nu
+\vct{\dot{\vomega_i}}_{\ttN} = \mJ_{\omega\,i} (\mq) \cdot \ddot{\mq} + \dot{\momega}_i (\mq,\dot{\mq}), \, i=1,...,\nu
+\end{equation}
+Sendo:
+\begin{equation}
+\dot{\momega}_i (\mq,\dot{\mq}) = \sum_{j=1}^{i} \vct{\vomega_{j-1}}_{\ttN} \wedge \mj_{\omega\,i,j} \cdot \dot{q}_j, \, i=1,...,\nu
+\end{equation}
+
+As acelerações angulares dos ligamentos escritas nas bases dos sistemas de coordenadas solidários aos ligamentos, podem ser obtidas pelas seguintes expressões:
+\begin{equation}
+\vct{\dot{\vomega}_i}_{\ttB_i} = \vct{\vone}_{\ttN \rl \ttB_i}^\msT \cdot \vct{\dot{\vomega}_i}_{\ttN} = \mJ_{w\,i} (\mq) \cdot \ddot{\mq} + \dot{\mw}_i(\mq, \dot{\mq}) , \, i = 1,...,\nu
+\end{equation}
+Sendo:
+\begin{equation}
+\dot{\mw}_i(\mq, \dot{\mq}) = \vct{\vone}_{\ttN \rl \ttB_i}^\msT \cdot \dot{\momega}_i(\mq, \dot{\mq}), \, i = 1,...,\nu
 \end{equation}
 
 \item[D)] Dinâmica
 
 O modelo dinâmico de $\ssB$ é obtido utilizando o método Orsino de acoplamento de subsistemas \cite{23orsino}. A idéia é obter o modelo dinâmico do sistema acoplado através dos modelos dos subsistemas desacoplados e dos vínculos cinemáticos entre eles.
 
+\begin{itemize}
+
+\item[i)] Modelo dos sub-sistemas \\
+
 O modelo dinâmico desacoplado de cada ligamento pode ser obtido facilmente por Newton-Euler, pois são considerados como corpos rígidos livres no espaço, sujeitos apenas à força peso. Sendo assim, aplicando o Teorema do Movimentos do Baricentro e o Teorema do Momento Angular para cada ligamento, temos:
 
 \begin{equation} \label{eq:Newton-Euler}
 \begin{cases}
-m_i \va_i + m_i \vg = \vzr \\
+m_i \va_i - m_i \vg = \vzr \\
 \vI_i \cdot \dot{\vomega}_i + \vomega_i \wedge (\vI_i \cdot \vomega_i) = \vzr
 \end{cases} \, i = 1,...,\nu
 \end{equation}
@@ -440,7 +473,7 @@ m_i \mone & \mzr \\
 \end{bmatrix}
 +
 \begin{bmatrix}
-m_i \vct{\vg}_{\ttN} \\
+-m_i \vct{\vg}_{\ttN} \\
 \mzr
 \end{bmatrix}
 =
@@ -462,7 +495,7 @@ m_i \mone & \mzr \\
 \end{equation}
 \begin{equation}
 \mg_i = \begin{bmatrix}
-m_i \vct{\vg}_{\ttN} \\
+-m_i \vct{\vg}_{\ttN} \\
 \mzr
 \end{bmatrix}, \, i = 1,...,\nu
 \end{equation}
@@ -478,16 +511,32 @@ m_i \vct{\vg}_{\ttN} \\
 \mM_i \dot{\mp}_i + \mv_i(\mp_i) + \mg_i = \mzr, \, i = 1,...,\nu
 \end{equation}
 
-Definindo:
+Sendo assim, os sistemas de forças (considerando forças ativas e de inércia) aplicados em cada subsistema são dados por:
 \begin{equation}
 \overline{\mf}_i(\mp_i, \dot{\mp}_i)  = - (\mM_i\dot{\mp}_i + \mv_i(\mp_i) + \mg_i), \, i = 1,...,\nu
 \end{equation}
 
-O modelo dinâmico de cada subsistema é dado por:
+Portanto, o modelo dinâmico de cada subsistema pode ser escrito como:
 \begin{equation}
 \overline{\mf}_i(\mp_i, \dot{\mp}_i) = \mzr, \, i = 1,...,\nu
 \end{equation}
 
+\item[ii)] Sistemas de forças e quasi-velocidades adicionais \\
+
+Muitas vezes é conveniente definir um conjunto de quasi-velocidades adicionais $\mp_0$, as quais só fazem sentido para o sistema acoplado, e sistemas de forças adicionais $\mf_0$ aplicados na direção das quasi-velocidades adicionais. \\
+
+Neste algoritmo de modelagem, serão considerados como quasi-velocidades adicionais as derivadas temporais das coordenadas das juntas, o seja:
+\begin{equation}
+\mp_0 = \dot{\mq}
+\end{equation}
+
+Neste caso, os sistemas de forças adicionais serão os esforços que os atuadores aplicam nas juntas, ou seja:
+\begin{equation}
+\mf_0 = \mu
+\end{equation}
+
+
+\end{itemize}
 
 \end{itemize}
 
