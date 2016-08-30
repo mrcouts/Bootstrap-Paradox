@@ -440,7 +440,26 @@ Sendo:
 
 \item[D)] Dinâmica
 
-O modelo dinâmico de $\ssB$ é obtido utilizando o método Orsino de acoplamento de subsistemas \cite{23orsino}. A idéia é obter o modelo dinâmico do sistema acoplado através dos modelos dos subsistemas desacoplados e dos vínculos cinemáticos entre eles.
+O modelo dinâmico de $\ssB$ é obtido utilizando o método Orsino de acoplamento de sub-sistemas \cite{23orsino}, e é dado por:
+\begin{equation} \label{eq:ModeloMecSerial}
+\mM(\mq) \ddot{\mq} + \mv(\mq,\dot{\mq}) + \mg(\mq) = \mu
+\end{equation}
+
+Sendo:
+\begin{equation} \label{eq:MSerial}
+\mM(\mq) = \sum_{i=1}^\nu
+m_i \mJ_{v\,i}^\msT \mJ_{v\,i} + \mJ_{w\,i}^\msT \vct{\vI_i}_{\ttB_i \rl \ttB_i} \mJ_{w\,i}
+\end{equation}
+\begin{equation} \label{eq:vSerial}
+\mv(\mq, \dot{\mq}) = \sum_{i=1}^\nu
+ m_i \mJ_{v\,i}^\msT \ma_i + \mJ_{w\,i}^\msT\{\vct{\vI_i}_{\ttB_i \rl \ttB_i} \dot{\mw}_i + (\mJ_{w\,i} \dot{\mq}) \wedge (\vct{\vI_i}_{\ttB_i \rl \ttB_i}  \mJ_{w\,i} \dot{\mq}) \}
+\end{equation}
+\begin{equation} \label{eq:gSerial}
+\mg(\mq) = - \sum_{i=1}^\nu m_i \mJ_{v\,i} \vct{\vg}_{\ttN}
+\end{equation}
+
+Segue abaixo, a dedução.
+%A idéia é obter o modelo dinâmico do sistema acoplado através dos modelos dos subsistemas desacoplados e dos vínculos cinemáticos entre eles.
 
 \begin{itemize}
 
@@ -672,23 +691,23 @@ m_i (\mJ_{v\,i} \ddot{\mq} + \ma_i ) \\
 =\mu
 \end{equation}
 
-Sendo assim, o modelo dinâmico do mecanismo serial pode ser reescrito como:
-\begin{equation}
+Sendo assim, obtemos os resultados mostrados anteriormente pelas equações \eqref{eq:ModeloMecSerial}, \eqref{eq:MSerial}, \eqref{eq:vSerial}, \eqref{eq:gSerial}:
+$$
 \mM(\mq) \ddot{\mq} + \mv(\mq,\dot{\mq}) + \mg(\mq) = \mu
-\end{equation}
+$$
 
 Sendo:
-\begin{equation}
+$$
 \mM(\mq) = \sum_{i=1}^\nu
 m_i \mJ_{v\,i}^\msT \mJ_{v\,i} + \mJ_{w\,i}^\msT \vct{\vI_i}_{\ttB_i \rl \ttB_i} \mJ_{w\,i}
-\end{equation}
-\begin{equation}
+$$
+$$
 \mv(\mq, \dot{\mq}) = \sum_{i=1}^\nu
  m_i \mJ_{v\,i}^\msT \ma_i + \mJ_{w\,i}^\msT\{\vct{\vI_i}_{\ttB_i \rl \ttB_i} \dot{\mw}_i + (\mJ_{w\,i} \dot{\mq}) \wedge (\vct{\vI_i}_{\ttB_i \rl \ttB_i}  \mJ_{w\,i} \dot{\mq}) \}
-\end{equation}
-\begin{equation}
-\mg(\mq) = - \sum_{i=1}^\nu m_i \mJ_{v\,i} \vct{\mg}_{\ttN}
-\end{equation}
+$$
+$$
+\mg(\mq) = - \sum_{i=1}^\nu m_i \mJ_{v\,i} \vct{\vg}_{\ttN}
+$$
 
 \end{itemize}
 
