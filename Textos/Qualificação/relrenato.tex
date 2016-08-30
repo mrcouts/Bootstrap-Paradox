@@ -362,7 +362,7 @@ Sendo assim, a velocidade angular de cada ligamento pode ser obtida pelas seguin
 \end{equation}
 
 As velocidades angulares dos ligamentos escritas nas bases dos sistemas de coordenadas solidários aos ligamentos, podem ser obtidas pelas seguintes expressões:
-\begin{equation} \label{eq:wi_q_}
+\begin{equation} \label{eq:wi_Bi}
 \vct{\vomega_i}_{\ttB_i} = \vct{\vone}_{\ttN \rl \ttB_i}^\msT \cdot \vct{\vomega_i}_{\ttN} = \mJ_{w\,i} (\mq) \cdot \dot{\mq}, \, i = 1,...,\nu
 \end{equation}
 Sendo:
@@ -389,7 +389,7 @@ $$ \text{Com } i=1,...,\nu \text{ e } j=1,...,i$$
 \end{equation}
 
 Sendo assim, a aceleração do centro de massa de cada ligamento pode ser obtida pela seguinte expressão:
-\begin{equation}
+\begin{equation} \label{eq:ai_N}
 \vct{\va_i}_{\ttN} = \mJ_{v\,i}(\mq) \cdot \ddot{\mq} + \ma_i (\mq, \dot{\mq}), \, i=1,...,\nu
 \end{equation}
 Sendo:
@@ -430,7 +430,7 @@ Sendo:
 \end{equation}
 
 As acelerações angulares dos ligamentos escritas nas bases dos sistemas de coordenadas solidários aos ligamentos, podem ser obtidas pelas seguintes expressões:
-\begin{equation}
+\begin{equation} \label{eq:dwi_Bi}
 \vct{\dot{\vomega}_i}_{\ttB_i} = \vct{\vone}_{\ttN \rl \ttB_i}^\msT \cdot \vct{\dot{\vomega}_i}_{\ttN} = \mJ_{w\,i} (\mq) \cdot \ddot{\mq} + \dot{\mw}_i(\mq, \dot{\mq}) , \, i = 1,...,\nu
 \end{equation}
 Sendo:
@@ -500,25 +500,25 @@ m_i \mone & \mzr \\
 \end{equation}
 
 Definindo:
-\begin{equation}
+\begin{equation} \label{eq:M_i}
 \mM_i = \begin{bmatrix}
 m_i \mone & \mzr \\
 \mzr      & \vct{\vI_i}_{\ttB_i \rl \ttB_i}
 \end{bmatrix}, \, i = 1,...,\nu
 \end{equation}
-\begin{equation}
+\begin{equation} \label{eq:v_i}
 \mv_i = \begin{bmatrix}
 \mzr \\
 \vct{\vomega_i}_{\ttB_i} \wedge (\vct{\vI_i}_{\ttB_i \rl \ttB_i} \cdot \vct{\vomega_i}_{\ttB_i})
 \end{bmatrix}, \, i = 1,...,\nu
 \end{equation}
-\begin{equation}
+\begin{equation} \label{eq:g_i}
 \mg_i = \begin{bmatrix}
 -m_i \vct{\vg}_{\ttN} \\
 \mzr
 \end{bmatrix}, \, i = 1,...,\nu
 \end{equation}
-\begin{equation}
+\begin{equation} \label{eq:p_i}
 \mp_i = \begin{bmatrix}
 \vct{\vv_i}_{\ttN} \\
 \vct{\vomega_i}_{\ttB_i}
@@ -545,7 +545,7 @@ Portanto, o modelo dinâmico de cada subsistema pode ser escrito como:
 
 Muitas vezes é conveniente definir um conjunto de quasi-velocidades adicionais $\mp_0$, as quais só fazem sentido para o sistema acoplado, e sistemas de forças adicionais $\mf_0$ aplicados na direção das quasi-velocidades adicionais. \\
 
-Neste algoritmo de modelagem, serão considerados como quasi-velocidades adicionais as derivadas temporais das coordenadas das juntas, o seja:
+Neste algoritmo de modelagem, serão considerados como quasi-velocidades adicionais as derivadas temporais das coordenadas das juntas, ou seja:
 \begin{equation} \label{eq:mp_0}
 \mp_0 = \dot{\mq}
 \end{equation}
@@ -562,7 +562,7 @@ Através das equações \eqref{eq:vi_q_}, \eqref{eq:wi_q_} e \eqref{eq:mp_0}, é pos
 \underline{\mp_i}(\mq, \mp_0) = \mJ_i (\mq) \cdot \mp_0, \, i=1,...,\nu
 \end{equation}
 Sendo:
-\begin{equation}
+\begin{equation} \label{eq:J_i}
 \mJ_i(\mq) = \begin{bmatrix}
 \mJ_{v\,i}(\mq) \\
 \mJ_{w\,i}(\mq)
@@ -581,7 +581,7 @@ $\mp\cir$ pode ser expresso em função apenas das quasi-velocidades $\mp_0$ da se
 \underline{\mp\cir}(\mq,\mp_0) = \mJ(\mq) \mp_0
 \end{equation}
 Sendo:
-\begin{equation}
+\begin{equation} \label{eq:J}
 \mJ(\mq) = \begin{bmatrix}
 \mJ_1(\mq)^\msT & ... & \mJ_{\nu}(\mq)^\msT
 \end{bmatrix}^\msT
@@ -617,16 +617,11 @@ Seja $\mC$ a seguinte matriz:
 \end{bmatrix}
 \end{equation}
 
-Note que $\mC$ é complemento ortogonal de $\mA$, visto que para configurações não singulares:
+Note que $\mC$ é complemento ortogonal de $\mA$, visto que
 \begin{equation}
 \mA(\mq) \cdot \mC(\mq) = \mJ(\mq) - \mJ(\mq) = \mzr
 \end{equation}
-\begin{equation}
-\det\Bigg(\begin{bmatrix}
-\mC(\mq)^\msT \\
-\mA(\mq)
-\end{bmatrix} \Bigg) \neq 0 
-\end{equation}
+e para configurações não singulares o posto de $\begin{bmatrix} \mC(\mq)^\msT \\ \mA(\mq) \end{bmatrix}$ é cheio.
 
 Sendo assim, o modelo dinâmico do mecanismo serial pode ser escrito como:
 \begin{equation}
@@ -634,10 +629,12 @@ Sendo assim, o modelo dinâmico do mecanismo serial pode ser escrito como:
 \end{equation}
 
 Ou seja:
-\begin{equation}
+\begin{equation} \label{eq:ModeloDinâmicoSerialSomatorio}
 \mu - \sum_{i=1}^\nu \mJ_i(\mq)^\msT (\mM_i \dot{\mp}_i + \mv_i(\mp_i) + \mg_i) = \mzr
 \end{equation}
-\begin{equation}
+
+Substituindo \eqref{eq:M_i}, \eqref{eq:v_i}, \eqref{eq:g_i}, \eqref{eq:p_i} e \eqref{eq:J_i} em \eqref{eq:ModeloDinâmicoSerialSomatorio}, temos:
+\begin{equation} \label{eq:ModeloDinâmicoSerialSomatorio2}
 \sum_{i=1}^\nu
 \begin{bmatrix}
 \mJ_{v\,i} \\
@@ -666,6 +663,8 @@ m_i \mone & \mzr \\
 \end{Bmatrix}
 =\mu
 \end{equation}
+
+Substituindo \eqref{eq:wi_Bi}, \eqref{eq:ai_N} e  \eqref{eq:dwi_Bi} em \eqref{eq:ModeloDinâmicoSerialSomatorio2}, temos:
 \begin{equation}
 \sum_{i=1}^\nu
 \begin{bmatrix}
@@ -691,7 +690,7 @@ m_i (\mJ_{v\,i} \ddot{\mq} + \ma_i ) \\
 =\mu
 \end{equation}
 
-Sendo assim, obtemos os resultados mostrados anteriormente pelas equações \eqref{eq:ModeloMecSerial}, \eqref{eq:MSerial}, \eqref{eq:vSerial}, \eqref{eq:gSerial}:
+Sendo assim, obtemos o modelo dinâmico mostrado anteriormente pelas equações \eqref{eq:ModeloMecSerial}, \eqref{eq:MSerial}, \eqref{eq:vSerial}, \eqref{eq:gSerial}:
 $$
 \mM(\mq) \ddot{\mq} + \mv(\mq,\dot{\mq}) + \mg(\mq) = \mu
 $$
