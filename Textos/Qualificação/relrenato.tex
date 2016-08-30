@@ -394,7 +394,7 @@ Sendo assim, a aceleração do centro de massa de cada ligamento pode ser obtida p
 \end{equation}
 Sendo:
 \begin{equation}
-\ma_i (\mq, \dot{\mq}) = \sum_{j=1}^{i} \mj_{\omega\,i,j}  \wedge [\mj_{\omega\,i,j} \wedge (\vct{\ttg_i}_{\ttN} - \vct{\tto_{j-1}}_{\ttN}) ] \dot{q}_j^2 + 2 \vct{\vomega_{j-1}}_{\ttN} \wedge \mj_{v\,i,j} \dot{q}_j, \, i=1,...,\nu
+\ma_i (\mq, \dot{\mq}) = \sum_{j=1}^{i} \mj_{\omega\,i,j}  \wedge [\mj_{\omega\,i,j} \wedge (\vct{\ttg_i}_{\ttN} - \vct{\tto_{j-1}}_{\ttN}) ] \dot{q}_j^2 + 2 (\mJ_{\omega\,j-1} \dot{\mq}) \wedge \mj_{v\,i,j} \dot{q}_j, \, i=1,...,\nu
 \end{equation}
 
 Analogamente, para a aceleração do efetuador, temos:
@@ -403,7 +403,7 @@ Analogamente, para a aceleração do efetuador, temos:
 \end{equation}
 Sendo:
 \begin{equation}
-\ma(\mq,\dot{\mq}) = \sum_{j=1}^{\nu} \mj_{\omega\,j}  \wedge [\mj_{\omega\,j} \wedge (\vct{\ttx}_{\ttN} - \vct{\tto_{j-1}}_{\ttN}) ] \dot{q}_j^2 + 2 \vct{\vomega_{j-1}}_{\ttN} \wedge \mj_{v\,j} \dot{q}_j, \, i=1,...,\nu
+\ma(\mq,\dot{\mq}) = \sum_{j=1}^{\nu} \mj_{\omega\,j}  \wedge [\mj_{\omega\,j} \wedge (\vct{\ttx}_{\ttN} - \vct{\tto_{j-1}}_{\ttN}) ] \dot{q}_j^2 + 2 (\mJ_{\omega\,j-1} \dot{\mq}) \wedge \mj_{v\,j} \dot{q}_j, \, i=1,...,\nu
 \end{equation}
 
 \item[C2)] Cinemática de acelerações angulares
@@ -426,7 +426,7 @@ Sendo assim, a aceleração angular de cada ligamento pode ser obtida pelas seguin
 \end{equation}
 Sendo:
 \begin{equation}
-\dot{\momega}_i (\mq,\dot{\mq}) = \sum_{j=1}^{i} \vct{\vomega_{j-1}}_{\ttN} \wedge \mj_{\omega\,i,j} \cdot \dot{q}_j, \, i=1,...,\nu
+\dot{\momega}_i (\mq,\dot{\mq}) = \sum_{j=1}^{i} (\mJ_{\omega\,j-1} \dot{\mq}) \wedge \mj_{\omega\,i,j} \cdot \dot{q}_j, \, i=1,...,\nu
 \end{equation}
 
 As acelerações angulares dos ligamentos escritas nas bases dos sistemas de coordenadas solidários aos ligamentos, podem ser obtidas pelas seguintes expressões:
