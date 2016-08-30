@@ -440,7 +440,7 @@ Sendo:
 
 \item[D)] Dinâmica
 
-O modelo dinâmico de $\ssB$ é obtido utilizando o método Orsino de acoplamento de sub-sistemas \cite{23orsino}, e é dado por:
+O modelo dinâmico de $\ssB$ é obtido utilizando o método Orsino de acoplamento de subsistemas \cite{23orsino}, e é dado por:
 \begin{equation} \label{eq:ModeloMecSerial}
 \mM(\mq) \ddot{\mq} + \mv(\mq,\dot{\mq}) + \mg(\mq) = \mu
 \end{equation}
@@ -463,7 +463,7 @@ Segue abaixo, a dedução.
 
 \begin{itemize}
 
-\item[i)] Modelo dos sub-sistemas \\
+\item[i)] Modelo dos subsistemas \\
 
 O modelo dinâmico desacoplado de cada ligamento pode ser obtido facilmente por Newton-Euler, pois são considerados como corpos rígidos livres no espaço, sujeitos apenas à força peso. Sendo assim, aplicando o Teorema do Movimentos do Baricentro e o Teorema do Momento Angular para cada ligamento, temos:
 
@@ -555,9 +555,9 @@ Nesse caso, os sistemas de forças adicionais serão os esforços que os atuadores 
 \mf_0 = \mu
 \end{equation}
 
-\item[iii)] Vínculos cinemáticos entre sub-sistemas
+\item[iii)] Vínculos cinemáticos entre subsistemas
 
-Através das equações \eqref{eq:vi_q_}, \eqref{eq:wi_q_} e \eqref{eq:mp_0}, é possível relacionar as quasi-velocidades de cada sub-sistema com as quasi-velocidades adicionais da seguinte maneira:
+Através das equações \eqref{eq:vi_q_}, \eqref{eq:wi_Bi} e \eqref{eq:mp_0}, é possível relacionar as quasi-velocidades de cada subsistema com as quasi-velocidades adicionais da seguinte maneira:
 \begin{equation}
 \underline{\mp_i}(\mq, \mp_0) = \mJ_i (\mq) \cdot \mp_0, \, i=1,...,\nu
 \end{equation}
@@ -592,7 +592,7 @@ Sendo assim, as vínculos de quasi-velocidades entre subsistemas podem ser expres
 \overline{\mp}(\mq,\mp) = \mJ(\mq) \mp_0 - \mp\cir = \mzr
 \end{equation}
 
-\item[iv)] Acoplamento de sub-sistemas
+\item[iv)] Acoplamento de subsistemas
 
 Seja $\mf$ a matriz-coluna contendo todos os sistemas de forças:
 \begin{equation}
@@ -625,7 +625,7 @@ e para configurações não singulares o posto de $\begin{bmatrix} \mC(\mq)^\msT \\
 
 Sendo assim, o modelo dinâmico do mecanismo serial pode ser escrito como:
 \begin{equation}
-\overline{\mf} = \mC^\msT \mf = \mzr
+\mC^\msT \mf = \mzr
 \end{equation}
 
 Ou seja:
