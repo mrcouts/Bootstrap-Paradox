@@ -193,7 +193,7 @@ Esta se\c{c}\~ao apresenta uma s\'intese dos principais resultados te\'oricos ob
 \input{symbols}
 
 %---ALGORITMO PARA MODELAGEM DE PLATAFORMAS ROBÓTICAS------------------------------------------------------------------------------------------
-\subsection{Algoritmo para modelagem de mecanismos seriais - Novo}\label{S04-0}
+\subsection{Algoritmo para modelagem de mecanismos seriais - Novo}\label{S04-1}
 
 Esta subseção tem o intuito de apresentar um algoritmo genérico para a obtenção do modelo cinemático e dinâmico de mecanismos seriais. O algoritmo apresentado é implementável em linguagens de programação comumente usadas atualmente, como C++, Java e Python, sem necessitar de recursos de manipulação simbólica. \\
 Para a obtenção do modelo, são necessários apenas os parametros de Denavit-Hartemberg \cite{Craig, Denavit, Lipkin, Cabral} do mecanismo e as posições dos centros de massa dos ligamentos em relação aos sistemas de coordenadas fixos aos ligamentos. \\ 
@@ -209,6 +209,9 @@ Seja $\ssB$ um sistema mecânico serial de $\nu$ graus de liberdade. Primeirament
 \item $\{\vi_i, \vj_i, \vk_i\}, \,i=0,...,\nu$: base ortonormal do sistema $\ttB_i$.
 \item $\ttg_i, \,i=1,...,\nu$: centro de massa de $\llB_i$.
 \item $\ttx$: ponto no espa\c{c}o fixo ao efetuador.
+\item $\vomega$: vetor velocidade angular absoluta do efetuador.
+\item $\vv$: vetor velocidade linear absoluta do efetuador.
+\item $\va$: vetor acelera\c{c}\~ao linear absoluta do efetuador.
 \item $\vomega_i, \,i=1,...,\nu$: vetor velocidade angular absoluta de $\llB_i$.
 \item $\vv_i, \,i=1,...,\nu$: vetor velocidade linear absoluta do centro de massa de $\llB_i$.
 \item $\va_i, \,i=1,...,\nu$: vetor acelera\c{c}\~ao linear absoluta do centro de $\llB_i$.
@@ -273,7 +276,7 @@ A posição do efetuador em relação ao sistema base é função dos deslocamentos rel
 
 Derivando no tempo, obtemos:
 \begin{equation} \label{eq:dx_q_}
-\frac{\dd}{\dd t} \vct{\ttx}_{\ttN} = \mJ_v (\mq) \cdot \dot{\mq} = \sum_{i=1}^{\nu} \mj_{v\,i} (\mq) \cdot \dot{q}_i
+\vct{\vv}_{\ttN} = \frac{\dd}{\dd t} \vct{\ttx}_{\ttN} = \mJ_v (\mq) \cdot \dot{\mq} = \sum_{i=1}^{\nu} \mj_{v\,i} (\mq) \cdot \dot{q}_i
 \end{equation}
 
 Sendo:
@@ -361,6 +364,15 @@ Sendo assim, a velocidade angular de cada ligamento pode ser obtida pelas seguin
 \end{cases} \, i,j=1,...,\nu
 \end{equation}
 
+Note que também obtemos a velocidade angular do efetuador no sistema da base, pois
+\begin{equation}
+\vct{\vomega}_{\ttN} = \vct{\vomega_{\nu}}_{\ttN} = \mJ_{\omega}(\mq) \cdot \dot{\mq}
+\end{equation}
+Sendo:
+\begin{equation}
+\mJ_{\omega}(\mq) = \mJ_{\omega\,\nu}(\mq) 
+\end{equation}
+
 As velocidades angulares dos ligamentos escritas nas bases dos sistemas de coordenadas solidários aos ligamentos, podem ser obtidas pelas seguintes expressões:
 \begin{equation} \label{eq:wi_Bi}
 \vct{\vomega_i}_{\ttB_i} = \vct{\vone}_{\ttN \rl \ttB_i}^\msT \cdot \vct{\vomega_i}_{\ttN} = \mJ_{w\,i} (\mq) \cdot \dot{\mq}, \, i = 1,...,\nu
@@ -370,6 +382,7 @@ Sendo:
 \mJ_{w\,i} (\mq) = \vct{\vone}_{\ttN \rl \ttB_i}^\msT \cdot \mJ_{\omega\,i} (\mq), \, i = 1,...,\nu
 \end{equation}
 
+%Para o efetuador, temos que sua velocidade angular é a mesma do $\nu$-ésimo ligamento, ou seja:
 
 \item[C1)] Cinemática de acelerações lineares
 
@@ -427,6 +440,15 @@ Sendo assim, a aceleração angular de cada ligamento pode ser obtida pelas seguin
 Sendo:
 \begin{equation}
 \dot{\momega}_i (\mq,\dot{\mq}) = \sum_{j=1}^{i} (\mJ_{\omega\,j-1} \dot{\mq}) \wedge \mj_{\omega\,i,j} \cdot \dot{q}_j, \, i=1,...,\nu
+\end{equation}
+
+Note que também obtemos a aceleração angular do efetuador no sistema da base, pois
+\begin{equation}
+\vct{\dot{\vomega}}_{\ttN} = \vct{\dot{\vomega}_{\nu}}_{\ttN} = \mJ_{\omega}(\mq) \cdot \ddot{\mq} + \dot{\momega} (\mq,\dot{\mq})
+\end{equation}
+Sendo:
+\begin{equation}
+\dot{\momega} (\mq,\dot{\mq}) = \dot{\momega}_{\nu} (\mq,\dot{\mq})
 \end{equation}
 
 As acelerações angulares dos ligamentos escritas nas bases dos sistemas de coordenadas solidários aos ligamentos, podem ser obtidas pelas seguintes expressões:
@@ -712,9 +734,229 @@ $$
 
 \end{itemize}
 
+\subsection{Algoritmo para modelagem de mecanismos paralelos - Novo}\label{S04-2}
+
+Esta subseção tem o intuito de apresentar um algoritmo genérico para a obtenção do modelo dinâmico de mecanismos paralelos. O algoritmo apresentado é implementável em linguagens de programação comumente usadas atualmente, como C++, Java e Python, sem necessitar de recursos de manipulação simbólica. \\
+Para a obtenção do modelo do mecanismo paralelos, são necessários apenas os modelos de mecanismos seriais deduzidos  utilizando o algoritmo apresentado anteriormente, do modelo do efetuador, e de 7 matrizes constantes que são utilizadas para descrever a arquitetura do mecanismo paralelo. \\ 
+
+Para realizar a modelagem de mecanismos paralelos a partir de subsistemas seriais j\'a deduzidos, \'e necess\'ario introduzir mais alguns conceitos: \\
+
+Sejam $\ssB_0$, $\ssB_1$, ..., $\ssB_{n} \,$ $n+1$ subsistemas mec\^anicos e $\ssM$ um sistema mec\^anico de $\nu\ssh$ graus de liberdade gerado pelo acoplamento dos subsistemas citados. Definimos:
+
+\begin{itemize}
+\item $\ttN_i, \, i=1,...,n$: sistema de coordenadas da base de $\ssB_i$.
+\item $\mq\ssh, \mq_0$: matriz-coluna de $\nu\ssh$ coordenadas generalizadas independentes da plataforma/efetuador $\ssB_0$.
+\item $\mq_i, \,i=1, ..., n$: matriz-coluna de coordenadas generalizadas do subsistema serial $\ssB_i$.
+\item $\mq\cir$: matriz-coluna de coordenadas generalizadas  n\~ao pertencentes \`a plataforma/efetuador. Definida como $\mq\cir = \begin{bmatrix}  {\mq_1}^\msT & ... & {\mq_{n}}^\msT \end{bmatrix}^\msT $.
+\item $\mq$: matriz-coluna contendo todas as coordenadas generalizadas do sistema $\ssM$. Definida como $\mq = \begin{bmatrix} {\mq\ssh}^\msT & {\mq\cir}^\msT \end{bmatrix}^\msT $.
+\item $\overline{\mq}(\mq)$: matriz-coluna dos v\'inculos de posi\c{c}\~ao entre subsistemas. As equa\c{c}\~oes vinculares s\~ao dadas por $\overline{\mq}(\mq) = \mzr $.
+\item $\overline{\momega}(\mq,\dot{\mq})$: matriz-coluna dos v\'inculos de orienta\c{c}\~ao entre subsistemas. As equa\c{c}\~oes vinculares s\~ao dadas por $\overline{\momega}(\mq,\dot{\mq}) = \mzr $.
+\item $\ttx_i, \,i=1, ..., n$: ponto no espa\c{c}o fixo ao efetuador de $\ssB_i$.
+\item $\mx_i(\mq_i), \,i=1, ..., n$: $\ttx_i$ escrito em função das coordenadas $\mq_i$.
+\item $\mJ_{v\,\ssB_i}(\mq_i), \,i=1, ..., n$: jacobiano de velocidades lineares do efetuador de $\ssB_i$.
+\item $\mJ_{\omega\,\ssB_i}(\mq_i), \,i=1, ..., n$: jacobiano de velocidades angulares do efetuador de $\ssB_i$.
+\item $\ma_{\ssB_i}(\mq_i, \dot{\mq}_i), \,i=1, ..., n$: parcela da aceleração linear do efetuador de $\ssB_i$, escrita na base de $\ttN_i$, independente de $\ddot{\mq}_i$.
+\item $\dot{\momega}_{\ssB_i}(\mq_i, \dot{\mq}_i), \,i=1, ..., n$: parcela da aceleração angular do efetuador de $\ssB_i$, escrita na base de $\ttN_i$, independente de $\ddot{\mq}_i$.
+\item $\mM_{\ssB_i}(\mq_i), \,i=0, ..., n$: matriz de in\'ercia generalizada do subsistema $\ssB_i$.
+\item $\mv_{\ssB_i}(\mq_i, \dot{\mq}_i), \,i=0, ..., n$: matriz-coluna das forças de inércia girosc\'opica generalizadas do subsistema $\ssB_j$.
+\item $\mg_{\ssB_i}(\mq_i), \,i=0, ..., n$: matriz-coluna dos esfor\c{c}os gravitacionais generalizados do subsistema $\ssB_j$.
+\item $\mu_i, \,i=0, ..., n$: matriz-coluna dos esfor\c{c}os ativos externos generalizados do subsistema $\ssB_i$.
+\end{itemize}
+
+\begin{itemize}
+
+\item[i)] Modelo dos subsistemas \\
+
+O modelo dinâmico de cada subsistema pode ser escrito como:
+
+\begin{equation}
+\overline{\mf}_{\ssB_i}(\mu_i, \mq_i, \dot{\mq}_i, \ddot{\mq}_i) =  \mu_i - (\mM_{\ssB_i}(\mq_i) \ddot{\mq}_i + \mv_{\ssB_i}(\mq_i,\dot{\mq}_i) + \mg_{\ssB_i}(\mq_i)) = \mzr, \, i = 0,...,n
+\end{equation}
+
+Sendo que para $i=0$ temos o modelo do efetuador/plataforma e para $i>0$ temos os modelos dos mecanismos seriais obtidos anteriormente.
+
+\item[ii)] Vínculos cinemáticos entre subsistemas
+
+É possível relacionar as coordenadas da plataforma/efetuador $\ssB_0$ com as coordenadas dos efetuadores das cadeias seriais por meio de rotações e translações, ou seja:
+
+\begin{equation}
+\mq\ssh = \mE_i \cdot \mx_i(\mq_i) + \mf_i, \, i = 1,...,n
+\end{equation}
+
+Sendo assim, temos:
+\begin{equation}
+\begin{bmatrix}
+\mone & ... & \mone
+\end{bmatrix}^\msT
+\cdot \mq\ssh =
+\begin{bmatrix}
+\mC_0 &  \mzr  & \ldots & \mzr\\
+\mzr  &  \mC_1 & \ldots & \mzr\\
+\vdots & \vdots & \ddots & \vdots\\
+\mzr  &   \mzr       &\ldots & \mC_{n}
+\end{bmatrix}
+\end{equation}
 
 
-\subsection{Algoritmo para modelagem de mecanismos seriais}\label{S04-1}
+
+
+Através das equações \eqref{eq:vi_q_}, \eqref{eq:wi_Bi} e \eqref{eq:mp_0}, é possível relacionar as quasi-velocidades de cada subsistema com as quasi-velocidades adicionais da seguinte maneira:
+\begin{equation}
+\underline{\mp_i}(\mq, \mp_0) = \mJ_i (\mq) \cdot \mp_0, \, i=1,...,\nu
+\end{equation}
+Sendo:
+\begin{equation}
+\mJ_i(\mq) = \begin{bmatrix}
+\mJ_{v\,i}(\mq) \\
+\mJ_{w\,i}(\mq)
+\end{bmatrix}, \, i=1,...,\nu
+\end{equation}
+
+Seja $\mp\cir$ a matriz coluna que contém as quasi-velocidades de todos os ligamentos:
+\begin{equation}
+\mp\cir = \begin{bmatrix}
+\mp_1^\msT & ... & \mp_{\nu}^\msT
+\end{bmatrix}^\msT
+\end{equation}
+
+$\mp\cir$ pode ser expresso em função apenas das quasi-velocidades $\mp_0$ da seguinte forma:
+\begin{equation}
+\underline{\mp\cir}(\mq,\mp_0) = \mJ(\mq) \mp_0
+\end{equation}
+Sendo:
+\begin{equation}
+\mJ(\mq) = \begin{bmatrix}
+\mJ_1(\mq)^\msT & ... & \mJ_{\nu}(\mq)^\msT
+\end{bmatrix}^\msT
+\end{equation}
+
+Sendo assim, as vínculos de quasi-velocidades entre subsistemas podem ser expressos como:
+\begin{equation}
+\overline{\mp}(\mq,\mp) = \mJ(\mq) \mp_0 - \mp\cir = \mzr
+\end{equation}
+
+\item[iv)] Acoplamento de subsistemas
+
+Seja $\mf$ a matriz-coluna contendo todos os sistemas de forças:
+\begin{equation}
+\mf = \begin{bmatrix}
+\mf_0^\msT & \overline{\mf}_1^\msT & ... & \overline{\mf}_\nu^\msT  
+\end{bmatrix}^\msT
+\end{equation}
+
+E seja $\mA$ o jacobiano dos vínculos de quasi-velocidades:
+\begin{equation}
+\mA(\mq) = \frac{\partial \overline{\mp}}{\partial \mp} = \begin{bmatrix}
+\mJ(\mq) & -\mone
+\end{bmatrix}
+\end{equation}
+
+Seja $\mC$ a seguinte matriz:
+\begin{equation}
+\mC(\mq) =
+\begin{bmatrix}
+\mone \\
+\mJ(\mq)
+\end{bmatrix}
+\end{equation}
+
+Note que $\mC$ é complemento ortogonal de $\mA$, visto que
+\begin{equation}
+\mA(\mq) \cdot \mC(\mq) = \mJ(\mq) - \mJ(\mq) = \mzr
+\end{equation}
+e para configurações não singulares o posto de $\begin{bmatrix} \mC(\mq)^\msT \\ \mA(\mq) \end{bmatrix}$ é cheio.
+
+Sendo assim, o modelo dinâmico do mecanismo serial pode ser escrito como:
+\begin{equation}
+\mC^\msT \mf = \mzr
+\end{equation}
+
+Ou seja:
+\begin{equation}
+\mu - \sum_{i=1}^\nu \mJ_i(\mq)^\msT (\mM_i \dot{\mp}_i + \mv_i(\mp_i) + \mg_i) = \mzr
+\end{equation}
+
+Substituindo \eqref{eq:M_i}, \eqref{eq:v_i}, \eqref{eq:g_i}, \eqref{eq:p_i} e \eqref{eq:J_i} em \eqref{eq:ModeloDinâmicoSerialSomatorio}, temos:
+\begin{equation}
+\sum_{i=1}^\nu
+\begin{bmatrix}
+\mJ_{v\,i} \\
+\mJ_{w\,i}
+\end{bmatrix}^\msT
+\begin{Bmatrix}
+\begin{bmatrix}
+m_i \mone & \mzr \\
+\mzr      & \vct{\vI_i}_{\ttB_i \rl \ttB_i}
+\end{bmatrix}
+\cdot
+\begin{bmatrix}
+\vct{\va_i}_{\ttN} \\
+\vct{\dot{\vomega}_i}_{\ttB_i}
+\end{bmatrix}
++
+\begin{bmatrix}
+\mzr \\
+\vct{\vomega_i}_{\ttB_i} \wedge (\vct{\vI_i}_{\ttB_i \rl \ttB_i} \cdot \vct{\vomega_i}_{\ttB_i})
+\end{bmatrix}
++
+\begin{bmatrix}
+-m_i \vct{\vg}_{\ttN} \\
+\mzr
+\end{bmatrix}
+\end{Bmatrix}
+=\mu
+\end{equation}
+
+Substituindo \eqref{eq:wi_Bi}, \eqref{eq:ai_N} e  \eqref{eq:dwi_Bi} em \eqref{eq:ModeloDinâmicoSerialSomatorio2}, temos:
+\begin{equation}
+\sum_{i=1}^\nu
+\begin{bmatrix}
+\mJ_{v\,i} \\
+\mJ_{w\,i}
+\end{bmatrix}^\msT
+\begin{Bmatrix}
+\begin{bmatrix}
+m_i (\mJ_{v\,i} \ddot{\mq} + \ma_i ) \\
+\vct{\vI_i}_{\ttB_i \rl \ttB_i} (\mJ_{w\,i} \ddot{\mq} + \dot{\mw}_i)
+\end{bmatrix}
++
+\begin{bmatrix}
+\mzr \\
+(\mJ_{w\,i} \dot{\mq}) \wedge (\vct{\vI_i}_{\ttB_i \rl \ttB_i}  \mJ_{w\,i} \dot{\mq})
+\end{bmatrix}
++
+\begin{bmatrix}
+-m_i \vct{\vg}_{\ttN} \\
+\mzr
+\end{bmatrix}
+\end{Bmatrix}
+=\mu
+\end{equation}
+
+Sendo assim, obtemos o modelo dinâmico mostrado anteriormente pelas equações \eqref{eq:ModeloMecSerial}, \eqref{eq:MSerial}, \eqref{eq:vSerial}, \eqref{eq:gSerial}:
+$$
+\mM(\mq) \ddot{\mq} + \mv(\mq,\dot{\mq}) + \mg(\mq) = \mu
+$$
+
+Sendo:
+$$
+\mM(\mq) = \sum_{i=1}^\nu
+m_i \mJ_{v\,i}^\msT \mJ_{v\,i} + \mJ_{w\,i}^\msT \vct{\vI_i}_{\ttB_i \rl \ttB_i} \mJ_{w\,i}
+$$
+$$
+\mv(\mq, \dot{\mq}) = \sum_{i=1}^\nu
+ m_i \mJ_{v\,i}^\msT \ma_i + \mJ_{w\,i}^\msT\{\vct{\vI_i}_{\ttB_i \rl \ttB_i} \dot{\mw}_i + (\mJ_{w\,i} \dot{\mq}) \wedge (\vct{\vI_i}_{\ttB_i \rl \ttB_i}  \mJ_{w\,i} \dot{\mq}) \}
+$$
+$$
+\mg(\mq) = - \sum_{i=1}^\nu m_i \mJ_{v\,i} \vct{\vg}_{\ttN}
+$$
+
+\end{itemize}
+
+
+
+
+\subsection{Algoritmo para modelagem de mecanismos seriais}\label{S04-3}
 
 Para explicar o algoritmo desenvolvido \'e necess\'ario primeiro definir uma s\'erie de conceitos: \\
 
@@ -1149,7 +1391,7 @@ l_{1} \ssin_1  \dot{\theta}_1^2 + l_{g2} \ssin_{1\plus 2}   (\dot{\theta}_1+\dot
 \end{cases}
 \end{equation}\normalsize
 
-\subsection{Algoritmo para modelagem de mecanismos paralelos}\label{S04-2}
+\subsection{Algoritmo para modelagem de mecanismos paralelos}\label{S04-4}
 
 Para realizar a modelagem de mecanismos paralelos a partir de subsistemas seriais j\'a deduzidos, \'e necess\'ario introduzir mais alguns conceitos: \\
 
@@ -1649,7 +1891,7 @@ c_2 \dot{\theta}_{2,2} + \gamma_2 \sign(\dot{\theta}_{2,2}) \\
 
 \end{itemize}
 
-\subsection{Modelo din\^amico acoplado}\label{S04-3}
+\subsection{Modelo din\^amico acoplado}\label{S04-5}
 
 Para as dedu\c{c}\~oes que ser\~ao feitas nas pr\'oximas subse\c{c}\~oes, \'e conveniente reescrever o modelo do mecanismo da seguinte maneira:
 
@@ -1682,7 +1924,7 @@ $\mu^\star$ s\~ao os esfor\c{c}os ativos aplicados na dire\c{c}\~ao de $\dot{\mq
 \dot{\mq}^\star =  \mZ \mp\ssh
 \end{equation}
 
-\subsection{Inclus\~ao da din\^amica dos atuadores}\label{S04-4}
+\subsection{Inclus\~ao da din\^amica dos atuadores}\label{S04-6}
 
 %Esta subse\c{c}\~ao \'e dedicada \'a inclus\~ao da din\^amica dos atuadores no modelos deduzidos. Ser\~ao explorados apenas atuadores do tipo motor DC com redutor acoplado. Para isso, primeiramente definimos os par\^ametros do modelo do sistema motor-redutor:
 
@@ -1754,7 +1996,7 @@ Portanto, o modelo do mecanismo $\ssM$ considerando a din\^amica dos atuadores \
 \end{cases}
 \end{equation}
 
-\subsection{Modelo utilizado no projeto de controle}\label{S04-5}
+\subsection{Modelo utilizado no projeto de controle}\label{S04-7}
 
 Partindo do modelo \eqref{eq:MotorAcoplado}, apresentado na subse\c{c}\~ao anterior, ser\~ao utilizados alguns artif\'icios matem\'aticos a fim de obter um modelo mais conveniente para a realiza\c{c}\~ao do projeto de controle.
 
@@ -1947,7 +2189,7 @@ Sendo $\mA'(\mq)$ o jacobiano das equa\c{c}\~oes vinculares que relacionam as co
 
 Vale observar que ${\mA'}^\msT$ \'e complemento ortogonal de $\mD'$, e como $\mH$ n\~ao \'e singular, tamb\'em \'e complemento ortogonal de $\mH'$.
 
-\subsection{Projeto do Controlador}\label{S04-6}
+\subsection{Projeto do Controlador}\label{S04-8}
 
 Esta subse\c{c}\~ao \'e destinada ao projeto de controladores n\~ao lineares robustos, destinados ao controle de posi\c{c}\~ao e orienta\c{c}\~ao de plataformas paralelas descritas pelos modelos \eqref{eq:ModeloSRed} e \eqref{eq:ModeloCRed}, utilizando a t\'ecnica de controle por modos deslizantes.
 
