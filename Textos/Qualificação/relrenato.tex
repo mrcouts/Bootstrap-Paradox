@@ -552,7 +552,7 @@ m_i \mone & \mzr \\
 \mM_i \dot{\mp}_i + \mv_i(\mp_i) + \mg_i = \mzr, \, i = 1,...,\nu
 \end{equation}
 
-Seja $\mf_i$ o sistema de forças (considerando esforços ativos e de inércia) aplicado no i-ésimo subsistema, na direção das quasi-velocidades $\mp_i$. $\mf_i$ pode ser obtido pela seguinte expressão:
+Seja $\mf_i$ o sistema de forças ativas  (considerando os esforços de inércia) aplicado no i-ésimo subsistema, na direção das quasi-velocidades $\mp_i$. $\mf_i$ pode ser obtido pela seguinte expressão:
 %Sendo assim, os sistemas de forças (considerando esforços ativos e de inércia) aplicados em cada subsistema são dados por:
 \begin{equation}
 \overline{\mf}_i(\mp_i, \dot{\mp}_i)  = - (\mM_i\dot{\mp}_i + \mv_i(\mp_i) + \mg_i), \, i = 1,...,\nu
@@ -563,16 +563,16 @@ Portanto, o modelo dinâmico de cada subsistema pode ser escrito como:
 \overline{\mf}_i(\mp_i, \dot{\mp}_i) = \mzr, \, i = 1,...,\nu
 \end{equation}
 
-\item[ii)] Sistemas de forças e quasi-velocidades adicionais \\
+\item[ii)] Sistemas de forças ativas generalizadas e quasi-velocidades adicionais \\
 
-Muitas vezes é conveniente definir um conjunto de quasi-velocidades adicionais $\mp_0$, as quais só fazem sentido para o sistema acoplado, e sistemas de forças adicionais $\mf_0$ aplicados na direção das quasi-velocidades adicionais. \\
+Muitas vezes é conveniente definir um conjunto de quasi-velocidades adicionais $\mp_0$, as quais só fazem sentido para o sistema acoplado, e sistemas de forças ativas generalizadas adicionais $\mf_0$ aplicados na direção das quasi-velocidades adicionais. \\
 
 Neste algoritmo de modelagem, serão considerados como quasi-velocidades adicionais as derivadas temporais das coordenadas das juntas, ou seja:
 \begin{equation} \label{eq:mp_0}
 \mp_0 = \dot{\mq}
 \end{equation}
 
-Nesse caso, os sistemas de forças adicionais serão os esforços que os atuadores aplicam nas juntas, ou seja:
+Nesse caso, os sistemas de forças ativas generalizadas adicionais serão os esforços que os atuadores aplicam nas juntas, ou seja:
 \begin{equation}
 \mf_0 = \mu
 \end{equation}
@@ -616,7 +616,7 @@ Sendo assim, as vínculos de quasi-velocidades entre subsistemas podem ser expres
 
 \item[iv)] Acoplamento de subsistemas
 
-Seja $\mf$ a matriz-coluna contendo todos os sistemas de forças:
+Seja $\mf$ a matriz-coluna contendo todos os sistemas de forças ativas generalizadas:
 \begin{equation}
 \mf = \begin{bmatrix}
 \mf_0^\msT & \overline{\mf}_1^\msT & ... & \overline{\mf}_\nu^\msT  
@@ -775,7 +775,7 @@ O modelo dinâmico de cada subsistema pode ser escrito como:
 
 Sendo que para $i=0$ temos o modelo do efetuador/plataforma e para $i>0$ temos os modelos dos mecanismos seriais obtidos anteriormente.
 
-\item[ii)] Vínculos cinemáticos entre subsistemas
+\item[ii)] Vínculos de posição entre subsistemas
 
 É possível relacionar as coordenadas da plataforma/efetuador $\ssB_0$ com as coordenadas dos efetuadores das cadeias seriais por meio de rotações e translações, ou seja:
 
@@ -784,89 +784,289 @@ Sendo que para $i=0$ temos o modelo do efetuador/plataforma e para $i>0$ temos o
 \end{equation}
 
 Sendo assim, temos:
-\begin{equation}
+\begin{equation} \label{eq:VinculosPosicao}
 \begin{bmatrix}
-\mone & ... & \mone
-\end{bmatrix}^\msT
-\cdot \mq\ssh =
+\mone\\
+\vdots\\
+\mone
+\end{bmatrix}\cdot \mq\ssh =
 \begin{bmatrix}
-\mC_0 &  \mzr  & \ldots & \mzr\\
-\mzr  &  \mC_1 & \ldots & \mzr\\
-\vdots & \vdots & \ddots & \vdots\\
-\mzr  &   \mzr       &\ldots & \mC_{n}
+\mE_1 & \ldots & \mzr\\
+\vdots & \ddots & \vdots\\
+\mzr &\ldots  & \mE_{n}
+\end{bmatrix}
+\cdot
+\begin{bmatrix}
+\mx_1(\mq_1) \\
+\vdots \\
+\mx_n(\mq_n)
+\end{bmatrix}
++
+\begin{bmatrix}
+\mf_1 \\
+\vdots \\
+\mf_n
 \end{bmatrix}
 \end{equation}
 
-
-
-
-Através das equações \eqref{eq:vi_q_}, \eqref{eq:wi_Bi} e \eqref{eq:mp_0}, é possível relacionar as quasi-velocidades de cada subsistema com as quasi-velocidades adicionais da seguinte maneira:
-\begin{equation}
-\underline{\mp_i}(\mq, \mp_0) = \mJ_i (\mq) \cdot \mp_0, \, i=1,...,\nu
-\end{equation}
-Sendo:
-\begin{equation}
-\mJ_i(\mq) = \begin{bmatrix}
-\mJ_{v\,i}(\mq) \\
-\mJ_{w\,i}(\mq)
-\end{bmatrix}, \, i=1,...,\nu
+Além disso, em alguns casos é necessário incluir vínculos afins entre as coordenadas generalizadas, ou seja:
+\begin{equation} \label{eq:VinculosPosicaoAfins}
+\mD_{\oplus}\cdot\mq\ssh = \mF_{\oplus}\cdot\mq\cir + \mf_{\oplus}
 \end{equation}
 
-Seja $\mp\cir$ a matriz coluna que contém as quasi-velocidades de todos os ligamentos:
-\begin{equation}
-\mp\cir = \begin{bmatrix}
-\mp_1^\msT & ... & \mp_{\nu}^\msT
-\end{bmatrix}^\msT
-\end{equation}
-
-$\mp\cir$ pode ser expresso em função apenas das quasi-velocidades $\mp_0$ da seguinte forma:
-\begin{equation}
-\underline{\mp\cir}(\mq,\mp_0) = \mJ(\mq) \mp_0
-\end{equation}
-Sendo:
-\begin{equation}
-\mJ(\mq) = \begin{bmatrix}
-\mJ_1(\mq)^\msT & ... & \mJ_{\nu}(\mq)^\msT
-\end{bmatrix}^\msT
-\end{equation}
-
-Sendo assim, as vínculos de quasi-velocidades entre subsistemas podem ser expressos como:
-\begin{equation}
-\overline{\mp}(\mq,\mp) = \mJ(\mq) \mp_0 - \mp\cir = \mzr
-\end{equation}
-
-\item[iv)] Acoplamento de subsistemas
-
-Seja $\mf$ a matriz-coluna contendo todos os sistemas de forças:
-\begin{equation}
-\mf = \begin{bmatrix}
-\mf_0^\msT & \overline{\mf}_1^\msT & ... & \overline{\mf}_\nu^\msT  
-\end{bmatrix}^\msT
-\end{equation}
-
-E seja $\mA$ o jacobiano dos vínculos de quasi-velocidades:
-\begin{equation}
-\mA(\mq) = \frac{\partial \overline{\mp}}{\partial \mp} = \begin{bmatrix}
-\mJ(\mq) & -\mone
+Juntando a equação \eqref{eq:VinculosPosicaoAfins} à equação \eqref{eq:VinculosPosicao}, temos:
+\begin{equation} \label{eq:VinculosPosicao2}
+\begin{bmatrix}
+\mone\\
+\vdots\\
+\mone \\
+\mD_{\oplus}
+\end{bmatrix}
+\cdot
+\mq\ssh =
+\begin{bmatrix}
+\mE_1 & \ldots & \mzr\\
+\vdots & \ddots & \vdots\\
+\mzr &\ldots  & \mE_{n} \\
+\mzr &\ldots  & \mzr
+\end{bmatrix}
+\cdot
+\begin{bmatrix}
+\mx_1(\mq_1) \\
+\vdots \\
+\mx_n(\mq_n)
+\end{bmatrix}
++
+\begin{bmatrix}
+\mzr\\
+\vdots\\
+\mzr \\
+\mF_{\oplus}
+\end{bmatrix}
+\cdot
+\mq\cir
++
+\begin{bmatrix}
+\mf_1 \\
+\vdots \\
+\mf_n \\
+\mf_{\oplus}
 \end{bmatrix}
 \end{equation}
 
-Seja $\mC$ a seguinte matriz:
+Sendo assim, os vínculos de posição entre subsistemas podem ser descritos de maneira genérica por:
+\begin{equation} \label{eq:VinculosGenericosPosicao}
+\overline{\mq}(\mq) = \mD \cdot \mq\ssh - \mE \cdot \mx(\mq)
+- \mF \cdot \mq\cir - \mf = \mzr
+\end{equation}
+
+Sendo $\mD$, $\mE$, $\mF$ e $\mf$ matrizes constantes e $\mx$ dado por:
+\begin{equation}
+\mx(\mq) = 
+\begin{bmatrix}
+\mx_1(\mq_1) \\
+\vdots \\
+\mx_n(\mq_n)
+\end{bmatrix}
+\end{equation}
+
+\item[iii)] Vínculos de velocidades lineares entre subsistemas
+
+Derivando no tempo a equação \eqref{eq:VinculosGenericosPosicao}, temos:
+\begin{equation} \label{eq:VinculosGenericosVel}
+\dot{\overline{\mq}}(\mq,\dot{\mq}) = \mD \cdot \dot{\mq}\ssh - \mE \cdot \dot{\mx}(\mq,\dot{\mq}) - \mF \cdot \dot{\mq}\cir = \mzr
+\end{equation}
+
+A derivada $\dot{\mx}$ pode ser obtida da seguinte maneira:
+\begin{equation} \label{eq:dxdt}
+\dot{\mx}(\mq,\dot{\mq}) = \frac{\dd}{\dd t}
+\begin{bmatrix}
+\mx_1(\mq_1) \\
+\vdots \\
+\mx_n(\mq_n)
+\end{bmatrix} =
+\begin{bmatrix}
+\mJ_{v\,\ssB_1}(\mq_1) \cdot \dot{\mq}_1 \\
+\vdots \\
+\mJ_{v\,\ssB_n}(\mq_n) \cdot \dot{\mq}_n
+\end{bmatrix}
+=
+\mJ_{\mathsf{v}}(\mq) \cdot \dot{\mq}\cir
+\end{equation}
+
+Sendo:
+\begin{equation}
+\mJ_{\mathsf{v}}(\mq) =
+\begin{bmatrix}
+\mJ_{v\,\ssB_1}(\mq_1) & \ldots & \mzr\\
+\vdots & \ddots & \vdots\\
+\mzr &\ldots  & \mJ_{v\,\ssB_n}(\mq_n)
+\end{bmatrix}
+\end{equation}
+
+Assim, substituindo \eqref{eq:dxdt} em \eqref{eq:VinculosGenericosVel}, obtemos:
+\begin{equation} \label{eq:VinculosGenericosVelocidades}
+\dot{\overline{\mq}}(\mq,\dot{\mq}) = \mD \cdot \dot{\mq}\ssh - \mE \cdot \mJ_{\mathsf{v}}(\mq) \cdot \dot{\mq}\cir  - \mF \cdot \dot{\mq}\cir = \mzr
+\end{equation}
+
+\item[iv)] Vínculos de velocidades angulares entre subsistemas
+
+Em alguns casos, é necessário incluir vínculos entre as velocidades angulares dos efetuadores das cadeiais seriais, de modo a restringir suas orientações no espaço.
+
+De maneira análoga à equação \eqref{eq:VinculosGenericosVelocidades}, os vínculos de velocidades angulares serão definidos por:
+\begin{equation}
+\dot{\overline{\mq}}(\mq) = \mP \cdot \dot{\mq}\ssh - \mQ \cdot \mJ_{\mathsf{w}}(\mq) \cdot \dot{\mq}\cir  - \mR \cdot \dot{\mq}\cir = \mzr
+\end{equation}
+
+Sendo $\mP$, $\mQ$ e $\mR$ matrizes constantes e $\mJ_{\mathsf{w}}(\mq)$ dado por:
+\begin{equation} \label{eq:VinculosGenericosVelocidadesAngulares}
+\mJ_{\mathsf{w}}(\mq) =
+\begin{bmatrix}
+\mJ_{\omega\,\ssB_1}(\mq_1) & \ldots & \mzr\\
+\vdots & \ddots & \vdots\\
+\mzr &\ldots  & \mJ_{\omega\,\ssB_n}(\mq_n)
+\end{bmatrix}
+\end{equation}
+
+\item[v)] Vínculos de quasi-velocidades
+
+Neste caso, as quasi-velocidades do sistema são dadas simplemente por
+\begin{equation}
+\mp = \dot{\mq}
+\end{equation}
+
+Os vínculos de quasi-velocidades são dados pela união dos vínculos de velocidades lineares e dos vínculos de velocidades angulares, ou seja:
+\begin{equation}
+\overline{\mp}(\mq,\dot{\mq}) = \begin{bmatrix}
+\dot{\overline{\mq}}(\mq,\dot{\mq}) \\
+\overline{\momega}(\mq,\dot{\mq})
+\end{bmatrix} = \mzr
+\end{equation}
+
+
+\item[vi)] Acoplamento de subsistemas
+
+Seja $\mf$ a matriz-coluna contendo todos os sistemas de forças ativas generalizadas:
+\begin{equation} \label{eq:fParalelos}
+\mf = 
+\begin{bmatrix}
+\overline{\mf}_{\ssB_0} \\
+\vdots \\
+\overline{\mf}_{\ssB_n}  
+\end{bmatrix}
+=
+\begin{bmatrix}
+\mu_0 \\
+\vdots \\
+\mu_n  
+\end{bmatrix}
+-
+\begin{bmatrix}
+\mM_{\ssB_0}(\mq_0) & \ldots & \mzr\\
+\vdots & \ddots & \vdots\\
+\mzr &\ldots  & \mM_{\ssB_n}(\mq_n)
+\end{bmatrix}
+\cdot
+\ddot{\mq} \;
+-
+\begin{bmatrix}
+\mv_{\ssB_0}(\mq_0,\dot{\mq}_0) \\
+\vdots \\
+\mv_{\ssB_n}(\mq_n,\dot{\mq}_n)  
+\end{bmatrix}
+-
+\begin{bmatrix}
+\mg_{\ssB_0}(\mq_0) \\
+\vdots \\
+\mg_{\ssB_n}(\mq_0)  
+\end{bmatrix}
+\end{equation}
+
+Definindo:
+\begin{equation}
+\mM'(\mq) =
+\begin{bmatrix}
+\mM_{\ssB_0}(\mq_0) & \ldots & \mzr\\
+\vdots & \ddots & \vdots\\
+\mzr &\ldots  & \mM_{\ssB_n}(\mq_n)
+\end{bmatrix}
+\end{equation}
+\begin{equation}
+\mv'(\mq,\dot{\mq}) =
+\begin{bmatrix}
+\mv_{\ssB_0}(\mq_0,\dot{\mq}_0)^\msT &
+... &
+\mv_{\ssB_n}(\mq_n,\dot{\mq}_n)^\msT
+\end{bmatrix}^\msT
+\end{equation}
+\begin{equation}
+\mg'(\mq) =
+\begin{bmatrix}
+\mg_{\ssB_0}(\mq_0)^\msT &
+... &
+\mg_{\ssB_n}(\mq_0)^\msT  
+\end{bmatrix}^\msT
+\end{equation}
+\begin{equation}
+\mu' =
+\begin{bmatrix}
+\mu_0^\msT &
+... &
+\mu_n^\msT  
+\end{bmatrix}^\msT
+\end{equation}
+
+\eqref{eq:fParalelos} pode ser reescrita como:
+\begin{equation}
+\mf = \mu' - \mM'(\mq) \cdot \ddot{\mq} - \mv'(\mq,\dot{\mq}) - \mg'(\mq)
+\end{equation}
+
+Seja $\mA$ o jacobiano dos vínculos de quasi-velocidades:
+\begin{equation}
+\mA(\mq) = \frac{\partial \overline{\mp}}{\partial \mp} = 
+\begin{bmatrix}
+\mA\ssh(\mq) & \mA\cir(\mq)
+\end{bmatrix}
+\end{equation}
+
+Sendo:
+\begin{equation}
+\mA\ssh(\mq) = \frac{\partial \overline{\mp}}{\partial \mp\ssh} =
+\begin{bmatrix}
+\mD \\
+\mP \\
+\end{bmatrix}
+\end{equation}
+
+\begin{equation}
+\mA\cir(\mq) =  \frac{\partial \overline{\mp}}{\partial \mp\cir} =
+-\begin{bmatrix}
+\mE \cdot \mJ_{\mathsf{v}}(\mq) + \mF \\
+\mQ \cdot \mJ_{\mathsf{w}}(\mq) + \mR \\
+\end{bmatrix}
+\end{equation}
+
+Um possível complemento ortogonal de $\mA$ é dado por
 \begin{equation}
 \mC(\mq) =
 \begin{bmatrix}
 \mone \\
-\mJ(\mq)
+-\mA\cir(\mq)^\msI \cdot \mA\ssh(\mq)
 \end{bmatrix}
 \end{equation}
 
-Note que $\mC$ é complemento ortogonal de $\mA$, visto que
+Pois:
 \begin{equation}
-\mA(\mq) \cdot \mC(\mq) = \mJ(\mq) - \mJ(\mq) = \mzr
+\mA(\mq) \cdot \mC(\mq) = \mA\ssh(\mq) - \mA\ssh(\mq) = \mzr
 \end{equation}
 e para configurações não singulares o posto de $\begin{bmatrix} \mC(\mq)^\msT \\ \mA(\mq) \end{bmatrix}$ é cheio.
 
-Sendo assim, o modelo dinâmico do mecanismo serial pode ser escrito como:
+Além disso, repare que $\mC$ respeita a seguinte relação:
+\begin{equation}
+\dot{\mq} = \mC(\mq) \cdot \dot{\mq}\ssh
+\end{equation}
+
+Sendo assim, o modelo dinâmico do mecanismo paralelo pode ser escrito como:
 \begin{equation}
 \mC^\msT \mf = \mzr
 \end{equation}
