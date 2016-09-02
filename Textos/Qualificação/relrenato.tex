@@ -752,7 +752,7 @@ Sejam $\ssB_0$, $\ssB_1$, ..., $\ssB_{n} \,$ $n+1$ subsistemas mec\^anicos e $\s
 \item $\overline{\mq}(\mq)$: matriz-coluna dos v\'inculos de posi\c{c}\~ao entre subsistemas. As equa\c{c}\~oes vinculares s\~ao dadas por $\overline{\mq}(\mq) = \mzr $.
 \item $\overline{\momega}(\mq,\dot{\mq})$: matriz-coluna dos v\'inculos de orienta\c{c}\~ao entre subsistemas. As equa\c{c}\~oes vinculares s\~ao dadas por $\overline{\momega}(\mq,\dot{\mq}) = \mzr $.
 \item $\ttx_i, \,i=1, ..., n$: ponto no espa\c{c}o fixo ao efetuador de $\ssB_i$.
-\item $\mx_i(\mq_i), \,i=1, ..., n$: $\ttx_i$ escrito em função das coordenadas $\mq_i$.
+\item $\mx_i(\mq_i), \,i=1, ..., n$: $\vct{\ttx_i}_{\ttN_i}$ escrito em função das coordenadas $\mq_i$.
 \item $\mJ_{v\,\ssB_i}(\mq_i), \,i=1, ..., n$: jacobiano de velocidades lineares do efetuador de $\ssB_i$.
 \item $\mJ_{\omega\,\ssB_i}(\mq_i), \,i=1, ..., n$: jacobiano de velocidades angulares do efetuador de $\ssB_i$.
 \item $\ma_{\ssB_i}(\mq_i, \dot{\mq}_i), \,i=1, ..., n$: parcela da aceleração linear do efetuador de $\ssB_i$, escrita na base de $\ttN_i$, independente de $\ddot{\mq}_i$.
@@ -775,7 +775,7 @@ O modelo dinâmico de cada subsistema pode ser escrito como:
 
 Sendo que para $i=0$ temos o modelo do efetuador/plataforma e para $i>0$ temos os modelos dos mecanismos seriais obtidos anteriormente.
 
-\item[ii)] Vínculos de posição entre subsistemas
+\item[ii)] Vínculos de posição
 
 É possível relacionar as coordenadas da plataforma/efetuador $\ssB_0$ com as coordenadas dos efetuadores das cadeias seriais por meio de rotações e translações, ou seja:
 
@@ -870,7 +870,7 @@ Sendo $\mD$, $\mE$, $\mF$ e $\mf$ matrizes constantes e $\mx$ dado por:
 \end{bmatrix}
 \end{equation}
 
-\item[iii)] Vínculos de velocidades lineares entre subsistemas
+\item[iii)] Vínculos de velocidades lineares
 
 Derivando no tempo a equação \eqref{eq:VinculosGenericosPosicao}, temos:
 \begin{equation} \label{eq:VinculosGenericosVel}
@@ -891,12 +891,12 @@ A derivada $\dot{\mx}$ pode ser obtida da seguinte maneira:
 \mJ_{v\,\ssB_n}(\mq_n) \cdot \dot{\mq}_n
 \end{bmatrix}
 =
-\mJ_{\mathsf{v}}(\mq) \cdot \dot{\mq}\cir
+\mJ_{\mathsf{v}}(\mq\cir) \cdot \dot{\mq}\cir
 \end{equation}
 
 Sendo:
 \begin{equation}
-\mJ_{\mathsf{v}}(\mq) =
+\mJ_{\mathsf{v}}(\mq\cir) =
 \begin{bmatrix}
 \mJ_{v\,\ssB_1}(\mq_1) & \ldots & \mzr\\
 \vdots & \ddots & \vdots\\
@@ -906,21 +906,21 @@ Sendo:
 
 Assim, substituindo \eqref{eq:dxdt} em \eqref{eq:VinculosGenericosVel}, obtemos:
 \begin{equation} \label{eq:VinculosGenericosVelocidades}
-\dot{\overline{\mq}}(\mq,\dot{\mq}) = \mD \cdot \dot{\mq}\ssh - \mE \cdot \mJ_{\mathsf{v}}(\mq) \cdot \dot{\mq}\cir  - \mF \cdot \dot{\mq}\cir = \mzr
+\dot{\overline{\mq}}(\mq,\dot{\mq}) = \mD \cdot \dot{\mq}\ssh - \mE \cdot \mJ_{\mathsf{v}}(\mq\cir) \cdot \dot{\mq}\cir  - \mF \cdot \dot{\mq}\cir = \mzr
 \end{equation}
 
-\item[iv)] Vínculos de velocidades angulares entre subsistemas
+\item[iv)] Vínculos de velocidades angulares
 
 Em alguns casos, é necessário incluir vínculos entre as velocidades angulares dos efetuadores das cadeiais seriais, de modo a restringir suas orientações no espaço.
 
 De maneira análoga à equação \eqref{eq:VinculosGenericosVelocidades}, os vínculos de velocidades angulares serão definidos por:
 \begin{equation}
-\dot{\overline{\mq}}(\mq) = \mP \cdot \dot{\mq}\ssh - \mQ \cdot \mJ_{\mathsf{w}}(\mq) \cdot \dot{\mq}\cir  - \mR \cdot \dot{\mq}\cir = \mzr
+\dot{\overline{\mq}}(\mq) = \mP \cdot \dot{\mq}\ssh - \mQ \cdot \mJ_{\mathsf{w}}(\mq\cir) \cdot \dot{\mq}\cir  - \mR \cdot \dot{\mq}\cir = \mzr
 \end{equation}
 
 Sendo $\mP$, $\mQ$ e $\mR$ matrizes constantes e $\mJ_{\mathsf{w}}(\mq)$ dado por:
 \begin{equation} \label{eq:VinculosGenericosVelocidadesAngulares}
-\mJ_{\mathsf{w}}(\mq) =
+\mJ_{\mathsf{w}}(\mq\cir) =
 \begin{bmatrix}
 \mJ_{\omega\,\ssB_1}(\mq_1) & \ldots & \mzr\\
 \vdots & \ddots & \vdots\\
@@ -936,15 +936,96 @@ Neste caso, as quasi-velocidades do sistema são dadas simplemente por
 \end{equation}
 
 Os vínculos de quasi-velocidades são dados pela união dos vínculos de velocidades lineares e dos vínculos de velocidades angulares, ou seja:
-\begin{equation}
+\begin{equation} \label{eq:VinculosQuasiVel}
 \overline{\mp}(\mq,\dot{\mq}) = \begin{bmatrix}
 \dot{\overline{\mq}}(\mq,\dot{\mq}) \\
 \overline{\momega}(\mq,\dot{\mq})
-\end{bmatrix} = \mzr
+\end{bmatrix}
+= 
+\begin{bmatrix}
+\mD \cdot \dot{\mq}\ssh - \mE \cdot \mJ_{\mathsf{v}}(\mq\cir) \cdot \dot{\mq}\cir  - \mF \cdot \dot{\mq}\cir \\
+\mP \cdot \dot{\mq}\ssh - \mQ \cdot \mJ_{\mathsf{w}}(\mq\cir) \cdot \dot{\mq}\cir  - \mR \cdot \dot{\mq}\cir
+\end{bmatrix}
+=
+\mzr
+\end{equation}
+
+Repare que \eqref{eq:VinculosQuasiVel} pode ser reescrita como:
+\begin{equation}
+\overline{\mp}(\mq,\dot{\mq}) = \mA(\mq) \dot{\mq}
+\end{equation}
+
+Sendo $\mA$ o jacobiano dos vínculos de quasi-velocidades, o qual é dado por:
+\begin{equation}
+\mA(\mq) = \frac{\partial \overline{\mp}}{\partial \dot{\mq}} = 
+\begin{bmatrix}
+\mA\ssh(\mq) & \mA\cir(\mq)
+\end{bmatrix}
+\end{equation}
+
+Sendo:
+\begin{equation}
+\mA\ssh(\mq) = \frac{\partial \overline{\mp}}{\partial \dot{\mq}\ssh} =
+\begin{bmatrix}
+\mD \\
+\mP \\
+\end{bmatrix}
+\end{equation}
+
+\begin{equation}
+\mA\cir(\mq) =  \frac{\partial \overline{\mp}}{\partial \dot{\mq}\cir} =
+-\begin{bmatrix}
+\mE \cdot \mJ_{\mathsf{v}}(\mq\cir) + \mF \\
+\mQ \cdot \mJ_{\mathsf{w}}(\mq\cir) + \mR \\
+\end{bmatrix}
+\end{equation}
+
+\item[vi)] Vínculos de quasi-acelerações
+
+Derivando \eqref{eq:VinculosQuasiVel}, temos:
+\begin{equation} \label{eq:VinculosQuasiAce}
+\dot{\overline{\mp}}(\mq,\dot{\mq},\ddot{\mq}) =
+\begin{bmatrix}
+\ddot{\overline{\mq}}(\mq,\dot{\mq}, \ddot{\mq}) \\
+\dot{\overline{\momega}}(\mq,\dot{\mq}, \ddot{\mq})
+\end{bmatrix}
+= 
+\begin{bmatrix}
+\mD \cdot \ddot{\mq}\ssh - \mE \cdot (\mJ_{\mathsf{v}}(\mq\cir) \cdot \ddot{\mq}\cir + \ma\cir(\mq\cir,\dot{\mq}\cir))  - \mF \cdot \ddot{\mq}\cir \\
+\mP \cdot \ddot{\mq}\ssh - \mQ \cdot (\mJ_{\mathsf{w}}(\mq\cir) \cdot \ddot{\mq}\cir + \dot{\momega}\cir(\mq\cir,\dot{\mq}\cir))  - \mR \cdot \ddot{\mq}\cir
+\end{bmatrix}
+=
+\mzr
+\end{equation}
+
+Sendo:
+\begin{equation}
+\ma\cir(\mq\cir,\dot{\mq}\cir) = \begin{bmatrix}
+\ma_{\ssB_1}(\mq_1,\dot{\mq}_1)^\msT & ... & \ma_{\ssB_n}(\mq_n,\dot{\mq}_n)^\msT
+\end{bmatrix}^\msT
+\end{equation}
+\begin{equation}
+\dot{\momega}\cir(\mq\cir,\dot{\mq}\cir) = \begin{bmatrix}
+\dot{\momega}_{\ssB_1}(\mq_1,\dot{\mq}_1)^\msT & ... & \dot{\momega}_{\ssB_n}(\mq_n,\dot{\mq}_n)^\msT
+\end{bmatrix}^\msT
+\end{equation}
+
+Repare que \eqref{eq:VinculosQuasiAce} pode ser reescrita como:
+\begin{equation}
+\dot{\overline{\mp}}(\mq,\dot{\mq},\ddot{\mq}) = \mA(\mq)\ddot{\mq} - \mb(\mq,\dot{\mq}) = \mzr
+\end{equation}
+
+Sendo:
+\begin{equation}
+\mb(\mq,\dot{\mq}) =
+\begin{bmatrix}
+\mE \cdot \ma\cir(\mq\cir,\dot{\mq}\cir) \\
+\mQ \cdot \dot{\momega}\cir(\mq\cir,\dot{\mq}\cir) \\
+\end{bmatrix}
 \end{equation}
 
 
-\item[vi)] Acoplamento de subsistemas
+\item[vii)] Acoplamento de subsistemas
 
 Seja $\mf$ a matriz-coluna contendo todos os sistemas de forças ativas generalizadas:
 \begin{equation} \label{eq:fParalelos}
@@ -1021,32 +1102,7 @@ Definindo:
 \mf = \mu' - \mM'(\mq) \cdot \ddot{\mq} - \mv'(\mq,\dot{\mq}) - \mg'(\mq)
 \end{equation}
 
-Seja $\mA$ o jacobiano dos vínculos de quasi-velocidades:
-\begin{equation}
-\mA(\mq) = \frac{\partial \overline{\mp}}{\partial \mp} = 
-\begin{bmatrix}
-\mA\ssh(\mq) & \mA\cir(\mq)
-\end{bmatrix}
-\end{equation}
-
-Sendo:
-\begin{equation}
-\mA\ssh(\mq) = \frac{\partial \overline{\mp}}{\partial \mp\ssh} =
-\begin{bmatrix}
-\mD \\
-\mP \\
-\end{bmatrix}
-\end{equation}
-
-\begin{equation}
-\mA\cir(\mq) =  \frac{\partial \overline{\mp}}{\partial \mp\cir} =
--\begin{bmatrix}
-\mE \cdot \mJ_{\mathsf{v}}(\mq) + \mF \\
-\mQ \cdot \mJ_{\mathsf{w}}(\mq) + \mR \\
-\end{bmatrix}
-\end{equation}
-
-Um possível complemento ortogonal de $\mA$ é dado por
+Um possível complemento ortogonal para o jacobiano dos vínculos de quasi-velocidades ($\mA$) é dado por
 \begin{equation}
 \mC(\mq) =
 \begin{bmatrix}
@@ -1073,83 +1129,8 @@ Sendo assim, o modelo dinâmico do mecanismo paralelo pode ser escrito como:
 
 Ou seja:
 \begin{equation}
-\mu - \sum_{i=1}^\nu \mJ_i(\mq)^\msT (\mM_i \dot{\mp}_i + \mv_i(\mp_i) + \mg_i) = \mzr
+\mC(\mq)^\msT ( \mu' - \mM'(\mq)\ddot{\mq} - \mv'(\mq,\dot{\mq}) - \mg'(\mq) ) = \mzr
 \end{equation}
-
-Substituindo \eqref{eq:M_i}, \eqref{eq:v_i}, \eqref{eq:g_i}, \eqref{eq:p_i} e \eqref{eq:J_i} em \eqref{eq:ModeloDinâmicoSerialSomatorio}, temos:
-\begin{equation}
-\sum_{i=1}^\nu
-\begin{bmatrix}
-\mJ_{v\,i} \\
-\mJ_{w\,i}
-\end{bmatrix}^\msT
-\begin{Bmatrix}
-\begin{bmatrix}
-m_i \mone & \mzr \\
-\mzr      & \vct{\vI_i}_{\ttB_i \rl \ttB_i}
-\end{bmatrix}
-\cdot
-\begin{bmatrix}
-\vct{\va_i}_{\ttN} \\
-\vct{\dot{\vomega}_i}_{\ttB_i}
-\end{bmatrix}
-+
-\begin{bmatrix}
-\mzr \\
-\vct{\vomega_i}_{\ttB_i} \wedge (\vct{\vI_i}_{\ttB_i \rl \ttB_i} \cdot \vct{\vomega_i}_{\ttB_i})
-\end{bmatrix}
-+
-\begin{bmatrix}
--m_i \vct{\vg}_{\ttN} \\
-\mzr
-\end{bmatrix}
-\end{Bmatrix}
-=\mu
-\end{equation}
-
-Substituindo \eqref{eq:wi_Bi}, \eqref{eq:ai_N} e  \eqref{eq:dwi_Bi} em \eqref{eq:ModeloDinâmicoSerialSomatorio2}, temos:
-\begin{equation}
-\sum_{i=1}^\nu
-\begin{bmatrix}
-\mJ_{v\,i} \\
-\mJ_{w\,i}
-\end{bmatrix}^\msT
-\begin{Bmatrix}
-\begin{bmatrix}
-m_i (\mJ_{v\,i} \ddot{\mq} + \ma_i ) \\
-\vct{\vI_i}_{\ttB_i \rl \ttB_i} (\mJ_{w\,i} \ddot{\mq} + \dot{\mw}_i)
-\end{bmatrix}
-+
-\begin{bmatrix}
-\mzr \\
-(\mJ_{w\,i} \dot{\mq}) \wedge (\vct{\vI_i}_{\ttB_i \rl \ttB_i}  \mJ_{w\,i} \dot{\mq})
-\end{bmatrix}
-+
-\begin{bmatrix}
--m_i \vct{\vg}_{\ttN} \\
-\mzr
-\end{bmatrix}
-\end{Bmatrix}
-=\mu
-\end{equation}
-
-Sendo assim, obtemos o modelo dinâmico mostrado anteriormente pelas equações \eqref{eq:ModeloMecSerial}, \eqref{eq:MSerial}, \eqref{eq:vSerial}, \eqref{eq:gSerial}:
-$$
-\mM(\mq) \ddot{\mq} + \mv(\mq,\dot{\mq}) + \mg(\mq) = \mu
-$$
-
-Sendo:
-$$
-\mM(\mq) = \sum_{i=1}^\nu
-m_i \mJ_{v\,i}^\msT \mJ_{v\,i} + \mJ_{w\,i}^\msT \vct{\vI_i}_{\ttB_i \rl \ttB_i} \mJ_{w\,i}
-$$
-$$
-\mv(\mq, \dot{\mq}) = \sum_{i=1}^\nu
- m_i \mJ_{v\,i}^\msT \ma_i + \mJ_{w\,i}^\msT\{\vct{\vI_i}_{\ttB_i \rl \ttB_i} \dot{\mw}_i + (\mJ_{w\,i} \dot{\mq}) \wedge (\vct{\vI_i}_{\ttB_i \rl \ttB_i}  \mJ_{w\,i} \dot{\mq}) \}
-$$
-$$
-\mg(\mq) = - \sum_{i=1}^\nu m_i \mJ_{v\,i} \vct{\vg}_{\ttN}
-$$
 
 \end{itemize}
 
