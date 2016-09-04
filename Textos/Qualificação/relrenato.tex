@@ -775,7 +775,13 @@ O modelo dinâmico de cada subsistema pode ser escrito como:
 
 Sendo que para $i=0$ temos o modelo do efetuador/plataforma e para $i>0$ temos os modelos dos mecanismos seriais obtidos anteriormente.
 
-\item[ii)] Vínculos de posição
+\item[ii)] Vínculos cinemáticos entre subsistemas
+
+\begin{itemize}
+
+
+
+\item[a)] Vínculos de posição
 
 É possível relacionar as coordenadas da plataforma/efetuador $\ssB_0$ com as coordenadas dos efetuadores das cadeias seriais por meio de rotações e translações, ou seja:
 
@@ -870,7 +876,7 @@ Sendo $\mD$, $\mE$, $\mF$ e $\mf$ matrizes constantes e $\mx$ dado por:
 \end{bmatrix}
 \end{equation}
 
-\item[iii)] Vínculos de velocidades lineares
+\item[b)] Vínculos de velocidades lineares
 
 Derivando no tempo a equação \eqref{eq:VinculosGenericosPosicao}, temos:
 \begin{equation} \label{eq:VinculosGenericosVel}
@@ -909,7 +915,7 @@ Assim, substituindo \eqref{eq:dxdt} em \eqref{eq:VinculosGenericosVel}, obtemos:
 \dot{\overline{\mq}}(\mq,\dot{\mq}) = \mD \cdot \dot{\mq}\ssh - \mE \cdot \mJ_{\mathsf{v}}(\mq\cir) \cdot \dot{\mq}\cir  - \mF \cdot \dot{\mq}\cir = \mzr
 \end{equation}
 
-\item[iv)] Vínculos de velocidades angulares
+\item[c)] Vínculos de velocidades angulares
 
 Em alguns casos, é necessário incluir vínculos entre as velocidades angulares dos efetuadores das cadeiais seriais, de modo a restringir suas orientações no espaço.
 
@@ -928,7 +934,7 @@ Sendo $\mP$, $\mQ$ e $\mR$ matrizes constantes e $\mJ_{\mathsf{w}}(\mq)$ dado po
 \end{bmatrix}
 \end{equation}
 
-\item[v)] Vínculos de quasi-velocidades
+\item[d)] Vínculos de quasi-velocidades
 
 Neste caso, as quasi-velocidades do sistema são dadas simplemente por
 \begin{equation}
@@ -952,7 +958,7 @@ Os vínculos de quasi-velocidades são dados pela união dos vínculos de velocidade
 
 Repare que \eqref{eq:VinculosQuasiVel} pode ser reescrita como:
 \begin{equation}
-\overline{\mp}(\mq,\dot{\mq}) = \mA(\mq) \dot{\mq}
+\overline{\mp}(\mq,\dot{\mq}) = \mA(\mq) \dot{\mq} = \mzr
 \end{equation}
 
 Sendo $\mA$ o jacobiano dos vínculos de quasi-velocidades, o qual é dado por:
@@ -980,7 +986,7 @@ Sendo:
 \end{bmatrix}
 \end{equation}
 
-\item[vi)] Vínculos de quasi-acelerações
+\item[e)] Vínculos de quasi-acelerações
 
 Derivando \eqref{eq:VinculosQuasiVel}, temos:
 \begin{equation} \label{eq:VinculosQuasiAce}
@@ -1024,8 +1030,9 @@ Sendo:
 \end{bmatrix}
 \end{equation}
 
+\end{itemize}
 
-\item[vii)] Acoplamento de subsistemas
+\item[iii)] Acoplamento de subsistemas
 
 Seja $\mf$ a matriz-coluna contendo todos os sistemas de forças ativas generalizadas:
 \begin{equation} \label{eq:fParalelos}
@@ -1122,15 +1129,42 @@ Além disso, repare que $\mC$ respeita a seguinte relação:
 \dot{\mq} = \mC(\mq) \cdot \dot{\mq}\ssh
 \end{equation}
 
-Sendo assim, o modelo dinâmico do mecanismo paralelo pode ser escrito como:
+Sendo assim, a equação dinâmica do mecanismo paralelo pode ser escrita como:
 \begin{equation}
 \mC^\msT \mf = \mzr
 \end{equation}
 
 Ou seja:
-\begin{equation}
-\mC(\mq)^\msT ( \mu' - \mM'(\mq)\ddot{\mq} - \mv'(\mq,\dot{\mq}) - \mg'(\mq) ) = \mzr
+\begin{equation} \label{eq:EquaçãoDinamicaParalelos}
+\mC(\mq)^\msT (   \mM'(\mq)\ddot{\mq} + \mv'(\mq,\dot{\mq}) + \mg'(\mq) ) = \mC(\mq)^\msT \mu'
 \end{equation}
+
+\item[iv)] Simulação dinâmica direta
+
+É possível realizar a simulação dinâmica do sistema utilizando a equação dinâmica \eqref{eq:EquaçãoDinamicaParalelos} e os vínculos de quasi-acelerações \eqref{eq:VinculosQuasiAce}:
+\begin{equation}
+\begin{cases}
+\mC(\mq)^\msT (   \mM'(\mq)\ddot{\mq} + \mv'(\mq,\dot{\mq}) + \mg'(\mq) ) = \mC(\mq)^\msT \mu' \\
+\mA(\mq)\ddot{\mq} = \mb(\mq,\dot{\mq})
+\end{cases}
+\end{equation}
+
+Reescrevendo em forma matricial:
+\begin{equation}
+\begin{bmatrix}
+\mC(\mq)^\msT \mM'(\mq) \\
+\mA(\mq)
+\end{bmatrix}
+\cdot
+\ddot{\mq}
+=
+\begin{bmatrix}
+\mC(\mq)^\msT (\mu' - \mv'(\mq,\dot{\mq}) - \mg'(\mq) ) \\
+\mb(\mq,\dot{\mq})
+\end{bmatrix}
+\end{equation}
+
+É necessário que as condições iniciais respeitem os vínculos de posição e velocidades. Com isso, teoricamente, os vínculos continuariam sendo respeitados durante toda a simulação. Porém, devido a erros numéricos de truncamento e erros associados ao método de integração numérica utilizado, os vínculos de posição e velocidade podem deixar de ser respeitados. Esse problema pode ser resolvido utilizando a técnica das constantes de estabilização de Baumgarte \cite{Baumgarte}.
 
 \end{itemize}
 
