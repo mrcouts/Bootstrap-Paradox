@@ -1110,7 +1110,7 @@ Definindo:
 \end{equation}
 
 Um possível complemento ortogonal para o jacobiano dos vínculos de quasi-velocidades ($\mA$) é dado por
-\begin{equation}
+\begin{equation} \label{eq:CComplemento}
 \mC(\mq) =
 \begin{bmatrix}
 \mone \\
@@ -1125,7 +1125,7 @@ Pois:
 e para configurações não singulares o posto de $\begin{bmatrix} \mC(\mq)^\msT \\ \mA(\mq) \end{bmatrix}$ é cheio.
 
 Além disso, repare que $\mC$ respeita a seguinte relação:
-\begin{equation}
+\begin{equation} \label{eq:CCinematica}
 \dot{\mq} = \mC(\mq) \cdot \dot{\mq}\ssh
 \end{equation}
 
@@ -1141,7 +1141,7 @@ Ou seja:
 
 \item[iv)] Simulação dinâmica direta
 
-É possível realizar a simulação dinâmica do sistema utilizando a equação dinâmica \eqref{eq:EquaçãoDinamicaParalelos} e os vínculos de quasi-acelerações \eqref{eq:VinculosQuasiAce}:
+É possível realizar a simulação dinâmica direta do sistema utilizando a equação dinâmica \eqref{eq:EquaçãoDinamicaParalelos} e os vínculos de quasi-acelerações \eqref{eq:VinculosQuasiAce}:
 \begin{equation}
 \begin{cases}
 \mC(\mq)^\msT (   \mM'(\mq)\ddot{\mq} + \mv'(\mq,\dot{\mq}) + \mg'(\mq) ) = \mC(\mq)^\msT \mu' \\
@@ -1245,6 +1245,45 @@ Sendo assim, o sistema de EDOs que será utilizado para realizar a simualação din
 \end{bmatrix}
 \end{equation}
 
+\item[v)] Simulação dinâmica inversa
+
+Na simulação dinâmica inversa, são dados os perfis de $\mq\ssh$, $\dot{\mq}\ssh$ e $\ddot{\mq}\ssh$ em função do tempo e obtem-se os perfis dos esforços nos atuadores para a trajetória dada. Para isso, será utilizada a equação dinâmica \eqref{eq:EquaçãoDinamicaParalelos}:
+$$ \mC(\mq)^\msT (   \mM'(\mq)\ddot{\mq} + \mv'(\mq,\dot{\mq}) + \mg'(\mq) ) = \mC(\mq)^\msT \mu' $$
+
+Repare que os termos desta equação dependem de $\mq$, $\dot{\mq}$ e $\ddot{\mq}$. Sendo assim, primeiramente é preciso obter $\mq$, $\dot{\mq}$ e $\ddot{\mq}$ dados $\mq\ssh$, $\dot{\mq}\ssh$ e $\ddot{\mq}\ssh$.
+
+$\mq$ é obtido resolvendo numéricamente a equação dos vínculos de posição \eqref{eq:VinculosPosicao2}, a qual é um sistema de equações algébricas não lineares.
+$$ \overline{\mq}(\mq) = \mzr $$
+
+Tendo obtido $\mq$, $\dot{\mq}$ é obtido pela equação \eqref{eq:CCinematica}:
+$$ \dot{\mq} = \mC(\mq) \cdot \dot{\mq}\ssh $$
+
+Para obter $\ddot{\mq}$, desenvolvemos a equação dos vínculos de quasi-acelerações \eqref{eq:VinculosQuasiAce}:
+$$ \mA\ssh(\mq) \cdot \ddot{\mq}\ssh + \mA\cir(\mq) \cdot \ddot{\mq}\cir = \mb(\mq, \dot{\mq}) $$
+$$ \Rightarrow  \ddot{\mq}\cir = \mA\cir(\mq)^{-1}(\mb(\mq, \dot{\mq}) - \mA\ssh(\mq) \cdot \ddot{\mq}\ssh) $$
+\begin{equation} \label{eq:d2q_em_funcao}
+\therefore \ddot{\mq} =
+\begin{bmatrix}
+\mzr \\
+\mA\cir(\mq)^{-1} \cdot \mb(\mq, \dot{\mq})
+\end{bmatrix}
++
+\begin{bmatrix}
+\mone \\
+\mA\cir(\mq)^{-1} \cdot \mA\ssh(\mq)
+\end{bmatrix}
+\cdot
+\ddot{\mq}\ssh
+\end{equation}
+
+Substituindo \eqref{eq:CComplemento} em \eqref{eq:d2q_em_funcao}, temos:
+\begin{equation} \label{eq:d2q_em_funcao}
+\therefore \ddot{\mq} = \mC(\mq) \cdot \ddot{\mq}\ssh +
+\begin{bmatrix}
+\mzr \\
+\mA\cir(\mq)^{-1} \cdot \mb(\mq, \dot{\mq})
+\end{bmatrix}
+\end{equation}
 
 \end{itemize}
 
