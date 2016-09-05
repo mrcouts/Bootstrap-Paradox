@@ -529,7 +529,7 @@ m_i \mone & \mzr \\
 \end{bmatrix}, \, i = 1,...,\nu
 \end{equation}
 \begin{equation} \label{eq:v_i}
-\mv_i = \begin{bmatrix}
+\mv_i (\mp_i) = \begin{bmatrix}
 \mzr \\
 \vct{\vomega_i}_{\ttB_i} \wedge (\vct{\vI_i}_{\ttB_i \rl \ttB_i} \cdot \vct{\vomega_i}_{\ttB_i})
 \end{bmatrix}, \, i = 1,...,\nu
@@ -549,13 +549,13 @@ m_i \mone & \mzr \\
 
 \eqref{eq:Newton-EulerMat} pode ser reescrita como:
 \begin{equation}
-\mM_i \dot{\mp}_i + \mv_i(\mp_i) + \mg_i = \mzr, \, i = 1,...,\nu
+\mM_i \cdot \dot{\mp}_i + \mv_i(\mp_i) + \mg_i = \mzr, \, i = 1,...,\nu
 \end{equation}
 
 Seja $\mf_i$ o sistema de forças ativas  (considerando os esforços de inércia) aplicado no i-ésimo subsistema, na direção das quasi-velocidades $\mp_i$. $\mf_i$ pode ser obtido pela seguinte expressão:
 %Sendo assim, os sistemas de forças (considerando esforços ativos e de inércia) aplicados em cada subsistema são dados por:
 \begin{equation}
-\overline{\mf}_i(\mp_i, \dot{\mp}_i)  = - (\mM_i\dot{\mp}_i + \mv_i(\mp_i) + \mg_i), \, i = 1,...,\nu
+\overline{\mf}_i(\mp_i, \dot{\mp}_i)  = - (\mM_i \cdot \dot{\mp}_i + \mv_i(\mp_i) + \mg_i), \, i = 1,...,\nu
 \end{equation}
 
 Portanto, o modelo dinâmico de cada subsistema pode ser escrito como:
@@ -1164,7 +1164,87 @@ Reescrevendo em forma matricial:
 \end{bmatrix}
 \end{equation}
 
-É necessário que as condições iniciais respeitem os vínculos de posição e velocidades. Com isso, teoricamente, os vínculos continuariam sendo respeitados durante toda a simulação. Porém, devido a erros numéricos de truncamento e erros associados ao método de integração numérica utilizado, os vínculos de posição e velocidade podem deixar de ser respeitados. Esse problema pode ser resolvido utilizando a técnica das constantes de estabilização de Baumgarte \cite{Baumgarte}.
+É necessário que as condições iniciais respeitem os vínculos de posição e velocidades. Com isso, teoricamente, os vínculos continuariam sendo respeitados na solução do sistema de EDOs. Porém, devido a erros numéricos de truncamento e erros associados ao método de integração numérica utilizado, os vínculos de posição e velocidade podem deixar de ser respeitados. Esse problema pode ser resolvido utilizando a técnica das constantes de estabilização de Baumgarte \cite{Baumgarte}. A idéia é substituir a equação dos vínculos de aceleração pela seguinte equação:
+\begin{equation} \label{eq:VinculosQuasiAce2}
+\overline{\mp}'(\mq, \dot{\mq}, \ddot{\mq}) =
+\begin{bmatrix}
+\ddot{\overline{\mq}} + 2\lambda \dot{\overline{\mq}} + \lambda^2 \overline{\mq} \\
+\dot{\overline{\momega}} + \lambda \overline{\momega}
+\end{bmatrix}
+=
+\begin{bmatrix}
+\ddot{\overline{\mq}} \\
+\dot{\overline{\momega}}
+\end{bmatrix}
++
+\lambda
+\begin{bmatrix}
+2 \cdot \mone & \mzr \\
+\mzr & \mone
+\end{bmatrix}
+\cdot
+\begin{bmatrix}
+\dot{\overline{\mq}} \\
+\overline{\momega}
+\end{bmatrix}
++
+\lambda^2
+\begin{bmatrix}
+\overline{\mq} \\
+\mzr
+\end{bmatrix}
+= \mzr
+\end{equation}
+
+Substituindo \eqref{eq:VinculosQuasiVel} e \eqref{eq:VinculosQuasiAce} em \eqref{eq:VinculosQuasiAce2}, temos:
+\begin{equation} \label{eq:VinculosQuasiAce3}
+\overline{\mp}'(\mq, \dot{\mq}, \ddot{\mq}) =
+\mA(\mq) \ddot{\mq} - \mb(\mq, \dot{\mq})
++
+\lambda
+\begin{bmatrix}
+2 \cdot \mone & \mzr \\
+\mzr & \mone
+\end{bmatrix}
+\cdot
+\mA(\mq) \cdot \dot{\mq} +
+\lambda^2
+\begin{bmatrix}
+\overline{\mq}(\mq) \\
+\mzr
+\end{bmatrix}
+= \mzr
+\end{equation}
+
+Impondo que \eqref{eq:VinculosQuasiAce3} seja respeitada, garantimos que $\overline{\mq}(\mq)$ e $\overline{\momega}(\mq, \dot{\mq})$ tenderão exponencialmente a zero, para $\lambda > 0$, ou seja, irá fazer com que os vínculos de posição e velocidades sejam respeitados mesmo havendo erros de truncamento e erros associados ao método de integração numérica de EDOs. É importante ressaltar que $\lambda$ é superiomente limitado pelo passo de integração $h$ e pelo método de integração, porém, escolhendo $\lambda = 1/h$ já garante a estabilidade do método para praticamente qualquer método de integração numérica de EDOs.
+
+Sendo assim, o sistema de EDOs que será utilizado para realizar a simualação dinâmica direta é dado por:
+\begin{equation}
+\begin{bmatrix}
+\mC(\mq)^\msT \mM'(\mq) \\
+\mA(\mq)
+\end{bmatrix}
+\cdot
+\ddot{\mq}
+=
+\begin{bmatrix}
+\mC(\mq)^\msT (\mu' - \mv'(\mq,\dot{\mq}) - \mg'(\mq) ) \\
+\mb(\mq,\dot{\mq}) -
+\lambda
+\begin{bmatrix}
+2 \cdot \mone & \mzr \\
+\mzr & \mone
+\end{bmatrix}
+\cdot
+\mA(\mq) \cdot \dot{\mq} -
+\lambda^2
+\begin{bmatrix}
+\overline{\mq}(\mq) \\
+\mzr
+\end{bmatrix} 
+\end{bmatrix}
+\end{equation}
+
 
 \end{itemize}
 
