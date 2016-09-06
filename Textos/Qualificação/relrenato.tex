@@ -1335,19 +1335,19 @@ Sendo assim, a simulação dinâmica inversa é feita utilizando a equação \eqref{eq
 
 \subsection{Projeto do Controlador}\label{S04-8}
 
-Esta subse\c{c}\~ao \'e destinada ao projeto de controladores n\~ao lineares robustos, destinados ao controle de posi\c{c}\~ao e orienta\c{c}\~ao de plataformas paralelas descritas pelos modelos \eqref{eq:ModeloSRed} e \eqref{eq:ModeloCRed}, utilizando a t\'ecnica de controle por modos deslizantes.
+Esta subseção é destinada ao projeto de controladores não lineares robustos, destinados ao controle de posição de plataformas paralelas cujo modelo dinâmico para simulação dinâmica inversa é dado por \eqref{eq:DinamicaInversa2}, utilizando a técnica de controle por modos deslizantes \cite{Slotini, Utkin}.
 
-Sejam $\underline{k_p}$ e $\underline{k_v}$ matrizes diagonais positivas definidas, $\mq_0^\sdia$ uma matriz-coluna de sinais refer\^encia, e $\ms$ uma matriz-coluna dada por:
+Sejam $\underline{\lambda}$ uma matriz diagonal positiva, $\mq\ssh_d$ uma matriz-coluna de sinais referência, e $\ms$ uma matriz-coluna dada por:
 \begin{equation} \label{eq:SlidingSurfaces}
-\ms = -(\ddot{\me} + \underline{k_v}\dot{\me} + \underline{k_p}\me)
+\ms = -(\dot{\me} + \underline{\lambda}\me)
 \end{equation} 
 
 Sendo:
 \begin{equation}
-\me = \mq_0^\sdia - \mq_0
+\me = \mq\ssh_d - \mq\ssh
 \end{equation}
 
-Seja $V(\ms)$ um fun\c{c}\~ao de Lyapunov dada por:
+Seja $V(\ms)$ uma função de Lyapunov dada por:
 \begin{equation}
 V(\ms) = \frac{1}{2} \ms^\msT \ms
 \end{equation}
@@ -1362,35 +1362,37 @@ Sendo $\varkappa$ uma constante positiva. Repare que $\ms^\msT \sign(\ms)$ \'e a
 O projeto do controlador \'e feito utilizando a condi\c{c}\~ao \eqref{eq:SlidingCondition}, a qual \'e conhecida como condi\c{c}\~ao de escorregamento. Assim, derivando \eqref{eq:SlidingSurfaces}, temos:
 
 \begin{equation} \label{eq:DSlidingSurfaces}
-\dot{\ms} = \dddot{\mq}_0 - \msigma
+\dot{\ms} = \ddot{\mq}\ssh - \msigma
 \end{equation}
 Sendo:
 \begin{equation}
-\msigma = \dddot{\mq}_0^\sdia + \underline{k_v}\ddot{\me} + \underline{k_p}\dot{\me}
+\msigma = \ddot{\mq}\ssh_d + \underline{\lambda}\dot{\me}
 \end{equation}
 
 Substituindo \eqref{eq:DSlidingSurfaces} em \eqref{eq:SlidingCondition}, temos:
 
 \begin{equation} \label{eq:SlidingCondition2}
-\ms^\msT (\dddot{\mq}_0 -\msigma + \varkappa \, \sign(\ms) ) \leq 0
+\ms^\msT (\ddot{\mq}\ssh -\msigma + \varkappa \, \sign(\ms) ) \leq 0
 \end{equation} \\
 
-A partir de agora o projeto do controlador ser\'a dividido em dois casos:
+Com o intuido de deixar um pouco menos carregada a notação, definimos:
+\begin{equation}
+\mH(\mq) = \mM_{\ssM}(\mq)
+\end{equation}
+\begin{equation}
+\mh(\mq, \dot{\mq}\ssh) = \mv_{\ssM}(\mq, \dot{\mq}\ssh) + \mg_{\ssM}(\mq)
+\end{equation}
 
-\begin{itemize}
-\item[i)] $\mq_0$ \'e um conjunto de coordenadas generalizadas independentes
+Sendo assim, equação \eqref{eq:DinamicaInversa2} pode ser reescrita como:
+\begin{equation} \label{eq:ModeloControle}
+\mH(\mq) \ddot{\mq}\ssh + \mh(\mq,\dot{\mq}\ssh) = \mu^\star
+\end{equation}
 
-Nesse caso, o modelo do sistema \'e dado por \eqref{eq:ModeloSRed}, ou seja:
+\eqref{eq:ModeloControle} será utilizada para realizar o projeto do controlador. \\
 
-$$
-\begin{cases}
-\underline{L} \frac{\dd \mi}{\dd t} + \underline{R} \mi + \underline{k_w r} \mZ (\mq) \dot{\mq}_0= \mup
-\\
-\mH(\mq) \dddot{\mq}_0 + \mh(\mq,\mp,\dot{\mp}, \mi) = \mup
-\end{cases}
-$$
 
-Isolando $\dddot{\mq}_0$ na segunda equa\c{c}\~ao de \eqref{eq:ModeloSRed} e subtituindo em \eqref{eq:SlidingCondition2}, temos:
+
+Isolando $\ddot{\mq}\ssh$ em \eqref{eq:ModeloControle} e subtituindo em \eqref{eq:SlidingCondition2}, temos:
 \begin{equation} \label{eq:SlidingCondition3}
 \ms^\msT (\mH^\msI (\mup - \mh ) -\msigma + \varkappa \, \sign(\ms) ) \leq 0
 \end{equation}
@@ -1436,9 +1438,6 @@ k = \varkappa + \displaystyle\max_{1 \leq i \leq \nu\ssh} \Big( \frac{|\delta_i|
 \end{equation}
 
 Sendo $\delta_i$ e $\sigma_i$ as i-\'esimas componentes de $\mdelta$ e $\msigma$, repectivamente, e $\Delta_{i,j}$ o elemento da i-\'esima linha e j-\'esima coluna de $\mDelta$.
-
-
-\end{itemize}
 
 %---PUBLICAÇÕES---------------------------------------------------------
 \newpage
