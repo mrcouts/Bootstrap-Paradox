@@ -1375,17 +1375,20 @@ Substituindo \eqref{eq:DSlidingSurfaces} em \eqref{eq:SlidingCondition}, temos:
 \ms^\msT (\ddot{\mq}\ssh -\msigma + \varkappa \, \sign(\ms) ) \leq 0
 \end{equation} \\
 
-Com o intuido de deixar um pouco menos carregada a notação, definimos:
+Com o intuito de deixar um pouco menos carregada a notação, definimos:
 \begin{equation}
 \mH(\mq) = \mM_{\ssM}(\mq)
 \end{equation}
 \begin{equation}
 \mh(\mq, \dot{\mq}\ssh) = \mv_{\ssM}(\mq, \dot{\mq}\ssh) + \mg_{\ssM}(\mq)
 \end{equation}
+\begin{equation}
+\mup = \mu^\star
+\end{equation}
 
 Sendo assim, equação \eqref{eq:DinamicaInversa2} pode ser reescrita como:
 \begin{equation} \label{eq:ModeloControle}
-\mH(\mq) \ddot{\mq}\ssh + \mh(\mq,\dot{\mq}\ssh) = \mu^\star
+\mH(\mq)  \ddot{\mq}\ssh + \mh(\mq,\dot{\mq}\ssh) = \mup
 \end{equation}
 
 \eqref{eq:ModeloControle} será utilizada para realizar o projeto do controlador. \\
@@ -1402,14 +1405,14 @@ Para satisfazer \eqref{eq:SlidingCondition3}, \'e utilizada a seguinte lei de co
 \mup = \hat{\mh} + \hat{\mH}( \msigma - \underline{k} \sign(\ms) )
 \end{equation}
 
-Sendo $\hat{\mh}$ e $\hat{\mH}$ estimadores de $\mh$ e $\mH$, respectivamente. Substituindo \eqref{eq:ControlLawSRed} em \eqref{eq:SlidingCondition3}, temos:
+Sendo $\hat{\mh}$ e $\hat{\mH}$ estimadores de $\mh$ e $\mH$, respectivamente, e $\underline{k}$ uma matriz diagonal positiva. Substituindo \eqref{eq:ControlLawSRed} em \eqref{eq:SlidingCondition3}, temos:
 \begin{equation} \label{eq:SlidingCondition4}
 \ms^\msT (\mdelta + \mDelta \msigma  + \varkappa \, \sign(\ms) - (\mDelta + \mone) \underline{k} \sign(\ms) ) \leq 0
 \end{equation}
 
 Sendo:
 \begin{equation}
-\mdelta(\mq,\mq,\dot{\mp},\mi) = \mH^\msI (\hat{\mh} - \mh)
+\mdelta(\mq, \dot{\mq}\ssh) = \mH^\msI (\hat{\mh} - \mh)
 \end{equation}
 \begin{equation}
 \mDelta(\mq) = \mH^\msI \hat{\mH} - \mone
@@ -1425,19 +1428,31 @@ Aplicando a desigualdade triangular em cada componente do lado esquerdo de \eqre
 | \mdelta + \mDelta \msigma  + \varkappa \, \sign(\ms) | \leq |\mdelta|_{max} + |\mDelta|_{max} |\msigma| + \diag(\varkappa \mone)
 \end{equation}
 
+Além disso, pode-se fazer a seguinte majoração no lado direito de \eqref{eq:DesigualdadeK1}:
+\begin{equation}
+(\mDelta + \mone) \cdot \diag(\underline{k})  \geq (\mone - |\mDelta|_{max} ) \cdot \diag(\underline{k})
+\end{equation}
+
 Portanto, se a seguinte inequa\c{c}\~ao matricial for respeitada:
 \begin{equation} \label{eq:DesigualdadeK2}
-(\mDelta + \mone) \cdot \diag(\underline{k})  \geq |\mdelta|_{max} + |\mDelta|_{max} |\msigma| + \diag(\varkappa \mone)
+(\mone - |\mDelta|_{max} ) \cdot \diag(\underline{k})  \geq |\mdelta|_{max} + |\mDelta|_{max} |\msigma| + \diag(\varkappa \mone)
 \end{equation}
 
 \eqref{eq:SlidingCondition4} ser\'a respeitada, o que garante que a condi\c{c}\~ao de escorregamento \eqref{eq:SlidingCondition} tamb\'em seja respeitada e consequentemente garante a converg\^encia do erro de controle para zero.
 
-Uma poss\'ivel solu\c{c}\~ao para \eqref{eq:DesigualdadeK2} \'e obtida fazendo $\underline{k} = k \mone$, a qual \'e v\'alida apenas se o somat\'orio de cada uma das linhas de $|\mDelta|_{max}$ for menor do que $1$. Esta solu\c{c}\~ao \'e dada por:
+Uma poss\'ivel solu\c{c}\~ao para \eqref{eq:DesigualdadeK2} é dada por:
 \begin{equation}
-k = \varkappa + \displaystyle\max_{1 \leq i \leq \nu\ssh} \Big( \frac{|\delta_i|_{max}}{1 - \sum_{j=1}^{\nu\ssh} |\Delta_{i,j}|_{max} } \Big) + \sum_{\kappa = 1}^{\nu\ssh} \displaystyle\max_{1 \leq i \leq \nu\ssh} \Big( \frac{|\Delta_{i,\kappa}|_{max}}{1 - \sum_{j=1}^{\nu\ssh} |\Delta_{i,j}|_{max} } \Big) |\sigma_\kappa|
+\diag(\underline{k})  = (\mone - |\mDelta|_{max} )^{-1} ( |\mdelta|_{max} + |\mDelta|_{max} |\msigma| + \diag(\varkappa \mone) )
 \end{equation}
 
-Sendo $\delta_i$ e $\sigma_i$ as i-\'esimas componentes de $\mdelta$ e $\msigma$, repectivamente, e $\Delta_{i,j}$ o elemento da i-\'esima linha e j-\'esima coluna de $\mDelta$.
+A qual é válida apenas se $(\mone - |\mDelta|_{max} )^{-1}$ for positiva. 
+
+%Uma poss\'ivel solu\c{c}\~ao para \eqref{eq:DesigualdadeK2} \'e obtida fazendo $\underline{k} = k \mone$, a qual \'e v\'alida apenas se o somat\'orio de cada uma das linhas de $|\mDelta|_{max}$ for menor do que $1$. Esta solu\c{c}\~ao \'e dada por:
+%\begin{equation}
+%k = \varkappa + \displaystyle\max_{1 \leq i \leq \nu\ssh} \Big( \frac{|\delta_i|_{max}}{1 - \sum_{j=1}^{\nu\ssh} |\Delta_{i,j}|_{max} } \Big) + \sum_{\kappa = 1}^{\nu\ssh} \displaystyle\max_{1 \leq i \leq \nu\ssh} \Big( \frac{|\Delta_{i,\kappa}|_{max}}{1 - \sum_{j=1}^{\nu\ssh} |\Delta_{i,j}|_{max} } \Big) |\sigma_\kappa|
+%\end{equation}
+
+%Sendo $\delta_i$ e $\sigma_i$ as i-\'esimas componentes de $\mdelta$ e $\msigma$, repectivamente, e $\Delta_{i,j}$ o elemento da i-\'esima linha e j-\'esima coluna de $\mDelta$.
 
 %---PUBLICAÇÕES---------------------------------------------------------
 \newpage
