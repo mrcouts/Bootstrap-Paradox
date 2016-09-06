@@ -136,7 +136,7 @@ Há uma série de vantagens em utilizar mecanismos paralelos no lugar dos tradicio
 	\label{fig:Mecanismo}
 \end{figure}
 
-Levando-se em conta esta dificuldade de obtenção e a complexidade inerente do modelo dinâmico, o controle de mecanismos de arquitetura paralela é uma tarefa desafiadora. A utilização de modelos dinâmicos simplificados limita o desempenho do projeto de controladores baseados no modelo. Porém, mesmo na hipótesez do modelo dinâmico completo estar disponível, o emprego de técnicas de controle não linear pode acarretar um custo  computacional muito elevado \cite{Craig, Zubizarreta, Slotini}. Este paradigma, aliado à falta de estratégias de controle apropriadas para esse tipo de mecanismos, resulta na exploração insatisfatória dos potenciais promissores de tais máquinas, como resposta dinâmica rápida e alta precisão \cite{Abdellatif}. Além disso, observa-se na literatura a escassez de trabalhos publicados com comprovação experimental de técnicas de controle aplicáveis a mecanismos paralelos \cite{Rynaldo}.
+Levando-se em conta esta dificuldade de obtenção e a complexidade inerente do modelo dinâmico, o controle de mecanismos de arquitetura paralela é uma tarefa desafiadora. A utilização de modelos dinâmicos simplificados limita o desempenho do projeto de controladores baseados no modelo. Porém, mesmo na hipótese do modelo dinâmico completo estar disponível, o emprego de técnicas de controle não linear pode acarretar um custo  computacional muito elevado \cite{Craig, Zubizarreta, Slotini}. Este paradigma, aliado à falta de estratégias de controle apropriadas para esse tipo de mecanismos, resulta na exploração insatisfatória dos potenciais promissores de tais máquinas, como resposta dinâmica rápida e alta precisão \cite{Abdellatif}. Além disso, observa-se na literatura a escassez de trabalhos publicados com comprovação experimental de técnicas de controle aplicáveis a mecanismos paralelos \cite{Rynaldo}.
 	
     Uma alternativa para a superação desta dificuldade seria a combinação de técnicas de controle não linear robusto (por exemplo, controle por modos deslizantes \cite{Slotini, Utkin}) com modelos dinâmicos completos de mecanismos paralelos, desenvolvidos a partir de novas metodologias de modelagem de sistemas multicorpos \cite{Orsino2013, 21orsino, 22orsino, 23orsino}. Com esta estratégia, torna-se possível sintetizar leis de controle de alto desempenho e custo computacional mais adequado, viabilizando a exploração do potencial promissor dos mecanismos paralelos.
 
@@ -148,19 +148,19 @@ Levando-se em conta esta dificuldade de obtenção e a complexidade inerente do mo
 
 Os principais objetivos do projeto s\~ao:
 \begin{itemize}
-\item Desenvolvimento de um algoritmo gerador de modelos dinâmicos completos de mecanismos paralelos, de forma explícita. Pretende-se utilizar a metodologia proposta por Orsino et. al. \cite{23orsino} de acoplamento de subsistemas multicorpos.
+\item Desenvolvimento de um algoritmo gerador de modelos dinâmicos completos de mecanismos paralelos, de forma implícita. Pretende-se utilizar a metodologia proposta por Orsino et. al. \cite{23orsino} de acoplamento de subsistemas multicorpos.
 
 
 \item Elabora\c{c}\~ao de uma metodologia de projeto de controlador n\~ao linear robusto, de alto desempenho, baseado na t\'ecnica de controle por modos deslizantes \cite{Slotini, Utkin}, aplicável a  mecanismos de arquitetura paralela. Para tanto, serão consideradas as incertezas param\'etricas e a possibilidade de atua\c{c}\~ao redundante \cite{Cheng},  além da síntese de leis de controle com custo computacional consideralvemente menor do que as tradicionais, que empregam o Controle por Torque Computado \cite{Craig, Zubizarreta}.
 
 
-\item Realizar a modelagem cinemática e dinâmica do mecanismo 2\underline{R}SU+\underline{P}PaP \cite{Kumazawa}, utilizando o algoritmo de modelagem desenvolvido.
-\item Realizar o projeto de um controlador de trajetória para o mecanismo escolhido, utilizando a metodologia de projeto de controle proposta.
+\item Realizar a modelagem cinemática e dinâmica dos mecanismos 5R \cite{22orsino} e 2\underline{R}SU+\underline{P}PaP \cite{Rynaldo, Kumazawa}, utilizando o algoritmo de modelagem desenvolvido.
+\item Realizar o projeto de um controlador de trajetória para os mecanismos escolhidos, utilizando a metodologia de projeto de controle proposta.
 \item Realizar simula\c{c}\~oes dinâmicas das leis de controle sintetizadas.
-\item Realizar a validação experimental do controlador projetado no protótipo do mecanismo escolhido, que se encontra no laboratório de mecanismos.
+\item Realizar a validação experimental dos controladores projetados nos protótipos dos mecanismos escolhidos, sendo que o protótipo do mecanimos 2\underline{R}SU+\underline{P}PaP se encontra no laboratório de mecanismos da EPUSP e o protótipo do pentágono articulado (5R) está sendo desenvolvido por outros alunos orientados pelo Prof. Dr. Tarcisio A. H. Coelho.
 \end{itemize}
 
-É importante ressaltar que os dois primeiros objetivos citados já foram alcançados e que a arquitetura paralela 2\underline{R}SU+\underline{P}PaP foi desenvolvida pelo grupo de pesquisa do Prof. Dr. Tarcio Antonio Hess Coelho, havendo ainda poucos estudos na literatura sobre ela. Sendo assim, pode-se afirmar que simulações dinâmicas e validações experimentais de leis de controle não-linear robusto neste mecanismo tem caráter inédito.
+É importante ressaltar que os dois primeiros objetivos citados já foram alcançados e que a arquitetura paralela 2\underline{R}SU+\underline{P}PaP foi desenvolvida pelo grupo de pesquisa do Prof. Dr. Tarcio Antonio Hess Coelho, havendo ainda poucos estudos na literatura sobre ela. Sendo assim, pode-se afirmar que simulações dinâmicas e validações experimentais de leis de controle não linear robusto neste mecanismo tem caráter inédito.
 
 
 %METODOLOGIA--------------------------------------------------------------------
