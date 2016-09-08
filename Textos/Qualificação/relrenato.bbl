@@ -147,7 +147,7 @@ R. M. M. Orsino, T. A. H. Coelho.
 \bibitem{Coutinho}
 A. G. Coutinho, T. A. H. Coelho.
 \newblock A new approach for obtaining the dynamic balancing conditions in serial mechanisms
-\newblock {\em International Journal of Mechanisms and Robotic Systems}, 2015. Manuscript accepted for publication
+\newblock {\em International Journal of Mechanisms and Robotic Systems}, 3(1), 2015.
 
 \bibitem{Cabral}
 E. L. L. Cabral.
@@ -158,5 +158,10 @@ E. L. L. Cabral.
 J. Baumgarte.
 \newblock Stabilization of constraints and integrals of motion in dynamical systems
 \newblock {\em Computer Methods in Applied Mechanics and Engineering}, 1(1): 1--16, 1972.
+
+\bibitem{RK}
+P. J. Prince, J. R. Dormand.
+\newblock High order embedded Runge-Kutta formulae
+\newblock {\em Journal of Computational and Applied Mathematics}, 7(1): 67--75, 1981.
 
 \end{thebibliography}

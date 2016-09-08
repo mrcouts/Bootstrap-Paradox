@@ -1,4 +1,5 @@
 #relrenato
+rm -f *.cno *.cns *.glo *.glsdefs *.ind *.ist *.gz *.syo *.sys
 latex --src -interaction=nonstopmode relrenato 
 #bibtex relrenato
 makeindex relrenato
