@@ -162,9 +162,16 @@ Os principais objetivos do projeto s\~ao:
 
 É importante ressaltar que os dois primeiros objetivos citados já foram alcançados e que a arquitetura paralela 2\underline{R}SU+\underline{P}PaP foi desenvolvida pelo grupo de pesquisa do Prof. Dr. Tarcio Antonio Hess Coelho, havendo ainda poucos estudos na literatura sobre ela. Sendo assim, pode-se afirmar que simulações dinâmicas e validações experimentais de leis de controle não linear robusto neste mecanismo tem caráter inédito.
 
+\newpage
 
 %METODOLOGIA--------------------------------------------------------------------
+
+\section{Revisão da literatura}\label{revision}
+
 \newpage
+
+%METODOLOGIA--------------------------------------------------------------------
+
 \section{Metodologia do projeto}\label{method}
 
 O estágio atual de desenvolvimento do presente projeto ocorre basicamente em três áreas:
@@ -193,7 +200,7 @@ Esta se\c{c}\~ao apresenta uma s\'intese dos principais resultados te\'oricos ob
 \input{symbols}
 
 %---ALGORITMO PARA MODELAGEM DE PLATAFORMAS ROBÓTICAS------------------------------------------------------------------------------------------
-\subsection{Algoritmo para modelagem de mecanismos seriais - Novo}\label{S04-1}
+\subsection{Algoritmo para modelagem de mecanismos seriais - Novo}\label{S05-1}
 
 Esta subseção tem o intuito de apresentar um algoritmo genérico para a obtenção do modelo cinemático e dinâmico de mecanismos seriais. O algoritmo apresentado é implementável em linguagens de programação comumente usadas atualmente, como C++, Java e Python, sem necessitar de recursos de manipulação simbólica. \\
 Para a obtenção do modelo, são necessários apenas os parametros de Denavit-Hartemberg \cite{Craig, Denavit, Lipkin, Cabral} do mecanismo e as posições dos centros de massa dos ligamentos em relação aos sistemas de coordenadas fixos aos ligamentos. \\ 
@@ -734,7 +741,7 @@ $$
 
 \end{itemize}
 
-\subsection{Algoritmo para modelagem de mecanismos paralelos - Novo}\label{S04-2}
+\subsection{Algoritmo para modelagem de mecanismos paralelos - Novo}\label{S05-2}
 
 Esta subseção tem o intuito de apresentar um algoritmo genérico para a obtenção do modelo dinâmico de mecanismos paralelos. O algoritmo apresentado é implementável em linguagens de programação comumente usadas atualmente, como C++, Java e Python, sem necessitar de recursos de manipulação simbólica. \\
 Para a obtenção do modelo do mecanismo paralelos, são necessários apenas os modelos de mecanismos seriais deduzidos  utilizando o algoritmo apresentado anteriormente, do modelo do efetuador, e de 7 matrizes constantes que são utilizadas para descrever a arquitetura do mecanismo paralelo. \\ 
@@ -1333,7 +1340,7 @@ Sendo assim, a simulação dinâmica inversa é feita utilizando a equação \eqref{eq
 
 \end{itemize}
 
-\subsection{Projeto do Controlador}\label{S04-8}
+\subsection{Projeto do Controlador}\label{S05-3}
 
 Esta subseção é destinada ao projeto de controladores não lineares robustos, destinados ao controle de posição de plataformas paralelas cujo modelo dinâmico para simulação dinâmica inversa é dado por \eqref{eq:DinamicaInversa2}, utilizando a técnica de controle por modos deslizantes \cite{Slotini, Utkin}.
 
@@ -1454,15 +1461,21 @@ A qual é válida apenas se $(\mone - |\mDelta|_{max} )^{-1}$ for positiva.
 
 %Sendo $\delta_i$ e $\sigma_i$ as i-\'esimas componentes de $\mdelta$ e $\msigma$, repectivamente, e $\Delta_{i,j}$ o elemento da i-\'esima linha e j-\'esima coluna de $\mDelta$.
 
-%---PUBLICAÇÕES---------------------------------------------------------
+\subsection{Simulações}\label{S05-4}
+
 \newpage
+
+%---PUBLICAÇÕES---------------------------------------------------------
+\section{Conclusões Parciais}\label{concl}
+
+\newpage
+%---PUBLICAÇÕES---------------------------------------------------------
 \section{Publicações}\label{publi}
 
-A partir dos resultados obtidos no trabalho de formatura realizado na gradua\c{c}\~ao, foi publicado um artigo intitulado ``Development of a controller for a 3-DOF robotic platform for user interaction in rehabilitation therapies'' \cite{Biorob}, o qual foi escrito pelo aluno em coautoria com Eng. Guilherme Martinho Dobrianskyj e seu orientador, Prof. Dr. Tarc\'isio Ant\^onio Hess Coelho. Este trabalho foi apresentado no BioRob 2014 (IEEE International Conference on Biomedical Robotics and Biomechatronics) na se\c{c}\~ao de posters, no dia 15 de agosto de 2014. O artigo pode ser acessado por \url{http://dx.doi.org/10.1109/BIOROB.2014.6913880}.
+A partir dos resultados obtidos no trabalho de formatura realizado na gradua\c{c}\~ao, foi publicado um artigo intitulado ``Development of a controller for a 3-DOF robotic platform for user interaction in rehabilitation therapies'' \cite{Biorob}, o qual foi escrito em coautoria com Eng. Guilherme Martinho Dobrianskyj e o Prof. Dr. Tarc\'isio Ant\^onio Hess Coelho. Este trabalho foi apresentado no BioRob 2014 (IEEE International Conference on Biomedical Robotics and Biomechatronics) na se\c{c}\~ao de posters, no dia 15 de agosto de 2014. O artigo pode ser acessado por \url{http://dx.doi.org/10.1109/BIOROB.2014.6913880}.
 
 Um cap\' itulo de livro, intitulado ``Dynamic modelling
-and control of balanced parallel mechanisms'' \cite{22orsino}, foi escrito em coautoria com o aluno de
-doutorado direto Renato M. M. Orsino e com o Prof. Dr. Tarcisio Antonio Hess Coelho, para o livro {\em Dynamic balancing of mechanisms and synthesizing of parallel
+and control of balanced parallel mechanisms'' \cite{22orsino}, foi escrito em coautoria com o Dr. Renato M. M. Orsino e com o Prof. Dr. Tarcisio Antonio Hess Coelho, para o livro {\em Dynamic balancing of mechanisms and synthesizing of parallel
 robots}  (editado pelo Prof. Dr. Dan Zhang da Universidade do Instituto de Tecnologia
 de Ontario e publicado pela editora Springer).
 Este cap\'itulo de livro trata do uso de uma metodologia de modelagem modular para o
@@ -1476,7 +1489,7 @@ Um artigo, publicado no peri\'odico {\em International Journal of Mechanisms and
 \newpage
 \section{Disciplinas de pós-graduação}\label{disci}
 
-Ao longo do programa o aluno j\'a cumpriu 56 cr\'editos, tendo cursado 7 disciplinas 
+Ao longo do programa foram cumpridos 56 cr\'editos, tendo cursado 7 disciplinas 
 de p\'os-gradua\c{c}\~ao:
 \begin{itemize}
 \item PME--5004 --- Complementos de Matem\'atica I
@@ -1488,9 +1501,9 @@ de p\'os-gradua\c{c}\~ao:
 \item PMR--5014 --- Controle N\~ao Linear Aplicado a Sistemas Mec\^anicos e Mecatr\^onicos
 \end{itemize}
 
-Ressalta-se que em todas o aluno obteve conceito A, demonstrando bom aproveitamento. \\
+Ressalta-se que em todas as disciplinas foi obtido conceito A, demonstrando bom aproveitamento. \\
 
-Ainda é necessário cumprir mais 24 créditos de pós-graduação, os quais deverão ser cumpridos realizando a publicação de 3 artigos em periódicos indexados.
+Ainda é necessário cumprir mais 24 créditos de pós-graduação, os quais deverão ser cumpridos realizando a publicação de 3 artigos em periódicos indexados, sendo que um dos 3 artigos já foi publicado.
 
 
 
@@ -1535,7 +1548,7 @@ Serão realizados as seguintes etapas para a realização da proposta:
 
 Aqui segue um cronograma estimado para realização das atividades propostas:
 
-\begin{table}[!ht]
+\begin{table}[H]
 \begin{center}
 \caption[Cronograma]{Cronograma -- Planejamento de Atividades por quadrimestre}
 \begin{tabular}{|c|c|c|c|c|c|c|c|c|} 
@@ -1577,8 +1590,13 @@ Aqui segue um cronograma estimado para realização das atividades propostas:
 \end{center}
 \end{table}
 
-\phantom{a}
 \newpage
+%---SUMÁRIO ESTRUTURADO DA TESE---------------------------------------------------------
+\section{Sumário estruturado da tese}\label{sum}
+
+\newpage
+
+\phantom{a}
 \bibliographystyle{plain}
 \bibliography{bibliografia}
 
