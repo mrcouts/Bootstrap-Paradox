@@ -37,6 +37,7 @@
 \usepackage[sort=def, nopostdot]{glossaries}
 \usepackage{makeidx} 
 \usepackage{listings}
+\usepackage{multicol}
 
 \renewcommand*{\glossarypreamble}{\vspace{-\baselineskip}}  
 
@@ -780,7 +781,7 @@ Sejam $\ssB_0$, $\ssB_1$, ..., $\ssB_{n} \,$ $n+1$ subsistemas mec\^anicos e $\s
 
 O modelo dinâmico de cada subsistema pode ser escrito como:
 
-\begin{equation}
+\begin{equation} \label{eq:ModeloDosSubsistemas}
 \overline{\mf}_{\ssB_i}(\mu_i, \mq_i, \dot{\mq}_i, \ddot{\mq}_i) =  \mu_i - (\mM_{\ssB_i}(\mq_i) \ddot{\mq}_i + \mv_{\ssB_i}(\mq_i,\dot{\mq}_i) + \mg_{\ssB_i}(\mq_i)) = \mzr, \, i = 0,...,n
 \end{equation}
 
@@ -1331,13 +1332,13 @@ Supondo que não haja atuação redundante, para configurações não singulares, \eqr
 
 Sendo: 
 \begin{equation}
-\mM_{\ssM} (\mq) = (\mZ(\mq)^\msT)^{-1} \cdot \mC(\mq)^\msT \mM'(\mq) \mC(\mq) 
+\mM_{\ssM} (\mq) = (\mZ(\mq)^\msT)^\msI \cdot \mC(\mq)^\msT \mM'(\mq) \mC(\mq) 
 \end{equation}
 \begin{equation}
-\mv_{\ssM} (\mq, \dot{\mq}\ssh) = (\mZ(\mq)^\msT)^{-1} \cdot \mC(\mq)^\msT \{   \mM'(\mq) \cdot  \mc(\mq, \mC(\mq) \cdot \dot{\mq}\ssh) + \mv'(\mq,\mC(\mq) \cdot \dot{\mq}\ssh) \} 
+\mv_{\ssM} (\mq, \dot{\mq}\ssh) = (\mZ(\mq)^\msT)^\msI \cdot \mC(\mq)^\msT \{   \mM'(\mq) \cdot  \mc(\mq, \mC(\mq) \cdot \dot{\mq}\ssh) + \mv'(\mq,\mC(\mq) \cdot \dot{\mq}\ssh) \} 
 \end{equation}
 \begin{equation}
-\mg_{\ssM} (\mq) = (\mZ(\mq)^\msT)^{-1} \cdot \mC(\mq)^\msT \mg'(\mq) 
+\mg_{\ssM} (\mq) = (\mZ(\mq)^\msT)^\msI \cdot \mC(\mq)^\msT \mg'(\mq) 
 \end{equation}
 
 Sendo assim, a simulação dinâmica inversa é feita utilizando a equação \eqref{eq:DinamicaInversa2} para obter os esforços nos atuadores, dados $\mq\ssh$, $\dot{\mq}\ssh$ e $\ddot{\mq}\ssh$, e obtendo $\mq$ através da solução numérica da equação \eqref{eq:VinculosGenericosPosicao}.
@@ -1365,10 +1366,10 @@ V(\ms) = \frac{1}{2} \ms^\msT \ms
 
 Pela teoria de estabilidade de Lyapunov, se $\dot{V} < 0 \,\, \forall \ms \neq \mzr$, $\ms$ converge para $\mzr$ independentemente das condi\c{c}\~oes iniciais do sistema. Para que isso seja poss\'ivel, \'e imposta a seguinte condi\c{c}\~ao:
 \begin{equation} \label{eq:SlidingCondition}
-\frac{\dd}{\dd t} V(\ms) = \ms^\msT \dot{\ms} \leq - \varkappa \, \ms^\msT \sign(\ms) 
+\frac{\dd}{\dd t} V(\ms) = \ms^\msT \dot{\ms} \leq - \eta \, \ms^\msT \sign(\ms) 
 \end{equation}
 
-Sendo $\varkappa$ uma constante positiva. Repare que $\ms^\msT \sign(\ms)$ \'e a soma dos m\'odulos das componentes de $\ms$, o que implica que $- \varkappa \, \ms^\msT \sign(\ms) < 0 \,\, \forall \ms \neq \mzr$. Repare tamb\'em que se $\dot{\ms} = - \varkappa \,\sign(\ms)$,  \eqref{eq:SlidingCondition} \'e satisfeita e cada componente de $\ms$ respeita a EDO $\dot{s_i} = - \varkappa \,\sign(s_i)$, a qual converge para zero em um tempo finito de $t = \frac{|s_i(0)|}{\varkappa}$. Sendo assim, pode-se dizer que se \eqref{eq:SlidingCondition} for satisfeita, $\ms$ converge para zero em tempo finito e, a partir desse momento, o erro de controle $\me$ converge assintoticamente para zero.
+Sendo $\eta$ uma constante positiva. Repare que $\ms^\msT \sign(\ms)$ \'e a soma dos m\'odulos das componentes de $\ms$, o que implica que $- \eta \, \ms^\msT \sign(\ms) < 0 \,\, \forall \ms \neq \mzr$. Repare tamb\'em que se $\dot{\ms} = - \eta \,\sign(\ms)$,  \eqref{eq:SlidingCondition} \'e satisfeita e cada componente de $\ms$ respeita a EDO $\dot{s_i} = - \eta \,\sign(s_i)$, a qual converge para zero em um tempo finito de $t = \frac{|s_i(0)|}{\eta}$. Sendo assim, pode-se dizer que se \eqref{eq:SlidingCondition} for satisfeita, $\ms$ converge para zero em tempo finito e, a partir desse momento, o erro de controle $\me$ converge assintoticamente para zero.
 
 O projeto do controlador \'e feito utilizando a condi\c{c}\~ao \eqref{eq:SlidingCondition}, a qual \'e conhecida como condi\c{c}\~ao de escorregamento. Assim, derivando \eqref{eq:SlidingSurfaces}, temos:
 
@@ -1383,7 +1384,7 @@ Sendo:
 Substituindo \eqref{eq:DSlidingSurfaces} em \eqref{eq:SlidingCondition}, temos:
 
 \begin{equation} \label{eq:SlidingCondition2}
-\ms^\msT (\ddot{\mq}\ssh -\msigma + \varkappa \, \sign(\ms) ) \leq 0
+\ms^\msT (\ddot{\mq}\ssh -\msigma + \eta \, \sign(\ms) ) \leq 0
 \end{equation} \\
 
 Com o intuito de deixar um pouco menos carregada a notação, definimos:
@@ -1408,7 +1409,7 @@ Sendo assim, equação \eqref{eq:DinamicaInversa2} pode ser reescrita como:
 
 Isolando $\ddot{\mq}\ssh$ em \eqref{eq:ModeloControle} e subtituindo em \eqref{eq:SlidingCondition2}, temos:
 \begin{equation} \label{eq:SlidingCondition3}
-\ms^\msT (\mH^\msI (\mup - \mh ) -\msigma + \varkappa \, \sign(\ms) ) \leq 0
+\ms^\msT (\mH^\msI (\mup - \mh ) -\msigma + \eta \, \sign(\ms) ) \leq 0
 \end{equation}
 
 Para satisfazer \eqref{eq:SlidingCondition3}, \'e utilizada a seguinte lei de controle:
@@ -1418,7 +1419,7 @@ Para satisfazer \eqref{eq:SlidingCondition3}, \'e utilizada a seguinte lei de co
 
 Sendo $\hat{\mh}$ e $\hat{\mH}$ estimadores de $\mh$ e $\mH$, respectivamente, e $\underline{k}$ uma matriz diagonal positiva. Substituindo \eqref{eq:ControlLawSRed} em \eqref{eq:SlidingCondition3}, temos:
 \begin{equation} \label{eq:SlidingCondition4}
-\ms^\msT (\mdelta + \mDelta \msigma  + \varkappa \, \sign(\ms) - (\mDelta + \mone) \underline{k} \sign(\ms) ) \leq 0
+\ms^\msT (\mdelta + \mDelta \msigma  + \eta \, \sign(\ms) - (\mDelta + \mone) \underline{k} \sign(\ms) ) \leq 0
 \end{equation}
 
 Sendo:
@@ -1431,12 +1432,12 @@ Sendo:
 
 Pode-se dizer que \eqref{eq:SlidingCondition4} \'e sempre satisfeita se:
 \begin{equation} \label{eq:DesigualdadeK1}
-(\mDelta + \mone) \cdot \diag(\underline{k})  \geq | \mdelta + \mDelta \msigma  + \varkappa \, \sign(\ms) |
+(\mDelta + \mone) \cdot \diag(\underline{k})  \geq | \mdelta + \mDelta \msigma  + \eta \, \sign(\ms) |
 \end{equation}
 
 Aplicando a desigualdade triangular em cada componente do lado esquerdo de \eqref{eq:DesigualdadeK1}, temos:
 \begin{equation}
-| \mdelta + \mDelta \msigma  + \varkappa \, \sign(\ms) | \leq |\mdelta|_{max} + |\mDelta|_{max} |\msigma| + \diag(\varkappa \mone)
+| \mdelta + \mDelta \msigma  + \eta \, \sign(\ms) | \leq |\mdelta|_{max} + |\mDelta|_{max} |\msigma| + \diag(\eta \mone)
 \end{equation}
 
 Além disso, pode-se fazer a seguinte majoração no lado direito de \eqref{eq:DesigualdadeK1}:
@@ -1446,26 +1447,232 @@ Além disso, pode-se fazer a seguinte majoração no lado direito de \eqref{eq:Desi
 
 Portanto, se a seguinte inequa\c{c}\~ao matricial for respeitada:
 \begin{equation} \label{eq:DesigualdadeK2}
-(\mone - |\mDelta|_{max} ) \cdot \diag(\underline{k})  \geq |\mdelta|_{max} + |\mDelta|_{max} |\msigma| + \diag(\varkappa \mone)
+(\mone - |\mDelta|_{max} ) \cdot \diag(\underline{k})  \geq |\mdelta|_{max} + |\mDelta|_{max} |\msigma| + \diag(\eta \mone)
 \end{equation}
 
 \eqref{eq:SlidingCondition4} ser\'a respeitada, o que garante que a condi\c{c}\~ao de escorregamento \eqref{eq:SlidingCondition} tamb\'em seja respeitada e consequentemente garante a converg\^encia do erro de controle para zero.
 
 Uma poss\'ivel solu\c{c}\~ao para \eqref{eq:DesigualdadeK2} é dada por:
 \begin{equation}
-\diag(\underline{k})  = (\mone - |\mDelta|_{max} )^{-1} ( |\mdelta|_{max} + |\mDelta|_{max} |\msigma| + \diag(\varkappa \mone) )
+\diag(\underline{k})  = (\mone - |\mDelta|_{max} )^\msI ( |\mdelta|_{max} + |\mDelta|_{max} |\msigma| + \diag(\eta \mone) )
 \end{equation}
 
-A qual é válida apenas se $(\mone - |\mDelta|_{max} )^{-1}$ for positiva. 
+A qual é válida apenas se $(\mone - |\mDelta|_{max} )^\msI$ for positiva. 
 
 %Uma poss\'ivel solu\c{c}\~ao para \eqref{eq:DesigualdadeK2} \'e obtida fazendo $\underline{k} = k \mone$, a qual \'e v\'alida apenas se o somat\'orio de cada uma das linhas de $|\mDelta|_{max}$ for menor do que $1$. Esta solu\c{c}\~ao \'e dada por:
 %\begin{equation}
-%k = \varkappa + \displaystyle\max_{1 \leq i \leq \nu\ssh} \Big( \frac{|\delta_i|_{max}}{1 - \sum_{j=1}^{\nu\ssh} |\Delta_{i,j}|_{max} } \Big) + \sum_{\kappa = 1}^{\nu\ssh} \displaystyle\max_{1 \leq i \leq \nu\ssh} \Big( \frac{|\Delta_{i,\kappa}|_{max}}{1 - \sum_{j=1}^{\nu\ssh} |\Delta_{i,j}|_{max} } \Big) |\sigma_\kappa|
+%k = \eta + \displaystyle\max_{1 \leq i \leq \nu\ssh} \Big( \frac{|\delta_i|_{max}}{1 - \sum_{j=1}^{\nu\ssh} |\Delta_{i,j}|_{max} } \Big) + \sum_{\kappa = 1}^{\nu\ssh} \displaystyle\max_{1 \leq i \leq \nu\ssh} \Big( \frac{|\Delta_{i,\kappa}|_{max}}{1 - \sum_{j=1}^{\nu\ssh} |\Delta_{i,j}|_{max} } \Big) |\sigma_\kappa|
 %\end{equation}
 
 %Sendo $\delta_i$ e $\sigma_i$ as i-\'esimas componentes de $\mdelta$ e $\msigma$, repectivamente, e $\Delta_{i,j}$ o elemento da i-\'esima linha e j-\'esima coluna de $\mDelta$.
 
 \subsection{Simulações}\label{S05-4}
+Nesta subseção, será realizada a simulação dinâmica direta do mecânimo 5R utilizando o algoritmo de modelagem e simulação de mecanismos paralelos apresentado e a lei de controle apresentada na subseção anterior, considerando incertezas paramétricas, tanto no projeto, quanto na simulação.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.30]{5Rscan.jpg}  
+	\caption{Pentágono articulado (5R)}
+	\label{fig:5R}
+\end{figure}
+
+O mecanismo 5R será modelado através do acoplamento de 2 subsistemas seriais $\ssB_1$ e $\ssB_2$ do tipo \underline{R}\underline{R}, e um efetuador pontual $\ssB_0$ de massa $m_0$.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.25]{RR.jpg}  
+	\caption{Mecanismo \underline{R}\underline{R}}
+	\label{fig:RR}
+\end{figure}
+
+
+\begin{itemize}
+\item[i)] Modelo do efetuador
+
+O modelo do efetuado pontual $\ssB_0$ segue o formato dado pela equação \eqref{eq:ModeloDosSubsistemas}, ou seja:
+\begin{equation}
+\overline{\mf}_{\ssB_0}(\mu_0, \mq_0, \dot{\mq}_0, \ddot{\mq}_0) =  \mu_0 - (\mM_{\ssB_0}(\mq_0) \ddot{\mq}_0 + \mv_{\ssB_0}(\mq_0,\dot{\mq}_0) + \mg_{\ssB_0}(\mq_0)) = \mzr
+\end{equation}
+Para o subsistema em questão, temos:
+\begin{equation}
+\mM_{\ssB_0}(\mq_0) = \begin{bmatrix}
+m_0 & 0 \\
+0 & m_0 \\
+\end{bmatrix}
+\end{equation}
+\begin{equation}
+\mv_{\ssB_0}(\mq_0,\dot{\mq}_0) = \mzr
+\end{equation}
+\begin{equation}
+\mg_{\ssB_0}(\mq_0) = \begin{bmatrix}
+0 &
+m_0 g \\
+\end{bmatrix}^\msT
+\end{equation}
+\begin{equation}
+\mq_0 = \mq\ssh = \begin{bmatrix}
+x &
+y
+\end{bmatrix}^\msT
+\end{equation}
+\begin{equation}
+\mu_0 = \mzr
+\end{equation}
+
+
+
+\item[ii)] Parâmetros de Denavit-Hartemberg das cadeias seriais
+
+\begin{table}[H]
+\begin{center}
+\caption[DH]{Parâmetros de Denavit-Hartemberg do mecanismo \underline{R}\underline{R}}
+\begin{tabular}{|c|c|c|c|c|c|} 
+	\hline
+	\rule[-2mm]{0mm}{6mm}
+	Ligamento & $a_i$ & $\alpha_i$ & $d_i$ & $\theta_i$ \\
+	\hline
+	\rule[-2mm]{0mm}{6mm}
+	(1) & $l_1$ & $0$ & $0$ & $q_1(t)$  \\
+	\rule[-1mm]{0mm}{5mm}
+	(2) & $l_2$ & $0$ & $0$ & $q_2(t)$  \\
+	\hline
+\end{tabular}
+\label{tab:DH}
+\end{center}
+\end{table}
+
+\item[iii)] Parâmetros da arquitetura do mecanismo paralelo
+
+É possível relacionar as coordenadas um ponto no espaço descrito no sistema $\ttN$ com as coordenadas do mesmo ponto escritas nos sistemas $\ttN_1$ e $\ttN_2$ da seguinte maneira:
+\begin{equation}
+\vct{\ttp}_{\ttN} = \begin{bmatrix}
+1 & 0 & 0 \\
+0 & 1 & 0 \\
+0 & 0 & 1 \\
+\end{bmatrix}
+\cdot
+\vct{\ttp}_{\ttN_1}
++
+\begin{bmatrix}
+l_0 \\
+0 \\
+0 
+\end{bmatrix}
+\end{equation}
+\begin{equation}
+\vct{\ttp}_{\ttN} = \begin{bmatrix}
+-1 & 0 & 0 \\
+0 & 1 & 0 \\
+0 & 0 & -1 \\
+\end{bmatrix}
+\cdot
+\vct{\ttp}_{\ttN_2}
++
+\begin{bmatrix}
+-l_0 \\
+0 \\
+0 
+\end{bmatrix}
+\end{equation}
+
+Escolhendo o ponto $\ttp$ como sendo o efetuador do mecanismo paralelo, o qual tem a mesma localização dos efetuadores das cadeias serias neste caso, temos:
+\begin{equation}
+\mq\ssh = 
+\begin{bmatrix}
+1 & 0 & 0 \\
+0 & 1 & 0 \\
+\end{bmatrix}
+\cdot
+\mx_1(\mq_1)
++
+\begin{bmatrix}
+l_0 \\
+0 \\
+\end{bmatrix}
+\end{equation}
+\begin{equation}
+\mq\ssh = 
+\begin{bmatrix}
+-1 & 0 & 0 \\
+0 & 1 & 0 \\
+\end{bmatrix}
+\cdot
+\mx_2(\mq_2)
++
+\begin{bmatrix}
+-l_0 \\
+0 \\
+\end{bmatrix}
+\end{equation}
+
+Sendo assim, temos que os vínculos de posição são dados por:
+\begin{equation}
+\overline{\mq}(\mq) =
+\begin{bmatrix}
+1 & 0 \\
+0 & 1 \\
+1 & 0 \\
+0 & 1 \\
+\end{bmatrix}
+\cdot
+\mq\ssh
+-
+\begin{bmatrix}
+1 & 0 & 0 & 0 & 0 & 0 \\
+0 & 1 & 0 & 0 & 0 & 0 \\
+0 & 0 & 0 & -1 & 0 & 0 \\
+0 & 0 & 0 & 0 & 1 & 0 \\
+\end{bmatrix}
+\cdot
+\mx(\mq\cir)
+-
+\begin{bmatrix}
+l_0 \\
+0 \\
+-l_0 \\
+0 \\
+\end{bmatrix}
+= \mzr
+\end{equation}
+
+Como não temos vínculos de velocidades angulares para esse mecanismo, as matrizes que descrevem a arquitetura do mecanismo são dadas por:
+\begin{multicols}{3}
+\begin{equation}
+\md = \begin{bmatrix}
+l_0 \\
+0 \\
+-l_0 \\
+0 \\
+\end{bmatrix}
+\end{equation} \\
+\begin{equation}
+\mD = \begin{bmatrix}
+1 & 0 \\
+0 & 1 \\
+1 & 0 \\
+0 & 1 \\
+\end{bmatrix}
+\end{equation} \\
+\begin{equation}
+\mE = \begin{bmatrix}
+1 & 0 & 0 & 0 & 0 & 0 \\
+0 & 1 & 0 & 0 & 0 & 0 \\
+0 & 0 & 0 & -1 & 0 & 0 \\
+0 & 0 & 0 & 0 & 1 & 0 \\
+\end{bmatrix}
+\end{equation}
+\end{multicols}
+\begin{equation}
+\mF = \mzr
+\end{equation}
+\begin{equation}
+\mP = \mQ = \mR = \vct{\varnothing}
+\end{equation}
+ 
+
+\end{itemize}
+
+
 
 \newpage
 
