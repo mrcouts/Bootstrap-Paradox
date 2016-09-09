@@ -164,6 +164,11 @@ P. J. Prince, J. R. Dormand.
 \newblock High order embedded Runge-Kutta formulae
 \newblock {\em Journal of Computational and Applied Mathematics}, 7(1): 67--75, 1981.
 
+\bibitem{Kaminski}
+P. C. Kaminski.
+\newblock {\em {Mec\^anica geral para engenheiros}}.
+\newblock Edgard Bl\"ucher, 2000.
+
 \bibitem{Tenenbaum}
 R. A. Tenenbaum.
 \newblock {\em {Fundamentals of Applied Dynamics}}.
