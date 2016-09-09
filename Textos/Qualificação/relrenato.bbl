@@ -147,7 +147,7 @@ R. M. M. Orsino, T. A. H. Coelho.
 \bibitem{Coutinho}
 A. G. Coutinho, T. A. H. Coelho.
 \newblock A new approach for obtaining the dynamic balancing conditions in serial mechanisms
-\newblock {\em International Journal of Mechanisms and Robotic Systems}, 3(1), 2015.
+\newblock {\em International Journal of Mechanisms and Robotic Systems}, 3(1): 32--47, 2016.
 
 \bibitem{Cabral}
 E. L. L. Cabral.
@@ -163,5 +163,10 @@ J. Baumgarte.
 P. J. Prince, J. R. Dormand.
 \newblock High order embedded Runge-Kutta formulae
 \newblock {\em Journal of Computational and Applied Mathematics}, 7(1): 67--75, 1981.
+
+\bibitem{Tenenbaum}
+R. A. Tenenbaum.
+\newblock {\em {Fundamentals of Applied Dynamics}}.
+\newblock Springer Science \& Business Media, 2006.
 
 \end{thebibliography}

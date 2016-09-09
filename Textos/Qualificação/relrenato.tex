@@ -1516,20 +1516,23 @@ Serão realizados as seguintes etapas para a realização da proposta:
 
 \begin{itemize}
 
-\item[(1)] 	Modelagem cinemática do mecanismo 2\underline{R}SU + \underline{P}PaP
-\item[(2)] 	Modelagem dinâmica do mecanismo
-\item[(3)] Simulação dinâmica inversa do mecanismo
-\item[(4)] Simulação dinâmica direta do mecanismo utilizando leis de Controle por Torque Computado
-\item[(5)] Identificação dos parâmetros do sistema e suas respectivas incertezas, utilizando o protótipo
-\item[(6)] Projeto de controlador por modos deslizantes
-\item[(7)] Simulação do sistema em malha fechada, utilizando o controlador projetado
-\item[(8)] Preparo para o exame de qualificação
-\item[(9)] Validação experimental do controlador projetado, utilizando o protótipo
-\item[(10)] Escrever artigo sobre uma nova abordagem para modelagem dinâmica de mecanismos seriais, utilizando o método Orsino de acoplamento de subsistemas \cite{23orsino}, aliado aos parâmetros de Denavit-Hartenberg \cite{Craig, Denavit, Lipkin}
-\item[(11)] Escrever artigo sobre modelagem dinâmica de mecanismos paralelos, utilizando o método Orsino de acoplamento de subsistemas
-\item[(12)] Escrever artigo sobre controle não linear robusto aplicado a mecanismos paralelos
-\item[(13)] Avaliação geral dos resultados
-\item[(14)] Preparo da tese
+\item[(1)] Obtenção do espaço de trabalho e singularidades do mecanismo  2\underline{R}SU+\underline{P}PaP
+\item[(2)] Realização de projeto de controlador por modos deslizantes para o mecanismo 2\underline{R}SU+\underline{P}PaP, considerando os esforços dos atuadores como entradas de controle
+\item[(3)] Simulação dinâmica direta do mecanismo 2\underline{R}SU+\underline{P}PaP controlado pelo controlador projetado
+\item[(4)] Inclusão de atritos nas juntas no algoritmo de modelagem
+\item[(5)] Inclusão das inércias efetivas dos atuadores no algoritmo de modelagem
+\item[(6)] Dedução dos princípios de composição de movimento para as derivadas das acelerações lineares e angulares
+\item[(7)] Aplicações dos princípios de composição de movimento das derivadas das acelerações lineares e angulares para efetuadores e centros de massa de ligamentos de mecanismos seriais
+\item[(8)] Inclusão da dinâmica eletro-mecânica dos atuadores no algoritmo de modelagem
+\item[(9)] Identificação dos parâmetros dos sistemas e suas respectivas incertezas, utilizando os protótipos
+\item[(10)] Realização de projeto de controlador por modos deslizantes para os mecanismos 5R e 2\underline{R}SU+\underline{P}PaP, considerando a tensão elétrica nos atuadores como entrada de controle
+\item[(11)] Simulação dinâmica direta dos mecanismos controlados pelos controladores descritos no item anterior
+\item[(12)] Validação experimental dos controladores projetados, utilizando os protótipos
+\item[(13)] Escrever artigo sobre uma nova abordagem para modelagem dinâmica de mecanismos seriais, utilizando o método Orsino de acoplamento de subsistemas \cite{23orsino}, aliado aos parâmetros de Denavit-Hartenberg \cite{Craig, Denavit, Lipkin}
+\item[(14)] Escrever artigo sobre modelagem dinâmica de mecanismos paralelos, utilizando o método Orsino de acoplamento de subsistemas
+\item[(15)] Escrever artigo sobre controle não linear robusto aplicado a mecanismos paralelos
+\item[(16)] Avaliação geral dos resultados
+\item[(17)] Preparo da tese
 
 %\item[(1)] 	Cumprimentos dos créditos de pós-graduação.
 %\item[(2)] 	Pesquisa e revisão bibliográfica da literatura para o desenvolvimento teórico.
@@ -1551,39 +1554,45 @@ Aqui segue um cronograma estimado para realização das atividades propostas:
 \begin{table}[H]
 \begin{center}
 \caption[Cronograma]{Cronograma -- Planejamento de Atividades por quadrimestre}
-\begin{tabular}{|c|c|c|c|c|c|c|c|c|} 
+\begin{tabular}{|c|c|c|c|c|c|} 
 	\hline
 	\rule[-2mm]{0mm}{6mm}
-	Ativ./Quad. & $3^o/15$ & $1^o/16$ & $2^o/16$ & $3^o/16$ & $1^o/17$ & $2^o/17$ & $3^o/17$ \\
+	Ativ./Quad. & $3^o/16$ & $1^o/17$ & $2^o/17$ & $3^o/17$ \\
 	\hline
 	\rule[-2mm]{0mm}{6mm}
-	(1) & \rule[0mm]{10mm}{2mm} &  \rule[0mm]{10mm}{2mm} &  &  &  &  &   \\
+	(1) & \rule[0mm]{10mm}{2mm} &   &  &    \\
 	\rule[-1mm]{0mm}{5mm}
-	(2) & \rule[0mm]{10mm}{2mm} & \rule[0mm]{10mm}{2mm} &  &  &  &  &   \\
+	(2) & \rule[0mm]{10mm}{2mm} &  &  &    \\
 	\rule[-1mm]{0mm}{5mm}
-	(3) & \rule[0mm]{10mm}{2mm} & \rule[0mm]{10mm}{2mm} &  &  &  &  &   \\
+	(3) & \rule[0mm]{10mm}{2mm} &  &  &     \\
 	\rule[-1mm]{0mm}{5mm}
-	(4) &  & \rule[0mm]{10mm}{2mm} & \rule[0mm]{10mm}{2mm} &  &  &  &   \\
+	(4) &  \rule[0mm]{10mm}{2mm} &  &  &     \\
 	\rule[-1mm]{0mm}{5mm}
-	(5) &  &  & \rule[0mm]{10mm}{2mm}  & \rule[0mm]{10mm}{2mm} &  &  &   \\
+	(5) & \rule[0mm]{10mm}{2mm}  &  &  &     \\
 	\rule[-1mm]{0mm}{5mm}
-	(6) &  &  & \rule[0mm]{10mm}{2mm} & \rule[0mm]{10mm}{2mm} &  &  &   \\
+	(6) &  \rule[0mm]{10mm}{2mm} &  &  &     \\
 	\rule[-1mm]{0mm}{5mm}
-	(7) &  &  & \rule[0mm]{10mm}{2mm} & \rule[0mm]{10mm}{2mm} &  &  &   \\
+	(7) & \rule[0mm]{10mm}{2mm} &  &  &     \\
 	\rule[-1mm]{0mm}{5mm}
-	(8) & \rule[0mm]{10mm}{2mm}  & \rule[0mm]{10mm}{2mm} & \rule[0mm]{10mm}{2mm} &  &  &  &   \\
+	(8) & \rule[0mm]{10mm}{2mm}  &  &  &    \\
 	\rule[-2mm]{0mm}{6mm}
-	(9) &  &  &  &  & \rule[0mm]{10mm}{2mm} & \rule[0mm]{10mm}{2mm} & \rule[0mm]{10mm}{2mm}  \\
+	(9) & \rule[0mm]{10mm}{2mm}  & \rule[0mm]{10mm}{2mm}  &  &    \\
 	\rule[-1mm]{0mm}{5mm}
-	(10) &  & \rule[0mm]{10mm}{2mm} & \rule[0mm]{10mm}{2mm} &  &  &  &   \\
+	(10) & \rule[0mm]{10mm}{2mm} & \rule[0mm]{10mm}{2mm} &  &     \\
 	\rule[-2mm]{0mm}{6mm}
-	(11) &  &  &  & \rule[0mm]{10mm}{2mm} &  &  &  \\
+	(11) & \rule[0mm]{10mm}{2mm} & \rule[0mm]{10mm}{2mm} &  &    \\
 	\rule[-2mm]{0mm}{6mm}
-	(12) &  &  &  &  &  &  & \rule[0mm]{10mm}{2mm}  \\
+	(12) & \rule[0mm]{10mm}{2mm}  & \rule[0mm]{10mm}{2mm} & \rule[0mm]{10mm}{2mm} & \rule[0mm]{10mm}{2mm}   \\
 	\rule[-2mm]{0mm}{6mm}
-	(13) &  &  &  &  &  &  & \rule[0mm]{10mm}{2mm}  \\
+	(13) &  & \rule[0mm]{10mm}{2mm} &  &    \\
 	\rule[-2mm]{0mm}{6mm}
-	(14) &  &  &  &  & \rule[0mm]{10mm}{2mm} & \rule[0mm]{10mm}{2mm} & \rule[0mm]{10mm}{2mm}  \\
+	(14) &  &  & \rule[0mm]{10mm}{2mm} &   \\
+	\rule[-2mm]{0mm}{6mm}
+	(15) &  &  &  & \rule[0mm]{10mm}{2mm}   \\
+	\rule[-2mm]{0mm}{6mm}
+	(16) &  &  & \rule[0mm]{10mm}{2mm} & \rule[0mm]{10mm}{2mm}   \\
+	\rule[-2mm]{0mm}{6mm}
+	(17) &  & \rule[0mm]{10mm}{2mm} & \rule[0mm]{10mm}{2mm} & \rule[0mm]{10mm}{2mm}   \\
 	\hline
 \end{tabular}
 \label{crono}
