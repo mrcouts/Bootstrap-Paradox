@@ -116,7 +116,7 @@ Para realizar o projeto de um sistema de controle, \'e necess\'ario primeirament
 
 Utilizando os m\'etodos tradicionais de modelagem de Sistemas Mec\^anicos Multicorpos, \'e dif\'icil e trabalhoso de se obter modelos de sistemas complexos, como mecanismos paralelos. Para contornar esse problema, \'e comum desprezar alguns efeitos de acoplamentos inerciais, simplificando o processo de modelagem. Por\'em, essa estrat\'egia gera modelos mais pobres, o que ir\'a limitar a perfomance que o sistema poder\'a atingir quando for feito o projeto do sistema de controle.
 
-A solu\c{c}\~ao proposta para ser poss\'ivel aumentar a performance, garantindo a robustez, de um sistema de controle de mecanismos paralelos \'e a utiliza\c{c}\~ao dos novos m\'etodos de modelagem din\^amica desenvolvidos pelo grupo de pesquisa do Prof. Doutor Tarcisio Antonio Hess Coelho, os quais s\~ao adequados para incluir todos os efeitos de din\^amica de corpos r\'igidos, independentemente da complexidade do sistema.
+A solu\c{c}\~ao proposta para ser poss\'ivel aumentar a performance, garantindo a robustez, de um sistema de controle de mecanismos paralelos \'e a utiliza\c{c}\~ao dos novos m\'etodos de modelagem din\^amica desenvolvidos pelo grupo de pesquisa do Prof. Doutor Tarcisio Antonio Hess Coelho, os quais s\~ao adequados para incluir todos os efeitos da din\^amica de corpos r\'igidos, independentemente da complexidade do sistema.
 
 O presente projeto visa desenvolver um algoritmo de modelagem que inclua todos os efeitos da din\^amica de corpos r\'igidos para realizar a modelagem din\^amica de mecanismos paralelos (baseado na metodologia de Orsino), desenvolver uma metodologia de projeto de controle robusto para mecanismos paralelos tradicionais e mecanismos com atua\c{c}\~ao redundante, e realizar simulações e valida\c{c}\~oes experimentais das leis de controle sintetizadas pela metodologia proposta.
 
@@ -160,7 +160,7 @@ Os principais objetivos do projeto s\~ao:
 \item Realizar a validação experimental dos controladores projetados nos protótipos dos mecanismos escolhidos, sendo que o protótipo do mecanimos 2\underline{R}SU+\underline{P}PaP se encontra no laboratório de mecanismos da EPUSP e o protótipo do pentágono articulado (5R) está sendo desenvolvido por outros alunos orientados pelo Prof. Dr. Tarcisio A. H. Coelho.
 \end{itemize}
 
-É importante ressaltar que os dois primeiros objetivos citados já foram alcançados e que a arquitetura paralela 2\underline{R}SU+\underline{P}PaP foi desenvolvida pelo grupo de pesquisa do Prof. Dr. Tarcio Antonio Hess Coelho, havendo ainda poucos estudos na literatura sobre ela. Sendo assim, pode-se afirmar que simulações dinâmicas e validações experimentais de leis de controle não linear robusto neste mecanismo tem caráter inédito.
+É importante ressaltar que os 5 primeiros objetivos citados já foram parcialmente alcançados e que a arquitetura paralela 2\underline{R}SU+\underline{P}PaP foi desenvolvida pelo grupo de pesquisa do Prof. Dr. Tarcio Antonio Hess Coelho, havendo ainda poucos estudos na literatura sobre ela. Sendo assim, pode-se afirmar que simulações dinâmicas e validações experimentais de leis de controle não linear robusto neste mecanismo tem caráter inédito.
 
 \newpage
 
@@ -175,14 +175,14 @@ Os principais objetivos do projeto s\~ao:
 \section{Metodologia do projeto}\label{method}
 
 O estágio atual de desenvolvimento do presente projeto ocorre basicamente em três áreas:
-aplicação do algoritmo de modelagem e simulação para dos mecanismos 5R \cite{22orsino} e 2\underline{R}SU + \underline{P}PaP \cite{Kumazawa}, o projeto de controladores não lineares robustos de alto desempenho baseado no modelo dinâmico para os mecanismos citados, e a simulação e validação experimental das leis de controle sintetizadas.
+aplicação do algoritmo de modelagem e simulação para os mecanismos 5R \cite{22orsino} e 2\underline{R}SU + \underline{P}PaP \cite{Kumazawa}, o projeto e simulação de controladores não lineares robustos de alto desempenho baseado no modelo dinâmico para os mecanismos citados, e a validação experimental das leis de controle sintetizadas.
 
 Os trabalhos no âmbito de modelagem e simulação estão sendo desenvolvidos a partir da aplicação do algoritmo de modelagem cinemática e dinâmica de mecanismos paralelos desenvolvido, baseado na utilização dos parâmetros de Denavit-Hartenberg \cite{Craig, Denavit, Lipkin} e no método Orsino de acoplamento de subsistemas \cite{23orsino}. Toda modelagem será feita em C++, utilizando uma biblioteca otimizada de cálculo matricial (Armadillo).
 As simulações da dinâmica direta do mecanismo serão feitas utilizando o método Runge-Kutta de 8ª ordem \cite{RK} para solução de sistemas de EDOs, de modo a garantir estabilidade numérica do método, mesmo utilizando leis de controle quase descontínuas.
 
 Os trabalhos na área de projeto de controle serão feitos utilizando a metodologia desenvolvida de projeto de controladores robustos multivariáveis para mecanismos paralelos, baseada no modelo dinâmico do mecanismo a ser controlado e na técnica de controle por modos deslizantes \cite{Slotini, Utkin}.
 
-Os trabalhos no âmbito da validação experimental das leis de controle sintetizadas serão realizados no protótipo do mecanismo 2\underline{R}SU + \underline{P}PaP que encontra-se no laboratório de mecanismos e no protótico do mecanismo 5R que está sendo construído por outros alunos do grupo de pesquisa. A bancada experimental do mecanismo 2\underline{R}SU + \underline{P}PaP já está funcional e já estão sendo realizados ensaios de leis de controle de trajetória baseadas apenas no modelo cinemático do mecanismo. Para realização da validação experimental nest bancada, será realizada a identificação dos parâmetros do sistema e suas respectivas incertezas, projeto do controlador baseado nos parâmetros e incertezas identificadas, e implementação das leis de controle e aquisição de dados em ambiente Labview. \\
+Os trabalhos no âmbito da validação experimental das leis de controle sintetizadas serão realizados no protótipo do mecanismo 2\underline{R}SU + \underline{P}PaP que encontra-se no laboratório de mecanismos e no protótico do mecanismo 5R que está sendo construído por outros alunos do grupo de pesquisa. A bancada experimental do mecanismo 2\underline{R}SU + \underline{P}PaP já está funcional e já estão sendo realizados ensaios de leis de controle de trajetória baseadas apenas no modelo cinemático do mecanismo. Para a realização da validação experimental nesta bancada, será realizada a identificação dos parâmetros do sistema e suas respectivas incertezas, projeto do controlador baseado nos parâmetros e incertezas identificadas, implementação das leis de controle, e aquisição de dados em ambiente Labview. \\
 
 \begin{figure}[h!]
 	\centering
@@ -228,6 +228,10 @@ Seja $\ssB$ um sistema mecânico serial de $\nu$ graus de liberdade. Primeirament
 \item  $\mq$: matriz-coluna de $\nu$ coordenadas generalizadas independentes. É dada por $\mq = \begin{bmatrix}
 q_1 & ... & {q}_{\nu}
 \end{bmatrix}^\msT $.
+\item $\vv_{abs}, \vv_{rel}, \vv_{arr}$: Velocidades absoluta, relativa e de arrastamento, respectivamente.
+\item $\va_{abs}, \va_{rel}, \va_{arr}$: Acelerações absoluta, relativa e de arrastamento, respectivamente.
+\item $\vomega_{abs}, \vomega_{rel}, \vomega_{arr}$: Velocidades angulares absoluta, relativa e de arrastamento, respectivamente.
+\item $\dot{\vomega}_{abs}, \dot{\vomega}_{rel}, \dot{\vomega}_{arr}$: Acelerações angulares absoluta, relativa e de arrastamento, respectivamente.
 \end{itemize}
 
 \begin{itemize}
@@ -1121,7 +1125,7 @@ Um possível complemento ortogonal para o jacobiano dos vínculos de quasi-velocid
 \mC(\mq) =
 \begin{bmatrix}
 \mone \\
--\mA\cir(\mq)^\msI \cdot \mA\ssh(\mq)
+-\mA\cir(\mq)^\msP \cdot \mA\ssh(\mq)
 \end{bmatrix}
 \end{equation}
 
@@ -1267,17 +1271,17 @@ $$ \dot{\mq} = \mC(\mq) \cdot \dot{\mq}\ssh $$
 
 Para obter $\ddot{\mq}$, desenvolvemos a equação dos vínculos de quasi-acelerações \eqref{eq:VinculosQuasiAce}:
 $$ \mA\ssh(\mq) \cdot \ddot{\mq}\ssh + \mA\cir(\mq) \cdot \ddot{\mq}\cir = \mb(\mq, \dot{\mq}) $$
-$$ \Rightarrow  \ddot{\mq}\cir = \mA\cir(\mq)^{-1}(\mb(\mq, \dot{\mq}) - \mA\ssh(\mq) \cdot \ddot{\mq}\ssh) $$
+$$ \Rightarrow  \ddot{\mq}\cir = \mA\cir(\mq)^\msP (\mb(\mq, \dot{\mq}) - \mA\ssh(\mq) \cdot \ddot{\mq}\ssh) $$
 \begin{equation} \label{eq:d2q_em_funcao}
 \therefore \ddot{\mq} =
 \begin{bmatrix}
 \mzr \\
-\mA\cir(\mq)^{-1} \cdot \mb(\mq, \dot{\mq})
+\mA\cir(\mq)^\msP \cdot \mb(\mq, \dot{\mq})
 \end{bmatrix}
 +
 \begin{bmatrix}
 \mone \\
-\mA\cir(\mq)^{-1} \cdot \mA\ssh(\mq)
+-\mA\cir(\mq)^\msP \cdot \mA\ssh(\mq)
 \end{bmatrix}
 \cdot
 \ddot{\mq}\ssh
@@ -1293,7 +1297,7 @@ Sendo:
 \mc(\mq, \dot{\mq}) =
 \begin{bmatrix}
 \mzr \\
-\mA\cir(\mq)^{-1} \cdot \mb(\mq, \dot{\mq})
+\mA\cir(\mq)^\msP \cdot \mb(\mq, \dot{\mq})
 \end{bmatrix}
 \end{equation}
 
