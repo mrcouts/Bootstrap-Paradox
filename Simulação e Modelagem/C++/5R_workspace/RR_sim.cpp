@@ -41,7 +41,7 @@ int main(){
     //Plotar área de trabalho
     double lx = 0.23;
     double ly = 0.27;
-    double dl = 0.01;
+    double dl = 0.0005;
     uint nx = (lx/dl);
     uint ny = (ly/dl);
     Mat<int> M; M.zeros(ny,nx);
@@ -70,12 +70,13 @@ int main(){
             y = i*dl+0.5*dl;
             gnr2.Doit(q0_, {x, y});
             if(gnr2.convergiu){
+                q0_ = gnr2.x_;
                 A2_ = join_horiz(Robot.Ah_, join_horiz(Robot.Ao_.col(1), Robot.Ao_.col(3)) );
-                if(abs(det(Robot.Ao_)) < 1.6*1e-4 || abs(det(A2_)) < 1e-3 ) M(i,j) = 2;
+                if(abs(det(Robot.Ao_)) < 1.3*1e-4 || abs(det(A2_)) < 1e-4 ) M(i,j) = 2;
                 else M(i,j) = 1;
             }
             gnr2.convergiu = false;
-            if( ((x - x0)*(x - x0) + (y - y0)*(y - y0) <= r*r) && (M(i,j) != 2) )
+            if( ((x - x0)*(x - x0) + (y - y0)*(y - y0) <= (r+dl)*(r+dl) ) && ((x - x0)*(x - x0) + (y - y0)*(y - y0) >= (r-dl)*(r-dl) ) && (M(i,j) != 2) )
                 M(i,j) = 3;
         }
     }
