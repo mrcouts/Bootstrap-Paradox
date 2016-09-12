@@ -1453,11 +1453,49 @@ Portanto, se a seguinte inequa\c{c}\~ao matricial for respeitada:
 \eqref{eq:SlidingCondition4} ser\'a respeitada, o que garante que a condi\c{c}\~ao de escorregamento \eqref{eq:SlidingCondition} tamb\'em seja respeitada e consequentemente garante a converg\^encia do erro de controle para zero.
 
 Uma poss\'ivel solu\c{c}\~ao para \eqref{eq:DesigualdadeK2} é dada por:
-\begin{equation}
+\begin{equation} \label{eq:MatrizDiagk}
 \diag(\underline{k})  = (\mone - |\mDelta|_{max} )^\msI ( |\mdelta|_{max} + |\mDelta|_{max} |\msigma| + \diag(\eta \mone) )
 \end{equation}
 
-A qual é válida apenas se $(\mone - |\mDelta|_{max} )^\msI$ for positiva. 
+A qual é válida apenas se $(\mone - |\mDelta|_{max} )^\msI$ for positiva. \\
+
+Sabendo-se que, dadas as passagens feitas para a obtenção de $\mv_{\ssM}$ no algoritmo de modelagem, $\mv_{\ssM}$ pode ser escrito da seguinte maneira:
+\begin{equation}
+\mv_{\ssM}(\mq, \dot{\mq}\ssh) = \sum_{i=1}^{\nu\ssh} \sum_{j=1}^i \mgamma_{i,j}(\mq) \dot{q}\ssh_i \dot{q}\ssh_j 
+\end{equation}
+
+Além disso, definindo:
+\begin{equation}
+\mgamma(\mq) = \mg_{\ssM}(\mq)
+\end{equation}
+\begin{equation}
+\mdelta_0(\mq) = \mH(\mq)^\msI (\hat{\mgamma}(\mq) - \mgamma(\mq))
+\end{equation}
+\begin{equation}
+\mdelta_{i,j}(\mq) = \mH(\mq)^\msI (\hat{\mgamma}_{i,j}(\mq) - \mgamma_{i,j}(\mq))
+\end{equation}
+
+Temos que:
+\begin{equation}
+\mdelta(\mq, \dot{\mq}\ssh) = \mdelta_0(\mq) + \sum_{i=1}^{\nu\ssh} \sum_{j=1}^i \mdelta_{i,j}(\mq) \dot{q}\ssh_i \dot{q}\ssh_j 
+\end{equation}
+
+Sendo assim, a equação \eqref{eq:MatrizDiagk} pode ser reescrita como:
+\begin{equation} \label{eq:MatriDiagk2}
+\diag(\underline{k})  = \meta + \mGamma |\msigma| + \sum_{i=1}^{\nu\ssh}\sum_{j=1}^{i} \meta_{i,j} |\dot{q}\ssh_i||\dot{q}\ssh_j| 
+\end{equation}
+
+Sendo $\mGamma$, $\meta$ e $\meta_{i,j}$  matrizes constantes dadas por:
+\begin{equation}
+\mGamma = (\mone - |\mDelta|_{max} )^\msI |\mDelta|_{max}
+\end{equation}
+\begin{equation}
+\meta = (\mone - |\mDelta|_{max} )^\msI ( | \mdelta_0 |_{max} + \diag(\eta \mone) )
+\end{equation}
+\begin{equation}
+\meta_{i,j} = (\mone - |\mDelta|_{max} )^\msI | \mdelta_{i,j} |_{max}, \, i=1,...,\nu\ssh, \, j = 1,...,i
+\end{equation}
+
 
 %Uma poss\'ivel solu\c{c}\~ao para \eqref{eq:DesigualdadeK2} \'e obtida fazendo $\underline{k} = k \mone$, a qual \'e v\'alida apenas se o somat\'orio de cada uma das linhas de $|\mDelta|_{max}$ for menor do que $1$. Esta solu\c{c}\~ao \'e dada por:
 %\begin{equation}
@@ -1471,7 +1509,7 @@ Nesta subseção, será realizada a simulação dinâmica direta do mecânimo 5R utiliz
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.30]{5Rscan.jpg}  
+	\includegraphics[scale=0.25]{5Rscan.jpg}  
 	\caption{Pentágono articulado (5R)}
 	\label{fig:5R}
 \end{figure}
@@ -1679,7 +1717,7 @@ Definimos os seguinte parâmetros e incertezas para o mecanismo em questão:
 \item[-] $l_2 = 0.15 m$
 \item[-] $l_{g1} = (0.06 \pm 0.009) m$
 \item[-] $l_{g1} = (0.075 \pm 0.011) m$
-\item[-] $m_0 = 0 kg$
+\item[-] $m_0 = 0 \, kg$
 \item[-] $m_1 = (0.143 \pm 0.0215) kg$
 \item[-] $m_2 = (0.171 \pm 0.0257) kg$
 \item[-] $Jz_1 = (171.6 \pm 25.7 ) 10^{-6} kg\cdot m^2$
@@ -1700,7 +1738,52 @@ Dados os parâmetros geométricos defidos acima, obtemos o seguinte espaço de trab
 	\label{fig:RRWS}
 \end{figure}
 
-A região em azul escuro é a região não pertencente ao espaço de trabalho do mecanismo. As regiões em azul claro, em amarelo, e em vermelho são regiões pertencententes ao espaço do mecanismo, sendo a amarela considerada singular (próxima a singularidades) e a vermelha a trajetória a ser seguida pelo mecanismo.  
+A região em azul escuro é a região não pertencente ao espaço de trabalho do mecanismo. As regiões em azul claro, em amarelo, e em vermelho são regiões pertencententes ao espaço do mecanismo. A região a amarela é considerada singular (próxima a singularidades) e a vermelha é a trajetória a ser seguida pelo mecanismo.
+
+\item[vi)] Controlador
+
+A lei de controle que será utilizada na simulação dinâmica direta é dada pelas equações \eqref{eq:ControlLawSRed} e \eqref{eq:MatriDiagk2}. $\mGamma$, $\meta$ e $\meta_{i,j}$ são obtidas da seguinte maneira:
+\begin{itemize}
+\item[$\bullet$] Discretiza-se o espaço de trabalho em um número finito de pontos considerados não-singulares. Foi adotada um discretização de $1 cm$ na horizontal e na vertical.
+\item[$\bullet$] Para cada ponto calcula-se $|\mDelta|$, $|\mdelta_0|$ e $|\mdelta_{i,j}|$ para todas as combinações possíveis de parâmetros, com os parâmetros podendo assumir seu valor mínimo e seu valor máximo. Como temos 6 parâmetros incertos, temos 64 possibilidades.
+\item[$\bullet$] Obtem-se o valor máximo de $|\mDelta|$, $|\mdelta_0|$ e $|\mdelta_{i,j}|$ para cada ponto.
+\item[$\bullet$] Obtem-se o valor máximo de $|\mDelta|$, $|\mdelta_0|$ e $|\mdelta_{i,j}|$ para o espaço de trabalho, a partir do valor máximo em cada ponto.
+\end{itemize}
+
+Realizando-se esse procedimento e adotando $\eta = 1.0$, obtemos:
+\begin{equation}
+\diag(\underline{k}) =
+\begin{bmatrix}
+18.1 \\
+28.3
+\end{bmatrix}
++
+\begin{bmatrix}
+57.6 \\
+78.6
+\end{bmatrix} {q\ssh_1}^2
++
+\begin{bmatrix}
+44.2 \\
+63.3
+\end{bmatrix} |q\ssh_1 q\ssh_2 |
++
+\begin{bmatrix}
+27.2 \\
+38.6
+\end{bmatrix} {q\ssh_2}^2
++
+\begin{bmatrix}
+1.50 & 1.19 \\
+1.87 & 1.86
+\end{bmatrix}
+\begin{bmatrix}
+|\ddot{q}\ssh_{1 \, d} + \lambda \dot{e}_1| \\
+|\ddot{q}\ssh_{2 \, d} + \lambda \dot{e}_2|
+\end{bmatrix}
+\end{equation}
+
+
 
 \end{itemize}
 
