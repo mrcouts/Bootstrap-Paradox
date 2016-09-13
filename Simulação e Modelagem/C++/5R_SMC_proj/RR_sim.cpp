@@ -212,7 +212,7 @@ int main(){
     k_.print("k_ =");
 
     mat iI_Delta_ = inv(eye(2,2) - Delta_);
-    vec eta_  = iI_Delta_*(delta_ + ones(2,1) ); 
+    vec eta_  = iI_Delta_*(delta_ + 20.0*ones(2,1) ); 
     vec eta1_  = iI_Delta_*delta1_; 
     vec eta2_  = iI_Delta_*delta2_; 
     vec eta12_ = iI_Delta_*delta12_; 

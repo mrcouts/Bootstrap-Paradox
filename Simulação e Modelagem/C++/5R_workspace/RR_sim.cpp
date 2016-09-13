@@ -41,8 +41,7 @@ int main(){
     //Plotar área de trabalho
     double lx = 0.23;
     double ly = 0.27;
-    //double dl = 0.00025;
-    double dl = 0.0005;
+    double dl = 0.00025;
     uint nx = (lx/dl);
     uint ny = (ly/dl);
     Mat<int> M; M.zeros(ny,nx);

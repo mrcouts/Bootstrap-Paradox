@@ -1732,7 +1732,7 @@ Dados os parâmetros geométricos defidos acima, obtemos o seguinte espaço de trab
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.37]{Workspace2.png}  
+	\includegraphics[scale=0.25]{Workspace.png}  
 	\caption{Espaço de trabalho do mecanismo \underline{R}\underline{R}}
 	\label{fig:RRWS}
 \end{figure}
@@ -1749,12 +1749,12 @@ A lei de controle que será utilizada na simulação dinâmica direta é dada pelas e
 \item[$\bullet$] Obtem-se o valor máximo de $|\mDelta|$, $|\mdelta_0|$ e $|\mdelta_{i,j}|$ para o espaço de trabalho, a partir do valor máximo em cada ponto.
 \end{itemize}
 
-Realizando-se esse procedimento e adotando $\eta = 1.0$, obtemos:
+Realizando-se esse procedimento e adotando $\eta = 20.0$, obtemos:
 \begin{equation}
 \diag(\underline{k}) =
 \begin{bmatrix}
-15.1 \\
-26.1
+75.3 \\
+108
 \end{bmatrix}
 +
 \begin{bmatrix}
@@ -1840,17 +1840,132 @@ q\ssh_{2 \, d}(t) = 0.17 + 0.07 \sin(28.57 t) \\
 \end{equation}
 
 \item[$\bullet$] Parâmetros do controlador:
-$$ \lambda = 50.0 $$
-$$ \eta = 1.0 $$
+$$ \lambda = 40.0 $$
+$$ \eta = 20.0 $$
 
 Os parâmetros do mecanismo foram escolhidos de modo que haja um erro de $15\%$ em cada parâmetro incerto.
-Os parâmetros do controlar foram escolhidos de modo que o sistema tenha um tempo de alcance às superfícies de escorregamento $t_r  \leq 2.0 s$ e um tempo de assentamento de $t_a = 0.08 s$, quando o sistema chega nas superfícies de escorregamento.
+Os parâmetros do controlar foram escolhidos de modo que o sistema tenha um tempo de alcance às superfícies de escorregamento $t_r  \leq 0.1 s$ (pois $\ms(0) = [0 \; -2]^\msT$) e um tempo de assentamento de $t_a = 0.1 s$, quando o sistema chega nas superfícies de escorregamento. \\
+\end{itemize}
+
+A função $f(x) = \sign(x)$ foi substituida pela função de saturação $f_{sat}(x) = \tanh(100 x)$, a qual tem as seguintes propriedades:
+\begin{itemize}
+\item[-] $f_{sat}(0.023) = -f_{sat}(-0.023) = 0.98$
+\item[-] $f_{sat}(\infty) = -f_{sat}(-\infty) = 1$
+\item[-] $ \frac{\dd f_{sat}}{\dd x} (0) = 100$
+\end{itemize}
+
+Sua utilização garante a estabilidade nas simulações numéricas, evita o chattering nos atuadores, e ainda garante um erro em regime permanente desprezível para esta aplicação.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.4]{Tanh.pdf}  
+	\caption{Função de saturação $f_{sat}(x) = \tanh(100 x)$}
+	\label{fig:Tanh}
+\end{figure}
 
 \end{itemize}
 
+Aqui seguem os resultados das simulações numéricas:
 
 
-\end{itemize}
+\begin{multicols}{2}
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.31]{Torque1.pdf}  
+	\caption{lalala}
+	\label{fig:Torque1}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.31]{Torque2.pdf}  
+	\caption{lalala}
+	\label{fig:Torque2}
+\end{figure}
+\end{multicols}
+\begin{multicols}{2}
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.31]{ex.pdf}  
+	\caption{lalala}
+	\label{fig:ex}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.31]{ey.pdf}  
+	\caption{lalala}
+	\label{fig:ey}
+\end{figure}
+\end{multicols}
+\begin{multicols}{2}
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.31]{sx.pdf}  
+	\caption{lalala}
+	\label{fig:sx}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.31]{sy.pdf}  
+	\caption{lalala}
+	\label{fig:sy}
+\end{figure}
+\end{multicols}
+
+Repare que ...
+
+\begin{multicols}{2}
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.31]{Torque12.pdf}  
+	\caption{lalala}
+	\label{fig:Torque12}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.31]{Torque22.pdf}  
+	\caption{lalala}
+	\label{fig:Torque22}
+\end{figure}
+\end{multicols}
+\begin{multicols}{2}
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.31]{ex2.pdf}  
+	\caption{lalala}
+	\label{fig:ex2}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.31]{ey2.pdf}  
+	\caption{lalala}
+	\label{fig:ey2}
+\end{figure}
+\end{multicols}
+\begin{multicols}{2}
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.31]{sx2.pdf}  
+	\caption{lalala}
+	\label{fig:sx2}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.31]{sy2.pdf}  
+	\caption{lalala}
+	\label{fig:sy2}
+\end{figure}
+\end{multicols}
+
+
+
+
+
 
 
 

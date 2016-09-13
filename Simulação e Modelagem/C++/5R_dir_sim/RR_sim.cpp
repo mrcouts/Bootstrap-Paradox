@@ -52,7 +52,8 @@ int main(){
     arma_rng::set_seed_random();
     //vec sigma_ = ((vec){0.3, 0.1, 0.2, 0.1, 0.5, 0.1}) % sign(randn(6))*1.8;
     //vec sigma_ = sign(randn(6))*0.5;
-    vec sigma_ = {-0.15,0.15,0.15,0.15,0.15,0.15};
+    //vec sigma_ = {-0.15,0.15,0.15,0.15,0.15,0.15};
+    vec sigma_ = {-0.5,0.5,0.5,0.5,0.5,0.5};
     vec coef_  = ones(6) + sigma_;
 
     cube I__; I__.zeros(3,3,2);
@@ -97,7 +98,7 @@ int main(){
     Reference RefObj = Reference(1.2, {0.07, 0.17}, {0.07, 0.17});
 
     //Simulação dinâmica
-    double lambda = 50.0;
+    double lambda = 40.0;
     
     
     //double eta = 93.5768;
@@ -115,7 +116,7 @@ int main(){
     //mat Gamma_; Gamma_.zeros(2,2);
     //Gamma_ << 2.1547 << 1.5500 << endr
     //       << 2.7074 << 2.2725 << endr;
-    vec eta_ = {15.1258, 26.0756};
+    vec eta_ = {7.5314e+01, 1.0840e+02};
     cube Lambda__; Lambda__.zeros(2,2,2);
     Lambda__.slice(0) << 37.0403 << 22.7291 << endr
                       << 0       << 17.5189 << endr;
