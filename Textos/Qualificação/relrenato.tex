@@ -1716,7 +1716,7 @@ Definimos os seguinte parâmetros e incertezas para o mecanismo em questão:
 \item[-] $l_1 = 0.12 m$
 \item[-] $l_2 = 0.15 m$
 \item[-] $l_{g1} = (0.06 \pm 0.009) m$
-\item[-] $l_{g1} = (0.075 \pm 0.011) m$
+\item[-] $l_{g2} = (0.075 \pm 0.011) m$
 \item[-] $m_0 = 0 \, kg$
 \item[-] $m_1 = (0.143 \pm 0.0215) kg$
 \item[-] $m_2 = (0.171 \pm 0.0257) kg$
@@ -1724,7 +1724,6 @@ Definimos os seguinte parâmetros e incertezas para o mecanismo em questão:
 \item[-] $Jz_2 = (320.6 \pm 48.1 ) 10^{-6} kg\cdot m^2$
 \item[-] $g = 9.8 m/s^2$
 \end{itemize}
-
 \end{multicols}
 
 \item[v)] Espaço de trabalho
@@ -1733,7 +1732,7 @@ Dados os parâmetros geométricos defidos acima, obtemos o seguinte espaço de trab
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.37]{Workspace.png}  
+	\includegraphics[scale=0.37]{Workspace2.png}  
 	\caption{Espaço de trabalho do mecanismo \underline{R}\underline{R}}
 	\label{fig:RRWS}
 \end{figure}
@@ -1754,34 +1753,100 @@ Realizando-se esse procedimento e adotando $\eta = 1.0$, obtemos:
 \begin{equation}
 \diag(\underline{k}) =
 \begin{bmatrix}
-18.1 \\
-28.3
+15.1 \\
+26.1
 \end{bmatrix}
 +
 \begin{bmatrix}
-57.6 \\
-78.6
+37.0 \\
+54.1
 \end{bmatrix} {q\ssh_1}^2
 +
 \begin{bmatrix}
-44.2 \\
-63.3
+22.7 \\
+35.5
 \end{bmatrix} |q\ssh_1 q\ssh_2 |
 +
 \begin{bmatrix}
-27.2 \\
-38.6
+17.5 \\
+28.5
 \end{bmatrix} {q\ssh_2}^2
 +
 \begin{bmatrix}
-1.50 & 1.19 \\
-1.87 & 1.86
+1.25 & 0.92 \\
+1.68 & 1.65
 \end{bmatrix}
+\cdot
 \begin{bmatrix}
 |\ddot{q}\ssh_{1 \, d} + \lambda \dot{e}_1| \\
 |\ddot{q}\ssh_{2 \, d} + \lambda \dot{e}_2|
 \end{bmatrix}
 \end{equation}
+
+\item[vi)] Simulação dinâmica direta
+
+Para realizar a simulação dinâmica direta, definimos:
+
+\begin{itemize}
+
+\item[$\bullet$] Parâmetros do mecanismo:
+\begin{multicols}{2}
+\begin{itemize}
+\item[-] $l_1 = 0.12 m$
+\item[-] $l_2 = 0.15 m$
+\item[-] $l_{g1} = 0.051 m$
+\item[-] $l_{g2} = 0.086 m$
+\item[-] $m_0 = 0 \, kg$
+\item[-] $m_1 = 0.1645 kg$
+\item[-] $m_2 = 0.1967 kg$
+\item[-] $Jz_1 = 197.3 \cdot 10^{-6} kg\cdot m^2$
+\item[-] $Jz_2 = 368.7 \cdot 10^{-6} kg\cdot m^2$
+\item[-] $g = 9.8 m/s^2$
+\end{itemize}
+\end{multicols}
+
+\item[$\bullet$] Parâmetros estimados
+\begin{multicols}{2}
+\begin{itemize}
+\item[-] $\hat{l}_1 = 0.12 m$
+\item[-] $\hat{l}_2 = 0.15 m$
+\item[-] $\hat{l}_{g1} = 0.06 m$
+\item[-] $\hat{l}_{g2} = 0.075 m$
+\item[-] $\hat{m}_0 = 0 \, kg$
+\item[-] $\hat{m}_1 = 0.143 kg$
+\item[-] $\hat{m}_2 = 0.171 kg$
+\item[-] $\hat{J}z_1 = 171.6 \cdot 10^{-6} kg\cdot m^2$
+\item[-] $\hat{J}z_2 = 320.6 \cdot 10^{-6} kg\cdot m^2$
+\item[-] $\hat{g} = 9.8 m/s^2$
+\end{itemize}
+\end{multicols}
+
+\item[$\bullet$] Condições iniciais:
+\begin{equation}
+\begin{cases}
+q\ssh_1(0) = 0.07 m\\
+q\ssh_2(0) = 0.17 m \\
+\dot{q}\ssh_1(0) = 0 \\
+\dot{q}\ssh_2(0) = 0 \\
+\end{cases}
+\end{equation}
+
+\item[$\bullet$] Trajetória de referência:
+\begin{equation}
+\begin{cases}
+q\ssh_{1 \, d}(t) = 0.07 \cos(28.57 t) \\
+q\ssh_{2 \, d}(t) = 0.17 + 0.07 \sin(28.57 t) \\
+\end{cases}
+\end{equation}
+
+\item[$\bullet$] Parâmetros do controlador:
+$$ \lambda = 50.0 $$
+$$ \eta = 1.0 $$
+
+Os parâmetros do mecanismo foram escolhidos de modo que haja um erro de $15\%$ em cada parâmetro incerto.
+Os parâmetros do controlar foram escolhidos de modo que o sistema tenha um tempo de alcance às superfícies de escorregamento $t_r  \leq 2.0 s$ e um tempo de assentamento de $t_a = 0.08 s$, quando o sistema chega nas superfícies de escorregamento.
+
+\end{itemize}
 
 
 

@@ -141,7 +141,7 @@ int main(){
             if(gnr2.convergiu){
             	q0_ = gnr2.x_;
                 A2_ = join_horiz(Robot.Ah_, join_horiz(Robot.Ao_.col(1), Robot.Ao_.col(3)) );
-                if(abs(det(Robot.Ao_)) < 1.5*1e-4 || abs(det(A2_)) < 1e-10 ) M(i,j) = 2;
+                if(abs(det(Robot.Ao_)) < 1.6*1e-4 || abs(det(A2_)) < 1e-10 ) M(i,j) = 2;
                 else{
                     M(i,j) = 1;
                     Robot.Doit(Robot.q0_, join_vert(v1_, -solve(Robot.Ao_, Robot.Ah_*v1_)) );
