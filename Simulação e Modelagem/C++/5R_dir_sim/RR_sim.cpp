@@ -126,7 +126,7 @@ int main(){
     Gamma_ << 1.2525 << 0.9153 << endr
            << 1.6833 << 1.6495 << endr;
 
-    
+    /*
     //SMCLaw SMC = SMCLaw(2, lambda, eta, K_, k_, 100.0, &RefObj, &Robot);
     //SMCLaw SMC = SMCLaw(2, lambda, eta, Lambda_, gamma_, 20.0, &r_, &dr_, &d2r_, &Robot);
     SMCLaw SMC = SMCLaw(2, lambda, eta_, Lambda__, Gamma_, 100.0, &r_, &dr_, &d2r_, &Robot);
@@ -134,11 +134,11 @@ int main(){
     //SMCLaw SMC = SMCLaw(2, lambda, 20.0, 20.0, &RefObj, &Robot);
     //SMCLaw SMC = SMCLaw(2, lambda, 40.0, 40.0, &r_, &dr_, &d2r_, &Robot);
     Acceleration AC = Acceleration(6, &_Robot, &SMC);
-
+    */
 
     //FLControlLaw FL = FLControlLaw(2, lambda*lambda, 2*lambda, &RefObj, &Robot);
-    //FLControlLaw FL = FLControlLaw(6, lambda*lambda, 2*lambda, &r_, &dr_, &d2r_, &Robot);
-    //Acceleration AC = Acceleration(6, &_Robot, &FL);
+    FLControlLaw FL = FLControlLaw(6, lambda*lambda, 2*lambda, &r_, &dr_, &d2r_, &Robot);
+    Acceleration AC = Acceleration(6, &_Robot, &FL);
 
    
     
