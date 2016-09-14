@@ -132,7 +132,7 @@ Há uma série de vantagens em utilizar mecanismos paralelos no lugar dos tradicio
 
 \begin{figure}[h!]
 	\centering
-	\includegraphics[scale=0.18]{theadeptquat.jpg}  
+	\includegraphics[scale=0.18]{figures/theadeptquat.jpg}  
 	\caption{Robô industrial Adept Quattro}
 	\label{fig:Mecanismo}
 \end{figure}
@@ -187,7 +187,7 @@ Os trabalhos no âmbito da validação experimental das leis de controle sintetizad
 
 \begin{figure}[h!]
 	\centering
-	\includegraphics[scale=0.2]{Mecanismo.jpeg}  
+	\includegraphics[scale=0.2]{figures/Mecanismo.jpeg}  
 	\caption{Mecanismo 2\underline{R}SU + \underline{P}PaP}
 	\label{fig:Mecanismo2}
 \end{figure}
@@ -1509,7 +1509,7 @@ Nesta subseção, será realizada a simulação dinâmica direta do mecânimo 5R utiliz
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.25]{5Rscan.jpg}  
+	\includegraphics[scale=0.25]{figures/5Rscan.jpg}  
 	\caption{Pentágono articulado (5R)}
 	\label{fig:5R}
 \end{figure}
@@ -1518,7 +1518,7 @@ O mecanismo 5R será modelado através do acoplamento de 2 subsistemas seriais $\s
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.25]{RR.jpg}  
+	\includegraphics[scale=0.25]{figures/RR.jpg}  
 	\caption{Mecanismo \underline{R}\underline{R}}
 	\label{fig:RR}
 \end{figure}
@@ -1741,7 +1741,7 @@ A região em azul escuro é a região não pertencente ao espaço de trabalho do meca
 
 \item[vi)] Controlador
 
-A lei de controle que será utilizada na simulação dinâmica direta é dada pelas equações \eqref{eq:ControlLawSRed} e \eqref{eq:MatriDiagk2}. $\mGamma$, $\meta$ e $\meta_{i,j}$ são obtidas da seguinte maneira:
+A lei de controle por modos deslizantes que será utilizada na simulação dinâmica direta é dada pelas equações \eqref{eq:ControlLawSRed} e \eqref{eq:MatriDiagk2}. $\mGamma$, $\meta$ e $\meta_{i,j}$ são obtidas da seguinte maneira:
 \begin{itemize}
 \item[$\bullet$] Discretiza-se o espaço de trabalho em um número finito de pontos considerados não-singulares. Foi adotada um discretização de $1 cm$ na horizontal e na vertical.
 \item[$\bullet$] Para cada ponto calcula-se $|\mDelta|$, $|\mdelta_0|$ e $|\mdelta_{i,j}|$ para todas as combinações possíveis de parâmetros, com os parâmetros podendo assumir seu valor mínimo e seu valor máximo. Como temos 6 parâmetros incertos, temos 64 possibilidades.
@@ -1760,17 +1760,17 @@ Realizando-se esse procedimento e adotando $\eta = 20.0$, obtemos:
 \begin{bmatrix}
 37.0 \\
 54.1
-\end{bmatrix} {q\ssh_1}^2
+\end{bmatrix} \dot{x}^2
 +
 \begin{bmatrix}
 22.7 \\
 35.5
-\end{bmatrix} |q\ssh_1 q\ssh_2 |
+\end{bmatrix} |\dot{x} \dot{y} |
 +
 \begin{bmatrix}
 17.5 \\
 28.5
-\end{bmatrix} {q\ssh_2}^2
+\end{bmatrix} \dot{y}^2
 +
 \begin{bmatrix}
 1.25 & 0.92 \\
@@ -1778,8 +1778,8 @@ Realizando-se esse procedimento e adotando $\eta = 20.0$, obtemos:
 \end{bmatrix}
 \cdot
 \begin{bmatrix}
-|\ddot{q}\ssh_{1 \, d} + \lambda \dot{e}_1| \\
-|\ddot{q}\ssh_{2 \, d} + \lambda \dot{e}_2|
+|\ddot{x}_d + \lambda \dot{e}_x| \\
+|\ddot{y}_d + \lambda \dot{e}_y|
 \end{bmatrix}
 \end{equation}
 
@@ -1858,7 +1858,7 @@ Sua utilização garante a estabilidade nas simulações numéricas, evita o chatteri
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.4]{Tanh.pdf}  
+	\includegraphics[scale=0.4]{figures/Tanh.pdf}  
 	\caption{Função de saturação $f_{sat}(x) = \tanh(100 x)$}
 	\label{fig:Tanh}
 \end{figure}
@@ -1872,14 +1872,14 @@ Aqui seguem os resultados das simulações numéricas:
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.31]{figures/Torque1.pdf}  
-	\caption{lalala}
+	\caption{Torque aplicado pelo atuador 1}
 	\label{fig:Torque1}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.31]{figures/Torque2.pdf}  
-	\caption{lalala}
+	\caption{Torque aplicado pelo atuador 2}
 	\label{fig:Torque2}
 \end{figure}
 \end{multicols}
@@ -1887,14 +1887,14 @@ Aqui seguem os resultados das simulações numéricas:
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.31]{figures/ex.pdf}  
-	\caption{lalala}
+	\caption{Erro de na coordenada $x$}
 	\label{fig:ex}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.31]{figures/ey.pdf}  
-	\caption{lalala}
+	\caption{Erro de na coordenada $y$}
 	\label{fig:ey}
 \end{figure}
 \end{multicols}
@@ -1902,34 +1902,34 @@ Aqui seguem os resultados das simulações numéricas:
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.31]{figures/sx.pdf}  
-	\caption{lalala}
+	\caption{Variável $s_x$}
 	\label{fig:sx}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.31]{figures/sy.pdf}  
-	\caption{lalala}
+	\caption{Variável $s_y$}
 	\label{fig:sy}
 \end{figure}
 \end{multicols}
 
-Repare que o tempo de alcance de $s_y$ é aproximadamente $t_r = ? < 0.1s$. Além disso, $0.1s$ depois de alcançar a superfície de escorregamento, o erro $e_y$ já é praticamente nulo, como pode-se observar no gráfico da figura $?$. Sendo assim, temos os resultados coerentes com os parâmetros do controlador adotados. \\
+Repare que o tempo de alcance de $s_y$ é aproximadamente $t_r = 0.008s < 0.1s$. Além disso, $0.1s$ depois de alcançar a superfície de escorregamento, o erro $e_y$ já é praticamente nulo, como pode-se observar no gráfico da figura \ref{fig:ey}. Sendo assim, temos os resultados coerentes com os parâmetros do controlador adotados. \\
 
-O projeto do controlador foi feito supondo incertezas de $15\%$ nos parâmetros incertos. Porém, realizando a mesma simulação, aumentando para $50\%$ os erros paramétricos, pode-se observar que o sistema ainda consegue ser controlado, sem grandes diferenças nos resultados, como pode ser visto nos resultados abaixo: 
+O projeto do controlador foi feito supondo incertezas de $15\%$ nos parâmetros incertos. Porém, realizando a simulação com o mesmo controlador, aumentando para $50\%$ os erros paramétricos, pode-se observar que o sistema ainda consegue ser controlado, com erros de controle na ordem de centésimos de milímetro, como pode ser visto nos resultados abaixo: 
 
 \begin{multicols}{2}
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.31]{figures/Torque12.pdf}  
-	\caption{lalala}
+	\caption{Torque aplicado pelo atuador 1}
 	\label{fig:Torque12}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.31]{figures/Torque22.pdf}  
-	\caption{lalala}
+	\caption{Torque aplicado pelo atuador 2}
 	\label{fig:Torque22}
 \end{figure}
 \end{multicols}
@@ -1937,14 +1937,14 @@ O projeto do controlador foi feito supondo incertezas de $15\%$ nos parâmetros i
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.31]{figures/ex2.pdf}  
-	\caption{lalala}
+	\caption{Erro de na coordenada $x$}
 	\label{fig:ex2}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.31]{figures/ey2.pdf}  
-	\caption{lalala}
+	\caption{Erro de na coordenada $x$}
 	\label{fig:ey2}
 \end{figure}
 \end{multicols}
@@ -1952,14 +1952,14 @@ O projeto do controlador foi feito supondo incertezas de $15\%$ nos parâmetros i
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.31]{figures/sx2.pdf}  
-	\caption{lalala}
+	\caption{Variável $s_x$}
 	\label{fig:sx2}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.31]{figures/sy2.pdf}  
-	\caption{lalala}
+	\caption{Variável $s_y$}
 	\label{fig:sy2}
 \end{figure}
 \end{multicols}
@@ -1975,14 +1975,14 @@ Escolhendo $\lambda = 40.0$, obtemos os seguintes resultados:
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.31]{figures/Torque13.pdf}  
-	\caption{lalala}
+	\caption{Torque aplicado pelo atuador 1}
 	\label{fig:Torque13}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.31]{figures/Torque23.pdf}  
-	\caption{lalala}
+	\caption{Torque aplicado pelo atuador 2}
 	\label{fig:Torque23}
 \end{figure}
 \end{multicols}
@@ -1990,19 +1990,19 @@ Escolhendo $\lambda = 40.0$, obtemos os seguintes resultados:
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.31]{figures/ex3.pdf}  
-	\caption{lalala}
+	\caption{Erro de na coordenada $x$}
 	\label{fig:ex3}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.31]{figures/ey3.pdf}  
-	\caption{lalala}
+	\caption{Erro de na coordenada $y$}
 	\label{fig:ey3}
 \end{figure}
 \end{multicols}
 
-Repare que a lei de Controle por Torque Computado mal consegue controlar o sistema, mantendo um erro em regime permanente oscilando em torno de $x \, mm$ com uma amplitude de $x \, mm$. 
+Repare que a lei de Controle por Torque Computado não consegue seguir a trajetória de forma satisfatória, mantendo um erro em regime permanente oscilatório com pico $12 mm$ na coordenada $x$ e $27 mm$ na coordenada $y$.
 
 
 
