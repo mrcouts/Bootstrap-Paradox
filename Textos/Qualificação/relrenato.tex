@@ -1871,14 +1871,14 @@ Aqui seguem os resultados das simulações numéricas:
 \begin{multicols}{2}
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.31]{Torque1.pdf}  
+	\includegraphics[scale=0.31]{teste.pdf}  
 	\caption{lalala}
 	\label{fig:Torque1}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.31]{Torque2.pdf}  
+	\includegraphics[scale=0.31]{teste.pdf}  
 	\caption{lalala}
 	\label{fig:Torque2}
 \end{figure}
@@ -1886,14 +1886,14 @@ Aqui seguem os resultados das simulações numéricas:
 \begin{multicols}{2}
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.31]{ex.pdf}  
+	\includegraphics[scale=0.31]{teste.pdf}  
 	\caption{lalala}
 	\label{fig:ex}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.31]{ey.pdf}  
+	\includegraphics[scale=0.31]{teste.pdf}  
 	\caption{lalala}
 	\label{fig:ey}
 \end{figure}
@@ -1901,32 +1901,34 @@ Aqui seguem os resultados das simulações numéricas:
 \begin{multicols}{2}
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.31]{sx.pdf}  
+	\includegraphics[scale=0.31]{teste.pdf}  
 	\caption{lalala}
 	\label{fig:sx}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.31]{sy.pdf}  
+	\includegraphics[scale=0.31]{teste.pdf}  
 	\caption{lalala}
 	\label{fig:sy}
 \end{figure}
 \end{multicols}
 
-Repare que ...
+Repare que o tempo de alcance de $s_y$ é aproximadamente $t_r = ? < 0.1s$. Além disso, $0.1s$ depois de alcançar a superfície de escorregamento, o erro $e_y$ já é praticamente nulo, como pode-se observar no gráfico da figura $?$. Sendo assim, temos os resultados coerentes com os parâmetros do controlador adotados. \\
+
+O projeto do controlador foi feito supondo incertezas de $15\%$ nos parâmetros incertos. Porém, realizando a mesma simulação, aumentando para $50\%$ os erros paramétricos, pode-se observar que o sistema ainda consegue ser controlado, sem grandes diferenças nos resultados, como pode ser visto nos resultados abaixo: 
 
 \begin{multicols}{2}
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.31]{Torque12.pdf}  
+	\includegraphics[scale=0.31]{teste.pdf}  
 	\caption{lalala}
 	\label{fig:Torque12}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.31]{Torque22.pdf}  
+	\includegraphics[scale=0.31]{teste.pdf}  
 	\caption{lalala}
 	\label{fig:Torque22}
 \end{figure}
@@ -1934,14 +1936,14 @@ Repare que ...
 \begin{multicols}{2}
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.31]{ex2.pdf}  
+	\includegraphics[scale=0.31]{teste.pdf}  
 	\caption{lalala}
 	\label{fig:ex2}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.31]{ey2.pdf}  
+	\includegraphics[scale=0.31]{teste.pdf}  
 	\caption{lalala}
 	\label{fig:ey2}
 \end{figure}
@@ -1949,19 +1951,58 @@ Repare que ...
 \begin{multicols}{2}
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.31]{sx2.pdf}  
+	\includegraphics[scale=0.31]{teste.pdf}  
 	\caption{lalala}
 	\label{fig:sx2}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.31]{sy2.pdf}  
+	\includegraphics[scale=0.31]{teste.pdf}  
 	\caption{lalala}
 	\label{fig:sy2}
 \end{figure}
 \end{multicols}
 
+Para fins de comparação, realizamos a simulação anterior mudando a lei de controle para a tradicional lei de Controle por Torque Computado com amortecimento crítico \cite{Craig}:
+\begin{equation}
+\mup = \hat{\mh}(\mq,\dot{\mq}\ssh) + \hat{\mH}(\mq)( \ddot{\mq}\ssh_d + 2 \lambda \dot{\me} + \lambda^2 \me )
+\end{equation}
+
+Escolhendo $\lambda = 40.0$, obtemos os seguintes resultados:
+
+\begin{multicols}{2}
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.31]{teste.pdf}  
+	\caption{lalala}
+	\label{fig:Torque13}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.31]{teste.pdf}  
+	\caption{lalala}
+	\label{fig:Torque23}
+\end{figure}
+\end{multicols}
+\begin{multicols}{2}
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.31]{teste.pdf}  
+	\caption{lalala}
+	\label{fig:ex3}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.31]{teste.pdf}  
+	\caption{lalala}
+	\label{fig:ey3}
+\end{figure}
+\end{multicols}
+
+Repare que a lei de Controle por Torque Computado mal consegue controlar o sistema, mantendo um erro em regime permanente oscilando em torno de $x \, mm$ com uma amplitude de $x \, mm$. 
 
 
 
