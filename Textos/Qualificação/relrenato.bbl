@@ -1,9 +1,9 @@
 \begin{thebibliography}{10}
 
 \bibitem{Abdellatif}
-H. Abdellatif, B. Heimann, J. Kotlarski, T. Ortmainer.
+H. Abdellatif, B. Heimann, J. Kotlarski, T. Ortmaier.
 \newblock Practical model-based and robust control of parallel manipulators using passivity and sliding mode theory
-\newblock {\em Robotics 2010: Current and Future Challanges}. INTECH Open Access Publisher, 2010.
+\newblock {\em Robotics 2010: Current and Future Challenges}, InTech, 2010.
 
 \bibitem{Rynaldo}
 R. Z. H. de Almeida.
@@ -14,10 +14,30 @@ S\~ao Paulo. Departamento de Engenharia Mecatr\^onica e de
 Sistemas Mec\^anicos},
   2013.
 
+\bibitem{20altuzarra}
+O. Altuzarra, P. M. Eggers, F. J. Campa, C. Roldan-Paraponiaris, C. Pinto.
+\newblock Dynamic Modelling of Lower-Mobility Parallel Manipulators Using the Boltzmann-Hamel Equations
+\newblock {\em Mechanisms, Transmissions and Applications}, 31: 157--165, 2015.
+
+\bibitem{Baumgarte}
+J. Baumgarte.
+\newblock Stabilization of constraints and integrals of motion in dynamical systems
+\newblock {\em Computer Methods in Applied Mechanics and Engineering}, 1(1): 1--16, 1972.
+
 \bibitem{Begon}
 P. Begon, F. Pierrot, P. Dauchez.
 \newblock Fuzzy sliding mode control of a fast parallel robot.
 \newblock {\em Robotics and Automation, 1995. Proceedings., 1995 IEEE International Conference on}, 1:1178--1183, 1995.
+
+\bibitem{Bloch}
+A.M. Bloch, M. Reyhanoglu, N.H. McClamroch.
+\newblock Control and stabilization of nonholonomic dynamic systems.
+\newblock {\em Automatic Control, IEEE Transactions on}, 1992.
+
+\bibitem{Cabral}
+E. L. L. Cabral.
+\newblock Cinem\'atica Direta de Rob\^os Manipuladores,
+\newblock in {\em An\'alise de Rob\^os}, sites.poli.usp.br/p/eduardo.cabral/Cinem\'atica Direta.pdf accessed in 25/08/2016.
 
 \bibitem{Camacho}
 E. F. Camacho, C. B. Alba.
@@ -29,6 +49,11 @@ A. Chemori, G. S. Natal, F. Pierrot.
 \newblock Control of parallel robots: towards very high accelerations.
 \newblock {\em SSD'2013: 10th International Multi-Conference on Systems, Signals and Devices}, 2013.
 
+\bibitem{Chen}
+S-L. Chen, Y-C. Tsai. 
+\newblock Contouring control of a parallel mechanism based on equivalent errors
+\newblock {\em American Control Conference, 2008}, 2384--2388, 2008.
+
 \bibitem{Cheng}
 H. Cheng, Y-K. Yiu, Z. Li.
 \newblock Dynamics and control of redundantly actuated parallel manipulators
@@ -37,7 +62,7 @@ H. Cheng, Y-K. Yiu, Z. Li.
 \bibitem{Codourey}
 A. Codourey.
 \newblock Dynamic modelling and mass matrix evaluation of the DELTA parallel robot for axes decoupling control.
-\newblock {\em Intelligent Robots and Systems' 96, IROS 96, Proceedings of the 1996 IEEE/RSJ International Conference on}, 3:1211--1218, 1996.
+\newblock {\em Intelligent Robots and Systems' 96, IROS 96, Proceedings of the 1996 IEEE/RSJ International Conference on}, 3: 1211--1218, 1996.
 
 \bibitem{Coutinho}
 A. G. Coutinho, T. A. H. Coelho.
@@ -50,11 +75,11 @@ J. J. Craig.
 \newblock Addison-Wesley series in electrical and computer engineering: control
   engineering. Pearson/Prentice Hall, 2005.
 
-\bibitem{Duchaine}
-V. Duchaine, S. Bouchard, C. M. Gosselin.
-\newblock Computationally efficient predictive robot control
-\newblock {\em IEEE/ASME Transactions On Mechatronics}, 12(5): 570--578, 2007.
-  
+\bibitem{Denavit}
+J. Denavit, R. S. Hartenberg.
+\newblock A Kinematic Notation for Lower-Pair Mechanisms Based on Matrices.
+\newblock {\em Journal of Applied Mechanics}, 215--221, June 1955.
+
 \bibitem{Andre}
 G. M. Dobriankyj, A. G. Coutinho.
 \newblock Plataforma rob\'otica para reabilita\c{c}\~ao do membro superior humano.
@@ -62,13 +87,27 @@ G. M. Dobriankyj, A. G. Coutinho.
 S\~ao Paulo. Departamento de Engenharia Mecatr\^onica e de
 Sistemas Mec\^anicos}, 2013.
 
+\bibitem{Biorob}
+G. M. Dobrianskyj, A. G. Coutinho, T. A. H. Coelho.
+\newblock Development of a controller for a 3-DOF robotic platform for user interaction in rehabilitation therapies.
+\newblock {\em Biomedical Robotics and Biomechatronics 2014 5th IEEE RAS EMBS International Conference on},
+  819 -- 825, 2014.
 
-%\bibitem{Apostila}
-%R. M. M. Orsino, T. A. H. Coelho.
-%\newblock Metodologia para An\'alise e S\'intese de Mecanismos.
-%\newblock {\em Material de apoio para as disciplinas PMR2430 e PMR2331 - Escola Polit\'ecnica da Universidade de
-%S\~ao Paulo}, 2013.
-  
+\bibitem{Duchaine}
+V. Duchaine, S. Bouchard, C. M. Gosselin.
+\newblock Computationally efficient predictive robot control
+\newblock {\em IEEE/ASME Transactions On Mechatronics}, 12(5): 570--578, 2007.
+
+\bibitem{Ebrahimi}
+M. M. Ebrahimi, F. Piltan, M. Bazregar, A. Nabaee.
+\newblock Intelligent Robust Fuzzy-Parallel Optimization Control of a Continuum Robot Manipulator
+\newblock {\em International Journal of Control and Automation}, 6(3): 15--34, 2013.
+
+\bibitem{Guldner}
+J. Guldner, V. I. Utkin.
+\newblock The chattering problem in sliding mode system.
+\newblock {\em 14th Int. Symp. Math. Theory Netw. Syst.(MTNS), Perpignan, France}, 2000.
+
 \bibitem{Jarzebowska2009}
 E. Jarzebowska.
 \newblock Quasi-coordinates based dynamics modeling and control design for
@@ -76,78 +115,20 @@ E. Jarzebowska.
 \newblock {\em Nonlinear Analysis: Theory, Methods and Applications},
   71(12):118 -- 131, 2009.
 
-\bibitem{Merlet2002}
-J-P. Merlet.
-\newblock {Still a long way to go on the road for parallel mechanisms}.
-\newblock In {\em ASME DETC Conference, {Montreal, 2002}}, 2002.
-
-\bibitem{Orsino2013}
-R. M. M. Orsino, T. A. H. Coelho.
-\newblock A contribution for developing more efficient dynamic modelling
-  algorithms of parallel robots.
-\newblock {\em International Journal of Mechanisms and Robotic Systems},
-  1(1):15 -- 34, 2013.
-
-\bibitem{Zubizarreta}
-A. Zubizarreta, I. Cabanes, M. Marcos, C. Pinto,  E. Portillo.
-\newblock Extended CTC control for parallel robots.
-\newblock {\em Emerging Technologies and Factory Automation (ETFA), 2010 IEEE Conference on}, 2010.
-
-\bibitem{Bloch}
-A.M. Bloch, M. Reyhanoglu, N.H. McClamroch.
-\newblock Control and stabilization of nonholonomic dynamic systems.
-\newblock {\em Automatic Control, IEEE Transactions on}, 1992.
+\bibitem{Kaminski}
+P. C. Kaminski.
+\newblock {\em {Mec\^anica geral para engenheiros}}.
+\newblock Edgard Bl\"ucher, 2000.
 
 \bibitem{Khalil}
 W. Khalil, E. Dombre.
 \newblock {\em {Modeling, Identification and Control of Robots}}.
 \newblock Taylor \& Francis, 2002.
 
-\bibitem{Tsai}
-L. W. Tsai.
-\newblock {\em {Robot Analysis: The Mechanics of Serial and Parallel Manipulators}}.
-\newblock John Wiley \& Sons, 1999.
-
 \bibitem{Kumazawa}
 V. D. Kumazawa, T. A. Hess Coelho, D. Rinaudi, G. Carbone, M. Ceccarelli.  
 \newblock {Kinematic analysis and operation feasibility of a 3-dof asymmetric parallel mechanism}.
 \newblock In {\em 20th COBEM, {Gramado, Brazil}}, 2009.
-
-\bibitem{Slotini}
-J-J. E. Slotine, W. Li.
-\newblock {\em {Applied nonlinear control}}.
-\newblock Prentice Hall, 1991.
-
-\bibitem{Utkin}
-V. Utkin, J. Guldner, J. Shi.
-\newblock {\em {Sliding mode control in electro-mechanical systems}}.
-\newblock  Vol. 34. CRC press, 2009.
-
-\bibitem{Biorob}
-G. M. Dobrianskyj, A. G. Coutinho, T. A. H. Coelho.
-\newblock Development of a controller for a 3-DOF robotic platform for user interaction in rehabilitation therapies.
-\newblock {\em Biomedical Robotics and Biomechatronics 2014 5th IEEE RAS EMBS International Conference on},
-  819 -- 825, 2014.
-  
-\bibitem{Denavit}
-J. Denavit, R. S. Hartenberg.
-\newblock A Kinematic Notation for Lower-Pair Mechanisms Based on Matrices.
-\newblock {\em Journal of Applied Mechanics}, 215--221, June 1955.
-  
-\bibitem{Lipkin}
-H. Lipkin. 
-\newblock A note on denavit-hartenberg notation in robotics.
-\newblock {\em ASME 2005 International Design Engineering Technical Conferences and Computers and Information in Engineering Conference}, 921--926, 2005.
-
-\bibitem{20altuzarra}
-O. Altuzarra, P. M. Eggers, F. J. Campa, C. Roldan-Paraponiaris, C. Pinto.
-\newblock Dynamic Modelling of Lower-Mobility Parallel Manipulators Using the Boltzmann-Hamel Equations
-\newblock {\em Mechanisms, Transmissions and Applications}, 31: 157--165, 2015.
-
-\bibitem{Abdellatif}
-H. Abdellatif, B. Heimann, J. Kotlarski, T. Ortmaier.
-\newblock Practical model-based and robust control of parallel manipulators using passivity and sliding mode theory
-\newblock {\em Robotics 2010: Current and Future Challenges}, InTech, 2010.
 
 \bibitem{Li}
 Y. Li, Q. Xu.
@@ -159,49 +140,98 @@ O. Linda, M. Manic.
 \newblock Uncertainty-robust design of interval type-2 fuzzy logic controller for delta parallel robot
 \newblock {\em Industrial Informatics, IEEE Transactions on}, 7(4): 661--670, 2011.
 
-\bibitem{Chen}
-S-L. Chen, Y-C. Tsai. 
-\newblock Contouring control of a parallel mechanism based on equivalent errors
-\newblock {\em American Control Conference, 2008}, 2384--2388, 2008.
+\bibitem{Lipkin}
+H. Lipkin. 
+\newblock A note on denavit-hartenberg notation in robotics.
+\newblock {\em ASME 2005 International Design Engineering Technical Conferences and Computers and Information in Engineering Conference}, 921--926, 2005.
 
-\bibitem{21orsino}
-R. M. M. Orsino, T. A. H. Coelho, C. P. Pesce.
-\newblock Analytical mechanics approaches in the dynamic modelling of Delta mechanism
-\newblock {\em Robotica}, 33(4): 953--973, 2015.
+\bibitem{Merlet2002}
+J-P. Merlet.
+\newblock {Still a long way to go on the road for parallel mechanisms}.
+\newblock In {\em ASME DETC Conference, {Montreal, 2002}}, 2002.
 
 \bibitem{22orsino}
 R. M. M. Orsino, A. G. Coutinho, T. A. H. Coelho.
 \newblock Dynamic Modelling and Control of Balanced Parallel Mechanisms,
 \newblock in {\em Dynamic Balancing of Mechanisms and Synthesizing of Parallel Robots}, Springer, 2016:403--445.
 
+\bibitem{Orsino2013}
+R. M. M. Orsino, T. A. H. Coelho.
+\newblock A contribution for developing more efficient dynamic modelling
+  algorithms of parallel robots.
+\newblock {\em International Journal of Mechanisms and Robotic Systems},
+  1(1):15 -- 34, 2013.
+
 \bibitem{23orsino}
 R. M. M. Orsino, T. A. H. Coelho.
 \newblock A contribution on the modular modelling of multibody systems
 \newblock {\em Proc. Royal Society A}, 471(2183), 2015.
 
-\bibitem{Cabral}
-E. L. L. Cabral.
-\newblock Cinem\'atica Direta de Rob\^os Manipuladores,
-\newblock in {\em An\'alise de Rob\^os}, sites.poli.usp.br/p/eduardo.cabral/Cinem\'atica Direta.pdf accessed in 25/08/2016.
-
-\bibitem{Baumgarte}
-J. Baumgarte.
-\newblock Stabilization of constraints and integrals of motion in dynamical systems
-\newblock {\em Computer Methods in Applied Mechanics and Engineering}, 1(1): 1--16, 1972.
+\bibitem{21orsino}
+R. M. M. Orsino, T. A. H. Coelho, C. P. Pesce.
+\newblock Analytical mechanics approaches in the dynamic modelling of Delta mechanism
+\newblock {\em Robotica}, 33(4): 953--973, 2015.
 
 \bibitem{RK}
 P. J. Prince, J. R. Dormand.
 \newblock High order embedded Runge-Kutta formulae
 \newblock {\em Journal of Computational and Applied Mathematics}, 7(1): 67--75, 1981.
 
-\bibitem{Kaminski}
-P. C. Kaminski.
-\newblock {\em {Mec\^anica geral para engenheiros}}.
-\newblock Edgard Bl\"ucher, 2000.
+\bibitem{Slotini}
+J-J. E. Slotine, W. Li.
+\newblock {\em {Applied nonlinear control}}.
+\newblock Prentice Hall, 1991.
 
 \bibitem{Tenenbaum}
 R. A. Tenenbaum.
 \newblock {\em {Fundamentals of Applied Dynamics}}.
 \newblock Springer Science \& Business Media, 2006.
+
+\bibitem{Tsai}
+L. W. Tsai.
+\newblock {\em {Robot Analysis: The Mechanics of Serial and Parallel Manipulators}}.
+\newblock John Wiley \& Sons, 1999.
+
+\bibitem{Utkin}
+V. Utkin, J. Guldner, J. Shi.
+\newblock {\em {Sliding mode control in electro-mechanical systems}}.
+\newblock  Vol. 34. CRC press, 2009.
+
+\bibitem{Utkin2}
+V. Utkin, H. Lee
+\newblock Chattering problem in sliding mode control systems.
+\newblock {\em International Workshop on Variable Structure Systems, 2006. VSS'06}, 346--350, 2006.
+
+\bibitem{Wang}
+J. Wang, J. Wu, L. Wang, Z. You.
+\newblock Dynamic feed-forward control of a parallel kinematic machine
+\newblock {\em Mechatronics}, 19(3): 313--324, 2009.
+
+\bibitem{Zubizarreta}
+A. Zubizarreta, I. Cabanes, M. Marcos, C. Pinto,  E. Portillo.
+\newblock Extended CTC control for parallel robots
+\newblock {\em Emerging Technologies and Factory Automation (ETFA), 2010 IEEE Conference on}, 1--8, 2010.
+
+\bibitem{Zubizarreta2}
+A. Zubizarreta, I. Cabanes, M. Marcos, C. Pinto.
+\newblock Control of parallel robots using passive sensor data
+\newblock {\em 2008 IEEE/RSJ International Conference on Intelligent Robots and Systems}, 2398--2403, 2008.
+
+\bibitem{Zubizarreta3}
+A. Zubizarreta, I. Cabanes, M. Marcos, C. Pinto.
+\newblock A redundant dynamic model of parallel robots for model-based control
+\newblock {\em Robotica}, 31(2): 203--216, 2013.
+
+\bibitem{Zubizarreta4}
+A. Zubizarreta, M. Marcos, I. Cabanes, C. Pinto, E. Portillo. 
+\newblock Redundant sensor based control of the 3RRR parallel robot
+\newblock {\em Mechanism and machine theory}, 54: 1--17, 2012.
+
+
+%\bibitem{Apostila}
+%R. M. M. Orsino, T. A. H. Coelho.
+%\newblock Metodologia para An\'alise e S\'intese de Mecanismos.
+%\newblock {\em Material de apoio para as disciplinas PMR2430 e PMR2331 - Escola Polit\'ecnica da Universidade de
+%S\~ao Paulo}, 2013.
 
 \end{thebibliography}
