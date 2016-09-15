@@ -1,5 +1,10 @@
 \begin{thebibliography}{10}
 
+\bibitem{Abdellatif}
+H. Abdellatif, B. Heimann, J. Kotlarski, T. Ortmainer.
+\newblock Practical model-based and robust control of parallel manipulators using passivity and sliding mode theory
+\newblock {\em Robotics 2010: Current and Future Challanges}. INTECH Open Access Publisher, 2010.
+
 \bibitem{Rynaldo}
 R. Z. H. de Almeida.
 \newblock Modelagem din\^amica e controle e rob\^o manipulador
@@ -8,6 +13,47 @@ de arquitetura paralela assim\'etrica de tr\^es graus de liberdade.
 S\~ao Paulo. Departamento de Engenharia Mecatr\^onica e de
 Sistemas Mec\^anicos},
   2013.
+
+\bibitem{Begon}
+P. Begon, F. Pierrot, P. Dauchez.
+\newblock Fuzzy sliding mode control of a fast parallel robot.
+\newblock {\em Robotics and Automation, 1995. Proceedings., 1995 IEEE International Conference on}, 1:1178--1183, 1995.
+
+\bibitem{Camacho}
+E. F. Camacho, C. B. Alba.
+\newblock {\em {Model predictive control}}.
+\newblock Springer Science \& Business Media, 2013.
+
+\bibitem{Chemori}
+A. Chemori, G. S. Natal, F. Pierrot.
+\newblock Control of parallel robots: towards very high accelerations.
+\newblock {\em SSD'2013: 10th International Multi-Conference on Systems, Signals and Devices}, 2013.
+
+\bibitem{Cheng}
+H. Cheng, Y-K. Yiu, Z. Li.
+\newblock Dynamics and control of redundantly actuated parallel manipulators
+\newblock {\em Mechatronics, IEEE/ASME Transactions on}, 8(4): 483--491, 2003.
+
+\bibitem{Codourey}
+A. Codourey.
+\newblock Dynamic modelling and mass matrix evaluation of the DELTA parallel robot for axes decoupling control.
+\newblock {\em Intelligent Robots and Systems' 96, IROS 96, Proceedings of the 1996 IEEE/RSJ International Conference on}, 3:1211--1218, 1996.
+
+\bibitem{Coutinho}
+A. G. Coutinho, T. A. H. Coelho.
+\newblock A new approach for obtaining the dynamic balancing conditions in serial mechanisms
+\newblock {\em International Journal of Mechanisms and Robotic Systems}, 3(1): 32--47, 2016.
+
+\bibitem{Craig}
+J. J. Craig.
+\newblock {\em {Introduction to robotics: mechanics and control}}.
+\newblock Addison-Wesley series in electrical and computer engineering: control
+  engineering. Pearson/Prentice Hall, 2005.
+
+\bibitem{Duchaine}
+V. Duchaine, S. Bouchard, C. M. Gosselin.
+\newblock Computationally efficient predictive robot control
+\newblock {\em IEEE/ASME Transactions On Mechatronics}, 12(5): 570--578, 2007.
   
 \bibitem{Andre}
 G. M. Dobriankyj, A. G. Coutinho.
@@ -22,12 +68,6 @@ Sistemas Mec\^anicos}, 2013.
 %\newblock Metodologia para An\'alise e S\'intese de Mecanismos.
 %\newblock {\em Material de apoio para as disciplinas PMR2430 e PMR2331 - Escola Polit\'ecnica da Universidade de
 %S\~ao Paulo}, 2013.
-
-\bibitem{Craig}
-J. J. Craig.
-\newblock {\em {Introduction to robotics: mechanics and control}}.
-\newblock Addison-Wesley series in electrical and computer engineering: control
-  engineering. Pearson/Prentice Hall, 2005.
   
 \bibitem{Jarzebowska2009}
 E. Jarzebowska.
@@ -99,11 +139,6 @@ H. Lipkin.
 \newblock A note on denavit-hartenberg notation in robotics.
 \newblock {\em ASME 2005 International Design Engineering Technical Conferences and Computers and Information in Engineering Conference}, 921--926, 2005.
 
-\bibitem{Cheng}
-H. Cheng, Y-K. Yiu, Z. Li.
-\newblock Dynamics and control of redundantly actuated parallel manipulators
-\newblock {\em Mechatronics, IEEE/ASME Transactions on}, 8(4): 483--491, 2003.
-
 \bibitem{20altuzarra}
 O. Altuzarra, P. M. Eggers, F. J. Campa, C. Roldan-Paraponiaris, C. Pinto.
 \newblock Dynamic Modelling of Lower-Mobility Parallel Manipulators Using the Boltzmann-Hamel Equations
@@ -143,11 +178,6 @@ R. M. M. Orsino, A. G. Coutinho, T. A. H. Coelho.
 R. M. M. Orsino, T. A. H. Coelho.
 \newblock A contribution on the modular modelling of multibody systems
 \newblock {\em Proc. Royal Society A}, 471(2183), 2015.
-
-\bibitem{Coutinho}
-A. G. Coutinho, T. A. H. Coelho.
-\newblock A new approach for obtaining the dynamic balancing conditions in serial mechanisms
-\newblock {\em International Journal of Mechanisms and Robotic Systems}, 3(1): 32--47, 2016.
 
 \bibitem{Cabral}
 E. L. L. Cabral.
