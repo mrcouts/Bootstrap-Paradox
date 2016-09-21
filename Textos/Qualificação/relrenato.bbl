@@ -2,7 +2,7 @@
 
 \bibitem{Abdellatif}
 H. Abdellatif, B. Heimann, J. Kotlarski, T. Ortmaier.
-\newblock Practical model-based and robust control of parallel manipulators using passivity and sliding mode theory
+\newblock Practical model-based and robust control of parallel manipulators using passivity and sliding mode theory.
 \newblock {\em Robotics 2010: Current and Future Challenges}, InTech, 2010.
 
 \bibitem{Rynaldo}
@@ -16,12 +16,12 @@ Sistemas Mec\^anicos},
 
 \bibitem{20altuzarra}
 O. Altuzarra, P. M. Eggers, F. J. Campa, C. Roldan-Paraponiaris, C. Pinto.
-\newblock Dynamic Modelling of Lower-Mobility Parallel Manipulators Using the Boltzmann-Hamel Equations
+\newblock Dynamic Modelling of Lower-Mobility Parallel Manipulators Using the Boltzmann-Hamel Equations.
 \newblock {\em Mechanisms, Transmissions and Applications}, 31: 157--165, 2015.
 
 \bibitem{Baumgarte}
 J. Baumgarte.
-\newblock Stabilization of constraints and integrals of motion in dynamical systems
+\newblock Stabilization of constraints and integrals of motion in dynamical systems.
 \newblock {\em Computer Methods in Applied Mechanics and Engineering}, 1(1): 1--16, 1972.
 
 \bibitem{Begon}
@@ -36,7 +36,7 @@ A.M. Bloch, M. Reyhanoglu, N.H. McClamroch.
 
 \bibitem{Cabral}
 E. L. L. Cabral.
-\newblock Cinem\'atica Direta de Rob\^os Manipuladores,
+\newblock Cinem\'atica Direta de Rob\^os Manipuladores.
 \newblock in {\em An\'alise de Rob\^os}, sites.poli.usp.br/p/eduardo.cabral/Cinem\'atica Direta.pdf accessed in 25/08/2016.
 
 \bibitem{Camacho}
@@ -51,12 +51,12 @@ A. Chemori, G. S. Natal, F. Pierrot.
 
 \bibitem{Chen}
 S-L. Chen, Y-C. Tsai. 
-\newblock Contouring control of a parallel mechanism based on equivalent errors
+\newblock Contouring control of a parallel mechanism based on equivalent errors.
 \newblock {\em American Control Conference, 2008}, 2384--2388, 2008.
 
 \bibitem{Cheng}
 H. Cheng, Y-K. Yiu, Z. Li.
-\newblock Dynamics and control of redundantly actuated parallel manipulators
+\newblock Dynamics and control of redundantly actuated parallel manipulators.
 \newblock {\em Mechatronics, IEEE/ASME Transactions on}, 8(4): 483--491, 2003.
 
 \bibitem{Codourey}
@@ -64,9 +64,14 @@ A. Codourey.
 \newblock Dynamic modelling and mass matrix evaluation of the DELTA parallel robot for axes decoupling control.
 \newblock {\em Intelligent Robots and Systems' 96, IROS 96, Proceedings of the 1996 IEEE/RSJ International Conference on}, 3: 1211--1218, 1996.
 
+\bibitem{Codourey2}
+A. Codourey, E. Burdet.
+\newblock A body-oriented method for finding a linear form of the dynamic equation of fully parallel robots.
+\newblock {\em Robotics and Automation, 1997. Proceedings., 1997 IEEE International Conference on}, 2: 1612--1618, 1997.
+
 \bibitem{Coutinho}
 A. G. Coutinho, T. A. H. Coelho.
-\newblock A new approach for obtaining the dynamic balancing conditions in serial mechanisms
+\newblock A new approach for obtaining the dynamic balancing conditions in serial mechanisms.
 \newblock {\em International Journal of Mechanisms and Robotic Systems}, 3(1): 32--47, 2016.
 
 \bibitem{Craig}
@@ -95,18 +100,34 @@ G. M. Dobrianskyj, A. G. Coutinho, T. A. H. Coelho.
 
 \bibitem{Duchaine}
 V. Duchaine, S. Bouchard, C. M. Gosselin.
-\newblock Computationally efficient predictive robot control
+\newblock Computationally efficient predictive robot control.
 \newblock {\em IEEE/ASME Transactions On Mechatronics}, 12(5): 570--578, 2007.
 
 \bibitem{Ebrahimi}
 M. M. Ebrahimi, F. Piltan, M. Bazregar, A. Nabaee.
-\newblock Intelligent Robust Fuzzy-Parallel Optimization Control of a Continuum Robot Manipulator
+\newblock Intelligent Robust Fuzzy-Parallel Optimization Control of a Continuum Robot Manipulator.
 \newblock {\em International Journal of Control and Automation}, 6(3): 15--34, 2013.
+
+\bibitem{Ertugrul}
+M. Ertugrul, O. Kaynak.
+\newblock Neuro sliding mode control of robotic manipulators.
+\newblock {\em Mechatronics}, 10(1): 239--263, 2000.
+
 
 \bibitem{Guldner}
 J. Guldner, V. I. Utkin.
 \newblock The chattering problem in sliding mode system.
 \newblock {\em 14th Int. Symp. Math. Theory Netw. Syst.(MTNS), Perpignan, France}, 2000.
+
+\bibitem{Honegger}
+M. Honegger, R. Brega, G. Schweitzer.
+\newblock Application of a nonlinear adaptive controller to a 6 dof parallel manipulator.
+\newblock {\em Robotics and Automation, 2000. Proceedings. ICRA'00. IEEE International Conference on}, 2: 1930--1935, 2000.
+
+\bibitem{Hu}
+H. Hu, P-Y. Woo.
+\newblock Fuzzy supervisory sliding-mode and neural-network control for robotic manipulators.
+\newblock {\em IEEE Transactions on Industrial Electronics}, 53(3):929--940, 2006.
 
 \bibitem{Jarzebowska2009}
 E. Jarzebowska.
@@ -142,12 +163,12 @@ O. Linda, M. Manic.
 
 \bibitem{Lipkin}
 H. Lipkin. 
-\newblock A note on denavit-hartenberg notation in robotics.
+\newblock A note on denavit-hartenberg notation in robotics
 \newblock {\em ASME 2005 International Design Engineering Technical Conferences and Computers and Information in Engineering Conference}, 921--926, 2005.
 
 \bibitem{Merlet2002}
 J-P. Merlet.
-\newblock {Still a long way to go on the road for parallel mechanisms}.
+\newblock {Still a long way to go on the road for parallel mechanisms}
 \newblock In {\em ASME DETC Conference, {Montreal, 2002}}, 2002.
 
 \bibitem{22orsino}
@@ -177,10 +198,35 @@ P. J. Prince, J. R. Dormand.
 \newblock High order embedded Runge-Kutta formulae
 \newblock {\em Journal of Computational and Applied Mathematics}, 7(1): 67--75, 1981.
 
+\bibitem{Sadati}
+N. Sadati, R. Ghadami.
+\newblock {Adaptive multi-model sliding mode control of robotic manipulators using soft computing}
+\newblock {\em Neurocomputing}, 71(13): 2702--2710, 2008.
+
+\bibitem{Siciliano}
+B. Siciliano, L. Sciavicco, L. Villani, G. Oriolo.
+\newblock {\em {Robotics: modelling, planning and control}}.
+\newblock Springer Science \& Business Media, 2010.
+
 \bibitem{Slotini}
 J-J. E. Slotine, W. Li.
 \newblock {\em {Applied nonlinear control}}.
 \newblock Prentice Hall, 1991.
+
+\bibitem{SlotiniSMC}
+J-J. E. Slotine.
+\newblock The robust control of robot manipulators
+\newblock {\em The International Journal of Robotics Research}, 4(2): 49--64, 1985.
+
+\bibitem{SlotiniA}
+J-J. E. Slotine, W. Li.
+\newblock On the adaptive control of robot manipulators
+\newblock {\em The International Journal of Robotics Research}, 6(3): 49--59, 1987.
+
+\bibitem{Spong}
+M. W. Spong, S. Hutchinson, M. Vidyasagar.
+\newblock {\em {Robot modeling and control}}.
+\newblock Wiley New York, 2006.
 
 \bibitem{Tenenbaum}
 R. A. Tenenbaum.
@@ -199,13 +245,23 @@ V. Utkin, J. Guldner, J. Shi.
 
 \bibitem{Utkin2}
 V. Utkin, H. Lee
-\newblock Chattering problem in sliding mode control systems.
+\newblock Chattering problem in sliding mode control systems
 \newblock {\em International Workshop on Variable Structure Systems, 2006. VSS'06}, 346--350, 2006.
+
+\bibitem{Vivas}
+A. Vivas, P. Poignet.
+\newblock Predictive functional control of a parallel robot
+\newblock {\em Control Engineering Practice}, 13(7): 863--874, 2005.
 
 \bibitem{Wang}
 J. Wang, J. Wu, L. Wang, Z. You.
 \newblock Dynamic feed-forward control of a parallel kinematic machine
 \newblock {\em Mechatronics}, 19(3): 313--324, 2009.
+
+\bibitem{Zeinali}
+M. Zeinali, L. Notash.
+\newblock Adaptive sliding mode control with uncertainty estimator for robot manipulators
+\newblock {\em Mechanism and Machine Theory}, 45(1): 80--90, 2010.
 
 \bibitem{Zubizarreta}
 A. Zubizarreta, I. Cabanes, M. Marcos, C. Pinto,  E. Portillo.

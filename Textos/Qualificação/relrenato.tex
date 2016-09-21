@@ -169,6 +169,48 @@ Os principais objetivos do projeto s\~ao:
 
 \section{Revisão da literatura}\label{revision}
 
+Esta seção é dedicada à revisão da literatura de técnicas de controle de posição aplicadas a mecanismos paralelos. \\
+
+Existem diversas técnicas propostas pela literatura para realizar o controle de mecanismos paralelos. Dentre elas, podemos destacar:
+
+\begin{itemize}
+\item Controle PID
+\item Controle por Torque Computado (CTC)
+\item Controle por Torque Computado { \em feedforward }
+\item Controle por Torque Computado Estendido
+\item Controle Preditivo
+\item Controle Adaptativo
+\item Controle por Modos Deslizantes (CMD)
+\end{itemize}
+
+A técnica mais simples utilizada é a utilização de controles do tipo PID controlando cada junta ativa de maneira independente, considerando a dinâmica do mecanismo como distúrbios de controle. Essa técnica é caracterizada por sua facilidade de projeto, facilidade de implementação, visto que pode ser implementada até em hardware, baixo custo computacional para implementação em software, e performance satisfatória para movimento lento. Porém, essa técnica não se mostra adequada para realização de trajetória em altas velocidades e/ou acelerações \cite{Honegger, Zubizarreta}.
+
+Uma das técnicas de controle mais exploradas na literatura é o Controle por Torque Computado. Essa técnica é uma aplicação da técnica de controle não linear conhecida como linearização pela realimentação a sistemas mecânicos. A técnica consiste basicamente na utilização de duas malhas de controle, uma malha de controle que realiza a de compensação das não linearidades e o desacoplamento do sistema, e uma malha de controle linear composta por PIDs independentes \cite{Craig}. Essa técnica permite obter performances muito superiores  às obtidas utilizando simples PIDs e torna possível a realização de trajetória precisas em altas velocidades e/ou acelerações, porém tem sua performance limitada pela qualidade/fidelidade do modelo dinâmico utilizado para a compensação das não linearidades \cite{SlotiniSMC}. Sua implementação também é mais complexa, visto que é necessário calcular o modelo dinâmico inverso em tempo real, o que também aumenta consideravelmente seu custo computacional. Além disso, a técnica é sensível a incertezas estruturadas (paramétricas) e não estruturadas (dinâmicas não modeladas).
+
+(comentar alguns trabalhos)
+
+Para obter uma performance superior à utilização de PIDs independentes, porém com um custo computacional consideravelmente menor que o Controle por Torque Computado tradicional, alguns autores propõe a utilização do Controle por Torque Computado {\em feedforward} \cite{Khalil, Siciliano, Spong}. Essa técnica é similar ao CTC, com a diferença de que a compensação das não linearidades é feita por {\em feedforward}, não mais por realimentação. Isso torna possível realizar o cálculo do modelo dinâmico previamente, diminuindo consideravelmente o custo computacional.
+
+No trabalho de Codourey \cite{Codourey}, é obtida uma redução de 600\% no erro de posição utilizando este controlador em um mecanismo do tipo DELTA no lugar de PDs independentes. Já no trabalho de Wang et al. \cite{Wang}, são utilizados em cascata controladores lineares de posição, velocidade e corrente em cada junta ativa, e uma compensação dinâmica por {\em feedforward} dos distúrbios de torque para simular o controle de em um mecanismo 6-UPS.
+
+Com o intuito de melhorar a robustez do CTC, Zubizarreta et al. \cite{Zubizarreta, Zubizarreta2, Zubizarreta3, Zubizarreta4} propõe uma nova técnica de controle, o  Controle por Torque Computado Estendido, o qual baseia-se na utilização de informação redundante obtida pelo sensoriamento de juntas passivas. Em \cite{Zubizarreta}, os controladores propostos apresentam maior robustez em relação a erros paramétricos, principalmente em relação a parâmetros cinemáticos, em simulações feitas considerando um mecanismo do tipo 3-RRR.
+
+Outras técnicas de controle utilizadas em mecanismos paralelos são as técnicas baseadas em controle preditivo. O controle preditivo baseado em modelo caracteriza-se pelo uso do modelo dinâmico do sistema para a predição das saídas em tempo futuro, na obtenção do esforço de controle que minimize uma função objetivo relativa ao desempenho do sistema, avaliados em tempo  futuro, e na utilização efetiva apenas do valor inicial do esforço de controle obtido, repedindo-se o processo para cada iteração \cite{Camacho}.
+
+No trabalho de Vivas et al. \cite{Vivas} é utilizada uma malha de controle para compensação das não linearidades, e uma malha de controle preditivo linear, para controlar um mecanismo H4. É feita uma comparação da performance do controlador proposto com  um controlador por torque computado, na qual o controlador proposto se mostra mais robusto a incertezas paramétricas. 
+
+No trabalho de Duchaine et al. \cite{Duchaine} , é proposto um controlador preditivo baseado no modelo não linear simplificado de um mecanismo paralelo de 6 graus de liberdade. Foram adotadas várias hipóteses simplificadores no modelo dinâmico do mecanismo com o intuito de obter uma solução analítica para o problema de otimização proposto. Foram feitos experimentos utilizando o controlador proposto e utilizando um PID, obtendo erros de posição e custo computacional equivalentes para os 2 controladores, com a diferença que o controlador preditivo obteve erro de controle nulo no final da trajetória, enquanto o PID demorou um tempo considerável para chegar a erro nulo.
+
+O controle adaptativo, também encontrado na literatura, caracteriza-se pela utilização de leis de adaptação para realizar a estimação em tempo real de parâmetros do sistema ou de termos de compensação dinâmica. Sendo assim, as técnicas de controle adaptativo possibilitam que o sistema se torne praticamente insensível a incertezas paramétricas. Para o caso da estimação em tempo real dos parâmetros do sistema, pode-se dizer que o custo computacional é superior ao do CTC, visto que é necessário integrar as leis de adaptação em tempo real. Além disso, é necessário obter o modelo dinâmico linear em relação aos parâmetros do sistema \cite{SlotiniA}, o que pode ser uma tarefa difícil e consequentemente dificultar a aplicação da técnica. Em \cite{Codourey2} é proposto um algoritmo de obtenção do modelo dinâmico simplificado de mecanismos paralelos nesse formato.
+
+Em \cite{SlotiniA} é proposta uma lei de controle que combina o controle adaptativo com a técnica de controle robusto conhecida por Controle por Modos Deslizantes. Essa formulação é utilizada no trabalho de Chemori et al. \cite{Chemori} com o intuito de diminuir os erros de posição em regime permanente no controle de um mecanismo paralelo do tipo PAR2. No trabalho de Honegger at al. \cite{Honegger} também é utilizado o controle adaptativo com estimação em tempo real dos parâmetros do sistemas, porém utilizando compensação dinâmica por {\em feedforward}, em um mecanismo  paralelo do tipo Hexaglide.
+
+Também é encontrado na literatura a utilização de Controle por Modos Deslizantes em mecanismos paralelos. A técnica consiste no projeto de leis de controle que levem o sistema para superfícies de escorregamento no espaço de fase, de modo que assim que o sistema atinje e é mantido nas superfícies de escorregamento, o erro de controle decai exponencialmente para zero \cite{Slotini}. Para garantir que o sistema atinja em tempo finito e se mantenha nas superfícies de escorregamento, são utilizados termos descontínuos na lei de controle, o que pode causar problemas de oscilações bruscas em alta frequência nos esforços de controle ({\em chattering}). Em \cite{Guldner}  e  \cite{Utkin2} são propostas técnicas para evitar esse tipo de problema. A grande vantagem da utilização deste tipo de lei de controle é sua grande robustez a incertezas estruturadas e não estruturadas, sendo possível realizar o projeto do controlador de modo a suprimir um dado nível de incertezas paramétricas. Em \cite{SlotiniSMC} é proposta uma metodologia de projeto de Controle por Modos Deslizantes para manipuladores robóticos, porém não foi encontrado na literatura a aplicação dessa metodologia a mecanismos paralelos.
+
+Na literatura são encontradas diversos artigos utilizando a técnica de CMD aliada à lógica {\em fuzzy} e/ou redes neurais para o controle de manipuladores robóticos \cite{Begon, Ertugrul, Hu, Sadati}. Em \cite{Begon} é proposta uma lei de controle baseada na teoria de CMD e na utilização de lógica fuzzy para controlar de maneira independente os atuadores de um mecanismo paralelo do tipo Hexa. A técnica proposta tem o intuito de obter a robustez característica do CDM sem necessitar de uma lei de controle com termos descontínuos, evitando o {\em chattering}.
+
+Em \cite{Zeinali}, Zeinali et al. propõe uma lei de controle  baseada nas teorias de CMD e controle adaptativo. O controlador proposto realiza a compensação dinâmica em tempo real do erro de modelagem através de uma lei de adaptação. Além disso, substitui o termo descontínuo da lei de controle por um termo do tipo PID, com o intuito de evitar o chattering. A estabilidade e robustez da lei de controle proposta são provadas utilizando a teoria de estabilidade de Lyapunov \cite{Slotini}. A robustez da lei de controle é verificada através de simulações do controlador proposto aplicado a um mecanismo serial do tipo \underline{R}\underline{R}, nas quais o controlador consegue manter erros de posição muito pequenos em regime permanente, mesmo sendo baseado em um modelo muito pobre e na presença de distúrbios de torque. A técnica apresentada se mostra promissora, porém, como no artigo é feita apenas a simulação da lei de controle em um mecanismo serial bidimensional, ainda não se pode afirmar nada sobre seu desempenho em mecanismos paralelos.
+
 \newpage
 
 %METODOLOGIA--------------------------------------------------------------------
@@ -1509,7 +1551,7 @@ Nesta subseção, será realizada a simulação dinâmica direta do mecânimo 5R utiliz
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.25]{figures/5Rscan.jpg}  
+	\includegraphics[scale=0.10]{figures/5Rscan.jpg}  
 	\caption{Pentágono articulado (5R)}
 	\label{fig:5R}
 \end{figure}
@@ -1518,7 +1560,7 @@ O mecanismo 5R será modelado através do acoplamento de 2 subsistemas seriais $\s
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.25]{figures/RR.jpg}  
+	\includegraphics[scale=0.055]{figures/RR.jpg}  
 	\caption{Mecanismo \underline{R}\underline{R}}
 	\label{fig:RR}
 \end{figure}
