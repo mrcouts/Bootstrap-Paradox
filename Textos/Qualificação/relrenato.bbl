@@ -156,6 +156,11 @@ Y. Li, Q. Xu.
 \newblock Dynamic modeling and robust control of a 3-PRC translational parallel kinematic machine
 \newblock {\em Robotics and Computer-Integrated Manufacturing}, 25(3): 630--640, 2009.
 
+\bibitem{Li2}
+Q. Li, F. X. Wu.
+\newblock Control performance improvement of a parallel robot via the design for control approach
+\newblock {\em Mechatronics}, 14(8): 947--964, 2004.
+
 \bibitem{Linda}
 O. Linda, M. Manic.
 \newblock Uncertainty-robust design of interval type-2 fuzzy logic controller for delta parallel robot
@@ -202,6 +207,11 @@ P. J. Prince, J. R. Dormand.
 N. Sadati, R. Ghadami.
 \newblock {Adaptive multi-model sliding mode control of robotic manipulators using soft computing}
 \newblock {\em Neurocomputing}, 71(13): 2702--2710, 2008.
+
+\bibitem{Shang}
+W. Shang, S. Cong
+\newblock {Nonlinear computed torque control for a high-speed planar parallel manipulator}
+\newblock {\em Mechatronics}, 19(6): 987--992, 2009.
 
 \bibitem{Siciliano}
 B. Siciliano, L. Sciavicco, L. Villani, G. Oriolo.
@@ -257,6 +267,11 @@ A. Vivas, P. Poignet.
 J. Wang, J. Wu, L. Wang, Z. You.
 \newblock Dynamic feed-forward control of a parallel kinematic machine
 \newblock {\em Mechatronics}, 19(3): 313--324, 2009.
+
+\bibitem{Yen}
+P-L. Yen, C-C. Lai
+\newblock Dynamic modeling and control of a 3-DOF Cartesian parallel manipulator
+\newblock {\em Mechatronics}, 19(3): 390--398, 2009.
 
 \bibitem{Zeinali}
 M. Zeinali, L. Notash.
