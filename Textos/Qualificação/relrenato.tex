@@ -2055,6 +2055,16 @@ Repare que a lei de Controle por Torque Computado não consegue seguir a trajetór
 %---PUBLICAÇÕES---------------------------------------------------------
 \section{Conclusões Parciais}\label{concl}
 
+Durante a realização do projeto proposto, foi possível concluir que é fundamental a utilização linguagens de alta eficiência computacional para realizar simulações dinâmicas de modelos completos de mecanismos de alta complexidade, apesar da dificuldade em programar em tais linguagens.
+
+Tal constatação foi obtida quando foi feita a tentativa de utilizar um algoritmo de modelagem de mecanismos seriais implementado em Python para realizar a simulação dinâmica inversa de um mecanismo de 6 graus de liberdade. A algoritmo implementado demorava mais de um minuto para calcular cada ponto da simulação. Visto que o mecanismo 2\underline{R}SU+\underline{P}PaP é constituido de 2 cadeias seriais de 6 de liberdade, pode-se concluir que seria inviável realizar simulações dinâmicas deste mecanismos utilizando os algoritmos implementados em Python. Por este motivo, foi feita a migração da implementação dos algoritmos de modelagem para a linguagem C++, a qual se mostrou extremamente eficiente para esse tipo de tarefa. Utilizando o algoritmo implementado em C++, foi possível realizar mais de $10000$ pontos da mesma simulação em menos de 1 segundo.
+
+Também foi possível concluir, por meio de simulações, que é possível obter alto desempenho no controle mecanismos paralelos em altas velocidades/acelerações utilizando técnicas de controle não linear robusto, mesmo com altos níveis de incerteza nos parâmetros do modelo. 
+
+%Como as linguagens de programação com essa característica não apresentam recursos de manipulação simbólica, essa abordagem permite a obtenção de modelos dinâmicos apenas na forma implícita.
+
+%Desde o início do trabalho realizado, foi buscada a implementação de um algoritmo para a modelagem dinâmica de mecanismos paralelos. Inicialmente, o objetivo do algoritmo proposto era a obtenção de modelos explícitos utilizando recursos de manipulação simbólica. A primeira plataforma utilizada para a utilização de manipulação simbólica foi o software Mathematica, porém, devido a limitações da linguagem, foi feita a migração a biblioteca SymPy da linguagem de programação Python. Foi implementado um algoritmo genérico de modelagem de mecanismos seriais em Python.
+
 \newpage
 %---PUBLICAÇÕES---------------------------------------------------------
 \section{Publicações}\label{publi}
