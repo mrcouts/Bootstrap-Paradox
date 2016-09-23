@@ -187,6 +187,13 @@ A técnica mais simples consiste na utilização de malhas do tipo PID, controlando
 
 Uma das técnicas de controle mais exploradas na literatura é o Controle por Torque Computado (CTC). Basicamente, é uma técnica de controle não linear, mais conhecida como linearização pela realimentação, aplicada a sistemas mecânicos. A técnica consiste na utilização de duas malhas de controle, uma malha que realiza o desacoplamento do sistema e a compensação das não linearidades, e outra malha composta por PIDs independentes \cite{Craig}. Como resultado, alcança-se um desempenho  superior  àquele obtido utilizando simples PIDs, permitindo inclusive a realização de trajetórias precisas em altas velocidades e/ou acelerações. No entanto, seu desempenho poderá ser limitado pela qualidade/fidelidade do modelo dinâmico utilizado para a compensação das não linearidades \cite{SlotiniSMC}. Sua implementação também é mais complexa, visto que é necessário calcular o modelo dinâmico inverso em tempo real, o que também aumenta consideravelmente seu custo computacional. Além disso, a técnica é sensível a incertezas estruturadas (paramétricas) e não estruturadas (dinâmicas não modeladas). Como exemplos de utilização do CTC, podem ser citados os trabalhos de Cheng at al. \cite{Cheng}, Li e Wu \cite{Li}, Li e Fu \cite{Li2}, Shang at al. \cite{Shang} e Yen at al. \cite{Yen}.
 
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.40]{figures/CTC.jpg}  
+	\caption{Malha de CTC (Adaptado de \cite{Craig})}
+	\label{fig:CTC}
+\end{figure}
+
 Visando a redução do custo computacional associado ao cálculo do modelo dinâmico em tempo real, alguns autores propõe a utilização do CTC com pré-alimentação (CTCp) \cite{Khalil, Siciliano, Spong}. Essa técnica é similar ao CTC, com a diferença de que a compensação das não linearidades é feita por pré-alimentação e não mais por realimentação.  Consequentemente, realiza-se o cálculo do modelo dinâmico previamente, diminuindo o custo computacional.
 
 De fato, Codourey \cite{Codourey} obteve uma redução de 600\% no erro de posição utilizando o CTCp em um ensaio experimental com o robô DELTA, ao substituir os PDs originais. Na simulação do controle de um mecanismo 6-UPS, Wang et al. \cite{Wang} utilizaram em cascata controladores lineares de posição, velocidade e corrente em cada junta ativa, além de  uma compensação dinâmica por pré-alimentação dos distúrbios de torque.
