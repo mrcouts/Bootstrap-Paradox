@@ -12,40 +12,57 @@
 #include "Reference.h"
 
 vec r_(double t){
-    double r = 0.08;
+    double r = 0.18;
     double x0 = 0.0;
-    double y0 = 0.16;
+    double y0 = 0.18;
     double w = 1/r;
-    return {x0+r*cos(w*t), y0+r*sin(w*t),0.480};
+    return {x0+r*cos(w*t - PI/2), y0+r*sin(w*t - PI/2),0.480};
     //return {0,0,0.480};
 }
 
 vec dr_(double t){
-    double r = 0.08;
+    double r = 0.18;
     double w = 1/r;
-    return {-w*r*sin(w*t), w*r*cos(w*t),0};
+    return {-w*r*sin(w*t - PI/2), w*r*cos(w*t - PI/2),0};
     //return {0,0,0};
 }
 
 vec d2r_(double t){
-    double r = 0.08;
+    double r = 0.18;
     double w = 1/r;
-    return {-w*w*r*cos(w*t), -w*w*r*sin(w*t),0};
+    return {-w*w*r*cos(w*t - PI/2), -w*w*r*sin(w*t - PI/2),0};
     //return {0,0,0};
 }
 
-int main(){
+int main(){ 
+    double lg1 = 0.158;
+    double lg4 = 0.175;
+    double m1 = 0.100;
+    double m4 = 0.060;
+    double J1 = 1165e-6;
+    double J4 = 672.8e-6;
 
-    Mecanismo P = Mecanismo(3);
+    double lg22 = 0.247;
+    double lg42 = 0.100;
+    double m12 = 0.738;
+    double m22 = 0.495;
+    double m42 = 0.128;
+    double J22 = 13662e-6;
+
+    double m0 = 0.050;
+
+    arma_rng::set_seed_random();
+    vec sigma_ = {-0.15,0.15,0.15,0.15,0.15,0.15,-0.15,0.15,0.15,0.15,0.15,0.15,0.15};
+    vec coef_  = ones(13) + sigma_;
 
     vec l_ = {0.305, 0.045, 0.045 , 0.372, 0.0125, 0.000};
-    vec lg_= {0.158, 0.025, 0.0116, 0.175, 0.0042, 0.000};
-    vec m_ = {0.100, 0.033, 0.034 , 0.060, 0.023 , 0.000};
+    vec lg_= {lg1  , 0.025, 0.0116, lg4  , 0.0042, 0.000};
+    vec m_ = {m1   , 0.033, 0.034 , m4   , 0.023 , 0.000};
 
     cube I__; I__.zeros(3,3,6);
-    I__.slice(0) << 1154e-6 << 0       << 0       << endr
-                 << 0       << 1165e-6 << 0       << endr
-                 << 0       << 0       << 12.7e-6 << endr;
+    I__.slice(0) << 0.99*J1 << 0  << 0       << endr
+                 << 0       << J1 << 0       << endr
+                 << 0       << 0  << 12.7e-6 << endr;
 
     I__.slice(1) << 8.0e-6 << 0      << 0      << endr
                  << 0      << 1.5e-6 << 0      << endr
@@ -55,9 +72,9 @@ int main(){
                  << 0      << 8.2e-6 << 0      << endr
                  << 0      << 0      << 1.2e-6 << endr;
 
-    I__.slice(3) << 672.8e-6 << 0      << 0        << endr
-                 << 0        << 1.7e-6 << 0        << endr
-                 << 0        << 0      << 672.8e-6 << endr;
+    I__.slice(3) << J4 << 0      << 0  << endr
+                 << 0  << 1.7e-6 << 0  << endr
+                 << 0  << 0      << J4 << endr;
 
     I__.slice(4) << 1.6e-6 << 0      << 0      << endr
                  << 0      << 1.3e-6 << 0      << endr
@@ -67,21 +84,18 @@ int main(){
                  << 0 << 0 << 0 << endr
                  << 0 << 0 << 0 << endr;
 
-    Serial _6R1 = Serial(6, l_, lg_ , m_, I__ , {0, 9.8,0}, &fDH_6R);
-    Serial _6R2 = Serial(6, l_, lg_ , m_, I__ , {0, 9.8,0}, &fDH_6R);
-
     vec l2_ = {0.000, 0.380, 0.000, 0.200};
-    vec lg2_= {0.000, 0.191, 0.000, 0.100};
-    vec m2_ = {0.738, 0.326, 0.136, 0.128};
+    vec lg2_= {0.000, lg22 , 0.000, lg42 };
+    vec m2_ = {m12  , m22  , 0.000, m42  };
 
     cube I2__; I2__.zeros(3,3,4);
     I2__.slice(0) << 0  << 0  << 0 << endr
                   << 0  << 0  << 0 << endr
                   << 0  << 0  << 0 << endr;
 
-    I2__.slice(1) << 0 << 0 << 0        << endr
-                  << 0 << 0 << 0        << endr
-                  << 0 << 0 << 13662e-6 << endr;
+    I2__.slice(1) << 0 << 0 << 0   << endr
+                  << 0 << 0 << 0   << endr
+                  << 0 << 0 << J22 << endr;
 
     I2__.slice(2) << 0  << 0  << 0 << endr
                   << 0  << 0  << 0 << endr
@@ -91,13 +105,73 @@ int main(){
                   << 0  << 0  << 0 << endr
                   << 0  << 0  << 0 << endr;
 
+    vec _l_ = {0.305, 0.045, 0.045 , 0.372, 0.0125, 0.000};
+    vec _lg_= {coef_(0)*lg1  , 0.025, 0.0116, coef_(1)*lg4  , 0.0042, 0.000};
+    vec _m_ = {coef_(2)*m1   , 0.033, 0.034 , coef_(3)*m4   , 0.023 , 0.000};
+
+    cube _I__; _I__.zeros(3,3,6);
+    _I__.slice(0) << coef_(4)*0.99*J1 << 0             << 0       << endr
+                  << 0                << coef_(4)*J1   << 0       << endr
+                  << 0                << 0             << 12.7e-6 << endr;
+
+    _I__.slice(1) << 8.0e-6 << 0      << 0      << endr
+                  << 0      << 1.5e-6 << 0      << endr
+                  << 0      << 0      << 8.2e-6 << endr;
+
+    _I__.slice(2) << 7.9e-6 << 0      << 0      << endr
+                  << 0      << 8.2e-6 << 0      << endr
+                  << 0      << 0      << 1.2e-6 << endr;
+
+    _I__.slice(3) << coef_(5)*J4 << 0      << 0           << endr
+                  << 0           << 1.7e-6 << 0           << endr
+                  << 0           << 0      << coef_(5)*J4 << endr;
+
+    _I__.slice(4) << 1.6e-6 << 0      << 0      << endr
+                  << 0      << 1.3e-6 << 0      << endr
+                  << 0      << 0      << 1.2e-6 << endr;
+
+    _I__.slice(5) << 0 << 0 << 0 << endr
+                  << 0 << 0 << 0 << endr
+                  << 0 << 0 << 0 << endr;
+
+    vec _l2_ = {0.000, 0.380, 0.000, 0.200};
+    vec _lg2_= {0.000, coef_(6)*lg22 , 0.000, coef_(7)*lg42 };
+    vec _m2_ = {coef_(8)*m12  , coef_(9)*m22  , 0.000, coef_(10)*m42  };
+
+    cube _I2__; _I2__.zeros(3,3,4);
+    _I2__.slice(0) << 0  << 0  << 0 << endr
+                   << 0  << 0  << 0 << endr
+                   << 0  << 0  << 0 << endr;
+
+    _I2__.slice(1) << 0 << 0 << 0             << endr
+                   << 0 << 0 << 0             << endr
+                   << 0 << 0 << coef_(11)*J22 << endr;
+
+    _I2__.slice(2) << 0  << 0  << 0 << endr
+                   << 0  << 0  << 0 << endr
+                   << 0  << 0  << 0 << endr;
+
+    _I2__.slice(3) << 0  << 0  << 0 << endr
+                   << 0  << 0  << 0 << endr
+                   << 0  << 0  << 0 << endr;
+
+    Mecanismo P = Mecanismo(3); P.dy->Mh_ = m0*eye(3,3);
+    Serial _6R1 = Serial(6, l_, lg_ , m_, I__ , {0, 9.8,0}, &fDH_6R);
+    Serial _6R2 = Serial(6, l_, lg_ , m_, I__ , {0, 9.8,0}, &fDH_6R);
     Serial PRRP = Serial(4, l2_, lg2_ , m2_, I2__ , {9.8,0, 0}, &fDH_PRRP);
-
-
     Serial **R_ = new Serial* [3];
     R_[0] = &_6R1;
     R_[1] = &_6R2;
     R_[2] = &PRRP;
+
+    Mecanismo _P = Mecanismo(3); _P.dy->Mh_ = coef_(12)*m0*eye(3,3);
+    Serial __6R1 = Serial(6, _l_, _lg_ , _m_, _I__ , {0, 9.8,0}, &fDH_6R);
+    Serial __6R2 = Serial(6, _l_, _lg_ , _m_, _I__ , {0, 9.8,0}, &fDH_6R);
+    Serial _PRRP = Serial(4, _l2_, _lg2_ , _m2_, _I2__ , {9.8,0, 0}, &fDH_PRRP);
+    Serial **_R_ = new Serial* [3];
+    _R_[0] = &__6R1;
+    _R_[1] = &__6R2;
+    _R_[2] = &_PRRP;
 
     double b = 0.260;
     double h = 0.008;
@@ -114,14 +188,32 @@ int main(){
     mat S_ = zeros(6,16);
 
     Parallel Robot = Parallel(3, &P, R_, 3, {3,9,15}, D_, E_, F_, f_, P_, Q_, S_);
+    Parallel _Robot = Parallel(3, &_P, _R_, 3, {3,9,15}, D_, E_, F_, f_, P_, Q_, S_);
     Reference RefObj = Reference(0.12, {0.0, 0.0, 0.480}, {-0.2, -0.2, 0.500});
 
     double lambda = 50.0;
+
+    vec eta_ = {32.7299, 50.8718, 63.2811};
+    cube Lambda__; Lambda__.zeros(3,3,3);
+    Lambda__.slice(0) << 4.0933e+02 << 2.3252e+02 << 3.8963e+02 << endr
+                      << 0          << 3.3300e+01 << 1.1099e+02 << endr
+                      << 0          << 0          << 9.3153e+01 << endr;
+    Lambda__.slice(1) << 9.5456e+02 << 5.4236e+02 << 9.0941e+02 << endr
+                      << 0          << 7.7657e+01 << 2.5886e+02 << endr
+                      << 0          << 0          << 2.1734e+02 << endr;
+    Lambda__.slice(2) << 1.4451e+03 << 8.2065e+02 << 1.3759e+03 << endr
+                      << 0          << 1.1743e+02 << 3.9178e+02 << endr
+                      << 0          << 0          << 3.2897e+02 << endr;
+    mat Gamma_; Gamma_.zeros(3,3);
+    Gamma_ << 0.3018 << 0.1876 << 0.1021 << endr
+           << 0.4071 << 0.8102 << 0.1664 << endr
+           << 0.8604 << 0.7925 << 0.3145 << endr;
     //SMCLaw SMC = SMCLaw(3, lambda, 10.0, zeros(3,3), zeros(3), 100.0, &RefObj, &Robot);
-    SMCLaw SMC = SMCLaw(3, lambda, 10.0, 20.0, &r_, &dr_, &d2r_, &Robot);
+    //SMCLaw SMC = SMCLaw(3, lambda, 10.0, 20.0, &r_, &dr_, &d2r_, &Robot);
+    SMCLaw SMC = SMCLaw(3, lambda, eta_, Lambda__, Gamma_, 20.0, &r_, &dr_, &d2r_, &Robot);
     //FLControlLaw FL = FLControlLaw(3, lambda*lambda, 2*lambda, &RefObj, &Robot);
     //FLControlLaw FL = FLControlLaw(3, 400.0, 40.0, &r_, &dr_, &d2r_, &Robot);
-    Acceleration AC = Acceleration(19, &Robot, &SMC);
+    Acceleration AC = Acceleration(19, &_Robot, &SMC);
 
 
     vec q0_ = {0.0, 0.0, 0.480,
@@ -139,7 +231,7 @@ int main(){
     */
     
     RK rk = RK("RK8", &AC);
-    rk.Doit(0.0005, 2*1.2, x0_);
+    rk.Doit(0.00005, 2.0, x0_);
     double t;
     vec ref_; ref_.zeros(3);
     vec dref_; dref_.zeros(3);
