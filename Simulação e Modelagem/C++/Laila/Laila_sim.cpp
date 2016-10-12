@@ -12,25 +12,25 @@
 #include "Reference.h"
 
 vec r_(double t){
-    double r = 0.18;
+    double r = 0.37;
     double x0 = 0.0;
-    double y0 = 0.18;
+    double y0 = 0.0;
     double w = 1/r;
-    return {x0+r*cos(w*t - PI/2), y0+r*sin(w*t - PI/2),0.480};
+    return {x0+r*cos(w*t), y0+r*sin(w*t),0.480};
     //return {0,0,0.480};
 }
 
 vec dr_(double t){
-    double r = 0.18;
+    double r = 0.37;
     double w = 1/r;
-    return {-w*r*sin(w*t - PI/2), w*r*cos(w*t - PI/2),0};
+    return {-w*r*sin(w*t), w*r*cos(w*t),0};
     //return {0,0,0};
 }
 
 vec d2r_(double t){
-    double r = 0.18;
+    double r = 0.37;
     double w = 1/r;
-    return {-w*w*r*cos(w*t - PI/2), -w*w*r*sin(w*t - PI/2),0};
+    return {-w*w*r*cos(w*t), -w*w*r*sin(w*t),0};
     //return {0,0,0};
 }
 
@@ -189,7 +189,7 @@ int main(){
 
     Parallel Robot = Parallel(3, &P, R_, 3, {3,9,15}, D_, E_, F_, f_, P_, Q_, S_);
     Parallel _Robot = Parallel(3, &_P, _R_, 3, {3,9,15}, D_, E_, F_, f_, P_, Q_, S_);
-    Reference RefObj = Reference(0.12, {0.0, 0.0, 0.480}, {-0.2, -0.2, 0.500});
+    Reference RefObj = Reference(1.0, {0.0, 0.0, 0.480}, {0.37, 0.0, 0.480});
 
     double lambda = 50.0;
 
@@ -211,15 +211,36 @@ int main(){
     //SMCLaw SMC = SMCLaw(3, lambda, 10.0, zeros(3,3), zeros(3), 100.0, &RefObj, &Robot);
     //SMCLaw SMC = SMCLaw(3, lambda, 10.0, 20.0, &r_, &dr_, &d2r_, &Robot);
     SMCLaw SMC = SMCLaw(3, lambda, eta_, Lambda__, Gamma_, 20.0, &r_, &dr_, &d2r_, &Robot);
+    //SMCLaw SMC = SMCLaw(3, lambda, eta_, Lambda__, Gamma_, 20.0, &RefObj, &Robot);
     //FLControlLaw FL = FLControlLaw(3, lambda*lambda, 2*lambda, &RefObj, &Robot);
     //FLControlLaw FL = FLControlLaw(3, 400.0, 40.0, &r_, &dr_, &d2r_, &Robot);
     Acceleration AC = Acceleration(19, &_Robot, &SMC);
+    //Acceleration AC = Acceleration(19, &Robot, &FL);
 
 
-    vec q0_ = {0.0, 0.0, 0.480,
-               9.6321e-01, 0, 1.7529, 0, -1.1452, 0,
-               9.6321e-01, 0, 1.7529, 0, -1.1452, 0,
-               0, PI/2, 0, 9.6100e-02};
+    //vec q0_ = {0.0, 0.0, 0.480,
+    //           9.6321e-01, 0, 1.7529, 0, -1.1452, 0,
+    //           9.6321e-01, 0, 1.7529, 0, -1.1452, 0,
+    //           0, PI/2, 0, 9.6100e-02};
+    vec q0_ = {3.7000e-01,
+               1.0020e-17,
+               4.8000e-01,
+               1.6348e+00,
+               1.1851e+00,
+               1.2787e+00,
+              -6.1400e-02,
+              -1.3032e+00,
+              -1.1681e+00,
+               1.6348e+00,
+              -1.1851e+00,
+               1.2787e+00,
+               6.1400e-02,
+              -1.3032e+00,
+               1.1681e+00,
+               3.7000e-01,
+               1.5708e+00,
+              -1.2748e-16,
+               9.6100e-02};
     vec x0_ = join_vert(q0_, zeros(19,1));
 
     /*
@@ -231,7 +252,7 @@ int main(){
     */
     
     RK rk = RK("RK8", &AC);
-    rk.Doit(0.00005, 2.0, x0_);
+    rk.Doit(0.000025, 4.65, x0_);
     double t;
     vec ref_; ref_.zeros(3);
     vec dref_; dref_.zeros(3);
