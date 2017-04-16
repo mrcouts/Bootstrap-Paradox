@@ -73,7 +73,7 @@
 \vfill
 \hspace{.50\textwidth}
 \begin{minipage}{.45\textwidth}
-{Relatório sobre observadores de ordem reduzida apresentado à disciplina "Introdução à Teoria de Estimação" PME-5009 do Programa de Pós Graduação em Engenharia Mecânica (PPGEM) da Escola Politécnica 
+{Relatório sobre observadores de ordem reduzida apresentado à disciplina "PME5009: Introdução à Teoria de Estimação" do Programa de Pós Graduação em Engenharia Mecânica (PPGEM) da Escola Politécnica 
 da Universidade de São Paulo (EPUSP)
 }\\[25pt]
 {Área de concentração:}\\[2pt]
@@ -118,44 +118,20 @@ Prof. Dr. Tarcisio A. Hess Coelho
 
 %RESUMO--------------------------------------------------------   
 \newpage
-\section*{Resumo}
+%\section*{Resumo}
 
 
 
 %INTRODUÇÃO----------------------------------------------------
 %\newpage
-\section{Introdução}\label{intro}
+\section{Resumo}\label{intro}
 
-	
-
-
-%OBJETIVOS E JUSTIFICATIVAS--------------------------------------------
-%\newpage
-\section{Objetivos}\label{objetivos}
+Este trabalho se trata do desenvolvimento de uma metodologia de projeto de controle linear do tipo regulador de estados e projeto de observador de ordem reduzida aplicado a mecanismos seriais, supondo conhecido seu modelo dinâmico explicito. Além disso, será realizada a modelagem dinâmica de um mecanismo serial do tipo RP, no qual será será aplicada a metologia proposta e serão realizadas simulações de controle. 
 
 
 
-
-
-%METODOLOGIA--------------------------------------------------------------------
-%\newpage
-
-\section{Revisão da literatura}\label{revision}
-
-
-
-
-
-%METODOLOGIA--------------------------------------------------------------------
-%\newpage
-
-\section{Metodologia do projeto}\label{method}
-
-
-
-%RESULTADOS--------------------------------------------------------------------
-\newpage
-\section{Síntese de Resultados}\label{results}
+%Formulação--------------------------------------------------------------------
+\section{Formulação}\label{formulation}
 
 %Esta se\c{c}\~ao apresenta uma s\'intese dos principais resultados te\'oricos obtidos at\'e o momento.
 
@@ -169,7 +145,7 @@ Dado o modelo dinâmico de um mecanismo serial no formato
 \mH(\mq) \ddot{\mq} + \mh(\mq, \dot{\mq}) = \mtau
 \end{equation}
 
-iremos obter o modelo linearizado em torno de uma trajetória de referência $\mq_d(t)$  representa-lo no espaço de estados linear.
+iremos obter o modelo linearizado em torno de uma trajetória de referência $\mq_d(t)$ e representa-lo no espaço de estados linear.
 
 
 Seja
@@ -259,7 +235,7 @@ Passando para o espaço de estados e definindo como saída do sistema os estados $
 Ou seja:
 \begin{equation}
 \begin{cases}
-\dot{\mx} = \mA(t) \cdot \mx + \mB(t) \cdot \mu \\
+\dot{\mx} = \mA(t) \cdot \mx + \mB(t) \cdot \muu \\
 \my = \mC(t) \cdot \mx
 \end{cases}
 \end{equation}
@@ -272,7 +248,7 @@ Sendo:
 \end{bmatrix}
 \end{equation}
 \begin{equation}
-\mu = \Delta\mtau
+\muu = \Delta\mtau
 \end{equation}
 \begin{equation}
 \mA(t) = \begin{bmatrix}
@@ -505,11 +481,16 @@ A partir de \eqref{eq:projObs}, é fácil perceber que a matriz $\mL(t)$ que leva 
 \mL(t) = \mA_{1,1}(t)+ \alpha \mone
 \end{equation}
 
-
-
-\subsection{Simulações}\label{S05-4}
+\section{Aplicação da técnica}\label{aplicacao}
 
 À partir dos equacionamentos deduzidos anteriormente, será realizada a modelagem, projeto de controle por realimentação de estados, projeto de observador de ordem reduzida, e simulação de controle de trajetória de um mecanismo serial do tipo RP. \\
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.5]{figures/RP.pdf}  
+	\caption{Mecanismo RP}
+	\label{fig:1}
+\end{figure}
 
 A modelagem do sistema será feita à partir do formalismo de Lagrange.
 
@@ -637,12 +618,14 @@ Jz_1 + Jz_2 + m_1 lg_1^2 + m_2 (d_d(t) - l_2 + l_{g2})^2 & 0 \\
 \end{bmatrix}
 \end{equation}
 
+\small
 \begin{equation}
 \mG(t) = \begin{bmatrix}
  \big( m_1 l_{g1}  + m_2 ( d_d(t) -l_2 + l_{g2})\big) g \sin \theta_d(t) & m_2 \left(2 \dot{d}_d(t) \dot{\theta}_d(t)+2  (d_d(t)-l_2+l_{g2})\ddot{\theta}_d(t) -g \cos \theta_d(t)\right) \\
 -m_2 g \cos\theta_d(t) & -m_2 \dot{\theta}_d^2(t)
 \end{bmatrix}
 \end{equation}
+\normalsize
 
 A partir de $\mM(t)$, $\mV(t)$ e $\mG(t)$, obtemos $\mA_{1,1}(t)$, $\mA_{1,2}(t)$, $\mB_1(t)$, $\mK(t)$ e $\mL(t)$ através de \eqref{eq:A11}, \eqref{eq:A12}, \eqref{eq:B1}, \eqref{eq:K} e \eqref{eq:L}. \\
 
@@ -746,43 +729,43 @@ Sendo assim, obtemos os seguintes resultados:
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.6]{figures/e_theta.jpeg}  
-	\caption{Erro de controle $\Delta\theta$}
-	\label{fig:1}
-\end{figure}
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[scale=0.6]{figures/e_d.jpeg}  
-	\caption{Erro de controle $\Delta d$}
+	\caption{Erro de controle $\Delta\theta[rad]$ em função de $t[s]$}
 	\label{fig:2}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.6]{figures/w1.jpeg}  
-	\caption{$\Delta\dot{\theta}$ real (em beje) e estimado (em azul)}
+	\includegraphics[scale=0.6]{figures/e_d.jpeg}  
+	\caption{Erro de controle $\Delta d[m]$  em função de $t[s]$}
 	\label{fig:3}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.6]{figures/w2.jpeg}  
-	\caption{$\Delta\dot{d}$ real (em beje) e estimado (em azul)}
+	\includegraphics[scale=0.6]{figures/w1.jpeg}  
+	\caption{$\Delta\dot{\theta}[rad/s]$ real (em azul) e estimado (em beje) em função de $t[s]$}
 	\label{fig:4}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.6]{figures/theta.jpeg}  
-	\caption{Coordenada $\theta$}
+	\includegraphics[scale=0.6]{figures/w2.jpeg}  
+	\caption{$\Delta\dot{d}[m/s]$ real (em azul) e estimado (em beje) em função de $t[s]$}
 	\label{fig:5}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.6]{figures/d.jpeg}  
-	\caption{Coordenada $d$}
+	\includegraphics[scale=0.6]{figures/theta.jpeg}  
+	\caption{Coordenada $\theta[rad]$ em função de $t[s]$}
 	\label{fig:6}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.6]{figures/d.jpeg}  
+	\caption{Coordenada $d[m]$ em função de $t[s]$}
+	\label{fig:7}
 \end{figure}
 
 %\begin{equation}
@@ -790,17 +773,13 @@ Sendo assim, obtemos os seguintes resultados:
 %\end{equation}
 
 
-
-
-
-\newpage
-
 %---CONCLUSÕES---------------------------------------------------------
 \section{Conclusões}\label{concl}
 
+A partir dos resultados obtidos, foi possível constatar que o controlador e observador projetados desempenham bem as funções pelas quais foram projetados, visto que o erro de controle e o erro de observação vão a zero assintoticamente, mesmo com condições iniciais não nulas para o erro de observação.
 
 
-\newpage
+%\newpage
 
 \phantom{a}
 \bibliographystyle{plain}
