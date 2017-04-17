@@ -1,78 +1,14 @@
 \begin{thebibliography}{10}
 
-\bibitem{Abdellatif}
-H. Abdellatif, B. Heimann, J. Kotlarski, T. Ortmaier.
-\newblock Practical model-based and robust control of parallel manipulators using passivity and sliding mode theory.
-\newblock {\em Robotics 2010: Current and Future Challenges}, InTech, 2010.
-
-\bibitem{Rynaldo}
-R. Z. H. de Almeida.
-\newblock Modelagem din\^amica e controle e rob\^o manipulador
-de arquitetura paralela assim\'etrica de tr\^es graus de liberdade.
-\newblock {\em Tese (Doutorado) - Escola Polit\'ecnica da Universidade de
-S\~ao Paulo. Departamento de Engenharia Mecatr\^onica e de
-Sistemas Mec\^anicos},
-  2013.
-
-\bibitem{20altuzarra}
-O. Altuzarra, P. M. Eggers, F. J. Campa, C. Roldan-Paraponiaris, C. Pinto.
-\newblock Dynamic Modelling of Lower-Mobility Parallel Manipulators Using the Boltzmann-Hamel Equations.
-\newblock {\em Mechanisms, Transmissions and Applications}, 157--165, Springer, 2015.
-
-\bibitem{Baumgarte}
-J. Baumgarte.
-\newblock Stabilization of constraints and integrals of motion in dynamical systems.
-\newblock {\em Computer Methods in Applied Mechanics and Engineering}, 1(1): 1--16, 1972.
-
-\bibitem{Begon}
-P. Begon, F. Pierrot, P. Dauchez.
-\newblock Fuzzy sliding mode control of a fast parallel robot.
-\newblock {\em Robotics and Automation, 1995. Proceedings., 1995 IEEE International Conference on}, 1178--1183, IEEE, 1995.
-
-\bibitem{Bloch}
-A.M. Bloch, M. Reyhanoglu, N.H. McClamroch.
-\newblock Control and stabilization of nonholonomic dynamic systems.
-\newblock {\em Automatic Control, IEEE Transactions on}, 37(11): 1746--1757, 1992.
-
-\bibitem{Cabral}
+\bibitem{CabralRE}
 E. L. L. Cabral.
-\newblock Cinem\'atica Direta de Rob\^os Manipuladores.
-\newblock {\em An\'alise de Rob\^os}, sites.poli.usp.br/p/eduardo.cabral/Cinem\'atica Direta.pdf acessado em 25/08/2016.
+\newblock Controle por Realimenta\c{c}\~ao dos Estados - Regulador de estados.
+\newblock {Notas de aula da disciplina PMR2400 - Controle e Automa{c}\~ao II (EPUSP)}, \url{http://sites.poli.usp.br/d/PMR2400/12-%20Regulador-Controle%20por%20realimenta%C3%A7%C3%A3o%20dos%20estados.pdf} acessado em 15/04/2017.
 
-\bibitem{Camacho}
-E. F. Camacho, C. B. Alba.
-\newblock {\em {Model predictive control}}.
-\newblock Springer Science \& Business Media, 2013.
-
-\bibitem{Chemori}
-A. Chemori, G. S. Natal, F. Pierrot.
-\newblock Control of parallel robots: towards very high accelerations.
-\newblock {\em SSD'2013: 10th International Multi-Conference on Systems, Signals and Devices}, 2013.
-
-\bibitem{Chen}
-S-L. Chen, Y-C. Tsai. 
-\newblock Contouring control of a parallel mechanism based on equivalent errors.
-\newblock {\em American Control Conference, 2008}, 2384--2388, IEEE, 2008.
-
-\bibitem{Cheng}
-H. Cheng, Y-K. Yiu, Z. Li.
-\newblock Dynamics and control of redundantly actuated parallel manipulators.
-\newblock {\em Mechatronics, IEEE/ASME Transactions on}, 8(4): 483--491, 2003.
-
-\bibitem{Codourey}
-A. Codourey.
-\newblock Dynamic modelling and mass matrix evaluation of the DELTA parallel robot for axes decoupling control.
-\newblock {\em Intelligent Robots and Systems' 96, IROS 96, Proceedings of the 1996 IEEE/RSJ International Conference on}, 1211--1218, IEEE, 1996.
-
-\bibitem{Codourey2}
-A. Codourey, E. Burdet.
-\newblock A body-oriented method for finding a linear form of the dynamic equation of fully parallel robots.
-\newblock {\em Robotics and Automation, 1997. Proceedings., 1997 IEEE International Conference on}, 1211--1218, IEEE, 1997.
-
-\bibitem{Coutinho}
-A. G. Coutinho, T. A. H. Coelho.
-\newblock A new approach for obtaining the dynamic balancing conditions in serial mechanisms.
-\newblock {\em International Journal of Mechanisms and Robotic Systems}, 3(1): 32--47, 2016.
+\bibitem{CabralLIN}
+E. L. L. Cabral.
+\newblock Lineariza\c{c}\~ao de Sistemas Din\^amicos.
+\newblock {Notas de aula da disciplina PMR2400 - Controle e Automa{c}\~ao II (EPUSP)}, \url{http://sites.poli.usp.br/d/PMR2400/3-%20Lineariza%C3%A7%C3%A3o%20de%20sistemas.pdf} acessado em 15/04/2017.
 
 \bibitem{Craig}
 J. J. Craig.
@@ -80,228 +16,25 @@ J. J. Craig.
 \newblock Addison-Wesley series in electrical and computer engineering: control
   engineering. Pearson/Prentice Hall, 2005.
 
-\bibitem{Denavit}
-J. Denavit, R. S. Hartenberg.
-\newblock A Kinematic Notation for Lower-Pair Mechanisms Based on Matrices.
-\newblock {\em Trans. of the ASME. Journal of Applied Mechanics}, 22:(1) 215--221, 1955.
+\bibitem{Fleury}
+A. T. Fleury
+\newblock Observadores de Luenberger ou Observadores de Ordem Reduzida.
+\newblock {Notas de aula da disciplina PME5009  - Introdu\c{c}\~ao \`a Teoria da Estima\c{c}\~ao (EPUSP)}, \url{http://sites.poli.usp.br/d/pme5009/PME5009_notas_aula_site.pdf} acessado em 15/04/2017.
 
-\bibitem{Andre}
-G. M. Dobriankyj, A. G. Coutinho.
-\newblock Plataforma rob\'otica para reabilita\c{c}\~ao do membro superior humano.
-\newblock {\em Tese (Trabalho de Conclus\~ao de Curso) - Escola Polit\'ecnica da Universidade de
-S\~ao Paulo. Departamento de Engenharia Mecatr\^onica e de
-Sistemas Mec\^anicos}, 2013.
+\bibitem{Koskie}
+S. Koskie.
+\newblock Luenberger Observers.
+\newblock {Notas de aula da disciplina ECE 680 - Modern Automatic Control (IUPUI)}, \url{http://www.engr.iupui.edu/~skoskie/ECE680/Luenberger_Observers.pdf} acessado em 15/04/2017.
 
-\bibitem{Biorob}
-G. M. Dobrianskyj, A. G. Coutinho, T. A. H. Coelho.
-\newblock Development of a controller for a 3-DOF robotic platform for user interaction in rehabilitation therapies.
-\newblock {\em Biomedical Robotics and Biomechatronics 2014 5th IEEE RAS EMBS International Conference on}, 819 -- 825, IEEE, 2014.
-
-\bibitem{Duchaine}
-V. Duchaine, S. Bouchard, C. M. Gosselin.
-\newblock Computationally efficient predictive robot control.
-\newblock {\em IEEE/ASME Transactions On Mechatronics}, 12(5): 570--578, 2007.
-
-\bibitem{Ebrahimi}
-M. M. Ebrahimi, F. Piltan, M. Bazregar, A. Nabaee.
-\newblock Intelligent Robust Fuzzy-Parallel Optimization Control of a Continuum Robot Manipulator.
-\newblock {\em International Journal of Control and Automation}, 6(3): 15--34, 2013.
-
-\bibitem{Ertugrul}
-M. Ertugrul, O. Kaynak.
-\newblock Neuro sliding mode control of robotic manipulators.
-\newblock {\em Mechatronics}, 10(1): 239--263, 2000.
-
-
-\bibitem{Guldner}
-J. Guldner, V. I. Utkin.
-\newblock The chattering problem in sliding mode system.
-\newblock {\em 14th Int. Symp. Math. Theory Netw. Syst.(MTNS), Perpignan, France}, 2000.
-
-\bibitem{Honegger}
-M. Honegger, R. Brega, G. Schweitzer.
-\newblock Application of a nonlinear adaptive controller to a 6 dof parallel manipulator.
-\newblock {\em Robotics and Automation, 2000. Proceedings. ICRA'00. IEEE International Conference on}, 1930--1935, IEEE, 2000.
-
-\bibitem{Hu}
-H. Hu, P-Y. Woo.
-\newblock Fuzzy supervisory sliding-mode and neural-network control for robotic manipulators.
-\newblock {\em IEEE Transactions on Industrial Electronics}, 53(3): 929--940, 2006.
-
-\bibitem{Jarzebowska2009}
-E. Jarzebowska.
-\newblock Quasi-coordinates based dynamics modeling and control design for
-  nonholonomic systems.
-\newblock {\em Nonlinear Analysis: Theory, Methods and Applications},
-  71(12):118 -- 131, 2009.
-
-\bibitem{Kaminski}
-P. C. Kaminski.
-\newblock {\em {Mec\^anica geral para engenheiros}}.
-\newblock Edgard Bl\"ucher, 2000.
-
-\bibitem{Khalil}
-W. Khalil, E. Dombre.
-\newblock {\em {Modeling, Identification and Control of Robots}}.
-\newblock Taylor \& Francis, 2002.
-
-\bibitem{Kumazawa}
-V. D. Kumazawa, T. A. Hess Coelho, D. Rinaudi, G. Carbone, M. Ceccarelli.  
-\newblock {Kinematic analysis and operation feasibility of a 3-dof asymmetric parallel mechanism}.
-\newblock In {\em 20th COBEM, Gramado, Brazil, Paper No. COB09-0744}, 2009.
-
-\bibitem{Li}
-Y. Li, Q. Xu.
-\newblock Dynamic modeling and robust control of a 3-PRC translational parallel kinematic machine
-\newblock {\em Robotics and Computer-Integrated Manufacturing}, 25(3): 630--640, 2009.
-
-\bibitem{Li2}
-Q. Li, F. X. Wu.
-\newblock Control performance improvement of a parallel robot via the design for control approach
-\newblock {\em Mechatronics}, 14(8): 947--964, 2004.
-
-\bibitem{Linda}
-O. Linda, M. Manic.
-\newblock Uncertainty-robust design of interval type-2 fuzzy logic controller for delta parallel robot
-\newblock {\em Industrial Informatics, IEEE Transactions on}, 7(4): 661--670, 2011.
-
-\bibitem{Lipkin}
-H. Lipkin. 
-\newblock A note on denavit-hartenberg notation in robotics
-\newblock {\em ASME 2005 International Design Engineering Technical Conferences and Computers and Information in Engineering Conference}, 921--926, American Society of Mechanical Engineers, 2005.
-
-\bibitem{Merlet2002}
-J-P. Merlet.
-\newblock {Still a long way to go on the road for parallel mechanisms}
-\newblock In {\em ASME DETC Conference, {Montreal, 2002}}, 2002.
-
-\bibitem{22orsino}
-R. M. M. Orsino, A. G. Coutinho, T. A. H. Coelho.
-\newblock Dynamic Modelling and Control of Balanced Parallel Mechanisms.
-\newblock {\em Dynamic Balancing of Mechanisms and Synthesizing of Parallel Robots}, 403--445, Springer International Publishing, 2016.
-
-\bibitem{Orsino2013}
-R. M. M. Orsino, T. A. H. Coelho.
-\newblock A contribution for developing more efficient dynamic modelling
-  algorithms of parallel robots.
-\newblock {\em International Journal of Mechanisms and Robotic Systems},
-  1(1): 15 -- 34, 2013.
-
-\bibitem{23orsino}
-R. M. M. Orsino, T. A. H. Coelho.
-\newblock A contribution on the modular modelling of multibody systems
-\newblock {\em Proc. Royal Society A}, 471(2183), The Royal Society, 2015.
-
-\bibitem{21orsino}
-R. M. M. Orsino, T. A. H. Coelho, C. P. Pesce.
-\newblock Analytical mechanics approaches in the dynamic modelling of Delta mechanism
-\newblock {\em Robotica}, 33(4): 953--973, 2015.
-
-\bibitem{RK}
-P. J. Prince, J. R. Dormand.
-\newblock High order embedded Runge-Kutta formulae
-\newblock {\em Journal of Computational and Applied Mathematics}, 7(1): 67--75, 1981.
-
-\bibitem{Sadati}
-N. Sadati, R. Ghadami.
-\newblock {Adaptive multi-model sliding mode control of robotic manipulators using soft computing}
-\newblock {\em Neurocomputing}, 71(13): 2702--2710, 2008.
-
-\bibitem{Shang}
-W. Shang, S. Cong
-\newblock {Nonlinear computed torque control for a high-speed planar parallel manipulator}
-\newblock {\em Mechatronics}, 19(6): 987--992, 2009.
-
-\bibitem{Siciliano}
-B. Siciliano, L. Sciavicco, L. Villani, G. Oriolo.
-\newblock {\em {Robotics: modelling, planning and control}}.
-\newblock Springer Science \& Business Media, 2010.
-
-\bibitem{Slotini}
-J-J. E. Slotine, W. Li.
-\newblock {\em {Applied nonlinear control}}.
-\newblock Prentice Hall, 1991.
-
-\bibitem{SlotiniSMC}
-J-J. E. Slotine.
-\newblock The robust control of robot manipulators
-\newblock {\em The International Journal of Robotics Research}, 4(2): 49--64, 1985.
-
-\bibitem{SlotiniA}
-J-J. E. Slotine, W. Li.
-\newblock On the adaptive control of robot manipulators
-\newblock {\em The International Journal of Robotics Research}, 6(3): 49--59, 1987.
-
-\bibitem{Spong}
-M. W. Spong, S. Hutchinson, M. Vidyasagar.
-\newblock {\em {Robot modeling and control}}.
-\newblock Wiley New York, 2006.
-
-\bibitem{Tenenbaum}
-R. A. Tenenbaum.
-\newblock {\em {Fundamentals of Applied Dynamics}}.
-\newblock Springer Science \& Business Media, 2006.
+\bibitem{Lanczos}
+C. Lanczos.
+\newblock {\em {The variational principles of mechanics}}.
+\newblock Dover Publications, New York, 1986.
 
 \bibitem{Tsai}
 L. W. Tsai.
 \newblock {\em {Robot Analysis: The Mechanics of Serial and Parallel Manipulators}}.
 \newblock John Wiley \& Sons, 1999.
 
-\bibitem{Utkin}
-V. Utkin, J. Guldner, J. Shi.
-\newblock {\em {Sliding mode control in electro-mechanical systems}}.
-\newblock  Vol. 34. CRC press, 2009.
-
-\bibitem{Utkin2}
-V. Utkin, H. Lee
-\newblock Chattering problem in sliding mode control systems
-\newblock {\em International Workshop on Variable Structure Systems, 2006. VSS'06}, 346--350, 2006.
-
-\bibitem{Vivas}
-A. Vivas, P. Poignet.
-\newblock Predictive functional control of a parallel robot
-\newblock {\em Control Engineering Practice}, 13(7): 863--874, 2005.
-
-\bibitem{Wang}
-J. Wang, J. Wu, L. Wang, Z. You.
-\newblock Dynamic feed-forward control of a parallel kinematic machine
-\newblock {\em Mechatronics}, 19(3): 313--324, 2009.
-
-\bibitem{Yen}
-P-L. Yen, C-C. Lai
-\newblock Dynamic modeling and control of a 3-DOF Cartesian parallel manipulator
-\newblock {\em Mechatronics}, 19(3): 390--398, 2009.
-
-\bibitem{Zeinali}
-M. Zeinali, L. Notash.
-\newblock Adaptive sliding mode control with uncertainty estimator for robot manipulators
-\newblock {\em Mechanism and Machine Theory}, 45(1): 80--90, 2010.
-
-\bibitem{Zubizarreta}
-A. Zubizarreta, I. Cabanes, M. Marcos, C. Pinto,  E. Portillo.
-\newblock Extended CTC control for parallel robots
-\newblock {\em Emerging Technologies and Factory Automation (ETFA), 2010 IEEE Conference on}, 1--8, IEEE, 2010.
-
-\bibitem{Zubizarreta2}
-A. Zubizarreta, I. Cabanes, M. Marcos, C. Pinto.
-\newblock Control of parallel robots using passive sensor data
-\newblock {\em 2008 IEEE/RSJ International Conference on Intelligent Robots and Systems}, 2398--2403, IEEE, 2008.
-
-\bibitem{Zubizarreta3}
-A. Zubizarreta, I. Cabanes, M. Marcos, C. Pinto.
-\newblock A redundant dynamic model of parallel robots for model-based control
-\newblock {\em Robotica}, 31(2): 203--216, 2013.
-
-\bibitem{Zubizarreta4}
-A. Zubizarreta, M. Marcos, I. Cabanes, C. Pinto, E. Portillo. 
-\newblock Redundant sensor based control of the 3RRR parallel robot
-\newblock {\em Mechanism and machine theory}, 54(1): 1--17, 2012.
-
-
-%\bibitem{Apostila}
-%R. M. M. Orsino, T. A. H. Coelho.
-%\newblock Metodologia para An\'alise e S\'intese de Mecanismos.
-%\newblock {\em Material de apoio para as disciplinas PMR2430 e PMR2331 - Escola Polit\'ecnica da Universidade de
-%S\~ao Paulo}, 2013.
 
 \end{thebibliography}

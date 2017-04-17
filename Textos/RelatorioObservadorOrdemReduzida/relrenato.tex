@@ -39,6 +39,7 @@
 \usepackage{makeidx} 
 \usepackage{listings}
 \usepackage{multicol}
+\usepackage{hyperref}
 
 \renewcommand*{\glossarypreamble}{\vspace{-\baselineskip}}  
 
@@ -73,7 +74,7 @@
 \vfill
 \hspace{.50\textwidth}
 \begin{minipage}{.45\textwidth}
-{Relatório sobre observadores de ordem reduzida apresentado à disciplina "PME5009: Introdução à Teoria de Estimação" do Programa de Pós Graduação em Engenharia Mecânica (PPGEM) da Escola Politécnica 
+{Relatório sobre observadores de ordem reduzida apresentado à disciplina {\em PME5009 - Introdução à Teoria de Estimação} do Programa de Pós Graduação em Engenharia Mecânica (PPGEM) da Escola Politécnica 
 da Universidade de São Paulo (EPUSP)
 }\\[25pt]
 {Área de concentração:}\\[2pt]
@@ -126,7 +127,7 @@ Prof. Dr. Tarcisio A. Hess Coelho
 %\newpage
 \section{Resumo}\label{intro}
 
-Este trabalho se trata do desenvolvimento de uma metodologia de projeto de controle linear do tipo regulador de estados e projeto de observador de ordem reduzida aplicado a mecanismos seriais, supondo conhecido seu modelo dinâmico explicito. Além disso, será realizada a modelagem dinâmica de um mecanismo serial do tipo RP, no qual será será aplicada a metologia proposta e serão realizadas simulações de controle. 
+Este trabalho se trata do desenvolvimento de uma metodologia de projeto de controle moderno e projeto de observador de ordem reduzida aplicado a mecanismos seriais, supondo modelo dinâmico explícito conhecido. Além disso, será realizada a modelagem dinâmica de um mecanismo serial do tipo RP, no qual será será aplicada a metologia proposta e serão realizadas simulações de controle de trajetória. 
 
 
 
@@ -140,12 +141,12 @@ Este trabalho se trata do desenvolvimento de uma metodologia de projeto de contr
 %---ALGORITMO PARA MODELAGEM DE PLATAFORMAS ROBÓTICAS------------------------------------------------------------------------------------------
 \subsection{Modelo dinâmico linearizado de mecanismos seriais}\label{S05-1}
 
-Dado o modelo dinâmico de um mecanismo serial no formato
+Dado o modelo dinâmico de um mecanismo serial no formato \cite{Craig}
 \begin{equation} \label{eq:MecSerial}
 \mH(\mq) \ddot{\mq} + \mh(\mq, \dot{\mq}) = \mtau
 \end{equation}
 
-iremos obter o modelo linearizado em torno de uma trajetória de referência $\mq_d(t)$ e representa-lo no espaço de estados linear.
+iremos obter o modelo linearizado em torno de uma trajetória de referência $\mq_d(t)$ e representa-lo no espaço de estados linear \cite{CabralLIN}.
 
 
 Seja
@@ -271,7 +272,7 @@ Sendo:
 
 \subsection{Projeto de regulador de estados}\label{S05-2}
 
-A lei de controle de um controlador do tipo regulador de estados é dada por:
+A lei de controle de um controlador do tipo regulador de estados \cite{CabralRE} é dada por:
 \begin{equation} \label{eq:Reg}
 \muu = - \mK(t) \cdot \mx
 \end{equation}
@@ -290,7 +291,7 @@ Seria desejável que a equação do sistema em malha fechada fosse dada por:
 
 A qual garante que $\Delta\mq$ vá a zero assintoticamente para $k_p, k_v > 0$.
 
-É fácil perceber que a lei de controle que leva o sistema a esse comportamento em malha fechada é dada por:
+É possível perceber que a lei de controle que leva o sistema a esse comportamento em malha fechada é dada por:
 \begin{equation}
 \Delta\mtau = -\big(\mM(t) k_v - \mV(t)\big)\Delta\dot{\mq} -\big(\mM(t) k_p - \mG(t)\big)\Delta\mq = - \begin{bmatrix}
 \mM(t) k_v - \mV(t) & \mM(t) k_p - \mG(t)
@@ -311,7 +312,7 @@ Portanto, a lei do regulador de estados é dada pela equação \eqref{eq:Reg}, send
 
 \subsection{Projeto de observador de ordem reduzida}\label{S05-3}
 
-Para projetar o observador de estados, partimos da equação \eqref{eq:SisLinSS}:
+Para projetar o observador de estados de ordem reduzida \cite{Fleury, Koskie}, partimos da equação \eqref{eq:SisLinSS}:
 
 \begin{equation} \tag{\ref{eq:SisLinSS}}
 \begin{cases}
@@ -483,7 +484,7 @@ A partir de \eqref{eq:projObs}, é fácil perceber que a matriz $\mL(t)$ que leva 
 
 \section{Aplicação da técnica}\label{aplicacao}
 
-À partir dos equacionamentos deduzidos anteriormente, será realizada a modelagem, projeto de controle por realimentação de estados, projeto de observador de ordem reduzida, e simulação de controle de trajetória de um mecanismo serial do tipo RP. \\
+À partir dos equacionamentos deduzidos anteriormente, será realizada a modelagem, projeto de controle por realimentação de estados, projeto de observador de ordem reduzida, e simulação de controle de trajetória de um mecanismo serial do tipo RP (figura \ref{fig:1}). \\
 
 \begin{figure}[H]
 	\centering
@@ -492,7 +493,7 @@ A partir de \eqref{eq:projObs}, é fácil perceber que a matriz $\mL(t)$ que leva 
 	\label{fig:1}
 \end{figure}
 
-A modelagem do sistema será feita à partir do formalismo de Lagrange.
+A modelagem do sistema será feita à partir do formalismo de Lagrange \cite{Lanczos,Tsai}.
 
 Sejam $(x_1, y_1)$ e $(x_2, y_2)$ as coordenadas dos centros de massa dos elos 1 e 2, respectivamente. As energias cinética e potencial do sistema são dadas por:
 
@@ -671,7 +672,7 @@ Definindo os seguintes valores para os parâmetros do sistema:
 \end{itemize}
 \end{multicols}
 
-Os parâmetros $k_p$ e $k_v$ do controlador são escolhidos do modo a alocar os pólos do sistema em malha fechada em $s = -100 rad/s$. Sendo assim, temos:
+Os parâmetros $k_p$ e $k_v$ do controlador são escolhidos do modo a alocar os pólos do sistema em malha fechada em $s = -100 rad/s$ (amortecimento crítico). Sendo assim, temos:
 \begin{equation}
 k_p = 100^2 (rad/s)^2 = 10000 (rad/s)^2
 \end{equation}
@@ -703,8 +704,8 @@ E as seguintes condições iniciais:
 d(0) 
 \end{bmatrix}
 = \begin{bmatrix}
-0 \\
-0.15 
+0.1 \\
+0.16 
 \end{bmatrix}
 \end{equation}
 \begin{equation}
@@ -724,47 +725,47 @@ d(0)
 \end{bmatrix}
 \end{equation}
 
-Sendo assim, obtemos os seguintes resultados:
+Sendo assim, obtemos os seguintes resultados: (figuras \ref{fig:2}, \ref{fig:3}, \ref{fig:4}, \ref{fig:5} e \ref{fig:6})
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.6]{figures/e_theta.jpeg}  
-	\caption{Erro de controle $\Delta\theta[rad]$ em função de $t[s]$}
+	\includegraphics[scale=0.6]{figures/e_theta.pdf}  
+	\caption{Erro de controle $\Delta\theta$ em função do tempo}
 	\label{fig:2}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.6]{figures/e_d.jpeg}  
-	\caption{Erro de controle $\Delta d[m]$  em função de $t[s]$}
+	\includegraphics[scale=0.6]{figures/e_d.pdf}  
+	\caption{Erro de controle $\Delta d$  em função do tempo}
 	\label{fig:3}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.6]{figures/w1.jpeg}  
-	\caption{$\Delta\dot{\theta}[rad/s]$ real (em azul) e estimado (em beje) em função de $t[s]$}
+	\includegraphics[scale=0.6]{figures/w1.pdf}  
+	\caption{$\Delta\dot{\theta}$ real (em azul) e estimado (em beje) em função do tempo}
 	\label{fig:4}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.6]{figures/w2.jpeg}  
-	\caption{$\Delta\dot{d}[m/s]$ real (em azul) e estimado (em beje) em função de $t[s]$}
+	\includegraphics[scale=0.6]{figures/w2.pdf}  
+	\caption{$\Delta\dot{d}$ real (em azul) e estimado (em beje) em função do tempo}
 	\label{fig:5}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.6]{figures/theta.jpeg}  
-	\caption{Coordenada $\theta[rad]$ em função de $t[s]$}
+	\includegraphics[scale=0.6]{figures/theta.pdf}  
+	\caption{Coordenada $\theta$ em função do tempo}
 	\label{fig:6}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.6]{figures/d.jpeg}  
-	\caption{Coordenada $d[m]$ em função de $t[s]$}
+	\includegraphics[scale=0.6]{figures/d.pdf}  
+	\caption{Coordenada $d$ em função do tempo}
 	\label{fig:7}
 \end{figure}
 
@@ -776,7 +777,7 @@ Sendo assim, obtemos os seguintes resultados:
 %---CONCLUSÕES---------------------------------------------------------
 \section{Conclusões}\label{concl}
 
-A partir dos resultados obtidos, foi possível constatar que o controlador e observador projetados desempenham bem as funções pelas quais foram projetados, visto que o erro de controle e o erro de observação vão a zero assintoticamente, mesmo com condições iniciais não nulas para o erro de observação.
+A partir dos resultados obtidos, foi possível constatar que o controlador e observador projetados desempenham bem as funções pelas quais foram projetados, visto que o erro de controle e o erro de observação vão a zero assintoticamente, mesmo partindo de condições iniciais não nulas.
 
 
 %\newpage
