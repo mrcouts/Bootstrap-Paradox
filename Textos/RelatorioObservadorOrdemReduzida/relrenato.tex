@@ -704,8 +704,8 @@ E as seguintes condições iniciais:
 d(0) 
 \end{bmatrix}
 = \begin{bmatrix}
-0.1 \\
-0.16 
+0.0 \\
+0.15 
 \end{bmatrix}
 \end{equation}
 \begin{equation}
@@ -729,44 +729,97 @@ Sendo assim, obtemos os seguintes resultados: (figuras \ref{fig:2}, \ref{fig:3},
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.6]{figures/e_theta.pdf}  
+	\includegraphics[scale=0.6]{figures/e_theta_orig.pdf}  
 	\caption{Erro de controle $\Delta\theta$ em função do tempo}
 	\label{fig:2}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.6]{figures/e_d.pdf}  
+	\includegraphics[scale=0.6]{figures/e_d_orig.pdf}  
 	\caption{Erro de controle $\Delta d$  em função do tempo}
 	\label{fig:3}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.6]{figures/w1.pdf}  
+	\includegraphics[scale=0.6]{figures/w1_orig.pdf}  
 	\caption{$\Delta\dot{\theta}$ real (em azul) e estimado (em beje) em função do tempo}
 	\label{fig:4}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.6]{figures/w2.pdf}  
+	\includegraphics[scale=0.6]{figures/w2_orig.pdf}  
 	\caption{$\Delta\dot{d}$ real (em azul) e estimado (em beje) em função do tempo}
 	\label{fig:5}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.6]{figures/theta.pdf}  
+	\includegraphics[scale=0.6]{figures/theta_orig.pdf}  
 	\caption{Coordenada $\theta$ em função do tempo}
 	\label{fig:6}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.6]{figures/d.pdf}  
+	\includegraphics[scale=0.6]{figures/d_orig.pdf}  
 	\caption{Coordenada $d$ em função do tempo}
 	\label{fig:7}
+\end{figure}
+
+Como podemos perceber, os erros de controle e de observação vão a zero assintóticamente. Realizando a mesma simulação, agora com erro de controle não nulo em $t=0$, mudando as condições iniciais para
+
+\begin{equation}
+\mq(0) = \begin{bmatrix}
+0.1 \\
+0.16
+\end{bmatrix}
+\end{equation}
+
+obtemos os seguintes resultados: (figuras \ref{fig:8}, \ref{fig:9}, \ref{fig:10}, \ref{fig:11}, \ref{fig:12} e \ref{fig:13})
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.6]{figures/e_theta.pdf}  
+	\caption{Erro de controle $\Delta\theta$ em função do tempo}
+	\label{fig:8}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.6]{figures/e_d.pdf}  
+	\caption{Erro de controle $\Delta d$  em função do tempo}
+	\label{fig:9}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.6]{figures/w1.pdf}  
+	\caption{$\Delta\dot{\theta}$ real (em azul) e estimado (em beje) em função do tempo}
+	\label{fig:10}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.6]{figures/w2.pdf}  
+	\caption{$\Delta\dot{d}$ real (em azul) e estimado (em beje) em função do tempo}
+	\label{fig:11}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.6]{figures/theta.pdf}  
+	\caption{Coordenada $\theta$ em função do tempo}
+	\label{fig:12}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.6]{figures/d.pdf}  
+	\caption{Coordenada $d$ em função do tempo}
+	\label{fig:13}
 \end{figure}
 
 %\begin{equation}
