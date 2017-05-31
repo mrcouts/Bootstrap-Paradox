@@ -70,7 +70,7 @@
 \vspace{1.0cm}
 \textsc{\Large{{ André Garnier Coutinho}}}\\
 \vspace{5.0cm}
- {\huge\bfseries Projeto de Observador de Ordem Reduzida aplicado a um mecanismo serial do tipo RP\\}
+ {\huge\bfseries Projeto de Filtro de Kalman Estendido aplicado a um mecanismo serial do tipo RP\\}
 \vfill
 \hspace{.50\textwidth}
 \begin{minipage}{.45\textwidth}
@@ -482,6 +482,88 @@ A partir de \eqref{eq:projObs}, é fácil perceber que a matriz $\mL(t)$ que leva 
 \mL(t) = \mA_{1,1}(t)+ \alpha \mone
 \end{equation}
 
+\subsection{Projeto de Filtro de Kalman Estendido}\label{S05-4}
+
+			\begin{align*}
+				\dot{x} &=  f(t, x), \; x(t_0) = x_0 \\
+				\\
+				x_{k+1} &=  x_k + \frac{T}{6} \Big( k_1 + 2 k_2 + 2 k_3 + k_4 \Big) = g(t_k, x_k) \\
+				t_{k+1} &=  t_k + T \\
+				\\
+				k_1 &=  f(t_k, x_k) \\
+				k_2 &=  f \Big( t_k + \frac{T}{2}, x_k + \frac{T}{2} k_1 \Big) \\
+				k_3 &=  f \Big( t_k + \frac{T}{2}, x_k + \frac{T}{2} k_2 \Big) \\
+				k_4 &=  f(t_k + T, x_k + T k_3) \\
+			\end{align*}
+		
+    	\begin{equation}
+    		A = \frac{\partial f}{\partial x}
+    	\end{equation}
+    	
+		\begin{equation}
+			\phi = \frac{\partial g}{\partial x_k} = 1 + \frac{T}{6} \Big( \frac{\partial k_1}{\partial x_k} + 2 \frac{\partial k_2}{\partial x_k}  + 2 \frac{\partial k_3}{\partial x_k}  + \frac{\partial k_4}{\partial x_k}  \Big)
+		\end{equation}
+		
+		\begin{equation}
+			\frac{\partial k_1}{\partial x_k}  =  \frac{\partial f}{\partial x}
+		\end{equation}
+		\begin{equation}
+			\frac{\partial k_2}{\partial x_k}  =  \frac{\partial f}{\partial x} \Big( 1 + \frac{T}{2} \frac{\partial k_1}{\partial x_k}  \Big)
+		\end{equation}
+		\begin{equation}
+			\frac{\partial k_3}{\partial x_k}  =  \frac{\partial f}{\partial x} \Big( 1 + \frac{T}{2} \frac{\partial k_3}{\partial x_k}  \Big)
+		\end{equation}
+		\begin{equation}
+			\frac{\partial k_4}{\partial x_k}  =  \frac{\partial f}{\partial x} \Big( 1 + T \frac{\partial k_3}{\partial x_k} \Big)
+		\end{equation}
+		
+    	\begin{equation}
+    		\therefore \phi = \frac{\partial g}{\partial x_k} = 1 + T \cdot A + \frac{1}{2!}(T \cdot A)^2 + \frac{1}{3!}(T \cdot A)^3 + \frac{1}{4!}(T \cdot A)^4
+    	\end{equation}
+    	
+		\begin{equation}
+			\mtau_k = \hat{\mh}(\hat{\mq}_k^+,\dot{\hat{\mq}}_k^+) + \hat{\mH}(\hat{\mq}_k^+)( \ddot{\mq}_d(t_k) + k_v (\dot{\mq}_d(t_k) - \dot{\hat{\mq}}_k^+) + k_p (\mq_d(t_k) - \hat{\mq}_k^+)  )
+		\end{equation}
+		
+		\begin{equation}
+			\mx_{k+1} = \mg(t_k, \mx_k)\Big|_{\mu = \mu_k}
+		\end{equation}
+		
+		\begin{equation}
+			\mA_{k} = \mA(\hat{\mx}_k^+)
+		\end{equation}
+		\begin{equation}
+			\mphi_{k} =  \mone + T \cdot \mA_k + \frac{1}{2!}(T \cdot \mA_k)^2 + \frac{1}{3!}(T \cdot \mA_k)^3 + \frac{1}{4!}(T \cdot \mA_k)^4
+		\end{equation}
+		
+		\begin{equation}
+			\hat{\mx}_{k+1}^- = \hat{\mg}(t_k, \hat{\mx}_k^+)\Big|_{\mu = \mu_k}
+		\end{equation}
+		\begin{equation}
+			\mP_{k+1}^- = \mphi_{k} \mP_{k}^+ \mphi_{k}^\msT + \mQ
+		\end{equation}
+		
+		\begin{equation}
+			\my_{k+1} = \mC \mx_{k+1} + \mv_{k+1}
+		\end{equation}
+		\begin{equation}
+			\mS_{k+1} = \mC \cdot \mP_{k+1}^- \cdot \mC^\msT + \mR
+		\end{equation}
+		\begin{equation}
+			\mK_{k+1} = \left( ( \mS_{k+1}^\msT)^\msI  \cdot  ( \mC \cdot \mP_{k+1}^- ) \right)^\msT
+		\end{equation}
+
+		\begin{equation}
+			\hat{\mx}_{k+1}^+ =  \hat{\mx}_{k+1}^- + \mK_{k+1}(\my_{k+1} - \mC \hat{\mx}_{k+1}^-)
+		\end{equation}
+		\begin{equation}
+			\mP_{k+1}^+ =  (\mone - \mK_{k+1} \mC) \mP_{k+1}^- (\mone - \mK_{k+1} \mC)^\msT
+		\end{equation}
+		
+		
+    	
+
+
 \section{Aplicação da técnica}\label{aplicacao}
 
 À partir dos equacionamentos deduzidos anteriormente, será realizada a modelagem, projeto de controle por realimentação de estados, projeto de observador de ordem reduzida, e simulação de controle de trajetória de um mecanismo serial do tipo RP (figura \ref{fig:1}). \\
@@ -840,3 +922,4 @@ A partir dos resultados obtidos, foi possível constatar que o controlador e obse
 \bibliography{bibliografia}
 
 \end{document}\grid
+\grid
