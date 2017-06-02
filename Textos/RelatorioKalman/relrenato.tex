@@ -139,66 +139,148 @@ Este trabalho se trata do desenvolvimento de uma metodologia de projeto de contr
 %\input{symbols}
 
 %---ALGORITMO PARA MODELAGEM DE PLATAFORMAS ROBÓTICAS------------------------------------------------------------------------------------------
-\subsection{Modelo dinâmico linearizado de mecanismos seriais}\label{S05-1}
+\subsection{Modelo dinâmico no espaço de estados}\label{S05-0}
 
-Dado o modelo dinâmico de um mecanismo serial no formato \cite{Craig}
+O modelo dinâmico de um mecanismo serial pode ser escrito no seguinte formato \cite{Craig}:
 \begin{equation} \label{eq:MecSerial}
 \mH(\mq) \ddot{\mq} + \mh(\mq, \dot{\mq}) = \mtau
 \end{equation}
 
-iremos obter o modelo linearizado em torno de uma trajetória de referência $\mq_d(t)$ e representa-lo no espaço de estados linear \cite{CabralLIN}.
 
+Passando para o espaço de estados e definindo como saída do sistema os estados $\mq$, temos:
+\begin{equation} \label{eq:SisSS}
+\begin{cases}
+\begin{bmatrix}
+\ddot{\mq} \\
+\dot{\mq} \\
+\end{bmatrix}
+=
+\begin{bmatrix}
+\mH^{-1}(\mq) \big(\mtau - \mh(\mq,\dot{\mq})\big) \\
+\dot{\mq}
+\end{bmatrix}
 
-Seja
-\begin{equation}
-\mf(\mq, \dot{\mq}, \ddot{\mq}, \mtau) = \mH(\mq) \ddot{\mq} + \mh(\mq, \dot{\mq}) - \mtau
+\\
+\my = \mq
+\end{cases}
 \end{equation}
 
-Sendo assim, o modelo dinâmico do mecanismo serial é dado por
+Ou seja:
+\begin{equation} \label{eq:SisSSg}
+\begin{cases}
+\dot{\mx} = \mff(t, \mx, \muu) \\
+\my = \mhh(t, \mx, \muu) \\
+\end{cases}
+\end{equation}
+
+Sendo:
+\begin{equation} \label{eq:x}
+\mx = \begin{bmatrix}
+\dot{\mq} \\
+\mq \\
+\end{bmatrix}
+\end{equation}
+\begin{equation}
+\mff(t, \mx, \muu) = \begin{bmatrix}
+\mH^{-1}(\mq) \big(\mtau - \mh(\mq,\dot{\mq})\big) \\
+\dot{\mq}
+\end{bmatrix}
+\end{equation}
+\begin{equation}
+\mhh(t, \mx, \muu) = \mq
+\end{equation}
+
+\subsection{Modelo dinâmico discretizado}\label{S05-1}
+
+Como já foi visto anteriormente, o modelo dinâmico de um mecanismo serial no espaço de estado não linear pode ser dado por:
+
+\begin{equation} \tag{\ref{eq:SisSSg}}
+\begin{cases}
+\dot{\mx} = \mff(t, \mx, \muu) \\
+\my = \mhh(t, \mx, \muu) \\
+\end{cases}
+\end{equation}
+
+Supondo que a entrade de controle $\muu$ é atualizada a cada $T$ segundos (controle em tempo discreto), temos que o sistema dinâmico discretizado pode ser dado pela seguinte expressão:
+
+\begin{equation}
+\begin{cases}
+\mx_{k+1} = \mgg(t_k, \mx_k, \muu_k) \\
+\my_k = \mhh(t_k, \mx_k, \muu_k) \\
+\muu_k = \muuu(t_k, \mx_x) \\
+t_{k+1} = t_k + T
+\end{cases}
+\end{equation}
+
+Em sistemas não lineares a expressão de $\mgg(t_k, \mx_k, \muu_k)$ em geral não pode ser obtidade de forma exata, dado que a maioria dos sistemas de equações diferenciais não lineares não possui solução exata. Sendo assim, $\mgg(t_k, \mx_k, \muu_k)$ deve ser obtida pela através de métodos numéricos de soluçãos de EDOs. Neste trabalho iremos utilizar um Runge-Kutta de ordem 4, o RK4, para realizar a discretização do sistema. Sendo assim, obtemos a seguinte expressão para $\mgg(t_k, \mx_k, \muu_k)$:
+
+\begin{equation}
+\mgg(t_k, \mx_k, \muu_k) = x_k + \frac{T}{6} \Big( \mk_{1 | k} + 2 \mk_{2 | k} + 2 \mk_{3 | k} + \mk_{4 | k} \Big)
+\end{equation}
+
+Sendo
+
+\begin{align}
+\mk_{1 | k} &=  \mff(t_k, \mx_k, \muu_k) \\
+\mk_{2 | k} &=  \mff \Big( t_k + \frac{T}{2}, \mx_k + \frac{T}{2} \mk_{1 | k}, \muu_k \Big) \\
+\mk_{3 | k} &=  \mff \Big( t_k + \frac{T}{2}, \mx_k + \frac{T}{2} \mk_{2 | k}, \muu_k \Big) \\
+\mk_{4 | k} &=  \mff(t_k + T, \mx_k + T \mk_{3 | k}, \muu_k)
+\end{align}
+
+\subsection{Modelo dinâmico linearizado de mecanismos seriais}\label{S05-11}
+
+Para aplicar o Filtro de Kalman Estendido no modelo dinâmico não linear deduzido é preciso obter o jacobiano $\mA(\mx, \muu) = \frac{\partial \mff}{\partial \mx}$ para o cálculo da estimativa a priori da matriz de covariância. Este jacobiano será obtido de forma implícita através da linearização da equação dinâmica \eqref{eq:MecSerial} e sua representação no espaço de estados linear \cite{CabralLIN}.
+
+A equação \eqref{eq:MecSerial} pode ser reescrita como:
 \begin{equation}
 \mf(\mq, \dot{\mq}, \ddot{\mq}, \mtau) = \mzr
 \end{equation}
 
+Sendo:
+\begin{equation}
+\mf (\mq, \dot{\mq}, \ddot{\mq}, \mtau) = \mH(\mq) \ddot{\mq} + \mh(\mq, \dot{\mq}) - \mtau
+\end{equation}
 
-Para obter o modelo dinâmico linearizado do mecanismo serial, iremos linearizar a função $\mf(\mq, \dot{\mq}, \ddot{\mq}, \mtau)$ em torno de $\mq = \mq_d(t)$, $\dot{\mq} = \dot{\mq}_d(t)$, $\ddot{\mq} = \ddot{\mq}_d(t)$ e $\mtau = \mtau_d(t)$. Utilizaremos o superescrito $*$ para indicar que uma função está calculada nessas condições. Sendo assim, expandindo $\mf$ em Série de Taylor até primeira ordem em torno de $*$, temos:
+
+Para obter o modelo dinâmico linearizado do mecanismo serial, iremos linearizar a função $\mf(\mq, \dot{\mq}, \ddot{\mq}, \mtau)$ em torno de $\mq = \mq^*$, $\dot{\mq} = \dot{\mq}^*$, $\ddot{\mq} = \ddot{\mq}^*$ e $\mtau = \mtau^*$. Utilizaremos o superescrito $*$ para indicar que uma função está calculada nessas condições. Sendo assim, expandindo $\mf$ em Série de Taylor até primeira ordem em torno de $*$, temos:
 \begin{equation}
 \mf(\mq, \dot{\mq}, \ddot{\mq}, \mtau) \approx  \mf^* + \frac{\partial \mf}{\partial \mq}^* \Delta \mq + \frac{\partial \mf}{\partial \dot{\mq}}^* \Delta \dot{\mq} + \frac{\partial \mf}{\partial \ddot{\mq}}^* \Delta \ddot{\mq} + \frac{\partial \mf}{\partial \mtau}^* \Delta \mtau
 \end{equation}
 
 Sendo:
 \begin{equation} \label{eq:G}
-\frac{\partial \mf}{\partial \mq}^* = \mG(t) = \Big( \frac{\partial (\mH \cdot \ddot{\mq})}{\partial \mq} + \frac{\partial \mh}{\partial \mq} \Big)^*
+\frac{\partial \mf}{\partial \mq}^* = \mG = \Big( \frac{\partial (\mH \cdot \ddot{\mq})}{\partial \mq} + \frac{\partial \mh}{\partial \mq} \Big)^*
 \end{equation}
 \begin{equation} \label{eq:V}
-\frac{\partial \mf}{\partial \dot{\mq}}^* = \mV(t) =  \frac{\partial \mh}{\partial \dot{\mq}}^*
+\frac{\partial \mf}{\partial \dot{\mq}}^* = \mV =  \frac{\partial \mh}{\partial \dot{\mq}}^*
 \end{equation}
 \begin{equation} \label{eq:M}
-\frac{\partial \mf}{\partial \ddot{\mq}}^* = \mM(t) = \mH^*
+\frac{\partial \mf}{\partial \ddot{\mq}}^* = \mM = \mH^*
 \end{equation}
 \begin{equation}
 \frac{\partial \mf}{\partial \mtau}^* = -\mone
 \end{equation}
 \begin{equation}
-\Delta\mq = \mq - \mq_d(t)
+\Delta\mq = \mq - \mq^*
 \end{equation}
 \begin{equation}
-\Delta\dot{\mq} = \dot{\mq} - \dot{\mq}_d(t)
+\Delta\dot{\mq} = \dot{\mq} - \dot{\mq}^*
 \end{equation}
 \begin{equation}
-\Delta\ddot{\mq} = \ddot{\mq} - \ddot{\mq}_d(t)
+\Delta\ddot{\mq} = \ddot{\mq} - \ddot{\mq}^*
 \end{equation}
 \begin{equation}
-\Delta\mtau = \mtau - \mtau_d(t)
+\Delta\mtau = \mtau - \mtau^*
 \end{equation}
 
-$\mtau_d(t)$ é escolhido de modo que $\mf^* = \mzr$, ou seja:
+$\mtau^*$ é escolhido de modo que $\mf^* = \mzr$, ou seja:
 \begin{equation} \label{eq:tau_d}
-\mtau_d(t) = \mM (t) \cdot  \ddot{\mq}_d(t) + \mh^*(t)
+\mtau^* = \mH^*  \cdot  \ddot{\mq}^* + \mh^*
 \end{equation}
 
 Assim, o modelo linearizado do mecanismo é dado por:
 \begin{equation} \label{eq:SisLin}
-\mM(t) \cdot \Delta\ddot{\mq} + \mV(t)\cdot \Delta\dot{\mq} + \mG(t)\cdot \Delta\mq = \Delta\mtau
+\mM \cdot \Delta\ddot{\mq} + \mV \cdot \Delta\dot{\mq} + \mG \cdot \Delta\mq = \Delta\mtau
 \end{equation}
 
 Passando para o espaço de estados e definindo como saída do sistema os estados $\Delta\mq$, temos:
@@ -223,7 +305,7 @@ Passando para o espaço de estados e definindo como saída do sistema os estados $
 \mzr
 \end{bmatrix} \Delta\mtau
 \\
-\my = \begin{bmatrix}
+\Delta\my = \begin{bmatrix}
 \mzr & \mone
 \end{bmatrix}
 \begin{bmatrix}
@@ -236,265 +318,40 @@ Passando para o espaço de estados e definindo como saída do sistema os estados $
 Ou seja:
 \begin{equation}
 \begin{cases}
-\dot{\mx} = \mA(t) \cdot \mx + \mB(t) \cdot \muu \\
-\my = \mC(t) \cdot \mx
+\Delta\dot{\mx} = \mA^* \cdot \Delta\mx + \mB^* \cdot \Delta\muu \\
+\Delta\my = \mC^* \cdot \Delta\mx
 \end{cases}
 \end{equation}
 
 Sendo:
 \begin{equation} \label{eq:x}
-\mx = \begin{bmatrix}
+\Delta\mx = \begin{bmatrix}
 \Delta\dot{\mq} \\
 \Delta\mq \\
 \end{bmatrix}
 \end{equation}
-\begin{equation}
-\muu = \Delta\mtau
-\end{equation}
-\begin{equation}
-\mA(t) = \begin{bmatrix}
+\begin{equation} \label{eq:A}
+\mA^* = \begin{bmatrix}
 -\mM^{-1} \mV& -\mM^{-1} \mG \\
 \mone & \mzr
 \end{bmatrix}
 \end{equation}
 \begin{equation}
-\mB(t) = \begin{bmatrix}
+\mB^* = \begin{bmatrix}
 \mM^{-1} \\
 \mzr
 \end{bmatrix}
 \end{equation}
 \begin{equation}
-\mC(t) = \begin{bmatrix}
+\mC^* = \begin{bmatrix}
 \mzr & \mone
 \end{bmatrix}
 \end{equation}
 
-
-\subsection{Projeto de regulador de estados}\label{S05-2}
-
-A lei de controle de um controlador do tipo regulador de estados \cite{CabralRE} é dada por:
-\begin{equation} \label{eq:Reg}
-\muu = - \mK(t) \cdot \mx
-\end{equation}
-
-a qual tem como objetivo levar todos os estados do sistema assintoticamente a zero, independentemente da condição inicial. Para o sistema em questão, se todos os estados forem a zero, significa que o sistema está seguindo a trajetória de referência. 
-
-Como já foi visto anteriormente, a equação do sistema linearizado é dada por: 
-\begin{equation} \tag{\ref{eq:SisLin}}
-\mM(t) \cdot \Delta\ddot{\mq} + \mV(t)\cdot \Delta\dot{\mq} + \mG(t)\cdot \Delta\mq = \Delta\mtau
-\end{equation}
-
-Seria desejável que a equação do sistema em malha fechada fosse dada por:
-\begin{equation}
-\Delta\ddot{\mq} + k_v  \Delta\dot{\mq} + k_p \Delta\mq = \mzr
-\end{equation}
-
-A qual garante que $\Delta\mq$ vá a zero assintoticamente para $k_p, k_v > 0$.
-
-É possível perceber que a lei de controle que leva o sistema a esse comportamento em malha fechada é dada por:
-\begin{equation}
-\Delta\mtau = -\big(\mM(t) k_v - \mV(t)\big)\Delta\dot{\mq} -\big(\mM(t) k_p - \mG(t)\big)\Delta\mq = - \begin{bmatrix}
-\mM(t) k_v - \mV(t) & \mM(t) k_p - \mG(t)
-\end{bmatrix}
-\begin{bmatrix}
-\Delta\dot{\mq} \\
-\Delta\mq
-\end{bmatrix}
-\end{equation}
-
-Portanto, a lei do regulador de estados é dada pela equação \eqref{eq:Reg}, sendo:
-\begin{equation} \label{eq:K}
-\mK(t) = \begin{bmatrix}
-\mM(t) k_v - \mV(t) & \mM(t) k_p - \mG(t)
-\end{bmatrix}
-\end{equation}
+Sendo assim, obtemos o jacobiano $\mA(\mx, \muu) = \frac{\partial \mff}{\partial \mx}$, pois a matriz $\mA^*$  definida pela equação \eqref{eq:A} é simplesmente $\mA(\mx^*, \muu^*)$.
 
 
-\subsection{Projeto de observador de ordem reduzida}\label{S05-3}
-
-Para projetar o observador de estados de ordem reduzida \cite{Fleury, Koskie}, partimos da equação \eqref{eq:SisLinSS}:
-
-\begin{equation} \tag{\ref{eq:SisLinSS}}
-\begin{cases}
-\begin{bmatrix}
-\Delta\ddot{\mq} \\
-\Delta\dot{\mq} \\
-\end{bmatrix}
-=
-\begin{bmatrix}
--\mM^{-1} \mV& -\mM^{-1} \mG \\
-\mone & \mzr
-\end{bmatrix}
-\begin{bmatrix}
-\Delta\dot{\mq} \\
-\Delta\mq \\
-\end{bmatrix}
-+
-\begin{bmatrix}
-\mM^{-1} \\
-\mzr
-\end{bmatrix} \Delta\mtau
-\\
-\my = \begin{bmatrix}
-\mzr & \mone
-\end{bmatrix}
-\begin{bmatrix}
-\Delta\dot{\mq} \\
-\Delta\mq \\
-\end{bmatrix}
-\end{cases}
-\end{equation}
-
-Repare que os estados $\Delta\mq$ são as saídas do sistema e $\Delta\dot{\mq}$  são os estados que não são saídas. Sendo assim, podemos reescrever a primeira equação matricial de \eqref{eq:SisLinSS} da seguinte maneira:
-
-\begin{equation} \label{eq:SisLinYW}
-\begin{bmatrix}
-\dot{\mw} \\
-\dot{\my} \\
-\end{bmatrix}
-=
-\begin{bmatrix}
-\mA_{1,1} & \mA_{1,2} \\
-\mA_{2,1} & \mA_{2,2}
-\end{bmatrix}
-\begin{bmatrix}
-\mw \\
-\my \\
-\end{bmatrix}
-+
-\begin{bmatrix}
-\mB_1 \\
-\mB_2
-\end{bmatrix} \muu
-\end{equation}
-
-Sendo:
-\begin{equation} \label{eq:w_def}
-\mw = \Delta\dot{\mq}
-\end{equation}
-\begin{equation} \label{eq:A11}
-\mA_{1,1} = -\mM^{-1}\mV
-\end{equation}
-\begin{equation} \label{eq:A12}
-\mA_{1,2} = -\mM^{-1}\mG
-\end{equation}
-\begin{equation} \label{eq:A21}
-\mA_{2,1} = \mone
-\end{equation}
-\begin{equation} \label{eq:A22}
-\mA_{2,2} = \mzr
-\end{equation}
-\begin{equation} \label{eq:B1}
-\mB_1 = \mM^{-1}
-\end{equation}
-\begin{equation} \label{eq:B2}
-\mB_2 = \mzr
-\end{equation}
-
-A partir da equação \eqref{eq:SisLinYW}, temos que:
-
-\begin{equation} \label{eq:w_Ly}
-\dot{\mw} - \mL \cdot \dot{\my} = (\mA_{1,1} - \mL \mA_{2,1} )\mw + (\mA_{1,2} - \mL \mA_{2,2})\my + (\mB_1 - \mL \mB_2) \muu
-\end{equation}
-
-Sendo $\mL = \mL(t)$ uma matriz de ganhos variante no tempo. \\
-
-Definindo como novo vetor de estados do sistema:
-\begin{equation}
-\mv = \mw - \mL \cdot \my
-\end{equation}
-
-Sendo assim, temos que:
-\begin{equation} \label{eq:w}
-\mw = \mv + \mL \cdot \my
-\end{equation}
-\begin{equation} \label{eq:dw}
-\dot{\mw} = \dot{\mv} + \mL \cdot \dot{\my} + \dot{\mL} \cdot \my
-\end{equation}
-
-Substituindo \eqref{eq:w} e \eqref{eq:dw} em \eqref{eq:w_Ly}, temos:
-$$\dot{\mv} + \dot{\mL} \cdot \my  = (\mA_{1,1} - \mL \mA_{2,1} )(\mv + \mL \cdot \my) + (\mA_{1,2} - \mL \mA_{2,2})\my + (\mB_1 - \mL \mB_2) \muu$$
-\begin{equation} \label{eq:v}
-\therefore \dot{\mv}   = (\mA_{1,1} - \mL \mA_{2,1} )\mv + (\mA_{1,1}\mL - \mL \mA_{2,1}\mL + \mA_{1,2} - \mL\mA_{2,2}  -  \dot{\mL})\my + (\mB_1 - \mL \mB_2) \muu
-\end{equation} \\
-
-O observador de ordem reduzida irá obter uma estimativa $\hat{\mv}$ dos estados $\mv$ através da seguinte equação:
-\begin{equation} \label{eq:v_ch}
-\therefore \dot{\hat{\mv}}   = (\mA_{1,1} - \mL \mA_{2,1} )\hat{\mv} + (\mA_{1,1}\mL - \mL \mA_{2,1}\mL + \mA_{1,2} - \mL\mA_{2,2}  -  \dot{\mL})\my + (\mB_1 - \mL \mB_2) \muu
-\end{equation}
-dado que $\my$ e $\muu$ são conhecidos, visto que $\my$ é medido e $\muu$ é a entrada do sistema. \\
-
-Repare que, tendo obtido as estimativas para os estados $\mv$ a partir da equação \eqref{eq:v_ch}, é possível obter uma estimativa para os estados $\mx$, pois:
-\begin{equation}
-\mx = \begin{bmatrix}
-\mw \\
-\my
-\end{bmatrix}
-=
- \begin{bmatrix}
-\mv + \mL \cdot \my \\
-\my
-\end{bmatrix}
-\end{equation}
-
-Logo:
-\begin{equation}
-\hat{\mx} = \begin{bmatrix}
-\hat{\mw} \\
-\my
-\end{bmatrix}
-=
- \begin{bmatrix}
-\hat{\mv} + \mL \cdot \my \\
-\my
-\end{bmatrix}
-\end{equation}
-
-Para utilizar a equação do observador de estados \eqref{eq:v_ch}, é necessário projetar a matriz de ganhos $\mL(t)$.  Definindo o erro de estimação de $\mv$ como:
-\begin{equation}
-\tilde{\mv} = \hat{\mv} - \mv 
-\end{equation}
-
-Subtraindo a equação \eqref{eq:v} da equação \eqref{eq:v_ch}, temos:
-\begin{equation} \label{eq:v_til}
-\dot{\tilde{\mv}} = (\mA_{1,1} - \mL \mA_{2,1} )\tilde{\mv}
-\end{equation}
-
-A equação \eqref{eq:v_til} descreve a dinâmica do erro de estimação de $\mv$. Sendo assim, podemos projetar a matriz $\mL(t)$ de modo a garantir que o erro de estimação tenda assintoticamente a zero, independentemente da condição inicial. Como já foi visto anteriormente: 
-\begin{equation} \tag{\ref{eq:A21}}
-\mA_{2,1} = \mone
-\end{equation}
-
-Sendo assim, temos que:
-\begin{equation} \label{eq:projObs}
-\mA_{1,1} - \mL \mA_{2,1} = \mA_{1,1} - \mL 
-\end{equation}
-
-Seria conveniente que a equação dinâmica do erro de estimação fosse dada por:
-\begin{equation}
-\dot{\tilde{\mv}} = -\alpha\tilde{\mv}
-\end{equation}
-
-A qual garante que $\tilde{\mv}$ vá a zero assintoticamente para $\alpha > 0$.
-
-A partir de \eqref{eq:projObs}, é fácil perceber que a matriz $\mL(t)$ que leva a dinâmica de $\tilde{\mv}$ a esse comportamento é dada por:
-\begin{equation} \label{eq:L}
-\mL(t) = \mA_{1,1}(t)+ \alpha \mone
-\end{equation}
-
-\subsection{Projeto de Filtro de Kalman Estendido}\label{S05-4}
-
-			\begin{align*}
-				\dot{x} &=  f(t, x), \; x(t_0) = x_0 \\
-				\\
-				x_{k+1} &=  x_k + \frac{T}{6} \Big( k_1 + 2 k_2 + 2 k_3 + k_4 \Big) = g(t_k, x_k) \\
-				t_{k+1} &=  t_k + T \\
-				\\
-				k_1 &=  f(t_k, x_k) \\
-				k_2 &=  f \Big( t_k + \frac{T}{2}, x_k + \frac{T}{2} k_1 \Big) \\
-				k_3 &=  f \Big( t_k + \frac{T}{2}, x_k + \frac{T}{2} k_2 \Big) \\
-				k_4 &=  f(t_k + T, x_k + T k_3) \\
-			\end{align*}
+\subsection{Projeto de Filtro de Kalman Estendido}\label{S05-2}
 		
     	\begin{equation}
     		A = \frac{\partial f}{\partial x}
@@ -560,8 +417,73 @@ A partir de \eqref{eq:projObs}, é fácil perceber que a matriz $\mL(t)$ que leva 
 			\mP_{k+1}^+ =  (\mone - \mK_{k+1} \mC) \mP_{k+1}^- (\mone - \mK_{k+1} \mC)^\msT
 		\end{equation}
 		
+		\begin{multicols}{2}
+			\begin{itemize}
+				\item[-] $l_1 = 0.10 m$
+				\item[-] $l_2 = 0.10 m$
+				\item[-] $l_{g1} = 0.05 m$
+				\item[-] $l_{g2} = 0.05 m$
+				\item[-] $m_1 = 0.1 kg$
+				\item[-] $m_2 = 0.1 kg$
+				\item[-] $Jz_1 = 80.0 \cdot 10^{-6} kg\cdot m^2$
+				\item[-] $Jz_2 = 80.0 \cdot 10^{-6} kg\cdot m^2$
+				\item[-] $g = 9.8 m/s^2$
+			\end{itemize}
+		\end{multicols}
 		
+		\begin{multicols}{2}
+			\begin{itemize}
+				\item[-] $\hat{l}_1 = 0.0992 m$
+				\item[-] $\hat{l}_2 = 0.0999 m$
+				\item[-] $\hat{l}_{g1} = 0.0489 m$
+				\item[-] $\hat{l}_{g2} = 0.0505 m$
+				\item[-] $\hat{m}_1 = 0.0945 kg$
+				\item[-] $\hat{m}_2 = 0.101 kg$
+				\item[-] $\hat{J}z_1 = 80.8 \cdot 10^{-6} kg\cdot m^2$
+				\item[-] $\hat{J}z_2 = 86.6 \cdot 10^{-6} kg\cdot m^2$
+				\item[-] $\hat{g} = 9.8 m/s^2$
+			\end{itemize}
+		\end{multicols}
+		
+		$$
+		\begin{cases}
+			\theta_d(t) = -\frac{\pi}{2} +  \frac{\pi}{2} \sin(10 t) \\
+			d_d(t) = 0.15 +  0.1 \sin(10 t) \\
+		\end{cases}
+		$$
+		
+		$$
+		\begin{cases}
+			\mq(0) = \hat{\mq}^-(0) = \mq_d(0) \\
+			\dot{\mq}(0) = \mzr \\
+			\dot{\hat{\mq}}^-(0) = \dot{\mq}_d(0) \\
+			\mP^-(0) =
+			\begin{bmatrix}
+				247 & 0 & 0 & 0 \\
+				0     & 1 & 0 & 0 \\
+				0     & 0 & 1.57 \cdot 10^{-4} & 0 \\
+				0     & 0 & 0               & 5 \cdot 10^{-4}
+			\end{bmatrix} 
+		\end{cases}
+		$$
     	
+		\begin{itemize}
+			\item[--] $ k_v = 200 $  \\[8pt]
+			\item[--] $ k_p = 10000 $ \\[8pt]
+		\end{itemize}
+		
+			$$ \mQ = 
+				\begin{bmatrix}
+					1.57 \cdot 10^{-4} & 0 & 0 & 0 \\
+					0     & 5 \cdot 10^{-4} & 0 & 0 \\
+					0     & 0 & 0 & 0 \\
+					0     & 0 & 0   & 0
+				\end{bmatrix} $$
+			$$ \mR = 
+				\begin{bmatrix}
+					1.57 \cdot 10^{-4} & 0\\
+					0     & 5 \cdot 10^{-4} \\
+				\end{bmatrix} $$
 
 
 \section{Aplicação da técnica}\label{aplicacao}
