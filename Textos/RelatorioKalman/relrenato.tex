@@ -127,7 +127,7 @@ Prof. Dr. Tarcisio A. Hess Coelho
 %\newpage
 \section{Resumo}\label{intro}
 
-Este trabalho se trata do desenvolvimento de uma metodologia de projeto de controle moderno e projeto de observador de ordem reduzida aplicado a mecanismos seriais, supondo modelo dinâmico explícito conhecido. Além disso, será realizada a modelagem dinâmica de um mecanismo serial do tipo RP, no qual será será aplicada a metologia proposta e serão realizadas simulações de controle de trajetória. 
+Este trabalho se trata do desenvolvimento de uma metodologia de projeto de Filtro de Kalman Estendido discreto-discreto aplicado a mecanismos seriais, supondo modelo dinâmico explícito conhecido. Além disso, será realizada a modelagem dinâmica de um mecanismo serial do tipo RP, no qual será será aplicada a metologia proposta e serão realizadas simulações de controle de trajetória. 
 
 
 
@@ -139,7 +139,7 @@ Este trabalho se trata do desenvolvimento de uma metodologia de projeto de contr
 %\input{symbols}
 
 %---ALGORITMO PARA MODELAGEM DE PLATAFORMAS ROBÓTICAS------------------------------------------------------------------------------------------
-\subsection{Modelo dinâmico no espaço de estados}\label{S05-0}
+\subsection{Modelo dinâmico no espaço de estados}\label{S05-1}
 
 O modelo dinâmico de um mecanismo serial pode ser escrito no seguinte formato \cite{Craig}:
 \begin{equation} \label{eq:MecSerial}
@@ -168,8 +168,8 @@ Passando para o espaço de estados e definindo como saída do sistema os estados $
 Ou seja:
 \begin{equation} \label{eq:SisSSg}
 \begin{cases}
-\dot{\mx} = \mff(t, \mx, \muu) \\
-\my = \mhh(t, \mx, \muu) \\
+\dot{\mx} = \mff(\mx, \muu) \\
+\my = \mhh(\mx) \\
 \end{cases}
 \end{equation}
 
@@ -180,56 +180,78 @@ Sendo:
 \mq \\
 \end{bmatrix}
 \end{equation}
-\begin{equation}
-\mff(t, \mx, \muu) = \begin{bmatrix}
+\begin{equation} \label{eq:ff}
+\mff( \mx, \muu) = \begin{bmatrix} 
 \mH^{-1}(\mq) \big(\mtau - \mh(\mq,\dot{\mq})\big) \\
 \dot{\mq}
 \end{bmatrix}
 \end{equation}
-\begin{equation}
-\mhh(t, \mx, \muu) = \mq
+\begin{equation} \label{eq:hh}
+\mhh(\mx) = \mq
 \end{equation}
 
-\subsection{Modelo dinâmico discretizado}\label{S05-1}
+\subsection{Modelo dinâmico linearizado}\label{S05-2}
 
-Como já foi visto anteriormente, o modelo dinâmico de um mecanismo serial no espaço de estado não linear pode ser dado por:
+Dado o modelo dinâmico do sistema representado no espaço de estados não linear \eqref{eq:SisSSg}, o modelo linearizado do sistema pode ser obtido realizando a expansão em série de Taylor até primeira ordem das funções $\mff$ e $\mhh$ em torno de um ponto $\mx = \mx^*$, $\muu = \muu^*$. Utilizaremos o superescrito $*$ para indicar que uma função está calculada nessas condições.
 
-\begin{equation} \tag{\ref{eq:SisSSg}}
+\begin{equation}
+\mff(\mx, \muu) \approx \mff^* + \frac{\partial \mff}{\partial \mx} \Big|^* \Delta \mx + \frac{\partial \mff}{\partial \muu} \Big|^* \Delta \muu
+\end{equation}
+
+\begin{equation}
+\mhh(\mx, \muu) \approx \mhh^* + \frac{\partial \mhh}{\partial \mx} \Big|^* \Delta \mx + \frac{\partial \mhh}{\partial \muu} \Big|^* \Delta \muu
+\end{equation}
+
+Sendo:
+\begin{equation}
+\Delta\mx = \mx - \mx^*
+\end{equation}
+\begin{equation}
+\Delta\muu = \muu - \muu^*
+\end{equation}
+
+Sabendo-se que:
+\begin{equation}
+\dot{\mx}^* = \mff^*
+\end{equation}
+\begin{equation}
+\my^* = \mhh^*
+\end{equation}
+
+E definindo:
+\begin{equation}
+\Delta\dot{\mx} = \dot{\mx} - \dot{\mx}^*
+\end{equation}
+\begin{equation}
+\Delta\my = \my - \my^*
+\end{equation}
+\begin{equation}
+\mA = \frac{\partial \mff}{\partial \mx} 
+\end{equation}
+\begin{equation}
+\mB = \frac{\partial \mff}{\partial \muu} 
+\end{equation}
+\begin{equation}
+\mC = \frac{\partial \mhh}{\partial \mx} 
+\end{equation}
+
+Obtemos o sistema dinâmico linearizado escrito no espaço de estados linear:
+\begin{equation}
 \begin{cases}
-\dot{\mx} = \mff(t, \mx, \muu) \\
-\my = \mhh(t, \mx, \muu) \\
+\Delta\dot{\mx} = \mA^* \cdot \Delta\mx + \mB^* \cdot \Delta\muu \\
+\Delta\my = \mC^* \cdot \Delta\mx
 \end{cases}
 \end{equation}
 
-Supondo que a entrade de controle $\muu$ é atualizada a cada $T$ segundos (controle em tempo discreto), temos que o sistema dinâmico discretizado pode ser dado pela seguinte expressão:
+A expressão de $\mC$ pode ser obtida diretamente sem nem nenhuma dificuldade, visto que a expressão de $\mhh(\mx)$ \eqref{eq:hh} é bem simples para o sistema em questão:
 
 \begin{equation}
-\begin{cases}
-\mx_{k+1} = \mgg(t_k, \mx_k, \muu_k) \\
-\my_k = \mhh(t_k, \mx_k, \muu_k) \\
-\muu_k = \muuu(t_k, \mx_x) \\
-t_{k+1} = t_k + T
-\end{cases}
+\mC = \begin{bmatrix}
+\mzr & \mone
+\end{bmatrix}
 \end{equation}
 
-Em sistemas não lineares a expressão de $\mgg(t_k, \mx_k, \muu_k)$ em geral não pode ser obtidade de forma exata, dado que a maioria dos sistemas de equações diferenciais não lineares não possui solução exata. Sendo assim, $\mgg(t_k, \mx_k, \muu_k)$ deve ser obtida pela através de métodos numéricos de soluçãos de EDOs. Neste trabalho iremos utilizar um Runge-Kutta de ordem 4, o RK4, para realizar a discretização do sistema. Sendo assim, obtemos a seguinte expressão para $\mgg(t_k, \mx_k, \muu_k)$:
-
-\begin{equation}
-\mgg(t_k, \mx_k, \muu_k) = x_k + \frac{T}{6} \Big( \mk_{1 | k} + 2 \mk_{2 | k} + 2 \mk_{3 | k} + \mk_{4 | k} \Big)
-\end{equation}
-
-Sendo
-
-\begin{align}
-\mk_{1 | k} &=  \mff(t_k, \mx_k, \muu_k) \\
-\mk_{2 | k} &=  \mff \Big( t_k + \frac{T}{2}, \mx_k + \frac{T}{2} \mk_{1 | k}, \muu_k \Big) \\
-\mk_{3 | k} &=  \mff \Big( t_k + \frac{T}{2}, \mx_k + \frac{T}{2} \mk_{2 | k}, \muu_k \Big) \\
-\mk_{4 | k} &=  \mff(t_k + T, \mx_k + T \mk_{3 | k}, \muu_k)
-\end{align}
-
-\subsection{Modelo dinâmico linearizado de mecanismos seriais}\label{S05-11}
-
-Para aplicar o Filtro de Kalman Estendido no modelo dinâmico não linear deduzido é preciso obter o jacobiano $\mA(\mx, \muu) = \frac{\partial \mff}{\partial \mx}$ para o cálculo da estimativa a priori da matriz de covariância. Este jacobiano será obtido de forma implícita através da linearização da equação dinâmica \eqref{eq:MecSerial} e sua representação no espaço de estados linear \cite{CabralLIN}.
+Devido à complexidade da expressão de $\mff(\mx, \muu)$ \eqref{eq:ff}, as expressões de $\mA$ e $\mB$ serão obtidas de forma implícita. 
 
 A equação \eqref{eq:MecSerial} pode ser reescrita como:
 \begin{equation}
@@ -244,21 +266,21 @@ Sendo:
 
 Para obter o modelo dinâmico linearizado do mecanismo serial, iremos linearizar a função $\mf(\mq, \dot{\mq}, \ddot{\mq}, \mtau)$ em torno de $\mq = \mq^*$, $\dot{\mq} = \dot{\mq}^*$, $\ddot{\mq} = \ddot{\mq}^*$ e $\mtau = \mtau^*$. Utilizaremos o superescrito $*$ para indicar que uma função está calculada nessas condições. Sendo assim, expandindo $\mf$ em Série de Taylor até primeira ordem em torno de $*$, temos:
 \begin{equation}
-\mf(\mq, \dot{\mq}, \ddot{\mq}, \mtau) \approx  \mf^* + \frac{\partial \mf}{\partial \mq}^* \Delta \mq + \frac{\partial \mf}{\partial \dot{\mq}}^* \Delta \dot{\mq} + \frac{\partial \mf}{\partial \ddot{\mq}}^* \Delta \ddot{\mq} + \frac{\partial \mf}{\partial \mtau}^* \Delta \mtau
+\mf(\mq, \dot{\mq}, \ddot{\mq}, \mtau) \approx  \mf^* + \frac{\partial \mf}{\partial \mq}\Big|^* \Delta \mq + \frac{\partial \mf}{\partial \dot{\mq}}\Big|^* \Delta \dot{\mq} + \frac{\partial \mf}{\partial \ddot{\mq}}\Big|^* \Delta \ddot{\mq} + \frac{\partial \mf}{\partial \mtau}\Big|^* \Delta \mtau
 \end{equation}
 
 Sendo:
 \begin{equation} \label{eq:G}
-\frac{\partial \mf}{\partial \mq}^* = \mG = \Big( \frac{\partial (\mH \cdot \ddot{\mq})}{\partial \mq} + \frac{\partial \mh}{\partial \mq} \Big)^*
+\frac{\partial \mf}{\partial \mq} = \mG =  \frac{\partial (\mH \cdot \ddot{\mq})}{\partial \mq} + \frac{\partial \mh}{\partial \mq} 
 \end{equation}
 \begin{equation} \label{eq:V}
-\frac{\partial \mf}{\partial \dot{\mq}}^* = \mV =  \frac{\partial \mh}{\partial \dot{\mq}}^*
+\frac{\partial \mf}{\partial \dot{\mq}} = \mV =  \frac{\partial \mh}{\partial \dot{\mq}}
 \end{equation}
 \begin{equation} \label{eq:M}
-\frac{\partial \mf}{\partial \ddot{\mq}}^* = \mM = \mH^*
+\frac{\partial \mf}{\partial \ddot{\mq}} = \mH
 \end{equation}
 \begin{equation}
-\frac{\partial \mf}{\partial \mtau}^* = -\mone
+\frac{\partial \mf}{\partial \mtau} = -\mone
 \end{equation}
 \begin{equation}
 \Delta\mq = \mq - \mq^*
@@ -280,19 +302,18 @@ $\mtau^*$ é escolhido de modo que $\mf^* = \mzr$, ou seja:
 
 Assim, o modelo linearizado do mecanismo é dado por:
 \begin{equation} \label{eq:SisLin}
-\mM \cdot \Delta\ddot{\mq} + \mV \cdot \Delta\dot{\mq} + \mG \cdot \Delta\mq = \Delta\mtau
+\mH^* \cdot \Delta\ddot{\mq} + \mV^* \cdot \Delta\dot{\mq} + \mG^* \cdot \Delta\mq = \Delta\mtau
 \end{equation}
 
-Passando para o espaço de estados e definindo como saída do sistema os estados $\Delta\mq$, temos:
+Passando para o espaço de estados, temos:
 \begin{equation} \label{eq:SisLinSS}
-\begin{cases}
 \begin{bmatrix}
 \Delta\ddot{\mq} \\
 \Delta\dot{\mq} \\
 \end{bmatrix}
 =
 \begin{bmatrix}
--\mM^{-1} \mV& -\mM^{-1} \mG \\
+-{\mH^*}^{-1} \mV^* & -{\mH^*}^{-1} \mG^* \\
 \mone & \mzr
 \end{bmatrix}
 \begin{bmatrix}
@@ -301,26 +322,14 @@ Passando para o espaço de estados e definindo como saída do sistema os estados $
 \end{bmatrix}
 +
 \begin{bmatrix}
-\mM^{-1} \\
+{\mH^*}^{-1} \\
 \mzr
 \end{bmatrix} \Delta\mtau
-\\
-\Delta\my = \begin{bmatrix}
-\mzr & \mone
-\end{bmatrix}
-\begin{bmatrix}
-\Delta\dot{\mq} \\
-\Delta\mq \\
-\end{bmatrix}
-\end{cases}
 \end{equation}
 
 Ou seja:
 \begin{equation}
-\begin{cases}
 \Delta\dot{\mx} = \mA^* \cdot \Delta\mx + \mB^* \cdot \Delta\muu \\
-\Delta\my = \mC^* \cdot \Delta\mx
-\end{cases}
 \end{equation}
 
 Sendo:
@@ -331,91 +340,185 @@ Sendo:
 \end{bmatrix}
 \end{equation}
 \begin{equation} \label{eq:A}
-\mA^* = \begin{bmatrix}
--\mM^{-1} \mV& -\mM^{-1} \mG \\
+\mA = \begin{bmatrix}
+-\mH^{-1} \mV& -\mH^{-1} \mG \\
 \mone & \mzr
 \end{bmatrix}
 \end{equation}
 \begin{equation}
-\mB^* = \begin{bmatrix}
-\mM^{-1} \\
+\mB = \begin{bmatrix}
+\mH^{-1} \\
 \mzr
 \end{bmatrix}
 \end{equation}
-\begin{equation}
-\mC^* = \begin{bmatrix}
-\mzr & \mone
-\end{bmatrix}
+
+\subsection{Modelo dinâmico discretizado}\label{S05-3}
+
+Como já foi visto anteriormente, o modelo dinâmico de um mecanismo serial no espaço de estado não linear pode ser dado por:
+
+\begin{equation} \tag{\ref{eq:SisSSg}}
+\begin{cases}
+\dot{\mx} = \mff(\mx, \muu) \\
+\my = \mhh(\mx) \\
+\end{cases}
 \end{equation}
 
-Sendo assim, obtemos o jacobiano $\mA(\mx, \muu) = \frac{\partial \mff}{\partial \mx}$, pois a matriz $\mA^*$  definida pela equação \eqref{eq:A} é simplesmente $\mA(\mx^*, \muu^*)$.
+Supondo que a entrade de controle $\muu$ é atualizada a cada $T$ segundos (controle em tempo discreto), temos que o sistema dinâmico discretizado pode ser dado pela seguinte expressão:
+
+\begin{equation}
+\begin{cases}
+\mx_{k+1} = \mgg(\mx_k, \muu_k) \\
+\my_{k+1} = \mhh(\mx_{k+1}) \\
+t_{k+1} = t_k + T
+\end{cases}
+\end{equation}
+
+Em sistemas não lineares a expressão de $\mgg(\mx_k, \muu_k)$ em geral não pode ser obtidade de forma exata, dado que a maioria dos sistemas de equações diferenciais não lineares não possui solução exata. Sendo assim, $\mgg( \mx_k, \muu_k)$ deve ser obtida pela através de métodos numéricos de soluçãos de EDOs. Neste trabalho iremos utilizar um Runge-Kutta de ordem 4 para realizar a discretização do sistema. Sendo assim, obtemos a seguinte expressão para $\mgg( \mx_k, \muu_k)$:
+
+\begin{equation} \label{eq:g}
+\mgg(\mx_k, \muu_k) = \mx_k + \frac{T}{6} \Big( \mk_{1 | k} + 2 \mk_{2 | k} + 2 \mk_{3 | k} + \mk_{4 | k} \Big)
+\end{equation}
+
+Sendo
+
+\begin{align}
+\mk_{1 | k} &=  \mff(\mx_k, \muu_k) \\
+\mk_{2 | k} &=  \mff \Big( \mx_k + \frac{T}{2} \mk_{1 | k}, \muu_k \Big) \\
+\mk_{3 | k} &=  \mff \Big(  \mx_k + \frac{T}{2} \mk_{2 | k}, \muu_k \Big) \\
+\mk_{4 | k} &=  \mff( \mx_k + T \mk_{3 | k}, \muu_k)
+\end{align}
+
+\subsection{Jacobiano do sistema discretizado}\label{S05-4}
+
+Para aplicar o Filtro de Kalman Estendido no modelo dinâmico não linear \eqref{eq:SisSSg} é preciso obter o jacobiano $\frac{\partial \mgg}{\partial \mx_k}$ para o cálculo da estimativa a priori da matriz de covariância. Sendo assim, primeiramente definimos:
+
+\begin{equation}
+\mphi(\mx_k, \muu_k)= \frac{\partial \mgg}{\partial \mx_k}
+\end{equation}
+
+\begin{equation}
+\mA_k = \frac{\partial \mff}{\partial \mx} (\mx_k, \muu_k)
+\end{equation} 
 
 
-\subsection{Projeto de Filtro de Kalman Estendido}\label{S05-2}
+Derivando \eqref{eq:g}, temos:
+
+\begin{equation}
+			\mphi_k = \frac{\partial \mgg}{\partial \mx_k} = \mone + \frac{T}{6} \Big( \frac{\partial \mk_{1|k}}{\partial \mx_k} + 2 \frac{\partial \mk_{2|k}}{\partial \mx_k}  + 2 \frac{\partial \mk_{3|k}}{\partial \mx_k}  + \frac{\partial \mk_{4|k}}{\partial \mx_k}  \Big)
+		\end{equation}
+		
+Sendo:		
+		\begin{equation}
+			\frac{\partial \mk_{1|k}}{\partial \mx_k}  =  \frac{\partial \mff}{\partial \mx} (\mx_k, \muu_k)
+		\end{equation}
+		\begin{equation}
+			\frac{\partial \mk_{2|k}}{\partial \mx_k}  =  \frac{\partial \mff}{\partial \mx} (\mx_k, \muu_k) \Big( 1 + \frac{T}{2} \frac{\partial \mk_{1|k}}{\partial \mx_k}  \Big)
+		\end{equation}
+		\begin{equation}
+			\frac{\partial \mk_{3|k}}{\partial \mx_k}  =  \frac{\partial \mff}{\partial \mx} (\mx_k, \muu_k) \Big( 1 + \frac{T}{2} \frac{\partial \mk_{2|k}}{\partial \mx_k}  \Big)
+		\end{equation}
+		\begin{equation}
+			\frac{\partial \mk_{4|k}}{\partial \mx_k}  =  \frac{\partial \mff}{\partial \mx} (\mx_k, \muu_k) \Big( 1 + T \frac{\partial \mk_{3|k}}{\partial \mx_k} \Big)
+		\end{equation}
 		
     	\begin{equation}
-    		A = \frac{\partial f}{\partial x}
+    		\mphi(\mx_k, \muu_k) = \frac{\partial \mgg}{\partial \mx_k} = \mone + T \cdot \mA_k + \frac{1}{2!}(T \cdot \mA_k)^2 + \frac{1}{3!}(T \cdot \mA_k)^3 + \frac{1}{4!}(T \cdot \mA_k)^4
     	\end{equation}
     	
+%O jacobiano $\mphi_k = \frac{\partial \mgg}{\partial \mx_k}$ foi obtido em função do jacobiano $\mA = \frac{\partial \mff}{\partial \mx}$. Sendo assim, ainda é necessário obter $\mA$ em função dos termos da equação dinâmica do mecanismo serial \eqref{eq:MecSerial}. Este  será obtido na próxima subseção de forma implícita através da linearização da equação dinâmica \eqref{eq:MecSerial} e sua representação no espaço de estados linear \cite{CabralLIN}.
+
+
+\subsection{Filtro de Kalman Estendido}\label{S05-5}
+
+Sejam dois sistemas discretos, o da planta:
+
+\begin{equation}
+\begin{cases}
+\mx_{k+1} = \mgg(\mx_k, \muu_k) \\
+\my_{k+1} = \mhh(\mx_{k+1}) + \mv_{k+1} \\
+\end{cases}
+\end{equation}
+
+e o do modelo da planta (com supostos erros de modelagem):
+
+\begin{equation}
+\begin{cases}
+\hat{\mx}_{k+1} = \hat{\mgg}(\hat{\mx}_k, \muu_k) \\
+\hat{\my}_{k+1} = \hat{\mhh}(\hat{\mx}_{k+1}) \\
+\end{cases}
+\end{equation}
+
+Sendo $\mv_{k+1}$ o ruído de medição, assumido como um vetor de ruído branco gaussiano com média nula e covariância $\mR_{k+1}$. Além disso, considere um vetor $\mw_{k}$, relativo aos erros de modelagem do sistema, ou seja:
+\begin{equation}
+\mw_{k} =  \mgg(\mx_k, \muu_k) - \hat{\mgg}(\mx_k, \muu_k)
+\end{equation}
+
+$\mw_{k}$ será considerado como sendo um vetor de ruído branco gaussiano com média nula e covariância $\mQ_{k}$.  
+
+Sejam $\hat{\mphi}$ e $\hat{\mC}$ os seguintes jacobianos do modelo da planta:
+\begin{equation}
+\hat{\mphi}(\hat{\mx}_k, \muu_k) = \frac{\partial \hat{\mgg}}{\partial\hat{\mx}_k}
+\end{equation}
+\begin{equation}
+\hat{\mC}(\hat{\mx}_k, \muu_k) = \frac{\partial \hat{\mhh}}{\partial\hat{\mx}_k}
+\end{equation}
+
+E seja $\muu$ uma lei de controle do tipo:
+\begin{equation}
+\muu = \muuu(t, \hat{\mx})
+\end{equation}
+
+Aqui segue o algoritmo do Filtro de Kalman Estendido que será utilizado para realizar as simulações do sistema de interesse:
+
+\begin{itemize}
+\item Cálculo da lei de controle
+\begin{equation}
+\muu_k = \muuu(t_k, \hat{\mx}_k)
+\end{equation}
+\item Evolução temporal da planta e medição das saídas
+\begin{equation}
+\mx_{k+1} = \mg(\mx_k, \muu_k)
+\end{equation}
+\begin{equation}
+\my_{k+1} = \mhh(\mx_{k+1}) + \mv_{k+1}
+\end{equation}
+\item Predição
 		\begin{equation}
-			\phi = \frac{\partial g}{\partial x_k} = 1 + \frac{T}{6} \Big( \frac{\partial k_1}{\partial x_k} + 2 \frac{\partial k_2}{\partial x_k}  + 2 \frac{\partial k_3}{\partial x_k}  + \frac{\partial k_4}{\partial x_k}  \Big)
+			\hat{\mphi}_{k} = \hat{\mphi}(\hat{\mx}_k^+, \muu_k)
 		\end{equation}
-		
 		\begin{equation}
-			\frac{\partial k_1}{\partial x_k}  =  \frac{\partial f}{\partial x}
+			\hat{\mx}_{k+1}^- = \hat{\mg}(\hat{\mx}_k^+, \muu_k)
 		\end{equation}
 		\begin{equation}
-			\frac{\partial k_2}{\partial x_k}  =  \frac{\partial f}{\partial x} \Big( 1 + \frac{T}{2} \frac{\partial k_1}{\partial x_k}  \Big)
+			\mP_{k+1}^- = \hat{\mphi}_{k} \mP_{k}^+ \hat{\mphi}_{k}^\msT + \mQ_k
+		\end{equation}
+\item Correção
+\begin{equation}
+			\hat{\mC}_{k+1} = \hat{\mC}(\hat{\mx}_{k+1}^-)
 		\end{equation}
 		\begin{equation}
-			\frac{\partial k_3}{\partial x_k}  =  \frac{\partial f}{\partial x} \Big( 1 + \frac{T}{2} \frac{\partial k_3}{\partial x_k}  \Big)
+			\tilde{\my}_{k+1} = \my_{k+1} - \hat{\mhh}(\hat{\mx}_{k+1}^-)
 		\end{equation}
 		\begin{equation}
-			\frac{\partial k_4}{\partial x_k}  =  \frac{\partial f}{\partial x} \Big( 1 + T \frac{\partial k_3}{\partial x_k} \Big)
-		\end{equation}
-		
-    	\begin{equation}
-    		\therefore \phi = \frac{\partial g}{\partial x_k} = 1 + T \cdot A + \frac{1}{2!}(T \cdot A)^2 + \frac{1}{3!}(T \cdot A)^3 + \frac{1}{4!}(T \cdot A)^4
-    	\end{equation}
-    	
-		\begin{equation}
-			\mtau_k = \hat{\mh}(\hat{\mq}_k^+,\dot{\hat{\mq}}_k^+) + \hat{\mH}(\hat{\mq}_k^+)( \ddot{\mq}_d(t_k) + k_v (\dot{\mq}_d(t_k) - \dot{\hat{\mq}}_k^+) + k_p (\mq_d(t_k) - \hat{\mq}_k^+)  )
-		\end{equation}
-		
-		\begin{equation}
-			\mx_{k+1} = \mg(t_k, \mx_k)\Big|_{\mu = \mu_k}
-		\end{equation}
-		
-		\begin{equation}
-			\mA_{k} = \mA(\hat{\mx}_k^+)
+			\mS_{k+1} = \hat{\mC}_{k+1}  \mP_{k+1}^-  \hat{\mC}_{k+1}^\msT + \mR_{k+1}
 		\end{equation}
 		\begin{equation}
-			\mphi_{k} =  \mone + T \cdot \mA_k + \frac{1}{2!}(T \cdot \mA_k)^2 + \frac{1}{3!}(T \cdot \mA_k)^3 + \frac{1}{4!}(T \cdot \mA_k)^4
-		\end{equation}
-		
-		\begin{equation}
-			\hat{\mx}_{k+1}^- = \hat{\mg}(t_k, \hat{\mx}_k^+)\Big|_{\mu = \mu_k}
-		\end{equation}
-		\begin{equation}
-			\mP_{k+1}^- = \mphi_{k} \mP_{k}^+ \mphi_{k}^\msT + \mQ
-		\end{equation}
-		
-		\begin{equation}
-			\my_{k+1} = \mC \mx_{k+1} + \mv_{k+1}
-		\end{equation}
-		\begin{equation}
-			\mS_{k+1} = \mC \cdot \mP_{k+1}^- \cdot \mC^\msT + \mR
-		\end{equation}
-		\begin{equation}
-			\mK_{k+1} = \left( ( \mS_{k+1}^\msT)^\msI  \cdot  ( \mC \cdot \mP_{k+1}^- ) \right)^\msT
+			\mK_{k+1} = \left( ( \mS_{k+1}^\msT)^\msI  \cdot  ( \hat{\mC}_{k+1}  \mP_{k+1}^- ) \right)^\msT
 		\end{equation}
 
 		\begin{equation}
-			\hat{\mx}_{k+1}^+ =  \hat{\mx}_{k+1}^- + \mK_{k+1}(\my_{k+1} - \mC \hat{\mx}_{k+1}^-)
+			\hat{\mx}_{k+1}^+ =  \hat{\mx}_{k+1}^- + \mK_{k+1} \tilde{\my}_{k+1}
 		\end{equation}
 		\begin{equation}
-			\mP_{k+1}^+ =  (\mone - \mK_{k+1} \mC) \mP_{k+1}^- (\mone - \mK_{k+1} \mC)^\msT
+			\mP_{k+1}^+ =  (\mone - \mK_{k+1} \hat{\mC}_{k+1}) \mP_{k+1}^- (\mone - \mK_{k+1} \hat{\mC}_{k+1})^\msT
 		\end{equation}
+\end{itemize}
+		
+
+		
+		
+		
+		
 		
 		\begin{multicols}{2}
 			\begin{itemize}
