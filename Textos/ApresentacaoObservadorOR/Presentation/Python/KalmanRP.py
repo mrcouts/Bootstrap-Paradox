@@ -6,6 +6,10 @@ from math import *
 import numpy as np
 from scipy.linalg import expm
 from numpy.linalg import solve
+from matplotlib import rc
+
+rc('font', **{'family':'serif','serif':['Palatino']})
+rc('text', usetex=True)
 
 Eye = lambda N:np.matrix( np.eye(N) )
 Zeros = lambda Ni,Nj :np.matrix( np.zeros((Ni,Nj)) )
@@ -137,7 +141,7 @@ R1 = RP(l1=l1, l2=l2, lg1=lg1, lg2=lg2, m1=m1, m2=m2, Jz1=Jz1, Jz2=Jz2, g=g)
 R2 = RP(l1=l1, l2=l2, lg1=lg1, lg2=lg2, m1=m1, m2=m2, Jz1=Jz1, Jz2=Jz2, g=g)
 
 w = 10.0
-theta_d = lambda t:-pi/2 + 0.5*pi*sin(w*t)
+theta_d = lambda t: 1.0*(-pi/2) + 0.5*pi*sin(w*t)
 dtheta_d = lambda t:w*0.5*pi*cos(w*t)
 d2theta_d = lambda t:-w*w*0.5*pi*sin(w*t)
 d_d = lambda t:0.15 + 0.1*sin(w*t)
@@ -148,7 +152,7 @@ qd = lambda t:np.matrix([theta_d(t),d_d(t)]).T
 dqd = lambda t:np.matrix([dtheta_d(t),dd_d(t)]).T
 d2qd = lambda t:np.matrix([d2theta_d(t),d2d_d(t)]).T
 
-T = 5.0e-6
+T = 5e-6
 tf = 0.2*6.28
 n = int(round(tf/T + 1) )
 t_ = [k*T for k in range(n)]
@@ -160,7 +164,7 @@ xe_ = [Zeros(4,1) for t in t_]
 P_ = [Zeros(4,4) for t in t_]
 
 mean = 0
-std1 = 0.5*2.0*pi/20000.0
+std1 = 0.5*2.0*pi/4000.0
 std2 = 0.5*0.001
 num_samples = n
 v1 = np.random.normal(mean, std1, size=num_samples)
@@ -193,7 +197,7 @@ z_[0] = H*x_[0] + v_[0]
 #K =  P_[0]*H.T*( H*P_[0]*H.T + R ).I
 K = solve( (H*P_[0]*H.T + R).T , H*P_[0].T ).T
 xe_[0] = xe_[0] + K*(z_[0] - H*xe_[0])
-P_[0] = (Eye(4) - K*H)*P_[0]*(Eye(4) - K*H).T
+P_[0] = (Eye(4) - K*H)*P_[0]*(Eye(4) - K*H).T + K*R*K.T
 
 R2.doitx(xe_[0])
 
@@ -280,7 +284,7 @@ for k in range(n-1):
   #K =  P_[k+1]*H.T * ( H*P_[k+1]*H.T + R ).I
   K = solve( (H*P_[k+1]*H.T + R).T , H*P_[k+1].T ).T
   xe_[k+1] = xe_[k+1] + K*(z_[k+1] - H*xe_[k+1])
-  P_[k+1] = (Eye(4) - K*H)*P_[k+1]*(Eye(4) - K*H).T
+  P_[k+1] = (Eye(4) - K*H)*P_[k+1]*(Eye(4) - K*H).T + K*R*K.T
   #Atualiza modelo
   R2.doitx(xe_[k+1])
   print(k)
@@ -312,116 +316,126 @@ P11_np = np.array([P_[i][1,1] for i in range(n)])
 P22_np = np.array([P_[i][2,2] for i in range(n)])
 P33_np = np.array([P_[i][3,3] for i in range(n)])
 
+Ptr_np = P00_np + P11_np + P22_np + P33_np
+
 
 fig1 = plt.figure()
 plt.plot(t_np, theta_np, 'r', t_np, thetae_np, 'k--', linewidth=2)
 #plt.xscale('log')
-plt.xlabel('t[s]')
-plt.ylabel('theta[rad]')
+plt.xlabel(r'$t[s]$')
+plt.ylabel(r'$\theta [rad]$')
 #plt.title('s em z')
-plt.savefig('theta.png')
+plt.savefig('theta.pdf')
 
 plt.figure()
 plt.plot(t_np, d_np, 'r', t_np, de_np, 'k--', linewidth=2)
 #plt.xscale('log')
-plt.xlabel('t[s]')
-plt.ylabel('d[m]')
+plt.xlabel(r'$t[s]$')
+plt.ylabel(r'$d[m]$')
 #plt.title('s em z')
-plt.savefig('d.png')
+plt.savefig('d.pdf')
 
 plt.figure()
 plt.plot(t_np, dtheta_np, 'r', t_np, dthetae_np, 'k--', linewidth=2)
 #plt.xscale('log')
-plt.xlabel('t[s]')
-plt.ylabel('dtheta/dt[rad/s]')
+plt.xlabel(r'$t[s]$')
+plt.ylabel(r'$\dot{\theta}[rad/s]$')
 #plt.title('s em z')
-plt.savefig('dtheta.png')
+plt.savefig('dtheta.pdf')
 
 plt.figure()
 plt.plot(t_np, dd_np, 'r', t_np, dde_np, 'k--', linewidth=2)
 #plt.xscale('log')
-plt.xlabel('t[s]')
-plt.ylabel('dd/dt[m/s]')
+plt.xlabel(r'$t[s]$')
+plt.ylabel(r'$\dot{d}[m/s]$')
 #plt.title('s em z')
-plt.savefig('dd.png')
+plt.savefig('dd.pdf')
 
 plt.figure()
 plt.plot(t_np, e_theta_np, 'r', linewidth=2)
 #plt.xscale('log')
-plt.xlabel('t[s]')
-plt.ylabel('e_theta[rad]')
+plt.xlabel(r'$t[s]$')
+plt.ylabel(r'$ (\theta_d - \theta) [rad]  $')
 #plt.title('s em z')
-plt.savefig('e_theta.png')
+plt.savefig('e_theta.pdf')
 
 plt.figure()
 plt.plot(t_np, e_d_np, 'r', linewidth=2)
 #plt.xscale('log')
-plt.xlabel('t[s]')
-plt.ylabel('e_d[m]')
+plt.xlabel(r'$t[s]$')
+plt.ylabel(r'$ (d_d - d) [m]  $')
 #plt.title('s em z')
-plt.savefig('e_d.png')
+plt.savefig('e_d.pdf')
 
 plt.figure()
-plt.plot(t_np, P00_np, 'r', linewidth=2)
+plt.plot(t_np[0:int(n/1000.0)], P00_np[0:int(n/1000.0)], 'r', linewidth=2)
 #plt.xscale('log')
-plt.xlabel('t[s]')
-plt.ylabel('P00')
+plt.xlabel(r'$t[s]$')
+plt.ylabel(r'$P_{\dot{\theta},\dot{\theta}}$')
 #plt.title('s em z')
-plt.savefig('P00.png')
+plt.savefig('P00.pdf')
 
 plt.figure()
-plt.plot(t_np, P11_np, 'r', linewidth=2)
+plt.plot(t_np[0:int(n/1000.0)], P11_np[0:int(n/1000.0)], 'r', linewidth=2)
 #plt.xscale('log')
-plt.xlabel('t[s]')
-plt.ylabel('P11')
+plt.xlabel(r'$t[s]$')
+plt.ylabel(r'$P_{\dot{d},\dot{d}}$')
 #plt.title('s em z')
-plt.savefig('P11.png')
+plt.savefig('P11.pdf')
 
 plt.figure()
-plt.plot(t_np, P22_np, 'r', linewidth=2)
+plt.plot(t_np[0:int(n/1000.0)], P22_np[0:int(n/1000.0)], 'r', linewidth=2)
 #plt.xscale('log')
-plt.xlabel('t[s]')
-plt.ylabel('P22')
+plt.xlabel(r'$t[s]$')
+plt.ylabel(r'$P_{\theta,\theta}$')
 #plt.title('s em z')
-plt.savefig('P22.png')
+plt.savefig('P22.pdf')
 
 plt.figure()
-plt.plot(t_np, P33_np, 'r', linewidth=2)
+plt.plot(t_np[0:int(n/1000.0)], P33_np[0:int(n/1000.0)], 'r', linewidth=2)
 #plt.xscale('log')
-plt.xlabel('t[s]')
-plt.ylabel('P33')
+plt.xlabel(r'$t[s]$')
+plt.ylabel(r'$P_{d,d}$')
 #plt.title('s em z')
-plt.savefig('P33.png')
+plt.savefig('P33.pdf')
 
 plt.figure()
-plt.plot(t_np, e_obs_theta_np, 'r', linewidth=2)
+plt.plot(t_np[0:int(n/1000.0)], Ptr_np[0:int(n/1000.0)], 'r', linewidth=2)
 #plt.xscale('log')
-plt.xlabel('t[s]')
-plt.ylabel('e_obs_theta[rad]')
+plt.xlabel(r'$t[s]$')
+plt.ylabel(r'$tr(\mathbf{P})$')
 #plt.title('s em z')
-plt.savefig('e_obs_theta.png')
+plt.savefig('Ptr.pdf')
 
 plt.figure()
-plt.plot(t_np, e_obs_d_np, 'r', linewidth=2)
+plt.plot(t_np[0:int(n/8.3)], e_obs_theta_np[0:int(n/8.3)], 'r', linewidth=2)
 #plt.xscale('log')
-plt.xlabel('t[s]')
-plt.ylabel('e_obs_d[m]')
+plt.xlabel(r'$t[s]$')
+plt.ylabel(r'$( \theta - \hat{\theta} )[rad]$')
 #plt.title('s em z')
-plt.savefig('e_obs_d.png')
+plt.savefig('e_obs_theta.pdf')
 
 plt.figure()
-plt.plot(t_np, e_obs_dtheta_np, 'r', linewidth=2)
+plt.plot(t_np[0:int(n/8.3)], e_obs_d_np[0:int(n/8.3)], 'r', linewidth=2)
 #plt.xscale('log')
-plt.xlabel('t[s]')
-plt.ylabel('e_obs_dtheta[rad/s]')
+plt.xlabel(r'$t[s]$')
+plt.ylabel(r'$( \theta - \hat{\theta} )[rad]$')
 #plt.title('s em z')
-plt.savefig('e_obs_dtheta.png')
+plt.savefig('e_obs_d.pdf')
 
 plt.figure()
-plt.plot(t_np, e_obs_dd_np, 'r', linewidth=2)
+plt.plot(t_np[0:int(n/500.0)], e_obs_dtheta_np[0:int(n/500.0)], 'r', linewidth=2)
 #plt.xscale('log')
-plt.xlabel('t[s]')
-plt.ylabel('e_obs_dd[m/s]')
+plt.xlabel(r'$t[s]$')
+plt.ylabel(r'$( \dot{\theta} - \dot{\hat{\theta}} )[rad/s]$')
 #plt.title('s em z')
-plt.savefig('e_obs_dd.png')
+plt.savefig('e_obs_dtheta.pdf')
+
+plt.figure()
+plt.plot(t_np[0:int(n/500.0)], e_obs_dd_np[0:int(n/500.0)], 'r', linewidth=2)
+#plt.xscale('log')
+plt.xlabel(r'$t[s]$')
+plt.ylabel(r'$( \dot{d} - \dot{\hat{d}} )[m/s]$')
+#plt.title('s em z')
+plt.savefig('e_obs_dd.pdf')
 
