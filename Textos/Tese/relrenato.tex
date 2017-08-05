@@ -1,0 +1,2437 @@
+\documentclass[a4paper,12pt,brazil]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[latin1]{inputenc}
+\usepackage[brazil]{babel}
+\usepackage{float}
+
+\flushbottom
+
+\setlength\textwidth{160mm}
+\setlength\textheight{247mm}
+\setlength\hoffset{-13.4mm}
+\setlength\voffset{-20mm}
+\setlength\parindent{0.75cm}
+\setlength\parskip{0mm}
+\setlength\topsep{12pt}
+
+\usepackage{paralist}
+\usepackage{subfigure}
+\usepackage{amsmath,amssymb,amsfonts,textcomp}
+\usepackage{rawfonts}
+\usepackage{graphics,psfrag}
+\usepackage{latexsym}
+\usepackage{varioref}
+\usepackage{subfigmat}
+\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage[colorlinks,citecolor=Fuchsia,urlcolor=blue,linkcolor=black]{hyperref}
+%\usepackage[colorlinks=false]{hyperref}
+\usepackage{color}
+\usepackage{array}
+\usepackage{hhline}
+\usepackage{array}
+\usepackage{supertabular}
+\usepackage{setspace}
+\usepackage[pdftex]{graphicx}
+\usepackage{special-char}
+
+\usepackage[sort=def, nopostdot]{glossaries}
+\usepackage{makeidx} 
+\usepackage{listings}
+\usepackage{multicol}
+
+\renewcommand*{\glossarypreamble}{\vspace{-\baselineskip}}  
+
+\newglossary[cng]{conventions}{cns}{cno}{Convenções de notação}
+\newglossary[syg]{symbols}{sys}{syo}{Lista de símbolos}
+
+\renewcommand*{\arraystretch}{1.3}  % sets the line indent in glossaries
+\setlength{\glsdescwidth}{390pt}   
+\setlength\LTleft{0pt}
+
+\renewcommand*{\glossarypreamble}{\vspace{-\baselineskip}}
+
+\makeindex
+\makeglossaries
+
+\graphicspath{{figuras/}{../figuras/}}
+
+
+\begin{document}
+
+\setcounter{MaxMatrixCols}{50}
+
+\onehalfspacing 
+
+\begin{titlepage}
+\begin{center}
+{\phantom{a}}
+\vspace{1.0cm}
+\textsc{\Large{{ André Garnier Coutinho}}}\\
+\vspace{5.0cm}
+ {\huge\bfseries Simulação dinâmica e validação experimental de técnicas de controle para robôs de arquitetura paralela\\}
+\vfill
+\hspace{.50\textwidth}
+\begin{minipage}{.45\textwidth}
+{
+Texto apresentado à Escola Politécnica da Universidade de São Paulo (EPUSP) como requisito parcial para a qualificação no Curso de Doutorado em Engenharia Mecânica.
+%Relatório anual de atividades apresentado à Comissão de Atividade Discente (CADIS) 
+%do Programa de Pós Graduação em Engenharia Mecânica (PPGEM) da Escola Politécnica 
+%da Universidade de São Paulo (EPUSP)
+}\\[25pt]
+{Área de concentração:}\\[2pt]
+{Engenharia Mecânica}\\[25pt]
+{Orientador:}\\[2pt]
+Prof. Dr. Tarcisio A. Hess Coelho
+\end{minipage}
+
+\vfill
+{São Paulo \\ 23 de Setembro de 2016}
+\end{center}
+\end{titlepage}
+
+
+
+
+\vspace{-0.3cm}
+
+\noindent
+{\bf Nome: }{André Garnier Coutinho}\\[8pt]
+{\bf NUSP: }{6846085}\\[8pt]
+{\bf Curso: }{Doutorado Direto}\\[8pt]
+{\bf Área de concentração: }{Engenharia Mecânica de Projeto e Fabricação (3151)}\\[8pt]
+{\bf Orientador: }{Professor Doutor Tarcisio Antonio Hess Coelho}\\[8pt]
+{\bf Ano de ingresso no PPGEM: }{2014}\\[8pt]
+{\bf Bolsista: }{Sim}\\[8pt]
+{\bf Agência de fomento: }{CNPq}\\[8pt]
+{\bf Edital/Chamada: }{Cota Institucional (Demanda Social)}\\[8pt]
+{\bf Prazo Máximo para realização do Exame de Qualificação: }{17/10/2016}\\[8pt]
+
+\vspace{2cm}
+\noindent
+
+% ---
+% Sumário
+% ---
+\newpage
+\pdfbookmark[0]{\contentsname}{toc}
+\tableofcontents
+\cleardoublepage
+% ---
+
+%RESUMO--------------------------------------------------------   
+\newpage
+\section*{Resumo}
+
+Para realizar o projeto de um sistema de controle, em geral, \'e necess\'ario primeiramente de um modelo da planta a ser controlada. O grau de fidelidade do modelo da planta, dentro das condi\c{c}\~oes de opera\c{c}\~ao desejadas do sistema, influi diretamente no desempenho do sistema em malha fechada que o projeto do controlador pode oferecer. Quanto mais rico for o modelo, mais f\'acil de atingir requisitos de performance mais elevados (menor tempo de resposta e menor sobressinal, por exemplo) garantindo a estabilidade do sistema.
+
+Utilizando os m\'etodos tradicionais de modelagem de Sistemas Mec\^anicos Multicorpos, \'e dif\'icil e trabalhoso de se obter modelos de sistemas complexos, como mecanismos paralelos. Para contornar esse problema, \'e comum desprezar alguns efeitos de acoplamentos inerciais, simplificando o processo de modelagem. Por\'em, essa estrat\'egia gera modelos mais pobres, o que ir\'a limitar a perfomance que o sistema poder\'a atingir quando for feito o projeto do sistema de controle.
+
+A solu\c{c}\~ao proposta para ser poss\'ivel aumentar o desempenho, garantindo a robustez, de um sistema de controle de mecanismos paralelos \'e a utiliza\c{c}\~ao dos novos m\'etodos de modelagem din\^amica desenvolvidos pelo grupo de pesquisa do Prof. Doutor Tarcisio Antonio Hess Coelho, os quais s\~ao adequados para incluir todos os efeitos da din\^amica de corpos r\'igidos, independentemente da complexidade do sistema.
+
+O presente projeto visa desenvolver um algoritmo de modelagem que inclua todos os efeitos da din\^amica de corpos r\'igidos para realizar a modelagem din\^amica de mecanismos paralelos (baseado na metodologia de Orsino), desenvolver uma metodologia de projeto de controle robusto para mecanismos paralelos tradicionais e mecanismos com atua\c{c}\~ao redundante, e realizar simulações e valida\c{c}\~oes experimentais das leis de controle sintetizadas pela metodologia proposta.
+
+%INTRODUÇÃO----------------------------------------------------
+\newpage
+\section{Introdução}\label{intro}
+
+	Os mecanismos de arquitetura paralela são amplamente utilizados em simuladores de voo, simuladores automobilisticos, e tarefas de {\em pick-and-place}. Além disso, também são empregados em sistemas de posicionamento, sistemas de medição, máquinas de usinagem, entre outras tarefas. 
+
+Há uma série de vantagens em utilizar mecanismos paralelos no lugar dos tradicionais seriais. Dentre elas podemos citar sua grande capacidade de carga, alta precisão de posicionamento, alta rigidez estrutural, e uma redução significativa na inércia \cite{Cheng, Khalil, Merlet2002, Tsai}. Outra característica marcante desse tipo de arquitetura são as altas velocidades e acelerações atingidas, as quais superam muito os valores máximos atingidos utilizando arquitetura serial. Grande parte dessas vantagens se devem à possibilidade de instalação de todos os motores na base imóvel do mecanismo. Como desvantagens podemos citar o menor espaço de trabalho e modelo dinâmico muito mais complexo e de difícil obtenção \cite{Rynaldo, Merlet2002}.
+%As maiores vantagens em utilizar mecanismos paralelos no lugar dos tradicionais mecanismos seriais são sua grande capacidade de carga, alta precisão de posicionamento do efetuador, alta rigidez estrutural, e uma redução significativa na inércia \cite{Merlet2002, Khalil, Tsai, Cheng}. Outra característica marcante desse tipo de arquitetura são as altas velocidades e acelerações atingidas, as quais superam muito os valores máximos atingidos utilizando arquitetura serial. Grande parte dessas vantagens se devem à possibilidade de ter todos os motores localizados na base. Como desvantagens podemos citar o menor espaço de trabalho e modelo dinâmico muito mais complexo e difícil de se obter \cite{Merlet2002, Rynaldo}.
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.18]{figures/theadeptquat.jpg}  
+	\caption{Robô industrial Adept Quattro}
+	\label{fig:Mecanismo}
+\end{figure}
+
+Levando-se em conta esta dificuldade de obtenção e a complexidade inerente do modelo dinâmico, o controle de mecanismos de arquitetura paralela é uma tarefa desafiadora. A utilização de modelos dinâmicos simplificados limita o desempenho do projeto de controladores baseados no modelo. Porém, mesmo na hipótese do modelo dinâmico completo estar disponível, o emprego de técnicas de controle não linear pode acarretar um custo  computacional muito elevado \cite{Craig, Slotini, Zubizarreta}. Este paradigma, aliado à falta de estratégias de controle apropriadas para esse tipo de mecanismos, resulta na exploração insatisfatória dos potenciais promissores de tais máquinas, como resposta dinâmica rápida e alta precisão \cite{Abdellatif}. Além disso, observa-se na literatura a escassez de trabalhos publicados com comprovação experimental de técnicas de controle aplicáveis a mecanismos paralelos \cite{Rynaldo}.
+	
+    Uma alternativa para a superação desta dificuldade seria a combinação de técnicas de controle não linear robusto (por exemplo, controle por modos deslizantes \cite{Slotini, Utkin}) com modelos dinâmicos completos de mecanismos paralelos, desenvolvidos a partir de novas metodologias de modelagem de sistemas multicorpos \cite{22orsino, Orsino2013, 23orsino, 21orsino}. Com esta estratégia, torna-se possível sintetizar leis de controle de alto desempenho e custo computacional mais adequado, viabilizando a exploração do potencial promissor dos mecanismos paralelos.
+
+
+%OBJETIVOS E JUSTIFICATIVAS--------------------------------------------
+\newpage
+\section{Objetivos}\label{objetivos}
+
+
+Os principais objetivos do projeto s\~ao:
+\begin{itemize}
+\item Desenvolvimento de um algoritmo gerador de modelos dinâmicos completos de mecanismos paralelos, de forma implícita. Pretende-se utilizar a metodologia proposta por Orsino et. al. \cite{23orsino} de acoplamento de subsistemas multicorpos.
+
+
+\item Elabora\c{c}\~ao de uma metodologia de projeto de controlador n\~ao linear robusto, de alto desempenho, baseado na t\'ecnica de controle por modos deslizantes \cite{Slotini, Utkin}, aplicável a  mecanismos de arquitetura paralela. Para tanto, serão consideradas as incertezas param\'etricas e a possibilidade de atua\c{c}\~ao redundante \cite{Cheng},  além da síntese de leis de controle com custo computacional consideralvemente menor do que as tradicionais, que empregam o Controle por Torque Computado \cite{Craig, Zubizarreta}.
+
+
+\item Realizar a modelagem cinemática e dinâmica dos mecanismos 5R \cite{22orsino} e 2\underline{R}SU+\underline{P}PaP \cite{Rynaldo, Kumazawa}, utilizando o algoritmo de modelagem desenvolvido.
+\item Realizar o projeto de um controlador de trajetória para os mecanismos escolhidos, utilizando a metodologia de projeto de controle proposta.
+\item Realizar simula\c{c}\~oes dinâmicas das leis de controle sintetizadas.
+\item Realizar a validação experimental dos controladores projetados nos protótipos dos mecanismos escolhidos, sendo que o protótipo do mecanimos 2\underline{R}SU+\underline{P}PaP se encontra no laboratório de mecanismos da EPUSP e o protótipo do pentágono articulado (5R) está sendo desenvolvido por outros alunos orientados pelo Prof. Dr. Tarcisio A. H. Coelho.
+\end{itemize}
+
+É importante ressaltar que os 5 primeiros objetivos citados já foram parcialmente alcançados e que a arquitetura paralela 2\underline{R}SU+\underline{P}PaP foi desenvolvida pelo grupo de pesquisa do Prof. Dr. Tarcio Antonio Hess Coelho, havendo ainda poucos estudos na literatura sobre ela. Sendo assim, pode-se afirmar que simulações dinâmicas e validações experimentais de leis de controle não linear robusto neste mecanismo tem caráter inédito.
+
+\newpage
+
+%METODOLOGIA--------------------------------------------------------------------
+
+\section{Revisão da literatura}\label{revision}
+
+Esta seção é dedicada à revisão da literatura de técnicas de controle de posição aplicadas a mecanismos paralelos. \\
+
+Existem diversas técnicas propostas pela literatura para realizar o controle de mecanismos paralelos. Dentre elas, podemos destacar:
+
+\begin{itemize}
+\item Controle PID
+\item Controle por Torque Computado (CTC)
+\item Controle por Torque Computado com pré-alimentação (CTCp)
+\item Controle por Torque Computado Estendido (CTCe)
+\item Controle Preditivo Baseado em Modelo (CPM)
+\item Controle Adaptativo
+\item Controle por Modos Deslizantes (CMD)
+\end{itemize}
+
+A técnica mais simples consiste na utilização de malhas do tipo PID, controlando cada junta ativa de maneira independente, considerando a dinâmica do mecanismo como distúrbios de controle. Essa técnica é caracterizada por sua facilidade de projeto e implementação, tanto em hardware quanto em software, além de exibir um desempenho satisfatório para movimento lento. Porém, essa técnica não se mostra adequada para a realização de trajetórias em altas velocidades e/ou acelerações \cite{Honegger, Zubizarreta}.
+
+Uma das técnicas de controle mais exploradas na literatura é o Controle por Torque Computado (CTC). Basicamente, é uma técnica de controle não linear, mais conhecida como linearização pela realimentação, aplicada a sistemas mecânicos. A técnica consiste na utilização de duas malhas de controle, uma malha que realiza o desacoplamento do sistema e a compensação das não linearidades, e outra malha composta por PIDs independentes \cite{Craig}. Como resultado, alcança-se um desempenho  superior  àquele obtido utilizando simples PIDs, permitindo inclusive a realização de trajetórias precisas em altas velocidades e/ou acelerações. No entanto, seu desempenho poderá ser limitado pela qualidade/fidelidade do modelo dinâmico utilizado para a compensação das não linearidades \cite{SlotiniSMC}. Sua implementação também é mais complexa, visto que é necessário calcular o modelo dinâmico inverso em tempo real, o que também aumenta consideravelmente seu custo computacional. Além disso, a técnica é sensível a incertezas estruturadas (paramétricas) e não estruturadas (dinâmicas não modeladas). Como exemplos de utilização do CTC, podem ser citados os trabalhos de Cheng at al. \cite{Cheng}, Li e Wu \cite{Li}, Li e Fu \cite{Li2}, Shang at al. \cite{Shang} e Yen at al. \cite{Yen}.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.385]{figures/CTC.jpg}  
+	\caption{Malha de CTC (Adaptado de \cite{Craig})}
+	\label{fig:CTC}
+\end{figure}
+
+Visando a redução do custo computacional associado ao cálculo do modelo dinâmico em tempo real, alguns autores propõe a utilização do CTC com pré-alimentação (CTCp) \cite{Khalil, Siciliano, Spong}. Essa técnica é similar ao CTC, com a diferença de que a compensação das não linearidades é feita por pré-alimentação e não mais por realimentação.  Consequentemente, realiza-se o cálculo do modelo dinâmico previamente, diminuindo o custo computacional.
+
+De fato, Codourey \cite{Codourey} obteve uma redução de 600\% no erro de posição utilizando o CTCp em um ensaio experimental com o robô DELTA, ao substituir os PDs originais. Na simulação do controle de um mecanismo 6-UPS, Wang et al. \cite{Wang} utilizaram em cascata controladores lineares de posição, velocidade e corrente em cada junta ativa, além de  uma compensação dinâmica por pré-alimentação dos distúrbios de torque.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.385]{figures/CTCp.jpg}  
+	\caption{Malha de CTCp (Adaptado de \cite{Craig})}
+	\label{fig:CTCp}
+\end{figure}
+
+Com o intuito de melhorar a robustez do CTC associada a incertezas paramétricas, Zubizarreta et al. \cite{Zubizarreta, Zubizarreta2, Zubizarreta3, Zubizarreta4} propuseram  o  Controle por Torque Computado Estendido (CTCe), que utiliza informação redundante obtida pelo sensoriamento de juntas passivas. Em \cite{Zubizarreta}, os controladores propostos demonstraram maior robustez, principalmente em relação a parâmetros cinemáticos, durante as simulações realizadas com o mecanismo 3-RRR.
+
+Outra técnica alternativa, aplicada a mecanismos paralelos, é o controle preditivo baseado em modelo (CPM). Para a sua implementação, o CPM necessita minimizar uma função objetivo, dependente das saidas e do esforço de controle, ambos calculados em tempo futuro \cite{Camacho}. Assim, dependendo do modelo utilizado, o processo de otimização pode agregar um custo computacional que inviabilize o controle, comprometendo a motivação inicial de aprimorar o desempenho do sistema. Como exemplos de utilização do CPM, podem ser citados os trabalhos de Vivas et al. \cite{Vivas} e   Duchaine et al. \cite{Duchaine}.
+
+Com o propósito de controlar o mecanismo H4, Vivas et al. \cite{Vivas} utilizaram  uma malha de CPM linear e outra malha para compensação das não linearidades. Após a comparação do desempenho do controlador proposto com  o CTC, os autores observaram maior robustez do CPM a incertezas paramétricas. 
+
+Duchaine et al. \cite{Duchaine}, por sua vez, propuseram um controlador preditivo baseado no modelo não linear de um mecanismo paralelo de 6 graus de liberdade. Visando a obtenção de uma solução analítica para o problema de otimização, foram adotadas diversas hipóteses simplificadoras no modelo dinâmico do mecanismo. Com o intuito de comparar o controlador proposto com um PID, foram feitos alguns experimentos, onde se observou  que o CPM apresentou erro nulo de posição no final da trajetória, enquanto que o PID demorou um tempo considerável para alcançar erro nulo. Foi verificada a equivalência entre o custo computacional dos 2 controladores. 
+
+O controle adaptativo, também encontrado na literatura, caracteriza-se pela utilização de leis de adaptação para realizar a estimação em tempo real de parâmetros do sistema ou de termos de compensação dinâmica. Sendo assim, as técnicas de controle adaptativo possibilitam que o sistema se torne praticamente insensível a incertezas paramétricas. Para o caso em que se realiza a estimação em tempo real dos parâmetros do sistema, pode-se dizer que o custo computacional é superior ao do CTC, visto que é necessário integrar as leis de adaptação em tempo real. Além disso, é necessário obter o modelo dinâmico linear em relação aos parâmetros do sistema \cite{SlotiniA}, o que pode ser uma tarefa difícil, inviabilizando, em alguns casos, a aplicação da técnica. Em \cite{Codourey2} é proposto um algoritmo de obtenção do modelo dinâmico simplificado de mecanismos paralelos nesse formato.
+
+Em \cite{SlotiniA} é proposta uma lei de controle que combina o controle adaptativo com a técnica de controle robusto conhecida por Controle por Modos Deslizantes. Chemori et al. \cite{Chemori} utilizaram essa técnica  com o intuito de diminuir os erros de posição em regime permanente no controle de um mecanismo paralelo do tipo PAR2. Por outro lado, Honegger at al. \cite{Honegger} empregaram o controle adaptativo com estimação em tempo real dos parâmetros do sistemas, realizando a compensação dinâmica por pré-alimentação, em um mecanismo  paralelo do tipo Hexaglide.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.385]{figures/CA.jpg}  
+	\caption{Malha de controle adaptativo (Adaptado de \cite{Craig})}
+	\label{fig:CTCp}
+\end{figure}
+
+Outra técnica promissora para aplicação em mecanismos paralelos é o Controle por Modos Deslizantes (CMD). A técnica consiste no projeto de leis de controle que levem o sistema para superfícies de escorregamento no espaço de fase, de modo que assim que o sistema atinje e é mantido nas superfícies de escorregamento, o erro de controle decai exponencialmente para zero \cite{Slotini}. Para garantir que o sistema atinja em tempo finito e se mantenha nas superfícies de escorregamento, são utilizados termos descontínuos na lei de controle, o que pode causar problemas de oscilações bruscas em alta frequência nos esforços de controle ({\em chattering}). Em \cite{Guldner}  e  \cite{Utkin2} são propostas técnicas para evitar esse tipo de problema. A grande vantagem da utilização deste tipo de lei de controle é sua grande robustez a incertezas estruturadas e não estruturadas, sendo possível realizar o projeto do controlador de modo a suprimir um dado nível de incertezas paramétricas. Em \cite{SlotiniSMC} é proposta uma metodologia de projeto de Controle por Modos Deslizantes para manipuladores robóticos seriais.
+
+Na literatura são encontradas diversos artigos utilizando a técnica de CMD aliada à lógica {\em fuzzy} e/ou redes neurais para o controle de manipuladores robóticos \cite{Begon, Ertugrul, Hu, Sadati}. Begon et al. \cite{Begon} propuseram uma lei de controle baseada na teoria de CMD e na utilização de lógica {\em fuzzy} para controlar de maneira independente os atuadores de um mecanismo paralelo do tipo Hexa. A técnica proposta teve o intuito de obter a robustez característica do CDM sem necessitar de uma lei de controle com termos descontínuos, evitando o {\em chattering}.
+
+Em \cite{Zeinali}, Zeinali et al. desenvolveram uma lei de controle  baseada nas teorias de CMD e controle adaptativo. O controlador desenvolvido realiza a compensação dinâmica em tempo real do erro de modelagem através de uma lei de adaptação. Além disso, substitui o termo descontínuo da lei de controle por um termo do tipo PID, com o intuito de evitar o {\em chattering}. A estabilidade e robustez da lei de controle proposta foram provadas utilizando a teoria de estabilidade de Lyapunov \cite{Slotini}. A robustez da lei de controle foi verificada através de simulações do controlador proposto aplicado a um mecanismo serial do tipo \underline{R}\underline{R}, nas quais o controlador conseguiu manter erros de posição muito pequenos em regime permanente, mesmo sendo baseado em um modelo muito pobre e na presença de distúrbios de torque. A técnica apresentada se mostra promissora, porém, como no artigo foi feita apenas a simulação da lei de controle em um mecanismo serial bidimensional, ainda não se pode afirmar nada sobre seu desempenho em mecanismos paralelos tridimensionais.
+
+\newpage
+
+%METODOLOGIA--------------------------------------------------------------------
+
+\section{Metodologia do projeto}\label{method}
+
+O estágio atual de desenvolvimento do presente projeto ocorre basicamente em três áreas:
+aplicação do algoritmo de modelagem e simulação para os mecanismos 5R \cite{22orsino} e 2\underline{R}SU + \underline{P}PaP \cite{Kumazawa}, o projeto e simulação de controladores não lineares robustos de alto desempenho baseado no modelo dinâmico para os mecanismos citados, e a validação experimental das leis de controle sintetizadas.
+
+Os trabalhos no âmbito de modelagem e simulação estão sendo desenvolvidos a partir da aplicação do algoritmo de modelagem cinemática e dinâmica de mecanismos paralelos desenvolvido, baseado na utilização dos parâmetros de Denavit-Hartenberg \cite{Craig, Denavit, Lipkin} e no método Orsino de acoplamento de subsistemas \cite{23orsino}. Toda modelagem será feita em C++, utilizando uma biblioteca otimizada de cálculo matricial (Armadillo).
+As simulações da dinâmica direta do mecanismo serão feitas utilizando o método Runge-Kutta de 8ª ordem \cite{RK} para solução de sistemas de EDOs, de modo a garantir estabilidade numérica do método, mesmo utilizando leis de controle quase descontínuas.
+
+Os trabalhos na área de projeto de controle serão feitos utilizando a metodologia desenvolvida de projeto de controladores robustos multivariáveis para mecanismos paralelos, baseada no modelo dinâmico do mecanismo a ser controlado e na técnica de controle por modos deslizantes \cite{Slotini, Utkin}.
+
+Os trabalhos no âmbito da validação experimental das leis de controle sintetizadas serão realizados no protótipo do mecanismo 2\underline{R}SU + \underline{P}PaP que encontra-se no laboratório de mecanismos e no protótico do mecanismo 5R que está sendo construído por outros alunos do grupo de pesquisa. A bancada experimental do mecanismo 2\underline{R}SU + \underline{P}PaP já está funcional e já estão sendo realizados ensaios de leis de controle de trajetória baseadas apenas no modelo cinemático do mecanismo. Para a realização da validação experimental nesta bancada, será realizada a identificação dos parâmetros do sistema e suas respectivas incertezas, projeto do controlador baseado nos parâmetros e incertezas identificadas, implementação das leis de controle, e aquisição de dados em ambiente Labview. \\
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[scale=0.2]{figures/Mecanismo.jpeg}  
+	\caption{Mecanismo 2\underline{R}SU + \underline{P}PaP}
+	\label{fig:Mecanismo2}
+\end{figure}
+
+%RESULTADOS--------------------------------------------------------------------
+\newpage
+\section{Síntese de Resultados}\label{results}
+
+Esta se\c{c}\~ao apresenta uma s\'intese dos principais resultados te\'oricos obtidos at\'e o momento.
+
+\input{symbols}
+
+%---ALGORITMO PARA MODELAGEM DE PLATAFORMAS ROBÓTICAS------------------------------------------------------------------------------------------
+\subsection{Cinemática de corpos rígidos}\label{S05-0}
+
+Esta subseção tem o intuito de apresentar as equações básicos da cinemática de corpos rígidos,  as equações de Poisson para velocidades, acelerações e sobre-acelerações.
+
+\begin{itemize}
+\item[A)] Equação de Poisson para velocidades
+
+Sejam $\ttp$ e $\tto$ dois pontos pertencentes a um corpo rígido $\llB$. Podemos relacionar a velocidade do ponto $\ttp$ e a velocidade do ponto $\tto$ através da equação de Poisson para velocidades:
+\begin{equation}\label{eq:Poisson_v}
+\vv_\ttp = \vv_\tto + \vomega_\llB \wedge (\ttp - \tto)
+\end{equation}
+
+\item[B)] Equação de Poisson para acelerações
+
+
+Derivando \eqref{eq:Poisson_v} no tempo, temos:
+\begin{equation}\label{eq:Poisson_a_aux}
+\va_\ttp = \va_\tto + \dot{\vomega}_\llB \wedge (\ttp - \tto) + \vomega_\llB \wedge (\vv_\ttp - \vv_\tto)
+\end{equation}
+
+Substituindo \eqref{eq:Poisson_v} em \eqref{eq:Poisson_a_aux}, obtemos a equação de Poisson para acelerações:
+\begin{equation}\label{eq:Poisson_a}
+\va_\ttp = \va_\tto + \dot{\vomega}_\llB \wedge (\ttp - \tto) + \vomega_\llB \wedge \vomega_\llB \wedge (\ttp - \tto)
+\end{equation}
+
+\item[C)] Equação de Poisson para sobre-acelerações
+
+
+Derivando \eqref{eq:Poisson_a} no tempo, temos:
+\begin{equation}\label{eq:Poisson_da_aux}
+\dot{\va}_\ttp = \dot{\va}_\tto + \ddot{\vomega}_\llB \wedge (\ttp - \tto) + \dot{\vomega}_\llB \wedge (\vv_\ttp - \vv_\tto) + \dot{\vomega}_\llB \wedge \vomega_\llB \wedge (\ttp - \tto) + \vomega_\llB \wedge \dot{\vomega}_\llB \wedge (\ttp - \tto) + \vomega_\llB \wedge \vomega_\llB \wedge (\vv_\ttp - \vv_\tto)
+\end{equation}
+
+Substituindo \eqref{eq:Poisson_v} em \eqref{eq:Poisson_da_aux}, obtemos a equação de Poisson para sobre-acelerações:
+\begin{equation}\label{eq:Poisson_da_aux}
+\dot{\va}_\ttp = \dot{\va}_\tto + \ddot{\vomega}_\llB \wedge (\ttp - \tto)  + 2\dot{\vomega}_\llB \wedge \vomega_\llB \wedge (\ttp - \tto) + \vomega_\llB \wedge \dot{\vomega}_\llB \wedge (\ttp - \tto) + \vomega_\llB \wedge \vomega_\llB \wedge  \vomega_\llB \wedge (\ttp - \tto)
+\end{equation}
+
+\end{itemize}
+
+\subsection{Composição de movimentos}\label{S05-01}
+
+Esta subseção tem o intuito de apresentar um dos princípios básicos da cinemática de corpos rígidos, a composição de movimentos.
+
+\begin{itemize}
+
+\item[A)] Composição de velocidades lineares
+
+Sejam $\llN$ um referencial inercial, $\ttN$ um sistema de coordenadas fixo a $\llN$, definido pela origem $\tto_\ttN$ e pelos versores $\vi_\ttN$, $\vj_\ttN$ e $\vk_\ttN$. Sejam também $\llB$ um corpo rígido, $\ttB$ um sistema de coordenadas fixo a $\llB$, definido pela origem $\tto_\ttB$ e pelos versores $\vi_\ttB$, $\vj_\ttB$ e $\vk_\ttB$, e $\ttp$ um ponto no espaço. Definindo os vetores:
+\begin{equation}
+\vr_\ttB = (\tto_\ttB - \tto_\ttN)
+\end{equation}
+\begin{equation}
+\vrho = (\ttp - \tto_\ttB)
+\end{equation}
+\begin{equation}
+\vr_\ttP = (\ttp - \tto_\ttN)
+\end{equation}
+
+Desta maneira, tem-se que:
+\begin{equation} \label{eq:r_rho}
+\vr_\ttp = \vr_{\tto_\ttB} + \vrho
+\end{equation}
+
+Derivando \eqref{eq:r_rho} no tempo, temos:
+\begin{equation} \label{eq:dr_rho_aux}
+\vv_\ttp = \vv_{\tto_\ttB} + \dot{\vrho}
+\end{equation}
+
+Admitindo que o vetor $\vrho$ pode ser escrito da seguinte maneira:
+\begin{equation}
+\vrho = (\ttp - \tto_\ttB) = x \vi_\ttB + y \vj_\ttB + z \vk_\ttB
+\end{equation}
+
+Temos:
+\begin{equation}
+\dot{\vrho} =  x \dot{\vi}_\ttB + y \dot{\vj}_\ttB + z \dot{\vk}_\ttB + \dot{x} \vi_\ttB +  \dot{y} \vj_\ttB + \dot{z} \vk_\ttB 
+\end{equation}
+Ou seja:
+\begin{equation} \label{eq:drho}
+\dot{\vrho} =  \vomega_\llB \wedge (\ttp - \tto_\ttB) + \dot{x} \vi_\ttB +  \dot{y} \vj_\ttB + \dot{z} \vk_\ttB
+\end{equation}
+
+Substituindo \eqref{eq:drho} em \eqref{eq:dr_rho_aux}, temos:
+\begin{equation} \label{eq:dr_rho}
+\vv_\ttp = \vv_{\tto_\ttB}  + \vomega_\llB \wedge (\ttp - \tto_\ttB) + \dot{x} \vi_\ttB + \dot{y} \vj_\ttB + \dot{z} \vk_\ttB
+\end{equation}
+
+Repare que $\vv_\ttp$ pode ser dividido na soma de duas parcelas, a parcela $\vv_{\tto_\ttB}  + \vomega_\llB \wedge (\ttp - \tto_\ttB)$, que seria a velocidade de $\ttp$ se $\ttp$ estivesse fixo a $\llB$ (movimento de arrastamento), e a parcela $\dot{x} \vi_\ttB + \dot{y} \vj_\ttB + \dot{z} \vk_\ttB$, que seria a velocidade de $\ttp$ se $\llB$ estivesse parado (movimento relativo). Sendo assim, deduzimos princípio da composição de movimento para velocidades lineares:
+\begin{equation}
+\vv = \vv_{arr} + \vv_{rel}
+\end{equation}
+
+\item[B)] Composição de acelerações lineares
+
+Derivando \eqref{eq:dr_rho} no tempo, temos:
+\begin{equation} \label{eq:d2r_rho_aux}
+\va_\ttp = \va_{\tto_\ttB}  + \dot{\vomega}_\llB \wedge (\ttp - \tto_\ttB) + \vomega_\llB \wedge \dot{\vrho} + \vomega_\llB \wedge(\dot{x} \vi_\ttB + \dot{y} \vj_\ttB + \dot{z} \vk_\ttB) + \ddot{x} \vi_\ttB + \ddot{y} \vj_\ttB + \ddot{z} \vk_\ttB
+\end{equation}
+
+Substituindo \eqref{eq:drho} em \eqref{eq:d2r_rho_aux}, temos:
+\begin{equation} \label{eq:d2r_rho}
+\va_\ttp = \va_{\tto_\ttB}  + \dot{\vomega}_\llB \wedge (\ttp - \tto_\ttB) + \vomega_\llB \wedge \vomega_\llB \wedge (\ttp - \tto_\ttB)  + 2 \vomega_\llB \wedge(\dot{x} \vi_\ttB + \dot{y} \vj_\ttB + \dot{z} \vk_\ttB) + \ddot{x} \vi_\ttB + \ddot{y} \vj_\ttB + \ddot{z} \vk_\ttB
+\end{equation}
+
+Repare que $\va_\ttp$ pode ser dividido na soma de três parcelas, a parcela $\va_{\tto_\ttB}  + \dot{\vomega}_\llB \wedge (\ttp - \tto_\ttB) + \vomega_\llB \wedge \vomega_\llB \wedge (\ttp - \tto_\ttB)$, que seria a aceleração de $\ttp$ se $\ttp$ estivesse fixo a $\llB$ (movimento de arrastamento), a parcela $\ddot{x} \vi_\ttB + \ddot{y} \vj_\ttB + \ddot{z} \vk_\ttB$, que seria a aceleração de $\ttp$ se $\llB$ estivesse parado (movimento relativo), e a parcela complementar $2 \vomega_\llB \wedge(\dot{x} \vi_\ttB + \dot{y} \vj_\ttB + \dot{z} \vk_\ttB)$ . Sendo assim, deduzimos princípio da composição de movimento para acelerações lineares:
+\begin{equation}
+\va = \va_{arr} + \va_{rel} + 2\vomega_{arr} \wedge \vv_{rel}
+\end{equation}
+
+\item[B)] Composição de sobre-acelerações lineares
+
+Derivando \eqref{eq:d2r_rho} no tempo, temos:
+\begin{multline} \label{eq:d3r_rho_aux}
+\\
+\dot{\va}_\ttp = 
+\dot{\va}_{\tto_\ttB}  + 
+\ddot{\vomega}_\llB \wedge (\ttp - \tto_\ttB) + \dot{\vomega}_\llB \wedge \dot{\vrho} + 
+\dot{\vomega}_\llB \wedge \vomega_\llB \wedge (\ttp - \tto_\ttB) + 
+\vomega_\llB \wedge \dot{\vomega}_\llB \wedge (\ttp - \tto_\ttB) + \\
+\vomega_\llB \wedge \vomega_\llB \wedge \dot{\vrho}  + 
+2 \dot{\vomega}_\llB \wedge(\dot{x} \vi_\ttB + \dot{y} \vj_\ttB + \dot{z} \vk_\ttB) + 
+ 2 \vomega_\llB \wedge \vomega_\llB \wedge (\dot{x} \vi_\ttB + \dot{y} \vj_\ttB + \dot{z} \vk_\ttB) + \\
+3 \vomega_\llB \wedge(\ddot{x} \vi_\ttB + \ddot{y} \vj_\ttB + \ddot{z} \vk_\ttB) + 
+\dddot{x} \vi_\ttB + \dddot{y} \vj_\ttB + \dddot{z} \vk_\ttB \\
+\end{multline}
+
+
+Substituindo \eqref{eq:drho} em \eqref{eq:d3r_rho_aux}, temos:
+\begin{multline} \label{eq:d3r_rho}
+\\
+\dot{\va}_\ttp = 
+\dot{\va}_{\tto_\ttB}  + 
+\ddot{\vomega}_\llB \wedge (\ttp - \tto_\ttB) + 
+2\dot{\vomega}_\llB \wedge \vomega_\llB \wedge (\ttp - \tto_\ttB)  + 
+\vomega_\llB \wedge \dot{\vomega}_\llB \wedge (\ttp - \tto_\ttB) + 
+\vomega_\llB \wedge \vomega_\llB \wedge \vomega_\llB \wedge (\ttp - \tto_\ttB)  + \\
+3\dot{\vomega}_\llB \wedge (\dot{x} \vi_\ttB +  \dot{y} \vj_\ttB + \dot{z} \vk_\ttB) + 
+3\vomega_\llB \wedge \vomega_\llB \wedge (\dot{x} \vi_\ttB +  \dot{y} \vj_\ttB + \dot{z} \vk_\ttB)  + 
+3 \vomega_\llB \wedge(\ddot{x} \vi_\ttB + \ddot{y} \vj_\ttB + \ddot{z} \vk_\ttB) + \\
+\dddot{x} \vi_\ttB + \dddot{y} \vj_\ttB + \dddot{z} \vk_\ttB \\
+\end{multline}
+
+Repare que $\dot{\va}_\ttp$ pode ser dividido na soma de três parcelas, a parcela $\dot{\va}_{\tto_\ttB}  + 
+\ddot{\vomega}_\llB \wedge (\ttp - \tto_\ttB) + 
+2\dot{\vomega}_\llB \wedge \vomega_\llB \wedge (\ttp - \tto_\ttB)  + 
+\vomega_\llB \wedge \dot{\vomega}_\llB \wedge (\ttp - \tto_\ttB) $, que seria a sobre-aceleração de $\ttp$ se $\ttp$ estivesse fixo a $\llB$ (movimento de arrastamento), a parcela $\dddot{x} \vi_\ttB + \dddot{y} \vj_\ttB + \dddot{z} \vk_\ttB$, que seria a sobre-aceleração de $\ttp$ se $\llB$ estivesse parado (movimento relativo), e a parcela complementar $3\dot{\vomega}_\llB \wedge (\dot{x} \vi_\ttB +  \dot{y} \vj_\ttB + \dot{z} \vk_\ttB) + 
+3\vomega_\llB \wedge \vomega_\llB \wedge (\dot{x} \vi_\ttB +  \dot{y} \vj_\ttB + \dot{z} \vk_\ttB)  + 
+3 \vomega_\llB \wedge(\ddot{x} \vi_\ttB + \ddot{y} \vj_\ttB + \ddot{z} \vk_\ttB)$ . Sendo assim, deduzimos princípio da composição de movimento para sobre-acelerações lineares:
+\begin{equation}
+\dot{\va} = \dot{\va}_{arr} + \dot{\va}_{rel} + 3(\dot{\vomega}_{arr} \wedge \vv_{rel} + 
+\vomega_{arr} \wedge \vomega_{arr} \wedge \vv_{rel}  + 
+ \vomega_{arr} \wedge \va_{rel} )
+\end{equation}
+
+\end{itemize}
+
+$$ \vv_\ttp^\llA = \vv_{\ttp_{|\llB}}^\llA + \vv_\ttp^\llB $$
+
+$$ \va_\ttp^\llA = \va_{\ttp_{|\llB}}^\llA + \va_\ttp^\llB + 2 \vomega_\llB^\llA \wedge \vv_\ttp^\llB $$
+
+
+
+\subsection{Algoritmo para modelagem de mecanismos seriais}\label{S05-1}
+
+Esta subseção tem o intuito de apresentar um algoritmo genérico para a obtenção do modelo cinemático e dinâmico de mecanismos seriais. O algoritmo apresentado é implementável em linguagens de programação comumente usadas atualmente, como C++, Java e Python, sem necessitar de recursos de manipulação simbólica. \\
+Para a obtenção do modelo, são necessários apenas os parametros de Denavit-Hartemberg \cite{Craig, Denavit, Lipkin, Cabral} do mecanismo e as posições dos centros de massa dos ligamentos em relação aos sistemas de coordenadas fixos aos ligamentos. \\ 
+
+Seja $\ssB$ um sistema mecânico serial de $\nu$ graus de liberdade. Primeiramente, fazemos as seguintes definições:
+
+\begin{itemize}
+\item $\llN$: referencial inercial.
+\item $\ttN, \ttB_0$: sistema de coordenadas da base, fixo a $\llN$.
+\item $\llB_i, \,i=1,...,\nu$: i-ésimo ligamento.
+\item $\ttB_i, \,i=1,...,\nu$: sistema de coordenadas solid\'ario a $\llB_i$.
+\item $\tto_i, \,i=0,...,\nu$: origem do sistema $\ttB_i$.
+\item $\{\vi_i, \vj_i, \vk_i\}, \,i=0,...,\nu$: base ortonormal do sistema $\ttB_i$.
+\item $\ttg_i, \,i=1,...,\nu$: centro de massa de $\llB_i$.
+\item $\ttx$: ponto no espa\c{c}o fixo ao efetuador.
+\item $\vomega$: vetor velocidade angular absoluta do efetuador.
+\item $\vv$: vetor velocidade linear absoluta do efetuador.
+\item $\va$: vetor acelera\c{c}\~ao linear absoluta do efetuador.
+\item $\vomega_i, \,i=1,...,\nu$: vetor velocidade angular absoluta de $\llB_i$.
+\item $\vv_i, \,i=1,...,\nu$: vetor velocidade linear absoluta do centro de massa de $\llB_i$.
+\item $\va_i, \,i=1,...,\nu$: vetor acelera\c{c}\~ao linear absoluta do centro de $\llB_i$.
+\item $m_i$: massa da barra $\llB_i$.
+\item $\vI_i$: tensor de in\'ercia da barra $\llB_i$ em relação a seu centro de massa.
+\item $q_i, \,i=1,...,\nu$: deslocamento relativo (angular ou linear) da i-ésima junta.
+\item  $\mq$: matriz-coluna de $\nu$ coordenadas generalizadas independentes. É dada por $\mq = \begin{bmatrix}
+q_1 & ... & {q}_{\nu}
+\end{bmatrix}^\msT $.
+\item $\vv_{abs}, \vv_{rel}, \vv_{arr}$: Velocidades absoluta, relativa e de arrastamento, respectivamente.
+\item $\va_{abs}, \va_{rel}, \va_{arr}$: Acelerações absoluta, relativa e de arrastamento, respectivamente.
+\item $\vomega_{abs}, \vomega_{rel}, \vomega_{arr}$: Velocidades angulares absoluta, relativa e de arrastamento, respectivamente.
+\item $\dot{\vomega}_{abs}, \dot{\vomega}_{rel}, \dot{\vomega}_{arr}$: Acelerações angulares absoluta, relativa e de arrastamento, respectivamente.
+\end{itemize}
+
+\begin{itemize}
+\item[A)] Cinemática de posição
+
+Dados os parâmetros de Denavit-Hartemberg $a_i$, $\alpha_i$, $d_i$ e $\theta_i$, com $1 \leq i \leq \nu$, é possível obter as matrizes de transformação homogênea $\hvct{\vone}_{\ttB_{i-1} \rl \ttB_i}$ a partir da seguinte expressão \cite{Cabral} :
+
+\begin{equation} \label{eq:TransformacaoHomogeneaDH}
+\hvct{\vone}_{\ttB_{i-1} \rl \ttB_i} =
+\begin{bmatrix}
+\ccos\theta_i & -\ssin\theta_i \ccos\alpha_i &  \ssin\theta_i \ssin\alpha_i & a_i\ccos\theta_i \\
+\ssin\theta_i &  \ccos\theta_i \ccos\alpha_i & -\ccos\theta_i \ssin\alpha_i & a_i\ssin\theta_i \\
+0             &  \ssin\alpha_i               &  \ccos\alpha_i               & d_i \\
+0             & 0                            & 0                            & 1
+\end{bmatrix},\, i=1,...,\nu
+\end{equation}
+
+Tendo obtido $\hvct{\vone}_{\ttB_{i-1} \rl \ttB_i}$, é possível obter as transformações homogêneas que relacionam os sistemas solidários aos ligamentos ($\ttB_i$) ao sistema da base ($\ttN$) pela seguinte expressão recursiva:
+
+\begin{equation} \label{eq:H__}
+\hvct{\vone}_{\ttN \rl \ttB_i} =
+\begin{cases}
+\hvct{\vone}_{\ttB_0 \rl \ttB_1}, \text{se } i=1 \\
+\hvct{\vone}_{\ttN \rl \ttB_{i-1}} \cdot \hvct{\vone}_{\ttB_{i-1} \rl \ttB_i}  , \text{se } i>1
+\end{cases} \, i=1,...,\nu
+\end{equation}
+
+As matrizes  $\hvct{\vone}_{\ttN \rl \ttB_i}$ apresentam o seguinte formato:
+\begin{equation} \label{eq:H__2}
+\hvct{\vone}_{\ttN \rl \ttB_i} =
+\begin{bmatrix}
+\vct{\vi_{i}}_{\ttN} & \vct{\vj_{i}}_{\ttN} & \vct{\vk_{i}}_{\ttN} & \vct{\tto_i}_{\ttN} \\
+0 & 0 & 0 & 1
+\end{bmatrix}, \, i=1,...,\nu
+\end{equation}
+
+Sendo assim, tendo obtido $\hvct{\vone}_{\ttN \rl \ttB_i}$, automaticamente obtemos $\vct{\vi_{i}}_{\ttN}, \vct{\vj_{i}}_{\ttN}, \vct{\vk_{i}}_{\ttN}$ e $\vct{\tto_i}_{\ttN}$. Note que também obtemos as coordenadas do efetuador no sistema da base, pois
+\begin{equation} \label{eq:x_}
+\vct{\ttx}_{\ttN} = \vct{\tto_{\nu}}_{\ttN}
+\end{equation}
+
+Além disso, como $\vct{\ttg_i}_{\ttB_i}$ são dados de entrada do algoritmo, obtemos as coordenadas dos centros de massa dos ligamentos no sistema da base através da seguinte expressão:
+\begin{equation} \label{eq:og__}
+\hvct{\ttg_i}_{\ttN} = \hvct{\vone}_{\ttN \rl \ttB_i} \cdot \hvct{\ttg_i}_{\ttB_i}, \, i=1,...,\nu
+\end{equation}
+
+\item[B1)] Cinemática de velocidades lineares
+
+A posição do efetuador em relação ao sistema base é função dos deslocamentos relativos das juntas, ou seja:
+\begin{equation} \label{eq:x_q_}
+\vct{\ttx}_{\ttN} = \underline{\mx}(\mq)
+\end{equation}
+
+Derivando no tempo, obtemos:
+\begin{equation} \label{eq:dx_q_}
+\vct{\vv}_{\ttN} = \frac{\dd}{\dd t} \vct{\ttx}_{\ttN} = \mJ_v (\mq) \cdot \dot{\mq} = \sum_{i=1}^{\nu} \mj_{v\,i} (\mq) \cdot \dot{q}_i
+\end{equation}
+
+Sendo:
+\begin{equation} \label{eq:jv_}
+\mj_{v\,i}(\mq) = \frac{\partial \underline{\mx}}{\partial q_i}, \, i=1,...,\nu
+\end{equation}
+
+\begin{equation} \label{eq:Jv_}
+\mJ_v(\mq) = \frac{\partial \underline{\mx}}{\partial\mq} = \begin{bmatrix}
+\mj_{v\,1}(\mq) & ... & \mj_{v\,\nu}(\mq)
+\end{bmatrix}
+\end{equation}
+
+Analisando a equação \eqref{eq:dx_q_}, pode-se obersevar que o produto $\mj_{v\,i} \dot{q}_i$ representa a contribuição da i-ésima junta na velocidade do efetuador, com todas as outras juntas paradas \cite{Cabral}. Note que esta constatação está de acordo com a aplicação recursiva do príncipio da composição de movimento para velocidades lineares \cite{Kaminski, Tenenbaum}:
+\begin{equation} \label{eq:Composição_v}
+\vv_{abs} = \vv_{arr} + \vv_{rel}
+\end{equation}
+
+Sendo assim, a contribuição de cada junta na velocidade do efetuador é dada por:
+\begin{equation} \label{eq:ContribuiçãoVelocidadeLinear}
+\mj_{v\,i} \cdot \dot{q}_i = \begin{cases}
+\vct{\vk_{i-1}}_{\ttN} \dot{q}_i, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; \text{se a i-ésima junta for prismática} \\
+(\vct{\vk_{i-1}}_{\ttN} \dot{q}_i)\wedge (\vct{\ttx}_{\ttN}-\vct{\tto_{i-1}}_{\ttN}) , \text{se a i-ésima junta for de revolução} \\
+\end{cases}\, i=1,...,\nu
+\end{equation}
+
+Ou seja:
+\begin{equation} \label{eq:jvi_}
+\mj_{v\,i}(\mq) = \begin{cases}
+\vct{\vk_{i-1}}_{\ttN}, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; \text{se a i-ésima junta for prismática} \\
+\vct{\vk_{i-1}}_{\ttN}\wedge (\vct{\ttx}_{\ttN}-\vct{\tto_{i-1}}_{\ttN}) , \text{se a i-ésima junta for de revolução} \\
+\end{cases} \, i=1,...,\nu
+\end{equation}
+
+Para obter as velocidades dos centros de massa dos ligamentos, o raciocínio é análogo:
+
+\begin{equation} \label{eq:vi_q_}
+\vct{\vv_i}_{\ttN} = \frac{\dd}{\dd t} \vct{\ttg_i}_{\ttN}  = \mJ_{v\,i} (\mq) \cdot \dot{\mq} = \sum_{j=1}^{\nu} \mj_{v\,i,j} (\mq) \cdot \dot{q}_j, \, i=1,...,\nu
+\end{equation}
+
+Sendo:
+
+\begin{equation} \label{eq:Jvi_}
+\mJ_{v\,i}(\mq) = \begin{bmatrix}
+\mj_{v\,i,1}(\mq) & ... & \mj_{v\,i,\nu}(\mq)
+\end{bmatrix}, \, i=1,...,\nu
+\end{equation}
+
+\begin{equation} \label{eq:jvij_}
+\mj_{v\,i,j}(\mq) = \begin{cases}
+\mzr, \text{se j>i} \\
+\vct{\vk_{j-1}}_{\ttN}, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; \text{se } j\leq i  \text{ e a j-ésima junta for prismática} \\
+\vct{\vk_{j-1}}_{\ttN}\wedge (\vct{\ttg_i}_{\ttN}-\vct{\tto_{j-1}}_{\ttN}) , \text{se } j\leq i \text{ e a j-ésima junta for de revolução} \\
+\end{cases} \, i,j=1,...,\nu
+\end{equation}
+
+\item[B2)] Cinemática de velocidades angulares
+
+A velocidade angular de cada ligamento pode ser obtida aplicando recursivamente o príncipio da composição de movimentos para velocidades angulares \cite{Kaminski, Tenenbaum}:
+\begin{equation} \label{eq:Composição_w}
+\vomega_{abs} = \vomega_{arr} + \vomega_{rel}
+\end{equation}
+\begin{equation} \label{eq:Composição_w_rec}
+\vct{\vomega_i}_{\ttN} = \begin{cases}
+\mzr, \text{se } i=0 \\
+\vct{\vomega_{i-1}}_{\ttN}, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; \text{se } i>0  \text{ e a i-ésima junta for prismática} \\
+\vct{\vomega_{i-1}}_{\ttN} + \vct{\vk_{i-1}}_{\ttN} \dot{q}_i,  \text{se } i>0  \text{ e a i-ésima junta for de revolução} \\
+\end{cases}\, i=0,...,\nu
+\end{equation}
+
+Sendo assim, a velocidade angular de cada ligamento pode ser obtida pelas seguintes expressões:
+
+\begin{equation}
+\vct{\vomega_i}_{\ttN} = \mJ_{\omega\,i} (\mq) \cdot \dot{\mq} = \sum_{j=1}^{\nu} \mj_{\omega\,i,j} (\mq) \cdot \dot{q}_j, \, i=1,...,\nu
+\end{equation}
+\begin{equation}
+\mJ_{\omega\,i}(\mq) = \begin{bmatrix}
+\mj_{\omega\,i,1}(\mq) & ... & \mj_{\omega\,i,\nu}(\mq)
+\end{bmatrix}, \, i=1,...,\nu
+\end{equation}
+\begin{equation}
+\mj_{\omega\,i,j}(\mq) = \begin{cases}
+\mzr, \;\;\;\;\;\;\;\;\; \text{se } j>i  \text{ ou a j-ésima junta for prismática} \\
+\vct{\vk_{j-1}}_{\ttN}, \text{se } j\leq i \text{ e a j-ésima junta for de revolução} \\
+\end{cases} \, i,j=1,...,\nu
+\end{equation}
+
+Note que também obtemos a velocidade angular do efetuador no sistema da base, pois
+\begin{equation}
+\vct{\vomega}_{\ttN} = \vct{\vomega_{\nu}}_{\ttN} = \mJ_{\omega}(\mq) \cdot \dot{\mq}
+\end{equation}
+Sendo:
+\begin{equation}
+\mJ_{\omega}(\mq) = \mJ_{\omega\,\nu}(\mq) 
+\end{equation}
+
+As velocidades angulares dos ligamentos escritas nas bases dos sistemas de coordenadas solidários aos ligamentos, podem ser obtidas pelas seguintes expressões:
+\begin{equation} \label{eq:wi_Bi}
+\vct{\vomega_i}_{\ttB_i} = \vct{\vone}_{\ttN \rl \ttB_i}^\msT \cdot \vct{\vomega_i}_{\ttN} = \mJ_{w\,i} (\mq) \cdot \dot{\mq}, \, i = 1,...,\nu
+\end{equation}
+Sendo:
+\begin{equation}
+\mJ_{w\,i} (\mq) = \vct{\vone}_{\ttN \rl \ttB_i}^\msT \cdot \mJ_{\omega\,i} (\mq), \, i = 1,...,\nu
+\end{equation}
+
+%Para o efetuador, temos que sua velocidade angular é a mesma do $\nu$-ésimo ligamento, ou seja:
+
+\item[C1)] Cinemática de acelerações lineares
+
+A aceleração do centro de massa de cada ligamento pode ser obtida aplicando recursivamente o príncipio da composição de movimentos para acelerações lineares \cite{Kaminski, Tenenbaum}:
+\begin{equation} \label{eq:Composição_a}
+\va_{abs} = \va_{arr} + \va_{rel} + 2 \vomega_{arr} \wedge \vv_{rel} 
+\end{equation}
+\begin{equation} \label{eq:Composição_a_rec}
+\vct{\va_{i,j}}_{\ttN} = \begin{cases}
+\mzr, \text{se } j=0 \\
+\vct{\va_{i,j-1}}_{\ttN} + \mj_{v\,i,j} \ddot{q}_i + \mj_{\omega\,i,j}  \wedge [\mj_{\omega\,i,j} \wedge (\vct{\ttg_i}_{\ttN} - \vct{\tto_{j-1}}_{\ttN}) ] \dot{q}_j^2 + 2 \vct{\vomega_{j-1}}_{\ttN} \wedge \mj_{v\,i,j} \dot{q}_j ,  \text{se } j>0 \\
+\end{cases} 
+\end{equation}
+$$ \text{Com } i=1,...,\nu \text{ e } j=1,...,i$$
+\begin{equation}
+\vct{\va_i}_{\ttN} = \vct{\va_{i,i}}_{\ttN}, \, i=1,...,\nu
+\end{equation}
+
+Sendo assim, a aceleração do centro de massa de cada ligamento pode ser obtida pela seguinte expressão:
+\begin{equation} \label{eq:ai_N}
+\vct{\va_i}_{\ttN} = \mJ_{v\,i}(\mq) \cdot \ddot{\mq} + \ma_i (\mq, \dot{\mq}), \, i=1,...,\nu
+\end{equation}
+Sendo:
+\begin{equation}
+\ma_i (\mq, \dot{\mq}) = \sum_{j=1}^{i} \mj_{\omega\,i,j}  \wedge [\mj_{\omega\,i,j} \wedge (\vct{\ttg_i}_{\ttN} - \vct{\tto_{j-1}}_{\ttN}) ] \dot{q}_j^2 + 2 (\mJ_{\omega\,j-1} \dot{\mq}) \wedge \mj_{v\,i,j} \dot{q}_j, \, i=1,...,\nu
+\end{equation}
+
+Analogamente, para a aceleração do efetuador, temos:
+\begin{equation}
+\frac{\dd^2}{\dd t^2} \vct{\ttx}_{\ttN} = \mJ_{v} (\mq) \cdot \ddot{\mq} + \ma(\mq,\dot{\mq}), \, i=1,...,\nu
+\end{equation}
+Sendo:
+\begin{equation}
+\ma(\mq,\dot{\mq}) = \sum_{j=1}^{\nu} \mj_{\omega\,j}  \wedge [\mj_{\omega\,j} \wedge (\vct{\ttx}_{\ttN} - \vct{\tto_{j-1}}_{\ttN}) ] \dot{q}_j^2 + 2 (\mJ_{\omega\,j-1} \dot{\mq}) \wedge \mj_{v\,j} \dot{q}_j, \, i=1,...,\nu
+\end{equation}
+
+\item[C2)] Cinemática de acelerações angulares
+
+A aceleração angular de cada ligamento pode ser obtida aplicando recursivamente o príncipio da composição de movimentos para acelerações angulares \cite{Kaminski, Tenenbaum}:
+\begin{equation} \label{eq:Composição_dw}
+\dot{\vomega}_{abs} = \dot{\vomega}_{arr} + \dot{\vomega}_{rel} + \vomega_{arr} \wedge \vomega_{rel} 
+\end{equation}
+\begin{equation} \label{eq:Composição_dw_rec}
+\vct{\dot{\vomega}_i}_{\ttN} = \begin{cases}
+\mzr, \text{se } i=0 \\
+\vct{\dot{\vomega}_{i-1}}_{\ttN} + \mj_{\omega\,i,i} \ddot{q}_i + \vct{\vomega_{i-1}}_{\ttN} \wedge \mj_{\omega\,i,i} \dot{q}_i ,  \text{se } i>0 \\
+\end{cases}\, i=0,...,\nu
+\end{equation}
+
+Sendo assim, a aceleração angular de cada ligamento pode ser obtida pelas seguintes expressões:
+
+\begin{equation}
+\vct{\dot{\vomega_i}}_{\ttN} = \mJ_{\omega\,i} (\mq) \cdot \ddot{\mq} + \dot{\momega}_i (\mq,\dot{\mq}), \, i=1,...,\nu
+\end{equation}
+Sendo:
+\begin{equation}
+\dot{\momega}_i (\mq,\dot{\mq}) = \sum_{j=1}^{i} (\mJ_{\omega\,j-1} \dot{\mq}) \wedge \mj_{\omega\,i,j} \cdot \dot{q}_j, \, i=1,...,\nu
+\end{equation}
+
+Note que também obtemos a aceleração angular do efetuador no sistema da base, pois
+\begin{equation}
+\vct{\dot{\vomega}}_{\ttN} = \vct{\dot{\vomega}_{\nu}}_{\ttN} = \mJ_{\omega}(\mq) \cdot \ddot{\mq} + \dot{\momega} (\mq,\dot{\mq})
+\end{equation}
+Sendo:
+\begin{equation}
+\dot{\momega} (\mq,\dot{\mq}) = \dot{\momega}_{\nu} (\mq,\dot{\mq})
+\end{equation}
+
+As acelerações angulares dos ligamentos escritas nas bases dos sistemas de coordenadas solidários aos ligamentos, podem ser obtidas pelas seguintes expressões:
+\begin{equation} \label{eq:dwi_Bi}
+\vct{\dot{\vomega}_i}_{\ttB_i} = \vct{\vone}_{\ttN \rl \ttB_i}^\msT \cdot \vct{\dot{\vomega}_i}_{\ttN} = \mJ_{w\,i} (\mq) \cdot \ddot{\mq} + \dot{\mw}_i(\mq, \dot{\mq}) , \, i = 1,...,\nu
+\end{equation}
+Sendo:
+\begin{equation}
+\dot{\mw}_i(\mq, \dot{\mq}) = \vct{\vone}_{\ttN \rl \ttB_i}^\msT \cdot \dot{\momega}_i(\mq, \dot{\mq}), \, i = 1,...,\nu
+\end{equation}
+
+\item[D)] Dinâmica
+
+O modelo dinâmico de $\ssB$ é obtido utilizando o método Orsino de acoplamento de subsistemas \cite{23orsino}, e é dado por:
+\begin{equation} \label{eq:ModeloMecSerial}
+\mM(\mq) \ddot{\mq} + \mv(\mq,\dot{\mq}) + \mg(\mq) = \mu
+\end{equation}
+
+Sendo:
+\begin{equation} \label{eq:MSerial}
+\mM(\mq) = \sum_{i=1}^\nu
+m_i \mJ_{v\,i}^\msT \mJ_{v\,i} + \mJ_{w\,i}^\msT \vct{\vI_i}_{\ttB_i \rl \ttB_i} \mJ_{w\,i}
+\end{equation}
+\begin{equation} \label{eq:vSerial}
+\mv(\mq, \dot{\mq}) = \sum_{i=1}^\nu
+ m_i \mJ_{v\,i}^\msT \ma_i + \mJ_{w\,i}^\msT\{\vct{\vI_i}_{\ttB_i \rl \ttB_i} \dot{\mw}_i + (\mJ_{w\,i} \dot{\mq}) \wedge (\vct{\vI_i}_{\ttB_i \rl \ttB_i}  \mJ_{w\,i} \dot{\mq}) \}
+\end{equation}
+\begin{equation} \label{eq:gSerial}
+\mg(\mq) = - \sum_{i=1}^\nu m_i \mJ_{v\,i} \vct{\vg}_{\ttN}
+\end{equation}
+
+Segue abaixo, a dedução.
+%A idéia é obter o modelo dinâmico do sistema acoplado através dos modelos dos subsistemas desacoplados e dos vínculos cinemáticos entre eles.
+
+\begin{itemize}
+
+\item[i)] Modelo dos subsistemas \\
+
+O modelo dinâmico desacoplado de cada ligamento pode ser obtido facilmente por Newton-Euler, pois são considerados como corpos rígidos livres no espaço, sujeitos apenas à força peso. Sendo assim, aplicando o Teorema do Movimentos do Baricentro e o Teorema do Momento Angular para cada ligamento, temos:
+
+\begin{equation} \label{eq:Newton-Euler}
+\begin{cases}
+m_i \va_i - m_i \vg = \vzr \\
+\vI_i \cdot \dot{\vomega}_i + \vomega_i \wedge (\vI_i \cdot \vomega_i) = \vzr
+\end{cases} \, i = 1,...,\nu
+\end{equation}
+
+Aplicando a primeira equação vetorial no sistema $\ttN$ e a segunda no sistema $\ttB_i$, temos:
+\begin{equation} \label{eq:Newton-EulerMat}
+\begin{bmatrix}
+m_i \mone & \mzr \\
+\mzr      & \vct{\vI_i}_{\ttB_i \rl \ttB_i}
+\end{bmatrix}
+\cdot
+\begin{bmatrix}
+\vct{\va_i}_{\ttN} \\
+\vct{\dot{\vomega}_i}_{\ttB_i}
+\end{bmatrix}
++
+\begin{bmatrix}
+\mzr \\
+\vct{\vomega_i}_{\ttB_i} \wedge (\vct{\vI_i}_{\ttB_i \rl \ttB_i} \cdot \vct{\vomega_i}_{\ttB_i})
+\end{bmatrix}
++
+\begin{bmatrix}
+-m_i \vct{\vg}_{\ttN} \\
+\mzr
+\end{bmatrix}
+=
+\mzr, \, i = 1,...,\nu
+\end{equation}
+
+Definindo:
+\begin{equation} \label{eq:M_i}
+\mM_i = \begin{bmatrix}
+m_i \mone & \mzr \\
+\mzr      & \vct{\vI_i}_{\ttB_i \rl \ttB_i}
+\end{bmatrix}, \, i = 1,...,\nu
+\end{equation}
+\begin{equation} \label{eq:v_i}
+\mv_i (\mp_i) = \begin{bmatrix}
+\mzr \\
+\vct{\vomega_i}_{\ttB_i} \wedge (\vct{\vI_i}_{\ttB_i \rl \ttB_i} \cdot \vct{\vomega_i}_{\ttB_i})
+\end{bmatrix}, \, i = 1,...,\nu
+\end{equation}
+\begin{equation} \label{eq:g_i}
+\mg_i = \begin{bmatrix}
+-m_i \vct{\vg}_{\ttN} \\
+\mzr
+\end{bmatrix}, \, i = 1,...,\nu
+\end{equation}
+\begin{equation} \label{eq:p_i}
+\mp_i = \begin{bmatrix}
+\vct{\vv_i}_{\ttN} \\
+\vct{\vomega_i}_{\ttB_i}
+\end{bmatrix}, \, i = 1,...,\nu
+\end{equation}
+
+\eqref{eq:Newton-EulerMat} pode ser reescrita como:
+\begin{equation}
+\mM_i \cdot \dot{\mp}_i + \mv_i(\mp_i) + \mg_i = \mzr, \, i = 1,...,\nu
+\end{equation}
+
+Seja $\mf_i$ o sistema de forças ativas  (considerando os esforços de inércia) aplicado no i-ésimo subsistema, na direção das quasi-velocidades $\mp_i$. $\mf_i$ pode ser obtido pela seguinte expressão:
+%Sendo assim, os sistemas de forças (considerando esforços ativos e de inércia) aplicados em cada subsistema são dados por:
+\begin{equation}
+\overline{\mf}_i(\mp_i, \dot{\mp}_i)  = - (\mM_i \cdot \dot{\mp}_i + \mv_i(\mp_i) + \mg_i), \, i = 1,...,\nu
+\end{equation}
+
+Portanto, o modelo dinâmico de cada subsistema pode ser escrito como:
+\begin{equation}
+\overline{\mf}_i(\mp_i, \dot{\mp}_i) = \mzr, \, i = 1,...,\nu
+\end{equation}
+
+\item[ii)] Sistemas de forças ativas generalizadas e quasi-velocidades adicionais \\
+
+Muitas vezes é conveniente definir um conjunto de quasi-velocidades adicionais $\mp_0$, as quais só fazem sentido para o sistema acoplado, e sistemas de forças ativas generalizadas adicionais $\mf_0$ aplicados na direção das quasi-velocidades adicionais. \\
+
+Neste algoritmo de modelagem, serão considerados como quasi-velocidades adicionais as derivadas temporais das coordenadas das juntas, ou seja:
+\begin{equation} \label{eq:mp_0}
+\mp_0 = \dot{\mq}
+\end{equation}
+
+Nesse caso, os sistemas de forças ativas generalizadas adicionais serão os esforços que os atuadores aplicam nas juntas, ou seja:
+\begin{equation}
+\mf_0 = \mu
+\end{equation}
+
+\item[iii)] Vínculos cinemáticos entre subsistemas
+
+Através das equações \eqref{eq:vi_q_}, \eqref{eq:wi_Bi} e \eqref{eq:mp_0}, é possível relacionar as quasi-velocidades de cada subsistema com as quasi-velocidades adicionais da seguinte maneira:
+\begin{equation}
+\underline{\mp_i}(\mq, \mp_0) = \mJ_i (\mq) \cdot \mp_0, \, i=1,...,\nu
+\end{equation}
+Sendo:
+\begin{equation} \label{eq:J_i}
+\mJ_i(\mq) = \begin{bmatrix}
+\mJ_{v\,i}(\mq) \\
+\mJ_{w\,i}(\mq)
+\end{bmatrix}, \, i=1,...,\nu
+\end{equation}
+
+Seja $\mp\cir$ a matriz coluna que contém as quasi-velocidades de todos os ligamentos:
+\begin{equation}
+\mp\cir = \begin{bmatrix}
+\mp_1^\msT & ... & \mp_{\nu}^\msT
+\end{bmatrix}^\msT
+\end{equation}
+
+$\mp\cir$ pode ser expresso em função apenas das quasi-velocidades $\mp_0$ da seguinte forma:
+\begin{equation}
+\underline{\mp\cir}(\mq,\mp_0) = \mJ(\mq) \mp_0
+\end{equation}
+Sendo:
+\begin{equation} \label{eq:J}
+\mJ(\mq) = \begin{bmatrix}
+\mJ_1(\mq)^\msT & ... & \mJ_{\nu}(\mq)^\msT
+\end{bmatrix}^\msT
+\end{equation}
+
+Sendo assim, as vínculos de quasi-velocidades entre subsistemas podem ser expressos como:
+\begin{equation}
+\overline{\mp}(\mq,\mp) = \mJ(\mq) \mp_0 - \mp\cir = \mzr
+\end{equation}
+
+\item[iv)] Acoplamento de subsistemas
+
+Seja $\mf$ a matriz-coluna contendo todos os sistemas de forças ativas generalizadas:
+\begin{equation}
+\mf = \begin{bmatrix}
+\mf_0^\msT & \overline{\mf}_1^\msT & ... & \overline{\mf}_\nu^\msT  
+\end{bmatrix}^\msT
+\end{equation}
+
+E seja $\mA$ o jacobiano dos vínculos de quasi-velocidades:
+\begin{equation}
+\mA(\mq) = \frac{\partial \overline{\mp}}{\partial \mp} = \begin{bmatrix}
+\mJ(\mq) & -\mone
+\end{bmatrix}
+\end{equation}
+
+Seja $\mC$ a seguinte matriz:
+\begin{equation}
+\mC(\mq) =
+\begin{bmatrix}
+\mone \\
+\mJ(\mq)
+\end{bmatrix}
+\end{equation}
+
+Note que $\mC$ é complemento ortogonal de $\mA$, visto que
+\begin{equation}
+\mA(\mq) \cdot \mC(\mq) = \mJ(\mq) - \mJ(\mq) = \mzr
+\end{equation}
+e para configurações não singulares o posto de $\begin{bmatrix} \mC(\mq)^\msT \\ \mA(\mq) \end{bmatrix}$ é cheio.
+
+Sendo assim, o modelo dinâmico do mecanismo serial pode ser escrito como:
+\begin{equation}
+\mC^\msT \mf = \mzr
+\end{equation}
+
+Ou seja:
+\begin{equation} \label{eq:ModeloDinâmicoSerialSomatorio}
+\mu - \sum_{i=1}^\nu \mJ_i(\mq)^\msT (\mM_i \dot{\mp}_i + \mv_i(\mp_i) + \mg_i) = \mzr
+\end{equation}
+
+Substituindo \eqref{eq:M_i}, \eqref{eq:v_i}, \eqref{eq:g_i}, \eqref{eq:p_i} e \eqref{eq:J_i} em \eqref{eq:ModeloDinâmicoSerialSomatorio}, temos:
+\begin{equation} \label{eq:ModeloDinâmicoSerialSomatorio2}
+\sum_{i=1}^\nu
+\begin{bmatrix}
+\mJ_{v\,i} \\
+\mJ_{w\,i}
+\end{bmatrix}^\msT
+\begin{Bmatrix}
+\begin{bmatrix}
+m_i \mone & \mzr \\
+\mzr      & \vct{\vI_i}_{\ttB_i \rl \ttB_i}
+\end{bmatrix}
+\cdot
+\begin{bmatrix}
+\vct{\va_i}_{\ttN} \\
+\vct{\dot{\vomega}_i}_{\ttB_i}
+\end{bmatrix}
++
+\begin{bmatrix}
+\mzr \\
+\vct{\vomega_i}_{\ttB_i} \wedge (\vct{\vI_i}_{\ttB_i \rl \ttB_i} \cdot \vct{\vomega_i}_{\ttB_i})
+\end{bmatrix}
++
+\begin{bmatrix}
+-m_i \vct{\vg}_{\ttN} \\
+\mzr
+\end{bmatrix}
+\end{Bmatrix}
+=\mu
+\end{equation}
+
+Substituindo \eqref{eq:wi_Bi}, \eqref{eq:ai_N} e  \eqref{eq:dwi_Bi} em \eqref{eq:ModeloDinâmicoSerialSomatorio2}, temos:
+\begin{equation}
+\sum_{i=1}^\nu
+\begin{bmatrix}
+\mJ_{v\,i} \\
+\mJ_{w\,i}
+\end{bmatrix}^\msT
+\begin{Bmatrix}
+\begin{bmatrix}
+m_i (\mJ_{v\,i} \ddot{\mq} + \ma_i ) \\
+\vct{\vI_i}_{\ttB_i \rl \ttB_i} (\mJ_{w\,i} \ddot{\mq} + \dot{\mw}_i)
+\end{bmatrix}
++
+\begin{bmatrix}
+\mzr \\
+(\mJ_{w\,i} \dot{\mq}) \wedge (\vct{\vI_i}_{\ttB_i \rl \ttB_i}  \mJ_{w\,i} \dot{\mq})
+\end{bmatrix}
++
+\begin{bmatrix}
+-m_i \vct{\vg}_{\ttN} \\
+\mzr
+\end{bmatrix}
+\end{Bmatrix}
+=\mu
+\end{equation}
+
+Sendo assim, obtemos o modelo dinâmico mostrado anteriormente pelas equações \eqref{eq:ModeloMecSerial}, \eqref{eq:MSerial}, \eqref{eq:vSerial}, \eqref{eq:gSerial}:
+$$
+\mM(\mq) \ddot{\mq} + \mv(\mq,\dot{\mq}) + \mg(\mq) = \mu
+$$
+
+Sendo:
+$$
+\mM(\mq) = \sum_{i=1}^\nu
+m_i \mJ_{v\,i}^\msT \mJ_{v\,i} + \mJ_{w\,i}^\msT \vct{\vI_i}_{\ttB_i \rl \ttB_i} \mJ_{w\,i}
+$$
+$$
+\mv(\mq, \dot{\mq}) = \sum_{i=1}^\nu
+ m_i \mJ_{v\,i}^\msT \ma_i + \mJ_{w\,i}^\msT\{\vct{\vI_i}_{\ttB_i \rl \ttB_i} \dot{\mw}_i + (\mJ_{w\,i} \dot{\mq}) \wedge (\vct{\vI_i}_{\ttB_i \rl \ttB_i}  \mJ_{w\,i} \dot{\mq}) \}
+$$
+$$
+\mg(\mq) = - \sum_{i=1}^\nu m_i \mJ_{v\,i} \vct{\vg}_{\ttN}
+$$
+
+\end{itemize}
+
+\end{itemize}
+
+\subsection{Algoritmo para modelagem de mecanismos paralelos}\label{S05-2}
+
+Esta subseção tem o intuito de apresentar um algoritmo genérico para a obtenção do modelo dinâmico de mecanismos paralelos. O algoritmo apresentado é implementável em linguagens de programação comumente usadas atualmente, como C++, Java e Python, sem necessitar de recursos de manipulação simbólica. \\
+Para a obtenção do modelo do mecanismo paralelos, são necessários apenas os modelos de mecanismos seriais deduzidos  utilizando o algoritmo apresentado anteriormente, do modelo do efetuador, e de 7 matrizes constantes que são utilizadas para descrever a arquitetura do mecanismo paralelo. \\ 
+
+Para realizar a modelagem de mecanismos paralelos a partir de subsistemas seriais j\'a deduzidos, \'e necess\'ario introduzir mais alguns conceitos: \\
+
+Sejam $\ssB_0$, $\ssB_1$, ..., $\ssB_{n} \,$ $n+1$ subsistemas mec\^anicos e $\ssM$ um sistema mec\^anico de $\nu\ssh$ graus de liberdade gerado pelo acoplamento dos subsistemas citados. Definimos:
+
+\begin{itemize}
+\item $\ttN_i, \, i=1,...,n$: sistema de coordenadas da base de $\ssB_i$.
+\item $\mq\ssh, \mq_0$: matriz-coluna de $\nu\ssh$ coordenadas generalizadas independentes da plataforma/efetuador $\ssB_0$.
+\item $\mq_i, \,i=1, ..., n$: matriz-coluna de coordenadas generalizadas do subsistema serial $\ssB_i$.
+\item $\mq\cir$: matriz-coluna de coordenadas generalizadas  n\~ao pertencentes \`a plataforma/efetuador. Definida como $\mq\cir = \begin{bmatrix}  {\mq_1}^\msT & ... & {\mq_{n}}^\msT \end{bmatrix}^\msT $.
+\item $\mq$: matriz-coluna contendo todas as coordenadas generalizadas do sistema $\ssM$. Definida como $\mq = \begin{bmatrix} {\mq\ssh}^\msT & {\mq\cir}^\msT \end{bmatrix}^\msT $.
+\item $\overline{\mq}(\mq)$: matriz-coluna dos v\'inculos de posi\c{c}\~ao entre subsistemas. As equa\c{c}\~oes vinculares s\~ao dadas por $\overline{\mq}(\mq) = \mzr $.
+\item $\overline{\momega}(\mq,\dot{\mq})$: matriz-coluna dos v\'inculos de orienta\c{c}\~ao entre subsistemas. As equa\c{c}\~oes vinculares s\~ao dadas por $\overline{\momega}(\mq,\dot{\mq}) = \mzr $.
+\item $\ttx_i, \,i=1, ..., n$: ponto no espa\c{c}o fixo ao efetuador de $\ssB_i$.
+\item $\mx_i(\mq_i), \,i=1, ..., n$: $\vct{\ttx_i}_{\ttN_i}$ escrito em função das coordenadas $\mq_i$.
+\item $\mJ_{v\,\ssB_i}(\mq_i), \,i=1, ..., n$: jacobiano de velocidades lineares do efetuador de $\ssB_i$.
+\item $\mJ_{\omega\,\ssB_i}(\mq_i), \,i=1, ..., n$: jacobiano de velocidades angulares do efetuador de $\ssB_i$.
+\item $\ma_{\ssB_i}(\mq_i, \dot{\mq}_i), \,i=1, ..., n$: parcela da aceleração linear do efetuador de $\ssB_i$, escrita na base de $\ttN_i$, independente de $\ddot{\mq}_i$.
+\item $\dot{\momega}_{\ssB_i}(\mq_i, \dot{\mq}_i), \,i=1, ..., n$: parcela da aceleração angular do efetuador de $\ssB_i$, escrita na base de $\ttN_i$, independente de $\ddot{\mq}_i$.
+\item $\mM_{\ssB_i}(\mq_i), \,i=0, ..., n$: matriz de in\'ercia generalizada do subsistema $\ssB_i$.
+\item $\mv_{\ssB_i}(\mq_i, \dot{\mq}_i), \,i=0, ..., n$: matriz-coluna das forças de inércia girosc\'opica generalizadas do subsistema $\ssB_j$.
+\item $\mg_{\ssB_i}(\mq_i), \,i=0, ..., n$: matriz-coluna dos esfor\c{c}os gravitacionais generalizados do subsistema $\ssB_j$.
+\item $\mu_i, \,i=0, ..., n$: matriz-coluna dos esfor\c{c}os ativos externos generalizados do subsistema $\ssB_i$.
+\end{itemize}
+
+\begin{itemize}
+
+\item[i)] Modelo dos subsistemas \\
+
+O modelo dinâmico de cada subsistema pode ser escrito como:
+
+\begin{equation} \label{eq:ModeloDosSubsistemas}
+\overline{\mf}_{\ssB_i}(\mu_i, \mq_i, \dot{\mq}_i, \ddot{\mq}_i) =  \mu_i - (\mM_{\ssB_i}(\mq_i) \ddot{\mq}_i + \mv_{\ssB_i}(\mq_i,\dot{\mq}_i) + \mg_{\ssB_i}(\mq_i)) = \mzr, \, i = 0,...,n
+\end{equation}
+
+Sendo que para $i=0$ temos o modelo do efetuador/plataforma e para $i>0$ temos os modelos dos mecanismos seriais obtidos anteriormente.
+
+\item[ii)] Vínculos cinemáticos entre subsistemas
+
+\begin{itemize}
+
+
+
+\item[a)] Vínculos de posição
+
+É possível relacionar as coordenadas da plataforma/efetuador $\ssB_0$ com as coordenadas dos efetuadores das cadeias seriais por meio de rotações e translações, ou seja:
+
+\begin{equation}
+\mq\ssh = \md_i + \mE_i \cdot \mx_i(\mq_i), \, i = 1,...,n
+\end{equation}
+
+Sendo assim, temos:
+\begin{equation} \label{eq:VinculosPosicao}
+\begin{bmatrix}
+\mone\\
+\vdots\\
+\mone
+\end{bmatrix}\cdot \mq\ssh =
+\begin{bmatrix}
+\md_1 \\
+\vdots \\
+\md_n
+\end{bmatrix}
++
+\begin{bmatrix}
+\mE_1 & \ldots & \mzr\\
+\vdots & \ddots & \vdots\\
+\mzr &\ldots  & \mE_{n}
+\end{bmatrix}
+\cdot
+\begin{bmatrix}
+\mx_1(\mq_1) \\
+\vdots \\
+\mx_n(\mq_n)
+\end{bmatrix}
+\end{equation}
+
+Além disso, em alguns casos é necessário incluir vínculos afins entre as coordenadas generalizadas, ou seja:
+\begin{equation} \label{eq:VinculosPosicaoAfins}
+\mD_{\oplus}\cdot\mq\ssh = \md_{\oplus} + \mF_{\oplus}\cdot\mq\cir
+\end{equation}
+
+Juntando a equação \eqref{eq:VinculosPosicaoAfins} à equação \eqref{eq:VinculosPosicao}, temos:
+\begin{equation} \label{eq:VinculosPosicao2}
+\begin{bmatrix}
+\mone\\
+\vdots\\
+\mone \\
+\mD_{\oplus}
+\end{bmatrix}
+\cdot
+\mq\ssh =
+\begin{bmatrix}
+\md_1 \\
+\vdots \\
+\md_n \\
+\md_{\oplus}
+\end{bmatrix}
++
+\begin{bmatrix}
+\mE_1 & \ldots & \mzr\\
+\vdots & \ddots & \vdots\\
+\mzr &\ldots  & \mE_{n} \\
+\mzr &\ldots  & \mzr
+\end{bmatrix}
+\cdot
+\begin{bmatrix}
+\mx_1(\mq_1) \\
+\vdots \\
+\mx_n(\mq_n)
+\end{bmatrix}
++
+\begin{bmatrix}
+\mzr\\
+\vdots\\
+\mzr \\
+\mF_{\oplus}
+\end{bmatrix}
+\cdot
+\mq\cir
+\end{equation}
+
+Sendo assim, os vínculos de posição entre subsistemas podem ser descritos de maneira genérica por:
+\begin{equation} \label{eq:VinculosGenericosPosicao}
+\overline{\mq}(\mq) = \mD \cdot \mq\ssh - \md - \mE \cdot \mx(\mq)
+- \mF \cdot \mq\cir = \mzr
+\end{equation}
+
+Sendo $\md$, $\mD$, $\mE$ e $\mF$ matrizes constantes e $\mx$ dado por:
+\begin{equation}
+\mx(\mq) = 
+\begin{bmatrix}
+\mx_1(\mq_1) \\
+\vdots \\
+\mx_n(\mq_n)
+\end{bmatrix}
+\end{equation}
+
+\item[b)] Vínculos de velocidades lineares
+
+Derivando no tempo a equação \eqref{eq:VinculosGenericosPosicao}, temos:
+\begin{equation} \label{eq:VinculosGenericosVel}
+\dot{\overline{\mq}}(\mq,\dot{\mq}) = \mD \cdot \dot{\mq}\ssh - \mE \cdot \dot{\mx}(\mq,\dot{\mq}) - \mF \cdot \dot{\mq}\cir = \mzr
+\end{equation}
+
+A derivada $\dot{\mx}$ pode ser obtida da seguinte maneira:
+\begin{equation} \label{eq:dxdt}
+\dot{\mx}(\mq,\dot{\mq}) = \frac{\dd}{\dd t}
+\begin{bmatrix}
+\mx_1(\mq_1) \\
+\vdots \\
+\mx_n(\mq_n)
+\end{bmatrix} =
+\begin{bmatrix}
+\mJ_{v\,\ssB_1}(\mq_1) \cdot \dot{\mq}_1 \\
+\vdots \\
+\mJ_{v\,\ssB_n}(\mq_n) \cdot \dot{\mq}_n
+\end{bmatrix}
+=
+\mJ_{\mathsf{v}}(\mq\cir) \cdot \dot{\mq}\cir
+\end{equation}
+
+Sendo:
+\begin{equation}
+\mJ_{\mathsf{v}}(\mq\cir) =
+\begin{bmatrix}
+\mJ_{v\,\ssB_1}(\mq_1) & \ldots & \mzr\\
+\vdots & \ddots & \vdots\\
+\mzr &\ldots  & \mJ_{v\,\ssB_n}(\mq_n)
+\end{bmatrix}
+\end{equation}
+
+Assim, substituindo \eqref{eq:dxdt} em \eqref{eq:VinculosGenericosVel}, obtemos:
+\begin{equation} \label{eq:VinculosGenericosVelocidades}
+\dot{\overline{\mq}}(\mq,\dot{\mq}) = \mD \cdot \dot{\mq}\ssh - \mE \cdot \mJ_{\mathsf{v}}(\mq\cir) \cdot \dot{\mq}\cir  - \mF \cdot \dot{\mq}\cir = \mzr
+\end{equation}
+
+\item[c)] Vínculos de velocidades angulares
+
+Em alguns casos, é necessário incluir vínculos entre as velocidades angulares dos efetuadores das cadeiais seriais, de modo a restringir suas orientações no espaço.
+
+De maneira análoga à equação \eqref{eq:VinculosGenericosVelocidades}, os vínculos de velocidades angulares serão definidos por:
+\begin{equation}
+\dot{\overline{\mq}}(\mq) = \mP \cdot \dot{\mq}\ssh - \mQ \cdot \mJ_{\mathsf{w}}(\mq\cir) \cdot \dot{\mq}\cir  - \mR \cdot \dot{\mq}\cir = \mzr
+\end{equation}
+
+Sendo $\mP$, $\mQ$ e $\mR$ matrizes constantes e $\mJ_{\mathsf{w}}(\mq)$ dado por:
+\begin{equation} \label{eq:VinculosGenericosVelocidadesAngulares}
+\mJ_{\mathsf{w}}(\mq\cir) =
+\begin{bmatrix}
+\mJ_{\omega\,\ssB_1}(\mq_1) & \ldots & \mzr\\
+\vdots & \ddots & \vdots\\
+\mzr &\ldots  & \mJ_{\omega\,\ssB_n}(\mq_n)
+\end{bmatrix}
+\end{equation}
+
+\item[d)] Vínculos de quasi-velocidades
+
+Neste caso, as quasi-velocidades do sistema são dadas simplemente por
+\begin{equation}
+\mp = \dot{\mq}
+\end{equation}
+
+Os vínculos de quasi-velocidades são dados pela união dos vínculos de velocidades lineares e dos vínculos de velocidades angulares, ou seja:
+\begin{equation} \label{eq:VinculosQuasiVel}
+\overline{\mp}(\mq,\dot{\mq}) = \begin{bmatrix}
+\dot{\overline{\mq}}(\mq,\dot{\mq}) \\
+\overline{\momega}(\mq,\dot{\mq})
+\end{bmatrix}
+= 
+\begin{bmatrix}
+\mD \cdot \dot{\mq}\ssh - \mE \cdot \mJ_{\mathsf{v}}(\mq\cir) \cdot \dot{\mq}\cir  - \mF \cdot \dot{\mq}\cir \\
+\mP \cdot \dot{\mq}\ssh - \mQ \cdot \mJ_{\mathsf{w}}(\mq\cir) \cdot \dot{\mq}\cir  - \mR \cdot \dot{\mq}\cir
+\end{bmatrix}
+=
+\mzr
+\end{equation}
+
+Repare que \eqref{eq:VinculosQuasiVel} pode ser reescrita como:
+\begin{equation}
+\overline{\mp}(\mq,\dot{\mq}) = \mA(\mq) \dot{\mq} = \mzr
+\end{equation}
+
+Sendo $\mA$ o jacobiano dos vínculos de quasi-velocidades, o qual é dado por:
+\begin{equation}
+\mA(\mq) = \frac{\partial \overline{\mp}}{\partial \dot{\mq}} = 
+\begin{bmatrix}
+\mA\ssh(\mq) & \mA\cir(\mq)
+\end{bmatrix}
+\end{equation}
+
+Sendo:
+\begin{equation}
+\mA\ssh(\mq) = \frac{\partial \overline{\mp}}{\partial \dot{\mq}\ssh} =
+\begin{bmatrix}
+\mD \\
+\mP \\
+\end{bmatrix}
+\end{equation}
+
+\begin{equation}
+\mA\cir(\mq) =  \frac{\partial \overline{\mp}}{\partial \dot{\mq}\cir} =
+-\begin{bmatrix}
+\mE \cdot \mJ_{\mathsf{v}}(\mq\cir) + \mF \\
+\mQ \cdot \mJ_{\mathsf{w}}(\mq\cir) + \mR \\
+\end{bmatrix}
+\end{equation}
+
+\item[e)] Vínculos de quasi-acelerações
+
+Derivando \eqref{eq:VinculosQuasiVel}, temos:
+\begin{equation} \label{eq:VinculosQuasiAce}
+\dot{\overline{\mp}}(\mq,\dot{\mq},\ddot{\mq}) =
+\begin{bmatrix}
+\ddot{\overline{\mq}}(\mq,\dot{\mq}, \ddot{\mq}) \\
+\dot{\overline{\momega}}(\mq,\dot{\mq}, \ddot{\mq})
+\end{bmatrix}
+= 
+\begin{bmatrix}
+\mD \cdot \ddot{\mq}\ssh - \mE \cdot (\mJ_{\mathsf{v}}(\mq\cir) \cdot \ddot{\mq}\cir + \ma\cir(\mq\cir,\dot{\mq}\cir))  - \mF \cdot \ddot{\mq}\cir \\
+\mP \cdot \ddot{\mq}\ssh - \mQ \cdot (\mJ_{\mathsf{w}}(\mq\cir) \cdot \ddot{\mq}\cir + \dot{\momega}\cir(\mq\cir,\dot{\mq}\cir))  - \mR \cdot \ddot{\mq}\cir
+\end{bmatrix}
+=
+\mzr
+\end{equation}
+
+Sendo:
+\begin{equation}
+\ma\cir(\mq\cir,\dot{\mq}\cir) = \begin{bmatrix}
+\ma_{\ssB_1}(\mq_1,\dot{\mq}_1)^\msT & ... & \ma_{\ssB_n}(\mq_n,\dot{\mq}_n)^\msT
+\end{bmatrix}^\msT
+\end{equation}
+\begin{equation}
+\dot{\momega}\cir(\mq\cir,\dot{\mq}\cir) = \begin{bmatrix}
+\dot{\momega}_{\ssB_1}(\mq_1,\dot{\mq}_1)^\msT & ... & \dot{\momega}_{\ssB_n}(\mq_n,\dot{\mq}_n)^\msT
+\end{bmatrix}^\msT
+\end{equation}
+
+Repare que \eqref{eq:VinculosQuasiAce} pode ser reescrita como:
+\begin{equation}
+\dot{\overline{\mp}}(\mq,\dot{\mq},\ddot{\mq}) = \mA(\mq)\ddot{\mq} - \mb(\mq,\dot{\mq}) = \mzr
+\end{equation}
+
+Sendo:
+\begin{equation}
+\mb(\mq,\dot{\mq}) =
+\begin{bmatrix}
+\mE \cdot \ma\cir(\mq\cir,\dot{\mq}\cir) \\
+\mQ \cdot \dot{\momega}\cir(\mq\cir,\dot{\mq}\cir) \\
+\end{bmatrix}
+\end{equation}
+
+\end{itemize}
+
+\item[iii)] Acoplamento de subsistemas
+
+Seja $\mf$ a matriz-coluna contendo todos os sistemas de forças ativas generalizadas:
+\begin{equation} \label{eq:fParalelos}
+\mf = 
+\begin{bmatrix}
+\overline{\mf}_{\ssB_0} \\
+\vdots \\
+\overline{\mf}_{\ssB_n}  
+\end{bmatrix}
+=
+\begin{bmatrix}
+\mu_0 \\
+\vdots \\
+\mu_n  
+\end{bmatrix}
+-
+\begin{bmatrix}
+\mM_{\ssB_0}(\mq_0) & \ldots & \mzr\\
+\vdots & \ddots & \vdots\\
+\mzr &\ldots  & \mM_{\ssB_n}(\mq_n)
+\end{bmatrix}
+\cdot
+\ddot{\mq} \;
+-
+\begin{bmatrix}
+\mv_{\ssB_0}(\mq_0,\dot{\mq}_0) \\
+\vdots \\
+\mv_{\ssB_n}(\mq_n,\dot{\mq}_n)  
+\end{bmatrix}
+-
+\begin{bmatrix}
+\mg_{\ssB_0}(\mq_0) \\
+\vdots \\
+\mg_{\ssB_n}(\mq_0)  
+\end{bmatrix}
+\end{equation}
+
+Definindo:
+\begin{equation}
+\mM'(\mq) =
+\begin{bmatrix}
+\mM_{\ssB_0}(\mq_0) & \ldots & \mzr\\
+\vdots & \ddots & \vdots\\
+\mzr &\ldots  & \mM_{\ssB_n}(\mq_n)
+\end{bmatrix}
+\end{equation}
+\begin{equation}
+\mv'(\mq,\dot{\mq}) =
+\begin{bmatrix}
+\mv_{\ssB_0}(\mq_0,\dot{\mq}_0)^\msT &
+... &
+\mv_{\ssB_n}(\mq_n,\dot{\mq}_n)^\msT
+\end{bmatrix}^\msT
+\end{equation}
+\begin{equation}
+\mg'(\mq) =
+\begin{bmatrix}
+\mg_{\ssB_0}(\mq_0)^\msT &
+... &
+\mg_{\ssB_n}(\mq_0)^\msT  
+\end{bmatrix}^\msT
+\end{equation}
+\begin{equation}
+\mu' =
+\begin{bmatrix}
+\mu_0^\msT &
+... &
+\mu_n^\msT  
+\end{bmatrix}^\msT
+\end{equation}
+
+\eqref{eq:fParalelos} pode ser reescrita como:
+\begin{equation}
+\mf = \mu' - \mM'(\mq) \cdot \ddot{\mq} - \mv'(\mq,\dot{\mq}) - \mg'(\mq)
+\end{equation}
+
+Um possível complemento ortogonal para o jacobiano dos vínculos de quasi-velocidades ($\mA$) é dado por
+\begin{equation} \label{eq:CComplemento}
+\mC(\mq) =
+\begin{bmatrix}
+\mone \\
+-\mA\cir(\mq)^\msP \cdot \mA\ssh(\mq)
+\end{bmatrix}
+\end{equation}
+
+Pois:
+\begin{equation}
+\mA(\mq) \cdot \mC(\mq) = \mA\ssh(\mq) - \mA\ssh(\mq) = \mzr
+\end{equation}
+e para configurações não singulares o posto de $\begin{bmatrix} \mC(\mq)^\msT \\ \mA(\mq) \end{bmatrix}$ é cheio.
+
+Além disso, repare que $\mC$ respeita a seguinte relação:
+\begin{equation} \label{eq:CCinematica}
+\dot{\mq} = \mC(\mq) \cdot \dot{\mq}\ssh
+\end{equation}
+
+Sendo assim, a equação dinâmica do mecanismo paralelo pode ser escrita como:
+\begin{equation}
+\mC^\msT \mf = \mzr
+\end{equation}
+
+Ou seja:
+\begin{equation} \label{eq:EquaçãoDinamicaParalelos}
+\mC(\mq)^\msT (   \mM'(\mq)\ddot{\mq} + \mv'(\mq,\dot{\mq}) + \mg'(\mq) ) = \mC(\mq)^\msT \mu'
+\end{equation}
+
+\item[iv)] Simulação dinâmica direta
+
+É possível realizar a simulação dinâmica direta do sistema utilizando a equação dinâmica \eqref{eq:EquaçãoDinamicaParalelos} e os vínculos de quasi-acelerações \eqref{eq:VinculosQuasiAce}:
+\begin{equation}
+\begin{cases}
+\mC(\mq)^\msT (   \mM'(\mq)\ddot{\mq} + \mv'(\mq,\dot{\mq}) + \mg'(\mq) ) = \mC(\mq)^\msT \mu' \\
+\mA(\mq)\ddot{\mq} = \mb(\mq,\dot{\mq})
+\end{cases}
+\end{equation}
+
+Reescrevendo em forma matricial:
+\begin{equation}
+\begin{bmatrix}
+\mC(\mq)^\msT \mM'(\mq) \\
+\mA(\mq)
+\end{bmatrix}
+\cdot
+\ddot{\mq}
+=
+\begin{bmatrix}
+\mC(\mq)^\msT (\mu' - \mv'(\mq,\dot{\mq}) - \mg'(\mq) ) \\
+\mb(\mq,\dot{\mq})
+\end{bmatrix}
+\end{equation}
+
+É necessário que as condições iniciais respeitem os vínculos de posição e velocidades. Com isso, teoricamente, os vínculos continuariam sendo respeitados na solução do sistema de EDOs. Porém, devido a erros numéricos de truncamento e erros associados ao método de integração numérica utilizado, os vínculos de posição e velocidade podem deixar de ser respeitados. Esse problema pode ser resolvido utilizando a técnica das constantes de estabilização de Baumgarte \cite{Baumgarte}. A idéia é substituir a equação dos vínculos de aceleração pela seguinte equação:
+\begin{equation} \label{eq:VinculosQuasiAce2}
+\overline{\mp}'(\mq, \dot{\mq}, \ddot{\mq}) =
+\begin{bmatrix}
+\ddot{\overline{\mq}} + 2\lambda \dot{\overline{\mq}} + \lambda^2 \overline{\mq} \\
+\dot{\overline{\momega}} + \lambda \overline{\momega}
+\end{bmatrix}
+=
+\begin{bmatrix}
+\ddot{\overline{\mq}} \\
+\dot{\overline{\momega}}
+\end{bmatrix}
++
+\lambda
+\begin{bmatrix}
+2 \cdot \mone & \mzr \\
+\mzr & \mone
+\end{bmatrix}
+\cdot
+\begin{bmatrix}
+\dot{\overline{\mq}} \\
+\overline{\momega}
+\end{bmatrix}
++
+\lambda^2
+\begin{bmatrix}
+\overline{\mq} \\
+\mzr
+\end{bmatrix}
+= \mzr
+\end{equation}
+
+Substituindo \eqref{eq:VinculosQuasiVel} e \eqref{eq:VinculosQuasiAce} em \eqref{eq:VinculosQuasiAce2}, temos:
+\begin{equation} \label{eq:VinculosQuasiAce3}
+\overline{\mp}'(\mq, \dot{\mq}, \ddot{\mq}) =
+\mA(\mq) \ddot{\mq} - \mb(\mq, \dot{\mq})
++
+\lambda
+\begin{bmatrix}
+2 \cdot \mone & \mzr \\
+\mzr & \mone
+\end{bmatrix}
+\cdot
+\mA(\mq) \cdot \dot{\mq} +
+\lambda^2
+\begin{bmatrix}
+\overline{\mq}(\mq) \\
+\mzr
+\end{bmatrix}
+= \mzr
+\end{equation}
+
+Impondo que \eqref{eq:VinculosQuasiAce3} seja respeitada, garantimos que $\overline{\mq}(\mq)$ e $\overline{\momega}(\mq, \dot{\mq})$ tenderão exponencialmente a zero, para $\lambda > 0$, ou seja, irá fazer com que os vínculos de posição e velocidades sejam respeitados mesmo havendo erros de truncamento e erros associados ao método de integração numérica de EDOs. É importante ressaltar que $\lambda$ é superiomente limitado pelo passo de integração $h$ e pelo método de integração, porém, escolhendo $\lambda = 1/h$ já garante a estabilidade do método para praticamente qualquer método de integração numérica de EDOs.
+
+Sendo assim, o sistema de EDOs que será utilizado para realizar a simualação dinâmica direta é dado por:
+\begin{equation}
+\begin{bmatrix}
+\mC(\mq)^\msT \mM'(\mq) \\
+\mA(\mq)
+\end{bmatrix}
+\cdot
+\ddot{\mq}
+=
+\begin{bmatrix}
+\mC(\mq)^\msT (\mu' - \mv'(\mq,\dot{\mq}) - \mg'(\mq) ) \\
+\mb(\mq,\dot{\mq}) -
+\lambda
+\begin{bmatrix}
+2 \cdot \mone & \mzr \\
+\mzr & \mone
+\end{bmatrix}
+\cdot
+\mA(\mq) \cdot \dot{\mq} -
+\lambda^2
+\begin{bmatrix}
+\overline{\mq}(\mq) \\
+\mzr
+\end{bmatrix} 
+\end{bmatrix}
+\end{equation}
+
+\item[v)] Simulação dinâmica inversa
+
+Na simulação dinâmica inversa, são dados os perfis de $\mq\ssh$, $\dot{\mq}\ssh$ e $\ddot{\mq}\ssh$ em função do tempo e obtem-se os perfis dos esforços nos atuadores para a trajetória dada. Para isso, será utilizada a equação dinâmica \eqref{eq:EquaçãoDinamicaParalelos}:
+$$ \mC(\mq)^\msT (   \mM'(\mq)\ddot{\mq} + \mv'(\mq,\dot{\mq}) + \mg'(\mq) ) = \mC(\mq)^\msT \mu' $$
+
+Repare que os termos desta equação dependem de $\mq$, $\dot{\mq}$ e $\ddot{\mq}$. Sendo assim, primeiramente é preciso obter $\mq$, $\dot{\mq}$ e $\ddot{\mq}$ dados $\mq\ssh$, $\dot{\mq}\ssh$ e $\ddot{\mq}\ssh$.
+
+$\mq$ é obtido resolvendo numéricamente a equação dos vínculos de posição \eqref{eq:VinculosPosicao2}, a qual é um sistema de equações algébricas não lineares.
+$$ \overline{\mq}(\mq) = \mzr $$
+
+Tendo obtido $\mq$, $\dot{\mq}$ é obtido pela equação \eqref{eq:CCinematica}:
+$$ \dot{\mq} = \mC(\mq) \cdot \dot{\mq}\ssh $$
+
+Para obter $\ddot{\mq}$, desenvolvemos a equação dos vínculos de quasi-acelerações \eqref{eq:VinculosQuasiAce}:
+$$ \mA\ssh(\mq) \cdot \ddot{\mq}\ssh + \mA\cir(\mq) \cdot \ddot{\mq}\cir = \mb(\mq, \dot{\mq}) $$
+$$ \Rightarrow  \ddot{\mq}\cir = \mA\cir(\mq)^\msP (\mb(\mq, \dot{\mq}) - \mA\ssh(\mq) \cdot \ddot{\mq}\ssh) $$
+\begin{equation} \label{eq:d2q_em_funcao}
+\therefore \ddot{\mq} =
+\begin{bmatrix}
+\mzr \\
+\mA\cir(\mq)^\msP \cdot \mb(\mq, \dot{\mq})
+\end{bmatrix}
++
+\begin{bmatrix}
+\mone \\
+-\mA\cir(\mq)^\msP \cdot \mA\ssh(\mq)
+\end{bmatrix}
+\cdot
+\ddot{\mq}\ssh
+\end{equation}
+
+Substituindo \eqref{eq:CComplemento} em \eqref{eq:d2q_em_funcao}, temos:
+\begin{equation} \label{eq:d2q_em_funcao2}
+\therefore \ddot{\mq} = \mC(\mq) \cdot \ddot{\mq}\ssh + \mc(\mq, \dot{\mq})
+\end{equation}
+
+Sendo:
+\begin{equation}
+\mc(\mq, \dot{\mq}) =
+\begin{bmatrix}
+\mzr \\
+\mA\cir(\mq)^\msP \cdot \mb(\mq, \dot{\mq})
+\end{bmatrix}
+\end{equation}
+
+Além disso, normalmente não há atuadores em todas as juntas do mecanismo paralelo. Sendo assim, $\mu'$ pode ser reescrito como:
+\begin{equation} \label{eq:u_estrela}
+\mu' = \mU \cdot \mu^\star
+\end{equation}
+
+Sendo $\mU$ uma matriz constante composta por zeros e uns, e $\mu^\star$ os esforços aplicados pelos atuadores.
+
+Substituindo \eqref{eq:CCinematica}, \eqref{eq:d2q_em_funcao2} e \eqref{eq:u_estrela} em \eqref{eq:EquaçãoDinamicaParalelos}, temos:
+
+\begin{equation}
+\mC(\mq)^\msT \{   \mM'(\mq) \cdot [\mC(\mq) \cdot \ddot{\mq}\ssh + \mc(\mq, \mC(\mq) \cdot \dot{\mq}\ssh)] + \mv'(\mq,\mC(\mq) \cdot \dot{\mq}\ssh) + \mg'(\mq) \} = \mC(\mq)^\msT \mU \cdot \mu^\star
+\end{equation}
+
+Definindo:
+\begin{equation}
+\mZ(\mq)^\msT = \mC(\mq)^\msT \mU
+\end{equation}
+
+Temos:
+\begin{equation} \label{eq:DinamicaInversa1}
+\mC(\mq)^\msT \mM'(\mq) \mC(\mq) \cdot \ddot{\mq}\ssh + \mC(\mq)^\msT \{   \mM'(\mq) \cdot  \mc(\mq, \mC(\mq) \cdot \dot{\mq}\ssh) + \mv'(\mq,\mC(\mq) \cdot \dot{\mq}\ssh) \} + \mC(\mq)^\msT \mg'(\mq)  = \mZ(\mq)^\msT \mu^\star
+\end{equation}
+
+Supondo que não haja atuação redundante, para configurações não singulares, \eqref{eq:DinamicaInversa1} pode ser reescrita como:
+\begin{equation} \label{eq:DinamicaInversa2}
+\mM_{\ssM} (\mq) \cdot \ddot{\mq}\ssh + \mv_{\ssM}(\mq, \dot{\mq}\ssh) + \mg_{\ssM}(\mq)   = \mu^\star
+\end{equation}
+
+Sendo: 
+\begin{equation}
+\mM_{\ssM} (\mq) = (\mZ(\mq)^\msT)^\msI \cdot \mC(\mq)^\msT \mM'(\mq) \mC(\mq) 
+\end{equation}
+\begin{equation}
+\mv_{\ssM} (\mq, \dot{\mq}\ssh) = (\mZ(\mq)^\msT)^\msI \cdot \mC(\mq)^\msT \{   \mM'(\mq) \cdot  \mc(\mq, \mC(\mq) \cdot \dot{\mq}\ssh) + \mv'(\mq,\mC(\mq) \cdot \dot{\mq}\ssh) \} 
+\end{equation}
+\begin{equation}
+\mg_{\ssM} (\mq) = (\mZ(\mq)^\msT)^\msI \cdot \mC(\mq)^\msT \mg'(\mq) 
+\end{equation}
+
+Sendo assim, a simulação dinâmica inversa é feita utilizando a equação \eqref{eq:DinamicaInversa2} para obter os esforços nos atuadores, dados $\mq\ssh$, $\dot{\mq}\ssh$ e $\ddot{\mq}\ssh$, e obtendo $\mq$ através da solução numérica da equação \eqref{eq:VinculosGenericosPosicao}.
+
+\end{itemize}
+
+\subsection{Projeto do Controlador}\label{S05-3}
+
+Esta subseção é destinada ao projeto de controladores não lineares robustos, destinados ao controle de posição de plataformas paralelas cujo modelo dinâmico para simulação dinâmica inversa é dado por \eqref{eq:DinamicaInversa2}, utilizando a técnica de controle por modos deslizantes \cite{Slotini, Utkin}.
+
+Sejam $\underline{\lambda}$ uma matriz diagonal positiva, $\mq\ssh_d$ uma matriz-coluna de sinais referência, e $\ms$ uma matriz-coluna dada por:
+\begin{equation} \label{eq:SlidingSurfaces}
+\ms = -(\dot{\me} + \underline{\lambda}\me)
+\end{equation} 
+
+Sendo:
+\begin{equation}
+\me = \mq\ssh_d - \mq\ssh
+\end{equation}
+
+Seja $V(\ms)$ uma função de Lyapunov dada por:
+\begin{equation}
+V(\ms) = \frac{1}{2} \ms^\msT \ms
+\end{equation}
+
+Pela teoria de estabilidade de Lyapunov, se $\dot{V} < 0 \,\, \forall \ms \neq \mzr$, $\ms$ converge para $\mzr$ independentemente das condi\c{c}\~oes iniciais do sistema. Para que isso seja poss\'ivel, \'e imposta a seguinte condi\c{c}\~ao:
+\begin{equation} \label{eq:SlidingCondition}
+\frac{\dd}{\dd t} V(\ms) = \ms^\msT \dot{\ms} \leq - \eta \, \ms^\msT \sign(\ms) 
+\end{equation}
+
+Sendo $\eta$ uma constante positiva. Repare que $\ms^\msT \sign(\ms)$ \'e a soma dos m\'odulos das componentes de $\ms$, o que implica que $- \eta \, \ms^\msT \sign(\ms) < 0 \,\, \forall \ms \neq \mzr$. Repare tamb\'em que se $\dot{\ms} = - \eta \,\sign(\ms)$,  \eqref{eq:SlidingCondition} \'e satisfeita e cada componente de $\ms$ respeita a EDO $\dot{s_i} = - \eta \,\sign(s_i)$, a qual converge para zero em um tempo finito de $t = \frac{|s_i(0)|}{\eta}$. Sendo assim, pode-se dizer que se \eqref{eq:SlidingCondition} for satisfeita, $\ms$ converge para zero em tempo finito e, a partir desse momento, o erro de controle $\me$ converge assintoticamente para zero.
+
+O projeto do controlador \'e feito utilizando a condi\c{c}\~ao \eqref{eq:SlidingCondition}, a qual \'e conhecida como condi\c{c}\~ao de escorregamento. Assim, derivando \eqref{eq:SlidingSurfaces}, temos:
+
+\begin{equation} \label{eq:DSlidingSurfaces}
+\dot{\ms} = \ddot{\mq}\ssh - \msigma
+\end{equation}
+Sendo:
+\begin{equation}
+\msigma = \ddot{\mq}\ssh_d + \underline{\lambda}\dot{\me}
+\end{equation}
+
+Substituindo \eqref{eq:DSlidingSurfaces} em \eqref{eq:SlidingCondition}, temos:
+
+\begin{equation} \label{eq:SlidingCondition2}
+\ms^\msT (\ddot{\mq}\ssh -\msigma + \eta \, \sign(\ms) ) \leq 0
+\end{equation} \\
+
+Com o intuito de deixar um pouco menos carregada a notação, definimos:
+\begin{equation}
+\mH(\mq) = \mM_{\ssM}(\mq)
+\end{equation}
+\begin{equation}
+\mh(\mq, \dot{\mq}\ssh) = \mv_{\ssM}(\mq, \dot{\mq}\ssh) + \mg_{\ssM}(\mq)
+\end{equation}
+\begin{equation}
+\mup = \mu^\star
+\end{equation}
+
+Sendo assim, equação \eqref{eq:DinamicaInversa2} pode ser reescrita como:
+\begin{equation} \label{eq:ModeloControle}
+\mH(\mq)  \ddot{\mq}\ssh + \mh(\mq,\dot{\mq}\ssh) = \mup
+\end{equation}
+
+\eqref{eq:ModeloControle} será utilizada para realizar o projeto do controlador. \\
+
+
+
+Isolando $\ddot{\mq}\ssh$ em \eqref{eq:ModeloControle} e subtituindo em \eqref{eq:SlidingCondition2}, temos:
+\begin{equation} \label{eq:SlidingCondition3}
+\ms^\msT (\mH^\msI (\mup - \mh ) -\msigma + \eta \, \sign(\ms) ) \leq 0
+\end{equation}
+
+Para satisfazer \eqref{eq:SlidingCondition3}, \'e utilizada a seguinte lei de controle:
+\begin{equation} \label{eq:ControlLawSRed}
+\mup = \hat{\mh} + \hat{\mH}( \msigma - \underline{k} \sign(\ms) )
+\end{equation}
+
+Sendo $\hat{\mh}$ e $\hat{\mH}$ estimadores de $\mh$ e $\mH$, respectivamente, e $\underline{k}$ uma matriz diagonal positiva. Substituindo \eqref{eq:ControlLawSRed} em \eqref{eq:SlidingCondition3}, temos:
+\begin{equation} \label{eq:SlidingCondition4}
+\ms^\msT (\mdelta + \mDelta \msigma  + \eta \, \sign(\ms) - (\mDelta + \mone) \underline{k} \sign(\ms) ) \leq 0
+\end{equation}
+
+Sendo:
+\begin{equation}
+\mdelta(\mq, \dot{\mq}\ssh) = \mH^\msI (\hat{\mh} - \mh)
+\end{equation}
+\begin{equation}
+\mDelta(\mq) = \mH^\msI \hat{\mH} - \mone
+\end{equation}
+
+Pode-se dizer que \eqref{eq:SlidingCondition4} \'e sempre satisfeita se:
+\begin{equation} \label{eq:DesigualdadeK1}
+(\mDelta + \mone) \cdot \diag(\underline{k})  \geq | \mdelta + \mDelta \msigma  + \eta \, \sign(\ms) |
+\end{equation}
+
+Aplicando a desigualdade triangular em cada componente do lado esquerdo de \eqref{eq:DesigualdadeK1}, temos:
+\begin{equation}
+| \mdelta + \mDelta \msigma  + \eta \, \sign(\ms) | \leq |\mdelta|_{max} + |\mDelta|_{max} |\msigma| + \diag(\eta \mone)
+\end{equation}
+
+Além disso, pode-se fazer a seguinte majoração no lado direito de \eqref{eq:DesigualdadeK1}:
+\begin{equation}
+(\mDelta + \mone) \cdot \diag(\underline{k})  \geq (\mone - |\mDelta|_{max} ) \cdot \diag(\underline{k})
+\end{equation}
+
+Portanto, se a seguinte inequa\c{c}\~ao matricial for respeitada:
+\begin{equation} \label{eq:DesigualdadeK2}
+(\mone - |\mDelta|_{max} ) \cdot \diag(\underline{k})  \geq |\mdelta|_{max} + |\mDelta|_{max} |\msigma| + \diag(\eta \mone)
+\end{equation}
+
+\eqref{eq:SlidingCondition4} ser\'a respeitada, o que garante que a condi\c{c}\~ao de escorregamento \eqref{eq:SlidingCondition} tamb\'em seja respeitada e consequentemente garante a converg\^encia do erro de controle para zero.
+
+Uma poss\'ivel solu\c{c}\~ao para \eqref{eq:DesigualdadeK2} é dada por:
+\begin{equation} \label{eq:MatrizDiagk}
+\diag(\underline{k})  = (\mone - |\mDelta|_{max} )^\msI ( |\mdelta|_{max} + |\mDelta|_{max} |\msigma| + \diag(\eta \mone) )
+\end{equation}
+
+A qual é válida apenas se $(\mone - |\mDelta|_{max} )^\msI$ for positiva. \\
+
+Sabendo-se que, dadas as passagens feitas para a obtenção de $\mv_{\ssM}$ no algoritmo de modelagem, $\mv_{\ssM}$ pode ser escrito da seguinte maneira:
+\begin{equation}
+\mv_{\ssM}(\mq, \dot{\mq}\ssh) = \sum_{i=1}^{\nu\ssh} \sum_{j=1}^i \mgamma_{i,j}(\mq) \dot{q}\ssh_i \dot{q}\ssh_j 
+\end{equation}
+
+Além disso, definindo:
+\begin{equation}
+\mgamma(\mq) = \mg_{\ssM}(\mq)
+\end{equation}
+\begin{equation}
+\mdelta_0(\mq) = \mH(\mq)^\msI (\hat{\mgamma}(\mq) - \mgamma(\mq))
+\end{equation}
+\begin{equation}
+\mdelta_{i,j}(\mq) = \mH(\mq)^\msI (\hat{\mgamma}_{i,j}(\mq) - \mgamma_{i,j}(\mq))
+\end{equation}
+
+Temos que:
+\begin{equation}
+\mdelta(\mq, \dot{\mq}\ssh) = \mdelta_0(\mq) + \sum_{i=1}^{\nu\ssh} \sum_{j=1}^i \mdelta_{i,j}(\mq) \dot{q}\ssh_i \dot{q}\ssh_j 
+\end{equation}
+
+Sendo assim, a equação \eqref{eq:MatrizDiagk} pode ser reescrita como:
+\begin{equation} \label{eq:MatriDiagk2}
+\diag(\underline{k})  = \meta + \mGamma |\msigma| + \sum_{i=1}^{\nu\ssh}\sum_{j=1}^{i} \meta_{i,j} |\dot{q}\ssh_i||\dot{q}\ssh_j| 
+\end{equation}
+
+Sendo $\mGamma$, $\meta$ e $\meta_{i,j}$  matrizes constantes dadas por:
+\begin{equation}
+\mGamma = (\mone - |\mDelta|_{max} )^\msI |\mDelta|_{max}
+\end{equation}
+\begin{equation}
+\meta = (\mone - |\mDelta|_{max} )^\msI ( | \mdelta_0 |_{max} + \diag(\eta \mone) )
+\end{equation}
+\begin{equation}
+\meta_{i,j} = (\mone - |\mDelta|_{max} )^\msI | \mdelta_{i,j} |_{max}, \, i=1,...,\nu\ssh, \, j = 1,...,i
+\end{equation}
+
+
+%Uma poss\'ivel solu\c{c}\~ao para \eqref{eq:DesigualdadeK2} \'e obtida fazendo $\underline{k} = k \mone$, a qual \'e v\'alida apenas se o somat\'orio de cada uma das linhas de $|\mDelta|_{max}$ for menor do que $1$. Esta solu\c{c}\~ao \'e dada por:
+%\begin{equation}
+%k = \eta + \displaystyle\max_{1 \leq i \leq \nu\ssh} \Big( \frac{|\delta_i|_{max}}{1 - \sum_{j=1}^{\nu\ssh} |\Delta_{i,j}|_{max} } \Big) + \sum_{\kappa = 1}^{\nu\ssh} \displaystyle\max_{1 \leq i \leq \nu\ssh} \Big( \frac{|\Delta_{i,\kappa}|_{max}}{1 - \sum_{j=1}^{\nu\ssh} |\Delta_{i,j}|_{max} } \Big) |\sigma_\kappa|
+%\end{equation}
+
+%Sendo $\delta_i$ e $\sigma_i$ as i-\'esimas componentes de $\mdelta$ e $\msigma$, repectivamente, e $\Delta_{i,j}$ o elemento da i-\'esima linha e j-\'esima coluna de $\mDelta$.
+
+\subsection{Simulações}\label{S05-4}
+Nesta subseção, será realizada a simulação dinâmica direta do mecânimo 5R utilizando o algoritmo de modelagem e simulação de mecanismos paralelos apresentado, e a lei de controle apresentada na subseção anterior. Serão consideradas incertezas paramétricas, tanto no projeto do controlador, quanto na simulação.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.10]{figures/5Rscan.jpg}  
+	\caption{Pentágono articulado (5R)}
+	\label{fig:5R}
+\end{figure}
+
+O mecanismo 5R será modelado através do acoplamento de 2 subsistemas seriais $\ssB_1$ e $\ssB_2$ do tipo \underline{R}\underline{R}, e um efetuador pontual $\ssB_0$ de massa $m_0$.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.055]{figures/RR.jpg}  
+	\caption{Mecanismo \underline{R}\underline{R}}
+	\label{fig:RR}
+\end{figure}
+
+
+\begin{itemize}
+\item[i)] Modelo do efetuador
+
+O modelo do efetuador pontual $\ssB_0$ segue o formato dado pela equação \eqref{eq:ModeloDosSubsistemas}, ou seja:
+\begin{equation}
+\overline{\mf}_{\ssB_0}(\mu_0, \mq_0, \dot{\mq}_0, \ddot{\mq}_0) =  \mu_0 - (\mM_{\ssB_0}(\mq_0) \ddot{\mq}_0 + \mv_{\ssB_0}(\mq_0,\dot{\mq}_0) + \mg_{\ssB_0}(\mq_0)) = \mzr
+\end{equation}
+Para o subsistema em questão, temos:
+\begin{equation}
+\mM_{\ssB_0}(\mq_0) = \begin{bmatrix}
+m_0 & 0 \\
+0 & m_0 \\
+\end{bmatrix}
+\end{equation}
+\begin{equation}
+\mv_{\ssB_0}(\mq_0,\dot{\mq}_0) = \mzr
+\end{equation}
+\begin{equation}
+\mg_{\ssB_0}(\mq_0) = \begin{bmatrix}
+0 &
+m_0 g \\
+\end{bmatrix}^\msT
+\end{equation}
+\begin{equation}
+\mq_0 = \mq\ssh = \begin{bmatrix}
+x &
+y
+\end{bmatrix}^\msT
+\end{equation}
+\begin{equation}
+\mu_0 = \mzr
+\end{equation}
+
+
+
+\item[ii)] Parâmetros de Denavit-Hartemberg das cadeias seriais
+
+\begin{table}[H]
+\begin{center}
+\caption[DH]{Parâmetros de Denavit-Hartemberg do mecanismo \underline{R}\underline{R}}
+\begin{tabular}{|c|c|c|c|c|c|} 
+	\hline
+	\rule[-2mm]{0mm}{6mm}
+	Ligamento & $a_i$ & $\alpha_i$ & $d_i$ & $\theta_i$ \\
+	\hline
+	\rule[-2mm]{0mm}{6mm}
+	(1) & $l_1$ & $0$ & $0$ & $q_1(t)$  \\
+	\rule[-1mm]{0mm}{5mm}
+	(2) & $l_2$ & $0$ & $0$ & $q_2(t)$  \\
+	\hline
+\end{tabular}
+\label{tab:DH}
+\end{center}
+\end{table}
+
+\item[iii)] Arquitetura do mecanismo paralelo
+
+É possível relacionar as coordenadas um ponto no espaço descrito no sistema $\ttN$ com as coordenadas do mesmo ponto escritas nos sistemas $\ttN_1$ e $\ttN_2$ da seguinte maneira:
+\begin{equation}
+\vct{\ttp}_{\ttN} = \begin{bmatrix}
+1 & 0 & 0 \\
+0 & 1 & 0 \\
+0 & 0 & 1 \\
+\end{bmatrix}
+\cdot
+\vct{\ttp}_{\ttN_1}
++
+\begin{bmatrix}
+l_0 \\
+0 \\
+0 
+\end{bmatrix}
+\end{equation}
+\begin{equation}
+\vct{\ttp}_{\ttN} = \begin{bmatrix}
+-1 & 0 & 0 \\
+0 & 1 & 0 \\
+0 & 0 & -1 \\
+\end{bmatrix}
+\cdot
+\vct{\ttp}_{\ttN_2}
++
+\begin{bmatrix}
+-l_0 \\
+0 \\
+0 
+\end{bmatrix}
+\end{equation}
+
+Escolhendo o ponto $\ttp$ como sendo o efetuador do mecanismo paralelo, o qual tem a mesma localização dos efetuadores das cadeias serias neste caso, temos:
+\begin{equation}
+\mq\ssh = 
+\begin{bmatrix}
+1 & 0 & 0 \\
+0 & 1 & 0 \\
+\end{bmatrix}
+\cdot
+\mx_1(\mq_1)
++
+\begin{bmatrix}
+l_0 \\
+0 \\
+\end{bmatrix}
+\end{equation}
+\begin{equation}
+\mq\ssh = 
+\begin{bmatrix}
+-1 & 0 & 0 \\
+0 & 1 & 0 \\
+\end{bmatrix}
+\cdot
+\mx_2(\mq_2)
++
+\begin{bmatrix}
+-l_0 \\
+0 \\
+\end{bmatrix}
+\end{equation}
+
+Sendo assim, temos que os vínculos de posição são dados por:
+\begin{equation}
+\overline{\mq}(\mq) =
+\begin{bmatrix}
+1 & 0 \\
+0 & 1 \\
+1 & 0 \\
+0 & 1 \\
+\end{bmatrix}
+\cdot
+\mq\ssh
+-
+\begin{bmatrix}
+1 & 0 & 0 & 0 & 0 & 0 \\
+0 & 1 & 0 & 0 & 0 & 0 \\
+0 & 0 & 0 & -1 & 0 & 0 \\
+0 & 0 & 0 & 0 & 1 & 0 \\
+\end{bmatrix}
+\cdot
+\mx(\mq\cir)
+-
+\begin{bmatrix}
+l_0 \\
+0 \\
+-l_0 \\
+0 \\
+\end{bmatrix}
+= \mzr
+\end{equation}
+
+Como não temos vínculos de velocidades angulares para esse mecanismo, as matrizes que descrevem a arquitetura do mecanismo são dadas por:
+\begin{multicols}{3}
+\begin{equation}
+\md = \begin{bmatrix}
+l_0 \\
+0 \\
+-l_0 \\
+0 \\
+\end{bmatrix}
+\end{equation} \\
+\begin{equation}
+\mD = \begin{bmatrix}
+1 & 0 \\
+0 & 1 \\
+1 & 0 \\
+0 & 1 \\
+\end{bmatrix}
+\end{equation} \\
+\begin{equation}
+\mE = \begin{bmatrix}
+1 & 0 & 0 & 0 & 0 & 0 \\
+0 & 1 & 0 & 0 & 0 & 0 \\
+0 & 0 & 0 & -1 & 0 & 0 \\
+0 & 0 & 0 & 0 & 1 & 0 \\
+\end{bmatrix}
+\end{equation}
+\end{multicols}
+\begin{equation}
+\mF = \mzr
+\end{equation}
+\begin{equation}
+\mP = \mQ = \mR = \vct{\varnothing}
+\end{equation}
+
+\item[iv)] Parâmetros e incertezas do modelo
+
+Definimos os seguinte parâmetros e incertezas para o mecanismo em questão:
+
+\begin{multicols}{2}
+\begin{itemize}
+\item[-] $l_1 = 0.12 m$
+\item[-] $l_2 = 0.15 m$
+\item[-] $l_{g1} = (0.06 \pm 0.009) m$
+\item[-] $l_{g2} = (0.075 \pm 0.011) m$
+\item[-] $m_0 = 0 \, kg$
+\item[-] $m_1 = (0.143 \pm 0.0215) kg$
+\item[-] $m_2 = (0.171 \pm 0.0257) kg$
+\item[-] $Jz_1 = (171.6 \pm 25.7 ) 10^{-6} kg\cdot m^2$
+\item[-] $Jz_2 = (320.6 \pm 48.1 ) 10^{-6} kg\cdot m^2$
+\item[-] $g = 9.8 m/s^2$
+\end{itemize}
+\end{multicols}
+
+\item[v)] Espaço de trabalho
+
+Dados os parâmetros geométricos defidos acima, obtemos o seguinte espaço de trabalho para o mecanismo:
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.25]{figures/Workspace.pdf}  
+	\caption{Espaço de trabalho do mecanismo \underline{R}\underline{R}}
+	\label{fig:RRWS}
+\end{figure}
+
+A região em azul escuro é a região não pertencente ao espaço de trabalho do mecanismo. As regiões em azul claro, em amarelo, e em vermelho são regiões pertencententes ao espaço do mecanismo. A região a amarela é considerada singular (próxima a singularidades) e a vermelha é a trajetória a ser seguida pelo mecanismo.
+
+\item[vi)] Controlador
+
+A lei de controle por modos deslizantes que será utilizada na simulação dinâmica direta é dada pelas equações \eqref{eq:ControlLawSRed} e \eqref{eq:MatriDiagk2}. $\mGamma$, $\meta$ e $\meta_{i,j}$ são obtidas da seguinte maneira:
+\begin{itemize}
+\item[$\bullet$] Discretiza-se o espaço de trabalho em um número finito de pontos considerados não-singulares. Foi adotada um discretização de $1 cm$ na horizontal e na vertical.
+\item[$\bullet$] Para cada ponto calcula-se $|\mDelta|$, $|\mdelta_0|$ e $|\mdelta_{i,j}|$ para todas as combinações possíveis de parâmetros, com os parâmetros podendo assumir seu valor mínimo e seu valor máximo. Como temos 6 parâmetros incertos, temos 64 possibilidades.
+\item[$\bullet$] Obtem-se o valor máximo de $|\mDelta|$, $|\mdelta_0|$ e $|\mdelta_{i,j}|$ para cada ponto.
+\item[$\bullet$] Obtem-se o valor máximo de $|\mDelta|$, $|\mdelta_0|$ e $|\mdelta_{i,j}|$ para o espaço de trabalho, a partir do valor máximo em cada ponto.
+\end{itemize}
+
+Realizando-se esse procedimento e adotando $\eta = 20.0$, obtemos:
+\begin{equation}
+\diag(\underline{k}) =
+\begin{bmatrix}
+75.3 \\
+108
+\end{bmatrix}
++
+\begin{bmatrix}
+37.0 \\
+54.1
+\end{bmatrix} \dot{x}^2
++
+\begin{bmatrix}
+22.7 \\
+35.5
+\end{bmatrix} |\dot{x} \dot{y} |
++
+\begin{bmatrix}
+17.5 \\
+28.5
+\end{bmatrix} \dot{y}^2
++
+\begin{bmatrix}
+1.25 & 0.92 \\
+1.68 & 1.65
+\end{bmatrix}
+\cdot
+\begin{bmatrix}
+|\ddot{x}_d + \lambda \dot{e}_x| \\
+|\ddot{y}_d + \lambda \dot{e}_y|
+\end{bmatrix}
+\end{equation}
+
+\item[vi)] Simulação dinâmica direta
+
+Para realizar a simulação dinâmica direta, definimos:
+
+\begin{itemize}
+
+\item[$\bullet$] Parâmetros do mecanismo:
+\begin{multicols}{2}
+\begin{itemize}
+\item[-] $l_1 = 0.12 m$
+\item[-] $l_2 = 0.15 m$
+\item[-] $l_{g1} = 0.051 m$
+\item[-] $l_{g2} = 0.086 m$
+\item[-] $m_0 = 0 \, kg$
+\item[-] $m_1 = 0.1645 kg$
+\item[-] $m_2 = 0.1967 kg$
+\item[-] $Jz_1 = 197.3 \cdot 10^{-6} kg\cdot m^2$
+\item[-] $Jz_2 = 368.7 \cdot 10^{-6} kg\cdot m^2$
+\item[-] $g = 9.8 m/s^2$
+\end{itemize}
+\end{multicols}
+
+\item[$\bullet$] Parâmetros estimados
+\begin{multicols}{2}
+\begin{itemize}
+\item[-] $\hat{l}_1 = 0.12 m$
+\item[-] $\hat{l}_2 = 0.15 m$
+\item[-] $\hat{l}_{g1} = 0.06 m$
+\item[-] $\hat{l}_{g2} = 0.075 m$
+\item[-] $\hat{m}_0 = 0 \, kg$
+\item[-] $\hat{m}_1 = 0.143 kg$
+\item[-] $\hat{m}_2 = 0.171 kg$
+\item[-] $\hat{J}z_1 = 171.6 \cdot 10^{-6} kg\cdot m^2$
+\item[-] $\hat{J}z_2 = 320.6 \cdot 10^{-6} kg\cdot m^2$
+\item[-] $\hat{g} = 9.8 m/s^2$
+\end{itemize}
+\end{multicols}
+
+\item[$\bullet$] Condições iniciais:
+\begin{equation}
+\begin{cases}
+q\ssh_1(0) = 0.07 m\\
+q\ssh_2(0) = 0.17 m \\
+\dot{q}\ssh_1(0) = 0 \\
+\dot{q}\ssh_2(0) = 0 \\
+\end{cases}
+\end{equation}
+
+\item[$\bullet$] Trajetória de referência:
+\begin{equation}
+\begin{cases}
+q\ssh_{1 \, d}(t) = 0.07 \cos(28.57 t) \\
+q\ssh_{2 \, d}(t) = 0.17 + 0.07 \sin(28.57 t) \\
+\end{cases}
+\end{equation}
+
+\item[$\bullet$] Parâmetros do controlador:
+$$ \lambda = 40.0 $$
+$$ \eta = 20.0 $$
+
+Os parâmetros do mecanismo foram escolhidos de modo que haja um erro de $15\%$ em cada parâmetro incerto.
+Os parâmetros do controlar foram escolhidos de modo que o sistema tenha um tempo de alcance às superfícies de escorregamento $t_r  \leq 0.1 s$ (pois $\ms(0) = [0 \; -2]^\msT$) e um tempo de assentamento de $t_a = 0.1 s$, quando o sistema chega nas superfícies de escorregamento. \\
+\end{itemize}
+
+A função $f(x) = \sign(x)$ foi substituida pela função de saturação $f_{sat}(x) = \tanh(100 x)$, a qual tem as seguintes propriedades:
+\begin{itemize}
+\item[-] $f_{sat}(0.023) = -f_{sat}(-0.023) = 0.98$
+\item[-] $f_{sat}(\infty) = -f_{sat}(-\infty) = 1$
+\item[-] $ \frac{\dd f_{sat}}{\dd x} (0) = 100$
+\end{itemize}
+
+Sua utilização garante a estabilidade nas simulações numéricas, evita o chattering nos atuadores, e ainda garante um erro em regime permanente desprezível para esta aplicação.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.4]{figures/Tanh.pdf}  
+	\caption{Função de saturação $f_{sat}(x) = \tanh(100 x)$}
+	\label{fig:Tanh}
+\end{figure}
+
+\end{itemize}
+
+Aqui seguem os resultados das simulações numéricas:
+
+
+\begin{multicols}{2}
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.31]{figures/Torque1.pdf}  
+	\caption{Torque aplicado pelo atuador 1}
+	\label{fig:Torque1}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.31]{figures/Torque2.pdf}  
+	\caption{Torque aplicado pelo atuador 2}
+	\label{fig:Torque2}
+\end{figure}
+\end{multicols}
+\begin{multicols}{2}
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.31]{figures/ex.pdf}  
+	\caption{Erro de na coordenada $x$}
+	\label{fig:ex}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.31]{figures/ey.pdf}  
+	\caption{Erro de na coordenada $y$}
+	\label{fig:ey}
+\end{figure}
+\end{multicols}
+\begin{multicols}{2}
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.31]{figures/sx.pdf}  
+	\caption{Variável $s_x$}
+	\label{fig:sx}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.31]{figures/sy.pdf}  
+	\caption{Variável $s_y$}
+	\label{fig:sy}
+\end{figure}
+\end{multicols}
+
+Repare que o tempo de alcance de $s_y$ é aproximadamente $t_r = 0.008s < 0.1s$. Além disso, $0.1s$ depois de alcançar a superfície de escorregamento, o erro $e_y$ já é praticamente nulo, como pode-se observar no gráfico da figura \ref{fig:ey}. Sendo assim, temos os resultados coerentes com os parâmetros do controlador adotados. \\
+
+O projeto do controlador foi feito supondo incertezas de $15\%$ nos parâmetros incertos. Porém, realizando a simulação com o mesmo controlador, aumentando para $50\%$ os erros paramétricos, pode-se observar que o sistema ainda consegue ser controlado, com erros de controle na ordem de centésimos de milímetro, como pode ser visto nos resultados abaixo: 
+
+\begin{multicols}{2}
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.31]{figures/Torque12.pdf}  
+	\caption{Torque aplicado pelo atuador 1}
+	\label{fig:Torque12}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.31]{figures/Torque22.pdf}  
+	\caption{Torque aplicado pelo atuador 2}
+	\label{fig:Torque22}
+\end{figure}
+\end{multicols}
+\begin{multicols}{2}
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.31]{figures/ex2.pdf}  
+	\caption{Erro de na coordenada $x$}
+	\label{fig:ex2}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.31]{figures/ey2.pdf}  
+	\caption{Erro de na coordenada $x$}
+	\label{fig:ey2}
+\end{figure}
+\end{multicols}
+\begin{multicols}{2}
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.31]{figures/sx2.pdf}  
+	\caption{Variável $s_x$}
+	\label{fig:sx2}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.31]{figures/sy2.pdf}  
+	\caption{Variável $s_y$}
+	\label{fig:sy2}
+\end{figure}
+\end{multicols}
+
+Para fins de comparação, realizamos a simulação anterior mudando a lei de controle para a tradicional lei de Controle por Torque Computado com amortecimento crítico \cite{Craig}:
+\begin{equation}
+\mup = \hat{\mh}(\mq,\dot{\mq}\ssh) + \hat{\mH}(\mq)( \ddot{\mq}\ssh_d + 2 \lambda \dot{\me} + \lambda^2 \me )
+\end{equation}
+
+Escolhendo $\lambda = 40.0$, obtemos os seguintes resultados:
+
+\begin{multicols}{2}
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.31]{figures/Torque13.pdf}  
+	\caption{Torque aplicado pelo atuador 1}
+	\label{fig:Torque13}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.31]{figures/Torque23.pdf}  
+	\caption{Torque aplicado pelo atuador 2}
+	\label{fig:Torque23}
+\end{figure}
+\end{multicols}
+\begin{multicols}{2}
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.31]{figures/ex3.pdf}  
+	\caption{Erro de na coordenada $x$}
+	\label{fig:ex3}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.31]{figures/ey3.pdf}  
+	\caption{Erro de na coordenada $y$}
+	\label{fig:ey3}
+\end{figure}
+\end{multicols}
+
+Repare que a lei de Controle por Torque Computado não consegue seguir a trajetória de forma satisfatória, mantendo um erro em regime permanente oscilatório com pico $12 mm$ na coordenada $x$ e $27 mm$ na coordenada $y$.
+
+
+
+
+
+
+
+\newpage
+
+%---PUBLICAÇÕES---------------------------------------------------------
+\section{Conclusões Parciais}\label{concl}
+
+Durante a realização do projeto proposto, foi possível concluir que é fundamental a utilização linguagens de alta eficiência computacional para realizar simulações dinâmicas de modelos completos de mecanismos de alta complexidade, apesar da dificuldade em programar em tais linguagens.
+
+Tal constatação foi obtida quando foi feita a tentativa de utilizar um algoritmo de modelagem de mecanismos seriais implementado em Python para realizar a simulação dinâmica inversa de um mecanismo de 6 graus de liberdade. A algoritmo implementado demorava mais de um minuto para calcular cada ponto da simulação. Visto que o mecanismo 2\underline{R}SU+\underline{P}PaP é constituido de 2 cadeias seriais de 6 de liberdade, pode-se concluir que seria inviável realizar simulações dinâmicas deste mecanismos utilizando os algoritmos implementados em Python. Por este motivo, foi feita a migração da implementação dos algoritmos de modelagem para a linguagem C++, a qual se mostrou extremamente eficiente para esse tipo de tarefa. Utilizando o algoritmo implementado em C++, foi possível realizar mais de $10000$ pontos da mesma simulação em menos de 1 segundo.
+
+Também foi possível concluir, por meio de simulações, que é possível obter alto desempenho no controle mecanismos paralelos em altas velocidades/acelerações utilizando técnicas de controle não linear robusto, mesmo com altos níveis de incerteza nos parâmetros do modelo. 
+
+%Como as linguagens de programação com essa característica não apresentam recursos de manipulação simbólica, essa abordagem permite a obtenção de modelos dinâmicos apenas na forma implícita.
+
+%Desde o início do trabalho realizado, foi buscada a implementação de um algoritmo para a modelagem dinâmica de mecanismos paralelos. Inicialmente, o objetivo do algoritmo proposto era a obtenção de modelos explícitos utilizando recursos de manipulação simbólica. A primeira plataforma utilizada para a utilização de manipulação simbólica foi o software Mathematica, porém, devido a limitações da linguagem, foi feita a migração a biblioteca SymPy da linguagem de programação Python. Foi implementado um algoritmo genérico de modelagem de mecanismos seriais em Python.
+
+\newpage
+%---PUBLICAÇÕES---------------------------------------------------------
+\section{Publicações}\label{publi}
+
+A partir dos resultados obtidos no trabalho de formatura realizado na gradua\c{c}\~ao, foi publicado um artigo intitulado ``Development of a controller for a 3-DOF robotic platform for user interaction in rehabilitation therapies'' \cite{Biorob}, o qual foi escrito em coautoria com Eng. Guilherme Martinho Dobrianskyj e o Prof. Dr. Tarc\'isio Ant\^onio Hess Coelho. Este trabalho foi apresentado no BioRob 2014 (IEEE International Conference on Biomedical Robotics and Biomechatronics) na se\c{c}\~ao de posters, no dia 15 de agosto de 2014. O artigo pode ser acessado por \url{http://dx.doi.org/10.1109/BIOROB.2014.6913880}.
+
+Um cap\' itulo de livro, intitulado ``Dynamic modelling
+and control of balanced parallel mechanisms'' \cite{22orsino}, foi escrito em coautoria com o Dr. Renato M. M. Orsino e com o Prof. Dr. Tarcisio Antonio Hess Coelho, para o livro {\em Dynamic balancing of mechanisms and synthesizing of parallel
+robots}  (editado pelo Prof. Dr. Dan Zhang da Universidade do Instituto de Tecnologia
+de Ontario e publicado pela editora Springer).
+Este cap\'itulo de livro trata do uso de uma metodologia de modelagem modular para o
+balanceamento adaptativo e desenvolvimento de algoritmos de controle para mecanismos
+rob\'oticos paralelos. O capítulo pode ser acessado por \url{http://dx.doi.org/10.1007/978-3-319-17683-3_16}.
+
+Um artigo, publicado no peri\'odico {\em International Journal of Mechanisms and Robotic Systems}, intitulado ``A new approach for obtaining the dynamic balancing conditions in serial mechanisms'' \cite{Coutinho}, foi escrito em coautoria com o Prof. Dr. Tarc\'isio Antonio Hess Coelho. O artigo pode ser acessado por \url{http://dx.doi.org/10.1504/IJMRS.2016.077036}.
+
+
+%---DISCIPLINAS CURSADAS---------------------------------------------------------
+\newpage
+\section{Disciplinas de pós-graduação}\label{disci}
+
+Ao longo do programa foram cumpridos 56 cr\'editos, tendo cursado 7 disciplinas 
+de p\'os-gradua\c{c}\~ao:
+\begin{itemize}
+\item PME--5004 --- Complementos de Matem\'atica I
+\item PMR--5010 --- Elementos Finitos em Sistemas Multif\'isicos: Fundamentos
+\item PMR--5215 --- Otimiza\c{c}\~ao Aplicada ao Projeto de Sistemas Mec\^anicos
+\item PMR--5238 --- An\'alise e S\'intese de Mecanismo Planos e Tridimensionais
+\item PMR--5211 --- Mec\^anica dos S\'olidos Experimental
+\item PMR--5234 --- T\'ecnicas de Ultra-Som e suas aplica\c{c}\~oes na Ind\'ustria e na Medicina
+\item PMR--5014 --- Controle N\~ao Linear Aplicado a Sistemas Mec\^anicos e Mecatr\^onicos
+\end{itemize}
+
+Ressalta-se que em todas as disciplinas foi obtido conceito A, demonstrando bom aproveitamento. \\
+
+Ainda é necessário cumprir mais 24 créditos de pós-graduação, os quais deverão ser cumpridos realizando a publicação de 3 artigos em periódicos indexados, sendo que um dos 3 artigos já foi publicado.
+
+
+
+
+%ETAPAS E ATIVIDADES DO PROJETO----------------------------------------
+\newpage
+\section{Cronograma de Atividades do Projeto}\label{atividades}
+
+Serão realizados as seguintes etapas para a realização da proposta:
+
+\begin{itemize}
+
+\item[(1)] Obtenção do espaço de trabalho e singularidades do mecanismo  2\underline{R}SU+\underline{P}PaP
+\item[(2)] Realização de projeto de controlador por modos deslizantes para o mecanismo 2\underline{R}SU+\underline{P}PaP, considerando os esforços dos atuadores como entradas de controle
+\item[(3)] Simulação dinâmica direta do mecanismo 2\underline{R}SU+\underline{P}PaP controlado pelo controlador projetado
+\item[(4)] Inclusão de atritos nas juntas no algoritmo de modelagem
+\item[(5)] Inclusão das inércias efetivas dos atuadores no algoritmo de modelagem
+\item[(6)] Dedução dos princípios de composição de movimento para as derivadas das acelerações lineares e angulares
+\item[(7)] Aplicações dos princípios de composição de movimento das derivadas das acelerações lineares e angulares para efetuadores e centros de massa de ligamentos de mecanismos seriais
+\item[(8)] Inclusão da dinâmica eletro-mecânica dos atuadores no algoritmo de modelagem
+\item[(9)] Identificação dos parâmetros dos sistemas e suas respectivas incertezas, utilizando os protótipos
+\item[(10)] Realização de projeto de controlador por modos deslizantes para os mecanismos 5R e 2\underline{R}SU+\underline{P}PaP, considerando a tensão elétrica nos atuadores como entrada de controle
+\item[(11)] Simulação dinâmica direta dos mecanismos controlados pelos controladores descritos no item anterior
+\item[(12)] Validação experimental dos controladores projetados, utilizando os protótipos
+\item[(13)] Escrever artigo sobre uma nova abordagem para modelagem dinâmica de mecanismos seriais, utilizando o método Orsino de acoplamento de subsistemas \cite{23orsino}, aliado aos parâmetros de Denavit-Hartenberg \cite{Craig, Denavit, Lipkin}
+\item[(14)] Escrever artigo sobre modelagem dinâmica de mecanismos paralelos, utilizando o método Orsino de acoplamento de subsistemas
+\item[(15)] Escrever artigo sobre controle não linear robusto aplicado a mecanismos paralelos
+\item[(16)] Avaliação geral dos resultados
+\item[(17)] Preparo da tese
+
+%\item[(1)] 	Cumprimentos dos créditos de pós-graduação.
+%\item[(2)] 	Pesquisa e revisão bibliográfica da literatura para o desenvolvimento teórico.
+%\item[(3)] 	Estudo dos aprimoramentos dos métodos de Lagrange, Kane e PTV, desenvolvidos no grupo de pesquisa do professor Dr. Tarcísio Coelho.
+%\item[(4)] 	Aplicação dos métodos em diferentes mecanismos paralelos.
+%\item[(5)] 	Discussão e comparação entre os resultados obtidos utilizando cada um dos métodos aplicados.
+%\item[(6)] 	Simulação da dinâmica inversa para os mecanismos escolhidos.
+%\item[(7)]  Estudo de técnicas de controle não-linear.
+%\item[(8)] 	Simulação da dinâmica direta utilizando as técnicas de controle estudadas.
+%\item[(9)] 	Inclusão de variáveis redundantes nas leis de controle estudadas.
+%\item[(10)] Simulação da dinâmica direita utilizando as técnicas de controle com variáveis redundantes.
+%\item[(11)] 	Comparação e análise dos resultados obtidos utilizando as leis de controles implementadas em simulação.
+%\item[(12)] 	Avaliação geral dos resultados.
+%\item[(13)] Preparo da dissertação.
+\end{itemize}
+
+Aqui segue um cronograma estimado para realização das atividades propostas:
+
+\begin{table}[H]
+\begin{center}
+\caption[Cronograma]{Cronograma -- Planejamento de Atividades por quadrimestre}
+\begin{tabular}{|c|c|c|c|c|c|} 
+	\hline
+	\rule[-2mm]{0mm}{6mm}
+	Ativ./Quad. & $3^o/16$ & $1^o/17$ & $2^o/17$ & $3^o/17$ \\
+	\hline
+	\rule[-2mm]{0mm}{6mm}
+	(1) & \rule[0mm]{10mm}{2mm} &   &  &    \\
+	\rule[-1mm]{0mm}{5mm}
+	(2) & \rule[0mm]{10mm}{2mm} &  &  &    \\
+	\rule[-1mm]{0mm}{5mm}
+	(3) & \rule[0mm]{10mm}{2mm} &  &  &     \\
+	\rule[-1mm]{0mm}{5mm}
+	(4) &  \rule[0mm]{10mm}{2mm} &  &  &     \\
+	\rule[-1mm]{0mm}{5mm}
+	(5) & \rule[0mm]{10mm}{2mm}  &  &  &     \\
+	\rule[-1mm]{0mm}{5mm}
+	(6) &  \rule[0mm]{10mm}{2mm} &  &  &     \\
+	\rule[-1mm]{0mm}{5mm}
+	(7) & \rule[0mm]{10mm}{2mm} &  &  &     \\
+	\rule[-1mm]{0mm}{5mm}
+	(8) & \rule[0mm]{10mm}{2mm}  &  &  &    \\
+	\rule[-2mm]{0mm}{6mm}
+	(9) & \rule[0mm]{10mm}{2mm}  & \rule[0mm]{10mm}{2mm}  &  &    \\
+	\rule[-1mm]{0mm}{5mm}
+	(10) & \rule[0mm]{10mm}{2mm} & \rule[0mm]{10mm}{2mm} &  &     \\
+	\rule[-2mm]{0mm}{6mm}
+	(11) & \rule[0mm]{10mm}{2mm} & \rule[0mm]{10mm}{2mm} &  &    \\
+	\rule[-2mm]{0mm}{6mm}
+	(12) & \rule[0mm]{10mm}{2mm}  & \rule[0mm]{10mm}{2mm} & \rule[0mm]{10mm}{2mm} & \rule[0mm]{10mm}{2mm}   \\
+	\rule[-2mm]{0mm}{6mm}
+	(13) &  & \rule[0mm]{10mm}{2mm} &  &    \\
+	\rule[-2mm]{0mm}{6mm}
+	(14) &  &  & \rule[0mm]{10mm}{2mm} &   \\
+	\rule[-2mm]{0mm}{6mm}
+	(15) &  &  &  & \rule[0mm]{10mm}{2mm}   \\
+	\rule[-2mm]{0mm}{6mm}
+	(16) &  &  & \rule[0mm]{10mm}{2mm} & \rule[0mm]{10mm}{2mm}   \\
+	\rule[-2mm]{0mm}{6mm}
+	(17) &  & \rule[0mm]{10mm}{2mm} & \rule[0mm]{10mm}{2mm} & \rule[0mm]{10mm}{2mm}   \\
+	\hline
+\end{tabular}
+\label{crono}
+\end{center}
+\end{table}
+
+\newpage
+%---SUMÁRIO ESTRUTURADO DA TESE---------------------------------------------------------
+\section{Sumário estruturado da tese}\label{sum}
+
+Esta subseção tem o intuito de apresentar a estrutura de capítulos e sub-capítulos que pretende ser utilizada na tese.
+
+\begin{itemize}
+\item[1)] Introdução
+\item[2)] Revisão da literatura
+\item[3)] Metodologia do projeto
+\item[4)] Modelagem dinâmica
+\begin{itemize}
+\item[4.1)] Algoritmo para modelagem de mecanismos seriais
+\item[4.2)] Algoritmo para modelagem de mecanismos paralelos
+\end{itemize}
+\item[5)] Controle
+\begin{itemize}
+\item[5.1)] Linearização pela realimentação
+\item[5.2)] Controle por Modos Deslizantes
+\item[5.3)] Controle por Modos Deslizantes Adaptativo
+\end{itemize}
+\item[6)] Resultados
+\begin{itemize}
+\item[6.1)] Mecanismos 5R
+\begin{itemize}
+\item[6.1.1)] Simulação
+\item[6.1.2)] Exeperimento
+\end{itemize}
+\item[6.2)] Mecanismo 2\underline{R}SU+\underline{P}PaP
+\begin{itemize}
+\item[6.2.1)] Simulação
+\item[6.2.2)] Exeperimento
+\end{itemize}
+\end{itemize}
+\item[7)] Conclusões
+\item[8)] Referências
+\end{itemize}
+
+\newpage
+
+\phantom{a}
+\bibliographystyle{plain}
+\bibliography{bibliografia}
+
+\end{document}
