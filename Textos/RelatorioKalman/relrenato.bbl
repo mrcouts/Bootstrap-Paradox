@@ -1,0 +1,25 @@
+\begin{thebibliography}{10}
+
+
+\bibitem{CabralLIN}
+E. L. L. Cabral.
+\newblock Lineariza\c{c}\~ao de Sistemas Din\^amicos.
+\newblock {Notas de aula da disciplina PMR2400 - Controle e Automa{c}\~ao II (EPUSP)}, \url{http://sites.poli.usp.br/d/PMR2400/3-%20Lineariza%C3%A7%C3%A3o%20de%20sistemas.pdf} acessado em 15/04/2017.
+
+\bibitem{Coutinho}
+A. G. Coutinho.
+\newblock Projeto de Observador de Ordem Reduzida aplicado a um mecanismo serial do tipo RP.
+\newblock {Trabalho realizado para  a disciplina PME5009  - Introdu\c{c}\~ao \`a Teoria da Estima\c{c}\~ao (EPUSP)}, 2017.
+
+\bibitem{Craig}
+J. J. Craig.
+\newblock {\em {Introduction to robotics: mechanics and control}}.
+\newblock Addison-Wesley series in electrical and computer engineering: control
+  engineering. Pearson/Prentice Hall, 2005.
+
+\bibitem{Fleury}
+A. T. Fleury.
+\newblock Filtro Estendido de Kalman.
+\newblock {Notas de aula da disciplina PME5009  - Introdu\c{c}\~ao \`a Teoria da Estima\c{c}\~ao (EPUSP)}, \url{http://sites.poli.usp.br/d/pme5009/PME5009_notas_aula_site.pdf} acessado em 01/06/2017.
+
+\end{thebibliography}
