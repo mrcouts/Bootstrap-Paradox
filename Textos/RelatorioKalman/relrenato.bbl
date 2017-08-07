@@ -22,4 +22,9 @@ A. T. Fleury.
 \newblock Filtro Estendido de Kalman.
 \newblock {Notas de aula da disciplina PME5009  - Introdu\c{c}\~ao \`a Teoria da Estima\c{c}\~ao (EPUSP)}, \url{http://sites.poli.usp.br/d/pme5009/PME5009_notas_aula_site.pdf} acessado em 01/06/2017.
 
+\bibitem{Tan}
+D. Tan, Z. Chen.
+\newblock On A General Formula of Fourth Order Runge-Kutta.
+\newblock {\em Journal of Mathematical Science \& Mathematics Education 7}, 1--10, 2012.
+
 \end{thebibliography}
