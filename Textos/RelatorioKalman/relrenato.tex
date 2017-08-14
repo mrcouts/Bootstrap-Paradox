@@ -371,7 +371,7 @@ t_{k+1} = t_k + T
 \end{cases}
 \end{equation}
 
-Em sistemas contínuos não lineares a expressão de $\mgg(\mx_k, \muu_k)$ em geral não pode ser obtidade de forma exata, dado que a maioria dos sistemas de equações diferenciais não lineares não possui solução exata. Sendo assim, $\mgg( \mx_k, \muu_k)$ deve ser obtida através de métodos numéricos de soluçãos de EDOs. Neste trabalho iremos utilizar um Runge-Kutta de ordem 4 para realizar a discretização do sistema. Sendo assim, obtemos a seguinte expressão para $\mgg( \mx_k, \muu_k)$:
+Em sistemas contínuos não lineares a expressão de $\mgg(\mx_k, \muu_k)$ em geral não pode ser obtidade de forma exata, dado que a maioria dos sistemas de equações diferenciais não lineares não possui solução exata. Sendo assim, $\mgg( \mx_k, \muu_k)$ deve ser obtida através de métodos numéricos de soluçãos de EDOs. Neste trabalho iremos utilizar o clássico Runge-Kutta de ordem 4 \cite{Tan} para realizar a discretização do sistema. Sendo assim, obtemos a seguinte expressão para $\mgg( \mx_k, \muu_k)$:
 
 \begin{equation} \label{eq:g}
 \mgg(\mx_k, \muu_k) = \mx_k + \frac{T}{6} \Big( \mk_{1 | k} + 2 \mk_{2 | k} + 2 \mk_{3 | k} + \mk_{4 | k} \Big)
