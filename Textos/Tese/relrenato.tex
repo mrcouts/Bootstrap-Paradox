@@ -273,11 +273,62 @@ Esta se\c{c}\~ao apresenta uma s\'intese dos principais resultados te\'oricos ob
 \input{symbols}
 
 %---ALGORITMO PARA MODELAGEM DE PLATAFORMAS ROBÓTICAS------------------------------------------------------------------------------------------
-\subsection{Cinemática de corpos rígidos}\label{S05-0}
+\subsection{Cinemática de corpos rígidos}\label{S05-1}
+
+\subsubsection{Conceitos básicos}\label{S05-01-01}
+
+Esta subseção tem o intuito de apresentar os conceitos de derivada temporal de vetores em um referencial e as definições velocidade e aceleração.
+
+\begin{itemize}
+\item[A)] Derivada temporal de versores
+
+Sejam $\llA$ e $\llB$ dois referenciais referenciais e $\hat{\vx}_{\lllB}$ um versor fixo ao referencial $\llB$. A derivada temporal de $\hat{\vx}_{\lllB}$ no referencial $\llA$ é definida como:
+\begin{equation}
+\frac{\dd^{[{\lllA}]} \hat{\vx}_{\lllB} }{\dd t} = \dot{\hat{\vx}}_{\lllB}^{[\lllA]} = \vomega_{\lllB}^{\lllA} \wedge \hat{\vx}_{\lllB}
+\end{equation}
+
+\item[B)] Derivada temporal de vetores
+
+Seja $\ttB = \{ \vi_{\ttB}, \vj_{\ttB}, \vk_{\ttB} \}$ uma base ortonormal fixa ao referencial $\llB$ e $\vx$ um vetor cuja decomposição na base $\ttB$ é conhecida e dada por $\vx = x \vi_{\ttB} + y \vj_{\ttB} + z \vk_{\ttB} $. A derivada temporal de $\vx$ no referencial $\llA$ é definida como:
+$$
+\frac{\dd^{[{\lllA}]} \vx }{\dd t} = \dot{\vx}^{[\lllA]} = \dot{x} \vi_{\ttB} + \dot{y} \vj_{\ttB} + \dot{z} \vk_{\ttB} + x \dot{\vi}_{\ttB}^{[\lllA]} + y \dot{\vj}_{\ttB}^{[\lllA]} + z \dot{\vk}_{\ttB}^{[\lllA]}
+$$
+$$
+ = \dot{x} \vi_{\ttB} + \dot{y} \vj_{\ttB} + \dot{z} \vk_{\ttB} +  \vomega_{\lllB}^{\lllA} \wedge x \vi_{\ttB} +  \vomega_{\lllB}^{\lllA} \wedge y \vj_{\ttB} + \vomega_{\lllB}^{\lllA} \wedge z \vk_{\ttB}
+$$
+$$
+ = \dot{x} \vi_{\ttB} + \dot{y} \vj_{\ttB} + \dot{z} \vk_{\ttB} + \vomega_{\lllB}^{\lllA} \wedge (x \vi_{\ttB} + y \vj_{\ttB} + z \vk_{\ttB})
+$$
+
+Repare que o termo $\dot{x} \vi_{\lllB} + \dot{y} \vj_{\lllB} + \dot{z} \vk_{\lllB}$ é a derivada temporal do vetor $\vx$ no referencial $\llB$. Sendo assim, temos:
+\begin{equation}
+\frac{\dd^{[{\lllA}]} \vx }{\dd t} = \dot{\vx}^{[\lllA]} = \dot{\vx}^{[\lllB]}  + \vomega_{\lllB}^{\lllA} \wedge \vx
+\end{equation}
+
+
+\item[C)] Definição de vetor velocidade
+
+Seja $\vr_{\tto \rl \ttp} = (\ttp - \tto)$ o vetor que liga do ponto $\tto$ até o ponto $\ttp$, sendo $\tto$ um ponto fixo ao referencial $\llA$. A velocidade do ponto $\ttp$ em relação ao referencial $\llA$ é definida como:
+\begin{equation}
+\vv_\ttp^{\lllA} = \frac{\dd^{[\lllA]} \vr_{\tto \rl \ttp}}{\dd t} = \dot{\vr}_{\tto \rl \ttp}^{[\lllA]}
+\end{equation}
+
+\item[D)] Definição de vetor aceleração
+
+A aceleração do ponto $\ttp$ em relação ao referencial $\llA$ é definida como:
+\begin{equation}
+\va_\ttp^{\lllA} = \frac{\dd^{[\lllA]} \vv_\ttp^{\lllA} }{\dd t}
+\end{equation}
+
+\end{itemize}
+
+
+\subsubsection{Equações de Poisson}\label{S05-01-02}
 
 Esta subseção tem o intuito de apresentar as equações básicos da cinemática de corpos rígidos,  as equações de Poisson para velocidades, acelerações e sobre-acelerações.
 
 \begin{itemize}
+
 \item[A)] Equação de Poisson para velocidades
 
 Sejam $\ttp$ e $\tto$ dois pontos pertencentes a um corpo rígido $\llB$, e $\llA$ um referencial. Podemos relacionar a velocidades dos ponto $\ttp$ e $\tto$ em relação a $\llA$ através da equação de Poisson para velocidades:
@@ -313,7 +364,7 @@ Substituindo \eqref{eq:Poisson_v} em \eqref{eq:Poisson_da_aux}, obtemos a equaçã
 
 \end{itemize}
 
-\subsection{Composição de movimentos}\label{S05-01}
+\subsubsection{Composição de movimentos}\label{S05-01-03}
 
 Esta subseção tem o intuito de apresentar um dos princípios básicos da cinemática de corpos rígidos, a composição de movimentos.
 
@@ -342,7 +393,7 @@ Derivando \eqref{eq:r_rho} no tempo, temos:
 \vv_\ttp^{\lllA} = \vv_{\tto_\ttB}^{\lllA} + \dot{\vr}_{\tto_\ttB \rl \ttp}^{[\lllA]}
 \end{equation}
 
-Admitindo que o vetor $\vrho$ pode ser escrito da seguinte maneira:
+Admitindo que o vetor $\vr_{\tto_\ttB \rl \ttp}$ pode ser escrito da seguinte maneira:
 \begin{equation}
 \vr_{\tto_\ttB \rl \ttp} = (\ttp - \tto_\ttB) = x \vi_\ttB + y \vj_\ttB + z \vk_\ttB
 \end{equation}
