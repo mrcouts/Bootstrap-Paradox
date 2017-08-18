@@ -277,7 +277,7 @@ Esta se\c{c}\~ao apresenta uma s\'intese dos principais resultados te\'oricos ob
 
 \subsubsection{Conceitos básicos}\label{S05-01-01}
 
-Esta subseção tem o intuito de apresentar os conceitos de derivada temporal de vetores em um referencial e as definições velocidade e aceleração.
+Esta subseção tem o intuito de apresentar os conceitos de derivada temporal de vetores em relação a um referencial e as definições velocidade e aceleração.
 
 \begin{itemize}
 \item[A)] Derivada temporal de versores
@@ -289,7 +289,7 @@ Sejam $\llA$ e $\llB$ dois referenciais referenciais e $\hat{\vx}_{\lllB}$ um ve
 
 \item[B)] Derivada temporal de vetores
 
-Seja $\ttB = \{ \vi_{\ttB}, \vj_{\ttB}, \vk_{\ttB} \}$ uma base ortonormal fixa ao referencial $\llB$ e $\vx$ um vetor cuja decomposição na base $\ttB$ é conhecida e dada por $\vx = x \vi_{\ttB} + y \vj_{\ttB} + z \vk_{\ttB} $. A derivada temporal de $\vx$ no referencial $\llA$ é definida como:
+Seja $\ttB = \{ \vi_{\ttB}, \vj_{\ttB}, \vk_{\ttB} \}$ uma base ortonormal fixa ao referencial $\llB$ e $\vx$ um vetor cuja decomposição na base $\ttB$ é conhecida e dada por $\vx = x \vi_{\ttB} + y \vj_{\ttB} + z \vk_{\ttB} $. A derivada temporal de $\vx$ em relação ao referencial $\llA$ é definida como:
 $$
 \frac{\dd^{[{\lllA}]} \vx }{\dd t} = \dot{\vx}^{[\lllA]} = \dot{x} \vi_{\ttB} + \dot{y} \vj_{\ttB} + \dot{z} \vk_{\ttB} + x \dot{\vi}_{\ttB}^{[\lllA]} + y \dot{\vj}_{\ttB}^{[\lllA]} + z \dot{\vk}_{\ttB}^{[\lllA]}
 $$
@@ -301,7 +301,7 @@ $$
 $$
 
 Repare que o termo $\dot{x} \vi_{\lllB} + \dot{y} \vj_{\lllB} + \dot{z} \vk_{\lllB}$ é a derivada temporal do vetor $\vx$ no referencial $\llB$. Sendo assim, temos:
-\begin{equation}
+\begin{equation} \label{eq:derivada_vetor}
 \frac{\dd^{[{\lllA}]} \vx }{\dd t} = \dot{\vx}^{[\lllA]} = \dot{\vx}^{[\lllB]}  + \vomega_{\lllB}^{\lllA} \wedge \vx
 \end{equation}
 
@@ -311,6 +311,11 @@ Repare que o termo $\dot{x} \vi_{\lllB} + \dot{y} \vj_{\lllB} + \dot{z} \vk_{\ll
 Seja $\vr_{\tto \rl \ttp} = (\ttp - \tto)$ o vetor que liga do ponto $\tto$ até o ponto $\ttp$, sendo $\tto$ um ponto fixo ao referencial $\llA$. A velocidade do ponto $\ttp$ em relação ao referencial $\llA$ é definida como:
 \begin{equation}
 \vv_\ttp^{\lllA} = \frac{\dd^{[\lllA]} \vr_{\tto \rl \ttp}}{\dd t} = \dot{\vr}_{\tto \rl \ttp}^{[\lllA]}
+\end{equation}
+
+Caso $\tto$ não esteja fixo a $\llA$, temos que:
+\begin{equation}
+\frac{\dd^{[\lllA]} \vr_{\tto \rl \ttp}}{\dd t} = \dot{\vr}_{\tto \rl \ttp}^{[\lllA]} = \vv_\ttp^{\lllA} - \vv_\tto^{\lllA}
 \end{equation}
 
 \item[D)] Definição de vetor aceleração
@@ -333,33 +338,33 @@ Esta subseção tem o intuito de apresentar as equações básicos da cinemática de c
 
 Sejam $\ttp$ e $\tto$ dois pontos pertencentes a um corpo rígido $\llB$, e $\llA$ um referencial. Podemos relacionar a velocidades dos ponto $\ttp$ e $\tto$ em relação a $\llA$ através da equação de Poisson para velocidades:
 \begin{equation}\label{eq:Poisson_v}
-\vv_\ttp^{\lllA} = \vv_\tto^{\lllA} + \vomega_{\lllB}^{\lllA} \wedge (\ttp - \tto)
+\vv_\ttp^{\lllA} = \vv_\tto^{\lllA} + \vomega_{\lllB}^{\lllA} \wedge \vr_{\tto \rl \ttp}
 \end{equation}
 
 \item[B)] Equação de Poisson para acelerações
 
 
-Derivando \eqref{eq:Poisson_v} no tempo, temos:
+Derivando \eqref{eq:Poisson_v} no tempo em relação a $\llA$, temos:
 \begin{equation}\label{eq:Poisson_a_aux}
-\va_\ttp^{\lllA} = \va_\tto^{\lllA} + \dot{\vomega}_{\lllB}^{\lllA} \wedge (\ttp - \tto) + \vomega_{\lllB}^{\lllA} \wedge (\vv_\ttp^{\lllA} - \vv_\tto^{\lllA})
+\va_\ttp^{\lllA} = \va_\tto^{\lllA} + \dot{\vomega}_{\lllB}^{\lllA} \wedge \vr_{\tto \rl \ttp} + \vomega_{\lllB}^{\lllA} \wedge (\vv_\ttp^{\lllA} - \vv_\tto^{\lllA})
 \end{equation}
 
 Substituindo \eqref{eq:Poisson_v} em \eqref{eq:Poisson_a_aux}, obtemos a equação de Poisson para acelerações:
 \begin{equation}\label{eq:Poisson_a}
-\va_\ttp^{\lllA} = \va_\tto^{\lllA} + \dot{\vomega}_{\lllB}^{\lllA} \wedge (\ttp - \tto) + \vomega_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA} \wedge (\ttp - \tto)
+\va_\ttp^{\lllA} = \va_\tto^{\lllA} + \dot{\vomega}_{\lllB}^{\lllA} \wedge \vr_{\tto \rl \ttp} + \vomega_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA} \wedge \vr_{\tto \rl \ttp}
 \end{equation}
 
 \item[C)] Equação de Poisson para sobre-acelerações
 
 
-Derivando \eqref{eq:Poisson_a} no tempo, temos:
+Derivando \eqref{eq:Poisson_a} no tempo em relação a $\llA$, temos:
 \begin{equation}\label{eq:Poisson_da_aux}
-\dot{\va}_\ttp^{\lllA} = \dot{\va}_\tto^{\lllA} + \ddot{\vomega}_{\lllB}^{\lllA} \wedge (\ttp - \tto) + \dot{\vomega}_{\lllB}^{\lllA} \wedge (\vv_\ttp^{\lllA} - \vv_\tto^{\lllA}) + \dot{\vomega}_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA} \wedge (\ttp - \tto) + \vomega_{\lllB}^{\lllA} \wedge \dot{\vomega}_{\lllB}^{\lllA} \wedge (\ttp - \tto) + \vomega_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA} \wedge (\vv_\ttp^{\lllA} - \vv_\tto^{\lllA})
+\dot{\va}_\ttp^{\lllA} = \dot{\va}_\tto^{\lllA} + \ddot{\vomega}_{\lllB}^{\lllA} \wedge \vr_{\tto \rl \ttp} + \dot{\vomega}_{\lllB}^{\lllA} \wedge (\vv_\ttp^{\lllA} - \vv_\tto^{\lllA}) + \dot{\vomega}_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA} \wedge \vr_{\tto \rl \ttp} + \vomega_{\lllB}^{\lllA} \wedge \dot{\vomega}_{\lllB}^{\lllA} \wedge \vr_{\tto \rl \ttp} + \vomega_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA} \wedge (\vv_\ttp^{\lllA} - \vv_\tto^{\lllA})
 \end{equation}
 
 Substituindo \eqref{eq:Poisson_v} em \eqref{eq:Poisson_da_aux}, obtemos a equação de Poisson para sobre-acelerações:
 \begin{equation}\label{eq:Poisson_da_aux}
-\dot{\va}_\ttp^{\lllA} = \dot{\va}_\tto^{\lllA} + \ddot{\vomega}_{\lllB}^{\lllA} \wedge (\ttp - \tto)  + 2\dot{\vomega}_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA} \wedge (\ttp - \tto) + \vomega_{\lllB}^{\lllA} \wedge \dot{\vomega}_{\lllB}^{\lllA} \wedge (\ttp - \tto) + \vomega_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA} \wedge  \vomega_{\lllB}^{\lllA} \wedge (\ttp - \tto)
+\dot{\va}_\ttp^{\lllA} = \dot{\va}_\tto^{\lllA} + \ddot{\vomega}_{\lllB}^{\lllA} \wedge \vr_{\tto \rl \ttp}  + 2\dot{\vomega}_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA} \wedge \vr_{\tto \rl \ttp} + \vomega_{\lllB}^{\lllA} \wedge \dot{\vomega}_{\lllB}^{\lllA} \wedge \vr_{\tto \rl \ttp} + \vomega_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA} \wedge  \vomega_{\lllB}^{\lllA} \wedge \vr_{\tto \rl \ttp}
 \end{equation}
 
 \end{itemize}
@@ -372,67 +377,68 @@ Esta subseção tem o intuito de apresentar um dos princípios básicos da cinemátic
 
 \item[A)] Composição de velocidades lineares
 
-Sejam $\llA$ um referencial, $\ttA$ um sistema de coordenadas fixo a $\llA$, definido pela origem $\tto_\ttA$ e pelos versores $\vi_\ttA$, $\vj_\ttA$ e $\vk_\ttA$. Sejam também $\llB$ um corpo rígido, $\ttB$ um sistema de coordenadas fixo a $\llB$, definido pela origem $\tto_\ttB$ e pelos versores $\vi_\ttB$, $\vj_\ttB$ e $\vk_\ttB$, e $\ttp$ um ponto no espaço. Definindo os vetores:
-\begin{equation}
-\vr_{\tto_\ttA \rl \tto_\ttB} = (\tto_\ttB - \tto_\ttA)
-\end{equation}
-\begin{equation}
-\vr_{\tto_\ttB \rl \ttp} =  (\ttp - \tto_\ttB)
-\end{equation}
-\begin{equation}
-\vr_{\tto_\ttA \rl \ttp} = (\ttp - \tto_\ttA)
-\end{equation}
-
-Desta maneira, tem-se que:
+Sejam $\llA$ um referencial, $\ttA$ um sistema de coordenadas fixo a $\llA$, definido pela origem $\tto_\ttA$ e pelos versores $\vi_\ttA$, $\vj_\ttA$ e $\vk_\ttA$. Sejam também $\llB$ um referencial, $\ttB$ um sistema de coordenadas fixo a $\llB$, definido pela origem $\tto_\ttB$ e pelos versores $\vi_\ttB$, $\vj_\ttB$ e $\vk_\ttB$, e $\ttp$ um ponto no espaço. Definindo os vetores $\vr_{\tto_\ttA \rl \tto_\ttB}$, $\vr_{\tto_\ttB \rl \ttp}$ e $\vr_{\tto_\ttA \rl \ttp}$ tem-se que:
 \begin{equation} \label{eq:r_rho}
 \vr_{\tto_\ttA \rl \ttp} = \vr_{\tto_\ttA \rl \tto_\ttB} + \vr_{\tto_\ttB \rl \ttp}
 \end{equation}
 
-Derivando \eqref{eq:r_rho} no tempo, temos:
+Derivando \eqref{eq:r_rho} no tempo em relação a $\llA$, temos:
 \begin{equation} \label{eq:dr_rho_aux}
 \vv_\ttp^{\lllA} = \vv_{\tto_\ttB}^{\lllA} + \dot{\vr}_{\tto_\ttB \rl \ttp}^{[\lllA]}
 \end{equation}
 
-Admitindo que o vetor $\vr_{\tto_\ttB \rl \ttp}$ pode ser escrito da seguinte maneira:
-\begin{equation}
-\vr_{\tto_\ttB \rl \ttp} = (\ttp - \tto_\ttB) = x \vi_\ttB + y \vj_\ttB + z \vk_\ttB
+Utilizando a equação \eqref{eq:derivada_vetor}, temos que:
+\begin{equation} 
+\dot{\vr}_{\tto_\ttB \rl \ttp}^{[\lllA]} = \dot{\vr}_{\tto_\ttB \rl \ttp}^{[\lllB]} + \vomega_{\lllB}^{\lllA}  \wedge  \vr_{\tto_\ttB \rl \ttp} 
 \end{equation}
 
-Temos:
-\begin{equation}
-\dot{\vr}_{\tto_\ttB \rl \ttp}^{[\lllA]} =  x \dot{\vi}_\ttB^{[\lllA]} + y \dot{\vj}_\ttB^{[\lllA]} + z \dot{\vk}_\ttB^{[\lllA]} + \dot{x} \vi_\ttB +  \dot{y} \vj_\ttB + \dot{z} \vk_\ttB 
-\end{equation}
+
 Ou seja:
 \begin{equation} \label{eq:drho}
-\dot{\vr}_{\tto_\ttB \rl \ttp}^{[\lllA]} =  \vomega_{\lllB}^{\lllA} \wedge (\ttp - \tto_\ttB) + \vv_\ttp^{\lllB}
+\dot{\vr}_{\tto_\ttB \rl \ttp}^{[\lllA]} =   \vv_\ttp^{\lllB} + \vomega_{\lllB}^{\lllA} \wedge \vr_{\tto_\ttB \rl \ttp} 
 \end{equation}
 
 Substituindo \eqref{eq:drho} em \eqref{eq:dr_rho_aux}, temos:
 \begin{equation} \label{eq:dr_rho}
-\vv_\ttp^{\lllA} = \vv_{\tto_\ttB}^{\lllA}  + \vomega_{\lllB}^{\lllA} \wedge (\ttp - \tto_\ttB) + \vv_\ttp^{\lllB}
+\vv_\ttp^{\lllA} = \vv_{\tto_\ttB}^{\lllA}  + \vomega_{\lllB}^{\lllA} \wedge \vr_{\tto_\ttB \rl \ttp}  + \vv_\ttp^{\lllB}
 \end{equation}
 
-Repare que $\vv_\ttp^{\lllA}$ pode ser dividido na soma de duas parcelas, a parcela $\vv_{\tto_\ttB}^{\lllA}  + \vomega_{\lllB}^{\lllA} \wedge (\ttp - \tto_\ttB)$, que seria a velocidade de $\ttp$ se $\ttp$ estivesse fixo a $\llB$ (movimento de arrastamento), e a parcela $\vv_\ttp^{\lllB}$, que seria a velocidade de $\ttp$ se $\llB$ estivesse parado (movimento relativo). Sendo assim, deduzimos princípio da composição de movimento para velocidades lineares:
+Definindo:
+\begin{equation}
+\vv_{\ttp \rl \lllB}^{\lllA} = \vv_{\tto_\ttB}^{\lllA}  + \vomega_{\lllB}^{\lllA} \wedge \vr_{\tto_\ttB \rl \ttp}
+\end{equation}
+
+Temos princípio da composição de movimento para velocidades lineares:
 \begin{equation}
 \vv_\ttp^{\lllA} = \vv_{\ttp \rl \lllB}^{\lllA} + \vv_\ttp^{\lllB}
 \end{equation}
+
+Ou seja, $\vv_\ttp^{\lllA}$ é composto pela soma de $\vv_{\ttp \rl \lllB}^{\lllA}$, que seria a velocidade de $\ttp$ se $\ttp$ estivesse fixo a $\llB$ (movimento de arrastamento), e $\vv_\ttp^{\lllB}$, que seria a velocidade de $\ttp$ se $\llB$ estivesse parado em relação a $\llA$ (movimento relativo).
 
 \item[B)] Composição de acelerações lineares
 
 Derivando \eqref{eq:dr_rho} no tempo, temos:
 \begin{equation} \label{eq:d2r_rho_aux}
-\va_\ttp^{\lllA} = \va_{\tto_\ttB}^{\lllA}  + \dot{\vomega}_{\lllB}^{\lllA} \wedge (\ttp - \tto_\ttB) + \vomega_{\lllB}^{\lllA} \wedge \dot{\vrho} + \vomega_{\lllB}^{\lllA} \wedge(\dot{x} \vi_\ttB + \dot{y} \vj_\ttB + \dot{z} \vk_\ttB) + \ddot{x} \vi_\ttB + \ddot{y} \vj_\ttB + \ddot{z} \vk_\ttB
+\va_\ttp^{\lllA} = \va_{\tto_\ttB}^{\lllA}  + \dot{\vomega}_{\lllB}^{\lllA} \wedge \vr_{\tto_\ttB \rl \ttp}  + \vomega_{\lllB}^{\lllA} \wedge \dot{\vr}_{\tto_\ttB \rl \ttp}^{[\lllA]} + \vomega_{\lllB}^{\lllA} \wedge \vv_\ttp^{\lllB} + \va_\ttp^{\lllB}
 \end{equation}
 
 Substituindo \eqref{eq:drho} em \eqref{eq:d2r_rho_aux}, temos:
 \begin{equation} \label{eq:d2r_rho}
-\va_\ttp^{\lllA} = \va_{\tto_\ttB}^{\lllA}  + \dot{\vomega}_{\lllB}^{\lllA} \wedge (\ttp - \tto_\ttB) + \vomega_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA} \wedge (\ttp - \tto_\ttB)  + 2 \vomega_{\lllB}^{\lllA} \wedge(\dot{x} \vi_\ttB + \dot{y} \vj_\ttB + \dot{z} \vk_\ttB) + \ddot{x} \vi_\ttB + \ddot{y} \vj_\ttB + \ddot{z} \vk_\ttB
+\va_\ttp^{\lllA} = \va_{\tto_\ttB}^{\lllA}  + \dot{\vomega}_{\lllB}^{\lllA} \wedge \vr_{\tto_\ttB \rl \ttp} + \vomega_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA} \wedge \vr_{\tto_\ttB \rl \ttp}  + 2 \vomega_{\lllB}^{\lllA} \wedge \vv_\ttp^{\lllB} + \va_\ttp^{\lllB}
 \end{equation}
 
-Repare que $\va_\ttp$ pode ser dividido na soma de três parcelas, a parcela $\va_{\tto_\ttB}^{\lllA}  + \dot{\vomega}_{\lllB}^{\lllA} \wedge (\ttp - \tto_\ttB) + \vomega_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA} \wedge (\ttp - \tto_\ttB)$, que seria a aceleração de $\ttp$ se $\ttp$ estivesse fixo a $\llB$ (movimento de arrastamento), a parcela $\ddot{x} \vi_\ttB + \ddot{y} \vj_\ttB + \ddot{z} \vk_\ttB$, que seria a aceleração de $\ttp$ se $\llB$ estivesse parado (movimento relativo), e a parcela complementar $2 \vomega_{\lllB}^{\lllA} \wedge(\dot{x} \vi_\ttB + \dot{y} \vj_\ttB + \dot{z} \vk_\ttB)$ . Sendo assim, deduzimos princípio da composição de movimento para acelerações lineares:
+Definindo:
+\begin{equation}
+\va_{\ttp \rl \lllB}^{\lllA} = \va_{\tto_\ttB}^{\lllA}  + \dot{\vomega}_{\lllB}^{\lllA} \wedge \vr_{\tto_\ttB \rl \ttp} + \vomega_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA} \wedge \vr_{\tto_\ttB \rl \ttp}
+\end{equation}
+
+Temos princípio da composição de movimento para acelerações lineares:
 \begin{equation}
 \va_\ttp^{\lllA} = \va_{\ttp \rl \lllB}^{\lllA} + \va_\ttp^{\lllB} + 2\vomega_{\lllB}^{\lllA} \wedge \vv_\ttp^{\lllB}
 \end{equation}
+
+Ou seja, $\va_\ttp^{\lllA}$ é composto pela soma de $\va_{\ttp \rl \lllB}^{\lllA}$, que seria a aceleração de $\ttp$ se $\ttp$ estivesse fixo a $\llB$ (aceleração de arrastamento), $\va_\ttp^{\lllB}$, que seria a aceleração de $\ttp$ se $\llB$ estivesse parado em relação a $\llA$ (aceleração relativa), e da parcela $2\vomega_{\lllB}^{\lllA} \wedge \vv_\ttp^{\lllB}$ (aceleralção complementar).
+
 
 \item[C)] Composição de sobre-acelerações lineares
 
@@ -441,14 +447,14 @@ Derivando \eqref{eq:d2r_rho} no tempo, temos:
 \\
 \dot{\va}_\ttp^{\lllA} = 
 \dot{\va}_{\tto_\ttB}^{\lllA}  + 
-\ddot{\vomega}_{\lllB}^{\lllA} \wedge (\ttp - \tto_\ttB) + \dot{\vomega}_{\lllB}^{\lllA} \wedge \dot{\vrho} + 
-\dot{\vomega}_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA} \wedge (\ttp - \tto_\ttB) + 
-\vomega_{\lllB}^{\lllA} \wedge \dot{\vomega}_{\lllB}^{\lllA} \wedge (\ttp - \tto_\ttB) + \\
-\vomega_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA} \wedge \dot{\vrho}  + 
-2 \dot{\vomega}_{\lllB}^{\lllA} \wedge(\dot{x} \vi_\ttB + \dot{y} \vj_\ttB + \dot{z} \vk_\ttB) + 
- 2 \vomega_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA} \wedge (\dot{x} \vi_\ttB + \dot{y} \vj_\ttB + \dot{z} \vk_\ttB) + \\
-3 \vomega_{\lllB}^{\lllA} \wedge(\ddot{x} \vi_\ttB + \ddot{y} \vj_\ttB + \ddot{z} \vk_\ttB) + 
-\dddot{x} \vi_\ttB + \dddot{y} \vj_\ttB + \dddot{z} \vk_\ttB \\
+\ddot{\vomega}_{\lllB}^{\lllA} \wedge \vr_{\tto_\ttB \rl \ttp} + \dot{\vomega}_{\lllB}^{\lllA} \wedge \dot{\vr}_{\tto_\ttB \rl \ttp}^{[\lllA]} + 
+\dot{\vomega}_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA} \wedge \vr_{\tto_\ttB \rl \ttp} + 
+\vomega_{\lllB}^{\lllA} \wedge \dot{\vomega}_{\lllB}^{\lllA} \wedge \vr_{\tto_\ttB \rl \ttp} + \\
+\vomega_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA} \wedge \dot{\vr}_{\tto_\ttB \rl \ttp}^{[\lllA]}  + 
+2 \dot{\vomega}_{\lllB}^{\lllA} \wedge \vv_{\ttp}^{\lllB} + 
+ 2 \vomega_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA} \wedge \vv_{\ttp}^{\lllB} + 
+3 \vomega_{\lllB}^{\lllA} \wedge \va_{\ttp}^{\lllB} + 
+\dot{\va}_{\ttp}^{\lllB} \\
 \end{multline}
 
 
@@ -457,28 +463,36 @@ Substituindo \eqref{eq:drho} em \eqref{eq:d3r_rho_aux}, temos:
 \\
 \dot{\va}_\ttp^{\lllA} = 
 \dot{\va}_{\tto_\ttB}^{\lllA}  + 
-\ddot{\vomega}_{\lllB}^{\lllA} \wedge (\ttp - \tto_\ttB) + 
-2\dot{\vomega}_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA} \wedge (\ttp - \tto_\ttB)  + 
-\vomega_{\lllB}^{\lllA} \wedge \dot{\vomega}_{\lllB}^{\lllA} \wedge (\ttp - \tto_\ttB) + 
-\vomega_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA} \wedge (\ttp - \tto_\ttB)  + \\
-3\dot{\vomega}_{\lllB}^{\lllA} \wedge (\dot{x} \vi_\ttB +  \dot{y} \vj_\ttB + \dot{z} \vk_\ttB) + 
-3\vomega_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA} \wedge (\dot{x} \vi_\ttB +  \dot{y} \vj_\ttB + \dot{z} \vk_\ttB)  + 
-3 \vomega_{\lllB}^{\lllA} \wedge(\ddot{x} \vi_\ttB + \ddot{y} \vj_\ttB + \ddot{z} \vk_\ttB) + \\
-\dddot{x} \vi_\ttB + \dddot{y} \vj_\ttB + \dddot{z} \vk_\ttB \\
+\ddot{\vomega}_{\lllB}^{\lllA} \wedge \vr_{\tto_\ttB \rl \ttp} + 
+2\dot{\vomega}_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA} \wedge \vr_{\tto_\ttB \rl \ttp}  + 
+\vomega_{\lllB}^{\lllA} \wedge \dot{\vomega}_{\lllB}^{\lllA} \wedge \vr_{\tto_\ttB \rl \ttp} + 
+\vomega_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA} \wedge \vr_{\tto_\ttB \rl \ttp}  + \\
+3\dot{\vomega}_{\lllB}^{\lllA} \wedge \vv_{\ttp}^{\lllB} + 
+3\vomega_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA} \wedge \vv_{\ttp}^{\lllB}  + 
+3 \vomega_{\lllB}^{\lllA} \wedge \va_{\ttp}^{\lllB} +
+\dot{\va}_{\ttp}^{\lllB} \\
 \end{multline}
 
-Repare que $\dot{\va}_\ttp^{\lllA}$ pode ser dividido na soma de três parcelas, a parcela $\dot{\va}_{\tto_\ttB}^{\lllA}  + 
-\ddot{\vomega}_{\lllB}^{\lllA} \wedge (\ttp - \tto_\ttB) + 
-2\dot{\vomega}_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA} \wedge (\ttp - \tto_\ttB)  + 
-\vomega_{\lllB}^{\lllA} \wedge \dot{\vomega}_{\lllB}^{\lllA} \wedge (\ttp - \tto_\ttB) + 
-\vomega_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA} \wedge (\ttp - \tto_\ttB) $, que seria a sobre-aceleração de $\ttp$ se $\ttp$ estivesse fixo a $\llB$ (movimento de arrastamento), a parcela $\dddot{x} \vi_\ttB + \dddot{y} \vj_\ttB + \dddot{z} \vk_\ttB$, que seria a sobre-aceleração de $\ttp$ se $\llB$ estivesse parado (movimento relativo), e a parcela complementar $3\dot{\vomega}_{\lllB}^{\lllA} \wedge (\dot{x} \vi_\ttB +  \dot{y} \vj_\ttB + \dot{z} \vk_\ttB) + 
-3\vomega_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA} \wedge (\dot{x} \vi_\ttB +  \dot{y} \vj_\ttB + \dot{z} \vk_\ttB)  + 
-3 \vomega_{\lllB}^{\lllA} \wedge(\ddot{x} \vi_\ttB + \ddot{y} \vj_\ttB + \ddot{z} \vk_\ttB)$ . Sendo assim, deduzimos princípio da composição de movimento para sobre-acelerações lineares:
+Definindo:
 \begin{equation}
-\dot{\va}_\ttp^{\lllA} = \dot{\va}_\ttp^{\lllA} + \dot{\va}_\ttp^{\lllB} + 3(\dot{\vomega}_{\lllB}^{\lllA} \wedge \vv_\ttp^{\lllB} + 
+\dot{\va}_{\ttp \rl \lllB}^{\lllA} = \dot{\va}_{\tto_\ttB}^{\lllA}  + 
+\ddot{\vomega}_{\lllB}^{\lllA} \wedge \vr_{\tto_\ttB \rl \ttp} + 
+2\dot{\vomega}_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA} \wedge \vr_{\tto_\ttB \rl \ttp}  + 
+\vomega_{\lllB}^{\lllA} \wedge \dot{\vomega}_{\lllB}^{\lllA} \wedge \vr_{\tto_\ttB \rl \ttp} + 
+\vomega_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA} \wedge \vr_{\tto_\ttB \rl \ttp}
+\end{equation}
+
+Temos princípio da composição de movimento para sobre-acelerações lineares:
+\begin{equation}
+\dot{\va}_\ttp^{\lllA} = \dot{\va}_{\ttp \rl \lllB}^{\lllA} + 3(\dot{\vomega}_{\lllB}^{\lllA} \wedge \vv_\ttp^{\lllB} + 
 \vomega_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA} \wedge \vv_\ttp^{\lllB}  + 
  \vomega_{\lllB}^{\lllA} \wedge \va_\ttp^{\lllB} )
 \end{equation}
+
+Ou seja, $\dot{\va}_\ttp^{\lllA}$ é composto pela soma de $\dot{\va}_{\ttp \rl \lllB}^{\lllA}$, que seria a sobre-aceleração de 
+$\ttp$ se $\ttp$ estivesse fixo a $\llB$ (sobre-aceleração de arrastamento), $\dot{\va}_\ttp^{\lllB}$, que seria a sobre-aceleração de $\ttp$ se $\llB$ estivesse parado em relação a $\llA$ (sobre-aceleração relativa), e da parcela $3(\dot{\vomega}_{\lllB}^{\lllA} \wedge \vv_\ttp^{\lllB} + 
+\vomega_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA} \wedge \vv_\ttp^{\lllB}  + 
+ \vomega_{\lllB}^{\lllA} \wedge \va_\ttp^{\lllB} )$ (sobre-aceleralção complementar).
 
 \end{itemize}
 
