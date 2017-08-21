@@ -277,12 +277,27 @@ Esta se\c{c}\~ao apresenta uma s\'intese dos principais resultados te\'oricos ob
 
 \subsubsection{Conceitos básicos}\label{S05-01-01}
 
-Esta subseção tem o intuito de apresentar os conceitos de derivada temporal de vetores em relação a um referencial e as definições velocidade e aceleração.
+Esta subseção tem o intuito de apresentar os conceitos de derivada temporal de vetores em relação a um referencial e as definições velocidade e aceleração. \\
+
+Sejam $\llA$ e $\llB$ dois referenciais, e $\ttp$ e $\tto$ pontos no espaço. Primeiramente, fazemos as seguintes definições:
+
+\begin{itemize}
+\item $\vr_{\tto \rl \ttp}$: vetor que liga o ponto $\tto$ ao ponto $\ttp$, orientado no sentido de $\tto$ até $\ttp$.
+\item $\vv_{\ttp}^{\lllA}$: vetor velocidade do ponto $\ttp$ em relação a $\llA$.
+\item $\va_{\ttp}^{\lllA}$: vetor acelera\c{c}\~ao do ponto $\ttp$ em relação a $\llA$.
+\item $\dot{\va}_{\ttp}^{\lllA}$: vetor sobre-acelera\c{c}\~ao do ponto $\ttp$ em relação a $\llA$.
+\item $\vomega_{\lllB}^{\lllA}$: vetor velocidade angular de $\llB$ em relação a $\llA$.
+\item $\dot{\vomega}_{\lllB}^{\lllA}$: vetor aceleração angular de $\llB$ em relação a $\llA$.
+\item $\ddot{\vomega}_{\lllB}^{\lllA}$: vetor sobre-aceleração angular de $\llB$ em relação a $\llA$.
+\item $\displaystyle\frac{\dd^{[\lllA]}}{\dd t}$: Operador derivada temporal em relação ao referencial $\llA$.
+\end{itemize}
+
 
 \begin{itemize}
 \item[A)] Derivada temporal de versores
 
-Sejam $\llA$ e $\llB$ dois referenciais referenciais e $\hat{\vx}_{\lllB}$ um versor fixo ao referencial $\llB$. A derivada temporal de $\hat{\vx}_{\lllB}$ no referencial $\llA$ é definida como:
+Seja %m $\llA$ e $\llB$ dois referenciais referenciais e 
+$\hat{\vx}_{\lllB}$ um versor fixo ao referencial $\llB$. A derivada temporal de $\hat{\vx}_{\lllB}$ em relação ao referencial $\llA$ é definida como:
 \begin{equation}
 \frac{\dd^{[{\lllA}]} \hat{\vx}_{\lllB} }{\dd t} = \dot{\hat{\vx}}_{\lllB}^{[\lllA]} = \vomega_{\lllB}^{\lllA} \wedge \hat{\vx}_{\lllB}
 \end{equation}
@@ -308,12 +323,13 @@ Repare que o termo $\dot{x} \vi_{\lllB} + \dot{y} \vj_{\lllB} + \dot{z} \vk_{\ll
 
 \item[C)] Definição de vetor velocidade
 
-Seja $\vr_{\tto \rl \ttp} = (\ttp - \tto)$ o vetor que liga do ponto $\tto$ até o ponto $\ttp$, sendo $\tto$ um ponto fixo ao referencial $\llA$. A velocidade do ponto $\ttp$ em relação ao referencial $\llA$ é definida como:
+%Seja $\vr_{\tto \rl \ttp}$ o vetor que liga do ponto $\tto$ até o ponto $\ttp$, sendo $\tto$ um ponto fixo ao referencial $\llA$. 
+A velocidade do ponto $\ttp$ em relação ao referencial $\llA$ é definida como:
 \begin{equation}
 \vv_\ttp^{\lllA} = \frac{\dd^{[\lllA]} \vr_{\tto \rl \ttp}}{\dd t} = \dot{\vr}_{\tto \rl \ttp}^{[\lllA]}
 \end{equation}
 
-Caso $\tto$ não esteja fixo a $\llA$, temos que:
+Supondo $\tto$ fixo a $\llA$. Caso $\tto$ não esteja fixo a $\llA$, temos que:
 \begin{equation}
 \frac{\dd^{[\lllA]} \vr_{\tto \rl \ttp}}{\dd t} = \dot{\vr}_{\tto \rl \ttp}^{[\lllA]} = \vv_\ttp^{\lllA} - \vv_\tto^{\lllA}
 \end{equation}
@@ -363,7 +379,7 @@ Derivando \eqref{eq:Poisson_a} no tempo em relação a $\llA$, temos:
 \end{equation}
 
 Substituindo \eqref{eq:Poisson_v} em \eqref{eq:Poisson_da_aux}, obtemos a equação de Poisson para sobre-acelerações:
-\begin{equation}\label{eq:Poisson_da_aux}
+\begin{equation}\label{eq:Poisson_da}
 \dot{\va}_\ttp^{\lllA} = \dot{\va}_\tto^{\lllA} + \ddot{\vomega}_{\lllB}^{\lllA} \wedge \vr_{\tto \rl \ttp}  + 2\dot{\vomega}_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA} \wedge \vr_{\tto \rl \ttp} + \vomega_{\lllB}^{\lllA} \wedge \dot{\vomega}_{\lllB}^{\lllA} \wedge \vr_{\tto \rl \ttp} + \vomega_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA} \wedge  \vomega_{\lllB}^{\lllA} \wedge \vr_{\tto \rl \ttp}
 \end{equation}
 
@@ -377,7 +393,7 @@ Esta subseção tem o intuito de apresentar um dos princípios básicos da cinemátic
 
 \item[A)] Composição de velocidades lineares
 
-Sejam $\llA$ um referencial, $\ttA$ um sistema de coordenadas fixo a $\llA$, definido pela origem $\tto_\ttA$ e pelos versores $\vi_\ttA$, $\vj_\ttA$ e $\vk_\ttA$. Sejam também $\llB$ um referencial, $\ttB$ um sistema de coordenadas fixo a $\llB$, definido pela origem $\tto_\ttB$ e pelos versores $\vi_\ttB$, $\vj_\ttB$ e $\vk_\ttB$, e $\ttp$ um ponto no espaço. Definindo os vetores $\vr_{\tto_\ttA \rl \tto_\ttB}$, $\vr_{\tto_\ttB \rl \ttp}$ e $\vr_{\tto_\ttA \rl \ttp}$ tem-se que:
+Sejam $\llA$ um referencial, e $\ttA$ um sistema de coordenadas fixo a $\llA$, definido pela origem $\tto_\ttA$ e pelos versores $\vi_\ttA$, $\vj_\ttA$ e $\vk_\ttA$. Sejam também $\llB$ um referencial, $\ttB$ um sistema de coordenadas fixo a $\llB$, definido pela origem $\tto_\ttB$ e pelos versores $\vi_\ttB$, $\vj_\ttB$ e $\vk_\ttB$, e $\ttp$ um ponto no espaço. Definindo os vetores $\vr_{\tto_\ttA \rl \tto_\ttB}$, $\vr_{\tto_\ttB \rl \ttp}$ e $\vr_{\tto_\ttA \rl \ttp}$ tem-se que:
 \begin{equation} \label{eq:r_rho}
 \vr_{\tto_\ttA \rl \ttp} = \vr_{\tto_\ttA \rl \tto_\ttB} + \vr_{\tto_\ttB \rl \ttp}
 \end{equation}
@@ -404,12 +420,12 @@ Substituindo \eqref{eq:drho} em \eqref{eq:dr_rho_aux}, temos:
 \end{equation}
 
 Definindo:
-\begin{equation}
+\begin{equation} \label{eq:v_arr}
 \vv_{\ttp \rl \lllB}^{\lllA} = \vv_{\tto_\ttB}^{\lllA}  + \vomega_{\lllB}^{\lllA} \wedge \vr_{\tto_\ttB \rl \ttp}
 \end{equation}
 
 Temos princípio da composição de movimento para velocidades lineares:
-\begin{equation}
+\begin{equation} \label{eq:Composicao_vel}
 \vv_\ttp^{\lllA} = \vv_{\ttp \rl \lllB}^{\lllA} + \vv_\ttp^{\lllB}
 \end{equation}
 
@@ -417,7 +433,7 @@ Ou seja, $\vv_\ttp^{\lllA}$ é composto pela soma de $\vv_{\ttp \rl \lllB}^{\lllA
 
 \item[B)] Composição de acelerações lineares
 
-Derivando \eqref{eq:dr_rho} no tempo, temos:
+Derivando \eqref{eq:dr_rho} no tempo em relação a $\llA$, temos:
 \begin{equation} \label{eq:d2r_rho_aux}
 \va_\ttp^{\lllA} = \va_{\tto_\ttB}^{\lllA}  + \dot{\vomega}_{\lllB}^{\lllA} \wedge \vr_{\tto_\ttB \rl \ttp}  + \vomega_{\lllB}^{\lllA} \wedge \dot{\vr}_{\tto_\ttB \rl \ttp}^{[\lllA]} + \vomega_{\lllB}^{\lllA} \wedge \vv_\ttp^{\lllB} + \va_\ttp^{\lllB}
 \end{equation}
@@ -494,11 +510,85 @@ $\ttp$ se $\ttp$ estivesse fixo a $\llB$ (sobre-aceleração de arrastamento), $\d
 \vomega_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA} \wedge \vv_\ttp^{\lllB}  + 
  \vomega_{\lllB}^{\lllA} \wedge \va_\ttp^{\lllB} )$ (sobre-aceleralção complementar).
 
+\item[D)] Composição de velocidades angulares
+
+Sejam $\llA$ e $\llB$ dois referenciais e $\llC$ um corpo rígido. Sejam também os pontos $\ttp_1$ e $\ttp_2$, ambos fixos a $\llC$.
+
+Aplicando o princípio da composição de movimento para velocidades lineras, temos que:
+
+\begin{equation}
+\vv_{\ttp_1}^{\lllA} = \vv_{\ttp_1 \rl \lllB}^{\lllA} + \vv_{\ttp_1}^{\lllB}
+\end{equation}
+\begin{equation}
+\vv_{\ttp_2}^{\lllA} = \vv_{\ttp_2 \rl \lllB}^{\lllA} + \vv_{\ttp_2}^{\lllB}
+\end{equation}
+
+A partir da equação \eqref{eq:v_arr}, temos que:
+\begin{equation}
+\vv_{\ttp_1 \rl \lllB}^{\lllA} = \vv_{\tto_\ttB}^{\lllA} + \vomega_{\lllB}^{\lllA} \wedge \vr_{\tto_\ttB  \rl \ttp_1} 
+\end{equation}
+\begin{equation}
+\vv_{\ttp_2 \rl \lllB}^{\lllA} = \vv_{\tto_\ttB}^{\lllA} + \vomega_{\lllB}^{\lllA} \wedge \vr_{\tto_\ttB  \rl \ttp_2}
+\end{equation}
+
+Sendo assim, temos:
+\begin{equation} \label{eq:v_p1}
+\vv_{\ttp_1}^{\lllA} = \vv_{\tto_\ttB}^{\lllA} + \vomega_{\lllB}^{\lllA} \wedge \vr_{\tto_\ttB  \rl \ttp_1}  + \vv_{\ttp_1}^{\lllB}
+\end{equation}
+\begin{equation} \label{eq:v_p2}
+\vv_{\ttp_2}^{\lllA} = \vv_{\tto_\ttB}^{\lllA} + \vomega_{\lllB}^{\lllA} \wedge \vr_{\tto_\ttB  \rl \ttp_2} + \vv_{\ttp_2}^{\lllB}
+\end{equation}
+
+Subtraindo \eqref{eq:v_p2} de \eqref{eq:v_p1}, temos:
+\begin{equation} \label{eq:v_p1p2}
+\vv_{\ttp_1}^{\lllA} - \vv_{\ttp_2}^{\lllA} =  \vomega_{\lllB}^{\lllA} \wedge \vr_{\ttp_2  \rl \ttp_1}  + \vv_{\ttp_1}^{\lllB} - \vv_{\ttp_2}^{\lllB}
+\end{equation}
+
+Como $\ttp_1$ e $\ttp_2$ pertencem a um mesmo corpo rígido, temos que:
+\begin{equation} \label{eq:vA_poisson_p1p2}
+\vv_{\ttp_1}^{\lllA} =  \vv_{\ttp_2}^{\lllA} + \vomega_{\lllC}^{\lllA} \wedge \vr_{\ttp_2 \rl \ttp_1}
+\end{equation}
+\begin{equation} \label{eq:vB_poisson_p1p2}
+\vv_{\ttp_1}^{\lllB} =  \vv_{\ttp_2}^{\lllB} + \vomega_{\lllC}^{\lllB} \wedge \vr_{\ttp_2 \rl \ttp_1}
+\end{equation}
+
+Substituindo \eqref{eq:vA_poisson_p1p2} e \eqref{eq:vB_poisson_p1p2} em \eqref{eq:v_p1p2}:
+\begin{equation}
+\vomega_{\lllC}^{\lllA} \wedge \vr_{\ttp_2 \rl \ttp_1} =  \vomega_{\lllB}^{\lllA} \wedge \vr_{\ttp_2  \rl \ttp_1}  + \vomega_{\lllC}^{\lllB} \wedge \vr_{\ttp_2 \rl \ttp_1}
+\end{equation}
+
+Temos princípio da composição de movimento para velocidades angulares:
+\begin{equation} \label{eq:composicao_w}
+\vomega_{\lllC}^{\lllA}  =  \vomega_{\lllB}^{\lllA}   + \vomega_{\lllC}^{\lllB}
+\end{equation}
+
+Ou seja, $\vomega_{\lllC}^{\lllA}$ é composta pela soma de $\vomega_{\lllB}^{\lllA}$, que seria velocidade angular de  de $\llC$ se $\llC$ estivesse fixo a $\llB$ (velocidade angular de arrastamento), e $\vomega_{\lllC}^{\lllB}$, que seria a velocidade angular de $\llC$ se $\llB$ estivesse parado em relação a $\llA$ (velocidade angular relativa).
+
+\item[E)] Composição de acelerações angulares
+
+Derivando \eqref{eq:composicao_w} no tempo em relação a $\llA$, temos princípio da composição de movimento para acelerações angulares:
+\begin{equation} \label{eq:composicao_dw}
+\dot{\vomega}_{\lllC}^{\lllA}  =  \dot{\vomega}_{\lllB}^{\lllA}   + \dot{\vomega}_{\lllC}^{\lllB} + \vomega_{\lllB}^{\lllA} \wedge \vomega_{\lllC}^{\lllB}
+\end{equation}
+
+Ou seja, $\dot{\vomega}_{\lllC}^{\lllA}$ é composta pela soma de $\dot{\vomega}_{\lllB}^{\lllA}$, que seria a aceleração angular  de $\llC$ se $\llC$ estivesse fixo a $\llB$ (aceleração angular de arrastamento), $\dot{\vomega}_{\lllC}^{\lllB}$, que seria a aceleração angular de $\llC$ se $\llB$ estivesse parado em relação a $\llA$ (aceleração angular relativa), e da parcela $\vomega_{\lllB}^{\lllA} \wedge \vomega_{\lllC}^{\lllB}$ (aceleralção angular complementar).
+
+\item[F)] Composição de sobre-acelerações angulares
+
+Derivando \eqref{eq:composicao_dw} no tempo em relação a $\llA$, temos princípio da composição de movimento para sobre-acelerações angulares::
+\begin{equation} \label{eq:eq:composicao_d2w_aux}
+\ddot{\vomega}_{\lllC}^{\lllA}  =  \ddot{\vomega}_{\lllB}^{\lllA}   + \ddot{\vomega}_{\lllC}^{\lllB} +  \dot{\vomega}_{\lllB}^{\lllA} \wedge \vomega_{\lllC}^{\lllB} + 2 \vomega_{\lllB}^{\lllA} \wedge \dot{\vomega}_{\lllC}^{\lllB} + \vomega_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA} \wedge \vomega_{\lllC}^{\lllB}
+\end{equation}
+
+Ou seja, $\ddot{\vomega}_{\lllC}^{\lllA}$ é composta pela soma de $\ddot{\vomega}_{\lllB}^{\lllA}$, que seria a sobre-aceleração angular  de $\llC$ se $\llC$ estivesse fixo a $\llB$ (sobre-aceleração angular de arrastamento), $\ddot{\vomega}_{\lllC}^{\lllB}$, que seria a sobre-aceleração angular de $\llC$ se $\llB$ estivesse parado em relação a $\llA$ (aceleração angular relativa), e da parcela $ \dot{\vomega}_{\lllB}^{\lllA} \wedge \vomega_{\lllC}^{\lllB} + 2 \vomega_{\lllB}^{\lllA} \wedge \dot{\vomega}_{\lllC}^{\lllB} + \vomega_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA} \wedge \vomega_{\lllC}^{\lllB}$ (sobre-aceleralção angular complementar).
+
+
+
 \end{itemize}
 
 
 
-\subsection{Algoritmo para modelagem de mecanismos seriais}\label{S05-1}
+\subsection{Algoritmo para modelagem de mecanismos seriais}\label{S05-2}
 
 Esta subseção tem o intuito de apresentar um algoritmo genérico para a obtenção do modelo cinemático e dinâmico de mecanismos seriais. O algoritmo apresentado é implementável em linguagens de programação comumente usadas atualmente, como C++, Java e Python, sem necessitar de recursos de manipulação simbólica. \\
 Para a obtenção do modelo, são necessários apenas os parametros de Denavit-Hartemberg \cite{Craig, Denavit, Lipkin, Cabral} do mecanismo e as posições dos centros de massa dos ligamentos em relação aos sistemas de coordenadas fixos aos ligamentos. \\ 
@@ -506,7 +596,7 @@ Para a obtenção do modelo, são necessários apenas os parametros de Denavit-Harte
 Seja $\ssB$ um sistema mecânico serial de $\nu$ graus de liberdade. Primeiramente, fazemos as seguintes definições:
 
 \begin{itemize}
-\item $\llN$: referencial inercial.
+\item $\llN, \llB_0$: referencial inercial.
 \item $\ttN, \ttB_0$: sistema de coordenadas da base, fixo a $\llN$.
 \item $\llB_i, \,i=1,...,\nu$: i-ésimo ligamento.
 \item $\ttB_i, \,i=1,...,\nu$: sistema de coordenadas solid\'ario a $\llB_i$.
@@ -514,22 +604,18 @@ Seja $\ssB$ um sistema mecânico serial de $\nu$ graus de liberdade. Primeirament
 \item $\{\vi_i, \vj_i, \vk_i\}, \,i=0,...,\nu$: base ortonormal do sistema $\ttB_i$.
 \item $\ttg_i, \,i=1,...,\nu$: centro de massa de $\llB_i$.
 \item $\ttx$: ponto no espa\c{c}o fixo ao efetuador.
-\item $\vomega$: vetor velocidade angular absoluta do efetuador.
-\item $\vv$: vetor velocidade linear absoluta do efetuador.
-\item $\va$: vetor acelera\c{c}\~ao linear absoluta do efetuador.
-\item $\vomega_i, \,i=1,...,\nu$: vetor velocidade angular absoluta de $\llB_i$.
-\item $\vv_i, \,i=1,...,\nu$: vetor velocidade linear absoluta do centro de massa de $\llB_i$.
-\item $\va_i, \,i=1,...,\nu$: vetor acelera\c{c}\~ao linear absoluta do centro de $\llB_i$.
+%\item $\vomega_{\lllX}^{\lllN}$: vetor velocidade angular absoluta do efetuador.
+%\item $\vv$: vetor velocidade linear absoluta do efetuador.
+%\item $\va$: vetor acelera\c{c}\~ao linear absoluta do efetuador.
+%\item $\vomega_i, \,i=1,...,\nu$: vetor velocidade angular absoluta de $\llB_i$.
+%\item $\vv_i, \,i=1,...,\nu$: vetor velocidade linear absoluta do centro de massa de $\llB_i$.
+%\item $\va_i, \,i=1,...,\nu$: vetor acelera\c{c}\~ao linear absoluta do centro de $\llB_i$.
 \item $m_i$: massa da barra $\llB_i$.
 \item $\vI_i$: tensor de in\'ercia da barra $\llB_i$ em relação a seu centro de massa.
 \item $q_i, \,i=1,...,\nu$: deslocamento relativo (angular ou linear) da i-ésima junta.
 \item  $\mq$: matriz-coluna de $\nu$ coordenadas generalizadas independentes. É dada por $\mq = \begin{bmatrix}
 q_1 & ... & {q}_{\nu}
 \end{bmatrix}^\msT $.
-\item $\vv_{abs}, \vv_{rel}, \vv_{arr}$: Velocidades absoluta, relativa e de arrastamento, respectivamente.
-\item $\va_{abs}, \va_{rel}, \va_{arr}$: Acelerações absoluta, relativa e de arrastamento, respectivamente.
-\item $\vomega_{abs}, \vomega_{rel}, \vomega_{arr}$: Velocidades angulares absoluta, relativa e de arrastamento, respectivamente.
-\item $\dot{\vomega}_{abs}, \dot{\vomega}_{rel}, \dot{\vomega}_{arr}$: Acelerações angulares absoluta, relativa e de arrastamento, respectivamente.
 \end{itemize}
 
 \begin{itemize}
@@ -577,6 +663,46 @@ Além disso, como $\vct{\ttg_i}_{\ttB_i}$ são dados de entrada do algoritmo, obte
 \end{equation}
 
 \item[B1)] Cinemática de velocidades lineares
+
+A velocidade do efetuador pode ser obtida aplicando recursivamente o príncipio da composição de movimentos para velocidades lineres deduzido anteriormente \eqref{eq:Composicao_vel}:
+
+\begin{equation}
+\vv_{\ttx}^{\lllB_0} = \vv_{\ttx \rl \lllB_1}^{\lllB_0} + \vv_{\ttx}^{\lllB_1}
+\end{equation}
+\begin{equation}
+\vv_{\ttx}^{\lllB_1} = \vv_{\ttx \rl \lllB_2}^{\lllB_1} + \vv_{\ttx}^{\lllB_2}
+\end{equation}
+$$ \vdots $$
+\begin{equation}
+\vv_{\ttx}^{\lllB_{i-1}} = \vv_{\ttx \rl \lllB_i}^{\lllB_{i-1}} + \vv_{\ttx}^{\lllB_i}
+\end{equation}
+$$ \vdots $$
+\begin{equation}
+\vv_{\ttx}^{\lllB_{\nu-1}} = \vv_{\ttx \rl \lllB_\nu}^{\lllB_{\nu-1}} + \vv_{\ttx}^{\lllB_\nu}
+\end{equation}
+
+Como $\ttx$ é fixo a $\llB_\nu$, temos que:
+\begin{equation}
+\vv_{\ttx}^{\lllB_\nu} = \vzr
+\end{equation}
+
+Sendo assim, a velocidade do efetuador em relação a cada um dos referenciais é dada por:
+\begin{equation}
+\vv_{\ttx}^{\lllB_{i-1}} =
+\begin{cases}
+\displaystyle\sum_{j=i}^{\nu} \vv_{\ttx \rl \lllB_{j}}^{\lllB_{j-1}}, \; 1 \leq i \leq \nu \\
+\vzr, \;\;\;\;\;\;\;\;\;\;\;\; i = \nu + 1
+\end{cases}\, i=1,...,\nu+1
+\end{equation}
+
+Sendo que a velocidade de arrastamento de cada uma das juntas é dada por:
+\begin{equation}
+\vv_{\ttx \rl \lllB_{i}}^{\lllB_{i-1}} = 
+\begin{cases}
+\dot{q}_{i} \vk_{i-1}, \;\;\;\;\;\;\;\;\;\;\;\;\;\; \text{se a i-ésima junta for prismática} \\
+\dot{q}_{i} \vk_{i-1} \wedge \vr_{\tto_{i-1} \rl \ttx}, \; \text{se a i-ésima junta for de revolução}
+\end{cases}\, i=1,...,\nu
+\end{equation}
 
 A posição do efetuador em relação ao sistema base é função dos deslocamentos relativos das juntas, ou seja:
 \begin{equation} \label{eq:x_q_}
@@ -1043,7 +1169,7 @@ $$
 
 \end{itemize}
 
-\subsection{Algoritmo para modelagem de mecanismos paralelos}\label{S05-2}
+\subsection{Algoritmo para modelagem de mecanismos paralelos}\label{S05-3}
 
 Esta subseção tem o intuito de apresentar um algoritmo genérico para a obtenção do modelo dinâmico de mecanismos paralelos. O algoritmo apresentado é implementável em linguagens de programação comumente usadas atualmente, como C++, Java e Python, sem necessitar de recursos de manipulação simbólica. \\
 Para a obtenção do modelo do mecanismo paralelos, são necessários apenas os modelos de mecanismos seriais deduzidos  utilizando o algoritmo apresentado anteriormente, do modelo do efetuador, e de 7 matrizes constantes que são utilizadas para descrever a arquitetura do mecanismo paralelo. \\ 
@@ -1642,7 +1768,7 @@ Sendo assim, a simulação dinâmica inversa é feita utilizando a equação \eqref{eq
 
 \end{itemize}
 
-\subsection{Projeto do Controlador}\label{S05-3}
+\subsection{Projeto do Controlador}\label{S05-5}
 
 Esta subseção é destinada ao projeto de controladores não lineares robustos, destinados ao controle de posição de plataformas paralelas cujo modelo dinâmico para simulação dinâmica inversa é dado por \eqref{eq:DinamicaInversa2}, utilizando a técnica de controle por modos deslizantes \cite{Slotini, Utkin}.
 
