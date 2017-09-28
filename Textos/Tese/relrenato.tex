@@ -449,7 +449,7 @@ Definindo:
 \end{equation}
 
 Temos princípio da composição de movimento para acelerações lineares:
-\begin{equation}
+\begin{equation} \label{eq:Composicao_ace}
 \va_\ttp^{\lllA} = \va_{\ttp \rl \lllB}^{\lllA} + \va_\ttp^{\lllB} + 2\vomega_{\lllB}^{\lllA} \wedge \vv_\ttp^{\lllB}
 \end{equation}
 
@@ -686,14 +686,23 @@ Como $\ttx$ é fixo a $\llB_\nu$, temos que:
 \vv_{\ttx}^{\lllB_\nu} = \vzr
 \end{equation}
 
-Sendo assim, a velocidade do efetuador em relação a cada um dos referenciais é dada por:
+Sendo assim, a velocidade do efetuador em relação a cada um dos referenciais pode ser obtida recursivamente pela seguinte expressão:
+%\begin{equation}
+%\vv_{\ttx}^{\lllB_{i-1}} =
+%\begin{cases}
+%\displaystyle\sum_{j=i}^{\nu} \vv_{\ttx \rl \lllB_{j}}^{\lllB_{j-1}}, \; 1 \leq i \leq \nu \\
+%\vzr, \;\;\;\;\;\;\;\;\;\;\;\; i = \nu + 1
+%\end{cases}\, i=1,...,\nu+1
+%\end{equation}
 \begin{equation}
 \vv_{\ttx}^{\lllB_{i-1}} =
 \begin{cases}
-\displaystyle\sum_{j=i}^{\nu} \vv_{\ttx \rl \lllB_{j}}^{\lllB_{j-1}}, \; 1 \leq i \leq \nu \\
-\vzr, \;\;\;\;\;\;\;\;\;\;\;\; i = \nu + 1
-\end{cases}\, i=1,...,\nu+1
+\vzr, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\; i = \nu + 1 \\
+\vv_{\ttx}^{\lllB_{i}} + \vv_{\ttx \rl \lllB_{i}}^{\lllB_{i-1}}, \; 1 \leq i \leq \nu \\
+\end{cases}\, i=\nu+1,...,1
 \end{equation}
+
+
 
 Sendo que a velocidade de arrastamento de cada uma das juntas é dada por:
 \begin{equation}
@@ -704,41 +713,7 @@ Sendo que a velocidade de arrastamento de cada uma das juntas é dada por:
 \end{cases}\, i=1,...,\nu
 \end{equation}
 
-A posição do efetuador em relação ao sistema base é função dos deslocamentos relativos das juntas, ou seja:
-\begin{equation} \label{eq:x_q_}
-\vct{\ttx}_{\ttN} = \underline{\mx}(\mq)
-\end{equation}
-
-Derivando no tempo, obtemos:
-\begin{equation} \label{eq:dx_q_}
-\vct{\vv}_{\ttN} = \frac{\dd}{\dd t} \vct{\ttx}_{\ttN} = \mJ_v (\mq) \cdot \dot{\mq} = \sum_{i=1}^{\nu} \mj_{v\,i} (\mq) \cdot \dot{q}_i
-\end{equation}
-
-Sendo:
-\begin{equation} \label{eq:jv_}
-\mj_{v\,i}(\mq) = \frac{\partial \underline{\mx}}{\partial q_i}, \, i=1,...,\nu
-\end{equation}
-
-\begin{equation} \label{eq:Jv_}
-\mJ_v(\mq) = \frac{\partial \underline{\mx}}{\partial\mq} = \begin{bmatrix}
-\mj_{v\,1}(\mq) & ... & \mj_{v\,\nu}(\mq)
-\end{bmatrix}
-\end{equation}
-
-Analisando a equação \eqref{eq:dx_q_}, pode-se obersevar que o produto $\mj_{v\,i} \dot{q}_i$ representa a contribuição da i-ésima junta na velocidade do efetuador, com todas as outras juntas paradas \cite{Cabral}. Note que esta constatação está de acordo com a aplicação recursiva do príncipio da composição de movimento para velocidades lineares \cite{Kaminski, Tenenbaum}:
-\begin{equation} \label{eq:Composição_v}
-\vv_{abs} = \vv_{arr} + \vv_{rel}
-\end{equation}
-
-Sendo assim, a contribuição de cada junta na velocidade do efetuador é dada por:
-\begin{equation} \label{eq:ContribuiçãoVelocidadeLinear}
-\mj_{v\,i} \cdot \dot{q}_i = \begin{cases}
-\vct{\vk_{i-1}}_{\ttN} \dot{q}_i, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; \text{se a i-ésima junta for prismática} \\
-(\vct{\vk_{i-1}}_{\ttN} \dot{q}_i)\wedge (\vct{\ttx}_{\ttN}-\vct{\tto_{i-1}}_{\ttN}) , \text{se a i-ésima junta for de revolução} \\
-\end{cases}\, i=1,...,\nu
-\end{equation}
-
-Ou seja:
+Fazendo as seguintes definições:
 \begin{equation} \label{eq:jvi_}
 \mj_{v\,i}(\mq) = \begin{cases}
 \vct{\vk_{i-1}}_{\ttN}, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; \text{se a i-ésima junta for prismática} \\
@@ -746,10 +721,57 @@ Ou seja:
 \end{cases} \, i=1,...,\nu
 \end{equation}
 
-Para obter as velocidades dos centros de massa dos ligamentos, o raciocínio é análogo:
+\begin{equation}
+\mv_i = \vct{\vv_{\ttx}^{\lllB_{i}} }_{\ttN}
+\end{equation}
 
-\begin{equation} \label{eq:vi_q_}
-\vct{\vv_i}_{\ttN} = \frac{\dd}{\dd t} \vct{\ttg_i}_{\ttN}  = \mJ_{v\,i} (\mq) \cdot \dot{\mq} = \sum_{j=1}^{\nu} \mj_{v\,i,j} (\mq) \cdot \dot{q}_j, \, i=1,...,\nu
+Temos que:
+\begin{equation}
+\vct{\vv_{\ttx \rl \lllB_{i}}^{\lllB_{i-1}} }_{\ttN} = \mj_{v\,i}(\mq) \dot{q}_{i}, \; i=1,...,\nu
+\end{equation}
+\begin{equation}
+\mv_{i-1} =
+\begin{cases}
+\mzr, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; i = \nu + 1 \\
+\mv_i + \mj_{v\,i}(\mq) \dot{q}_{i}, \; 1 \leq i \leq \nu \\
+\end{cases}\, i=\nu+1,...,1
+\end{equation}
+\begin{equation}
+\vct{\vv_{\ttx}^{\lllN} }_{\ttN} = \mv_0 = \mJ_v(\mq) \cdot \dot{\mq}
+\end{equation}
+
+Sendo:
+\begin{equation} \label{eq:Jv_}
+\mJ_v(\mq) = \begin{bmatrix}
+\mj_{v\,1}(\mq) & ... & \mj_{v\,\nu}(\mq)
+\end{bmatrix}
+\end{equation}
+
+Para obter as velocidades dos centros de massa dos ligamentos, seguimos a mesma linha de raciocínio e obtemos os seguintes resultados:
+
+Definindo:
+\begin{equation} \label{eq:jvij_}
+\mj_{v\,i,j}(\mq) = \begin{cases}
+\mzr, \text{se j>i} \\
+\vct{\vk_{j-1}}_{\ttN}, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; \text{se } j\leq i  \text{ e a j-ésima junta for prismática} \\
+\vct{\vk_{j-1}}_{\ttN}\wedge (\vct{\ttg_i}_{\ttN}-\vct{\tto_{j-1}}_{\ttN}) , \text{se } j\leq i \text{ e a j-ésima junta for de revolução} \\
+\end{cases} \, i,j=1,...,\nu
+\end{equation}
+
+\begin{equation}
+\mv_{i,j} = \vct{\vv_{\ttg_i}^{\lllB_{j}}}_{\ttN}
+\end{equation}
+
+Temos:
+\begin{equation}
+\mv_{i,j-1} =
+\begin{cases}
+\mzr, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; j = i+1 \\
+\mv_{i,j} + \mj_{v\,i,j}(\mq) \dot{q}_{j}, \; 1 \leq j \leq i \\
+\end{cases}\, i=1,...,\nu, \, j=i+1,...,1
+\end{equation}
+\begin{equation}
+\vct{\vv_{\ttg_i}^{\lllN} }_{\ttN} = \mJ_{v\,i}(\mq) \cdot \dot{\mq}
 \end{equation}
 
 Sendo:
@@ -760,139 +782,295 @@ Sendo:
 \end{bmatrix}, \, i=1,...,\nu
 \end{equation}
 
-\begin{equation} \label{eq:jvij_}
-\mj_{v\,i,j}(\mq) = \begin{cases}
-\mzr, \text{se j>i} \\
-\vct{\vk_{j-1}}_{\ttN}, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; \text{se } j\leq i  \text{ e a j-ésima junta for prismática} \\
-\vct{\vk_{j-1}}_{\ttN}\wedge (\vct{\ttg_i}_{\ttN}-\vct{\tto_{j-1}}_{\ttN}) , \text{se } j\leq i \text{ e a j-ésima junta for de revolução} \\
+\item[B2)] Cinemática de velocidades angulares
+
+A velocidade angular do efetuador pode ser obtida aplicando recursivamente o príncipio da composição de movimentos para velocidades angulares deduzido anteriormente \eqref{eq:composicao_w}:
+
+\begin{equation}
+\vomega_{\lllB_\nu}^{\lllB_0} = \vomega_{\lllB_1}^{\lllB_0} + \vomega_{\lllB_\nu}^{\lllB_1}
+\end{equation}
+\begin{equation}
+\vomega_{\lllB_\nu}^{\lllB_1} = \vomega_{\lllB_2}^{\lllB_1} + \vomega_{\lllB_\nu}^{\lllB_2}
+\end{equation}
+$$ \vdots $$
+\begin{equation}
+\vomega_{\lllB_\nu}^{\lllB_{i-1}} = \vomega_{\lllB_i}^{\lllB_{i-1}} + \vomega_{\lllB_\nu}^{\lllB_i}
+\end{equation}
+$$ \vdots $$
+\begin{equation}
+\vomega_{\lllB_\nu}^{\lllB_{\nu-2}} = \vomega_{\lllB_{\nu-1}}^{\lllB_{\nu-2}} + \vomega_{\lllB_\nu}^{\lllB_{\nu-1}}
+\end{equation}
+
+
+Sendo assim, a velocidade angular do efetuador em relação a cada um dos referenciais pode ser obtida recursivamente pela seguinte expressão:
+%\begin{equation}
+%\vomega_{\lllB_\nu}^{\lllB_{i-1}} =
+%\begin{cases}
+%\displaystyle\sum_{j=i}^{\nu} \vomega_{\lllB_{j}}^{\lllB_{j-1}}, \; 1 \leq i \leq \nu \\
+%\vzr, \;\;\;\;\;\;\;\;\;\;\;\; i = \nu + 1
+%\end{cases}\, i=1,...,\nu+1
+%\end{equation}
+\begin{equation}
+\vomega_{\lllB_\nu}^{\lllB_{i-1}} =
+\begin{cases}
+\vzr, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\; i = \nu + 1 \\
+\vomega_{\lllB_\nu}^{\lllB_{i}} + \vomega_{\lllB_{i}}^{\lllB_{i-1}}, \; 1 \leq i \leq \nu \\
+\end{cases}\, i=\nu+1,...,1
+\end{equation}
+
+
+
+Sendo que a velocidade angular de arrastamento de cada uma das juntas é dada por:
+\begin{equation}
+\vomega_{\lllB_{i}}^{\lllB_{i-1}} = 
+\begin{cases}
+\vzr, \;\;\;\;\;\;\; \text{se a i-ésima junta for prismática} \\
+\dot{q}_{i} \vk_{i-1}, \; \text{se a i-ésima junta for de revolução}
+\end{cases}\, i=1,...,\nu
+\end{equation}
+
+Fazendo as seguintes definições:
+\begin{equation} \label{eq:jwi_}
+\mj_{\omega\,i}(\mq) = \begin{cases}
+\mzr, \;\;\;\;\;\;\;\; \text{se a i-ésima junta for prismática} \\
+\vct{\vk_{i-1}}_{\ttN} , \text{se a i-ésima junta for de revolução} \\
+\end{cases} \, i=1,...,\nu
+\end{equation}
+
+\begin{equation}
+\momega_i = \vct{\vomega_{\lllB_\nu}^{\lllB_{i}} }_{\ttN}
+\end{equation}
+
+Temos que:
+\begin{equation}
+\vct{\vomega_{\lllB_{i}}^{\lllB_{i-1}} }_{\ttN} = \mj_{\omega\,i}(\mq) \dot{q}_{i}, \; i=1,...,\nu
+\end{equation}
+\begin{equation}
+\momega_{i-1} =
+\begin{cases}
+\mzr, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; i = \nu + 1 \\
+\momega_i + \mj_{\omega\,i}(\mq) \dot{q}_{i}, \; 1 \leq i \leq \nu \\
+\end{cases}\, i=\nu+1,...,1
+\end{equation}
+\begin{equation}
+\vct{\vomega_{\lllB_\nu}^{\lllN} }_{\ttN} = \momega_0 = \mJ_\omega(\mq) \cdot \dot{\mq}
+\end{equation}
+
+Sendo:
+\begin{equation} \label{eq:Jw_}
+\mJ_\omega(\mq) = \begin{bmatrix}
+\mj_{\omega\,1}(\mq) & ... & \mj_{\omega\,\nu}(\mq)
+\end{bmatrix}
+\end{equation}
+
+Para obter as velocidades angulares de cada ligamentos, seguimos a mesma linha de raciocínio e obtemos os seguintes resultados:
+
+Definindo:
+\begin{equation} \label{eq:jwij_}
+\mj_{\omega\,i,j}(\mq) = \begin{cases}
+\mzr, \;\;\;\;\;\;\;\;\, \text{se } j>i \\
+\mj_{\omega\,j}(\mq), \; \text{se } j\leq i \\
 \end{cases} \, i,j=1,...,\nu
 \end{equation}
 
-\item[B2)] Cinemática de velocidades angulares
-
-A velocidade angular de cada ligamento pode ser obtida aplicando recursivamente o príncipio da composição de movimentos para velocidades angulares \cite{Kaminski, Tenenbaum}:
-\begin{equation} \label{eq:Composição_w}
-\vomega_{abs} = \vomega_{arr} + \vomega_{rel}
-\end{equation}
-\begin{equation} \label{eq:Composição_w_rec}
-\vct{\vomega_i}_{\ttN} = \begin{cases}
-\mzr, \text{se } i=0 \\
-\vct{\vomega_{i-1}}_{\ttN}, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; \text{se } i>0  \text{ e a i-ésima junta for prismática} \\
-\vct{\vomega_{i-1}}_{\ttN} + \vct{\vk_{i-1}}_{\ttN} \dot{q}_i,  \text{se } i>0  \text{ e a i-ésima junta for de revolução} \\
-\end{cases}\, i=0,...,\nu
-\end{equation}
-
-Sendo assim, a velocidade angular de cada ligamento pode ser obtida pelas seguintes expressões:
-
 \begin{equation}
-\vct{\vomega_i}_{\ttN} = \mJ_{\omega\,i} (\mq) \cdot \dot{\mq} = \sum_{j=1}^{\nu} \mj_{\omega\,i,j} (\mq) \cdot \dot{q}_j, \, i=1,...,\nu
+\momega_{i,j} = \vct{\vomega_{\lllB_i}^{\lllB_{j}}}_{\ttN}
+\end{equation}
+
+Temos:
+\begin{equation}
+\momega_{i,j-1} =
+\begin{cases}
+\mzr, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; j = i+1 \\
+\momega_{i,j} + \mj_{\omega\,i,j}(\mq) \dot{q}_{j}, \; 1 \leq j \leq i \\
+\end{cases}\, i=1,...,\nu, \, j=i+1,...,1
 \end{equation}
 \begin{equation}
+\vct{\vomega_{\lllB_i}^{\lllN} }_{\ttN} = \momega_{i,0} = \mJ_{\omega\,i}(\mq) \cdot \dot{\mq}
+\end{equation}
+
+Sendo:
+
+\begin{equation} \label{eq:Jwi_}
 \mJ_{\omega\,i}(\mq) = \begin{bmatrix}
 \mj_{\omega\,i,1}(\mq) & ... & \mj_{\omega\,i,\nu}(\mq)
 \end{bmatrix}, \, i=1,...,\nu
 \end{equation}
-\begin{equation}
-\mj_{\omega\,i,j}(\mq) = \begin{cases}
-\mzr, \;\;\;\;\;\;\;\;\; \text{se } j>i  \text{ ou a j-ésima junta for prismática} \\
-\vct{\vk_{j-1}}_{\ttN}, \text{se } j\leq i \text{ e a j-ésima junta for de revolução} \\
-\end{cases} \, i,j=1,...,\nu
-\end{equation}
-
-Note que também obtemos a velocidade angular do efetuador no sistema da base, pois
-\begin{equation}
-\vct{\vomega}_{\ttN} = \vct{\vomega_{\nu}}_{\ttN} = \mJ_{\omega}(\mq) \cdot \dot{\mq}
-\end{equation}
-Sendo:
-\begin{equation}
-\mJ_{\omega}(\mq) = \mJ_{\omega\,\nu}(\mq) 
-\end{equation}
-
-As velocidades angulares dos ligamentos escritas nas bases dos sistemas de coordenadas solidários aos ligamentos, podem ser obtidas pelas seguintes expressões:
-\begin{equation} \label{eq:wi_Bi}
-\vct{\vomega_i}_{\ttB_i} = \vct{\vone}_{\ttN \rl \ttB_i}^\msT \cdot \vct{\vomega_i}_{\ttN} = \mJ_{w\,i} (\mq) \cdot \dot{\mq}, \, i = 1,...,\nu
-\end{equation}
-Sendo:
-\begin{equation}
-\mJ_{w\,i} (\mq) = \vct{\vone}_{\ttN \rl \ttB_i}^\msT \cdot \mJ_{\omega\,i} (\mq), \, i = 1,...,\nu
-\end{equation}
-
-%Para o efetuador, temos que sua velocidade angular é a mesma do $\nu$-ésimo ligamento, ou seja:
 
 \item[C1)] Cinemática de acelerações lineares
 
-A aceleração do centro de massa de cada ligamento pode ser obtida aplicando recursivamente o príncipio da composição de movimentos para acelerações lineares \cite{Kaminski, Tenenbaum}:
-\begin{equation} \label{eq:Composição_a}
-\va_{abs} = \va_{arr} + \va_{rel} + 2 \vomega_{arr} \wedge \vv_{rel} 
-\end{equation}
-\begin{equation} \label{eq:Composição_a_rec}
-\vct{\va_{i,j}}_{\ttN} = \begin{cases}
-\mzr, \text{se } j=0 \\
-\vct{\va_{i,j-1}}_{\ttN} + \mj_{v\,i,j} \ddot{q}_i + \mj_{\omega\,i,j}  \wedge [\mj_{\omega\,i,j} \wedge (\vct{\ttg_i}_{\ttN} - \vct{\tto_{j-1}}_{\ttN}) ] \dot{q}_j^2 + 2 \vct{\vomega_{j-1}}_{\ttN} \wedge \mj_{v\,i,j} \dot{q}_j ,  \text{se } j>0 \\
-\end{cases} 
-\end{equation}
-$$ \text{Com } i=1,...,\nu \text{ e } j=1,...,i$$
+A aceleração do efetuador pode ser obtida aplicando recursivamente o príncipio da composição de movimentos para velocidades lineres deduzido anteriormente \eqref{eq:Composicao_ace}:
+
 \begin{equation}
-\vct{\va_i}_{\ttN} = \vct{\va_{i,i}}_{\ttN}, \, i=1,...,\nu
+\va_{\ttx}^{\lllB_0} = \va_{\ttx \rl \lllB_1}^{\lllB_0} + \va_{\ttx}^{\lllB_1} + 2 \vomega_{\lllB_1}^{\lllB_0} \wedge \vv_{\ttx}^{\lllB_1}
+\end{equation}
+\begin{equation}
+\va_{\ttx}^{\lllB_1} = \va_{\ttx \rl \lllB_2}^{\lllB_1} + \va_{\ttx}^{\lllB_2} + 2 \vomega_{\lllB_2}^{\lllB_1} \wedge \vv_{\ttx}^{\lllB_2}
+\end{equation}
+$$ \vdots $$
+\begin{equation}
+\va_{\ttx}^{\lllB_{i-1}} = \va_{\ttx \rl \lllB_i}^{\lllB_{i-1}} + \va_{\ttx}^{\lllB_i} + 2 \vomega_{\lllB_i}^{\lllB_{i-1}} \wedge \vv_{\ttx}^{\lllB_i}
+\end{equation}
+$$ \vdots $$
+\begin{equation}
+\va_{\ttx}^{\lllB_{\nu-1}} = \va_{\ttx \rl \lllB_\nu}^{\lllB_{\nu-1}} + \va_{\ttx}^{\lllB_\nu} + 2 \vomega_{\lllB_\nu}^{\lllB_{\nu-1}} \wedge \vv_{\ttx}^{\lllB_\nu}
 \end{equation}
 
-Sendo assim, a aceleração do centro de massa de cada ligamento pode ser obtida pela seguinte expressão:
-\begin{equation} \label{eq:ai_N}
-\vct{\va_i}_{\ttN} = \mJ_{v\,i}(\mq) \cdot \ddot{\mq} + \ma_i (\mq, \dot{\mq}), \, i=1,...,\nu
-\end{equation}
-Sendo:
+Como $\ttx$ é fixo a $\llB_\nu$, temos que:
 \begin{equation}
-\ma_i (\mq, \dot{\mq}) = \sum_{j=1}^{i} \mj_{\omega\,i,j}  \wedge [\mj_{\omega\,i,j} \wedge (\vct{\ttg_i}_{\ttN} - \vct{\tto_{j-1}}_{\ttN}) ] \dot{q}_j^2 + 2 (\mJ_{\omega\,j-1} \dot{\mq}) \wedge \mj_{v\,i,j} \dot{q}_j, \, i=1,...,\nu
+\va_{\ttx}^{\lllB_\nu} = \vzr
 \end{equation}
 
-Analogamente, para a aceleração do efetuador, temos:
+Sendo assim, a aceleração do efetuador em relação a cada um dos referenciais pode ser obtida recursivamente pela seguinte expressão:
+%\begin{equation}
+%\vv_{\ttx}^{\lllB_{i-1}} =
+%\begin{cases}
+%\displaystyle\sum_{j=i}^{\nu} \vv_{\ttx \rl \lllB_{j}}^{\lllB_{j-1}}, \; 1 \leq i \leq \nu \\
+%\vzr, \;\;\;\;\;\;\;\;\;\;\;\; i = \nu + 1
+%\end{cases}\, i=1,...,\nu+1
+%\end{equation}
 \begin{equation}
-\frac{\dd^2}{\dd t^2} \vct{\ttx}_{\ttN} = \mJ_{v} (\mq) \cdot \ddot{\mq} + \ma(\mq,\dot{\mq}), \, i=1,...,\nu
+\va_{\ttx}^{\lllB_{i-1}} =
+\begin{cases}
+\vzr, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; i = \nu + 1 \\
+\va_{\ttx}^{\lllB_i} +\va_{\ttx \rl \lllB_i}^{\lllB_{i-1}} + 2 \vomega_{\lllB_i}^{\lllB_{i-1}} \wedge \vv_{\ttx}^{\lllB_i}, \; 1 \leq i \leq \nu \\
+\end{cases}\, i=\nu+1,...,1
 \end{equation}
-Sendo:
+
+
+
+Sendo que a aceleração de arrastamento de cada uma das juntas é dada por:
 \begin{equation}
-\ma(\mq,\dot{\mq}) = \sum_{j=1}^{\nu} \mj_{\omega\,j}  \wedge [\mj_{\omega\,j} \wedge (\vct{\ttx}_{\ttN} - \vct{\tto_{j-1}}_{\ttN}) ] \dot{q}_j^2 + 2 (\mJ_{\omega\,j-1} \dot{\mq}) \wedge \mj_{v\,j} \dot{q}_j, \, i=1,...,\nu
+\vv_{\ttx \rl \lllB_{i}}^{\lllB_{i-1}} = 
+\begin{cases}
+\ddot{q}_{i} \vk_{i-1}, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; \text{se a i-ésima junta for prismática} \\
+\ddot{q}_{i} \vk_{i-1} \wedge \vr_{\tto_{i-1} \rl \ttx} + \dot{q}^2_{i} \vk_{i-1} \wedge \vk_{i-1} \wedge \vr_{\tto_{i-1} \rl \ttx} , \; \text{se a i-ésima junta for de revolução}
+\end{cases}\, i=1,...,\nu
+\end{equation}
+
+Fazendo a seguinte definição:
+\begin{equation}
+\ma_i = \vct{\va_{\ttx}^{\lllB_{i}} }_{\ttN}
+\end{equation}
+
+Temos que:
+\begin{equation}
+\vct{\va_{\ttx \rl \lllB_{i}}^{\lllB_{i-1}} }_{\ttN} = \ddot{q}_{i} \mj_{v\,i} + \dot{q}^2_{i} \mj_{\omega\,i} \wedge \mj_{v\,i}, \; i=1,...,\nu
+\end{equation}
+\begin{equation}
+\ma_{i-1} =
+\begin{cases}
+\mzr, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; i = \nu + 1 \\
+\ma_i + \ddot{q}_{i} \mj_{v\,i} + \dot{q}^2_{i} \mj_{\omega\,i} \wedge \mj_{v\,i} + 2 \dot{q}_i \mj_{\omega\,i} \wedge \mv_i , \; 1 \leq i \leq \nu \\
+\end{cases}\, i=\nu+1,...,1
+\end{equation}
+\begin{equation}
+\vct{\va_{\ttx}^{\lllN} }_{\ttN} = \ma_0 = \mJ_v(\mq) \cdot \ddot{\mq} + \sum_{i=1}^\nu  \dot{q}^2_{i} \mj_{\omega\,i} \wedge \mj_{v\,i} + 2 \dot{q}_i \mj_{\omega\,i} \wedge \mv_i , \; 1 \leq i \leq \nu
+\end{equation}
+
+Para obter as acelerações dos centros de massa dos ligamentos, seguimos a mesma linha de raciocínio e obtemos os seguintes resultados:
+
+Definindo:
+\begin{equation}
+\ma_{i,j} = \vct{\va_{\ttg_i}^{\lllB_{j}}}_{\ttN}
+\end{equation}
+
+Temos:
+\begin{equation}
+\ma_{i,j-1} =
+\begin{cases}
+\mzr, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; j = i+1 \\
+\ma_{i,j} + \ddot{q}_{j} \mj_{v\,i,j} + \dot{q}^2_{j} \mj_{\omega\,i,j} \wedge \mj_{v\,i,j} + 2 \dot{q}_j \mj_{\omega\,i,j} \wedge \mv_{i,j}, \; 1 \leq j \leq i \\
+\end{cases}\, i=1,...,\nu, \, j=i+1,...,1
+\end{equation}
+\begin{equation}
+\vct{\va_{\ttg_i}^{\lllN} }_{\ttN} = \ma_{i,0} = \mJ_{v\,i}(\mq) \cdot \ddot{\mq} + \sum_{j=1}^i  \dot{q}^2_{j} \mj_{\omega\,i,j} \wedge \mj_{v\,i,j} + 2 \dot{q}_j \mj_{\omega\,i,j} \wedge \mv_{i,j} , \; 1 \leq i \leq \nu
 \end{equation}
 
 \item[C2)] Cinemática de acelerações angulares
 
-A aceleração angular de cada ligamento pode ser obtida aplicando recursivamente o príncipio da composição de movimentos para acelerações angulares \cite{Kaminski, Tenenbaum}:
-\begin{equation} \label{eq:Composição_dw}
-\dot{\vomega}_{abs} = \dot{\vomega}_{arr} + \dot{\vomega}_{rel} + \vomega_{arr} \wedge \vomega_{rel} 
-\end{equation}
-\begin{equation} \label{eq:Composição_dw_rec}
-\vct{\dot{\vomega}_i}_{\ttN} = \begin{cases}
-\mzr, \text{se } i=0 \\
-\vct{\dot{\vomega}_{i-1}}_{\ttN} + \mj_{\omega\,i,i} \ddot{q}_i + \vct{\vomega_{i-1}}_{\ttN} \wedge \mj_{\omega\,i,i} \dot{q}_i ,  \text{se } i>0 \\
-\end{cases}\, i=0,...,\nu
-\end{equation}
-
-Sendo assim, a aceleração angular de cada ligamento pode ser obtida pelas seguintes expressões:
+A aceleração angular do efetuador pode ser obtida aplicando recursivamente o príncipio da composição de movimentos para velocidades lineres deduzido anteriormente \eqref{eq:composicao_dw}:
 
 \begin{equation}
-\vct{\dot{\vomega_i}}_{\ttN} = \mJ_{\omega\,i} (\mq) \cdot \ddot{\mq} + \dot{\momega}_i (\mq,\dot{\mq}), \, i=1,...,\nu
+\dot{\vomega}_{\lllB_\nu}^{\lllB_0} = \dot{\vomega}_{\lllB_1}^{\lllB_0} + \dot{\vomega}_{\lllB_\nu}^{\lllB_1} +  \vomega_{\lllB_1}^{\lllB_0} \wedge \vomega_{\lllB_\nu}^{\lllB_1}
 \end{equation}
-Sendo:
 \begin{equation}
-\dot{\momega}_i (\mq,\dot{\mq}) = \sum_{j=1}^{i} (\mJ_{\omega\,j-1} \dot{\mq}) \wedge \mj_{\omega\,i,j} \cdot \dot{q}_j, \, i=1,...,\nu
+\dot{\vomega}_{\lllB_\nu}^{\lllB_1} = \dot{\vomega}_{\lllB_2}^{\lllB_1} + \dot{\vomega}_{\lllB_\nu}^{\lllB_2} +  \vomega_{\lllB_2}^{\lllB_1} \wedge \vomega_{\lllB_\nu}^{\lllB_2}
+\end{equation}
+$$ \vdots $$
+\begin{equation}
+\dot{\vomega}_{\lllB_\nu}^{\lllB_{i-1}} = \dot{\vomega}_{\lllB_i}^{\lllB_{i-1}} + \dot{\vomega}_{\lllB_\nu}^{\lllB_i} +  \vomega_{\lllB_i}^{\lllB_{i-1}} \wedge \vomega_{\lllB_\nu}^{\lllB_i}
+\end{equation}
+$$ \vdots $$
+\begin{equation}
+\dot{\vomega}_{\lllB_\nu}^{\lllB_{\nu-2}} = \dot{\vomega}_{\lllB_{\nu-1}}^{\lllB_{\nu-2}} + \dot{\vomega}_{\lllB_\nu}^{\lllB_{\nu-1}} + \vomega_{\lllB_{\nu-1}}^{\lllB_{\nu-2}} \wedge \vomega_{\lllB_\nu}^{\lllB_{\nu-1}}
 \end{equation}
 
-Note que também obtemos a aceleração angular do efetuador no sistema da base, pois
+
+Sendo assim, a aceleração angular do efetuador em relação a cada um dos referenciais pode ser obtida recursivamente pela seguinte expressão:
+%\begin{equation}
+%\vv_{\ttx}^{\lllB_{i-1}} =
+%\begin{cases}
+%\displaystyle\sum_{j=i}^{\nu} \vv_{\ttx \rl \lllB_{j}}^{\lllB_{j-1}}, \; 1 \leq i \leq \nu \\
+%\vzr, \;\;\;\;\;\;\;\;\;\;\;\; i = \nu + 1
+%\end{cases}\, i=1,...,\nu+1
+%\end{equation}
 \begin{equation}
-\vct{\dot{\vomega}}_{\ttN} = \vct{\dot{\vomega}_{\nu}}_{\ttN} = \mJ_{\omega}(\mq) \cdot \ddot{\mq} + \dot{\momega} (\mq,\dot{\mq})
-\end{equation}
-Sendo:
-\begin{equation}
-\dot{\momega} (\mq,\dot{\mq}) = \dot{\momega}_{\nu} (\mq,\dot{\mq})
+\dot{\vomega}_{\lllB_\nu}^{\lllB_{i-1}} =
+\begin{cases}
+\vzr, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; i = \nu + 1 \\
+\dot{\vomega}_{\lllB_i}^{\lllB_{i-1}} + \dot{\vomega}_{\lllB_\nu}^{\lllB_i} +  \vomega_{\lllB_i}^{\lllB_{i-1}} \wedge \vomega_{\lllB_\nu}^{\lllB_i}, \; 1 \leq i \leq \nu \\
+\end{cases}\, i=\nu+1,...,1
 \end{equation}
 
-As acelerações angulares dos ligamentos escritas nas bases dos sistemas de coordenadas solidários aos ligamentos, podem ser obtidas pelas seguintes expressões:
-\begin{equation} \label{eq:dwi_Bi}
-\vct{\dot{\vomega}_i}_{\ttB_i} = \vct{\vone}_{\ttN \rl \ttB_i}^\msT \cdot \vct{\dot{\vomega}_i}_{\ttN} = \mJ_{w\,i} (\mq) \cdot \ddot{\mq} + \dot{\mw}_i(\mq, \dot{\mq}) , \, i = 1,...,\nu
-\end{equation}
-Sendo:
+
+
+Sendo que a aceleração angular de arrastamento de cada uma das juntas é dada por:
 \begin{equation}
-\dot{\mw}_i(\mq, \dot{\mq}) = \vct{\vone}_{\ttN \rl \ttB_i}^\msT \cdot \dot{\momega}_i(\mq, \dot{\mq}), \, i = 1,...,\nu
+\vv_{\ttx \rl \lllB_{i}}^{\lllB_{i-1}} = 
+\begin{cases}
+\vzr, \;\;\;\;\;\;\; \text{se a i-ésima junta for prismática} \\
+\ddot{q}_{i} \vk_{i-1}, \; \text{se a i-ésima junta for de revolução}
+\end{cases}\, i=1,...,\nu
+\end{equation}
+
+Fazendo a seguinte definição:
+\begin{equation}
+\dot{\momega}_i = \vct{\dot{\vomega}_{\ttx}^{\lllB_{i}} }_{\ttN}
+\end{equation}
+
+Temos que:
+\begin{equation}
+\vct{\dot{\vomega}_{\lllB_{i}}^{\lllB_{i-1}} }_{\ttN} = \ddot{q}_{i} \mj_{\omega\,i} , \; i=1,...,\nu
+\end{equation}
+\begin{equation}
+\dot{\momega}_{i-1} =
+\begin{cases}
+\mzr, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; i = \nu + 1 \\
+\dot{\momega}_i + \ddot{q}_{i} \mj_{\omega\,i} + \dot{q}_i \mj_{\omega\,i} \wedge \momega_i , \; 1 \leq i \leq \nu \\
+\end{cases}\, i=\nu+1,...,1
+\end{equation}
+\begin{equation}
+\vct{\dot{\vomega}_{\lllB_\nu}^{\lllN} }_{\ttN} = \dot{\momega}_0 = \mJ_\omega \cdot \ddot{\mq} + \sum_{i=1}^\nu \dot{q}_i \mj_{\omega\,i} \wedge \momega_i , \; 1 \leq i \leq \nu
+\end{equation}
+
+Para obter as acelerações angulares dos centros de massa dos ligamentos, seguimos a mesma linha de raciocínio e obtemos os seguintes resultados:
+
+Definindo:
+\begin{equation}
+\dot{\momega}_{i,j} = \vct{\dot{\vomega}_{\ttg_i}^{\lllB_{j}}}_{\ttN}
+\end{equation}
+
+Temos:
+\begin{equation}
+\dot{\momega}_{i,j-1} =
+\begin{cases}
+\mzr, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; j = i+1 \\
+\dot{\momega}_{i,j} + \ddot{q}_{j} \mj_{\omega\,i,j} + \dot{q}_j \mj_{\omega\,i,j} \wedge \momega_{i,j}, \; 1 \leq j \leq i \\
+\end{cases}\, i=1,...,\nu, \, j=i+1,...,1
+\end{equation}
+\begin{equation}
+\vct{\dot{\vomega}_{\lllB_i}^{\lllN} }_{\ttN} = \dot{\momega}_{i,0} = \mJ_{\omega\,i} \cdot \ddot{\mq} + \sum_{j=1}^i  \dot{q}_j \mj_{\omega\,i,j} \wedge \momega_{i,j} , \; 1 \leq i \leq \nu
 \end{equation}
 
 \item[D)] Dinâmica
