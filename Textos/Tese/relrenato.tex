@@ -499,8 +499,8 @@ Definindo:
 \end{equation}
 
 Temos princípio da composição de movimento para sobre-acelerações lineares:
-\begin{equation}
-\dot{\va}_\ttp^{\lllA} = \dot{\va}_{\ttp \rl \lllB}^{\lllA} + 3(\dot{\vomega}_{\lllB}^{\lllA} \wedge \vv_\ttp^{\lllB} + 
+\begin{equation} \label{eq:Composicao_dace}
+\dot{\va}_\ttp^{\lllA} = \dot{\va}_{\ttp \rl \lllB}^{\lllA} + \dot{\va}_\ttp^{\lllB} + 3(\dot{\vomega}_{\lllB}^{\lllA} \wedge \vv_\ttp^{\lllB} + 
 \vomega_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA} \wedge \vv_\ttp^{\lllB}  + 
  \vomega_{\lllB}^{\lllA} \wedge \va_\ttp^{\lllB} )
 \end{equation}
@@ -989,7 +989,7 @@ Temos:
 
 \item[C2)] Cinemática de acelerações angulares
 
-A aceleração angular do efetuador pode ser obtida aplicando recursivamente o príncipio da composição de movimentos para velocidades lineres deduzido anteriormente \eqref{eq:composicao_dw}:
+A aceleração angular do efetuador pode ser obtida aplicando recursivamente o príncipio da composição de movimentos para acelerações deduzido anteriormente \eqref{eq:composicao_dw}:
 
 \begin{equation}
 \dot{\vomega}_{\lllB_\nu}^{\lllB_0} = \dot{\vomega}_{\lllB_1}^{\lllB_0} + \dot{\vomega}_{\lllB_\nu}^{\lllB_1} +  \vomega_{\lllB_1}^{\lllB_0} \wedge \vomega_{\lllB_\nu}^{\lllB_1}
@@ -1072,6 +1072,199 @@ Temos:
 \begin{equation}
 \vct{\dot{\vomega}_{\lllB_i}^{\lllN} }_{\ttN} = \dot{\momega}_{i,0} = \mJ_{\omega\,i} \cdot \ddot{\mq} + \sum_{j=1}^i  \dot{q}_j \mj_{\omega\,i,j} \wedge \momega_{i,j} , \; 1 \leq i \leq \nu
 \end{equation}
+
+\item[D1)] Cinemática de sobre-acelerações lineares
+
+A sobre-aceleração do efetuador pode ser obtida aplicando recursivamente o príncipio da composição de movimentos para sobre-acelerações lineres deduzido anteriormente \eqref{eq:Composicao_dace}:
+
+
+\begin{equation}
+\dot{\va}_\ttp^{\lllB_0} = \dot{\va}_{\ttp \rl \lllB_1}^{\lllB_0} + \dot{\va}_\ttp^{\lllB_1} + 3(\dot{\vomega}_{\lllB_1}^{\lllB_0} \wedge \vv_\ttp^{\lllB_1} + 
+\vomega_{\lllB_1}^{\lllB_0} \wedge \vomega_{\lllB_1}^{\lllB_0} \wedge \vv_\ttp^{\lllB_1}  + 
+ \vomega_{\lllB_1}^{\lllB_0} \wedge \va_\ttp^{\lllB_1} )
+\end{equation}
+\begin{equation}
+\dot{\va}_\ttp^{\lllB_1} = \dot{\va}_{\ttp \rl \lllB_2}^{\lllB_1} + \dot{\va}_\ttp^{\lllB_2} + 3(\dot{\vomega}_{\lllB_2}^{\lllB_1} \wedge \vv_\ttp^{\lllB_2} + 
+\vomega_{\lllB_2}^{\lllB_1} \wedge \vomega_{\lllB_2}^{\lllB_1} \wedge \vv_\ttp^{\lllB_2}  + 
+ \vomega_{\lllB_2}^{\lllB_1} \wedge \va_\ttp^{\lllB_2} )
+\end{equation}
+$$ \vdots $$
+\begin{equation}
+\dot{\va}_\ttp^{\lllB_{i-1}} = \dot{\va}_{\ttp \rl \lllB_i}^{\lllB_{i-1}} + \dot{\va}_\ttp^{\lllB_i} + 3(\dot{\vomega}_{\lllB_i}^{\lllB_{i-1}} \wedge \vv_\ttp^{\lllB_i} + 
+\vomega_{\lllB_i}^{\lllB_{i-1}} \wedge \vomega_{\lllB_i}^{\lllB_{i-1}} \wedge \vv_\ttp^{\lllB_i}  + 
+ \vomega_{\lllB_i}^{\lllB_{i-1}} \wedge \va_\ttp^{\lllB_i} )
+\end{equation}
+$$ \vdots $$
+\begin{equation}
+\dot{\va}_\ttp^{\lllB_{\nu-1}} = \dot{\va}_{\ttp \rl \lllB_\nu}^{\lllB_{\nu-1}} + \dot{\va}_\ttp^{\lllB_\nu} + 3(\dot{\vomega}_{\lllB_\nu}^{\lllB_{\nu-1}} \wedge \vv_\ttp^{\lllB_\nu} + 
+\vomega_{\lllB_\nu}^{\lllB_{\nu-1}} \wedge \vomega_{\lllB_\nu}^{\lllB_{\nu-1}} \wedge \vv_\ttp^{\lllB_\nu}  + 
+ \vomega_{\lllB_\nu}^{\lllB_{\nu-1}} \wedge \va_\ttp^{\lllB_\nu} )
+\end{equation}
+
+Como $\ttx$ é fixo a $\llB_\nu$, temos que:
+\begin{equation}
+\dot{\va}_{\ttx}^{\lllB_\nu} = \vzr
+\end{equation}
+
+Sendo assim, a sobre-aceleração do efetuador em relação a cada um dos referenciais pode ser obtida recursivamente pela seguinte expressão:
+%\begin{equation}
+%\vv_{\ttx}^{\lllB_{i-1}} =
+%\begin{cases}
+%\displaystyle\sum_{j=i}^{\nu} \vv_{\ttx \rl \lllB_{j}}^{\lllB_{j-1}}, \; 1 \leq i \leq \nu \\
+%\vzr, \;\;\;\;\;\;\;\;\;\;\;\; i = \nu + 1
+%\end{cases}\, i=1,...,\nu+1
+%\end{equation}
+\begin{equation}
+\va_{\ttx}^{\lllB_{i-1}} =
+\begin{cases}
+\vzr, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; i = \nu + 1 \\
+\dot{\va}_{\ttp \rl \lllB_i}^{\lllB_{i-1}} + \dot{\va}_\ttp^{\lllB_i} + 3(\dot{\vomega}_{\lllB_i}^{\lllB_{i-1}} \wedge \vv_\ttp^{\lllB_i} + 
+\vomega_{\lllB_i}^{\lllB_{i-1}} \wedge \vomega_{\lllB_i}^{\lllB_{i-1}} \wedge \vv_\ttp^{\lllB_i}  + 
+ \vomega_{\lllB_i}^{\lllB_{i-1}} \wedge \va_\ttp^{\lllB_i} ), \; 1 \leq i \leq \nu \\
+\end{cases}\, i=\nu+1,...,1
+\end{equation}
+
+
+
+Sendo que a sobre-aceleração de arrastamento de cada uma das juntas é dada por:
+\begin{equation}
+\dot{\va}_{\ttx \rl \lllB_{i}}^{\lllB_{i-1}} = 
+\begin{cases}
+\dddot{q}_{i} \vk_{i-1}, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; \text{se a i-ésima junta for prismática} \\
+\dddot{q}_{i} \vk_{i-1} \wedge \vr_{\tto_{i-1} \rl \ttx} + 3 \dot{q}_{i} \ddot{q}_{i} \vk_{i-1} \wedge \vk_{i-1} \wedge \vr_{\tto_{i-1} \rl \ttx}  + \dot{q}_{i}^3 \vk_{i-1} \wedge \vk_{i-1} \wedge \vk_{i-1} \wedge \vr_{\tto_{i-1} \rl \ttx}, \; \text{se a i-ésima junta for de revolução}
+\end{cases}\, i=1,...,\nu
+\end{equation}
+
+Fazendo a seguinte definição:
+\begin{equation}
+\dot{\ma}_i = \vct{\dot{\va}_{\ttx}^{\lllB_{i}} }_{\ttN}
+\end{equation}
+
+Temos que:
+\begin{equation}
+\vct{\dot{\va}_{\ttx \rl \lllB_{i}}^{\lllB_{i-1}} }_{\ttN} = \dddot{q}_{i} \mj_{v\,i} + 3 \dot{q}_{i} \ddot{q}_{i} \mj_{\omega\,i} \wedge \mj_{v\,i} + \dot{q}_{i}^3 \mj_{\omega\,i} \wedge \mj_{\omega\,i} \wedge \mj_{v\,i}, \; i=1,...,\nu
+\end{equation}
+\begin{equation}
+\ma_{i-1} =
+\begin{cases}
+\mzr, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; i = \nu + 1 \\
+\ma_i + \dddot{q}_{i} \mj_{v\,i} + 3 \dot{q}_{i} \ddot{q}_{i} \mj_{\omega\,i} \wedge \mj_{v\,i} + \dot{q}_{i}^3 \mj_{\omega\,i} \wedge \mj_{\omega\,i} \wedge \mj_{v\,i} + 3(\ddot{q}_i  \mj_{\omega\,i} \wedge \mv_i + 
+\dot{q}_i^2 \mj_{\omega\,i} \wedge \mj_{\omega\,i} \wedge \mv_i  + \dot{q}_i
+ \mj_{\omega\,i} \wedge \ma_i ) , \; 1 \leq i \leq \nu \\
+\end{cases}\, i=\nu+1,...,1
+\end{equation}
+\begin{equation}
+\vct{\va_{\ttx}^{\lllN} }_{\ttN} = \ma_0 = \mJ_v \cdot \dddot{\mq} + \sum_{i=1}^\nu  3 \dot{q}_{i} \ddot{q}_{i} \mj_{\omega\,i} \wedge \mj_{v\,i} + \dot{q}_{i}^3 \mj_{\omega\,i} \wedge \mj_{\omega\,i} \wedge \mj_{v\,i} + 3(\ddot{q}_i  \mj_{\omega\,i} \wedge \mv_i + 
+\dot{q}_i^2 \mj_{\omega\,i} \wedge \mj_{\omega\,i} \wedge \mv_i  + \dot{q}_i
+ \mj_{\omega\,i} \wedge \ma_i ) , \; 1 \leq i \leq \nu
+\end{equation}
+
+Para obter as acelerações dos centros de massa dos ligamentos, seguimos a mesma linha de raciocínio e obtemos os seguintes resultados:
+
+Definindo:
+\begin{equation}
+\ma_{i,j} = \vct{\va_{\ttg_i}^{\lllB_{j}}}_{\ttN}
+\end{equation}
+
+Temos:
+\begin{equation}
+\ma_{i,j-1} =
+\begin{cases}
+\mzr, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; j = i+1 \\
+\ma_{i,j} + \ddot{q}_{j} \mj_{v\,i,j} + \dot{q}^2_{j} \mj_{\omega\,i,j} \wedge \mj_{v\,i,j} + 2 \dot{q}_j \mj_{\omega\,i,j} \wedge \mv_{i,j}, \; 1 \leq j \leq i \\
+\end{cases}\, i=1,...,\nu, \, j=i+1,...,1
+\end{equation}
+\begin{equation}
+\vct{\va_{\ttg_i}^{\lllN} }_{\ttN} = \ma_{i,0} = \mJ_{v\,i}(\mq) \cdot \ddot{\mq} + \sum_{j=1}^i  \dot{q}^2_{j} \mj_{\omega\,i,j} \wedge \mj_{v\,i,j} + 2 \dot{q}_j \mj_{\omega\,i,j} \wedge \mv_{i,j} , \; 1 \leq i \leq \nu
+\end{equation}
+
+\item[D2)] Cinemática de sobre-acelerações angulares
+
+A sobre-aceleração angular do efetuador pode ser obtida aplicando recursivamente o príncipio da composição de movimentos para sobre-aceleralções angulares deduzido anteriormente \eqref{eq:composicao_dw}:
+
+\begin{equation}
+\dot{\vomega}_{\lllB_\nu}^{\lllB_0} = \dot{\vomega}_{\lllB_1}^{\lllB_0} + \dot{\vomega}_{\lllB_\nu}^{\lllB_1} +  \vomega_{\lllB_1}^{\lllB_0} \wedge \vomega_{\lllB_\nu}^{\lllB_1}
+\end{equation}
+\begin{equation}
+\dot{\vomega}_{\lllB_\nu}^{\lllB_1} = \dot{\vomega}_{\lllB_2}^{\lllB_1} + \dot{\vomega}_{\lllB_\nu}^{\lllB_2} +  \vomega_{\lllB_2}^{\lllB_1} \wedge \vomega_{\lllB_\nu}^{\lllB_2}
+\end{equation}
+$$ \vdots $$
+\begin{equation}
+\dot{\vomega}_{\lllB_\nu}^{\lllB_{i-1}} = \dot{\vomega}_{\lllB_i}^{\lllB_{i-1}} + \dot{\vomega}_{\lllB_\nu}^{\lllB_i} +  \vomega_{\lllB_i}^{\lllB_{i-1}} \wedge \vomega_{\lllB_\nu}^{\lllB_i}
+\end{equation}
+$$ \vdots $$
+\begin{equation}
+\dot{\vomega}_{\lllB_\nu}^{\lllB_{\nu-2}} = \dot{\vomega}_{\lllB_{\nu-1}}^{\lllB_{\nu-2}} + \dot{\vomega}_{\lllB_\nu}^{\lllB_{\nu-1}} + \vomega_{\lllB_{\nu-1}}^{\lllB_{\nu-2}} \wedge \vomega_{\lllB_\nu}^{\lllB_{\nu-1}}
+\end{equation}
+
+
+Sendo assim, a aceleração angular do efetuador em relação a cada um dos referenciais pode ser obtida recursivamente pela seguinte expressão:
+%\begin{equation}
+%\vv_{\ttx}^{\lllB_{i-1}} =
+%\begin{cases}
+%\displaystyle\sum_{j=i}^{\nu} \vv_{\ttx \rl \lllB_{j}}^{\lllB_{j-1}}, \; 1 \leq i \leq \nu \\
+%\vzr, \;\;\;\;\;\;\;\;\;\;\;\; i = \nu + 1
+%\end{cases}\, i=1,...,\nu+1
+%\end{equation}
+\begin{equation}
+\dot{\vomega}_{\lllB_\nu}^{\lllB_{i-1}} =
+\begin{cases}
+\vzr, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; i = \nu + 1 \\
+\dot{\vomega}_{\lllB_i}^{\lllB_{i-1}} + \dot{\vomega}_{\lllB_\nu}^{\lllB_i} +  \vomega_{\lllB_i}^{\lllB_{i-1}} \wedge \vomega_{\lllB_\nu}^{\lllB_i}, \; 1 \leq i \leq \nu \\
+\end{cases}\, i=\nu+1,...,1
+\end{equation}
+
+
+
+Sendo que a aceleração angular de arrastamento de cada uma das juntas é dada por:
+\begin{equation}
+\vv_{\ttx \rl \lllB_{i}}^{\lllB_{i-1}} = 
+\begin{cases}
+\vzr, \;\;\;\;\;\;\; \text{se a i-ésima junta for prismática} \\
+\ddot{q}_{i} \vk_{i-1}, \; \text{se a i-ésima junta for de revolução}
+\end{cases}\, i=1,...,\nu
+\end{equation}
+
+Fazendo a seguinte definição:
+\begin{equation}
+\dot{\momega}_i = \vct{\dot{\vomega}_{\ttx}^{\lllB_{i}} }_{\ttN}
+\end{equation}
+
+Temos que:
+\begin{equation}
+\vct{\dot{\vomega}_{\lllB_{i}}^{\lllB_{i-1}} }_{\ttN} = \ddot{q}_{i} \mj_{\omega\,i} , \; i=1,...,\nu
+\end{equation}
+\begin{equation}
+\dot{\momega}_{i-1} =
+\begin{cases}
+\mzr, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; i = \nu + 1 \\
+\dot{\momega}_i + \ddot{q}_{i} \mj_{\omega\,i} + \dot{q}_i \mj_{\omega\,i} \wedge \momega_i , \; 1 \leq i \leq \nu \\
+\end{cases}\, i=\nu+1,...,1
+\end{equation}
+\begin{equation}
+\vct{\dot{\vomega}_{\lllB_\nu}^{\lllN} }_{\ttN} = \dot{\momega}_0 = \mJ_\omega \cdot \ddot{\mq} + \sum_{i=1}^\nu \dot{q}_i \mj_{\omega\,i} \wedge \momega_i , \; 1 \leq i \leq \nu
+\end{equation}
+
+Para obter as acelerações angulares dos centros de massa dos ligamentos, seguimos a mesma linha de raciocínio e obtemos os seguintes resultados:
+
+Definindo:
+\begin{equation}
+\dot{\momega}_{i,j} = \vct{\dot{\vomega}_{\ttg_i}^{\lllB_{j}}}_{\ttN}
+\end{equation}
+
+Temos:
+\begin{equation}
+\dot{\momega}_{i,j-1} =
+\begin{cases}
+\mzr, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; j = i+1 \\
+\dot{\momega}_{i,j} + \ddot{q}_{j} \mj_{\omega\,i,j} + \dot{q}_j \mj_{\omega\,i,j} \wedge \momega_{i,j}, \; 1 \leq j \leq i \\
+\end{cases}\, i=1,...,\nu, \, j=i+1,...,1
+\end{equation}
+\begin{equation}
+\vct{\dot{\vomega}_{\lllB_i}^{\lllN} }_{\ttN} = \dot{\momega}_{i,0} = \mJ_{\omega\,i} \cdot \ddot{\mq} + \sum_{j=1}^i  \dot{q}_j \mj_{\omega\,i,j} \wedge \momega_{i,j} , \; 1 \leq i \leq \nu
+\end{equation}
+
+
 
 \item[D)] Dinâmica
 
