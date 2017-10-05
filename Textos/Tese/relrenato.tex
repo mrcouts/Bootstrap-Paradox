@@ -40,6 +40,7 @@
 \usepackage{listings}
 \usepackage{multicol}
 \usepackage{scalerel}
+\usepackage{accents}
 
 \renewcommand*{\glossarypreamble}{\vspace{-\baselineskip}}  
 
@@ -725,6 +726,10 @@ Fazendo as seguintes definições:
 \mv_i = \vct{\vv_{\ttx}^{\lllB_{i}} }_{\ttN}
 \end{equation}
 
+\begin{equation}
+\underaccent{\tilde}{\mv} = \mv_0 =\vct{\vv_{\ttx}^{\lllN} }_{\ttN}
+\end{equation}
+
 Temos que:
 \begin{equation}
 \vct{\vv_{\ttx \rl \lllB_{i}}^{\lllB_{i-1}} }_{\ttN} = \mj_{v\,i} \dot{q}_{i}, \; i=1,...,\nu
@@ -737,7 +742,7 @@ Temos que:
 \end{cases}\, i=\nu+1,...,1
 \end{equation}
 \begin{equation}
-\vct{\vv_{\ttx}^{\lllN} }_{\ttN} = \mv_0 = \mJ_v \cdot \dot{\mq}
+\underaccent{\tilde}{\mv}(\mq, \dot{\mq}) = \mJ_v(\mq) \cdot \dot{\mq}
 \end{equation}
 
 Sendo:
@@ -762,6 +767,10 @@ Definindo:
 \mv_{i,j} = \vct{\vv_{\ttg_i}^{\lllB_{j}}}_{\ttN}
 \end{equation}
 
+\begin{equation}
+\underaccent{\tilde}{\mv}_i  = \mv_{i,0} = \vct{\vv_{\ttg_i}^{\lllN} }_{\ttN}
+\end{equation}
+
 Temos:
 \begin{equation}
 \mv_{i,j-1} =
@@ -771,7 +780,7 @@ Temos:
 \end{cases}\, i=1,...,\nu, \, j=i+1,...,1
 \end{equation}
 \begin{equation}
-\vct{\vv_{\ttg_i}^{\lllN} }_{\ttN} = \mJ_{v\,i} \cdot \dot{\mq}
+\underaccent{\tilde}{\mv}_i(\mq, \dot{\mq}) = \mJ_{v\,i}(\mq) \cdot \dot{\mq}
 \end{equation}
 
 Sendo:
@@ -841,6 +850,10 @@ Fazendo as seguintes definições:
 \momega_i = \vct{\vomega_{\lllB_\nu}^{\lllB_{i}} }_{\ttN}
 \end{equation}
 
+\begin{equation}
+\underaccent{\tilde}{\momega} = \momega_0 = \vct{\vomega_{\lllB_\nu}^{\lllN} }_{\ttN} 
+\end{equation}
+
 Temos que:
 \begin{equation}
 \vct{\vomega_{\lllB_{i}}^{\lllB_{i-1}} }_{\ttN} = \mj_{\omega\,i} \dot{q}_{i}, \; i=1,...,\nu
@@ -853,7 +866,7 @@ Temos que:
 \end{cases}\, i=\nu+1,...,1
 \end{equation}
 \begin{equation}
-\vct{\vomega_{\lllB_\nu}^{\lllN} }_{\ttN} = \momega_0 = \mJ_\omega \cdot \dot{\mq}
+\underaccent{\tilde}{\momega} = \mJ_\omega \cdot \dot{\mq}
 \end{equation}
 
 Sendo:
@@ -877,6 +890,10 @@ Definindo:
 \momega_{i,j} = \vct{\vomega_{\lllB_i}^{\lllB_{j}}}_{\ttN}
 \end{equation}
 
+\begin{equation}
+\underaccent{\tilde}{\momega}_i = \momega_{i,0} = \vct{\vomega_{\lllB_i}^{\lllN} }_{\ttN} 
+\end{equation}
+
 Temos:
 \begin{equation}
 \momega_{i,j-1} =
@@ -886,7 +903,7 @@ Temos:
 \end{cases}\, i=1,...,\nu, \, j=i+1,...,1
 \end{equation}
 \begin{equation}
-\vct{\vomega_{\lllB_i}^{\lllN} }_{\ttN} = \momega_{i,0} = \mJ_{\omega\,i} \cdot \dot{\mq}
+\underaccent{\tilde}{\momega}_i (\mq, \dot{\mq}) = \mJ_{\omega\,i}(\mq) \cdot \dot{\mq}
 \end{equation}
 
 Sendo:
@@ -948,9 +965,13 @@ Sendo que, a partir da equação \eqref{eq:Poisson_a}, a aceleração de arrastament
 \end{cases}\, i=1,...,\nu
 \end{equation}
 
-Fazendo a seguinte definição:
+Fazendo as seguintes definições:
 \begin{equation}
 \ma_i = \vct{\va_{\ttx}^{\lllB_{i}} }_{\ttN}
+\end{equation}
+
+\begin{equation}
+\underaccent{\tilde}{\ma} = \ma_0 =\vct{\va_{\ttx}^{\lllN} }_{\ttN}
 \end{equation}
 
 Temos que:
@@ -964,8 +985,14 @@ Temos que:
 \ma_i + \ddot{q}_{i} \mj_{v\,i} + \dot{q}^2_{i} \mj_{\omega\,i} \wedge \mj_{v\,i} + 2 \dot{q}_i \mj_{\omega\,i} \wedge \mv_i , \; 1 \leq i \leq \nu \\
 \end{cases}\, i=\nu+1,...,1
 \end{equation}
+
 \begin{equation}
-\vct{\va_{\ttx}^{\lllN} }_{\ttN} = \ma_0 = \mJ_v  \cdot \ddot{\mq} + \sum_{i=1}^\nu  \dot{q}^2_{i} \mj_{\omega\,i} \wedge \mj_{v\,i} + 2 \dot{q}_i \mj_{\omega\,i} \wedge \mv_i , \; 1 \leq i \leq \nu
+\underaccent{\tilde}{\ma} (\mq,\dot{\mq},\ddot{\mq}) = \mJ_v (\mq)  \cdot \ddot{\mq} + \underline{\ma} (\mq,\dot{\mq})
+\end{equation}
+
+Sendo:
+\begin{equation}
+\underline{\ma} = \sum_{i=1}^\nu  \dot{q}^2_{i} \mj_{\omega\,i} \wedge \mj_{v\,i} + 2 \dot{q}_i \mj_{\omega\,i} \wedge \mv_i
 \end{equation}
 
 Para obter as acelerações dos centros de massa dos ligamentos, seguimos a mesma linha de raciocínio e obtemos os seguintes resultados:
@@ -973,6 +1000,10 @@ Para obter as acelerações dos centros de massa dos ligamentos, seguimos a mesma 
 Definindo:
 \begin{equation}
 \ma_{i,j} = \vct{\va_{\ttg_i}^{\lllB_{j}}}_{\ttN}
+\end{equation}
+
+\begin{equation}
+\underaccent{\tilde}{\ma}_i = \ma_{i,0} = \vct{\va_{\ttg_i}^{\lllN} }_{\ttN}
 \end{equation}
 
 Temos:
@@ -984,7 +1015,12 @@ Temos:
 \end{cases}\, i=1,...,\nu, \, j=i+1,...,1
 \end{equation}
 \begin{equation}
-\vct{\va_{\ttg_i}^{\lllN} }_{\ttN} = \ma_{i,0} = \mJ_{v\,i} \cdot \ddot{\mq} + \sum_{j=1}^i  \dot{q}^2_{j} \mj_{\omega\,i,j} \wedge \mj_{v\,i,j} + 2 \dot{q}_j \mj_{\omega\,i,j} \wedge \mv_{i,j} , \; 1 \leq i \leq \nu
+\underaccent{\tilde}{\ma}_i (\mq,\dot{\mq},\ddot{\mq}) = \mJ_{v\,i}(\mq) \cdot \ddot{\mq} + \underline{\ma}_i (\mq,\dot{\mq}) , \; 1 \leq i \leq \nu
+\end{equation}
+
+Sendo:
+\begin{equation}
+\underline{\ma}_i  = \sum_{j=1}^i  \dot{q}^2_{j} \mj_{\omega\,i,j} \wedge \mj_{v\,i,j} + 2 \dot{q}_j \mj_{\omega\,i,j} \wedge \mv_{i,j} , \; 1 \leq i \leq \nu
 \end{equation}
 
 \item[C2)] Cinemática de acelerações angulares
@@ -1034,9 +1070,13 @@ Sendo que a aceleração angular de arrastamento de cada uma das juntas é dada por
 \end{cases}\, i=1,...,\nu
 \end{equation}
 
-Fazendo a seguinte definição:
+Fazendo as seguintes definições:
 \begin{equation}
 \dot{\momega}_i = \vct{\dot{\vomega}_{\ttx}^{\lllB_{i}} }_{\ttN}
+\end{equation}
+
+\begin{equation}
+\underaccent{\tilde}{\dot{\momega}} = \dot{\momega}_0 = \vct{\dot{\vomega}_{\lllB_\nu}^{\lllN} }_{\ttN}
 \end{equation}
 
 Temos que:
@@ -1051,7 +1091,12 @@ Temos que:
 \end{cases}\, i=\nu+1,...,1
 \end{equation}
 \begin{equation}
-\vct{\dot{\vomega}_{\lllB_\nu}^{\lllN} }_{\ttN} = \dot{\momega}_0 = \mJ_\omega \cdot \ddot{\mq} + \sum_{i=1}^\nu \dot{q}_i \mj_{\omega\,i} \wedge \momega_i , \; 1 \leq i \leq \nu
+\underaccent{\tilde}{\dot{\momega}}(\mq,\dot{\mq},\ddot{\mq}) = \mJ_\omega (\mq) \cdot \ddot{\mq} +  \underline{\dot{\momega}}(\mq,\dot{\mq})
+\end{equation}
+
+Sendo:
+\begin{equation}
+\underline{\dot{\momega}} = \sum_{i=1}^\nu \dot{q}_i \mj_{\omega\,i} \wedge \momega_i
 \end{equation}
 
 Para obter as acelerações angulares dos centros de massa dos ligamentos, seguimos a mesma linha de raciocínio e obtemos os seguintes resultados:
@@ -1059,6 +1104,10 @@ Para obter as acelerações angulares dos centros de massa dos ligamentos, seguimo
 Definindo:
 \begin{equation}
 \dot{\momega}_{i,j} = \vct{\dot{\vomega}_{\ttg_i}^{\lllB_{j}}}_{\ttN}
+\end{equation}
+
+\begin{equation}
+\underaccent{\tilde}{\dot{\momega}}_i = \dot{\momega}_{i,0} = \vct{\dot{\vomega}_{\lllB_i}^{\lllN} }_{\ttN}
 \end{equation}
 
 Temos:
@@ -1070,7 +1119,12 @@ Temos:
 \end{cases}\, i=1,...,\nu, \, j=i+1,...,1
 \end{equation}
 \begin{equation}
-\vct{\dot{\vomega}_{\lllB_i}^{\lllN} }_{\ttN} = \dot{\momega}_{i,0} = \mJ_{\omega\,i} \cdot \ddot{\mq} + \sum_{j=1}^i  \dot{q}_j \mj_{\omega\,i,j} \wedge \momega_{i,j} , \; 1 \leq i \leq \nu
+\underaccent{\tilde}{\dot{\momega}}_i (\mq,\dot{\mq},\ddot{\mq}) = \mJ_{\omega\,i} (\mq) \cdot \ddot{\mq} + \underline{\dot{\momega}}_i (\mq,\dot{\mq})  , \; 1 \leq i \leq \nu
+\end{equation}
+
+Sendo:
+\begin{equation}
+\underline{\dot{\momega}}_i = \sum_{j=1}^i  \dot{q}_j \mj_{\omega\,i,j} \wedge \momega_{i,j}
 \end{equation}
 
 \item[D1)] Cinemática de sobre-acelerações lineares
