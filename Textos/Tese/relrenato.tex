@@ -727,7 +727,7 @@ Fazendo as seguintes definições:
 \end{equation}
 
 \begin{equation}
-\underaccent{\sim}{\mv}  = \mv_0 =\vct{\vv_{\ttx}^{\lllN} }_{\ttN}
+\mv^\star  = \mv_0 =\vct{\vv_{\ttx}^{\lllN} }_{\ttN}
 \end{equation}
 
 Temos que:
@@ -742,7 +742,7 @@ Temos que:
 \end{cases}\, i=\nu+1,...,1
 \end{equation}
 \begin{equation}
-\underaccent{\tilde}{\mv}(\mq, \dot{\mq}) = \mJ_v(\mq) \cdot \dot{\mq}
+\mv^\star (\mq, \dot{\mq}) = \mJ_v(\mq) \cdot \dot{\mq}
 \end{equation}
 
 Sendo:
@@ -768,7 +768,7 @@ Definindo:
 \end{equation}
 
 \begin{equation}
-\underaccent{\tilde}{\mv}_i  = \mv_{i,0} = \vct{\vv_{\ttg_i}^{\lllN} }_{\ttN}
+\mv^\star_i  = \mv_{i,0} = \vct{\vv_{\ttg_i}^{\lllN} }_{\ttN}
 \end{equation}
 
 Temos:
@@ -780,7 +780,7 @@ Temos:
 \end{cases}\, i=1,...,\nu, \, j=i+1,...,1
 \end{equation}
 \begin{equation}
-\underaccent{\tilde}{\mv}_i(\mq, \dot{\mq}) = \mJ_{v\,i}(\mq) \cdot \dot{\mq}
+\mv^\star_i(\mq, \dot{\mq}) = \mJ_{v\,i}(\mq) \cdot \dot{\mq}
 \end{equation}
 
 Sendo:
@@ -851,7 +851,7 @@ Fazendo as seguintes definições:
 \end{equation}
 
 \begin{equation}
-\underaccent{\sim}{\momega} = \momega_0 = \vct{\vomega_{\lllB_\nu}^{\lllN} }_{\ttN} 
+\momega^\star = \momega_0 = \vct{\vomega_{\lllB_\nu}^{\lllN} }_{\ttN} 
 \end{equation}
 
 Temos que:
@@ -866,7 +866,7 @@ Temos que:
 \end{cases}\, i=\nu+1,...,1
 \end{equation}
 \begin{equation}
-\underaccent{\tilde}{\momega} = \mJ_\omega \cdot \dot{\mq}
+\momega^\star = \mJ_\omega \cdot \dot{\mq}
 \end{equation}
 
 Sendo:
@@ -891,7 +891,7 @@ Definindo:
 \end{equation}
 
 \begin{equation}
-\underaccent{\tilde}{\momega}_i = \momega_{i,0} = \vct{\vomega_{\lllB_i}^{\lllN} }_{\ttN} 
+\momega^\star_i = \momega_{i,0} = \vct{\vomega_{\lllB_i}^{\lllN} }_{\ttN} 
 \end{equation}
 
 Temos:
@@ -903,7 +903,7 @@ Temos:
 \end{cases}\, i=1,...,\nu, \, j=i+1,...,1
 \end{equation}
 \begin{equation}
-\underaccent{\tilde}{\momega}_i (\mq, \dot{\mq}) = \mJ_{\omega\,i}(\mq) \cdot \dot{\mq}
+\momega^\star_i (\mq, \dot{\mq}) = \mJ_{\omega\,i}(\mq) \cdot \dot{\mq}
 \end{equation}
 
 Sendo:
@@ -971,7 +971,7 @@ Fazendo as seguintes definições:
 \end{equation}
 
 \begin{equation}
-\underaccent{\tilde}{\ma} = \ma_0 =\vct{\va_{\ttx}^{\lllN} }_{\ttN}
+\ma^\star = \ma_0 =\vct{\va_{\ttx}^{\lllN} }_{\ttN}
 \end{equation}
 
 Temos que:
@@ -987,12 +987,12 @@ Temos que:
 \end{equation}
 
 \begin{equation}
-\underaccent{\tilde}{\ma} (\mq,\dot{\mq},\ddot{\mq}) = \mJ_v (\mq)  \cdot \ddot{\mq} + \underline{\ma} (\mq,\dot{\mq})
+\ma^\star (\mq,\dot{\mq},\ddot{\mq}) = \mJ_v (\mq)  \cdot \ddot{\mq} + \underaccent{\sim}{\ma} (\mq,\dot{\mq})
 \end{equation}
 
 Sendo:
 \begin{equation}
-\underline{\ma} = \sum_{i=1}^\nu  \dot{q}^2_{i} \mj_{\omega\,i} \wedge \mj_{v\,i} + 2 \dot{q}_i \mj_{\omega\,i} \wedge \mv_i
+\underaccent{\sim}{\ma} = \sum_{i=1}^\nu  \dot{q}^2_{i} \mj_{\omega\,i} \wedge \mj_{v\,i} + 2 \dot{q}_i \mj_{\omega\,i} \wedge \mv_i
 \end{equation}
 
 Para obter as acelerações dos centros de massa dos ligamentos, seguimos a mesma linha de raciocínio e obtemos os seguintes resultados:
@@ -1003,7 +1003,7 @@ Definindo:
 \end{equation}
 
 \begin{equation}
-\underaccent{\tilde}{\ma}_i = \ma_{i,0} = \vct{\va_{\ttg_i}^{\lllN} }_{\ttN}
+\ma^\star_i = \ma_{i,0} = \vct{\va_{\ttg_i}^{\lllN} }_{\ttN}
 \end{equation}
 
 Temos:
@@ -1015,12 +1015,12 @@ Temos:
 \end{cases}\, i=1,...,\nu, \, j=i+1,...,1
 \end{equation}
 \begin{equation}
-\underaccent{\tilde}{\ma}_i (\mq,\dot{\mq},\ddot{\mq}) = \mJ_{v\,i}(\mq) \cdot \ddot{\mq} + \underline{\ma}_i (\mq,\dot{\mq}) , \; 1 \leq i \leq \nu
+\ma^\star_i (\mq,\dot{\mq},\ddot{\mq}) = \mJ_{v\,i}(\mq) \cdot \ddot{\mq} + \underaccent{\sim}{\ma}_i (\mq,\dot{\mq}) , \; 1 \leq i \leq \nu
 \end{equation}
 
 Sendo:
 \begin{equation}
-\underline{\ma}_i  = \sum_{j=1}^i  \dot{q}^2_{j} \mj_{\omega\,i,j} \wedge \mj_{v\,i,j} + 2 \dot{q}_j \mj_{\omega\,i,j} \wedge \mv_{i,j} , \; 1 \leq i \leq \nu
+\underaccent{\sim}{\ma}_i  = \sum_{j=1}^i  \dot{q}^2_{j} \mj_{\omega\,i,j} \wedge \mj_{v\,i,j} + 2 \dot{q}_j \mj_{\omega\,i,j} \wedge \mv_{i,j} , \; 1 \leq i \leq \nu
 \end{equation}
 
 \item[C2)] Cinemática de acelerações angulares
