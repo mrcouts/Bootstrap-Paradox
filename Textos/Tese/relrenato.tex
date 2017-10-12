@@ -1164,7 +1164,6 @@ Temos que:
 Sendo:
 \begin{equation}
 \underaccent{\sim}{\dot{\momega}} = \sum_{i=1}^\nu \dot{q}_i \mj_{\omega\,i} \wedge \momega_i
-<<<<<<< HEAD
 \end{equation}
 
 Repare que, derivando (??) e (??), temos que:
@@ -1195,8 +1194,6 @@ Sendo:
 \dot{\mJ}_\omega(\mq) = \begin{bmatrix}
 \dot{\mj}_{\omega\,1}(\mq) & ... & \dot{\mj}_{\omega\,\nu}(\mq)
 \end{bmatrix}
-=======
->>>>>>> 94a009a3020de873526b0e6751f18c4f177461c6
 \end{equation}
 
 Para obter as acelerações angulares dos centros de massa dos ligamentos, seguimos a mesma linha de raciocínio e obtemos os seguintes resultados:
@@ -1225,7 +1222,6 @@ Temos:
 Sendo:
 \begin{equation}
 \underaccent{\sim}{\dot{\momega}}_i = \sum_{j=1}^i  \dot{q}_j \mj_{\omega\,i,j} \wedge \momega_{i,j}
-<<<<<<< HEAD
 \end{equation}
 
 Repare que, derivando (??) e (??), temos que:
@@ -1260,8 +1256,6 @@ Sendo:
 \dot{\mJ}_{\omega\,i} (\mq) = \begin{bmatrix}
 \dot{\mj}_{\omega\,i,1}(\mq) & ... & \dot{\mj}_{\omega\,i,\nu}(\mq)
 \end{bmatrix}
-=======
->>>>>>> 94a009a3020de873526b0e6751f18c4f177461c6
 \end{equation}
 
 \item[D1)] Cinemática de sobre-acelerações lineares
@@ -1326,13 +1320,9 @@ Sendo que, a partir da equação \eqref{eq:Poisson_da}, a sobre-aceleração de arra
 \end{cases}\, i=1,...,\nu
 \end{equation}
 
-Fazendo as seguintes definições:
+Fazendo a seguinte definição:
 \begin{equation}
 \dot{\ma}_i = \vct{\dot{\va}_{\ttx}^{\lllB_{i}} }_{\ttN}
-\end{equation}
-
-\begin{equation}
-\dot{\ma}^\star = \dot{\ma}_0 = \vct{\dot{\va}_{\ttx}^{\lllN} }_{\ttN}
 \end{equation}
 
 Temos que:
@@ -1349,14 +1339,9 @@ Temos que:
 \end{cases}\, i=\nu+1,...,1
 \end{equation}
 \begin{equation}
-\dot{\ma}^\star(\mq, \dot{\mq}, \ddot{\mq}, \dddot{\mq}) = \mJ_v (\mq) \cdot \dddot{\mq} + \underaccent{\sim}{\dot{\ma}} (\mq, \dot{\mq}, \ddot{\mq}) , \; 1 \leq i \leq \nu
-\end{equation}
-
-Sendo:
-\begin{equation}
-\underaccent{\sim}{\dot{\ma}} = \sum_{i=1}^\nu  3 \dot{q}_{i} \ddot{q}_{i} \mj_{\omega\,i} \wedge \mj_{v\,i} + \dot{q}_{i}^3 \mj_{\omega\,i} \wedge \mj_{\omega\,i} \wedge \mj_{v\,i} + 3(\ddot{q}_i  \mj_{\omega\,i} \wedge \mv_i + 
+\vct{\va_{\ttx}^{\lllN} }_{\ttN} = \ma_0 = \mJ_v \cdot \dddot{\mq} + \sum_{i=1}^\nu  3 \dot{q}_{i} \ddot{q}_{i} \mj_{\omega\,i} \wedge \mj_{v\,i} + \dot{q}_{i}^3 \mj_{\omega\,i} \wedge \mj_{\omega\,i} \wedge \mj_{v\,i} + 3(\ddot{q}_i  \mj_{\omega\,i} \wedge \mv_i + 
 \dot{q}_i^2 \mj_{\omega\,i} \wedge \mj_{\omega\,i} \wedge \mv_i  + \dot{q}_i
- \mj_{\omega\,i} \wedge \ma_i )
+ \mj_{\omega\,i} \wedge \ma_i ) , \; 1 \leq i \leq \nu
 \end{equation}
 
 Para obter as acelerações dos centros de massa dos ligamentos, seguimos a mesma linha de raciocínio e obtemos os seguintes resultados:
@@ -1364,9 +1349,6 @@ Para obter as acelerações dos centros de massa dos ligamentos, seguimos a mesma 
 Definindo:
 \begin{equation}
 \dot{\ma}_{i,j} = \vct{\dot{\va}_{\ttg_i}^{\lllB_{j}}}_{\ttN}
-\end{equation}
-\begin{equation}
-\dot{\ma}^\star_i = \dot{\ma}_{i,0} = \vct{\dot{\va}_{\ttg_i}^{\lllN}}_{\ttN}
 \end{equation}
 
 Temos:
@@ -1380,14 +1362,9 @@ Temos:
 \end{cases}\, i=1,...,\nu, \, j=i+1,...,1
 \end{equation}
 \begin{equation}
-\dot{\ma}^\star_i (\mq, \dot{\mq}, \ddot{\mq}, \dddot{\mq})  = \mJ_{v\,i}(\mq) \cdot \dddot{\mq} + \underaccent{\sim}{\dot{\ma}}_i (\mq, \dot{\mq}, \ddot{\mq}) , \; 1 \leq i \leq \nu
-\end{equation}
-
-Sendo:
-\begin{equation}
-\underaccent{\sim}{\dot{\ma}}_i = \sum_{j=1}^i  3 \dot{q}_{j} \ddot{q}_{j} \mj_{\omega\,i,j} \wedge \mj_{v\,i,j} + \dot{q}_{j}^3 \mj_{\omega\,i,j} \wedge \mj_{\omega\,i,j} \wedge \mj_{v\,i,j} + 3(\ddot{q}_j  \mj_{\omega\,i,j} \wedge \mv_{i,j} + 
+\vct{\dot{\va}_{\ttg_i}^{\lllN} }_{\ttN} = \dot{\ma}_{i,0} = \mJ_{v\,i} \cdot \dddot{\mq} + \sum_{j=1}^i  3 \dot{q}_{j} \ddot{q}_{j} \mj_{\omega\,i,j} \wedge \mj_{v\,i,j} + \dot{q}_{j}^3 \mj_{\omega\,i,j} \wedge \mj_{\omega\,i,j} \wedge \mj_{v\,i,j} + 3(\ddot{q}_j  \mj_{\omega\,i,j} \wedge \mv_{i,j} + 
 \dot{q}_j^2 \mj_{\omega\,i,j} \wedge \mj_{\omega\,i,j} \wedge \mv_{i,j}  + \dot{q}_j
- \mj_{\omega\,i,j} \wedge \ma_{i,j} )
+ \mj_{\omega\,i,j} \wedge \ma_{i,j} ) , \; 1 \leq i \leq \nu
 \end{equation}
 
 \item[D2)] Cinemática de sobre-acelerações angulares
@@ -1436,12 +1413,9 @@ Sendo que a sobre-aceleração angular de arrastamento de cada uma das juntas é da
 \end{cases}\, i=1,...,\nu
 \end{equation}
 
-Fazendo as seguintes definições:
+Fazendo a seguinte definição:
 \begin{equation}
 \ddot{\momega}_i = \vct{\ddot{\vomega}_{\ttx}^{\lllB_{i}} }_{\ttN}
-\end{equation}
-\begin{equation}
-\ddot{\momega}^\star = \ddot{\momega}_0 = \vct{\ddot{\vomega}_{\ttx}^{\lllN} }_{\ttN}
 \end{equation}
 
 Temos que:
@@ -1456,12 +1430,7 @@ Temos que:
 \end{cases}\, i=\nu+1,...,1
 \end{equation}
 \begin{equation}
-\ddot{\momega}^\star (\mq, \dot{\mq}, \ddot{\mq}, \dddot{\mq}) = \mJ_\omega (\mq) \cdot \dddot{\mq} + \underaccent{\sim}{\ddot{\momega}} (\mq, \dot{\mq}, \ddot{\mq}) , \; 1 \leq i \leq \nu
-\end{equation}
-
-Sendo:
-\begin{equation}
-\underaccent{\sim}{\ddot{\momega}} = \sum_{i=1}^\nu \ddot{q}_i \mj_{\omega\,i} \wedge \momega_i + 2 \dot{q}_i \mj_{\omega\,i} \wedge \dot{\momega}_i + \dot{q}_i ^2 \mj_{\omega\,i} \wedge \mj_{\omega\,i} \wedge \momega_i
+\vct{\ddot{\vomega}_{\lllB_\nu}^{\lllN} }_{\ttN} = \ddot{\momega}_0 = \mJ_\omega \cdot \dddot{\mq} + \sum_{i=1}^\nu \ddot{q}_i \mj_{\omega\,i} \wedge \momega_i + 2 \dot{q}_i \mj_{\omega\,i} \wedge \dot{\momega}_i + \dot{q}_i ^2 \mj_{\omega\,i} \wedge \mj_{\omega\,i} \wedge \momega_i , \; 1 \leq i \leq \nu
 \end{equation}
 
 Para obter as sobre-acelerações angulares dos centros de massa dos ligamentos, seguimos a mesma linha de raciocínio e obtemos os seguintes resultados:
@@ -1469,9 +1438,6 @@ Para obter as sobre-acelerações angulares dos centros de massa dos ligamentos, s
 Definindo:
 \begin{equation}
 \ddot{\momega}_{i,j} = \vct{\ddot{\vomega}_{\ttg_i}^{\lllB_{j}}}_{\ttN}
-\end{equation}
-\begin{equation}
-\ddot{\momega}^\star_i = \ddot{\momega}_{i,0} = \vct{\ddot{\vomega}_{\ttg_i}^{\lllN} }_{\ttN}
 \end{equation}
 
 Temos:
@@ -1483,12 +1449,7 @@ Temos:
 \end{cases}\, i=1,...,\nu, \, j=i+1,...,1
 \end{equation}
 \begin{equation}
-\ddot{\momega}^\star_i (\mq, \dot{\mq}, \dot{\mq}, \dddot{\mq}) = \mJ_{\omega\,i}(\mq) \cdot \dddot{\mq} + \underaccent{\sim}{\ddot{\momega}}_i (\mq, \dot{\mq}, \dot{\mq}) , \; 1 \leq i \leq \nu
-\end{equation}
-
-Sendo:
-\begin{equation}
-\underaccent{\sim}{\ddot{\momega}}_i = \sum_{j=1}^i  \ddot{q}_j \mj_{\omega\,i,j} \wedge \momega_{i,j} + 2 \dot{q}_j \mj_{\omega\,i,j} \wedge \dot{\momega}_{i,j} + \dot{q}_j ^2 \mj_{\omega\,i,j} \wedge \mj_{\omega\,i,j} \wedge \momega_{i,j}
+\vct{\ddot{\vomega}_{\lllB_i}^{\lllN} }_{\ttN} = \ddot{\momega}_{i,0} = \mJ_{\omega\,i} \cdot \dddot{\mq} + \sum_{j=1}^i  \ddot{q}_j \mj_{\omega\,i,j} \wedge \momega_{i,j} + 2 \dot{q}_j \mj_{\omega\,i,j} \wedge \dot{\momega}_{i,j} + \dot{q}_j ^2 \mj_{\omega\,i,j} \wedge \mj_{\omega\,i,j} \wedge \momega_{i,j} , \; 1 \leq i \leq \nu
 \end{equation}
 
 
@@ -1497,7 +1458,7 @@ Sendo:
 
 O modelo dinâmico de $\ssB$ é obtido utilizando o método Orsino de acoplamento de subsistemas \cite{23orsino}, e é dado por:
 \begin{equation} \label{eq:ModeloMecSerial}
-\mM(\mq) \ddot{\mq} + \mnu(\mq,\dot{\mq}) + \mg(\mq) = \mu
+\mM(\mq) \ddot{\mq} + \mv(\mq,\dot{\mq}) + \mg(\mq) = \mu
 \end{equation}
 
 Sendo:
