@@ -995,34 +995,27 @@ Sendo:
 \underaccent{\sim}{\ma} = \sum_{i=1}^\nu  \dot{q}^2_{i} \mj_{\omega\,i} \wedge \mj_{v\,i} + 2 \dot{q}_i \mj_{\omega\,i} \wedge \mv_i
 \end{equation}
 
-Repare que, derivando (??) e (??), temos que:
-\begin{equation}
-\ma_{i-1} =
-\begin{cases}
-\mzr, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; i = \nu + 1 \\
-\ma_i + \ddot{q}_{i} \mj_{v\,i} + \dot{q}_{i} \dot{\mj}_{v\,i} , \; 1 \leq i \leq \nu \\
-\end{cases}\, i=\nu+1,...,1
-\end{equation}
+Repare que, derivando (??), temos que:
 
 \begin{equation}
 \ma^\star (\mq,\dot{\mq},\ddot{\mq}) = \mJ_v (\mq)  \cdot \ddot{\mq} + \dot{\mJ}_v (\mq, \dot{\mq})  \cdot \dot{\mq}
 \end{equation}
 
-Comparando (??) com (??), temos que:
-\begin{equation}
-\dot{\mj}_{v\,i} = \mj_{\omega\,i} \wedge ( \dot{q}_{i}  \mj_{v\,i} + 2  \mv_i)
-\end{equation}
-
 Sendo assim, $\underaccent{\sim}{\ma}$ pode ser reescrito como:
 \begin{equation}
-\underaccent{\sim}{\ma} (\mq, \dot{\mq}) = \dot{\mJ}_v (\mq, \dot{\mq})  \cdot \dot{\mq}
+\underaccent{\sim}{\ma} (\mq, \dot{\mq}) = \dot{\mJ}_v (\mq, \dot{\mq})  \cdot \dot{\mq} = \sum_{i=1}^\nu \dot{\mj}_{v\,i} (\mq, \dot{\mq}) \dot{q}_i 
 \end{equation}
 
 Sendo:
 \begin{equation} \label{eq:dJv_}
-\dot{\mJ}_v(\mq) = \begin{bmatrix}
-\dot{\mj}_{v\,1}(\mq) & ... & \dot{\mj}_{v\,\nu}(\mq)
+\dot{\mJ}_v(\mq, \dot{\mq}) = \begin{bmatrix}
+\dot{\mj}_{v\,1}(\mq, \dot{\mq}) & ... & \dot{\mj}_{v\,\nu}(\mq, \dot{\mq})
 \end{bmatrix}
+\end{equation}
+
+Finalmente, comparando (??) com (??) temos que:
+\begin{equation}
+\dot{\mj}_{v\,i} = \mj_{\omega\,i} \wedge ( \dot{q}_{i} \mj_{v\,i} + 2  \mv_i)
 \end{equation}
 
 
@@ -1056,38 +1049,31 @@ Sendo:
 \underaccent{\sim}{\ma}_i  = \sum_{j=1}^i  \dot{q}^2_{j} \mj_{\omega\,i,j} \wedge \mj_{v\,i,j} + 2 \dot{q}_j \mj_{\omega\,i,j} \wedge \mv_{i,j} , \; 1 \leq i \leq \nu
 \end{equation}
 
-Repare que, derivando (??) e (??), temos que:
-\begin{equation}
-\ma_{i,j-1} =
-\begin{cases}
-\mzr, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; j = i+1 \\
-\ma_{i,j} + \ddot{q}_{j} \mj_{v\,i,j} + \dot{q}_{j} \dot{\mj}_{v\,i,j} , \; 1 \leq j \leq i \\
-\end{cases}\, i=1,...,\nu, \, j=i+1,...,1
-\end{equation}
+Repare que, derivando (??), temos que:
 
 \begin{equation}
 \ma^\star_i (\mq,\dot{\mq},\ddot{\mq}) = \mJ_{v\,i} (\mq)  \cdot \ddot{\mq} + \dot{\mJ}_{v\,i} (\mq, \dot{\mq})  \cdot \dot{\mq}
 \end{equation}
 
-Comparando (??) com (??), temos que:
-\begin{equation}
-\dot{\mj}_{v\,i,j} =
-\begin{cases}
-\mzr, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; j > i \\
-\mj_{\omega\,i,j} \wedge ( \dot{q}_{j}  \mj_{v\,i,j} + 2  \mv_{i,j}) , j \leq i \\
-\end{cases}\, i,j=1,...,\nu
-\end{equation}
-
 Sendo assim, $\underaccent{\sim}{\ma}_i$ pode ser reescrito como:
 \begin{equation}
-\underaccent{\sim}{\ma}_i (\mq, \dot{\mq}) = \dot{\mJ}_{v\,i} (\mq, \dot{\mq})  \cdot \dot{\mq}
+\underaccent{\sim}{\ma}_i (\mq, \dot{\mq}) = \dot{\mJ}_{v\,i} (\mq, \dot{\mq})  \cdot \dot{\mq} = \sum_{i=1}^\nu \dot{\mj}_{v\,i,j} (\mq, \dot{\mq}) \dot{q}_j 
 \end{equation}
 
 Sendo:
 \begin{equation} \label{eq:dJvi_}
-\dot{\mJ}_{v\,i} (\mq) = \begin{bmatrix}
-\dot{\mj}_{v\,i,1}(\mq) & ... & \dot{\mj}_{v\,i,\nu}(\mq)
+\dot{\mJ}_{v\,i}(\mq, \dot{\mq}) = \begin{bmatrix}
+\dot{\mj}_{v\,i,1}(\mq, \dot{\mq}) & ... & \dot{\mj}_{v\,i,\nu}(\mq, \dot{\mq})
 \end{bmatrix}
+\end{equation}
+
+Finalmente, comparando (??) com (??) temos que:
+\begin{equation}
+\dot{\mj}_{v\,i,j} =
+\begin{cases}
+\mzr, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; j > i \\
+\mj_{\omega\,i,j} \wedge ( \dot{q}_{j} \mj_{v\,i,j} + 2  \mv_{i,j}) , j \leq i \\
+\end{cases}\, i,j=1,...,\nu
 \end{equation}
 
 \item[C2)] Cinemática de acelerações angulares
@@ -1166,34 +1152,27 @@ Sendo:
 \underaccent{\sim}{\dot{\momega}} = \sum_{i=1}^\nu \dot{q}_i \mj_{\omega\,i} \wedge \momega_i
 \end{equation}
 
-Repare que, derivando (??) e (??), temos que:
-\begin{equation}
-\dot{\momega}_{i-1} =
-\begin{cases}
-\mzr, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; i = \nu + 1 \\
-\dot{\momega}_i + \ddot{q}_{i} \mj_{\omega\,i} + \dot{q}_{i} \dot{\mj}_{\omega\,i} , \; 1 \leq i \leq \nu \\
-\end{cases}\, i=\nu+1,...,1
-\end{equation}
+Repare que, derivando (??), temos que:
 
 \begin{equation}
 \dot{\momega}^\star (\mq,\dot{\mq},\ddot{\mq}) = \mJ_\omega (\mq)  \cdot \ddot{\mq} + \dot{\mJ}_\omega (\mq, \dot{\mq})  \cdot \dot{\mq}
 \end{equation}
 
-Comparando (??) com (??), temos que:
-\begin{equation}
-\dot{\mj}_{\omega\,i} = \mj_{\omega\,i} \wedge \momega_i
-\end{equation}
-
 Sendo assim, $\underaccent{\sim}{\dot{\momega}}$ pode ser reescrito como:
 \begin{equation}
-\underaccent{\sim}{\dot{\momega}} (\mq, \dot{\mq}) = \dot{\mJ}_\omega (\mq, \dot{\mq})  \cdot \dot{\mq}
+\underaccent{\sim}{\dot{\momega}} (\mq, \dot{\mq}) = \dot{\mJ}_\omega (\mq, \dot{\mq})  \cdot \dot{\mq} = \sum_{i=1}^\nu \dot{\mj}_{\omega\,i} (\mq, \dot{\mq}) \dot{q}_i 
 \end{equation}
 
 Sendo:
 \begin{equation} \label{eq:dJomega_}
-\dot{\mJ}_\omega(\mq) = \begin{bmatrix}
-\dot{\mj}_{\omega\,1}(\mq) & ... & \dot{\mj}_{\omega\,\nu}(\mq)
+\dot{\mJ}_\omega(\mq, \dot{\mq}) = \begin{bmatrix}
+\dot{\mj}_{\omega\,1}(\mq, \dot{\mq}) & ... & \dot{\mj}_{\omega\,\nu}(\mq, \dot{\mq})
 \end{bmatrix}
+\end{equation}
+
+Finalmente, comparando (??) com (??) temos que:
+\begin{equation}
+\dot{\mj}_{\omega\,i} = \mj_{\omega\,i} \wedge \momega_i
 \end{equation}
 
 Para obter as acelerações angulares dos centros de massa dos ligamentos, seguimos a mesma linha de raciocínio e obtemos os seguintes resultados:
@@ -1224,38 +1203,31 @@ Sendo:
 \underaccent{\sim}{\dot{\momega}}_i = \sum_{j=1}^i  \dot{q}_j \mj_{\omega\,i,j} \wedge \momega_{i,j}
 \end{equation}
 
-Repare que, derivando (??) e (??), temos que:
-\begin{equation}
-\dot{\momega}_{i,j-1} =
-\begin{cases}
-\mzr, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; j = i+1 \\
-\dot{\momega}_{i,j} + \ddot{q}_{j} \mj_{\omega\,i,j} + \dot{q}_{j} \dot{\mj}_{\omega\,i,j} , \; 1 \leq j \leq i \\
-\end{cases}\, i=1,...,\nu, \, j=i+1,...,1
-\end{equation}
+Repare que, derivando (??), temos que:
 
 \begin{equation}
 \dot{\momega}^\star_i (\mq,\dot{\mq},\ddot{\mq}) = \mJ_{\omega\,i} (\mq)  \cdot \ddot{\mq} + \dot{\mJ}_{\omega\,i} (\mq, \dot{\mq})  \cdot \dot{\mq}
 \end{equation}
 
-Comparando (??) com (??), temos que:
-\begin{equation}
-\dot{\mj}_{\omega\,i,j} =
-\begin{cases}
-\mzr, \;\;\;\;\;\;\;\;\;\;\;\;\;\; j > i \\
-\mj_{\omega\,i,j} \wedge  \momega_{i,j} , j \leq i \\
-\end{cases}\, i,j=1,...,\nu
-\end{equation}
-
 Sendo assim, $\underaccent{\sim}{\dot{\momega}}_i$ pode ser reescrito como:
 \begin{equation}
-\underaccent{\sim}{\dot{\momega}}_i (\mq, \dot{\mq}) = \dot{\mJ}_{\omega\,i} (\mq, \dot{\mq})  \cdot \dot{\mq}
+\underaccent{\sim}{\dot{\momega}}_i (\mq, \dot{\mq}) = \dot{\mJ}_{\omega\,i} (\mq, \dot{\mq})  \cdot \dot{\mq} = \sum_{i=1}^\nu \dot{\mj}_{\omega\,i,j} (\mq, \dot{\mq}) \dot{q}_j 
 \end{equation}
 
 Sendo:
 \begin{equation} \label{eq:dJomegai_}
-\dot{\mJ}_{\omega\,i} (\mq) = \begin{bmatrix}
-\dot{\mj}_{\omega\,i,1}(\mq) & ... & \dot{\mj}_{\omega\,i,\nu}(\mq)
+\dot{\mJ}_{\omega\,i}(\mq, \dot{\mq}) = \begin{bmatrix}
+\dot{\mj}_{\omega\,i,1}(\mq, \dot{\mq}) & ... & \dot{\mj}_{\omega\,i,\nu}(\mq, \dot{\mq})
 \end{bmatrix}
+\end{equation}
+
+Finalmente, comparando (??) com (??) temos que:
+\begin{equation}
+\dot{\mj}_{\omega\,i,j} =
+\begin{cases}
+\mzr, \;\;\;\;\;\;\;\;\;\;\;\;\;\; j > i \\
+\mj_{\omega\,i,j} \wedge \momega_{i,j} , j \leq i \\
+\end{cases}\, i,j=1,...,\nu
 \end{equation}
 
 \item[D1)] Cinemática de sobre-acelerações lineares
@@ -1320,9 +1292,13 @@ Sendo que, a partir da equação \eqref{eq:Poisson_da}, a sobre-aceleração de arra
 \end{cases}\, i=1,...,\nu
 \end{equation}
 
-Fazendo a seguinte definição:
+Fazendo as seguintes definições:
 \begin{equation}
 \dot{\ma}_i = \vct{\dot{\va}_{\ttx}^{\lllB_{i}} }_{\ttN}
+\end{equation}
+
+\begin{equation}
+\dot{\ma}^\star = \dot{\ma}_0 =\vct{\dot{\va}_{\ttx}^{\lllN} }_{\ttN}
 \end{equation}
 
 Temos que:
@@ -1330,16 +1306,22 @@ Temos que:
 \vct{\dot{\va}_{\ttx \rl \lllB_{i}}^{\lllB_{i-1}} }_{\ttN} = \dddot{q}_{i} \mj_{v\,i} + 3 \dot{q}_{i} \ddot{q}_{i} \mj_{\omega\,i} \wedge \mj_{v\,i} + \dot{q}_{i}^3 \mj_{\omega\,i} \wedge \mj_{\omega\,i} \wedge \mj_{v\,i}, \; i=1,...,\nu
 \end{equation}
 \begin{equation}
-\ma_{i-1} =
+\dot{\ma}_{i-1} =
 \begin{cases}
 \mzr, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; i = \nu + 1 \\
-\ma_i + \dddot{q}_{i} \mj_{v\,i} + 3 \dot{q}_{i} \ddot{q}_{i} \mj_{\omega\,i} \wedge \mj_{v\,i} + \dot{q}_{i}^3 \mj_{\omega\,i} \wedge \mj_{\omega\,i} \wedge \mj_{v\,i} + 3(\ddot{q}_i  \mj_{\omega\,i} \wedge \mv_i + 
+\dot{\ma}_i + \dddot{q}_{i} \mj_{v\,i} + 3 \dot{q}_{i} \ddot{q}_{i} \mj_{\omega\,i} \wedge \mj_{v\,i} + \dot{q}_{i}^3 \mj_{\omega\,i} \wedge \mj_{\omega\,i} \wedge \mj_{v\,i} + 3(\ddot{q}_i  \mj_{\omega\,i} \wedge \mv_i + 
 \dot{q}_i^2 \mj_{\omega\,i} \wedge \mj_{\omega\,i} \wedge \mv_i  + \dot{q}_i
  \mj_{\omega\,i} \wedge \ma_i ) , \; 1 \leq i \leq \nu \\
 \end{cases}\, i=\nu+1,...,1
 \end{equation}
+
 \begin{equation}
-\vct{\va_{\ttx}^{\lllN} }_{\ttN} = \ma_0 = \mJ_v \cdot \dddot{\mq} + \sum_{i=1}^\nu  3 \dot{q}_{i} \ddot{q}_{i} \mj_{\omega\,i} \wedge \mj_{v\,i} + \dot{q}_{i}^3 \mj_{\omega\,i} \wedge \mj_{\omega\,i} \wedge \mj_{v\,i} + 3(\ddot{q}_i  \mj_{\omega\,i} \wedge \mv_i + 
+\dot{\ma}^\star (\mq,\dot{\mq},\ddot{\mq}) = \mJ_v (\mq)  \cdot \dddot{\mq} + \underaccent{\sim}{\dot{\ma}} (\mq,\dot{\mq})
+\end{equation}
+
+Sendo:
+\begin{equation}
+\underaccent{\sim}{\dot{\ma}} = \sum_{i=1}^\nu  3 \dot{q}_{i} \ddot{q}_{i} \mj_{\omega\,i} \wedge \mj_{v\,i} + \dot{q}_{i}^3 \mj_{\omega\,i} \wedge \mj_{\omega\,i} \wedge \mj_{v\,i} + 3(\ddot{q}_i  \mj_{\omega\,i} \wedge \mv_i + 
 \dot{q}_i^2 \mj_{\omega\,i} \wedge \mj_{\omega\,i} \wedge \mv_i  + \dot{q}_i
  \mj_{\omega\,i} \wedge \ma_i ) , \; 1 \leq i \leq \nu
 \end{equation}
