@@ -986,23 +986,23 @@ Temos que:
 \end{cases}\, i=\nu+1,...,1
 \end{equation}
 
-\begin{equation}
+\begin{equation} \label{eq:ace_est}
 \ma^\star (\mq,\dot{\mq},\ddot{\mq}) = \mJ_v (\mq)  \cdot \ddot{\mq} + \underaccent{\sim}{\ma} (\mq,\dot{\mq})
 \end{equation}
 
 Sendo:
-\begin{equation}
+\begin{equation} \label{eq:a_til}
 \underaccent{\sim}{\ma} = \sum_{i=1}^\nu  \dot{q}^2_{i} \mj_{\omega\,i} \wedge \mj_{v\,i} + 2 \dot{q}_i \mj_{\omega\,i} \wedge \mv_i
 \end{equation}
 
-Repare que, derivando (??), temos que:
+Repare que, derivando \eqref{eq:ace_est}, temos que:
 
 \begin{equation}
 \ma^\star (\mq,\dot{\mq},\ddot{\mq}) = \mJ_v (\mq)  \cdot \ddot{\mq} + \dot{\mJ}_v (\mq, \dot{\mq})  \cdot \dot{\mq}
 \end{equation}
 
 Sendo assim, $\underaccent{\sim}{\ma}$ pode ser reescrito como:
-\begin{equation}
+\begin{equation} \label{eq:a_til_dJ}
 \underaccent{\sim}{\ma} (\mq, \dot{\mq}) = \dot{\mJ}_v (\mq, \dot{\mq})  \cdot \dot{\mq} = \sum_{i=1}^\nu \dot{\mj}_{v\,i} (\mq, \dot{\mq}) \dot{q}_i 
 \end{equation}
 
@@ -1013,7 +1013,7 @@ Sendo:
 \end{bmatrix}
 \end{equation}
 
-Finalmente, comparando (??) com (??) temos que:
+Finalmente, comparando \eqref{eq:a_til} com \eqref{eq:a_til_dJ} temos que:
 \begin{equation}
 \dot{\mj}_{v\,i} = \mj_{\omega\,i} \wedge ( \dot{q}_{i} \mj_{v\,i} + 2  \mv_i)
 \end{equation}
@@ -1046,28 +1046,15 @@ Temos:
 
 Sendo:
 \begin{equation}
-\underaccent{\sim}{\ma}_i  = \sum_{j=1}^i  \dot{q}^2_{j} \mj_{\omega\,i,j} \wedge \mj_{v\,i,j} + 2 \dot{q}_j \mj_{\omega\,i,j} \wedge \mv_{i,j} , \; 1 \leq i \leq \nu
+\underaccent{\sim}{\ma}_i (\mq, \dot{\mq}) = \dot{\mJ}_{v\,i} (\mq, \dot{\mq})  \cdot \dot{\mq}
 \end{equation}
 
-Repare que, derivando (??), temos que:
-
-\begin{equation}
-\ma^\star_i (\mq,\dot{\mq},\ddot{\mq}) = \mJ_{v\,i} (\mq)  \cdot \ddot{\mq} + \dot{\mJ}_{v\,i} (\mq, \dot{\mq})  \cdot \dot{\mq}
-\end{equation}
-
-Sendo assim, $\underaccent{\sim}{\ma}_i$ pode ser reescrito como:
-\begin{equation}
-\underaccent{\sim}{\ma}_i (\mq, \dot{\mq}) = \dot{\mJ}_{v\,i} (\mq, \dot{\mq})  \cdot \dot{\mq} = \sum_{i=1}^\nu \dot{\mj}_{v\,i,j} (\mq, \dot{\mq}) \dot{q}_j 
-\end{equation}
-
-Sendo:
 \begin{equation} \label{eq:dJvi_}
 \dot{\mJ}_{v\,i}(\mq, \dot{\mq}) = \begin{bmatrix}
 \dot{\mj}_{v\,i,1}(\mq, \dot{\mq}) & ... & \dot{\mj}_{v\,i,\nu}(\mq, \dot{\mq})
 \end{bmatrix}
 \end{equation}
 
-Finalmente, comparando (??) com (??) temos que:
 \begin{equation}
 \dot{\mj}_{v\,i,j} =
 \begin{cases}
