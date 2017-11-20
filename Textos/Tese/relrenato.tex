@@ -1308,6 +1308,10 @@ Definindo:
 \dot{\ma}_{i,j} = \vct{\dot{\va}_{\ttg_i}^{\lllB_{j}}}_{\ttN}
 \end{equation}
 
+\begin{equation}
+\dot{\ma}_i^\star = \dot{\ma}_{i,0} =\vct{\dot{\va}_{\ttg_i}^{\lllN} }_{\ttN}
+\end{equation}
+
 Temos:
 \begin{equation}
 \dot{\ma}_{i,j-1} =
@@ -1319,7 +1323,12 @@ Temos:
 \end{cases}\, i=1,...,\nu, \, j=i+1,...,1
 \end{equation}
 \begin{equation}
-\vct{\dot{\va}_{\ttg_i}^{\lllN} }_{\ttN} = \dot{\ma}_{i,0} = \mJ_{v\,i} \cdot \dddot{\mq} + \sum_{j=1}^i  3 \dot{q}_{j} \ddot{q}_{j} \mj_{\omega\,i,j} \wedge \mj_{v\,i,j} + \dot{q}_{j}^3 \mj_{\omega\,i,j} \wedge \mj_{\omega\,i,j} \wedge \mj_{v\,i,j} + 3(\ddot{q}_j  \mj_{\omega\,i,j} \wedge \mv_{i,j} + 
+\dot{\ma}_i^\star(\mq,\dot{\mq},\ddot{\mq},\dddot{\mq}) = \mJ_{v\,i} (\mq) \cdot \dddot{\mq} + \underaccent{\sim}{\dot{\ma}}_i (\mq,\dot{\mq},\ddot{\mq})
+\end{equation}
+
+Sendo:
+\begin{equation}
+\underaccent{\sim}{\dot{\ma}}_i =\sum_{j=1}^i  3 \dot{q}_{j} \ddot{q}_{j} \mj_{\omega\,i,j} \wedge \mj_{v\,i,j} + \dot{q}_{j}^3 \mj_{\omega\,i,j} \wedge \mj_{\omega\,i,j} \wedge \mj_{v\,i,j} + 3(\ddot{q}_j  \mj_{\omega\,i,j} \wedge \mv_{i,j} + 
 \dot{q}_j^2 \mj_{\omega\,i,j} \wedge \mj_{\omega\,i,j} \wedge \mv_{i,j}  + \dot{q}_j
  \mj_{\omega\,i,j} \wedge \ma_{i,j} ) , \; 1 \leq i \leq \nu
 \end{equation}
@@ -1363,16 +1372,19 @@ Sendo assim, a aceleração angular do efetuador em relação a cada um dos referenc
 
 Sendo que a sobre-aceleração angular de arrastamento de cada uma das juntas é dada por:
 \begin{equation}
-\ddot{\vomega}_{\ttx \rl \lllB_{i}}^{\lllB_{i-1}} = 
+\ddot{\vomega}_{\lllB_\nu \rl \lllB_{i}}^{\lllB_{i-1}} = 
 \begin{cases}
 \vzr, \;\;\;\;\;\;\;\;\; \text{se a i-ésima junta for prismática} \\
 \dddot{q}_{i} \vk_{i-1}, \; \text{se a i-ésima junta for de revolução}
 \end{cases}\, i=1,...,\nu
 \end{equation}
 
-Fazendo a seguinte definição:
+Fazendo as seguintes definições:
 \begin{equation}
-\ddot{\momega}_i = \vct{\ddot{\vomega}_{\ttx}^{\lllB_{i}} }_{\ttN}
+\ddot{\momega}_i = \vct{\ddot{\vomega}_{\lllB_\nu}^{\lllB_{i}} }_{\ttN}
+\end{equation}
+\begin{equation}
+\ddot{\momega}^\star = \ddot{\momega}_0 = \vct{\ddot{\vomega}_{\lllB_\nu}^{\lllN} }_{\ttN}
 \end{equation}
 
 Temos que:
@@ -1387,27 +1399,44 @@ Temos que:
 \end{cases}\, i=\nu+1,...,1
 \end{equation}
 \begin{equation}
-\vct{\ddot{\vomega}_{\lllB_\nu}^{\lllN} }_{\ttN} = \ddot{\momega}_0 = \mJ_\omega \cdot \dddot{\mq} + \sum_{i=1}^\nu \ddot{q}_i \mj_{\omega\,i} \wedge \momega_i + 2 \dot{q}_i \mj_{\omega\,i} \wedge \dot{\momega}_i + \dot{q}_i ^2 \mj_{\omega\,i} \wedge \mj_{\omega\,i} \wedge \momega_i , \; 1 \leq i \leq \nu
+\ddot{\momega}_i^\star(\mq,\dot{\mq},\ddot{\mq},\dddot{\mq}) = \mJ_\omega(\mq) \cdot \dddot{\mq} + \underaccent{\sim}{\ddot{\momega}}(\mq,\dot{\mq},\ddot{\mq})
+\end{equation}
+
+Sendo:
+\begin{equation}
+\underaccent{\sim}{\ddot{\momega}} = \sum_{i=1}^\nu \ddot{q}_i \mj_{\omega\,i} \wedge \momega_i + 2 \dot{q}_i \mj_{\omega\,i} \wedge \dot{\momega}_i + \dot{q}_i ^2 \mj_{\omega\,i} \wedge \mj_{\omega\,i} \wedge \momega_i 
 \end{equation}
 
 Para obter as sobre-acelerações angulares dos centros de massa dos ligamentos, seguimos a mesma linha de raciocínio e obtemos os seguintes resultados:
 
 Definindo:
 \begin{equation}
-\ddot{\momega}_{i,j} = \vct{\ddot{\vomega}_{\ttg_i}^{\lllB_{j}}}_{\ttN}
+\ddot{\momega}_{i,j} = \vct{\ddot{\vomega}_{\lllB_i}^{\lllB_{j}}}_{\ttN}
+\end{equation}
+\begin{equation}
+\ddot{\momega}_i^\star = \ddot{\momega}_{i,0} = \vct{\ddot{\vomega}_{\lllB_i}^{\lllN} }_{\ttN}
 \end{equation}
 
 Temos:
+\scriptsize
 \begin{equation}
 \ddot{\momega}_{i,j-1} =
 \begin{cases}
 \mzr, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; j = i+1 \\
 \ddot{\momega}_{i,j} + \dddot{q}_{j} \mj_{\omega\,i,j} + \ddot{q}_j \mj_{\omega\,i,j} \wedge \momega_{i,j} + 2 \dot{q}_j \mj_{\omega\,i,j} \wedge \dot{\momega}_{i,j} + \dot{q}_j ^2 \mj_{\omega\,i,j} \wedge \mj_{\omega\,i,j} \wedge \momega_{i,j}, \; 1 \leq j \leq i \\
-\end{cases}\, i=1,...,\nu, \, j=i+1,...,1
+\end{cases}\, i=1,...,\nu, \, \\ j=i+1,...,1
 \end{equation}
+\normalsize
 \begin{equation}
-\vct{\ddot{\vomega}_{\lllB_i}^{\lllN} }_{\ttN} = \ddot{\momega}_{i,0} = \mJ_{\omega\,i} \cdot \dddot{\mq} + \sum_{j=1}^i  \ddot{q}_j \mj_{\omega\,i,j} \wedge \momega_{i,j} + 2 \dot{q}_j \mj_{\omega\,i,j} \wedge \dot{\momega}_{i,j} + \dot{q}_j ^2 \mj_{\omega\,i,j} \wedge \mj_{\omega\,i,j} \wedge \momega_{i,j} , \; 1 \leq i \leq \nu
+\ddot{\momega}_i^\star(\mq,\dot{\mq},\ddot{\mq},\dddot{\mq}) = \mJ_{\omega\,i} (\mq) \cdot \dddot{\mq} + \underaccent{\sim}{\ddot{\momega}}_i (\mq,\dot{\mq},\ddot{\mq}) , \; 1 \leq i \leq \nu
 \end{equation}
+
+Sendo:
+
+\begin{equation}
+\underaccent{\sim}{\ddot{\momega}}_i = \sum_{j=1}^i  \ddot{q}_j \mj_{\omega\,i,j} \wedge \momega_{i,j} + 2 \dot{q}_j \mj_{\omega\,i,j} \wedge \dot{\momega}_{i,j} + \dot{q}_j ^2 \mj_{\omega\,i,j} \wedge \mj_{\omega\,i,j} \wedge \momega_{i,j} , \; 1 \leq i \leq \nu
+\end{equation}
+
 
 
 
