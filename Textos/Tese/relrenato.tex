@@ -866,7 +866,7 @@ Temos que:
 \end{cases}\, i=\nu+1,...,1
 \end{equation}
 \begin{equation}
-\momega^\star = \mJ_\omega \cdot \dot{\mq}
+\momega^\star(\mq, \dot{\mq}) = \mJ_\omega (\mq) \cdot \dot{\mq}
 \end{equation}
 
 Sendo:
@@ -992,7 +992,7 @@ Temos que:
 
 Sendo:
 \begin{equation} \label{eq:a_til}
-\underaccent{\sim}{\ma} = \sum_{i=1}^\nu  \dot{q}^2_{i} \mj_{\omega\,i} \wedge \mj_{v\,i} + 2 \dot{q}_i \mj_{\omega\,i} \wedge \mv_i
+\underaccent{\sim}{\ma} = \sum_{i=1}^\nu  \dot{q}_{i} \mj_{\omega\,i} \wedge (\dot{q}_{i} \mj_{v\,i} + 2  \mv_i )
 \end{equation}
 
 Repare que, derivando \eqref{eq:ace_est}, temos que:
@@ -1130,23 +1130,23 @@ Temos que:
 \dot{\momega}_i + \ddot{q}_{i} \mj_{\omega\,i} + \dot{q}_i \mj_{\omega\,i} \wedge \momega_i , \; 1 \leq i \leq \nu \\
 \end{cases}\, i=\nu+1,...,1
 \end{equation}
-\begin{equation}
+\begin{equation} \label{eq:ace_ang_est}
 \dot{\momega}^\star(\mq,\dot{\mq},\ddot{\mq}) = \mJ_\omega (\mq) \cdot \ddot{\mq} +  \underaccent{\sim}{\dot{\momega}}(\mq,\dot{\mq})
 \end{equation}
 
 Sendo:
-\begin{equation}
+\begin{equation} \label{eq:dw_til}
 \underaccent{\sim}{\dot{\momega}} = \sum_{i=1}^\nu \dot{q}_i \mj_{\omega\,i} \wedge \momega_i
 \end{equation}
 
-Repare que, derivando (??), temos que:
+Repare que, derivando \eqref{eq:ace_ang_est}, temos que:
 
 \begin{equation}
 \dot{\momega}^\star (\mq,\dot{\mq},\ddot{\mq}) = \mJ_\omega (\mq)  \cdot \ddot{\mq} + \dot{\mJ}_\omega (\mq, \dot{\mq})  \cdot \dot{\mq}
 \end{equation}
 
 Sendo assim, $\underaccent{\sim}{\dot{\momega}}$ pode ser reescrito como:
-\begin{equation}
+\begin{equation} \label{eq:dw_til_dJ}
 \underaccent{\sim}{\dot{\momega}} (\mq, \dot{\mq}) = \dot{\mJ}_\omega (\mq, \dot{\mq})  \cdot \dot{\mq} = \sum_{i=1}^\nu \dot{\mj}_{\omega\,i} (\mq, \dot{\mq}) \dot{q}_i 
 \end{equation}
 
@@ -1157,7 +1157,7 @@ Sendo:
 \end{bmatrix}
 \end{equation}
 
-Finalmente, comparando (??) com (??) temos que:
+Finalmente, comparando \eqref{eq:dw_til} com \eqref{eq:dw_til_dJ} temos que:
 \begin{equation}
 \dot{\mj}_{\omega\,i} = \mj_{\omega\,i} \wedge \momega_i
 \end{equation}
@@ -1187,18 +1187,7 @@ Temos:
 
 Sendo:
 \begin{equation}
-\underaccent{\sim}{\dot{\momega}}_i = \sum_{j=1}^i  \dot{q}_j \mj_{\omega\,i,j} \wedge \momega_{i,j}
-\end{equation}
-
-Repare que, derivando (??), temos que:
-
-\begin{equation}
-\dot{\momega}^\star_i (\mq,\dot{\mq},\ddot{\mq}) = \mJ_{\omega\,i} (\mq)  \cdot \ddot{\mq} + \dot{\mJ}_{\omega\,i} (\mq, \dot{\mq})  \cdot \dot{\mq}
-\end{equation}
-
-Sendo assim, $\underaccent{\sim}{\dot{\momega}}_i$ pode ser reescrito como:
-\begin{equation}
-\underaccent{\sim}{\dot{\momega}}_i (\mq, \dot{\mq}) = \dot{\mJ}_{\omega\,i} (\mq, \dot{\mq})  \cdot \dot{\mq} = \sum_{i=1}^\nu \dot{\mj}_{\omega\,i,j} (\mq, \dot{\mq}) \dot{q}_j 
+\underaccent{\sim}{\dot{\momega}}_i (\mq, \dot{\mq}) = \dot{\mJ}_{\omega\,i} (\mq, \dot{\mq})  \cdot \dot{\mq}
 \end{equation}
 
 Sendo:
@@ -1208,7 +1197,6 @@ Sendo:
 \end{bmatrix}
 \end{equation}
 
-Finalmente, comparando (??) com (??) temos que:
 \begin{equation}
 \dot{\mj}_{\omega\,i,j} =
 \begin{cases}
