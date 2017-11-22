@@ -650,7 +650,7 @@ As matrizes  $\hvct{\vone}_{\ttN \rl \ttB_i}$ apresentam o seguinte formato:
 \begin{bmatrix}
 \vct{\vi_{i}}_{\ttN} & \vct{\vj_{i}}_{\ttN} & \vct{\vk_{i}}_{\ttN} & \vct{\tto_i}_{\ttN} \\
 0 & 0 & 0 & 1
-\end{bmatrix}, \, i=1,...,\nu
+\end{bmatrix}
 \end{equation}
 
 Sendo assim, tendo obtido $\hvct{\vone}_{\ttN \rl \ttB_i}$, automaticamente obtemos $\vct{\vi_{i}}_{\ttN}, \vct{\vj_{i}}_{\ttN}, \vct{\vk_{i}}_{\ttN}$ e $\vct{\tto_i}_{\ttN}$. Note que também obtemos as coordenadas do efetuador no sistema da base, pois
@@ -660,7 +660,7 @@ Sendo assim, tendo obtido $\hvct{\vone}_{\ttN \rl \ttB_i}$, automaticamente obte
 
 Além disso, como $\vct{\ttg_i}_{\ttB_i}$ são dados de entrada do algoritmo, obtemos as coordenadas dos centros de massa dos ligamentos no sistema da base através da seguinte expressão:
 \begin{equation} \label{eq:og__}
-\hvct{\ttg_i}_{\ttN} = \hvct{\vone}_{\ttN \rl \ttB_i} \cdot \hvct{\ttg_i}_{\ttB_i}, \, i=1,...,\nu
+\hvct{\ttg_i}_{\ttN} = \hvct{\vone}_{\ttN \rl \ttB_i} \cdot \hvct{\ttg_i}_{\ttB_i}
 \end{equation}
 
 \item[B1)] Cinemática de velocidades lineares
@@ -709,16 +709,16 @@ Sendo que, a partir da equação \eqref{eq:Poisson_v}, a velocidade de arrastament
 \begin{equation}
 \vv_{\ttx \rl \lllB_{i}}^{\lllB_{i-1}} = 
 \begin{cases}
-\dot{q}_{i} \vk_{i-1}, \;\;\;\;\;\;\;\;\;\;\;\;\;\; \text{se a i-ésima junta for prismática} \\
-\dot{q}_{i} \vk_{i-1} \wedge \vr_{\tto_{i-1} \rl \ttx}, \; \text{se a i-ésima junta for de revolução}
+\dot{q}_{i} \vk_{i-1}, \;\;\;\;\;\;\;\;\;\;\;\;\;\; \text{i-ésima junta prismática} \\
+\dot{q}_{i} \vk_{i-1} \wedge \vr_{\tto_{i-1} \rl \ttx}, \; \text{i-ésima junta rotativa}
 \end{cases}\, i=1,...,\nu
 \end{equation}
 
 Fazendo as seguintes definições:
 \begin{equation} \label{eq:jvi_}
 \mj_{v\,i}(\mq) = \begin{cases}
-\vct{\vk_{i-1}}_{\ttN}, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; \text{se a i-ésima junta for prismática} \\
-\vct{\vk_{i-1}}_{\ttN}\wedge (\vct{\ttx}_{\ttN}-\vct{\tto_{i-1}}_{\ttN}) , \text{se a i-ésima junta for de revolução} \\
+\vct{\vk_{i-1}}_{\ttN}, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; \text{i-ésima junta prismática} \\
+\vct{\vk_{i-1}}_{\ttN}\wedge (\vct{\ttx}_{\ttN}-\vct{\tto_{i-1}}_{\ttN}) , \; \text{i-ésima junta rotativa} \\
 \end{cases} \, i=1,...,\nu
 \end{equation}
 
@@ -741,7 +741,7 @@ Temos que:
 \mv_i + \mj_{v\,i}  \dot{q}_{i}, \; 1 \leq i \leq \nu \\
 \end{cases}\, i=\nu+1,...,1
 \end{equation}
-\begin{equation}
+\begin{equation} \label{eq:vel_est}
 \mv^\star (\mq, \dot{\mq}) = \mJ_v(\mq) \cdot \dot{\mq}
 \end{equation}
 
@@ -757,9 +757,9 @@ Para obter as velocidades dos centros de massa dos ligamentos, seguimos a mesma 
 Definindo:
 \begin{equation} \label{eq:jvij_}
 \mj_{v\,i,j}(\mq) = \begin{cases}
-\mzr, \text{se j>i} \\
-\vct{\vk_{j-1}}_{\ttN}, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; \text{se } j\leq i  \text{ e a j-ésima junta for prismática} \\
-\vct{\vk_{j-1}}_{\ttN}\wedge (\vct{\ttg_i}_{\ttN}-\vct{\tto_{j-1}}_{\ttN}) , \text{se } j\leq i \text{ e a j-ésima junta for de revolução} \\
+\mzr, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; j>i \\
+\vct{\vk_{j-1}}_{\ttN}, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; j\leq i  \text{ e j-ésima junta prismática} \\
+\vct{\vk_{j-1}}_{\ttN}\wedge (\vct{\ttg_i}_{\ttN}-\vct{\tto_{j-1}}_{\ttN}) , \; j\leq i \text{ e j-ésima junta rotativa} \\
 \end{cases} \, i,j=1,...,\nu
 \end{equation}
 
@@ -788,7 +788,7 @@ Sendo:
 \begin{equation} \label{eq:Jvi_}
 \mJ_{v\,i}(\mq) = \begin{bmatrix}
 \mj_{v\,i,1}(\mq) & ... & \mj_{v\,i,\nu}(\mq)
-\end{bmatrix}, \, i=1,...,\nu
+\end{bmatrix}
 \end{equation}
 
 \item[B2)] Cinemática de velocidades angulares
@@ -822,7 +822,7 @@ Sendo assim, a velocidade angular do efetuador em relação a cada um dos referenc
 \begin{equation}
 \vomega_{\lllB_\nu}^{\lllB_{i-1}} =
 \begin{cases}
-\vzr, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\; i = \nu + 1 \\
+\vzr, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; i = \nu + 1 \\
 \vomega_{\lllB_\nu}^{\lllB_{i}} + \vomega_{\lllB_{i}}^{\lllB_{i-1}}, \; 1 \leq i \leq \nu \\
 \end{cases}\, i=\nu+1,...,1
 \end{equation}
@@ -833,16 +833,16 @@ Sendo que a velocidade angular de arrastamento de cada uma das juntas é dada por
 \begin{equation}
 \vomega_{\lllB_{i}}^{\lllB_{i-1}} = 
 \begin{cases}
-\vzr, \;\;\;\;\;\;\; \text{se a i-ésima junta for prismática} \\
-\dot{q}_{i} \vk_{i-1}, \; \text{se a i-ésima junta for de revolução}
+\vzr, \;\;\;\;\;\;\; \text{i-ésima junta prismática} \\
+\dot{q}_{i} \vk_{i-1}, \; \text{i-ésima junta rotativa}
 \end{cases}\, i=1,...,\nu
 \end{equation}
 
 Fazendo as seguintes definições:
 \begin{equation} \label{eq:jwi_}
 \mj_{\omega\,i}(\mq) = \begin{cases}
-\mzr, \;\;\;\;\;\;\;\; \text{se a i-ésima junta for prismática} \\
-\vct{\vk_{i-1}}_{\ttN} , \text{se a i-ésima junta for de revolução} \\
+\mzr, \;\;\;\;\;\;\;\; \text{i-ésima junta prismática} \\
+\vct{\vk_{i-1}}_{\ttN} , \text{i-ésima junta rotativa} \\
 \end{cases} \, i=1,...,\nu
 \end{equation}
 
@@ -865,7 +865,7 @@ Temos que:
 \momega_i + \mj_{\omega\,i} \dot{q}_{i}, \; 1 \leq i \leq \nu \\
 \end{cases}\, i=\nu+1,...,1
 \end{equation}
-\begin{equation}
+\begin{equation} \label{eq:vel_ang_est}
 \momega^\star(\mq, \dot{\mq}) = \mJ_\omega (\mq) \cdot \dot{\mq}
 \end{equation}
 
@@ -881,8 +881,8 @@ Para obter as velocidades angulares de cada ligamentos, seguimos a mesma linha d
 Definindo:
 \begin{equation} \label{eq:jwij_}
 \mj_{\omega\,i,j}(\mq) = \begin{cases}
-\mzr, \;\;\;\;\;\;\;\;\, \text{se } j>i \\
-\mj_{\omega\,j}(\mq), \; \text{se } j\leq i \\
+\mzr, \;\;\;\;\;\;\;\;\,  j>i \\
+\mj_{\omega\,j}(\mq), \;  j\leq i \\
 \end{cases} \, i,j=1,...,\nu
 \end{equation}
 
@@ -911,7 +911,7 @@ Sendo:
 \begin{equation} \label{eq:Jwi_}
 \mJ_{\omega\,i}(\mq) = \begin{bmatrix}
 \mj_{\omega\,i,1}(\mq) & ... & \mj_{\omega\,i,\nu}(\mq)
-\end{bmatrix}, \, i=1,...,\nu
+\end{bmatrix}
 \end{equation}
 
 \item[C1)] Cinemática de acelerações lineares
@@ -960,8 +960,8 @@ Sendo que, a partir da equação \eqref{eq:Poisson_a}, a aceleração de arrastament
 \begin{equation}
 \va_{\ttx \rl \lllB_{i}}^{\lllB_{i-1}} = 
 \begin{cases}
-\ddot{q}_{i} \vk_{i-1}, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; \text{se a i-ésima junta for prismática} \\
-\ddot{q}_{i} \vk_{i-1} \wedge \vr_{\tto_{i-1} \rl \ttx} + \dot{q}^2_{i} \vk_{i-1} \wedge \vk_{i-1} \wedge \vr_{\tto_{i-1} \rl \ttx} , \; \text{se a i-ésima junta for de revolução}
+\ddot{q}_{i} \vk_{i-1}, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; \text{i-ésima junta prismática} \\
+\ddot{q}_{i} \vk_{i-1} \wedge \vr_{\tto_{i-1} \rl \ttx} + \dot{q}^2_{i} \vk_{i-1} \wedge \vk_{i-1} \wedge \vr_{\tto_{i-1} \rl \ttx} , \; \text{i-ésima junta rotativa}
 \end{cases}\, i=1,...,\nu
 \end{equation}
 
@@ -969,7 +969,6 @@ Fazendo as seguintes definições:
 \begin{equation}
 \ma_i = \vct{\va_{\ttx}^{\lllB_{i}} }_{\ttN}
 \end{equation}
-
 \begin{equation}
 \ma^\star = \ma_0 =\vct{\va_{\ttx}^{\lllN} }_{\ttN}
 \end{equation}
@@ -981,21 +980,23 @@ Temos que:
 \begin{equation}
 \ma_{i-1} =
 \begin{cases}
-\mzr, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; i = \nu + 1 \\
-\ma_i + \ddot{q}_{i} \mj_{v\,i} + \dot{q}^2_{i} \mj_{\omega\,i} \wedge \mj_{v\,i} + 2 \dot{q}_i \mj_{\omega\,i} \wedge \mv_i , \; 1 \leq i \leq \nu \\
+\mzr, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; i = \nu + 1 \\
+\ma_i +  \mj_{v\,i} \ddot{q}_{i} + (\underaccent{\sim}{\ma})_i  , \; 1 \leq i \leq \nu \\
 \end{cases}\, i=\nu+1,...,1
 \end{equation}
-
 \begin{equation} \label{eq:ace_est}
 \ma^\star (\mq,\dot{\mq},\ddot{\mq}) = \mJ_v (\mq)  \cdot \ddot{\mq} + \underaccent{\sim}{\ma} (\mq,\dot{\mq})
 \end{equation}
 
 Sendo:
+\begin{equation}
+(\underaccent{\sim}{\ma})_i = \dot{q}^2_{i} \mj_{\omega\,i} \wedge \mj_{v\,i} + 2 \dot{q}_i \mj_{\omega\,i} \wedge \mv_i
+\end{equation}
 \begin{equation} \label{eq:a_til}
-\underaccent{\sim}{\ma} = \sum_{i=1}^\nu  \dot{q}_{i} \mj_{\omega\,i} \wedge (\dot{q}_{i} \mj_{v\,i} + 2  \mv_i )
+\underaccent{\sim}{\ma} = \sum_{i=1}^\nu (\underaccent{\sim}{\ma})_i
 \end{equation}
 
-Repare que, derivando \eqref{eq:ace_est}, temos que:
+Repare que, derivando \eqref{eq:vel_est}, temos que:
 
 \begin{equation}
 \ma^\star (\mq,\dot{\mq},\ddot{\mq}) = \mJ_v (\mq)  \cdot \ddot{\mq} + \dot{\mJ}_v (\mq, \dot{\mq})  \cdot \dot{\mq}
@@ -1027,7 +1028,6 @@ Definindo:
 \begin{equation}
 \ma_{i,j} = \vct{\va_{\ttg_i}^{\lllB_{j}}}_{\ttN}
 \end{equation}
-
 \begin{equation}
 \ma^\star_i = \ma_{i,0} = \vct{\va_{\ttg_i}^{\lllN} }_{\ttN}
 \end{equation}
@@ -1036,8 +1036,8 @@ Temos:
 \begin{equation}
 \ma_{i,j-1} =
 \begin{cases}
-\mzr, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; j = i+1 \\
-\ma_{i,j} + \ddot{q}_{j} \mj_{v\,i,j} + \dot{q}^2_{j} \mj_{\omega\,i,j} \wedge \mj_{v\,i,j} + 2 \dot{q}_j \mj_{\omega\,i,j} \wedge \mv_{i,j}, \; 1 \leq j \leq i \\
+\mzr, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; j = i+1 \\
+\ma_{i,j} + \mj_{v\,i,j} \ddot{q}_{j} + (\underaccent{\sim}{\ma}_i)_j, \; 1 \leq j \leq i \\
 \end{cases}\, i=1,...,\nu, \, j=i+1,...,1
 \end{equation}
 \begin{equation}
@@ -1046,15 +1046,16 @@ Temos:
 
 Sendo:
 \begin{equation}
-\underaccent{\sim}{\ma}_i (\mq, \dot{\mq}) = \dot{\mJ}_{v\,i} (\mq, \dot{\mq})  \cdot \dot{\mq}
+(\underaccent{\sim}{\ma}_i)_j =  \dot{\mj}_{v\,i,j} \dot{q}_{j}
 \end{equation}
-
+\begin{equation}
+\underaccent{\sim}{\ma}_i (\mq, \dot{\mq}) = \sum_{j=1}^i \dot{\mj}_{v\,i,j} \dot{q}_{j} = \dot{\mJ}_{v\,i} (\mq, \dot{\mq})  \cdot \dot{\mq}
+\end{equation}
 \begin{equation} \label{eq:dJvi_}
 \dot{\mJ}_{v\,i}(\mq, \dot{\mq}) = \begin{bmatrix}
 \dot{\mj}_{v\,i,1}(\mq, \dot{\mq}) & ... & \dot{\mj}_{v\,i,\nu}(\mq, \dot{\mq})
 \end{bmatrix}
 \end{equation}
-
 \begin{equation}
 \dot{\mj}_{v\,i,j} =
 \begin{cases}
@@ -1105,8 +1106,8 @@ Sendo que a aceleração angular de arrastamento de cada uma das juntas é dada por
 \begin{equation}
 \dot{\vomega}_{\lllB_{i}}^{\lllB_{i-1}} = 
 \begin{cases}
-\vzr, \;\;\;\;\;\;\; \text{se a i-ésima junta for prismática} \\
-\ddot{q}_{i} \vk_{i-1}, \; \text{se a i-ésima junta for de revolução}
+\vzr, \;\;\;\;\;\;\; \text{i-ésima junta for prismática} \\
+\ddot{q}_{i} \vk_{i-1}, \; \text{i-ésima junta rotativa}
 \end{cases}\, i=1,...,\nu
 \end{equation}
 
@@ -1126,8 +1127,8 @@ Temos que:
 \begin{equation}
 \dot{\momega}_{i-1} =
 \begin{cases}
-\mzr, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; i = \nu + 1 \\
-\dot{\momega}_i + \ddot{q}_{i} \mj_{\omega\,i} + \dot{q}_i \mj_{\omega\,i} \wedge \momega_i , \; 1 \leq i \leq \nu \\
+\mzr, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; i = \nu + 1 \\
+\dot{\momega}_i +  \mj_{\omega\,i} \ddot{q}_{i} + (\underaccent{\sim}{\dot{\momega}})_i , \; 1 \leq i \leq \nu \\
 \end{cases}\, i=\nu+1,...,1
 \end{equation}
 \begin{equation} \label{eq:ace_ang_est}
@@ -1135,12 +1136,14 @@ Temos que:
 \end{equation}
 
 Sendo:
+\begin{equation}
+(\underaccent{\sim}{\dot{\momega}})_i = \dot{q}_i \mj_{\omega\,i} \wedge \momega_i
+\end{equation}
 \begin{equation} \label{eq:dw_til}
-\underaccent{\sim}{\dot{\momega}} = \sum_{i=1}^\nu \dot{q}_i \mj_{\omega\,i} \wedge \momega_i
+\underaccent{\sim}{\dot{\momega}} = \sum_{i=1}^\nu (\underaccent{\sim}{\dot{\momega}})_i
 \end{equation}
 
-Repare que, derivando \eqref{eq:ace_ang_est}, temos que:
-
+Repare que, derivando \eqref{eq:vel_ang_est}, temos que:
 \begin{equation}
 \dot{\momega}^\star (\mq,\dot{\mq},\ddot{\mq}) = \mJ_\omega (\mq)  \cdot \ddot{\mq} + \dot{\mJ}_\omega (\mq, \dot{\mq})  \cdot \dot{\mq}
 \end{equation}
@@ -1168,7 +1171,6 @@ Definindo:
 \begin{equation}
 \dot{\momega}_{i,j} = \vct{\dot{\vomega}_{\ttg_i}^{\lllB_{j}}}_{\ttN}
 \end{equation}
-
 \begin{equation}
 \dot{\momega}^\star_i = \dot{\momega}_{i,0} = \vct{\dot{\vomega}_{\lllB_i}^{\lllN} }_{\ttN}
 \end{equation}
@@ -1177,8 +1179,8 @@ Temos:
 \begin{equation}
 \dot{\momega}_{i,j-1} =
 \begin{cases}
-\mzr, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; j = i+1 \\
-\dot{\momega}_{i,j} + \ddot{q}_{j} \mj_{\omega\,i,j} + \dot{q}_j \mj_{\omega\,i,j} \wedge \momega_{i,j}, \; 1 \leq j \leq i \\
+\mzr, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; j = i+1 \\
+\dot{\momega}_{i,j} + \ddot{q}_{j} \mj_{\omega\,i,j} + (\underaccent{\sim}{\dot{\momega}}_i)_j, \; 1 \leq j \leq i \\
 \end{cases}\, i=1,...,\nu, \, j=i+1,...,1
 \end{equation}
 \begin{equation}
@@ -1187,7 +1189,10 @@ Temos:
 
 Sendo:
 \begin{equation}
-\underaccent{\sim}{\dot{\momega}}_i (\mq, \dot{\mq}) = \dot{\mJ}_{\omega\,i} (\mq, \dot{\mq})  \cdot \dot{\mq}
+(\underaccent{\sim}{\dot{\momega}}_i)_j = \dot{\mj}_{\omega\,i,j} \dot{q}_j
+\end{equation}
+\begin{equation}
+\underaccent{\sim}{\dot{\momega}}_i (\mq, \dot{\mq}) = \sum_{j=1}^i (\underaccent{\sim}{\dot{\momega}}_i)_j = \dot{\mJ}_{\omega\,i} (\mq, \dot{\mq})  \cdot \dot{\mq}
 \end{equation}
 
 Sendo:
@@ -1196,7 +1201,6 @@ Sendo:
 \dot{\mj}_{\omega\,i,1}(\mq, \dot{\mq}) & ... & \dot{\mj}_{\omega\,i,\nu}(\mq, \dot{\mq})
 \end{bmatrix}
 \end{equation}
-
 \begin{equation}
 \dot{\mj}_{\omega\,i,j} =
 \begin{cases}
@@ -1259,13 +1263,15 @@ Sendo assim, a sobre-aceleração do efetuador em relação a cada um dos referencia
 
 
 Sendo que, a partir da equação \eqref{eq:Poisson_da}, a sobre-aceleração de arrastamento de cada uma das juntas é dada por:
+\footnotesize
 \begin{equation}
 \dot{\va}_{\ttx \rl \lllB_{i}}^{\lllB_{i-1}} = 
 \begin{cases}
-\dddot{q}_{i} \vk_{i-1}, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; \text{se a i-ésima junta for prismática} \\
-\dddot{q}_{i} \vk_{i-1} \wedge \vr_{\tto_{i-1} \rl \ttx} + 3 \dot{q}_{i} \ddot{q}_{i} \vk_{i-1} \wedge \vk_{i-1} \wedge \vr_{\tto_{i-1} \rl \ttx}  + \dot{q}_{i}^3 \vk_{i-1} \wedge \vk_{i-1} \wedge \vk_{i-1} \wedge \vr_{\tto_{i-1} \rl \ttx}, \; \text{se a i-ésima junta for de revolução}
+\dddot{q}_{i} \vk_{i-1}, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; \text{junta prismática} \\
+\dddot{q}_{i} \vk_{i-1} \wedge \vr_{\tto_{i-1} \rl \ttx} + 3 \dot{q}_{i} \ddot{q}_{i} \vk_{i-1} \wedge \vk_{i-1} \wedge \vr_{\tto_{i-1} \rl \ttx}  + \dot{q}_{i}^3 \vk_{i-1} \wedge \vk_{i-1} \wedge \vk_{i-1} \wedge \vr_{\tto_{i-1} \rl \ttx}, \; \text{junta rotativa}
 \end{cases}\, i=1,...,\nu
 \end{equation}
+\normalsize
 
 Fazendo as seguintes definições:
 \begin{equation}
@@ -1283,10 +1289,8 @@ Temos que:
 \begin{equation}
 \dot{\ma}_{i-1} =
 \begin{cases}
-\mzr, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; i = \nu + 1 \\
-\dot{\ma}_i + \dddot{q}_{i} \mj_{v\,i} + 3 \dot{q}_{i} \ddot{q}_{i} \mj_{\omega\,i} \wedge \mj_{v\,i} + \dot{q}_{i}^3 \mj_{\omega\,i} \wedge \mj_{\omega\,i} \wedge \mj_{v\,i} + 3(\ddot{q}_i  \mj_{\omega\,i} \wedge \mv_i + 
-\dot{q}_i^2 \mj_{\omega\,i} \wedge \mj_{\omega\,i} \wedge \mv_i  + \dot{q}_i
- \mj_{\omega\,i} \wedge \ma_i ) , \; 1 \leq i \leq \nu \\
+\mzr, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; i = \nu + 1 \\
+\dot{\ma}_i + \dddot{q}_{i} \mj_{v\,i} + (\underaccent{\sim}{\dot{\ma}})_i , \; 1 \leq i \leq \nu \\
 \end{cases}\, i=\nu+1,...,1
 \end{equation}
 
@@ -1296,9 +1300,12 @@ Temos que:
 
 Sendo:
 \begin{equation}
-\underaccent{\sim}{\dot{\ma}} = \sum_{i=1}^\nu  3 \dot{q}_{i} \ddot{q}_{i} \mj_{\omega\,i} \wedge \mj_{v\,i} + \dot{q}_{i}^3 \mj_{\omega\,i} \wedge \mj_{\omega\,i} \wedge \mj_{v\,i} + 3(\ddot{q}_i  \mj_{\omega\,i} \wedge \mv_i + 
+(\underaccent{\sim}{\dot{\ma}})_i = 3 \dot{q}_{i} \ddot{q}_{i} \mj_{\omega\,i} \wedge \mj_{v\,i} + \dot{q}_{i}^3 \mj_{\omega\,i} \wedge \mj_{\omega\,i} \wedge \mj_{v\,i} + 3(\ddot{q}_i  \mj_{\omega\,i} \wedge \mv_i + 
 \dot{q}_i^2 \mj_{\omega\,i} \wedge \mj_{\omega\,i} \wedge \mv_i  + \dot{q}_i
- \mj_{\omega\,i} \wedge \ma_i ) , \; 1 \leq i \leq \nu
+ \mj_{\omega\,i} \wedge \ma_i )
+\end{equation}
+\begin{equation}
+\underaccent{\sim}{\dot{\ma}} = \sum_{i=1}^\nu  (\underaccent{\sim}{\dot{\ma}})_i
 \end{equation}
 
 Para obter as acelerações dos centros de massa dos ligamentos, seguimos a mesma linha de raciocínio e obtemos os seguintes resultados:
@@ -1316,10 +1323,8 @@ Temos:
 \begin{equation}
 \dot{\ma}_{i,j-1} =
 \begin{cases}
-\mzr, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; j = i+1 \\
-\dot{\ma}_{i,j} + \dddot{q}_{j} \mj_{v\,i,j} + 3 \dot{q}_{j} \ddot{q}_{j} \mj_{\omega\,i,j} \wedge \mj_{v\,i,j} + \dot{q}_{j}^3 \mj_{\omega\,i,j} \wedge \mj_{\omega\,i,j} \wedge \mj_{v\,i,j} + 3(\ddot{q}_j  \mj_{\omega\,i,j} \wedge \mv_{i,j} + 
-\dot{q}_j^2 \mj_{\omega\,i,j} \wedge \mj_{\omega\,i,j} \wedge \mv_{i,j}  + \dot{q}_j
- \mj_{\omega\,i,j} \wedge \ma_{i,j} ), \; 1 \leq j \leq i \\
+\mzr, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; j = i+1 \\
+\dot{\ma}_{i,j} + \dddot{q}_{j} \mj_{v\,i,j} + (\underaccent{\sim}{\dot{\ma}}_i)_j, \; 1 \leq j \leq i \\
 \end{cases}\, i=1,...,\nu, \, j=i+1,...,1
 \end{equation}
 \begin{equation}
@@ -1328,9 +1333,12 @@ Temos:
 
 Sendo:
 \begin{equation}
-\underaccent{\sim}{\dot{\ma}}_i =\sum_{j=1}^i  3 \dot{q}_{j} \ddot{q}_{j} \mj_{\omega\,i,j} \wedge \mj_{v\,i,j} + \dot{q}_{j}^3 \mj_{\omega\,i,j} \wedge \mj_{\omega\,i,j} \wedge \mj_{v\,i,j} + 3(\ddot{q}_j  \mj_{\omega\,i,j} \wedge \mv_{i,j} + 
+(\underaccent{\sim}{\dot{\ma}}_i)_j = 3 \dot{q}_{j} \ddot{q}_{j} \mj_{\omega\,i,j} \wedge \mj_{v\,i,j} + \dot{q}_{j}^3 \mj_{\omega\,i,j} \wedge \mj_{\omega\,i,j} \wedge \mj_{v\,i,j} + 3(\ddot{q}_j  \mj_{\omega\,i,j} \wedge \mv_{i,j} + 
 \dot{q}_j^2 \mj_{\omega\,i,j} \wedge \mj_{\omega\,i,j} \wedge \mv_{i,j}  + \dot{q}_j
- \mj_{\omega\,i,j} \wedge \ma_{i,j} ) , \; 1 \leq i \leq \nu
+ \mj_{\omega\,i,j} \wedge \ma_{i,j} )
+\end{equation}
+\begin{equation}
+\underaccent{\sim}{\dot{\ma}}_i =\sum_{j=1}^i  (\underaccent{\sim}{\dot{\ma}}_i)_j
 \end{equation}
 
 \item[D2)] Cinemática de sobre-acelerações angulares
@@ -1360,13 +1368,15 @@ Sendo assim, a aceleração angular do efetuador em relação a cada um dos referenc
 %\vzr, \;\;\;\;\;\;\;\;\;\;\;\; i = \nu + 1
 %\end{cases}\, i=1,...,\nu+1
 %\end{equation}
+\small
 \begin{equation}
 \ddot{\vomega}_{\lllB_\nu}^{\lllB_{i-1}} =
 \begin{cases}
-\vzr, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; i = \nu + 1 \\
+\vzr, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; i = \nu + 1 \\
 \ddot{\vomega}_{\lllB_i}^{\lllB_{i-1}}   + \ddot{\vomega}_{\lllB_\nu}^{\lllB_i} +  \dot{\vomega}_{\lllB_i}^{\lllB_{i-1}} \wedge \vomega_{\lllB_\nu}^{\lllB_i} + 2 \vomega_{\lllB_i}^{\lllB_{i-1}} \wedge \dot{\vomega}_{\lllB_\nu}^{\lllB_i} + \vomega_{\lllB_i}^{\lllB_{i-1}} \wedge \vomega_{\lllB_i}^{\lllB_{i-1}} \wedge \vomega_{\lllB_\nu}^{\lllB_i}, \; 1 \leq i \leq \nu \\
 \end{cases}\, i=\nu+1,...,1
 \end{equation}
+\normalsize
 
 
 
@@ -1374,8 +1384,8 @@ Sendo que a sobre-aceleração angular de arrastamento de cada uma das juntas é da
 \begin{equation}
 \ddot{\vomega}_{\lllB_\nu \rl \lllB_{i}}^{\lllB_{i-1}} = 
 \begin{cases}
-\vzr, \;\;\;\;\;\;\;\;\; \text{se a i-ésima junta for prismática} \\
-\dddot{q}_{i} \vk_{i-1}, \; \text{se a i-ésima junta for de revolução}
+\vzr, \;\;\;\;\;\;\; \text{junta prismática} \\
+\dddot{q}_{i} \vk_{i-1}, \; \text{junta rotativa}
 \end{cases}\, i=1,...,\nu
 \end{equation}
 
@@ -1394,8 +1404,8 @@ Temos que:
 \begin{equation}
 \ddot{\momega}_{i-1} =
 \begin{cases}
-\mzr, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; i = \nu + 1 \\
-\ddot{\momega}_i + \dddot{q}_{i} \mj_{\omega\,i} + \ddot{q}_i \mj_{\omega\,i} \wedge \momega_i + 2 \dot{q}_i \mj_{\omega\,i} \wedge \dot{\momega}_i + \dot{q}_i ^2 \mj_{\omega\,i} \wedge \mj_{\omega\,i} \wedge \momega_i , \; 1 \leq i \leq \nu \\
+\mzr, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; i = \nu + 1 \\
+\ddot{\momega}_i + \dddot{q}_{i} \mj_{\omega\,i} + (\underaccent{\sim}{\ddot{\momega}})_i , \; 1 \leq i \leq \nu \\
 \end{cases}\, i=\nu+1,...,1
 \end{equation}
 \begin{equation}
@@ -1404,7 +1414,10 @@ Temos que:
 
 Sendo:
 \begin{equation}
-\underaccent{\sim}{\ddot{\momega}} = \sum_{i=1}^\nu \ddot{q}_i \mj_{\omega\,i} \wedge \momega_i + 2 \dot{q}_i \mj_{\omega\,i} \wedge \dot{\momega}_i + \dot{q}_i ^2 \mj_{\omega\,i} \wedge \mj_{\omega\,i} \wedge \momega_i 
+(\underaccent{\sim}{\ddot{\momega}})_i = \ddot{q}_i \mj_{\omega\,i} \wedge \momega_i + 2 \dot{q}_i \mj_{\omega\,i} \wedge \dot{\momega}_i + \dot{q}_i ^2 \mj_{\omega\,i} \wedge \mj_{\omega\,i} \wedge \momega_i
+\end{equation}
+\begin{equation}
+\underaccent{\sim}{\ddot{\momega}} = \sum_{i=1}^\nu (\underaccent{\sim}{\ddot{\momega}})_i
 \end{equation}
 
 Para obter as sobre-acelerações angulares dos centros de massa dos ligamentos, seguimos a mesma linha de raciocínio e obtemos os seguintes resultados:
@@ -1418,23 +1431,23 @@ Definindo:
 \end{equation}
 
 Temos:
-\scriptsize
 \begin{equation}
 \ddot{\momega}_{i,j-1} =
 \begin{cases}
-\mzr, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; j = i+1 \\
-\ddot{\momega}_{i,j} + \dddot{q}_{j} \mj_{\omega\,i,j} + \ddot{q}_j \mj_{\omega\,i,j} \wedge \momega_{i,j} + 2 \dot{q}_j \mj_{\omega\,i,j} \wedge \dot{\momega}_{i,j} + \dot{q}_j ^2 \mj_{\omega\,i,j} \wedge \mj_{\omega\,i,j} \wedge \momega_{i,j}, \; 1 \leq j \leq i \\
+\mzr, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; j = i+1 \\
+\ddot{\momega}_{i,j} + \dddot{q}_{j} \mj_{\omega\,i,j} + (\underaccent{\sim}{\ddot{\momega}}_i)_j, \; 1 \leq j \leq i \\
 \end{cases}\, i=1,...,\nu, \, \\ j=i+1,...,1
 \end{equation}
-\normalsize
 \begin{equation}
-\ddot{\momega}_i^\star(\mq,\dot{\mq},\ddot{\mq},\dddot{\mq}) = \mJ_{\omega\,i} (\mq) \cdot \dddot{\mq} + \underaccent{\sim}{\ddot{\momega}}_i (\mq,\dot{\mq},\ddot{\mq}) , \; 1 \leq i \leq \nu
+\ddot{\momega}_i^\star(\mq,\dot{\mq},\ddot{\mq},\dddot{\mq}) = \mJ_{\omega\,i} (\mq) \cdot \dddot{\mq} + \underaccent{\sim}{\ddot{\momega}}_i (\mq,\dot{\mq},\ddot{\mq})
 \end{equation}
 
 Sendo:
-
 \begin{equation}
-\underaccent{\sim}{\ddot{\momega}}_i = \sum_{j=1}^i  \ddot{q}_j \mj_{\omega\,i,j} \wedge \momega_{i,j} + 2 \dot{q}_j \mj_{\omega\,i,j} \wedge \dot{\momega}_{i,j} + \dot{q}_j ^2 \mj_{\omega\,i,j} \wedge \mj_{\omega\,i,j} \wedge \momega_{i,j} , \; 1 \leq i \leq \nu
+(\underaccent{\sim}{\ddot{\momega}}_i)_j =  \ddot{q}_j \mj_{\omega\,i,j} \wedge \momega_{i,j} + 2 \dot{q}_j \mj_{\omega\,i,j} \wedge \dot{\momega}_{i,j} + \dot{q}_j ^2 \mj_{\omega\,i,j} \wedge \mj_{\omega\,i,j} \wedge \momega_{i,j}
+\end{equation}
+\begin{equation}
+\underaccent{\sim}{\ddot{\momega}}_i = \sum_{j=1}^i  (\underaccent{\sim}{\ddot{\momega}}_i)_j
 \end{equation}
 
 
