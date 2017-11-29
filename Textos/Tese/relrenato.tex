@@ -612,7 +612,8 @@ Seja $\ssB$ um sistema mecânico serial de $\nu$ graus de liberdade. Primeirament
 %\item $\vv_i, \,i=1,...,\nu$: vetor velocidade linear absoluta do centro de massa de $\llB_i$.
 %\item $\va_i, \,i=1,...,\nu$: vetor acelera\c{c}\~ao linear absoluta do centro de $\llB_i$.
 \item $m_i$: massa da barra $\llB_i$.
-\item $\vI_i$: tensor de in\'ercia da barra $\llB_i$ em relação a seu centro de massa.
+\item $\vI_{\ttg_i}$: tensor de in\'ercia da barra $\llB_i$ em relação a seu centro de massa.
+\item $\mI_i$: tensor de in\'ercia $\vI_{\ttg_i}$ escrito na base $\ttN$, ou seja, $\vct{\vI_{\ttg_i}}_{\ttN \rl \ttN}$.
 \item $q_i, \,i=1,...,\nu$: deslocamento relativo (angular ou linear) da i-ésima junta.
 \item  $\mq$: matriz-coluna de $\nu$ coordenadas generalizadas independentes. É dada por $\mq = \begin{bmatrix}
 q_1 & ... & {q}_{\nu}
@@ -1041,7 +1042,7 @@ Temos:
 \end{cases}\, i=1,...,\nu, \, j=i+1,...,1
 \end{equation}
 \begin{equation}
-\ma^\star_i (\mq,\dot{\mq},\ddot{\mq}) = \mJ_{v\,i}(\mq) \cdot \ddot{\mq} + \underaccent{\sim}{\ma}_i (\mq,\dot{\mq}) , \; 1 \leq i \leq \nu
+\ma^\star_i (\mq,\dot{\mq},\ddot{\mq}) = \mJ_{v\,i}(\mq) \cdot \ddot{\mq} + \underaccent{\sim}{\ma}_i (\mq,\dot{\mq})
 \end{equation}
 
 Sendo:
@@ -1049,7 +1050,7 @@ Sendo:
 (\underaccent{\sim}{\ma}_i)_j =  \dot{\mj}_{v\,i,j} \dot{q}_{j}
 \end{equation}
 \begin{equation}
-\underaccent{\sim}{\ma}_i (\mq, \dot{\mq}) = \sum_{j=1}^i \dot{\mj}_{v\,i,j} \dot{q}_{j} = \dot{\mJ}_{v\,i} (\mq, \dot{\mq})  \cdot \dot{\mq}
+\underaccent{\sim}{\ma}_i (\mq, \dot{\mq}) = \sum_{j=1}^i (\underaccent{\sim}{\ma}_i)_j  = \dot{\mJ}_{v\,i} (\mq, \dot{\mq})  \cdot \dot{\mq}
 \end{equation}
 \begin{equation} \label{eq:dJvi_}
 \dot{\mJ}_{v\,i}(\mq, \dot{\mq}) = \begin{bmatrix}
@@ -1180,11 +1181,11 @@ Temos:
 \dot{\momega}_{i,j-1} =
 \begin{cases}
 \mzr, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; j = i+1 \\
-\dot{\momega}_{i,j} + \ddot{q}_{j} \mj_{\omega\,i,j} + (\underaccent{\sim}{\dot{\momega}}_i)_j, \; 1 \leq j \leq i \\
+\dot{\momega}_{i,j} + \mj_{\omega\,i,j} \ddot{q}_{j}  + (\underaccent{\sim}{\dot{\momega}}_i)_j, \; 1 \leq j \leq i \\
 \end{cases}\, i=1,...,\nu, \, j=i+1,...,1
 \end{equation}
 \begin{equation}
-\dot{\momega}^\star_i (\mq,\dot{\mq},\ddot{\mq}) = \mJ_{\omega\,i} (\mq) \cdot \ddot{\mq} + \underaccent{\sim}{\dot{\momega}}_i (\mq,\dot{\mq})  , \; 1 \leq i \leq \nu
+\dot{\momega}^\star_i (\mq,\dot{\mq},\ddot{\mq}) = \mJ_{\omega\,i} (\mq) \cdot \ddot{\mq} + \underaccent{\sim}{\dot{\momega}}_i (\mq,\dot{\mq})
 \end{equation}
 
 Sendo:
@@ -1457,17 +1458,17 @@ Sendo:
 
 O modelo dinâmico de $\ssB$ é obtido utilizando o método Orsino de acoplamento de subsistemas \cite{23orsino}, e é dado por:
 \begin{equation} \label{eq:ModeloMecSerial}
-\mM(\mq) \ddot{\mq} + \mv(\mq,\dot{\mq}) + \mg(\mq) = \mu
+\mM(\mq) \ddot{\mq} + \mnu(\mq,\dot{\mq}) + \mg(\mq) = \mu
 \end{equation}
 
 Sendo:
 \begin{equation} \label{eq:MSerial}
 \mM(\mq) = \sum_{i=1}^\nu
-m_i \mJ_{v\,i}^\msT \mJ_{v\,i} + \mJ_{w\,i}^\msT \vct{\vI_i}_{\ttB_i \rl \ttB_i} \mJ_{w\,i}
+m_i \mJ_{v\,i}^\msT \mJ_{v\,i} + \mJ_{\omega\,i}^\msT \mI_i \mJ_{\omega\,i}
 \end{equation}
 \begin{equation} \label{eq:vSerial}
-\mv(\mq, \dot{\mq}) = \sum_{i=1}^\nu
- m_i \mJ_{v\,i}^\msT \ma_i + \mJ_{w\,i}^\msT\{\vct{\vI_i}_{\ttB_i \rl \ttB_i} \dot{\mw}_i + (\mJ_{w\,i} \dot{\mq}) \wedge (\vct{\vI_i}_{\ttB_i \rl \ttB_i}  \mJ_{w\,i} \dot{\mq}) \}
+\mnu(\mq, \dot{\mq}) = \sum_{i=1}^\nu
+ m_i \mJ_{v\,i}^\msT \underaccent{\sim}{\ma}_i + \mJ_{\omega\,i}^\msT \big( \mI_i \underaccent{\sim}{\dot{\momega}}_i + \momega^\star_i \wedge (\mI_i  \momega^\star_i) \big)
 \end{equation}
 \begin{equation} \label{eq:gSerial}
 \mg(\mq) = - \sum_{i=1}^\nu m_i \mJ_{v\,i} \vct{\vg}_{\ttN}
@@ -1484,26 +1485,26 @@ O modelo dinâmico desacoplado de cada ligamento pode ser obtido facilmente por N
 
 \begin{equation} \label{eq:Newton-Euler}
 \begin{cases}
-m_i \va_i - m_i \vg = \vzr \\
-\vI_i \cdot \dot{\vomega}_i + \vomega_i \wedge (\vI_i \cdot \vomega_i) = \vzr
+m_i \va^{\lllN}_{\ttg_i} - m_i \vg = \vf_{r\,i} \\
+\vI_{\ttg_i} \cdot \dot{\vomega}^{\lllN}_{\lllB_i} + \vomega^{\lllN}_{\lllB_i} \wedge (\vI_{\ttg_i} \cdot \vomega^{\lllN}_{\lllB_i}) = \vtau_{r\,i}
 \end{cases} \, i = 1,...,\nu
 \end{equation}
 
-Aplicando a primeira equação vetorial no sistema $\ttN$ e a segunda no sistema $\ttB_i$, temos:
+Aplicando as equações vetoriais no sistema $\ttN$, temos:
 \begin{equation} \label{eq:Newton-EulerMat}
 \begin{bmatrix}
 m_i \mone & \mzr \\
-\mzr      & \vct{\vI_i}_{\ttB_i \rl \ttB_i}
+\mzr      & \vct{\vI_{\ttg_i}}_{\ttN \rl \ttN}
 \end{bmatrix}
 \cdot
 \begin{bmatrix}
-\vct{\va_i}_{\ttN} \\
-\vct{\dot{\vomega}_i}_{\ttB_i}
+\vct{\va^{\lllN}_{\ttg_i}}_{\ttN}  \\
+\vct{\dot{\vomega}^{\lllN}_{\lllB_i}}_{\ttN}
 \end{bmatrix}
 +
 \begin{bmatrix}
 \mzr \\
-\vct{\vomega_i}_{\ttB_i} \wedge (\vct{\vI_i}_{\ttB_i \rl \ttB_i} \cdot \vct{\vomega_i}_{\ttB_i})
+\vct{\vomega^{\lllN}_{\lllB_i}}_{\ttN} \wedge (\vct{\vI_{\ttg_i}}_{\ttN \rl \ttN} \cdot \vct{\vomega^{\lllN}_{\lllB_i}}_{\ttN})
 \end{bmatrix}
 +
 \begin{bmatrix}
@@ -1511,38 +1512,66 @@ m_i \mone & \mzr \\
 \mzr
 \end{bmatrix}
 =
-\mzr, \, i = 1,...,\nu
+\begin{bmatrix}
+\vct{\vf_{r\,i}}_\ttN \\
+\vct{\vtau_{r\,i}}_\ttN
+\end{bmatrix}
+\end{equation}
+
+Ou seja:
+\begin{equation} \label{eq:Newton-EulerMat2}
+\begin{bmatrix}
+m_i \mone & \mzr \\
+\mzr      & \mI_i
+\end{bmatrix}
+\cdot
+\begin{bmatrix}
+\ma^\star_i  \\
+\dot{\momega}^\star_i
+\end{bmatrix}
++
+\begin{bmatrix}
+\mzr \\
+\momega^\star_i \wedge (\mI_i \cdot \momega^\star_i)
+\end{bmatrix}
++
+\begin{bmatrix}
+-m_i \vct{\vg}_{\ttN} \\
+\mzr
+\end{bmatrix}
+=
+\mf_{r\,i}
 \end{equation}
 
 Definindo:
 \begin{equation} \label{eq:M_i}
-\mM_i = \begin{bmatrix}
+\mM_i (\mq) = \begin{bmatrix}
 m_i \mone & \mzr \\
-\mzr      & \vct{\vI_i}_{\ttB_i \rl \ttB_i}
-\end{bmatrix}, \, i = 1,...,\nu
+\mzr      & \mI_i(\mq)
+\end{bmatrix}
 \end{equation}
 \begin{equation} \label{eq:v_i}
-\mv_i (\mp_i) = \begin{bmatrix}
+\mnu_i (\mq, \mp_i) = \begin{bmatrix}
 \mzr \\
-\vct{\vomega_i}_{\ttB_i} \wedge (\vct{\vI_i}_{\ttB_i \rl \ttB_i} \cdot \vct{\vomega_i}_{\ttB_i})
-\end{bmatrix}, \, i = 1,...,\nu
+\momega^\star_i \wedge (\mI_i(\mq) \cdot \momega^\star_i)
+\end{bmatrix}
 \end{equation}
 \begin{equation} \label{eq:g_i}
 \mg_i = \begin{bmatrix}
 -m_i \vct{\vg}_{\ttN} \\
 \mzr
-\end{bmatrix}, \, i = 1,...,\nu
+\end{bmatrix}
 \end{equation}
 \begin{equation} \label{eq:p_i}
 \mp_i = \begin{bmatrix}
-\vct{\vv_i}_{\ttN} \\
-\vct{\vomega_i}_{\ttB_i}
-\end{bmatrix}, \, i = 1,...,\nu
+\mv^\star_i  \\
+\momega^\star_i
+\end{bmatrix} , \, i = 1,...,\nu
 \end{equation}
 
 \eqref{eq:Newton-EulerMat} pode ser reescrita como:
 \begin{equation}
-\mM_i \cdot \dot{\mp}_i + \mv_i(\mp_i) + \mg_i = \mzr, \, i = 1,...,\nu
+\mM_i(\mq) \cdot \dot{\mp}_i + \mnu_i(\mq, \mp_i) + \mg_i = \mzr
 \end{equation}
 
 Seja $\mf_i$ o sistema de forças ativas  (considerando os esforços de inércia) aplicado no i-ésimo subsistema, na direção das quasi-velocidades $\mp_i$. $\mf_i$ pode ser obtido pela seguinte expressão:
