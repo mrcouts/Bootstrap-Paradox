@@ -618,6 +618,8 @@ Seja $\ssB$ um sistema mecânico serial de $\nu$ graus de liberdade. Primeirament
 \item  $\mq$: matriz-coluna de $\nu$ coordenadas generalizadas independentes. É dada por $\mq = \begin{bmatrix}
 q_1 & ... & {q}_{\nu}
 \end{bmatrix}^\msT $.
+\item $\vg$: Vetor aceleração gravitacional.
+\item $\mgamma$: Vetor aceleração gravitacional escrito na base $\ttN$, ou seja, $\vct{\vg}_{\ttN}$.
 \end{itemize}
 
 \begin{itemize}
@@ -1471,7 +1473,7 @@ m_i \mJ_{v\,i}^\msT \mJ_{v\,i} + \mJ_{\omega\,i}^\msT \mI_i \mJ_{\omega\,i}
  m_i \mJ_{v\,i}^\msT \underaccent{\sim}{\ma}_i + \mJ_{\omega\,i}^\msT \big( \mI_i \underaccent{\sim}{\dot{\momega}}_i + \momega^\star_i \wedge (\mI_i  \momega^\star_i) \big)
 \end{equation}
 \begin{equation} \label{eq:gSerial}
-\mg(\mq) = - \sum_{i=1}^\nu m_i \mJ_{v\,i} \vct{\vg}_{\ttN}
+\mg(\mq) = - \sum_{i=1}^\nu m_i \mJ_{v\,i}^\msT \mgamma
 \end{equation}
 
 Segue abaixo, a dedução.
@@ -1481,7 +1483,7 @@ Segue abaixo, a dedução.
 
 \item[i)] Modelo dos subsistemas \\
 
-O modelo dinâmico desacoplado de cada ligamento pode ser obtido facilmente por Newton-Euler, pois são considerados como corpos rígidos livres no espaço, sujeitos apenas à força peso. Sendo assim, aplicando o Teorema do Movimentos do Baricentro e o Teorema do Momento Angular para cada ligamento, temos:
+O modelo dinâmico de cada ligamento pode ser obtido por Newton-Euler, pois são considerados como corpos rígidos, sujeitos apenas à força peso e aos esforços reativos vinculares. Sendo assim, aplicando o Teorema do Movimento do Baricentro e o Teorema do Momento Angular para cada ligamento, temos:
 
 \begin{equation} \label{eq:Newton-Euler}
 \begin{cases}
@@ -1536,7 +1538,7 @@ m_i \mone & \mzr \\
 \end{bmatrix}
 +
 \begin{bmatrix}
--m_i \vct{\vg}_{\ttN} \\
+-m_i \mgamma \\
 \mzr
 \end{bmatrix}
 =
@@ -1558,7 +1560,7 @@ m_i \mone & \mzr \\
 \end{equation}
 \begin{equation} \label{eq:g_i}
 \mg_i = \begin{bmatrix}
--m_i \vct{\vg}_{\ttN} \\
+-m_i \mgamma \\
 \mzr
 \end{bmatrix}
 \end{equation}
@@ -1566,35 +1568,46 @@ m_i \mone & \mzr \\
 \mp_i = \begin{bmatrix}
 \mv^\star_i  \\
 \momega^\star_i
-\end{bmatrix} , \, i = 1,...,\nu
+\end{bmatrix}
 \end{equation}
 
 \eqref{eq:Newton-EulerMat} pode ser reescrita como:
 \begin{equation}
-\mM_i(\mq) \cdot \dot{\mp}_i + \mnu_i(\mq, \mp_i) + \mg_i = \mzr
+\mM_i(\mq) \cdot \dot{\mp}_i + \mnu_i(\mq, \mp_i) + \mg_i = \mf_{r\,i}
 \end{equation}
 
 Seja $\mf_i$ o sistema de forças ativas  (considerando os esforços de inércia) aplicado no i-ésimo subsistema, na direção das quasi-velocidades $\mp_i$. $\mf_i$ pode ser obtido pela seguinte expressão:
 %Sendo assim, os sistemas de forças (considerando esforços ativos e de inércia) aplicados em cada subsistema são dados por:
 \begin{equation}
-\overline{\mf}_i(\mp_i, \dot{\mp}_i)  = - (\mM_i \cdot \dot{\mp}_i + \mv_i(\mp_i) + \mg_i), \, i = 1,...,\nu
+\mf_i(\mq, \mp_i, \dot{\mp}_i)  = - (\mM_i (\mq) \cdot \dot{\mp}_i + \mv_i(\mp_i) + \mg_i), \, i = 1,...,\nu
 \end{equation}
 
 Portanto, o modelo dinâmico de cada subsistema pode ser escrito como:
 \begin{equation}
-\overline{\mf}_i(\mp_i, \dot{\mp}_i) = \mzr, \, i = 1,...,\nu
+\mf_i + \mf_{r\,i} = \mzr, \, i = 1,...,\nu
 \end{equation}
+
+%No caso de os subsistemas estarem desacoplados, temos que $\mf_{r\,i} = \mzr$.
 
 \item[ii)] Sistemas de forças ativas generalizadas e quasi-velocidades adicionais \\
 
-Muitas vezes é conveniente definir um conjunto de quasi-velocidades adicionais $\mp_0$, as quais só fazem sentido para o sistema acoplado, e sistemas de forças ativas generalizadas adicionais $\mf_0$ aplicados na direção das quasi-velocidades adicionais. \\
+Considere também um sistema constituido pelos esforços que os atuadores aplicam nas juntas do mecanismo. Primeiramente, definimos o vetor de quasi-velocidades relativas a esse subsistema:
+%Muitas vezes é conveniente definir um conjunto de quasi-velocidades adicionais $\mp_0$, as quais só fazem sentido para o sistema acoplado, e sistemas de forças ativas generalizadas adicionais $\mf_0$ aplicados na direção das quasi-velocidades adicionais. \\
 
-Neste algoritmo de modelagem, serão considerados como quasi-velocidades adicionais as derivadas temporais das coordenadas das juntas, ou seja:
+%Neste algoritmo de modelagem, serão considerados como quasi-velocidades adicionais as derivadas temporais das coordenadas das juntas, ou seja:
+
+
 \begin{equation} \label{eq:mp_0}
 \mp_0 = \dot{\mq}
 \end{equation}
 
-Nesse caso, os sistemas de forças ativas generalizadas adicionais serão os esforços que os atuadores aplicam nas juntas, ou seja:
+Seja $\mu$ o vetor de esforços aplicadas pelos atuadores na direção de $\mp_0$. Sendo assim, o modelo dinâmico deste subsistema é dado por:
+
+\begin{equation}
+\mf_0 + \mf_{r\,0} = \mzr
+\end{equation}
+
+Sendo:
 \begin{equation}
 \mf_0 = \mu
 \end{equation}
