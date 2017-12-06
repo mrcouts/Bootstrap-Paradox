@@ -1646,8 +1646,18 @@ Sendo:
 
 Sendo assim, as vínculos de quasi-velocidades entre subsistemas podem ser expressos como:
 \begin{equation} \label{eq:VinculosV_seriais}
-\overline{\mp}(\mq,\mp) = \mJ(\mq) \mp_0 - \mp\cir = \mzr
+\overline{\mp}(\mq,\mp) = \mA(\mq) \cdot \mp = \mzr
 \end{equation}
+
+Sendo:
+\begin{equation}
+\mA(\mq)  = \begin{bmatrix}
+\mJ(\mq) & -\mone
+\end{bmatrix}
+\end{equation}
+%\frac{\partial \overline{\mp}}{\partial \mp}
+
+\newpage
 
 \item[iv)] Acoplamento de subsistemas
 
@@ -1665,33 +1675,30 @@ Seja também $\mf_r$ a matriz-coluna contendo todos os sistemas de forças reativa
 \end{bmatrix}^\msT
 \end{equation}
 
-Sendo assim, as equações dinâmicas de todos os subsistemas são dadas por:
+Assim, as equações dinâmicas de todos os subsistemas são dadas por:
 \begin{equation} \label{eq:eq_dinamicas_1}
 \mf + \mf_r = \mzr
 \end{equation}
 
-Pelo postulado da mecânica analítica [?], que temos as potências virtuais das forças reativas são nulas, e consequentemente as forças reativas são normais aos movimentos permitidos pelos vínculos, ou seja:
-
-\begin{equation}
-\mf_r^\msT \cdot \delta \mp = 0
+Seja $\delta \mpi$ o seguinte conjunto de quasi-coordenadas:
+\begin{equation} \label{eq:quasi-coord}
+\delta \mpi = \delta \mp \, \dd t
 \end{equation}
 
-Os deslocamentos virtuais $\delta\mp$ devem respeitar \eqref{eq:VinculosV_seriais}, ou seja:
+Pelo postulado da mecânica analítica [?], temos que o trabalho virtual das forças reativas é nulo, e consequentemente as forças reativas são normais aos movimentos permitidos pelos vínculos, ou seja:
 \begin{equation}
-\overline{\mp} = \mA \cdot \mp = \mzr
-\end{equation}
-\begin{equation}
-\delta \overline{\mp} = \mA \cdot \delta \mp = \mzr
+\mf_r^\msT \cdot \delta \mpi = 0
 \end{equation}
 
-Sendo:
+
+Além disso, a partir da definição de $\delta \mpi$ \eqref{eq:quasi-coord} e dos vínculos de quasi-velocidades \eqref{eq:VinculosV_seriais}, temos que as quasi-coordenadas $\delta\mpi$ devem respeitar a seguinte relação:
 \begin{equation}
-\mA(\mq) = \frac{\partial \overline{\mp}}{\partial \mp} = \begin{bmatrix}
-\mJ(\mq) & -\mone
-\end{bmatrix}
+ \mA(\mq) \cdot \delta \mpi = \mzr
 \end{equation}
 
-Assim, para que $\mf_r$ respeite o postulado, $\mf_r^\msT$ deve ser combinação linear das linhas de $\mA$, ou seja, $\mf_r$ está contida na imagem de $\mA^\msT$:
+
+
+Assim, para que $\mf_r$ respeite o postulado, $\mf_r$ deve ser combinação linear das colunas de $\mA$, ou seja, $\mf_r$ está contida na imagem de $\mA^\msT$:
 \begin{equation}
 \mf_r = \mA^\msT \mlambda
 \end{equation}
@@ -1711,7 +1718,7 @@ Sendo assim, pré-multiplicando \eqref{eq:eq_dinamicas_2} à esquerda por $\mC^\ms
 \mC^\msT \mf = \mzr
 \end{equation}
 
-Esta operação é equivalente a projetar as equações dinâmicas no núcleo de $\mA$, o que elimina os multiplicadores de Lagrange, pois o núcleo de $\mA$ é complemento ortogonal da imagem de $\mA^\msT$.
+Esta operação é equivalente a projetar as equações dinâmicas no núcleo de $\mA$, o que elimina os multiplicadores de Lagrange $\mlambda$, visto que o núcleo de $\mA$ é complemento ortogonal da imagem de $\mA^\msT$.
 
 Para encontrar o núcleo de $\mA$, precisamos resolver o seguinte sistema linear homogêneo:
 \begin{equation}
