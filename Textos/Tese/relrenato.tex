@@ -1680,9 +1680,9 @@ Assim, as equações dinâmicas de todos os subsistemas são dadas por:
 \mf + \mf_r = \mzr
 \end{equation}
 
-Seja $\delta \mpi$ o seguinte conjunto de quasi-coordenadas:
+Seja $\mpi$ um conjunto de de quasi-coordenadas tal que:
 \begin{equation} \label{eq:quasi-coord}
-\delta \mpi = \delta \mp \, \dd t
+\frac{\dd \mpi}{\dd t} = \mp
 \end{equation}
 
 Pelo postulado da mecânica analítica [?], temos que o trabalho virtual das forças reativas é nulo, e consequentemente as forças reativas são normais aos movimentos permitidos pelos vínculos, ou seja:
@@ -1691,14 +1691,14 @@ Pelo postulado da mecânica analítica [?], temos que o trabalho virtual das força
 \end{equation}
 
 
-Além disso, a partir da definição de $\delta \mpi$ \eqref{eq:quasi-coord} e dos vínculos de quasi-velocidades \eqref{eq:VinculosV_seriais}, temos que as quasi-coordenadas $\delta\mpi$ devem respeitar a seguinte relação:
+Além disso, a partir da definição de $\mpi$ \eqref{eq:quasi-coord} e dos vínculos de quasi-velocidades \eqref{eq:VinculosV_seriais}, temos que as quasi-coordenadas $\mpi$ devem respeitar a seguinte relação:
 \begin{equation}
  \mA(\mq) \cdot \delta \mpi = \mzr
 \end{equation}
 
 
 
-Assim, para que $\mf_r$ respeite o postulado, $\mf_r$ deve ser combinação linear das colunas de $\mA$, ou seja, $\mf_r$ está contida na imagem de $\mA^\msT$:
+Assim, para que $\mf_r$ respeite o postulado, $\mf_r^\msT$ deve ser combinação linear das linhas de $\mA$, ou seja, $\mf_r$ está contida na imagem de $\mA^\msT$:
 \begin{equation}
 \mf_r = \mA^\msT \mlambda
 \end{equation}
