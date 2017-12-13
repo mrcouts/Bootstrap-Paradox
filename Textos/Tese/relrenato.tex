@@ -782,7 +782,7 @@ Temos:
 \mv_{i,j} + \mj_{v\,i,j} \dot{q}_{j}, \; 1 \leq j \leq i \\
 \end{cases}\, i=1,...,\nu, \, j=i+1,...,1
 \end{equation}
-\begin{equation}
+\begin{equation} \label{eq:v_star_i}
 \mv^\star_i(\mq, \dot{\mq}) = \mJ_{v\,i}(\mq) \cdot \dot{\mq}
 \end{equation}
 
@@ -905,7 +905,7 @@ Temos:
 \momega_{i,j} + \mj_{\omega\,i,j} \dot{q}_{j}, \; 1 \leq j \leq i \\
 \end{cases}\, i=1,...,\nu, \, j=i+1,...,1
 \end{equation}
-\begin{equation}
+\begin{equation} \label{eq:omega_star_i}
 \momega^\star_i (\mq, \dot{\mq}) = \mJ_{\omega\,i}(\mq) \cdot \dot{\mq}
 \end{equation}
 
@@ -1043,7 +1043,7 @@ Temos:
 \ma_{i,j} + \mj_{v\,i,j} \ddot{q}_{j} + (\underaccent{\sim}{\ma}_i)_j, \; 1 \leq j \leq i \\
 \end{cases}\, i=1,...,\nu, \, j=i+1,...,1
 \end{equation}
-\begin{equation}
+\begin{equation} \label{eq:a_star_i}
 \ma^\star_i (\mq,\dot{\mq},\ddot{\mq}) = \mJ_{v\,i}(\mq) \cdot \ddot{\mq} + \underaccent{\sim}{\ma}_i (\mq,\dot{\mq})
 \end{equation}
 
@@ -1186,7 +1186,7 @@ Temos:
 \dot{\momega}_{i,j} + \mj_{\omega\,i,j} \ddot{q}_{j}  + (\underaccent{\sim}{\dot{\momega}}_i)_j, \; 1 \leq j \leq i \\
 \end{cases}\, i=1,...,\nu, \, j=i+1,...,1
 \end{equation}
-\begin{equation}
+\begin{equation} \label{eq:domega_star_i}
 \dot{\momega}^\star_i (\mq,\dot{\mq},\ddot{\mq}) = \mJ_{\omega\,i} (\mq) \cdot \ddot{\mq} + \underaccent{\sim}{\dot{\momega}}_i (\mq,\dot{\mq})
 \end{equation}
 
@@ -1402,13 +1402,13 @@ Fazendo as seguintes definições:
 
 Temos que:
 \begin{equation}
-\vct{\ddot{\vomega}_{\lllB_{i}}^{\lllB_{i-1}} }_{\ttN} = \dddot{q}_{i} \mj_{\omega\,i} , \; i=1,...,\nu
+\vct{\ddot{\vomega}_{\lllB_{i}}^{\lllB_{i-1}} }_{\ttN} = \mj_{\omega\,i} \dddot{q}_{i} , \; i=1,...,\nu
 \end{equation}
 \begin{equation}
 \ddot{\momega}_{i-1} =
 \begin{cases}
 \mzr, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; i = \nu + 1 \\
-\ddot{\momega}_i + \dddot{q}_{i} \mj_{\omega\,i} + (\underaccent{\sim}{\ddot{\momega}})_i , \; 1 \leq i \leq \nu \\
+\ddot{\momega}_i +  \mj_{\omega\,i} \dddot{q}_{i} + (\underaccent{\sim}{\ddot{\momega}})_i , \; 1 \leq i \leq \nu \\
 \end{cases}\, i=\nu+1,...,1
 \end{equation}
 \begin{equation}
@@ -1438,7 +1438,7 @@ Temos:
 \ddot{\momega}_{i,j-1} =
 \begin{cases}
 \mzr, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; j = i+1 \\
-\ddot{\momega}_{i,j} + \dddot{q}_{j} \mj_{\omega\,i,j} + (\underaccent{\sim}{\ddot{\momega}}_i)_j, \; 1 \leq j \leq i \\
+\ddot{\momega}_{i,j} + \mj_{\omega\,i,j} \dddot{q}_{j} + (\underaccent{\sim}{\ddot{\momega}}_i)_j, \; 1 \leq j \leq i \\
 \end{cases}\, i=1,...,\nu, \, \\ j=i+1,...,1
 \end{equation}
 \begin{equation}
@@ -1483,7 +1483,7 @@ Segue abaixo, a dedução.
 
 \item[i)] Modelo dos subsistemas \\
 
-O modelo dinâmico de cada ligamento pode ser obtido por Newton-Euler, pois são considerados como corpos rígidos, sujeitos apenas à força peso e aos esforços reativos vinculares. Sendo assim, aplicando o Teorema do Movimento do Baricentro e o Teorema do Momento Angular para cada ligamento, temos:
+O modelo dinâmico de cada ligamento pode ser obtido por Newton-Euler, pois são considerados como corpos rígidos sujeitos apenas à força peso e aos esforços reativos vinculares. Sendo assim, aplicando o Teorema do Movimento do Baricentro e o Teorema do Momento Angular para cada ligamento, temos:
 
 \begin{equation} \label{eq:Newton-Euler}
 \begin{cases}
@@ -1571,7 +1571,7 @@ m_i \mone & \mzr \\
 \end{bmatrix}
 \end{equation}
 
-\eqref{eq:Newton-EulerMat} pode ser reescrita como:
+\eqref{eq:Newton-EulerMat2} pode ser reescrita como:
 \begin{equation}
 \mM_i(\mq) \cdot \dot{\mp}_i + \mnu_i(\mq, \mp_i) + \mg_i = \mf_{r\,i}
 \end{equation}
@@ -1591,7 +1591,7 @@ Portanto, o modelo dinâmico de cada subsistema pode ser escrito como:
 
 \item[ii)] Sistemas de forças ativas generalizadas e quasi-velocidades adicionais \\
 
-Considere também um sistema constituido pelos esforços que os atuadores aplicam nas juntas do mecanismo, e pelos seus respectivos esforços reativos. Primeiramente, definimos a matriz-coluna de quasi-velocidades relativas a esse subsistema:
+Considere também um sistema constituido pelos esforços que os atuadores aplicam nas juntas do mecanismo, e pelos seus respectivos esforços reativos. Primeiramente, definimos a matriz-coluna de quasi-velocidades relativas a esse subsistema (quasi-velocidades adicionais):
 %Muitas vezes é conveniente definir um conjunto de quasi-velocidades adicionais $\mp_0$, as quais só fazem sentido para o sistema acoplado, e sistemas de forças ativas generalizadas adicionais $\mf_0$ aplicados na direção das quasi-velocidades adicionais. \\
 
 %Neste algoritmo de modelagem, serão considerados como quasi-velocidades adicionais as derivadas temporais das coordenadas das juntas, ou seja:
@@ -1601,7 +1601,7 @@ Considere também um sistema constituido pelos esforços que os atuadores aplicam 
 \mp_0 = \dot{\mq}
 \end{equation}
 
-Seja $\mu$ a matriz-coluna de esforços generalizados aplicadas pelos atuadores na direção de $\mp_0$ (ou seja, a potência virtual de $\mu$ é dada por $ \delta P = \mu^\msT \cdot \delta \mp_0 $ ). Sendo assim, o modelo dinâmico deste subsistema é dado por:
+Seja $\mu$ a matriz-coluna de esforços generalizados aplicadas pelos atuadores na direção de $\dot{\mq}$ (ou seja, o trabalho virtual de $\mu$ é dado por $ \delta W_{\mu} = \mu^\msT \cdot \delta \mq $ ). Sendo assim, o modelo dinâmico deste subsistema é dado por:
 
 \begin{equation}
 \mf_0 + \mf_{r\,0} = \mzr
@@ -1614,7 +1614,7 @@ Sendo:
 
 \item[iii)] Vínculos cinemáticos entre subsistemas
 
-Através das equações \eqref{eq:vi_q_}, \eqref{eq:wi_Bi} e \eqref{eq:mp_0}, é possível relacionar as quasi-velocidades de cada subsistema com as quasi-velocidades adicionais da seguinte maneira:
+Através das equações \eqref{eq:v_star_i}, \eqref{eq:omega_star_i} e \eqref{eq:mp_0}, é possível relacionar as quasi-velocidades de cada subsistema com as quasi-velocidades adicionais da seguinte maneira:
 \begin{equation}
 \underline{\mp_i}(\mq, \mp_0) = \mJ_i (\mq) \cdot \mp_0, \, i=1,...,\nu
 \end{equation}
@@ -1687,11 +1687,11 @@ Seja $\mpi$ um conjunto de de quasi-coordenadas tal que:
 
 Pelo postulado da mecânica analítica [?], temos que o trabalho virtual das forças reativas é nulo, e consequentemente as forças reativas são normais aos movimentos permitidos pelos vínculos, ou seja:
 \begin{equation}
-\mf_r^\msT \cdot \delta \mpi = 0
+\delta W_{\mf_r} = \mf_r^\msT \cdot \delta \mpi = 0
 \end{equation}
 
 
-Além disso, a partir da definição de $\mpi$ \eqref{eq:quasi-coord} e dos vínculos de quasi-velocidades \eqref{eq:VinculosV_seriais}, temos que as quasi-coordenadas $\mpi$ devem respeitar a seguinte relação:
+Além disso, a partir da definição de $\mpi$ \eqref{eq:quasi-coord} e dos vínculos de quasi-velocidades \eqref{eq:VinculosV_seriais}, temos que as variações das quasi-coordenadas $\mpi$ devem respeitar a seguinte relação:
 \begin{equation}
  \mA(\mq) \cdot \delta \mpi = \mzr
 \end{equation}
@@ -1721,32 +1721,32 @@ Sendo assim, pré-multiplicando \eqref{eq:eq_dinamicas_2} à esquerda por $\mC^\ms
 Esta operação é equivalente a projetar as equações dinâmicas no núcleo de $\mA$, o que elimina os multiplicadores de Lagrange $\mlambda$, visto que o núcleo de $\mA$ é complemento ortogonal da imagem de $\mA^\msT$.
 
 Para encontrar o núcleo de $\mA$, precisamos resolver o seguinte sistema linear homogêneo:
-\begin{equation}
-\mA \cdot \mp = \mzr
+\begin{equation} \label{eq:SLH}
+\mA \cdot \mx = \mzr
 \end{equation}
 
-Subdividindo $\mp$ em $\mp_0$ e $\mp\cir$, e considerando $\mp_0$ como variáveis livres, temos:
+Subdividindo $\mx$ em $\mx\ssh $ e $\mx\cir$, sendo $\mx\ssh$ as $\nu$ primeiras componentes de $\mx$, e considerando $\mx\ssh$ como variáveis livres, temos:
 \begin{equation}
 \begin{bmatrix}
 \mJ(\mq) & -\mone
 \end{bmatrix}
 \cdot
 \begin{bmatrix}
-\mp_0 \\
-\mp\cir
+\mx\ssh \\
+\mx\cir
 \end{bmatrix} = \mzr
 \end{equation}
 \begin{equation}
-\Rightarrow \mp\cir = \mJ(\mq) \mp_0
+\Rightarrow \mx\cir = \mJ(\mq) \mx\ssh
 \end{equation}
-\begin{equation}
+\begin{equation} \label{eq:pre_C}
 \therefore
-\mp = 
+\mx = 
 \begin{bmatrix}
 \mone \\
 \mJ(\mq)
 \end{bmatrix}
-\cdot \mp_0
+\cdot \mx\ssh
 \end{equation}
 
 
@@ -1759,7 +1759,13 @@ Sendo assim, podemos escolher $\mC$ como a seguinte matriz:
 \end{bmatrix}
 \end{equation}
 
-Portanto, substituindo \eqref{MatrizC_seriais} em \eqref{eq:eq_dinamicas_3}, o modelo dinâmico do mecanismo serial pode ser escrito como:
+Repare 	que, fazendo $\mx = \mp$ (consequentemente $\mx\ssh = \mp_0$ e $\mx\cir = \mp\cir$) em \eqref{eq:SLH}, obtemos os vínculos de quasi-velocidades do sistema \eqref{eq:VinculosV_seriais}, e como as componentes $\mp_0$ são realmente indepentes para posições não singulares, à partir das expressões \eqref{eq:pre_C} e \eqref{eq:MatrizC_seriais}, temos que $\mC$ respeita a seguinte relação:
+\begin{equation} \label{eq:relacao_C}
+\mp = \mC(\mq) \cdot \mp_0
+\end{equation}
+
+
+Substituindo \eqref{eq:MatrizC_seriais} em \eqref{eq:eq_dinamicas_3}, o modelo dinâmico do mecanismo serial pode ser escrito como:
 
 \begin{equation} \label{eq:ModeloDinâmicoSerialSomatorio}
 \mu - \sum_{i=1}^\nu \mJ_i(\mq)^\msT (\mM_i \dot{\mp}_i + \mv_i(\mp_i) + \mg_i) = \mzr
@@ -1775,28 +1781,28 @@ Substituindo \eqref{eq:M_i}, \eqref{eq:v_i}, \eqref{eq:g_i}, \eqref{eq:p_i} e \e
 \begin{Bmatrix}
 \begin{bmatrix}
 m_i \mone & \mzr \\
-\mzr      & \vct{\vI_i}_{\ttB_i \rl \ttB_i}
+\mzr      & \mI_i
 \end{bmatrix}
 \cdot
 \begin{bmatrix}
-\vct{\va_i}_{\ttN} \\
-\vct{\dot{\vomega}_i}_{\ttB_i}
+\ma^\star_i  \\
+\dot{\momega}^\star_i
 \end{bmatrix}
 +
 \begin{bmatrix}
 \mzr \\
-\vct{\vomega_i}_{\ttB_i} \wedge (\vct{\vI_i}_{\ttB_i \rl \ttB_i} \cdot \vct{\vomega_i}_{\ttB_i})
+\momega^\star_i \wedge (\mI_i \cdot \momega^\star_i)
 \end{bmatrix}
 +
 \begin{bmatrix}
--m_i \vct{\vg}_{\ttN} \\
+-m_i \mgamma \\
 \mzr
 \end{bmatrix}
 \end{Bmatrix}
 =\mu
 \end{equation}
 
-Substituindo \eqref{eq:wi_Bi}, \eqref{eq:ai_N} e  \eqref{eq:dwi_Bi} em \eqref{eq:ModeloDinâmicoSerialSomatorio2}, temos:
+Substituindo \eqref{eq:a_star_i} e  \eqref{eq:domega_star_i} em \eqref{eq:ModeloDinâmicoSerialSomatorio2}, temos:
 \begin{equation}
 \sum_{i=1}^\nu
 \begin{bmatrix}
@@ -1805,17 +1811,17 @@ Substituindo \eqref{eq:wi_Bi}, \eqref{eq:ai_N} e  \eqref{eq:dwi_Bi} em \eqref{eq
 \end{bmatrix}^\msT
 \begin{Bmatrix}
 \begin{bmatrix}
-m_i (\mJ_{v\,i} \ddot{\mq} + \ma_i ) \\
-\vct{\vI_i}_{\ttB_i \rl \ttB_i} (\mJ_{w\,i} \ddot{\mq} + \dot{\mw}_i)
+m_i (\mJ_{v_i} \ddot{\mq} + \underaccent{\sim}{\ma}_i   )  \\
+ \mI_i (\mJ_{\omega_i} \ddot{\mq} + \underaccent{\sim}{\dot{\momega}}_i )
 \end{bmatrix}
 +
 \begin{bmatrix}
 \mzr \\
-(\mJ_{w\,i} \dot{\mq}) \wedge (\vct{\vI_i}_{\ttB_i \rl \ttB_i}  \mJ_{w\,i} \dot{\mq})
+\momega^\star_i \wedge (\mI_i \cdot \momega^\star_i)
 \end{bmatrix}
 +
 \begin{bmatrix}
--m_i \vct{\vg}_{\ttN} \\
+-m_i \mgamma \\
 \mzr
 \end{bmatrix}
 \end{Bmatrix}
@@ -1824,21 +1830,23 @@ m_i (\mJ_{v\,i} \ddot{\mq} + \ma_i ) \\
 
 Sendo assim, obtemos o modelo dinâmico mostrado anteriormente pelas equações \eqref{eq:ModeloMecSerial}, \eqref{eq:MSerial}, \eqref{eq:vSerial}, \eqref{eq:gSerial}:
 $$
-\mM(\mq) \ddot{\mq} + \mv(\mq,\dot{\mq}) + \mg(\mq) = \mu
+\mM(\mq) \ddot{\mq} + \mnu(\mq,\dot{\mq}) + \mg(\mq) = \mu
 $$
 
 Sendo:
 $$
 \mM(\mq) = \sum_{i=1}^\nu
-m_i \mJ_{v\,i}^\msT \mJ_{v\,i} + \mJ_{w\,i}^\msT \vct{\vI_i}_{\ttB_i \rl \ttB_i} \mJ_{w\,i}
+m_i \mJ_{v\,i}^\msT \mJ_{v\,i} + \mJ_{\omega\,i}^\msT \mI_i \mJ_{\omega\,i}
 $$
 $$
-\mv(\mq, \dot{\mq}) = \sum_{i=1}^\nu
- m_i \mJ_{v\,i}^\msT \ma_i + \mJ_{w\,i}^\msT\{\vct{\vI_i}_{\ttB_i \rl \ttB_i} \dot{\mw}_i + (\mJ_{w\,i} \dot{\mq}) \wedge (\vct{\vI_i}_{\ttB_i \rl \ttB_i}  \mJ_{w\,i} \dot{\mq}) \}
+\mnu(\mq, \dot{\mq}) = \sum_{i=1}^\nu
+ m_i \mJ_{v\,i}^\msT \underaccent{\sim}{\ma}_i + \mJ_{\omega\,i}^\msT \big( \mI_i \underaccent{\sim}{\dot{\momega}}_i + \momega^\star_i \wedge (\mI_i  \momega^\star_i) \big)
 $$
 $$
-\mg(\mq) = - \sum_{i=1}^\nu m_i \mJ_{v\,i} \vct{\vg}_{\ttN}
+\mg(\mq) = - \sum_{i=1}^\nu m_i \mJ_{v\,i}^\msT \mgamma
 $$
+
+
 
 \end{itemize}
 
