@@ -1579,12 +1579,12 @@ m_i \mone & \mzr \\
 Seja $\mf_i$ o sistema de forças ativas  (considerando os esforços de inércia) aplicado no i-ésimo subsistema, na direção das quasi-velocidades $\mp_i$. $\mf_i$ pode ser obtido pela seguinte expressão:
 %Sendo assim, os sistemas de forças (considerando esforços ativos e de inércia) aplicados em cada subsistema são dados por:
 \begin{equation}
-\mf_i(\mq, \mp_i, \dot{\mp}_i)  = - (\mM_i (\mq) \cdot \dot{\mp}_i + \mv_i(\mp_i) + \mg_i), \, i = 1,...,\nu
+\mf_i(\mq, \mp_i, \dot{\mp}_i)  = - (\mM_i (\mq) \cdot \dot{\mp}_i + \mv_i(\mp_i) + \mg_i)
 \end{equation}
 
 Portanto, o modelo dinâmico de cada subsistema pode ser escrito como:
 \begin{equation}
-\mf_i + \mf_{r\,i} = \mzr, \, i = 1,...,\nu
+\mf_i + \mf_{r\,i} = \mzr
 \end{equation}
 
 %No caso de os subsistemas estarem desacoplados, temos que $\mf_{r\,i} = \mzr$.
@@ -1598,31 +1598,31 @@ Considere também um sistema constituido pelos esforços que os atuadores aplicam 
 
 
 \begin{equation} \label{eq:mp_0}
-\mp_0 = \dot{\mq}
+\mp\ssh = \dot{\mq}
 \end{equation}
 
 Seja $\mu$ a matriz-coluna de esforços generalizados aplicadas pelos atuadores na direção de $\dot{\mq}$ (ou seja, o trabalho virtual de $\mu$ é dado por $ \delta W_{\mu} = \mu^\msT \cdot \delta \mq $ ). Sendo assim, o modelo dinâmico deste subsistema é dado por:
 
 \begin{equation}
-\mf_0 + \mf_{r\,0} = \mzr
+\mf\ssh + \mf_r\ssh = \mzr
 \end{equation}
 
 Sendo:
 \begin{equation}
-\mf_0 = \mu
+\mf\ssh = \mu
 \end{equation}
 
 \item[iii)] Vínculos cinemáticos entre subsistemas
 
 Através das equações \eqref{eq:v_star_i}, \eqref{eq:omega_star_i} e \eqref{eq:mp_0}, é possível relacionar as quasi-velocidades de cada subsistema com as quasi-velocidades adicionais da seguinte maneira:
 \begin{equation}
-\underline{\mp_i}(\mq, \mp_0) = \mJ_i (\mq) \cdot \mp_0, \, i=1,...,\nu
+\underline{\mp_i}(\mq, \mp\ssh) = \mJ_i (\mq) \cdot \mp\ssh, \, i=1,...,\nu
 \end{equation}
 Sendo:
 \begin{equation} \label{eq:J_i}
 \mJ_i(\mq) = \begin{bmatrix}
 \mJ_{v\,i}(\mq) \\
-\mJ_{w\,i}(\mq)
+\mJ_{\omega\,i}(\mq)
 \end{bmatrix}, \, i=1,...,\nu
 \end{equation}
 
@@ -1633,9 +1633,9 @@ Seja $\mp\cir$ a matriz coluna que contém as quasi-velocidades de todos os ligam
 \end{bmatrix}^\msT
 \end{equation}
 
-$\mp\cir$ pode ser expresso em função apenas das quasi-velocidades $\mp_0$ da seguinte forma:
-\begin{equation}
-\underline{\mp\cir}(\mq,\mp_0) = \mJ(\mq) \mp_0
+$\mp\cir$ pode ser expresso em função apenas das quasi-velocidades $\mp\ssh$ da seguinte forma:
+\begin{equation} \label{eq:p_red_em_func_de_p0}
+\underline{\mp\cir}(\mq,\mp\ssh) = \mJ(\mq) \mp\ssh
 \end{equation}
 Sendo:
 \begin{equation} \label{eq:J}
@@ -1644,9 +1644,9 @@ Sendo:
 \end{bmatrix}^\msT
 \end{equation}
 
-Sendo assim, as vínculos de quasi-velocidades entre subsistemas podem ser expressos como:
+Sendo assim, a partir de \eqref{eq:p_red_em_func_de_p0}, os vínculos de quasi-velocidades entre subsistemas podem ser expressos como:
 \begin{equation} \label{eq:VinculosV_seriais}
-\overline{\mp}(\mq,\mp) = \mA(\mq) \cdot \mp = \mzr
+\overline{\mp}(\mq,\mp) =  \mA(\mq) \cdot \mp = \mzr
 \end{equation}
 
 Sendo:
@@ -1654,6 +1654,11 @@ Sendo:
 \mA(\mq)  = \begin{bmatrix}
 \mJ(\mq) & -\mone
 \end{bmatrix}
+\end{equation}
+\begin{equation}
+\mp = \begin{bmatrix}
+{\mp\ssh}^\msT & {\mp\cir}^\msT
+\end{bmatrix}^\msT
 \end{equation}
 %\frac{\partial \overline{\mp}}{\partial \mp}
 
@@ -1664,14 +1669,28 @@ Sendo:
 Seja $\mf$ a matriz-coluna contendo todos os sistemas de forças ativas generalizadas:
 \begin{equation}
 \mf = \begin{bmatrix}
-\mf_0^\msT & \mf_1^\msT & ... & \mf_\nu^\msT  
+{\mf\ssh}^\msT & {\mf\cir}^\msT
+\end{bmatrix}^\msT
+\end{equation}
+
+Sendo:
+\begin{equation}
+\mf\cir = \begin{bmatrix}
+\mf_1^\msT & ... & \mf_\nu^\msT  
 \end{bmatrix}^\msT
 \end{equation}
 
 Seja também $\mf_r$ a matriz-coluna contendo todos os sistemas de forças reativas generalizadas:
 \begin{equation}
 \mf_r = \begin{bmatrix}
-\mf_{r\,0}^\msT & \mf_{r\,1}^\msT & ... & \mf_{r\,\nu}^\msT  
+{\mf_r\ssh}^\msT & {\mf_r\cir}^\msT
+\end{bmatrix}^\msT
+\end{equation}
+
+Sendo:
+\begin{equation}
+\mf_r\cir = \begin{bmatrix}
+\mf_{r\,1}^\msT & ... & \mf_{r\,\nu}^\msT  
 \end{bmatrix}^\msT
 \end{equation}
 
@@ -1707,6 +1726,47 @@ Sendo assim, podemos reescrever \eqref{eq:eq_dinamicas_1} como:
 \begin{equation} \label{eq:eq_dinamicas_2}
 \mf + \mA^\msT \mlambda = \mzr
 \end{equation}
+
+Repare que essa equação pode ser utilizada para determinar  $\mu$ e $\mlambda$ supondo conhecidas as forças de inércia $\mf\cir$, pois:
+\begin{equation}
+\begin{bmatrix}
+\mu \\
+\mf\cir
+\end{bmatrix} + \mA^\msT \mlambda = \mzr
+\end{equation}
+\begin{equation}
+\Rightarrow
+\begin{bmatrix}
+\mone \\
+\mzr
+\end{bmatrix} \mu +
+\begin{bmatrix}
+\mzr \\
+\mf\cir
+\end{bmatrix}
++ \mA^\msT \mlambda = \mzr
+\end{equation}
+\begin{equation}
+\therefore
+\begin{bmatrix}
+\begin{bmatrix}
+\mone \\
+\mzr
+\end{bmatrix} & \mA^\msT
+\end{bmatrix}
+\begin{bmatrix}
+\mu \\
+\mlambda
+\end{bmatrix}
+=
+\begin{bmatrix}
+\mzr \\
+-\mf\cir
+\end{bmatrix}
+\end{equation}
+
+Esta expressão pode ser utilizada para realizar a simulação dinâmica inversa, visto que, se conhecido o movimento do sistema, podem ser obtidos os esforços dos atuadores. Porém, como em geral não há o interesse de se obter as forças reativas aplicadas ao sistema, a presença dos multiplicadores torna a resolução do sistema desnecessariamente custosa. Sendo assim, vamos eliminar os multiplicadores da equação dinâmica, o que possibilitará realizar uma simulação dinâmica inversa muito menos custosa e também possibilitará realizar a simulação dinâmica direta.
+
 
 Seja $\mC$ uma matriz cujas colunas são base do núcleo de $\mA$. Assim, temos que:
 \begin{equation}
@@ -1759,16 +1819,16 @@ Sendo assim, podemos escolher $\mC$ como a seguinte matriz:
 \end{bmatrix}
 \end{equation}
 
-Repare 	que, fazendo $\mx = \mp$ (consequentemente $\mx\ssh = \mp_0$ e $\mx\cir = \mp\cir$) em \eqref{eq:SLH}, obtemos os vínculos de quasi-velocidades do sistema \eqref{eq:VinculosV_seriais}, e como as componentes $\mp_0$ são realmente indepentes para posições não singulares, à partir das expressões \eqref{eq:pre_C} e \eqref{eq:MatrizC_seriais}, temos que $\mC$ respeita a seguinte relação:
+Repare 	que, fazendo $\mx = \mp$ (consequentemente $\mx\ssh = \mp\ssh$ e $\mx\cir = \mp\cir$) em \eqref{eq:SLH}, obtemos os vínculos de quasi-velocidades do sistema \eqref{eq:VinculosV_seriais}, e como as componentes $\mp\ssh$ são realmente indepentes para posições não singulares, à partir das expressões \eqref{eq:pre_C} e \eqref{eq:MatrizC_seriais}, temos que $\mC$ respeita a seguinte relação:
 \begin{equation} \label{eq:relacao_C}
-\mp = \mC(\mq) \cdot \mp_0
+\mp = \mC(\mq) \cdot \mp\ssh
 \end{equation}
 
 
 Substituindo \eqref{eq:MatrizC_seriais} em \eqref{eq:eq_dinamicas_3}, o modelo dinâmico do mecanismo serial pode ser escrito como:
 
 \begin{equation} \label{eq:ModeloDinâmicoSerialSomatorio}
-\mu - \sum_{i=1}^\nu \mJ_i(\mq)^\msT (\mM_i \dot{\mp}_i + \mv_i(\mp_i) + \mg_i) = \mzr
+\mu - \sum_{i=1}^\nu \mJ_i(\mq)^\msT (\mM_i(\mq) \dot{\mp}_i + \mv_i(\mq,\mp_i) + \mg_i) = \mzr
 \end{equation}
 
 Substituindo \eqref{eq:M_i}, \eqref{eq:v_i}, \eqref{eq:g_i}, \eqref{eq:p_i} e \eqref{eq:J_i} em \eqref{eq:ModeloDinâmicoSerialSomatorio}, temos:
@@ -1776,7 +1836,7 @@ Substituindo \eqref{eq:M_i}, \eqref{eq:v_i}, \eqref{eq:g_i}, \eqref{eq:p_i} e \e
 \sum_{i=1}^\nu
 \begin{bmatrix}
 \mJ_{v\,i} \\
-\mJ_{w\,i}
+\mJ_{\omega\,i}
 \end{bmatrix}^\msT
 \begin{Bmatrix}
 \begin{bmatrix}
@@ -1807,7 +1867,7 @@ Substituindo \eqref{eq:a_star_i} e  \eqref{eq:domega_star_i} em \eqref{eq:Modelo
 \sum_{i=1}^\nu
 \begin{bmatrix}
 \mJ_{v\,i} \\
-\mJ_{w\,i}
+\mJ_{\omega\,i}
 \end{bmatrix}^\msT
 \begin{Bmatrix}
 \begin{bmatrix}
