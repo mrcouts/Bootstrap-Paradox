@@ -999,32 +999,6 @@ Sendo:
 \underaccent{\sim}{\ma} = \sum_{i=1}^\nu (\underaccent{\sim}{\ma})_i
 \end{equation}
 
-Repare que, derivando \eqref{eq:vel_est}, temos que:
-
-\begin{equation}
-\ma^\star (\mq,\dot{\mq},\ddot{\mq}) = \mJ_v (\mq)  \cdot \ddot{\mq} + \dot{\mJ}_v (\mq, \dot{\mq})  \cdot \dot{\mq}
-\end{equation}
-
-Sendo assim, $\underaccent{\sim}{\ma}$ pode ser reescrito como:
-\begin{equation} \label{eq:a_til_dJ}
-\underaccent{\sim}{\ma} (\mq, \dot{\mq}) = \dot{\mJ}_v (\mq, \dot{\mq})  \cdot \dot{\mq} = \sum_{i=1}^\nu \dot{\mj}_{v\,i} (\mq, \dot{\mq}) \dot{q}_i 
-\end{equation}
-
-Sendo:
-\begin{equation} \label{eq:dJv_}
-\dot{\mJ}_v(\mq, \dot{\mq}) = \begin{bmatrix}
-\dot{\mj}_{v\,1}(\mq, \dot{\mq}) & ... & \dot{\mj}_{v\,\nu}(\mq, \dot{\mq})
-\end{bmatrix}
-\end{equation}
-
-Finalmente, comparando \eqref{eq:a_til} com \eqref{eq:a_til_dJ} temos que:
-\begin{equation}
-\dot{\mj}_{v\,i} = \mj_{\omega\,i} \wedge ( \dot{q}_{i} \mj_{v\,i} + 2  \mv_i)
-\end{equation}
-
-
-
-
 Para obter as acelerações dos centros de massa dos ligamentos, seguimos a mesma linha de raciocínio e obtemos os seguintes resultados:
 
 Definindo:
@@ -1049,22 +1023,10 @@ Temos:
 
 Sendo:
 \begin{equation}
-(\underaccent{\sim}{\ma}_i)_j =  \dot{\mj}_{v\,i,j} \dot{q}_{j}
+(\underaccent{\sim}{\ma}_i)_j = \dot{q}_{j} \mj_{\omega\,i,j} \wedge ( \dot{q}_{j} \mj_{v\,i,j} + 2  \mv_{i,j})
 \end{equation}
 \begin{equation}
-\underaccent{\sim}{\ma}_i (\mq, \dot{\mq}) = \sum_{j=1}^i (\underaccent{\sim}{\ma}_i)_j  = \dot{\mJ}_{v\,i} (\mq, \dot{\mq})  \cdot \dot{\mq}
-\end{equation}
-\begin{equation} \label{eq:dJvi_}
-\dot{\mJ}_{v\,i}(\mq, \dot{\mq}) = \begin{bmatrix}
-\dot{\mj}_{v\,i,1}(\mq, \dot{\mq}) & ... & \dot{\mj}_{v\,i,\nu}(\mq, \dot{\mq})
-\end{bmatrix}
-\end{equation}
-\begin{equation}
-\dot{\mj}_{v\,i,j} =
-\begin{cases}
-\mzr, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; j > i \\
-\mj_{\omega\,i,j} \wedge ( \dot{q}_{j} \mj_{v\,i,j} + 2  \mv_{i,j}) , j \leq i \\
-\end{cases}\, i,j=1,...,\nu
+\underaccent{\sim}{\ma}_i (\mq, \dot{\mq}) = \sum_{j=1}^i (\underaccent{\sim}{\ma}_i)_j
 \end{equation}
 
 \item[C2)] Cinemática de acelerações angulares
@@ -1146,28 +1108,6 @@ Sendo:
 \underaccent{\sim}{\dot{\momega}} = \sum_{i=1}^\nu (\underaccent{\sim}{\dot{\momega}})_i
 \end{equation}
 
-Repare que, derivando \eqref{eq:vel_ang_est}, temos que:
-\begin{equation}
-\dot{\momega}^\star (\mq,\dot{\mq},\ddot{\mq}) = \mJ_\omega (\mq)  \cdot \ddot{\mq} + \dot{\mJ}_\omega (\mq, \dot{\mq})  \cdot \dot{\mq}
-\end{equation}
-
-Sendo assim, $\underaccent{\sim}{\dot{\momega}}$ pode ser reescrito como:
-\begin{equation} \label{eq:dw_til_dJ}
-\underaccent{\sim}{\dot{\momega}} (\mq, \dot{\mq}) = \dot{\mJ}_\omega (\mq, \dot{\mq})  \cdot \dot{\mq} = \sum_{i=1}^\nu \dot{\mj}_{\omega\,i} (\mq, \dot{\mq}) \dot{q}_i 
-\end{equation}
-
-Sendo:
-\begin{equation} \label{eq:dJomega_}
-\dot{\mJ}_\omega(\mq, \dot{\mq}) = \begin{bmatrix}
-\dot{\mj}_{\omega\,1}(\mq, \dot{\mq}) & ... & \dot{\mj}_{\omega\,\nu}(\mq, \dot{\mq})
-\end{bmatrix}
-\end{equation}
-
-Finalmente, comparando \eqref{eq:dw_til} com \eqref{eq:dw_til_dJ} temos que:
-\begin{equation}
-\dot{\mj}_{\omega\,i} = \mj_{\omega\,i} \wedge \momega_i
-\end{equation}
-
 Para obter as acelerações angulares dos centros de massa dos ligamentos, seguimos a mesma linha de raciocínio e obtemos os seguintes resultados:
 
 Definindo:
@@ -1192,24 +1132,10 @@ Temos:
 
 Sendo:
 \begin{equation}
-(\underaccent{\sim}{\dot{\momega}}_i)_j = \dot{\mj}_{\omega\,i,j} \dot{q}_j
+(\underaccent{\sim}{\dot{\momega}}_i)_j = \dot{q}_j \mj_{\omega\,i,j} \wedge \momega_{i,j}
 \end{equation}
 \begin{equation}
-\underaccent{\sim}{\dot{\momega}}_i (\mq, \dot{\mq}) = \sum_{j=1}^i (\underaccent{\sim}{\dot{\momega}}_i)_j = \dot{\mJ}_{\omega\,i} (\mq, \dot{\mq})  \cdot \dot{\mq}
-\end{equation}
-
-Sendo:
-\begin{equation} \label{eq:dJomegai_}
-\dot{\mJ}_{\omega\,i}(\mq, \dot{\mq}) = \begin{bmatrix}
-\dot{\mj}_{\omega\,i,1}(\mq, \dot{\mq}) & ... & \dot{\mj}_{\omega\,i,\nu}(\mq, \dot{\mq})
-\end{bmatrix}
-\end{equation}
-\begin{equation}
-\dot{\mj}_{\omega\,i,j} =
-\begin{cases}
-\mzr, \;\;\;\;\;\;\;\;\;\;\;\;\;\; j > i \\
-\mj_{\omega\,i,j} \wedge \momega_{i,j} , j \leq i \\
-\end{cases}\, i,j=1,...,\nu
+\underaccent{\sim}{\dot{\momega}}_i (\mq, \dot{\mq}) = \sum_{j=1}^i (\underaccent{\sim}{\dot{\momega}}_i)_j
 \end{equation}
 
 \item[D1)] Cinemática de sobre-acelerações lineares
@@ -1819,7 +1745,7 @@ Sendo assim, podemos escolher $\mC$ como a seguinte matriz:
 \end{bmatrix}
 \end{equation}
 
-Repare 	que, fazendo $\mx = \mp$ (consequentemente $\mx\ssh = \mp\ssh$ e $\mx\cir = \mp\cir$) em \eqref{eq:SLH}, obtemos os vínculos de quasi-velocidades do sistema \eqref{eq:VinculosV_seriais}, e como as componentes $\mp\ssh$ são realmente indepentes para posições não singulares, à partir das expressões \eqref{eq:pre_C} e \eqref{eq:MatrizC_seriais}, temos que $\mC$ respeita a seguinte relação:
+Repare 	que, fazendo $\mx = \mp$ (consequentemente $\mx\ssh = \mp\ssh$ e $\mx\cir = \mp\cir$) em \eqref{eq:SLH}, obtemos os vínculos de quasi-velocidades do sistema \eqref{eq:VinculosV_seriais}. Sendo assim, à partir das expressões \eqref{eq:pre_C} e \eqref{eq:MatrizC_seriais}, temos que $\mC$ respeita a seguinte relação:
 \begin{equation} \label{eq:relacao_C}
 \mp = \mC(\mq) \cdot \mp\ssh
 \end{equation}
