@@ -1,0 +1,842 @@
+\documentclass[a4paper,12pt,brazil]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[latin1]{inputenc}
+\usepackage[brazil]{babel}
+\usepackage{float}
+
+\flushbottom
+
+\setlength\textwidth{160mm}
+\setlength\textheight{247mm}
+\setlength\hoffset{-13.4mm}
+\setlength\voffset{-20mm}
+\setlength\parindent{0.75cm}
+\setlength\parskip{0mm}
+\setlength\topsep{12pt}
+
+\usepackage{paralist}
+\usepackage{subfigure}
+\usepackage{amsmath,amssymb,amsfonts,textcomp, bm}
+\usepackage{rawfonts}
+\usepackage{graphics,psfrag}
+\usepackage{latexsym}
+\usepackage{varioref}
+\usepackage{subfigmat}
+\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage[colorlinks,citecolor=Fuchsia,urlcolor=blue,linkcolor=black]{hyperref}
+%\usepackage[colorlinks=false]{hyperref}
+\usepackage{color}
+\usepackage{array}
+\usepackage{hhline}
+\usepackage{array}
+\usepackage{supertabular}
+\usepackage{setspace}
+\usepackage[pdftex]{graphicx}
+\usepackage{special-char}
+
+\usepackage[sort=def, nopostdot]{glossaries}
+\usepackage{makeidx} 
+\usepackage{listings}
+\usepackage{multicol}
+\usepackage{hyperref}
+
+\renewcommand*{\glossarypreamble}{\vspace{-\baselineskip}}  
+
+\newglossary[cng]{conventions}{cns}{cno}{Convenções de notação}
+\newglossary[syg]{symbols}{sys}{syo}{Lista de símbolos}
+
+\renewcommand*{\arraystretch}{1.3}  % sets the line indent in glossaries
+\setlength{\glsdescwidth}{390pt}   
+\setlength\LTleft{0pt}
+
+\renewcommand*{\glossarypreamble}{\vspace{-\baselineskip}}
+
+\makeindex
+\makeglossaries
+
+\graphicspath{{figuras/}{../figuras/}}
+
+
+\begin{document}
+
+\setcounter{MaxMatrixCols}{50}
+
+\onehalfspacing 
+
+\begin{titlepage}
+\begin{center}
+{\phantom{a}}
+\vspace{1.0cm}
+\textsc{\Large{{ André Garnier Coutinho}}}\\
+\vspace{5.0cm}
+ {\huge\bfseries Projeto de Observador de Ordem Reduzida aplicado a um mecanismo serial do tipo RP\\}
+\vfill
+\hspace{.50\textwidth}
+\begin{minipage}{.45\textwidth}
+{Relatório sobre observadores de ordem reduzida apresentado à disciplina {\em PME5009 - Introdução à Teoria de Estimação} do Programa de Pós Graduação em Engenharia Mecânica (PPGEM) da Escola Politécnica 
+da Universidade de São Paulo (EPUSP)
+}\\[25pt]
+{Área de concentração:}\\[2pt]
+{Engenharia Mecânica}\\[25pt]
+{Orientador:}\\[2pt]
+Prof. Dr. Tarcisio A. Hess Coelho
+\end{minipage}
+
+\vfill
+{São Paulo \\ 15 de Abril de 2017}
+\end{center}
+\end{titlepage}
+
+
+
+
+\vspace{-0.3cm}
+
+\noindent
+{\bf Nome: }{André Garnier Coutinho}\\[8pt]
+{\bf NUSP: }{6846085}\\[8pt]
+{\bf Curso: }{Doutorado Direto}\\[8pt]
+{\bf Área de concentração: }{Engenharia Mecânica de Projeto e Fabricação (3151)}\\[8pt]
+{\bf Orientador: }{Professor Doutor Tarcisio Antonio Hess Coelho}\\[8pt]
+{\bf Ano de ingresso no PPGEM: }{2014}\\[8pt]
+{\bf Bolsista: }{Sim}\\[8pt]
+{\bf Agência de fomento: }{CNPq}\\[8pt]
+{\bf Edital/Chamada: }{Cota Institucional (Demanda Social)}\\[8pt]
+{\bf Exame de Qualificação: }{Aprovado em 14/10/2016}\\[8pt]
+
+\vspace{2cm}
+\noindent
+
+% ---
+% Sumário
+% ---
+\newpage
+\pdfbookmark[0]{\contentsname}{toc}
+\tableofcontents
+\cleardoublepage
+% ---
+
+%RESUMO--------------------------------------------------------   
+\newpage
+%\section*{Resumo}
+
+
+
+%INTRODUÇÃO----------------------------------------------------
+%\newpage
+\section{Resumo}\label{intro}
+
+Este trabalho se trata do desenvolvimento de uma metodologia de projeto de controle moderno e projeto de observador de ordem reduzida aplicado a mecanismos seriais, supondo modelo dinâmico explícito conhecido. Além disso, será realizada a modelagem dinâmica de um mecanismo serial do tipo RP, no qual será será aplicada a metologia proposta e serão realizadas simulações de controle de trajetória. 
+
+
+
+%Formulação--------------------------------------------------------------------
+\section{Formulação}\label{formulation}
+
+%Esta se\c{c}\~ao apresenta uma s\'intese dos principais resultados te\'oricos obtidos at\'e o momento.
+
+%\input{symbols}
+
+%---ALGORITMO PARA MODELAGEM DE PLATAFORMAS ROBÓTICAS------------------------------------------------------------------------------------------
+\subsection{Modelo dinâmico linearizado de mecanismos seriais}\label{S05-1}
+
+Dado o modelo dinâmico de um mecanismo serial no formato \cite{Craig}
+\begin{equation} \label{eq:MecSerial}
+\mH(\mq) \ddot{\mq} + \mh(\mq, \dot{\mq}) = \mtau
+\end{equation}
+
+iremos obter o modelo linearizado em torno de uma trajetória de referência $\mq_d(t)$ e representa-lo no espaço de estados linear \cite{CabralLIN}.
+
+
+Seja
+\begin{equation}
+\mf(\mq, \dot{\mq}, \ddot{\mq}, \mtau) = \mH(\mq) \ddot{\mq} + \mh(\mq, \dot{\mq}) - \mtau
+\end{equation}
+
+Sendo assim, o modelo dinâmico do mecanismo serial é dado por
+\begin{equation}
+\mf(\mq, \dot{\mq}, \ddot{\mq}, \mtau) = \mzr
+\end{equation}
+
+
+Para obter o modelo dinâmico linearizado do mecanismo serial, iremos linearizar a função $\mf(\mq, \dot{\mq}, \ddot{\mq}, \mtau)$ em torno de $\mq = \mq_d(t)$, $\dot{\mq} = \dot{\mq}_d(t)$, $\ddot{\mq} = \ddot{\mq}_d(t)$ e $\mtau = \mtau_d(t)$. Utilizaremos o superescrito $*$ para indicar que uma função está calculada nessas condições. Sendo assim, expandindo $\mf$ em Série de Taylor até primeira ordem em torno de $*$, temos:
+\begin{equation}
+\mf(\mq, \dot{\mq}, \ddot{\mq}, \mtau) \approx  \mf^* + \frac{\partial \mf}{\partial \mq}^* \Delta \mq + \frac{\partial \mf}{\partial \dot{\mq}}^* \Delta \dot{\mq} + \frac{\partial \mf}{\partial \ddot{\mq}}^* \Delta \ddot{\mq} + \frac{\partial \mf}{\partial \mtau}^* \Delta \mtau
+\end{equation}
+
+Sendo:
+\begin{equation} \label{eq:G}
+\frac{\partial \mf}{\partial \mq}^* = \mG(t) = \Big( \frac{\partial (\mH \cdot \ddot{\mq})}{\partial \mq} + \frac{\partial \mh}{\partial \mq} \Big)^*
+\end{equation}
+\begin{equation} \label{eq:V}
+\frac{\partial \mf}{\partial \dot{\mq}}^* = \mV(t) =  \frac{\partial \mh}{\partial \dot{\mq}}^*
+\end{equation}
+\begin{equation} \label{eq:M}
+\frac{\partial \mf}{\partial \ddot{\mq}}^* = \mM(t) = \mH^*
+\end{equation}
+\begin{equation}
+\frac{\partial \mf}{\partial \mtau}^* = -\mone
+\end{equation}
+\begin{equation}
+\Delta\mq = \mq - \mq_d(t)
+\end{equation}
+\begin{equation}
+\Delta\dot{\mq} = \dot{\mq} - \dot{\mq}_d(t)
+\end{equation}
+\begin{equation}
+\Delta\ddot{\mq} = \ddot{\mq} - \ddot{\mq}_d(t)
+\end{equation}
+\begin{equation}
+\Delta\mtau = \mtau - \mtau_d(t)
+\end{equation}
+
+$\mtau_d(t)$ é escolhido de modo que $\mf^* = \mzr$, ou seja:
+\begin{equation} \label{eq:tau_d}
+\mtau_d(t) = \mM (t) \cdot  \ddot{\mq}_d(t) + \mh^*(t)
+\end{equation}
+
+Assim, o modelo linearizado do mecanismo é dado por:
+\begin{equation} \label{eq:SisLin}
+\mM(t) \cdot \Delta\ddot{\mq} + \mV(t)\cdot \Delta\dot{\mq} + \mG(t)\cdot \Delta\mq = \Delta\mtau
+\end{equation}
+
+Passando para o espaço de estados e definindo como saída do sistema os estados $\Delta\mq$, temos:
+\begin{equation} \label{eq:SisLinSS}
+\begin{cases}
+\begin{bmatrix}
+\Delta\ddot{\mq} \\
+\Delta\dot{\mq} \\
+\end{bmatrix}
+=
+\begin{bmatrix}
+-\mM^{-1} \mV& -\mM^{-1} \mG \\
+\mone & \mzr
+\end{bmatrix}
+\begin{bmatrix}
+\Delta\dot{\mq} \\
+\Delta\mq \\
+\end{bmatrix}
++
+\begin{bmatrix}
+\mM^{-1} \\
+\mzr
+\end{bmatrix} \Delta\mtau
+\\
+\my = \begin{bmatrix}
+\mzr & \mone
+\end{bmatrix}
+\begin{bmatrix}
+\Delta\dot{\mq} \\
+\Delta\mq \\
+\end{bmatrix}
+\end{cases}
+\end{equation}
+
+Ou seja:
+\begin{equation}
+\begin{cases}
+\dot{\mx} = \mA(t) \cdot \mx + \mB(t) \cdot \muu \\
+\my = \mC(t) \cdot \mx
+\end{cases}
+\end{equation}
+
+Sendo:
+\begin{equation} \label{eq:x}
+\mx = \begin{bmatrix}
+\Delta\dot{\mq} \\
+\Delta\mq \\
+\end{bmatrix}
+\end{equation}
+\begin{equation}
+\muu = \Delta\mtau
+\end{equation}
+\begin{equation}
+\mA(t) = \begin{bmatrix}
+-\mM^{-1} \mV& -\mM^{-1} \mG \\
+\mone & \mzr
+\end{bmatrix}
+\end{equation}
+\begin{equation}
+\mB(t) = \begin{bmatrix}
+\mM^{-1} \\
+\mzr
+\end{bmatrix}
+\end{equation}
+\begin{equation}
+\mC(t) = \begin{bmatrix}
+\mzr & \mone
+\end{bmatrix}
+\end{equation}
+
+
+\subsection{Projeto de regulador de estados}\label{S05-2}
+
+A lei de controle de um controlador do tipo regulador de estados \cite{CabralRE} é dada por:
+\begin{equation} \label{eq:Reg}
+\muu = - \mK(t) \cdot \mx
+\end{equation}
+
+a qual tem como objetivo levar todos os estados do sistema assintoticamente a zero, independentemente da condição inicial. Para o sistema em questão, se todos os estados forem a zero, significa que o sistema está seguindo a trajetória de referência. 
+
+Como já foi visto anteriormente, a equação do sistema linearizado é dada por: 
+\begin{equation} \tag{\ref{eq:SisLin}}
+\mM(t) \cdot \Delta\ddot{\mq} + \mV(t)\cdot \Delta\dot{\mq} + \mG(t)\cdot \Delta\mq = \Delta\mtau
+\end{equation}
+
+Seria desejável que a equação do sistema em malha fechada fosse dada por:
+\begin{equation}
+\Delta\ddot{\mq} + k_v  \Delta\dot{\mq} + k_p \Delta\mq = \mzr
+\end{equation}
+
+A qual garante que $\Delta\mq$ vá a zero assintoticamente para $k_p, k_v > 0$.
+
+É possível perceber que a lei de controle que leva o sistema a esse comportamento em malha fechada é dada por:
+\begin{equation}
+\Delta\mtau = -\big(\mM(t) k_v - \mV(t)\big)\Delta\dot{\mq} -\big(\mM(t) k_p - \mG(t)\big)\Delta\mq = - \begin{bmatrix}
+\mM(t) k_v - \mV(t) & \mM(t) k_p - \mG(t)
+\end{bmatrix}
+\begin{bmatrix}
+\Delta\dot{\mq} \\
+\Delta\mq
+\end{bmatrix}
+\end{equation}
+
+Portanto, a lei do regulador de estados é dada pela equação \eqref{eq:Reg}, sendo:
+\begin{equation} \label{eq:K}
+\mK(t) = \begin{bmatrix}
+\mM(t) k_v - \mV(t) & \mM(t) k_p - \mG(t)
+\end{bmatrix}
+\end{equation}
+
+
+\subsection{Projeto de observador de ordem reduzida}\label{S05-3}
+
+Para projetar o observador de estados de ordem reduzida \cite{Fleury, Koskie}, partimos da equação \eqref{eq:SisLinSS}:
+
+\begin{equation} \tag{\ref{eq:SisLinSS}}
+\begin{cases}
+\begin{bmatrix}
+\Delta\ddot{\mq} \\
+\Delta\dot{\mq} \\
+\end{bmatrix}
+=
+\begin{bmatrix}
+-\mM^{-1} \mV& -\mM^{-1} \mG \\
+\mone & \mzr
+\end{bmatrix}
+\begin{bmatrix}
+\Delta\dot{\mq} \\
+\Delta\mq \\
+\end{bmatrix}
++
+\begin{bmatrix}
+\mM^{-1} \\
+\mzr
+\end{bmatrix} \Delta\mtau
+\\
+\my = \begin{bmatrix}
+\mzr & \mone
+\end{bmatrix}
+\begin{bmatrix}
+\Delta\dot{\mq} \\
+\Delta\mq \\
+\end{bmatrix}
+\end{cases}
+\end{equation}
+
+Repare que os estados $\Delta\mq$ são as saídas do sistema e $\Delta\dot{\mq}$  são os estados que não são saídas. Sendo assim, podemos reescrever a primeira equação matricial de \eqref{eq:SisLinSS} da seguinte maneira:
+
+\begin{equation} \label{eq:SisLinYW}
+\begin{bmatrix}
+\dot{\mw} \\
+\dot{\my} \\
+\end{bmatrix}
+=
+\begin{bmatrix}
+\mA_{1,1} & \mA_{1,2} \\
+\mA_{2,1} & \mA_{2,2}
+\end{bmatrix}
+\begin{bmatrix}
+\mw \\
+\my \\
+\end{bmatrix}
++
+\begin{bmatrix}
+\mB_1 \\
+\mB_2
+\end{bmatrix} \muu
+\end{equation}
+
+Sendo:
+\begin{equation} \label{eq:w_def}
+\mw = \Delta\dot{\mq}
+\end{equation}
+\begin{equation} \label{eq:A11}
+\mA_{1,1} = -\mM^{-1}\mV
+\end{equation}
+\begin{equation} \label{eq:A12}
+\mA_{1,2} = -\mM^{-1}\mG
+\end{equation}
+\begin{equation} \label{eq:A21}
+\mA_{2,1} = \mone
+\end{equation}
+\begin{equation} \label{eq:A22}
+\mA_{2,2} = \mzr
+\end{equation}
+\begin{equation} \label{eq:B1}
+\mB_1 = \mM^{-1}
+\end{equation}
+\begin{equation} \label{eq:B2}
+\mB_2 = \mzr
+\end{equation}
+
+A partir da equação \eqref{eq:SisLinYW}, temos que:
+
+\begin{equation} \label{eq:w_Ly}
+\dot{\mw} - \mL \cdot \dot{\my} = (\mA_{1,1} - \mL \mA_{2,1} )\mw + (\mA_{1,2} - \mL \mA_{2,2})\my + (\mB_1 - \mL \mB_2) \muu
+\end{equation}
+
+Sendo $\mL = \mL(t)$ uma matriz de ganhos variante no tempo. \\
+
+Definindo como novo vetor de estados do sistema:
+\begin{equation}
+\mv = \mw - \mL \cdot \my
+\end{equation}
+
+Sendo assim, temos que:
+\begin{equation} \label{eq:w}
+\mw = \mv + \mL \cdot \my
+\end{equation}
+\begin{equation} \label{eq:dw}
+\dot{\mw} = \dot{\mv} + \mL \cdot \dot{\my} + \dot{\mL} \cdot \my
+\end{equation}
+
+Substituindo \eqref{eq:w} e \eqref{eq:dw} em \eqref{eq:w_Ly}, temos:
+$$\dot{\mv} + \dot{\mL} \cdot \my  = (\mA_{1,1} - \mL \mA_{2,1} )(\mv + \mL \cdot \my) + (\mA_{1,2} - \mL \mA_{2,2})\my + (\mB_1 - \mL \mB_2) \muu$$
+\begin{equation} \label{eq:v}
+\therefore \dot{\mv}   = (\mA_{1,1} - \mL \mA_{2,1} )\mv + (\mA_{1,1}\mL - \mL \mA_{2,1}\mL + \mA_{1,2} - \mL\mA_{2,2}  -  \dot{\mL})\my + (\mB_1 - \mL \mB_2) \muu
+\end{equation} \\
+
+O observador de ordem reduzida irá obter uma estimativa $\hat{\mv}$ dos estados $\mv$ através da seguinte equação:
+\begin{equation} \label{eq:v_ch}
+\therefore \dot{\hat{\mv}}   = (\mA_{1,1} - \mL \mA_{2,1} )\hat{\mv} + (\mA_{1,1}\mL - \mL \mA_{2,1}\mL + \mA_{1,2} - \mL\mA_{2,2}  -  \dot{\mL})\my + (\mB_1 - \mL \mB_2) \muu
+\end{equation}
+dado que $\my$ e $\muu$ são conhecidos, visto que $\my$ é medido e $\muu$ é a entrada do sistema. \\
+
+Repare que, tendo obtido as estimativas para os estados $\mv$ a partir da equação \eqref{eq:v_ch}, é possível obter uma estimativa para os estados $\mx$, pois:
+\begin{equation}
+\mx = \begin{bmatrix}
+\mw \\
+\my
+\end{bmatrix}
+=
+ \begin{bmatrix}
+\mv + \mL \cdot \my \\
+\my
+\end{bmatrix}
+\end{equation}
+
+Logo:
+\begin{equation}
+\hat{\mx} = \begin{bmatrix}
+\hat{\mw} \\
+\my
+\end{bmatrix}
+=
+ \begin{bmatrix}
+\hat{\mv} + \mL \cdot \my \\
+\my
+\end{bmatrix}
+\end{equation}
+
+Para utilizar a equação do observador de estados \eqref{eq:v_ch}, é necessário projetar a matriz de ganhos $\mL(t)$.  Definindo o erro de estimação de $\mv$ como:
+\begin{equation}
+\tilde{\mv} = \hat{\mv} - \mv 
+\end{equation}
+
+Subtraindo a equação \eqref{eq:v} da equação \eqref{eq:v_ch}, temos:
+\begin{equation} \label{eq:v_til}
+\dot{\tilde{\mv}} = (\mA_{1,1} - \mL \mA_{2,1} )\tilde{\mv}
+\end{equation}
+
+A equação \eqref{eq:v_til} descreve a dinâmica do erro de estimação de $\mv$. Sendo assim, podemos projetar a matriz $\mL(t)$ de modo a garantir que o erro de estimação tenda assintoticamente a zero, independentemente da condição inicial. Como já foi visto anteriormente: 
+\begin{equation} \tag{\ref{eq:A21}}
+\mA_{2,1} = \mone
+\end{equation}
+
+Sendo assim, temos que:
+\begin{equation} \label{eq:projObs}
+\mA_{1,1} - \mL \mA_{2,1} = \mA_{1,1} - \mL 
+\end{equation}
+
+Seria conveniente que a equação dinâmica do erro de estimação fosse dada por:
+\begin{equation}
+\dot{\tilde{\mv}} = -\alpha\tilde{\mv}
+\end{equation}
+
+A qual garante que $\tilde{\mv}$ vá a zero assintoticamente para $\alpha > 0$.
+
+A partir de \eqref{eq:projObs}, é fácil perceber que a matriz $\mL(t)$ que leva a dinâmica de $\tilde{\mv}$ a esse comportamento é dada por:
+\begin{equation} \label{eq:L}
+\mL(t) = \mA_{1,1}(t)+ \alpha \mone
+\end{equation}
+
+\section{Aplicação da técnica}\label{aplicacao}
+
+À partir dos equacionamentos deduzidos anteriormente, será realizada a modelagem, projeto de controle por realimentação de estados, projeto de observador de ordem reduzida, e simulação de controle de trajetória de um mecanismo serial do tipo RP (figura \ref{fig:1}). \\
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.5]{figures/RP.pdf}  
+	\caption{Mecanismo RP}
+	\label{fig:1}
+\end{figure}
+
+A modelagem do sistema será feita à partir do formalismo de Lagrange \cite{Lanczos,Tsai}.
+
+Sejam $(x_1, y_1)$ e $(x_2, y_2)$ as coordenadas dos centros de massa dos elos 1 e 2, respectivamente. As energias cinética e potencial do sistema são dadas por:
+
+\begin{equation} \label{eq:Ec}
+E_c = \frac{1}{2} \Big( m_1 ( \dot{x}_1^2 + \dot{y}_1^2 ) + Jz_1 \dot{\theta}^2 + m_2 ( \dot{x}_2^2 + \dot{y}_2^2 ) + Jz_2 \dot{\theta}^2 \Big)
+\end{equation}
+
+\begin{equation} \label{eq:Ep}
+E_p = -m_1 y_1 g - m_2 y_2 g
+\end{equation}
+
+Para aplicar o formalismo de Lagrange é preciso escrever as energias cinética e potencial em função de um conjunto mínimo de coordenadas generalizadas. Para esse sistema, definimos o seguinte conjunto mínimo de coordenadas generalizadas:
+
+\begin{equation}
+\mq = \begin{bmatrix}
+\theta \\
+d
+\end{bmatrix}
+\end{equation}
+
+Realizando a cinemática de posição para os centros de massa, podemos escrever $x_1$, $y_1$, $x_2$ e $y_2$ em função de $\theta$ e $d$.
+
+\begin{equation} \label{eq:cinPos}
+\begin{cases} 
+x_1 = l_{g1} \cos\theta \\
+y_1 = l_{g1} \sin\theta \\
+x_2 = (d - l_2 +l_{g2}) \cos\theta \\
+y_2 = (d - l_2 +l_{g2}) \sin\theta \\
+\end{cases}
+\end{equation}
+
+Derivando no tempo, temos:
+
+\begin{equation} \label{eq:cinVel}
+\begin{cases}
+\dot{x}_1 = -l_{g1} \sin\theta \dot{\theta} \\
+\dot{y}_1 = l_{g1} \cos\theta \dot{\theta} \\
+\dot{x}_2 = -(d - l_2 +l_{g2}) \sin\theta\dot{\theta} + \dot{d} \cos\theta \\
+\dot{y}_2 = (d - l_2 +l_{g2}) \cos\theta\dot{\theta} +  \dot{d} \sin\theta\\
+\end{cases}
+\end{equation}
+
+Substituindo \eqref{eq:cinVel} em \eqref{eq:Ec} e \eqref{eq:Ep}, temos:
+
+\begin{equation}
+E_c(\mq,\dot{\mq}) = \frac{1}{2} \Big(   \big(Jz_1 + Jz_2 + m_1 l_{g1}^2 + m_2 (d - l_2 +l_{g2})^2 \big) \dot{\theta}^2 + m_2 \dot{d}^2 \Big)
+\end{equation}
+
+\begin{equation}
+E_p(\mq) = - \big(m_1 l_{g1}  + m_2 (d -l_2 + l_{g2})\big) g \sin \theta 
+\end{equation}
+
+Sendo assim, definimos o Lagrangeano do sistema:
+
+\begin{equation}
+L(\mq, \dot{\mq}) = E_c(\mq, \dot{\mq}) - E_p(\mq)
+\end{equation}
+
+As equações de movimento do sistema são dadas por:
+
+\begin{equation}
+\frac{d}{dt} \Big( \frac{\partial L}{\partial \dot{\mq}} \Big) - \frac{\partial L}{\partial \mq} = \mtau
+\end{equation}
+
+Sendo $\mtau$ o vetor de esforços externos aplicados nas direções das coordenadas generalizadas, que no caso são os esforços dos atuadores. Calculando as derivadas do Lagrangeano:
+
+\begin{equation}
+\frac{\partial L}{\partial \dot{\mq}} = \begin{bmatrix}
+(Jz_1 + Jz_2 + m_1 lg_1^2 + m_2 (d - l_2 + l_{g2})^2) \dot{\theta} \\
+m_2 \dot{d}
+\end{bmatrix}
+\end{equation}
+
+\begin{equation}
+\frac{d}{dt} \Big( \frac{\partial L}{\partial \dot{\mq}} \Big) = \begin{bmatrix}
+(Jz_1 + Jz_2 + m_1 lg_1^2 + m_2 (d - l_2 + l_{g2})^2) \ddot{\theta} + 2 m_2 (d-l_2+l_{g2}) \dot{\theta} \dot{d} \\
+m_2 \ddot{d}
+\end{bmatrix}
+\end{equation}
+
+\begin{equation}
+\frac{\partial L}{\partial \mq} = \begin{bmatrix}
+(m_1 l_{g1} + m_2 (d-l_2 + l_{g2}) ) g \cos \theta \\
+m_2  (d-l_2+l_{g2})\dot{\theta}^2  + m_2 g \sin \theta
+\end{bmatrix}
+\end{equation}
+
+Sendo assim, temos que o modelo dinâmico do sistema podem ser escrito no formato da equação \eqref{eq:MecSerial}, ou seja:
+
+\begin{equation} \tag{\ref{eq:MecSerial}}
+\mH(\mq) \ddot{\mq} + \mh(\mq, \dot{\mq}) = \mtau
+\end{equation}
+
+Sendo:
+
+\begin{equation}
+\mH(\mq) = \begin{bmatrix}
+Jz_1 + Jz_2 + m_1 lg_1^2 + m_2 (d - l_2 + l_{g2})^2 & 0 \\
+0 & m_2
+\end{bmatrix}
+\end{equation}
+
+\begin{equation}
+\mh(\mq, \dot{\mq}) = \begin{bmatrix}
+2 m_2 (d-l_2+l_{g2}) \dot{\theta} \dot{d} - (m_1 l_{g1} + m_2 (d-l_2 + l_{g2}) ) g \cos \theta \\
+-m_2  (d-l_2+l_{g2})\dot{\theta}^2  - m_2 g \sin \theta
+\end{bmatrix}
+\end{equation}
+
+Tendo obtido $\mH(\mq)$ e $\mh(\mq, \dot{\mq})$, podemos calcular as matrizes $\mM(t)$, $\mV(t)$ e $\mG(t)$ do sistema linearizado à partir das equações \eqref{eq:M}, \eqref{eq:V} e \eqref{eq:G}:  
+
+\begin{equation}
+\mM(t) = \begin{bmatrix}
+Jz_1 + Jz_2 + m_1 lg_1^2 + m_2 (d_d(t) - l_2 + l_{g2})^2 & 0 \\
+0 & m_2
+\end{bmatrix}
+\end{equation}
+
+\begin{equation}
+\mV(t) = \begin{bmatrix}
+2 m_2 (d_d(t) -l_2+l_{g2}) \dot{d}_d(t) & 2 m_2 (d_d(t) -l_2+l_{g2}) \dot{\theta}_d(t) \\
+-2 m_2 (d_d(t) -l_2+l_{g2}) \dot{\theta}_d(t) & 0
+\end{bmatrix}
+\end{equation}
+
+\small
+\begin{equation}
+\mG(t) = \begin{bmatrix}
+ \big( m_1 l_{g1}  + m_2 ( d_d(t) -l_2 + l_{g2})\big) g \sin \theta_d(t) & m_2 \left(2 \dot{d}_d(t) \dot{\theta}_d(t)+2  (d_d(t)-l_2+l_{g2})\ddot{\theta}_d(t) -g \cos \theta_d(t)\right) \\
+-m_2 g \cos\theta_d(t) & -m_2 \dot{\theta}_d^2(t)
+\end{bmatrix}
+\end{equation}
+\normalsize
+
+A partir de $\mM(t)$, $\mV(t)$ e $\mG(t)$, obtemos $\mA_{1,1}(t)$, $\mA_{1,2}(t)$, $\mB_1(t)$, $\mK(t)$ e $\mL(t)$ através de \eqref{eq:A11}, \eqref{eq:A12}, \eqref{eq:B1}, \eqref{eq:K} e \eqref{eq:L}. \\
+
+Além disso, para realizar a simulação do sistema precisamos de $\mtau_d(t)$, a qual é dada pela equação \eqref{eq:tau_d} e depende das matrizes $\mM(t)$ e $\mh^*(t)$, sendo a última dada por:
+\begin{equation}
+\mh^*(t) = \begin{bmatrix}
+2 m_2 (d_d(t)-l_2+l_{g2}) \dot{\theta}_d(t) \dot{d}_d(t) - (m_1 l_{g1} + m_2 (d_d(t)-l_2 + l_{g2}) ) g \cos \theta_d(t) \\
+-m_2  (d-l_2+l_{g2})\dot{\theta}_d^2(t)  - m_2 g \sin \theta_d^2(t)
+\end{bmatrix}
+\end{equation}
+
+A simulação do sistema será feita a partir da solução do seguinte sistema de equações algébrico-diferenciais:
+
+\begin{equation}
+\begin{cases}
+\mH(\mq) \ddot{\mq} + \mh(\mq, \dot{\mq}) = \mtau \\
+\mtau = \mtau_d(t) + \muu \\
+\mtau_d(t) = \mM (t) \cdot  \ddot{\mq}_d(t) + \mh^*(t) \\
+\muu = -\mK(t) \cdot \hat{\mx} \\
+\hat{\mx}
+=
+ \begin{bmatrix}
+\hat{\mv} + \mL \cdot \my \\
+\my
+\end{bmatrix} \\
+\dot{\hat{\mv}}   = (\mA_{1,1} - \mL \mA_{2,1} )\hat{\mv} + (\mA_{1,1}\mL - \mL \mA_{2,1}\mL + \mA_{1,2} - \mL\mA_{2,2}  -  \dot{\mL})\my + (\mB_1 - \mL \mB_2) \muu \\
+\my = \mq - \mq_d(t)
+\end{cases}
+\end{equation}
+
+Definindo os seguintes valores para os parâmetros do sistema:
+\begin{multicols}{2}
+\begin{itemize}
+\item[-] $l_1 = 0.1 m$ 
+\item[-] $l_2 = 0.1 m$
+\item[-] $l_{g1} = 0.05 m$
+\item[-] $l_{g2} = 0.05 m$ 
+\item[-] $m_1 = 0.1 kg$ 
+\item[-] $m_2 = 0.1 kg$ 
+\item[-] $Jz_1 = 80.0 \cdot 10^{-6} kg \, m^2$ 
+\item[-] $Jz_2 = 80.0 \cdot 10^{-6} kg \, m^2$ 
+\item[-] $g = 9.8 m/s^2$
+\end{itemize}
+\end{multicols}
+
+Os parâmetros $k_p$ e $k_v$ do controlador são escolhidos do modo a alocar os pólos do sistema em malha fechada em $s = -100 rad/s$ (amortecimento crítico). Sendo assim, temos:
+\begin{equation}
+k_p = 100^2 (rad/s)^2 = 10000 (rad/s)^2
+\end{equation}
+\begin{equation}
+k_v = 2 \cdot 100 rad/s = 200 rad/s
+\end{equation}
+
+O parâmetro $\alpha$ do observador é escolhido de modo que os pólos do observador tenham uma dinâmica 3 vezes mais rápida que os pólos do sistema em malha fechada, ou seja, em $s = -300rad/s$. Sendo assim, temos:
+\begin{equation}
+\alpha = 300 rad/s
+\end{equation}
+
+Definindo a seguinte trajetória de referência:
+\begin{equation}
+\mq_d(t) = \begin{bmatrix}
+\theta_d(t) \\
+d_d(t) 
+\end{bmatrix}
+= \begin{bmatrix}
+\pi \sin(20 t) \\
+0.15 + 0.05\sin(20t)
+\end{bmatrix} 
+\end{equation}
+
+E as seguintes condições iniciais:
+\begin{equation}
+\mq(0) = \begin{bmatrix}
+\theta(0) \\
+d(0) 
+\end{bmatrix}
+= \begin{bmatrix}
+0.0 \\
+0.15 
+\end{bmatrix}
+\end{equation}
+\begin{equation}
+\dot{\mq}(0) = \begin{bmatrix}
+\dot{\theta}(0) \\
+\dot{d}(0) 
+\end{bmatrix}
+= \begin{bmatrix}
+0 \\
+0 
+\end{bmatrix}
+\end{equation}
+\begin{equation}
+\hat{\mv}(0) = \begin{bmatrix}
+1 \\
+1 
+\end{bmatrix}
+\end{equation}
+
+Sendo assim, obtemos os seguintes resultados: (figuras \ref{fig:2}, \ref{fig:3}, \ref{fig:4}, \ref{fig:5} e \ref{fig:6})
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.6]{figures/e_theta_orig.pdf}  
+	\caption{Erro de controle $\Delta\theta$ em função do tempo}
+	\label{fig:2}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.6]{figures/e_d_orig.pdf}  
+	\caption{Erro de controle $\Delta d$  em função do tempo}
+	\label{fig:3}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.6]{figures/w1_orig.pdf}  
+	\caption{$\Delta\dot{\theta}$ real (em azul) e estimado (em beje) em função do tempo}
+	\label{fig:4}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.6]{figures/w2_orig.pdf}  
+	\caption{$\Delta\dot{d}$ real (em azul) e estimado (em beje) em função do tempo}
+	\label{fig:5}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.6]{figures/theta_orig.pdf}  
+	\caption{Coordenada $\theta$ em função do tempo}
+	\label{fig:6}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.6]{figures/d_orig.pdf}  
+	\caption{Coordenada $d$ em função do tempo}
+	\label{fig:7}
+\end{figure}
+
+Como podemos perceber, os erros de controle e de observação vão a zero assintóticamente. Realizando a mesma simulação, agora com erro de controle não nulo em $t=0$, mudando as condições iniciais para
+
+\begin{equation}
+\mq(0) = \begin{bmatrix}
+0.1 \\
+0.16
+\end{bmatrix}
+\end{equation}
+
+obtemos os seguintes resultados: (figuras \ref{fig:8}, \ref{fig:9}, \ref{fig:10}, \ref{fig:11}, \ref{fig:12} e \ref{fig:13})
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.6]{figures/e_theta.pdf}  
+	\caption{Erro de controle $\Delta\theta$ em função do tempo}
+	\label{fig:8}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.6]{figures/e_d.pdf}  
+	\caption{Erro de controle $\Delta d$  em função do tempo}
+	\label{fig:9}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.6]{figures/w1.pdf}  
+	\caption{$\Delta\dot{\theta}$ real (em azul) e estimado (em beje) em função do tempo}
+	\label{fig:10}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.6]{figures/w2.pdf}  
+	\caption{$\Delta\dot{d}$ real (em azul) e estimado (em beje) em função do tempo}
+	\label{fig:11}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.6]{figures/theta.pdf}  
+	\caption{Coordenada $\theta$ em função do tempo}
+	\label{fig:12}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.6]{figures/d.pdf}  
+	\caption{Coordenada $d$ em função do tempo}
+	\label{fig:13}
+\end{figure}
+
+%\begin{equation}
+%\frac{2 m_2 \left(-\ddot{d}_d (d_d-l_2+l_{g2}) \left(m_2 (d_d-l_2+l_{g2})^2+Jz_1+Jz_2+l_{g1}^2 m_1\right)-\dot{d}_d^2 \left(Jz_1+Jz_2+l_{g1}^2 m_1 - m_2 (d_d-l_2+l_{g2})^2 \right)\right)}{\left(m_2 (d_d-l_2+l_{g2})^2+Jz_1+Jz_2+l_{g1}^2 m_1\right)^2}
+%\end{equation}
+
+
+%---CONCLUSÕES---------------------------------------------------------
+\section{Conclusões}\label{concl}
+
+A partir dos resultados obtidos, foi possível constatar que o controlador e observador projetados desempenham bem as funções pelas quais foram projetados, visto que o erro de controle e o erro de observação vão a zero assintoticamente, mesmo partindo de condições iniciais não nulas.
+
+
+%\newpage
+
+\phantom{a}
+\bibliographystyle{plain}
+\bibliography{bibliografia}
+
+\end{document}\grid

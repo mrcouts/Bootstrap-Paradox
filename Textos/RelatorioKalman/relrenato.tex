@@ -1,0 +1,841 @@
+\documentclass[a4paper,12pt,brazil]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[latin1]{inputenc}
+\usepackage[brazil]{babel}
+\usepackage{float}
+
+\flushbottom
+
+\setlength\textwidth{160mm}
+\setlength\textheight{247mm}
+\setlength\hoffset{-13.4mm}
+\setlength\voffset{-20mm}
+\setlength\parindent{0.75cm}
+\setlength\parskip{0mm}
+\setlength\topsep{12pt}
+
+\usepackage{paralist}
+\usepackage{subfigure}
+\usepackage{amsmath,amssymb,amsfonts,textcomp, bm}
+\usepackage{rawfonts}
+\usepackage{graphics,psfrag}
+\usepackage{latexsym}
+\usepackage{varioref}
+\usepackage{subfigmat}
+\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage[colorlinks,citecolor=Fuchsia,urlcolor=blue,linkcolor=black]{hyperref}
+%\usepackage[colorlinks=false]{hyperref}
+\usepackage{color}
+\usepackage{array}
+\usepackage{hhline}
+\usepackage{array}
+\usepackage{supertabular}
+\usepackage{setspace}
+\usepackage[pdftex]{graphicx}
+\usepackage{special-char}
+
+\usepackage[sort=def, nopostdot]{glossaries}
+\usepackage{makeidx} 
+\usepackage{listings}
+\usepackage{multicol}
+\usepackage{hyperref}
+
+\renewcommand*{\glossarypreamble}{\vspace{-\baselineskip}}  
+
+\newglossary[cng]{conventions}{cns}{cno}{Convenções de notação}
+\newglossary[syg]{symbols}{sys}{syo}{Lista de símbolos}
+
+\renewcommand*{\arraystretch}{1.3}  % sets the line indent in glossaries
+\setlength{\glsdescwidth}{390pt}   
+\setlength\LTleft{0pt}
+
+\renewcommand*{\glossarypreamble}{\vspace{-\baselineskip}}
+
+\makeindex
+\makeglossaries
+
+\graphicspath{{figuras/}{../figuras/}}
+
+
+\begin{document}
+
+\setcounter{MaxMatrixCols}{50}
+
+\onehalfspacing 
+
+\begin{titlepage}
+\begin{center}
+{\phantom{a}}
+\vspace{1.0cm}
+\textsc{\Large{{ André Garnier Coutinho}}}\\
+\vspace{5.0cm}
+ {\huge\bfseries Projeto de Filtro de Kalman Estendido aplicado a um mecanismo serial do tipo RP\\}
+\vfill
+\hspace{.50\textwidth}
+\begin{minipage}{.45\textwidth}
+{Relatório sobre observadores não determinísticos apresentado à disciplina {\em PME5009 - Introdução à Teoria de Estimação} do Programa de Pós Graduação em Engenharia Mecânica (PPGEM) da Escola Politécnica 
+da Universidade de São Paulo (EPUSP)
+}\\[25pt]
+{Área de concentração:}\\[2pt]
+{Engenharia Mecânica}\\[25pt]
+{Orientador:}\\[2pt]
+Prof. Dr. Tarcisio A. Hess Coelho
+\end{minipage}
+
+\vfill
+{São Paulo \\ 6 de Junho de 2017}
+\end{center}
+\end{titlepage}
+
+
+
+
+\vspace{-0.3cm}
+
+\noindent
+{\bf Nome: }{André Garnier Coutinho}\\[8pt]
+{\bf NUSP: }{6846085}\\[8pt]
+{\bf Curso: }{Doutorado Direto}\\[8pt]
+{\bf Área de concentração: }{Engenharia Mecânica de Projeto e Fabricação (3151)}\\[8pt]
+{\bf Orientador: }{Professor Doutor Tarcisio Antonio Hess Coelho}\\[8pt]
+{\bf Ano de ingresso no PPGEM: }{2014}\\[8pt]
+{\bf Bolsista: }{Sim}\\[8pt]
+{\bf Agência de fomento: }{CNPq}\\[8pt]
+{\bf Edital/Chamada: }{Cota Institucional (Demanda Social)}\\[8pt]
+{\bf Exame de Qualificação: }{Aprovado em 14/10/2016}\\[8pt]
+
+\vspace{2cm}
+\noindent
+
+% ---
+% Sumário
+% ---
+\newpage
+\pdfbookmark[0]{\contentsname}{toc}
+\tableofcontents
+\cleardoublepage
+% ---
+
+%RESUMO--------------------------------------------------------   
+\newpage
+%\section*{Resumo}
+
+
+
+%INTRODUÇÃO----------------------------------------------------
+%\newpage
+\section{Resumo}\label{intro}
+
+Este trabalho se trata do desenvolvimento de uma metodologia de projeto de Filtro de Kalman Estendido discreto-discreto \cite{Fleury} aplicado a mecanismos seriais, supondo modelo dinâmico explícito conhecido. Além disso, será utilizada a metologia proposta para realizar simulações de um sistema controle de trajetória aplicado a um mecanismo serial do tipo RP.
+
+%Formulação--------------------------------------------------------------------
+\section{Formulação}\label{formulation}
+
+%Esta se\c{c}\~ao apresenta uma s\'intese dos principais resultados te\'oricos obtidos at\'e o momento.
+
+%\input{symbols}
+
+%---ALGORITMO PARA MODELAGEM DE PLATAFORMAS ROBÓTICAS------------------------------------------------------------------------------------------
+\subsection{Modelo dinâmico no espaço de estados}\label{S02-1}
+
+O modelo dinâmico de um mecanismo serial pode ser escrito no seguinte formato \cite{Craig}:
+\begin{equation} \label{eq:MecSerial}
+\mH(\mq) \ddot{\mq} + \mh(\mq, \dot{\mq}) = \mtau
+\end{equation}
+
+
+Passando para o espaço de estados e definindo como saída do sistema os estados $\mq$, temos:
+\begin{equation} \label{eq:SisSS}
+\begin{cases}
+\begin{bmatrix}
+\ddot{\mq} \\
+\dot{\mq} \\
+\end{bmatrix}
+=
+\begin{bmatrix}
+\mH^{-1}(\mq) \big(\mtau - \mh(\mq,\dot{\mq})\big) \\
+\dot{\mq}
+\end{bmatrix}
+
+\\
+\my = \mq
+\end{cases}
+\end{equation}
+
+Ou seja:
+\begin{equation} \label{eq:SisSSg}
+\begin{cases}
+\dot{\mx} = \mff(\mx, \muu) \\
+\my = \mhh(\mx) \\
+\end{cases}
+\end{equation}
+
+Sendo:
+\begin{equation} \label{eq:x}
+\mx = \begin{bmatrix}
+\dot{\mq} \\
+\mq \\
+\end{bmatrix}
+\end{equation}
+\begin{equation} \label{eq:ff}
+\mff( \mx, \muu) = \begin{bmatrix} 
+\mH^{-1}(\mq) \big(\mtau - \mh(\mq,\dot{\mq})\big) \\
+\dot{\mq}
+\end{bmatrix}
+\end{equation}
+\begin{equation} \label{eq:hh}
+\mhh(\mx) = \mq
+\end{equation}
+
+\subsection{Modelo dinâmico linearizado}\label{S02-2}
+
+Dado o modelo dinâmico do sistema representado no espaço de estados não linear \eqref{eq:SisSSg}, o modelo linearizado do sistema pode ser obtido realizando a expansão em série de Taylor até primeira ordem das funções $\mff$ e $\mhh$ em torno de um ponto $\mx = \mx^*$, $\muu = \muu^*$ \cite{CabralLIN}. Utilizaremos o superescrito $*$ para indicar que uma função está calculada nessas condições.
+
+\begin{equation}
+\mff(\mx, \muu) \approx \mff^* + \frac{\partial \mff}{\partial \mx} \Big|^* \Delta \mx + \frac{\partial \mff}{\partial \muu} \Big|^* \Delta \muu
+\end{equation}
+
+\begin{equation}
+\mhh(\mx, \muu) \approx \mhh^* + \frac{\partial \mhh}{\partial \mx} \Big|^* \Delta \mx + \frac{\partial \mhh}{\partial \muu} \Big|^* \Delta \muu
+\end{equation}
+
+Sendo:
+\begin{equation}
+\Delta\mx = \mx - \mx^*
+\end{equation}
+\begin{equation}
+\Delta\muu = \muu - \muu^*
+\end{equation}
+
+Sabendo-se que:
+\begin{equation}
+\dot{\mx}^* = \mff^*
+\end{equation}
+\begin{equation}
+\my^* = \mhh^*
+\end{equation}
+
+E definindo:
+\begin{equation}
+\Delta\dot{\mx} = \dot{\mx} - \dot{\mx}^*
+\end{equation}
+\begin{equation}
+\Delta\my = \my - \my^*
+\end{equation}
+\begin{equation}
+\mA = \frac{\partial \mff}{\partial \mx} 
+\end{equation}
+\begin{equation}
+\mB = \frac{\partial \mff}{\partial \muu} 
+\end{equation}
+\begin{equation}
+\mC = \frac{\partial \mhh}{\partial \mx} 
+\end{equation}
+
+Obtemos o sistema dinâmico linearizado escrito no espaço de estados linear:
+\begin{equation}
+\begin{cases}
+\Delta\dot{\mx} = \mA^* \cdot \Delta\mx + \mB^* \cdot \Delta\muu \\
+\Delta\my = \mC^* \cdot \Delta\mx
+\end{cases}
+\end{equation}
+
+A expressão de $\mC$ pode ser obtida diretamente sem nem nenhuma dificuldade, visto que a expressão de $\mhh(\mx)$ \eqref{eq:hh} é bem simples para o sistema em questão:
+
+\begin{equation} \label{eq:C}
+\mC = \begin{bmatrix}
+\mzr & \mone
+\end{bmatrix}
+\end{equation}
+
+Devido à complexidade da expressão de $\mff(\mx, \muu)$ \eqref{eq:ff}, as expressões de $\mA$ e $\mB$ serão obtidas de forma implícita. 
+
+A equação \eqref{eq:MecSerial} pode ser reescrita como:
+\begin{equation}
+\mf(\mq, \dot{\mq}, \ddot{\mq}, \mtau) = \mzr
+\end{equation}
+
+Sendo:
+\begin{equation}
+\mf (\mq, \dot{\mq}, \ddot{\mq}, \mtau) = \mH(\mq) \ddot{\mq} + \mh(\mq, \dot{\mq}) - \mtau
+\end{equation}
+
+
+Para obter o modelo dinâmico linearizado do mecanismo serial, iremos linearizar a função $\mf(\mq, \dot{\mq}, \ddot{\mq}, \mtau)$ em torno de $\mq = \mq^*$, $\dot{\mq} = \dot{\mq}^*$, $\ddot{\mq} = \ddot{\mq}^*$ e $\mtau = \mtau^*$. Utilizaremos o superescrito $*$ para indicar que uma função está calculada nessas condições. Sendo assim, expandindo $\mf$ em Série de Taylor até primeira ordem em torno de $*$, temos:
+\begin{equation}
+\mf(\mq, \dot{\mq}, \ddot{\mq}, \mtau) \approx  \mf^* + \frac{\partial \mf}{\partial \mq}\Big|^* \Delta \mq + \frac{\partial \mf}{\partial \dot{\mq}}\Big|^* \Delta \dot{\mq} + \frac{\partial \mf}{\partial \ddot{\mq}}\Big|^* \Delta \ddot{\mq} + \frac{\partial \mf}{\partial \mtau}\Big|^* \Delta \mtau
+\end{equation}
+
+Sendo:
+\begin{equation} \label{eq:G}
+\frac{\partial \mf}{\partial \mq} = \mG =  \frac{\partial (\mH \cdot \ddot{\mq})}{\partial \mq} + \frac{\partial \mh}{\partial \mq} 
+\end{equation}
+\begin{equation} \label{eq:V}
+\frac{\partial \mf}{\partial \dot{\mq}} = \mV =  \frac{\partial \mh}{\partial \dot{\mq}}
+\end{equation}
+\begin{equation} \label{eq:M}
+\frac{\partial \mf}{\partial \ddot{\mq}} = \mH
+\end{equation}
+\begin{equation}
+\frac{\partial \mf}{\partial \mtau} = -\mone
+\end{equation}
+\begin{equation}
+\Delta\mq = \mq - \mq^*
+\end{equation}
+\begin{equation}
+\Delta\dot{\mq} = \dot{\mq} - \dot{\mq}^*
+\end{equation}
+\begin{equation}
+\Delta\ddot{\mq} = \ddot{\mq} - \ddot{\mq}^*
+\end{equation}
+\begin{equation}
+\Delta\mtau = \mtau - \mtau^*
+\end{equation}
+
+$\mtau^*$ é escolhido de modo que $\mf^* = \mzr$, ou seja:
+\begin{equation} \label{eq:tau_d}
+\mtau^* = \mH^*  \cdot  \ddot{\mq}^* + \mh^*
+\end{equation}
+
+Assim, o modelo linearizado do mecanismo é dado por:
+\begin{equation} \label{eq:SisLin}
+\mH^* \cdot \Delta\ddot{\mq} + \mV^* \cdot \Delta\dot{\mq} + \mG^* \cdot \Delta\mq = \Delta\mtau
+\end{equation}
+
+Passando para o espaço de estados, temos:
+\begin{equation} \label{eq:SisLinSS}
+\begin{bmatrix}
+\Delta\ddot{\mq} \\
+\Delta\dot{\mq} \\
+\end{bmatrix}
+=
+\begin{bmatrix}
+-{\mH^*}^{-1} \mV^* & -{\mH^*}^{-1} \mG^* \\
+\mone & \mzr
+\end{bmatrix}
+\begin{bmatrix}
+\Delta\dot{\mq} \\
+\Delta\mq \\
+\end{bmatrix}
++
+\begin{bmatrix}
+{\mH^*}^{-1} \\
+\mzr
+\end{bmatrix} \Delta\mtau
+\end{equation}
+
+Ou seja:
+\begin{equation}
+\Delta\dot{\mx} = \mA^* \cdot \Delta\mx + \mB^* \cdot \Delta\muu \\
+\end{equation}
+
+Sendo:
+\begin{equation} \label{eq:delta_x}
+\Delta\mx = \begin{bmatrix}
+\Delta\dot{\mq} \\
+\Delta\mq \\
+\end{bmatrix}
+\end{equation}
+\begin{equation} \label{eq:A}
+\mA = \begin{bmatrix}
+-\mH^{-1} \mV& -\mH^{-1} \mG \\
+\mone & \mzr
+\end{bmatrix}
+\end{equation}
+\begin{equation}
+\mB = \begin{bmatrix}
+\mH^{-1} \\
+\mzr
+\end{bmatrix}
+\end{equation}
+
+\subsection{Modelo dinâmico discretizado}\label{S02-3}
+
+Como já foi visto anteriormente, o modelo dinâmico de um mecanismo serial no espaço de estado não linear pode ser dado por:
+
+\begin{equation} \tag{\ref{eq:SisSSg}}
+\begin{cases}
+\dot{\mx} = \mff(\mx, \muu) \\
+\my = \mhh(\mx) \\
+\end{cases}
+\end{equation}
+
+Supondo que a entrade de controle $\muu$ é atualizada a cada $T$ segundos (controle em tempo discreto), temos que o sistema dinâmico discretizado pode ser dado pela seguinte expressão:
+
+\begin{equation}
+\begin{cases}
+\mx_{k+1} = \mgg(\mx_k, \muu_k) \\
+\my_{k+1} = \mhh(\mx_{k+1}) \\
+t_{k+1} = t_k + T
+\end{cases}
+\end{equation}
+
+Em sistemas contínuos não lineares a expressão de $\mgg(\mx_k, \muu_k)$ em geral não pode ser obtidade de forma exata, dado que a maioria dos sistemas de equações diferenciais não lineares não possui solução exata. Sendo assim, $\mgg( \mx_k, \muu_k)$ deve ser obtida através de métodos numéricos de soluçãos de EDOs. Neste trabalho iremos utilizar o clássico Runge-Kutta de ordem 4 \cite{Tan} para realizar a discretização do sistema. Sendo assim, obtemos a seguinte expressão para $\mgg( \mx_k, \muu_k)$:
+
+\begin{equation} \label{eq:g}
+\mgg(\mx_k, \muu_k) = \mx_k + \frac{T}{6} \Big( \mk_{1 | k} + 2 \mk_{2 | k} + 2 \mk_{3 | k} + \mk_{4 | k} \Big)
+\end{equation}
+
+Sendo
+
+\begin{align}
+\mk_{1 | k} &=  \mff(\mx_k, \muu_k) \\
+\mk_{2 | k} &=  \mff \Big( \mx_k + \frac{T}{2} \mk_{1 | k}, \muu_k \Big) \\
+\mk_{3 | k} &=  \mff \Big(  \mx_k + \frac{T}{2} \mk_{2 | k}, \muu_k \Big) \\
+\mk_{4 | k} &=  \mff( \mx_k + T \mk_{3 | k}, \muu_k)
+\end{align}
+
+\subsection{Jacobiano do sistema discretizado}\label{S02-4}
+
+Para aplicar o Filtro de Kalman Estendido no modelo dinâmico não linear \eqref{eq:SisSSg} é preciso obter o jacobiano $\frac{\partial \mgg}{\partial \mx_k}$ para o cálculo da estimativa a priori da matriz de covariância. Sendo assim, primeiramente definimos:
+
+\begin{equation}
+\mphi(\mx_k, \muu_k)= \frac{\partial \mgg}{\partial \mx_k}
+\end{equation}
+
+\begin{equation}
+\mA_k = \frac{\partial \mff}{\partial \mx} (\mx_k, \muu_k)
+\end{equation} 
+
+
+Derivando \eqref{eq:g}, temos:
+
+\begin{equation}
+			\mphi_k = \frac{\partial \mgg}{\partial \mx_k} = \mone + \frac{T}{6} \Big( \frac{\partial \mk_{1|k}}{\partial \mx_k} + 2 \frac{\partial \mk_{2|k}}{\partial \mx_k}  + 2 \frac{\partial \mk_{3|k}}{\partial \mx_k}  + \frac{\partial \mk_{4|k}}{\partial \mx_k}  \Big)
+		\end{equation}
+		
+Sendo:		
+		\begin{equation}
+			\frac{\partial \mk_{1|k}}{\partial \mx_k}  =  \frac{\partial \mff}{\partial \mx} (\mx_k, \muu_k)
+		\end{equation}
+		\begin{equation}
+			\frac{\partial \mk_{2|k}}{\partial \mx_k}  =  \frac{\partial \mff}{\partial \mx} (\mx_k, \muu_k) \Big( 1 + \frac{T}{2} \frac{\partial \mk_{1|k}}{\partial \mx_k}  \Big)
+		\end{equation}
+		\begin{equation}
+			\frac{\partial \mk_{3|k}}{\partial \mx_k}  =  \frac{\partial \mff}{\partial \mx} (\mx_k, \muu_k) \Big( 1 + \frac{T}{2} \frac{\partial \mk_{2|k}}{\partial \mx_k}  \Big)
+		\end{equation}
+		\begin{equation}
+			\frac{\partial \mk_{4|k}}{\partial \mx_k}  =  \frac{\partial \mff}{\partial \mx} (\mx_k, \muu_k) \Big( 1 + T \frac{\partial \mk_{3|k}}{\partial \mx_k} \Big)
+		\end{equation}
+		
+    	\begin{equation} \label{eq:phi}
+    		\mphi(\mx_k, \muu_k) = \frac{\partial \mgg}{\partial \mx_k} = \mone + T \cdot \mA_k + \frac{1}{2!}(T \cdot \mA_k)^2 + \frac{1}{3!}(T \cdot \mA_k)^3 + \frac{1}{4!}(T \cdot \mA_k)^4
+    	\end{equation}
+    	
+%O jacobiano $\mphi_k = \frac{\partial \mgg}{\partial \mx_k}$ foi obtido em função do jacobiano $\mA = \frac{\partial \mff}{\partial \mx}$. Sendo assim, ainda é necessário obter $\mA$ em função dos termos da equação dinâmica do mecanismo serial \eqref{eq:MecSerial}. Este  será obtido na próxima subseção de forma implícita através da linearização da equação dinâmica \eqref{eq:MecSerial} e sua representação no espaço de estados linear \cite{CabralLIN}.
+
+
+\subsection{Filtro de Kalman Estendido}\label{S02-5}
+
+Sejam dois sistemas discretos, o da planta:
+
+\begin{equation}
+\begin{cases}
+\mx_{k+1} = \mgg(\mx_k, \muu_k) \\
+\my_{k+1} = \mhh(\mx_{k+1}) + \mv_{k+1} \\
+\end{cases}
+\end{equation}
+
+e o do modelo da planta (com supostos erros de modelagem):
+
+\begin{equation}
+\begin{cases}
+\hat{\mx}_{k+1} = \hat{\mgg}(\hat{\mx}_k, \muu_k) \\
+\hat{\my}_{k+1} = \hat{\mhh}(\hat{\mx}_{k+1}) \\
+\end{cases}
+\end{equation}
+
+A função $\mgg(\mx_k, \muu_k)$ pode ser decomposta da seguinte forma:
+\begin{equation}
+\mgg(\mx_k, \muu_k) = \hat{\mgg}(\mx_k, \muu_k) + \mw_k
+\end{equation}
+
+Sendo $\hat{\mgg}(\mx_k, \muu_k)$ a parte modelada e $\mw_k$ o erro de modelagem, o qual é considerado como sendo um vetor de ruído branco gaussiano com média nula e covariância $\mQ_{k}$.
+
+O vetor $\mv_{k}$ é o ruído no processo de medição, assumido como um vetor de ruído branco gaussiano com média nula e covariância $\mR_{k}$.
+
+  
+
+Sejam $\hat{\mphi}$ e $\hat{\mC}$ os seguintes jacobianos do modelo da planta:
+\begin{equation}
+\hat{\mphi}(\hat{\mx}_k, \muu_k) = \frac{\partial \hat{\mgg}}{\partial\hat{\mx}_k}
+\end{equation}
+\begin{equation}
+\hat{\mC}(\hat{\mx}_k, \muu_k) = \frac{\partial \hat{\mhh}}{\partial\hat{\mx}_k}
+\end{equation}
+
+E seja $\muu$ uma lei de controle do tipo:
+\begin{equation}
+\muu = \muuu(t, \mx)
+\end{equation}
+
+Aqui segue o algoritmo para realização do controle em tempo discreto de mecanismos seriais, utilizando uma lei de controle que depende do tempo e dos estados do sistemas, e utilizando o Filtro de Kalman Estendido como observador de estados:
+
+\begin{itemize}
+\item Cálculo da lei de controle
+\begin{equation}
+\muu_k = \muuu(t_k, \hat{\mx}_k^+)
+\end{equation}
+\item Evolução temporal dos estados e medição das saídas
+\begin{equation}
+\mx_{k+1} = \mgg(\mx_k, \muu_k)
+\end{equation}
+\begin{equation}
+\my_{k+1} = \mhh(\mx_{k+1}) + \mv_{k+1}
+\end{equation}
+\item Predição
+		\begin{equation}
+			\hat{\mphi}_{k} = \hat{\mphi}(\hat{\mx}_k^+, \muu_k)
+		\end{equation}
+		\begin{equation}
+			\hat{\mx}_{k+1}^- = \hat{\mgg}(\hat{\mx}_k^+, \muu_k)
+		\end{equation}
+		\begin{equation}
+			\mP_{k+1}^- = \hat{\mphi}_{k} \mP_{k}^+ \hat{\mphi}_{k}^\msT + \mQ_k
+		\end{equation}
+\item Atualização
+\begin{equation}
+			\hat{\mC}_{k+1} = \hat{\mC}(\hat{\mx}_{k+1}^-)
+		\end{equation}
+		\begin{equation}
+			\tilde{\my}_{k+1} = \my_{k+1} - \hat{\mhh}(\hat{\mx}_{k+1}^-)
+		\end{equation}
+		\begin{equation}
+			\mS_{k+1} = \hat{\mC}_{k+1}  \mP_{k+1}^-  \hat{\mC}_{k+1}^\msT + \mR_{k+1}
+		\end{equation}
+		\begin{equation}
+			\mK_{k+1} = \left( ( \mS_{k+1}^\msT)^\msI  \cdot  ( \hat{\mC}_{k+1}  \mP_{k+1}^- ) \right)^\msT
+		\end{equation}
+
+		\begin{equation}
+			\hat{\mx}_{k+1}^+ =  \hat{\mx}_{k+1}^- + \mK_{k+1} \tilde{\my}_{k+1}
+		\end{equation}
+		\begin{equation}
+			\mP_{k+1}^+ =  (\mone - \mK_{k+1} \hat{\mC}_{k+1}) \mP_{k+1}^- (\mone - \mK_{k+1} \hat{\mC}_{k+1})^\msT + \mK_{k+1} \mR_{k+1} \mK_{k+1}^\msT
+		\end{equation}
+\end{itemize}
+
+Sendo $\hat{\mx}_{k}^-$ e $\mP_{k}^-$  as estimativas a priori para a média e para covariancia dos estados do sistema, respectivamente, $\hat{\mx}_{k}^+$ e $\mP_{k}^+$ as estimativas estimativas a posteriori para a média e para covariancia dos estados do sistema, respectivamente, $\tilde{\my}_k$ o resíduo da medição, $\mS_k$ o resíduo da covariância, e $\mK_k$ o ganho de Kalman.
+
+\subsection{Lei de Controle}\label{S02-6}
+
+A lei de controle escolhida para ser utilizada neste trabalho é a tradicional lei de Controle por Torque Computado \cite{Craig}, a qual é largamente utilizada na literatura de controle de mecanismos seriais e paralelos.
+
+Admitindo que a equação dinâmica da planta é dado por
+
+\begin{equation} \tag{\ref{eq:MecSerial}}
+\mH(\mq) \ddot{\mq} + \mh(\mq, \dot{\mq}) = \muu
+\end{equation}
+
+E que o modelo disponível da planta (supondo erros de modelagem) é dado por:
+
+\begin{equation}
+\hat{\mH}(\mq) \ddot{\mq} + \hat{\mh}(\mq, \dot{\mq}) = \muu
+\end{equation}
+
+A lei de Controle por Torque Computado é dada por:
+\begin{equation}
+\muu = \muuu(t, \mx) = \hat{\mH}(\mq) (\ddot{\mq}_d(t) + k_v \dot{\me} + k_p \me ) + \hat{\mh}(\mq, \dot{\mq})
+\end{equation}
+
+Sendo $\mq_d(t)$ a trajetória de refêrencia, e $\me$ o erro de controle, dado por:
+\begin{equation}
+\me = \mq_d(t) - \mq
+\end{equation}
+
+Repare que se não houvesse erros de modelagem, a equação do sistema em malha fechada seria dada por:
+\begin{equation}
+\ddot{\me} + k_v \dot{\me} + k_p \me = \mzr
+\end{equation}
+
+Sendo assim, o erro de controle decai exponencialmente a zero para $k_p, k_v > 0$ e as constante $k_p$ e $k_v$ podem ser utilizadas para alocar os pólos do sistema em malha fechada.
+
+\newpage
+
+\section{Aplicação da técnica}\label{aplicacao}
+
+À partir dos equacionamentos deduzidos anteriormente, será realizada o projeto de Filtro de Kalman Estendido  e simulação de controle de trajetória de um mecanismo serial do tipo RP (figura \ref{fig:1}). \\
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.5]{figures/RP.pdf}  
+	\caption{Mecanismo RP}
+	\label{fig:1}
+\end{figure}
+
+O modelo dinâmico que será utilizado é o mesmo apresentado e deduzido em \cite{Coutinho}, o qual pode ser escrito no formato da equação \eqref{eq:MecSerial}, ou seja:
+
+\begin{equation} \tag{\ref{eq:MecSerial}}
+\mH(\mq) \ddot{\mq} + \mh(\mq, \dot{\mq}) = \mtau
+\end{equation}
+
+Sendo:
+
+\begin{equation}
+\mq = \begin{bmatrix}
+\theta \\
+d
+\end{bmatrix}
+\end{equation}
+
+\begin{equation}
+\mH(\mq) = \begin{bmatrix}
+Jz_1 + Jz_2 + m_1 lg_1^2 + m_2 (d - l_2 + l_{g2})^2 & 0 \\
+0 & m_2
+\end{bmatrix}
+\end{equation}
+
+\begin{equation}
+\mh(\mq, \dot{\mq}) = \begin{bmatrix}
+2 m_2 (d-l_2+l_{g2}) \dot{\theta} \dot{d} - (m_1 l_{g1} + m_2 (d-l_2 + l_{g2}) ) g \cos \theta \\
+-m_2  (d-l_2+l_{g2})\dot{\theta}^2  - m_2 g \sin \theta
+\end{bmatrix}
+\end{equation}
+
+Tendo obtido $\mH(\mq)$ e $\mh(\mq, \dot{\mq})$, podemos calcular as matrizes $\mV(\mq,\dot{\mq})$ e $\mG(\mq, \dot{\mq},\ddot{\mq})$ do sistema linearizado à partir das equações \eqref{eq:V} e \eqref{eq:G}:  
+
+\begin{equation}
+\mV(\mq,\dot{\mq}) = \begin{bmatrix}
+2 m_2 (d -l_2+l_{g2}) \dot{d} & 2 m_2 (d -l_2+l_{g2}) \dot{\theta} \\
+-2 m_2 (d -l_2+l_{g2}) \dot{\theta} & 0
+\end{bmatrix}
+\end{equation}
+
+\small
+\begin{equation}
+\mG(\mq, \dot{\mq},\ddot{\mq}) = \begin{bmatrix}
+ \big( m_1 l_{g1}  + m_2 ( d -l_2 + l_{g2})\big) g \sin \theta & m_2 \left(2 \dot{d} \dot{\theta}+2  (d_d-l_2+l_{g2})\ddot{\theta} -g \cos \theta\right) \\
+-m_2 g \cos\theta & -m_2 \dot{\theta}^2
+\end{bmatrix}
+\end{equation}
+\normalsize
+
+A partir disso, podemos definir $\mx$ e obter $\mff$, $\mhh$, $\mgg$, $\mA$, $\mC$ e $\mphi$ através das equações \eqref{eq:x}, \eqref{eq:ff}, \eqref{eq:hh}, \eqref{eq:g}, \eqref{eq:A}, \eqref{eq:C} e \eqref{eq:phi}
+
+Definindo os seguintes valores para os parâmetros do modelo:
+\begin{multicols}{2}
+\begin{itemize}
+\item[-] $\hat{l}_1 = 0.10 m$
+\item[-] $\hat{l}_2 = 0.10 m$
+\item[-] $\hat{l}_{g1} = 0.05 m$
+\item[-] $\hat{l}_{g2} = 0.05 m$
+\item[-] $\hat{m}_1 = 0.1 kg$
+\item[-] $\hat{m}_2 = 0.1 kg$
+\item[-] $\hat{J}z_1 = 80.0 \cdot 10^{-6} kg\cdot m^2$
+\item[-] $\hat{J}z_2 = 80.0 \cdot 10^{-6} kg\cdot m^2$
+\item[-] $\hat{g} = 9.8 m/s^2$
+\end{itemize}
+\end{multicols}		
+E os seguintes valores para os parâmetros da planta:
+\begin{multicols}{2}
+\begin{itemize}
+\item[-] $l_1 = 0.0998 m$
+\item[-] $l_2 = 0.1001 m$
+\item[-] $l_{g1} = 0.0514 m$
+\item[-] $l_{g2} = 0.0497 m$
+\item[-] $m_1 = 0.1077 kg$
+\item[-] $m_2 = 0.0955 kg$
+\item[-] $Jz_1 = 77.34 \cdot 10^{-6} kg\cdot m^2$
+\item[-] $Jz_2 = 88.19 \cdot 10^{-6} kg\cdot m^2$
+\item[-] $g = 9.8 m/s^2$
+\end{itemize}
+\end{multicols}
+		
+Os parâmetros $k_p$ e $k_v$ do controlador são escolhidos do modo a alocar os pólos do sistema em malha fechada em $s = -100 rad/s$ (amortecimento crítico). Sendo assim, temos:
+\begin{equation}
+k_p = 100^2 (rad/s)^2 = 10000 (rad/s)^2
+\end{equation}
+\begin{equation}
+k_v = 2 \cdot 100 rad/s = 200 rad/s
+\end{equation}
+
+A matriz $\mR_k$ de covariância do ruído de medição é escolhida assumindo que o ângulo $\theta$ é medido por um encoder incremental com resolução de 1000 pulsos/volta, utilizando a leitura da quadratura, e que medição de $d$ tem a precisão de $1mm$, e que os erros de medida de $\theta$ e $d$ são independentes. Sendo assim, temos:
+\begin{equation}
+\mR_k =
+\begin{bmatrix}
+\Big(0.5 \cdot \frac{2\pi}{4000})^2 & 0 \\
+0 & (0.5 \cdot 10^{-3})^2
+\end{bmatrix}
+=
+\begin{bmatrix}
+6.17 \cdot 10^{-7} & 0 \\
+0 & 2.5 \cdot 10^{-7}
+\end{bmatrix}
+\end{equation}
+
+A matriz $\mQ_k$ de covariância do ruído de erro de modelagem é escolhida como sendo:
+\begin{equation}
+\mQ_k =
+\begin{bmatrix}
+6.17 \cdot 10^{-7} & 0 & 0 & 0 \\
+0 & 2.5 \cdot 10^{-7} & 0 & 0 \\
+0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0
+\end{bmatrix}
+\end{equation}
+
+Tendo em vista que as componentes de $\mff$ (e consequentemente de $\mgg$) relativas aos estados $\theta$ e $d$ não dependem de parâmetros do sistema, logo não apresentam erros de modelagem, e considerando que os erros de modelagem relativos aos estados $\dot{\theta}$ e $\dot{d}$ são da mesma ordem dos erros de medição.
+
+
+
+
+Definindo a seguinte trajetória de referência:
+\begin{equation}
+\mq_d(t) = \begin{bmatrix}
+\theta_d(t) \\
+d_d(t) 
+\end{bmatrix}
+= \begin{bmatrix}
+-\frac{\pi}{2} +  \frac{\pi}{2} \sin(10 t) \\
+0.15 +  0.1 \sin(10 t)
+\end{bmatrix} 
+\end{equation}
+
+As seguintes condições iniciais:
+\begin{multicols}{2}
+\begin{equation}
+\mx(0) = \begin{bmatrix}
+\mzr \\
+\mq_d(0) 
+\end{bmatrix}
+= \begin{bmatrix}
+0.0 \\
+0.0 \\
+0.0 \\
+0.15 
+\end{bmatrix}
+\end{equation}
+
+\begin{equation}
+\hat{\mx}^-(0) = \begin{bmatrix}
+\dot{\mq}_d(0) \\
+\mq_d(0) 
+\end{bmatrix}
+= \begin{bmatrix}
+15.71 \\
+1.0 \\
+0.0 \\
+0.15 
+\end{bmatrix}
+\end{equation}
+\end{multicols}
+
+\begin{equation}
+\mP^-(0) =
+			\begin{bmatrix}
+				246.7 & 0 & 0 & 0 \\
+				0     & 1.0 & 0 & 0 \\
+				0     & 0 & 6.17 \cdot 10^{-7} & 0 \\
+				0     & 0 & 0               & 2.5 \cdot 10^{-7}
+			\end{bmatrix} 
+\end{equation}
+
+E o período de amostragem do sistema, escolhido de modo a garantir a estabilidade numérica da simulação:
+\begin{equation}
+T = 5.0 \cdot 10^{-6} s
+\end{equation}
+
+Utilizando o algoritmo proposta na seção \ref{S02-5}, obtemos os seguintes resultados: (figuras \ref{fig:2}, \ref{fig:3}, \ref{fig:4}, \ref{fig:5}, \ref{fig:6}, \ref{fig:7}, \ref{fig:8}, \ref{fig:9}, \ref{fig:10}, \ref{fig:11} e \ref{fig:12})
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.7]{figures/e_theta.pdf}  
+	\caption{Erro de controle $\theta_d - \theta$ em função do tempo}
+	\label{fig:2}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.7]{figures/e_d.pdf}  
+	\caption{Erro de controle $d_d - d$  em função do tempo}
+	\label{fig:3}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.7]{figures/theta.pdf}  
+	\caption{$\theta$ real (em vermelho) e estimado (em tracejado) em função do tempo}
+	\label{fig:4}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.7]{figures/d.pdf}  
+	\caption{$d$ real (em vermelho) e estimado (em tracejado) em função do tempo}
+	\label{fig:5}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.7]{figures/dtheta.pdf}  
+	\caption{$\dot{\theta}$ real (em vermelho) e estimado (em tracejado) em função do tempo}
+	\label{fig:6}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.7]{figures/dd.pdf}  
+	\caption{$\dot{d}$ real (em vermelho) e estimado (em tracejado) em função do tempo}
+	\label{fig:7}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.7]{figures/e_obs_theta.pdf}  
+	\caption{Erro de observação $\theta - \hat{\theta}$ em função do tempo}
+	\label{fig:8}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.7]{figures/e_obs_d.pdf}  
+	\caption{Erro de observação $d - \hat{d}$  em função do tempo}
+	\label{fig:9}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.7]{figures/e_obs_dtheta.pdf}  
+	\caption{Erro de observação $\dot{\theta} - \dot{\hat{\theta}}$ em função do tempo}
+	\label{fig:10}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.7]{figures/e_obs_dd.pdf}  
+	\caption{Erro de observação $\dot{d} - \dot{\hat{d}}$  em função do tempo}
+	\label{fig:11}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.7]{figures/Ptr.pdf}  
+	\caption{Traço da matriz de covariância $\mP$  em função do tempo}
+	\label{fig:12}
+\end{figure}
+
+
+
+%\begin{equation}
+%\frac{2 m_2 \left(-\ddot{d}_d (d_d-l_2+l_{g2}) \left(m_2 (d_d-l_2+l_{g2})^2+Jz_1+Jz_2+l_{g1}^2 m_1\right)-\dot{d}_d^2 \left(Jz_1+Jz_2+l_{g1}^2 m_1 - m_2 (d_d-l_2+l_{g2})^2 \right)\right)}{\left(m_2 (d_d-l_2+l_{g2})^2+Jz_1+Jz_2+l_{g1}^2 m_1\right)^2}
+%\end{equation}
+		
+
+		
+
+
+%---CONCLUSÕES---------------------------------------------------------
+\section{Conclusões}\label{concl}
+
+A partir dos resultados obtidos, foi possível constatar que o Filtro de Kalman Estendido apresentou uma convergência muito rápida para as estimativas dos estados do sistema e suas respectivas covariâncias, apresentando erros de observação extremamente pequenos em regime permanente, mesmo havendo erros de modelagem no modelo utilizado. Consequentemente, o controlador não linear também conseguiu desempenhar muito bem o seu papel, também apresentando uma convergência rápida para o erro de controle e pequenos erros em regime permanente. Porém, pôde-se observar que para o sistema em questão, o Filtro de Kalman Estendido é muito sensível ao período de amostragem utilizado, sendo necessário utilizar períodos de amostragem na ordem de micro segundos para garantir a convergência da simulação numérica e o bom desepenho do sistema de controle.
+
+
+%\newpage
+
+\phantom{a}
+\bibliographystyle{plain}
+\bibliography{bibliografia}
+
+\end{document}\grid
+\grid

@@ -1,0 +1,507 @@
+%---------------------------------------------------------------------------------------%
+%                                    xcolor package                                     %
+%---------------------------------------------------------------------------------------%
+
+
+\definecolor{strawberry}{rgb}{1, 0., 0.5}
+\definecolor{cyan}{rgb}{0,1,1}
+\definecolor{steel}{rgb}{0.4, 0.4, 0.4}
+\definecolor{mercury}{rgb}{0.9, 0.9, 0.9}
+\definecolor{aqua}{rgb}{0, 0.5, 1}
+\definecolor{sky}{rgb}{0.4, 0.8, 1}
+\definecolor{tangerine}{rgb}{1, 0.7, 0}
+\definecolor{dew}{rgb}{0.4, 1, 0.8}
+\definecolor{lightgreen}{rgb}{0.8, 1, 0.4}
+\definecolor{banana}{rgb}{1, 1, 0.4}
+
+\definecolor{color01}{rgb}{0.65098041296005249, 0.80784314870834351, 0.89019608497619629}
+\definecolor{color02}{rgb}{0.68899655751153521, 0.8681737867056154, 0.54376011946622071}
+\definecolor{color03}{rgb}{0.98320646005518297, 0.5980161709820524, 0.59423301088459368}
+\definecolor{color04}{rgb}{0.99175701702342312, 0.74648213716698619, 0.43401768935077328}
+\definecolor{color05}{rgb}{0.78329874347238004, 0.68724338552531095, 0.8336793640080622}
+\definecolor{color06}{rgb}{0.8, 0.85, 0.85}
+
+
+
+%---------------------------------------------------------------------------------------%
+%                                    forest package                                     %
+%---------------------------------------------------------------------------------------%
+
+
+\forestset{
+  L1/.style={fill=strawberry,},
+  L2A/.style={fill=sky,edge={strawberry,line width=2pt}},
+  L2B/.style={fill=green,edge={strawberry,line width=2pt}},
+  L3/.style={fill=tangerine,edge={green,line width=2pt}},
+  S1/.style={fill=color01,},
+  S2A/.style={fill=color02,edge={color01,line width=2pt}},
+  S2B/.style={fill=color03,edge={color01,line width=2pt}},
+  S2C/.style={fill=color04,edge={color01,line width=2pt}},
+  S2D/.style={fill=color05,edge={color01,line width=2pt}},
+  S3/.style={fill=color06,edge={color03,line width=2pt}},
+  S3A/.style={fill=color04,edge={color03,line width=2pt}},
+  S3B/.style={fill=color05,edge={color03,line width=2pt}},
+  S4A/.style={fill=lightgreen,edge={color04,line width=2pt}},
+  S4B/.style={fill=banana,edge={color04,line width=2pt}},
+}
+
+
+
+%---------------------------------------------------------------------------------------%
+%                                	   amsthm package                                     %
+%---------------------------------------------------------------------------------------%
+
+\newtheorem{theorem}{\bf Theorem}[section]
+\newtheorem{condition}{\bf Condition}[section]
+\newtheorem{lemma}{\bf Lemma}[section]
+\newtheorem{corollary}{\bf Corollary}[section]
+\newtheorem{proposition}{\bf Proposition}[section]
+
+% \newtheorem{theorem}{Theorem}[section]
+% \newtheorem{lemma}[theorem]{Lemma}
+% \newtheorem{corollary}[theorem]{Corollary}
+% \newtheorem{conjecture}[theorem]{Conjecture}
+% \newtheorem{proposition}[theorem]{Proposition}
+% \newtheorem{definition}[theorem]{Definition}
+% \newtheorem{claim}{Claim}
+% \newtheorem{stheorem}[theorem]{Wrong Theorem}
+
+\theoremstyle{definition}
+\newtheorem{example}{Example}[section]
+\newtheorem{definition}{\bf Definition}[section]
+
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+
+
+
+%---------------------------------------------------------------------------------------%
+%                                	      setlength                                       %
+%---------------------------------------------------------------------------------------%
+
+
+
+%---------------------------------------------------------------------------------------%
+%                                       graphicx                                        %
+%---------------------------------------------------------------------------------------%
+
+\newcommand\scalemath[2]{\scalebox{#1}{\mbox{\ensuremath{\displaystyle #2}}}}
+
+
+
+%---------------------------------------------------------------------------------------%
+%                                         array                                         %
+%---------------------------------------------------------------------------------------%
+
+
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+
+
+
+%---------------------------------------------------------------------------------------%
+%                                       caption                                     %
+%---------------------------------------------------------------------------------------%
+
+\addto\captionsenglish{\renewcommand{\figurename}{\scshape Figura}}
+\addto\captionsenglish{\renewcommand{\tablename}{\scshape Tabela}}
+
+
+
+%*************************************************************************************%
+%                              - MATH ALPHABETS SETTINGS -                            %
+%*************************************************************************************%
+
+\makeatletter
+\def\new@mathgroup{\alloc@8\mathgroup\mathchardef\@cclvi}
+\def\document@select@group#1#2#3#4{%
+ \ifx\math@bgroup\bgroup\else\relax\expandafter\@firstofone\fi
+ {%
+ \ifmmode
+   \ifnum\csname c@mv@\math@version\endcsname<\@cclvi
+     \begingroup
+       \escapechar\m@ne
+       \getanddefine@fonts{\csname c@mv@\math@version\endcsname}#3%
+       \globaldefs\@ne  \math@fonts
+     \endgroup
+     \expandafter\extract@alph@from@version
+         \csname mv@\math@version\expandafter\endcsname
+         \expandafter{\number\csname
+                       c@mv@\math@version\endcsname}%
+          #1%
+     \global\advance\csname c@mv@\math@version\endcsname\@ne
+   \else
+     \let#1\relax
+     \@latex@error{Too many math alphabets used
+                   in version \math@version}%
+        \@eha
+  \fi
+ \else \expandafter\non@alpherr\fi
+ #1{#4}%
+ }%
+}
+\def\select@group#1#2#3#4{%
+ \ifx\math@bgroup\bgroup\else\relax\expandafter\@firstofone\fi
+ {%
+ \ifmmode
+  \ifnum\csname c@mv@\math@version\endcsname<\@cclvi
+     \begingroup
+       \escapechar\m@ne
+       \getanddefine@fonts{\csname c@mv@\math@version\endcsname}#3%
+       \globaldefs\@ne  \math@fonts
+     \endgroup
+     \init@restore@version
+     \xdef#1{\noexpand\use@mathgroup\noexpand#2%
+             {\number\csname c@mv@\math@version\endcsname}}%
+     \global\advance\csname c@mv@\math@version\endcsname\@ne
+   \else
+     \let#1\relax
+     \@latex@error{Too many math alphabets used in
+                   version \math@version}%
+        \@eha
+   \fi
+ \else \expandafter\non@alpherr\fi
+ #1{#4}%
+ }%
+}
+\makeatother
+
+%-------------------------------------------------------------------------------------%
+%                            operators, letters and symbols                           %
+%-------------------------------------------------------------------------------------%
+
+
+% - OPERATORS - %
+\DeclareSymbolFont{operators}{OT1}{cmss}{m}{n}
+% \DeclareSymbolFont{operators}{OT1}{zavm}{m}{n}
+% \DeclareSymbolFont{operators}{OT1}{cmbr}{m}{n}
+
+
+% - LETTERS - %
+\DeclareSymbolFont{letters}{OML}{cmbr}{m}{it}
+  \SetSymbolFont{letters}{bold}{OML}{cmbr}{b}{it}
+% \DeclareSymbolFont{letters}{OML}{cmbrm}{m}{it}
+%   \SetSymbolFont{letters}{bold}{OML}{cmbrm}{b}{it}
+
+
+% - GREEK LETTERS - %
+\makeatletter
+\let\iftx@libertine\iftrue
+\let\iftx@minion\iffalse
+\makeatother
+\DeclareSymbolFont{ugreek}{U}{ntxmia}{m}{it}
+\DeclareSymbolFont{bugreek}{U}{ntxmia}{bx}{it}
+\DeclareSymbolFont{bbold}{U}{bbold}{m}{n}
+
+
+% - SYMBOLS - %  
+\DeclareSymbolFont{symbols}{OMS}{cmbrs}{m}{n}
+\DeclareSymbolFont{stmry}{U}{stmry}{m}{n}
+  \SetSymbolFont{stmry}{bold}{U}{stmry}{b}{n}
+
+
+%-------------------------------------------------------------------------------------%
+%                                 declaring math alphabets                            %
+%-------------------------------------------------------------------------------------%
+
+
+% - NORMAL-BOLD ALPHABETS - %
+\DeclareMathAlphabet{\mathb}{OML}{cmbr}{bx}{it}
+\DeclareMathAlphabet{\mathbn}{OT1}{pbk}{b}{it}
+
+% - UPRIGHT-BOLD ALPHABET - %
+\DeclareMathAlphabet{\mathbu}{OML}{cmbr}{bx}{n}
+
+% - CALLIGRAPHIC ALPHABET - %
+\DeclareMathAlphabet{\mathc}{U}{eus}{m}{n}
+
+% - SCRIPT ALPHABET - %
+\DeclareMathAlphabet{\maths}{U}{BOONDOX-cal}{m}{n}
+\newcommand{\mathscr}{\maths}
+
+% - TYPEWRITER ALPHABETS - %
+\DeclareMathAlphabet{\mathtu}{OT1}{pcr}{m}{n}
+\DeclareMathAlphabet{\mathti}{OT1}{pcr}{m}{it}
+\DeclareMathAlphabet{\mathtub}{OT1}{pcr}{b}{n}
+\DeclareMathAlphabet{\mathtib}{OT1}{pcr}{b}{it}
+
+% - DOUBLE-STRUCK ALPHABET - %
+\DeclareMathAlphabet{\mathds}{U}{ntxsyb}{m}{n}
+
+
+% - UNUSED ALPHABET - %
+%\DeclareMathAlphabet{\mathu}{U}{eur}{m}{n} 
+% \DeclareMathAlphabet{\mathu}{OT1}{cmr}{m}{n}
+% \DeclareMathAlphabet{\mathbu}{U}{eur}{b}{n} 
+% \DeclareMathAlphabet{\mathbu}{U}{ntxmia}{b}{it}
+% \DeclareMathAlphabet{\mathbu}{OT1}{cmbr}{bx}{n}
+% \DeclareMathAlphabet{\mathbb}{U}{bbold}{m}{n}
+%\DeclareMathAlphabet{\mathit}{OT1}{cmbr}{m}{sl}
+%\DeclareMathAlphabet{\mathbf}{OT1}{cmr}{bx}{n}
+% \DeclareMathAlphabet{\mathsf}{OT1}{cmss}{m}{n}
+% \DeclareMathAlphabet{\mathsf}{OT1}{zavm}{m}{n}
+% \DeclareMathAlphabet{\mathsfg}{OML}{zavm}{m}{n}
+% \DeclareMathAlphabet{\mathtt}{OT1}{cmtl}{m}{n}
+% \DeclareMathAlphabet{\mathbold}{OML}{cmbrm}{b}{it}
+
+
+%-------------------------------------------------------------------------------------%
+%                                    greek letters                                    %
+%-------------------------------------------------------------------------------------%
+
+
+\let\upDelta\Delta
+\let\upOmega\Omega
+\let\upGamma\Gamma
+\let\upTheta\Theta
+\let\upLambda\Lambda
+\let\upXi\Xi
+\let\upPi\Pi
+\let\upSigma\Sigma
+\let\upUpsilon\Upsilon
+\let\upPhi\Phi
+\let\upPsi\Psi
+
+\DeclareMathSymbol{\Gamma}{\mathalpha}{letters}{0}
+\DeclareMathSymbol{\Delta}{\mathalpha}{letters}{1}
+\DeclareMathSymbol{\Theta}{\mathalpha}{letters}{2}
+\DeclareMathSymbol{\Lambda}{\mathalpha}{letters}{3}
+\DeclareMathSymbol{\Xi}{\mathalpha}{letters}{4}
+\DeclareMathSymbol{\Pi}{\mathalpha}{letters}{5}
+\DeclareMathSymbol{\Sigma}{\mathalpha}{letters}{6}
+\DeclareMathSymbol{\Upsilon}{\mathalpha}{letters}{7}
+\DeclareMathSymbol{\Phi}{\mathalpha}{letters}{8}
+\DeclareMathSymbol{\Psi}{\mathalpha}{letters}{9}
+\DeclareMathSymbol{\Omega}{\mathalpha}{letters}{10}
+
+\DeclareMathSymbol{\alpha}{\mathalpha}{letters}{11}
+\DeclareMathSymbol{\beta}{\mathalpha}{letters}{12}
+\DeclareMathSymbol{\gamma}{\mathalpha}{letters}{13}
+\DeclareMathSymbol{\delta}{\mathalpha}{letters}{14}
+\DeclareMathSymbol{\epsilon}{\mathalpha}{letters}{15}
+\DeclareMathSymbol{\zeta}{\mathalpha}{letters}{16}
+\DeclareMathSymbol{\eta}{\mathalpha}{letters}{17}
+\DeclareMathSymbol{\theta}{\mathalpha}{letters}{18}
+\DeclareMathSymbol{\iota}{\mathalpha}{letters}{19}
+\DeclareMathSymbol{\kappa}{\mathalpha}{letters}{20}
+\DeclareMathSymbol{\lambda}{\mathalpha}{letters}{21}
+\DeclareMathSymbol{\mu}{\mathalpha}{letters}{22}
+\DeclareMathSymbol{\nu}{\mathalpha}{letters}{23}
+\DeclareMathSymbol{\xi}{\mathalpha}{letters}{24}
+\DeclareMathSymbol{\pi}{\mathalpha}{letters}{25}
+\DeclareMathSymbol{\rho}{\mathalpha}{letters}{26}
+\DeclareMathSymbol{\sigma}{\mathalpha}{letters}{27}
+\DeclareMathSymbol{\tau}{\mathalpha}{letters}{28}
+\DeclareMathSymbol{\upsilon}{\mathalpha}{letters}{29}
+\DeclareMathSymbol{\phi}{\mathalpha}{letters}{30}
+\DeclareMathSymbol{\chi}{\mathalpha}{letters}{31}
+\DeclareMathSymbol{\psi}{\mathalpha}{letters}{32}
+\DeclareMathSymbol{\omega}{\mathalpha}{letters}{33}
+\DeclareMathSymbol{\varepsilon}{\mathalpha}{letters}{34}
+\DeclareMathSymbol{\vartheta}{\mathalpha}{letters}{35}
+\DeclareMathSymbol{\varpi}{\mathalpha}{letters}{36}
+\DeclareMathSymbol{\varrho}{\mathalpha}{letters}{37}
+\DeclareMathSymbol{\varsigma}{\mathalpha}{letters}{38}
+\DeclareMathSymbol{\varphi}{\mathalpha}{letters}{39}
+
+\DeclareMathSymbol{\uGamma}{\mathord}{ugreek}{0}
+\DeclareMathSymbol{\uDelta}{\mathord}{ugreek}{1}
+\DeclareMathSymbol{\uTheta}{\mathord}{ugreek}{2}
+\DeclareMathSymbol{\uLambda}{\mathord}{ugreek}{3}
+\DeclareMathSymbol{\uXi}{\mathord}{ugreek}{4}
+\DeclareMathSymbol{\uPi}{\mathord}{ugreek}{5}
+\DeclareMathSymbol{\uSigma}{\mathord}{ugreek}{6}
+\DeclareMathSymbol{\uUpsilon}{\mathord}{ugreek}{7}
+\DeclareMathSymbol{\uPhi}{\mathord}{ugreek}{8}
+\DeclareMathSymbol{\uPsi}{\mathord}{ugreek}{9}
+\DeclareMathSymbol{\uOmega}{\mathord}{ugreek}{10}
+
+\DeclareMathSymbol{\ualpha}{\mathord}{ugreek}{11}
+\DeclareMathSymbol{\ubeta}{\mathord}{ugreek}{12}
+\DeclareMathSymbol{\ugamma}{\mathord}{ugreek}{13}
+\DeclareMathSymbol{\udelta}{\mathord}{ugreek}{14}
+\DeclareMathSymbol{\uepsilon}{\mathord}{ugreek}{15}
+\DeclareMathSymbol{\uzeta}{\mathord}{ugreek}{16}
+\DeclareMathSymbol{\ueta}{\mathord}{ugreek}{17}
+\DeclareMathSymbol{\utheta}{\mathord}{ugreek}{18}
+\DeclareMathSymbol{\uiota}{\mathord}{ugreek}{19}
+\DeclareMathSymbol{\ukappa}{\mathord}{ugreek}{20}
+\DeclareMathSymbol{\ulambda}{\mathord}{ugreek}{21}
+\DeclareMathSymbol{\umu}{\mathord}{ugreek}{22}
+\DeclareMathSymbol{\unu}{\mathord}{ugreek}{23}
+\DeclareMathSymbol{\uxi}{\mathord}{ugreek}{24}
+\DeclareMathSymbol{\upi}{\mathord}{ugreek}{25}
+\DeclareMathSymbol{\urho}{\mathord}{ugreek}{26}
+\DeclareMathSymbol{\usigma}{\mathord}{ugreek}{27}
+\DeclareMathSymbol{\utau}{\mathord}{ugreek}{28}
+\DeclareMathSymbol{\uupsilon}{\mathord}{ugreek}{29}
+\DeclareMathSymbol{\uphi}{\mathord}{ugreek}{30}
+\DeclareMathSymbol{\uchi}{\mathord}{ugreek}{31}
+\DeclareMathSymbol{\upsi}{\mathord}{ugreek}{32}
+\DeclareMathSymbol{\uomega}{\mathord}{ugreek}{33}
+\DeclareMathSymbol{\uvarepsilon}{\mathord}{ugreek}{34}
+\DeclareMathSymbol{\uvartheta}{\mathord}{ugreek}{35}
+\DeclareMathSymbol{\uvarpi}{\mathord}{ugreek}{36}
+\DeclareMathSymbol{\uvarrho}{\mathord}{ugreek}{37}
+\DeclareMathSymbol{\uvarsigma}{\mathord}{ugreek}{38}
+\DeclareMathSymbol{\uvarphi}{\mathord}{ugreek}{39}
+
+\DeclareMathSymbol{\buGamma}{\mathord}{bugreek}{0}
+\DeclareMathSymbol{\buDelta}{\mathord}{bugreek}{1}
+\DeclareMathSymbol{\buTheta}{\mathord}{bugreek}{2}
+\DeclareMathSymbol{\buLambda}{\mathord}{bugreek}{3}
+\DeclareMathSymbol{\buXi}{\mathord}{bugreek}{4}
+\DeclareMathSymbol{\buPi}{\mathord}{bugreek}{5}
+\DeclareMathSymbol{\buSigma}{\mathord}{bugreek}{6}
+\DeclareMathSymbol{\buUpsilon}{\mathord}{bugreek}{7}
+\DeclareMathSymbol{\buPhi}{\mathord}{bugreek}{8}
+\DeclareMathSymbol{\buPsi}{\mathord}{bugreek}{9}
+\DeclareMathSymbol{\buOmega}{\mathord}{bugreek}{10}
+
+\DeclareMathSymbol{\bualpha}{\mathord}{bugreek}{11}
+\DeclareMathSymbol{\bubeta}{\mathord}{bugreek}{12}
+\DeclareMathSymbol{\bugamma}{\mathord}{bugreek}{13}
+\DeclareMathSymbol{\budelta}{\mathord}{bugreek}{14}
+\DeclareMathSymbol{\buepsilon}{\mathord}{bugreek}{15}
+\DeclareMathSymbol{\buzeta}{\mathord}{bugreek}{16}
+\DeclareMathSymbol{\bueta}{\mathord}{bugreek}{17}
+\DeclareMathSymbol{\butheta}{\mathord}{bugreek}{18}
+\DeclareMathSymbol{\buiota}{\mathord}{bugreek}{19}
+\DeclareMathSymbol{\bukappa}{\mathord}{bugreek}{20}
+\DeclareMathSymbol{\bulambda}{\mathord}{bugreek}{21}
+\DeclareMathSymbol{\bumu}{\mathord}{bugreek}{22}
+\DeclareMathSymbol{\bunu}{\mathord}{bugreek}{23}
+\DeclareMathSymbol{\buxi}{\mathord}{bugreek}{24}
+\DeclareMathSymbol{\bupi}{\mathord}{bugreek}{25}
+\DeclareMathSymbol{\burho}{\mathord}{bugreek}{26}
+\DeclareMathSymbol{\busigma}{\mathord}{bugreek}{27}
+\DeclareMathSymbol{\butau}{\mathord}{bugreek}{28}
+\DeclareMathSymbol{\buupsilon}{\mathord}{bugreek}{29}
+\DeclareMathSymbol{\buphi}{\mathord}{bugreek}{30}
+\DeclareMathSymbol{\buchi}{\mathord}{bugreek}{31}
+\DeclareMathSymbol{\bupsi}{\mathord}{bugreek}{32}
+\DeclareMathSymbol{\buomega}{\mathord}{bugreek}{33}
+\DeclareMathSymbol{\buvarepsilon}{\mathord}{bugreek}{34}
+\DeclareMathSymbol{\buvartheta}{\mathord}{bugreek}{35}
+\DeclareMathSymbol{\buvarpi}{\mathord}{bugreek}{36}
+\DeclareMathSymbol{\buvarrho}{\mathord}{bugreek}{37}
+\DeclareMathSymbol{\buvarsigma}{\mathord}{bugreek}{38}
+\DeclareMathSymbol{\buvarphi}{\mathord}{bugreek}{39}
+
+\DeclareMathSymbol{\bbGamma}{\mathord}{bbold}{0}
+\DeclareMathSymbol{\bbDelta}{\mathord}{bbold}{1}
+\DeclareMathSymbol{\bbTheta}{\mathord}{bbold}{2}
+\DeclareMathSymbol{\bbLambda}{\mathord}{bbold}{3}
+\DeclareMathSymbol{\bbXi}{\mathord}{bbold}{4}
+\DeclareMathSymbol{\bbPi}{\mathord}{bbold}{5}
+\DeclareMathSymbol{\bbSigma}{\mathord}{bbold}{6}
+\DeclareMathSymbol{\bbUpsilon}{\mathord}{bbold}{7}
+\DeclareMathSymbol{\bbPhi}{\mathord}{bbold}{8}
+\DeclareMathSymbol{\bbPsi}{\mathord}{bbold}{9}
+\DeclareMathSymbol{\bbOmega}{\mathord}{bbold}{10}
+
+\DeclareMathSymbol{\bbalpha}{\mathord}{bbold}{"0B}
+\DeclareMathSymbol{\bbbeta}{\mathord}{bbold}{"0C}
+\DeclareMathSymbol{\bbgamma}{\mathord}{bbold}{"0D}
+\DeclareMathSymbol{\bbdelta}{\mathord}{bbold}{"0E}
+\DeclareMathSymbol{\bbespilon}{\mathord}{bbold}{"0F}
+\DeclareMathSymbol{\bbzeta}{\mathord}{bbold}{"10}
+\DeclareMathSymbol{\bbeta}{\mathord}{bbold}{"11}
+\DeclareMathSymbol{\bbtheta}{\mathord}{bbold}{"12}
+\DeclareMathSymbol{\bbiota}{\mathord}{bbold}{"13}
+\DeclareMathSymbol{\bbkappa}{\mathord}{bbold}{"14}
+\DeclareMathSymbol{\bblambda}{\mathord}{bbold}{"15}
+\DeclareMathSymbol{\bbmu}{\mathord}{bbold}{"16}
+\DeclareMathSymbol{\bbnu}{\mathord}{bbold}{"17}
+\DeclareMathSymbol{\bbxi}{\mathord}{bbold}{"18}
+\DeclareMathSymbol{\bbpi}{\mathord}{bbold}{"19}
+\DeclareMathSymbol{\bbrho}{\mathord}{bbold}{"1A}
+\DeclareMathSymbol{\bbsigma}{\mathord}{bbold}{"1B}
+\DeclareMathSymbol{\bbtau}{\mathord}{bbold}{"1C}
+\DeclareMathSymbol{\bbupsilon}{\mathord}{bbold}{"1D}
+\DeclareMathSymbol{\bbphi}{\mathord}{bbold}{"1E}
+\DeclareMathSymbol{\bbchi}{\mathord}{bbold}{"1F}
+\DeclareMathSymbol{\bbpsi}{\mathord}{bbold}{"20}
+\DeclareMathSymbol{\bbomega}{\mathord}{bbold}{"7F}
+
+
+%-------------------------------------------------------------------------------------%
+%                                    extra symbols                                    %
+%-------------------------------------------------------------------------------------%
+
+
+\makeatletter
+  \DeclareFontFamily{OMX}{MnSymbolE}{}
+  \DeclareSymbolFont{MnLargeSymbols}{OMX}{MnSymbolE}{m}{n}
+  \SetSymbolFont{MnLargeSymbols}{bold}{OMX}{MnSymbolE}{b}{n}
+  \DeclareFontShape{OMX}{MnSymbolE}{m}{n}{
+      <-6>  MnSymbolE5
+     <6-7>  MnSymbolE6
+     <7-8>  MnSymbolE7
+     <8-9>  MnSymbolE8
+     <9-10> MnSymbolE9
+    <10-12> MnSymbolE10
+    <12->   MnSymbolE12
+  }{}
+  \DeclareFontShape{OMX}{MnSymbolE}{b}{n}{
+      <-6>  MnSymbolE-Bold5
+     <6-7>  MnSymbolE-Bold6
+     <7-8>  MnSymbolE-Bold7
+     <8-9>  MnSymbolE-Bold8
+     <9-10> MnSymbolE-Bold9
+    <10-12> MnSymbolE-Bold10
+    <12->   MnSymbolE-Bold12
+  }{}
+
+  \let\llangle\@undefined
+  \let\rrangle\@undefined
+  \DeclareMathDelimiter{\llangle}{\mathopen}%
+                       {MnLargeSymbols}{'164}{MnLargeSymbols}{'164}
+  \DeclareMathDelimiter{\rrangle}{\mathclose}%
+                       {MnLargeSymbols}{'171}{MnLargeSymbols}{'171}
+\makeatother
+
+
+\DeclareMathDelimiter\llbracket{\mathopen}{stmry}{"4A}
+                                          {stmry}{"71}
+\DeclareMathDelimiter\rrbracket{\mathclose}{stmry}{"4B}
+                                           {stmry}{"79}
+
+\makeatletter
+  
+  \newsavebox\myboxA
+  \newsavebox\myboxB
+  \newlength\mylenA
+
+  \newcommand*\xoverline[2][0.75]{%
+      \sbox{\myboxA}{$\m@th#2$}%
+      \setbox\myboxB\null% Phantom box
+      \ht\myboxB=\ht\myboxA%
+      \dp\myboxB=\dp\myboxA%
+      \wd\myboxB=#1\wd\myboxA% Scale phantom
+      \sbox\myboxB{$\m@th\overline{\copy\myboxB}$}%  Overlined phantom
+      \setlength\mylenA{\the\wd\myboxA}%   calc width diff
+      \addtolength\mylenA{-\the\wd\myboxB}%
+      \ifdim\wd\myboxB<\wd\myboxA%
+         \rlap{\hskip 0.5\mylenA\usebox\myboxB}{\usebox\myboxA}%
+      \else
+          \hskip -0.5\mylenA\rlap{\usebox\myboxA}{\hskip 0.5\mylenA\usebox\myboxB}%
+      \fi}
+
+  \newcommand*\xunderline[2][0.75]{%
+      \sbox{\myboxA}{$\m@th#2$}%
+      \setbox\myboxB\null% Phantom box
+      \ht\myboxB=\ht\myboxA%
+      \dp\myboxB=\dp\myboxA%
+      \wd\myboxB=#1\wd\myboxA% Scale phantom
+      \sbox\myboxB{$\m@th\underline{\copy\myboxB}$}%  Overlined phantom
+      \setlength\mylenA{\the\wd\myboxA}%   calc width diff
+      \addtolength\mylenA{-\the\wd\myboxB}%
+      \ifdim\wd\myboxB<\wd\myboxA%
+         \rlap{\hskip 0.5\mylenA\usebox\myboxB}{\usebox\myboxA}%
+      \else
+          \hskip -0.5\mylenA\rlap{\usebox\myboxA}{\hskip 0.5\mylenA\usebox\myboxB}%
+      \fi}
+
+\makeatother
