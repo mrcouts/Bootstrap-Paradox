@@ -565,6 +565,14 @@ Temos princípio da composição de movimento para velocidades angulares:
 
 Ou seja, $\vomega_{\lllC}^{\lllA}$ é composta pela soma de $\vomega_{\lllB}^{\lllA}$, que seria velocidade angular de  de $\llC$ se $\llC$ estivesse fixo a $\llB$ (velocidade angular de arrastamento), e $\vomega_{\lllC}^{\lllB}$, que seria a velocidade angular de $\llC$ se $\llB$ estivesse parado em relação a $\llA$ (velocidade angular relativa).
 
+Repare que, fazendo $\llC \equiv \llA$, temos que:
+\begin{equation}
+\vzr  =  \vomega_{\lllB}^{\lllA}   + \vomega_{\lllA}^{\lllB}
+\end{equation}
+\begin{equation} \label{eq:composicao_wCA}
+\therefore \vomega_{\lllA}^{\lllB}  =   - \vomega_{\lllB}^{\lllA}
+\end{equation}
+
 \item[E)] Composição de acelerações angulares
 
 Derivando \eqref{eq:composicao_w} no tempo em relação a $\llA$, temos princípio da composição de movimento para acelerações angulares:
@@ -574,6 +582,14 @@ Derivando \eqref{eq:composicao_w} no tempo em relação a $\llA$, temos princípio 
 
 Ou seja, $\dot{\vomega}_{\lllC}^{\lllA}$ é composta pela soma de $\dot{\vomega}_{\lllB}^{\lllA}$, que seria a aceleração angular  de $\llC$ se $\llC$ estivesse fixo a $\llB$ (aceleração angular de arrastamento), $\dot{\vomega}_{\lllC}^{\lllB}$, que seria a aceleração angular de $\llC$ se $\llB$ estivesse parado em relação a $\llA$ (aceleração angular relativa), e da parcela $\vomega_{\lllB}^{\lllA} \wedge \vomega_{\lllC}^{\lllB}$ (aceleralção angular complementar).
 
+Repare que, fazendo $\llC \equiv \llA$ e utilizando \eqref{eq:composicao_wCA}, temos que:
+\begin{equation}
+\vzr =  \dot{\vomega}_{\lllB}^{\lllA}   + \dot{\vomega}_{\lllA}^{\lllB} - \vomega_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA}
+\end{equation}
+\begin{equation} \label{eq:composicao_dwCA}
+\therefore \dot{\vomega}_{\lllA}^{\lllB} = - \dot{\vomega}_{\lllB}^{\lllA}
+\end{equation}
+
 \item[F)] Composição de sobre-acelerações angulares
 
 Derivando \eqref{eq:composicao_dw} no tempo em relação a $\llA$, temos princípio da composição de movimento para sobre-acelerações angulares:
@@ -582,6 +598,14 @@ Derivando \eqref{eq:composicao_dw} no tempo em relação a $\llA$, temos princípio
 \end{equation}
 
 Ou seja, $\ddot{\vomega}_{\lllC}^{\lllA}$ é composta pela soma de $\ddot{\vomega}_{\lllB}^{\lllA}$, que seria a sobre-aceleração angular  de $\llC$ se $\llC$ estivesse fixo a $\llB$ (sobre-aceleração angular de arrastamento), $\ddot{\vomega}_{\lllC}^{\lllB}$, que seria a sobre-aceleração angular de $\llC$ se $\llB$ estivesse parado em relação a $\llA$ (aceleração angular relativa), e da parcela $ \dot{\vomega}_{\lllB}^{\lllA} \wedge \vomega_{\lllC}^{\lllB} + 2 \vomega_{\lllB}^{\lllA} \wedge \dot{\vomega}_{\lllC}^{\lllB} + \vomega_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA} \wedge \vomega_{\lllC}^{\lllB}$ (sobre-aceleralção angular complementar).
+
+Repare que, fazendo $\llC \equiv \llA$ e utilizando \eqref{eq:composicao_wCA} e \eqref{eq:composicao_dwCA}, temos que:
+\begin{equation}
+\vzr  =  \ddot{\vomega}_{\lllB}^{\lllA}   + \ddot{\vomega}_{\lllA}^{\lllB} -  \dot{\vomega}_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA} - 2 \vomega_{\lllB}^{\lllA} \wedge \dot{\vomega}_{\lllB}^{\lllA} - \vomega_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA}
+\end{equation}
+\begin{equation} \label{eq:composicao_d2wCA}
+\therefore \ddot{\vomega}_{\lllA}^{\lllB}  =  -\ddot{\vomega}_{\lllB}^{\lllA} -  \dot{\vomega}_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA}
+\end{equation}
 
 
 
@@ -1382,7 +1406,7 @@ Sendo:
 
 
 
-\item[D)] Dinâmica
+\item[E)] Dinâmica
 
 O modelo dinâmico de $\ssB$ é obtido utilizando o método Orsino de acoplamento de subsistemas \cite{23orsino}, e é dado por:
 \begin{equation} \label{eq:ModeloMecSerial}
@@ -1587,8 +1611,6 @@ Sendo:
 \end{bmatrix}^\msT
 \end{equation}
 %\frac{\partial \overline{\mp}}{\partial \mp}
-
-\newpage
 
 \item[iv)] Acoplamento de subsistemas
 
@@ -1832,6 +1854,9 @@ $$
 \mg(\mq) = - \sum_{i=1}^\nu m_i \mJ_{v\,i}^\msT \mgamma
 $$
 
+\item[F)] Dinâmica de ordem superior
+
+Em alguns casos a obtenção do o modelo dinâmico de ordem superior (derivada do modelo dinâmico) pode ser vantajoso, tendo em vista que pode ser utilizado para obter leis de controle mais suaves, realizar o controle de posição diretamente pela tensão elétrica aplicada nos atuadores (sem a necessidade do controle de corrente), ou obter o modelo dinâmico linearizado em torno de uma trajetória.  
 
 
 \end{itemize}
