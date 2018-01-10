@@ -1408,7 +1408,7 @@ Sendo:
 
 \item[E)] Dinâmica
 
-O modelo dinâmico de $\ssB$ é obtido utilizando o método Orsino de acoplamento de subsistemas \cite{23orsino}, e é dado por:
+O modelo dinâmico de $\ssB$ é obtido utilizando um procedimento inspirado no Método Orsino de acoplamento de subsistemas \cite{23orsino}, e é dado por:
 \begin{equation} \label{eq:ModeloMecSerial}
 \mM(\mq) \ddot{\mq} + \mnu(\mq,\dot{\mq}) + \mg(\mq) = \mu
 \end{equation}
@@ -1856,8 +1856,61 @@ $$
 
 \item[F)] Dinâmica de ordem superior
 
-Em alguns casos a obtenção do o modelo dinâmico de ordem superior (derivada do modelo dinâmico) pode ser vantajoso, tendo em vista que pode ser utilizado para obter leis de controle mais suaves, realizar o controle de posição diretamente pela tensão elétrica aplicada nos atuadores (sem a necessidade do controle de corrente), ou obter o modelo dinâmico linearizado em torno de uma trajetória.  
+Em alguns casos a obtenção do o modelo dinâmico de ordem superior (derivada do modelo dinâmico) pode ser vantajoso, tendo em vista que pode ser utilizado para obter leis de controle mais suaves, realizar o controle de posição diretamente pela tensão elétrica aplicada nos atuadores (sem a necessidade do controle de corrente), ou obter o modelo dinâmico linearizado em torno de uma trajetória. Essas aplicações serão exploradas no capítulo X. \\
 
+Para obter o modelo dinâmico de ordem superior, será mais uma vez adotada uma estratágia inspirada no Método Orsino. Primeiramente, precisamos obter as derivadas temporais das equações de Newton-Euler. Derivando o equação do TMB do centro de massa de cada ligamente no tempo, temos:
+\begin{equation}
+\frac{\dd^{[\llN]}}{\dd t} \Big( m_i \va^{\lllN}_{\ttg_i} - m_i \vg - \vf_{r\,i} \Big) =  m_i \dot{\va}^{\lllN}_{\ttg_i} - \dot{\vf}_{r\,i} = \vzr \\
+\end{equation}
+\begin{equation}
+\therefore m_i \dot{\va}^{\lllN}_{\ttg_i} = \dot{\vf}_{r\,i} 
+\end{equation}
+
+Agora, derivando o equação do TMA de cada ligamento no tempo, temos:
+\begin{equation}
+\frac{\dd^{[\llN]}}{\dd t} \Big( \vI_{\ttg_i} \cdot \dot{\vomega}^{\lllN}_{\lllB_i} + \vomega^{\lllN}_{\lllB_i} \wedge (\vI_{\ttg_i} \cdot \vomega^{\lllN}_{\lllB_i}) - \vtau_{r\,i} \Big) = \vzr
+\end{equation}
+
+Utilizando (?), (?) e (?), temos:
+\begin{equation}
+\frac{\dd^{[\llB_i]}}{\dd t} \Big( -\vI_{\ttg_i} \cdot \dot{\vomega}^{\lllB_i}_{\lllN} + \vomega^{\lllB_i}_{\lllN} \wedge (\vI_{\ttg_i} \cdot \vomega^{\lllB_i}_{\lllN}) \Big) + \vomega^{\lllN}_{\lllB_i} \wedge \Big( \vI_{\ttg_i} \cdot \dot{\vomega}^{\lllN}_{\lllB_i} + \vomega^{\lllN}_{\lllB_i} \wedge (\vI_{\ttg_i} \cdot \vomega^{\lllN}_{\lllB_i}) \Big) = \dot{\vtau}_{r\,i}  \\
+\end{equation}
+\begin{equation}
+ -\vI_{\ttg_i} \cdot \ddot{\vomega}^{\lllB_i}_{\lllN} + \dot{\vomega}^{\lllB_i}_{\lllN} \wedge (\vI_{\ttg_i} \cdot \vomega^{\lllB_i}_{\lllN}) + \vomega^{\lllB_i}_{\lllN} \wedge (\vI_{\ttg_i} \cdot \dot{\vomega}^{\lllB_i}_{\lllN}) + \vomega^{\lllN}_{\lllB_i} \wedge \Big( \vI_{\ttg_i} \cdot \dot{\vomega}^{\lllN}_{\lllB_i} + \vomega^{\lllN}_{\lllB_i} \wedge (\vI_{\ttg_i} \cdot \vomega^{\lllN}_{\lllB_i}) \Big) = \dot{\vtau}_{r\,i}  \\
+\end{equation}
+
+Finalmente, utilizando (?), (?) e (?), temos:
+\begin{equation}
+\therefore \vI_{\ttg_i} \cdot (\ddot{\vomega}^{\lllN}_{\lllB_i} + \dot{\vomega}^{\lllN}_{\lllB_i} \wedge \vomega^{\lllN}_{\lllB_i}) + \dot{\vomega}^{\lllN}_{\lllB_i} \wedge (\vI_{\ttg_i} \cdot \vomega^{\lllN}_{\lllB_i}) + 2\vomega^{\lllN}_{\lllB_i} \wedge (\vI_{\ttg_i} \cdot \dot{\vomega}^{\lllN}_{\lllB_i}) + \vomega^{\lllN}_{\lllB_i} \wedge  \vomega^{\lllN}_{\lllB_i} \wedge (\vI_{\ttg_i} \cdot \vomega^{\lllN}_{\lllB_i})  = \dot{\vtau}_{r\,i}  \\
+\end{equation}
+
+Ou seja, as derivadas temporais das equações de Newton-Euler para cada ligamento são dadas por:
+\begin{equation}
+\begin{cases}
+m_i \dot{\va}^{\lllN}_{\ttg_i} = \dot{\vf}_{r\,i}  \\
+\vI_{\ttg_i} \cdot (\ddot{\vomega}^{\lllN}_{\lllB_i} + \dot{\vomega}^{\lllN}_{\lllB_i} \wedge \vomega^{\lllN}_{\lllB_i}) + \dot{\vomega}^{\lllN}_{\lllB_i} \wedge (\vI_{\ttg_i} \cdot \vomega^{\lllN}_{\lllB_i}) + 2\vomega^{\lllN}_{\lllB_i} \wedge (\vI_{\ttg_i} \cdot \dot{\vomega}^{\lllN}_{\lllB_i}) + \vomega^{\lllN}_{\lllB_i} \wedge  \vomega^{\lllN}_{\lllB_i} \wedge (\vI_{\ttg_i} \cdot \vomega^{\lllN}_{\lllB_i})  = \dot{\vtau}_{r\,i}
+\end{cases}\, i = 1,...,\nu
+\end{equation}
+
+Aplicando as equações vetoriais no sistema $\ttN$, temos:
+\begin{equation} \label{eq:Newton-EulerMat2D}
+\begin{bmatrix}
+m_i \mone & \mzr \\
+\mzr      & \mI_i
+\end{bmatrix}
+\cdot
+\begin{bmatrix}
+\dot{\ma}^\star_i  \\
+\ddot{\momega}^\star_i
+\end{bmatrix}
++
+\begin{bmatrix}
+\mzr \\
+\mI_i (\dot{\momega}^\star_i \wedge \momega^\star_i) + \dot{\momega}^\star_i \wedge (\mI_i \cdot \momega^\star_i) + 2\momega^\star_i \wedge (\mI_i \cdot \dot{\momega}^\star_i) + \momega^\star_i \wedge \momega^\star_i \wedge (\mI_i \cdot \momega^\star_i)
+\end{bmatrix}
+=
+\dot{\mf}_{r\,i}
+\end{equation}
 
 \end{itemize}
 
