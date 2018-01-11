@@ -1912,6 +1912,83 @@ m_i \mone & \mzr \\
 \dot{\mf}_{r\,i}
 \end{equation}
 
+Derivando (?) e comparando com (?), temos que:
+
+\begin{equation}
+\dot{\mf}_i = 
+-\begin{bmatrix}
+m_i \mone & \mzr \\
+\mzr      & \mI_i
+\end{bmatrix}
+\cdot
+\begin{bmatrix}
+\dot{\ma}^\star_i  \\
+\ddot{\momega}^\star_i
+\end{bmatrix}
+-
+\begin{bmatrix}
+\mzr \\
+\mI_i (\dot{\momega}^\star_i \wedge \momega^\star_i) + \dot{\momega}^\star_i \wedge (\mI_i \cdot \momega^\star_i) + 2\momega^\star_i \wedge (\mI_i \cdot \dot{\momega}^\star_i) + \momega^\star_i \wedge \momega^\star_i \wedge (\mI_i \cdot \momega^\star_i)
+\end{bmatrix}
+\end{equation}
+
+Derivando a equação dinâmica (?), temos que:
+\begin{equation}
+\dot{\mf} + \dot{\mA}^\msT \mlambda + \mA^\msT \dot{\mlambda} = \mzr 
+\end{equation}
+
+Tendo em vista que a imagem de $\mC$ é complemento ortogonal da imagem de $\mA^\msT$, podemos eliminar $\dot{\mlambda}$ multiplicando (?) à esquerda por $\mC^\msT$, temos:
+\begin{equation}
+\mC^\msT\dot{\mf} + \mC^\msT \dot{\mA}^\msT \mlambda  = \mzr 
+\end{equation}
+
+Repare que:
+\begin{equation}
+\mC^\msT \dot{\mA}^\msT =
+\begin{bmatrix}
+\mone & \mJ^\msT
+\end{bmatrix}
+\cdot
+\begin{bmatrix}
+\dot{\mJ}^\msT \\
+\mzr
+\end{bmatrix}
+= \dot{\mJ}^\msT
+\end{equation}
+
+Portanto, temos que:
+\begin{equation}
+\mC^\msT\dot{\mf} + \dot{\mJ}^\msT \mlambda  = \mzr 
+\end{equation}
+
+\begin{equation}
+\dot{\mu} + \sum_{i=1}^\nu \mJ_i(\mq)^\msT \dot{\mf}_i + \dot{\mJ}^\msT \mlambda  = \mzr
+\end{equation}
+
+\footnotesize
+\begin{equation}
+\sum_{i=1}^\nu
+\begin{bmatrix}
+\mJ_{v\,i} \\
+\mJ_{\omega\,i}
+\end{bmatrix}^\msT
+\begin{Bmatrix}
+\begin{bmatrix}
+m_i (\mJ_{v_i} \dddot{\mq} + \underaccent{\sim}{\dot{\ma}}_i   )  \\
+ \mI_i (\mJ_{\omega_i} \dddot{\mq} + \underaccent{\sim}{\ddot{\momega}}_i )
++
+\mI_i (\dot{\momega}^\star_i \wedge \momega^\star_i) + \dot{\momega}^\star_i \wedge (\mI_i \cdot \momega^\star_i) + 2\momega^\star_i \wedge (\mI_i \cdot \dot{\momega}^\star_i) + \momega^\star_i \wedge \momega^\star_i \wedge (\mI_i \cdot \momega^\star_i)
+\end{bmatrix}
+\end{Bmatrix}
+- \dot{\mJ}^\msT \mlambda
+=\dot{\mu}
+\end{equation}
+\normalsize
+
+\begin{equation}
+\mM \cdot \dddot{\mq} - \dot{\mJ}^\msT \mlambda + \sum_{i=1}^\nu  \mJ_{v\,i}^\msT \, \underaccent{\sim}{\dot{\ma}}_i + \mJ_{\omega\,i}^\msT \Big( \mI_i (\underaccent{\sim}{\ddot{\momega}}_i + \dot{\momega}^\star_i \wedge \momega^\star_i) + \dot{\momega}^\star_i \wedge (\mI_i \cdot \momega^\star_i) + 2\momega^\star_i \wedge (\mI_i \cdot \dot{\momega}^\star_i) + \momega^\star_i \wedge \momega^\star_i \wedge (\mI_i \cdot \momega^\star_i)  \Big) = \dot{\mu}
+\end{equation}
+
 \end{itemize}
 
 \end{itemize}
