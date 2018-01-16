@@ -1280,7 +1280,7 @@ Temos:
 \dot{\ma}_{i,j} + \dddot{q}_{j} \mj_{v\,i,j} + (\underaccent{\sim}{\dot{\ma}}_i)_j, \; 1 \leq j \leq i \\
 \end{cases}\, i=1,...,\nu, \, j=i+1,...,1
 \end{equation}
-\begin{equation}
+\begin{equation} \label{eq:da_star_i}
 \dot{\ma}_i^\star(\mq,\dot{\mq},\ddot{\mq},\dddot{\mq}) = \mJ_{v\,i} (\mq) \cdot \dddot{\mq} + \underaccent{\sim}{\dot{\ma}}_i (\mq,\dot{\mq},\ddot{\mq})
 \end{equation}
 
@@ -1361,7 +1361,7 @@ Temos que:
 \ddot{\momega}_i +  \mj_{\omega\,i} \dddot{q}_{i} + (\underaccent{\sim}{\ddot{\momega}})_i , \; 1 \leq i \leq \nu \\
 \end{cases}\, i=\nu+1,...,1
 \end{equation}
-\begin{equation}
+\begin{equation} \label{eq:d2omega_star_i}
 \ddot{\momega}_i^\star(\mq,\dot{\mq},\ddot{\mq},\dddot{\mq}) = \mJ_\omega(\mq) \cdot \dddot{\mq} + \underaccent{\sim}{\ddot{\momega}}(\mq,\dot{\mq},\ddot{\mq})
 \end{equation}
 
@@ -1533,7 +1533,7 @@ Seja $\mf_i$ o sistema de forças ativas  (considerando os esforços de inércia) a
 \end{equation}
 
 Portanto, o modelo dinâmico de cada subsistema pode ser escrito como:
-\begin{equation}
+\begin{equation} \label{eq:fi_plus_fri}
 \mf_i + \mf_{r\,i} = \mzr
 \end{equation}
 
@@ -1773,7 +1773,7 @@ Repare 	que, fazendo $\mx = \mp$ (consequentemente $\mx\ssh = \mp\ssh$ e $\mx\ci
 \end{equation}
 
 
-Substituindo \eqref{eq:MatrizC_seriais} em \eqref{eq:eq_dinamicas_3}, o modelo dinâmico do mecanismo serial pode ser escrito como:
+Substituindo \eqref{eq:MatrizC_seriais} e \eqref{eq:J} em \eqref{eq:eq_dinamicas_3}, o modelo dinâmico do mecanismo serial pode ser escrito como:
 
 \begin{equation} \label{eq:ModeloDinâmicoSerialSomatorio}
 \mu - \sum_{i=1}^\nu \mJ_i(\mq)^\msT (\mM_i(\mq) \dot{\mp}_i + \mv_i(\mq,\mp_i) + \mg_i) = \mzr
@@ -1856,32 +1856,45 @@ $$
 
 \item[F)] Dinâmica de ordem superior
 
-Em alguns casos a obtenção do o modelo dinâmico de ordem superior (derivada do modelo dinâmico) pode ser vantajoso, tendo em vista que pode ser utilizado para obter leis de controle mais suaves, realizar o controle de posição diretamente pela tensão elétrica aplicada nos atuadores (sem a necessidade do controle de corrente), ou obter o modelo dinâmico linearizado em torno de uma trajetória. Essas aplicações serão exploradas no capítulo X. \\
+Em alguns casos a obtenção do o modelo dinâmico de ordem superior (derivada do modelo dinâmico) pode ser vantajoso, tendo em vista que pode ser utilizado para obter leis de controle mais suaves, realizar o controle de posição diretamente pela tensão elétrica aplicada nos atuadores (sem a necessidade do controle de corrente), ou obter o modelo dinâmico linearizado em torno de uma trajetória. Essas aplicações serão exploradas no capítulo ?. \\
 
-Para obter o modelo dinâmico de ordem superior, será mais uma vez adotada uma estratágia inspirada no Método Orsino. Primeiramente, precisamos obter as derivadas temporais das equações de Newton-Euler. Derivando o equação do TMB do centro de massa de cada ligamente no tempo, temos:
-\begin{equation}
-\frac{\dd^{[\llN]}}{\dd t} \Big( m_i \va^{\lllN}_{\ttg_i} - m_i \vg - \vf_{r\,i} \Big) =  m_i \dot{\va}^{\lllN}_{\ttg_i} - \dot{\vf}_{r\,i} = \vzr \\
+Derivando \eqref{eq:ModeloMecSerial}, temos:
+
+\begin{equation} \label{eq:ModeloMecSerialD}
+\mM(\mq) \dddot{\mq} + \mh(\mq, \dot{\mq}, \ddot{\mq}) = \dot{\mu}
 \end{equation}
+
+Sendo:
 \begin{equation}
-\therefore m_i \dot{\va}^{\lllN}_{\ttg_i} = \dot{\vf}_{r\,i} 
+\mh(\mq, \dot{\mq}, \ddot{\mq}) = \dot{\mM}(\mq, \dot{\mq}) \ddot{\mq} + \dot{\mnu}(\mq, \dot{\mq}, \ddot{\mq}) + \dot{\mg}(\mq,\dot{\mq})
+\end{equation}
+
+A obtenção de $\mh(\mq, \dot{\mq}, \ddot{\mq})$ através da derivação temporal direta das equações \eqref{eq:MSerial}, \eqref{eq:vSerial} e \eqref{eq:gSerial} é possível, porém um tanto quanto complexa. Sendo assim, para obter o modelo dinâmico de ordem superior, será mais uma vez adotada uma estratágia inspirada no Método Orsino. 
+
+Primeiramente, é preciso obter as derivadas temporais das equações de Newton-Euler. Derivando o equação do TMB do centro de massa de cada ligamente no tempo, temos:
+$$
+\frac{\dd^{[\llN]}}{\dd t} \Big( m_i \va^{\lllN}_{\ttg_i} - m_i \vg - \vf_{r\,i} \Big) =  m_i \dot{\va}^{\lllN}_{\ttg_i} - \dot{\vf}_{r\,i} = \vzr \\
+$$
+\begin{equation}
+ m_i \dot{\va}^{\lllN}_{\ttg_i} = \dot{\vf}_{r\,i} 
 \end{equation}
 
 Agora, derivando o equação do TMA de cada ligamento no tempo, temos:
-\begin{equation}
+$$
 \frac{\dd^{[\llN]}}{\dd t} \Big( \vI_{\ttg_i} \cdot \dot{\vomega}^{\lllN}_{\lllB_i} + \vomega^{\lllN}_{\lllB_i} \wedge (\vI_{\ttg_i} \cdot \vomega^{\lllN}_{\lllB_i}) - \vtau_{r\,i} \Big) = \vzr
-\end{equation}
+$$
 
-Utilizando (?), (?) e (?), temos:
-\begin{equation}
-\frac{\dd^{[\llB_i]}}{\dd t} \Big( -\vI_{\ttg_i} \cdot \dot{\vomega}^{\lllB_i}_{\lllN} + \vomega^{\lllB_i}_{\lllN} \wedge (\vI_{\ttg_i} \cdot \vomega^{\lllB_i}_{\lllN}) \Big) + \vomega^{\lllN}_{\lllB_i} \wedge \Big( \vI_{\ttg_i} \cdot \dot{\vomega}^{\lllN}_{\lllB_i} + \vomega^{\lllN}_{\lllB_i} \wedge (\vI_{\ttg_i} \cdot \vomega^{\lllN}_{\lllB_i}) \Big) = \dot{\vtau}_{r\,i}  \\
-\end{equation}
-\begin{equation}
- -\vI_{\ttg_i} \cdot \ddot{\vomega}^{\lllB_i}_{\lllN} + \dot{\vomega}^{\lllB_i}_{\lllN} \wedge (\vI_{\ttg_i} \cdot \vomega^{\lllB_i}_{\lllN}) + \vomega^{\lllB_i}_{\lllN} \wedge (\vI_{\ttg_i} \cdot \dot{\vomega}^{\lllB_i}_{\lllN}) + \vomega^{\lllN}_{\lllB_i} \wedge \Big( \vI_{\ttg_i} \cdot \dot{\vomega}^{\lllN}_{\lllB_i} + \vomega^{\lllN}_{\lllB_i} \wedge (\vI_{\ttg_i} \cdot \vomega^{\lllN}_{\lllB_i}) \Big) = \dot{\vtau}_{r\,i}  \\
-\end{equation}
+Utilizando \eqref{eq:derivada_vetor}, \eqref{eq:composicao_wCA} e \eqref{eq:composicao_dwCA}, temos:
+$$
+\frac{\dd^{[\llB_i]}}{\dd t} \Big( -\vI_{\ttg_i} \cdot \dot{\vomega}^{\lllB_i}_{\lllN} + \vomega^{\lllB_i}_{\lllN} \wedge (\vI_{\ttg_i} \cdot \vomega^{\lllB_i}_{\lllN}) \Big) + \vomega^{\lllN}_{\lllB_i} \wedge \Big( \vI_{\ttg_i} \cdot \dot{\vomega}^{\lllN}_{\lllB_i} + \vomega^{\lllN}_{\lllB_i} \wedge (\vI_{\ttg_i} \cdot \vomega^{\lllN}_{\lllB_i}) \Big) \\
+$$
+$$
+= -\vI_{\ttg_i} \cdot \ddot{\vomega}^{\lllB_i}_{\lllN} + \dot{\vomega}^{\lllB_i}_{\lllN} \wedge (\vI_{\ttg_i} \cdot \vomega^{\lllB_i}_{\lllN}) + \vomega^{\lllB_i}_{\lllN} \wedge (\vI_{\ttg_i} \cdot \dot{\vomega}^{\lllB_i}_{\lllN}) + \vomega^{\lllN}_{\lllB_i} \wedge \Big( \vI_{\ttg_i} \cdot \dot{\vomega}^{\lllN}_{\lllB_i} + \vomega^{\lllN}_{\lllB_i} \wedge (\vI_{\ttg_i} \cdot \vomega^{\lllN}_{\lllB_i}) \Big) = \dot{\vtau}_{r\,i}  \\
+$$
 
-Finalmente, utilizando (?), (?) e (?), temos:
+Finalmente, utilizando \eqref{eq:composicao_wCA}, \eqref{eq:composicao_dwCA} e \eqref{eq:composicao_d2wCA}, temos:
 \begin{equation}
-\therefore \vI_{\ttg_i} \cdot (\ddot{\vomega}^{\lllN}_{\lllB_i} + \dot{\vomega}^{\lllN}_{\lllB_i} \wedge \vomega^{\lllN}_{\lllB_i}) + \dot{\vomega}^{\lllN}_{\lllB_i} \wedge (\vI_{\ttg_i} \cdot \vomega^{\lllN}_{\lllB_i}) + 2\vomega^{\lllN}_{\lllB_i} \wedge (\vI_{\ttg_i} \cdot \dot{\vomega}^{\lllN}_{\lllB_i}) + \vomega^{\lllN}_{\lllB_i} \wedge  \vomega^{\lllN}_{\lllB_i} \wedge (\vI_{\ttg_i} \cdot \vomega^{\lllN}_{\lllB_i})  = \dot{\vtau}_{r\,i}  \\
+\vI_{\ttg_i} \cdot (\ddot{\vomega}^{\lllN}_{\lllB_i} + \dot{\vomega}^{\lllN}_{\lllB_i} \wedge \vomega^{\lllN}_{\lllB_i}) + \dot{\vomega}^{\lllN}_{\lllB_i} \wedge (\vI_{\ttg_i} \cdot \vomega^{\lllN}_{\lllB_i}) + 2\vomega^{\lllN}_{\lllB_i} \wedge (\vI_{\ttg_i} \cdot \dot{\vomega}^{\lllN}_{\lllB_i}) + \vomega^{\lllN}_{\lllB_i} \wedge  \vomega^{\lllN}_{\lllB_i} \wedge (\vI_{\ttg_i} \cdot \vomega^{\lllN}_{\lllB_i})  = \dot{\vtau}_{r\,i}  \\
 \end{equation}
 
 Ou seja, as derivadas temporais das equações de Newton-Euler para cada ligamento são dadas por:
@@ -1912,9 +1925,9 @@ m_i \mone & \mzr \\
 \dot{\mf}_{r\,i}
 \end{equation}
 
-Derivando (?) e comparando com (?), temos que:
+Derivando \eqref{eq:fi_plus_fri} e comparando com \eqref{eq:Newton-EulerMat2D}, temos que:
 
-\begin{equation}
+\begin{equation} \label{eq:df_i}
 \dot{\mf}_i = 
 -\begin{bmatrix}
 m_i \mone & \mzr \\
@@ -1932,12 +1945,12 @@ m_i \mone & \mzr \\
 \end{bmatrix}
 \end{equation}
 
-Derivando a equação dinâmica (?), temos que:
-\begin{equation}
+Derivando a equação dinâmica \eqref{eq:eq_dinamicas_2}, temos que:
+\begin{equation} \label{eq:eq_dinamicas_2D}
 \dot{\mf} + \dot{\mA}^\msT \mlambda + \mA^\msT \dot{\mlambda} = \mzr 
 \end{equation}
 
-Tendo em vista que a imagem de $\mC$ é complemento ortogonal da imagem de $\mA^\msT$, podemos eliminar $\dot{\mlambda}$ multiplicando (?) à esquerda por $\mC^\msT$, temos:
+Tendo em vista que a imagem de $\mC$ é complemento ortogonal da imagem de $\mA^\msT$, podemos eliminar $\dot{\mlambda}$ multiplicando \eqref{eq:eq_dinamicas_2D} à esquerda por $\mC^\msT$:
 \begin{equation}
 \mC^\msT\dot{\mf} + \mC^\msT \dot{\mA}^\msT \mlambda  = \mzr 
 \end{equation}
@@ -1957,13 +1970,16 @@ Repare que:
 \end{equation}
 
 Portanto, temos que:
-\begin{equation}
+\begin{equation} \label{eq:eq_dinamicas_3D}
 \mC^\msT\dot{\mf} + \dot{\mJ}^\msT \mlambda  = \mzr 
 \end{equation}
 
-\begin{equation}
+Substituindo \eqref{eq:MatrizC_seriais} e \eqref{eq:J} em \eqref{eq:eq_dinamicas_3D}, o modelo dinâmico de ordem superior do mecanismo serial pode ser escrito como:
+\begin{equation} \label{eq:ModeloDinâmicoSerialSomatorioD}
 \dot{\mu} + \sum_{i=1}^\nu \mJ_i(\mq)^\msT \dot{\mf}_i + \dot{\mJ}^\msT \mlambda  = \mzr
 \end{equation}
+
+Substituindo \eqref{eq:df_i}, \eqref{eq:J_i}, \eqref{eq:da_star_i} e  \eqref{eq:d2omega_star_i} em \eqref{eq:ModeloDinâmicoSerialSomatorioD}, temos:
 
 \footnotesize
 \begin{equation}
@@ -1972,21 +1988,26 @@ Portanto, temos que:
 \mJ_{v\,i} \\
 \mJ_{\omega\,i}
 \end{bmatrix}^\msT
-\begin{Bmatrix}
 \begin{bmatrix}
 m_i (\mJ_{v_i} \dddot{\mq} + \underaccent{\sim}{\dot{\ma}}_i   )  \\
  \mI_i (\mJ_{\omega_i} \dddot{\mq} + \underaccent{\sim}{\ddot{\momega}}_i )
 +
 \mI_i (\dot{\momega}^\star_i \wedge \momega^\star_i) + \dot{\momega}^\star_i \wedge (\mI_i \cdot \momega^\star_i) + 2\momega^\star_i \wedge (\mI_i \cdot \dot{\momega}^\star_i) + \momega^\star_i \wedge \momega^\star_i \wedge (\mI_i \cdot \momega^\star_i)
 \end{bmatrix}
-\end{Bmatrix}
 - \dot{\mJ}^\msT \mlambda
 =\dot{\mu}
 \end{equation}
 \normalsize
 
-\begin{equation}
+Realizando o produto das matrizes, e utilizando a definição de $\mM(\mq)$ \eqref{eq:MSerial}, temos:
+
+\begin{equation} \label{eq:ModeloMecSerialDaux}
 \mM \cdot \dddot{\mq} - \dot{\mJ}^\msT \mlambda + \sum_{i=1}^\nu  \mJ_{v\,i}^\msT \, \underaccent{\sim}{\dot{\ma}}_i + \mJ_{\omega\,i}^\msT \Big( \mI_i (\underaccent{\sim}{\ddot{\momega}}_i + \dot{\momega}^\star_i \wedge \momega^\star_i) + \dot{\momega}^\star_i \wedge (\mI_i \cdot \momega^\star_i) + 2\momega^\star_i \wedge (\mI_i \cdot \dot{\momega}^\star_i) + \momega^\star_i \wedge \momega^\star_i \wedge (\mI_i \cdot \momega^\star_i)  \Big) = \dot{\mu}
+\end{equation}
+
+Portanto, comparando \eqref{eq:ModeloMecSerialDaux} com \eqref{eq:ModeloMecSerialD}, temos que:
+\begin{equation}
+\mh = - \dot{\mJ}^\msT \mlambda + \sum_{i=1}^\nu  \mJ_{v\,i}^\msT \, \underaccent{\sim}{\dot{\ma}}_i + \mJ_{\omega\,i}^\msT \Big( \mI_i (\underaccent{\sim}{\ddot{\momega}}_i + \dot{\momega}^\star_i \wedge \momega^\star_i) + \dot{\momega}^\star_i \wedge (\mI_i \cdot \momega^\star_i) + 2\momega^\star_i \wedge (\mI_i \cdot \dot{\momega}^\star_i) + \momega^\star_i \wedge \momega^\star_i \wedge (\mI_i \cdot \momega^\star_i)  \Big)
 \end{equation}
 
 \end{itemize}
