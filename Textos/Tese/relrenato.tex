@@ -41,6 +41,8 @@
 \usepackage{multicol}
 \usepackage{scalerel}
 \usepackage{accents}
+\usepackage{empheq}
+\usepackage{fancybox}
 
 \renewcommand*{\glossarypreamble}{\vspace{-\baselineskip}}  
 
@@ -1405,7 +1407,6 @@ Sendo:
 
 
 
-
 \item[E)] Dinâmica
 
 O modelo dinâmico de $\ssB$ é obtido utilizando um procedimento inspirado no Método Orsino de acoplamento de subsistemas \cite{23orsino}, e é dado por:
@@ -1854,7 +1855,96 @@ $$
 \mg(\mq) = - \sum_{i=1}^\nu m_i \mJ_{v\,i}^\msT \mgamma
 $$
 
-\item[F)] Dinâmica de ordem superior
+\item[F)] Derivada dos Jacobianos
+
+Para a obtenção do modelo dinâmico de ordem superior (derivada do modelo dinâmico), será necessário obter as derivadas dos jacobianos. As expressões obtidas anteriormente para as colunas dos jacobianos são dadas pelas equações \eqref{eq:jvi_}, \eqref{eq:jvij_}, \eqref{eq:jwi_}, e \eqref{eq:jwij_}:
+$$
+\mj_{v\,i}(\mq) = \begin{cases}
+\vct{\vk_{i-1}}_{\ttN}, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; \text{i-ésima junta prismática} \\
+\vct{\vk_{i-1}}_{\ttN}\wedge (\vct{\ttx}_{\ttN}-\vct{\tto_{i-1}}_{\ttN}) , \; \text{i-ésima junta rotativa} \\
+\end{cases} \, i=1,...,\nu
+$$
+$$ 
+\mj_{v\,i,j}(\mq) = \begin{cases}
+\mzr, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; j>i \\
+\vct{\vk_{j-1}}_{\ttN}, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; j\leq i  \text{ e j-ésima junta prismática} \\
+\vct{\vk_{j-1}}_{\ttN}\wedge (\vct{\ttg_i}_{\ttN}-\vct{\tto_{j-1}}_{\ttN}) , \; j\leq i \text{ e j-ésima junta rotativa} \\
+\end{cases} \, i,j=1,...,\nu
+$$
+$$
+\mj_{\omega\,i}(\mq) = \begin{cases}
+\mzr, \;\;\;\;\;\;\;\; \text{i-ésima junta prismática} \\
+\vct{\vk_{i-1}}_{\ttN} , \text{i-ésima junta rotativa} \\
+\end{cases} \, i=1,...,\nu
+$$
+$$ 
+\mj_{\omega\,i,j}(\mq) = \begin{cases}
+\mzr, \;\;\;\;\;\;\;\;\,  j>i \\
+\mj_{\omega\,j}(\mq), \;  j\leq i \\
+\end{cases} \, i,j=1,...,\nu
+$$
+
+Sendo assim, podemos obter as derivadas dos jacobianos calculando as seguintes derivadas vetoriais:
+\begin{equation}
+\frac{\dd^{[\llN]} \vk_{i-1}}{\dd t} 
+\end{equation}
+\begin{equation}
+\frac{\dd^{[\llN]}}{\dd t} \Big( \vk_{i-1} \wedge \vr_{\tto_{i-1} | \ttx}   \Big)
+\end{equation}
+\begin{equation}
+\frac{\dd^{[\llN]}}{\dd t} \Big( \vk_{j-1} \wedge \vr_{\tto_{j-1} | \ttg_i}   \Big) 
+\end{equation}
+
+Utilizando a definição da derivada de versores (?) em (?), temos:
+\begin{empheq}[box=\ovalbox]{equation}
+\frac{\dd^{[\llN]} \vk_{i-1}}{\dd t} = \vomega_{\lllB_{i-1}}^{\lllN} \wedge \vk_{i-1}
+\end{empheq}
+
+Utilizando (?) e (?) em (?), temos:
+\begin{equation}
+\frac{\dd^{[\llN]}}{\dd t} \Big( \vk_{i-1} \wedge \vr_{\tto_{i-1} | \ttx}   \Big) = (\vomega_{\lllB_{i-1}}^{\lllN} \wedge \vk_{i-1}) \wedge \vr_{\tto_{i-1} | \ttx} + \vk_{i-1} \wedge \Big(\vomega_{\lllB_{i-1}}^{\lllN} \wedge \vr_{\tto_{i-1} | \ttx} + \vv_\ttx^{\lllB_{i-1}}   \Big)
+\end{equation}
+
+Pelas propriedades do produto vetorial (?) e (?), temos que:
+\begin{equation}
+(\vomega_{\lllB_{i-1}}^{\lllN} \wedge \vk_{i-1}) \wedge \vr_{\tto_{i-1} | \ttx} = (\vomega_{\lllB_{i-1}}^{\lllN} \cdot \vr_{\tto_{i-1} | \ttx}) \vk_{i-1}  - (\vk_{i-1} \cdot \vr_{\tto_{i-1} | \ttx}) \vomega_{\lllB_{i-1}}^{\lllN}
+\end{equation}
+\begin{equation}
+\vk_{i-1} \wedge \vomega_{\lllB_{i-1}}^{\lllN} \wedge \vr_{\tto_{i-1} | \ttx} = (\vk_{i-1} \cdot \vr_{\tto_{i-1} | \ttx} ) \vomega_{\lllB_{i-1}}^{\lllN}  - (\vk_{i-1} \cdot \vomega_{\lllB_{i-1}}^{\lllN})\vr_{\tto_{i-1} | \ttx}
+\end{equation}
+
+Sendo assim, temos:
+\begin{equation}
+\frac{\dd^{[\llN]}}{\dd t} \Big( \vk_{i-1} \wedge \vr_{\tto_{i-1} | \ttx}   \Big) = (\vomega_{\lllB_{i-1}}^{\lllN} \cdot \vr_{\tto_{i-1} | \ttx}) \vk_{i-1}  - (\vk_{i-1} \cdot \vomega_{\lllB_{i-1}}^{\lllN})\vr_{\tto_{i-1} | \ttx} + \vk_{i-1} \wedge \vv_\ttx^{\lllB_{i-1}}  
+\end{equation}
+
+Finalmente, utilizando a propriedade (?), temos:
+\begin{empheq}[box=\ovalbox]{equation}
+\frac{\dd^{[\llN]}}{\dd t} \Big( \vk_{i-1} \wedge \vr_{\tto_{i-1} | \ttx}   \Big) = \vomega_{\lllB_{i-1}}^{\lllN}  \wedge \vk_{i-1}  \wedge \vr_{\tto_{i-1} | \ttx} + \vk_{i-1} \wedge \vv_\ttx^{\lllB_{i-1}}  
+\end{empheq}
+
+Analogamente para (?), temos:
+\begin{empheq}[box=\ovalbox]{equation}
+\frac{\dd^{[\llN]}}{\dd t} \Big( \vk_{j-1} \wedge \vr_{\tto_{j-1} | \ttg_i}   \Big)  = \vomega_{\lllB_{j-1}}^{\lllN}  \wedge \vk_{j-1}  \wedge \vr_{\tto_{j-1} | \ttg_i} + \vk_{j-1} \wedge \vv_{\ttg_{i}}^{\lllB_{j-1}}  
+\end{empheq}
+
+Sendo assim, pode-se concluir que as derivadas das colunas dos jacobianos são dadas por:
+\begin{empheq}[box=\ovalbox]{equation}
+\dot{\mj}_{v\,i} = \momega^\star_{i-1} \wedge \mj_{v\,i} + \mj_{\omega\,i} \wedge \mv_{i-1}
+\end{empheq}
+\begin{empheq}[box=\ovalbox]{equation}
+\dot{\mj}_{v\,i,j} = \momega^\star_{j-1} \wedge \mj_{v\,i,j} + \mj_{\omega\,i,j} \wedge \mv_{i,j-1}
+\end{empheq}
+\begin{empheq}[box=\ovalbox]{equation}
+\dot{\mj}_{\omega\,i} = \momega^\star_{i-1} \wedge \mj_{\omega\,i} 
+\end{empheq}
+\begin{empheq}[box=\ovalbox]{equation}
+\dot{\mj}_{\omega\,i,j} = \momega^\star_{j-1} \wedge \mj_{\omega\,i,j}
+\end{empheq}
+
+
+
+\item[G)] Dinâmica de ordem superior
 
 Em alguns casos a obtenção do o modelo dinâmico de ordem superior (derivada do modelo dinâmico) pode ser vantajoso, tendo em vista que pode ser utilizado para obter leis de controle mais suaves, realizar o controle de posição diretamente pela tensão elétrica aplicada nos atuadores (sem a necessidade do controle de corrente), ou obter o modelo dinâmico linearizado em torno de uma trajetória. Essas aplicações serão exploradas no capítulo ?. \\
 
