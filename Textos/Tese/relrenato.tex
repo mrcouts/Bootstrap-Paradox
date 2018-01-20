@@ -43,6 +43,9 @@
 \usepackage{accents}
 \usepackage{empheq}
 \usepackage{fancybox}
+\definecolor{myblue}{rgb}{.8, .8, 1}
+\newcommand*\mybluebox[1]{%
+\colorbox{myblue}{\hspace{1em}#1\hspace{1em}}}
 
 \renewcommand*{\glossarypreamble}{\vspace{-\baselineskip}}  
 
@@ -1837,52 +1840,52 @@ m_i (\mJ_{v_i} \ddot{\mq} + \underaccent{\sim}{\ma}_i   )  \\
 =\mu
 \end{equation}
 
-Sendo assim, obtemos o modelo dinâmico mostrado anteriormente pelas equações \eqref{eq:ModeloMecSerial}, \eqref{eq:MSerial}, \eqref{eq:vSerial}, \eqref{eq:gSerial}:
-$$
+Sendo assim, obtemos o modelo dinâmico mostrado anteriormente:
+\begin{equation} \tag{\ref{eq:ModeloMecSerial}}
 \mM(\mq) \ddot{\mq} + \mnu(\mq,\dot{\mq}) + \mg(\mq) = \mu
-$$
+\end{equation}
 
 Sendo:
-$$
+\begin{equation} \tag{\ref{eq:MSerial}}
 \mM(\mq) = \sum_{i=1}^\nu
 m_i \mJ_{v\,i}^\msT \mJ_{v\,i} + \mJ_{\omega\,i}^\msT \mI_i \mJ_{\omega\,i}
-$$
-$$
+\end{equation}
+\begin{equation} \tag{\ref{eq:vSerial}}
 \mnu(\mq, \dot{\mq}) = \sum_{i=1}^\nu
  m_i \mJ_{v\,i}^\msT \underaccent{\sim}{\ma}_i + \mJ_{\omega\,i}^\msT \big( \mI_i \underaccent{\sim}{\dot{\momega}}_i + \momega^\star_i \wedge (\mI_i  \momega^\star_i) \big)
-$$
-$$
+\end{equation}
+\begin{equation} \tag{\ref{eq:gSerial}}
 \mg(\mq) = - \sum_{i=1}^\nu m_i \mJ_{v\,i}^\msT \mgamma
-$$
+\end{equation}
 
 \item[F)] Derivada dos Jacobianos
 
-Para a obtenção do modelo dinâmico de ordem superior (derivada do modelo dinâmico), será necessário obter as derivadas dos jacobianos. As expressões obtidas anteriormente para as colunas dos jacobianos são dadas pelas equações \eqref{eq:jvi_}, \eqref{eq:jvij_}, \eqref{eq:jwi_}, e \eqref{eq:jwij_}:
-$$
+Para a obtenção do modelo dinâmico de ordem superior (derivada do modelo dinâmico), será necessário obter as derivadas dos jacobianos. As expressões obtidas anteriormente para as colunas dos jacobianos são dadas pelas seguintes equações:
+\begin{equation} \tag{\ref{eq:jvi_}}
 \mj_{v\,i}(\mq) = \begin{cases}
 \vct{\vk_{i-1}}_{\ttN}, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; \text{i-ésima junta prismática} \\
 \vct{\vk_{i-1}}_{\ttN}\wedge (\vct{\ttx}_{\ttN}-\vct{\tto_{i-1}}_{\ttN}) , \; \text{i-ésima junta rotativa} \\
 \end{cases} \, i=1,...,\nu
-$$
-$$ 
+\end{equation}
+\begin{equation} \tag{\ref{eq:jvij_}}
 \mj_{v\,i,j}(\mq) = \begin{cases}
 \mzr, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; j>i \\
 \vct{\vk_{j-1}}_{\ttN}, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; j\leq i  \text{ e j-ésima junta prismática} \\
 \vct{\vk_{j-1}}_{\ttN}\wedge (\vct{\ttg_i}_{\ttN}-\vct{\tto_{j-1}}_{\ttN}) , \; j\leq i \text{ e j-ésima junta rotativa} \\
 \end{cases} \, i,j=1,...,\nu
-$$
-$$
+\end{equation}
+\begin{equation} \tag{\ref{eq:jwi_}}
 \mj_{\omega\,i}(\mq) = \begin{cases}
 \mzr, \;\;\;\;\;\;\;\; \text{i-ésima junta prismática} \\
 \vct{\vk_{i-1}}_{\ttN} , \text{i-ésima junta rotativa} \\
 \end{cases} \, i=1,...,\nu
-$$
-$$ 
+\end{equation}
+\begin{equation} \tag{\ref{eq:jwij_}}
 \mj_{\omega\,i,j}(\mq) = \begin{cases}
 \mzr, \;\;\;\;\;\;\;\;\,  j>i \\
 \mj_{\omega\,j}(\mq), \;  j\leq i \\
 \end{cases} \, i,j=1,...,\nu
-$$
+\end{equation}
 
 Sendo assim, podemos obter as derivadas dos jacobianos calculando as seguintes derivadas vetoriais:
 \begin{equation}
@@ -1896,7 +1899,7 @@ Sendo assim, podemos obter as derivadas dos jacobianos calculando as seguintes d
 \end{equation}
 
 Utilizando a definição da derivada de versores (?) em (?), temos:
-\begin{empheq}[box=\ovalbox]{equation}
+\begin{empheq}[box=\fbox]{equation}
 \frac{\dd^{[\llN]} \vk_{i-1}}{\dd t} = \vomega_{\lllB_{i-1}}^{\lllN} \wedge \vk_{i-1}
 \end{empheq}
 
@@ -1919,26 +1922,26 @@ Sendo assim, temos:
 \end{equation}
 
 Finalmente, utilizando a propriedade (?), temos:
-\begin{empheq}[box=\ovalbox]{equation}
+\begin{empheq}[box=\fbox]{equation}
 \frac{\dd^{[\llN]}}{\dd t} \Big( \vk_{i-1} \wedge \vr_{\tto_{i-1} | \ttx}   \Big) = \vomega_{\lllB_{i-1}}^{\lllN}  \wedge \vk_{i-1}  \wedge \vr_{\tto_{i-1} | \ttx} + \vk_{i-1} \wedge \vv_\ttx^{\lllB_{i-1}}  
 \end{empheq}
 
 Analogamente para (?), temos:
-\begin{empheq}[box=\ovalbox]{equation}
+\begin{empheq}[box=\fbox]{equation}
 \frac{\dd^{[\llN]}}{\dd t} \Big( \vk_{j-1} \wedge \vr_{\tto_{j-1} | \ttg_i}   \Big)  = \vomega_{\lllB_{j-1}}^{\lllN}  \wedge \vk_{j-1}  \wedge \vr_{\tto_{j-1} | \ttg_i} + \vk_{j-1} \wedge \vv_{\ttg_{i}}^{\lllB_{j-1}}  
 \end{empheq}
 
 Sendo assim, pode-se concluir que as derivadas das colunas dos jacobianos são dadas por:
-\begin{empheq}[box=\ovalbox]{equation}
+\begin{empheq}[box=\mybluebox]{equation}
 \dot{\mj}_{v\,i} = \momega^\star_{i-1} \wedge \mj_{v\,i} + \mj_{\omega\,i} \wedge \mv_{i-1}
 \end{empheq}
-\begin{empheq}[box=\ovalbox]{equation}
+\begin{empheq}[box=\mybluebox]{equation}
 \dot{\mj}_{v\,i,j} = \momega^\star_{j-1} \wedge \mj_{v\,i,j} + \mj_{\omega\,i,j} \wedge \mv_{i,j-1}
 \end{empheq}
-\begin{empheq}[box=\ovalbox]{equation}
+\begin{empheq}[box=\mybluebox]{equation}
 \dot{\mj}_{\omega\,i} = \momega^\star_{i-1} \wedge \mj_{\omega\,i} 
 \end{empheq}
-\begin{empheq}[box=\ovalbox]{equation}
+\begin{empheq}[box=\mybluebox]{equation}
 \dot{\mj}_{\omega\,i,j} = \momega^\star_{j-1} \wedge \mj_{\omega\,i,j}
 \end{empheq}
 
@@ -1946,46 +1949,49 @@ Sendo assim, pode-se concluir que as derivadas das colunas dos jacobianos são da
 
 \item[G)] Dinâmica de ordem superior
 
-Em alguns casos a obtenção do o modelo dinâmico de ordem superior (derivada do modelo dinâmico) pode ser vantajoso, tendo em vista que pode ser utilizado para obter leis de controle mais suaves, realizar o controle de posição diretamente pela tensão elétrica aplicada nos atuadores (sem a necessidade do controle de corrente), ou obter o modelo dinâmico linearizado em torno de uma trajetória. Essas aplicações serão exploradas no capítulo ?. \\
+Em alguns casos a obtenção do o modelo dinâmico de ordem superior (derivada do modelo dinâmico) pode ser vantajoso, tendo em vista que pode ser utilizado para obter leis de controle mais suaves, realizar o controle de posição diretamente pela tensão elétrica aplicada nos atuadores (sem a necessidade do controle de corrente), ou obter o modelo dinâmico linearizado em torno de uma trajetória. Essas aplicações serão exploradas no capítulo [???]. \\
 
 Derivando \eqref{eq:ModeloMecSerial}, temos:
 
-\begin{equation} \label{eq:ModeloMecSerialD}
+\begin{empheq}[box=\mybluebox]{equation} \label{eq:ModeloMecSerialD}
 \mM(\mq) \dddot{\mq} + \mh(\mq, \dot{\mq}, \ddot{\mq}) = \dot{\mu}
-\end{equation}
+\end{empheq}
 
 Sendo:
-\begin{equation}
+\begin{empheq}[box=\mybluebox]{equation}
 \mh(\mq, \dot{\mq}, \ddot{\mq}) = \dot{\mM}(\mq, \dot{\mq}) \ddot{\mq} + \dot{\mnu}(\mq, \dot{\mq}, \ddot{\mq}) + \dot{\mg}(\mq,\dot{\mq})
-\end{equation}
+\end{empheq}
 
 A obtenção de $\mh(\mq, \dot{\mq}, \ddot{\mq})$ através da derivação temporal direta das equações \eqref{eq:MSerial}, \eqref{eq:vSerial} e \eqref{eq:gSerial} é possível, porém um tanto quanto complexa. Sendo assim, para obter o modelo dinâmico de ordem superior, será mais uma vez adotada uma estratágia inspirada no Método Orsino. 
 
 Primeiramente, é preciso obter as derivadas temporais das equações de Newton-Euler. Derivando o equação do TMB do centro de massa de cada ligamente no tempo, temos:
-$$
-\frac{\dd^{[\llN]}}{\dd t} \Big( m_i \va^{\lllN}_{\ttg_i} - m_i \vg - \vf_{r\,i} \Big) =  m_i \dot{\va}^{\lllN}_{\ttg_i} - \dot{\vf}_{r\,i} = \vzr \\
-$$
 \begin{equation}
- m_i \dot{\va}^{\lllN}_{\ttg_i} = \dot{\vf}_{r\,i} 
+\frac{\dd^{[\llN]}}{\dd t} \Big( m_i \va^{\lllN}_{\ttg_i} - m_i \vg - \vf_{r\,i} \Big) =  m_i \dot{\va}^{\lllN}_{\ttg_i} - \dot{\vf}_{r\,i} = \vzr \\
 \end{equation}
+\begin{empheq}[box=\fbox]{equation}
+ m_i \dot{\va}^{\lllN}_{\ttg_i} = \dot{\vf}_{r\,i} 
+\end{empheq}
 
 Agora, derivando o equação do TMA de cada ligamento no tempo, temos:
-$$
+\begin{equation}
 \frac{\dd^{[\llN]}}{\dd t} \Big( \vI_{\ttg_i} \cdot \dot{\vomega}^{\lllN}_{\lllB_i} + \vomega^{\lllN}_{\lllB_i} \wedge (\vI_{\ttg_i} \cdot \vomega^{\lllN}_{\lllB_i}) - \vtau_{r\,i} \Big) = \vzr
-$$
+\end{equation}
 
 Utilizando \eqref{eq:derivada_vetor}, \eqref{eq:composicao_wCA} e \eqref{eq:composicao_dwCA}, temos:
-$$
+\begin{equation}
 \frac{\dd^{[\llB_i]}}{\dd t} \Big( -\vI_{\ttg_i} \cdot \dot{\vomega}^{\lllB_i}_{\lllN} + \vomega^{\lllB_i}_{\lllN} \wedge (\vI_{\ttg_i} \cdot \vomega^{\lllB_i}_{\lllN}) \Big) + \vomega^{\lllN}_{\lllB_i} \wedge \Big( \vI_{\ttg_i} \cdot \dot{\vomega}^{\lllN}_{\lllB_i} + \vomega^{\lllN}_{\lllB_i} \wedge (\vI_{\ttg_i} \cdot \vomega^{\lllN}_{\lllB_i}) \Big) \\
 $$
 $$
-= -\vI_{\ttg_i} \cdot \ddot{\vomega}^{\lllB_i}_{\lllN} + \dot{\vomega}^{\lllB_i}_{\lllN} \wedge (\vI_{\ttg_i} \cdot \vomega^{\lllB_i}_{\lllN}) + \vomega^{\lllB_i}_{\lllN} \wedge (\vI_{\ttg_i} \cdot \dot{\vomega}^{\lllB_i}_{\lllN}) + \vomega^{\lllN}_{\lllB_i} \wedge \Big( \vI_{\ttg_i} \cdot \dot{\vomega}^{\lllN}_{\lllB_i} + \vomega^{\lllN}_{\lllB_i} \wedge (\vI_{\ttg_i} \cdot \vomega^{\lllN}_{\lllB_i}) \Big) = \dot{\vtau}_{r\,i}  \\
-$$
+= -\vI_{\ttg_i} \cdot \ddot{\vomega}^{\lllB_i}_{\lllN} + \dot{\vomega}^{\lllB_i}_{\lllN} \wedge (\vI_{\ttg_i} \cdot \vomega^{\lllB_i}_{\lllN}) + \vomega^{\lllB_i}_{\lllN} \wedge (\vI_{\ttg_i} \cdot \dot{\vomega}^{\lllB_i}_{\lllN}) + \vomega^{\lllN}_{\lllB_i} \wedge \Big( \vI_{\ttg_i} \cdot \dot{\vomega}^{\lllN}_{\lllB_i} + \vomega^{\lllN}_{\lllB_i} \wedge (\vI_{\ttg_i} \cdot \vomega^{\lllN}_{\lllB_i}) \Big) = \dot{\vtau}_{r\,i}
+\end{equation}
 
 Finalmente, utilizando \eqref{eq:composicao_wCA}, \eqref{eq:composicao_dwCA} e \eqref{eq:composicao_d2wCA}, temos:
-\begin{equation}
-\vI_{\ttg_i} \cdot (\ddot{\vomega}^{\lllN}_{\lllB_i} + \dot{\vomega}^{\lllN}_{\lllB_i} \wedge \vomega^{\lllN}_{\lllB_i}) + \dot{\vomega}^{\lllN}_{\lllB_i} \wedge (\vI_{\ttg_i} \cdot \vomega^{\lllN}_{\lllB_i}) + 2\vomega^{\lllN}_{\lllB_i} \wedge (\vI_{\ttg_i} \cdot \dot{\vomega}^{\lllN}_{\lllB_i}) + \vomega^{\lllN}_{\lllB_i} \wedge  \vomega^{\lllN}_{\lllB_i} \wedge (\vI_{\ttg_i} \cdot \vomega^{\lllN}_{\lllB_i})  = \dot{\vtau}_{r\,i}  \\
-\end{equation}
+\begin{empheq}[box=\fbox]{equation}
+\begin{split}
+\vI_{\ttg_i} \cdot (\ddot{\vomega}^{\lllN}_{\lllB_i} + \dot{\vomega}^{\lllN}_{\lllB_i} \wedge \vomega^{\lllN}_{\lllB_i}) &+ \dot{\vomega}^{\lllN}_{\lllB_i} \wedge (\vI_{\ttg_i} \cdot \vomega^{\lllN}_{\lllB_i}) + 2\vomega^{\lllN}_{\lllB_i} \wedge (\vI_{\ttg_i} \cdot \dot{\vomega}^{\lllN}_{\lllB_i}) \\
+ &+ \vomega^{\lllN}_{\lllB_i} \wedge  \vomega^{\lllN}_{\lllB_i} \wedge (\vI_{\ttg_i} \cdot \vomega^{\lllN}_{\lllB_i})  = \dot{\vtau}_{r\,i}
+\end{split}
+\end{empheq}
 
 Ou seja, as derivadas temporais das equações de Newton-Euler para cada ligamento são dadas por:
 \begin{equation}
@@ -2096,9 +2102,14 @@ Realizando o produto das matrizes, e utilizando a definição de $\mM(\mq)$ \eqref
 \end{equation}
 
 Portanto, comparando \eqref{eq:ModeloMecSerialDaux} com \eqref{eq:ModeloMecSerialD}, temos que:
-\begin{equation}
-\mh = - \dot{\mJ}^\msT \mlambda + \sum_{i=1}^\nu  \mJ_{v\,i}^\msT \, \underaccent{\sim}{\dot{\ma}}_i + \mJ_{\omega\,i}^\msT \Big( \mI_i (\underaccent{\sim}{\ddot{\momega}}_i + \dot{\momega}^\star_i \wedge \momega^\star_i) + \dot{\momega}^\star_i \wedge (\mI_i \cdot \momega^\star_i) + 2\momega^\star_i \wedge (\mI_i \cdot \dot{\momega}^\star_i) + \momega^\star_i \wedge \momega^\star_i \wedge (\mI_i \cdot \momega^\star_i)  \Big)
-\end{equation}
+\small
+\begin{empheq}[box=\mybluebox]{equation}
+\begin{split}
+&\mh = - \dot{\mJ}^\msT \mlambda + \\
+&\sum_{i=1}^\nu  \mJ_{v\,i}^\msT \, \underaccent{\sim}{\dot{\ma}}_i + \mJ_{\omega\,i}^\msT \Big( \mI_i (\underaccent{\sim}{\ddot{\momega}}_i + \dot{\momega}^\star_i \wedge \momega^\star_i) + \dot{\momega}^\star_i \wedge (\mI_i \cdot \momega^\star_i) + 2\momega^\star_i \wedge (\mI_i \cdot \dot{\momega}^\star_i) + \momega^\star_i \wedge \momega^\star_i \wedge (\mI_i \cdot \momega^\star_i)  \Big)
+\end{split}
+\end{empheq}
+\normalsize
 
 \end{itemize}
 
