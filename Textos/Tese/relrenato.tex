@@ -47,6 +47,42 @@
 \newcommand*\mybluebox[1]{%
 \colorbox{myblue}{\hspace{1em}#1\hspace{1em}}}
 
+\usepackage{titlesec}
+\usepackage{hyperref}
+
+\titleclass{\subsubsubsection}{straight}[\subsection]
+
+\newcounter{subsubsubsection}[subsubsection]
+\renewcommand\thesubsubsubsection{\thesubsubsection.\arabic{subsubsubsection}}
+\renewcommand\theparagraph{\thesubsubsubsection.\arabic{paragraph}} % optional; useful if paragraphs are to be numbered
+
+\titleformat{\subsubsubsection}
+  {\normalfont\normalsize\bfseries}{\thesubsubsubsection}{1em}{}
+\titlespacing*{\subsubsubsection}
+{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+
+\makeatletter
+\renewcommand\paragraph{\@startsection{paragraph}{5}{\z@}%
+  {3.25ex \@plus1ex \@minus.2ex}%
+  {-1em}%
+  {\normalfont\normalsize\bfseries}}
+\renewcommand\subparagraph{\@startsection{subparagraph}{6}{\parindent}%
+  {3.25ex \@plus1ex \@minus .2ex}%
+  {-1em}%
+  {\normalfont\normalsize\bfseries}}
+\def\toclevel@subsubsubsection{4}
+\def\toclevel@paragraph{5}
+\def\toclevel@paragraph{6}
+\def\l@subsubsubsection{\@dottedtocline{4}{7em}{4em}}
+\def\l@paragraph{\@dottedtocline{5}{10em}{5em}}
+\def\l@subparagraph{\@dottedtocline{6}{14em}{6em}}
+\makeatother
+
+\setcounter{secnumdepth}{4}
+\setcounter{tocdepth}{4}
+
+
+
 \renewcommand*{\glossarypreamble}{\vspace{-\baselineskip}}  
 
 \newglossary[cng]{conventions}{cns}{cno}{Convenções de notação}
@@ -298,72 +334,64 @@ Sejam $\llA$ e $\llB$ dois referenciais, e $\ttp$ e $\tto$ pontos no espaço. Pri
 \item $\displaystyle\frac{\dd^{[\lllA]}}{\dd t}$: Operador derivada temporal em relação ao referencial $\llA$.
 \end{itemize}
 
-
-\begin{itemize}
-\item[A)] Derivada temporal de versores
+\subsubsubsection{Derivada temporal de versores}\label{S05-01-01-01}
 
 Seja %m $\llA$ e $\llB$ dois referenciais referenciais e 
 $\hat{\vx}_{\lllB}$ um versor fixo ao referencial $\llB$. A derivada temporal de $\hat{\vx}_{\lllB}$ em relação ao referencial $\llA$ é definida como:
-\begin{equation}
+\begin{empheq}[box=\mybluebox]{equation} \label{eq:derivada_versor}
 \frac{\dd^{[{\lllA}]} \hat{\vx}_{\lllB} }{\dd t} = \dot{\hat{\vx}}_{\lllB}^{[\lllA]} = \vomega_{\lllB}^{\lllA} \wedge \hat{\vx}_{\lllB}
-\end{equation}
+\end{empheq}
 
-\item[B)] Derivada temporal de vetores
+\subsubsubsection{Derivada temporal de vetores}\label{S05-01-01-02} 
 
 Seja $\ttB = \{ \vi_{\ttB}, \vj_{\ttB}, \vk_{\ttB} \}$ uma base ortonormal fixa ao referencial $\llB$ e $\vx$ um vetor cuja decomposição na base $\ttB$ é conhecida e dada por $\vx = x \vi_{\ttB} + y \vj_{\ttB} + z \vk_{\ttB} $. A derivada temporal de $\vx$ em relação ao referencial $\llA$ é definida como:
-$$
-\frac{\dd^{[{\lllA}]} \vx }{\dd t} = \dot{\vx}^{[\lllA]} = \dot{x} \vi_{\ttB} + \dot{y} \vj_{\ttB} + \dot{z} \vk_{\ttB} + x \dot{\vi}_{\ttB}^{[\lllA]} + y \dot{\vj}_{\ttB}^{[\lllA]} + z \dot{\vk}_{\ttB}^{[\lllA]}
-$$
-$$
- = \dot{x} \vi_{\ttB} + \dot{y} \vj_{\ttB} + \dot{z} \vk_{\ttB} +  \vomega_{\lllB}^{\lllA} \wedge x \vi_{\ttB} +  \vomega_{\lllB}^{\lllA} \wedge y \vj_{\ttB} + \vomega_{\lllB}^{\lllA} \wedge z \vk_{\ttB}
-$$
-$$
- = \dot{x} \vi_{\ttB} + \dot{y} \vj_{\ttB} + \dot{z} \vk_{\ttB} + \vomega_{\lllB}^{\lllA} \wedge (x \vi_{\ttB} + y \vj_{\ttB} + z \vk_{\ttB})
-$$
+\begin{equation}
+\begin{split}
+\frac{\dd^{[{\lllA}]} \vx }{\dd t} &= \dot{\vx}^{[\lllA]} = \dot{x} \vi_{\ttB} + \dot{y} \vj_{\ttB} + \dot{z} \vk_{\ttB} + x \dot{\vi}_{\ttB}^{[\lllA]} + y \dot{\vj}_{\ttB}^{[\lllA]} + z \dot{\vk}_{\ttB}^{[\lllA]} \\
+ &= \dot{x} \vi_{\ttB} + \dot{y} \vj_{\ttB} + \dot{z} \vk_{\ttB} +  \vomega_{\lllB}^{\lllA} \wedge x \vi_{\ttB} +  \vomega_{\lllB}^{\lllA} \wedge y \vj_{\ttB} + \vomega_{\lllB}^{\lllA} \wedge z \vk_{\ttB} \\
+ &= \dot{x} \vi_{\ttB} + \dot{y} \vj_{\ttB} + \dot{z} \vk_{\ttB} + \vomega_{\lllB}^{\lllA} \wedge (x \vi_{\ttB} + y \vj_{\ttB} + z \vk_{\ttB})
+\end{split}
+\end{equation}
 
 Repare que o termo $\dot{x} \vi_{\lllB} + \dot{y} \vj_{\lllB} + \dot{z} \vk_{\lllB}$ é a derivada temporal do vetor $\vx$ no referencial $\llB$. Sendo assim, temos:
-\begin{equation} \label{eq:derivada_vetor}
+\begin{empheq}[box=\mybluebox]{equation} \label{eq:derivada_vetor}
 \frac{\dd^{[{\lllA}]} \vx }{\dd t} = \dot{\vx}^{[\lllA]} = \dot{\vx}^{[\lllB]}  + \vomega_{\lllB}^{\lllA} \wedge \vx
-\end{equation}
+\end{empheq}
 
 
-\item[C)] Definição de vetor velocidade
+\subsubsubsection{Definição de vetor velocidade}\label{S05-01-01-03}
 
 %Seja $\vr_{\tto \rl \ttp}$ o vetor que liga do ponto $\tto$ até o ponto $\ttp$, sendo $\tto$ um ponto fixo ao referencial $\llA$. 
-A velocidade do ponto $\ttp$ em relação ao referencial $\llA$ é definida como:
-\begin{equation}
+Supondo que o ponto $\tto$ esteja fixo a $\llA$, a velocidade do ponto $\ttp$ em relação ao referencial $\llA$ é definida como:
+\begin{empheq}[box=\mybluebox]{equation}
 \vv_\ttp^{\lllA} = \frac{\dd^{[\lllA]} \vr_{\tto \rl \ttp}}{\dd t} = \dot{\vr}_{\tto \rl \ttp}^{[\lllA]}
-\end{equation}
+\end{empheq}
 
-Supondo $\tto$ fixo a $\llA$. Caso $\tto$ não esteja fixo a $\llA$, temos que:
-\begin{equation}
+Caso $\tto$ não esteja fixo a $\llA$, temos que:
+\begin{empheq}[box=\fbox]{equation}
 \frac{\dd^{[\lllA]} \vr_{\tto \rl \ttp}}{\dd t} = \dot{\vr}_{\tto \rl \ttp}^{[\lllA]} = \vv_\ttp^{\lllA} - \vv_\tto^{\lllA}
-\end{equation}
+\end{empheq}
 
-\item[D)] Definição de vetor aceleração
+\subsubsubsection{Definição de vetor aceleração}\label{S05-01-01-04}
 
 A aceleração do ponto $\ttp$ em relação ao referencial $\llA$ é definida como:
-\begin{equation}
+\begin{empheq}[box=\mybluebox]{equation}
 \va_\ttp^{\lllA} = \frac{\dd^{[\lllA]} \vv_\ttp^{\lllA} }{\dd t}
-\end{equation}
-
-\end{itemize}
+\end{empheq}
 
 
 \subsubsection{Equações de Poisson}\label{S05-01-02}
 
 Esta subseção tem o intuito de apresentar as equações básicos da cinemática de corpos rígidos,  as equações de Poisson para velocidades, acelerações e sobre-acelerações.
 
-\begin{itemize}
-
-\item[A)] Equação de Poisson para velocidades
+\subsubsubsection{Equação de Poisson para velocidades}\label{S05-01-02-01}
 
 Sejam $\ttp$ e $\tto$ dois pontos pertencentes a um corpo rígido $\llB$, e $\llA$ um referencial. Podemos relacionar a velocidades dos ponto $\ttp$ e $\tto$ em relação a $\llA$ através da equação de Poisson para velocidades:
-\begin{equation}\label{eq:Poisson_v}
+\begin{empheq}[box=\mybluebox]{equation}\label{eq:Poisson_v}
 \vv_\ttp^{\lllA} = \vv_\tto^{\lllA} + \vomega_{\lllB}^{\lllA} \wedge \vr_{\tto \rl \ttp}
-\end{equation}
+\end{empheq}
 
-\item[B)] Equação de Poisson para acelerações
+\subsubsubsection{Equação de Poisson para acelerações}\label{S05-01-02-02}
 
 
 Derivando \eqref{eq:Poisson_v} no tempo em relação a $\llA$, temos:
@@ -372,11 +400,11 @@ Derivando \eqref{eq:Poisson_v} no tempo em relação a $\llA$, temos:
 \end{equation}
 
 Substituindo \eqref{eq:Poisson_v} em \eqref{eq:Poisson_a_aux}, obtemos a equação de Poisson para acelerações:
-\begin{equation}\label{eq:Poisson_a}
+\begin{empheq}[box=\mybluebox]{equation} \label{eq:Poisson_a}
 \va_\ttp^{\lllA} = \va_\tto^{\lllA} + \dot{\vomega}_{\lllB}^{\lllA} \wedge \vr_{\tto \rl \ttp} + \vomega_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA} \wedge \vr_{\tto \rl \ttp}
-\end{equation}
+\end{empheq}
 
-\item[C)] Equação de Poisson para sobre-acelerações
+\subsubsubsection{Equação de Poisson para sobre-acelerações}\label{S05-01-02-03}
 
 
 Derivando \eqref{eq:Poisson_a} no tempo em relação a $\llA$, temos:
@@ -385,19 +413,15 @@ Derivando \eqref{eq:Poisson_a} no tempo em relação a $\llA$, temos:
 \end{equation}
 
 Substituindo \eqref{eq:Poisson_v} em \eqref{eq:Poisson_da_aux}, obtemos a equação de Poisson para sobre-acelerações:
-\begin{equation}\label{eq:Poisson_da}
+\begin{empheq}[box=\mybluebox]{equation} \label{eq:Poisson_da}
 \dot{\va}_\ttp^{\lllA} = \dot{\va}_\tto^{\lllA} + \ddot{\vomega}_{\lllB}^{\lllA} \wedge \vr_{\tto \rl \ttp}  + 2\dot{\vomega}_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA} \wedge \vr_{\tto \rl \ttp} + \vomega_{\lllB}^{\lllA} \wedge \dot{\vomega}_{\lllB}^{\lllA} \wedge \vr_{\tto \rl \ttp} + \vomega_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA} \wedge  \vomega_{\lllB}^{\lllA} \wedge \vr_{\tto \rl \ttp}
-\end{equation}
-
-\end{itemize}
+\end{empheq}
 
 \subsubsection{Composição de movimentos}\label{S05-01-03}
 
 Esta subseção tem o intuito de apresentar um dos princípios básicos da cinemática de corpos rígidos, a composição de movimentos.
 
-\begin{itemize}
-
-\item[A)] Composição de velocidades lineares
+\subsubsubsection{Composição de velocidades lineares}\label{S05-01-03-01}
 
 Sejam $\llA$ um referencial, e $\ttA$ um sistema de coordenadas fixo a $\llA$, definido pela origem $\tto_\ttA$ e pelos versores $\vi_\ttA$, $\vj_\ttA$ e $\vk_\ttA$. Sejam também $\llB$ um referencial, $\ttB$ um sistema de coordenadas fixo a $\llB$, definido pela origem $\tto_\ttB$ e pelos versores $\vi_\ttB$, $\vj_\ttB$ e $\vk_\ttB$, e $\ttp$ um ponto no espaço. Definindo os vetores $\vr_{\tto_\ttA \rl \tto_\ttB}$, $\vr_{\tto_\ttB \rl \ttp}$ e $\vr_{\tto_\ttA \rl \ttp}$ tem-se que:
 \begin{equation} \label{eq:r_rho}
@@ -426,18 +450,18 @@ Substituindo \eqref{eq:drho} em \eqref{eq:dr_rho_aux}, temos:
 \end{equation}
 
 Definindo:
-\begin{equation} \label{eq:v_arr}
+\begin{empheq}[box=\fbox]{equation} \label{eq:v_arr}
 \vv_{\ttp \rl \lllB}^{\lllA} = \vv_{\tto_\ttB}^{\lllA}  + \vomega_{\lllB}^{\lllA} \wedge \vr_{\tto_\ttB \rl \ttp}
-\end{equation}
+\end{empheq}
 
 Temos princípio da composição de movimento para velocidades lineares:
-\begin{equation} \label{eq:Composicao_vel}
+\begin{empheq}[box=\mybluebox]{equation} \label{eq:Composicao_vel}
 \vv_\ttp^{\lllA} = \vv_{\ttp \rl \lllB}^{\lllA} + \vv_\ttp^{\lllB}
-\end{equation}
+\end{empheq}
 
 Ou seja, $\vv_\ttp^{\lllA}$ é composto pela soma de $\vv_{\ttp \rl \lllB}^{\lllA}$, que seria a velocidade de $\ttp$ se $\ttp$ estivesse fixo a $\llB$ (movimento de arrastamento), e $\vv_\ttp^{\lllB}$, que seria a velocidade de $\ttp$ se $\llB$ estivesse parado em relação a $\llA$ (movimento relativo).
 
-\item[B)] Composição de acelerações lineares
+\subsubsubsection{Composição de acelerações lineares}\label{S05-01-03-02}
 
 Derivando \eqref{eq:dr_rho} no tempo em relação a $\llA$, temos:
 \begin{equation} \label{eq:d2r_rho_aux}
@@ -450,19 +474,19 @@ Substituindo \eqref{eq:drho} em \eqref{eq:d2r_rho_aux}, temos:
 \end{equation}
 
 Definindo:
-\begin{equation}
+\begin{empheq}[box=\fbox]{equation}
 \va_{\ttp \rl \lllB}^{\lllA} = \va_{\tto_\ttB}^{\lllA}  + \dot{\vomega}_{\lllB}^{\lllA} \wedge \vr_{\tto_\ttB \rl \ttp} + \vomega_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA} \wedge \vr_{\tto_\ttB \rl \ttp}
-\end{equation}
+\end{empheq}
 
 Temos princípio da composição de movimento para acelerações lineares:
-\begin{equation} \label{eq:Composicao_ace}
+\begin{empheq}[box=\mybluebox]{equation} \label{eq:Composicao_ace}
 \va_\ttp^{\lllA} = \va_{\ttp \rl \lllB}^{\lllA} + \va_\ttp^{\lllB} + 2\vomega_{\lllB}^{\lllA} \wedge \vv_\ttp^{\lllB}
-\end{equation}
+\end{empheq}
 
 Ou seja, $\va_\ttp^{\lllA}$ é composto pela soma de $\va_{\ttp \rl \lllB}^{\lllA}$, que seria a aceleração de $\ttp$ se $\ttp$ estivesse fixo a $\llB$ (aceleração de arrastamento), $\va_\ttp^{\lllB}$, que seria a aceleração de $\ttp$ se $\llB$ estivesse parado em relação a $\llA$ (aceleração relativa), e da parcela $2\vomega_{\lllB}^{\lllA} \wedge \vv_\ttp^{\lllB}$ (aceleralção complementar).
 
 
-\item[C)] Composição de sobre-acelerações lineares
+\subsubsubsection{Composição de sobre-acelerações lineares}\label{S05-01-03-03}
 
 Derivando \eqref{eq:d2r_rho} no tempo, temos:
 \begin{multline} \label{eq:d3r_rho_aux}
@@ -496,27 +520,27 @@ Substituindo \eqref{eq:drho} em \eqref{eq:d3r_rho_aux}, temos:
 \end{multline}
 
 Definindo:
-\begin{equation}
+\begin{empheq}[box=\fbox]{equation}
 \dot{\va}_{\ttp \rl \lllB}^{\lllA} = \dot{\va}_{\tto_\ttB}^{\lllA}  + 
 \ddot{\vomega}_{\lllB}^{\lllA} \wedge \vr_{\tto_\ttB \rl \ttp} + 
 2\dot{\vomega}_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA} \wedge \vr_{\tto_\ttB \rl \ttp}  + 
 \vomega_{\lllB}^{\lllA} \wedge \dot{\vomega}_{\lllB}^{\lllA} \wedge \vr_{\tto_\ttB \rl \ttp} + 
 \vomega_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA} \wedge \vr_{\tto_\ttB \rl \ttp}
-\end{equation}
+\end{empheq}
 
 Temos princípio da composição de movimento para sobre-acelerações lineares:
-\begin{equation} \label{eq:Composicao_dace}
+\begin{empheq}[box=\mybluebox]{equation} \label{eq:Composicao_dace}
 \dot{\va}_\ttp^{\lllA} = \dot{\va}_{\ttp \rl \lllB}^{\lllA} + \dot{\va}_\ttp^{\lllB} + 3(\dot{\vomega}_{\lllB}^{\lllA} \wedge \vv_\ttp^{\lllB} + 
 \vomega_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA} \wedge \vv_\ttp^{\lllB}  + 
  \vomega_{\lllB}^{\lllA} \wedge \va_\ttp^{\lllB} )
-\end{equation}
+\end{empheq}
 
 Ou seja, $\dot{\va}_\ttp^{\lllA}$ é composto pela soma de $\dot{\va}_{\ttp \rl \lllB}^{\lllA}$, que seria a sobre-aceleração de 
 $\ttp$ se $\ttp$ estivesse fixo a $\llB$ (sobre-aceleração de arrastamento), $\dot{\va}_\ttp^{\lllB}$, que seria a sobre-aceleração de $\ttp$ se $\llB$ estivesse parado em relação a $\llA$ (sobre-aceleração relativa), e da parcela $3(\dot{\vomega}_{\lllB}^{\lllA} \wedge \vv_\ttp^{\lllB} + 
 \vomega_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA} \wedge \vv_\ttp^{\lllB}  + 
  \vomega_{\lllB}^{\lllA} \wedge \va_\ttp^{\lllB} )$ (sobre-aceleralção complementar).
 
-\item[D)] Composição de velocidades angulares
+\subsubsubsection{Composição de velocidades angulares}\label{S05-01-03-04}
 
 Sejam $\llA$ e $\llB$ dois referenciais e $\llC$ um corpo rígido. Sejam também os pontos $\ttp_1$ e $\ttp_2$, ambos fixos a $\llC$.
 
@@ -564,9 +588,9 @@ Substituindo \eqref{eq:vA_poisson_p1p2} e \eqref{eq:vB_poisson_p1p2} em \eqref{e
 \end{equation}
 
 Temos princípio da composição de movimento para velocidades angulares:
-\begin{equation} \label{eq:composicao_w}
+\begin{empheq}[box=\mybluebox]{equation} \label{eq:composicao_w}
 \vomega_{\lllC}^{\lllA}  =  \vomega_{\lllB}^{\lllA}   + \vomega_{\lllC}^{\lllB}
-\end{equation}
+\end{empheq}
 
 Ou seja, $\vomega_{\lllC}^{\lllA}$ é composta pela soma de $\vomega_{\lllB}^{\lllA}$, que seria velocidade angular de  de $\llC$ se $\llC$ estivesse fixo a $\llB$ (velocidade angular de arrastamento), e $\vomega_{\lllC}^{\lllB}$, que seria a velocidade angular de $\llC$ se $\llB$ estivesse parado em relação a $\llA$ (velocidade angular relativa).
 
@@ -574,16 +598,16 @@ Repare que, fazendo $\llC \equiv \llA$, temos que:
 \begin{equation}
 \vzr  =  \vomega_{\lllB}^{\lllA}   + \vomega_{\lllA}^{\lllB}
 \end{equation}
-\begin{equation} \label{eq:composicao_wCA}
+\begin{empheq}[box=\fbox]{equation} \label{eq:composicao_wCA}
 \therefore \vomega_{\lllA}^{\lllB}  =   - \vomega_{\lllB}^{\lllA}
-\end{equation}
+\end{empheq}
 
-\item[E)] Composição de acelerações angulares
+\subsubsubsection{Composição de acelerações angulares}\label{S05-01-03-05}
 
 Derivando \eqref{eq:composicao_w} no tempo em relação a $\llA$, temos princípio da composição de movimento para acelerações angulares:
-\begin{equation} \label{eq:composicao_dw}
+\begin{empheq}[box=\mybluebox]{equation} \label{eq:composicao_dw}
 \dot{\vomega}_{\lllC}^{\lllA}  =  \dot{\vomega}_{\lllB}^{\lllA}   + \dot{\vomega}_{\lllC}^{\lllB} + \vomega_{\lllB}^{\lllA} \wedge \vomega_{\lllC}^{\lllB}
-\end{equation}
+\end{empheq}
 
 Ou seja, $\dot{\vomega}_{\lllC}^{\lllA}$ é composta pela soma de $\dot{\vomega}_{\lllB}^{\lllA}$, que seria a aceleração angular  de $\llC$ se $\llC$ estivesse fixo a $\llB$ (aceleração angular de arrastamento), $\dot{\vomega}_{\lllC}^{\lllB}$, que seria a aceleração angular de $\llC$ se $\llB$ estivesse parado em relação a $\llA$ (aceleração angular relativa), e da parcela $\vomega_{\lllB}^{\lllA} \wedge \vomega_{\lllC}^{\lllB}$ (aceleralção angular complementar).
 
@@ -591,16 +615,16 @@ Repare que, fazendo $\llC \equiv \llA$ e utilizando \eqref{eq:composicao_wCA}, t
 \begin{equation}
 \vzr =  \dot{\vomega}_{\lllB}^{\lllA}   + \dot{\vomega}_{\lllA}^{\lllB} - \vomega_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA}
 \end{equation}
-\begin{equation} \label{eq:composicao_dwCA}
+\begin{empheq}[box=\fbox]{equation} \label{eq:composicao_dwCA}
 \therefore \dot{\vomega}_{\lllA}^{\lllB} = - \dot{\vomega}_{\lllB}^{\lllA}
-\end{equation}
+\end{empheq}
 
-\item[F)] Composição de sobre-acelerações angulares
+\subsubsubsection{Composição de sobre-acelerações angulares}\label{S05-01-03-06}
 
 Derivando \eqref{eq:composicao_dw} no tempo em relação a $\llA$, temos princípio da composição de movimento para sobre-acelerações angulares:
-\begin{equation} \label{eq:composicao_d2w}
+\begin{empheq}[box=\mybluebox]{equation} \label{eq:composicao_d2w}
 \ddot{\vomega}_{\lllC}^{\lllA}  =  \ddot{\vomega}_{\lllB}^{\lllA}   + \ddot{\vomega}_{\lllC}^{\lllB} +  \dot{\vomega}_{\lllB}^{\lllA} \wedge \vomega_{\lllC}^{\lllB} + 2 \vomega_{\lllB}^{\lllA} \wedge \dot{\vomega}_{\lllC}^{\lllB} + \vomega_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA} \wedge \vomega_{\lllC}^{\lllB}
-\end{equation}
+\end{empheq}
 
 Ou seja, $\ddot{\vomega}_{\lllC}^{\lllA}$ é composta pela soma de $\ddot{\vomega}_{\lllB}^{\lllA}$, que seria a sobre-aceleração angular  de $\llC$ se $\llC$ estivesse fixo a $\llB$ (sobre-aceleração angular de arrastamento), $\ddot{\vomega}_{\lllC}^{\lllB}$, que seria a sobre-aceleração angular de $\llC$ se $\llB$ estivesse parado em relação a $\llA$ (aceleração angular relativa), e da parcela $ \dot{\vomega}_{\lllB}^{\lllA} \wedge \vomega_{\lllC}^{\lllB} + 2 \vomega_{\lllB}^{\lllA} \wedge \dot{\vomega}_{\lllC}^{\lllB} + \vomega_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA} \wedge \vomega_{\lllC}^{\lllB}$ (sobre-aceleralção angular complementar).
 
@@ -608,17 +632,13 @@ Repare que, fazendo $\llC \equiv \llA$ e utilizando \eqref{eq:composicao_wCA} e 
 \begin{equation}
 \vzr  =  \ddot{\vomega}_{\lllB}^{\lllA}   + \ddot{\vomega}_{\lllA}^{\lllB} -  \dot{\vomega}_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA} - 2 \vomega_{\lllB}^{\lllA} \wedge \dot{\vomega}_{\lllB}^{\lllA} - \vomega_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA}
 \end{equation}
-\begin{equation} \label{eq:composicao_d2wCA}
+\begin{empheq}[box=\fbox]{equation} \label{eq:composicao_d2wCA}
 \therefore \ddot{\vomega}_{\lllA}^{\lllB}  =  -\ddot{\vomega}_{\lllB}^{\lllA} -  \dot{\vomega}_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA}
-\end{equation}
+\end{empheq}
 
 
 
-\end{itemize}
-
-
-
-\subsection{Algoritmo para modelagem de mecanismos seriais}\label{S05-2}
+\subsection{Algoritmo para modelagem de mecanismos seriais}\label{S05-02}
 
 Esta subseção tem o intuito de apresentar um algoritmo genérico para a obtenção do modelo cinemático e dinâmico de mecanismos seriais. O algoritmo apresentado é implementável em linguagens de programação comumente usadas atualmente, como C++, Java e Python, sem necessitar de recursos de manipulação simbólica. \\
 Para a obtenção do modelo, são necessários apenas os parametros de Denavit-Hartemberg \cite{Craig, Denavit, Lipkin, Cabral} do mecanismo e as posições dos centros de massa dos ligamentos em relação aos sistemas de coordenadas fixos aos ligamentos. \\ 
@@ -651,8 +671,9 @@ q_1 & ... & {q}_{\nu}
 \item $\mgamma$: Vetor aceleração gravitacional escrito na base $\ttN$, ou seja, $\vct{\vg}_{\ttN}$.
 \end{itemize}
 
-\begin{itemize}
-\item[A)] Cinemática de posição
+\subsubsection{Cinemática}\label{S05-02-01}
+
+\subsubsubsection{Cinemática de posição}\label{S05-02-01-01}
 
 Dados os parâmetros de Denavit-Hartemberg $a_i$, $\alpha_i$, $d_i$ e $\theta_i$, com $1 \leq i \leq \nu$, é possível obter as matrizes de transformação homogênea $\hvct{\vone}_{\ttB_{i-1} \rl \ttB_i}$ a partir da seguinte expressão \cite{Cabral} :
 
@@ -695,7 +716,7 @@ Além disso, como $\vct{\ttg_i}_{\ttB_i}$ são dados de entrada do algoritmo, obte
 \hvct{\ttg_i}_{\ttN} = \hvct{\vone}_{\ttN \rl \ttB_i} \cdot \hvct{\ttg_i}_{\ttB_i}
 \end{equation}
 
-\item[B1)] Cinemática de velocidades lineares
+\subsubsubsection{Cinemática de velocidades lineares}\label{S05-02-01-02}
 
 A velocidade do efetuador pode ser obtida aplicando recursivamente o príncipio da composição de movimentos para velocidades lineres deduzido anteriormente \eqref{eq:Composicao_vel}:
 
@@ -823,7 +844,7 @@ Sendo:
 \end{bmatrix}
 \end{equation}
 
-\item[B2)] Cinemática de velocidades angulares
+\subsubsubsection{Cinemática de velocidades angulares}\label{S05-02-01-03}
 
 A velocidade angular do efetuador pode ser obtida aplicando recursivamente o príncipio da composição de movimentos para velocidades angulares deduzido anteriormente \eqref{eq:composicao_w}:
 
@@ -946,7 +967,7 @@ Sendo:
 \end{bmatrix}
 \end{equation}
 
-\item[C1)] Cinemática de acelerações lineares
+\subsubsubsection{Cinemática de acelerações lineares}\label{S05-02-01-04}
 
 A aceleração do efetuador pode ser obtida aplicando recursivamente o príncipio da composição de movimentos para velocidades lineres deduzido anteriormente \eqref{eq:Composicao_ace}:
 
@@ -1058,7 +1079,7 @@ Sendo:
 \underaccent{\sim}{\ma}_i (\mq, \dot{\mq}) = \sum_{j=1}^i (\underaccent{\sim}{\ma}_i)_j
 \end{equation}
 
-\item[C2)] Cinemática de acelerações angulares
+\subsubsubsection{Cinemática de acelerações angulares}\label{S05-02-01-05}
 
 A aceleração angular do efetuador pode ser obtida aplicando recursivamente o príncipio da composição de movimentos para acelerações deduzido anteriormente \eqref{eq:composicao_dw}:
 
@@ -1167,7 +1188,7 @@ Sendo:
 \underaccent{\sim}{\dot{\momega}}_i (\mq, \dot{\mq}) = \sum_{j=1}^i (\underaccent{\sim}{\dot{\momega}}_i)_j
 \end{equation}
 
-\item[D1)] Cinemática de sobre-acelerações lineares
+\subsubsubsection{Cinemática de sobre-acelerações lineares}\label{S05-02-01-06}
 
 A sobre-aceleração do efetuador pode ser obtida aplicando recursivamente o príncipio da composição de movimentos para sobre-acelerações lineres deduzido anteriormente \eqref{eq:Composicao_dace}:
 
@@ -1299,7 +1320,7 @@ Sendo:
 \underaccent{\sim}{\dot{\ma}}_i =\sum_{j=1}^i  (\underaccent{\sim}{\dot{\ma}}_i)_j
 \end{equation}
 
-\item[D2)] Cinemática de sobre-acelerações angulares
+\subsubsubsection{Cinemática de sobre-acelerações angulares}\label{S05-02-01-07}
 
 A sobre-aceleração angular do efetuador pode ser obtida aplicando recursivamente o príncipio da composição de movimentos para sobre-aceleralções angulares deduzido anteriormente \eqref{eq:composicao_d2w}:
 \begin{equation}
@@ -1408,34 +1429,32 @@ Sendo:
 \underaccent{\sim}{\ddot{\momega}}_i = \sum_{j=1}^i  (\underaccent{\sim}{\ddot{\momega}}_i)_j
 \end{equation}
 
+\subsubsection{Dinâmica}\label{S05-02-02}
 
-
-\item[E)] Dinâmica
+\subsubsubsection{Modelo Dinâmico} \label{S05-02-02-01}
 
 O modelo dinâmico de $\ssB$ é obtido utilizando um procedimento inspirado no Método Orsino de acoplamento de subsistemas \cite{23orsino}, e é dado por:
-\begin{equation} \label{eq:ModeloMecSerial}
+\begin{empheq}[box=\mybluebox]{equation} \label{eq:ModeloMecSerial}
 \mM(\mq) \ddot{\mq} + \mnu(\mq,\dot{\mq}) + \mg(\mq) = \mu
-\end{equation}
+\end{empheq}
 
 Sendo:
-\begin{equation} \label{eq:MSerial}
+\begin{empheq}[box=\mybluebox]{equation} \label{eq:MSerial}
 \mM(\mq) = \sum_{i=1}^\nu
 m_i \mJ_{v\,i}^\msT \mJ_{v\,i} + \mJ_{\omega\,i}^\msT \mI_i \mJ_{\omega\,i}
-\end{equation}
-\begin{equation} \label{eq:vSerial}
+\end{empheq}
+\begin{empheq}[box=\mybluebox]{equation} \label{eq:vSerial}
 \mnu(\mq, \dot{\mq}) = \sum_{i=1}^\nu
  m_i \mJ_{v\,i}^\msT \underaccent{\sim}{\ma}_i + \mJ_{\omega\,i}^\msT \big( \mI_i \underaccent{\sim}{\dot{\momega}}_i + \momega^\star_i \wedge (\mI_i  \momega^\star_i) \big)
-\end{equation}
-\begin{equation} \label{eq:gSerial}
+\end{empheq}
+\begin{empheq}[box=\mybluebox]{equation} \label{eq:gSerial}
 \mg(\mq) = - \sum_{i=1}^\nu m_i \mJ_{v\,i}^\msT \mgamma
-\end{equation}
+\end{empheq}
 
 Segue abaixo, a dedução.
 %A idéia é obter o modelo dinâmico do sistema acoplado através dos modelos dos subsistemas desacoplados e dos vínculos cinemáticos entre eles.
 
-\begin{itemize}
-
-\item[i)] Modelo dos subsistemas \\
+\paragraph{i) Modelo dos subsistemas} $ \, $ \\
 
 O modelo dinâmico de cada ligamento pode ser obtido por Newton-Euler, pois são considerados como corpos rígidos sujeitos apenas à força peso e aos esforços reativos vinculares. Sendo assim, aplicando o Teorema do Movimento do Baricentro e o Teorema do Momento Angular para cada ligamento, temos:
 
@@ -1543,7 +1562,7 @@ Portanto, o modelo dinâmico de cada subsistema pode ser escrito como:
 
 %No caso de os subsistemas estarem desacoplados, temos que $\mf_{r\,i} = \mzr$.
 
-\item[ii)] Sistemas de forças ativas generalizadas e quasi-velocidades adicionais \\
+\paragraph{ii) Sistemas de forças ativas generalizadas e quasi-velocidades adicionais} $ \, $ \\
 
 Considere também um sistema constituido pelos esforços que os atuadores aplicam nas juntas do mecanismo, e pelos seus respectivos esforços reativos. Primeiramente, definimos a matriz-coluna de quasi-velocidades relativas a esse subsistema (quasi-velocidades adicionais):
 %Muitas vezes é conveniente definir um conjunto de quasi-velocidades adicionais $\mp_0$, as quais só fazem sentido para o sistema acoplado, e sistemas de forças ativas generalizadas adicionais $\mf_0$ aplicados na direção das quasi-velocidades adicionais. \\
@@ -1566,7 +1585,7 @@ Sendo:
 \mf\ssh = \mu
 \end{equation}
 
-\item[iii)] Vínculos cinemáticos entre subsistemas
+\paragraph{iii) Vínculos cinemáticos entre subsistemas} $ \, $ \\
 
 Através das equações \eqref{eq:v_star_i}, \eqref{eq:omega_star_i} e \eqref{eq:mp_0}, é possível relacionar as quasi-velocidades de cada subsistema com as quasi-velocidades adicionais da seguinte maneira:
 \begin{equation}
@@ -1616,7 +1635,7 @@ Sendo:
 \end{equation}
 %\frac{\partial \overline{\mp}}{\partial \mp}
 
-\item[iv)] Acoplamento de subsistemas
+\paragraph{iv) Acoplamento de subsistemas} $ \, $ \\
 
 Seja $\mf$ a matriz-coluna contendo todos os sistemas de forças ativas generalizadas:
 \begin{equation}
@@ -1858,96 +1877,7 @@ m_i \mJ_{v\,i}^\msT \mJ_{v\,i} + \mJ_{\omega\,i}^\msT \mI_i \mJ_{\omega\,i}
 \mg(\mq) = - \sum_{i=1}^\nu m_i \mJ_{v\,i}^\msT \mgamma
 \end{equation}
 
-\item[F)] Derivada dos Jacobianos
-
-Para a obtenção do modelo dinâmico de ordem superior (derivada do modelo dinâmico), será necessário obter as derivadas dos jacobianos. As expressões obtidas anteriormente para as colunas dos jacobianos são dadas pelas seguintes equações:
-\begin{equation} \tag{\ref{eq:jvi_}}
-\mj_{v\,i}(\mq) = \begin{cases}
-\vct{\vk_{i-1}}_{\ttN}, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; \text{i-ésima junta prismática} \\
-\vct{\vk_{i-1}}_{\ttN}\wedge (\vct{\ttx}_{\ttN}-\vct{\tto_{i-1}}_{\ttN}) , \; \text{i-ésima junta rotativa} \\
-\end{cases} \, i=1,...,\nu
-\end{equation}
-\begin{equation} \tag{\ref{eq:jvij_}}
-\mj_{v\,i,j}(\mq) = \begin{cases}
-\mzr, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; j>i \\
-\vct{\vk_{j-1}}_{\ttN}, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; j\leq i  \text{ e j-ésima junta prismática} \\
-\vct{\vk_{j-1}}_{\ttN}\wedge (\vct{\ttg_i}_{\ttN}-\vct{\tto_{j-1}}_{\ttN}) , \; j\leq i \text{ e j-ésima junta rotativa} \\
-\end{cases} \, i,j=1,...,\nu
-\end{equation}
-\begin{equation} \tag{\ref{eq:jwi_}}
-\mj_{\omega\,i}(\mq) = \begin{cases}
-\mzr, \;\;\;\;\;\;\;\; \text{i-ésima junta prismática} \\
-\vct{\vk_{i-1}}_{\ttN} , \text{i-ésima junta rotativa} \\
-\end{cases} \, i=1,...,\nu
-\end{equation}
-\begin{equation} \tag{\ref{eq:jwij_}}
-\mj_{\omega\,i,j}(\mq) = \begin{cases}
-\mzr, \;\;\;\;\;\;\;\;\,  j>i \\
-\mj_{\omega\,j}(\mq), \;  j\leq i \\
-\end{cases} \, i,j=1,...,\nu
-\end{equation}
-
-Sendo assim, podemos obter as derivadas dos jacobianos calculando as seguintes derivadas vetoriais:
-\begin{equation}
-\frac{\dd^{[\llN]} \vk_{i-1}}{\dd t} 
-\end{equation}
-\begin{equation}
-\frac{\dd^{[\llN]}}{\dd t} \Big( \vk_{i-1} \wedge \vr_{\tto_{i-1} | \ttx}   \Big)
-\end{equation}
-\begin{equation}
-\frac{\dd^{[\llN]}}{\dd t} \Big( \vk_{j-1} \wedge \vr_{\tto_{j-1} | \ttg_i}   \Big) 
-\end{equation}
-
-Utilizando a definição da derivada de versores (?) em (?), temos:
-\begin{empheq}[box=\fbox]{equation}
-\frac{\dd^{[\llN]} \vk_{i-1}}{\dd t} = \vomega_{\lllB_{i-1}}^{\lllN} \wedge \vk_{i-1}
-\end{empheq}
-
-Utilizando (?) e (?) em (?), temos:
-\begin{equation}
-\frac{\dd^{[\llN]}}{\dd t} \Big( \vk_{i-1} \wedge \vr_{\tto_{i-1} | \ttx}   \Big) = (\vomega_{\lllB_{i-1}}^{\lllN} \wedge \vk_{i-1}) \wedge \vr_{\tto_{i-1} | \ttx} + \vk_{i-1} \wedge \Big(\vomega_{\lllB_{i-1}}^{\lllN} \wedge \vr_{\tto_{i-1} | \ttx} + \vv_\ttx^{\lllB_{i-1}}   \Big)
-\end{equation}
-
-Pelas propriedades do produto vetorial (?) e (?), temos que:
-\begin{equation}
-(\vomega_{\lllB_{i-1}}^{\lllN} \wedge \vk_{i-1}) \wedge \vr_{\tto_{i-1} | \ttx} = (\vomega_{\lllB_{i-1}}^{\lllN} \cdot \vr_{\tto_{i-1} | \ttx}) \vk_{i-1}  - (\vk_{i-1} \cdot \vr_{\tto_{i-1} | \ttx}) \vomega_{\lllB_{i-1}}^{\lllN}
-\end{equation}
-\begin{equation}
-\vk_{i-1} \wedge \vomega_{\lllB_{i-1}}^{\lllN} \wedge \vr_{\tto_{i-1} | \ttx} = (\vk_{i-1} \cdot \vr_{\tto_{i-1} | \ttx} ) \vomega_{\lllB_{i-1}}^{\lllN}  - (\vk_{i-1} \cdot \vomega_{\lllB_{i-1}}^{\lllN})\vr_{\tto_{i-1} | \ttx}
-\end{equation}
-
-Sendo assim, temos:
-\begin{equation}
-\frac{\dd^{[\llN]}}{\dd t} \Big( \vk_{i-1} \wedge \vr_{\tto_{i-1} | \ttx}   \Big) = (\vomega_{\lllB_{i-1}}^{\lllN} \cdot \vr_{\tto_{i-1} | \ttx}) \vk_{i-1}  - (\vk_{i-1} \cdot \vomega_{\lllB_{i-1}}^{\lllN})\vr_{\tto_{i-1} | \ttx} + \vk_{i-1} \wedge \vv_\ttx^{\lllB_{i-1}}  
-\end{equation}
-
-Finalmente, utilizando a propriedade (?), temos:
-\begin{empheq}[box=\fbox]{equation}
-\frac{\dd^{[\llN]}}{\dd t} \Big( \vk_{i-1} \wedge \vr_{\tto_{i-1} | \ttx}   \Big) = \vomega_{\lllB_{i-1}}^{\lllN}  \wedge \vk_{i-1}  \wedge \vr_{\tto_{i-1} | \ttx} + \vk_{i-1} \wedge \vv_\ttx^{\lllB_{i-1}}  
-\end{empheq}
-
-Analogamente para (?), temos:
-\begin{empheq}[box=\fbox]{equation}
-\frac{\dd^{[\llN]}}{\dd t} \Big( \vk_{j-1} \wedge \vr_{\tto_{j-1} | \ttg_i}   \Big)  = \vomega_{\lllB_{j-1}}^{\lllN}  \wedge \vk_{j-1}  \wedge \vr_{\tto_{j-1} | \ttg_i} + \vk_{j-1} \wedge \vv_{\ttg_{i}}^{\lllB_{j-1}}  
-\end{empheq}
-
-Sendo assim, pode-se concluir que as derivadas das colunas dos jacobianos são dadas por:
-\begin{empheq}[box=\mybluebox]{equation}
-\dot{\mj}_{v\,i} = \momega^\star_{i-1} \wedge \mj_{v\,i} + \mj_{\omega\,i} \wedge \mv_{i-1}
-\end{empheq}
-\begin{empheq}[box=\mybluebox]{equation}
-\dot{\mj}_{v\,i,j} = \momega^\star_{j-1} \wedge \mj_{v\,i,j} + \mj_{\omega\,i,j} \wedge \mv_{i,j-1}
-\end{empheq}
-\begin{empheq}[box=\mybluebox]{equation}
-\dot{\mj}_{\omega\,i} = \momega^\star_{i-1} \wedge \mj_{\omega\,i} 
-\end{empheq}
-\begin{empheq}[box=\mybluebox]{equation}
-\dot{\mj}_{\omega\,i,j} = \momega^\star_{j-1} \wedge \mj_{\omega\,i,j}
-\end{empheq}
-
-
-
-\item[G)] Dinâmica de ordem superior
+\subsubsubsection{Equações Dinâmicas de Ordem Superior} \label{S05-02-02-02}
 
 Em alguns casos a obtenção do o modelo dinâmico de ordem superior (derivada do modelo dinâmico) pode ser vantajoso, tendo em vista que pode ser utilizado para obter leis de controle mais suaves, realizar o controle de posição diretamente pela tensão elétrica aplicada nos atuadores (sem a necessidade do controle de corrente), ou obter o modelo dinâmico linearizado em torno de uma trajetória. Essas aplicações serão exploradas no capítulo [???]. \\
 
@@ -2103,7 +2033,7 @@ Realizando o produto das matrizes, e utilizando a definição de $\mM(\mq)$ \eqref
 
 Portanto, comparando \eqref{eq:ModeloMecSerialDaux} com \eqref{eq:ModeloMecSerialD}, temos que:
 \small
-\begin{empheq}[box=\mybluebox]{equation}
+\begin{empheq}[box=\mybluebox]{equation} \label{eq:h_}
 \begin{split}
 &\mh = - \dot{\mJ}^\msT \mlambda + \\
 &\sum_{i=1}^\nu  \mJ_{v\,i}^\msT \, \underaccent{\sim}{\dot{\ma}}_i + \mJ_{\omega\,i}^\msT \Big( \mI_i (\underaccent{\sim}{\ddot{\momega}}_i + \dot{\momega}^\star_i \wedge \momega^\star_i) + \dot{\momega}^\star_i \wedge (\mI_i \cdot \momega^\star_i) + 2\momega^\star_i \wedge (\mI_i \cdot \dot{\momega}^\star_i) + \momega^\star_i \wedge \momega^\star_i \wedge (\mI_i \cdot \momega^\star_i)  \Big)
@@ -2111,9 +2041,65 @@ Portanto, comparando \eqref{eq:ModeloMecSerialDaux} com \eqref{eq:ModeloMecSeria
 \end{empheq}
 \normalsize
 
-\end{itemize}
+\subsubsubsection{Derivada dos Jacobianos} \label{S05-02-02-03}
 
-\end{itemize}
+Para tornar possível a utilização da equação \eqref{eq:h_}, será necessário obter as derivadas dos jacobianos. A partir das equações \eqref{eq:jvi_}, \eqref{eq:jvij_}, \eqref{eq:jwi_} e \eqref{eq:jwij_}, podemos obter as derivadas dos jacobianos calculando as seguintes derivadas vetoriais:
+\begin{equation} \label{eq:derivada_k_aux}
+\frac{\dd^{[\llN]} \vk_{i-1}}{\dd t} 
+\end{equation}
+\begin{equation} \label{eq:derivada_kvet1_aux}
+\frac{\dd^{[\llN]}}{\dd t} \Big( \vk_{i-1} \wedge \vr_{\tto_{i-1} | \ttx}   \Big)
+\end{equation}
+\begin{equation} \label{eq:derivada_kvet2_aux}
+\frac{\dd^{[\llN]}}{\dd t} \Big( \vk_{j-1} \wedge \vr_{\tto_{j-1} | \ttg_i}   \Big) 
+\end{equation}
+
+Utilizando a definição da derivada de versores \eqref{eq:derivada_versor} em \eqref{eq:derivada_kaux}, temos:
+\begin{empheq}[box=\fbox]{equation} \label{eq:derivada_k}
+\frac{\dd^{[\llN]} \vk_{i-1}}{\dd t} = \vomega_{\lllB_{i-1}}^{\lllN} \wedge \vk_{i-1}
+\end{empheq}
+
+Utilizando \eqref{eq:derivada_k} e \eqref{eq:derivada_vetor} em \eqref{eq:derivada_kvet1_aux}, temos:
+\begin{equation}
+\frac{\dd^{[\llN]}}{\dd t} \Big( \vk_{i-1} \wedge \vr_{\tto_{i-1} | \ttx}   \Big) = (\vomega_{\lllB_{i-1}}^{\lllN} \wedge \vk_{i-1}) \wedge \vr_{\tto_{i-1} | \ttx} + \vk_{i-1} \wedge \Big(\vomega_{\lllB_{i-1}}^{\lllN} \wedge \vr_{\tto_{i-1} | \ttx} + \vv_\ttx^{\lllB_{i-1}}   \Big)
+\end{equation}
+
+Pelas propriedades do produto vetorial (?) e (?), temos que:
+\begin{equation}
+(\vomega_{\lllB_{i-1}}^{\lllN} \wedge \vk_{i-1}) \wedge \vr_{\tto_{i-1} | \ttx} = (\vomega_{\lllB_{i-1}}^{\lllN} \cdot \vr_{\tto_{i-1} | \ttx}) \vk_{i-1}  - (\vk_{i-1} \cdot \vr_{\tto_{i-1} | \ttx}) \vomega_{\lllB_{i-1}}^{\lllN}
+\end{equation}
+\begin{equation}
+\vk_{i-1} \wedge \vomega_{\lllB_{i-1}}^{\lllN} \wedge \vr_{\tto_{i-1} | \ttx} = (\vk_{i-1} \cdot \vr_{\tto_{i-1} | \ttx} ) \vomega_{\lllB_{i-1}}^{\lllN}  - (\vk_{i-1} \cdot \vomega_{\lllB_{i-1}}^{\lllN})\vr_{\tto_{i-1} | \ttx}
+\end{equation}
+
+Sendo assim, temos:
+\begin{equation}
+\frac{\dd^{[\llN]}}{\dd t} \Big( \vk_{i-1} \wedge \vr_{\tto_{i-1} | \ttx}   \Big) = (\vomega_{\lllB_{i-1}}^{\lllN} \cdot \vr_{\tto_{i-1} | \ttx}) \vk_{i-1}  - (\vk_{i-1} \cdot \vomega_{\lllB_{i-1}}^{\lllN})\vr_{\tto_{i-1} | \ttx} + \vk_{i-1} \wedge \vv_\ttx^{\lllB_{i-1}}  
+\end{equation}
+
+Finalmente, utilizando a propriedade (?), temos:
+\begin{empheq}[box=\fbox]{equation} \label{eq:derivada_kvet1}
+\frac{\dd^{[\llN]}}{\dd t} \Big( \vk_{i-1} \wedge \vr_{\tto_{i-1} | \ttx}   \Big) = \vomega_{\lllB_{i-1}}^{\lllN}  \wedge \vk_{i-1}  \wedge \vr_{\tto_{i-1} | \ttx} + \vk_{i-1} \wedge \vv_\ttx^{\lllB_{i-1}}  
+\end{empheq}
+
+Analogamente para \eqref{eq:derivada_kvet2_aux}, temos:
+\begin{empheq}[box=\fbox]{equation} \label{eq:derivada_kvet2}
+\frac{\dd^{[\llN]}}{\dd t} \Big( \vk_{j-1} \wedge \vr_{\tto_{j-1} | \ttg_i}   \Big)  = \vomega_{\lllB_{j-1}}^{\lllN}  \wedge \vk_{j-1}  \wedge \vr_{\tto_{j-1} | \ttg_i} + \vk_{j-1} \wedge \vv_{\ttg_{i}}^{\lllB_{j-1}}  
+\end{empheq}
+
+Sendo assim, pode-se concluir que as derivadas das colunas dos jacobianos são dadas por:
+\begin{empheq}[box=\mybluebox]{equation}
+\dot{\mj}_{v\,i} = \momega^\star_{i-1} \wedge \mj_{v\,i} + \mj_{\omega\,i} \wedge \mv_{i-1}
+\end{empheq}
+\begin{empheq}[box=\mybluebox]{equation}
+\dot{\mj}_{v\,i,j} = \momega^\star_{j-1} \wedge \mj_{v\,i,j} + \mj_{\omega\,i,j} \wedge \mv_{i,j-1}
+\end{empheq}
+\begin{empheq}[box=\mybluebox]{equation}
+\dot{\mj}_{\omega\,i} = \momega^\star_{i-1} \wedge \mj_{\omega\,i} 
+\end{empheq}
+\begin{empheq}[box=\mybluebox]{equation}
+\dot{\mj}_{\omega\,i,j} = \momega^\star_{j-1} \wedge \mj_{\omega\,i,j}
+\end{empheq}
 
 \subsection{Algoritmo para modelagem de mecanismos paralelos}\label{S05-3}
 
