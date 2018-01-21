@@ -334,6 +334,38 @@ Sejam $\llA$ e $\llB$ dois referenciais, e $\ttp$ e $\tto$ pontos no espaço. Pri
 \item $\displaystyle\frac{\dd^{[\lllA]}}{\dd t}$: Operador derivada temporal em relação ao referencial $\llA$.
 \end{itemize}
 
+\subsubsubsection{Produto vetorial}\label{S05-01-01-00}
+
+Para a realização do cálculo de derivadas vetoriais, frequentemente é necessário o uso do produto vetorial. A notação para o operador produto vetorial utilizada será o "$\wedge$". Com o intuito de deixar as equações mais legíveis, iremos adotar as seguintes convenções:
+
+\begin{equation}
+\va \wedge (\vb \wedge \vc) \equiv \va \wedge \vb \wedge \vc
+\end{equation}
+\begin{equation}
+\va \wedge \big( \vb \wedge ( \vc \wedge \vd) \big) \equiv \va \wedge \vb \wedge \vc \wedge \vd
+\end{equation}
+
+Além disso, vale destacar algumas propriedades básicas do produto vetorial que possivelmente serão utilizadas durante o texto:
+\begin{equation}
+\va \wedge \va = \vzr
+\end{equation}
+\begin{equation}
+\va \wedge \vb = -\vb \wedge \va
+\end{equation}
+\begin{equation}
+\va \wedge (\vb + \vc) = \va \wedge \vb + \va \wedge \vc
+\end{equation}
+\begin{equation}
+(\lambda \va) \wedge \vb =  \va \wedge (\lambda \vb) = \lambda (\va \wedge \vb)
+\end{equation}
+
+Também vale destacar a seguinte propriedades do produto vetorial entre 3 vetores:
+\begin{equation} \label{eq:prodvet3}
+(\va \wedge \vb) \wedge \vc = \va \wedge \vb \wedge \vc - \vb \wedge \va \wedge \vc
+\end{equation}
+
+
+
 \subsubsubsection{Derivada temporal de versores}\label{S05-01-01-01}
 
 Seja %m $\llA$ e $\llB$ dois referenciais referenciais e 
@@ -2054,7 +2086,7 @@ Para tornar possível a utilização da equação \eqref{eq:h_}, será necessário obte
 \frac{\dd^{[\llN]}}{\dd t} \Big( \vk_{j-1} \wedge \vr_{\tto_{j-1} | \ttg_i}   \Big) 
 \end{equation}
 
-Utilizando a definição da derivada de versores \eqref{eq:derivada_versor} em \eqref{eq:derivada_kaux}, temos:
+Utilizando a definição da derivada de versores \eqref{eq:derivada_versor} em \eqref{eq:derivada_k_aux}, temos:
 \begin{empheq}[box=\fbox]{equation} \label{eq:derivada_k}
 \frac{\dd^{[\llN]} \vk_{i-1}}{\dd t} = \vomega_{\lllB_{i-1}}^{\lllN} \wedge \vk_{i-1}
 \end{empheq}
@@ -2064,20 +2096,7 @@ Utilizando \eqref{eq:derivada_k} e \eqref{eq:derivada_vetor} em \eqref{eq:deriva
 \frac{\dd^{[\llN]}}{\dd t} \Big( \vk_{i-1} \wedge \vr_{\tto_{i-1} | \ttx}   \Big) = (\vomega_{\lllB_{i-1}}^{\lllN} \wedge \vk_{i-1}) \wedge \vr_{\tto_{i-1} | \ttx} + \vk_{i-1} \wedge \Big(\vomega_{\lllB_{i-1}}^{\lllN} \wedge \vr_{\tto_{i-1} | \ttx} + \vv_\ttx^{\lllB_{i-1}}   \Big)
 \end{equation}
 
-Pelas propriedades do produto vetorial (?) e (?), temos que:
-\begin{equation}
-(\vomega_{\lllB_{i-1}}^{\lllN} \wedge \vk_{i-1}) \wedge \vr_{\tto_{i-1} | \ttx} = (\vomega_{\lllB_{i-1}}^{\lllN} \cdot \vr_{\tto_{i-1} | \ttx}) \vk_{i-1}  - (\vk_{i-1} \cdot \vr_{\tto_{i-1} | \ttx}) \vomega_{\lllB_{i-1}}^{\lllN}
-\end{equation}
-\begin{equation}
-\vk_{i-1} \wedge \vomega_{\lllB_{i-1}}^{\lllN} \wedge \vr_{\tto_{i-1} | \ttx} = (\vk_{i-1} \cdot \vr_{\tto_{i-1} | \ttx} ) \vomega_{\lllB_{i-1}}^{\lllN}  - (\vk_{i-1} \cdot \vomega_{\lllB_{i-1}}^{\lllN})\vr_{\tto_{i-1} | \ttx}
-\end{equation}
-
-Sendo assim, temos:
-\begin{equation}
-\frac{\dd^{[\llN]}}{\dd t} \Big( \vk_{i-1} \wedge \vr_{\tto_{i-1} | \ttx}   \Big) = (\vomega_{\lllB_{i-1}}^{\lllN} \cdot \vr_{\tto_{i-1} | \ttx}) \vk_{i-1}  - (\vk_{i-1} \cdot \vomega_{\lllB_{i-1}}^{\lllN})\vr_{\tto_{i-1} | \ttx} + \vk_{i-1} \wedge \vv_\ttx^{\lllB_{i-1}}  
-\end{equation}
-
-Finalmente, utilizando a propriedade (?), temos:
+Utilizando a propriedade do produto vetorial entre 3 vetores \eqref{eq:prodvet3}, temos:
 \begin{empheq}[box=\fbox]{equation} \label{eq:derivada_kvet1}
 \frac{\dd^{[\llN]}}{\dd t} \Big( \vk_{i-1} \wedge \vr_{\tto_{i-1} | \ttx}   \Big) = \vomega_{\lllB_{i-1}}^{\lllN}  \wedge \vk_{i-1}  \wedge \vr_{\tto_{i-1} | \ttx} + \vk_{i-1} \wedge \vv_\ttx^{\lllB_{i-1}}  
 \end{empheq}
