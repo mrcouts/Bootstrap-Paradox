@@ -345,7 +345,7 @@ Para a realização do cálculo de derivadas vetoriais, frequentemente é necessário
 \va \wedge \big( \vb \wedge ( \vc \wedge \vd) \big) \equiv \va \wedge \vb \wedge \vc \wedge \vd
 \end{equation}
 
-Além disso, vale destacar algumas propriedades básicas do produto vetorial que possivelmente serão utilizadas durante o texto:
+Além disso, vale destacar algumas propriedades básicas do produto vetorial que serão utilizadas durante o texto:
 \begin{equation}
 \va \wedge \va = \vzr
 \end{equation}
@@ -1551,24 +1551,24 @@ m_i \mone & \mzr \\
 \end{equation}
 
 Definindo:
-\begin{equation} \label{eq:M_i}
-\mM_i (\mq) = \begin{bmatrix}
-m_i \mone & \mzr \\
-\mzr      & \mI_i(\mq)
-\end{bmatrix}
-\end{equation}
-\begin{equation} \label{eq:v_i}
-\mnu_i (\mq, \mp_i) = \begin{bmatrix}
-\mzr \\
-\momega^\star_i \wedge (\mI_i(\mq) \cdot \momega^\star_i)
-\end{bmatrix}
-\end{equation}
-\begin{equation} \label{eq:g_i}
-\mg_i = \begin{bmatrix}
--m_i \mgamma \\
-\mzr
-\end{bmatrix}
-\end{equation}
+%\begin{equation} \label{eq:M_i}
+%\mM_i (\mq) = \begin{bmatrix}
+%m_i \mone & \mzr \\
+%\mzr      & \mI_i(\mq)
+%\end{bmatrix}
+%\end{equation}
+%\begin{equation} \label{eq:v_i}
+%\mnu_i (\mq, \mp_i) = \begin{bmatrix}
+%\mzr \\
+%\momega^\star_i \wedge (\mI_i(\mq) \cdot \momega^\star_i)
+%\end{bmatrix}
+%\end{equation}
+%\begin{equation} \label{eq:g_i}
+%\mg_i = \begin{bmatrix}
+%-m_i \mgamma \\
+%\mzr
+%\end{bmatrix}
+%\end{equation}
 \begin{equation} \label{eq:p_i}
 \mp_i = \begin{bmatrix}
 \mv^\star_i  \\
@@ -1576,15 +1576,35 @@ m_i \mone & \mzr \\
 \end{bmatrix}
 \end{equation}
 
-\eqref{eq:Newton-EulerMat2} pode ser reescrita como:
-\begin{equation}
-\mM_i(\mq) \cdot \dot{\mp}_i + \mnu_i(\mq, \mp_i) + \mg_i = \mf_{r\,i}
-\end{equation}
+%\eqref{eq:Newton-EulerMat2} pode ser reescrita como:
+%\begin{equation}
+%\mM_i(\mq) \cdot \dot{\mp}_i + \mnu_i(\mq, \mp_i) + \mg_i = \mf_{r\,i}
+%\end{equation}
 
 Seja $\mf_i$ o sistema de forças ativas  (considerando os esforços de inércia) aplicado no i-ésimo subsistema, na direção das quasi-velocidades $\mp_i$. $\mf_i$ pode ser obtido pela seguinte expressão:
 %Sendo assim, os sistemas de forças (considerando esforços ativos e de inércia) aplicados em cada subsistema são dados por:
-\begin{equation}
-\mf_i(\mq, \mp_i, \dot{\mp}_i)  = - (\mM_i (\mq) \cdot \dot{\mp}_i + \mv_i(\mp_i) + \mg_i)
+\begin{equation} \label{eq:f_i}
+\mf_i  = -\begin{Bmatrix}
+\begin{bmatrix}
+m_i \mone & \mzr \\
+\mzr      & \mI_i
+\end{bmatrix}
+\cdot
+\begin{bmatrix}
+\ma^\star_i  \\
+\dot{\momega}^\star_i
+\end{bmatrix}
++
+\begin{bmatrix}
+\mzr \\
+\momega^\star_i \wedge (\mI_i \cdot \momega^\star_i)
+\end{bmatrix}
++
+\begin{bmatrix}
+-m_i \mgamma \\
+\mzr
+\end{bmatrix}
+\end{Bmatrix}
 \end{equation}
 
 Portanto, o modelo dinâmico de cada subsistema pode ser escrito como:
@@ -1613,7 +1633,7 @@ Seja $\mu$ a matriz-coluna de esforços generalizados aplicadas pelos atuadores n
 \end{equation}
 
 Sendo:
-\begin{equation}
+\begin{equation} \label{eq:fssh_u}
 \mf\ssh = \mu
 \end{equation}
 
@@ -1670,14 +1690,14 @@ Sendo:
 \paragraph{iv) Acoplamento de subsistemas} $ \, $ \\
 
 Seja $\mf$ a matriz-coluna contendo todos os sistemas de forças ativas generalizadas:
-\begin{equation}
+\begin{equation} \label{eq:fSeriais}
 \mf = \begin{bmatrix}
 {\mf\ssh}^\msT & {\mf\cir}^\msT
 \end{bmatrix}^\msT
 \end{equation}
 
 Sendo:
-\begin{equation}
+\begin{equation} \label{eq:fcir}
 \mf\cir = \begin{bmatrix}
 \mf_1^\msT & ... & \mf_\nu^\msT  
 \end{bmatrix}^\msT
@@ -1730,45 +1750,48 @@ Sendo assim, podemos reescrever \eqref{eq:eq_dinamicas_1} como:
 \mf + \mA^\msT \mlambda = \mzr
 \end{equation}
 
-Repare que essa equação pode ser utilizada para determinar  $\mu$ e $\mlambda$ supondo conhecidas as forças de inércia $\mf\cir$, pois:
-\begin{equation}
-\begin{bmatrix}
-\mu \\
-\mf\cir
-\end{bmatrix} + \mA^\msT \mlambda = \mzr
-\end{equation}
-\begin{equation}
-\Rightarrow
-\begin{bmatrix}
-\mone \\
-\mzr
-\end{bmatrix} \mu +
-\begin{bmatrix}
-\mzr \\
-\mf\cir
-\end{bmatrix}
-+ \mA^\msT \mlambda = \mzr
-\end{equation}
-\begin{equation}
-\therefore
-\begin{bmatrix}
-\begin{bmatrix}
-\mone \\
-\mzr
-\end{bmatrix} & \mA^\msT
-\end{bmatrix}
-\begin{bmatrix}
-\mu \\
-\mlambda
-\end{bmatrix}
-=
-\begin{bmatrix}
-\mzr \\
--\mf\cir
-\end{bmatrix}
-\end{equation}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Repare que essa equação pode ser utilizada para determinar  $\mu$ e $\mlambda$ supondo conhecidas as forças de inércia $\mf\cir$, pois:
+%\begin{equation}
+%\begin{bmatrix}
+%\mu \\
+%\mf\cir
+%\end{bmatrix} + \mA^\msT \mlambda = \mzr
+%\end{equation}
+%\begin{equation}
+%\Rightarrow
+%\begin{bmatrix}
+%\mone \\
+%\mzr
+%\end{bmatrix} \mu +
+%\begin{bmatrix}
+%\mzr \\
+%\mf\cir
+%\end{bmatrix}
+%+ \mA^\msT \mlambda = \mzr
+%\end{equation}
+%\begin{equation}
+%\therefore
+%\begin{bmatrix}
+%\begin{bmatrix}
+%\mone \\
+%\mzr
+%\end{bmatrix} & \mA^\msT
+%\end{bmatrix}
+%\begin{bmatrix}
+%\mu \\
+%\mlambda
+%\end{bmatrix}
+%=
+%\begin{bmatrix}
+%\mzr \\
+%-\mf\cir
+%\end{bmatrix}
+%\end{equation}
 
-Esta expressão pode ser utilizada para realizar a simulação dinâmica inversa, visto que, se conhecido o movimento do sistema, podem ser obtidos os esforços dos atuadores. Porém, como em geral não há o interesse de se obter as forças reativas aplicadas ao sistema, a presença dos multiplicadores torna a resolução do sistema desnecessariamente custosa. Sendo assim, vamos eliminar os multiplicadores da equação dinâmica, o que possibilitará realizar uma simulação dinâmica inversa muito menos custosa e também possibilitará realizar a simulação dinâmica direta.
+%Esta expressão pode ser utilizada para realizar a simulação dinâmica inversa, visto que, se conhecido o movimento do sistema, podem ser obtidos os esforços dos atuadores. Porém, como em geral não há o interesse de se obter as forças reativas aplicadas ao sistema, a presença dos multiplicadores torna a resolução do sistema desnecessariamente custosa. Sendo assim, vamos eliminar os multiplicadores da equação dinâmica, o que possibilitará realizar uma simulação dinâmica inversa muito menos custosa e também possibilitará realizar a simulação dinâmica direta.
+
+
 
 
 Seja $\mC$ uma matriz cujas colunas são base do núcleo de $\mA$. Assim, temos que:
@@ -1827,14 +1850,13 @@ Repare 	que, fazendo $\mx = \mp$ (consequentemente $\mx\ssh = \mp\ssh$ e $\mx\ci
 \mp = \mC(\mq) \cdot \mp\ssh
 \end{equation}
 
-
-Substituindo \eqref{eq:MatrizC_seriais} e \eqref{eq:J} em \eqref{eq:eq_dinamicas_3}, o modelo dinâmico do mecanismo serial pode ser escrito como:
-
-\begin{equation} \label{eq:ModeloDinâmicoSerialSomatorio}
-\mu - \sum_{i=1}^\nu \mJ_i(\mq)^\msT (\mM_i(\mq) \dot{\mp}_i + \mv_i(\mq,\mp_i) + \mg_i) = \mzr
+Substituindo \eqref{eq:MatrizC_seriais}, \eqref{eq:fSeriais} e \eqref{eq:fssh_u}  em \eqref{eq:eq_dinamicas_3}, temos:
+\begin{equation} \label{eq:u_Jtfcir}
+\mu + \mJ^\msT \mf\cir = \mzr
 \end{equation}
 
-Substituindo \eqref{eq:M_i}, \eqref{eq:v_i}, \eqref{eq:g_i}, \eqref{eq:p_i} e \eqref{eq:J_i} em \eqref{eq:ModeloDinâmicoSerialSomatorio}, temos:
+
+Substituindo \eqref{eq:J}, \eqref{eq:J_i}, \eqref{eq:f_i} e \eqref{eq:fcir} em \eqref{eq:u_Jtfcir}, temos:
 \begin{equation} \label{eq:ModeloDinâmicoSerialSomatorio2}
 \sum_{i=1}^\nu
 \begin{bmatrix}
