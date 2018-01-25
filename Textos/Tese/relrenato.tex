@@ -360,9 +360,9 @@ Além disso, vale destacar algumas propriedades básicas do produto vetorial que s
 \end{equation}
 
 Também vale destacar a seguinte propriedades do produto vetorial entre 3 vetores:
-\begin{equation} \label{eq:prodvet3}
+\begin{empheq}[box=\fbox]{equation} \label{eq:prodvet3}
 (\va \wedge \vb) \wedge \vc = \va \wedge \vb \wedge \vc - \vb \wedge \va \wedge \vc
-\end{equation}
+\end{empheq}
 
 
 
@@ -709,7 +709,7 @@ q_1 & ... & {q}_{\nu}
 
 Dados os parâmetros de Denavit-Hartemberg $a_i$, $\alpha_i$, $d_i$ e $\theta_i$, com $1 \leq i \leq \nu$, é possível obter as matrizes de transformação homogênea $\hvct{\vone}_{\ttB_{i-1} \rl \ttB_i}$ a partir da seguinte expressão \cite{Cabral} :
 
-\begin{equation} \label{eq:TransformacaoHomogeneaDH}
+\begin{empheq}[box=\mybluebox]{equation} \label{eq:TransformacaoHomogeneaDH}
 \hvct{\vone}_{\ttB_{i-1} \rl \ttB_i} =
 \begin{bmatrix}
 \ccos\theta_i & -\ssin\theta_i \ccos\alpha_i &  \ssin\theta_i \ssin\alpha_i & a_i\ccos\theta_i \\
@@ -717,36 +717,36 @@ Dados os parâmetros de Denavit-Hartemberg $a_i$, $\alpha_i$, $d_i$ e $\theta_i$,
 0             &  \ssin\alpha_i               &  \ccos\alpha_i               & d_i \\
 0             & 0                            & 0                            & 1
 \end{bmatrix},\, i=1,...,\nu
-\end{equation}
+\end{empheq}
 
 Tendo obtido $\hvct{\vone}_{\ttB_{i-1} \rl \ttB_i}$, é possível obter as transformações homogêneas que relacionam os sistemas solidários aos ligamentos ($\ttB_i$) ao sistema da base ($\ttN$) pela seguinte expressão recursiva:
 
-\begin{equation} \label{eq:H__}
+\begin{empheq}[box=\mybluebox]{equation} \label{eq:H__}
 \hvct{\vone}_{\ttN \rl \ttB_i} =
 \begin{cases}
 \hvct{\vone}_{\ttB_0 \rl \ttB_1}, \text{se } i=1 \\
 \hvct{\vone}_{\ttN \rl \ttB_{i-1}} \cdot \hvct{\vone}_{\ttB_{i-1} \rl \ttB_i}  , \text{se } i>1
 \end{cases} \, i=1,...,\nu
-\end{equation}
+\end{empheq}
 
 As matrizes  $\hvct{\vone}_{\ttN \rl \ttB_i}$ apresentam o seguinte formato:
-\begin{equation} \label{eq:H__2}
+\begin{empheq}[box=\mybluebox]{equation} \label{eq:H__2}
 \hvct{\vone}_{\ttN \rl \ttB_i} =
 \begin{bmatrix}
 \vct{\vi_{i}}_{\ttN} & \vct{\vj_{i}}_{\ttN} & \vct{\vk_{i}}_{\ttN} & \vct{\tto_i}_{\ttN} \\
 0 & 0 & 0 & 1
 \end{bmatrix}
-\end{equation}
+\end{empheq}
 
 Sendo assim, tendo obtido $\hvct{\vone}_{\ttN \rl \ttB_i}$, automaticamente obtemos $\vct{\vi_{i}}_{\ttN}, \vct{\vj_{i}}_{\ttN}, \vct{\vk_{i}}_{\ttN}$ e $\vct{\tto_i}_{\ttN}$. Note que também obtemos as coordenadas do efetuador no sistema da base, pois
-\begin{equation} \label{eq:x_}
+\begin{empheq}[box=\mybluebox]{equation} \label{eq:x_}
 \vct{\ttx}_{\ttN} = \vct{\tto_{\nu}}_{\ttN}
-\end{equation}
+\end{empheq}
 
 Além disso, como $\vct{\ttg_i}_{\ttB_i}$ são dados de entrada do algoritmo, obtemos as coordenadas dos centros de massa dos ligamentos no sistema da base através da seguinte expressão:
-\begin{equation} \label{eq:og__}
+\begin{empheq}[box=\mybluebox]{equation} \label{eq:og__}
 \hvct{\ttg_i}_{\ttN} = \hvct{\vone}_{\ttN \rl \ttB_i} \cdot \hvct{\ttg_i}_{\ttB_i}
-\end{equation}
+\end{empheq}
 
 \subsubsubsection{Cinemática de velocidades lineares}\label{S05-02-01-02}
 
@@ -800,81 +800,80 @@ Sendo que, a partir da equação \eqref{eq:Poisson_v}, a velocidade de arrastament
 \end{equation}
 
 Fazendo as seguintes definições:
-\begin{equation} \label{eq:jvi_}
+\begin{empheq}[box=\mybluebox]{equation} \label{eq:jvi_}
 \mj_{v\,i}(\mq) = \begin{cases}
 \vct{\vk_{i-1}}_{\ttN}, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; \text{i-ésima junta prismática} \\
 \vct{\vk_{i-1}}_{\ttN}\wedge (\vct{\ttx}_{\ttN}-\vct{\tto_{i-1}}_{\ttN}) , \; \text{i-ésima junta rotativa} \\
 \end{cases} \, i=1,...,\nu
-\end{equation}
+\end{empheq}
 
-\begin{equation}
+\begin{empheq}[box=\fbox]{equation}
 \mv_i = \vct{\vv_{\ttx}^{\lllB_{i}} }_{\ttN}
-\end{equation}
+\end{empheq}
 
-\begin{equation}
+\begin{empheq}[box=\fbox]{equation}
 \mv^\star  = \mv_0 =\vct{\vv_{\ttx}^{\lllN} }_{\ttN}
-\end{equation}
+\end{empheq}
 
 Temos que:
 \begin{equation}
 \vct{\vv_{\ttx \rl \lllB_{i}}^{\lllB_{i-1}} }_{\ttN} = \mj_{v\,i} \dot{q}_{i}, \; i=1,...,\nu
 \end{equation}
-\begin{equation}
+\begin{empheq}[box=\mybluebox]{equation}
 \mv_{i-1} =
 \begin{cases}
 \mzr, \;\;\;\;\;\;\;\;\;\;\;\;\; i = \nu + 1 \\
 \mv_i + \mj_{v\,i}  \dot{q}_{i}, \; 1 \leq i \leq \nu \\
 \end{cases}\, i=\nu+1,...,1
-\end{equation}
-\begin{equation} \label{eq:vel_est}
+\end{empheq}
+\begin{empheq}[box=\fbox]{equation}\label{eq:vel_est}
 \mv^\star (\mq, \dot{\mq}) = \mJ_v(\mq) \cdot \dot{\mq}
-\end{equation}
+\end{empheq}
 
 Sendo:
-\begin{equation} \label{eq:Jv_}
+\begin{empheq}[box=\fbox]{equation} \label{eq:Jv_}
 \mJ_v(\mq) = \begin{bmatrix}
 \mj_{v\,1}(\mq) & ... & \mj_{v\,\nu}(\mq)
 \end{bmatrix}
-\end{equation}
+\end{empheq}
 
 Para obter as velocidades dos centros de massa dos ligamentos, seguimos a mesma linha de raciocínio e obtemos os seguintes resultados:
 
 Definindo:
-\begin{equation} \label{eq:jvij_}
+\begin{empheq}[box=\mybluebox]{equation} \label{eq:jvij_}
 \mj_{v\,i,j}(\mq) = \begin{cases}
 \mzr, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; j>i \\
 \vct{\vk_{j-1}}_{\ttN}, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; j\leq i  \text{ e j-ésima junta prismática} \\
 \vct{\vk_{j-1}}_{\ttN}\wedge (\vct{\ttg_i}_{\ttN}-\vct{\tto_{j-1}}_{\ttN}) , \; j\leq i \text{ e j-ésima junta rotativa} \\
 \end{cases} \, i,j=1,...,\nu
-\end{equation}
+\end{empheq}
 
-\begin{equation}
+\begin{empheq}[box=\fbox]{equation}
 \mv_{i,j} = \vct{\vv_{\ttg_i}^{\lllB_{j}}}_{\ttN}
-\end{equation}
+\end{empheq}
 
-\begin{equation}
+\begin{empheq}[box=\fbox]{equation}
 \mv^\star_i  = \mv_{i,0} = \vct{\vv_{\ttg_i}^{\lllN} }_{\ttN}
-\end{equation}
+\end{empheq}
 
 Temos:
-\begin{equation}
+\begin{empheq}[box=\mybluebox]{equation} 
 \mv_{i,j-1} =
 \begin{cases}
 \mzr, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; j = i+1 \\
 \mv_{i,j} + \mj_{v\,i,j} \dot{q}_{j}, \; 1 \leq j \leq i \\
 \end{cases}\, i=1,...,\nu, \, j=i+1,...,1
-\end{equation}
-\begin{equation} \label{eq:v_star_i}
+\end{empheq}
+\begin{empheq}[box=\fbox]{equation}  \label{eq:v_star_i}
 \mv^\star_i(\mq, \dot{\mq}) = \mJ_{v\,i}(\mq) \cdot \dot{\mq}
-\end{equation}
+\end{empheq}
 
 Sendo:
-
-\begin{equation} \label{eq:Jvi_}
+\begin{empheq}[box=\fbox]{equation} \label{eq:Jvi_}
 \mJ_{v\,i}(\mq) = \begin{bmatrix}
 \mj_{v\,i,1}(\mq) & ... & \mj_{v\,i,\nu}(\mq)
 \end{bmatrix}
-\end{equation}
+\end{empheq}
 
 \subsubsubsection{Cinemática de velocidades angulares}\label{S05-02-01-03}
 
@@ -924,80 +923,83 @@ Sendo que a velocidade angular de arrastamento de cada uma das juntas é dada por
 \end{equation}
 
 Fazendo as seguintes definições:
-\begin{equation} \label{eq:jwi_}
+\begin{empheq}[box=\mybluebox]{equation}  \label{eq:jwi_}
 \mj_{\omega\,i}(\mq) = \begin{cases}
 \mzr, \;\;\;\;\;\;\;\; \text{i-ésima junta prismática} \\
 \vct{\vk_{i-1}}_{\ttN} , \text{i-ésima junta rotativa} \\
 \end{cases} \, i=1,...,\nu
-\end{equation}
+\end{empheq}
 
-\begin{equation}
+\begin{empheq}[box=\fbox]{equation}
 \momega_i = \vct{\vomega_{\lllB_\nu}^{\lllB_{i}} }_{\ttN}
-\end{equation}
+\end{empheq}
 
-\begin{equation}
+\begin{empheq}[box=\fbox]{equation}
 \momega^\star = \momega_0 = \vct{\vomega_{\lllB_\nu}^{\lllN} }_{\ttN} 
-\end{equation}
+\end{empheq}
 
 Temos que:
 \begin{equation}
 \vct{\vomega_{\lllB_{i}}^{\lllB_{i-1}} }_{\ttN} = \mj_{\omega\,i} \dot{q}_{i}, \; i=1,...,\nu
 \end{equation}
-\begin{equation}
+
+\begin{empheq}[box=\mybluebox]{equation}
 \momega_{i-1} =
 \begin{cases}
 \mzr, \;\;\;\;\;\;\;\;\;\;\;\;\;\; i = \nu + 1 \\
 \momega_i + \mj_{\omega\,i} \dot{q}_{i}, \; 1 \leq i \leq \nu \\
 \end{cases}\, i=\nu+1,...,1
-\end{equation}
-\begin{equation} \label{eq:vel_ang_est}
+\end{empheq}
+
+\begin{empheq}[box=\fbox]{equation} \label{eq:vel_ang_est}
 \momega^\star(\mq, \dot{\mq}) = \mJ_\omega (\mq) \cdot \dot{\mq}
-\end{equation}
+\end{empheq}
 
 Sendo:
-\begin{equation} \label{eq:Jw_}
+\begin{empheq}[box=\fbox]{equation} \label{eq:Jw_}
 \mJ_\omega(\mq) = \begin{bmatrix}
 \mj_{\omega\,1}(\mq) & ... & \mj_{\omega\,\nu}(\mq)
 \end{bmatrix}
-\end{equation}
+\end{empheq}
 
 Para obter as velocidades angulares de cada ligamentos, seguimos a mesma linha de raciocínio e obtemos os seguintes resultados:
 
 Definindo:
-\begin{equation} \label{eq:jwij_}
+\begin{empheq}[box=\mybluebox]{equation} \label{eq:jwij_}
 \mj_{\omega\,i,j}(\mq) = \begin{cases}
 \mzr, \;\;\;\;\;\;\;\;\,  j>i \\
 \mj_{\omega\,j}(\mq), \;  j\leq i \\
 \end{cases} \, i,j=1,...,\nu
-\end{equation}
+\end{empheq}
 
-\begin{equation}
+\begin{empheq}[box=\fbox]{equation}
 \momega_{i,j} = \vct{\vomega_{\lllB_i}^{\lllB_{j}}}_{\ttN}
-\end{equation}
+\end{empheq}
 
-\begin{equation}
+\begin{empheq}[box=\fbox]{equation}
 \momega^\star_i = \momega_{i,0} = \vct{\vomega_{\lllB_i}^{\lllN} }_{\ttN} 
-\end{equation}
+\end{empheq}
 
 Temos:
-\begin{equation}
+\begin{empheq}[box=\mybluebox]{equation}
 \momega_{i,j-1} =
 \begin{cases}
 \mzr, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; j = i+1 \\
 \momega_{i,j} + \mj_{\omega\,i,j} \dot{q}_{j}, \; 1 \leq j \leq i \\
 \end{cases}\, i=1,...,\nu, \, j=i+1,...,1
-\end{equation}
-\begin{equation} \label{eq:omega_star_i}
+\end{empheq}
+
+\begin{empheq}[box=\fbox]{equation} \label{eq:omega_star_i}
 \momega^\star_i (\mq, \dot{\mq}) = \mJ_{\omega\,i}(\mq) \cdot \dot{\mq}
-\end{equation}
+\end{empheq}
 
 Sendo:
 
-\begin{equation} \label{eq:Jwi_}
+\begin{empheq}[box=\fbox]{equation} \label{eq:Jwi_}
 \mJ_{\omega\,i}(\mq) = \begin{bmatrix}
 \mj_{\omega\,i,1}(\mq) & ... & \mj_{\omega\,i,\nu}(\mq)
 \end{bmatrix}
-\end{equation}
+\end{empheq}
 
 \subsubsubsection{Cinemática de acelerações lineares}\label{S05-02-01-04}
 
@@ -1051,65 +1053,72 @@ Sendo que, a partir da equação \eqref{eq:Poisson_a}, a aceleração de arrastament
 \end{equation}
 
 Fazendo as seguintes definições:
-\begin{equation}
+\begin{empheq}[box=\fbox]{equation}
 \ma_i = \vct{\va_{\ttx}^{\lllB_{i}} }_{\ttN}
-\end{equation}
-\begin{equation}
+\end{empheq}
+
+\begin{empheq}[box=\fbox]{equation}
 \ma^\star = \ma_0 =\vct{\va_{\ttx}^{\lllN} }_{\ttN}
-\end{equation}
+\end{empheq}
 
 Temos que:
 \begin{equation}
 \vct{\va_{\ttx \rl \lllB_{i}}^{\lllB_{i-1}} }_{\ttN} = \ddot{q}_{i} \mj_{v\,i} + \dot{q}^2_{i} \mj_{\omega\,i} \wedge \mj_{v\,i}, \; i=1,...,\nu
 \end{equation}
-\begin{equation}
+
+\begin{empheq}[box=\mybluebox]{equation}
 \ma_{i-1} =
 \begin{cases}
 \mzr, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; i = \nu + 1 \\
 \ma_i +  \mj_{v\,i} \ddot{q}_{i} + (\underaccent{\sim}{\ma})_i  , \; 1 \leq i \leq \nu \\
 \end{cases}\, i=\nu+1,...,1
-\end{equation}
-\begin{equation} \label{eq:ace_est}
+\end{empheq}
+
+\begin{empheq}[box=\fbox]{equation} \label{eq:ace_est}
 \ma^\star (\mq,\dot{\mq},\ddot{\mq}) = \mJ_v (\mq)  \cdot \ddot{\mq} + \underaccent{\sim}{\ma} (\mq,\dot{\mq})
-\end{equation}
+\end{empheq}
 
 Sendo:
-\begin{equation}
-(\underaccent{\sim}{\ma})_i = \dot{q}^2_{i} \mj_{\omega\,i} \wedge \mj_{v\,i} + 2 \dot{q}_i \mj_{\omega\,i} \wedge \mv_i
-\end{equation}
-\begin{equation} \label{eq:a_til}
+\begin{empheq}[box=\mybluebox]{equation}
+(\underaccent{\sim}{\ma})_i = \dot{q}_{i} \mj_{\omega\,i} \wedge ( \dot{q}_{i}  \mj_{v\,i} + 2  \mv_i)
+\end{empheq}
+
+\begin{empheq}[box=\fbox]{equation} \label{eq:a_til}
 \underaccent{\sim}{\ma} = \sum_{i=1}^\nu (\underaccent{\sim}{\ma})_i
-\end{equation}
+\end{empheq}
 
 Para obter as acelerações dos centros de massa dos ligamentos, seguimos a mesma linha de raciocínio e obtemos os seguintes resultados:
 
 Definindo:
-\begin{equation}
+\begin{empheq}[box=\fbox]{equation}
 \ma_{i,j} = \vct{\va_{\ttg_i}^{\lllB_{j}}}_{\ttN}
-\end{equation}
-\begin{equation}
+\end{empheq}
+
+\begin{empheq}[box=\fbox]{equation}
 \ma^\star_i = \ma_{i,0} = \vct{\va_{\ttg_i}^{\lllN} }_{\ttN}
-\end{equation}
+\end{empheq}
 
 Temos:
-\begin{equation}
+\begin{empheq}[box=\mybluebox]{equation}
 \ma_{i,j-1} =
 \begin{cases}
 \mzr, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; j = i+1 \\
 \ma_{i,j} + \mj_{v\,i,j} \ddot{q}_{j} + (\underaccent{\sim}{\ma}_i)_j, \; 1 \leq j \leq i \\
 \end{cases}\, i=1,...,\nu, \, j=i+1,...,1
-\end{equation}
-\begin{equation} \label{eq:a_star_i}
+\end{empheq}
+
+\begin{empheq}[box=\fbox]{equation} \label{eq:a_star_i}
 \ma^\star_i (\mq,\dot{\mq},\ddot{\mq}) = \mJ_{v\,i}(\mq) \cdot \ddot{\mq} + \underaccent{\sim}{\ma}_i (\mq,\dot{\mq})
-\end{equation}
+\end{empheq}
 
 Sendo:
-\begin{equation}
+\begin{empheq}[box=\mybluebox]{equation}
 (\underaccent{\sim}{\ma}_i)_j = \dot{q}_{j} \mj_{\omega\,i,j} \wedge ( \dot{q}_{j} \mj_{v\,i,j} + 2  \mv_{i,j})
-\end{equation}
-\begin{equation}
+\end{empheq}
+
+\begin{empheq}[box=\fbox]{equation}
 \underaccent{\sim}{\ma}_i (\mq, \dot{\mq}) = \sum_{j=1}^i (\underaccent{\sim}{\ma}_i)_j
-\end{equation}
+\end{empheq}
 
 \subsubsubsection{Cinemática de acelerações angulares}\label{S05-02-01-05}
 
