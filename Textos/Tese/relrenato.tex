@@ -2204,7 +2204,7 @@ Realizando o produto das matrizes, temos:
 
 \begin{equation} \label{eq:ModeloMecSerialDaux}
 \begin{split}
-\sum_{i=1}^\nu \Big( &m_i \mJ_{v\,i}^\msT \mJ_{v\,i} + \mJ_{\omega\,i}^\msT \mI_i \mJ_{\omega\,i} \Big) \dddot{\mq} + \Big( m_i \dot{\mJ}_{v\,i}^\msT \mJ_{v\,i} + \dot{\mJ}_{\omega\,i}^\msT \mI_i \mJ_{\omega\,i} \Big) \ddot{\mq}  \\ +  &m_i \mJ_{v\,i}^\msT \, \underaccent{\sim}{\dot{\ma}}_i + \mJ_{\omega\,i}^\msT \Big( \mI_i (\underaccent{\sim}{\ddot{\momega}}_i + \dot{\momega}^\star_i \wedge \momega^\star_i) + \dot{\momega}^\star_i \wedge (\mI_i \cdot \momega^\star_i) + 2\momega^\star_i \wedge (\mI_i \cdot \dot{\momega}^\star_i) + \momega^\star_i \wedge \momega^\star_i \wedge (\mI_i \cdot \momega^\star_i)  \Big) \\ + &m_i \dot{\mJ}_{v\,i}^\msT \Big(\underaccent{\sim}{\ma}_i - \mgamma \Big) + \dot{\mJ}_{\omega\,i}^\msT \Big( \mI_i \underaccent{\sim}{\dot{\momega}}_i   + \momega^\star_i \wedge (\mI_i \cdot \momega^\star_i  \Big) = \dot{\mu}
+\sum_{i=1}^\nu \Big( &m_i \mJ_{v\,i}^\msT \mJ_{v\,i} + \mJ_{\omega\,i}^\msT \mI_i \mJ_{\omega\,i} \Big) \dddot{\mq}  \\ +  &m_i \mJ_{v\,i}^\msT \, \underaccent{\sim}{\dot{\ma}}_i + \mJ_{\omega\,i}^\msT \Big( \mI_i (\underaccent{\sim}{\ddot{\momega}}_i + \dot{\momega}^\star_i \wedge \momega^\star_i) + \dot{\momega}^\star_i \wedge (\mI_i \cdot \momega^\star_i) + 2\momega^\star_i \wedge (\mI_i \cdot \dot{\momega}^\star_i) + \momega^\star_i \wedge \momega^\star_i \wedge (\mI_i \cdot \momega^\star_i)  \Big) \\ + &m_i \dot{\mJ}_{v\,i}^\msT \Big(\ma^\star_i - \mgamma \Big) + \dot{\mJ}_{\omega\,i}^\msT \Big( \mI_i \dot{\momega}^\star_i   + \momega^\star_i \wedge (\mI_i \cdot \momega^\star_i)  \Big) = \dot{\mu}
 \end{split}
 \end{equation}
 
@@ -2212,7 +2212,7 @@ Portanto, comparando \eqref{eq:ModeloMecSerialDaux} com \eqref{eq:ModeloMecSeria
 \small
 \begin{empheq}[box=\myyellowbox]{equation} \label{eq:h_}
 \begin{split}
-\mh = \sum_{i=1}^\nu  \Big( &m_i \dot{\mJ}_{v\,i}^\msT \mJ_{v\,i} + \dot{\mJ}_{\omega\,i}^\msT \mI_i \mJ_{\omega\,i} \Big) \ddot{\mq}  + m_i \mJ_{v\,i}^\msT \, \underaccent{\sim}{\dot{\ma}}_i \\ + &\mJ_{\omega\,i}^\msT \Big( \mI_i (\underaccent{\sim}{\ddot{\momega}}_i + \dot{\momega}^\star_i \wedge \momega^\star_i) + \dot{\momega}^\star_i \wedge (\mI_i \cdot \momega^\star_i) + 2\momega^\star_i \wedge (\mI_i \cdot \dot{\momega}^\star_i) + \momega^\star_i \wedge \momega^\star_i \wedge (\mI_i \cdot \momega^\star_i)  \Big) \\ + &m_i \dot{\mJ}_{v\,i}^\msT \Big(\underaccent{\sim}{\ma}_i - \mgamma \Big) + \dot{\mJ}_{\omega\,i}^\msT \Big( \mI_i \underaccent{\sim}{\dot{\momega}}_i   + \momega^\star_i \wedge (\mI_i \cdot \momega^\star_i  \Big)
+\mh = +  &m_i \mJ_{v\,i}^\msT \, \underaccent{\sim}{\dot{\ma}}_i + \mJ_{\omega\,i}^\msT \Big( \mI_i (\underaccent{\sim}{\ddot{\momega}}_i + \dot{\momega}^\star_i \wedge \momega^\star_i) + \dot{\momega}^\star_i \wedge (\mI_i \cdot \momega^\star_i) + 2\momega^\star_i \wedge (\mI_i \cdot \dot{\momega}^\star_i) + \momega^\star_i \wedge \momega^\star_i \wedge (\mI_i \cdot \momega^\star_i)  \Big) \\ + &m_i \dot{\mJ}_{v\,i}^\msT \Big(\ma^\star_i - \mgamma \Big) + \dot{\mJ}_{\omega\,i}^\msT \Big( \mI_i \dot{\momega}^\star_i   + \momega^\star_i \wedge (\mI_i \cdot \momega^\star_i)  \Big)
 \end{split}
 \end{empheq}
 \normalsize
