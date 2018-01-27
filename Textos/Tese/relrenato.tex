@@ -44,11 +44,11 @@
 \usepackage{empheq}
 \usepackage{fancybox}
 
-\definecolor{myblue}{rgb}{.8, .8, 1}
+\definecolor{myblue}{rgb}{.75, .75, 1}
 \newcommand*\mybluebox[1]{%
 \colorbox{myblue}{\hspace{1em}#1\hspace{1em}}}
 
-\definecolor{lightblue}{rgb}{.88, .88, 1}
+\definecolor{lightblue}{rgb}{.9, .9, 1}
 \newcommand*\lightbluebox[1]{%
 \colorbox{lightblue}{\hspace{1em}#1\hspace{1em}}}
 
@@ -1512,7 +1512,7 @@ Sendo:
 \subsubsubsection{Modelo Dinâmico} \label{S05-02-02-01}
 
 O modelo dinâmico de $\ssB$ é obtido utilizando um procedimento de acoplamento de subsistemas baseado no Método Orsino  \cite{23orsino}, e é dado por:
-\begin{empheq}[box=\lightbluebox]{equation} \label{eq:ModeloMecSerial}
+\begin{empheq}[box=\mybluebox]{equation} \label{eq:ModeloMecSerial}
 \mM(\mq) \ddot{\mq} + \mnu(\mq,\dot{\mq}) + \mg(\mq) = \mu
 \end{empheq}
 
@@ -1655,13 +1655,13 @@ m_i \mone & \mzr \\
 
 
 Portanto, o modelo dinâmico de cada subsistema pode ser escrito como:
-\begin{empheq}[box=\lightbluebox]{equation}\label{eq:fi_plus_fri}
+\begin{empheq}[box=\mybluebox]{equation}\label{eq:fi_plus_fri}
 \mf_i + \mf_{r\,i} = \mzr
 \end{empheq}
 
 %No caso de os subsistemas estarem desacoplados, temos que $\mf_{r\,i} = \mzr$.
 
-\paragraph{ii) Sistemas de forças ativas generalizadas e quasi-velocidades adicionais} $ \, $ \\
+\paragraph{ii) Sistemas de forças ativas generalizadas} $ \, $ \\
 
 Considere também um sistema constituido pelos esforços que os atuadores aplicam nas juntas do mecanismo, e pelos seus respectivos esforços reativos. Primeiramente, definimos a matriz-coluna de quasi-velocidades relativas a esse subsistema (quasi-velocidades adicionais):
 %Muitas vezes é conveniente definir um conjunto de quasi-velocidades adicionais $\mp_0$, as quais só fazem sentido para o sistema acoplado, e sistemas de forças ativas generalizadas adicionais $\mf_0$ aplicados na direção das quasi-velocidades adicionais. \\
@@ -1669,13 +1669,13 @@ Considere também um sistema constituido pelos esforços que os atuadores aplicam 
 %Neste algoritmo de modelagem, serão considerados como quasi-velocidades adicionais as derivadas temporais das coordenadas das juntas, ou seja:
 
 
-\begin{empheq}[box=\almondbox]{equation} \label{eq:mp_0}
+\begin{empheq}[box=\lightbluebox]{equation} \label{eq:mp_0}
 \mp\ssh = \dot{\mq}
 \end{empheq}
 
 Seja $\mu$ a matriz-coluna de esforços generalizados aplicadas pelos atuadores na direção de $\dot{\mq}$ (ou seja, o trabalho virtual de $\mu$ é dado por $ \delta W_{\mu} = \mu^\msT \cdot \delta \mq $ ). Sendo assim, o modelo dinâmico deste subsistema é dado por:
 
-\begin{empheq}[box=\lightbluebox]{equation}
+\begin{empheq}[box=\mybluebox]{equation}
 \mf\ssh + \mf_r\ssh = \mzr
 \end{empheq}
 
@@ -1700,11 +1700,11 @@ Sendo:
 \end{empheq}
 
 Seja $\mp\cir$ a matriz coluna que contém as quasi-velocidades de todos os ligamentos:
-\begin{equation}
+\begin{empheq}[box=\lightbluebox]{equation}
 \mp\cir = \begin{bmatrix}
 \mp_1^\msT & ... & \mp_{\nu}^\msT
 \end{bmatrix}^\msT
-\end{equation}
+\end{empheq}
 
 $\mp\cir$ pode ser expresso em função apenas das quasi-velocidades $\mp\ssh$ da seguinte forma:
 \begin{equation} \label{eq:p_red_em_func_de_p0}
@@ -1719,7 +1719,7 @@ Sendo:
 \end{empheq}
 
 Sendo assim, a partir de \eqref{eq:p_red_em_func_de_p0}, os vínculos de quasi-velocidades entre subsistemas podem ser expressos como:
-\begin{empheq}[box=\lightbluebox]{equation} \label{eq:VinculosV_seriais}
+\begin{empheq}[box=\mybluebox]{equation} \label{eq:VinculosV_seriais}
 \overline{\mp}(\mq,\mp) =  \mA(\mq) \cdot \mp = \mzr
 \end{empheq}
 
@@ -1730,28 +1730,28 @@ Sendo:
 \end{bmatrix}
 \end{empheq}
 
-\begin{equation}
+\begin{empheq}[box=\lightbluebox]{equation}
 \mp = \begin{bmatrix}
 {\mp\ssh}^\msT & {\mp\cir}^\msT
 \end{bmatrix}^\msT
-\end{equation}
+\end{empheq}
 %\frac{\partial \overline{\mp}}{\partial \mp}
 
 \paragraph{iv) Acoplamento de subsistemas} $ \, $ \\
 
 Seja $\mf$ a matriz-coluna contendo todos os sistemas de forças ativas generalizadas:
-\begin{equation} \label{eq:fSeriais}
+\begin{empheq}[box=\lightbluebox]{equation} \label{eq:fSeriais}
 \mf = \begin{bmatrix}
 {\mf\ssh}^\msT & {\mf\cir}^\msT
 \end{bmatrix}^\msT
-\end{equation}
+\end{empheq}
 
 Sendo:
-\begin{equation} \label{eq:fcir}
+\begin{empheq}[box=\lightbluebox]{equation} \label{eq:fcir}
 \mf\cir = \begin{bmatrix}
 \mf_1^\msT & ... & \mf_\nu^\msT  
 \end{bmatrix}^\msT
-\end{equation}
+\end{empheq}
 
 Seja também $\mf_r$ a matriz-coluna contendo todos os sistemas de forças reativas generalizadas:
 \begin{equation}
@@ -1850,9 +1850,9 @@ Seja $\mC$ uma matriz cujas colunas são base do núcleo de $\mA$. Assim, temos qu
 \end{equation}
 
 Sendo assim, pré-multiplicando \eqref{eq:eq_dinamicas_2} à esquerda por $\mC^\msT$, temos:
-\begin{equation} \label{eq:eq_dinamicas_3}
+\begin{empheq}[box=\mybluebox]{equation} \label{eq:eq_dinamicas_3}
 \mC^\msT \mf = \mzr
-\end{equation}
+\end{empheq}
 
 Esta operação é equivalente a projetar as equações dinâmicas no núcleo de $\mA$, o que elimina os multiplicadores de Lagrange $\mlambda$, visto que o núcleo de $\mA$ é complemento ortogonal da imagem de $\mA^\msT$.
 
@@ -1887,23 +1887,23 @@ Subdividindo $\mx$ em $\mx\ssh $ e $\mx\cir$, sendo $\mx\ssh$ as $\nu$ primeiras
 
 
 Sendo assim, podemos escolher $\mC$ como a seguinte matriz:
-\begin{equation} \label{eq:MatrizC_seriais}
+\begin{empheq}[box=\lightbluebox]{equation} \label{eq:MatrizC_seriais}
 \mC(\mq) =
 \begin{bmatrix}
 \mone \\
 \mJ(\mq)
 \end{bmatrix}
-\end{equation}
+\end{empheq}
 
 Repare 	que, fazendo $\mx = \mp$ (consequentemente $\mx\ssh = \mp\ssh$ e $\mx\cir = \mp\cir$) em \eqref{eq:SLH}, obtemos os vínculos de quasi-velocidades do sistema \eqref{eq:VinculosV_seriais}. Sendo assim, à partir das expressões \eqref{eq:pre_C} e \eqref{eq:MatrizC_seriais}, temos que $\mC$ respeita a seguinte relação:
-\begin{equation} \label{eq:relacao_C}
+\begin{empheq}[box=\lightbluebox]{equation} \label{eq:relacao_C}
 \mp = \mC(\mq) \cdot \mp\ssh
-\end{equation}
+\end{empheq}
 
 Substituindo \eqref{eq:MatrizC_seriais}, \eqref{eq:fSeriais} e \eqref{eq:fssh_u}  em \eqref{eq:eq_dinamicas_3}, temos:
-\begin{equation} \label{eq:u_Jtfcir}
+\begin{empheq}[box=\mybluebox]{equation} \label{eq:u_Jtfcir}
 \mu + \mJ^\msT \mf\cir = \mzr
-\end{equation}
+\end{empheq}
 
 
 Substituindo \eqref{eq:J}, \eqref{eq:J_i}, \eqref{eq:f_i} e \eqref{eq:fcir} em \eqref{eq:u_Jtfcir}, temos:
@@ -1983,7 +1983,7 @@ m_i \mJ_{v\,i}^\msT \mJ_{v\,i} + \mJ_{\omega\,i}^\msT \mI_i \mJ_{\omega\,i}
 
 \subsubsubsection{Equações Dinâmicas de Ordem Superior} \label{S05-02-02-02}
 
-Em alguns casos a obtenção do o modelo dinâmico de ordem superior (derivada do modelo dinâmico) pode ser vantajoso, tendo em vista que pode ser utilizado para obter leis de controle mais suaves, realizar o controle de posição diretamente pela tensão elétrica aplicada nos atuadores (sem a necessidade do controle de corrente), ou obter o modelo dinâmico linearizado em torno de uma trajetória. Essas aplicações serão exploradas no capítulo [???]. \\
+Em alguns casos a obtenção do o modelo dinâmico de ordem superior (derivada do modelo dinâmico) pode ser vantajosa, tendo em vista que pode ser utilizado para obter leis de controle mais suaves, realizar o controle de posição diretamente pela tensão elétrica aplicada nos atuadores (sem a necessidade do controle de corrente), ou obter o modelo dinâmico linearizado em torno de uma trajetória. Essas aplicações serão exploradas no capítulo [???]. \\
 
 Derivando \eqref{eq:ModeloMecSerial}, temos:
 
@@ -1992,13 +1992,23 @@ Derivando \eqref{eq:ModeloMecSerial}, temos:
 \end{empheq}
 
 Sendo:
-\begin{empheq}[box=\mybluebox]{equation}
+\begin{empheq}[box=\lightbluebox]{equation}
 \mh(\mq, \dot{\mq}, \ddot{\mq}) = \dot{\mM}(\mq, \dot{\mq}) \ddot{\mq} + \dot{\mnu}(\mq, \dot{\mq}, \ddot{\mq}) + \dot{\mg}(\mq,\dot{\mq})
 \end{empheq}
 
-A obtenção de $\mh(\mq, \dot{\mq}, \ddot{\mq})$ através da derivação temporal direta das equações \eqref{eq:MSerial}, \eqref{eq:vSerial} e \eqref{eq:gSerial} é possível, porém um tanto quanto complexa. Sendo assim, para obter o modelo dinâmico de ordem superior, será mais uma vez adotada uma estratágia inspirada no Método Orsino. 
+A obtenção de $\mh(\mq, \dot{\mq}, \ddot{\mq})$ através da derivação temporal direta das equações \eqref{eq:MSerial}, \eqref{eq:vSerial} e \eqref{eq:gSerial} é possível, porém um tanto quanto complexa. Uma maneira mais simples seria realizar a derivada temporal da equação (???), ou seja:
+\begin{equation} \label{eq:eq_dinamicas_3D}
+\dot{\mu} + \mJ^\msT \dot{\mf}\cir + \dot{\mJ}^\msT \mf\cir = \mzr
+\end{equation}
 
-Primeiramente, é preciso obter as derivadas temporais das equações de Newton-Euler. Derivando o equação do TMB do centro de massa de cada ligamente no tempo, temos:
+%Sendo assim, para obter o modelo dinâmico de ordem superior, será mais uma vez adotada uma estratágia inspirada no Método Orsino. 
+
+Substituindo \eqref{eq:J} e \eqref{eq:fcir} em \eqref{eq:eq_dinamicas_3D}, o modelo dinâmico de ordem superior do mecanismo serial pode ser escrito como:
+\begin{equation} \label{eq:ModeloDinâmicoSerialSomatorioD}
+\dot{\mu} + \sum_{i=1}^\nu \mJ_i^\msT \dot{\mf}_i + \dot{\mJ}_i^\msT \mf_i  = \mzr
+\end{equation}
+
+Para obter $\dot{\mf}_i$, serão realizadas as derivadas temporais das equações de Newton-Euler. Derivando o equação do TMB do centro de massa de cada ligamente no tempo, temos:
 \begin{equation}
 \frac{\dd^{[\llN]}}{\dd t} \Big( m_i \va^{\lllN}_{\ttg_i} - m_i \vg - \vf_{r\,i} \Big) =  m_i \dot{\va}^{\lllN}_{\ttg_i} - \dot{\vf}_{r\,i} = \vzr \\
 \end{equation}
@@ -2075,72 +2085,134 @@ m_i \mone & \mzr \\
 \end{bmatrix}
 \end{equation}
 
-Derivando a equação dinâmica \eqref{eq:eq_dinamicas_2}, temos que:
-\begin{equation} \label{eq:eq_dinamicas_2D}
-\dot{\mf} + \dot{\mA}^\msT \mlambda + \mA^\msT \dot{\mlambda} = \mzr 
-\end{equation}
-
-Tendo em vista que a imagem de $\mC$ é complemento ortogonal da imagem de $\mA^\msT$, podemos eliminar $\dot{\mlambda}$ multiplicando \eqref{eq:eq_dinamicas_2D} à esquerda por $\mC^\msT$:
-\begin{equation}
-\mC^\msT\dot{\mf} + \mC^\msT \dot{\mA}^\msT \mlambda  = \mzr 
-\end{equation}
-
-Repare que:
-\begin{equation}
-\mC^\msT \dot{\mA}^\msT =
-\begin{bmatrix}
-\mone & \mJ^\msT
-\end{bmatrix}
-\cdot
-\begin{bmatrix}
-\dot{\mJ}^\msT \\
-\mzr
-\end{bmatrix}
-= \dot{\mJ}^\msT
-\end{equation}
-
-Portanto, temos que:
-\begin{equation} \label{eq:eq_dinamicas_3D}
-\mC^\msT\dot{\mf} + \dot{\mJ}^\msT \mlambda  = \mzr 
-\end{equation}
-
-Substituindo \eqref{eq:MatrizC_seriais} e \eqref{eq:J} em \eqref{eq:eq_dinamicas_3D}, o modelo dinâmico de ordem superior do mecanismo serial pode ser escrito como:
-\begin{equation} \label{eq:ModeloDinâmicoSerialSomatorioD}
-\dot{\mu} + \sum_{i=1}^\nu \mJ_i(\mq)^\msT \dot{\mf}_i + \dot{\mJ}^\msT \mlambda  = \mzr
-\end{equation}
-
-Substituindo \eqref{eq:df_i}, \eqref{eq:J_i}, \eqref{eq:da_star_i} e  \eqref{eq:d2omega_star_i} em \eqref{eq:ModeloDinâmicoSerialSomatorioD}, temos:
+Portanto, substituindo \eqref{eq:df_i} e \eqref{eq:f_i} em \eqref{eq:ModeloDinâmicoSerialSomatorioD}, temos:
 
 \footnotesize
-\begin{equation}
+\begin{equation} \label{eq:ModeloDinâmicoSerialSomatorio2}
+\begin{split}
 \sum_{i=1}^\nu
 \begin{bmatrix}
 \mJ_{v\,i} \\
 \mJ_{\omega\,i}
 \end{bmatrix}^\msT
+&\begin{Bmatrix}
 \begin{bmatrix}
-m_i (\mJ_{v_i} \dddot{\mq} + \underaccent{\sim}{\dot{\ma}}_i   )  \\
- \mI_i (\mJ_{\omega_i} \dddot{\mq} + \underaccent{\sim}{\ddot{\momega}}_i )
-+
-\mI_i (\dot{\momega}^\star_i \wedge \momega^\star_i) + \dot{\momega}^\star_i \wedge (\mI_i \cdot \momega^\star_i) + 2\momega^\star_i \wedge (\mI_i \cdot \dot{\momega}^\star_i) + \momega^\star_i \wedge \momega^\star_i \wedge (\mI_i \cdot \momega^\star_i)
+m_i \mone & \mzr \\
+\mzr      & \mI_i
 \end{bmatrix}
-- \dot{\mJ}^\msT \mlambda
+\cdot
+\begin{bmatrix}
+\dot{\ma}^\star_i  \\
+\ddot{\momega}^\star_i
+\end{bmatrix}
++
+\begin{bmatrix}
+\mzr \\
+\mI_i (\dot{\momega}^\star_i \wedge \momega^\star_i) + \dot{\momega}^\star_i \wedge (\mI_i \cdot \momega^\star_i) + 2\momega^\star_i \wedge (\mI_i \cdot \dot{\momega}^\star_i) + \momega^\star_i \wedge \momega^\star_i \wedge (\mI_i \cdot \momega^\star_i)
+\end{bmatrix} 
+\end{Bmatrix} \\
++
+\begin{bmatrix}
+\dot{\mJ}_{v\,i} \\
+\dot{\mJ}_{\omega\,i}
+\end{bmatrix}^\msT
+&\begin{Bmatrix}
+\begin{bmatrix}
+m_i \mone & \mzr \\
+\mzr      & \mI_i
+\end{bmatrix}
+\cdot
+\begin{bmatrix}
+\ma^\star_i  \\
+\dot{\momega}^\star_i
+\end{bmatrix}
++
+\begin{bmatrix}
+\mzr \\
+\momega^\star_i \wedge (\mI_i \cdot \momega^\star_i)
+\end{bmatrix}
++
+\begin{bmatrix}
+-m_i \mgamma \\
+\mzr
+\end{bmatrix}
+\end{Bmatrix}
 =\dot{\mu}
+\end{split}
 \end{equation}
 \normalsize
 
-Realizando o produto das matrizes, e utilizando a definição de $\mM(\mq)$ \eqref{eq:MSerial}, temos:
+Substituindo \eqref{eq:a_star_i}, \eqref{eq:domega_star_i}, \eqref{eq:da_star_i} e \eqref{eq:d2omega_star_i} em \eqref{eq:ModeloDinâmicoSerialSomatorio2}, temos:
+
+\footnotesize
+\begin{equation} \label{eq:ModeloDinâmicoSerialSomatorio3}
+\begin{split}
+\sum_{i=1}^\nu
+\begin{bmatrix}
+\mJ_{v\,i} \\
+\mJ_{\omega\,i}
+\end{bmatrix}^\msT
+&\begin{Bmatrix}
+\begin{bmatrix}
+m_i \mone & \mzr \\
+\mzr      & \mI_i
+\end{bmatrix}
+\cdot
+\begin{bmatrix}
+\mJ_{v\,i} \dddot{\mq} +  \underaccent{\sim}{\dot{\ma}}_i  \\
+\mJ_{\omega\,i} \dddot{\mq} + \underaccent{\sim}{\ddot{\momega}}_i
+\end{bmatrix}
++
+\begin{bmatrix}
+\mzr \\
+\mI_i (\dot{\momega}^\star_i \wedge \momega^\star_i) + \dot{\momega}^\star_i \wedge (\mI_i \cdot \momega^\star_i) + 2\momega^\star_i \wedge (\mI_i \cdot \dot{\momega}^\star_i) + \momega^\star_i \wedge \momega^\star_i \wedge (\mI_i \cdot \momega^\star_i)
+\end{bmatrix} 
+\end{Bmatrix} \\
++
+\begin{bmatrix}
+\dot{\mJ}_{v\,i} \\
+\dot{\mJ}_{\omega\,i}
+\end{bmatrix}^\msT
+&\begin{Bmatrix}
+\begin{bmatrix}
+m_i \mone & \mzr \\
+\mzr      & \mI_i
+\end{bmatrix}
+\cdot
+\begin{bmatrix}
+\mJ_{v\,i} \ddot{\mq} +  \underaccent{\sim}{\ma}_i  \\
+\mJ_{\omega\,i} \ddot{\mq} + \underaccent{\sim}{\dot{\momega}}_i
+\end{bmatrix}
++
+\begin{bmatrix}
+\mzr \\
+\momega^\star_i \wedge (\mI_i \cdot \momega^\star_i)
+\end{bmatrix}
++
+\begin{bmatrix}
+-m_i \mgamma \\
+\mzr
+\end{bmatrix}
+\end{Bmatrix}
+=\dot{\mu}
+\end{split}
+\end{equation}
+\normalsize
+
+Realizando o produto das matrizes, temos:
+%e utilizando a definição de $\mM(\mq)$ \eqref{eq:MSerial},
 
 \begin{equation} \label{eq:ModeloMecSerialDaux}
-\mM \cdot \dddot{\mq} - \dot{\mJ}^\msT \mlambda + \sum_{i=1}^\nu  \mJ_{v\,i}^\msT \, \underaccent{\sim}{\dot{\ma}}_i + \mJ_{\omega\,i}^\msT \Big( \mI_i (\underaccent{\sim}{\ddot{\momega}}_i + \dot{\momega}^\star_i \wedge \momega^\star_i) + \dot{\momega}^\star_i \wedge (\mI_i \cdot \momega^\star_i) + 2\momega^\star_i \wedge (\mI_i \cdot \dot{\momega}^\star_i) + \momega^\star_i \wedge \momega^\star_i \wedge (\mI_i \cdot \momega^\star_i)  \Big) = \dot{\mu}
+\begin{split}
+\sum_{i=1}^\nu \Big( &m_i \mJ_{v\,i}^\msT \mJ_{v\,i} + \mJ_{\omega\,i}^\msT \mI_i \mJ_{\omega\,i} \Big) \dddot{\mq} + \Big( m_i \dot{\mJ}_{v\,i}^\msT \mJ_{v\,i} + \dot{\mJ}_{\omega\,i}^\msT \mI_i \mJ_{\omega\,i} \Big) \ddot{\mq}  \\ +  &m_i \mJ_{v\,i}^\msT \, \underaccent{\sim}{\dot{\ma}}_i + \mJ_{\omega\,i}^\msT \Big( \mI_i (\underaccent{\sim}{\ddot{\momega}}_i + \dot{\momega}^\star_i \wedge \momega^\star_i) + \dot{\momega}^\star_i \wedge (\mI_i \cdot \momega^\star_i) + 2\momega^\star_i \wedge (\mI_i \cdot \dot{\momega}^\star_i) + \momega^\star_i \wedge \momega^\star_i \wedge (\mI_i \cdot \momega^\star_i)  \Big) \\ + &m_i \dot{\mJ}_{v\,i}^\msT \Big(\underaccent{\sim}{\ma}_i - \mgamma \Big) + \dot{\mJ}_{\omega\,i}^\msT \Big( \mI_i \underaccent{\sim}{\dot{\momega}}_i   + \momega^\star_i \wedge (\mI_i \cdot \momega^\star_i  \Big) = \dot{\mu}
+\end{split}
 \end{equation}
 
-Portanto, comparando \eqref{eq:ModeloMecSerialDaux} com \eqref{eq:ModeloMecSerialD}, temos que:
+Portanto, comparando \eqref{eq:ModeloMecSerialDaux} com \eqref{eq:ModeloMecSerialD} e \eqref{eq:MSerial}, temos que:
 \small
-\begin{empheq}[box=\mybluebox]{equation} \label{eq:h_}
+\begin{empheq}[box=\myyellowbox]{equation} \label{eq:h_}
 \begin{split}
-&\mh = - \dot{\mJ}^\msT \mlambda + \\
-&\sum_{i=1}^\nu  \mJ_{v\,i}^\msT \, \underaccent{\sim}{\dot{\ma}}_i + \mJ_{\omega\,i}^\msT \Big( \mI_i (\underaccent{\sim}{\ddot{\momega}}_i + \dot{\momega}^\star_i \wedge \momega^\star_i) + \dot{\momega}^\star_i \wedge (\mI_i \cdot \momega^\star_i) + 2\momega^\star_i \wedge (\mI_i \cdot \dot{\momega}^\star_i) + \momega^\star_i \wedge \momega^\star_i \wedge (\mI_i \cdot \momega^\star_i)  \Big)
+\mh = \sum_{i=1}^\nu  \Big( &m_i \dot{\mJ}_{v\,i}^\msT \mJ_{v\,i} + \dot{\mJ}_{\omega\,i}^\msT \mI_i \mJ_{\omega\,i} \Big) \ddot{\mq}  + m_i \mJ_{v\,i}^\msT \, \underaccent{\sim}{\dot{\ma}}_i \\ + &\mJ_{\omega\,i}^\msT \Big( \mI_i (\underaccent{\sim}{\ddot{\momega}}_i + \dot{\momega}^\star_i \wedge \momega^\star_i) + \dot{\momega}^\star_i \wedge (\mI_i \cdot \momega^\star_i) + 2\momega^\star_i \wedge (\mI_i \cdot \dot{\momega}^\star_i) + \momega^\star_i \wedge \momega^\star_i \wedge (\mI_i \cdot \momega^\star_i)  \Big) \\ + &m_i \dot{\mJ}_{v\,i}^\msT \Big(\underaccent{\sim}{\ma}_i - \mgamma \Big) + \dot{\mJ}_{\omega\,i}^\msT \Big( \mI_i \underaccent{\sim}{\dot{\momega}}_i   + \momega^\star_i \wedge (\mI_i \cdot \momega^\star_i  \Big)
 \end{split}
 \end{empheq}
 \normalsize
@@ -2179,16 +2251,16 @@ Analogamente para \eqref{eq:derivada_kvet2_aux}, temos:
 \end{empheq}
 
 Sendo assim, pode-se concluir que as derivadas das colunas dos jacobianos são dadas por:
-\begin{empheq}[box=\mybluebox]{equation}
+\begin{empheq}[box=\myyellowbox]{equation}
 \dot{\mj}_{v\,i} = \momega^\star_{i-1} \wedge \mj_{v\,i} + \mj_{\omega\,i} \wedge \mv_{i-1}
 \end{empheq}
-\begin{empheq}[box=\mybluebox]{equation}
+\begin{empheq}[box=\myyellowbox]{equation}
 \dot{\mj}_{v\,i,j} = \momega^\star_{j-1} \wedge \mj_{v\,i,j} + \mj_{\omega\,i,j} \wedge \mv_{i,j-1}
 \end{empheq}
-\begin{empheq}[box=\mybluebox]{equation}
+\begin{empheq}[box=\myyellowbox]{equation}
 \dot{\mj}_{\omega\,i} = \momega^\star_{i-1} \wedge \mj_{\omega\,i} 
 \end{empheq}
-\begin{empheq}[box=\mybluebox]{equation}
+\begin{empheq}[box=\myyellowbox]{equation}
 \dot{\mj}_{\omega\,i,j} = \momega^\star_{j-1} \wedge \mj_{\omega\,i,j}
 \end{empheq}
 
