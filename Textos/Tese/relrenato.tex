@@ -1185,66 +1185,73 @@ Sendo que a aceleração angular de arrastamento de cada uma das juntas é dada por
 \end{equation}
 
 Fazendo as seguintes definições:
-\begin{equation}
+\begin{empheq}[box=\lightbluebox]{equation}
 \dot{\momega}_i = \vct{\dot{\vomega}_{\ttx}^{\lllB_{i}} }_{\ttN}
-\end{equation}
+\end{empheq}
 
-\begin{equation}
+\begin{empheq}[box=\lightbluebox]{equation}
 \dot{\momega}^\star = \dot{\momega}_0 = \vct{\dot{\vomega}_{\lllB_\nu}^{\lllN} }_{\ttN}
-\end{equation}
+\end{empheq}
 
 Temos que:
 \begin{equation}
 \vct{\dot{\vomega}_{\lllB_{i}}^{\lllB_{i-1}} }_{\ttN} = \ddot{q}_{i} \mj_{\omega\,i} , \; i=1,...,\nu
 \end{equation}
-\begin{equation}
+
+\begin{empheq}[box=\myyellowbox]{equation}
 \dot{\momega}_{i-1} =
 \begin{cases}
 \mzr, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; i = \nu + 1 \\
 \dot{\momega}_i +  \mj_{\omega\,i} \ddot{q}_{i} + (\underaccent{\sim}{\dot{\momega}})_i , \; 1 \leq i \leq \nu \\
 \end{cases}\, i=\nu+1,...,1
-\end{equation}
-\begin{equation} \label{eq:ace_ang_est}
+\end{empheq}
+
+\begin{empheq}[box=\lightbluebox]{equation} \label{eq:ace_ang_est}
 \dot{\momega}^\star(\mq,\dot{\mq},\ddot{\mq}) = \mJ_\omega (\mq) \cdot \ddot{\mq} +  \underaccent{\sim}{\dot{\momega}}(\mq,\dot{\mq})
-\end{equation}
+\end{empheq}
 
 Sendo:
-\begin{equation}
+\begin{empheq}[box=\myyellowbox]{equation}
 (\underaccent{\sim}{\dot{\momega}})_i = \dot{q}_i \mj_{\omega\,i} \wedge \momega_i
-\end{equation}
-\begin{equation} \label{eq:dw_til}
+\end{empheq}
+
+\begin{empheq}[box=\myyellowbox]{equation} \label{eq:dw_til}
 \underaccent{\sim}{\dot{\momega}} = \sum_{i=1}^\nu (\underaccent{\sim}{\dot{\momega}})_i
-\end{equation}
+\end{empheq}
 
 Para obter as acelerações angulares dos centros de massa dos ligamentos, seguimos a mesma linha de raciocínio e obtemos os seguintes resultados:
 
 Definindo:
-\begin{equation}
+\begin{empheq}[box=\lightbluebox]{equation}
 \dot{\momega}_{i,j} = \vct{\dot{\vomega}_{\ttg_i}^{\lllB_{j}}}_{\ttN}
-\end{equation}
-\begin{equation}
+\end{empheq}
+
+\begin{empheq}[box=\lightbluebox]{equation}
 \dot{\momega}^\star_i = \dot{\momega}_{i,0} = \vct{\dot{\vomega}_{\lllB_i}^{\lllN} }_{\ttN}
-\end{equation}
+\end{empheq}
 
 Temos:
-\begin{equation}
+\begin{empheq}[box=\myyellowbox]{equation}
 \dot{\momega}_{i,j-1} =
 \begin{cases}
 \mzr, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; j = i+1 \\
 \dot{\momega}_{i,j} + \mj_{\omega\,i,j} \ddot{q}_{j}  + (\underaccent{\sim}{\dot{\momega}}_i)_j, \; 1 \leq j \leq i \\
 \end{cases}\, i=1,...,\nu, \, j=i+1,...,1
-\end{equation}
-\begin{equation} \label{eq:domega_star_i}
+\end{empheq}
+
+\begin{empheq}[box=\lightbluebox]{equation}\label{eq:domega_star_i}
 \dot{\momega}^\star_i (\mq,\dot{\mq},\ddot{\mq}) = \mJ_{\omega\,i} (\mq) \cdot \ddot{\mq} + \underaccent{\sim}{\dot{\momega}}_i (\mq,\dot{\mq})
-\end{equation}
+\end{empheq}
 
 Sendo:
-\begin{equation}
+\begin{empheq}[box=\myyellowbox]{equation}
 (\underaccent{\sim}{\dot{\momega}}_i)_j = \dot{q}_j \mj_{\omega\,i,j} \wedge \momega_{i,j}
-\end{equation}
-\begin{equation}
+\end{empheq}
+
+\begin{empheq}[box=\myyellowbox]{equation}
 \underaccent{\sim}{\dot{\momega}}_i (\mq, \dot{\mq}) = \sum_{j=1}^i (\underaccent{\sim}{\dot{\momega}}_i)_j
-\end{equation}
+\end{empheq}
+
 
 \subsubsubsection{Cinemática de sobre-acelerações lineares}\label{S05-02-01-06}
 
@@ -1311,72 +1318,78 @@ Sendo que, a partir da equação \eqref{eq:Poisson_da}, a sobre-aceleração de arra
 \normalsize
 
 Fazendo as seguintes definições:
-\begin{equation}
+\begin{empheq}[box=\lightbluebox]{equation}
 \dot{\ma}_i = \vct{\dot{\va}_{\ttx}^{\lllB_{i}} }_{\ttN}
-\end{equation}
+\end{empheq}
 
-\begin{equation}
+\begin{empheq}[box=\lightbluebox]{equation}
 \dot{\ma}^\star = \dot{\ma}_0 =\vct{\dot{\va}_{\ttx}^{\lllN} }_{\ttN}
-\end{equation}
+\end{empheq}
 
 Temos que:
 \begin{equation}
 \vct{\dot{\va}_{\ttx \rl \lllB_{i}}^{\lllB_{i-1}} }_{\ttN} = \dddot{q}_{i} \mj_{v\,i} + 3 \dot{q}_{i} \ddot{q}_{i} \mj_{\omega\,i} \wedge \mj_{v\,i} + \dot{q}_{i}^3 \mj_{\omega\,i} \wedge \mj_{\omega\,i} \wedge \mj_{v\,i}, \; i=1,...,\nu
 \end{equation}
-\begin{equation}
+
+\begin{empheq}[box=\myyellowbox]{equation}
 \dot{\ma}_{i-1} =
 \begin{cases}
 \mzr, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; i = \nu + 1 \\
 \dot{\ma}_i + \dddot{q}_{i} \mj_{v\,i} + (\underaccent{\sim}{\dot{\ma}})_i , \; 1 \leq i \leq \nu \\
 \end{cases}\, i=\nu+1,...,1
-\end{equation}
+\end{empheq}
 
-\begin{equation}
+\begin{empheq}[box=\lightbluebox]{equation}
 \dot{\ma}^\star (\mq,\dot{\mq},\ddot{\mq}) = \mJ_v (\mq)  \cdot \dddot{\mq} + \underaccent{\sim}{\dot{\ma}} (\mq,\dot{\mq})
-\end{equation}
+\end{empheq}
 
 Sendo:
-\begin{equation}
+\begin{empheq}[box=\myyellowbox]{equation}
 (\underaccent{\sim}{\dot{\ma}})_i = 3 \dot{q}_{i} \ddot{q}_{i} \mj_{\omega\,i} \wedge \mj_{v\,i} + \dot{q}_{i}^3 \mj_{\omega\,i} \wedge \mj_{\omega\,i} \wedge \mj_{v\,i} + 3(\ddot{q}_i  \mj_{\omega\,i} \wedge \mv_i + 
 \dot{q}_i^2 \mj_{\omega\,i} \wedge \mj_{\omega\,i} \wedge \mv_i  + \dot{q}_i
  \mj_{\omega\,i} \wedge \ma_i )
-\end{equation}
-\begin{equation}
+\end{empheq}
+
+\begin{empheq}[box=\myyellowbox]{equation}
 \underaccent{\sim}{\dot{\ma}} = \sum_{i=1}^\nu  (\underaccent{\sim}{\dot{\ma}})_i
-\end{equation}
+\end{empheq}
 
 Para obter as acelerações dos centros de massa dos ligamentos, seguimos a mesma linha de raciocínio e obtemos os seguintes resultados:
 
 Definindo:
-\begin{equation}
+\begin{empheq}[box=\lightbluebox]{equation}
 \dot{\ma}_{i,j} = \vct{\dot{\va}_{\ttg_i}^{\lllB_{j}}}_{\ttN}
-\end{equation}
+\end{empheq}
 
-\begin{equation}
+\begin{empheq}[box=\lightbluebox]{equation}
 \dot{\ma}_i^\star = \dot{\ma}_{i,0} =\vct{\dot{\va}_{\ttg_i}^{\lllN} }_{\ttN}
-\end{equation}
+\end{empheq}
 
 Temos:
-\begin{equation}
+\begin{empheq}[box=\myyellowbox]{equation}
 \dot{\ma}_{i,j-1} =
 \begin{cases}
 \mzr, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; j = i+1 \\
 \dot{\ma}_{i,j} + \dddot{q}_{j} \mj_{v\,i,j} + (\underaccent{\sim}{\dot{\ma}}_i)_j, \; 1 \leq j \leq i \\
 \end{cases}\, i=1,...,\nu, \, j=i+1,...,1
-\end{equation}
-\begin{equation} \label{eq:da_star_i}
+\end{empheq}
+
+\begin{empheq}[box=\lightbluebox]{equation} \label{eq:da_star_i}
 \dot{\ma}_i^\star(\mq,\dot{\mq},\ddot{\mq},\dddot{\mq}) = \mJ_{v\,i} (\mq) \cdot \dddot{\mq} + \underaccent{\sim}{\dot{\ma}}_i (\mq,\dot{\mq},\ddot{\mq})
-\end{equation}
+\end{empheq}
 
 Sendo:
-\begin{equation}
+\small
+\begin{empheq}[box=\myyellowbox]{equation}
 (\underaccent{\sim}{\dot{\ma}}_i)_j = 3 \dot{q}_{j} \ddot{q}_{j} \mj_{\omega\,i,j} \wedge \mj_{v\,i,j} + \dot{q}_{j}^3 \mj_{\omega\,i,j} \wedge \mj_{\omega\,i,j} \wedge \mj_{v\,i,j} + 3(\ddot{q}_j  \mj_{\omega\,i,j} \wedge \mv_{i,j} + 
 \dot{q}_j^2 \mj_{\omega\,i,j} \wedge \mj_{\omega\,i,j} \wedge \mv_{i,j}  + \dot{q}_j
  \mj_{\omega\,i,j} \wedge \ma_{i,j} )
-\end{equation}
-\begin{equation}
+\end{empheq}
+\normalsize
+
+\begin{empheq}[box=\myyellowbox]{equation}
 \underaccent{\sim}{\dot{\ma}}_i =\sum_{j=1}^i  (\underaccent{\sim}{\dot{\ma}}_i)_j
-\end{equation}
+\end{empheq}
 
 \subsubsubsection{Cinemática de sobre-acelerações angulares}\label{S05-02-01-07}
 
@@ -1427,85 +1440,92 @@ Sendo que a sobre-aceleração angular de arrastamento de cada uma das juntas é da
 \end{equation}
 
 Fazendo as seguintes definições:
-\begin{equation}
+\begin{empheq}[box=\lightbluebox]{equation}
 \ddot{\momega}_i = \vct{\ddot{\vomega}_{\lllB_\nu}^{\lllB_{i}} }_{\ttN}
-\end{equation}
-\begin{equation}
+\end{empheq}
+
+\begin{empheq}[box=\lightbluebox]{equation}
 \ddot{\momega}^\star = \ddot{\momega}_0 = \vct{\ddot{\vomega}_{\lllB_\nu}^{\lllN} }_{\ttN}
-\end{equation}
+\end{empheq}
 
 Temos que:
 \begin{equation}
 \vct{\ddot{\vomega}_{\lllB_{i}}^{\lllB_{i-1}} }_{\ttN} = \mj_{\omega\,i} \dddot{q}_{i} , \; i=1,...,\nu
 \end{equation}
-\begin{equation}
+
+\begin{empheq}[box=\myyellowbox]{equation}
 \ddot{\momega}_{i-1} =
 \begin{cases}
 \mzr, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; i = \nu + 1 \\
 \ddot{\momega}_i +  \mj_{\omega\,i} \dddot{q}_{i} + (\underaccent{\sim}{\ddot{\momega}})_i , \; 1 \leq i \leq \nu \\
 \end{cases}\, i=\nu+1,...,1
-\end{equation}
-\begin{equation} \label{eq:d2omega_star_i}
+\end{empheq}
+
+\begin{empheq}[box=\lightbluebox]{equation} \label{eq:d2omega_star_i}
 \ddot{\momega}_i^\star(\mq,\dot{\mq},\ddot{\mq},\dddot{\mq}) = \mJ_\omega(\mq) \cdot \dddot{\mq} + \underaccent{\sim}{\ddot{\momega}}(\mq,\dot{\mq},\ddot{\mq})
-\end{equation}
+\end{empheq}
 
 Sendo:
-\begin{equation}
+\begin{empheq}[box=\myyellowbox]{equation}
 (\underaccent{\sim}{\ddot{\momega}})_i = \ddot{q}_i \mj_{\omega\,i} \wedge \momega_i + 2 \dot{q}_i \mj_{\omega\,i} \wedge \dot{\momega}_i + \dot{q}_i ^2 \mj_{\omega\,i} \wedge \mj_{\omega\,i} \wedge \momega_i
-\end{equation}
-\begin{equation}
+\end{empheq}
+
+\begin{empheq}[box=\myyellowbox]{equation}
 \underaccent{\sim}{\ddot{\momega}} = \sum_{i=1}^\nu (\underaccent{\sim}{\ddot{\momega}})_i
-\end{equation}
+\end{empheq}
 
 Para obter as sobre-acelerações angulares dos centros de massa dos ligamentos, seguimos a mesma linha de raciocínio e obtemos os seguintes resultados:
 
 Definindo:
-\begin{equation}
+\begin{empheq}[box=\lightbluebox]{equation}
 \ddot{\momega}_{i,j} = \vct{\ddot{\vomega}_{\lllB_i}^{\lllB_{j}}}_{\ttN}
-\end{equation}
-\begin{equation}
+\end{empheq}
+
+\begin{empheq}[box=\lightbluebox]{equation}
 \ddot{\momega}_i^\star = \ddot{\momega}_{i,0} = \vct{\ddot{\vomega}_{\lllB_i}^{\lllN} }_{\ttN}
-\end{equation}
+\end{empheq}
 
 Temos:
-\begin{equation}
+\begin{empheq}[box=\myyellowbox]{equation}
 \ddot{\momega}_{i,j-1} =
 \begin{cases}
 \mzr, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; j = i+1 \\
 \ddot{\momega}_{i,j} + \mj_{\omega\,i,j} \dddot{q}_{j} + (\underaccent{\sim}{\ddot{\momega}}_i)_j, \; 1 \leq j \leq i \\
-\end{cases}\, i=1,...,\nu, \, \\ j=i+1,...,1
-\end{equation}
-\begin{equation}
+\end{cases}\, i=1,...,\nu, \, j=i+1,...,1
+\end{empheq}
+
+\begin{empheq}[box=\lightbluebox]{equation}
 \ddot{\momega}_i^\star(\mq,\dot{\mq},\ddot{\mq},\dddot{\mq}) = \mJ_{\omega\,i} (\mq) \cdot \dddot{\mq} + \underaccent{\sim}{\ddot{\momega}}_i (\mq,\dot{\mq},\ddot{\mq})
-\end{equation}
+\end{empheq}
 
 Sendo:
-\begin{equation}
+\begin{empheq}[box=\myyellowbox]{equation}
 (\underaccent{\sim}{\ddot{\momega}}_i)_j =  \ddot{q}_j \mj_{\omega\,i,j} \wedge \momega_{i,j} + 2 \dot{q}_j \mj_{\omega\,i,j} \wedge \dot{\momega}_{i,j} + \dot{q}_j ^2 \mj_{\omega\,i,j} \wedge \mj_{\omega\,i,j} \wedge \momega_{i,j}
-\end{equation}
-\begin{equation}
+\end{empheq}
+
+\begin{empheq}[box=\myyellowbox]{equation}
 \underaccent{\sim}{\ddot{\momega}}_i = \sum_{j=1}^i  (\underaccent{\sim}{\ddot{\momega}}_i)_j
-\end{equation}
+\end{empheq}
 
 \subsubsection{Dinâmica}\label{S05-02-02}
 
 \subsubsubsection{Modelo Dinâmico} \label{S05-02-02-01}
 
-O modelo dinâmico de $\ssB$ é obtido utilizando um procedimento inspirado no Método Orsino de acoplamento de subsistemas \cite{23orsino}, e é dado por:
-\begin{empheq}[box=\mybluebox]{equation} \label{eq:ModeloMecSerial}
+O modelo dinâmico de $\ssB$ é obtido utilizando um procedimento de acoplamento de subsistemas baseado no Método Orsino  \cite{23orsino}, e é dado por:
+\begin{empheq}[box=\lightbluebox]{equation} \label{eq:ModeloMecSerial}
 \mM(\mq) \ddot{\mq} + \mnu(\mq,\dot{\mq}) + \mg(\mq) = \mu
 \end{empheq}
 
 Sendo:
-\begin{empheq}[box=\mybluebox]{equation} \label{eq:MSerial}
+\begin{empheq}[box=\myyellowbox]{equation} \label{eq:MSerial}
 \mM(\mq) = \sum_{i=1}^\nu
 m_i \mJ_{v\,i}^\msT \mJ_{v\,i} + \mJ_{\omega\,i}^\msT \mI_i \mJ_{\omega\,i}
 \end{empheq}
-\begin{empheq}[box=\mybluebox]{equation} \label{eq:vSerial}
+\begin{empheq}[box=\myyellowbox]{equation} \label{eq:vSerial}
 \mnu(\mq, \dot{\mq}) = \sum_{i=1}^\nu
  m_i \mJ_{v\,i}^\msT \underaccent{\sim}{\ma}_i + \mJ_{\omega\,i}^\msT \big( \mI_i \underaccent{\sim}{\dot{\momega}}_i + \momega^\star_i \wedge (\mI_i  \momega^\star_i) \big)
 \end{empheq}
-\begin{empheq}[box=\mybluebox]{equation} \label{eq:gSerial}
+\begin{empheq}[box=\myyellowbox]{equation} \label{eq:gSerial}
 \mg(\mq) = - \sum_{i=1}^\nu m_i \mJ_{v\,i}^\msT \mgamma
 \end{empheq}
 
@@ -1609,7 +1629,7 @@ Definindo:
 
 Seja $\mf_i$ o sistema de forças ativas  (considerando os esforços de inércia) aplicado no i-ésimo subsistema, na direção das quasi-velocidades $\mp_i$. $\mf_i$ pode ser obtido pela seguinte expressão:
 %Sendo assim, os sistemas de forças (considerando esforços ativos e de inércia) aplicados em cada subsistema são dados por:
-\begin{equation} \label{eq:f_i}
+\begin{empheq}[box=\lightbluebox]{equation} \label{eq:f_i}
 \mf_i  = -\begin{Bmatrix}
 \begin{bmatrix}
 m_i \mone & \mzr \\
@@ -1631,12 +1651,13 @@ m_i \mone & \mzr \\
 \mzr
 \end{bmatrix}
 \end{Bmatrix}
-\end{equation}
+\end{empheq}
+
 
 Portanto, o modelo dinâmico de cada subsistema pode ser escrito como:
-\begin{equation} \label{eq:fi_plus_fri}
+\begin{empheq}[box=\lightbluebox]{equation}\label{eq:fi_plus_fri}
 \mf_i + \mf_{r\,i} = \mzr
-\end{equation}
+\end{empheq}
 
 %No caso de os subsistemas estarem desacoplados, temos que $\mf_{r\,i} = \mzr$.
 
@@ -1648,20 +1669,20 @@ Considere também um sistema constituido pelos esforços que os atuadores aplicam 
 %Neste algoritmo de modelagem, serão considerados como quasi-velocidades adicionais as derivadas temporais das coordenadas das juntas, ou seja:
 
 
-\begin{equation} \label{eq:mp_0}
+\begin{empheq}[box=\almondbox]{equation} \label{eq:mp_0}
 \mp\ssh = \dot{\mq}
-\end{equation}
+\end{empheq}
 
 Seja $\mu$ a matriz-coluna de esforços generalizados aplicadas pelos atuadores na direção de $\dot{\mq}$ (ou seja, o trabalho virtual de $\mu$ é dado por $ \delta W_{\mu} = \mu^\msT \cdot \delta \mq $ ). Sendo assim, o modelo dinâmico deste subsistema é dado por:
 
-\begin{equation}
+\begin{empheq}[box=\lightbluebox]{equation}
 \mf\ssh + \mf_r\ssh = \mzr
-\end{equation}
+\end{empheq}
 
 Sendo:
-\begin{equation} \label{eq:fssh_u}
+\begin{empheq}[box=\lightbluebox]{equation} \label{eq:fssh_u}
 \mf\ssh = \mu
-\end{equation}
+\end{empheq}
 
 \paragraph{iii) Vínculos cinemáticos entre subsistemas} $ \, $ \\
 
@@ -1669,13 +1690,14 @@ Através das equações \eqref{eq:v_star_i}, \eqref{eq:omega_star_i} e \eqref{eq:mp
 \begin{equation}
 \underline{\mp_i}(\mq, \mp\ssh) = \mJ_i (\mq) \cdot \mp\ssh, \, i=1,...,\nu
 \end{equation}
+
 Sendo:
-\begin{equation} \label{eq:J_i}
+\begin{empheq}[box=\lightbluebox]{equation} \label{eq:J_i}
 \mJ_i(\mq) = \begin{bmatrix}
 \mJ_{v\,i}(\mq) \\
 \mJ_{\omega\,i}(\mq)
 \end{bmatrix}, \, i=1,...,\nu
-\end{equation}
+\end{empheq}
 
 Seja $\mp\cir$ a matriz coluna que contém as quasi-velocidades de todos os ligamentos:
 \begin{equation}
@@ -1688,24 +1710,26 @@ $\mp\cir$ pode ser expresso em função apenas das quasi-velocidades $\mp\ssh$ da 
 \begin{equation} \label{eq:p_red_em_func_de_p0}
 \underline{\mp\cir}(\mq,\mp\ssh) = \mJ(\mq) \mp\ssh
 \end{equation}
+
 Sendo:
-\begin{equation} \label{eq:J}
+\begin{empheq}[box=\lightbluebox]{equation} \label{eq:J}
 \mJ(\mq) = \begin{bmatrix}
 \mJ_1(\mq)^\msT & ... & \mJ_{\nu}(\mq)^\msT
 \end{bmatrix}^\msT
-\end{equation}
+\end{empheq}
 
 Sendo assim, a partir de \eqref{eq:p_red_em_func_de_p0}, os vínculos de quasi-velocidades entre subsistemas podem ser expressos como:
-\begin{equation} \label{eq:VinculosV_seriais}
+\begin{empheq}[box=\lightbluebox]{equation} \label{eq:VinculosV_seriais}
 \overline{\mp}(\mq,\mp) =  \mA(\mq) \cdot \mp = \mzr
-\end{equation}
+\end{empheq}
 
 Sendo:
-\begin{equation}
+\begin{empheq}[box=\lightbluebox]{equation}
 \mA(\mq)  = \begin{bmatrix}
 \mJ(\mq) & -\mone
 \end{bmatrix}
-\end{equation}
+\end{empheq}
+
 \begin{equation}
 \mp = \begin{bmatrix}
 {\mp\ssh}^\msT & {\mp\cir}^\msT
