@@ -2274,7 +2274,14 @@ Para realizar a modelagem de mecanismos paralelos a partir de subsistemas seriai
 Sejam $\ssB_0$, $\ssB_1$, ..., $\ssB_{n} \,$ $n+1$ subsistemas mec\^anicos e $\ssM$ um sistema mec\^anico de $\nu\ssh$ graus de liberdade gerado pelo acoplamento dos subsistemas citados. Definimos:
 
 \begin{itemize}
-\item $\ttN_i, \, i=0,...,n$: sistema de coordenadas da base de $\ssB_i$.
+\item $\llN_i, \, i=0,...,n$: referencial inercial relativo ao subsistema $\ssB_i$.
+\item $\ttN_i, \, i=0,...,n$: sistema de coordenadas fixo a $llN_i$.
+\item $\ttg$: centro de massa da plataforma/efetuador $\llB_0$.
+\item $m$: massa da plataforma/efetuador $\llB_0$.
+\item $\vI_{\ttg}$: tensor de in\'ercia da plataforma/efetuador $\llB_0$ em relação a seu centro de massa.
+\item $\mI$: tensor de in\'ercia $\vI_{\ttg}$ escrito na base $\ttN_0$, ou seja, $\vct{\vI_{\ttg}}_{\ttN_0 \rl \ttN_0}$.
+\item $\vg$: Vetor aceleração gravitacional.
+\item $\mgamma$: Vetor aceleração gravitacional escrito na base $\ttN_0$, ou seja, $\vct{\vg}_{\ttN_0}$.
 \item $\mq_i, \,i=0, ..., n$: matriz-coluna de coordenadas generalizadas do subsistema $\ssB_i$.
 \item $\mq^\ast$: matriz-coluna de coordenadas generalizadas de posição da plataforma/efetuador $\ssB_0$, ou seja, $\mq^\ast = \mq_0$.
 \item $\mq^\diamond$: matriz-coluna de coordenadas generalizadas dos subsistemas seriais. Definida como $\mq^\diamond = \begin{bmatrix}  {\mq_1}^\msT & ... & {\mq_{n}}^\msT \end{bmatrix}^\msT $.
@@ -2288,12 +2295,12 @@ Sejam $\ssB_0$, $\ssB_1$, ..., $\ssB_{n} \,$ $n+1$ subsistemas mec\^anicos e $\s
 \item $\overline{\momega}(\mq,\mp)$: matriz-coluna dos v\'inculos de orienta\c{c}\~ao entre subsistemas. As equa\c{c}\~oes vinculares s\~ao dadas por $\overline{\momega}(\mq,\mp) = \mzr $.
 \item $\ttx_i, \,i=1, ..., n$: ponto no espa\c{c}o fixo ao efetuador de $\ssB_i$.
 \item $\mx_i(\mq_i), \,i=1, ..., n$: $\vct{\ttx_i}_{\ttN_i}$ escrito em função das coordenadas $\mq_i$.
-\item $\mJ_{v\,\ssB_i}(\mq_i), \,i=1, ..., n$: jacobiano de velocidades lineares do efetuador de $\ssB_i$.
-\item $\mJ_{\omega\,\ssB_i}(\mq_i), \,i=1, ..., n$: jacobiano de velocidades angulares do efetuador de $\ssB_i$.
-\item $\underaccent{\sim}{\ma}_{\ssB_i}(\mq_i, \dot{\mq}_i), \,i=1, ..., n$: parcela da aceleração linear absoluta do efetuador de $\ssB_i$, escrita na base de $\ttN_i$, independente de $\ddot{\mq}_i$.
-\item $\underaccent{\sim}{\dot{\momega}}_{\ssB_i}(\mq_i, \dot{\mq}_i), \,i=1, ..., n$: parcela da aceleração angular absoluta do efetuador de $\ssB_i$, escrita na base de $\ttN_i$, independente de $\ddot{\mq}_i$.
+\item $\mJ_{v\,\ssB_i}(\mq_i), \,i=1, ..., n$: jacobiano $\mJ_v$ do subsistema $\ssB_i$.
+\item $\mJ_{\omega\,\ssB_i}(\mq_i), \,i=1, ..., n$: jacobiano $\mJ_\omega$ do subsistema $\ssB_i$.
+\item $\underaccent{\sim}{\ma}_{\ssB_i}(\mq_i, \mp_i), \,i=1, ..., n$: matriz-coluna $\underaccent{\sim}{\ma}$ do subsistema $\ssB_i$.
+\item $\underaccent{\sim}{\dot{\momega}}_{\ssB_i}(\mq_i, \mp_i), \,i=1, ..., n$: matriz-coluna $\underaccent{\sim}{\dot{\momega}}$ do subsistema $\ssB_i$.
 \item $\mM_{\ssB_i}(\mq_i), \,i=0, ..., n$: matriz de in\'ercia generalizada do subsistema $\ssB_i$.
-\item $\mv_{\ssB_i}(\mq_i, \mp_i), \,i=0, ..., n$: matriz-coluna das forças de inércia girosc\'opica generalizadas do subsistema $\ssB_i$.
+\item $\mnu_{\ssB_i}(\mq_i, \mp_i), \,i=0, ..., n$: matriz-coluna das forças de inércia girosc\'opica generalizadas do subsistema $\ssB_i$.
 \item $\mg_{\ssB_i}(\mq_i), \,i=0, ..., n$: matriz-coluna dos esfor\c{c}os gravitacionais generalizados do subsistema $\ssB_i$.
 \item $\mu_{\ssB_i}, \,i=0, ..., n$: matriz-coluna dos esfor\c{c}os ativos externos generalizados aplicados ao subsistema $\ssB_i$.
 \end{itemize}
@@ -2305,10 +2312,86 @@ Sejam $\ssB_0$, $\ssB_1$, ..., $\ssB_{n} \,$ $n+1$ subsistemas mec\^anicos e $\s
 O modelo dinâmico de cada subsistema desacoplado pode ser escrito como:
 
 \begin{equation} \label{eq:ModeloDosSubsistemas}
-\overline{\mf}_{\ssB_i}(\mu_i, \mq_i, \mp_i ,\dot{\mp}_i) =  \mu_{\ssB_i} - \Big(\mM_{\ssB_i}(\mq_i) \ddot{\mq}_i + \mv_{\ssB_i}(\mq_i,\mp_i) + \mg_{\ssB_i}(\mq_i)\Big) = \mzr, \, i = 0,...,n
+\overline{\mf}_{\ssB_i}(\mu_i, \mq_i, \mp_i ,\dot{\mp}_i) =  \mu_{\ssB_i} - \Big(\mM_{\ssB_i}(\mq_i) \dot{\mp}_i + \mnu_{\ssB_i}(\mq_i,\mp_i) + \mg_{\ssB_i}(\mq_i)\Big) = \mzr, \, i = 0,...,n
 \end{equation}
 
-Sendo que para $i=0$ temos o modelo do efetuador/plataforma e para $i>0$ temos os modelos dos mecanismos seriais obtidos anteriormente.
+Sendo que para $i=0$ temos o modelo do efetuador/plataforma e para $i>0$ temos os modelos dos mecanismos seriais obtidos anteriormente. \\
+
+Para os subsistemas seriais, as matrizes $\mM_{\ssB_i}$, $\mnu_{\ssB_i}$ e $\mg_{\ssB_i}$ são obtidas utilizando o algoritmo de modelagem de mecanismos seriais apresentado anteriormente. Para o efetuador, iremos utilizar o modelo de um corpo rígido livre no espaço, através das equações de Newton-Euler:
+
+\begin{equation} \label{eq:Newton-EulerE}
+\begin{cases}
+m \va^{\lllN_0}_{\ttg} - m \vg = \vzr \\
+\vI_{\ttg} \cdot \dot{\vomega}^{\lllN_0}_{\lllB_0} + \vomega^{\lllN_0}_{\lllB_0} \wedge (\vI_{\ttg} \cdot \vomega^{\lllN_0}_{\lllB_0}) = \vzr
+\end{cases}
+\end{equation}
+
+Aplicando as equações vetoriais no sistema $\ttN$, temos:
+\begin{equation} \label{eq:Newton-EulerMatE}
+\begin{bmatrix}
+m \mone & \mzr \\
+\mzr      & \vct{\vI_{\ttg}}_{\ttN_0 \rl \ttN_0}
+\end{bmatrix}
+\cdot
+\begin{bmatrix}
+\vct{\va^{\lllN_0}_{\ttg}}_{\ttN_0}  \\
+\vct{\dot{\vomega}^{\lllN_0}_{\lllB_0}}_{\ttN_0}
+\end{bmatrix}
++
+\begin{bmatrix}
+\mzr \\
+\vct{\vomega^{\lllN_0}_{\lllB_0}}_{\ttN_0} \wedge (\vct{\vI_{\ttg}}_{\ttN_0 \rl \ttN_0} \cdot \vct{\vomega^{\lllN_0}_{\lllB_0}}_{\ttN_0})
+\end{bmatrix}
++
+\begin{bmatrix}
+-m \vct{\vg}_{\ttN_0} \\
+\mzr
+\end{bmatrix}
+=
+\mzr
+\end{equation}
+
+Definindo:
+\begin{equation}
+\mq^\ast = \vct{\ttg}_{\ttN_0}
+\end{equation}
+\begin{equation}
+\momega^\ast = \vct{\vomega^{\lllN_0}_{\lllB_0}}_{\ttN_0}
+\end{equation}
+
+Temos:
+\begin{equation} \label{eq:Newton-EulerMat2E}
+\begin{bmatrix}
+m \mone & \mzr \\
+\mzr      & \mI
+\end{bmatrix}
+\cdot
+\begin{bmatrix}
+\ddot{\mq}^\ast  \\
+\dot{\momega}^\ast
+\end{bmatrix}
++
+\begin{bmatrix}
+\mzr \\
+\dot{\momega}^\ast \wedge (\mI \cdot \dot{\momega}^\ast)
+\end{bmatrix}
++
+\begin{bmatrix}
+-m \mgamma \\
+\mzr
+\end{bmatrix}
+=
+\mzr
+\end{equation}
+
+Ou seja:
+\begin{equation}
+\mM_{\ssB_0} = 
+\begin{bmatrix}
+m \mone & \mzr \\
+\mzr      & \mI
+\end{bmatrix}
+\end{equation}
 
 \item[ii)] Vínculos cinemáticos entre subsistemas
 
