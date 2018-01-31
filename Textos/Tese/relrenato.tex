@@ -2275,20 +2275,24 @@ Sejam $\ssB_0$, $\ssB_1$, ..., $\ssB_{n} \,$ $n+1$ subsistemas mec\^anicos e $\s
 
 \begin{itemize}
 \item $\llN_i, \, i=0,...,n$: referencial inercial relativo ao subsistema $\ssB_i$.
-\item $\ttN_i, \, i=0,...,n$: sistema de coordenadas fixo a $llN_i$.
+\item $\ttN_i, \, i=0,...,n$: sistema de coordenadas solidário a $\llN_i$.
+\item $\tto_i, \,i=0,...,\nu$: origem do sistema $\ttN_i$.
 \item $\ttg$: centro de massa da plataforma/efetuador $\llB_0$.
+\item $\ttB$: sistema de coordenadas solidário a $\ssB_0$ com origem em $\ttg$.
 \item $m$: massa da plataforma/efetuador $\llB_0$.
 \item $\vI_{\ttg}$: tensor de in\'ercia da plataforma/efetuador $\llB_0$ em relação a seu centro de massa.
 \item $\mI$: tensor de in\'ercia $\vI_{\ttg}$ escrito na base $\ttN_0$, ou seja, $\vct{\vI_{\ttg}}_{\ttN_0 \rl \ttN_0}$.
 \item $\vg$: Vetor aceleração gravitacional.
 \item $\mgamma$: Vetor aceleração gravitacional escrito na base $\ttN_0$, ou seja, $\vct{\vg}_{\ttN_0}$.
 \item $\mq_i, \,i=0, ..., n$: matriz-coluna de coordenadas generalizadas do subsistema $\ssB_i$.
-\item $\mq^\ast$: matriz-coluna de coordenadas generalizadas de posição da plataforma/efetuador $\ssB_0$, ou seja, $\mq^\ast = \mq_0$.
+\item $\mx^\ast$: matriz-coluna de coordenadas generalizadas de posição da plataforma/efetuador $\ssB_0$.
+\item $\mtheta^\ast$: matriz-coluna de coordenadas generalizadas de orientação da plataforma/efetuador $\ssB_0$.
+\item $\mq^\ast$: matriz-coluna de coordenadas generalizadas da plataforma/efetuador $\ssB_0$. Definida como $\mq^\ast = \mq_0 = \begin{bmatrix} {\mx^\ast}^\msT & {\mtheta^\ast}^\msT \end{bmatrix}^\msT $.
 \item $\mq^\diamond$: matriz-coluna de coordenadas generalizadas dos subsistemas seriais. Definida como $\mq^\diamond = \begin{bmatrix}  {\mq_1}^\msT & ... & {\mq_{n}}^\msT \end{bmatrix}^\msT $.
 \item $\mq$: matriz-coluna contendo todas as coordenadas generalizadas do sistema $\ssM$. Definida como $\mq = \begin{bmatrix} {\mq^\ast}^\msT & {\mq^\diamond}^\msT \end{bmatrix}^\msT $.
 \item $\mp_i, \,i=0, ..., n$: matriz-coluna de quasi-velocidades do subsistema $\ssB_i$.
 \item $\momega^\ast$: matriz-coluna de componentes de velocidade angular da plataforma/efetuador $\ssB_0$.
-\item $\mp^\ast$: matriz-coluna de quasi-velocidades da plataforma/efetuador $\ssB_0$. Definida como $\mp^\ast = \mp_0 = \begin{bmatrix} {\dot{\mq}^\ast}^\msT & {\momega^\ast}^\msT \end{bmatrix}^\msT $.
+\item $\mp^\ast$: matriz-coluna de quasi-velocidades da plataforma/efetuador $\ssB_0$. Definida como $\mp^\ast = \mp_0 = \begin{bmatrix} {\dot{\mx}^\ast}^\msT & {\momega^\ast}^\msT \end{bmatrix}^\msT $.
 \item $\mp^\diamond$: matriz-coluna de quasi-velocidades dos subsistemas seriais. Definida como $\mp^\diamond = \dot{\mq}^\diamond $.
 \item $\mp$: matriz-coluna contendo todas as quasi-velocidades do sistema $\ssM$. Definida como $\mp = \begin{bmatrix} {\mp^\ast}^\msT & {\mp^\diamond}^\msT \end{bmatrix}^\msT $.
 \item $\overline{\mq}(\mq)$: matriz-coluna dos v\'inculos de posi\c{c}\~ao entre subsistemas. As equa\c{c}\~oes vinculares s\~ao dadas por $\overline{\mq}(\mq) = \mzr $.
@@ -2353,7 +2357,7 @@ m \mone & \mzr \\
 
 Definindo:
 \begin{equation}
-\mq^\ast = \vct{\ttg}_{\ttN_0}
+\mx^\ast = \vct{\ttg}_{\ttN_0}
 \end{equation}
 \begin{equation}
 \momega^\ast = \vct{\vomega^{\lllN_0}_{\lllB_0}}_{\ttN_0}
@@ -2367,7 +2371,7 @@ m \mone & \mzr \\
 \end{bmatrix}
 \cdot
 \begin{bmatrix}
-\ddot{\mq}^\ast  \\
+\ddot{\mx}^\ast  \\
 \dot{\momega}^\ast
 \end{bmatrix}
 +
@@ -2386,10 +2390,26 @@ m \mone & \mzr \\
 
 Ou seja:
 \begin{equation}
-\mM_{\ssB_0} = 
+\mM_{\ssB_0}(\mq_0) = 
 \begin{bmatrix}
 m \mone & \mzr \\
-\mzr      & \mI
+\mzr      & \mI(\mtheta^\ast)
+\end{bmatrix}
+\end{equation}
+
+\begin{equation}
+\mnu_{\ssB_0}(\mq_0, \mp_0) = 
+\begin{bmatrix}
+\mzr \\
+\dot{\momega}^\ast \wedge \big(\mI(\mtheta^\ast) \cdot \dot{\momega}^\ast \big)
+\end{bmatrix}
+\end{equation}
+
+\begin{equation}
+\mg_{\ssB_0}(\mq_0) = 
+\begin{bmatrix}
+-m \mgamma \\
+\mzr
 \end{bmatrix}
 \end{equation}
 
@@ -2401,19 +2421,45 @@ m \mone & \mzr \\
 
 \item[a)] Vínculos de posição
 
-É possível relacionar as coordenadas da plataforma/efetuador $\ssB_0$ com as coordenadas dos efetuadores das cadeias seriais por meio de rotações e translações, ou seja:
+Seja $\ttp_i$ um ponto pertencente à plataforma/efetuador $\ssB_0$ e também ao efetuador do subsistema serial $\ssB_i$. Sendo assim, é possível relacionar as coordenadas do ponto $\ttp_i$ escritas no sistema $\ttN_0$ partindo da plataforma/efetuador $\ssB_0$ e da cadeia serial $\ssB_i$:
 
 \begin{equation}
-\mq^\ast = \md_i + \mE_i \cdot \mx_i(\mq_i), \, i = 1,...,n
+\vct{\ttp_i}_{\ttN_0} = \vct{\vone}_{\ttN_0 \rl \ttB} \vct{\ttp_i}_\ttB + \vct{\ttg}_{\ttN_0} = \vct{\vone}_{\ttN_0 \rl \ttN_i} \vct{\ttp_i}_{\ttN_i} + \vct{\tto_i}_{\ttN_0} 
 \end{equation}
 
-Sendo assim, temos:
+Sabe-se que $\vct{\ttg}_{\ttN_0} = \mx^\ast$ e $\vct{\ttp_i}_{\ttN_i} = \mx_i(\mq_i)$. Tendo em vista que $\vct{\ttp_i}_\ttB$, $\vct{\vone}_{\ttN_0 \rl \ttN_i}$ e $\vct{\tto_i}_{\ttN_0}$ são constantes e que $\vct{\vone}_{\ttN_0 \rl \ttB}$ depende de $\mtheta^\ast$, definindo:
+
+\begin{equation}
+\mc_i(\mtheta^\ast) = -\vct{\vone}_{\ttN_0 \rl \ttB} \vct{\ttp_i}_\ttB
+\end{equation}
+
+\begin{equation}
+\md_i = \vct{\tto_i}_{\ttN_0} 
+\end{equation}
+
+\begin{equation}
+\mE_i = \vct{\vone}_{\ttN_0 \rl \ttB}
+\end{equation}
+
+Temos:
+
+\begin{equation}
+\mx^\ast = \mc_i(\mtheta^\ast) + \md_i + \mE_i \cdot \mx_i(\mq_i), \, i = 1,...,n
+\end{equation}
+
+Assim:
 \begin{equation} \label{eq:VinculosPosicao}
 \begin{bmatrix}
 \mone\\
 \vdots\\
 \mone
-\end{bmatrix}\cdot \mq\ssh =
+\end{bmatrix}\cdot \mx^\ast =
+\begin{bmatrix}
+\mc_1(\mtheta^\ast) \\
+\vdots \\
+\mc_n(\mtheta^\ast)
+\end{bmatrix}
++
 \begin{bmatrix}
 \md_1 \\
 \vdots \\
@@ -2449,6 +2495,13 @@ Juntando a equação \eqref{eq:VinculosPosicaoAfins} à equação \eqref{eq:VinculosP
 \cdot
 \mq^\ast =
 \begin{bmatrix}
+\mc_1(\mtheta^\ast) \\
+\vdots \\
+\mc_n(\mtheta^\ast) \\
+\mzr
+\end{bmatrix}
++
+\begin{bmatrix}
 \md_1 \\
 \vdots \\
 \md_n \\
@@ -2480,11 +2533,11 @@ Juntando a equação \eqref{eq:VinculosPosicaoAfins} à equação \eqref{eq:VinculosP
 
 Sendo assim, os vínculos de posição entre subsistemas podem ser descritos de maneira genérica por:
 \begin{equation} \label{eq:VinculosGenericosPosicao}
-\overline{\mq}(\mq) = \mD \cdot \mq^\ast - \md - \mE \cdot \mx(\mq)
+\overline{\mq}(\mq) = \mD \cdot \mq^\ast - \mc(\mtheta^\ast) - \md - \mE \cdot \mx(\mq)
 - \mF \cdot \mq^\diamond = \mzr
 \end{equation}
 
-Sendo $\md$, $\mD$, $\mE$ e $\mF$ matrizes constantes e $\mx$ dado por:
+Sendo $\md$, $\mD$, $\mE$ e $\mF$ matrizes constantes e $\mx$ e $\mc$ dados por:
 \begin{equation}
 \mx(\mq) = 
 \begin{bmatrix}
@@ -2494,11 +2547,21 @@ Sendo $\md$, $\mD$, $\mE$ e $\mF$ matrizes constantes e $\mx$ dado por:
 \end{bmatrix}
 \end{equation}
 
+\begin{equation}
+\mc(\mtheta^\ast) = 
+\begin{bmatrix}
+\mc_1(\mtheta^\ast) \\
+\vdots \\
+\mc_n(\mtheta^\ast) \\
+\mzr
+\end{bmatrix}
+\end{equation}
+
 \item[b)] Vínculos de velocidades lineares
 
 Derivando no tempo a equação \eqref{eq:VinculosGenericosPosicao}, temos:
 \begin{equation} \label{eq:VinculosGenericosVel}
-\dot{\overline{\mq}}(\mq,\dot{\mq}) = \mD \cdot \dot{\mq}^\ast- \mE \cdot \dot{\mx}(\mq,\dot{\mq}) - \mF \cdot \dot{\mq}^\diamond = \mzr
+\dot{\overline{\mq}}(\mq,\dot{\mq}) = \mD \cdot \dot{\mq}^\ast- \dot{\mc}(\mtheta^\ast, \momega^\ast) - \mE \cdot \dot{\mx}(\mq,\dot{\mq}) - \mF \cdot \dot{\mq}^\diamond = \mzr
 \end{equation}
 
 A derivada $\dot{\mx}$ pode ser obtida da seguinte maneira:
@@ -2527,6 +2590,35 @@ Sendo:
 \mzr &\ldots  & \mJ_{v\,\ssB_n}(\mq_n)
 \end{bmatrix}
 \end{equation}
+
+E a derivada $\dot{\mc}$ pode ser obtida da seguinte maneira:
+\begin{equation} \label{eq:dcdt}
+\dot{\mc}(\mtheta^\ast,\momega^\ast) = \frac{\dd}{\dd t}
+\begin{bmatrix}
+\mc_1(\mq_1) \\
+\vdots \\
+\mc_n(\mq_n) \\
+\mzr
+\end{bmatrix} =
+\begin{bmatrix}
+\mJ_{v\,\ssB_1}(\mq_1) \cdot \dot{\mq}_1 \\
+\vdots \\
+\mJ_{v\,\ssB_n}(\mq_n) \cdot \dot{\mq}_n
+\end{bmatrix}
+=
+\mJ_{\mathsf{v}}(\mq^\diamond) \cdot \dot{\mq}^\diamond
+\end{equation}
+
+Sendo:
+\begin{equation}
+\mJ_{\mathsf{v}}(\mq^\diamond) =
+\begin{bmatrix}
+\mJ_{v\,\ssB_1}(\mq_1) & \ldots & \mzr\\
+\vdots & \ddots & \vdots\\
+\mzr &\ldots  & \mJ_{v\,\ssB_n}(\mq_n)
+\end{bmatrix}
+\end{equation}
+
 
 Assim, substituindo \eqref{eq:dxdt} em \eqref{eq:VinculosGenericosVel}, obtemos:
 \begin{equation} \label{eq:VinculosGenericosVelocidades}
