@@ -381,6 +381,28 @@ Também vale destacar a seguinte propriedades do produto vetorial entre 3 vetores
 (\va \wedge \vb) \wedge \vc = \va \wedge \vb \wedge \vc - \vb \wedge \va \wedge \vc
 \end{empheq}
 
+O produto vetorial entre matrizes-coluna 3x1 apresenta a mesma notação, e pode ser representado por um produto de matrizes:
+\begin{empheq}[box=\almondbox]{equation}
+\ma \wedge \mb = \mS(\ma) \cdot \mb
+\end{empheq}
+
+Sendo:
+\begin{equation}
+\mS(\ma) = \begin{bmatrix}
+0 & -a_3 & a_2 \\
+a_3 & 0 & -a_1 \\
+-a_2 & a_1 & 0
+\end{bmatrix}
+\end{equation}
+
+\begin{equation}
+\ma = \begin{bmatrix}
+a_1 &
+a_2 &
+a_3
+\end{bmatrix}^\msT
+\end{equation}
+
 \subsubsubsection{Derivada temporal de versores}\label{S05-01-01-01}
 
 Seja %m $\llA$ e $\llB$ dois referenciais referenciais e 
@@ -1996,7 +2018,7 @@ Sendo:
 \mh(\mq, \dot{\mq}, \ddot{\mq}) = \dot{\mM}(\mq, \dot{\mq}) \ddot{\mq} + \dot{\mnu}(\mq, \dot{\mq}, \ddot{\mq}) + \dot{\mg}(\mq,\dot{\mq})
 \end{empheq}
 
-A obtenção de $\mh(\mq, \dot{\mq}, \ddot{\mq})$ através da derivação temporal direta das equações \eqref{eq:MSerial}, \eqref{eq:vSerial} e \eqref{eq:gSerial} é possível, porém um tanto quanto complexa. Uma maneira mais simples seria realizar a derivada temporal da equação (???), ou seja:
+A obtenção de $\mh(\mq, \dot{\mq}, \ddot{\mq})$ através da derivação temporal direta das equações \eqref{eq:MSerial}, \eqref{eq:vSerial} e \eqref{eq:gSerial} é possível, porém um tanto quanto complexa. Uma maneira mais simples seria realizar a derivada temporal da equação \eqref{eq:u_Jtfcir}, ou seja:
 \begin{equation} \label{eq:eq_dinamicas_3D}
 \dot{\mu} + \mJ^\msT \dot{\mf}\cir + \dot{\mJ}^\msT \mf\cir = \mzr
 \end{equation}
@@ -2533,28 +2555,56 @@ Juntando a equação \eqref{eq:VinculosPosicaoAfins} à equação \eqref{eq:VinculosP
 
 Sendo assim, os vínculos de posição entre subsistemas podem ser descritos de maneira genérica por:
 \begin{equation} \label{eq:VinculosGenericosPosicao}
-\overline{\mq}(\mq) = \mD \cdot \mq^\ast - \mc(\mtheta^\ast) - \md - \mE \cdot \mx(\mq)
+\overline{\mq}(\mq) = \mD \cdot \mx^\ast - \mc(\mtheta^\ast) - \md - \mE \cdot \mx(\mq)
 - \mF \cdot \mq^\diamond = \mzr
 \end{equation}
 
-Sendo $\md$, $\mD$, $\mE$ e $\mF$ matrizes constantes e $\mx$ e $\mc$ dados por:
+Sendo:
+
 \begin{equation}
-\mx(\mq) = 
-\begin{bmatrix}
-\mx_1(\mq_1) \\
-\vdots \\
-\mx_n(\mq_n)
-\end{bmatrix}
+\mD = \begin{bmatrix}
+\mone &
+\hdots &
+\mone &
+\mD_{\oplus}^\msT &
+\end{bmatrix}^\msT
 \end{equation}
 
 \begin{equation}
 \mc(\mtheta^\ast) = 
 \begin{bmatrix}
-\mc_1(\mtheta^\ast) \\
-\vdots \\
-\mc_n(\mtheta^\ast) \\
+\mc_1(\mtheta^\ast)^\msT &
+\hdots &
+\mc_n(\mtheta^\ast)^\msT &
 \mzr
+\end{bmatrix}^\msT
+\end{equation}
+
+\begin{equation}
+\md  = \begin{bmatrix}
+\md_1^\msT &
+\hdots &
+\md_n^\msT &
+\md_{\oplus}^\msT
+\end{bmatrix}^\msT
+\end{equation}
+
+\begin{equation}
+\mE = \begin{bmatrix}
+\mE_1 & \ldots & \mzr\\
+\vdots & \ddots & \vdots\\
+\mzr &\ldots  & \mE_{n} \\
+\mzr &\ldots  & \mzr
 \end{bmatrix}
+\end{equation}
+
+\begin{equation}
+\mx(\mq) = 
+\begin{bmatrix}
+\mx_1(\mq_1)^\msT &
+\hdots &
+\mx_n(\mq_n)^\msT
+\end{bmatrix}^\msT
 \end{equation}
 
 \item[b)] Vínculos de velocidades lineares
@@ -2595,46 +2645,99 @@ E a derivada $\dot{\mc}$ pode ser obtida da seguinte maneira:
 \begin{equation} \label{eq:dcdt}
 \dot{\mc}(\mtheta^\ast,\momega^\ast) = \frac{\dd}{\dd t}
 \begin{bmatrix}
-\mc_1(\mq_1) \\
+\mc_1(\mtheta^\ast) \\
 \vdots \\
-\mc_n(\mq_n) \\
+\mc_n(\mtheta^\ast) \\
 \mzr
 \end{bmatrix} =
 \begin{bmatrix}
-\mJ_{v\,\ssB_1}(\mq_1) \cdot \dot{\mq}_1 \\
+\momega^\ast \wedge \mc_1(\mtheta^\ast) \\
 \vdots \\
-\mJ_{v\,\ssB_n}(\mq_n) \cdot \dot{\mq}_n
+\momega^\ast \wedge \mc_n(\mtheta^\ast) \\
+\mzr
 \end{bmatrix}
 =
-\mJ_{\mathsf{v}}(\mq^\diamond) \cdot \dot{\mq}^\diamond
+-\mS^\ast(\mtheta^\ast) \cdot \momega^\ast
 \end{equation}
 
 Sendo:
 \begin{equation}
-\mJ_{\mathsf{v}}(\mq^\diamond) =
+\mS^\ast(\mtheta^\ast) =
 \begin{bmatrix}
-\mJ_{v\,\ssB_1}(\mq_1) & \ldots & \mzr\\
-\vdots & \ddots & \vdots\\
-\mzr &\ldots  & \mJ_{v\,\ssB_n}(\mq_n)
+ \mS\big(\mc_1(\mtheta^\ast)\big) \\
+\vdots \\
+\mS\big(\mc_n(\mtheta^\ast)\big) \\
+\mzr
 \end{bmatrix}
 \end{equation}
 
 
-Assim, substituindo \eqref{eq:dxdt} em \eqref{eq:VinculosGenericosVel}, obtemos:
+Assim, substituindo \eqref{eq:dxdt} e \eqref{eq:dcdt} em \eqref{eq:VinculosGenericosVel}, obtemos:
 \begin{equation} \label{eq:VinculosGenericosVelocidades}
-\dot{\overline{\mq}}(\mq,\mp) = \mD \cdot \dot{\mq}^\ast - \mE \cdot \mJ_{\mathsf{v}}(\mq^\diamond) \cdot \mp^\diamond  - \mF \cdot \mp^\diamond = \mzr
+\dot{\overline{\mq}}(\mq,\mp) = \mD \cdot \dot{\mx}^\ast + \mS^\ast(\mtheta^\ast) \cdot \momega^\ast - \mE \cdot \mJ_{\mathsf{v}}(\mq^\diamond) \cdot \mp^\diamond  - \mF \cdot \mp^\diamond = \mzr
 \end{equation}
 
 \item[c)] Vínculos de velocidades angulares
 
-Em alguns casos, é necessário incluir vínculos entre as velocidades angulares dos efetuadores das cadeiais seriais, de modo a restringir suas orientações no espaço.
+Supondo que os efetuadores de cada cadeia serial $\ssB_i$ estejam ligados rigidamente à plataforma/efetuador $\ssB_0$, temos que todos apresentam a mesma velocidade angular. Sendo assim, obtem-se as seguintes relações:
 
-De maneira análoga à equação \eqref{eq:VinculosGenericosVelocidades}, os vínculos de velocidades angulares serão definidos por:
 \begin{equation}
-\overline{\momega}(\mq,\mp) = \mP \cdot \momega^\ast - \mQ \cdot \mJ_{\mathsf{w}}(\mq^\diamond) \cdot \mp^\diamond  - \mR \cdot \mp^\diamond = \mzr
+\vct{\vomega^{\lllN_0}_{\lllB_0}}_{\ttN_0} = \momega^\ast = \vct{\vone}_{\ttN_0 \rl \ttN_i}  \vct{\vomega^{\lllN_i}_{\lllB_0}}_{\ttN_i} , \; i = 1, ... , n
 \end{equation}
 
-Sendo $\mP$, $\mQ$ e $\mR$ matrizes constantes e $\mJ_{\mathsf{w}}$ dado por:
+Sabe-se que $\vct{\vomega^{\lllN_i}_{\lllB_0}}_{\ttN_i} =  \mJ_{\omega\,\ssB_i}(\mq_i) \dot{\mq}_i$ e que $\mE_i =\vct{\vone}_{\ttN_0 \rl \ttN_i}$. Sendo assim, temos:
+
+\begin{equation}
+\momega^\ast = \mE_i \cdot \mJ_{\omega\,\ssB_i}(\mq_i) \dot{\mq}_i, \, i = 1,...,n
+\end{equation}
+
+Assim:
+\begin{equation} \label{eq:VinculosVelAng}
+\begin{bmatrix}
+\mone\\
+\vdots\\
+\mone
+\end{bmatrix}\cdot \momega^\ast =
+\begin{bmatrix}
+\mE_1 & \ldots & \mzr\\
+\vdots & \ddots & \vdots\\
+\mzr &\ldots  & \mE_{n}
+\end{bmatrix}
+\cdot
+\begin{bmatrix}
+\mJ_{\omega\,\ssB_1}(\mq_1) & \ldots & \mzr\\
+\vdots & \ddots & \vdots\\
+\mzr &\ldots  & \mJ_{\omega\,\ssB_n}(\mq_n)
+\end{bmatrix}
+\begin{bmatrix}
+\dot{\mq}_1 \\
+\vdots \\
+\dot{\mq}_n
+\end{bmatrix}
+\end{equation}
+
+Sendo assim, os vínculos de posição entre subsistemas podem ser descritos de maneira genérica por:
+\begin{equation}
+\overline{\momega}(\mq,\mp) = \mP \cdot \momega^\ast - \mQ \cdot \mJ_{\mathsf{w}}(\mq^\diamond) \cdot \mp^\diamond  = \mzr
+\end{equation}
+
+Sendo:
+\begin{equation}
+\mP = \begin{bmatrix}
+\mone &
+\hdots &
+\mone
+\end{bmatrix}^\msT
+\end{equation}
+
+\begin{equation}
+\mQ = \begin{bmatrix}
+\mE_1 & \ldots & \mzr\\
+\vdots & \ddots & \vdots\\
+\mzr &\ldots  & \mE_{n}
+\end{bmatrix}
+\end{equation}
+
 \begin{equation} \label{eq:VinculosGenericosVelocidadesAngulares}
 \mJ_{\mathsf{w}}(\mq^\diamond) =
 \begin{bmatrix}
@@ -2654,8 +2757,8 @@ Os vínculos de quasi-velocidades são dados pela união dos vínculos de velocidade
 \end{bmatrix}
 = 
 \begin{bmatrix}
-\mD \cdot \dot{\mq}^\ast - \mE \cdot \mJ_{\mathsf{v}}(\mq^\diamond) \cdot \mp^\diamond  - \mF \cdot \mp^\diamond \\
-\mP \cdot   \momega^\ast - \mQ \cdot \mJ_{\mathsf{w}}(\mq^\diamond) \cdot \mp^\diamond  - \mR \cdot \mp^\diamond
+\mD \cdot \dot{\mx}^\ast + \mS^\ast(\mtheta^\ast) \cdot \momega^\ast - \mE \cdot \mJ_{\mathsf{v}}(\mq^\diamond) \cdot \mp^\diamond  - \mF \cdot \mp^\diamond \\
+\mP \cdot   \momega^\ast - \mQ \cdot \mJ_{\mathsf{w}}(\mq^\diamond) \cdot \mp^\diamond
 \end{bmatrix}
 =
 \mzr
@@ -2670,8 +2773,8 @@ Sendo $\mA$ dado por:
 \begin{equation}
 \mA(\mq) = 
 \begin{bmatrix}
-\mD & \mzr & -(\mE \cdot \mJ_{\mathsf{v}}(\mq\cir) + \mF) \\
-\mzr &  \mP & -(\mQ \cdot \mJ_{\mathsf{w}}(\mq\cir) + \mR) \\
+\mD & \mS^\ast(\mtheta^\ast) & -(\mE \cdot \mJ_{\mathsf{v}}(\mq\cir) + \mF) \\
+\mzr &  \mP & -\mQ \cdot \mJ_{\mathsf{w}}(\mq\cir) \\
 \end{bmatrix}
 \end{equation}
 
