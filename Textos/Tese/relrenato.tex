@@ -1556,17 +1556,23 @@ Segue abaixo, a dedução.
 
 \paragraph{i) Modelo dos subsistemas} $ \, $ \\
 
-O modelo dinâmico de cada ligamento pode ser obtido por Newton-Euler, pois são considerados como corpos rígidos sujeitos apenas à força peso e aos esforços reativos vinculares. Sendo assim, aplicando o Teorema do Movimento do Baricentro e o Teorema do Momento Angular para cada ligamento, temos:
+O modelo dinâmico de cada ligamento pode ser obtido por Newton-Euler, pois são considerados como corpos rígidos livres no espaço sujeitos apenas à força peso. Sendo assim, através do Teorema do Movimento do Baricentro e do Teorema do Momento Angular, obtemos os esforços não-reativos (ativos e inerciais) aplicados em cada ligamento:
 
 \begin{equation} \label{eq:Newton-Euler}
 \begin{cases}
-m_i \va^{\lllN}_{\ttg_i} - m_i \vg = \vf_{r\,i} \\
-\vI_{\ttg_i} \cdot \dot{\vomega}^{\lllN}_{\lllB_i} + \vomega^{\lllN}_{\lllB_i} \wedge (\vI_{\ttg_i} \cdot \vomega^{\lllN}_{\lllB_i}) = \vtau_{r\,i}
+\vf_i = -m_i \va^{\lllN}_{\ttg_i} + m_i \vg  \\
+\vtau_i= -\vI_{\ttg_i} \cdot \dot{\vomega}^{\lllN}_{\lllB_i} - \vomega^{\lllN}_{\lllB_i} \wedge (\vI_{\ttg_i} \cdot \vomega^{\lllN}_{\lllB_i}) 
 \end{cases} \, i = 1,...,\nu
 \end{equation}
 
 Aplicando as equações vetoriais no sistema $\ttN$, temos:
 \begin{equation} \label{eq:Newton-EulerMat}
+\begin{bmatrix}
+\vct{\vf_i}_\ttN \\
+\vct{\vtau_i}_\ttN
+\end{bmatrix}
+=
+-
 \begin{bmatrix}
 m_i \mone & \mzr \\
 \mzr      & \vct{\vI_{\ttg_i}}_{\ttN \rl \ttN}
@@ -1576,83 +1582,21 @@ m_i \mone & \mzr \\
 \vct{\va^{\lllN}_{\ttg_i}}_{\ttN}  \\
 \vct{\dot{\vomega}^{\lllN}_{\lllB_i}}_{\ttN}
 \end{bmatrix}
-+
+-
 \begin{bmatrix}
 \mzr \\
 \vct{\vomega^{\lllN}_{\lllB_i}}_{\ttN} \wedge (\vct{\vI_{\ttg_i}}_{\ttN \rl \ttN} \cdot \vct{\vomega^{\lllN}_{\lllB_i}}_{\ttN})
 \end{bmatrix}
-+
+-
 \begin{bmatrix}
 -m_i \vct{\vg}_{\ttN} \\
 \mzr
 \end{bmatrix}
-=
-\begin{bmatrix}
-\vct{\vf_{r\,i}}_\ttN \\
-\vct{\vtau_{r\,i}}_\ttN
-\end{bmatrix}
 \end{equation}
 
 Ou seja:
-\begin{equation} \label{eq:Newton-EulerMat2}
-\begin{bmatrix}
-m_i \mone & \mzr \\
-\mzr      & \mI_i
-\end{bmatrix}
-\cdot
-\begin{bmatrix}
-\ma^\star_i  \\
-\dot{\momega}^\star_i
-\end{bmatrix}
-+
-\begin{bmatrix}
-\mzr \\
-\momega^\star_i \wedge (\mI_i \cdot \momega^\star_i)
-\end{bmatrix}
-+
-\begin{bmatrix}
--m_i \mgamma \\
-\mzr
-\end{bmatrix}
-=
-\mf_{r\,i}
-\end{equation}
-
-Definindo:
-%\begin{equation} \label{eq:M_i}
-%\mM_i (\mq) = \begin{bmatrix}
-%m_i \mone & \mzr \\
-%\mzr      & \mI_i(\mq)
-%\end{bmatrix}
-%\end{equation}
-%\begin{equation} \label{eq:v_i}
-%\mnu_i (\mq, \mp_i) = \begin{bmatrix}
-%\mzr \\
-%\momega^\star_i \wedge (\mI_i(\mq) \cdot \momega^\star_i)
-%\end{bmatrix}
-%\end{equation}
-%\begin{equation} \label{eq:g_i}
-%\mg_i = \begin{bmatrix}
-%-m_i \mgamma \\
-%\mzr
-%\end{bmatrix}
-%\end{equation}
-\begin{equation} \label{eq:p_i}
-\mp_i = \begin{bmatrix}
-\mv^\star_i  \\
-\momega^\star_i
-\end{bmatrix}
-\end{equation}
-
-%\eqref{eq:Newton-EulerMat2} pode ser reescrita como:
-%\begin{equation}
-%\mM_i(\mq) \cdot \dot{\mp}_i + \mnu_i(\mq, \mp_i) + \mg_i = \mf_{r\,i}
-%\end{equation}
-
-Seja $\mf_i$ o sistema de forças ativas  (considerando os esforços de inércia) aplicado no i-ésimo subsistema, na direção das quasi-velocidades $\mp_i$. $\mf_i$ pode ser obtido pela seguinte expressão:
-%Sendo assim, os sistemas de forças (considerando esforços ativos e de inércia) aplicados em cada subsistema são dados por:
 \begin{empheq}[box=\lightbluebox]{equation} \label{eq:f_i}
-\mf_i  = -\begin{Bmatrix}
+\overline{\mf}_i  = -\begin{Bmatrix}
 \begin{bmatrix}
 m_i \mone & \mzr \\
 \mzr      & \mI_i
@@ -1675,17 +1619,61 @@ m_i \mone & \mzr \\
 \end{Bmatrix}
 \end{empheq}
 
-
-Portanto, o modelo dinâmico de cada subsistema pode ser escrito como:
+Como não há forças reativas aplicadas nos subsistemas desacoplados, o modelo dinâmico de cada subsistema pode ser escrito como:
 \begin{empheq}[box=\mybluebox]{equation}\label{eq:fi_plus_fri}
-\mf_i + \mf_{r\,i} = \mzr
+\overline{\mf}_i = \mzr
 \end{empheq}
+
+Além disso, definindo as quasi-velocidades:
+%\begin{equation} \label{eq:M_i}
+%\mM_i (\mq) = \begin{bmatrix}
+%m_i \mone & \mzr \\
+%\mzr      & \mI_i(\mq)
+%\end{bmatrix}
+%\end{equation}
+%\begin{equation} \label{eq:v_i}
+%\mnu_i (\mq, \mp_i) = \begin{bmatrix}
+%\mzr \\
+%\momega^\star_i \wedge (\mI_i(\mq) \cdot \momega^\star_i)
+%\end{bmatrix}
+%\end{equation}
+%\begin{equation} \label{eq:g_i}
+%\mg_i = \begin{bmatrix}
+%-m_i \mgamma \\
+%\mzr
+%\end{bmatrix}
+%\end{equation}
+\begin{empheq}[box=\lightbluebox]{equation} \label{eq:p_i}
+\mp_i = \begin{bmatrix}
+\mv^\star_i  \\
+\momega^\star_i
+\end{bmatrix}
+\end{empheq}
+
+E as quasi-coordenadas:
+\begin{empheq}[box=\lightbluebox]{equation} \label{eq:pi_i}
+\dd\mpi_i = \mp_i \dd t
+\end{empheq}
+
+Temos que o trabalho virtual realizado por cada subsistema é dado por:
+\begin{empheq}[box=\mybluebox]{equation}
+\delta W_i =  \delta \mpi_i^\msT \cdot \overline{\mf}_i
+\end{empheq}
+
+%Seja $\mf_i$ o sistema de forças ativas  (considerando os esforços de inércia) aplicado no i-ésimo subsistema, na direção das quasi-velocidades $\mp_i$. $\mf_i$ pode ser obtido pela seguinte expressão:
+
+%\eqref{eq:Newton-EulerMat2} pode ser reescrita como:
+%\begin{equation}
+%\mM_i(\mq) \cdot \dot{\mp}_i + \mnu_i(\mq, \mp_i) + \mg_i = \mf_{r\,i}
+%\end{equation}
+
+%Sendo assim, os sistemas de forças (considerando esforços ativos e de inércia) aplicados em cada subsistema são dados por:
 
 %No caso de os subsistemas estarem desacoplados, temos que $\mf_{r\,i} = \mzr$.
 
 \paragraph{ii) Sistemas de forças ativas generalizadas} $ \, $ \\
 
-Considere também um sistema constituido pelos esforços que os atuadores aplicam nas juntas do mecanismo, e pelos seus respectivos esforços reativos. Primeiramente, definimos a matriz-coluna de quasi-velocidades relativas a esse subsistema (quasi-velocidades adicionais):
+Considere também um subsistema constituido pelos esforços que os atuadores aplicam nas juntas do mecanismo. Primeiramente, definimos a matriz-coluna de quasi-velocidades relativas a esse subsistema (quasi-velocidades adicionais):
 %Muitas vezes é conveniente definir um conjunto de quasi-velocidades adicionais $\mp_0$, as quais só fazem sentido para o sistema acoplado, e sistemas de forças ativas generalizadas adicionais $\mf_0$ aplicados na direção das quasi-velocidades adicionais. \\
 
 %Neste algoritmo de modelagem, serão considerados como quasi-velocidades adicionais as derivadas temporais das coordenadas das juntas, ou seja:
@@ -1695,15 +1683,10 @@ Considere também um sistema constituido pelos esforços que os atuadores aplicam 
 \mp\ssh = \dot{\mq}
 \end{empheq}
 
-Seja $\mu$ a matriz-coluna de esforços generalizados aplicadas pelos atuadores na direção de $\dot{\mq}$ (ou seja, o trabalho virtual de $\mu$ é dado por $ \delta W_{\mu} = \mu^\msT \cdot \delta \mq $ ). Sendo assim, o modelo dinâmico deste subsistema é dado por:
+Seja $\mu$ a matriz-coluna de esforços generalizados aplicadas pelos atuadores na direção de $\dot{\mq}$. Sendo assim, o trabalho virtual realizado por este subsistema é dado por:
 
 \begin{empheq}[box=\mybluebox]{equation}
-\mf\ssh + \mf_r\ssh = \mzr
-\end{empheq}
-
-Sendo:
-\begin{empheq}[box=\lightbluebox]{equation} \label{eq:fssh_u}
-\mf\ssh = \mu
+\delta W\ssh = \delta \mq^\msT \cdot \mu 
 \end{empheq}
 
 \paragraph{iii) Vínculos cinemáticos entre subsistemas} $ \, $ \\
@@ -1764,7 +1747,7 @@ Sendo:
 Seja $\mf$ a matriz-coluna contendo todos os sistemas de forças ativas generalizadas:
 \begin{empheq}[box=\lightbluebox]{equation} \label{eq:fSeriais}
 \mf = \begin{bmatrix}
-{\mf\ssh}^\msT & {\mf\cir}^\msT
+{\mu}^\msT & {\mf\cir}^\msT
 \end{bmatrix}^\msT
 \end{empheq}
 
@@ -1775,33 +1758,37 @@ Sendo:
 \end{bmatrix}^\msT
 \end{empheq}
 
-Seja também $\mf_r$ a matriz-coluna contendo todos os sistemas de forças reativas generalizadas:
+Seja $\mpi$ um conjunto de de quasi-coordenadas tal que:
+\begin{equation} \label{eq:quasi-coord}
+\dd \mpi = \mp \, \dd t
+\end{equation}
+
+Ou seja:
 \begin{equation}
-\mf_r = \begin{bmatrix}
-{\mf_r\ssh}^\msT & {\mf_r\cir}^\msT
+\dd\mpi = \begin{bmatrix}
+\dd{\mpi\ssh}^\msT & \dd{\mpi\cir}^\msT
 \end{bmatrix}^\msT
 \end{equation}
 
 Sendo:
 \begin{equation}
-\mf_r\cir = \begin{bmatrix}
-\mf_{r\,1}^\msT & ... & \mf_{r\,\nu}^\msT  
+\dd\mpi\ssh = \dd\mq
+\end{equation}
+
+\begin{equation}
+\dd{\mpi\cir} = \begin{bmatrix}
+\dd\mpi_1^\msT & ... & \dd\mpi_{\nu}^\msT
 \end{bmatrix}^\msT
 \end{equation}
 
-Assim, as equações dinâmicas de todos os subsistemas são dadas por:
-\begin{equation} \label{eq:eq_dinamicas_1}
-\mf + \mf_r = \mzr
-\end{equation}
-
-Seja $\mpi$ um conjunto de de quasi-coordenadas tal que:
-\begin{equation} \label{eq:quasi-coord}
-\frac{\dd \mpi}{\dd t} = \mp
-\end{equation}
-
-Pelo postulado da mecânica analítica [?], temos que o trabalho virtual das forças reativas é nulo, e consequentemente as forças reativas são normais aos movimentos permitidos pelos vínculos, ou seja:
+Pelo princípio de d'Alembert, temos que
 \begin{equation}
-\delta W_{\mf_r} = \mf_r^\msT \cdot \delta \mpi = 0
+\delta W\ssh + \sum_{i=1}^\nu \delta W_i  = 0
+\end{equation}
+
+Através de (?), (?) e (?), temos que:
+\begin{equation}
+\delta \mpi^\msT \cdot \mf = 0
 \end{equation}
 
 
@@ -1811,16 +1798,44 @@ Além disso, a partir da definição de $\mpi$ \eqref{eq:quasi-coord} e dos vínculo
 \end{equation}
 
 
-
-Assim, para que $\mf_r$ respeite o postulado, $\mf_r^\msT$ deve ser combinação linear das linhas de $\mA$, ou seja, $\mf_r$ está contida na imagem de $\mA^\msT$:
+Subdividindo $\delta\mpi$ em $\delta\mpi\ssh $ e $\delta\mpi\cir$ e considerando $\delta\mpi\ssh$ como variáveis livres, temos:
 \begin{equation}
-\mf_r = \mA^\msT \mlambda
+\begin{bmatrix}
+\mJ(\mq) & -\mone
+\end{bmatrix}
+\cdot
+\begin{bmatrix}
+\delta\mpi\ssh \\
+\delta\mpi\cir
+\end{bmatrix} = \mzr
+\end{equation}
+\begin{equation}
+\Rightarrow \delta\mpi\cir = \mJ(\mq) \delta\mpi\ssh
+\end{equation}
+\begin{equation} \label{eq:pre_C}
+\therefore
+\delta\mpi = 
+\begin{bmatrix}
+\mone \\
+\mJ(\mq)
+\end{bmatrix}
+\cdot \delta\mpi\ssh
 \end{equation}
 
-Sendo assim, podemos reescrever \eqref{eq:eq_dinamicas_1} como:
-\begin{equation} \label{eq:eq_dinamicas_2}
-\mf + \mA^\msT \mlambda = \mzr
-\end{equation}
+
+Sendo assim, podemos escolher $\mC$ como a seguinte matriz:
+\begin{empheq}[box=\lightbluebox]{equation} \label{eq:MatrizC_seriais}
+\mC(\mq) =
+\begin{bmatrix}
+\mone \\
+\mJ(\mq)
+\end{bmatrix}
+\end{empheq}
+
+Repare 	que trocando $\delta\mpi$ por $\mp$ em \eqref{eq:SLH}, obtemos os vínculos de quasi-velocidades do sistema \eqref{eq:VinculosV_seriais}. Sendo assim, à partir das expressões \eqref{eq:pre_C} e \eqref{eq:MatrizC_seriais}, temos que $\mC$ respeita a seguinte relação:
+\begin{empheq}[box=\lightbluebox]{equation} \label{eq:relacao_C}
+\mp = \mC(\mq) \cdot \mp\ssh
+\end{empheq}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %Repare que essa equação pode ser utilizada para determinar  $\mu$ e $\mlambda$ supondo conhecidas as forças de inércia $\mf\cir$, pois:
@@ -1864,13 +1879,6 @@ Sendo assim, podemos reescrever \eqref{eq:eq_dinamicas_1} como:
 %Esta expressão pode ser utilizada para realizar a simulação dinâmica inversa, visto que, se conhecido o movimento do sistema, podem ser obtidos os esforços dos atuadores. Porém, como em geral não há o interesse de se obter as forças reativas aplicadas ao sistema, a presença dos multiplicadores torna a resolução do sistema desnecessariamente custosa. Sendo assim, vamos eliminar os multiplicadores da equação dinâmica, o que possibilitará realizar uma simulação dinâmica inversa muito menos custosa e também possibilitará realizar a simulação dinâmica direta.
 
 
-
-
-Seja $\mC$ uma matriz cujas colunas são base do núcleo de $\mA$. Assim, temos que:
-\begin{equation}
-\mA \cdot \mC = \mzr \Leftrightarrow  \mC^\msT \mA^\msT  = \mzr 
-\end{equation}
-
 Sendo assim, pré-multiplicando \eqref{eq:eq_dinamicas_2} à esquerda por $\mC^\msT$, temos:
 \begin{empheq}[box=\mybluebox]{equation} \label{eq:eq_dinamicas_3}
 \mC^\msT \mf = \mzr
@@ -1878,49 +1886,7 @@ Sendo assim, pré-multiplicando \eqref{eq:eq_dinamicas_2} à esquerda por $\mC^\ms
 
 Esta operação é equivalente a projetar as equações dinâmicas no núcleo de $\mA$, o que elimina os multiplicadores de Lagrange $\mlambda$, visto que o núcleo de $\mA$ é complemento ortogonal da imagem de $\mA^\msT$.
 
-Para encontrar o núcleo de $\mA$, precisamos resolver o seguinte sistema linear homogêneo:
-\begin{equation} \label{eq:SLH}
-\mA \cdot \mx = \mzr
-\end{equation}
 
-Subdividindo $\mx$ em $\mx\ssh $ e $\mx\cir$, sendo $\mx\ssh$ as $\nu$ primeiras componentes de $\mx$, e considerando $\mx\ssh$ como variáveis livres, temos:
-\begin{equation}
-\begin{bmatrix}
-\mJ(\mq) & -\mone
-\end{bmatrix}
-\cdot
-\begin{bmatrix}
-\mx\ssh \\
-\mx\cir
-\end{bmatrix} = \mzr
-\end{equation}
-\begin{equation}
-\Rightarrow \mx\cir = \mJ(\mq) \mx\ssh
-\end{equation}
-\begin{equation} \label{eq:pre_C}
-\therefore
-\mx = 
-\begin{bmatrix}
-\mone \\
-\mJ(\mq)
-\end{bmatrix}
-\cdot \mx\ssh
-\end{equation}
-
-
-Sendo assim, podemos escolher $\mC$ como a seguinte matriz:
-\begin{empheq}[box=\lightbluebox]{equation} \label{eq:MatrizC_seriais}
-\mC(\mq) =
-\begin{bmatrix}
-\mone \\
-\mJ(\mq)
-\end{bmatrix}
-\end{empheq}
-
-Repare 	que, fazendo $\mx = \mp$ (consequentemente $\mx\ssh = \mp\ssh$ e $\mx\cir = \mp\cir$) em \eqref{eq:SLH}, obtemos os vínculos de quasi-velocidades do sistema \eqref{eq:VinculosV_seriais}. Sendo assim, à partir das expressões \eqref{eq:pre_C} e \eqref{eq:MatrizC_seriais}, temos que $\mC$ respeita a seguinte relação:
-\begin{empheq}[box=\lightbluebox]{equation} \label{eq:relacao_C}
-\mp = \mC(\mq) \cdot \mp\ssh
-\end{empheq}
 
 Substituindo \eqref{eq:MatrizC_seriais}, \eqref{eq:fSeriais} e \eqref{eq:fssh_u}  em \eqref{eq:eq_dinamicas_3}, temos:
 \begin{empheq}[box=\mybluebox]{equation} \label{eq:u_Jtfcir}
