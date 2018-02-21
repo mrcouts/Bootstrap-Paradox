@@ -715,8 +715,8 @@ Para a obtenção do modelo, são necessários apenas os parametros de Denavit-Harte
 Seja $\ssB$ um sistema mecânico serial de $\nu$ graus de liberdade. Primeiramente, fazemos as seguintes definições:
 
 \begin{itemize}
-\item $\llN, \llB_0$: referencial inercial.
-\item $\ttN, \ttB_0$: sistema de coordenadas da base, fixo a $\llN$.
+\item $\llN$ ou $\llB_0$: referencial inercial.
+\item $\ttN$ ou $\ttB_0$: sistema de coordenadas da base do mecanismo, fixo a $\llN$.
 \item $\llB_i, \,i=1,...,\nu$: i-ésimo ligamento.
 \item $\ttB_i, \,i=1,...,\nu$: sistema de coordenadas solid\'ario a $\llB_i$.
 \item $\tto_i, \,i=0,...,\nu$: origem do sistema $\ttB_i$.
@@ -738,6 +738,12 @@ q_1 & ... & {q}_{\nu}
 \end{bmatrix}^\msT $.
 \item $\vg$: Vetor aceleração gravitacional.
 \item $\mgamma$: Vetor aceleração gravitacional escrito na base $\ttN$, ou seja, $\vct{\vg}_{\ttN}$.
+\item $\vf_i$: Vetor força não-reativa resultante aplicada no centro de massa de $\llB_i$.
+\item $\vtau_i$: Vetor torque não-reativo resultante aplicado em $\llB_i$.
+\item $\overline{\mf}_i$: Matriz-coluna de forças não-reativas generalizadas aplicadas no subsistema $\llB_i$. É dada por $\overline{\mf}_i = \begin{bmatrix}
+\vct{\vf_i}_\ttN^\msT &
+\vct{\vtau_i}_\ttN^\msT
+\end{bmatrix}^\msT $.
 \end{itemize}
 
 \subsubsection{Cinemática}\label{S05-02-01}
@@ -1619,7 +1625,7 @@ m_i \mone & \mzr \\
 \end{Bmatrix}
 \end{empheq}
 
-Como não há forças reativas aplicadas nos subsistemas desacoplados, o modelo dinâmico de cada subsistema pode ser escrito como:
+Como subsistemas estão desacoplados, não há forças reativas, portanto o modelo dinâmico de cada subsistema pode ser escrito como:
 \begin{empheq}[box=\mybluebox]{equation}\label{eq:fi_plus_fri}
 \overline{\mf}_i = \mzr
 \end{empheq}
@@ -1656,7 +1662,7 @@ E as quasi-coordenadas:
 \end{empheq}
 
 Temos que o trabalho virtual realizado por cada subsistema é dado por:
-\begin{empheq}[box=\mybluebox]{equation}
+\begin{empheq}[box=\mybluebox]{equation} \label{eq:dWiSeriais}
 \delta W_i =  \delta \mpi_i^\msT \cdot \overline{\mf}_i
 \end{empheq}
 
@@ -1673,7 +1679,7 @@ Temos que o trabalho virtual realizado por cada subsistema é dado por:
 
 \paragraph{ii) Sistemas de forças ativas generalizadas} $ \, $ \\
 
-Considere também um subsistema constituido pelos esforços que os atuadores aplicam nas juntas do mecanismo. Primeiramente, definimos a matriz-coluna de quasi-velocidades relativas a esse subsistema (quasi-velocidades adicionais):
+Considere também um subsistema constituido pelos esforços que os atuadores aplicam nas juntas do mecanismo. Primeiramente, definimos a matriz-coluna de quasi-velocidades relativas a esse subsistema:
 %Muitas vezes é conveniente definir um conjunto de quasi-velocidades adicionais $\mp_0$, as quais só fazem sentido para o sistema acoplado, e sistemas de forças ativas generalizadas adicionais $\mf_0$ aplicados na direção das quasi-velocidades adicionais. \\
 
 %Neste algoritmo de modelagem, serão considerados como quasi-velocidades adicionais as derivadas temporais das coordenadas das juntas, ou seja:
@@ -1683,15 +1689,15 @@ Considere também um subsistema constituido pelos esforços que os atuadores aplic
 \mp\ssh = \dot{\mq}
 \end{empheq}
 
-Seja $\mu$ a matriz-coluna de esforços generalizados aplicadas pelos atuadores na direção de $\dot{\mq}$. Sendo assim, o trabalho virtual realizado por este subsistema é dado por:
+Seja $\mu$ a matriz-coluna de esforços generalizados aplicadas pelos atuadores na direção de $\delta\mq$. Sendo assim, o trabalho virtual realizado por este subsistema é dado por:
 
-\begin{empheq}[box=\mybluebox]{equation}
+\begin{empheq}[box=\mybluebox]{equation} \label{eq:dWsshSeriais}
 \delta W\ssh = \delta \mq^\msT \cdot \mu 
 \end{empheq}
 
 \paragraph{iii) Vínculos cinemáticos entre subsistemas} $ \, $ \\
 
-Através das equações \eqref{eq:v_star_i}, \eqref{eq:omega_star_i} e \eqref{eq:mp_0}, é possível relacionar as quasi-velocidades de cada subsistema com as quasi-velocidades adicionais da seguinte maneira:
+Através das equações \eqref{eq:v_star_i}, \eqref{eq:omega_star_i} e \eqref{eq:mp_0}, é possível relacionar as quasi-velocidades de cada subsistema com as quasi-velocidades $\mp\ssh$ da seguinte maneira:
 \begin{equation}
 \underline{\mp_i}(\mq, \mp\ssh) = \mJ_i (\mq) \cdot \mp\ssh, \, i=1,...,\nu
 \end{equation}
@@ -1744,7 +1750,7 @@ Sendo:
 
 \paragraph{iv) Acoplamento de subsistemas} $ \, $ \\
 
-Seja $\mf$ a matriz-coluna contendo todos os sistemas de forças ativas generalizadas:
+Seja $\mf$ a matriz-coluna contendo todos os sistemas de forças não-reativas generalizadas:
 \begin{empheq}[box=\lightbluebox]{equation} \label{eq:fSeriais}
 \mf = \begin{bmatrix}
 {\mu}^\msT & {\mf\cir}^\msT
@@ -1782,18 +1788,18 @@ Sendo:
 \end{equation}
 
 Pelo princípio de d'Alembert, temos que
-\begin{equation}
+\begin{equation} \label{eq:PdASeriais}
 \delta W\ssh + \sum_{i=1}^\nu \delta W_i  = 0
 \end{equation}
 
-Através de (?), (?) e (?), temos que:
-\begin{equation}
+Através de \eqref{eq:PdASeriais}, \eqref{eq:dWsshSeriais}, \eqref{eq:dWiSeriais}, \eqref{eq:fSeriais} e \eqref{eq:quasi-coord}, temos que:
+\begin{equation} \label{eq:PdASeriais2}
 \delta \mpi^\msT \cdot \mf = 0
 \end{equation}
 
 
 Além disso, a partir da definição de $\mpi$ \eqref{eq:quasi-coord} e dos vínculos de quasi-velocidades \eqref{eq:VinculosV_seriais}, temos que as variações das quasi-coordenadas $\mpi$ devem respeitar a seguinte relação:
-\begin{equation}
+\begin{equation} \label{eq:vinculosdpiSeriais}
  \mA(\mq) \cdot \delta \mpi = \mzr
 \end{equation}
 
@@ -1812,18 +1818,13 @@ Subdividindo $\delta\mpi$ em $\delta\mpi\ssh $ e $\delta\mpi\cir$ e considerando
 \begin{equation}
 \Rightarrow \delta\mpi\cir = \mJ(\mq) \delta\mpi\ssh
 \end{equation}
-\begin{equation} \label{eq:pre_C}
+\begin{equation} \label{eq:dpidpisshSeriais}
 \therefore
-\delta\mpi = 
-\begin{bmatrix}
-\mone \\
-\mJ(\mq)
-\end{bmatrix}
-\cdot \delta\mpi\ssh
+\delta\mpi = \mC(\mq) \cdot \delta\mpi\ssh
 \end{equation}
 
 
-Sendo assim, podemos escolher $\mC$ como a seguinte matriz:
+Sendo:
 \begin{empheq}[box=\lightbluebox]{equation} \label{eq:MatrizC_seriais}
 \mC(\mq) =
 \begin{bmatrix}
@@ -1832,7 +1833,7 @@ Sendo assim, podemos escolher $\mC$ como a seguinte matriz:
 \end{bmatrix}
 \end{empheq}
 
-Repare 	que trocando $\delta\mpi$ por $\mp$ em \eqref{eq:SLH}, obtemos os vínculos de quasi-velocidades do sistema \eqref{eq:VinculosV_seriais}. Sendo assim, à partir das expressões \eqref{eq:pre_C} e \eqref{eq:MatrizC_seriais}, temos que $\mC$ respeita a seguinte relação:
+Repare 	que trocando $\delta\mpi$ por $\mp$ em \eqref{eq:vinculosdpiSeriais}, obtemos os vínculos de quasi-velocidades do sistema \eqref{eq:VinculosV_seriais}. Sendo assim, à partir das expressões \eqref{eq:pre_C} e \eqref{eq:MatrizC_seriais}, temos que $\mC$ respeita a seguinte relação:
 \begin{empheq}[box=\lightbluebox]{equation} \label{eq:relacao_C}
 \mp = \mC(\mq) \cdot \mp\ssh
 \end{empheq}
@@ -1879,19 +1880,21 @@ Repare 	que trocando $\delta\mpi$ por $\mp$ em \eqref{eq:SLH}, obtemos os víncul
 %Esta expressão pode ser utilizada para realizar a simulação dinâmica inversa, visto que, se conhecido o movimento do sistema, podem ser obtidos os esforços dos atuadores. Porém, como em geral não há o interesse de se obter as forças reativas aplicadas ao sistema, a presença dos multiplicadores torna a resolução do sistema desnecessariamente custosa. Sendo assim, vamos eliminar os multiplicadores da equação dinâmica, o que possibilitará realizar uma simulação dinâmica inversa muito menos custosa e também possibilitará realizar a simulação dinâmica direta.
 
 
-Sendo assim, pré-multiplicando \eqref{eq:eq_dinamicas_2} à esquerda por $\mC^\msT$, temos:
+Sendo assim, substituindo \eqref{eq:dpidpisshSeriais} em \eqref{eq:PdASeriais2}, temos:
+\begin{equation}
+\delta {\mpi\ssh}^\msT \cdot \mC^\msT \mf = \mzr
+\end{equation}
+
+Tendo em vista que as quasi-coordenadas $\mpi\ssh$ são independentes, as variações $\delta\mpi\ssh$ são arbitrárias. Sendo assim, as equações dinâmicas do sistema são dadas por: 
+
 \begin{empheq}[box=\mybluebox]{equation} \label{eq:eq_dinamicas_3}
 \mC^\msT \mf = \mzr
 \end{empheq}
 
-Esta operação é equivalente a projetar as equações dinâmicas no núcleo de $\mA$, o que elimina os multiplicadores de Lagrange $\mlambda$, visto que o núcleo de $\mA$ é complemento ortogonal da imagem de $\mA^\msT$.
-
-
-
-Substituindo \eqref{eq:MatrizC_seriais}, \eqref{eq:fSeriais} e \eqref{eq:fssh_u}  em \eqref{eq:eq_dinamicas_3}, temos:
-\begin{empheq}[box=\mybluebox]{equation} \label{eq:u_Jtfcir}
+Substituindo \eqref{eq:MatrizC_seriais} e \eqref{eq:fSeriais}  em \eqref{eq:eq_dinamicas_3}, temos:
+\begin{equation} \label{eq:u_Jtfcir}
 \mu + \mJ^\msT \mf\cir = \mzr
-\end{empheq}
+\end{equation}
 
 
 Substituindo \eqref{eq:J}, \eqref{eq:J_i}, \eqref{eq:f_i} e \eqref{eq:fcir} em \eqref{eq:u_Jtfcir}, temos:
@@ -2792,7 +2795,7 @@ Sendo:
 
 \item[iii)] Acoplamento de subsistemas
 
-Seja $\mf$ a matriz-coluna contendo todos os sistemas de forças ativas generalizadas:
+Seja $\mf$ a matriz-coluna contendo todos os sistemas de forças não-reativas generalizadas:
 \begin{equation} \label{eq:fParalelos}
 \mf = 
 \begin{bmatrix}
