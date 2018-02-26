@@ -17,8 +17,7 @@ public:
     uint dof;
     Dy *dy;
     vec q0_;
-    vec q1_;
-};
+    vec q1_; };
 
 class Serial:public Mecanismo {
 public:
@@ -30,6 +29,7 @@ public:
     vec lg_;
     vec m_;
     cube I__;
+    cube Ig__;
     vec g_;
     cube Hr__;
     cube H__;
@@ -45,15 +45,19 @@ public:
     vec vh_;
     vec gh_;
     //Dy *dy;
-    cube w_rel__;
-    cube w_arr__;
-    cube dw_co__;
-    cube dw_co2__;
-    cube a_cen__;
-    cube a_cor__;
+    cube v__;
+    cube V__;
+    cube w__;
+    cube W__;
+    //cube w_rel__;
+    //cube w_arr__;
+    //cube dw_co2__;
+    //cube a_cen__;
+    //cube a_cor__;
     cube a_co__;
-    vec dw_co_n_;
+    cube dw_co__;
     vec a_co_n_;
+    vec dw_co_n_;
     mat (*fDH)(vec, vec, vec); };
 
 #endif

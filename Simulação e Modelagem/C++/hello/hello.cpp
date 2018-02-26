@@ -156,6 +156,12 @@ int main(void){
     //cout << fMh_.n_cols << endl;
     cout << endl << "Mh_ = " << endl <<interpolacao_2D_mat(-0.05, 0.20, xi, yi, xf, yf, fMh_) << endl;
 
+    cube CUBO; CUBO.zeros(3,3,3);
+    vec VET1 = CUBO(span(0,2), span(0,0), span(0,0));
+    vec VET2 = CUBO.slice(0)(span(0,2), span(0,0) );
+    cout << cross(  CUBO.slice(0)(span(0,2), span(0,0) ) ,CUBO.slice(0)(span(0,2), span(0,0) )) << endl;
+    cout << VET2 << endl;
+
 
     return 0;
 }
