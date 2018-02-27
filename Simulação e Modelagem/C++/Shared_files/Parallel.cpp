@@ -41,7 +41,7 @@ void Parallel::Construct(uint dof, Mecanismo *P, Serial **R_, uint nR_, Col<uint
 
     q0__      = new vec* [nR_]; for(uint i = 0; i<nR_; i++)      q0__[i] = &(R_[i]->q0_);
     q1__      = new vec* [nR_]; for(uint i = 0; i<nR_; i++)      q1__[i] = &(R_[i]->q1_);
-    o__       = new mat* [nR_]; for(uint i = 0; i<nR_; i++)       o__[i] = &(R_[i]->o__.slice(R_[i]->dof));
+    o__       = new vec* [nR_]; for(uint i = 0; i<nR_; i++)       o__[i] = &(R_[i]->x_);
     Jv_n__    = new mat* [nR_]; for(uint i = 0; i<nR_; i++)    Jv_n__[i] = &(R_[i]->Jv_n_);
     Jw_n__    = new mat* [nR_]; for(uint i = 0; i<nR_; i++)    Jw_n__[i] = &(R_[i]->Jw_n_);
     a_co_n__  = new vec* [nR_]; for(uint i = 0; i<nR_; i++)  a_co_n__[i] = &(R_[i]->a_co_n_);

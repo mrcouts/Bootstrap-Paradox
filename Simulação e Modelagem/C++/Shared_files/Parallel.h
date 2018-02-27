@@ -22,7 +22,7 @@ public:
     mat **M__;
     vec **v__;
     vec **g__;
-    mat **o__;
+    vec **o__;
     mat **Jv_n__;
     mat **Jw_n__;
     vec **a_co_n__;
