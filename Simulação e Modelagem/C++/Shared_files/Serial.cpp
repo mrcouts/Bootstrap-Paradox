@@ -102,24 +102,24 @@ Dy* Serial::Doit(vec q0_, vec q1_){
 	x_ = o__.col(dof);
 
 	//CALCULO DOS JACOBIANOS
-	for(uint i = 0; i<dof; i++)
+	Jw_n_.zeros();
+	for(uint i = 0; i<dof; i++){
+		if(H(i,7)==true){
+			Jv_n_.col(i) = cross(z__.col(i), o__.col(dof) - o__.col(i));
+			Jw_n_.col(i) = z__.col(i);}
+		else
+			Jv_n_.col(i) = z__.col(i);
+		Jw__.slice(i) = Jw_n_;
 		for(uint j = 0; j<=i; j++){
-			if(H(j,7)==true){
+			if(H(j,7)==true)
 				Jv__.slice(i).col(j) = cross(z__.col(j), og__.col(i) - o__.col(j));
-				Jw__.slice(i).col(j) = z__.col(j);}
 			else
-				Jv__.slice(i).col(j) = z__.col(j);}
-
-	for(uint i = 0; i<dof; i++)
-		if(H(i,7)==true) Jv_n_.col(i) = cross(z__.col(i), o__.col(dof) - o__.col(i));
-		else             Jv_n_.col(i) = z__.col(i);
-	Jw_n_ = Jw__.slice(dof-1);
-
+				Jv__.slice(i).col(j) = z__.col(j);}}
+		
 	//CINEMATICA DE VELOCIDADES
 	for(uint i = dof; i>=1; i--){
 		v__.col(i-1) = v__.col(i) + Jv_n_.col(i-1)*q0_(i-1);
-		w__.col(i-1) = w__.col(i) + Jw_n_.col(i-1)*q0_(i-1);
-	}
+		w__.col(i-1) = w__.col(i) + Jw_n_.col(i-1)*q0_(i-1);}
 
 	for(uint i = 0; i<dof; i++)
 		for(int j = i; j>=1; j--)
