@@ -72,6 +72,15 @@ mat interpolacao_2D_mat(double x, double y,  double x0, double y0, double xf, do
     else return 0;
 }
 
+mat CrossMat(vec x)
+{
+    mat M;
+    M << 0     << -x(2) <<  x(1) << endr
+      << x(2)  << 0     << -x(0) << endr
+      << -x(1) << x(0)  <<  0 << endr;
+    return M;
+}
+
 int main(void){
 	//cout << "Hello! This is a C++ program." << endl;
     mat A; A.zeros(2,2);
@@ -134,6 +143,7 @@ int main(void){
     //cout << sin(xis*ypi) << endl;
     */
 
+    /*
     //Plotar área de trabalho
     uint nx = 96.0;
     uint ny = 56.0;
@@ -155,12 +165,13 @@ int main(void){
     //cout << fMh_.n_rows << endl;
     //cout << fMh_.n_cols << endl;
     cout << endl << "Mh_ = " << endl <<interpolacao_2D_mat(-0.05, 0.20, xi, yi, xf, yf, fMh_) << endl;
+    */
 
-    cube CUBO; CUBO.zeros(3,3,3);
-    vec VET1 = CUBO(span(0,2), span(0,0), span(0,0));
-    vec VET2 = CUBO.slice(0)(span(0,2), span(0,0) );
-    cout << cross(  CUBO.slice(0)(span(0,2), span(0,0) ) ,CUBO.slice(0)(span(0,2), span(0,0) )) << endl;
-    cout << VET2 << endl;
+    vec vetor = {1,2,3};
+    vec vetor2 = {4,5,6};
+    cout << CrossMat(vetor) << endl;
+    cout << CrossMat(vetor)*vetor2 << endl;
+    cout << cross(vetor,vetor2)  << endl;
 
 
     return 0;

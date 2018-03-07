@@ -95,3 +95,12 @@ mat join_vert(mat v, uint n){
         aux = join_vert(aux, v);
     return aux;
 }
+
+mat CrossMat(vec x)
+{
+    mat M;
+    M << 0     << -x(2) <<  x(1) << endr
+      << x(2)  << 0     << -x(0) << endr
+      << -x(1) << x(0)  <<  0 << endr;
+    return M;
+}

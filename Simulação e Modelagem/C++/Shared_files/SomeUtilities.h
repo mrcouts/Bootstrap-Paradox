@@ -25,5 +25,6 @@ mat join_vert(mat **lista, uint n);
 mat join_diag(mat **lista, uint n);
 vec join_vert(vec v, uint n);
 mat join_vert(mat v, uint n);
+mat CrossMat(vec x);
 
 #endif
