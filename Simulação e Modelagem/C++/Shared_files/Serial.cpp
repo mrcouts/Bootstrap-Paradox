@@ -19,6 +19,43 @@ Dy* Mecanismo::Doit(vec q0_, vec q1_){
 	return dy;
 }
 
+CorpoRigido::CorpoRigido(double m, mat33 I_, vec3 g_){
+	dof = 6;
+	dy = new Dy(6);
+	this->m = m;
+	this->I_ = I_;
+	this->g_ = g_;
+}
+
+CorpoRigido::~CorpoRigido(){
+	delete dy;
+}
+
+Dy* CorpoRigido::Doit(vec7 q_, vec6 p_){
+	x_ = q_.subvec(0,2);
+	qu_ = q_.subvec(3,6);
+	qu_ = qu_/norm(qu_);
+	this->q_ = join_vert(x_,qu_);
+	this->p_ = p_;
+
+	Ce_ << qu_(3) << qu_(2) << -qu_(1) << endr
+       << -qu_(2) << qu_(3) << qu_(0) << endr
+       << -qu_(1) << -qu_(0) << qu_(3) << endr
+       << -qu_(0) << -qu_(1) << qu_(2) << endr;
+
+    dq_p_ = join_diag( eye(3,3), 0.5*Ce_ );
+    p_dq_ = join_diag( eye(3,3), 0.5*Ce_.t() );
+
+    R_ <<  1 - qu_(1)*qu_(1) - qu_(2)*qu_(2)  << 2*(qu_(0)*qu_(1) - qu_(2)*qu_(3)) << 2*(qu_(0)*qu_(2) + qu_(1)*qu_(3)) << endr
+       <<  2*(qu_(0)*qu_(1) + qu_(2)*qu_(3))  << 1 - qu_(0)*qu_(0) - qu_(2)*qu_(2) << 2*(qu_(1)*qu_(2) - qu_(0)*qu_(3)) << endr
+       << -sin(theta) << 0 << cos(theta) << endr;
+
+
+
+
+	return dy;
+}
+
 Serial::Serial(int dof, vec l_, vec lg_, vec m_, cube I__, vec g_, mat (*fDH)(vec, vec, vec)):Mecanismo(dof){
 	this->l_ = l_;
 	this->lg_= lg_;
