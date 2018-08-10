@@ -36,22 +36,27 @@ Dy* CorpoRigido::Doit(vec7 q_, vec6 p_){
 	qu_ = q_.subvec(3,6);
 	qu_ = qu_/norm(qu_);
 	this->q_ = join_vert(x_,qu_);
+
+	v_ = p_.subvec(0,2);
+	w_ = p_.subvec(3,5);
 	this->p_ = p_;
 
-	Ce_ << qu_(3) << qu_(2) << -qu_(1) << endr
-       << -qu_(2) << qu_(3) << qu_(0) << endr
-       << -qu_(1) << -qu_(0) << qu_(3) << endr
-       << -qu_(0) << -qu_(1) << qu_(2) << endr;
+	Ce_ << -qu_(1) << -qu_(2) << -qu_(3) << endr
+       <<   qu_(0) <<  qu_(3) << -qu_(2) << endr
+       <<  -qu_(3) <<  qu_(0) <<  qu_(1) << endr
+       <<   qu_(2) << -qu_(1) <<  qu_(0) << endr;
 
     dq_p_ = join_diag( eye(3,3), 0.5*Ce_ );
-    p_dq_ = join_diag( eye(3,3), 0.5*Ce_.t() );
+    p_dq_ = join_diag( eye(3,3), 2*Ce_.t() );
 
-    R_ <<  1 - qu_(1)*qu_(1) - qu_(2)*qu_(2)  << 2*(qu_(0)*qu_(1) - qu_(2)*qu_(3)) << 2*(qu_(0)*qu_(2) + qu_(1)*qu_(3)) << endr
-       <<  2*(qu_(0)*qu_(1) + qu_(2)*qu_(3))  << 1 - qu_(0)*qu_(0) - qu_(2)*qu_(2) << 2*(qu_(1)*qu_(2) - qu_(0)*qu_(3)) << endr
-       << -sin(theta) << 0 << cos(theta) << endr;
+    R_ << 1 - 2*(qu_(2)*qu_(2) + qu_(3)*qu_(3))  <<     2*(qu_(1)*qu_(2) - qu_(3)*qu_(0)) <<     2*(qu_(1)*qu_(3) + qu_(2)*qu_(0)) << endr
+       <<     2*(qu_(1)*qu_(2) + qu_(3)*qu_(0))  << 1 - 2*(qu_(1)*qu_(1) + qu_(3)*qu_(3)) <<     2*(qu_(2)*qu_(3) - qu_(1)*qu_(0)) << endr
+       <<     2*(qu_(1)*qu_(3) - qu_(2)*qu_(0))  <<     2*(qu_(1)*qu_(0) + qu_(2)*qu_(3)) << 1 - 2*(qu_(1)*qu_(1) + qu_(2)*qu_(2)) << endr;
 
-
-
+    Ig_ = R_*I_*R_.t();
+   	dy->Mh_ = join_diag( m*eye(3,3), Ig_ );
+   	dy->vh_ = join_vert( zeros(3,1), cross(w_, Ig_*w_) );
+   	dy->gh_ = join_vert(-m*g_, zeros(3,1));
 
 	return dy;
 }

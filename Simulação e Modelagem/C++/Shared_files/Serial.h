@@ -19,9 +19,10 @@ public:
     vec q0_;
     vec q1_; };
 
+
 class CorpoRigido{
 public:
-    CorpoRigido(double m, mat I_, vec g_);
+    CorpoRigido(double m, mat33 I_, vec3 g_);
     ~CorpoRigido();
     Dy* Doit(vec7 q_, vec6 p_);
 
@@ -39,6 +40,9 @@ public:
     vec3 x_;
     vec4 qu_;
     vec7 q_;
+
+    vec3 v_;
+    vec3 w_;
     vec6 p_;
 
     //Matriz de rotacao    
@@ -48,14 +52,11 @@ public:
     mat33 Ig_;
 
     //Relacoes entre p e dq
-    mat43 Ce_;
-    mat76 dq_p_;
-    mat67 p_dq_;
+    mat::fixed<4,3> Ce_;
+    mat::fixed<7,6> dq_p_;
+    mat::fixed<6,7> p_dq_;
 
     //Matrizes relativas a dinamica
-    mat66 Mh_;
-    vec6 vh_;
-    vec6 gh_;
     Dy *dy;
 
 };
