@@ -19,6 +19,14 @@ RK::RK(string method, GNR *gnr){
 	this->SetMethod(method);
 }
 
+RK::RK(string method, Serial *R, FLControlLaw *FL, int nh){
+	caso = 4;
+	this->R = R;
+	this->FL = FL;
+	this->nh = nh;
+	this->SetMethod(method);
+}
+
 void RK::SetMethod(string method){
 	if(method == "Heun"){
 		N = 2;
@@ -165,6 +173,7 @@ void RK::Doit(double h, double tf, vec y0_){
 	u__.zeros(y0_.n_rows/2, 1, nt+1);
 	y__.slice(0) = y0_;
 	k__.zeros(y0_.n_rows, 1, N);
+	counter = 0;
 
 	vec aux_; aux_ = zeros(y0_.n_rows);
 	for(int i = 0; i<nt; i++){
@@ -178,6 +187,17 @@ void RK::Doit(double h, double tf, vec y0_){
 		        k__.slice(0) = F2(0);
 		        break;
 		    case 3: k__.slice(0) = gnr->g_(y__.slice(i)); break;
+		    case 4:
+		    	if(counter == 0){
+		    		k__.slice(0) = R->f_(y__.slice(i), FL->Doit(t_(i), y__(span(0,R->dof-1),span(0,0),span(i,i)), y__(span(R->dof,2*R->dof-1),span(0,0),span(i,i)) ) );
+		    		counter = nh - 1;
+		    	}
+		    	else{
+		    		k__.slice(0) = R->f_(y__.slice(i), R->u_ );
+		    		counter--;
+		    	}
+		    	for(uint j = 0; j< R->dof; j++) u__(j,0,i) = R->u_(j);
+		    	break;
 		}
 		for(int j = 1; j<N; j++){
 			aux_.zeros();
@@ -187,6 +207,7 @@ void RK::Doit(double h, double tf, vec y0_){
 		        case 1: k__.slice(j) = f_(t_(i) + c_(j-1)*h, y__.slice(i) + h*aux_); break;
 		        case 2: k__.slice(j) = AC->f_(t_(i) + c_(j-1)*h, y__.slice(i) + h*aux_); break;
 		        case 3: k__.slice(j) = gnr->g_(y__.slice(i) + h*aux_); break;
+		        case 4: k__.slice(j) = R->f_(y__.slice(i) + h*aux_, R->u_); break;
 		    }
 		aux_.zeros();
 		for(int i = 0; i<N; i++)
@@ -198,5 +219,9 @@ void RK::Doit(double h, double tf, vec y0_){
 		vec aux2_ = AC->f2_(t_(nt),y__.slice(nt))(1);
 		for(uint j = 0; j< aux2_.n_rows; j++) u__(j,0,nt) = aux2_(j);
 		//u__.slice(nt) = AC->f2_(t_(nt),y__.slice(nt))(1);
+	}
+	if(caso == 4){
+		vec aux2_ = R->f_(y__.slice(nt), FL->Doit(t_(nt), y__(span(0,R->dof-1),span(0,0),span(nt,nt)), y__(span(R->dof,2*R->dof-1),span(0,0),span(nt,nt)) ) );
+		for(uint j = 0; j< R->dof; j++) u__(j,0,nt) = R->u_(j);
 	}
 }

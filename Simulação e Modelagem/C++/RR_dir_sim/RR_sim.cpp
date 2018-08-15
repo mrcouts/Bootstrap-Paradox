@@ -49,10 +49,12 @@ int main(void){
     //v = AC.f_(0, join_vert(r_(0.1), dr_(0.1)) );
     //cout << v << endl;
 
-    RK rk = RK("RK8", &AC);
-    rk.Doit(0.001, 10.0, join_vert(r_(0.0), dr_(0.0)) );
+    RK rk = RK("RK8", &RR, &FL, 10);
+    rk.Doit(0.0001, 5.0, join_vert(r_(0.0), dr_(0.0)) );
     for(uint i = 0; i< rk.t_.n_rows; i++)
-        cout << rk.t_(i) << "; " << rk.u__(0,0,i)  << "; " << rk.u__(1,0,i) << "; " << endl;
+        //cout << rk.t_(i) << "; " << rk.u__(0,0,i)  << "; " << rk.u__(1,0,i) << "; " << endl;
         //cout << rk.t_(i) << "; " << r_(rk.t_(i))(1) - rk.y__(1,0,i)  << "; " << dr_(rk.t_(i))(1) - rk.y__(3,0,i) << "; " << endl;
+        //cout << rk.t_(i) << "; " << r_(rk.t_(i))(0) - rk.y__(0,0,i)  << "; " << r_(rk.t_(i))(1) - rk.y__(1,0,i) << "; " << endl;
+        cout << rk.t_(i) << "; " << rk.y__(0,0,i)  << "; " << rk.y__(1,0,i) << "; " << endl;
 
     return 0; }

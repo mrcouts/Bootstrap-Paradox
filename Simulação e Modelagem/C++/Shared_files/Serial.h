@@ -66,7 +66,10 @@ public:
     Serial(int dof, vec l_, vec lg_, vec m_, cube I__, vec g_, mat (*fDH)(vec, vec, vec));
     ~Serial();
     Dy* Doit(vec q0_, vec q1_);
+    vec Acc(vec q0_, vec q1_, vec u_);
+    vec f_(vec y_, vec u_);
 
+    vec u_;
     vec l_;
     vec lg_;
     vec m_;

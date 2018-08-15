@@ -68,6 +68,7 @@ Serial::Serial(int dof, vec l_, vec lg_, vec m_, cube I__, vec g_, mat (*fDH)(ve
 	this->I__= I__;
 	this->g_ = g_;
 	this->fDH = fDH;
+	u_.zeros(dof);
 	Ig__.zeros(3,3,dof);
 	Hr__.zeros(4,4,dof);
 	H__.zeros(4,4,dof);
@@ -96,7 +97,8 @@ Serial::Serial(int dof, vec l_, vec lg_, vec m_, cube I__, vec g_, mat (*fDH)(ve
 }
 
 Serial::~Serial(){
-	l_.clear() ;
+	u_.clear();
+	l_.clear();
 	lg_.clear();
 	Ig__.clear();
 	Hr__.clear();
@@ -200,4 +202,14 @@ Dy* Serial::Doit(vec q0_, vec q1_){
 	ogr_.clear();
 
 	return dy;
+}
+
+vec Serial::Acc(vec q0_, vec q1_, vec u_){
+	this->u_ = u_;
+	this->Doit(q0_, q1_);
+	return solve(dy->Mh_, u_ - dy->vh_ - dy->gh_);
+}
+
+vec Serial::f_(vec y_, vec u_){
+	return join_vert(y_(span(dof,2*dof-1)), this->Acc(y_(span(0,dof-1)),y_(span(dof,2*dof-1)),u_));
 }
