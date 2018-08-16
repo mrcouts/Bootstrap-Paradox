@@ -12,6 +12,41 @@
 using namespace std;
 using namespace arma;
 
+class ControlLaw {
+public:
+    ControlLaw(uint dof, double lambda, vec (*r_)(double), vec (*dr_)(double), vec (*d2r_)(double), Serial *R);
+    ControlLaw(uint dof, double lambda, vec (*r_)(double), vec (*dr_)(double), vec (*d2r_)(double), Parallel *R2);
+    ControlLaw(uint dof, double lambda, vec (*r_)(double), vec (*dr_)(double), vec (*d2r_)(double), Dy* (*dy_comp)(vec, vec));
+    ControlLaw(uint dof, double lambda, Reference *RefObj, Serial *R);
+    ControlLaw(uint dof, double lambda, Reference *RefObj, Parallel *R2);
+    ControlLaw(uint dof, double lambda, Reference *RefObj, Dy* (*dy_comp)(vec, vec));
+
+    ControlLaw(uint dof, double lambda, double K, double phi, vec (*r_)(double), vec (*dr_)(double), vec (*d2r_)(double), Serial *R);
+    ControlLaw(uint dof, double lambda, double K, double phi, vec (*r_)(double), vec (*dr_)(double), vec (*d2r_)(double), Parallel *R2);
+    ControlLaw(uint dof, double lambda, double K, double phi, vec (*r_)(double), vec (*dr_)(double), vec (*d2r_)(double), Dy* (*dy_comp)(vec, vec));
+    ControlLaw(uint dof, double lambda, double K, double phi, Reference *RefObj, Serial *R);
+    ControlLaw(uint dof, double lambda, double K, double phi, Reference *RefObj, Parallel *R2);
+    ControlLaw(uint dof, double lambda, double K, double phi, Reference *RefObj, Dy* (*dy_comp)(vec, vec));
+
+    ~ControlLaw();
+    vec Doit(double t, vec q0_, vec q1_);
+
+    uint dof;
+    double lambda;
+    double K;
+    double phi;
+    vec (*r_)(double);
+    vec (*dr_)(double);
+    vec (*d2r_)(double);
+    Serial *R;
+    Parallel *R2;
+    Dy* (*dy_comp)(vec, vec);
+    int caso;
+    bool smc;
+    Reference *RefObj;
+    bool RefObjFlag;
+};
+
 class FLControlLaw {
 public:
     FLControlLaw(uint dof, double Kp, double Kv, vec (*r_)(double), vec (*dr_)(double), vec (*d2r_)(double), Serial *R);

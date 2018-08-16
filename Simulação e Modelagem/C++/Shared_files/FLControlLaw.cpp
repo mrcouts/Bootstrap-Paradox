@@ -1,5 +1,198 @@
 #include "FLControlLaw.h"
 
+ControlLaw::ControlLaw(uint dof, double lambda, vec (*r_)(double), vec (*dr_)(double), vec (*d2r_)(double), Serial *R){
+	this->dof = dof;
+	this->lambda = lambda;
+	this->r_ = r_;
+	this->dr_ = dr_;
+	this->d2r_ = d2r_;
+	this->R = R;
+	caso = 1;
+	smc = false;
+	RefObjFlag = false;
+}
+
+ControlLaw::ControlLaw(uint dof, double lambda, vec (*r_)(double), vec (*dr_)(double), vec (*d2r_)(double), Dy* (*dy_comp)(vec, vec)){
+	this->dof = dof;
+	this->lambda = lambda;
+	this->r_ = r_;
+	this->dr_ = dr_;
+	this->d2r_ = d2r_;
+	this->dy_comp = dy_comp;
+	caso = 2;
+	smc = false;
+	RefObjFlag = false;
+}
+
+ControlLaw::ControlLaw(uint dof, double lambda, vec (*r_)(double), vec (*dr_)(double), vec (*d2r_)(double), Parallel *R2){
+	this->dof = dof;
+	this->lambda = lambda;
+	this->r_ = r_;
+	this->dr_ = dr_;
+	this->d2r_ = d2r_;
+	this->R2 = R2;
+	caso = 3;
+	smc = false;
+	RefObjFlag = false;
+}
+
+ControlLaw::ControlLaw(uint dof, double lambda, Reference *RefObj, Serial *R){
+	this->dof = dof;
+	this->lambda = lambda;
+	this->RefObj = RefObj;
+	this->R = R;
+	caso = 1;
+	smc = false;
+	RefObjFlag = true;
+}
+
+ControlLaw::ControlLaw(uint dof, double lambda, Reference *RefObj, Dy* (*dy_comp)(vec, vec)){
+	this->dof = dof;
+	this->lambda = lambda;
+	this->RefObj = RefObj;
+	this->dy_comp = dy_comp;
+	caso = 2;
+	smc = false;
+	RefObjFlag = true;
+}
+
+ControlLaw::ControlLaw(uint dof, double lambda, Reference *RefObj, Parallel *R2){
+	this->dof = dof;
+	this->lambda = lambda;
+	this->RefObj = RefObj;
+	this->R2 = R2;
+	caso = 3;
+	smc = false;
+	RefObjFlag = true;
+}
+
+ControlLaw::ControlLaw(uint dof, double lambda, double K, double phi, vec (*r_)(double), vec (*dr_)(double), vec (*d2r_)(double), Serial *R){
+	this->dof = dof;
+	this->lambda = lambda;
+	this->K = K;
+	this->phi = phi;
+	this->r_ = r_;
+	this->dr_ = dr_;
+	this->d2r_ = d2r_;
+	this->R = R;
+	caso = 1;
+	smc = true;
+	RefObjFlag = false;
+}
+
+ControlLaw::ControlLaw(uint dof, double lambda, double K, double phi, vec (*r_)(double), vec (*dr_)(double), vec (*d2r_)(double), Dy* (*dy_comp)(vec, vec)){
+	this->dof = dof;
+	this->lambda = lambda;
+	this->K = K;
+	this->phi = phi;
+	this->r_ = r_;
+	this->dr_ = dr_;
+	this->d2r_ = d2r_;
+	this->dy_comp = dy_comp;
+	caso = 2;
+	smc = true;
+	RefObjFlag = false;
+}
+
+ControlLaw::ControlLaw(uint dof, double lambda, double K, double phi, vec (*r_)(double), vec (*dr_)(double), vec (*d2r_)(double), Parallel *R2){
+	this->dof = dof;
+	this->lambda = lambda;
+	this->K = K;
+	this->phi = phi;
+	this->r_ = r_;
+	this->dr_ = dr_;
+	this->d2r_ = d2r_;
+	this->R2 = R2;
+	caso = 3;
+	smc = true;
+	RefObjFlag = false;
+}
+
+ControlLaw::ControlLaw(uint dof, double lambda, double K, double phi, Reference *RefObj, Serial *R){
+	this->dof = dof;
+	this->lambda = lambda;
+	this->K = K;
+	this->phi = phi;
+	this->RefObj = RefObj;
+	this->R = R;
+	caso = 1;
+	smc = true;
+	RefObjFlag = true;
+}
+
+ControlLaw::ControlLaw(uint dof, double lambda, double K, double phi, Reference *RefObj, Dy* (*dy_comp)(vec, vec)){
+	this->dof = dof;
+	this->lambda = lambda;
+	this->K = K;
+	this->phi = phi;
+	this->RefObj = RefObj;
+	this->dy_comp = dy_comp;
+	caso = 2;
+	smc = true;
+	RefObjFlag = true;
+}
+
+ControlLaw::ControlLaw(uint dof, double lambda, double K, double phi, Reference *RefObj, Parallel *R2){
+	this->dof = dof;
+	this->lambda = lambda;
+	this->K = K;
+	this->phi = phi;
+	this->RefObj = RefObj;
+	this->R2 = R2;
+	caso = 3;
+	smc = true;
+	RefObjFlag = true;
+}
+
+ControlLaw::~ControlLaw(){}
+
+vec ControlLaw::Doit(double t, vec q0_, vec q1_){
+	Dy *dy;
+
+	if(smc)	{
+		if(RefObjFlag){
+			RefObj->Doit(t);
+				switch (caso){
+				case 1: dy = R->Doit(q0_, q1_); break;
+				case 2: dy = dy_comp(q0_, q1_); break;
+				case 3: dy = R2->Doit(q0_, q1_);
+				        return dy->vh_ + dy->gh_ + dy->Mh_*(RefObj->d2r_ + lambda*(RefObj->dr_ - R2->P->q1_ ) + K*tanh(( RefObj->dr_ - R2->P->q1_  + lambda*(RefObj->r_ - R2->P->q0_)  )/phi) );
+			}
+			return             dy->vh_ + dy->gh_ + dy->Mh_*(RefObj->d2r_ + lambda*(RefObj->dr_ - q1_)         + K*tanh(( RefObj->dr_ - q1_         + lambda*(RefObj->r_ - q0_       )  )/phi) );
+		}
+		else{
+			switch (caso){
+				case 1: dy = R->Doit(q0_, q1_); break;
+				case 2: dy = dy_comp(q0_, q1_); break;
+				case 3: dy = R2->Doit(q0_, q1_);
+				        return dy->vh_ + dy->gh_ + dy->Mh_*(d2r_(t) + lambda*(dr_(t) - R2->P->q1_ ) + K*tanh(( dr_(t) - R2->P->q1_ + lambda*(r_(t) - R2->P->q0_)  )/phi) );
+			}
+			return             dy->vh_ + dy->gh_ + dy->Mh_*(d2r_(t) + lambda*(dr_(t) - q1_)         + K*tanh(( dr_(t) - q1_        + lambda*(r_(t) - q0_       )  )/phi) );
+		}
+	}
+	else{
+		if(RefObjFlag){
+			RefObj->Doit(t);
+				switch (caso){
+				case 1: dy = R->Doit(q0_, q1_); break;
+				case 2: dy = dy_comp(q0_, q1_); break;
+				case 3: dy = R2->Doit(q0_, q1_);
+				        return dy->vh_ + dy->gh_ + dy->Mh_*(RefObj->d2r_ + 2*lambda*(RefObj->dr_ - R2->P->q1_ ) + lambda*lambda*(RefObj->r_ - R2->P->q0_  ) );
+			}
+			return             dy->vh_ + dy->gh_ + dy->Mh_*(RefObj->d2r_ + 2*lambda*(RefObj->dr_ - q1_)         + lambda*lambda*(RefObj->r_ - q0_) );
+		}
+		else{
+			switch (caso){
+				case 1: dy = R->Doit(q0_, q1_); break;
+				case 2: dy = dy_comp(q0_, q1_); break;
+				case 3: dy = R2->Doit(q0_, q1_);
+				        return dy->vh_ + dy->gh_ + dy->Mh_*(d2r_(t) + 2*lambda*(dr_(t) - R2->P->q1_ ) + lambda*lambda*(r_(t) - R2->P->q0_  ) );
+			}
+			return dy->vh_ + dy->gh_ + dy->Mh_*(d2r_(t) + 2*lambda*(dr_(t) - q1_) + lambda*lambda*(r_(t) - q0_) );
+		}
+	}
+}
+
 FLControlLaw::FLControlLaw(uint dof, double Kp, double Kv, vec (*r_)(double), vec (*dr_)(double), vec (*d2r_)(double), Serial *R){
 	this->dof = dof;
 	this->Kp = Kp;

@@ -19,10 +19,10 @@ RK::RK(string method, GNR *gnr){
 	this->SetMethod(method);
 }
 
-RK::RK(string method, Serial *R, FLControlLaw *FL, int nh){
+RK::RK(string method, Serial *R, ControlLaw *CL, int nh){
 	caso = 4;
 	this->R = R;
-	this->FL = FL;
+	this->CL = CL;
 	this->nh = nh;
 	this->SetMethod(method);
 }
@@ -189,7 +189,7 @@ void RK::Doit(double h, double tf, vec y0_){
 		    case 3: k__.slice(0) = gnr->g_(y__.slice(i)); break;
 		    case 4:
 		    	if(counter == 0){
-		    		k__.slice(0) = R->f_(y__.slice(i), FL->Doit(t_(i), y__(span(0,R->dof-1),span(0,0),span(i,i)), y__(span(R->dof,2*R->dof-1),span(0,0),span(i,i)) ) );
+		    		k__.slice(0) = R->f_(y__.slice(i), CL->Doit(t_(i), y__(span(0,R->dof-1),span(0,0),span(i,i)), y__(span(R->dof,2*R->dof-1),span(0,0),span(i,i)) ) );
 		    		counter = nh - 1;
 		    	}
 		    	else{
@@ -221,7 +221,7 @@ void RK::Doit(double h, double tf, vec y0_){
 		//u__.slice(nt) = AC->f2_(t_(nt),y__.slice(nt))(1);
 	}
 	if(caso == 4){
-		vec aux2_ = R->f_(y__.slice(nt), FL->Doit(t_(nt), y__(span(0,R->dof-1),span(0,0),span(nt,nt)), y__(span(R->dof,2*R->dof-1),span(0,0),span(nt,nt)) ) );
+		vec aux2_ = R->f_(y__.slice(nt), CL->Doit(t_(nt), y__(span(0,R->dof-1),span(0,0),span(nt,nt)), y__(span(R->dof,2*R->dof-1),span(0,0),span(nt,nt)) ) );
 		for(uint j = 0; j< R->dof; j++) u__(j,0,nt) = R->u_(j);
 	}
 }

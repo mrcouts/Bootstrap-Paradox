@@ -16,7 +16,7 @@ public:
     RK(string method, vec (*f_)(double, vec));
     RK(string method, Acceleration *AC);
     RK(string method, GNR *gnr);
-    RK(string method, Serial *R, FLControlLaw *FL, int nh);
+    RK(string method, Serial *R, ControlLaw *CL, int nh);
     ~RK();
     void Doit(double h, double tf, vec y0_);
 
@@ -28,7 +28,7 @@ public:
     Acceleration *AC;
     GNR *gnr;
     Serial *R;
-    FLControlLaw *FL;
+    ControlLaw *CL;
     int nh;
     int counter;
     int caso;
