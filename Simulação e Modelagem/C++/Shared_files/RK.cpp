@@ -160,6 +160,7 @@ RK::~RK(){
 
 	t_.clear();
 	y__.clear();
+	dy__.clear();
 	u__.clear();
 	k__.clear();
 }
@@ -170,6 +171,7 @@ void RK::Doit(double h, double tf, vec y0_){
 	for(int i = 0; i<nt+1; i++)
 		t_(i) = i*h;
 	y__.zeros(y0_.n_rows, 1, nt+1);
+	dy__.zeros(y0_.n_rows, 1, nt+1);
 	u__.zeros(y0_.n_rows/2, 1, nt+1);
 	y__.slice(0) = y0_;
 	k__.zeros(y0_.n_rows, 1, N);
@@ -189,7 +191,7 @@ void RK::Doit(double h, double tf, vec y0_){
 		    case 3: k__.slice(0) = gnr->g_(y__.slice(i)); break;
 		    case 4:
 		    	if(counter == 0){
-		    		k__.slice(0) = R->f_(y__.slice(i), CL->Doit(t_(i), y__(span(0,R->dof-1),span(0,0),span(i,i)), y__(span(R->dof,2*R->dof-1),span(0,0),span(i,i)) ) );
+		    		k__.slice(0) = R->f_(y__.slice(i), CL->Doit(t_(i), y__(span(0,R->dof-1),span(0,0),span(i,i)), dy__(span(0,R->dof-1),span(0,0),span(i,i)) ) );
 		    		counter = nh - 1;
 		    	}
 		    	else{
@@ -213,6 +215,7 @@ void RK::Doit(double h, double tf, vec y0_){
 		for(int i = 0; i<N; i++)
 			aux_ += b_(i)*k__.slice(i);
 		y__.slice(i+1) = y__.slice(i) + h*aux_; 
+		dy__.slice(i+1) = (y__.slice(i+1) - y__.slice(i))/h ; 
 	    }
 	}
 	if(caso == 2){

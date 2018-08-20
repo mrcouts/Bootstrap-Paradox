@@ -35,6 +35,7 @@ public:
 
     vec t_;
     cube y__;
+    cube dy__;
     cube u__;
 private:
     void SetMethod(string method);
