@@ -5,6 +5,52 @@
 using namespace std;
 using namespace arma;
 
+class Filter {
+public:
+    Filter(int order, int size, vec a_, vec b_);
+    ~Filter();
+    vec Doit(vec u_);
+
+    int order;
+    int size;
+    mat u__;
+    mat y__;
+    vec a_;
+    vec b_;
+};
+
+Filter::Filter(int order, int size, vec a_, vec b_){
+    this->order = order;
+    this->size = size;
+    this->a_.zeros(order+1);
+    this->b_.zeros(order+1);
+    this->a_ = a_;
+    this->b_ = b_;
+    u__.zeros(size,order+1);
+    y__.zeros(size,order+1);
+}
+
+Filter::~Filter(){
+    a_.clear();
+    b_.clear();
+    u__.clear();
+    y__.clear();
+}
+
+vec Filter::Doit(vec u_){
+    u__.col(0) = u_;
+    y__.col(0) = b_(0)*u__.col(0);
+    for(int i = 1; i <= order; i++) y__.col(0)  += b_(i)*u__.col(i) - a_(i)*y__.col(i);
+    y__.col(0) = y__.col(0)/a_(0);
+
+    u__ = shitf(u__,+1);
+    y__ = shitf(u__,+1);
+
+    return y__.col(1);
+}
+
+
+
 double interpolacao(double x, double x0, double xf, vec v)
 {
     int N = v.n_rows;
