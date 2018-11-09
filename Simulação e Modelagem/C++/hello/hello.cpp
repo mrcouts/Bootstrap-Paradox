@@ -22,10 +22,10 @@ public:
 Filter::Filter(int order, int size, vec a_, vec b_){
     this->order = order;
     this->size = size;
-    this->a_.zeros(order+1);
-    this->b_.zeros(order+1);
-    this->a_ = a_;
-    this->b_ = b_;
+    this->a_.ones(order+1);
+    this->b_.ones(order+1);
+    this->a_ = a_/a_(0);
+    this->b_ = b_/a_(0);
     u__.zeros(size,order+1);
     y__.zeros(size,order+1);
 }
@@ -40,13 +40,47 @@ Filter::~Filter(){
 vec Filter::Doit(vec u_){
     u__.col(0) = u_;
     y__.col(0) = b_(0)*u__.col(0);
-    for(int i = 1; i <= order; i++) y__.col(0)  += b_(i)*u__.col(i) - a_(i)*y__.col(i);
-    y__.col(0) = y__.col(0)/a_(0);
+    for(int i = 1; i <= order; i++)
+        y__.col(0)  += b_(i)*u__.col(i) - a_(i)*y__.col(i);
 
-    u__ = shitf(u__,+1);
-    y__ = shitf(u__,+1);
+    
+    for(int i = order; i > 0; i--){
+        u__.col(i) = u__.col(i-1);
+        y__.col(i) = y__.col(i-1);
+    }
 
-    return y__.col(1);
+    //u__ = shitf(u__,+1);
+    //y__ = shitf(u__,+1);
+
+    return y__.col(0);
+}
+
+vec Tustin(int order, double T, double w0, vec as_){
+    vec a_ = zeros(order+1);
+    double c;
+    if (w0 == 0.0) c = 2/T;
+    else c = w0/tan(0.5*w0*T);
+
+    switch(order){
+        case 1:
+            a_(0) = as_(0) + c*as_(1);
+            a_(1) = as_(0) - c*as_(1);
+            break;
+        case 2:
+            a_(0) = as_(0) + c*as_(1) + c*c*as_(2);
+            a_(1) = 2*as_(0) - 2*c*c*as_(2);
+            a_(2) = as_(0) - c*as_(1) + c*c*as_(2);
+            break;
+        case 3:
+            a_(0) = -as_(0) - c*as_(1) - c*c*as_(2) - c*c*c*as_(3);
+            a_(1) = -3*as_(0) - c*as_(1) + c*c*as_(2) + 3*c*c*c*as_(3);
+            a_(2) = -3*as_(0) + c*as_(1) + c*c*as_(2) - 3*c*c*c*as_(3);
+            a_(3) = -as_(0) + c*as_(1) - c*c*as_(2) + c*c*c*as_(3);
+            break;
+    }
+
+
+    return a_;
 }
 
 
@@ -129,10 +163,14 @@ mat CrossMat(vec x)
 
 int main(void){
 	//cout << "Hello! This is a C++ program." << endl;
+
+    /*
     mat A; A.zeros(2,2);
     A << 1 << 2 << endr
       << 3 << 4 << endr;
     vec b = {1, 2};
+    /*
+
     //vec x = solve(A,b);
     /*A.print("A = ");
     b.print("b = ");
@@ -213,11 +251,33 @@ int main(void){
     cout << endl << "Mh_ = " << endl <<interpolacao_2D_mat(-0.05, 0.20, xi, yi, xf, yf, fMh_) << endl;
     */
 
-    vec vetor = {1,2,3};
+    /*vec vetor = {1,2,3};
     vec vetor2 = {4,5,6};
     cout << CrossMat(vetor) << endl;
     cout << CrossMat(vetor)*vetor2 << endl;
     cout << cross(vetor,vetor2)  << endl;
+    */
+
+    //y[k] = -a1*y[k-1] + b0*u[k] + b1*u[k-1]
+
+    int n = 30;
+    int size = 2;
+    mat u__ = ones(2,n);
+    mat y__ = zeros(2,n);
+    vec as_ = {1,2,2,1};
+    vec bs_ = {1,0,0,0};
+    vec a_ = Tustin(3,1.0,0.0,as_);
+    vec b_ = Tustin(3,1.0,0.0,bs_);
+
+    cout << a_ << endl;
+    cout << b_ << endl;
+
+    Filter *F1; F1 = new Filter(3,size,a_,b_);
+    for(int i = 0; i < n; i++){
+        y__.col(i) = F1->Doit(u__.col(i));
+    }
+    cout << y__.t() << endl;
+    cout << F1->u__ << endl;
 
 
     return 0;
