@@ -76,6 +76,13 @@ mat Tustin(double T, double w0, mat ABs_){
             AB_.col(2) = 3*ABs_.col(0) - c*ABs_.col(1) - c*c*ABs_.col(2) + 3*c*c*c*ABs_.col(3);
             AB_.col(3) =   ABs_.col(0) - c*ABs_.col(1) + c*c*ABs_.col(2) -   c*c*c*ABs_.col(3);
             break;
+        case 4:
+            AB_.col(0) =   ABs_.col(0) +   c*ABs_.col(1)  +   c*c*ABs_.col(2) + c*c*c*ABs_.col(3) +   c*c*c*c*ABs_.col(4);
+            AB_.col(1) = 4*ABs_.col(0) + 2*c*ABs_.col(1)                    - 2*c*c*c*ABs_.col(3) - 4*c*c*c*c*ABs_.col(4);
+            AB_.col(2) = 6*ABs_.col(0)                    - 2*c*c*ABs_.col(2)                     + 6*c*c*c*c*ABs_.col(4);
+            AB_.col(3) = 4*ABs_.col(0) - 2*c*ABs_.col(1)                    + 2*c*c*c*ABs_.col(3) - 4*c*c*c*c*ABs_.col(4);
+            AB_.col(4) =   ABs_.col(0) -   c*ABs_.col(1)  +   c*c*ABs_.col(2) - c*c*c*ABs_.col(3) +   c*c*c*c*ABs_.col(4);
+            break;
     }
 
 
@@ -263,10 +270,10 @@ int main(void){
     int size = 2;
     mat u__ = ones(2,n);
     mat y__ = zeros(2,n);
-    vec as_ = {15,26.3351,18.4943,5.41166};
-    vec bs_ = {15,0,0,0};
+    vec as_ = {105,221.961,201.089,94.4635,19.9688};
+    vec bs_ = {105,0,0,0,0};
     mat ABs_ = join_horiz(as_,bs_).t();
-    mat AB_ = Tustin(0.5,0.0,ABs_);
+    mat AB_ = Tustin(0.33,1.0,ABs_);
 
     cout << AB_ << endl;
 
