@@ -83,6 +83,15 @@ mat Tustin(double T, double w0, mat ABs_){
             AB_.col(3) = 4*ABs_.col(0) - 2*c*ABs_.col(1)                    + 2*c*c*c*ABs_.col(3) - 4*c*c*c*c*ABs_.col(4);
             AB_.col(4) =   ABs_.col(0) -   c*ABs_.col(1)  +   c*c*ABs_.col(2) - c*c*c*ABs_.col(3) +   c*c*c*c*ABs_.col(4);
             break;
+        case 5:
+            AB_.col(0) =    ABs_.col(0) +   c*ABs_.col(1)  +   c*c*ABs_.col(2) +   c*c*c*ABs_.col(3) +   c*c*c*c*ABs_.col(4) +    c*c*c*c*c*ABs_.col(5);
+            AB_.col(1) =  5*ABs_.col(0) + 3*c*ABs_.col(1)  +   c*c*ABs_.col(2) -   c*c*c*ABs_.col(3) - 3*c*c*c*c*ABs_.col(4) -  5*c*c*c*c*c*ABs_.col(5);
+            AB_.col(2) = 10*ABs_.col(0) + 2*c*ABs_.col(1)  - 2*c*c*ABs_.col(2) - 2*c*c*c*ABs_.col(3) + 2*c*c*c*c*ABs_.col(4) + 10*c*c*c*c*c*ABs_.col(5);
+            AB_.col(3) = 10*ABs_.col(0) - 2*c*ABs_.col(1)  - 2*c*c*ABs_.col(2) + 2*c*c*c*ABs_.col(3) + 2*c*c*c*c*ABs_.col(4) - 10*c*c*c*c*c*ABs_.col(5);
+            AB_.col(4) =  5*ABs_.col(0) - 3*c*ABs_.col(1)  +   c*c*ABs_.col(2) +   c*c*c*ABs_.col(3) - 3*c*c*c*c*ABs_.col(4) +  5*c*c*c*c*c*ABs_.col(5);
+            AB_.col(5) =    ABs_.col(0) -   c*ABs_.col(1)  +   c*c*ABs_.col(2) -   c*c*c*ABs_.col(3) +   c*c*c*c*ABs_.col(4) -    c*c*c*c*c*ABs_.col(5);
+
+            break;
     }
 
 
@@ -270,10 +279,10 @@ int main(void){
     int size = 2;
     mat u__ = ones(2,n);
     mat y__ = zeros(2,n);
-    vec as_ = {105,221.961,201.089,94.4635,19.9688};
-    vec bs_ = {105,0,0,0,0};
+    vec as_ = {945,2293.9,2474.78,1501.82,520.792,84.2784};
+    vec bs_ = {945,0,0,0,0,0};
     mat ABs_ = join_horiz(as_,bs_).t();
-    mat AB_ = Tustin(0.33,1.0,ABs_);
+    mat AB_ = Tustin(0.5,1.0,ABs_);
 
     cout << AB_ << endl;
 
