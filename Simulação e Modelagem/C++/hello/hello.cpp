@@ -90,12 +90,72 @@ mat Tustin(double T, double w0, mat ABs_){
             AB_.col(3) = 10*ABs_.col(0) - 2*c*ABs_.col(1)  - 2*c*c*ABs_.col(2) + 2*c*c*c*ABs_.col(3) + 2*c*c*c*c*ABs_.col(4) - 10*c*c*c*c*c*ABs_.col(5);
             AB_.col(4) =  5*ABs_.col(0) - 3*c*ABs_.col(1)  +   c*c*ABs_.col(2) +   c*c*c*ABs_.col(3) - 3*c*c*c*c*ABs_.col(4) +  5*c*c*c*c*c*ABs_.col(5);
             AB_.col(5) =    ABs_.col(0) -   c*ABs_.col(1)  +   c*c*ABs_.col(2) -   c*c*c*ABs_.col(3) +   c*c*c*c*ABs_.col(4) -    c*c*c*c*c*ABs_.col(5);
-
             break;
     }
 
 
     return AB_;
+}
+
+mat Bessel(double w, int order){
+	mat ABs_ = ones(2, order+1);
+	switch(order){
+        case 1:
+            ABs_(0,0) = w;
+            ABs_(0,1) = 1.0;
+            ABs_(1,0) = ABs_(0,0);
+            ABs_(1,1) = 0.0;
+            break;
+        case 2:
+            ABs_(0,0) = 1.61803*w*w;
+            ABs_(0,1) = 2.20320*w;
+            ABs_(0,2) = 1.0;
+            ABs_(1,0) = ABs_(0,0);
+            ABs_(1,1) = 0.0;
+            ABs_(1,2) = 0.0;
+            break;
+        case 3:
+            ABs_(0,0) = 2.77179*w*w*w;
+            ABs_(0,1) = 4.86636*w*w;
+            ABs_(0,2) = 3.41749*w;
+            ABs_(0,3) = 1.0;
+            ABs_(1,0) = ABs_(0,0);
+            ABs_(1,1) = 0.0;
+            ABs_(1,2) = 0.0;
+            ABs_(1,3) = 0.0;
+            break;
+        case 4:
+            ABs_(0,0) = 5.25820*w*w*w*w;
+            ABs_(0,1) = 11.1154*w*w*w;
+            ABs_(0,2) = 10.0702*w*w;
+            ABs_(0,3) = 4.73055*w;
+            ABs_(0,4) = 1.0;
+            ABs_(1,0) = ABs_(0,0);
+            ABs_(1,1) = 0.0;
+            ABs_(1,2) = 0.0;
+            ABs_(1,3) = 0.0;
+            ABs_(1,4) = 0.0;
+            break;
+        case 5:
+            ABs_(0,0) = 11.2128*w*w*w*w*w;
+            ABs_(0,1) = 27.2182*w*w*w*w;
+            ABs_(0,2) = 29.3643*w*w*w;
+            ABs_(0,3) = 17.8198*w*w;
+            ABs_(0,4) = 6.17942*w;
+            ABs_(0,5) = 1.0;
+            ABs_(1,0) = ABs_(0,0);
+            ABs_(1,1) = 0.0;
+            ABs_(1,2) = 0.0;
+            ABs_(1,3) = 0.0;
+            ABs_(1,4) = 0.0;
+            ABs_(1,5) = 0.0;
+            break;
+    }
+    return ABs_;
+}
+
+mat Bessel_d(double T, double w, int order){
+	return Tustin(T,w,Bessel(w,order));
 }
 
 
@@ -275,18 +335,17 @@ int main(void){
 
     //y[k] = -a1*y[k-1] + b0*u[k] + b1*u[k-1]
 
-    int n = 30;
-    int size = 2;
-    mat u__ = ones(2,n);
-    mat y__ = zeros(2,n);
-    vec as_ = {945,2293.9,2474.78,1501.82,520.792,84.2784};
-    vec bs_ = {945,0,0,0,0,0};
-    mat ABs_ = join_horiz(as_,bs_).t();
-    mat AB_ = Tustin(0.5,1.0,ABs_);
+    int n = 60;
+    int size = 1;
+    double T = 0.005;
+    double w = 60.0;
+    int order = 5;
+    mat u__ = ones(size,n);
+    mat y__ = zeros(size,n);
 
-    cout << AB_ << endl;
+    cout << Bessel_d(T,w,order) << endl;
 
-    Filter *F1; F1 = new Filter(size,AB_);
+    Filter *F1; F1 = new Filter(size,Bessel_d(T,w,order));
     for(int i = 0; i < n; i++){
         y__.col(i) = F1->Doit(u__.col(i));
     }
