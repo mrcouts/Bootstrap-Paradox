@@ -7,7 +7,7 @@ using namespace arma;
 
 class Filter {
 public:
-    Filter(int order, int size, vec a_, vec b_);
+    Filter(int size, mat AB_);
     ~Filter();
     vec Doit(vec u_);
 
@@ -19,13 +19,11 @@ public:
     vec b_;
 };
 
-Filter::Filter(int order, int size, vec a_, vec b_){
-    this->order = order;
+Filter::Filter(int size, mat AB_){
+    this->order = AB_.n_cols-1;
     this->size = size;
-    this->a_.ones(order+1);
-    this->b_.ones(order+1);
-    this->a_ = a_/a_(0);
-    this->b_ = b_/a_(0);
+    this->a_ = (AB_.row(0)/AB_(0,0)).t();
+    this->b_ = (AB_.row(1)/AB_(0,0)).t();
     u__.zeros(size,order+1);
     y__.zeros(size,order+1);
 }
@@ -55,32 +53,33 @@ vec Filter::Doit(vec u_){
     return y__.col(0);
 }
 
-vec Tustin(int order, double T, double w0, vec as_){
-    vec a_ = zeros(order+1);
+mat Tustin(double T, double w0, mat ABs_){
+    int order = ABs_.n_cols-1;
+    mat AB_ = ABs_;
     double c;
     if (w0 == 0.0) c = 2/T;
     else c = w0/tan(0.5*w0*T);
 
     switch(order){
         case 1:
-            a_(0) = as_(0) + c*as_(1);
-            a_(1) = as_(0) - c*as_(1);
+            AB_.col(0) = ABs_.col(0) + c*ABs_.col(1);
+            AB_.col(1) = ABs_.col(0) - c*ABs_.col(1);
             break;
         case 2:
-            a_(0) = as_(0) + c*as_(1) + c*c*as_(2);
-            a_(1) = 2*as_(0) - 2*c*c*as_(2);
-            a_(2) = as_(0) - c*as_(1) + c*c*as_(2);
+            AB_.col(0) =   ABs_.col(0) + c*ABs_.col(1) + c*c*ABs_.col(2);
+            AB_.col(1) = 2*ABs_.col(0)               - 2*c*c*ABs_.col(2);
+            AB_.col(2) =   ABs_.col(0) - c*ABs_.col(1) + c*c*ABs_.col(2);
             break;
         case 3:
-            a_(0) = -as_(0) - c*as_(1) - c*c*as_(2) - c*c*c*as_(3);
-            a_(1) = -3*as_(0) - c*as_(1) + c*c*as_(2) + 3*c*c*c*as_(3);
-            a_(2) = -3*as_(0) + c*as_(1) + c*c*as_(2) - 3*c*c*c*as_(3);
-            a_(3) = -as_(0) + c*as_(1) - c*c*as_(2) + c*c*c*as_(3);
+            AB_.col(0) =   ABs_.col(0) + c*ABs_.col(1) + c*c*ABs_.col(2) +   c*c*c*ABs_.col(3);
+            AB_.col(1) = 3*ABs_.col(0) + c*ABs_.col(1) - c*c*ABs_.col(2) - 3*c*c*c*ABs_.col(3);
+            AB_.col(2) = 3*ABs_.col(0) - c*ABs_.col(1) - c*c*ABs_.col(2) + 3*c*c*c*ABs_.col(3);
+            AB_.col(3) =   ABs_.col(0) - c*ABs_.col(1) + c*c*ABs_.col(2) -   c*c*c*ABs_.col(3);
             break;
     }
 
 
-    return a_;
+    return AB_;
 }
 
 
@@ -264,15 +263,14 @@ int main(void){
     int size = 2;
     mat u__ = ones(2,n);
     mat y__ = zeros(2,n);
-    vec as_ = {1,2,2,1};
-    vec bs_ = {1,0,0,0};
-    vec a_ = Tustin(3,1.0,0.0,as_);
-    vec b_ = Tustin(3,1.0,0.0,bs_);
+    vec as_ = {15,26.3351,18.4943,5.41166};
+    vec bs_ = {15,0,0,0};
+    mat ABs_ = join_horiz(as_,bs_).t();
+    mat AB_ = Tustin(0.5,0.0,ABs_);
 
-    cout << a_ << endl;
-    cout << b_ << endl;
+    cout << AB_ << endl;
 
-    Filter *F1; F1 = new Filter(3,size,a_,b_);
+    Filter *F1; F1 = new Filter(size,AB_);
     for(int i = 0; i < n; i++){
         y__.col(i) = F1->Doit(u__.col(i));
     }
