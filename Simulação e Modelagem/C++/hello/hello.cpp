@@ -59,6 +59,10 @@ mat Tustin(double T, double w0, mat ABs_){
     double c;
     if (w0 == 0.0) c = 2/T;
     else c = w0/tan(0.5*w0*T);
+    double c2 = c*c;
+    double c3 = c2*c;
+    double c4 = c3*c;
+    double c5 = c4*c;
 
     switch(order){
         case 1:
@@ -66,34 +70,33 @@ mat Tustin(double T, double w0, mat ABs_){
             AB_.col(1) = ABs_.col(0) - c*ABs_.col(1);
             break;
         case 2:
-            AB_.col(0) =   ABs_.col(0) + c*ABs_.col(1) + c*c*ABs_.col(2);
-            AB_.col(1) = 2*ABs_.col(0)               - 2*c*c*ABs_.col(2);
-            AB_.col(2) =   ABs_.col(0) - c*ABs_.col(1) + c*c*ABs_.col(2);
+            AB_.col(0) =   ABs_.col(0) + c*ABs_.col(1) + c2*ABs_.col(2);
+            AB_.col(1) = 2*ABs_.col(0)               - 2*c2*ABs_.col(2);
+            AB_.col(2) =   ABs_.col(0) - c*ABs_.col(1) + c2*ABs_.col(2);
             break;
         case 3:
-            AB_.col(0) =   ABs_.col(0) + c*ABs_.col(1) + c*c*ABs_.col(2) +   c*c*c*ABs_.col(3);
-            AB_.col(1) = 3*ABs_.col(0) + c*ABs_.col(1) - c*c*ABs_.col(2) - 3*c*c*c*ABs_.col(3);
-            AB_.col(2) = 3*ABs_.col(0) - c*ABs_.col(1) - c*c*ABs_.col(2) + 3*c*c*c*ABs_.col(3);
-            AB_.col(3) =   ABs_.col(0) - c*ABs_.col(1) + c*c*ABs_.col(2) -   c*c*c*ABs_.col(3);
+            AB_.col(0) =   ABs_.col(0) + c*ABs_.col(1) + c2*ABs_.col(2) +   c3*ABs_.col(3);
+            AB_.col(1) = 3*ABs_.col(0) + c*ABs_.col(1) - c2*ABs_.col(2) - 3*c3*ABs_.col(3);
+            AB_.col(2) = 3*ABs_.col(0) - c*ABs_.col(1) - c2*ABs_.col(2) + 3*c3*ABs_.col(3);
+            AB_.col(3) =   ABs_.col(0) - c*ABs_.col(1) + c2*ABs_.col(2) -   c3*ABs_.col(3);
             break;
         case 4:
-            AB_.col(0) =   ABs_.col(0) +   c*ABs_.col(1)  +   c*c*ABs_.col(2) + c*c*c*ABs_.col(3) +   c*c*c*c*ABs_.col(4);
-            AB_.col(1) = 4*ABs_.col(0) + 2*c*ABs_.col(1)                    - 2*c*c*c*ABs_.col(3) - 4*c*c*c*c*ABs_.col(4);
-            AB_.col(2) = 6*ABs_.col(0)                    - 2*c*c*ABs_.col(2)                     + 6*c*c*c*c*ABs_.col(4);
-            AB_.col(3) = 4*ABs_.col(0) - 2*c*ABs_.col(1)                    + 2*c*c*c*ABs_.col(3) - 4*c*c*c*c*ABs_.col(4);
-            AB_.col(4) =   ABs_.col(0) -   c*ABs_.col(1)  +   c*c*ABs_.col(2) - c*c*c*ABs_.col(3) +   c*c*c*c*ABs_.col(4);
+            AB_.col(0) =   ABs_.col(0) +   c*ABs_.col(1)  +   c2*ABs_.col(2) + c3*ABs_.col(3) +   c4*ABs_.col(4);
+            AB_.col(1) = 4*ABs_.col(0) + 2*c*ABs_.col(1)                   - 2*c3*ABs_.col(3) - 4*c4*ABs_.col(4);
+            AB_.col(2) = 6*ABs_.col(0)                    - 2*c2*ABs_.col(2)                  + 6*c4*ABs_.col(4);
+            AB_.col(3) = 4*ABs_.col(0) - 2*c*ABs_.col(1)                   + 2*c3*ABs_.col(3) - 4*c4*ABs_.col(4);
+            AB_.col(4) =   ABs_.col(0) -   c*ABs_.col(1)  +   c2*ABs_.col(2) - c3*ABs_.col(3) +   c4*ABs_.col(4);
             break;
         case 5:
-            AB_.col(0) =    ABs_.col(0) +   c*ABs_.col(1)  +   c*c*ABs_.col(2) +   c*c*c*ABs_.col(3) +   c*c*c*c*ABs_.col(4) +    c*c*c*c*c*ABs_.col(5);
-            AB_.col(1) =  5*ABs_.col(0) + 3*c*ABs_.col(1)  +   c*c*ABs_.col(2) -   c*c*c*ABs_.col(3) - 3*c*c*c*c*ABs_.col(4) -  5*c*c*c*c*c*ABs_.col(5);
-            AB_.col(2) = 10*ABs_.col(0) + 2*c*ABs_.col(1)  - 2*c*c*ABs_.col(2) - 2*c*c*c*ABs_.col(3) + 2*c*c*c*c*ABs_.col(4) + 10*c*c*c*c*c*ABs_.col(5);
-            AB_.col(3) = 10*ABs_.col(0) - 2*c*ABs_.col(1)  - 2*c*c*ABs_.col(2) + 2*c*c*c*ABs_.col(3) + 2*c*c*c*c*ABs_.col(4) - 10*c*c*c*c*c*ABs_.col(5);
-            AB_.col(4) =  5*ABs_.col(0) - 3*c*ABs_.col(1)  +   c*c*ABs_.col(2) +   c*c*c*ABs_.col(3) - 3*c*c*c*c*ABs_.col(4) +  5*c*c*c*c*c*ABs_.col(5);
-            AB_.col(5) =    ABs_.col(0) -   c*ABs_.col(1)  +   c*c*ABs_.col(2) -   c*c*c*ABs_.col(3) +   c*c*c*c*ABs_.col(4) -    c*c*c*c*c*ABs_.col(5);
+            AB_.col(0) =    ABs_.col(0) +   c*ABs_.col(1)  +   c2*ABs_.col(2) +   c3*ABs_.col(3) +   c4*ABs_.col(4) +    c5*ABs_.col(5);
+            AB_.col(1) =  5*ABs_.col(0) + 3*c*ABs_.col(1)  +   c2*ABs_.col(2) -   c3*ABs_.col(3) - 3*c4*ABs_.col(4) -  5*c5*ABs_.col(5);
+            AB_.col(2) = 10*ABs_.col(0) + 2*c*ABs_.col(1)  - 2*c2*ABs_.col(2) - 2*c3*ABs_.col(3) + 2*c4*ABs_.col(4) + 10*c5*ABs_.col(5);
+            AB_.col(3) = 10*ABs_.col(0) - 2*c*ABs_.col(1)  - 2*c2*ABs_.col(2) + 2*c3*ABs_.col(3) + 2*c4*ABs_.col(4) - 10*c5*ABs_.col(5);
+            AB_.col(4) =  5*ABs_.col(0) - 3*c*ABs_.col(1)  +   c2*ABs_.col(2) +   c3*ABs_.col(3) - 3*c4*ABs_.col(4) +  5*c5*ABs_.col(5);
+            AB_.col(5) =    ABs_.col(0) -   c*ABs_.col(1)  +   c2*ABs_.col(2) -   c3*ABs_.col(3) +   c4*ABs_.col(4) -    c5*ABs_.col(5);
             break;
     }
-
-
+    AB_ = AB_/AB_(0,0);
     return AB_;
 }
 
@@ -107,7 +110,7 @@ mat Bessel(double w, int order){
             ABs_(1,1) = 0.0;
             break;
         case 2:
-            ABs_(0,0) = 1.61803*w*w;
+            ABs_(0,0) = 1.61803*pow(w,2);
             ABs_(0,1) = 2.20320*w;
             ABs_(0,2) = 1.0;
             ABs_(1,0) = ABs_(0,0);
@@ -115,8 +118,8 @@ mat Bessel(double w, int order){
             ABs_(1,2) = 0.0;
             break;
         case 3:
-            ABs_(0,0) = 2.77179*w*w*w;
-            ABs_(0,1) = 4.86636*w*w;
+            ABs_(0,0) = 2.77179*pow(w,3);
+            ABs_(0,1) = 4.86636*pow(w,2);
             ABs_(0,2) = 3.41749*w;
             ABs_(0,3) = 1.0;
             ABs_(1,0) = ABs_(0,0);
@@ -125,9 +128,9 @@ mat Bessel(double w, int order){
             ABs_(1,3) = 0.0;
             break;
         case 4:
-            ABs_(0,0) = 5.25820*w*w*w*w;
-            ABs_(0,1) = 11.1154*w*w*w;
-            ABs_(0,2) = 10.0702*w*w;
+            ABs_(0,0) = 5.25820*pow(w,4);
+            ABs_(0,1) = 11.1154*pow(w,3);
+            ABs_(0,2) = 10.0702*pow(w,2);
             ABs_(0,3) = 4.73055*w;
             ABs_(0,4) = 1.0;
             ABs_(1,0) = ABs_(0,0);
@@ -137,10 +140,10 @@ mat Bessel(double w, int order){
             ABs_(1,4) = 0.0;
             break;
         case 5:
-            ABs_(0,0) = 11.2128*w*w*w*w*w;
-            ABs_(0,1) = 27.2182*w*w*w*w;
-            ABs_(0,2) = 29.3643*w*w*w;
-            ABs_(0,3) = 17.8198*w*w;
+            ABs_(0,0) = 11.2128*pow(w,5);
+            ABs_(0,1) = 27.2182*pow(w,4);
+            ABs_(0,2) = 29.3643*pow(w,3);
+            ABs_(0,3) = 17.8198*pow(w,2);
             ABs_(0,4) = 6.17942*w;
             ABs_(0,5) = 1.0;
             ABs_(1,0) = ABs_(0,0);
