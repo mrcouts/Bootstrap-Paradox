@@ -157,8 +157,19 @@ mat Bessel(double w, int order){
     return ABs_;
 }
 
+mat dBessel(double w, int order){
+    mat AB_ = Bessel(w,order);
+    AB_(1,1) = AB_(0,0);
+    AB_(1,0) = 0;
+    return AB_;
+}
+
 mat Bessel_d(double T, double w, int order){
 	return Tustin(T,w,Bessel(w,order));
+}
+
+mat dBessel_d(double T, double w, int order){
+    return Tustin(T,w,dBessel(w,order));
 }
 
 
@@ -346,9 +357,9 @@ int main(void){
     mat u__ = ones(size,n);
     mat y__ = zeros(size,n);
 
-    cout << Bessel_d(T,w,order) << endl;
+    cout << dBessel_d(T,w,order) << endl;
 
-    Filter *F1; F1 = new Filter(size,Bessel_d(T,w,order));
+    Filter *F1; F1 = new Filter(size,dBessel_d(T,w,order));
     for(int i = 0; i < n; i++){
         y__.col(i) = F1->Doit(u__.col(i));
     }
