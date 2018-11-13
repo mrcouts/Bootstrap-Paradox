@@ -6,6 +6,7 @@
 #include <string>
 #include "Acceleration.h"
 #include "GNR.h"
+#include "Filter.h"
 
 
 using namespace std;
@@ -37,6 +38,9 @@ public:
     cube y__;
     cube dy__;
     cube u__;
+    cube z__;
+    cube dz__;
+    Filter *Fltr;
 private:
     void SetMethod(string method);
     cube k__;

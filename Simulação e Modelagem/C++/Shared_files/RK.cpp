@@ -161,6 +161,8 @@ RK::~RK(){
 	t_.clear();
 	y__.clear();
 	dy__.clear();
+	z__.clear();
+	dz__.clear();
 	u__.clear();
 	k__.clear();
 }
@@ -177,6 +179,12 @@ void RK::Doit(double h, double tf, vec y0_){
 	k__.zeros(y0_.n_rows, 1, N);
 	counter = 0;
 
+	if(caso == 4){
+		z__.zeros(R->dof, 1, nt+1);
+		dz__.zeros(R->dof, 1, nt+1);
+		Fltr = new Filter(R->dof,dBessel_d(h*nh,5.0*40.0,2));
+	}
+
 	vec aux_; aux_ = zeros(y0_.n_rows);
 	for(int i = 0; i<nt; i++){
 		field<vec> F2(2);
@@ -191,7 +199,9 @@ void RK::Doit(double h, double tf, vec y0_){
 		    case 3: k__.slice(0) = gnr->g_(y__.slice(i)); break;
 		    case 4:
 		    	if(counter == 0){
-		    		k__.slice(0) = R->f_(y__.slice(i), CL->Doit(t_(i), y__(span(0,R->dof-1),span(0,0),span(i,i)), dy__(span(0,R->dof-1),span(0,0),span(i,i)) ) );
+		    		z__.slice(i) = y__(span(0,R->dof-1),span(0,0),span(i,i));
+		    		dz__.slice(i) = Fltr->Doit(z__.slice(i));
+		    		k__.slice(0) = R->f_(y__.slice(i), CL->Doit(t_(i), z__.slice(i), dz__.slice(i) ) );
 		    		counter = nh - 1;
 		    	}
 		    	else{
