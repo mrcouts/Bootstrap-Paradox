@@ -182,7 +182,7 @@ void RK::Doit(double h, double tf, vec y0_){
 	if(caso == 4){
 		z__.zeros(R->dof, 1, nt+1);
 		dz__.zeros(R->dof, 1, nt+1);
-		Fltr = new Filter(R->dof,dBessel_d(h*nh,5.0*40.0,2));
+		Fltr = new Filter(R->dof,dBessel_d(h*nh,5.0*40.0,4));
 	}
 
 	vec aux_; aux_ = zeros(y0_.n_rows);
