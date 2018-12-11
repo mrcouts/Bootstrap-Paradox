@@ -376,32 +376,32 @@ Além disso, vale destacar algumas propriedades básicas do produto vetorial que s
 (\lambda \va) \wedge \vb =  \va \wedge (\lambda \vb) = \lambda (\va \wedge \vb)
 \end{equation}
 
-Também vale destacar a seguinte propriedades do produto vetorial entre 3 vetores:
-\begin{empheq}[box=\almondbox]{equation} \label{eq:prodvet3}
-(\va \wedge \vb) \wedge \vc = \va \wedge \vb \wedge \vc - \vb \wedge \va \wedge \vc
-\end{empheq}
-
-O produto vetorial entre matrizes-coluna 3x1 apresenta a mesma notação, e pode ser representado por um produto de matrizes:
-\begin{empheq}[box=\almondbox]{equation}
-\ma \wedge \mb = \mS(\ma) \cdot \mb
-\end{empheq}
-
-Sendo:
-\begin{equation}
-\mS(\ma) = \begin{bmatrix}
-0 & -a_3 & a_2 \\
-a_3 & 0 & -a_1 \\
--a_2 & a_1 & 0
-\end{bmatrix}
-\end{equation}
-
-\begin{equation}
-\ma = \begin{bmatrix}
-a_1 &
-a_2 &
-a_3
-\end{bmatrix}^\msT
-\end{equation}
+%Também vale destacar a seguinte propriedades do produto vetorial entre 3 vetores:
+%\begin{empheq}[box=\almondbox]{equation} \label{eq:prodvet3}
+%(\va \wedge \vb) \wedge \vc = \va \wedge \vb \wedge \vc - \vb \wedge \va \wedge \vc
+%\end{empheq}
+%
+%O produto vetorial entre matrizes-coluna 3x1 apresenta a mesma notação, e pode ser representado por um produto de matrizes:
+%\begin{empheq}[box=\almondbox]{equation}
+%\ma \wedge \mb = \mS(\ma) \cdot \mb
+%\end{empheq}
+%
+%Sendo:
+%\begin{equation}
+%\mS(\ma) = \begin{bmatrix}
+%0 & -a_3 & a_2 \\
+%a_3 & 0 & -a_1 \\
+%-a_2 & a_1 & 0
+%\end{bmatrix}
+%\end{equation}
+%
+%\begin{equation}
+%\ma = \begin{bmatrix}
+%a_1 &
+%a_2 &
+%a_3
+%\end{bmatrix}^\msT
+%\end{equation}
 
 \subsubsubsection{Derivada temporal de versores}\label{S05-01-01-01}
 
@@ -473,18 +473,18 @@ Substituindo \eqref{eq:Poisson_v} em \eqref{eq:Poisson_a_aux}, obtemos a equação
 \va_\ttp^{\lllA} = \va_\tto^{\lllA} + \dot{\vomega}_{\lllB}^{\lllA} \wedge \vr_{\tto \rl \ttp} + \vomega_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA} \wedge \vr_{\tto \rl \ttp}
 \end{empheq}
 
-\subsubsubsection{Equação de Poisson para sobre-acelerações}\label{S05-01-02-03}
-
-
-Derivando \eqref{eq:Poisson_a} no tempo em relação a $\llA$, temos:
-\begin{equation}\label{eq:Poisson_da_aux}
-\dot{\va}_\ttp^{\lllA} = \dot{\va}_\tto^{\lllA} + \ddot{\vomega}_{\lllB}^{\lllA} \wedge \vr_{\tto \rl \ttp} + \dot{\vomega}_{\lllB}^{\lllA} \wedge (\vv_\ttp^{\lllA} - \vv_\tto^{\lllA}) + \dot{\vomega}_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA} \wedge \vr_{\tto \rl \ttp} + \vomega_{\lllB}^{\lllA} \wedge \dot{\vomega}_{\lllB}^{\lllA} \wedge \vr_{\tto \rl \ttp} + \vomega_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA} \wedge (\vv_\ttp^{\lllA} - \vv_\tto^{\lllA})
-\end{equation}
-
-Substituindo \eqref{eq:Poisson_v} em \eqref{eq:Poisson_da_aux}, obtemos a equação de Poisson para sobre-acelerações:
-\begin{empheq}[box=\mybluebox]{equation} \label{eq:Poisson_da}
-\dot{\va}_\ttp^{\lllA} = \dot{\va}_\tto^{\lllA} + \ddot{\vomega}_{\lllB}^{\lllA} \wedge \vr_{\tto \rl \ttp}  + 2\dot{\vomega}_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA} \wedge \vr_{\tto \rl \ttp} + \vomega_{\lllB}^{\lllA} \wedge \dot{\vomega}_{\lllB}^{\lllA} \wedge \vr_{\tto \rl \ttp} + \vomega_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA} \wedge  \vomega_{\lllB}^{\lllA} \wedge \vr_{\tto \rl \ttp}
-\end{empheq}
+%\subsubsubsection{Equação de Poisson para sobre-acelerações}\label{S05-01-02-03}
+%
+%
+%Derivando \eqref{eq:Poisson_a} no tempo em relação a $\llA$, temos:
+%\begin{equation}\label{eq:Poisson_da_aux}
+%\dot{\va}_\ttp^{\lllA} = \dot{\va}_\tto^{\lllA} + \ddot{\vomega}_{\lllB}^{\lllA} \wedge \vr_{\tto \rl \ttp} + \dot{\vomega}_{\lllB}^{\lllA} \wedge (\vv_\ttp^{\lllA} - \vv_\tto^{\lllA}) + \dot{\vomega}_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA} \wedge \vr_{\tto \rl \ttp} + \vomega_{\lllB}^{\lllA} \wedge \dot{\vomega}_{\lllB}^{\lllA} \wedge \vr_{\tto \rl \ttp} + \vomega_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA} \wedge (\vv_\ttp^{\lllA} - \vv_\tto^{\lllA})
+%\end{equation}
+%
+%Substituindo \eqref{eq:Poisson_v} em \eqref{eq:Poisson_da_aux}, obtemos a equação de Poisson para sobre-acelerações:
+%\begin{empheq}[box=\mybluebox]{equation} \label{eq:Poisson_da}
+%\dot{\va}_\ttp^{\lllA} = \dot{\va}_\tto^{\lllA} + \ddot{\vomega}_{\lllB}^{\lllA} \wedge \vr_{\tto \rl \ttp}  + 2\dot{\vomega}_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA} \wedge \vr_{\tto \rl \ttp} + \vomega_{\lllB}^{\lllA} \wedge \dot{\vomega}_{\lllB}^{\lllA} \wedge \vr_{\tto \rl \ttp} + \vomega_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA} \wedge  \vomega_{\lllB}^{\lllA} \wedge \vr_{\tto \rl \ttp}
+%\end{empheq}
 
 \subsubsection{Composição de movimentos}\label{S05-01-03}
 
@@ -555,59 +555,59 @@ Temos princípio da composição de movimento para acelerações lineares:
 Ou seja, $\va_\ttp^{\lllA}$ é composto pela soma de $\va_{\ttp \rl \lllB}^{\lllA}$, que seria a aceleração de $\ttp$ se $\ttp$ estivesse fixo a $\llB$ (aceleração de arrastamento), $\va_\ttp^{\lllB}$, que seria a aceleração de $\ttp$ se $\llB$ estivesse parado em relação a $\llA$ (aceleração relativa), e da parcela $2\vomega_{\lllB}^{\lllA} \wedge \vv_\ttp^{\lllB}$ (aceleralção complementar).
 
 
-\subsubsubsection{Composição de sobre-acelerações lineares}\label{S05-01-03-03}
-
-Derivando \eqref{eq:d2r_rho} no tempo, temos:
-\begin{multline} \label{eq:d3r_rho_aux}
-\\
-\dot{\va}_\ttp^{\lllA} = 
-\dot{\va}_{\tto_\ttB}^{\lllA}  + 
-\ddot{\vomega}_{\lllB}^{\lllA} \wedge \vr_{\tto_\ttB \rl \ttp} + \dot{\vomega}_{\lllB}^{\lllA} \wedge \dot{\vr}_{\tto_\ttB \rl \ttp}^{[\lllA]} + 
-\dot{\vomega}_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA} \wedge \vr_{\tto_\ttB \rl \ttp} + 
-\vomega_{\lllB}^{\lllA} \wedge \dot{\vomega}_{\lllB}^{\lllA} \wedge \vr_{\tto_\ttB \rl \ttp} + \\
-\vomega_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA} \wedge \dot{\vr}_{\tto_\ttB \rl \ttp}^{[\lllA]}  + 
-2 \dot{\vomega}_{\lllB}^{\lllA} \wedge \vv_{\ttp}^{\lllB} + 
- 2 \vomega_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA} \wedge \vv_{\ttp}^{\lllB} + 
-3 \vomega_{\lllB}^{\lllA} \wedge \va_{\ttp}^{\lllB} + 
-\dot{\va}_{\ttp}^{\lllB} \\
-\end{multline}
-
-
-Substituindo \eqref{eq:drho} em \eqref{eq:d3r_rho_aux}, temos:
-\begin{multline} \label{eq:d3r_rho}
-\\
-\dot{\va}_\ttp^{\lllA} = 
-\dot{\va}_{\tto_\ttB}^{\lllA}  + 
-\ddot{\vomega}_{\lllB}^{\lllA} \wedge \vr_{\tto_\ttB \rl \ttp} + 
-2\dot{\vomega}_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA} \wedge \vr_{\tto_\ttB \rl \ttp}  + 
-\vomega_{\lllB}^{\lllA} \wedge \dot{\vomega}_{\lllB}^{\lllA} \wedge \vr_{\tto_\ttB \rl \ttp} + 
-\vomega_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA} \wedge \vr_{\tto_\ttB \rl \ttp}  + \\
-3\dot{\vomega}_{\lllB}^{\lllA} \wedge \vv_{\ttp}^{\lllB} + 
-3\vomega_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA} \wedge \vv_{\ttp}^{\lllB}  + 
-3 \vomega_{\lllB}^{\lllA} \wedge \va_{\ttp}^{\lllB} +
-\dot{\va}_{\ttp}^{\lllB} \\
-\end{multline}
-
-Definindo:
-\begin{empheq}[box=\almondbox]{equation}
-\dot{\va}_{\ttp \rl \lllB}^{\lllA} = \dot{\va}_{\tto_\ttB}^{\lllA}  + 
-\ddot{\vomega}_{\lllB}^{\lllA} \wedge \vr_{\tto_\ttB \rl \ttp} + 
-2\dot{\vomega}_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA} \wedge \vr_{\tto_\ttB \rl \ttp}  + 
-\vomega_{\lllB}^{\lllA} \wedge \dot{\vomega}_{\lllB}^{\lllA} \wedge \vr_{\tto_\ttB \rl \ttp} + 
-\vomega_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA} \wedge \vr_{\tto_\ttB \rl \ttp}
-\end{empheq}
-
-Temos princípio da composição de movimento para sobre-acelerações lineares:
-\begin{empheq}[box=\mybluebox]{equation} \label{eq:Composicao_dace}
-\dot{\va}_\ttp^{\lllA} = \dot{\va}_{\ttp \rl \lllB}^{\lllA} + \dot{\va}_\ttp^{\lllB} + 3(\dot{\vomega}_{\lllB}^{\lllA} \wedge \vv_\ttp^{\lllB} + 
-\vomega_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA} \wedge \vv_\ttp^{\lllB}  + 
- \vomega_{\lllB}^{\lllA} \wedge \va_\ttp^{\lllB} )
-\end{empheq}
-
-Ou seja, $\dot{\va}_\ttp^{\lllA}$ é composto pela soma de $\dot{\va}_{\ttp \rl \lllB}^{\lllA}$, que seria a sobre-aceleração de 
-$\ttp$ se $\ttp$ estivesse fixo a $\llB$ (sobre-aceleração de arrastamento), $\dot{\va}_\ttp^{\lllB}$, que seria a sobre-aceleração de $\ttp$ se $\llB$ estivesse parado em relação a $\llA$ (sobre-aceleração relativa), e da parcela $3(\dot{\vomega}_{\lllB}^{\lllA} \wedge \vv_\ttp^{\lllB} + 
-\vomega_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA} \wedge \vv_\ttp^{\lllB}  + 
- \vomega_{\lllB}^{\lllA} \wedge \va_\ttp^{\lllB} )$ (sobre-aceleralção complementar).
+%\subsubsubsection{Composição de sobre-acelerações lineares}\label{S05-01-03-03}
+%
+%Derivando \eqref{eq:d2r_rho} no tempo, temos:
+%\begin{multline} \label{eq:d3r_rho_aux}
+%\\
+%\dot{\va}_\ttp^{\lllA} = 
+%\dot{\va}_{\tto_\ttB}^{\lllA}  + 
+%\ddot{\vomega}_{\lllB}^{\lllA} \wedge \vr_{\tto_\ttB \rl \ttp} + \dot{\vomega}_{\lllB}^{\lllA} \wedge \dot{\vr}_{\tto_\ttB \rl \ttp}^{[\lllA]} + 
+%\dot{\vomega}_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA} \wedge \vr_{\tto_\ttB \rl \ttp} + 
+%\vomega_{\lllB}^{\lllA} \wedge \dot{\vomega}_{\lllB}^{\lllA} \wedge \vr_{\tto_\ttB \rl \ttp} + \\
+%\vomega_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA} \wedge \dot{\vr}_{\tto_\ttB \rl \ttp}^{[\lllA]}  + 
+%2 \dot{\vomega}_{\lllB}^{\lllA} \wedge \vv_{\ttp}^{\lllB} + 
+% 2 \vomega_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA} \wedge \vv_{\ttp}^{\lllB} + 
+%3 \vomega_{\lllB}^{\lllA} \wedge \va_{\ttp}^{\lllB} + 
+%\dot{\va}_{\ttp}^{\lllB} \\
+%\end{multline}
+%
+%
+%Substituindo \eqref{eq:drho} em \eqref{eq:d3r_rho_aux}, temos:
+%\begin{multline} \label{eq:d3r_rho}
+%\\
+%\dot{\va}_\ttp^{\lllA} = 
+%\dot{\va}_{\tto_\ttB}^{\lllA}  + 
+%\ddot{\vomega}_{\lllB}^{\lllA} \wedge \vr_{\tto_\ttB \rl \ttp} + 
+%2\dot{\vomega}_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA} \wedge \vr_{\tto_\ttB \rl \ttp}  + 
+%\vomega_{\lllB}^{\lllA} \wedge \dot{\vomega}_{\lllB}^{\lllA} \wedge \vr_{\tto_\ttB \rl \ttp} + 
+%\vomega_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA} \wedge \vr_{\tto_\ttB \rl \ttp}  + \\
+%3\dot{\vomega}_{\lllB}^{\lllA} \wedge \vv_{\ttp}^{\lllB} + 
+%3\vomega_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA} \wedge \vv_{\ttp}^{\lllB}  + 
+%3 \vomega_{\lllB}^{\lllA} \wedge \va_{\ttp}^{\lllB} +
+%\dot{\va}_{\ttp}^{\lllB} \\
+%\end{multline}
+%
+%Definindo:
+%\begin{empheq}[box=\almondbox]{equation}
+%\dot{\va}_{\ttp \rl \lllB}^{\lllA} = \dot{\va}_{\tto_\ttB}^{\lllA}  + 
+%\ddot{\vomega}_{\lllB}^{\lllA} \wedge \vr_{\tto_\ttB \rl \ttp} + 
+%2\dot{\vomega}_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA} \wedge \vr_{\tto_\ttB \rl \ttp}  + 
+%\vomega_{\lllB}^{\lllA} \wedge \dot{\vomega}_{\lllB}^{\lllA} \wedge \vr_{\tto_\ttB \rl \ttp} + 
+%\vomega_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA} \wedge \vr_{\tto_\ttB \rl \ttp}
+%\end{empheq}
+%
+%Temos princípio da composição de movimento para sobre-acelerações lineares:
+%\begin{empheq}[box=\mybluebox]{equation} \label{eq:Composicao_dace}
+%\dot{\va}_\ttp^{\lllA} = \dot{\va}_{\ttp \rl \lllB}^{\lllA} + \dot{\va}_\ttp^{\lllB} + 3(\dot{\vomega}_{\lllB}^{\lllA} \wedge \vv_\ttp^{\lllB} + 
+%\vomega_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA} \wedge \vv_\ttp^{\lllB}  + 
+% \vomega_{\lllB}^{\lllA} \wedge \va_\ttp^{\lllB} )
+%\end{empheq}
+%
+%Ou seja, $\dot{\va}_\ttp^{\lllA}$ é composto pela soma de $\dot{\va}_{\ttp \rl \lllB}^{\lllA}$, que seria a sobre-aceleração de 
+%$\ttp$ se $\ttp$ estivesse fixo a $\llB$ (sobre-aceleração de arrastamento), $\dot{\va}_\ttp^{\lllB}$, que seria a sobre-aceleração de $\ttp$ se $\llB$ estivesse parado em relação a $\llA$ (sobre-aceleração relativa), e da parcela $3(\dot{\vomega}_{\lllB}^{\lllA} \wedge \vv_\ttp^{\lllB} + 
+%\vomega_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA} \wedge \vv_\ttp^{\lllB}  + 
+% \vomega_{\lllB}^{\lllA} \wedge \va_\ttp^{\lllB} )$ (sobre-aceleralção complementar).
 
 \subsubsubsection{Composição de velocidades angulares}\label{S05-01-03-04}
 
@@ -688,24 +688,22 @@ Repare que, fazendo $\llC \equiv \llA$ e utilizando \eqref{eq:composicao_wCA}, t
 \therefore \dot{\vomega}_{\lllA}^{\lllB} = - \dot{\vomega}_{\lllB}^{\lllA}
 \end{empheq}
 
-\subsubsubsection{Composição de sobre-acelerações angulares}\label{S05-01-03-06}
-
-Derivando \eqref{eq:composicao_dw} no tempo em relação a $\llA$, temos princípio da composição de movimento para sobre-acelerações angulares:
-\begin{empheq}[box=\mybluebox]{equation} \label{eq:composicao_d2w}
-\ddot{\vomega}_{\lllC}^{\lllA}  =  \ddot{\vomega}_{\lllB}^{\lllA}   + \ddot{\vomega}_{\lllC}^{\lllB} +  \dot{\vomega}_{\lllB}^{\lllA} \wedge \vomega_{\lllC}^{\lllB} + 2 \vomega_{\lllB}^{\lllA} \wedge \dot{\vomega}_{\lllC}^{\lllB} + \vomega_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA} \wedge \vomega_{\lllC}^{\lllB}
-\end{empheq}
-
-Ou seja, $\ddot{\vomega}_{\lllC}^{\lllA}$ é composta pela soma de $\ddot{\vomega}_{\lllB}^{\lllA}$, que seria a sobre-aceleração angular  de $\llC$ se $\llC$ estivesse fixo a $\llB$ (sobre-aceleração angular de arrastamento), $\ddot{\vomega}_{\lllC}^{\lllB}$, que seria a sobre-aceleração angular de $\llC$ se $\llB$ estivesse parado em relação a $\llA$ (aceleração angular relativa), e da parcela $ \dot{\vomega}_{\lllB}^{\lllA} \wedge \vomega_{\lllC}^{\lllB} + 2 \vomega_{\lllB}^{\lllA} \wedge \dot{\vomega}_{\lllC}^{\lllB} + \vomega_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA} \wedge \vomega_{\lllC}^{\lllB}$ (sobre-aceleralção angular complementar).
-
-Repare que, fazendo $\llC \equiv \llA$ e utilizando \eqref{eq:composicao_wCA} e \eqref{eq:composicao_dwCA}, temos que:
-\begin{equation}
-\vzr  =  \ddot{\vomega}_{\lllB}^{\lllA}   + \ddot{\vomega}_{\lllA}^{\lllB} -  \dot{\vomega}_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA} - 2 \vomega_{\lllB}^{\lllA} \wedge \dot{\vomega}_{\lllB}^{\lllA} - \vomega_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA}
-\end{equation}
-\begin{empheq}[box=\almondbox]{equation} \label{eq:composicao_d2wCA}
-\therefore \ddot{\vomega}_{\lllA}^{\lllB}  =  -\ddot{\vomega}_{\lllB}^{\lllA} -  \dot{\vomega}_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA}
-\end{empheq}
-
-
+%\subsubsubsection{Composição de sobre-acelerações angulares}\label{S05-01-03-06}
+%
+%Derivando \eqref{eq:composicao_dw} no tempo em relação a $\llA$, temos princípio da composição de movimento para sobre-acelerações angulares:
+%\begin{empheq}[box=\mybluebox]{equation} \label{eq:composicao_d2w}
+%\ddot{\vomega}_{\lllC}^{\lllA}  =  \ddot{\vomega}_{\lllB}^{\lllA}   + \ddot{\vomega}_{\lllC}^{\lllB} +  \dot{\vomega}_{\lllB}^{\lllA} \wedge \vomega_{\lllC}^{\lllB} + 2 \vomega_{\lllB}^{\lllA} \wedge \dot{\vomega}_{\lllC}^{\lllB} + \vomega_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA} \wedge \vomega_{\lllC}^{\lllB}
+%\end{empheq}
+%
+%Ou seja, $\ddot{\vomega}_{\lllC}^{\lllA}$ é composta pela soma de $\ddot{\vomega}_{\lllB}^{\lllA}$, que seria a sobre-aceleração angular  de $\llC$ se $\llC$ estivesse fixo a $\llB$ (sobre-aceleração angular de arrastamento), $\ddot{\vomega}_{\lllC}^{\lllB}$, que seria a sobre-aceleração angular de $\llC$ se $\llB$ estivesse parado em relação a $\llA$ (aceleração angular relativa), e da parcela $ \dot{\vomega}_{\lllB}^{\lllA} \wedge \vomega_{\lllC}^{\lllB} + 2 \vomega_{\lllB}^{\lllA} \wedge \dot{\vomega}_{\lllC}^{\lllB} + \vomega_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA} \wedge \vomega_{\lllC}^{\lllB}$ (sobre-aceleralção angular complementar).
+%
+%Repare que, fazendo $\llC \equiv \llA$ e utilizando \eqref{eq:composicao_wCA} e \eqref{eq:composicao_dwCA}, temos que:
+%\begin{equation}
+%\vzr  =  \ddot{\vomega}_{\lllB}^{\lllA}   + \ddot{\vomega}_{\lllA}^{\lllB} -  \dot{\vomega}_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA} - 2 \vomega_{\lllB}^{\lllA} \wedge \dot{\vomega}_{\lllB}^{\lllA} - \vomega_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA}
+%\end{equation}
+%\begin{empheq}[box=\almondbox]{equation} \label{eq:composicao_d2wCA}
+%\therefore \ddot{\vomega}_{\lllA}^{\lllB}  =  -\ddot{\vomega}_{\lllB}^{\lllA} -  \dot{\vomega}_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA}
+%\end{empheq}
 
 \subsection{Algoritmo para modelagem de mecanismos seriais}\label{S05-02}
 
@@ -1281,259 +1279,261 @@ Sendo:
 \end{empheq}
 
 
-\subsubsubsection{Cinemática de sobre-acelerações lineares}\label{S05-02-01-06}
-
-A sobre-aceleração do efetuador pode ser obtida aplicando recursivamente o príncipio da composição de movimentos para sobre-acelerações lineres deduzido anteriormente \eqref{eq:Composicao_dace}:
-
-
-\begin{equation}
-\dot{\va}_\ttp^{\lllB_0} = \dot{\va}_{\ttp \rl \lllB_1}^{\lllB_0} + \dot{\va}_\ttp^{\lllB_1} + 3(\dot{\vomega}_{\lllB_1}^{\lllB_0} \wedge \vv_\ttp^{\lllB_1} + 
-\vomega_{\lllB_1}^{\lllB_0} \wedge \vomega_{\lllB_1}^{\lllB_0} \wedge \vv_\ttp^{\lllB_1}  + 
- \vomega_{\lllB_1}^{\lllB_0} \wedge \va_\ttp^{\lllB_1} )
-\end{equation}
-\begin{equation}
-\dot{\va}_\ttp^{\lllB_1} = \dot{\va}_{\ttp \rl \lllB_2}^{\lllB_1} + \dot{\va}_\ttp^{\lllB_2} + 3(\dot{\vomega}_{\lllB_2}^{\lllB_1} \wedge \vv_\ttp^{\lllB_2} + 
-\vomega_{\lllB_2}^{\lllB_1} \wedge \vomega_{\lllB_2}^{\lllB_1} \wedge \vv_\ttp^{\lllB_2}  + 
- \vomega_{\lllB_2}^{\lllB_1} \wedge \va_\ttp^{\lllB_2} )
-\end{equation}
-$$ \vdots $$
-\begin{equation}
-\dot{\va}_\ttp^{\lllB_{i-1}} = \dot{\va}_{\ttp \rl \lllB_i}^{\lllB_{i-1}} + \dot{\va}_\ttp^{\lllB_i} + 3(\dot{\vomega}_{\lllB_i}^{\lllB_{i-1}} \wedge \vv_\ttp^{\lllB_i} + 
-\vomega_{\lllB_i}^{\lllB_{i-1}} \wedge \vomega_{\lllB_i}^{\lllB_{i-1}} \wedge \vv_\ttp^{\lllB_i}  + 
- \vomega_{\lllB_i}^{\lllB_{i-1}} \wedge \va_\ttp^{\lllB_i} )
-\end{equation}
-$$ \vdots $$
-\begin{equation}
-\dot{\va}_\ttp^{\lllB_{\nu-1}} = \dot{\va}_{\ttp \rl \lllB_\nu}^{\lllB_{\nu-1}} + \dot{\va}_\ttp^{\lllB_\nu} + 3(\dot{\vomega}_{\lllB_\nu}^{\lllB_{\nu-1}} \wedge \vv_\ttp^{\lllB_\nu} + 
-\vomega_{\lllB_\nu}^{\lllB_{\nu-1}} \wedge \vomega_{\lllB_\nu}^{\lllB_{\nu-1}} \wedge \vv_\ttp^{\lllB_\nu}  + 
- \vomega_{\lllB_\nu}^{\lllB_{\nu-1}} \wedge \va_\ttp^{\lllB_\nu} )
-\end{equation}
-
-Como $\ttx$ é fixo a $\llB_\nu$, temos que:
-\begin{equation}
-\dot{\va}_{\ttx}^{\lllB_\nu} = \vzr
-\end{equation}
-
-Sendo assim, a sobre-aceleração do efetuador em relação a cada um dos referenciais pode ser obtida recursivamente pela seguinte expressão:
+%\subsubsubsection{Cinemática de sobre-acelerações lineares}\label{S05-02-01-06}
+%
+%A sobre-aceleração do efetuador pode ser obtida aplicando recursivamente o príncipio da composição de movimentos para sobre-acelerações lineres deduzido anteriormente \eqref{eq:Composicao_dace}:
+%
+%
 %\begin{equation}
-%\vv_{\ttx}^{\lllB_{i-1}} =
-%\begin{cases}
-%\displaystyle\sum_{j=i}^{\nu} \vv_{\ttx \rl \lllB_{j}}^{\lllB_{j-1}}, \; 1 \leq i \leq \nu \\
-%\vzr, \;\;\;\;\;\;\;\;\;\;\;\; i = \nu + 1
-%\end{cases}\, i=1,...,\nu+1
+%\dot{\va}_\ttp^{\lllB_0} = \dot{\va}_{\ttp \rl \lllB_1}^{\lllB_0} + \dot{\va}_\ttp^{\lllB_1} + 3(\dot{\vomega}_{\lllB_1}^{\lllB_0} \wedge \vv_\ttp^{\lllB_1} + 
+%\vomega_{\lllB_1}^{\lllB_0} \wedge \vomega_{\lllB_1}^{\lllB_0} \wedge \vv_\ttp^{\lllB_1}  + 
+% \vomega_{\lllB_1}^{\lllB_0} \wedge \va_\ttp^{\lllB_1} )
 %\end{equation}
-\begin{equation}
-\va_{\ttx}^{\lllB_{i-1}} =
-\begin{cases}
-\vzr, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; i = \nu + 1 \\
-\dot{\va}_{\ttp \rl \lllB_i}^{\lllB_{i-1}} + \dot{\va}_\ttp^{\lllB_i} + 3(\dot{\vomega}_{\lllB_i}^{\lllB_{i-1}} \wedge \vv_\ttp^{\lllB_i} + 
-\vomega_{\lllB_i}^{\lllB_{i-1}} \wedge \vomega_{\lllB_i}^{\lllB_{i-1}} \wedge \vv_\ttp^{\lllB_i}  + 
- \vomega_{\lllB_i}^{\lllB_{i-1}} \wedge \va_\ttp^{\lllB_i} ), \; 1 \leq i \leq \nu \\
-\end{cases}\, i=\nu+1,...,1
-\end{equation}
-
-
-
-Sendo que, a partir da equação \eqref{eq:Poisson_da}, a sobre-aceleração de arrastamento de cada uma das juntas é dada por:
-\footnotesize
-\begin{equation}
-\dot{\va}_{\ttx \rl \lllB_{i}}^{\lllB_{i-1}} = 
-\begin{cases}
-\dddot{q}_{i} \vk_{i-1}, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; \text{junta prismática} \\
-\dddot{q}_{i} \vk_{i-1} \wedge \vr_{\tto_{i-1} \rl \ttx} + 3 \dot{q}_{i} \ddot{q}_{i} \vk_{i-1} \wedge \vk_{i-1} \wedge \vr_{\tto_{i-1} \rl \ttx}  + \dot{q}_{i}^3 \vk_{i-1} \wedge \vk_{i-1} \wedge \vk_{i-1} \wedge \vr_{\tto_{i-1} \rl \ttx}, \; \text{junta rotativa}
-\end{cases}\, i=1,...,\nu
-\end{equation}
-\normalsize
-
-Fazendo as seguintes definições:
-\begin{empheq}[box=\lightbluebox]{equation}
-\dot{\ma}_i = \vct{\dot{\va}_{\ttx}^{\lllB_{i}} }_{\ttN}
-\end{empheq}
-
-\begin{empheq}[box=\lightbluebox]{equation}
-\dot{\ma}^\star = \dot{\ma}_0 =\vct{\dot{\va}_{\ttx}^{\lllN} }_{\ttN}
-\end{empheq}
-
-Temos que:
-\begin{equation}
-\vct{\dot{\va}_{\ttx \rl \lllB_{i}}^{\lllB_{i-1}} }_{\ttN} = \dddot{q}_{i} \mj_{v\,i} + 3 \dot{q}_{i} \ddot{q}_{i} \mj_{\omega\,i} \wedge \mj_{v\,i} + \dot{q}_{i}^3 \mj_{\omega\,i} \wedge \mj_{\omega\,i} \wedge \mj_{v\,i}, \; i=1,...,\nu
-\end{equation}
-
-\begin{empheq}[box=\myyellowbox]{equation}
-\dot{\ma}_{i-1} =
-\begin{cases}
-\mzr, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; i = \nu + 1 \\
-\dot{\ma}_i + \dddot{q}_{i} \mj_{v\,i} + (\underaccent{\sim}{\dot{\ma}})_i , \; 1 \leq i \leq \nu \\
-\end{cases}\, i=\nu+1,...,1
-\end{empheq}
-
-\begin{empheq}[box=\lightbluebox]{equation}
-\dot{\ma}^\star (\mq,\dot{\mq},\ddot{\mq}) = \mJ_v (\mq)  \cdot \dddot{\mq} + \underaccent{\sim}{\dot{\ma}} (\mq,\dot{\mq})
-\end{empheq}
-
-Sendo:
-\begin{empheq}[box=\myyellowbox]{equation}
-(\underaccent{\sim}{\dot{\ma}})_i = 3 \dot{q}_{i} \ddot{q}_{i} \mj_{\omega\,i} \wedge \mj_{v\,i} + \dot{q}_{i}^3 \mj_{\omega\,i} \wedge \mj_{\omega\,i} \wedge \mj_{v\,i} + 3(\ddot{q}_i  \mj_{\omega\,i} \wedge \mv_i + 
-\dot{q}_i^2 \mj_{\omega\,i} \wedge \mj_{\omega\,i} \wedge \mv_i  + \dot{q}_i
- \mj_{\omega\,i} \wedge \ma_i )
-\end{empheq}
-
-\begin{empheq}[box=\myyellowbox]{equation}
-\underaccent{\sim}{\dot{\ma}} = \sum_{i=1}^\nu  (\underaccent{\sim}{\dot{\ma}})_i
-\end{empheq}
-
-Para obter as acelerações dos centros de massa dos ligamentos, seguimos a mesma linha de raciocínio e obtemos os seguintes resultados:
-
-Definindo:
-\begin{empheq}[box=\lightbluebox]{equation}
-\dot{\ma}_{i,j} = \vct{\dot{\va}_{\ttg_i}^{\lllB_{j}}}_{\ttN}
-\end{empheq}
-
-\begin{empheq}[box=\lightbluebox]{equation}
-\dot{\ma}_i^\star = \dot{\ma}_{i,0} =\vct{\dot{\va}_{\ttg_i}^{\lllN} }_{\ttN}
-\end{empheq}
-
-Temos:
-\begin{empheq}[box=\myyellowbox]{equation}
-\dot{\ma}_{i,j-1} =
-\begin{cases}
-\mzr, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; j = i+1 \\
-\dot{\ma}_{i,j} + \dddot{q}_{j} \mj_{v\,i,j} + (\underaccent{\sim}{\dot{\ma}}_i)_j, \; 1 \leq j \leq i \\
-\end{cases}\, i=1,...,\nu, \, j=i+1,...,1
-\end{empheq}
-
-\begin{empheq}[box=\lightbluebox]{equation} \label{eq:da_star_i}
-\dot{\ma}_i^\star(\mq,\dot{\mq},\ddot{\mq},\dddot{\mq}) = \mJ_{v\,i} (\mq) \cdot \dddot{\mq} + \underaccent{\sim}{\dot{\ma}}_i (\mq,\dot{\mq},\ddot{\mq})
-\end{empheq}
-
-Sendo:
-\small
-\begin{empheq}[box=\myyellowbox]{equation}
-(\underaccent{\sim}{\dot{\ma}}_i)_j = 3 \dot{q}_{j} \ddot{q}_{j} \mj_{\omega\,i,j} \wedge \mj_{v\,i,j} + \dot{q}_{j}^3 \mj_{\omega\,i,j} \wedge \mj_{\omega\,i,j} \wedge \mj_{v\,i,j} + 3(\ddot{q}_j  \mj_{\omega\,i,j} \wedge \mv_{i,j} + 
-\dot{q}_j^2 \mj_{\omega\,i,j} \wedge \mj_{\omega\,i,j} \wedge \mv_{i,j}  + \dot{q}_j
- \mj_{\omega\,i,j} \wedge \ma_{i,j} )
-\end{empheq}
-\normalsize
-
-\begin{empheq}[box=\myyellowbox]{equation}
-\underaccent{\sim}{\dot{\ma}}_i =\sum_{j=1}^i  (\underaccent{\sim}{\dot{\ma}}_i)_j
-\end{empheq}
-
-\subsubsubsection{Cinemática de sobre-acelerações angulares}\label{S05-02-01-07}
-
-A sobre-aceleração angular do efetuador pode ser obtida aplicando recursivamente o príncipio da composição de movimentos para sobre-aceleralções angulares deduzido anteriormente \eqref{eq:composicao_d2w}:
-\begin{equation}
-\ddot{\vomega}_{\lllB_\nu}^{\lllB_0}  =  \ddot{\vomega}_{\lllB_1}^{\lllB_0}   + \ddot{\vomega}_{\lllB_\nu}^{\lllB_1} +  \dot{\vomega}_{\lllB_1}^{\lllB_0} \wedge \vomega_{\lllB_\nu}^{\lllB_1} + 2 \vomega_{\lllB_1}^{\lllB_0} \wedge \dot{\vomega}_{\lllB_\nu}^{\lllB_1} + \vomega_{\lllB_1}^{\lllB_0} \wedge \vomega_{\lllB_1}^{\lllB_0} \wedge \vomega_{\lllB_\nu}^{\lllB_1}
-\end{equation}
-\begin{equation}
-\ddot{\vomega}_{\lllB_\nu}^{\lllB_1}  =  \ddot{\vomega}_{\lllB_2}^{\lllB_1}   + \ddot{\vomega}_{\lllB_\nu}^{\lllB_2} +  \dot{\vomega}_{\lllB_2}^{\lllB_1} \wedge \vomega_{\lllB_\nu}^{\lllB_2} + 2 \vomega_{\lllB_2}^{\lllB_1} \wedge \dot{\vomega}_{\lllB_\nu}^{\lllB_2} + \vomega_{\lllB_2}^{\lllB_1} \wedge \vomega_{\lllB_2}^{\lllB_1} \wedge \vomega_{\lllB_\nu}^{\lllB_2}
-\end{equation}
-$$ \vdots $$
-\begin{equation}
-\ddot{\vomega}_{\lllB_\nu}^{\lllB_{i-1}}  =  \ddot{\vomega}_{\lllB_i}^{\lllB_{i-1}}   + \ddot{\vomega}_{\lllB_\nu}^{\lllB_i} +  \dot{\vomega}_{\lllB_i}^{\lllB_{i-1}} \wedge \vomega_{\lllB_\nu}^{\lllB_i} + 2 \vomega_{\lllB_i}^{\lllB_{i-1}} \wedge \dot{\vomega}_{\lllB_\nu}^{\lllB_i} + \vomega_{\lllB_i}^{\lllB_{i-1}} \wedge \vomega_{\lllB_i}^{\lllB_{i-1}} \wedge \vomega_{\lllB_\nu}^{\lllB_i}
-\end{equation}
-$$ \vdots $$
-\begin{equation}
-\ddot{\vomega}_{\lllB_\nu}^{\lllB_{\nu-2}}  =  \ddot{\vomega}_{\lllB_{\nu-1}}^{\lllB_{\nu-2}}   + \ddot{\vomega}_{\lllB_\nu}^{\lllB_{\nu-1}} +  \dot{\vomega}_{\lllB_{\nu-1}}^{\lllB_{\nu-2}} \wedge \vomega_{\lllB_\nu}^{\lllB_{\nu-1}} + 2 \vomega_{\lllB_{\nu-1}}^{\lllB_{\nu-2}} \wedge \dot{\vomega}_{\lllB_\nu}^{\lllB_{\nu-1}} + \vomega_{\lllB_{\nu-1}}^{\lllB_{\nu-2}} \wedge \vomega_{\lllB_{\nu-1}}^{\lllB_{\nu-2}} \wedge \vomega_{\lllB_\nu}^{\lllB_{\nu-1}}
-\end{equation}
-
-
-Sendo assim, a aceleração angular do efetuador em relação a cada um dos referenciais pode ser obtida recursivamente pela seguinte expressão:
 %\begin{equation}
-%\vv_{\ttx}^{\lllB_{i-1}} =
-%\begin{cases}
-%\displaystyle\sum_{j=i}^{\nu} \vv_{\ttx \rl \lllB_{j}}^{\lllB_{j-1}}, \; 1 \leq i \leq \nu \\
-%\vzr, \;\;\;\;\;\;\;\;\;\;\;\; i = \nu + 1
-%\end{cases}\, i=1,...,\nu+1
+%\dot{\va}_\ttp^{\lllB_1} = \dot{\va}_{\ttp \rl \lllB_2}^{\lllB_1} + \dot{\va}_\ttp^{\lllB_2} + 3(\dot{\vomega}_{\lllB_2}^{\lllB_1} \wedge \vv_\ttp^{\lllB_2} + 
+%\vomega_{\lllB_2}^{\lllB_1} \wedge \vomega_{\lllB_2}^{\lllB_1} \wedge \vv_\ttp^{\lllB_2}  + 
+% \vomega_{\lllB_2}^{\lllB_1} \wedge \va_\ttp^{\lllB_2} )
 %\end{equation}
-\small
-\begin{equation}
-\ddot{\vomega}_{\lllB_\nu}^{\lllB_{i-1}} =
-\begin{cases}
-\vzr, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; i = \nu + 1 \\
-\ddot{\vomega}_{\lllB_i}^{\lllB_{i-1}}   + \ddot{\vomega}_{\lllB_\nu}^{\lllB_i} +  \dot{\vomega}_{\lllB_i}^{\lllB_{i-1}} \wedge \vomega_{\lllB_\nu}^{\lllB_i} + 2 \vomega_{\lllB_i}^{\lllB_{i-1}} \wedge \dot{\vomega}_{\lllB_\nu}^{\lllB_i} + \vomega_{\lllB_i}^{\lllB_{i-1}} \wedge \vomega_{\lllB_i}^{\lllB_{i-1}} \wedge \vomega_{\lllB_\nu}^{\lllB_i}, \; 1 \leq i \leq \nu \\
-\end{cases}\, i=\nu+1,...,1
-\end{equation}
-\normalsize
+%$$ \vdots $$
+%\begin{equation}
+%\dot{\va}_\ttp^{\lllB_{i-1}} = \dot{\va}_{\ttp \rl \lllB_i}^{\lllB_{i-1}} + \dot{\va}_\ttp^{\lllB_i} + 3(\dot{\vomega}_{\lllB_i}^{\lllB_{i-1}} \wedge \vv_\ttp^{\lllB_i} + 
+%\vomega_{\lllB_i}^{\lllB_{i-1}} \wedge \vomega_{\lllB_i}^{\lllB_{i-1}} \wedge \vv_\ttp^{\lllB_i}  + 
+% \vomega_{\lllB_i}^{\lllB_{i-1}} \wedge \va_\ttp^{\lllB_i} )
+%\end{equation}
+%$$ \vdots $$
+%\begin{equation}
+%\dot{\va}_\ttp^{\lllB_{\nu-1}} = \dot{\va}_{\ttp \rl \lllB_\nu}^{\lllB_{\nu-1}} + \dot{\va}_\ttp^{\lllB_\nu} + 3(\dot{\vomega}_{\lllB_\nu}^{\lllB_{\nu-1}} \wedge \vv_\ttp^{\lllB_\nu} + 
+%\vomega_{\lllB_\nu}^{\lllB_{\nu-1}} \wedge \vomega_{\lllB_\nu}^{\lllB_{\nu-1}} \wedge \vv_\ttp^{\lllB_\nu}  + 
+% \vomega_{\lllB_\nu}^{\lllB_{\nu-1}} \wedge \va_\ttp^{\lllB_\nu} )
+%\end{equation}
+%
+%Como $\ttx$ é fixo a $\llB_\nu$, temos que:
+%\begin{equation}
+%\dot{\va}_{\ttx}^{\lllB_\nu} = \vzr
+%\end{equation}
+%
+%Sendo assim, a sobre-aceleração do efetuador em relação a cada um dos referenciais pode ser obtida recursivamente pela seguinte expressão:
+%%\begin{equation}
+%%\vv_{\ttx}^{\lllB_{i-1}} =
+%%\begin{cases}
+%%\displaystyle\sum_{j=i}^{\nu} \vv_{\ttx \rl \lllB_{j}}^{\lllB_{j-1}}, \; 1 \leq i \leq \nu \\
+%%\vzr, \;\;\;\;\;\;\;\;\;\;\;\; i = \nu + 1
+%%\end{cases}\, i=1,...,\nu+1
+%%\end{equation}
+%\begin{equation}
+%\va_{\ttx}^{\lllB_{i-1}} =
+%\begin{cases}
+%\vzr, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; i = \nu + 1 \\
+%\dot{\va}_{\ttp \rl \lllB_i}^{\lllB_{i-1}} + \dot{\va}_\ttp^{\lllB_i} + 3(\dot{\vomega}_{\lllB_i}^{\lllB_{i-1}} \wedge \vv_\ttp^{\lllB_i} + 
+%\vomega_{\lllB_i}^{\lllB_{i-1}} \wedge \vomega_{\lllB_i}^{\lllB_{i-1}} \wedge \vv_\ttp^{\lllB_i}  + 
+% \vomega_{\lllB_i}^{\lllB_{i-1}} \wedge \va_\ttp^{\lllB_i} ), \; 1 \leq i \leq \nu \\
+%\end{cases}\, i=\nu+1,...,1
+%\end{equation}
+%
+%
+%
+%Sendo que, a partir da equação \eqref{eq:Poisson_da}, a sobre-aceleração de arrastamento de cada uma das juntas é dada por:
+%\footnotesize
+%\begin{equation}
+%\dot{\va}_{\ttx \rl \lllB_{i}}^{\lllB_{i-1}} = 
+%\begin{cases}
+%\dddot{q}_{i} \vk_{i-1}, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; \text{junta prismática} \\
+%\dddot{q}_{i} \vk_{i-1} \wedge \vr_{\tto_{i-1} \rl \ttx} + 3 \dot{q}_{i} \ddot{q}_{i} \vk_{i-1} \wedge \vk_{i-1} \wedge \vr_{\tto_{i-1} \rl \ttx}  + \dot{q}_{i}^3 \vk_{i-1} \wedge \vk_{i-1} \wedge \vk_{i-1} \wedge \vr_{\tto_{i-1} \rl \ttx}, \; \text{junta rotativa}
+%\end{cases}\, i=1,...,\nu
+%\end{equation}
+%\normalsize
+%
+%Fazendo as seguintes definições:
+%\begin{empheq}[box=\lightbluebox]{equation}
+%\dot{\ma}_i = \vct{\dot{\va}_{\ttx}^{\lllB_{i}} }_{\ttN}
+%\end{empheq}
+%
+%\begin{empheq}[box=\lightbluebox]{equation}
+%\dot{\ma}^\star = \dot{\ma}_0 =\vct{\dot{\va}_{\ttx}^{\lllN} }_{\ttN}
+%\end{empheq}
+%
+%Temos que:
+%\begin{equation}
+%\vct{\dot{\va}_{\ttx \rl \lllB_{i}}^{\lllB_{i-1}} }_{\ttN} = \dddot{q}_{i} \mj_{v\,i} + 3 \dot{q}_{i} \ddot{q}_{i} \mj_{\omega\,i} \wedge \mj_{v\,i} + \dot{q}_{i}^3 \mj_{\omega\,i} \wedge \mj_{\omega\,i} \wedge \mj_{v\,i}, \; i=1,...,\nu
+%\end{equation}
+%
+%\begin{empheq}[box=\myyellowbox]{equation}
+%\dot{\ma}_{i-1} =
+%\begin{cases}
+%\mzr, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; i = \nu + 1 \\
+%\dot{\ma}_i + \dddot{q}_{i} \mj_{v\,i} + (\underaccent{\sim}{\dot{\ma}})_i , \; 1 \leq i \leq \nu \\
+%\end{cases}\, i=\nu+1,...,1
+%\end{empheq}
+%
+%\begin{empheq}[box=\lightbluebox]{equation}
+%\dot{\ma}^\star (\mq,\dot{\mq},\ddot{\mq}) = \mJ_v (\mq)  \cdot \dddot{\mq} + \underaccent{\sim}{\dot{\ma}} (\mq,\dot{\mq})
+%\end{empheq}
+%
+%Sendo:
+%\begin{empheq}[box=\myyellowbox]{equation}
+%(\underaccent{\sim}{\dot{\ma}})_i = 3 \dot{q}_{i} \ddot{q}_{i} \mj_{\omega\,i} \wedge \mj_{v\,i} + \dot{q}_{i}^3 \mj_{\omega\,i} \wedge \mj_{\omega\,i} \wedge \mj_{v\,i} + 3(\ddot{q}_i  \mj_{\omega\,i} \wedge \mv_i + 
+%\dot{q}_i^2 \mj_{\omega\,i} \wedge \mj_{\omega\,i} \wedge \mv_i  + \dot{q}_i
+% \mj_{\omega\,i} \wedge \ma_i )
+%\end{empheq}
+%
+%\begin{empheq}[box=\myyellowbox]{equation}
+%\underaccent{\sim}{\dot{\ma}} = \sum_{i=1}^\nu  (\underaccent{\sim}{\dot{\ma}})_i
+%\end{empheq}
+%
+%Para obter as acelerações dos centros de massa dos ligamentos, seguimos a mesma linha de raciocínio e obtemos os seguintes resultados:
+%
+%Definindo:
+%\begin{empheq}[box=\lightbluebox]{equation}
+%\dot{\ma}_{i,j} = \vct{\dot{\va}_{\ttg_i}^{\lllB_{j}}}_{\ttN}
+%\end{empheq}
+%
+%\begin{empheq}[box=\lightbluebox]{equation}
+%\dot{\ma}_i^\star = \dot{\ma}_{i,0} =\vct{\dot{\va}_{\ttg_i}^{\lllN} }_{\ttN}
+%\end{empheq}
+%
+%Temos:
+%\begin{empheq}[box=\myyellowbox]{equation}
+%\dot{\ma}_{i,j-1} =
+%\begin{cases}
+%\mzr, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; j = i+1 \\
+%\dot{\ma}_{i,j} + \dddot{q}_{j} \mj_{v\,i,j} + (\underaccent{\sim}{\dot{\ma}}_i)_j, \; 1 \leq j \leq i \\
+%\end{cases}\, i=1,...,\nu, \, j=i+1,...,1
+%\end{empheq}
+%
+%\begin{empheq}[box=\lightbluebox]{equation} \label{eq:da_star_i}
+%\dot{\ma}_i^\star(\mq,\dot{\mq},\ddot{\mq},\dddot{\mq}) = \mJ_{v\,i} (\mq) \cdot \dddot{\mq} + \underaccent{\sim}{\dot{\ma}}_i (\mq,\dot{\mq},\ddot{\mq})
+%\end{empheq}
+%
+%Sendo:
+%\small
+%\begin{empheq}[box=\myyellowbox]{equation}
+%(\underaccent{\sim}{\dot{\ma}}_i)_j = 3 \dot{q}_{j} \ddot{q}_{j} \mj_{\omega\,i,j} \wedge \mj_{v\,i,j} + \dot{q}_{j}^3 \mj_{\omega\,i,j} \wedge \mj_{\omega\,i,j} \wedge \mj_{v\,i,j} + 3(\ddot{q}_j  \mj_{\omega\,i,j} \wedge \mv_{i,j} + 
+%\dot{q}_j^2 \mj_{\omega\,i,j} \wedge \mj_{\omega\,i,j} \wedge \mv_{i,j}  + \dot{q}_j
+% \mj_{\omega\,i,j} \wedge \ma_{i,j} )
+%\end{empheq}
+%\normalsize
+%
+%\begin{empheq}[box=\myyellowbox]{equation}
+%\underaccent{\sim}{\dot{\ma}}_i =\sum_{j=1}^i  (\underaccent{\sim}{\dot{\ma}}_i)_j
+%\end{empheq}
+%
+%\subsubsubsection{Cinemática de sobre-acelerações angulares}\label{S05-02-01-07}
+%
+%A sobre-aceleração angular do efetuador pode ser obtida aplicando recursivamente o príncipio da composição de movimentos para sobre-aceleralções angulares deduzido anteriormente \eqref{eq:composicao_d2w}:
+%\begin{equation}
+%\ddot{\vomega}_{\lllB_\nu}^{\lllB_0}  =  \ddot{\vomega}_{\lllB_1}^{\lllB_0}   + \ddot{\vomega}_{\lllB_\nu}^{\lllB_1} +  \dot{\vomega}_{\lllB_1}^{\lllB_0} \wedge \vomega_{\lllB_\nu}^{\lllB_1} + 2 \vomega_{\lllB_1}^{\lllB_0} \wedge \dot{\vomega}_{\lllB_\nu}^{\lllB_1} + \vomega_{\lllB_1}^{\lllB_0} \wedge \vomega_{\lllB_1}^{\lllB_0} \wedge \vomega_{\lllB_\nu}^{\lllB_1}
+%\end{equation}
+%\begin{equation}
+%\ddot{\vomega}_{\lllB_\nu}^{\lllB_1}  =  \ddot{\vomega}_{\lllB_2}^{\lllB_1}   + \ddot{\vomega}_{\lllB_\nu}^{\lllB_2} +  \dot{\vomega}_{\lllB_2}^{\lllB_1} \wedge \vomega_{\lllB_\nu}^{\lllB_2} + 2 \vomega_{\lllB_2}^{\lllB_1} \wedge \dot{\vomega}_{\lllB_\nu}^{\lllB_2} + \vomega_{\lllB_2}^{\lllB_1} \wedge \vomega_{\lllB_2}^{\lllB_1} \wedge \vomega_{\lllB_\nu}^{\lllB_2}
+%\end{equation}
+%$$ \vdots $$
+%\begin{equation}
+%\ddot{\vomega}_{\lllB_\nu}^{\lllB_{i-1}}  =  \ddot{\vomega}_{\lllB_i}^{\lllB_{i-1}}   + \ddot{\vomega}_{\lllB_\nu}^{\lllB_i} +  \dot{\vomega}_{\lllB_i}^{\lllB_{i-1}} \wedge \vomega_{\lllB_\nu}^{\lllB_i} + 2 \vomega_{\lllB_i}^{\lllB_{i-1}} \wedge \dot{\vomega}_{\lllB_\nu}^{\lllB_i} + \vomega_{\lllB_i}^{\lllB_{i-1}} \wedge \vomega_{\lllB_i}^{\lllB_{i-1}} \wedge \vomega_{\lllB_\nu}^{\lllB_i}
+%\end{equation}
+%$$ \vdots $$
+%\begin{equation}
+%\ddot{\vomega}_{\lllB_\nu}^{\lllB_{\nu-2}}  =  \ddot{\vomega}_{\lllB_{\nu-1}}^{\lllB_{\nu-2}}   + \ddot{\vomega}_{\lllB_\nu}^{\lllB_{\nu-1}} +  \dot{\vomega}_{\lllB_{\nu-1}}^{\lllB_{\nu-2}} \wedge \vomega_{\lllB_\nu}^{\lllB_{\nu-1}} + 2 \vomega_{\lllB_{\nu-1}}^{\lllB_{\nu-2}} \wedge \dot{\vomega}_{\lllB_\nu}^{\lllB_{\nu-1}} + \vomega_{\lllB_{\nu-1}}^{\lllB_{\nu-2}} \wedge \vomega_{\lllB_{\nu-1}}^{\lllB_{\nu-2}} \wedge \vomega_{\lllB_\nu}^{\lllB_{\nu-1}}
+%\end{equation}
+%
+%
+%Sendo assim, a aceleração angular do efetuador em relação a cada um dos referenciais pode ser obtida recursivamente pela seguinte expressão:
+%%\begin{equation}
+%%\vv_{\ttx}^{\lllB_{i-1}} =
+%%\begin{cases}
+%%\displaystyle\sum_{j=i}^{\nu} \vv_{\ttx \rl \lllB_{j}}^{\lllB_{j-1}}, \; 1 \leq i \leq \nu \\
+%%\vzr, \;\;\;\;\;\;\;\;\;\;\;\; i = \nu + 1
+%%\end{cases}\, i=1,...,\nu+1
+%%\end{equation}
+%\small
+%\begin{equation}
+%\ddot{\vomega}_{\lllB_\nu}^{\lllB_{i-1}} =
+%\begin{cases}
+%\vzr, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; i = \nu + 1 \\
+%\ddot{\vomega}_{\lllB_i}^{\lllB_{i-1}}   + \ddot{\vomega}_{\lllB_\nu}^{\lllB_i} +  \dot{\vomega}_{\lllB_i}^{\lllB_{i-1}} \wedge \vomega_{\lllB_\nu}^{\lllB_i} + 2 \vomega_{\lllB_i}^{\lllB_{i-1}} \wedge \dot{\vomega}_{\lllB_\nu}^{\lllB_i} + \vomega_{\lllB_i}^{\lllB_{i-1}} \wedge \vomega_{\lllB_i}^{\lllB_{i-1}} \wedge \vomega_{\lllB_\nu}^{\lllB_i}, \; 1 \leq i \leq \nu \\
+%\end{cases}\, i=\nu+1,...,1
+%\end{equation}
+%\normalsize
+%
+%
+%
+%Sendo que a sobre-aceleração angular de arrastamento de cada uma das juntas é dada por:
+%\begin{equation}
+%\ddot{\vomega}_{\lllB_\nu \rl \lllB_{i}}^{\lllB_{i-1}} = 
+%\begin{cases}
+%\vzr, \;\;\;\;\;\;\; \text{junta prismática} \\
+%\dddot{q}_{i} \vk_{i-1}, \; \text{junta rotativa}
+%\end{cases}\, i=1,...,\nu
+%\end{equation}
+%
+%Fazendo as seguintes definições:
+%\begin{empheq}[box=\lightbluebox]{equation}
+%\ddot{\momega}_i = \vct{\ddot{\vomega}_{\lllB_\nu}^{\lllB_{i}} }_{\ttN}
+%\end{empheq}
+%
+%\begin{empheq}[box=\lightbluebox]{equation}
+%\ddot{\momega}^\star = \ddot{\momega}_0 = \vct{\ddot{\vomega}_{\lllB_\nu}^{\lllN} }_{\ttN}
+%\end{empheq}
+%
+%Temos que:
+%\begin{equation}
+%\vct{\ddot{\vomega}_{\lllB_{i}}^{\lllB_{i-1}} }_{\ttN} = \mj_{\omega\,i} \dddot{q}_{i} , \; i=1,...,\nu
+%\end{equation}
+%
+%\begin{empheq}[box=\myyellowbox]{equation}
+%\ddot{\momega}_{i-1} =
+%\begin{cases}
+%\mzr, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; i = \nu + 1 \\
+%\ddot{\momega}_i +  \mj_{\omega\,i} \dddot{q}_{i} + (\underaccent{\sim}{\ddot{\momega}})_i , \; 1 \leq i \leq \nu \\
+%\end{cases}\, i=\nu+1,...,1
+%\end{empheq}
+%
+%\begin{empheq}[box=\lightbluebox]{equation} \label{eq:d2omega_star_i}
+%\ddot{\momega}_i^\star(\mq,\dot{\mq},\ddot{\mq},\dddot{\mq}) = \mJ_\omega(\mq) \cdot \dddot{\mq} + \underaccent{\sim}{\ddot{\momega}}(\mq,\dot{\mq},\ddot{\mq})
+%\end{empheq}
+%
+%Sendo:
+%\begin{empheq}[box=\myyellowbox]{equation}
+%(\underaccent{\sim}{\ddot{\momega}})_i = \ddot{q}_i \mj_{\omega\,i} \wedge \momega_i + 2 \dot{q}_i \mj_{\omega\,i} \wedge \dot{\momega}_i + \dot{q}_i ^2 \mj_{\omega\,i} \wedge \mj_{\omega\,i} \wedge \momega_i
+%\end{empheq}
+%
+%\begin{empheq}[box=\myyellowbox]{equation}
+%\underaccent{\sim}{\ddot{\momega}} = \sum_{i=1}^\nu (\underaccent{\sim}{\ddot{\momega}})_i
+%\end{empheq}
+%
+%Para obter as sobre-acelerações angulares dos centros de massa dos ligamentos, seguimos a mesma linha de raciocínio e obtemos os seguintes resultados:
+%
+%Definindo:
+%\begin{empheq}[box=\lightbluebox]{equation}
+%\ddot{\momega}_{i,j} = \vct{\ddot{\vomega}_{\lllB_i}^{\lllB_{j}}}_{\ttN}
+%\end{empheq}
+%
+%\begin{empheq}[box=\lightbluebox]{equation}
+%\ddot{\momega}_i^\star = \ddot{\momega}_{i,0} = \vct{\ddot{\vomega}_{\lllB_i}^{\lllN} }_{\ttN}
+%\end{empheq}
+%
+%Temos:
+%\begin{empheq}[box=\myyellowbox]{equation}
+%\ddot{\momega}_{i,j-1} =
+%\begin{cases}
+%\mzr, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; j = i+1 \\
+%\ddot{\momega}_{i,j} + \mj_{\omega\,i,j} \dddot{q}_{j} + (\underaccent{\sim}{\ddot{\momega}}_i)_j, \; 1 \leq j \leq i \\
+%\end{cases}\, i=1,...,\nu, \, j=i+1,...,1
+%\end{empheq}
+%
+%\begin{empheq}[box=\lightbluebox]{equation}
+%\ddot{\momega}_i^\star(\mq,\dot{\mq},\ddot{\mq},\dddot{\mq}) = \mJ_{\omega\,i} (\mq) \cdot \dddot{\mq} + \underaccent{\sim}{\ddot{\momega}}_i (\mq,\dot{\mq},\ddot{\mq})
+%\end{empheq}
+%
+%Sendo:
+%\begin{empheq}[box=\myyellowbox]{equation}
+%(\underaccent{\sim}{\ddot{\momega}}_i)_j =  \ddot{q}_j \mj_{\omega\,i,j} \wedge \momega_{i,j} + 2 \dot{q}_j \mj_{\omega\,i,j} \wedge \dot{\momega}_{i,j} + \dot{q}_j ^2 \mj_{\omega\,i,j} \wedge \mj_{\omega\,i,j} \wedge \momega_{i,j}
+%\end{empheq}
+%
+%\begin{empheq}[box=\myyellowbox]{equation}
+%\underaccent{\sim}{\ddot{\momega}}_i = \sum_{j=1}^i  (\underaccent{\sim}{\ddot{\momega}}_i)_j
+%\end{empheq}
 
-
-
-Sendo que a sobre-aceleração angular de arrastamento de cada uma das juntas é dada por:
-\begin{equation}
-\ddot{\vomega}_{\lllB_\nu \rl \lllB_{i}}^{\lllB_{i-1}} = 
-\begin{cases}
-\vzr, \;\;\;\;\;\;\; \text{junta prismática} \\
-\dddot{q}_{i} \vk_{i-1}, \; \text{junta rotativa}
-\end{cases}\, i=1,...,\nu
-\end{equation}
-
-Fazendo as seguintes definições:
-\begin{empheq}[box=\lightbluebox]{equation}
-\ddot{\momega}_i = \vct{\ddot{\vomega}_{\lllB_\nu}^{\lllB_{i}} }_{\ttN}
-\end{empheq}
-
-\begin{empheq}[box=\lightbluebox]{equation}
-\ddot{\momega}^\star = \ddot{\momega}_0 = \vct{\ddot{\vomega}_{\lllB_\nu}^{\lllN} }_{\ttN}
-\end{empheq}
-
-Temos que:
-\begin{equation}
-\vct{\ddot{\vomega}_{\lllB_{i}}^{\lllB_{i-1}} }_{\ttN} = \mj_{\omega\,i} \dddot{q}_{i} , \; i=1,...,\nu
-\end{equation}
-
-\begin{empheq}[box=\myyellowbox]{equation}
-\ddot{\momega}_{i-1} =
-\begin{cases}
-\mzr, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; i = \nu + 1 \\
-\ddot{\momega}_i +  \mj_{\omega\,i} \dddot{q}_{i} + (\underaccent{\sim}{\ddot{\momega}})_i , \; 1 \leq i \leq \nu \\
-\end{cases}\, i=\nu+1,...,1
-\end{empheq}
-
-\begin{empheq}[box=\lightbluebox]{equation} \label{eq:d2omega_star_i}
-\ddot{\momega}_i^\star(\mq,\dot{\mq},\ddot{\mq},\dddot{\mq}) = \mJ_\omega(\mq) \cdot \dddot{\mq} + \underaccent{\sim}{\ddot{\momega}}(\mq,\dot{\mq},\ddot{\mq})
-\end{empheq}
-
-Sendo:
-\begin{empheq}[box=\myyellowbox]{equation}
-(\underaccent{\sim}{\ddot{\momega}})_i = \ddot{q}_i \mj_{\omega\,i} \wedge \momega_i + 2 \dot{q}_i \mj_{\omega\,i} \wedge \dot{\momega}_i + \dot{q}_i ^2 \mj_{\omega\,i} \wedge \mj_{\omega\,i} \wedge \momega_i
-\end{empheq}
-
-\begin{empheq}[box=\myyellowbox]{equation}
-\underaccent{\sim}{\ddot{\momega}} = \sum_{i=1}^\nu (\underaccent{\sim}{\ddot{\momega}})_i
-\end{empheq}
-
-Para obter as sobre-acelerações angulares dos centros de massa dos ligamentos, seguimos a mesma linha de raciocínio e obtemos os seguintes resultados:
-
-Definindo:
-\begin{empheq}[box=\lightbluebox]{equation}
-\ddot{\momega}_{i,j} = \vct{\ddot{\vomega}_{\lllB_i}^{\lllB_{j}}}_{\ttN}
-\end{empheq}
-
-\begin{empheq}[box=\lightbluebox]{equation}
-\ddot{\momega}_i^\star = \ddot{\momega}_{i,0} = \vct{\ddot{\vomega}_{\lllB_i}^{\lllN} }_{\ttN}
-\end{empheq}
-
-Temos:
-\begin{empheq}[box=\myyellowbox]{equation}
-\ddot{\momega}_{i,j-1} =
-\begin{cases}
-\mzr, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; j = i+1 \\
-\ddot{\momega}_{i,j} + \mj_{\omega\,i,j} \dddot{q}_{j} + (\underaccent{\sim}{\ddot{\momega}}_i)_j, \; 1 \leq j \leq i \\
-\end{cases}\, i=1,...,\nu, \, j=i+1,...,1
-\end{empheq}
-
-\begin{empheq}[box=\lightbluebox]{equation}
-\ddot{\momega}_i^\star(\mq,\dot{\mq},\ddot{\mq},\dddot{\mq}) = \mJ_{\omega\,i} (\mq) \cdot \dddot{\mq} + \underaccent{\sim}{\ddot{\momega}}_i (\mq,\dot{\mq},\ddot{\mq})
-\end{empheq}
-
-Sendo:
-\begin{empheq}[box=\myyellowbox]{equation}
-(\underaccent{\sim}{\ddot{\momega}}_i)_j =  \ddot{q}_j \mj_{\omega\,i,j} \wedge \momega_{i,j} + 2 \dot{q}_j \mj_{\omega\,i,j} \wedge \dot{\momega}_{i,j} + \dot{q}_j ^2 \mj_{\omega\,i,j} \wedge \mj_{\omega\,i,j} \wedge \momega_{i,j}
-\end{empheq}
-
-\begin{empheq}[box=\myyellowbox]{equation}
-\underaccent{\sim}{\ddot{\momega}}_i = \sum_{j=1}^i  (\underaccent{\sim}{\ddot{\momega}}_i)_j
-\end{empheq}
+%\newpage
 
 \subsubsection{Dinâmica}\label{S05-02-02}
 
@@ -1972,288 +1972,288 @@ m_i \mJ_{v\,i}^\msT \mJ_{v\,i} + \mJ_{\omega\,i}^\msT \mI_i \mJ_{\omega\,i}
 \mg(\mq) = - \sum_{i=1}^\nu m_i \mJ_{v\,i}^\msT \mgamma
 \end{equation}
 
-\subsubsubsection{Equações Dinâmicas de Ordem Superior} \label{S05-02-02-02}
-
-Em alguns casos a obtenção do o modelo dinâmico de ordem superior (derivada do modelo dinâmico) pode ser vantajosa, tendo em vista que pode ser utilizado para obter leis de controle mais suaves, realizar o controle de posição diretamente pela tensão elétrica aplicada nos atuadores (sem a necessidade do controle de corrente), ou obter o modelo dinâmico linearizado em torno de uma trajetória. Essas aplicações serão exploradas no capítulo [???]. \\
-
-Derivando \eqref{eq:ModeloMecSerial}, temos:
-
-\begin{empheq}[box=\mybluebox]{equation} \label{eq:ModeloMecSerialD}
-\mM(\mq) \dddot{\mq} + \mh(\mq, \dot{\mq}, \ddot{\mq}) = \dot{\mu}
-\end{empheq}
-
-Sendo:
-\begin{empheq}[box=\lightbluebox]{equation}
-\mh(\mq, \dot{\mq}, \ddot{\mq}) = \dot{\mM}(\mq, \dot{\mq}) \ddot{\mq} + \dot{\mnu}(\mq, \dot{\mq}, \ddot{\mq}) + \dot{\mg}(\mq,\dot{\mq})
-\end{empheq}
-
-A obtenção de $\mh(\mq, \dot{\mq}, \ddot{\mq})$ através da derivação temporal direta das equações \eqref{eq:MSerial}, \eqref{eq:vSerial} e \eqref{eq:gSerial} é possível, porém um tanto quanto complexa. Uma maneira mais simples seria realizar a derivada temporal da equação \eqref{eq:u_Jtfcir}, ou seja:
-\begin{equation} \label{eq:eq_dinamicas_3D}
-\dot{\mu} + \mJ^\msT \dot{\mf}\cir + \dot{\mJ}^\msT \mf\cir = \mzr
-\end{equation}
-
-%Sendo assim, para obter o modelo dinâmico de ordem superior, será mais uma vez adotada uma estratágia inspirada no Método Orsino. 
-
-Substituindo \eqref{eq:J} e \eqref{eq:fcir} em \eqref{eq:eq_dinamicas_3D}, o modelo dinâmico de ordem superior do mecanismo serial pode ser escrito como:
-\begin{equation} \label{eq:ModeloDinâmicoSerialSomatorioD}
-\dot{\mu} + \sum_{i=1}^\nu \mJ_i^\msT \dot{\mf}_i + \dot{\mJ}_i^\msT \mf_i  = \mzr
-\end{equation}
-
-Para obter $\dot{\mf}_i$, serão realizadas as derivadas temporais das equações de Newton-Euler. Derivando o equação do TMB do centro de massa de cada ligamente no tempo, temos:
-\begin{equation}
-\frac{\dd^{[\llN]}}{\dd t} \Big( m_i \va^{\lllN}_{\ttg_i} - m_i \vg - \vf_{r\,i} \Big) =  m_i \dot{\va}^{\lllN}_{\ttg_i} - \dot{\vf}_{r\,i} = \vzr \\
-\end{equation}
-\begin{empheq}[box=\almondbox]{equation}
- m_i \dot{\va}^{\lllN}_{\ttg_i} = \dot{\vf}_{r\,i} 
-\end{empheq}
-
-Agora, derivando o equação do TMA de cada ligamento no tempo, temos:
-\begin{equation}
-\frac{\dd^{[\llN]}}{\dd t} \Big( \vI_{\ttg_i} \cdot \dot{\vomega}^{\lllN}_{\lllB_i} + \vomega^{\lllN}_{\lllB_i} \wedge (\vI_{\ttg_i} \cdot \vomega^{\lllN}_{\lllB_i}) - \vtau_{r\,i} \Big) = \vzr
-\end{equation}
-
-Utilizando \eqref{eq:derivada_vetor}, \eqref{eq:composicao_wCA} e \eqref{eq:composicao_dwCA}, temos:
-\begin{equation}
-\frac{\dd^{[\llB_i]}}{\dd t} \Big( -\vI_{\ttg_i} \cdot \dot{\vomega}^{\lllB_i}_{\lllN} + \vomega^{\lllB_i}_{\lllN} \wedge (\vI_{\ttg_i} \cdot \vomega^{\lllB_i}_{\lllN}) \Big) + \vomega^{\lllN}_{\lllB_i} \wedge \Big( \vI_{\ttg_i} \cdot \dot{\vomega}^{\lllN}_{\lllB_i} + \vomega^{\lllN}_{\lllB_i} \wedge (\vI_{\ttg_i} \cdot \vomega^{\lllN}_{\lllB_i}) \Big) \\
-$$
-$$
-= -\vI_{\ttg_i} \cdot \ddot{\vomega}^{\lllB_i}_{\lllN} + \dot{\vomega}^{\lllB_i}_{\lllN} \wedge (\vI_{\ttg_i} \cdot \vomega^{\lllB_i}_{\lllN}) + \vomega^{\lllB_i}_{\lllN} \wedge (\vI_{\ttg_i} \cdot \dot{\vomega}^{\lllB_i}_{\lllN}) + \vomega^{\lllN}_{\lllB_i} \wedge \Big( \vI_{\ttg_i} \cdot \dot{\vomega}^{\lllN}_{\lllB_i} + \vomega^{\lllN}_{\lllB_i} \wedge (\vI_{\ttg_i} \cdot \vomega^{\lllN}_{\lllB_i}) \Big) = \dot{\vtau}_{r\,i}
-\end{equation}
-
-Finalmente, utilizando \eqref{eq:composicao_wCA}, \eqref{eq:composicao_dwCA} e \eqref{eq:composicao_d2wCA}, temos:
-\begin{empheq}[box=\almondbox]{equation}
-\begin{split}
-\vI_{\ttg_i} \cdot (\ddot{\vomega}^{\lllN}_{\lllB_i} + \dot{\vomega}^{\lllN}_{\lllB_i} \wedge \vomega^{\lllN}_{\lllB_i}) &+ \dot{\vomega}^{\lllN}_{\lllB_i} \wedge (\vI_{\ttg_i} \cdot \vomega^{\lllN}_{\lllB_i}) + 2\vomega^{\lllN}_{\lllB_i} \wedge (\vI_{\ttg_i} \cdot \dot{\vomega}^{\lllN}_{\lllB_i}) \\
- &+ \vomega^{\lllN}_{\lllB_i} \wedge  \vomega^{\lllN}_{\lllB_i} \wedge (\vI_{\ttg_i} \cdot \vomega^{\lllN}_{\lllB_i})  = \dot{\vtau}_{r\,i}
-\end{split}
-\end{empheq}
-
-Ou seja, as derivadas temporais das equações de Newton-Euler para cada ligamento são dadas por:
-\begin{equation}
-\begin{cases}
-m_i \dot{\va}^{\lllN}_{\ttg_i} = \dot{\vf}_{r\,i}  \\
-\vI_{\ttg_i} \cdot (\ddot{\vomega}^{\lllN}_{\lllB_i} + \dot{\vomega}^{\lllN}_{\lllB_i} \wedge \vomega^{\lllN}_{\lllB_i}) + \dot{\vomega}^{\lllN}_{\lllB_i} \wedge (\vI_{\ttg_i} \cdot \vomega^{\lllN}_{\lllB_i}) + 2\vomega^{\lllN}_{\lllB_i} \wedge (\vI_{\ttg_i} \cdot \dot{\vomega}^{\lllN}_{\lllB_i}) + \vomega^{\lllN}_{\lllB_i} \wedge  \vomega^{\lllN}_{\lllB_i} \wedge (\vI_{\ttg_i} \cdot \vomega^{\lllN}_{\lllB_i})  = \dot{\vtau}_{r\,i}
-\end{cases}\, i = 1,...,\nu
-\end{equation}
-
-Aplicando as equações vetoriais no sistema $\ttN$, temos:
-\begin{equation} \label{eq:Newton-EulerMat2D}
-\begin{bmatrix}
-m_i \mone & \mzr \\
-\mzr      & \mI_i
-\end{bmatrix}
-\cdot
-\begin{bmatrix}
-\dot{\ma}^\star_i  \\
-\ddot{\momega}^\star_i
-\end{bmatrix}
-+
-\begin{bmatrix}
-\mzr \\
-\mI_i (\dot{\momega}^\star_i \wedge \momega^\star_i) + \dot{\momega}^\star_i \wedge (\mI_i \cdot \momega^\star_i) + 2\momega^\star_i \wedge (\mI_i \cdot \dot{\momega}^\star_i) + \momega^\star_i \wedge \momega^\star_i \wedge (\mI_i \cdot \momega^\star_i)
-\end{bmatrix}
-=
-\dot{\mf}_{r\,i}
-\end{equation}
-
-Derivando \eqref{eq:fi_plus_fri} e comparando com \eqref{eq:Newton-EulerMat2D}, temos que:
-
-\begin{equation} \label{eq:df_i}
-\dot{\mf}_i = 
--\begin{bmatrix}
-m_i \mone & \mzr \\
-\mzr      & \mI_i
-\end{bmatrix}
-\cdot
-\begin{bmatrix}
-\dot{\ma}^\star_i  \\
-\ddot{\momega}^\star_i
-\end{bmatrix}
--
-\begin{bmatrix}
-\mzr \\
-\mI_i (\dot{\momega}^\star_i \wedge \momega^\star_i) + \dot{\momega}^\star_i \wedge (\mI_i \cdot \momega^\star_i) + 2\momega^\star_i \wedge (\mI_i \cdot \dot{\momega}^\star_i) + \momega^\star_i \wedge \momega^\star_i \wedge (\mI_i \cdot \momega^\star_i)
-\end{bmatrix}
-\end{equation}
-
-Portanto, substituindo \eqref{eq:df_i} e \eqref{eq:f_i} em \eqref{eq:ModeloDinâmicoSerialSomatorioD}, temos:
-
-\footnotesize
-\begin{equation} \label{eq:ModeloDinâmicoSerialSomatorio2}
-\begin{split}
-\sum_{i=1}^\nu
-\begin{bmatrix}
-\mJ_{v\,i} \\
-\mJ_{\omega\,i}
-\end{bmatrix}^\msT
-&\begin{Bmatrix}
-\begin{bmatrix}
-m_i \mone & \mzr \\
-\mzr      & \mI_i
-\end{bmatrix}
-\cdot
-\begin{bmatrix}
-\dot{\ma}^\star_i  \\
-\ddot{\momega}^\star_i
-\end{bmatrix}
-+
-\begin{bmatrix}
-\mzr \\
-\mI_i (\dot{\momega}^\star_i \wedge \momega^\star_i) + \dot{\momega}^\star_i \wedge (\mI_i \cdot \momega^\star_i) + 2\momega^\star_i \wedge (\mI_i \cdot \dot{\momega}^\star_i) + \momega^\star_i \wedge \momega^\star_i \wedge (\mI_i \cdot \momega^\star_i)
-\end{bmatrix} 
-\end{Bmatrix} \\
-+
-\begin{bmatrix}
-\dot{\mJ}_{v\,i} \\
-\dot{\mJ}_{\omega\,i}
-\end{bmatrix}^\msT
-&\begin{Bmatrix}
-\begin{bmatrix}
-m_i \mone & \mzr \\
-\mzr      & \mI_i
-\end{bmatrix}
-\cdot
-\begin{bmatrix}
-\ma^\star_i  \\
-\dot{\momega}^\star_i
-\end{bmatrix}
-+
-\begin{bmatrix}
-\mzr \\
-\momega^\star_i \wedge (\mI_i \cdot \momega^\star_i)
-\end{bmatrix}
-+
-\begin{bmatrix}
--m_i \mgamma \\
-\mzr
-\end{bmatrix}
-\end{Bmatrix}
-=\dot{\mu}
-\end{split}
-\end{equation}
-\normalsize
-
-Substituindo \eqref{eq:a_star_i}, \eqref{eq:domega_star_i}, \eqref{eq:da_star_i} e \eqref{eq:d2omega_star_i} em \eqref{eq:ModeloDinâmicoSerialSomatorio2}, temos:
-
-\footnotesize
-\begin{equation} \label{eq:ModeloDinâmicoSerialSomatorio3}
-\begin{split}
-\sum_{i=1}^\nu
-\begin{bmatrix}
-\mJ_{v\,i} \\
-\mJ_{\omega\,i}
-\end{bmatrix}^\msT
-&\begin{Bmatrix}
-\begin{bmatrix}
-m_i \mone & \mzr \\
-\mzr      & \mI_i
-\end{bmatrix}
-\cdot
-\begin{bmatrix}
-\mJ_{v\,i} \dddot{\mq} +  \underaccent{\sim}{\dot{\ma}}_i  \\
-\mJ_{\omega\,i} \dddot{\mq} + \underaccent{\sim}{\ddot{\momega}}_i
-\end{bmatrix}
-+
-\begin{bmatrix}
-\mzr \\
-\mI_i (\dot{\momega}^\star_i \wedge \momega^\star_i) + \dot{\momega}^\star_i \wedge (\mI_i \cdot \momega^\star_i) + 2\momega^\star_i \wedge (\mI_i \cdot \dot{\momega}^\star_i) + \momega^\star_i \wedge \momega^\star_i \wedge (\mI_i \cdot \momega^\star_i)
-\end{bmatrix} 
-\end{Bmatrix} \\
-+
-\begin{bmatrix}
-\dot{\mJ}_{v\,i} \\
-\dot{\mJ}_{\omega\,i}
-\end{bmatrix}^\msT
-&\begin{Bmatrix}
-\begin{bmatrix}
-m_i \mone & \mzr \\
-\mzr      & \mI_i
-\end{bmatrix}
-\cdot
-\begin{bmatrix}
-\mJ_{v\,i} \ddot{\mq} +  \underaccent{\sim}{\ma}_i  \\
-\mJ_{\omega\,i} \ddot{\mq} + \underaccent{\sim}{\dot{\momega}}_i
-\end{bmatrix}
-+
-\begin{bmatrix}
-\mzr \\
-\momega^\star_i \wedge (\mI_i \cdot \momega^\star_i)
-\end{bmatrix}
-+
-\begin{bmatrix}
--m_i \mgamma \\
-\mzr
-\end{bmatrix}
-\end{Bmatrix}
-=\dot{\mu}
-\end{split}
-\end{equation}
-\normalsize
-
-Realizando o produto das matrizes, temos:
-%e utilizando a definição de $\mM(\mq)$ \eqref{eq:MSerial},
-
-\begin{equation} \label{eq:ModeloMecSerialDaux}
-\begin{split}
-\sum_{i=1}^\nu \Big( &m_i \mJ_{v\,i}^\msT \mJ_{v\,i} + \mJ_{\omega\,i}^\msT \mI_i \mJ_{\omega\,i} \Big) \dddot{\mq}  \\ +  &m_i \mJ_{v\,i}^\msT \, \underaccent{\sim}{\dot{\ma}}_i + \mJ_{\omega\,i}^\msT \Big( \mI_i (\underaccent{\sim}{\ddot{\momega}}_i + \dot{\momega}^\star_i \wedge \momega^\star_i) + \dot{\momega}^\star_i \wedge (\mI_i \cdot \momega^\star_i) + 2\momega^\star_i \wedge (\mI_i \cdot \dot{\momega}^\star_i) + \momega^\star_i \wedge \momega^\star_i \wedge (\mI_i \cdot \momega^\star_i)  \Big) \\ + &m_i \dot{\mJ}_{v\,i}^\msT \Big(\ma^\star_i - \mgamma \Big) + \dot{\mJ}_{\omega\,i}^\msT \Big( \mI_i \dot{\momega}^\star_i   + \momega^\star_i \wedge (\mI_i \cdot \momega^\star_i)  \Big) = \dot{\mu}
-\end{split}
-\end{equation}
-
-Portanto, comparando \eqref{eq:ModeloMecSerialDaux} com \eqref{eq:ModeloMecSerialD} e \eqref{eq:MSerial}, temos que:
-\small
-\begin{empheq}[box=\myyellowbox]{equation} \label{eq:h_}
-\begin{split}
-\mh = \sum_{i=1}^\nu  &m_i \mJ_{v\,i}^\msT \, \underaccent{\sim}{\dot{\ma}}_i + \mJ_{\omega\,i}^\msT \Big( \mI_i (\underaccent{\sim}{\ddot{\momega}}_i + \dot{\momega}^\star_i \wedge \momega^\star_i) + \dot{\momega}^\star_i \wedge (\mI_i \cdot \momega^\star_i) + 2\momega^\star_i \wedge (\mI_i \cdot \dot{\momega}^\star_i) + \momega^\star_i \wedge \momega^\star_i \wedge (\mI_i \cdot \momega^\star_i)  \Big) \\ + &m_i \dot{\mJ}_{v\,i}^\msT \Big(\ma^\star_i - \mgamma \Big) + \dot{\mJ}_{\omega\,i}^\msT \Big( \mI_i \dot{\momega}^\star_i   + \momega^\star_i \wedge (\mI_i \cdot \momega^\star_i)  \Big)
-\end{split}
-\end{empheq}
-\normalsize
-
-\subsubsubsection{Derivada dos Jacobianos} \label{S05-02-02-03}
-
-Para tornar possível a utilização da equação \eqref{eq:h_}, será necessário obter as derivadas dos jacobianos. A partir das equações \eqref{eq:jvi_}, \eqref{eq:jvij_}, \eqref{eq:jwi_} e \eqref{eq:jwij_}, podemos obter as derivadas dos jacobianos calculando as seguintes derivadas vetoriais:
-\begin{equation} \label{eq:derivada_k_aux}
-\frac{\dd^{[\llN]} \vk_{i-1}}{\dd t} 
-\end{equation}
-\begin{equation} \label{eq:derivada_kvet1_aux}
-\frac{\dd^{[\llN]}}{\dd t} \Big( \vk_{i-1} \wedge \vr_{\tto_{i-1} | \ttx}   \Big)
-\end{equation}
-\begin{equation} \label{eq:derivada_kvet2_aux}
-\frac{\dd^{[\llN]}}{\dd t} \Big( \vk_{j-1} \wedge \vr_{\tto_{j-1} | \ttg_i}   \Big) 
-\end{equation}
-
-Utilizando a definição da derivada de versores \eqref{eq:derivada_versor} em \eqref{eq:derivada_k_aux}, temos:
-\begin{empheq}[box=\almondbox]{equation} \label{eq:derivada_k}
-\frac{\dd^{[\llN]} \vk_{i-1}}{\dd t} = \vomega_{\lllB_{i-1}}^{\lllN} \wedge \vk_{i-1}
-\end{empheq}
-
-Utilizando \eqref{eq:derivada_k} e \eqref{eq:derivada_vetor} em \eqref{eq:derivada_kvet1_aux}, temos:
-\begin{equation}
-\frac{\dd^{[\llN]}}{\dd t} \Big( \vk_{i-1} \wedge \vr_{\tto_{i-1} | \ttx}   \Big) = (\vomega_{\lllB_{i-1}}^{\lllN} \wedge \vk_{i-1}) \wedge \vr_{\tto_{i-1} | \ttx} + \vk_{i-1} \wedge \Big(\vomega_{\lllB_{i-1}}^{\lllN} \wedge \vr_{\tto_{i-1} | \ttx} + \vv_\ttx^{\lllB_{i-1}}   \Big)
-\end{equation}
-
-Utilizando a propriedade do produto vetorial entre 3 vetores \eqref{eq:prodvet3}, temos:
-\begin{empheq}[box=\almondbox]{equation} \label{eq:derivada_kvet1}
-\frac{\dd^{[\llN]}}{\dd t} \Big( \vk_{i-1} \wedge \vr_{\tto_{i-1} | \ttx}   \Big) = \vomega_{\lllB_{i-1}}^{\lllN}  \wedge \vk_{i-1}  \wedge \vr_{\tto_{i-1} | \ttx} + \vk_{i-1} \wedge \vv_\ttx^{\lllB_{i-1}}  
-\end{empheq}
-
-Analogamente para \eqref{eq:derivada_kvet2_aux}, temos:
-\begin{empheq}[box=\almondbox]{equation} \label{eq:derivada_kvet2}
-\frac{\dd^{[\llN]}}{\dd t} \Big( \vk_{j-1} \wedge \vr_{\tto_{j-1} | \ttg_i}   \Big)  = \vomega_{\lllB_{j-1}}^{\lllN}  \wedge \vk_{j-1}  \wedge \vr_{\tto_{j-1} | \ttg_i} + \vk_{j-1} \wedge \vv_{\ttg_{i}}^{\lllB_{j-1}}  
-\end{empheq}
-
-Sendo assim, pode-se concluir que as derivadas das colunas dos jacobianos são dadas por:
-\begin{empheq}[box=\myyellowbox]{equation}
-\dot{\mj}_{v\,i} = \momega^\star_{i-1} \wedge \mj_{v\,i} + \mj_{\omega\,i} \wedge \mv_{i-1}
-\end{empheq}
-\begin{empheq}[box=\myyellowbox]{equation}
-\dot{\mj}_{v\,i,j} = \momega^\star_{j-1} \wedge \mj_{v\,i,j} + \mj_{\omega\,i,j} \wedge \mv_{i,j-1}
-\end{empheq}
-\begin{empheq}[box=\myyellowbox]{equation}
-\dot{\mj}_{\omega\,i} = \momega^\star_{i-1} \wedge \mj_{\omega\,i} 
-\end{empheq}
-\begin{empheq}[box=\myyellowbox]{equation}
-\dot{\mj}_{\omega\,i,j} = \momega^\star_{j-1} \wedge \mj_{\omega\,i,j}
-\end{empheq}
+%\subsubsubsection{Equações Dinâmicas de Ordem Superior} \label{S05-02-02-02}
+%
+%Em alguns casos a obtenção do o modelo dinâmico de ordem superior (derivada do modelo dinâmico) pode ser vantajosa, tendo em vista que pode ser utilizado para obter leis de controle mais suaves, realizar o controle de posição diretamente pela tensão elétrica aplicada nos atuadores (sem a necessidade do controle de corrente), ou obter o modelo dinâmico linearizado em torno de uma trajetória. Essas aplicações serão exploradas no capítulo [???]. \\
+%
+%Derivando \eqref{eq:ModeloMecSerial}, temos:
+%
+%\begin{empheq}[box=\mybluebox]{equation} \label{eq:ModeloMecSerialD}
+%\mM(\mq) \dddot{\mq} + \mh(\mq, \dot{\mq}, \ddot{\mq}) = \dot{\mu}
+%\end{empheq}
+%
+%Sendo:
+%\begin{empheq}[box=\lightbluebox]{equation}
+%\mh(\mq, \dot{\mq}, \ddot{\mq}) = \dot{\mM}(\mq, \dot{\mq}) \ddot{\mq} + \dot{\mnu}(\mq, \dot{\mq}, \ddot{\mq}) + \dot{\mg}(\mq,\dot{\mq})
+%\end{empheq}
+%
+%A obtenção de $\mh(\mq, \dot{\mq}, \ddot{\mq})$ através da derivação temporal direta das equações \eqref{eq:MSerial}, \eqref{eq:vSerial} e \eqref{eq:gSerial} é possível, porém um tanto quanto complexa. Uma maneira mais simples seria realizar a derivada temporal da equação \eqref{eq:u_Jtfcir}, ou seja:
+%\begin{equation} \label{eq:eq_dinamicas_3D}
+%\dot{\mu} + \mJ^\msT \dot{\mf}\cir + \dot{\mJ}^\msT \mf\cir = \mzr
+%\end{equation}
+%
+%%Sendo assim, para obter o modelo dinâmico de ordem superior, será mais uma vez adotada uma estratágia inspirada no Método Orsino. 
+%
+%Substituindo \eqref{eq:J} e \eqref{eq:fcir} em \eqref{eq:eq_dinamicas_3D}, o modelo dinâmico de ordem superior do mecanismo serial pode ser escrito como:
+%\begin{equation} \label{eq:ModeloDinâmicoSerialSomatorioD}
+%\dot{\mu} + \sum_{i=1}^\nu \mJ_i^\msT \dot{\mf}_i + \dot{\mJ}_i^\msT \mf_i  = \mzr
+%\end{equation}
+%
+%Para obter $\dot{\mf}_i$, serão realizadas as derivadas temporais das equações de Newton-Euler. Derivando o equação do TMB do centro de massa de cada ligamente no tempo, temos:
+%\begin{equation}
+%\frac{\dd^{[\llN]}}{\dd t} \Big( m_i \va^{\lllN}_{\ttg_i} - m_i \vg - \vf_{r\,i} \Big) =  m_i \dot{\va}^{\lllN}_{\ttg_i} - \dot{\vf}_{r\,i} = \vzr \\
+%\end{equation}
+%\begin{empheq}[box=\almondbox]{equation}
+% m_i \dot{\va}^{\lllN}_{\ttg_i} = \dot{\vf}_{r\,i} 
+%\end{empheq}
+%
+%Agora, derivando o equação do TMA de cada ligamento no tempo, temos:
+%\begin{equation}
+%\frac{\dd^{[\llN]}}{\dd t} \Big( \vI_{\ttg_i} \cdot \dot{\vomega}^{\lllN}_{\lllB_i} + \vomega^{\lllN}_{\lllB_i} \wedge (\vI_{\ttg_i} \cdot \vomega^{\lllN}_{\lllB_i}) - \vtau_{r\,i} \Big) = \vzr
+%\end{equation}
+%
+%Utilizando \eqref{eq:derivada_vetor}, \eqref{eq:composicao_wCA} e \eqref{eq:composicao_dwCA}, temos:
+%\begin{equation}
+%\frac{\dd^{[\llB_i]}}{\dd t} \Big( -\vI_{\ttg_i} \cdot \dot{\vomega}^{\lllB_i}_{\lllN} + \vomega^{\lllB_i}_{\lllN} \wedge (\vI_{\ttg_i} \cdot %\vomega^{\lllB_i}_{\lllN}) \Big) + \vomega^{\lllN}_{\lllB_i} \wedge \Big( \vI_{\ttg_i} \cdot \dot{\vomega}^{\lllN}_{\lllB_i} + \vomega^{\lllN}_{\lllB_i} \wedge (\vI_{\ttg_i} \cdot \vomega^{\lllN}_{\lllB_i}) \Big) \\
+%$$
+%$$
+%= -\vI_{\ttg_i} \cdot \ddot{\vomega}^{\lllB_i}_{\lllN} + \dot{\vomega}^{\lllB_i}_{\lllN} \wedge (\vI_{\ttg_i} \cdot \vomega^{\lllB_i}_{\lllN}) + \vomega^{\lllB_i}_{\lllN} \wedge (\vI_{\ttg_i} \cdot \dot{\vomega}^{\lllB_i}_{\lllN}) + \vomega^{\lllN}_{\lllB_i} \wedge \Big( \vI_{\ttg_i} \cdot \dot{\vomega}^{\lllN}_{\lllB_i} + \vomega^{\lllN}_{\lllB_i} \wedge (\vI_{\ttg_i} \cdot \vomega^{\lllN}_{\lllB_i}) \Big) = \dot{\vtau}_{r\,i}
+%\end{equation}
+%
+%Finalmente, utilizando \eqref{eq:composicao_wCA}, \eqref{eq:composicao_dwCA} e \eqref{eq:composicao_d2wCA}, temos:
+%\begin{empheq}[box=\almondbox]{equation}
+%\begin{split}
+%\vI_{\ttg_i} \cdot (\ddot{\vomega}^{\lllN}_{\lllB_i} + \dot{\vomega}^{\lllN}_{\lllB_i} \wedge \vomega^{\lllN}_{\lllB_i}) &+ \dot{\vomega}^{\lllN}_{\lllB_i} \wedge (\vI_{\ttg_i} \cdot \vomega^{\lllN}_{\lllB_i}) + 2\vomega^{\lllN}_{\lllB_i} \wedge (\vI_{\ttg_i} \cdot \dot{\vomega}^{\lllN}_{\lllB_i}) \\
+% &+ \vomega^{\lllN}_{\lllB_i} \wedge  \vomega^{\lllN}_{\lllB_i} \wedge (\vI_{\ttg_i} \cdot \vomega^{\lllN}_{\lllB_i})  = \dot{\vtau}_{r\,i}
+%\end{split}
+%\end{empheq}
+%
+%Ou seja, as derivadas temporais das equações de Newton-Euler para cada ligamento são dadas por:
+%\begin{equation}
+%\begin{cases}
+%m_i \dot{\va}^{\lllN}_{\ttg_i} = \dot{\vf}_{r\,i}  \\
+%\vI_{\ttg_i} \cdot (\ddot{\vomega}^{\lllN}_{\lllB_i} + \dot{\vomega}^{\lllN}_{\lllB_i} \wedge \vomega^{\lllN}_{\lllB_i}) + \dot{\vomega}^{\lllN}_{\lllB_i} \wedge (\vI_{\ttg_i} \cdot \vomega^{\lllN}_{\lllB_i}) + 2\vomega^{\lllN}_{\lllB_i} \wedge (\vI_{\ttg_i} \cdot \dot{\vomega}^{\lllN}_{\lllB_i}) + \vomega^{\lllN}_{\lllB_i} \wedge  \vomega^{\lllN}_{\lllB_i} \wedge (\vI_{\ttg_i} \cdot \vomega^{\lllN}_{\lllB_i})  = \dot{\vtau}_{r\,i}
+%\end{cases}\, i = 1,...,\nu
+%\end{equation}
+%
+%Aplicando as equações vetoriais no sistema $\ttN$, temos:
+%\begin{equation} \label{eq:Newton-EulerMat2D}
+%\begin{bmatrix}
+%m_i \mone & \mzr \\
+%\mzr      & \mI_i
+%\end{bmatrix}
+%\cdot
+%\begin{bmatrix}
+%\dot{\ma}^\star_i  \\
+%\ddot{\momega}^\star_i
+%\end{bmatrix}
+%+
+%\begin{bmatrix}
+%\mzr \\
+%\mI_i (\dot{\momega}^\star_i \wedge \momega^\star_i) + \dot{\momega}^\star_i \wedge (\mI_i \cdot \momega^\star_i) + 2\momega^\star_i \wedge (\mI_i \cdot \dot{\momega}^\star_i) + \momega^\star_i \wedge \momega^\star_i \wedge (\mI_i \cdot \momega^\star_i)
+%\end{bmatrix}
+%=
+%\dot{\mf}_{r\,i}
+%\end{equation}
+%
+%Derivando \eqref{eq:fi_plus_fri} e comparando com \eqref{eq:Newton-EulerMat2D}, temos que:
+%
+%\begin{equation} \label{eq:df_i}
+%\dot{\mf}_i = 
+%-\begin{bmatrix}
+%m_i \mone & \mzr \\
+%\mzr      & \mI_i
+%\end{bmatrix}
+%\cdot
+%\begin{bmatrix}
+%\dot{\ma}^\star_i  \\
+%\ddot{\momega}^\star_i
+%\end{bmatrix}
+%-
+%\begin{bmatrix}
+%\mzr \\
+%\mI_i (\dot{\momega}^\star_i \wedge \momega^\star_i) + \dot{\momega}^\star_i \wedge (\mI_i \cdot \momega^\star_i) + 2\momega^\star_i \wedge (\mI_i \cdot \dot{\momega}^\star_i) + \momega^\star_i \wedge \momega^\star_i \wedge (\mI_i \cdot \momega^\star_i)
+%\end{bmatrix}
+%\end{equation}
+%
+%Portanto, substituindo \eqref{eq:df_i} e \eqref{eq:f_i} em \eqref{eq:ModeloDinâmicoSerialSomatorioD}, temos:
+%
+%\footnotesize
+%\begin{equation} \label{eq:ModeloDinâmicoSerialSomatorio2}
+%\begin{split}
+%\sum_{i=1}^\nu
+%\begin{bmatrix}
+%\mJ_{v\,i} \\
+%\mJ_{\omega\,i}
+%\end{bmatrix}^\msT
+%&\begin{Bmatrix}
+%\begin{bmatrix}
+%m_i \mone & \mzr \\
+%\mzr      & \mI_i
+%\end{bmatrix}
+%\cdot
+%\begin{bmatrix}
+%\dot{\ma}^\star_i  \\
+%\ddot{\momega}^\star_i
+%\end{bmatrix}
+%+
+%\begin{bmatrix}
+%\mzr \\
+%\mI_i (\dot{\momega}^\star_i \wedge \momega^\star_i) + \dot{\momega}^\star_i \wedge (\mI_i \cdot \momega^\star_i) + 2\momega^\star_i \wedge (\mI_i \cdot \dot{\momega}^\star_i) + \momega^\star_i \wedge \momega^\star_i \wedge (\mI_i \cdot \momega^\star_i)
+%\end{bmatrix} 
+%\end{Bmatrix} \\
+%+
+%\begin{bmatrix}
+%\dot{\mJ}_{v\,i} \\
+%\dot{\mJ}_{\omega\,i}
+%\end{bmatrix}^\msT
+%&\begin{Bmatrix}
+%\begin{bmatrix}
+%m_i \mone & \mzr \\
+%\mzr      & \mI_i
+%\end{bmatrix}
+%\cdot
+%\begin{bmatrix}
+%\ma^\star_i  \\
+%\dot{\momega}^\star_i
+%\end{bmatrix}
+%+
+%\begin{bmatrix}
+%\mzr \\
+%\momega^\star_i \wedge (\mI_i \cdot \momega^\star_i)
+%\end{bmatrix}
+%+
+%\begin{bmatrix}
+%-m_i \mgamma \\
+%\mzr
+%\end{bmatrix}
+%\end{Bmatrix}
+%=\dot{\mu}
+%\end{split}
+%\end{equation}
+%\normalsize
+%
+%Substituindo \eqref{eq:a_star_i}, \eqref{eq:domega_star_i}, \eqref{eq:da_star_i} e \eqref{eq:d2omega_star_i} em \eqref{eq:ModeloDinâmicoSerialSomatorio2}, temos:
+%
+%\footnotesize
+%\begin{equation} \label{eq:ModeloDinâmicoSerialSomatorio3}
+%\begin{split}
+%\sum_{i=1}^\nu
+%\begin{bmatrix}
+%\mJ_{v\,i} \\
+%\mJ_{\omega\,i}
+%\end{bmatrix}^\msT
+%&\begin{Bmatrix}
+%\begin{bmatrix}
+%m_i \mone & \mzr \\
+%\mzr      & \mI_i
+%\end{bmatrix}
+%\cdot
+%\begin{bmatrix}
+%\mJ_{v\,i} \dddot{\mq} +  \underaccent{\sim}{\dot{\ma}}_i  \\
+%\mJ_{\omega\,i} \dddot{\mq} + \underaccent{\sim}{\ddot{\momega}}_i
+%\end{bmatrix}
+%+
+%\begin{bmatrix}
+%\mzr \\
+%\mI_i (\dot{\momega}^\star_i \wedge \momega^\star_i) + \dot{\momega}^\star_i \wedge (\mI_i \cdot \momega^\star_i) + 2\momega^\star_i \wedge (\mI_i \cdot \dot{\momega}^\star_i) + \momega^\star_i \wedge \momega^\star_i \wedge (\mI_i \cdot \momega^\star_i)
+%\end{bmatrix} 
+%\end{Bmatrix} \\
+%+
+%\begin{bmatrix}
+%\dot{\mJ}_{v\,i} \\
+%\dot{\mJ}_{\omega\,i}
+%\end{bmatrix}^\msT
+%&\begin{Bmatrix}
+%\begin{bmatrix}
+%m_i \mone & \mzr \\
+%\mzr      & \mI_i
+%\end{bmatrix}
+%\cdot
+%\begin{bmatrix}
+%\mJ_{v\,i} \ddot{\mq} +  \underaccent{\sim}{\ma}_i  \\
+%\mJ_{\omega\,i} \ddot{\mq} + \underaccent{\sim}{\dot{\momega}}_i
+%\end{bmatrix}
+%+
+%\begin{bmatrix}
+%\mzr \\
+%\momega^\star_i \wedge (\mI_i \cdot \momega^\star_i)
+%\end{bmatrix}
+%+
+%\begin{bmatrix}
+%-m_i \mgamma \\
+%\mzr
+%\end{bmatrix}
+%\end{Bmatrix}
+%=\dot{\mu}
+%\end{split}
+%\end{equation}
+%\normalsize
+%
+%Realizando o produto das matrizes, temos:
+%%e utilizando a definição de $\mM(\mq)$ \eqref{eq:MSerial},
+%
+%\begin{equation} \label{eq:ModeloMecSerialDaux}
+%\begin{split}
+%\sum_{i=1}^\nu \Big( &m_i \mJ_{v\,i}^\msT \mJ_{v\,i} + \mJ_{\omega\,i}^\msT \mI_i \mJ_{\omega\,i} \Big) \dddot{\mq}  \\ +  &m_i \mJ_{v\,i}^\msT \, \underaccent{\sim}{\dot{\ma}}_i + \mJ_{\omega\,i}^\msT \Big( \mI_i (\underaccent{\sim}{\ddot{\momega}}_i + \dot{\momega}^\star_i \wedge \momega^\star_i) + \dot{\momega}^\star_i \wedge (\mI_i \cdot \momega^\star_i) + 2\momega^\star_i \wedge (\mI_i \cdot \dot{\momega}^\star_i) + \momega^\star_i \wedge \momega^\star_i \wedge (\mI_i \cdot \momega^\star_i)  \Big) \\ + &m_i \dot{\mJ}_{v\,i}^\msT \Big(\ma^\star_i - \mgamma \Big) + \dot{\mJ}_{\omega\,i}^\msT \Big( \mI_i \dot{\momega}^\star_i   + \momega^\star_i \wedge (\mI_i \cdot \momega^\star_i)  \Big) = \dot{\mu}
+%\end{split}
+%\end{equation}
+%
+%Portanto, comparando \eqref{eq:ModeloMecSerialDaux} com \eqref{eq:ModeloMecSerialD} e \eqref{eq:MSerial}, temos que:
+%\small
+%\begin{empheq}[box=\myyellowbox]{equation} \label{eq:h_}
+%\begin{split}
+%\mh = \sum_{i=1}^\nu  &m_i \mJ_{v\,i}^\msT \, \underaccent{\sim}{\dot{\ma}}_i + \mJ_{\omega\,i}^\msT \Big( \mI_i (\underaccent{\sim}{\ddot{\momega}}_i + \dot{\momega}^\star_i \wedge \momega^\star_i) + \dot{\momega}^\star_i \wedge (\mI_i \cdot \momega^\star_i) + 2\momega^\star_i \wedge (\mI_i \cdot \dot{\momega}^\star_i) + \momega^\star_i \wedge \momega^\star_i \wedge (\mI_i \cdot \momega^\star_i)  \Big) \\ + &m_i \dot{\mJ}_{v\,i}^\msT \Big(\ma^\star_i - \mgamma \Big) + \dot{\mJ}_{\omega\,i}^\msT \Big( \mI_i \dot{\momega}^\star_i   + \momega^\star_i \wedge (\mI_i \cdot \momega^\star_i)  \Big)
+%\end{split}
+%\end{empheq}
+%\normalsize
+%
+%\subsubsubsection{Derivada dos Jacobianos} \label{S05-02-02-03}
+%
+%Para tornar possível a utilização da equação \eqref{eq:h_}, será necessário obter as derivadas dos jacobianos. A partir das equações \eqref{eq:jvi_}, \eqref{eq:jvij_}, \eqref{eq:jwi_} e \eqref{eq:jwij_}, podemos obter as derivadas dos jacobianos calculando as seguintes derivadas vetoriais:
+%\begin{equation} \label{eq:derivada_k_aux}
+%\frac{\dd^{[\llN]} \vk_{i-1}}{\dd t} 
+%\end{equation}
+%\begin{equation} \label{eq:derivada_kvet1_aux}
+%\frac{\dd^{[\llN]}}{\dd t} \Big( \vk_{i-1} \wedge \vr_{\tto_{i-1} | \ttx}   \Big)
+%\end{equation}
+%\begin{equation} \label{eq:derivada_kvet2_aux}
+%\frac{\dd^{[\llN]}}{\dd t} \Big( \vk_{j-1} \wedge \vr_{\tto_{j-1} | \ttg_i}   \Big) 
+%\end{equation}
+%
+%Utilizando a definição da derivada de versores \eqref{eq:derivada_versor} em \eqref{eq:derivada_k_aux}, temos:
+%\begin{empheq}[box=\almondbox]{equation} \label{eq:derivada_k}
+%\frac{\dd^{[\llN]} \vk_{i-1}}{\dd t} = \vomega_{\lllB_{i-1}}^{\lllN} \wedge \vk_{i-1}
+%\end{empheq}
+%
+%Utilizando \eqref{eq:derivada_k} e \eqref{eq:derivada_vetor} em \eqref{eq:derivada_kvet1_aux}, temos:
+%\begin{equation}
+%\frac{\dd^{[\llN]}}{\dd t} \Big( \vk_{i-1} \wedge \vr_{\tto_{i-1} | \ttx}   \Big) = (\vomega_{\lllB_{i-1}}^{\lllN} \wedge \vk_{i-1}) \wedge \vr_{\tto_{i-1} | \ttx} + \vk_{i-1} \wedge \Big(\vomega_{\lllB_{i-1}}^{\lllN} \wedge \vr_{\tto_{i-1} | \ttx} + \vv_\ttx^{\lllB_{i-1}}   \Big)
+%\end{equation}
+%
+%Utilizando a propriedade do produto vetorial entre 3 vetores \eqref{eq:prodvet3}, temos:
+%\begin{empheq}[box=\almondbox]{equation} \label{eq:derivada_kvet1}
+%\frac{\dd^{[\llN]}}{\dd t} \Big( \vk_{i-1} \wedge \vr_{\tto_{i-1} | \ttx}   \Big) = \vomega_{\lllB_{i-1}}^{\lllN}  \wedge \vk_{i-1}  \wedge \vr_{\tto_{i-1} | \ttx} + \vk_{i-1} \wedge \vv_\ttx^{\lllB_{i-1}}  
+%\end{empheq}
+%
+%Analogamente para \eqref{eq:derivada_kvet2_aux}, temos:
+%\begin{empheq}[box=\almondbox]{equation} \label{eq:derivada_kvet2}
+%\frac{\dd^{[\llN]}}{\dd t} \Big( \vk_{j-1} \wedge \vr_{\tto_{j-1} | \ttg_i}   \Big)  = \vomega_{\lllB_{j-1}}^{\lllN}  \wedge \vk_{j-1}  \wedge \vr_{\tto_{j-1} | \ttg_i} + \vk_{j-1} \wedge \vv_{\ttg_{i}}^{\lllB_{j-1}}  
+%\end{empheq}
+%
+%Sendo assim, pode-se concluir que as derivadas das colunas dos jacobianos são dadas por:
+%\begin{empheq}[box=\myyellowbox]{equation}
+%\dot{\mj}_{v\,i} = \momega^\star_{i-1} \wedge \mj_{v\,i} + \mj_{\omega\,i} \wedge \mv_{i-1}
+%\end{empheq}
+%\begin{empheq}[box=\myyellowbox]{equation}
+%\dot{\mj}_{v\,i,j} = \momega^\star_{j-1} \wedge \mj_{v\,i,j} + \mj_{\omega\,i,j} \wedge \mv_{i,j-1}
+%\end{empheq}
+%\begin{empheq}[box=\myyellowbox]{equation}
+%\dot{\mj}_{\omega\,i} = \momega^\star_{i-1} \wedge \mj_{\omega\,i} 
+%\end{empheq}
+%\begin{empheq}[box=\myyellowbox]{equation}
+%\dot{\mj}_{\omega\,i,j} = \momega^\star_{j-1} \wedge \mj_{\omega\,i,j}
+%\end{empheq}
 
 \subsection{Algoritmo para modelagem de mecanismos paralelos}\label{S05-3}
 
@@ -2312,7 +2312,7 @@ O modelo dinâmico de cada subsistema desacoplado pode ser escrito como:
 
 Sendo que para $i=0$ temos o modelo do efetuador/plataforma e para $i>0$ temos os modelos dos mecanismos seriais obtidos anteriormente. \\
 
-Para os subsistemas seriais, as matrizes $\mM_{\ssB_i}$, $\mnu_{\ssB_i}$ e $\mg_{\ssB_i}$ são obtidas utilizando o algoritmo de modelagem de mecanismos seriais apresentado anteriormente. Para o efetuador, iremos utilizar o modelo de um corpo rígido livre no espaço, que realiza apenas translação, através das equações de Newton-Euler:
+Para os subsistemas seriais, as matrizes $\mM_{\ssB_i}$, $\mnu_{\ssB_i}$ e $\mg_{\ssB_i}$ são obtidas utilizando o algoritmo de modelagem de mecanismos seriais apresentado anteriormente. Para o efetuador, iremos utilizar o modelo de um corpo rígido livre no espaço, que realiza apenas translação. Sendo assim, aplicando Teorema do Movimento do Baricentro no efetuador, obtemos os esforços não-reativos (ativos e inerciais) nele aplicados:
 
 %\begin{equation} \label{eq:Newton-EulerE}
 %\begin{cases}
@@ -2322,7 +2322,7 @@ Para os subsistemas seriais, as matrizes $\mM_{\ssB_i}$, $\mnu_{\ssB_i}$ e $\mg_
 %\end{equation}
 
 \begin{equation} \label{eq:Newton-EulerE}
-m \va^{\lllN_0}_{\ttg} - m \vg = \vzr
+\vf = -m \va^{\lllN_0}_{\ttg} + m \vg
 \end{equation}
 
 
@@ -2352,7 +2352,7 @@ Aplicando as equações vetoriais no sistema $\ttN$, temos:
 %\end{equation}
 
 \begin{equation} \label{eq:Newton-EulerMatE}
-m \vct{\va^{\lllN_0}_{\ttg}}_{\ttN_0}  -m \vct{\vg}_{\ttN_0} = \mzr
+\vct{\vf}_{\ttN_0} = -m \vct{\va^{\lllN_0}_{\ttg}}_{\ttN_0}  +m \vct{\vg}_{\ttN_0}
 \end{equation}
 
 Definindo:
@@ -2391,10 +2391,10 @@ Temos:
 %\mzr
 %\end{equation}
 \begin{equation} \label{eq:Newton-EulerMat2E}
-m \ddot{\mq}^\ast - m \mgamma = \mzr 
+\overline{\mf}_{\ssB_i} = -m \ddot{\mq}^\ast + m \mgamma
 \end{equation}
 
-Ou seja:
+Portanto:
 %\begin{equation}
 %\mM_{\ssB_0}(\mq_0) = 
 %\begin{bmatrix}
@@ -2405,8 +2405,6 @@ Ou seja:
 \begin{equation}
 \mM_{\ssB_0} = m \mone
 \end{equation}
-
-
 %\begin{equation}
 %\mnu_{\ssB_0}(\mq_0, \mp_0) = 
 %\begin{bmatrix}
@@ -2417,8 +2415,6 @@ Ou seja:
 \begin{equation}
 \mnu_{\ssB_0} = \mzr
 \end{equation}
-
-
 %\begin{equation}
 %\mg_{\ssB_0}(\mq_0) = 
 %\begin{bmatrix}
