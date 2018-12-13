@@ -2287,6 +2287,8 @@ Sejam $\ssB_0$, $\ssB_1$, ..., $\ssB_{n} \,$ $n+1$ subsistemas mec\^anicos e $\s
 %\item $\mp^\ast$: matriz-coluna de quasi-velocidades da plataforma/efetuador $\ssB_0$. Definida como $\mp^\ast = \mp_0 = \begin{bmatrix} {\dot{\mx}^\ast}^\msT & {\momega^\ast}^\msT \end{bmatrix}^\msT $.
 %\item $\mp^\diamond$: matriz-coluna de quasi-velocidades dos subsistemas seriais. Definida como $\mp^\diamond = \dot{\mq}^\diamond $.
 %\item $\mp$: matriz-coluna contendo todas as quasi-velocidades do sistema $\ssM$. Definida como $\mp = \begin{bmatrix} {\mp^\ast}^\msT & {\mp^\diamond}^\msT \end{bmatrix}^\msT $.
+\item $\mq\ssh$: matriz-coluna de $\nu\ssh$ coordenadas generalizadas independentes.
+\item $\mq\cir$: matriz-coluna de coordenadas generalizadas redundantes (contém as componentes de $\mq$ não pertencentes a $\mq\ssh$)
 \item $\overline{\mq}(\mq)$: matriz-coluna dos v\'inculos de posi\c{c}\~ao entre subsistemas. As equa\c{c}\~oes vinculares s\~ao dadas por $\overline{\mq}(\mq) = \mzr $.
 \item $\overline{\momega}(\mq,\dot{\mq})$: matriz-coluna dos v\'inculos de orienta\c{c}\~ao entre subsistemas. As equa\c{c}\~oes vinculares s\~ao dadas por $\overline{\momega}(\mq,\dot{\mq}) = \mzr $.
 \item $\ttx_i, \,i=1, ..., n$: ponto no espa\c{c}o fixo ao efetuador de $\ssB_i$.
@@ -2313,7 +2315,13 @@ O modelo dinâmico de cada subsistema desacoplado pode ser escrito como:
 
 Sendo que para $i=0$ temos o modelo do efetuador/plataforma e para $i>0$ temos os modelos dos mecanismos seriais obtidos anteriormente. \\
 
-Para os subsistemas seriais, as matrizes $\mM_{\ssB_i}$, $\mnu_{\ssB_i}$ e $\mg_{\ssB_i}$ são obtidas utilizando o algoritmo de modelagem de mecanismos seriais apresentado anteriormente. Para o efetuador, iremos utilizar o modelo de um corpo rígido livre no espaço, que realiza apenas translação. Sendo assim, aplicando Teorema do Movimento do Baricentro no efetuador, obtemos os esforços não-reativos (ativos e inerciais) nele aplicados:
+
+O trabalho virtual dos esforços não-reativos (ativos e inerciais) de cada subsistema é dado por:
+\begin{equation}
+\delta W_i = \delta \mq_i^\msT \cdot \overline{\mf}_{\ssB_i}, \, i = 0,...,n
+\end{equation}
+
+Para os subsistemas seriais, as matrizes $\mM_{\ssB_i}$, $\mnu_{\ssB_i}$ e $\mg_{\ssB_i}$ são obtidas utilizando o algoritmo de modelagem de mecanismos seriais apresentado anteriormente. Para o efetuador, iremos utilizar o modelo de um corpo rígido livre no espaço, que realiza apenas translação. Sendo assim, aplicando Teorema do Movimento do Baricentro no efetuador, obtemos os esforços não-reativos  nele aplicados:
 
 %\begin{equation} \label{eq:Newton-EulerE}
 %\begin{cases}
@@ -2878,7 +2886,7 @@ Repare que \eqref{eq:VinculosQuasiVel} pode ser reescrita como:
 %\begin{equation}
 %\overline{\mp}(\mq,\mp) = \mA(\mq) \mp = \mzr
 %\end{equation}
-\begin{equation}
+\begin{equation} \label{eq:VinculosQuasiVel2}
 \overline{\mp}(\mq,\dot{\mq}) = \mA(\mq) \dot{\mq} = \mzr
 \end{equation}
 
@@ -3058,27 +3066,59 @@ Definindo:
 \mf = \mu' - \mM'(\mq) \cdot \ddot{\mq} - \mnu'(\mq,\dot{\mq}) - \mg'(\mq)
 \end{equation}
 
-Um possível complemento ortogonal para o jacobiano dos vínculos de quasi-velocidades ($\mA$) é dado por
-\begin{equation} \label{eq:CComplemento}
-\mC(\mq) =
-\begin{bmatrix}
-\mone \\
--\mA\cir(\mq)^\msP \cdot \mA\ssh(\mq)
-\end{bmatrix}
+Pelo princípio de D'Alambert, temos que:
+\begin{equation}
+\sum_{i=0}^n \delta W_i = \sum_{i=0}^n \delta \mq_i^\msT \cdot \overline{\mf}_{\ssB_i} = 0
 \end{equation}
 
-Pois:
-\begin{equation}
-\mA(\mq) \cdot \mC(\mq) = \mA\ssh(\mq) - \mA\ssh(\mq) = \mzr
+Ou seja:
+\begin{equation} \label{eq:DAlambertParalelos}
+\delta \mq^\msT \cdot \mf = \mzr
 \end{equation}
-e para configurações não singulares o posto de $\begin{bmatrix} \mC(\mq)^\msT \\ \mA(\mq) \end{bmatrix}$ é cheio.
+
+Além disso, a partir da equação \eqref{eq:VinculosQuasiVel2}, temos que:
+\begin{equation} \label{eq:Adeltaq}
+\mA(\mq) \delta \mq = \mzr
+\end{equation}
+
+$\mq$ pode ser escrita em função de $\mq\ssh$ e $\mq\cir$ da seguinte maneira:
+\begin{equation} \label{eq:QsshQcir}
+\mq = \mQ\ssh \mq\ssh + \mQ\cir \mq\cir
+\end{equation}
+
+Sendo $\mQ\ssh$ e $\mQ\cir$ matrizes constantes que contém apenas zeros e uns, contendo apenas um $"1"$ por coluna.
+Aplicando o operador variação em \eqref{eq:QsshQcir}, tem-se que:
+\begin{equation} \label{eq:deltaQsshQcir}
+\delta\mq = \mQ\ssh \delta\mq\ssh + \mQ\cir \delta\mq\cir
+\end{equation}
+
+Substituindo \eqref{eq:deltaQsshQcir} em \eqref{eq:Adeltaq}, podemos isolar $\delta\mq\cir$ em função de $\delta\mq\ssh$:
+\begin{equation} \label{eq:qcirqssh}
+\delta\mq\cir = -(\mA \mQ\cir)^{-1} \delta \mq\ssh
+\end{equation}
+
+Substuindo \eqref{eq:qcirqssh} em \eqref{eq:deltaQsshQcir}, obtemos $\delta\mq$ apenas em função de $\mq$ e $\delta\mq\ssh$:
+\begin{equation} \label{eq:deltamqC}
+\delta \mq = \mC(\mq) \cdot \delta\mq\ssh
+\end{equation}
+
+Sendo:
+\begin{equation} \label{eq:CComplemento}
+\mC(\mq) = \mQ\ssh -(\mA \mQ\cir)^{-1}
+\end{equation}
+
 
 Além disso, repare que $\mC$ respeita a seguinte relação:
 \begin{equation} \label{eq:CCinematica}
 \dot{\mq} = \mC(\mq) \cdot \dot{\mq}\ssh
 \end{equation}
 
-Sendo assim, a equação dinâmica do mecanismo paralelo pode ser escrita como:
+Substuindo \eqref{eq:deltamqC} em \eqref{eq:DAlambertParalelos}, temos:
+\begin{equation}
+\delta {\mq\ssh}^\msT \mC^\msT \mf = \mzr
+\end{equation}
+
+Tendo em vista que $\mq\ssh$ são coordenadas independentes, $\delta \mq\ssh$ são variações arbitrárias. Sendo assim, a equação dinâmica do mecanismo paralelo pode ser escrita como:
 \begin{equation}
 \mC^\msT \mf = \mzr
 \end{equation}
