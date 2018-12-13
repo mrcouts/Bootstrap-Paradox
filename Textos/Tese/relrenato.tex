@@ -2964,7 +2964,7 @@ Repare que \eqref{eq:VinculosQuasiAce} pode ser reescrita como:
 %\begin{equation}
 %\dot{\overline{\mp}}(\mq,\mp,\dot{\mp}) = \mA(\mq)\dot{\mp} + \mb(\mq,\mp) = \mzr
 %\end{equation}
-\begin{equation}
+\begin{equation} \label{eq:VinculosQuasiAce_}
 \dot{\overline{\mp}}(\mq,\dot{\mq},\ddot{\mq}) = \mA(\mq)\ddot{\mq} + \mb(\mq,\dot{\mq}) = \mzr
 \end{equation}
 
@@ -3094,7 +3094,7 @@ Aplicando o operador variação em \eqref{eq:QsshQcir}, tem-se que:
 
 Substituindo \eqref{eq:deltaQsshQcir} em \eqref{eq:Adeltaq}, podemos isolar $\delta\mq\cir$ em função de $\delta\mq\ssh$:
 \begin{equation} \label{eq:qcirqssh}
-\delta\mq\cir = -(\mA \mQ\cir)^{-1} \delta \mq\ssh
+\delta\mq\cir = -(\mA \mQ\cir)^{-1} \mA \mQ\ssh \delta \mq\ssh
 \end{equation}
 
 Substuindo \eqref{eq:qcirqssh} em \eqref{eq:deltaQsshQcir}, obtemos $\delta\mq$ apenas em função de $\mq$ e $\delta\mq\ssh$:
@@ -3104,7 +3104,7 @@ Substuindo \eqref{eq:qcirqssh} em \eqref{eq:deltaQsshQcir}, obtemos $\delta\mq$ 
 
 Sendo:
 \begin{equation} \label{eq:CComplemento}
-\mC(\mq) = \mQ\ssh -(\mA \mQ\cir)^{-1}
+\mC(\mq) = \mQ\ssh -(\mA \mQ\cir)^{-1} \mA \mQ\ssh 
 \end{equation}
 
 
@@ -3134,7 +3134,7 @@ Ou seja:
 \begin{equation}
 \begin{cases}
 \mC(\mq)^\msT (   \mM'(\mq)\ddot{\mq} + \mv'(\mq,\dot{\mq}) + \mg'(\mq) ) = \mC(\mq)^\msT \mu' \\
-\mA(\mq)\ddot{\mq} = \mb(\mq,\dot{\mq})
+\mA(\mq)\ddot{\mq} + \mb(\mq,\dot{\mq}) = \mzr
 \end{cases}
 \end{equation}
 
@@ -3149,7 +3149,7 @@ Reescrevendo em forma matricial:
 =
 \begin{bmatrix}
 \mC(\mq)^\msT (\mu' - \mv'(\mq,\dot{\mq}) - \mg'(\mq) ) \\
-\mb(\mq,\dot{\mq})
+-\mb(\mq,\dot{\mq})
 \end{bmatrix}
 \end{equation}
 
@@ -3188,7 +3188,7 @@ Reescrevendo em forma matricial:
 Substituindo \eqref{eq:VinculosQuasiVel} e \eqref{eq:VinculosQuasiAce} em \eqref{eq:VinculosQuasiAce2}, temos:
 \begin{equation} \label{eq:VinculosQuasiAce3}
 \overline{\mp}'(\mq, \dot{\mq}, \ddot{\mq}) =
-\mA(\mq) \ddot{\mq} - \mb(\mq, \dot{\mq})
+\mA(\mq) \ddot{\mq} + \mb(\mq, \dot{\mq})
 +
 \lambda
 \begin{bmatrix}
@@ -3205,7 +3205,7 @@ Substituindo \eqref{eq:VinculosQuasiVel} e \eqref{eq:VinculosQuasiAce} em \eqref
 = \mzr
 \end{equation}
 
-Impondo que \eqref{eq:VinculosQuasiAce3} seja respeitada, garantimos que $\overline{\mq}(\mq)$ e $\overline{\momega}(\mq, \dot{\mq})$ tenderão exponencialmente a zero, para $\lambda > 0$, ou seja, irá fazer com que os vínculos de posição e velocidades sejam respeitados mesmo havendo erros de truncamento e erros associados ao método de integração numérica de EDOs. É importante ressaltar que $\lambda$ é superiomente limitado pelo passo de integração $h$ e pelo método de integração, porém, escolhendo $\lambda = 1/h$ já garante a estabilidade do método para praticamente qualquer método de integração numérica de EDOs.
+Impondo que \eqref{eq:VinculosQuasiAce3} seja respeitada, garantimos que $\overline{\mq}(\mq)$ e $\overline{\momega}(\mq, \dot{\mq})$ tenderão exponencialmente a zero independentemente das condições iniciais, para $\lambda > 0$, ou seja, irá fazer com que os vínculos de posição e velocidades sejam respeitados mesmo havendo erros de truncamento e erros associados ao método de integração numérica de EDOs. É importante ressaltar que $\lambda$ é superiomente limitado pelo passo de integração $h$ e pelo método de integração, porém, escolhendo $\lambda = 1/h$ já garante a estabilidade do método para praticamente qualquer método de integração numérica de EDOs.
 
 Sendo assim, o sistema de EDOs que será utilizado para realizar a simualação dinâmica direta é dado por:
 \begin{equation}
@@ -3218,7 +3218,7 @@ Sendo assim, o sistema de EDOs que será utilizado para realizar a simualação din
 =
 \begin{bmatrix}
 \mC(\mq)^\msT (\mu' - \mv'(\mq,\dot{\mq}) - \mg'(\mq) ) \\
-\mb(\mq,\dot{\mq}) -
+-\mb(\mq,\dot{\mq}) -
 \lambda
 \begin{bmatrix}
 2 \cdot \mone & \mzr \\
@@ -3247,36 +3247,22 @@ $$ \overline{\mq}(\mq) = \mzr $$
 Tendo obtido $\mq$, $\dot{\mq}$ é obtido pela equação \eqref{eq:CCinematica}:
 $$ \dot{\mq} = \mC(\mq) \cdot \dot{\mq}\ssh $$
 
-Para obter $\ddot{\mq}$, desenvolvemos a equação dos vínculos de quasi-acelerações \eqref{eq:VinculosQuasiAce}:
-$$ \mA\ssh(\mq) \cdot \ddot{\mq}\ssh + \mA\cir(\mq) \cdot \ddot{\mq}\cir = \mb(\mq, \dot{\mq}) $$
-$$ \Rightarrow  \ddot{\mq}\cir = \mA\cir(\mq)^\msP (\mb(\mq, \dot{\mq}) - \mA\ssh(\mq) \cdot \ddot{\mq}\ssh) $$
+Para obter $\ddot{\mq}$, substitui-se a segunda derivada temporal da equação \eqref{eq:QsshQcir} na equação dos vínculos de quasi-acelerações \eqref{eq:VinculosQuasiAce_}:
+$$ \mA \mQ\ssh \ddot{\mq}\ssh + \mA \mQ\cir \ddot{\mq}\cir + \mb = \mzr $$
+$$ \Rightarrow  \ddot{\mq}\cir = - (\mA \mQ\cir)^\msI (\mb + \mA \mQ\ssh \ddot{\mq}\ssh) $$
 \begin{equation} \label{eq:d2q_em_funcao}
 \therefore \ddot{\mq} =
-\begin{bmatrix}
-\mzr \\
-\mA\cir(\mq)^\msP \cdot \mb(\mq, \dot{\mq})
-\end{bmatrix}
-+
-\begin{bmatrix}
-\mone \\
--\mA\cir(\mq)^\msP \cdot \mA\ssh(\mq)
-\end{bmatrix}
-\cdot
-\ddot{\mq}\ssh
+(\mQ\ssh - (\mA \mQ\cir)^\msI  \mA \mQ\ssh) \cdot \ddot{\mq}\ssh - (\mA \mQ\cir)^\msI \mb
 \end{equation}
 
-Substituindo \eqref{eq:CComplemento} em \eqref{eq:d2q_em_funcao}, temos:
+Comparando \eqref{eq:CComplemento} com \eqref{eq:d2q_em_funcao}, temos:
 \begin{equation} \label{eq:d2q_em_funcao2}
 \therefore \ddot{\mq} = \mC(\mq) \cdot \ddot{\mq}\ssh + \mc(\mq, \dot{\mq})
 \end{equation}
 
 Sendo:
 \begin{equation}
-\mc(\mq, \dot{\mq}) =
-\begin{bmatrix}
-\mzr \\
-\mA\cir(\mq)^\msP \cdot \mb(\mq, \dot{\mq})
-\end{bmatrix}
+\mc(\mq, \dot{\mq}) = - (\mA(\mq) \mQ\cir)^\msI \cdot \mb(\mq,\dot{\mq})
 \end{equation}
 
 Além disso, normalmente não há atuadores em todas as juntas do mecanismo paralelo. Sendo assim, $\mu'$ pode ser reescrito como:
@@ -3289,7 +3275,7 @@ Sendo $\mU$ uma matriz constante composta por zeros e uns, e $\mu^\star$ os esfo
 Substituindo \eqref{eq:CCinematica}, \eqref{eq:d2q_em_funcao2} e \eqref{eq:u_estrela} em \eqref{eq:EquaçãoDinamicaParalelos}, temos:
 
 \begin{equation}
-\mC(\mq)^\msT \{   \mM'(\mq) \cdot [\mC(\mq) \cdot \ddot{\mq}\ssh + \mc(\mq, \mC(\mq) \cdot \dot{\mq}\ssh)] + \mv'(\mq,\mC(\mq) \cdot \dot{\mq}\ssh) + \mg'(\mq) \} = \mC(\mq)^\msT \mU \cdot \mu^\star
+\mC^\msT \{ \mM' (\mC \cdot \ddot{\mq}\ssh + \mc) + \mv' + \mg'\} = \mC^\msT \mU \cdot \mu^\star
 \end{equation}
 
 Definindo:
@@ -3299,26 +3285,26 @@ Definindo:
 
 Temos:
 \begin{equation} \label{eq:DinamicaInversa1}
-\mC(\mq)^\msT \mM'(\mq) \mC(\mq) \cdot \ddot{\mq}\ssh + \mC(\mq)^\msT \{   \mM'(\mq) \cdot  \mc(\mq, \mC(\mq) \cdot \dot{\mq}\ssh) + \mv'(\mq,\mC(\mq) \cdot \dot{\mq}\ssh) \} + \mC(\mq)^\msT \mg'(\mq)  = \mZ(\mq)^\msT \mu^\star
+\mC^\msT \mM' \mC \cdot \ddot{\mq}\ssh + \mC^\msT (   \mM' \mc + \mv' ) + \mC^\msT \mg'  = \mZ^\msT \mu^\star
 \end{equation}
 
 Supondo que não haja atuação redundante, para configurações não singulares, \eqref{eq:DinamicaInversa1} pode ser reescrita como:
 \begin{equation} \label{eq:DinamicaInversa2}
-\mM_{\ssM} (\mq) \cdot \ddot{\mq}\ssh + \mv_{\ssM}(\mq, \dot{\mq}\ssh) + \mg_{\ssM}(\mq)   = \mu^\star
+\mM_{\ssM} (\mq) \cdot \ddot{\mq}\ssh + \mv_{\ssM}(\mq, \dot{\mq}) + \mg_{\ssM}(\mq)   = \mu^\star
 \end{equation}
 
 Sendo: 
 \begin{equation}
-\mM_{\ssM} (\mq) = (\mZ(\mq)^\msT)^\msI \cdot \mC(\mq)^\msT \mM'(\mq) \mC(\mq) 
+\mM_{\ssM}  = \mZ^{-\msT} \mC^\msT \mM' \mC
 \end{equation}
 \begin{equation}
-\mv_{\ssM} (\mq, \dot{\mq}\ssh) = (\mZ(\mq)^\msT)^\msI \cdot \mC(\mq)^\msT \{   \mM'(\mq) \cdot  \mc(\mq, \mC(\mq) \cdot \dot{\mq}\ssh) + \mv'(\mq,\mC(\mq) \cdot \dot{\mq}\ssh) \} 
+\mv_{\ssM}  = \mZ^{-\msT}  \mC^\msT (  \mM'  \mc  + \mv' )
 \end{equation}
 \begin{equation}
-\mg_{\ssM} (\mq) = (\mZ(\mq)^\msT)^\msI \cdot \mC(\mq)^\msT \mg'(\mq) 
+\mg_{\ssM}  = \mZ^{-\msT}  \mC^\msT \mg'
 \end{equation}
 
-Sendo assim, a simulação dinâmica inversa é feita utilizando a equação \eqref{eq:DinamicaInversa2} para obter os esforços nos atuadores, dados $\mq\ssh$, $\dot{\mq}\ssh$ e $\ddot{\mq}\ssh$, e obtendo $\mq$ através da solução numérica da equação \eqref{eq:VinculosGenericosPosicao}.
+Sendo assim, a simulação dinâmica inversa é feita utilizando a equação \eqref{eq:DinamicaInversa2} para obter os esforços nos atuadores, dados $\mq\ssh$, $\dot{\mq}\ssh$ e $\ddot{\mq}\ssh$, obtendo $\mq$ através da solução numérica da equação \eqref{eq:VinculosGenericosPosicao} e $\dot{\mq}$ através de \eqref{eq:CCinematica}.
 
 \end{itemize}
 
