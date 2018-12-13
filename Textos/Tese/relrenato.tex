@@ -2273,6 +2273,7 @@ Sejam $\ssB_0$, $\ssB_1$, ..., $\ssB_{n} \,$ $n+1$ subsistemas mec\^anicos e $\s
 \item $m$: massa da plataforma/efetuador $\llB_0$.
 %\item $\vI_{\ttg}$: tensor de in\'ercia da plataforma/efetuador $\llB_0$ em relação a seu centro de massa.
 %\item $\mI$: tensor de in\'ercia $\vI_{\ttg}$ escrito na base $\ttN_0$, ou seja, $\vct{\vI_{\ttg}}_{\ttN_0 \rl \ttN_0}$.
+\item $\vf$: Vetor de forças não-reativas (ativas e inerciais) aplicadas no centro de massa da plataforma/efetuador $\llB_0$.
 \item $\vg$: Vetor aceleração gravitacional.
 \item $\mgamma$: Vetor aceleração gravitacional escrito na base $\ttN_0$, ou seja, $\vct{\vg}_{\ttN_0}$.
 \item $\mq_i, \,i=0, ..., n$: matriz-coluna de coordenadas generalizadas do subsistema $\ssB_i$.
@@ -2391,7 +2392,7 @@ Temos:
 %\mzr
 %\end{equation}
 \begin{equation} \label{eq:Newton-EulerMat2E}
-\overline{\mf}_{\ssB_i} = -m \ddot{\mq}^\ast + m \mgamma
+\overline{\mf}_{\ssB_0} = -m \ddot{\mq}^\ast + m \mgamma
 \end{equation}
 
 Portanto:
@@ -2753,25 +2754,44 @@ Assim, substituindo \eqref{eq:dxdt} em \eqref{eq:VinculosGenericosVel}, obtemos:
 
 \item[c)] Vínculos de velocidades angulares
 
-Supondo que os efetuadores de cada cadeia serial $\ssB_i$ estejam ligados rigidamente à plataforma/efetuador $\ssB_0$, temos que todos apresentam a mesma velocidade angular. Sendo assim, obtem-se as seguintes relações:
+Supondo que os efetuadores de cada cadeia serial $\ssB_i$ estejam ligados rigidamente à plataforma/efetuador $\ssB_0$, temos que todos apresentam velocidade angular em relação a $\ttN_0$, tendo em vista que $\lllB_0$ só translada. Sendo assim, obtem-se as seguintes relações:
 
 \begin{equation}
-\vct{\vomega^{\lllN_0}_{\lllB_0}}_{\ttN_0} = \momega^\ast = \vct{\vone}_{\ttN_0 \rl \ttN_i}  \vct{\vomega^{\lllN_i}_{\lllB_0}}_{\ttN_i} , \; i = 1, ... , n
+\vct{\vomega^{\lllN_0}_{\lllB_0}}_{\ttN_0} = \mzr = \vct{\vone}_{\ttN_0 \rl \ttN_i}  \vct{\vomega^{\lllN_i}_{\lllB_0}}_{\ttN_i} , \; i = 1, ... , n
 \end{equation}
 
 Sabe-se que $\vct{\vomega^{\lllN_i}_{\lllB_0}}_{\ttN_i} =  \mJ_{\omega\,\ssB_i}(\mq_i) \dot{\mq}_i$ e que $\mE_i =\vct{\vone}_{\ttN_0 \rl \ttN_i}$. Sendo assim, temos:
 
 \begin{equation}
-\momega^\ast = \mE_i \cdot \mJ_{\omega\,\ssB_i}(\mq_i) \dot{\mq}_i, \, i = 1,...,n
+\mzr = \mE_i \cdot \mJ_{\omega\,\ssB_i}(\mq_i) \dot{\mq}_i, \, i = 1,...,n
 \end{equation}
 
 Assim:
+%\begin{equation} \label{eq:VinculosVelAng}
+%\begin{bmatrix}
+%\mone\\
+%\vdots\\
+%\mone
+%\end{bmatrix}\cdot \momega^\ast =
+%\begin{bmatrix}
+%\mE_1 & \ldots & \mzr\\
+%\vdots & \ddots & \vdots\\
+%\mzr &\ldots  & \mE_{n}
+%\end{bmatrix}
+%\cdot
+%\begin{bmatrix}
+%\mJ_{\omega\,\ssB_1}(\mq_1) & \ldots & \mzr\\
+%\vdots & \ddots & \vdots\\
+%\mzr &\ldots  & \mJ_{\omega\,\ssB_n}(\mq_n)
+%\end{bmatrix}
+%\begin{bmatrix}
+%\dot{\mq}_1 \\
+%\vdots \\
+%\dot{\mq}_n
+%\end{bmatrix}
+%\end{equation}
 \begin{equation} \label{eq:VinculosVelAng}
-\begin{bmatrix}
-\mone\\
-\vdots\\
-\mone
-\end{bmatrix}\cdot \momega^\ast =
+\mzr =
 \begin{bmatrix}
 \mE_1 & \ldots & \mzr\\
 \vdots & \ddots & \vdots\\
@@ -2791,19 +2811,21 @@ Assim:
 \end{equation}
 
 Sendo assim, os vínculos de posição entre subsistemas podem ser descritos de maneira genérica por:
+%\begin{equation}
+%\overline{\momega}(\mq,\mp) = \mP \cdot \momega^\ast - \mQ \cdot \mJ_{\mathsf{w}}(\mq^\diamond) \cdot \mp^\diamond  = \mzr
+%\end{equation}
 \begin{equation}
-\overline{\momega}(\mq,\mp) = \mP \cdot \momega^\ast - \mQ \cdot \mJ_{\mathsf{w}}(\mq^\diamond) \cdot \mp^\diamond  = \mzr
+\overline{\momega}(\mq,\dot{\mq}) = - \mQ \cdot \mJ_{\mathsf{w}}(\mq^\diamond) \cdot \dot{\mq}^\diamond  = \mzr
 \end{equation}
 
 Sendo:
-\begin{equation}
-\mP = \begin{bmatrix}
-\mone &
-\hdots &
-\mone
-\end{bmatrix}^\msT
-\end{equation}
-
+%\begin{equation}
+%\mP = \begin{bmatrix}
+%\mone &
+%\hdots &
+%\mone
+%\end{bmatrix}^\msT
+%\end{equation}
 \begin{equation}
 \mQ = \begin{bmatrix}
 \mE_1 & \ldots & \mzr\\
@@ -2824,75 +2846,133 @@ Sendo:
 \item[d)] Vínculos de quasi-velocidades
 
 Os vínculos de quasi-velocidades são dados pela união dos vínculos de velocidades lineares e dos vínculos de velocidades angulares, ou seja:
+%\begin{equation} \label{eq:VinculosQuasiVel}
+%\overline{\mp}(\mq,\mp) = \begin{bmatrix}
+%\dot{\overline{\mq}}(\mq,\dot{\mq}) \\
+%\overline{\momega}(\mq,\dot{\mq})
+%\end{bmatrix}
+%= 
+%\begin{bmatrix}
+%\mD \cdot \dot{\mx}^\ast + \mS^\ast(\mtheta^\ast) \cdot \momega^\ast - \mE \cdot \mJ_{\mathsf{v}}(\mq^\diamond) \cdot \mp^\diamond  - \mF \cdot \mp^\diamond \\
+%\mP \cdot   \momega^\ast - \mQ \cdot \mJ_{\mathsf{w}}(\mq^\diamond) \cdot \mp^\diamond
+%\end{bmatrix}
+%=
+%\mzr
+%\end{equation}
 \begin{equation} \label{eq:VinculosQuasiVel}
-\overline{\mp}(\mq,\mp) = \begin{bmatrix}
+\overline{\mp}(\mq,\dot{\mq}) = \begin{bmatrix}
 \dot{\overline{\mq}}(\mq,\dot{\mq}) \\
 \overline{\momega}(\mq,\dot{\mq})
 \end{bmatrix}
 = 
 \begin{bmatrix}
-\mD \cdot \dot{\mx}^\ast + \mS^\ast(\mtheta^\ast) \cdot \momega^\ast - \mE \cdot \mJ_{\mathsf{v}}(\mq^\diamond) \cdot \mp^\diamond  - \mF \cdot \mp^\diamond \\
-\mP \cdot   \momega^\ast - \mQ \cdot \mJ_{\mathsf{w}}(\mq^\diamond) \cdot \mp^\diamond
+\mD \cdot \dot{\mq}^\ast  - \mE \cdot \mJ_{\mathsf{v}}(\mq^\diamond) \cdot \dot{\mq}^\diamond  - \mF \cdot \dot{\mq}^\diamond \\
+ - \mQ \cdot \mJ_{\mathsf{w}}(\mq^\diamond) \cdot \dot{\mq}^\diamond
 \end{bmatrix}
 =
 \mzr
 \end{equation}
 
+
 Repare que \eqref{eq:VinculosQuasiVel} pode ser reescrita como:
+%\begin{equation}
+%\overline{\mp}(\mq,\mp) = \mA(\mq) \mp = \mzr
+%\end{equation}
 \begin{equation}
-\overline{\mp}(\mq,\mp) = \mA(\mq) \mp = \mzr
+\overline{\mp}(\mq,\dot{\mq}) = \mA(\mq) \dot{\mq} = \mzr
 \end{equation}
 
 Sendo $\mA$ dado por:
+%\begin{equation}
+%\mA(\mq) = 
+%\begin{bmatrix}
+%\mD & \mS^\ast(\mtheta^\ast) & -(\mE \cdot \mJ_{\mathsf{v}}(\mq\cir) + \mF) \\
+%\mzr &  \mP & -\mQ \cdot \mJ_{\mathsf{w}}(\mq\cir) \\
+%\end{bmatrix}
+%\end{equation}
 \begin{equation}
 \mA(\mq) = 
 \begin{bmatrix}
-\mD & \mS^\ast(\mtheta^\ast) & -(\mE \cdot \mJ_{\mathsf{v}}(\mq\cir) + \mF) \\
-\mzr &  \mP & -\mQ \cdot \mJ_{\mathsf{w}}(\mq\cir) \\
+\mD  & -(\mE \cdot \mJ_{\mathsf{v}}(\mq^\diamond) + \mF) \\
+\mzr & -\mQ \cdot \mJ_{\mathsf{w}}(\mq^\diamond) \\
 \end{bmatrix}
 \end{equation}
 
 \item[e)] Vínculos de quasi-acelerações
 
 Derivando \eqref{eq:VinculosQuasiVel}, temos:
+%\begin{equation} \label{eq:VinculosQuasiAce}
+%\dot{\overline{\mp}}(\mq,\mp,\dot{\mp}) =
+%\begin{bmatrix}
+%\ddot{\overline{\mq}}(\mq,\mp, \dot{\mp}) \\
+%\dot{\overline{\momega}}(\mq,\mp, \dot{\mp})
+%\end{bmatrix}
+%= 
+%\begin{bmatrix}
+%\mD \cdot \ddot{\mq}^\ast - \mE \cdot (\mJ_{\mathsf{v}}(\mq^\diamond) \cdot \dot{\mp}^\diamond + \underaccent{\sim}{\ma}(\mq, \mp))  - \mF \cdot \dot{\mp}^\diamond \\
+%\mP \cdot \dot{\momega}^\ast - \mQ \cdot (\mJ_{\mathsf{w}}(\mq^\diamond) \cdot \dot{\mp}^\diamond + \underaccent{\sim}{ \dot{\momega} }(\mq, \mp))  - \mR \cdot \dot{\mp}^\diamond
+%\end{bmatrix}
+%=
+%\mzr
+%\end{equation}
 \begin{equation} \label{eq:VinculosQuasiAce}
-\dot{\overline{\mp}}(\mq,\mp,\dot{\mp}) =
+\dot{\overline{\mp}}(\mq,\dot{\mq},\ddot{\mq}) =
 \begin{bmatrix}
-\ddot{\overline{\mq}}(\mq,\mp, \dot{\mp}) \\
-\dot{\overline{\momega}}(\mq,\mp, \dot{\mp})
+\ddot{\overline{\mq}}(\mq,\dot{\mq},\ddot{\mq}) \\
+\dot{\overline{\momega}}(\mq,\dot{\mq},\ddot{\mq})
 \end{bmatrix}
 = 
 \begin{bmatrix}
-\mD \cdot \ddot{\mq}^\ast - \mE \cdot (\mJ_{\mathsf{v}}(\mq^\diamond) \cdot \dot{\mp}^\diamond + \underaccent{\sim}{\ma}(\mq, \mp))  - \mF \cdot \dot{\mp}^\diamond \\
-\mP \cdot \dot{\momega}^\ast - \mQ \cdot (\mJ_{\mathsf{w}}(\mq^\diamond) \cdot \dot{\mp}^\diamond + \underaccent{\sim}{ \dot{\momega} }(\mq, \mp))  - \mR \cdot \dot{\mp}^\diamond
+\mD \cdot \ddot{\mq}^\ast - \mE \cdot (\mJ_{\mathsf{v}}(\mq^\diamond) \cdot \ddot{\mq}^\diamond + \underaccent{\sim}{\ma}(\mq, \dot{\mq}))  - \mF \cdot \ddot{\mq}^\diamond \\
+- \mQ \cdot (\mJ_{\mathsf{w}}(\mq^\diamond) \cdot \ddot{\mq}^\diamond + \underaccent{\sim}{ \dot{\momega} }(\mq, \dot{\mq}))
 \end{bmatrix}
 =
 \mzr
 \end{equation}
 
 Sendo:
+%\begin{equation}
+%\underaccent{\sim}{\ma}(\mq, \mp) = \begin{bmatrix}
+%\underaccent{\sim}{\ma}_{\ssB_1}(\mq, \mp)(\mq_1,\mp_1)^\msT & ... & \underaccent{\sim}{\ma}_{\ssB_n}(\mq, \mp)(\mq_n,\mp_n)^\msT
+%\end{bmatrix}^\msT
+%\end{equation}
+%\begin{equation}
+%\underaccent{\sim}{\dot{\momega}}(\mq, \mp) = \begin{bmatrix}
+%\underaccent{\sim}{\dot{\momega}}_{\ssB_1}(\mq, \mp)(\mq_1,\mp_1)^\msT & ... & \underaccent{\sim}{\dot{\momega}}_{\ssB_n}(\mq, \mp)(\mq_n,\mp_n)^\msT
+%\end{bmatrix}^\msT
+%\end{equation}
 \begin{equation}
-\underaccent{\sim}{\ma}(\mq, \mp) = \begin{bmatrix}
-\underaccent{\sim}{\ma}_{\ssB_1}(\mq, \mp)(\mq_1,\mp_1)^\msT & ... & \underaccent{\sim}{\ma}_{\ssB_n}(\mq, \mp)(\mq_n,\mp_n)^\msT
+\underaccent{\sim}{\ma}(\mq, \dot{\mq}) = \begin{bmatrix}
+\underaccent{\sim}{\ma}_{\ssB_1}(\mq_1, \dot{\mq}_1)^\msT & ... & \underaccent{\sim}{\ma}_{\ssB_n}(\mq_n, \dot{\mq}_n)^\msT
 \end{bmatrix}^\msT
 \end{equation}
 \begin{equation}
-\underaccent{\sim}{\dot{\momega}}(\mq, \mp) = \begin{bmatrix}
-\underaccent{\sim}{\dot{\momega}}_{\ssB_1}(\mq, \mp)(\mq_1,\mp_1)^\msT & ... & \underaccent{\sim}{\dot{\momega}}_{\ssB_n}(\mq, \mp)(\mq_n,\mp_n)^\msT
+\underaccent{\sim}{\dot{\momega}}(\mq, \dot{\mq}) = \begin{bmatrix}
+\underaccent{\sim}{\dot{\momega}}_{\ssB_1}(\mq_1, \dot{\mq}_1)^\msT & ... & \underaccent{\sim}{\dot{\momega}}_{\ssB_n}(\mq_n, \dot{\mq}_n)^\msT
 \end{bmatrix}^\msT
 \end{equation}
 
 Repare que \eqref{eq:VinculosQuasiAce} pode ser reescrita como:
+%\begin{equation}
+%\dot{\overline{\mp}}(\mq,\mp,\dot{\mp}) = \mA(\mq)\dot{\mp} + \mb(\mq,\mp) = \mzr
+%\end{equation}
 \begin{equation}
-\dot{\overline{\mp}}(\mq,\mp,\dot{\mp}) = \mA(\mq)\dot{\mp} + \mb(\mq,\mp) = \mzr
+\dot{\overline{\mp}}(\mq,\dot{\mq},\ddot{\mq}) = \mA(\mq)\ddot{\mq} + \mb(\mq,\dot{\mq}) = \mzr
 \end{equation}
 
 Sendo:
+%\begin{equation}
+%\mb(\mq,\mp) =
+%-\begin{bmatrix}
+%\mE \cdot \underaccent{\sim}{\ma}(\mq, \mp) \\
+%\mQ \cdot \underaccent{\sim}{\dot{\momega}}(\mq, \mp) \\
+%\end{bmatrix}
+%\end{equation}
 \begin{equation}
-\mb(\mq,\mp) =
+\mb(\mq,\dot{\mq}) =
 -\begin{bmatrix}
-\mE \cdot \underaccent{\sim}{\ma}(\mq, \mp) \\
-\mQ \cdot \underaccent{\sim}{\dot{\momega}}(\mq, \mp) \\
+\mE \cdot \underaccent{\sim}{\ma}(\mq, \dot{\mq}) \\
+\mQ \cdot \underaccent{\sim}{\dot{\momega}}(\mq, \dot{\mq}) \\
 \end{bmatrix}
 \end{equation}
 
@@ -2924,9 +3004,9 @@ Seja $\mf$ a matriz-coluna contendo todos os sistemas de forças não-reativas gen
 \dot{\mp} \;
 -
 \begin{bmatrix}
-\mnu_{\ssB_0}(\mq_0,\mp_0) \\
+\mnu_{\ssB_0}(\mq_0,\dot{\mq}_0) \\
 \vdots \\
-\mnu_{\ssB_n}(\mq_n,\mp_n)  
+\mnu_{\ssB_n}(\mq_n,\dot{\mq}_n)  
 \end{bmatrix}
 -
 \begin{bmatrix}
@@ -2948,9 +3028,9 @@ Definindo:
 \begin{equation}
 \mnu'(\mq,\dot{\mq}) =
 \begin{bmatrix}
-\mnu_{\ssB_0}(\mq_0,\mp_0)^\msT &
+\mnu_{\ssB_0}(\mq_0,\dot{\mq}_0)^\msT &
 ... &
-\mnu_{\ssB_n}(\mq_n,\mp_n)^\msT
+\mnu_{\ssB_n}(\mq_n,\dot{\mq}_n)^\msT
 \end{bmatrix}^\msT
 \end{equation}
 \begin{equation}
@@ -2971,8 +3051,11 @@ Definindo:
 \end{equation}
 
 \eqref{eq:fParalelos} pode ser reescrita como:
+%\begin{equation}
+%\mf = \mu' - \mM'(\mq) \cdot \dot{\mp} - \mnu'(\mq,\mp) - \mg'(\mq)
+%\end{equation}
 \begin{equation}
-\mf = \mu' - \mM'(\mq) \cdot \dot{\mp} - \mnu'(\mq,\mp) - \mg'(\mq)
+\mf = \mu' - \mM'(\mq) \cdot \ddot{\mq} - \mnu'(\mq,\dot{\mq}) - \mg'(\mq)
 \end{equation}
 
 Um possível complemento ortogonal para o jacobiano dos vínculos de quasi-velocidades ($\mA$) é dado por
