@@ -3288,29 +3288,31 @@ Temos:
 \mC^\msT \mM' \mC \cdot \ddot{\mq}\ssh + \mC^\msT (   \mM' \mc + \mv' ) + \mC^\msT \mg'  = \mZ^\msT \mu^\star
 \end{equation}
 
-Supondo que não haja atuação redundante, para configurações não singulares, \eqref{eq:DinamicaInversa1} pode ser reescrita como:
+Sendo assim, \eqref{eq:DinamicaInversa1} pode ser reescrita como:
 \begin{equation} \label{eq:DinamicaInversa2}
-\mM_{\ssM} (\mq) \ddot{\mq}\ssh + \mv_{\ssM}(\mq, \dot{\mq}) + \mg_{\ssM}(\mq)   = \mu^\star
+\mM_{\ssM} (\mq) \ddot{\mq}\ssh + \mv_{\ssM}(\mq, \dot{\mq}) + \mg_{\ssM}(\mq)   = \mZ(\mq)^{\msT} \mu^\star
 \end{equation}
 
 Sendo: 
 \begin{equation}
-\mM_{\ssM}  = \mZ^{-\msT} \mC^\msT \mM' \mC
+\mM_{\ssM}  =  \mC^\msT \mM' \mC
 \end{equation}
 \begin{equation}
-\mv_{\ssM}  = \mZ^{-\msT}  \mC^\msT (  \mM'  \mc  + \mv' )
+\mv_{\ssM}  =  \mC^\msT (  \mM'  \mc  + \mv' )
 \end{equation}
 \begin{equation}
-\mg_{\ssM}  = \mZ^{-\msT}  \mC^\msT \mg'
+\mg_{\ssM}  = \mC^\msT \mg'
 \end{equation}
 
-Sendo assim, a simulação dinâmica inversa é feita utilizando a equação \eqref{eq:DinamicaInversa2} para obter os esforços nos atuadores, dados $\mq\ssh$, $\dot{\mq}\ssh$ e $\ddot{\mq}\ssh$, obtendo $\mq$ através da solução numérica da equação \eqref{eq:VinculosGenericosPosicao} e $\dot{\mq}$ através de \eqref{eq:CCinematica}.
+Sendo assim, para mecanismos sem atuação redundante, a simulação dinâmica inversa é feita utilizando a equação \eqref{eq:DinamicaInversa2} para obter os esforços nos atuadores, dados $\mq\ssh$, $\dot{\mq}\ssh$ e $\ddot{\mq}\ssh$, obtendo $\mq$ através da solução numérica da equação \eqref{eq:VinculosGenericosPosicao} e $\dot{\mq}$ através de \eqref{eq:CCinematica}. 
+
+Para o caso de mecanismos com atuação redundante, há infinitas para $\mu^\star$ de modo que o mecanismo realize a trajetória desejada. Sendo assim, normalmente é escolhida uma solução que seja solução de um problema de otimização (como a minimização da energia consumida), tendo a equação \eqref{eq:DinamicaInversa2} como restrição.
 
 \end{itemize}
 
 \subsection{Projeto do Controlador}\label{S05-5}
 
-Esta subseção é destinada ao projeto de controladores não lineares robustos, destinados ao controle de posição de plataformas paralelas cujo modelo dinâmico para simulação dinâmica inversa é dado por \eqref{eq:DinamicaInversa2}, utilizando as técnicas de linearização por realimentação com observador de disturbios na malha linear, e controle por modos deslizantes contínuo \cite{Slotini, Utkin} e discreto.
+Esta subseção é destinada ao projeto de controladores não lineares, destinados ao controle de posição de plataformas paralelas cujo modelo dinâmico para simulação dinâmica inversa é dado por \eqref{eq:DinamicaInversa2}, utilizando as técnicas de linearização por realimentação com observador de disturbios na malha linear, e controle por modos deslizantes contínuo \cite{Slotini, Utkin} e discreto.
 
 Para facilitar a leitura das deduções e com o intuito de deixar um pouco menos carregada a notação, será adotada a seguinte notação:
 \begin{equation}
@@ -3320,7 +3322,7 @@ Para facilitar a leitura das deduções e com o intuito de deixar um pouco menos c
 \mh(\mq, \dot{\mq}) = \mv_{\ssM}(\mq, \dot{\mq}) + \mg_{\ssM}(\mq)
 \end{equation}
 \begin{equation}
-\mup = \mu^\star
+\mup = \mZ(\mq)^{\msT} \mu^\star
 \end{equation}
 
 Sendo assim, equação \eqref{eq:DinamicaInversa2} pode ser reescrita como:
@@ -3328,18 +3330,18 @@ Sendo assim, equação \eqref{eq:DinamicaInversa2} pode ser reescrita como:
 \mH(\mq)  \ddot{\mq}\ssh + \mh(\mq,\dot{\mq}) = \mup
 \end{equation}
 
-\subsubsection{Linearização por Realimentação com observador de distúrbios}\label{S05-05-01}
+\subsubsection{Controle por Torque Computado (CTC)}\label{S05-05-01}
 
-Tendo em vista a equação dinâmica \eqref{eq:ModeloControle}, uma possível lei de controle para de Lineariazação por Realimentação é dada por:
-\begin{equation} \label{eq:leiLin_por_Rea}
-\mup = \hat{\mH}(\mq) (\ddot{\mq}\ssh_d - \mup') + \hat{\mh}(\mq,\dot{\mq})
+Tendo em vista a equação dinâmica \eqref{eq:ModeloControle}, a lei de Controle por Torque computado é dada por:
+\begin{equation} \label{eq:leiCTC}
+\mup = \hat{\mH}(\mq) (\ddot{\mq}\ssh_d + \underline{k}_v \dot{\me} + \underline{k}_p \me ) + \hat{\mh}(\mq,\dot{\mq})
 \end{equation}
 
 Sendo $\hat{\mH}$ e $\hat{\mh}$ estimadores para $\mH$ e $\mh$, respectivamente.
 
-Substituindo a lei de controle \eqref{eq:leiLin_por_Rea} em \eqref{eq:ModeloControle}, temos:
+Substituindo a lei de controle \eqref{eq:leiCTC} em \eqref{eq:ModeloControle}, temos:
 \begin{equation}
-\ddot{\me} = \mup' + \mdelta(t,\mq,\dot{\mq},\mup')
+\ddot{\me} + \underline{k_v} \dot{\me} + \underline{k_p} \me = \mdelta(t,\mq,\dot{\mq})
 \end{equation}
 
 Sendo:
@@ -3347,7 +3349,7 @@ Sendo:
 \me = \mq\ssh_d - \mq\ssh
 \end{equation}
 \begin{equation}
-\mdelta = \mH^\msI( \tilde{\mH}(\ddot{\mq}\ssh_d - \mup') + \tilde{\mh} )
+\mdelta = \mH^\msI( \tilde{\mH}(\ddot{\mq}\ssh_d + \underline{k}_v \dot{\me} + \underline{k}_p \me ) + \tilde{\mh} )
 \end{equation}
 \begin{equation} \label{eq:Htil}
 \tilde{\mH} = \mH - \hat{\mH}
@@ -3357,7 +3359,7 @@ Sendo:
 \end{equation}
 
 
-\subsubsection{Controle por Modos Deslizantes contínuo}\label{S05-05-01}
+\subsubsection{Controle por Modos Deslizantes contínuo}\label{S05-05-02}
 
 Sejam $\underline{\lambda}$ uma matriz diagonal positiva, $\mq\ssh_d$ uma matriz-coluna de sinais referência, e $\ms$ uma matriz-coluna dada por:
 \begin{equation} \label{eq:SlidingSurfaces}
