@@ -3330,6 +3330,12 @@ Sendo assim, equação \eqref{eq:DinamicaInversa2} pode ser reescrita como:
 \mH(\mq)  \ddot{\mq}\ssh + \mh(\mq,\dot{\mq}) = \mup
 \end{equation}
 
+Além disso, definimos o erro de controle como sendo:
+\begin{equation}
+\me = \mq\ssh_d - \mq\ssh
+\end{equation}
+Sendo $\mq\ssh_d$ o sinal de referência
+
 \subsubsection{Controle por Torque Computado (CTC)}\label{S05-05-01}
 
 Tendo em vista a equação dinâmica \eqref{eq:ModeloControle}, a lei de Controle por Torque computado é dada por:
@@ -3337,7 +3343,7 @@ Tendo em vista a equação dinâmica \eqref{eq:ModeloControle}, a lei de Controle p
 \mup = \hat{\mH}(\mq) (\ddot{\mq}\ssh_d + \underline{k}_v \dot{\me} + \underline{k}_p \me ) + \hat{\mh}(\mq,\dot{\mq})
 \end{equation}
 
-Sendo $\hat{\mH}$ e $\hat{\mh}$ estimadores para $\mH$ e $\mh$, respectivamente.
+Sendo $\hat{\mH}$ e $\hat{\mh}$ estimadores para $\mH$ e $\mh$, respectivamente, e $\underline{k}_v$ e $\underline{k}_p$ matrizes diagonais positiva-definidas.
 
 Substituindo a lei de controle \eqref{eq:leiCTC} em \eqref{eq:ModeloControle}, temos:
 \begin{equation}
@@ -3345,9 +3351,6 @@ Substituindo a lei de controle \eqref{eq:leiCTC} em \eqref{eq:ModeloControle}, t
 \end{equation}
 
 Sendo:
-\begin{equation}
-\me = \mq\ssh_d - \mq\ssh
-\end{equation}
 \begin{equation}
 \mdelta = \mH^\msI( \tilde{\mH}(\ddot{\mq}\ssh_d + \underline{k}_v \dot{\me} + \underline{k}_p \me ) + \tilde{\mh} )
 \end{equation}
@@ -3357,6 +3360,8 @@ Sendo:
 \begin{equation} \label{eq:htil}
 \tilde{\mh} = \mh - \hat{\mh}
 \end{equation}
+
+Repare que, para o caso em que não há erros de modelagem ($\tilde{\mH} = \mzr$ e $\tilde{\mh} = \mzr$), a dinâmica de cada componente do erro se comporta como um movimento harmônico amortecido, tendendo assintóticamente a zero independentemente da condição inicial. Repare também que, o desempenho dessa técnica de controle depende diretamente da representatividade do modelo obtido dentro das condições de operação do sistema. 
 
 
 \subsubsection{Controle por Modos Deslizantes contínuo}\label{S05-05-02}
