@@ -3312,7 +3312,7 @@ Para o caso de mecanismos com atuação redundante, há infinitas para $\mu^\star$ 
 
 \subsection{Projeto do Controlador}\label{S05-5}
 
-Esta subseção é destinada ao projeto de controladores não lineares, destinados ao controle de posição de plataformas paralelas cujo modelo dinâmico para simulação dinâmica inversa é dado por \eqref{eq:DinamicaInversa2}, utilizando as técnicas de linearização por realimentação com observador de disturbios na malha linear, e controle por modos deslizantes contínuo \cite{Slotini, Utkin} e discreto.
+Esta subseção é destinada ao projeto de controladores não lineares, destinados ao controle de posição de plataformas paralelas cujo modelo dinâmico para simulação dinâmica inversa é dado por \eqref{eq:DinamicaInversa2}, utilizando a técnica de Linearização por Realimentação aliada a outras leis de controle não linear, como as leis Controle por Modos Deslizantes em Tempo Contínuo \cite{Slotini, Utkin}, e também aliada a técnicas de controle linear, como a alocação de pólos no espaço de estados (Controle por Torque Computado), alocação de pólos no domínio da frequência com observador de disturbios, e o Controle por Modos Deslizantes em Tempo Discreto.
 
 Para facilitar a leitura das deduções e com o intuito de deixar um pouco menos carregada a notação, será adotada a seguinte notação:
 \begin{equation}
@@ -3336,23 +3336,25 @@ Além disso, definimos o erro de controle como sendo:
 \end{equation}
 Sendo $\mq\ssh_d$ o sinal de referência
 
-\subsubsection{Controle por Torque Computado (CTC)}\label{S05-05-01}
+\subsubsection{Linearização por Realimentação (LR)}\label{S05-05-00}
 
-Tendo em vista a equação dinâmica \eqref{eq:ModeloControle}, a lei de Controle por Torque computado é dada por:
-\begin{equation} \label{eq:leiCTC}
-\mup = \hat{\mH}(\mq) (\ddot{\mq}\ssh_d + \underline{k}_v \dot{\me} + \underline{k}_p \me ) + \hat{\mh}(\mq,\dot{\mq})
+A técnica de controle conhecida como Linearização por Realimentação consiste utilizar a entrada de controle para cancelar as não linearidades do sistema, de modo a obter um sistema linear equivalente, normalmente desacoplado, no qual é possível utilizar inúmeras técnicas de controle linear.
+
+Tendo em vista a equação dinâmica \eqref{eq:ModeloControle}, é proposta a seguinte lei de Linearização por Realimentação:
+\begin{equation} \label{eq:leiLR}
+\mup = \hat{\mH}(\mq) (\ddot{\mq}\ssh_d - \mup' ) + \hat{\mh}(\mq,\dot{\mq})
 \end{equation}
 
-Sendo $\hat{\mH}$ e $\hat{\mh}$ estimadores para $\mH$ e $\mh$, respectivamente, e $\underline{k}_v$ e $\underline{k}_p$ matrizes diagonais positiva-definidas.
+Sendo $\hat{\mH}$ e $\hat{\mh}$ estimadores para $\mH$ e $\mh$, respectivamente.
 
-Substituindo a lei de controle \eqref{eq:leiCTC} em \eqref{eq:ModeloControle}, temos:
-\begin{equation}
-\ddot{\me} + \underline{k_v} \dot{\me} + \underline{k_p} \me = \mdelta(t,\mq,\dot{\mq})
+Substituindo a lei de controle \eqref{eq:leiLR} em \eqref{eq:ModeloControle}, temos:
+\begin{equation} \label{eq:ModeloLin}
+\ddot{\me}  = \mup' + \mdelta(t,\mq,\dot{\mq}, \mup')
 \end{equation}
 
 Sendo:
 \begin{equation}
-\mdelta = \mH^\msI( \tilde{\mH}(\ddot{\mq}\ssh_d + \underline{k}_v \dot{\me} + \underline{k}_p \me ) + \tilde{\mh} )
+\mdelta = \mH^\msI( \tilde{\mH}(\ddot{\mq}\ssh_d - \mup') + \tilde{\mh} )
 \end{equation}
 \begin{equation} \label{eq:Htil}
 \tilde{\mH} = \mH - \hat{\mH}
@@ -3361,10 +3363,31 @@ Sendo:
 \tilde{\mh} = \mh - \hat{\mh}
 \end{equation}
 
-Repare que, para o caso em que não há erros de modelagem ($\tilde{\mH} = \mzr$ e $\tilde{\mh} = \mzr$), a dinâmica de cada componente do erro se comporta como um movimento harmônico amortecido, tendendo assintóticamente a zero independentemente da condição inicial. Repare também que, o desempenho dessa técnica de controle depende diretamente da representatividade do modelo obtido dentro das condições de operação do sistema. 
+Repare que, para o caso em que não há erros de modelagem ($\tilde{\mH} = \mzr$ e $\tilde{\mh} = \mzr \Rightarrow \mdelta = \mzr$), a dinâmica de cada componente do erro se comporta como um sistema linear de segunda ordem forçado com inércia unitária e duplo integrador em $s = 0$.
+
+\subsubsection{Controle por Torque Computado (CTC)}\label{S05-05-01}
+
+A lei de Controle por Torque Computado tem o intuito de fazer com que a dinâmica de cada componente do erro de controle se comporte como um movimento harmônico amortecido, fazendo com que o erro tenda assintóticamente a zero independentemente da condição inicial, na ausência de erros de modelagem. Para atingir este objetivo, basta utilizar a seguinte lei de realimentação de estados para $\mup'$:
+\begin{equation} \label{eq:leiCTC}
+\mup' = -\underline{k}_v \dot{\me} - \underline{k}_p \me
+\end{equation}
+
+Sendo $\underline{k}_v$ e $\underline{k}_p$ matrizes diagonais positiva-definidas.
+
+Substituindo a lei de controle \eqref{eq:leiCTC} em \eqref{eq:ModeloLin}, temos:
+\begin{equation}
+\ddot{\me} + \underline{k_v} \dot{\me} + \underline{k_p} \me = \mdelta'(t,\mq,\dot{\mq})
+\end{equation}
+
+Sendo:
+\begin{equation}
+\mdelta' = \mH^\msI( \tilde{\mH}(\ddot{\mq}\ssh_d + \underline{k}_v \dot{\me} + \underline{k}_p \me ) + \tilde{\mh} )
+\end{equation}
+
+Repare que o desempenho desta técnica de controle depende diretamente da representatividade do modelo obtido dentro das condições de operação do sistema. 
 
 
-\subsubsection{Controle por Modos Deslizantes contínuo}\label{S05-05-02}
+\subsubsection{Controle por Modos Deslizantes em Tempo Contínuo}\label{S05-05-02}
 
 Sejam $\underline{\lambda}$ uma matriz diagonal positiva, $\mq\ssh_d$ uma matriz-coluna de sinais referência, e $\ms$ uma matriz-coluna dada por:
 \begin{equation} \label{eq:SlidingSurfaces}
