@@ -3389,27 +3389,38 @@ Repare que o desempenho desta técnica de controle depende diretamente da represe
 
 \subsubsection{Controle por Modos Deslizantes em Tempo Contínuo}\label{S05-05-02}
 
-Sejam $\underline{\lambda}$ uma matriz diagonal positiva, $\mq\ssh_d$ uma matriz-coluna de sinais referência, e $\ms$ uma matriz-coluna dada por:
-\begin{equation} \label{eq:SlidingSurfaces}
-\ms = -(\dot{\me} + \underline{\lambda}\me)
-\end{equation} 
+O Controle por Modos Deslizantes é uma técnica de controle não-linear robusto, a qual tem como principal vantagem uma menor sensibilidade ao modelo da planta utilizado, sendo robusto tanto a incertezas estruturadas quanto a incertezas não estruturadas. Nesta subseção serão deduzidas 4 leis de controle baseadas nesta técnica.
 
-Sendo:
-\begin{equation}
-\me = \mq\ssh_d - \mq\ssh
+Sejam $\underline{\lambda}$, $\underline{k}_v$ e $\underline{k}_p$ matrizes diagonais positiva-definidas. Assim, pode-se definir uma matriz-coluna $\ms$ de duas maneiras diferentes:
+\begin{equation} \label{eq:SlidingSurfaces}
+\ms = \dot{\me} + \underline{\lambda}\me
 \end{equation}
 
+ou
+\begin{equation} \label{eq:SlidingSurfaces_}
+\ms = \ddot{\me} + \underline{k}_v\dot{\me} + \underline{k}_p\me
+\end{equation}
+
+Tendo definido $\ms$, define-se a chamada superfície de escorregamento:
+\begin{equation} \label{eq:SuperficieDeEscorregamento}
+\ms = \ddot{\me} + \underline{k}_v\dot{\me} + \underline{k}_p\me
+\end{equation}
+
+Repare que fazendo com o sistema atinja a superfície de escorregamento, o erro de controle tenderá assintóticamente a zero, independente de qual das definições de $\ms$ for escolhida.
+ 
 Seja $V(\ms)$ uma função de Lyapunov dada por:
 \begin{equation}
-V(\ms) = \frac{1}{2} \ms^\msT \ms
+V(\ms) = \frac{1}{2} \ms^\msT \mW \, \ms
 \end{equation}
 
-Pela teoria de estabilidade de Lyapunov, se $\dot{V} < 0 \,\, \forall \ms \neq \mzr$, $\ms$ converge para $\mzr$ independentemente das condi\c{c}\~oes iniciais do sistema. Para que isso seja poss\'ivel, \'e imposta a seguinte condi\c{c}\~ao:
+Sendo $\mW$ uma matriz simétrica positiva-definida. Pela teoria de estabilidade de Lyapunov, se $\dot{V} < 0 \,\, \forall \ms \neq \mzr$, $\ms$ converge para $\mzr$ independentemente das condi\c{c}\~oes iniciais do sistema. Para que isso seja poss\'ivel, \'e imposta a seguinte condi\c{c}\~ao:
 \begin{equation} \label{eq:SlidingCondition}
-\frac{\dd}{\dd t} V(\ms) = \ms^\msT \dot{\ms} \leq - \eta \, \ms^\msT \sign(\ms) 
+\frac{\dd}{\dd t} V(\ms) = \ms^\msT \Big( \mW \, \dot{\ms} + \frac{1}{2}  \dot{\mW} \, \ms \Big) \leq -   \ms^\msT \underline{\eta} \sign(\ms) 
 \end{equation}
 
-Sendo $\eta$ uma constante positiva. Repare que $\ms^\msT \sign(\ms)$ \'e a soma dos m\'odulos das componentes de $\ms$, o que implica que $- \eta \, \ms^\msT \sign(\ms) < 0 \,\, \forall \ms \neq \mzr$. Repare tamb\'em que se $\dot{\ms} = - \eta \,\sign(\ms)$,  \eqref{eq:SlidingCondition} \'e satisfeita e cada componente de $\ms$ respeita a EDO $\dot{s_i} = - \eta \,\sign(s_i)$, a qual converge para zero em um tempo finito de $t = \frac{|s_i(0)|}{\eta}$. Sendo assim, pode-se dizer que se \eqref{eq:SlidingCondition} for satisfeita, $\ms$ converge para zero em tempo finito e, a partir desse momento, o erro de controle $\me$ converge assintoticamente para zero.
+Sendo $\underline{\eta}$ uma matriz diagonal positiva-definida. Repare que $\ms^\msT \underline{\eta} \sign(\ms)$ \'e a soma ponderada dos m\'odulos das componentes de $\ms$, o que implica que $-  \ms^\msT \underline{\eta} \sign(\ms) < 0 \,\, \forall \ms \neq \mzr$. Repare tamb\'em que $V(\ms)$ pode ser interpretada como uma distância quadrática do sistema até a superfície de escorregamento. A imposição da condição \eqref{eq:SlidingCondition} implica que a distância do sistema à superfície de escorregamente é sempre decrescente enquanto o sistema não atinjir a superfície de escorregamente, e garante a convergência $\ms$ para zero em tempo finito e, a partir desse momento, a convergência assintótica do erro de controle $\me$ para zero. 
+
+Para ilustrar, considere $\mW = \mone$ e $\underline{\eta} = \eta \mone$; se $\dot{\ms} = - \eta \,\sign(\ms)$,  \eqref{eq:SlidingCondition} \'e satisfeita e cada componente de $\ms$ respeita a EDO $\dot{s_i} = - \eta \,\sign(s_i)$, a qual converge para zero em um tempo finito de $t = \frac{|s_i(0)|}{\eta}$.
 
 O projeto do controlador \'e feito utilizando a condi\c{c}\~ao \eqref{eq:SlidingCondition}, a qual \'e conhecida como condi\c{c}\~ao de escorregamento. Assim, derivando \eqref{eq:SlidingSurfaces}, temos:
 
