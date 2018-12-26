@@ -3396,14 +3396,14 @@ Sejam $\underline{\lambda}$, $\underline{k}_v$ e $\underline{k}_p$ matrizes diag
 \ms = \dot{\me} + \underline{\lambda}\me
 \end{equation}
 
-ou
+e
 \begin{equation} \label{eq:SlidingSurfaces_}
 \ms = \ddot{\me} + \underline{k}_v\dot{\me} + \underline{k}_p\me
 \end{equation}
 
 Tendo definido $\ms$, define-se a chamada superfície de escorregamento:
 \begin{equation} \label{eq:SuperficieDeEscorregamento}
-\ms = \ddot{\me} + \underline{k}_v\dot{\me} + \underline{k}_p\me
+\ms = \mzr
 \end{equation}
 
 Repare que fazendo com o sistema atinja a superfície de escorregamento, o erro de controle tenderá assintóticamente a zero, independente de qual das definições de $\ms$ for escolhida.
@@ -3417,72 +3417,86 @@ Sendo $\mW$ uma matriz simétrica positiva-definida. Pela teoria de estabilidade 
 \begin{equation} \label{eq:SlidingCondition}
 \frac{\dd}{\dd t} V(\ms) = \ms^\msT \Big( \mW \, \dot{\ms} + \frac{1}{2}  \dot{\mW} \, \ms \Big) \leq -   \ms^\msT \underline{\eta} \sign(\ms) 
 \end{equation}
-
-Sendo $\underline{\eta}$ uma matriz diagonal positiva-definida. Repare que $\ms^\msT \underline{\eta} \sign(\ms)$ \'e a soma ponderada dos m\'odulos das componentes de $\ms$, o que implica que $-  \ms^\msT \underline{\eta} \sign(\ms) < 0 \,\, \forall \ms \neq \mzr$. Repare tamb\'em que $V(\ms)$ pode ser interpretada como uma distância quadrática do sistema até a superfície de escorregamento. A imposição da condição \eqref{eq:SlidingCondition} implica que a distância do sistema à superfície de escorregamente é sempre decrescente enquanto o sistema não atinjir a superfície de escorregamente, e garante a convergência $\ms$ para zero em tempo finito e, a partir desse momento, a convergência assintótica do erro de controle $\me$ para zero. 
-
-Para ilustrar, considere $\mW = \mone$ e $\underline{\eta} = \eta \mone$; se $\dot{\ms} = - \eta \,\sign(\ms)$,  \eqref{eq:SlidingCondition} \'e satisfeita e cada componente de $\ms$ respeita a EDO $\dot{s_i} = - \eta \,\sign(s_i)$, a qual converge para zero em um tempo finito de $t = \frac{|s_i(0)|}{\eta}$.
-
-O projeto do controlador \'e feito utilizando a condi\c{c}\~ao \eqref{eq:SlidingCondition}, a qual \'e conhecida como condi\c{c}\~ao de escorregamento. Assim, derivando \eqref{eq:SlidingSurfaces}, temos:
-
-\begin{equation} \label{eq:DSlidingSurfaces}
-\dot{\ms} = \ddot{\mq}\ssh - \msigma
-\end{equation}
-Sendo:
 \begin{equation}
-\msigma = \ddot{\mq}\ssh_d + \underline{\lambda}\dot{\me}
+\Rightarrow \ms^\msT \Big( \mW \, \dot{\ms} + \frac{1}{2}  \dot{\mW} \, \ms + \underline{\eta} \sign(\ms)  \Big) \leq 0
 \end{equation}
 
-Substituindo \eqref{eq:DSlidingSurfaces} em \eqref{eq:SlidingCondition}, temos:
+Sendo $\underline{\eta}$ uma matriz diagonal positiva-definida. Repare que $\ms^\msT \underline{\eta} \sign(\ms)$ \'e a soma ponderada dos m\'odulos das componentes de $\ms$, o que implica que $-  \ms^\msT \underline{\eta} \sign(\ms) < 0 \,\, \forall \ms \neq \mzr$. Repare tamb\'em que $V(\ms)$ pode ser interpretada como uma distância quadrática do sistema até a superfície de escorregamento. A imposição da condição \eqref{eq:SlidingCondition} implica que a distância do sistema à superfície de escorregamente é sempre decrescente enquanto o sistema não atingir a superfície de escorregamento, e garante a convergência $\ms$ para zero em tempo finito e, a partir deste momento, a convergência assintótica do erro de controle $\me$ para zero. 
+
+Para ilustrar, considere $\mW = \mone$; se $\dot{\ms} = - \underline{\eta} \,\sign(\ms)$,  \eqref{eq:SlidingCondition} \'e satisfeita e cada componente de $\ms$ respeita a EDO $\dot{s_i} = - \eta_i \,\sign(s_i)$, a qual converge para zero em um tempo finito de $t_i = \frac{|s_i(0)|}{\eta_i}$.
+
+O projeto do controlador \'e feito utilizando a condi\c{c}\~ao \eqref{eq:SlidingCondition}, a qual \'e conhecida como condi\c{c}\~ao de escorregamento. Primeiramente será realizado o projeto utilizando a definição \eqref{eq:SlidingSurfaces} para $\ms$.
+
+\begin{itemize}
+\item[a)] Para $\ms = \dot{\me} + \underline{\lambda}\me$:
+
+Derivando \eqref{eq:SlidingSurfaces} e substituindo em \eqref{eq:SlidingCondition}, temos:
 
 \begin{equation} \label{eq:SlidingCondition2}
-\ms^\msT (\ddot{\mq}\ssh -\msigma + \eta \, \sign(\ms) ) \leq 0
+\ms^\msT \Big(\mW (\ddot{\me} + \underline{\lambda} \dot{\me} ) + \frac{1}{2}\dot{\mW} \, \ms + \underline{\eta} \, \sign(\ms) \Big) \leq 0
 \end{equation} \\
 
-\eqref{eq:ModeloControle} será utilizada para realizar o projeto do controlador. \\
 
 
-
-Isolando $\ddot{\mq}\ssh$ em \eqref{eq:ModeloControle} e subtituindo em \eqref{eq:SlidingCondition2}, temos:
+Subtituindo \eqref{eq:ModeloLin} em \eqref{eq:SlidingCondition2}, temos:
 \begin{equation} \label{eq:SlidingCondition3}
-\ms^\msT (\mH^\msI (\mup - \mh ) -\msigma + \eta \, \sign(\ms) ) \leq 0
+\ms^\msT \Big(\mW \big(\mup' + \underline{\lambda} \dot{\me} + \mH^\msI( \tilde{\mH}(\ddot{\mq}\ssh_d - \mup') + \tilde{\mh} ) \big) + \frac{1}{2}\dot{\mW} \, \ms + \underline{\eta} \, \sign(\ms) \Big) \leq 0
 \end{equation}
 
-Para satisfazer \eqref{eq:SlidingCondition3}, \'e utilizada a seguinte lei de controle:
+Definindo:
+\begin{equation}
+\mup' = - \underline{\lambda} \dot{\me} + \mup''
+\end{equation}
+
+Temos:
+\begin{equation} \label{eq:SlidingCondition3_}
+\ms^\msT \Big(\mW \big( (\mone - \mH^\msI \tilde{\mH} )\mup'' + \mH^\msI( \tilde{\mH}(\ddot{\mq}\ssh_d + \underline{\lambda} \dot{\me}) + \tilde{\mh} ) \big) + \frac{1}{2}\dot{\mW} \, \ms + \underline{\eta} \, \sign(\ms) \Big) \leq 0
+\end{equation}
+
+Analisando \eqref{eq:SlidingCondition3_}, notam-se duas possíveis escolhas para $\mW$ que facilitam o projeto do controlador:
+\begin{equation} \label{eq:W1}
+\mW = \mone
+\end{equation}
+
+e
+\begin{equation} \label{eq:W2}
+\mW = \mH
+\end{equation}
+
+\begin{itemize}
+\item[a.1)] Para $\mW = \mone$:
+
+
+Substuindo \eqref{eq:W1} em \eqref{eq:SlidingCondition3_}, obtem-se:
+\begin{equation} \label{eq:SlidingCondition3_a1}
+\ms^\msT \Big((\mone - \mH^\msI \tilde{\mH} )\mup'' + \mH^\msI( \tilde{\mH}(\ddot{\mq}\ssh_d + \underline{\lambda} \dot{\me}) + \tilde{\mh} ) + \underline{\eta} \, \sign(\ms) \Big) \leq 0
+\end{equation}
+
+\end{itemize}
+
+Para satisfazer \eqref{eq:SlidingCondition3_a1}, é utilizada a seguinte lei de controle:
 \begin{equation} \label{eq:ControlLawSRed}
-\mup = \hat{\mh} + \hat{\mH}( \msigma - \underline{k} \sign(\ms) )
+\mup'' =  -\underline{k} \sign(\ms)
 \end{equation}
 
-Sendo $\hat{\mh}$ e $\hat{\mH}$ estimadores de $\mh$ e $\mH$, respectivamente, e $\underline{k}$ uma matriz diagonal positiva. Substituindo \eqref{eq:ControlLawSRed} em \eqref{eq:SlidingCondition3}, temos:
+Sendo $\underline{k}$ uma matriz diagonal positiva-definida. Substituindo \eqref{eq:ControlLawSRed} em \eqref{eq:SlidingCondition3_a1}, temos:
 \begin{equation} \label{eq:SlidingCondition4}
-\ms^\msT (\mdelta + \mDelta \msigma  + \eta \, \sign(\ms) - (\mDelta + \mone) \underline{k} \sign(\ms) ) \leq 0
-\end{equation}
-
-Sendo:
-\begin{equation}
-\mdelta(\mq, \dot{\mq}\ssh) = \mH^\msI (\hat{\mh} - \mh)
-\end{equation}
-\begin{equation}
-\mDelta(\mq) = \mH^\msI \hat{\mH} - \mone
+\ms^\msT \Big(- \big(\underline{k} - \underline{\eta} \big)  \sign(\ms) + \mH^\msI \tilde{\mH} \, \underline{k} \sign(\ms) + \mH^\msI( \tilde{\mH}(\ddot{\mq}\ssh_d + \underline{\lambda} \dot{\me}) + \tilde{\mh} ) \Big) \leq 0
 \end{equation}
 
 Pode-se dizer que \eqref{eq:SlidingCondition4} \'e sempre satisfeita se:
 \begin{equation} \label{eq:DesigualdadeK1}
-(\mDelta + \mone) \cdot \diag(\underline{k})  \geq | \mdelta + \mDelta \msigma  + \eta \, \sign(\ms) |
+ \diag(\underline{k}) - \diag(\underline{\eta}) \geq  | \mH^\msI \tilde{\mH} \, \underline{k} \sign(\ms) + \mH^\msI( \tilde{\mH}(\ddot{\mq}\ssh_d + \underline{\lambda} \dot{\me}) + \tilde{\mh} ) |
 \end{equation}
 
 Aplicando a desigualdade triangular em cada componente do lado esquerdo de \eqref{eq:DesigualdadeK1}, temos:
 \begin{equation}
-| \mdelta + \mDelta \msigma  + \eta \, \sign(\ms) | \leq |\mdelta|_{max} + |\mDelta|_{max} |\msigma| + \diag(\eta \mone)
-\end{equation}
-
-Além disso, pode-se fazer a seguinte majoração no lado direito de \eqref{eq:DesigualdadeK1}:
-\begin{equation}
-(\mDelta + \mone) \cdot \diag(\underline{k})  \geq (\mone - |\mDelta|_{max} ) \cdot \diag(\underline{k})
+| \mH^\msI \tilde{\mH} \, \underline{k} \sign(\ms) + \mH^\msI( \tilde{\mH}(\ddot{\mq}\ssh_d + \underline{\lambda} \dot{\me}) + \tilde{\mh} ) | \leq | \mH^\msI \tilde{\mH}|_{max} \diag(\underline{k}) +  |\mH^\msI \tilde{\mH}|_{max} |\ddot{\mq}\ssh_d + \underline{\lambda} \dot{\me}| + |\mH^\msI\tilde{\mh}|_{max}
 \end{equation}
 
 Portanto, se a seguinte inequa\c{c}\~ao matricial for respeitada:
 \begin{equation} \label{eq:DesigualdadeK2}
-(\mone - |\mDelta|_{max} ) \cdot \diag(\underline{k})  \geq |\mdelta|_{max} + |\mDelta|_{max} |\msigma| + \diag(\eta \mone)
+(\mone - | \mH^\msI \tilde{\mH}|_{max} ) \cdot \diag(\underline{k})  \geq \diag(\underline{\eta}) + |\mH^\msI \tilde{\mH}|_{max} |\ddot{\mq}\ssh_d + \underline{\lambda} \dot{\me}| + |\mH^\msI\tilde{\mh}|_{max}
 \end{equation}
 
 \eqref{eq:SlidingCondition4} ser\'a respeitada, o que garante que a condi\c{c}\~ao de escorregamento \eqref{eq:SlidingCondition} tamb\'em seja respeitada e consequentemente garante a converg\^encia do erro de controle para zero.
@@ -3530,6 +3544,8 @@ Sendo $\mGamma$, $\meta$ e $\meta_{i,j}$  matrizes constantes dadas por:
 \begin{equation}
 \meta_{i,j} = (\mone - |\mDelta|_{max} )^\msI | \mdelta_{i,j} |_{max}, \, i=1,...,\nu\ssh, \, j = 1,...,i
 \end{equation}
+
+\end{itemize}
 
 
 %Uma poss\'ivel solu\c{c}\~ao para \eqref{eq:DesigualdadeK2} \'e obtida fazendo $\underline{k} = k \mone$, a qual \'e v\'alida apenas se o somat\'orio de cada uma das linhas de $|\mDelta|_{max}$ for menor do que $1$. Esta solu\c{c}\~ao \'e dada por:
