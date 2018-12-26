@@ -3389,7 +3389,7 @@ Repare que o desempenho desta técnica de controle depende diretamente da represe
 
 \subsubsection{Controle por Modos Deslizantes em Tempo Contínuo}\label{S05-05-02}
 
-O Controle por Modos Deslizantes é uma técnica de controle não-linear robusto, a qual tem como principal vantagem uma menor sensibilidade ao modelo da planta utilizado, sendo robusto tanto a incertezas estruturadas quanto a incertezas não estruturadas. Nesta subseção serão deduzidas 4 leis de controle baseadas nesta técnica.
+O Controle por Modos Deslizantes é uma técnica de controle não-linear robusto, a qual tem como principal vantagem uma menor sensibilidade aos erros de modelagem, sendo robusto tanto a incertezas estruturadas quanto a incertezas não estruturadas. Nesta subseção serão deduzidas 4 leis de controle baseadas nesta técnica.
 
 Sejam $\underline{\lambda}$, $\underline{k}_v$ e $\underline{k}_p$ matrizes diagonais positiva-definidas. Assim, pode-se definir uma matriz-coluna $\ms$ de duas maneiras diferentes:
 \begin{equation} \label{eq:SlidingSurfaces}
@@ -3425,7 +3425,7 @@ Sendo $\underline{\eta}$ uma matriz diagonal positiva-definida. Repare que $\ms^
 
 Para ilustrar, considere $\mW = \mone$; se $\dot{\ms} = - \underline{\eta} \,\sign(\ms)$,  \eqref{eq:SlidingCondition} \'e satisfeita e cada componente de $\ms$ respeita a EDO $\dot{s_i} = - \eta_i \,\sign(s_i)$, a qual converge para zero em um tempo finito de $t_i = \frac{|s_i(0)|}{\eta_i}$.
 
-O projeto do controlador \'e feito utilizando a condi\c{c}\~ao \eqref{eq:SlidingCondition}, a qual \'e conhecida como condi\c{c}\~ao de escorregamento. Primeiramente será realizado o projeto utilizando a definição \eqref{eq:SlidingSurfaces} para $\ms$.
+O projeto do controlador \'e feito utilizando a condi\c{c}\~ao \eqref{eq:SlidingCondition}, a qual \'e conhecida como condi\c{c}\~ao de escorregamento, será subdividido pelas diferentes definições apresentadas para a variável $\ms$ (\eqref{eq:SlidingSurfaces} e \eqref{eq:SlidingSurfaces_}).
 
 \begin{itemize}
 \item[a)] Para $\ms = \dot{\me} + \underline{\lambda}\me$:
@@ -3453,7 +3453,12 @@ Temos:
 \ms^\msT \Big(\mW \big( (\mone - \mH^\msI \tilde{\mH} )\mup'' + \mH^\msI( \tilde{\mH}(\ddot{\mq}\ssh_d + \underline{\lambda} \dot{\me}) + \tilde{\mh} ) \big) + \frac{1}{2}\dot{\mW} \, \ms + \underline{\eta} \, \sign(\ms) \Big) \leq 0
 \end{equation}
 
-Analisando \eqref{eq:SlidingCondition3_}, notam-se duas possíveis escolhas para $\mW$ que facilitam o projeto do controlador:
+Note que:
+\begin{equation}
+\mone - \mH^\msI \tilde{\mH} = \mone - \mH^\msI ( \mH - \hat{\mH}) = \mH^\msI \hat{\mH}
+\end{equation}
+
+Sendo assim, são notáveis duas possíveis escolhas para $\mW$ que facilitam o projeto do controlador:
 \begin{equation} \label{eq:W1}
 \mW = \mone
 \end{equation}
@@ -3462,6 +3467,8 @@ e
 \begin{equation} \label{eq:W2}
 \mW = \mH
 \end{equation}
+
+Mais uma vez, o projeto do controlador será subdividido em 2 casos:
 
 \begin{itemize}
 \item[a.1)] Para $\mW = \mone$:
@@ -3472,19 +3479,17 @@ Substuindo \eqref{eq:W1} em \eqref{eq:SlidingCondition3_}, obtem-se:
 \ms^\msT \Big((\mone - \mH^\msI \tilde{\mH} )\mup'' + \mH^\msI( \tilde{\mH}(\ddot{\mq}\ssh_d + \underline{\lambda} \dot{\me}) + \tilde{\mh} ) + \underline{\eta} \, \sign(\ms) \Big) \leq 0
 \end{equation}
 
-\end{itemize}
-
 Para satisfazer \eqref{eq:SlidingCondition3_a1}, é utilizada a seguinte lei de controle:
 \begin{equation} \label{eq:ControlLawSRed}
 \mup'' =  -\underline{k} \sign(\ms)
 \end{equation}
 
-Sendo $\underline{k}$ uma matriz diagonal positiva-definida. Substituindo \eqref{eq:ControlLawSRed} em \eqref{eq:SlidingCondition3_a1}, temos:
+Sendo $\underline{k}$ uma matriz diagonal positiva-definida, com $\underline{k} \geq \underline{\eta} $. Substituindo \eqref{eq:ControlLawSRed} em \eqref{eq:SlidingCondition3_a1}, temos:
 \begin{equation} \label{eq:SlidingCondition4}
 \ms^\msT \Big(- \big(\underline{k} - \underline{\eta} \big)  \sign(\ms) + \mH^\msI \tilde{\mH} \, \underline{k} \sign(\ms) + \mH^\msI( \tilde{\mH}(\ddot{\mq}\ssh_d + \underline{\lambda} \dot{\me}) + \tilde{\mh} ) \Big) \leq 0
 \end{equation}
 
-Pode-se dizer que \eqref{eq:SlidingCondition4} \'e sempre satisfeita se:
+Pode-se dizer que, \eqref{eq:SlidingCondition4} \'e sempre satisfeita se:
 \begin{equation} \label{eq:DesigualdadeK1}
  \diag(\underline{k}) - \diag(\underline{\eta}) \geq  | \mH^\msI \tilde{\mH} \, \underline{k} \sign(\ms) + \mH^\msI( \tilde{\mH}(\ddot{\mq}\ssh_d + \underline{\lambda} \dot{\me}) + \tilde{\mh} ) |
 \end{equation}
@@ -3499,51 +3504,16 @@ Portanto, se a seguinte inequa\c{c}\~ao matricial for respeitada:
 (\mone - | \mH^\msI \tilde{\mH}|_{max} ) \cdot \diag(\underline{k})  \geq \diag(\underline{\eta}) + |\mH^\msI \tilde{\mH}|_{max} |\ddot{\mq}\ssh_d + \underline{\lambda} \dot{\me}| + |\mH^\msI\tilde{\mh}|_{max}
 \end{equation}
 
-\eqref{eq:SlidingCondition4} ser\'a respeitada, o que garante que a condi\c{c}\~ao de escorregamento \eqref{eq:SlidingCondition} tamb\'em seja respeitada e consequentemente garante a converg\^encia do erro de controle para zero.
+\eqref{eq:DesigualdadeK1} ser\'a respeitada, o que garante que a condi\c{c}\~ao de escorregamento \eqref{eq:SlidingCondition} tamb\'em seja respeitada e consequentemente garante a converg\^encia do erro de controle para zero.
 
-Uma poss\'ivel solu\c{c}\~ao para \eqref{eq:DesigualdadeK2} é dada por:
+Existe solu\c{c}\~ao para \eqref{eq:DesigualdadeK2} apenas se a matriz $\mone - | \mH^\msI \tilde{\mH}|_{max}$ for uma \emph{M-matrix}, ou seja, se módulo do maior autovalor de $| \mH^\msI \tilde{\mH}|_{max}$ for menor que $1$. Se este for o caso, a solução que minimiza a norma de $\diag(\underline{k})$ é dada por:
 \begin{equation} \label{eq:MatrizDiagk}
-\diag(\underline{k})  = (\mone - |\mDelta|_{max} )^\msI ( |\mdelta|_{max} + |\mDelta|_{max} |\msigma| + \diag(\eta \mone) )
+\diag(\underline{k})  = (\mone - | \mH^\msI \tilde{\mH}|_{max} )^\msI (\diag(\underline{\eta}) + |\mH^\msI \tilde{\mH}|_{max} |\ddot{\mq}\ssh_d + \underline{\lambda} \dot{\me}| + |\mH^\msI\tilde{\mh}|_{max})
 \end{equation}
 
-A qual é válida apenas se $(\mone - |\mDelta|_{max} )^\msI$ for positiva. \\
+\end{itemize}
 
-Sabendo-se que, dadas as passagens feitas para a obtenção de $\mv_{\ssM}$ no algoritmo de modelagem, $\mv_{\ssM}$ pode ser escrito da seguinte maneira:
-\begin{equation}
-\mv_{\ssM}(\mq, \dot{\mq}\ssh) = \sum_{i=1}^{\nu\ssh} \sum_{j=1}^i \mgamma_{i,j}(\mq) \dot{q}\ssh_i \dot{q}\ssh_j 
-\end{equation}
 
-Além disso, definindo:
-\begin{equation}
-\mgamma(\mq) = \mg_{\ssM}(\mq)
-\end{equation}
-\begin{equation}
-\mdelta_0(\mq) = \mH(\mq)^\msI (\hat{\mgamma}(\mq) - \mgamma(\mq))
-\end{equation}
-\begin{equation}
-\mdelta_{i,j}(\mq) = \mH(\mq)^\msI (\hat{\mgamma}_{i,j}(\mq) - \mgamma_{i,j}(\mq))
-\end{equation}
-
-Temos que:
-\begin{equation}
-\mdelta(\mq, \dot{\mq}\ssh) = \mdelta_0(\mq) + \sum_{i=1}^{\nu\ssh} \sum_{j=1}^i \mdelta_{i,j}(\mq) \dot{q}\ssh_i \dot{q}\ssh_j 
-\end{equation}
-
-Sendo assim, a equação \eqref{eq:MatrizDiagk} pode ser reescrita como:
-\begin{equation} \label{eq:MatriDiagk2}
-\diag(\underline{k})  = \meta + \mGamma |\msigma| + \sum_{i=1}^{\nu\ssh}\sum_{j=1}^{i} \meta_{i,j} |\dot{q}\ssh_i||\dot{q}\ssh_j| 
-\end{equation}
-
-Sendo $\mGamma$, $\meta$ e $\meta_{i,j}$  matrizes constantes dadas por:
-\begin{equation}
-\mGamma = (\mone - |\mDelta|_{max} )^\msI |\mDelta|_{max}
-\end{equation}
-\begin{equation}
-\meta = (\mone - |\mDelta|_{max} )^\msI ( | \mdelta_0 |_{max} + \diag(\eta \mone) )
-\end{equation}
-\begin{equation}
-\meta_{i,j} = (\mone - |\mDelta|_{max} )^\msI | \mdelta_{i,j} |_{max}, \, i=1,...,\nu\ssh, \, j = 1,...,i
-\end{equation}
 
 \end{itemize}
 
