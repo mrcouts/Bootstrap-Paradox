@@ -3425,7 +3425,7 @@ Sendo $\underline{\eta}$ uma matriz diagonal positiva-definida. Repare que $\ms^
 
 Para ilustrar, considere $\mW = \mone$; se $\dot{\ms} = - \underline{\eta} \,\sign(\ms)$,  \eqref{eq:SlidingCondition} \'e satisfeita e cada componente de $\ms$ respeita a EDO $\dot{s_i} = - \eta_i \,\sign(s_i)$, a qual converge para zero em um tempo finito de $t_i = \frac{|s_i(0)|}{\eta_i}$.
 
-O projeto do controlador \'e feito utilizando a condi\c{c}\~ao \eqref{eq:SlidingCondition}, a qual \'e conhecida como condi\c{c}\~ao de escorregamento, será subdividido pelas diferentes definições apresentadas para a variável $\ms$ (\eqref{eq:SlidingSurfaces} e \eqref{eq:SlidingSurfaces_}).
+O projeto do controlador \'e feito utilizando a condi\c{c}\~ao \eqref{eq:SlidingCondition}, a qual \'e conhecida como condi\c{c}\~ao de escorregamento, e será subdividido pelas diferentes definições apresentadas para a variável $\ms$ (\eqref{eq:SlidingSurfaces} e \eqref{eq:SlidingSurfaces_}).
 
 \begin{itemize}
 \item[a)] Para $\ms = \dot{\me} + \underline{\lambda}\me$:
@@ -3509,6 +3509,186 @@ Portanto, se a seguinte inequa\c{c}\~ao matricial for respeitada:
 Existe solu\c{c}\~ao para \eqref{eq:DesigualdadeK2} apenas se a matriz $\mone - | \mH^\msI \tilde{\mH}|_{max}$ for uma \emph{M-matrix}, ou seja, se módulo do maior autovalor de $| \mH^\msI \tilde{\mH}|_{max}$ for menor que $1$. Se este for o caso, a solução que minimiza a norma de $\diag(\underline{k})$ é dada por:
 \begin{equation} \label{eq:MatrizDiagk}
 \diag(\underline{k})  = (\mone - | \mH^\msI \tilde{\mH}|_{max} )^\msI (\diag(\underline{\eta}) + |\mH^\msI \tilde{\mH}|_{max} |\ddot{\mq}\ssh_d + \underline{\lambda} \dot{\me}| + |\mH^\msI\tilde{\mh}|_{max})
+\end{equation}
+
+\item[a.2)] Para $\mW = \mH$:
+
+
+Substuindo \eqref{eq:W2} em \eqref{eq:SlidingCondition3_}, obtem-se:
+\begin{equation} \label{eq:SlidingCondition3_a2}
+\ms^\msT \Big(\hat{\mH}\mup'' + \frac{1}{2} \dot{\mH} \, \ms +  \tilde{\mH}(\ddot{\mq}\ssh_d + \underline{\lambda} \dot{\me} + \tilde{\mh} ) + \underline{\eta} \, \sign(\ms) \Big) \leq 0
+\end{equation}
+
+Para satisfazer \eqref{eq:SlidingCondition3_a2}, é utilizada a seguinte lei de controle:
+\begin{equation} \label{eq:ControlLawSRed_a2}
+\mup'' =  - \hat{\mH}^\msI \Big( \underline{k} \sign(\ms) +  \frac{1}{2} \dot{\hat{\mH}} \, \ms \Big) 
+\end{equation}
+
+Sendo $\underline{k}$ uma matriz diagonal positiva-definida, com $\underline{k} \geq \underline{\eta} $. Substituindo \eqref{eq:ControlLawSRed} em \eqref{eq:SlidingCondition3_a2}, temos:
+\begin{equation} \label{eq:SlidingCondition4_a2}
+\ms^\msT \Big(- \big(\underline{k} - \underline{\eta} \big)  \sign(\ms) + \frac{1}{2} \dot{\tilde{\mH}} \, \ms + \tilde{\mH}(\ddot{\mq}\ssh_d + \underline{\lambda} \dot{\me}) + \tilde{\mh}  \Big) \leq 0
+\end{equation}
+
+Pode-se dizer que, \eqref{eq:SlidingCondition4_a2} \'e sempre satisfeita se:
+\begin{equation} \label{eq:DesigualdadeK1_a2}
+ \diag(\underline{k}) - \diag(\underline{\eta}) \geq  \Big| \frac{1}{2} \dot{\tilde{\mH}} \, \ms + \tilde{\mH}(\ddot{\mq}\ssh_d + \underline{\lambda} \dot{\me}) + \tilde{\mh} \Big|
+\end{equation}
+
+Aplicando a desigualdade triangular em cada componente do lado esquerdo de \eqref{eq:DesigualdadeK1_a2}, temos:
+\begin{equation}
+\Big| \frac{1}{2} \dot{\tilde{\mH}} \, \ms + \tilde{\mH}(\ddot{\mq}\ssh_d + \underline{\lambda} \dot{\me}) + \tilde{\mh} \Big| \leq  \frac{1}{2}|\dot{\tilde{\mH}}|_{max} |\ms| + |\tilde{\mH}|_{max} |\ddot{\mq}\ssh_d + \underline{\lambda} \dot{\me}| + |\tilde{\mh}|_{max}
+\end{equation}
+
+Portanto, se a seguinte inequa\c{c}\~ao matricial for respeitada:
+\begin{equation} \label{eq:DesigualdadeK2_a2}
+\diag(\underline{k})  \geq \diag(\underline{\eta}) + \frac{1}{2}|\dot{\tilde{\mH}}|_{max} |\ms| + |\tilde{\mH}|_{max} |\ddot{\mq}\ssh_d + \underline{\lambda} \dot{\me}| + |\tilde{\mh}|_{max}
+\end{equation}
+
+\eqref{eq:DesigualdadeK1_a2} ser\'a respeitada, o que garante que a condi\c{c}\~ao de escorregamento \eqref{eq:SlidingCondition} tamb\'em seja respeitada e consequentemente garante a converg\^encia do erro de controle para zero.
+
+Sempre existe solu\c{c}\~ao para \eqref{eq:DesigualdadeK2_a2}, e a solução que minimiza a norma de $\diag(\underline{k})$ é dada por:
+\begin{equation} \label{eq:MatrizDiagk_a2}
+\diag(\underline{k})  = \diag(\underline{\eta}) + \frac{1}{2}|\dot{\tilde{\mH}}|_{max} |\ms| + |\tilde{\mH}|_{max} |\ddot{\mq}\ssh_d + \underline{\lambda} \dot{\me}| + |\tilde{\mh}|_{max}
+\end{equation}
+
+\end{itemize}
+
+\item[b)] Para $\ms = \ddot{\me} + \underline{k}_v \dot{\me} + \underline{k}_p \me  $
+
+Substituindo \eqref{eq:ModeloLin} em \eqref{eq:SlidingSurfaces_}, temos:
+\begin{equation}
+\ms = \mup' + \underline{k}_v \dot{\me} + \underline{k}_p \me + \mdelta
+\end{equation}
+
+Sendo assim, definimos:
+\begin{equation}
+\mup' = -\underline{k}_v \dot{\me} - \underline{k}_p \me + \mup''
+\end{equation}
+
+Portanto:
+\begin{equation}
+\ms = \mup'' + \mH^\msI( \tilde{\mH}(\ddot{\mq}\ssh_d + \underline{k}_v \dot{\me} + \underline{k}_p \me - \mup'') + \tilde{\mh} ) \big)
+\end{equation}
+
+Definindo:
+\begin{equation}
+\msigma = \ddot{\mq}\ssh_d + \underline{k}_v \dot{\me} + \underline{k}_p \me
+\end{equation}
+
+Temos:
+\begin{equation} \label{eq:novo_s_b}
+\ms = (\mone - \mH^\msI \tilde{\mH} )\mup'' + \mH^\msI( \tilde{\mH}\msigma + \tilde{\mh} )
+\end{equation}
+
+Derivando \eqref{eq:novo_s_b}, temos:
+\begin{equation} \label{eq:novo_ds_b}
+\dot{\ms} = (\mone - \mH^\msI \tilde{\mH} )\dot{\mup}'' + \mH^\msI \mepsilon
+\end{equation}
+
+Sendo:
+\begin{equation}
+\mepsilon = ( \dot{\mH} \mH^\msI \tilde{\mH} -\dot{\tilde{\mH}}) \mup'' -  \dot{\mH} \mH^\msI ( \tilde{\mH}\msigma + \tilde{\mh} ) +  \dot{\tilde{\mH}}\msigma + \tilde{\mH} \dot{\msigma} + \dot{\tilde{\mh}}
+\end{equation}
+
+
+Substituindo \eqref{eq:novo_ds_b} em \eqref{eq:SlidingCondition}, temos:
+
+\begin{equation} \label{eq:SlidingCondition2b}
+\ms^\msT \Big(\mW ( (\mone - \mH^\msI \tilde{\mH} )\dot{\mup}'' + \mH^\msI \mepsilon ) + \frac{1}{2}\dot{\mW} \, \ms + \underline{\eta} \, \sign(\ms) \Big) \leq 0
+\end{equation} \\
+
+
+Mais uma vez, são notáveis duas possíveis escolhas para $\mW$ que facilitam o projeto do controlador:
+\begin{equation} \label{eq:W1b}
+\mW = \mone
+\end{equation}
+
+e
+\begin{equation} \label{eq:W2b}
+\mW = \mH
+\end{equation}
+
+Subdividido mais uma vez o projeto do controlador será  em 2 casos:
+
+\begin{itemize}
+\item[b.1)] Para $\mW = \mone$:
+
+
+Substuindo \eqref{eq:W1b} em \eqref{eq:SlidingCondition2b}, obtem-se:
+\begin{equation} \label{eq:SlidingCondition2_b1}
+\ms^\msT \Big((\mone - \mH^\msI \tilde{\mH} )\dot{\mup}'' + \mH^\msI \mepsilon + \underline{\eta} \, \sign(\ms) \Big) \leq 0
+\end{equation}
+
+Para satisfazer \eqref{eq:SlidingCondition2_b1}, é utilizada a seguinte lei de controle:
+\begin{equation} \label{eq:ControlLawSRedb1}
+\dot{\mup}'' =  -\underline{k} \sign(\ms)
+\end{equation}
+
+Sendo $\underline{k}$ uma matriz diagonal positiva-definida, com $\underline{k} \geq \underline{\eta} $. Substituindo \eqref{eq:ControlLawSRedb1} em \eqref{eq:SlidingCondition2_b1}, temos:
+\begin{equation} \label{eq:SlidingCondition4b1}
+\ms^\msT \Big(- \big(\underline{k} - \underline{\eta} \big)  \sign(\ms) + \mH^\msI \tilde{\mH} \, \underline{k} \sign(\ms) + \mH^\msI \mepsilon \Big) \leq 0
+\end{equation}
+
+Pode-se dizer que, \eqref{eq:SlidingCondition4b1} \'e sempre satisfeita se:
+\begin{equation} \label{eq:DesigualdadeK1b1}
+ \diag(\underline{k}) - \diag(\underline{\eta}) \geq  | \mH^\msI \tilde{\mH} \, \underline{k} \sign(\ms) + \mH^\msI \mepsilon |
+\end{equation}
+
+Aplicando a desigualdade triangular em cada componente do lado esquerdo de \eqref{eq:DesigualdadeK1b1}, temos:
+\begin{equation}
+| \mH^\msI \tilde{\mH} \, \underline{k} \sign(\ms) + \mH^\msI( \tilde{\mH}(\ddot{\mq}\ssh_d + \underline{\lambda} \dot{\me}) + \tilde{\mh} ) | \leq | \mH^\msI \tilde{\mH}|_{max} \diag(\underline{k}) +  |\mH^\msI \tilde{\mH}|_{max} |\ddot{\mq}\ssh_d + \underline{\lambda} \dot{\me}| + |\mH^\msI\tilde{\mh}|_{max}
+\end{equation}
+
+Portanto, se a seguinte inequa\c{c}\~ao matricial for respeitada:
+\begin{equation} \label{eq:DesigualdadeK2}
+(\mone - | \mH^\msI \tilde{\mH}|_{max} ) \cdot \diag(\underline{k})  \geq \diag(\underline{\eta}) + |\mH^\msI \tilde{\mH}|_{max} |\ddot{\mq}\ssh_d + \underline{\lambda} \dot{\me}| + |\mH^\msI\tilde{\mh}|_{max}
+\end{equation}
+
+\eqref{eq:DesigualdadeK1} ser\'a respeitada, o que garante que a condi\c{c}\~ao de escorregamento \eqref{eq:SlidingCondition} tamb\'em seja respeitada e consequentemente garante a converg\^encia do erro de controle para zero.
+
+Existe solu\c{c}\~ao para \eqref{eq:DesigualdadeK2} apenas se a matriz $\mone - | \mH^\msI \tilde{\mH}|_{max}$ for uma \emph{M-matrix}, ou seja, se módulo do maior autovalor de $| \mH^\msI \tilde{\mH}|_{max}$ for menor que $1$. Se este for o caso, a solução que minimiza a norma de $\diag(\underline{k})$ é dada por:
+\begin{equation} \label{eq:MatrizDiagk}
+\diag(\underline{k})  = (\mone - | \mH^\msI \tilde{\mH}|_{max} )^\msI (\diag(\underline{\eta}) + |\mH^\msI \tilde{\mH}|_{max} |\ddot{\mq}\ssh_d + \underline{\lambda} \dot{\me}| + |\mH^\msI\tilde{\mh}|_{max})
+\end{equation}
+
+\item[a.2)] Para $\mW = \mH$:
+
+
+Substuindo \eqref{eq:W2} em \eqref{eq:SlidingCondition3_}, obtem-se:
+\begin{equation} \label{eq:SlidingCondition3_a2}
+\ms^\msT \Big(\hat{\mH}\mup'' + \frac{1}{2} \dot{\mH} \, \ms +  \tilde{\mH}(\ddot{\mq}\ssh_d + \underline{\lambda} \dot{\me} + \tilde{\mh} ) + \underline{\eta} \, \sign(\ms) \Big) \leq 0
+\end{equation}
+
+Para satisfazer \eqref{eq:SlidingCondition3_a2}, é utilizada a seguinte lei de controle:
+\begin{equation} \label{eq:ControlLawSRed_a2}
+\mup'' =  - \hat{\mH}^\msI \Big( \underline{k} \sign(\ms) +  \frac{1}{2} \dot{\hat{\mH}} \, \ms \Big) 
+\end{equation}
+
+Sendo $\underline{k}$ uma matriz diagonal positiva-definida, com $\underline{k} \geq \underline{\eta} $. Substituindo \eqref{eq:ControlLawSRed} em \eqref{eq:SlidingCondition3_a2}, temos:
+\begin{equation} \label{eq:SlidingCondition4_a2}
+\ms^\msT \Big(- \big(\underline{k} - \underline{\eta} \big)  \sign(\ms) + \frac{1}{2} \dot{\tilde{\mH}} \, \ms + \tilde{\mH}(\ddot{\mq}\ssh_d + \underline{\lambda} \dot{\me}) + \tilde{\mh}  \Big) \leq 0
+\end{equation}
+
+Pode-se dizer que, \eqref{eq:SlidingCondition4_a2} \'e sempre satisfeita se:
+\begin{equation} \label{eq:DesigualdadeK1_a2}
+ \diag(\underline{k}) - \diag(\underline{\eta}) \geq  \Big| \frac{1}{2} \dot{\tilde{\mH}} \, \ms + \tilde{\mH}(\ddot{\mq}\ssh_d + \underline{\lambda} \dot{\me}) + \tilde{\mh} \Big|
+\end{equation}
+
+Aplicando a desigualdade triangular em cada componente do lado esquerdo de \eqref{eq:DesigualdadeK1_a2}, temos:
+\begin{equation}
+\Big| \frac{1}{2} \dot{\tilde{\mH}} \, \ms + \tilde{\mH}(\ddot{\mq}\ssh_d + \underline{\lambda} \dot{\me}) + \tilde{\mh} \Big| \leq  \frac{1}{2}|\dot{\tilde{\mH}}|_{max} |\ms| + |\tilde{\mH}|_{max} |\ddot{\mq}\ssh_d + \underline{\lambda} \dot{\me}| + |\tilde{\mh}|_{max}
+\end{equation}
+
+Portanto, se a seguinte inequa\c{c}\~ao matricial for respeitada:
+\begin{equation} \label{eq:DesigualdadeK2_a2}
+\diag(\underline{k})  \geq \diag(\underline{\eta}) + \frac{1}{2}|\dot{\tilde{\mH}}|_{max} |\ms| + |\tilde{\mH}|_{max} |\ddot{\mq}\ssh_d + \underline{\lambda} \dot{\me}| + |\tilde{\mh}|_{max}
+\end{equation}
+
+\eqref{eq:DesigualdadeK1_a2} ser\'a respeitada, o que garante que a condi\c{c}\~ao de escorregamento \eqref{eq:SlidingCondition} tamb\'em seja respeitada e consequentemente garante a converg\^encia do erro de controle para zero.
+
+Sempre existe solu\c{c}\~ao para \eqref{eq:DesigualdadeK2_a2}, e a solução que minimiza a norma de $\diag(\underline{k})$ é dada por:
+\begin{equation} \label{eq:MatrizDiagk_a2}
+\diag(\underline{k})  = \diag(\underline{\eta}) + \frac{1}{2}|\dot{\tilde{\mH}}|_{max} |\ms| + |\tilde{\mH}|_{max} |\ddot{\mq}\ssh_d + \underline{\lambda} \dot{\me}| + |\tilde{\mh}|_{max}
 \end{equation}
 
 \end{itemize}
