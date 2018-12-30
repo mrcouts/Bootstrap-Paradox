@@ -3391,6 +3391,8 @@ Repare que o desempenho desta técnica de controle depende diretamente da represe
 
 O Controle por Modos Deslizantes é uma técnica de controle não-linear robusto, a qual tem como principal vantagem uma menor sensibilidade aos erros de modelagem, sendo robusto tanto a incertezas estruturadas quanto a incertezas não estruturadas. Nesta subseção serão deduzidas 4 leis de controle baseadas nesta técnica.
 
+\paragraph{Dedução das leis de controle} $ \, $ \\
+
 Sejam $\underline{\lambda}$, $\underline{k}_v$ e $\underline{k}_p$ matrizes diagonais positiva-definidas. Assim, pode-se definir uma matriz-coluna $\ms$ de duas maneiras diferentes:
 \begin{equation} \label{eq:SlidingSurfaces}
 \ms = \dot{\me} + \underline{\lambda}\me
@@ -3553,6 +3555,8 @@ Sempre existe solu\c{c}\~ao para \eqref{eq:DesigualdadeK2_a2}, e a solução que m
 
 \end{itemize}
 
+Repare que as duas leis de controle previamente deduzidas possuem termos discontínuos, os quais podem gerar o efeito conhecido como \emph{chattering}, o qual pode gerar sérios desgastes nos atuadores do sistema e causar vibrações indesejadas no mecanismo. A utilização da definição \eqref{eq:SlidingSurfaces_} para $\ms$ na dedução da lei de controle diminui bastante o efeito do \emph{chattering}, pois utiliza termos que são integrais de funções discontínuas, o que consequentemente gera um perfil muito mais suave para o esforço de controle. Sendo assim, agora serão deduzidas as leis de controle baseadas na definição \eqref{eq:SlidingSurfaces_} para $\ms$.
+
 \item[b)] Para $\ms = \ddot{\me} + \underline{k}_v \dot{\me} + \underline{k}_p \me  $
 
 Substituindo \eqref{eq:ModeloLin} em \eqref{eq:SlidingSurfaces_}, temos:
@@ -3707,6 +3711,22 @@ Sempre existe solu\c{c}\~ao para \eqref{eq:DesigualdadeK2_b2}, e a solução que m
 
 
 \end{itemize}
+
+\paragraph{Camada Limite} $ \, $ \\
+
+Uma técnica muito utilizada para diminuir os efeitos do \emph{chattering} no CMD é substituição da função sinal por uma função de saturação nas leis de controle. Definindo:
+\begin{equation}
+\sat(x) = \begin{cases}
+x, \;\;\;\;\;\;\;\;\; \text{ se } |x| \leq 1 \\
+\sign(x), \text{ se } |x| > 1
+\end{cases}
+\end{equation}
+
+Sendo assim, no lugar de $\sign(\ms)$, será utilizado $\sat(\ms / \phi)$ nas leis de controle, sendo $\phi$ um número positivo conhecido como comprimento da camada limite.
+
+Ao mesmo tempo que a utilização da camada limite diminui os efeitos do \emph{chattering} no sistema, sua utilização não mais garante que o sistema atinja em tempo finito e se mantenha na superfície de escorregamento, apenas garante que o sistema atinja a camada limite ( $-\phi < s_i < \phi, \, i = 1,...,\nu\ssh $ ) em tempo finito, e lá se mantenha. 
+
+
 
 
 %Uma poss\'ivel solu\c{c}\~ao para \eqref{eq:DesigualdadeK2} \'e obtida fazendo $\underline{k} = k \mone$, a qual \'e v\'alida apenas se o somat\'orio de cada uma das linhas de $|\mDelta|_{max}$ for menor do que $1$. Esta solu\c{c}\~ao \'e dada por:
