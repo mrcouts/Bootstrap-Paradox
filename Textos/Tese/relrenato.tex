@@ -3502,14 +3502,14 @@ Aplicando a desigualdade triangular em cada componente do lado direito de \eqref
 \end{equation}
 
 Portanto, se a seguinte inequa\c{c}\~ao matricial for respeitada:
-\begin{equation} \label{eq:DesigualdadeK2}
+\begin{equation} \label{eq:DesigualdadeK2_a1}
 (\mone - | \mH^\msI \tilde{\mH}|_{max} ) \cdot \diag(\underline{k})  \geq \diag(\underline{\eta}) + |\mH^\msI \tilde{\mH}|_{max} |\ddot{\mq}\ssh_d + \underline{\lambda} \dot{\me}| + |\mH^\msI\tilde{\mh}|_{max}
 \end{equation}
 
 \eqref{eq:DesigualdadeK1} ser\'a respeitada, o que garante que a condi\c{c}\~ao de escorregamento \eqref{eq:SlidingCondition} tamb\'em seja respeitada e consequentemente garante a converg\^encia do erro de controle para zero.
 
-Existe solu\c{c}\~ao para \eqref{eq:DesigualdadeK2} apenas se a matriz $\mone - | \mH^\msI \tilde{\mH}|_{max}$ for uma \emph{M-matrix}, ou seja, se módulo do maior autovalor de $| \mH^\msI \tilde{\mH}|_{max}$ for menor que $1$. Se este for o caso, a solução que minimiza a norma de $\diag(\underline{k})$ é dada por:
-\begin{equation} \label{eq:MatrizDiagk}
+Existe solu\c{c}\~ao para \eqref{eq:DesigualdadeK2_a1} apenas se a matriz $\mone - | \mH^\msI \tilde{\mH}|_{max}$ for uma \emph{M-matrix}, ou seja, se módulo do maior autovalor de $| \mH^\msI \tilde{\mH}|_{max}$ for menor que $1$. Se este for o caso, a solução que minimiza a norma de $\diag(\underline{k})$ é dada por:
+\begin{equation} \label{eq:MatrizDiagk_a1}
 \diag(\underline{k})  = (\mone - | \mH^\msI \tilde{\mH}|_{max} )^\msI (\diag(\underline{\eta}) + |\mH^\msI \tilde{\mH}|_{max} |\ddot{\mq}\ssh_d + \underline{\lambda} \dot{\me}| + |\mH^\msI\tilde{\mh}|_{max})
 \end{equation}
 
@@ -3648,7 +3648,7 @@ Aplicando a desigualdade triangular em cada componente do lado direito de \eqref
 \end{equation}
 
 Portanto, se a seguinte inequa\c{c}\~ao matricial for respeitada:
-\begin{equation} \label{eq:DesigualdadeK2b1}
+\begin{equation} \label{eq:DesigualdadeK2_b1}
 \begin{split}
 (\mone - | \mH^\msI \tilde{\mH}|_{max} ) \cdot \diag(\underline{k})  \geq \diag(\underline{\eta}) + |\mH^\msI ( \dot{\mH} \mH^\msI \tilde{\mH} -\dot{\tilde{\mH}}) |_{max} | \mup'' -\msigma|  + \\ |\mH^\msI \tilde{\mH}|_{max}| \dot{\msigma}| + |\mH^\msI \dot{\mH} \mH^\msI  \tilde{\mh}|_{max}+ |\mH^\msI \dot{\tilde{\mh}}|_{max}
 \end{split}
@@ -3656,8 +3656,8 @@ Portanto, se a seguinte inequa\c{c}\~ao matricial for respeitada:
 
 \eqref{eq:DesigualdadeK1b1} ser\'a respeitada, o que garante que a condi\c{c}\~ao de escorregamento \eqref{eq:SlidingCondition} tamb\'em seja respeitada e consequentemente garante a converg\^encia do erro de controle para zero.
 
-Existe solu\c{c}\~ao para \eqref{eq:DesigualdadeK2b1} apenas se a matriz $\mone - | \mH^\msI \tilde{\mH}|_{max}$ for uma \emph{M-matrix}, ou seja, se módulo do maior autovalor de $| \mH^\msI \tilde{\mH}|_{max}$ for menor que $1$. Se este for o caso, a solução que minimiza a norma de $\diag(\underline{k})$ é dada por:
-\begin{equation} \label{eq:MatrizDiagkb1}
+Existe solu\c{c}\~ao para \eqref{eq:DesigualdadeK2_b1} apenas se a matriz $\mone - | \mH^\msI \tilde{\mH}|_{max}$ for uma \emph{M-matrix}, ou seja, se módulo do maior autovalor de $| \mH^\msI \tilde{\mH}|_{max}$ for menor que $1$. Se este for o caso, a solução que minimiza a norma de $\diag(\underline{k})$ é dada por:
+\begin{equation} \label{eq:MatrizDiagk_b1}
 \begin{split}
 \diag(\underline{k})  = (\mone - | \mH^\msI \tilde{\mH}|_{max} )^\msI (\diag(\underline{\eta}) + |\mH^\msI ( \dot{\mH} \mH^\msI \tilde{\mH} -\dot{\tilde{\mH}}) |_{max} | \mup'' -\msigma|  + \\ |\mH^\msI \tilde{\mH}|_{max}| \dot{\msigma}| + |\mH^\msI \dot{\mH} \mH^\msI  \tilde{\mh}|_{max}+ |\mH^\msI \dot{\tilde{\mh}}|_{max}
 \end{split}
@@ -3725,6 +3725,22 @@ x, \;\;\;\;\;\;\;\;\; \text{ se } |x| \leq 1 \\
 Sendo assim, no lugar de $\sign(\ms)$, será utilizado $\sat(\ms / \phi)$ nas leis de controle, sendo $\phi$ um número positivo conhecido como comprimento da camada limite.
 
 Ao mesmo tempo que a utilização da camada limite diminui os efeitos do \emph{chattering} no sistema, sua utilização não mais garante que o sistema atinja em tempo finito e se mantenha na superfície de escorregamento, apenas garante que o sistema atinja a camada limite ( $-\phi < s_i < \phi, \, i = 1,...,\nu\ssh $ ) em tempo finito, e lá se mantenha. 
+
+\paragraph{Ganho adaptativo} $ \, $ \\
+
+O cálculo de $\underline{k}$ pode ser um tanto complexo utilizando as equações \eqref{eq:MatrizDiagk_a1}, \eqref{eq:MatrizDiagk_a2}, \eqref{eq:MatrizDiagk_b1} ou \eqref{eq:MatrizDiagk_b2}, pois depende do módulo máximo de matrizes que não possuem expressões explícitas. Tal cálculo pode ser feito numéricamente discretizando a área de trabalho do mecanismo e atribuindo valores máximos e mínimos para cada parâmetro incerto do sistema, obtendo uma matriz $\underline{k}$ que varia conforme a posição do mecanismo. O uso desta estratégia, porém, poderá resultar na obtenção de valores de $\underline{k}$ muito maiores do que o necessário, o que pode amplificar o fenômeno do \emph{chattering}. Sendo assim, é proposta a obtenção da matriz $\underline{k}$ de forma adaptativa, utilizando a seguinte lei de adaptação:
+
+\begin{equation}
+\underline{k}_i[k] = \begin{cases}
+\big| \underline{k}_i[k-1] + \gamma_i \sign(s_i [k]) \sign(s_i [k-1])  \big|, \, \text{ se } |s_i[k]| \geq \phi \, \text{ ou }  \sign(s_i [k]) = - \sign(s_i [k-1]) \\
+\underline{k}_i[k-1], \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\, \text{ se } |s_i[k]| < \phi \, \text{ e }  \sign(s_i [k]) = \sign(s_i [k-1]) \\
+ 
+\end{cases}
+\end{equation}
+
+Sendo $\gamma_i$ uma constante positiva, a qual determina a velocidade da adaptação. \\
+
+Esta lei de adaptação pode ser explicada da seguinte maneira: $\underline{k}_i$ aumenta enquanto o sistema não atingir a região da camada limite. Enquanto o sistema estiver nesta região, $\underline{k}_i$ se mantém constante ou diminui a cada cruzamento com a superfície de escorregamento. Se o sistema estiver região da camada limite e $\underline{k}_i$ respeitar a inequação \eqref{eq:DesigualdadeK2_a1}, \eqref{eq:DesigualdadeK2_a2}, \eqref{eq:DesigualdadeK2_b1} ou \eqref{eq:DesigualdadeK2_b2} (dependendo da lei de controle utilizada), $\underline{k}_i$ irá dimunuir a cada cruzamento com a superfície de escorregamento, até que o sistema saia ligeiramente da região. Assim que o sistema sair da região, $\underline{k}_i$ irá aumentar até o sistema atingi-la novamente, repetindo este ciclo infinitamente, com $\underline{k}_i$ variando em uma faixa de valores muito próxima do menor valor possível para que o sistema se mantenha na região da camada limite.
 
 
 
@@ -4275,24 +4291,24 @@ Um artigo, publicado no peri\'odico {\em International Journal of Mechanisms and
 
 
 %---DISCIPLINAS CURSADAS---------------------------------------------------------
-\newpage
-\section{Disciplinas de pós-graduação}\label{disci}
+%\newpage
+%\section{Disciplinas de pós-graduação}\label{disci}
 
-Ao longo do programa foram cumpridos 56 cr\'editos, tendo cursado 7 disciplinas 
-de p\'os-gradua\c{c}\~ao:
-\begin{itemize}
-\item PME--5004 --- Complementos de Matem\'atica I
-\item PMR--5010 --- Elementos Finitos em Sistemas Multif\'isicos: Fundamentos
-\item PMR--5215 --- Otimiza\c{c}\~ao Aplicada ao Projeto de Sistemas Mec\^anicos
-\item PMR--5238 --- An\'alise e S\'intese de Mecanismo Planos e Tridimensionais
-\item PMR--5211 --- Mec\^anica dos S\'olidos Experimental
-\item PMR--5234 --- T\'ecnicas de Ultra-Som e suas aplica\c{c}\~oes na Ind\'ustria e na Medicina
-\item PMR--5014 --- Controle N\~ao Linear Aplicado a Sistemas Mec\^anicos e Mecatr\^onicos
-\end{itemize}
+%Ao longo do programa foram cumpridos 56 cr\'editos, tendo cursado 7 disciplinas 
+%de p\'os-gradua\c{c}\~ao:
+%\begin{itemize}
+%\item PME--5004 --- Complementos de Matem\'atica I
+%\item PMR--5010 --- Elementos Finitos em Sistemas Multif\'isicos: Fundamentos
+%\item PMR--5215 --- Otimiza\c{c}\~ao Aplicada ao Projeto de Sistemas Mec\^anicos
+%\item PMR--5238 --- An\'alise e S\'intese de Mecanismo Planos e Tridimensionais
+%\item PMR--5211 --- Mec\^anica dos S\'olidos Experimental
+%\item PMR--5234 --- T\'ecnicas de Ultra-Som e suas aplica\c{c}\~oes na Ind\'ustria e na Medicina
+%\item PMR--5014 --- Controle N\~ao Linear Aplicado a Sistemas Mec\^anicos e Mecatr\^onicos
+%\end{itemize}
 
-Ressalta-se que em todas as disciplinas foi obtido conceito A, demonstrando bom aproveitamento. \\
+%Ressalta-se que em todas as disciplinas foi obtido conceito A, demonstrando bom aproveitamento. \\
 
-Ainda é necessário cumprir mais 24 créditos de pós-graduação, os quais deverão ser cumpridos realizando a publicação de 3 artigos em periódicos indexados, sendo que um dos 3 artigos já foi publicado.
+%Ainda é necessário cumprir mais 24 créditos de pós-graduação, os quais deverão ser cumpridos realizando a publicação de 3 artigos em periódicos indexados, sendo que um dos 3 artigos já foi publicado.
 
 
 
