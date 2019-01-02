@@ -190,7 +190,7 @@ Utilizando os m\'etodos tradicionais de modelagem de Sistemas Mec\^anicos Multic
 
 A solu\c{c}\~ao proposta para ser poss\'ivel aumentar o desempenho, garantindo a robustez, de um sistema de controle de mecanismos paralelos \'e a utiliza\c{c}\~ao dos novos m\'etodos e estratégias de modelagem din\^amica desenvolvidos pelo grupo de pesquisa do Prof. Doutor Tarcisio Antonio Hess Coelho, os quais s\~ao adequados para incluir todos os efeitos da din\^amica de corpos r\'igidos, independentemente da complexidade do sistema.
 
-O presente projeto visa desenvolver um algoritmo de modelagem que inclua todos os efeitos da din\^amica de corpos r\'igidos para realizar a modelagem din\^amica de mecanismos paralelos (baseado na metodologia Orsino), desenvolver uma metodologias de projeto de controle robusto para mecanismos paralelos tradicionais e mecanismos com atua\c{c}\~ao redundante, e realizar simulações e valida\c{c}\~oes experimentais das leis de controle sintetizadas pela metodologia proposta.
+A presente tese visa desenvolver um algoritmo de modelagem que inclua todos os efeitos da din\^amica de corpos r\'igidos para realizar a modelagem din\^amica de mecanismos paralelos (baseado na metodologia Orsino), desenvolver uma metodologias de projeto de controle robusto para mecanismos paralelos tradicionais e mecanismos com atua\c{c}\~ao redundante, e realizar simulações e valida\c{c}\~oes experimentais das leis de controle sintetizadas pela metodologia proposta.
 
 %INTRODUÇÃO----------------------------------------------------
 \newpage
@@ -218,7 +218,7 @@ Levando-se em conta esta dificuldade de obtenção e a complexidade inerente do mo
 \section{Objetivos}\label{objetivos}
 
 
-Os principais objetivos do projeto s\~ao:
+Os principais objetivos da tese s\~ao:
 \begin{itemize}
 \item Desenvolvimento de um algoritmo gerador de modelos dinâmicos completos de mecanismos paralelos, de forma implícita. Será utilizada uma metodologia baseada no método Orsino de acoplamento de subsistemas multicorpos \cite{23orsino}.
 
@@ -307,7 +307,7 @@ Em \cite{Zeinali}, Zeinali et al. desenvolveram uma lei de controle  baseada nas
 
 %METODOLOGIA--------------------------------------------------------------------
 
-\section{Metodologia do projeto}\label{method}
+\section{Metodologia da tese}\label{method}
 
 O estágio atual de desenvolvimento do presente projeto ocorre basicamente em três áreas:
 aplicação do algoritmo de modelagem e simulação para os mecanismos 5R \cite{22orsino} e 2\underline{R}SU + \underline{P}PaP \cite{Kumazawa}, o projeto e simulação de controladores não lineares robustos de alto desempenho baseado no modelo dinâmico para os mecanismos citados, e a validação experimental das leis de controle sintetizadas.
@@ -317,7 +317,7 @@ As simulações da dinâmica direta do mecanismo serão feitas utilizando o método R
 
 Os trabalhos na área de projeto de controle serão feitos utilizando a metodologia desenvolvida de projeto de controladores robustos multivariáveis para mecanismos paralelos, baseada no modelo dinâmico do mecanismo a ser controlado e na técnica de controle por modos deslizantes \cite{Slotini, Utkin}.
 
-Os trabalhos no âmbito da validação experimental das leis de controle sintetizadas serão realizados no protótipo do mecanismo 2\underline{R}SU + \underline{P}PaP que encontra-se no laboratório de mecanismos e no protótico do mecanismo 5R que está sendo construído por outros alunos do grupo de pesquisa. A bancada experimental do mecanismo 2\underline{R}SU + \underline{P}PaP já está funcional e já estão sendo realizados ensaios de leis de controle de trajetória baseadas apenas no modelo cinemático do mecanismo. Para a realização da validação experimental nesta bancada, será realizada a identificação dos parâmetros do sistema e suas respectivas incertezas, projeto do controlador baseado nos parâmetros e incertezas identificadas, implementação das leis de controle, e aquisição de dados em ambiente Labview. \\
+Os trabalhos no âmbito da validação experimental das leis de controle sintetizadas serão realizados no protótipo do mecanismo 5R que encontra-se no laboratório de mecanismos. A bancada experimental do mecanismo 5R já está funcional e já forem realizados alguns testes de leis de controle de trajetória baseadas no modelo dinâmico do mecanismo. Para a realização da validação experimental nesta bancada, será realizada a identificação dos parâmetros do sistema e suas respectivas incertezas, projeto do controlador baseado nos parâmetros e incertezas identificadas, implementação das leis de controle, e aquisição de dados em ambiente Labview. \\
 
 \begin{figure}[h!]
 	\centering
@@ -4281,6 +4281,8 @@ rob\'oticos paralelos. O capítulo pode ser acessado por \url{http://dx.doi.org/1
 
 Um artigo, publicado no peri\'odico {\em International Journal of Mechanisms and Robotic Systems}, intitulado ``A new approach for obtaining the dynamic balancing conditions in serial mechanisms'' \cite{Coutinho}, foi escrito em coautoria com o Prof. Dr. Tarc\'isio Antonio Hess Coelho. O artigo pode ser acessado por \url{http://dx.doi.org/10.1504/IJMRS.2016.077036}.
 
+Um artigo, publicado no {\em Congresso Brasileira de Automática - 2018}, intitulado ``H-Infinity Control of a 3-DOF RRR Spatial Serial Mechanism'' \cite{CBA}, foi escrito em coautoria com a Eng. Isabella Stevani, o Prof. Dr. Diego Colón, e o Prof. Dr. Tarc\'isio Antonio Hess Coelho. O artigo pode ser acessado por \url{https://ssl4799.websiteseguro.com/swge5/PROCEEDINGS/} (doi:10.20906/CPS/CBA2018-0458).
+
 
 %---DISCIPLINAS CURSADAS---------------------------------------------------------
 %\newpage
@@ -4307,29 +4309,15 @@ Um artigo, publicado no peri\'odico {\em International Journal of Mechanisms and
 
 %ETAPAS E ATIVIDADES DO PROJETO----------------------------------------
 \newpage
-\section{Cronograma de Atividades do Projeto}\label{atividades}
+\section{Cronograma de Atividades}\label{atividades}
 
 Serão realizados as seguintes etapas para a realização da proposta:
 
 \begin{itemize}
 
-\item[(1)] Obtenção do espaço de trabalho e singularidades do mecanismo  2\underline{R}SU+\underline{P}PaP
-\item[(2)] Realização de projeto de controlador por modos deslizantes para o mecanismo 2\underline{R}SU+\underline{P}PaP, considerando os esforços dos atuadores como entradas de controle
-\item[(3)] Simulação dinâmica direta do mecanismo 2\underline{R}SU+\underline{P}PaP controlado pelo controlador projetado
-\item[(4)] Inclusão de atritos nas juntas no algoritmo de modelagem
-\item[(5)] Inclusão das inércias efetivas dos atuadores no algoritmo de modelagem
-\item[(6)] Dedução dos princípios de composição de movimento para as derivadas das acelerações lineares e angulares
-\item[(7)] Aplicações dos princípios de composição de movimento das derivadas das acelerações lineares e angulares para efetuadores e centros de massa de ligamentos de mecanismos seriais
-\item[(8)] Inclusão da dinâmica eletro-mecânica dos atuadores no algoritmo de modelagem
-\item[(9)] Identificação dos parâmetros dos sistemas e suas respectivas incertezas, utilizando os protótipos
-\item[(10)] Realização de projeto de controlador por modos deslizantes para os mecanismos 5R e 2\underline{R}SU+\underline{P}PaP, considerando a tensão elétrica nos atuadores como entrada de controle
-\item[(11)] Simulação dinâmica direta dos mecanismos controlados pelos controladores descritos no item anterior
-\item[(12)] Validação experimental dos controladores projetados, utilizando os protótipos
-\item[(13)] Escrever artigo sobre uma nova abordagem para modelagem dinâmica de mecanismos seriais, utilizando o método Orsino de acoplamento de subsistemas \cite{23orsino}, aliado aos parâmetros de Denavit-Hartenberg \cite{Craig, Denavit, Lipkin}
-\item[(14)] Escrever artigo sobre modelagem dinâmica de mecanismos paralelos, utilizando o método Orsino de acoplamento de subsistemas
-\item[(15)] Escrever artigo sobre controle não linear robusto aplicado a mecanismos paralelos
-\item[(16)] Avaliação geral dos resultados
-\item[(17)] Preparo da tese
+\item[(11)] Ensaios experimentais de avaliação do desempenho dos controladores no robô paralelo plano
+\item[(12)] Escrita e depósito do exemplar da tese
+\item[(13)] Defesa da tese
 
 %\item[(1)] 	Cumprimentos dos créditos de pós-graduação.
 %\item[(2)] 	Pesquisa e revisão bibliográfica da literatura para o desenvolvimento teórico.
@@ -4351,45 +4339,17 @@ Aqui segue um cronograma estimado para realização das atividades propostas:
 \begin{table}[H]
 \begin{center}
 \caption[Cronograma]{Cronograma -- Planejamento de Atividades por quadrimestre}
-\begin{tabular}{|c|c|c|c|c|c|} 
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|} 
 	\hline
 	\rule[-2mm]{0mm}{6mm}
-	Ativ./Quad. & $3^o/16$ & $1^o/17$ & $2^o/17$ & $3^o/17$ \\
+	Ativ./Quad. & $01/19$ & $02/19$ & $03/19$ & $04/19$ & $05/19$ & $06/19$ & $07/19$  \\
 	\hline
 	\rule[-2mm]{0mm}{6mm}
-	(1) & \rule[0mm]{10mm}{2mm} &   &  &    \\
-	\rule[-1mm]{0mm}{5mm}
-	(2) & \rule[0mm]{10mm}{2mm} &  &  &    \\
-	\rule[-1mm]{0mm}{5mm}
-	(3) & \rule[0mm]{10mm}{2mm} &  &  &     \\
-	\rule[-1mm]{0mm}{5mm}
-	(4) &  \rule[0mm]{10mm}{2mm} &  &  &     \\
-	\rule[-1mm]{0mm}{5mm}
-	(5) & \rule[0mm]{10mm}{2mm}  &  &  &     \\
-	\rule[-1mm]{0mm}{5mm}
-	(6) &  \rule[0mm]{10mm}{2mm} &  &  &     \\
-	\rule[-1mm]{0mm}{5mm}
-	(7) & \rule[0mm]{10mm}{2mm} &  &  &     \\
-	\rule[-1mm]{0mm}{5mm}
-	(8) & \rule[0mm]{10mm}{2mm}  &  &  &    \\
+	(11) & \rule[0mm]{10mm}{2mm} & \rule[0mm]{10mm}{2mm} &  \rule[0mm]{10mm}{2mm} & \rule[0mm]{10mm}{2mm} &  &  &    \\
 	\rule[-2mm]{0mm}{6mm}
-	(9) & \rule[0mm]{10mm}{2mm}  & \rule[0mm]{10mm}{2mm}  &  &    \\
-	\rule[-1mm]{0mm}{5mm}
-	(10) & \rule[0mm]{10mm}{2mm} & \rule[0mm]{10mm}{2mm} &  &     \\
+	(12) &   &  & \rule[0mm]{10mm}{2mm} & \rule[0mm]{10mm}{2mm} & \rule[0mm]{10mm}{2mm} & \rule[0mm]{10mm}{2mm}  &  \\
 	\rule[-2mm]{0mm}{6mm}
-	(11) & \rule[0mm]{10mm}{2mm} & \rule[0mm]{10mm}{2mm} &  &    \\
-	\rule[-2mm]{0mm}{6mm}
-	(12) & \rule[0mm]{10mm}{2mm}  & \rule[0mm]{10mm}{2mm} & \rule[0mm]{10mm}{2mm} & \rule[0mm]{10mm}{2mm}   \\
-	\rule[-2mm]{0mm}{6mm}
-	(13) &  & \rule[0mm]{10mm}{2mm} &  &    \\
-	\rule[-2mm]{0mm}{6mm}
-	(14) &  &  & \rule[0mm]{10mm}{2mm} &   \\
-	\rule[-2mm]{0mm}{6mm}
-	(15) &  &  &  & \rule[0mm]{10mm}{2mm}   \\
-	\rule[-2mm]{0mm}{6mm}
-	(16) &  &  & \rule[0mm]{10mm}{2mm} & \rule[0mm]{10mm}{2mm}   \\
-	\rule[-2mm]{0mm}{6mm}
-	(17) &  & \rule[0mm]{10mm}{2mm} & \rule[0mm]{10mm}{2mm} & \rule[0mm]{10mm}{2mm}   \\
+	(13) &  &  &  &  & & & \rule[0mm]{10mm}{2mm} \\
 	\hline
 \end{tabular}
 \label{crono}
@@ -4398,43 +4358,43 @@ Aqui segue um cronograma estimado para realização das atividades propostas:
 
 \newpage
 %---SUMÁRIO ESTRUTURADO DA TESE---------------------------------------------------------
-\section{Sumário estruturado da tese}\label{sum}
+%\section{Sumário estruturado da tese}\label{sum}
 
-Esta subseção tem o intuito de apresentar a estrutura de capítulos e sub-capítulos que pretende ser utilizada na tese.
+%Esta subseção tem o intuito de apresentar a estrutura de capítulos e sub-capítulos que pretende ser utilizada na tese.
 
-\begin{itemize}
-\item[1)] Introdução
-\item[2)] Revisão da literatura
-\item[3)] Metodologia do projeto
-\item[4)] Modelagem dinâmica
-\begin{itemize}
-\item[4.1)] Algoritmo para modelagem de mecanismos seriais
-\item[4.2)] Algoritmo para modelagem de mecanismos paralelos
-\end{itemize}
-\item[5)] Controle
-\begin{itemize}
-\item[5.1)] Linearização pela realimentação
-\item[5.2)] Controle por Modos Deslizantes
-\item[5.3)] Controle por Modos Deslizantes Adaptativo
-\end{itemize}
-\item[6)] Resultados
-\begin{itemize}
-\item[6.1)] Mecanismos 5R
-\begin{itemize}
-\item[6.1.1)] Simulação
-\item[6.1.2)] Exeperimento
-\end{itemize}
-\item[6.2)] Mecanismo 2\underline{R}SU+\underline{P}PaP
-\begin{itemize}
-\item[6.2.1)] Simulação
-\item[6.2.2)] Exeperimento
-\end{itemize}
-\end{itemize}
-\item[7)] Conclusões
-\item[8)] Referências
-\end{itemize}
-
-\newpage
+%\begin{itemize}
+%\item[1)] Introdução
+%\item[2)] Revisão da literatura
+%\item[3)] Metodologia do projeto
+%\item[4)] Modelagem dinâmica
+%\begin{itemize}
+%\item[4.1)] Algoritmo para modelagem de mecanismos seriais
+%\item[4.2)] Algoritmo para modelagem de mecanismos paralelos
+%\end{itemize}
+%\item[5)] Controle
+%\begin{itemize}
+%\item[5.1)] Linearização pela realimentação
+%\item[5.2)] Controle por Modos Deslizantes
+%\item[5.3)] Controle por Modos Deslizantes Adaptativo
+%\end{itemize}
+%\item[6)] Resultados
+%\begin{itemize}
+%\item[6.1)] Mecanismos 5R
+%\begin{itemize}
+%\item[6.1.1)] Simulação
+%\item[6.1.2)] Exeperimento
+%\end{itemize}
+%\item[6.2)] Mecanismo 2\underline{R}SU+\underline{P}PaP
+%\begin{itemize}
+%\item[6.2.1)] Simulação
+%\item[6.2.2)] Exeperimento
+%\end{itemize}
+%\end{itemize}
+%\item[7)] Conclusões
+%\item[8)] Referências
+%\end{itemize}
+%
+%\newpage
 
 \phantom{a}
 \bibliographystyle{plain}
