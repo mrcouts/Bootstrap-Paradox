@@ -134,7 +134,8 @@
 \hspace{.50\textwidth}
 \begin{minipage}{.45\textwidth}
 {
-Texto apresentado à Escola Politécnica da Universidade de São Paulo (EPUSP) como requisito parcial para a qualificação no Curso de Doutorado em Engenharia Mecânica.
+Texto apresentado à Escola Politécnica da Universidade de São Paulo (EPUSP) como requisito parcial para o pedido de extensão de prazo no Curso de Doutorado em Engenharia Mecânica.
+%Texto apresentado à Escola Politécnica da Universidade de São Paulo (EPUSP) como requisito parcial para a qualificação no Curso de Doutorado em Engenharia Mecânica.
 %Relatório anual de atividades apresentado à Comissão de Atividade Discente (CADIS) 
 %do Programa de Pós Graduação em Engenharia Mecânica (PPGEM) da Escola Politécnica 
 %da Universidade de São Paulo (EPUSP)
@@ -146,7 +147,7 @@ Prof. Dr. Tarcisio A. Hess Coelho
 \end{minipage}
 
 \vfill
-{São Paulo \\ 23 de Setembro de 2016}
+{São Paulo \\ 2 de Janeiro de 2019}
 \end{center}
 \end{titlepage}
 
@@ -165,7 +166,7 @@ Prof. Dr. Tarcisio A. Hess Coelho
 {\bf Bolsista: }{Sim}\\[8pt]
 {\bf Agência de fomento: }{CNPq}\\[8pt]
 {\bf Edital/Chamada: }{Cota Institucional (Demanda Social)}\\[8pt]
-{\bf Prazo Máximo para realização do Exame de Qualificação: }{17/10/2016}\\[8pt]
+{\bf Exame de Qualificação: }{Aprovado em 14/10/2016}\\[8pt]
 
 \vspace{2cm}
 \noindent
@@ -183,13 +184,13 @@ Prof. Dr. Tarcisio A. Hess Coelho
 \newpage
 \section*{Resumo}
 
-Para realizar o projeto de um sistema de controle, em geral, \'e necess\'ario primeiramente de um modelo da planta a ser controlada. O grau de fidelidade do modelo da planta, dentro das condi\c{c}\~oes de opera\c{c}\~ao desejadas do sistema, influi diretamente no desempenho do sistema em malha fechada que o projeto do controlador pode oferecer. Quanto mais rico for o modelo, mais f\'acil de atingir requisitos de performance mais elevados (menor tempo de resposta e menor sobressinal, por exemplo) garantindo a estabilidade do sistema.
+Para realizar o projeto de um sistema de controle, em geral, \'e necess\'ario primeiramente de um modelo da planta a ser controlada. O grau de fidelidade do modelo da planta, dentro das condi\c{c}\~oes de opera\c{c}\~ao desejadas do sistema, influi diretamente no desempenho do sistema em malha fechada que o projeto do controlador pode oferecer. Quanto mais rico for o modelo, mais f\'acil de atingir requisitos de desempenho mais elevados (menor tempo de resposta e menor sobressinal, por exemplo) garantindo a estabilidade do sistema.
 
-Utilizando os m\'etodos tradicionais de modelagem de Sistemas Mec\^anicos Multicorpos, \'e dif\'icil e trabalhoso de se obter modelos de sistemas complexos, como mecanismos paralelos. Para contornar esse problema, \'e comum desprezar alguns efeitos de acoplamentos inerciais, simplificando o processo de modelagem. Por\'em, essa estrat\'egia gera modelos mais pobres, o que ir\'a limitar a perfomance que o sistema poder\'a atingir quando for feito o projeto do sistema de controle.
+Utilizando os m\'etodos tradicionais de modelagem de Sistemas Mec\^anicos Multicorpos, \'e dif\'icil e trabalhoso de se obter modelos de sistemas complexos, como mecanismos paralelos. Para contornar esse problema, \'e comum desprezar alguns efeitos de acoplamentos inerciais, simplificando o processo de modelagem. Por\'em, essa estrat\'egia gera modelos mais pobres, o que ir\'a limitar o desempenho que o sistema poder\'a atingir quando for feito o projeto do sistema de controle.
 
-A solu\c{c}\~ao proposta para ser poss\'ivel aumentar o desempenho, garantindo a robustez, de um sistema de controle de mecanismos paralelos \'e a utiliza\c{c}\~ao dos novos m\'etodos de modelagem din\^amica desenvolvidos pelo grupo de pesquisa do Prof. Doutor Tarcisio Antonio Hess Coelho, os quais s\~ao adequados para incluir todos os efeitos da din\^amica de corpos r\'igidos, independentemente da complexidade do sistema.
+A solu\c{c}\~ao proposta para ser poss\'ivel aumentar o desempenho, garantindo a robustez, de um sistema de controle de mecanismos paralelos \'e a utiliza\c{c}\~ao dos novos m\'etodos e estratégias de modelagem din\^amica desenvolvidos pelo grupo de pesquisa do Prof. Doutor Tarcisio Antonio Hess Coelho, os quais s\~ao adequados para incluir todos os efeitos da din\^amica de corpos r\'igidos, independentemente da complexidade do sistema.
 
-O presente projeto visa desenvolver um algoritmo de modelagem que inclua todos os efeitos da din\^amica de corpos r\'igidos para realizar a modelagem din\^amica de mecanismos paralelos (baseado na metodologia de Orsino), desenvolver uma metodologia de projeto de controle robusto para mecanismos paralelos tradicionais e mecanismos com atua\c{c}\~ao redundante, e realizar simulações e valida\c{c}\~oes experimentais das leis de controle sintetizadas pela metodologia proposta.
+O presente projeto visa desenvolver um algoritmo de modelagem que inclua todos os efeitos da din\^amica de corpos r\'igidos para realizar a modelagem din\^amica de mecanismos paralelos (baseado na metodologia Orsino), desenvolver uma metodologias de projeto de controle robusto para mecanismos paralelos tradicionais e mecanismos com atua\c{c}\~ao redundante, e realizar simulações e valida\c{c}\~oes experimentais das leis de controle sintetizadas pela metodologia proposta.
 
 %INTRODUÇÃO----------------------------------------------------
 \newpage
@@ -202,7 +203,7 @@ Há uma série de vantagens em utilizar mecanismos paralelos no lugar dos tradicio
 
 \begin{figure}[h!]
 	\centering
-	\includegraphics[scale=0.18]{figures/theadeptquat.jpg}  
+	\includegraphics[scale=0.17]{figures/theadeptquat.jpg}  
 	\caption{Robô industrial Adept Quattro}
 	\label{fig:Mecanismo}
 \end{figure}
@@ -219,19 +220,21 @@ Levando-se em conta esta dificuldade de obtenção e a complexidade inerente do mo
 
 Os principais objetivos do projeto s\~ao:
 \begin{itemize}
-\item Desenvolvimento de um algoritmo gerador de modelos dinâmicos completos de mecanismos paralelos, de forma implícita. Pretende-se utilizar a metodologia proposta por Orsino et. al. \cite{23orsino} de acoplamento de subsistemas multicorpos.
+\item Desenvolvimento de um algoritmo gerador de modelos dinâmicos completos de mecanismos paralelos, de forma implícita. Será utilizada uma metodologia baseada no método Orsino de acoplamento de subsistemas multicorpos \cite{23orsino}.
 
 
-\item Elabora\c{c}\~ao de uma metodologia de projeto de controlador n\~ao linear robusto, de alto desempenho, baseado na t\'ecnica de controle por modos deslizantes \cite{Slotini, Utkin}, aplicável a  mecanismos de arquitetura paralela. Para tanto, serão consideradas as incertezas param\'etricas e a possibilidade de atua\c{c}\~ao redundante \cite{Cheng},  além da síntese de leis de controle com custo computacional consideralvemente menor do que as tradicionais, que empregam o Controle por Torque Computado \cite{Craig, Zubizarreta}.
-
+\item Elabora\c{c}\~ao de metodologias de projeto de controlador n\~ao linear robusto, de alto desempenho, aplicável a  mecanismos de arquitetura paralela. Para tanto, serão consideradas as incertezas param\'etricas e a possibilidade de atua\c{c}\~ao redundante \cite{Cheng},  além de estratégias para a síntese de leis de controle com custo computacional consideralvemente menor do que as tradicionais, que empregam o Controle por Torque Computado \cite{Craig, Zubizarreta}.
 
 \item Realizar a modelagem cinemática e dinâmica dos mecanismos 5R \cite{22orsino} e 2\underline{R}SU+\underline{P}PaP \cite{Rynaldo, Kumazawa}, utilizando o algoritmo de modelagem desenvolvido.
+
 \item Realizar o projeto de um controlador de trajetória para os mecanismos escolhidos, utilizando a metodologia de projeto de controle proposta.
-\item Realizar simula\c{c}\~oes dinâmicas das leis de controle sintetizadas.
-\item Realizar a validação experimental dos controladores projetados nos protótipos dos mecanismos escolhidos, sendo que o protótipo do mecanimos 2\underline{R}SU+\underline{P}PaP se encontra no laboratório de mecanismos da EPUSP e o protótipo do pentágono articulado (5R) está sendo desenvolvido por outros alunos orientados pelo Prof. Dr. Tarcisio A. H. Coelho.
+
+\item Realizar simula\c{c}\~oes dinâmicas utilizando as leis de controle sintetizadas.
+
+\item Realizar a validação experimental dos controladores projetados no protótipo dos mecanismos 5R, o qual se encontra no laboratório de mecanismos da EPUSP.
 \end{itemize}
 
-É importante ressaltar que os 5 primeiros objetivos citados já foram parcialmente alcançados e que a arquitetura paralela 2\underline{R}SU+\underline{P}PaP foi desenvolvida pelo grupo de pesquisa do Prof. Dr. Tarcio Antonio Hess Coelho, havendo ainda poucos estudos na literatura sobre ela. Sendo assim, pode-se afirmar que simulações dinâmicas e validações experimentais de leis de controle não linear robusto neste mecanismo tem caráter inédito.
+É importante ressaltar que os 5 primeiros objetivos citados já foram parcialmente alcançados e que a arquitetura paralela 2\underline{R}SU+\underline{P}PaP foi desenvolvida pelo grupo de pesquisa do Prof. Dr. Tarcio Antonio Hess Coelho, havendo ainda poucos estudos na literatura sobre ela. %Sendo assim, pode-se afirmar que simulações dinâmicas e validações experimentais de leis de controle não linear robusto neste mecanismo tem caráter inédito.
 
 \newpage
 
@@ -1537,8 +1540,6 @@ Sendo:
 
 \subsubsection{Dinâmica}\label{S05-02-02}
 
-\subsubsubsection{Modelo Dinâmico} \label{S05-02-02-01}
-
 O modelo dinâmico de $\ssB$ é obtido utilizando um procedimento de acoplamento de subsistemas baseado no Método Orsino  \cite{23orsino}, e é dado por:
 \begin{empheq}[box=\mybluebox]{equation} \label{eq:ModeloMecSerial}
 \mM(\mq) \ddot{\mq} + \mnu(\mq,\dot{\mq}) + \mg(\mq) = \mu
@@ -1560,7 +1561,7 @@ m_i \mJ_{v\,i}^\msT \mJ_{v\,i} + \mJ_{\omega\,i}^\msT \mI_i \mJ_{\omega\,i}
 Segue abaixo, a dedução.
 %A idéia é obter o modelo dinâmico do sistema acoplado através dos modelos dos subsistemas desacoplados e dos vínculos cinemáticos entre eles.
 
-\paragraph{i) Modelo dos subsistemas} $ \, $ \\
+\subsubsubsection{Modelo dos subsistemas} \label{S05-02-02-01}
 
 O modelo dinâmico de cada ligamento pode ser obtido por Newton-Euler, pois são considerados como corpos rígidos livres no espaço sujeitos apenas à força peso. Sendo assim, através do Teorema do Movimento do Baricentro e do Teorema do Momento Angular, obtemos os esforços não-reativos (ativos e inerciais) aplicados em cada ligamento:
 
@@ -1677,7 +1678,7 @@ Temos que o trabalho virtual realizado por cada subsistema é dado por:
 
 %No caso de os subsistemas estarem desacoplados, temos que $\mf_{r\,i} = \mzr$.
 
-\paragraph{ii) Sistemas de forças ativas generalizadas} $ \, $ \\
+\subsubsubsection{Sistemas de forças ativas generalizadas} \label{S05-02-02-02}
 
 Considere também um subsistema constituido pelos esforços que os atuadores aplicam nas juntas do mecanismo. Primeiramente, definimos a matriz-coluna de quasi-velocidades relativas a esse subsistema:
 %Muitas vezes é conveniente definir um conjunto de quasi-velocidades adicionais $\mp_0$, as quais só fazem sentido para o sistema acoplado, e sistemas de forças ativas generalizadas adicionais $\mf_0$ aplicados na direção das quasi-velocidades adicionais. \\
@@ -1695,7 +1696,7 @@ Seja $\mu$ a matriz-coluna de esforços generalizados aplicadas pelos atuadores n
 \delta W\ssh = \delta \mq^\msT \cdot \mu 
 \end{empheq}
 
-\paragraph{iii) Vínculos cinemáticos entre subsistemas} $ \, $ \\
+\subsubsubsection{Vínculos cinemáticos entre subsistemas} \label{S05-02-02-03}
 
 Através das equações \eqref{eq:v_star_i}, \eqref{eq:omega_star_i} e \eqref{eq:mp_0}, é possível relacionar as quasi-velocidades de cada subsistema com as quasi-velocidades $\mp\ssh$ da seguinte maneira:
 \begin{equation}
@@ -1748,7 +1749,7 @@ Sendo:
 \end{empheq}
 %\frac{\partial \overline{\mp}}{\partial \mp}
 
-\paragraph{iv) Acoplamento de subsistemas} $ \, $ \\
+\subsubsubsection{Acoplamento de subsistemas} \label{S05-02-02-04}
 
 Seja $\mf$ a matriz-coluna contendo todos os sistemas de forças não-reativas generalizadas:
 \begin{empheq}[box=\lightbluebox]{equation} \label{eq:fSeriais}
@@ -2257,7 +2258,7 @@ m_i \mJ_{v\,i}^\msT \mJ_{v\,i} + \mJ_{\omega\,i}^\msT \mI_i \mJ_{\omega\,i}
 
 \subsection{Algoritmo para modelagem de mecanismos paralelos}\label{S05-3}
 
-Esta subseção tem o intuito de apresentar um algoritmo genérico para a obtenção do modelo dinâmico de mecanismos paralelos não-redundantes cujo efetuador realiza apenas movimentos de translação. O algoritmo apresentado é implementável em linguagens de programação comumente usadas atualmente, como C++, Java e Python, sem necessitar de recursos de manipulação simbólica. \\
+Esta subseção tem o intuito de apresentar um algoritmo genérico para a obtenção do modelo dinâmico de mecanismos paralelos cujo efetuador realiza apenas movimentos de translação. O algoritmo apresentado é implementável em linguagens de programação comumente usadas atualmente, como C++, Java e Python, sem necessitar de recursos de manipulação simbólica. \\
 Para a obtenção do modelo do mecanismo paralelos, são necessários apenas os modelos de mecanismos seriais deduzidos  utilizando o algoritmo apresentado anteriormente, do modelo do efetuador, e de 7 matrizes constantes que são utilizadas para descrever a arquitetura do mecanismo paralelo. \\ 
 
 Para realizar a modelagem de mecanismos paralelos a partir de subsistemas seriais j\'a deduzidos, \'e necess\'ario introduzir mais alguns conceitos: \\
@@ -2303,9 +2304,7 @@ Sejam $\ssB_0$, $\ssB_1$, ..., $\ssB_{n} \,$ $n+1$ subsistemas mec\^anicos e $\s
 \item $\mu_{\ssB_i}, \,i=0, ..., n$: matriz-coluna dos esfor\c{c}os ativos externos generalizados aplicados ao subsistema $\ssB_i$.
 \end{itemize}
 
-\begin{itemize}
-
-\item[i)] Modelo dos subsistemas \\
+\subsubsection{Modelo dos subsistemas} \label{S05-03-01}
 
 O modelo dinâmico de cada subsistema desacoplado pode ser escrito como:
 
@@ -2436,13 +2435,10 @@ Portanto:
 \end{equation}
 
 
-\item[ii)] Vínculos cinemáticos entre subsistemas
-
-\begin{itemize}
+\subsubsection{Vínculos cinemáticos entre subsistemas} \label{S05-03-02}
 
 
-
-\item[a)] Vínculos de posição
+\subsubsubsection{Vínculos de posição} \label{S05-03-02-01}
 
 Seja $\ttp_i$ um ponto pertencente à plataforma/efetuador $\ssB_0$ e também ao efetuador do subsistema serial $\ssB_i$. Sendo assim, é possível relacionar as coordenadas do ponto $\ttp_i$ escritas no sistema $\ttN_0$ partindo da plataforma/efetuador $\ssB_0$ e da cadeia serial $\ssB_i$:
 
@@ -2682,7 +2678,7 @@ Sendo:
 \end{bmatrix}^\msT
 \end{equation}
 
-\item[b)] Vínculos de velocidades lineares
+\subsubsubsection{Vínculos de velocidades lineares} \label{S05-03-02-02}
 
 Derivando no tempo a equação \eqref{eq:VinculosGenericosPosicao}, temos:
 %\begin{equation} \label{eq:VinculosGenericosVel}
@@ -2760,7 +2756,7 @@ Assim, substituindo \eqref{eq:dxdt} em \eqref{eq:VinculosGenericosVel}, obtemos:
 \dot{\overline{\mq}}(\mq,\mp) = \mD \cdot \dot{\mq}^\ast - (\mE \cdot \mJ_{\mathsf{v}}(\mq^\diamond) + \mF) \cdot \dot{\mq}^\diamond = \mzr
 \end{equation}
 
-\item[c)] Vínculos de velocidades angulares
+\subsubsubsection{Vínculos de velocidades angulares} \label{S05-03-02-03}
 
 Supondo que os efetuadores de cada cadeia serial $\ssB_i$ estejam ligados rigidamente à plataforma/efetuador $\ssB_0$, temos que todos apresentam velocidade angular em relação a $\ttN_0$, tendo em vista que $\lllB_0$ só translada. Sendo assim, obtem-se as seguintes relações:
 
@@ -2851,7 +2847,7 @@ Sendo:
 \end{bmatrix}
 \end{equation}
 
-\item[d)] Vínculos de quasi-velocidades
+\subsubsubsection{Vínculos de quasi-velocidades} \label{S05-03-02-04}
 
 Os vínculos de quasi-velocidades são dados pela união dos vínculos de velocidades lineares e dos vínculos de velocidades angulares, ou seja:
 %\begin{equation} \label{eq:VinculosQuasiVel}
@@ -2906,7 +2902,7 @@ Sendo $\mA$ dado por:
 \end{bmatrix}
 \end{equation}
 
-\item[e)] Vínculos de quasi-acelerações
+\subsubsubsection{Vínculos de quasi-acelerações} \label{S05-03-02-05}
 
 Derivando \eqref{eq:VinculosQuasiVel}, temos:
 %\begin{equation} \label{eq:VinculosQuasiAce}
@@ -2984,9 +2980,7 @@ Sendo:
 \end{bmatrix}
 \end{equation}
 
-\end{itemize}
-
-\item[iii)] Acoplamento de subsistemas
+\subsubsection{Acoplamento de subsistemas} \label{S05-03-03}
 
 Seja $\mf$ a matriz-coluna contendo todos os sistemas de forças não-reativas generalizadas:
 \begin{equation} \label{eq:fParalelos}
@@ -3128,7 +3122,7 @@ Ou seja:
 \mC(\mq)^\msT (   \mM'(\mq)\ddot{\mq} + \mv'(\mq,\dot{\mq}) + \mg'(\mq) ) = \mC(\mq)^\msT \mu'
 \end{equation}
 
-\item[iv)] Simulação dinâmica direta
+\subsubsection{Simulação dinâmica direta} \label{S05-03-04}
 
 É possível realizar a simulação dinâmica direta do sistema utilizando a equação dinâmica \eqref{eq:EquaçãoDinamicaParalelos} e os vínculos de quasi-acelerações \eqref{eq:VinculosQuasiAce}:
 \begin{equation}
@@ -3234,7 +3228,7 @@ Sendo assim, o sistema de EDOs que será utilizado para realizar a simualação din
 \end{bmatrix}
 \end{equation}
 
-\item[v)] Simulação dinâmica inversa
+\subsubsection{Simulação dinâmica inversa} \label{S05-03-05}
 
 Na simulação dinâmica inversa, são dados os perfis de $\mq\ssh$, $\dot{\mq}\ssh$ e $\ddot{\mq}\ssh$ em função do tempo e obtem-se os perfis dos esforços nos atuadores para a trajetória dada. Para isso, será utilizada a equação dinâmica \eqref{eq:EquaçãoDinamicaParalelos}:
 $$ \mC(\mq)^\msT (   \mM'(\mq)\ddot{\mq} + \mv'(\mq,\dot{\mq}) + \mg'(\mq) ) = \mC(\mq)^\msT \mu' $$
@@ -3307,8 +3301,6 @@ Sendo:
 Sendo assim, para mecanismos sem atuação redundante, a simulação dinâmica inversa é feita utilizando a equação \eqref{eq:DinamicaInversa2} para obter os esforços nos atuadores, dados $\mq\ssh$, $\dot{\mq}\ssh$ e $\ddot{\mq}\ssh$, obtendo $\mq$ através da solução numérica da equação \eqref{eq:VinculosGenericosPosicao} e $\dot{\mq}$ através de \eqref{eq:CCinematica}. 
 
 Para o caso de mecanismos com atuação redundante, há infinitas para $\mu^\star$ de modo que o mecanismo realize a trajetória desejada. Sendo assim, normalmente é escolhida uma solução que seja solução de um problema de otimização (como a minimização da energia consumida), tendo a equação \eqref{eq:DinamicaInversa2} como restrição.
-
-\end{itemize}
 
 \subsection{Projeto do Controlador}\label{S05-5}
 
