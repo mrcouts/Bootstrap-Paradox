@@ -3379,11 +3379,11 @@ Sendo:
 Repare que o desempenho desta técnica de controle depende diretamente da representatividade do modelo obtido dentro das condições de operação do sistema. 
 
 
-\subsubsection{Controle por Modos Deslizantes em Tempo Contínuo}\label{S05-05-02}
+\subsubsection{Controle por Modos Deslizantes em Tempo Contínuo}\label{S05-04-03}
 
 O Controle por Modos Deslizantes é uma técnica de controle não-linear robusto, a qual tem como principal vantagem uma menor sensibilidade aos erros de modelagem, sendo robusto tanto a incertezas estruturadas quanto a incertezas não estruturadas. Nesta subseção serão deduzidas 4 leis de controle baseadas nesta técnica.
 
-\paragraph{Dedução das leis de controle} $ \, $ \\
+\subsubsubsection{Dedução das leis de controle}\label{S05-04-03-01}
 
 Sejam $\underline{\lambda}$, $\underline{k}_v$ e $\underline{k}_p$ matrizes diagonais positiva-definidas. Assim, pode-se definir uma matriz-coluna $\ms$ de duas maneiras diferentes:
 \begin{equation} \label{eq:SlidingSurfaces}
@@ -3704,7 +3704,7 @@ Sempre existe solu\c{c}\~ao para \eqref{eq:DesigualdadeK2_b2}, e a solução que m
 
 \end{itemize}
 
-\paragraph{Camada Limite} $ \, $ \\
+\subsubsubsection{Camada Limite}\label{S05-04-03-02}
 
 Uma técnica muito utilizada para diminuir os efeitos do \emph{chattering} no CMD é substituição da função sinal por uma função de saturação nas leis de controle. Definindo:
 \begin{equation}
@@ -3718,7 +3718,8 @@ Sendo assim, no lugar de $\sign(\ms)$, será utilizado $\sat(\ms / \phi)$ nas lei
 
 Ao mesmo tempo que a utilização da camada limite diminui os efeitos do \emph{chattering} no sistema, sua utilização não mais garante que o sistema atinja em tempo finito e se mantenha na superfície de escorregamento, apenas garante que o sistema atinja a camada limite ( $-\phi < s_i < \phi, \, i = 1,...,\nu\ssh $ ) em tempo finito, e lá se mantenha. 
 
-\paragraph{Ganho adaptativo} $ \, $ \\
+
+\subsubsubsection{Ganho adaptativo}\label{S05-04-03-03}
 
 O cálculo de $\underline{k}$ pode ser um tanto complexo utilizando as equações \eqref{eq:MatrizDiagk_a1}, \eqref{eq:MatrizDiagk_a2}, \eqref{eq:MatrizDiagk_b1} ou \eqref{eq:MatrizDiagk_b2}, pois depende do módulo máximo de matrizes que não possuem expressões explícitas. Tal cálculo pode ser feito numéricamente discretizando a área de trabalho do mecanismo e atribuindo valores máximos e mínimos para cada parâmetro incerto do sistema, obtendo uma matriz $\underline{k}$ que varia conforme a posição do mecanismo. O uso desta estratégia, porém, poderá resultar na obtenção de valores de $\underline{k}$ muito maiores do que o necessário, o que pode amplificar o fenômeno do \emph{chattering}. Sendo assim, é proposta a obtenção da matriz $\underline{k}$ de forma adaptativa, utilizando a seguinte lei de adaptação:
 
@@ -3743,6 +3744,72 @@ Esta lei de adaptação pode ser explicada da seguinte maneira: $\underline{k}_i$ 
 %\end{equation}
 
 %Sendo $\delta_i$ e $\sigma_i$ as i-\'esimas componentes de $\mdelta$ e $\msigma$, repectivamente, e $\Delta_{i,j}$ o elemento da i-\'esima linha e j-\'esima coluna de $\mDelta$.
+
+
+\subsubsection{Controle no Domínio da Frequência com Observador de Disturbios}\label{S05-04-04}
+
+Seja um sistema de controle SISO dado pelo seguinte diagrama de blocos:
+
+$$ Diagrama $$
+
+Sendo assim, a dinâmica do sistema pode ser representada pela seguinte equação:
+\begin{equation} \label{eq:DinTF}
+Y(z) = G_{mf}(z) R(z) + G_d (z) \big( D(z) - U''(z) \big) + G_n (z) N(z)
+\end{equation}
+
+Sendo:
+\begin{equation}
+G_{mf} = \frac{ F K G H }{1 + K G H}
+\end{equation}
+\begin{equation}
+G_{d} = \frac{ G }{1 + K G H}
+\end{equation}
+\begin{equation}
+G_{n} = -\frac{K G H}{1 + K G H}
+\end{equation}
+
+Será projetada uma lei de controle para o sinal $U''(z)$ de modo que ele siga o sinal de distúrbio e, consequentemente, minimize a influência do disturbio na saíde do sistema.
+
+Supondo $N(z) = 0$ em \eqref{eq:DinTF}, temos:
+\begin{equation} \label{eq:dinElUllD}
+E' + U''  =  D 
+\end{equation}
+
+Sendo:
+\begin{equation}
+E' = G_d ^{-1} (Y - G_{mf} R  )
+\end{equation}
+
+Tendo em vista que $E'$ depende apenas dos sinais de saíde e referência, define-se uma lende de controle para $U''$ em função de $E'$:
+\begin{equation}
+U'' = \bar{G} E'
+\end{equation}
+
+Consequentemente:
+\begin{equation} \label{eq:leiUllinv}
+E' = \bar{G}^{-1} U''
+\end{equation}
+
+Substituindo \eqref{eq:leiUllinv} em \eqref{eq:dinElUllD}, tem-se:
+\begin{equation}
+(1+ \bar{G}^{-1})U'' = D
+\end{equation}
+
+Portanto:
+\begin{equation} \label{eq:Gbarbar}
+\frac{U''}{D} = \frac{\bar{G}}{1+\bar{G}} = \bar{\bar{G}}
+\end{equation}
+
+Sendo assim, definindo-se $\bar{\bar{G}}$ como a função de transferência de um filtro passa-baixa com ganho unitário, $\bar{G}$ pode ser obtido em função de $\bar{\bar{G}}$, isolando-o na equação \eqref{eq:Gbarbar}:
+\begin{equation}
+\bar{G} = \frac{\bar{\bar{G}}}{1-\bar{\bar{G}}}
+\end{equation}
+
+
+
+
+
+
 
 \subsection{Simulações}\label{S05-4}
 Nesta subseção, será realizada a simulação dinâmica direta do mecânimo 5R utilizando o algoritmo de modelagem e simulação de mecanismos paralelos apresentado, e a lei de controle apresentada na subseção anterior. Serão consideradas incertezas paramétricas, tanto no projeto do controlador, quanto na simulação.
