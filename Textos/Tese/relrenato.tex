@@ -3745,19 +3745,23 @@ Esta lei de adaptação pode ser explicada da seguinte maneira: $\underline{k}_i$ 
 
 %Sendo $\delta_i$ e $\sigma_i$ as i-\'esimas componentes de $\mdelta$ e $\msigma$, repectivamente, e $\Delta_{i,j}$ o elemento da i-\'esima linha e j-\'esima coluna de $\mDelta$.
 
+\subsubsection{Controle Clássico com Observador de Distúrbios}\label{S05-04-04}
 
-\subsubsection{Controle Clássico com Observador de Disturbios}\label{S05-04-04}
+Como foi visto anteriormente, a técnica de Linearização por Realimentação idealmente lineariza o sistema de forma exata e desacopla o sistema através da realimentação de termos não lineares da dinâmica do sistema. Sendo assim, a equação \eqref{eq:ModeloLin} pode ser interpretada como o modelo de um sistema linear desacoplado com uma entrada de controle $\mup'$ e uma entrada de distúrbio $\mdelta$. Desta maneira, uma alternativa bastante direta, simples e eficaz para controlar o sistema linearizado é a utilização de técnicas de Controle Clássico.
 
-Como foi visto anteriormente, a técnica de Linearização por Realimentação idealmente lineariza o sistema de forma exata e desacopla o sistema através da realimentação de termos não lineares da dinâmica do sistema. Sendo assim, a equação \eqref{eq:ModeloLin} pode ser interpretada como um sistema linear desacoplado com uma entrada de controle $\mup'$ e uma entrada de distúrbio $\mdelta$. Desta maneira, uma alternativa bastante direta, simples e eficaz para controlar o sistema linearizado é a utilização de técnicas de Controle Clássico.
-
-As técnicas de Controle Clássico já são mais do que consagradas na literatura para sistema lineares SISO, e apresentam a possibilidade de projeto do controlador em tempo discreto. Porém, tendo em vista o sinal de distúrbio proveniente dos erros de modelagem, os quais podem ser relativamente grandes devido à complexidade do sistema e a erros paramétricos, o controlador projetado deve apresentar um bom nível de rejeição a distúrbio.
+As técnicas de Controle Clássico já são mais do que consagradas na literatura para sistemas lineares SISO, e apresentam a possibilidade de projeto do controlador em tempo discreto. Porém, tendo em vista o sinal de distúrbio proveniente dos erros de modelagem, os quais podem ser relativamente grandes devido à complexidade do sistema e a incertezas paramétricas, o controlador projetado deve apresentar um bom nível de rejeição a distúrbio para ser possível atingir requisitos de alto desempenho.
 
 Nesta subseção é apresentada uma técnica desenvolvida para desacoplar o projeto de Controle Clássico em duas etapas, o projeto de um controlador levando em conta apenas as características desejadas da dinâmica do sistema em malha fechada, e o projeto de um observador de distúbios, de modo a aumentar a rejeição à disturbio do sistema. \\
 
 
-Seja um sistema de controle SISO discreto dado pelo seguinte diagrama de blocos:
+Seja um sistema de controle SISO discreto cuja planta não possui zeros com $|z| \geq 1$, com a excessão de possíveis zeros em $z=-1$,  dado pelo seguinte diagrama de blocos:
 
-$$ Diagrama $$
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.5]{figures/ControleClassico.png}  
+	\caption{Malha de Controle Clássico}
+	\label{fig:ControleClassico}
+\end{figure}
 
 Sendo assim, a dinâmica do sistema pode ser representada pela seguinte equação:
 \begin{equation} \label{eq:DinTF}
@@ -3787,7 +3791,7 @@ Sendo:
 \bar{E} = G_d ^{-1} (Y - G_{mf} R  )
 \end{equation}
 
-Tendo em vista que $\bar{E}$ depende apenas dos sinais de saída e referência, define-se uma lende de controle para $\bar{U}$ em função de $\bar{E}$:
+Tendo em vista que $\bar{E}$ depende apenas dos sinais de saída e referência, define-se uma lei de controle para $\bar{U}$ em função de $\bar{E}$:
 \begin{equation} \label{eq:leiU_}
 \bar{U} = \bar{G} \bar{E}
 \end{equation}
@@ -3807,7 +3811,7 @@ Portanto:
 \frac{\bar{U}}{D} = \frac{\bar{G}}{1+\bar{G}} = \bar{\bar{G}}
 \end{equation}
 
-Sendo assim, definindo-se $\bar{\bar{G}}$ como a função de transferência de um filtro passa-baixa com ganho unitário, $\bar{G}$ pode ser obtido em função de $\bar{\bar{G}}$, isolando-o na equação \eqref{eq:G__}:
+Sendo assim, definindo-se $\bar{\bar{G}}$ como uma função de transferência de um filtro passa-baixa com ganho unitário, $\bar{G}$ pode ser obtido em função de $\bar{\bar{G}}$, isolando-o na equação \eqref{eq:G__}:
 \begin{equation}
 \bar{G} = \frac{\bar{\bar{G}}}{1-\bar{\bar{G}}}
 \end{equation}
@@ -3845,6 +3849,8 @@ Sendo:
 \bar{F} = F(\bar{G}+1) - \bar{G} G^{-1} 
 \end{equation}
 
+Repare que, para que $\bar{K}$ e $\bar{F}$ não sejam funções de transferência impróprias, $\bar{G}$, e consequentemente $\bar{\bar{G}}$, devem ter grau relativo maior ou igual ao grau relativo de $G$. Além disso, caso $\bar{G}$ possua zeros em $z=-1$, $\bar{G}$, e consequentemente $\bar{\bar{G}}$, devem ter a mesma quantidade de zeros neste mesmo lugar, para garantir a estabilidade do sinal de controle. \\
+
 Sendo assim, a equação \eqref{eq:DinTF} pode ser reescrita como:
 \begin{equation} \label{eq:DinTF2}
 Y(z) = \bar{G}_{mf}(z) R(z) + \bar{G}_d (z) D(z) + \bar{G}_n (z) N(z)
@@ -3872,10 +3878,7 @@ Pois:
 \lim_{z \rightarrow 1} \bar{\bar{G}}(z) = 1
 \end{equation}
 
-Além disso, é de se esperar que quanto mais rápida a dinâmica de $\bar{\bar{G}}$, maior seja a rejeição a distúrbio, tendo em vista a equação \eqref{eq:G__}. Porém, analisando \eqref{eq:Gn_}, é possível concluir que quanto menor a frequência de corte de $\bar{\bar{G}}$, ou seja, quanto mais lenta a dinâmica de $\bar{\bar{G}}$, maior será a rejeição a ruído. Sendo assim, pode-se se dizer que a escolha da frequência de corte de $\bar{\bar{G}}$ é um compromisso entre rejeição a distúrbio e rejeição à ruído.
-
-
-
+Além disso, é de se esperar que quanto mais rápida a dinâmica de $\bar{\bar{G}}$, maior seja a rejeição a distúrbio, tendo em vista a equação \eqref{eq:G__}. Porém, analisando \eqref{eq:Gn_}, é possível concluir que quanto menor a frequência de corte de $\bar{\bar{G}}$, ou seja, quanto mais lenta a dinâmica de $\bar{\bar{G}}$, menos degradada será a rejeição a ruído. Sendo assim, pode-se se dizer que a escolha da frequência de corte de $\bar{\bar{G}}$ é um compromisso entre rejeição a distúrbio e rejeição à ruído.
 
 
 \subsection{Simulações}\label{S05-4}
