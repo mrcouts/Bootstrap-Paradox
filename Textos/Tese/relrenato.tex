@@ -3754,58 +3754,118 @@ $$ Diagrama $$
 
 Sendo assim, a dinâmica do sistema pode ser representada pela seguinte equação:
 \begin{equation} \label{eq:DinTF}
-Y(z) = G_{mf}(z) R(z) + G_d (z) \big( D(z) - U''(z) \big) + G_n (z) N(z)
+Y(z) = G_{mf}(z) R(z) + G_d (z) \big( D(z) - \bar{U}(z) \big) + G_n (z) N(z)
 \end{equation}
 
 Sendo:
-\begin{equation}
-G_{mf} = \frac{ F K G H }{1 + K G H}
+\begin{equation} \label{eq:Gmf}
+G_{mf} = \frac{  G (F + K) }{1 + K G }
 \end{equation}
-\begin{equation}
-G_{d} = \frac{ G }{1 + K G H}
+\begin{equation} \label{eq:Gd}
+G_{d} = \frac{ G }{1 + K G }
 \end{equation}
-\begin{equation}
-G_{n} = -\frac{K G H}{1 + K G H}
+\begin{equation} \label{eq:Gn}
+G_{n} = -\frac{K G }{1 + K G }
 \end{equation}
 
-Será projetada uma lei de controle para o sinal $U''(z)$ de modo que ele siga o sinal de distúrbio e, consequentemente, minimize a influência do disturbio na saíde do sistema.
+Será projetada uma lei de controle para o sinal $\bar{U}(z)$ de modo que ele siga o sinal de distúrbio e, consequentemente, minimize a influência do disturbio na saída do sistema.
 
 Supondo $N(z) = 0$ em \eqref{eq:DinTF}, temos:
-\begin{equation} \label{eq:dinElUllD}
-E' + U''  =  D 
+\begin{equation} \label{eq:dinE_U_D}
+\bar{E} + \bar{U}  =  D 
 \end{equation}
 
 Sendo:
-\begin{equation}
-E' = G_d ^{-1} (Y - G_{mf} R  )
+\begin{equation} \label{eq:E_}
+\bar{E} = G_d ^{-1} (Y - G_{mf} R  )
 \end{equation}
 
-Tendo em vista que $E'$ depende apenas dos sinais de saíde e referência, define-se uma lende de controle para $U''$ em função de $E'$:
-\begin{equation}
-U'' = \bar{G} E'
+Tendo em vista que $\bar{E}$ depende apenas dos sinais de saída e referência, define-se uma lende de controle para $\bar{U}$ em função de $\bar{E}$:
+\begin{equation} \label{eq:leiU_}
+\bar{U} = \bar{G} \bar{E}
 \end{equation}
 
 Consequentemente:
-\begin{equation} \label{eq:leiUllinv}
-E' = \bar{G}^{-1} U''
+\begin{equation} \label{eq:leiU_inv}
+\bar{E} = \bar{G}^{-1} \bar{U}
 \end{equation}
 
-Substituindo \eqref{eq:leiUllinv} em \eqref{eq:dinElUllD}, tem-se:
+Substituindo \eqref{eq:leiU_inv} em \eqref{eq:dinE_U_D}, tem-se:
 \begin{equation}
-(1+ \bar{G}^{-1})U'' = D
+(1+ \bar{G}^{-1})\bar{U} = D
 \end{equation}
 
 Portanto:
-\begin{equation} \label{eq:Gbarbar}
-\frac{U''}{D} = \frac{\bar{G}}{1+\bar{G}} = \bar{\bar{G}}
+\begin{equation} \label{eq:G__}
+\frac{\bar{U}}{D} = \frac{\bar{G}}{1+\bar{G}} = \bar{\bar{G}}
 \end{equation}
 
-Sendo assim, definindo-se $\bar{\bar{G}}$ como a função de transferência de um filtro passa-baixa com ganho unitário, $\bar{G}$ pode ser obtido em função de $\bar{\bar{G}}$, isolando-o na equação \eqref{eq:Gbarbar}:
+Sendo assim, definindo-se $\bar{\bar{G}}$ como a função de transferência de um filtro passa-baixa com ganho unitário, $\bar{G}$ pode ser obtido em função de $\bar{\bar{G}}$, isolando-o na equação \eqref{eq:G__}:
 \begin{equation}
 \bar{G} = \frac{\bar{\bar{G}}}{1-\bar{\bar{G}}}
 \end{equation}
 
+Sabendo-se que o erro de controle é dado por:
+\begin{equation} \label{eq:ERRO}
+E = R - Y
+\end{equation}
 
+A partir da equações \eqref{eq:leiU_}, \eqref{eq:E_} e \eqref{eq:ERRO}, é possível escrever a lei de controle de $\bar{U}$ em função do erro de controle e do sinal de referência:
+\begin{equation}
+\bar{U} = \bar{G} G_d^{-1} \big( (1-G_{mf})R - E \big)
+\end{equation}
+
+Utilizando as definições \eqref{eq:Gd} e \eqref{eq:Gmf} das funções de transferência $G_d$  e $G_{mf}$ , temos:
+\begin{equation}
+\bar{U} = [\bar{G}(G^{-1} - F)] R - [\bar{G}(K + G^{-1})] E
+\end{equation}
+
+Sabendo-se que a lei de controle da entrada $U$ é dada por:
+\begin{equation} \label{eq:leiU}
+U = K E + F R - \bar{U}
+\end{equation}
+
+Podemos reescrever \eqref{eq:leiU} como:
+\begin{equation}
+U = \bar{K} E + \bar{F} R
+\end{equation}
+
+Sendo:
+\begin{equation}
+\bar{K} = K(\bar{G}+1) + \bar{G} G^{-1} 
+\end{equation}
+\begin{equation}
+\bar{F} = F(\bar{G}+1) - \bar{G} G^{-1} 
+\end{equation}
+
+Sendo assim, a equação \eqref{eq:DinTF} pode ser reescrita como:
+\begin{equation} \label{eq:DinTF2}
+Y(z) = \bar{G}_{mf}(z) R(z) + \bar{G}_d (z) D(z) + \bar{G}_n (z) N(z)
+\end{equation}
+
+Sendo:
+\begin{equation}
+\bar{G}_{mf} = \frac{  G (\bar{F} + \bar{K}) }{1 + \bar{K} G } = \frac{G( \bar{G} + 1 )(K+F)}{( \bar{G} + 1 )(1+GK)} = G_{mf}
+\end{equation}
+\begin{equation}
+\bar{G}_{d} = \frac{  G  }{1 + \bar{K} G } = \frac{G}{( \bar{G} + 1 )(1+GK)} = \frac{G_d}{\bar{G} + 1}
+\end{equation}
+\begin{equation}
+\bar{G}_{n} = -\frac{  G \bar{K}  }{1 + \bar{K} G } = -\frac{( \bar{G} + 1 )GK+\bar{G}}{( \bar{G} + 1 )(1+GK)} = \Bigg( 1 +\frac{\bar{\bar{G}}}{GK} \Bigg) G_n
+\end{equation}
+
+Repare que a função de transferência da saída em função da referência se mantém a mesma com a adição do observador de distúrbios, ou seja, o observador de distúrbios não afeta a contribuição do sinal de referência na dinâmica do sistema.
+
+Repare também que a adição do observador de distúrbios diminui consideravelmente o ganho DC da função de transferência da saída em função dos distúrbios, pois o ganho DC de $\bar{G}$ é infinito:
+\begin{equation}
+\lim_{z \rightarrow 1} \bar{G}(z) = \lim_{z \rightarrow 1} \frac{\bar{\bar{G}}(z)}{1-\bar{\bar{G}}(z)} = \infty
+\end{equation}
+Pois:
+\begin{equation}
+\lim_{z \rightarrow 1} \bar{\bar{G}}(z) = 1
+\end{equation}
+
+Além disso, é de se esperar que quanto mais rápida a dinâmica de $\bar{\bar{G}}$, maior seja a rejeição a distúrbio, tendo em vista a equação \eqref{eq:G__}.
 
 
 
