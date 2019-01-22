@@ -3746,9 +3746,16 @@ Esta lei de adaptação pode ser explicada da seguinte maneira: $\underline{k}_i$ 
 %Sendo $\delta_i$ e $\sigma_i$ as i-\'esimas componentes de $\mdelta$ e $\msigma$, repectivamente, e $\Delta_{i,j}$ o elemento da i-\'esima linha e j-\'esima coluna de $\mDelta$.
 
 
-\subsubsection{Controle no Domínio da Frequência com Observador de Disturbios}\label{S05-04-04}
+\subsubsection{Controle Clássico com Observador de Disturbios}\label{S05-04-04}
 
-Seja um sistema de controle SISO dado pelo seguinte diagrama de blocos:
+Como foi visto anteriormente, a técnica de Linearização por Realimentação idealmente lineariza o sistema de forma exata e desacopla o sistema através da realimentação de termos não lineares da dinâmica do sistema. Sendo assim, a equação \eqref{eq:ModeloLin} pode ser interpretada como um sistema linear desacoplado com uma entrada de controle $\mup'$ e uma entrada de distúrbio $\mdelta$. Desta maneira, uma alternativa bastante direta, simples e eficaz para controlar o sistema linearizado é a utilização de técnicas de Controle Clássico.
+
+As técnicas de Controle Clássico já são mais do que consagradas na literatura para sistema lineares SISO, e apresentam a possibilidade de projeto do controlador em tempo discreto. Porém, tendo em vista o sinal de distúrbio proveniente dos erros de modelagem, os quais podem ser relativamente grandes devido à complexidade do sistema e a erros paramétricos, o controlador projetado deve apresentar um bom nível de rejeição a distúrbio.
+
+Nesta subseção é apresentada uma técnica desenvolvida para desacoplar o projeto de Controle Clássico em duas etapas, o projeto de um controlador levando em conta apenas as características desejadas da dinâmica do sistema em malha fechada, e o projeto de um observador de distúbios, de modo a aumentar a rejeição à disturbio do sistema. \\
+
+
+Seja um sistema de controle SISO discreto dado pelo seguinte diagrama de blocos:
 
 $$ Diagrama $$
 
@@ -3759,13 +3766,13 @@ Y(z) = G_{mf}(z) R(z) + G_d (z) \big( D(z) - \bar{U}(z) \big) + G_n (z) N(z)
 
 Sendo:
 \begin{equation} \label{eq:Gmf}
-G_{mf} = \frac{  G (F + K) }{1 + K G }
+G_{mf} = \frac{  G (F + K) }{1 + G K }
 \end{equation}
 \begin{equation} \label{eq:Gd}
-G_{d} = \frac{ G }{1 + K G }
+G_{d} = \frac{ G }{1 + G K }
 \end{equation}
 \begin{equation} \label{eq:Gn}
-G_{n} = -\frac{K G }{1 + K G }
+G_{n} = -\frac{G K}{1 + G K }
 \end{equation}
 
 Será projetada uma lei de controle para o sinal $\bar{U}(z)$ de modo que ele siga o sinal de distúrbio e, consequentemente, minimize a influência do disturbio na saída do sistema.
@@ -3845,13 +3852,13 @@ Y(z) = \bar{G}_{mf}(z) R(z) + \bar{G}_d (z) D(z) + \bar{G}_n (z) N(z)
 
 Sendo:
 \begin{equation}
-\bar{G}_{mf} = \frac{  G (\bar{F} + \bar{K}) }{1 + \bar{K} G } = \frac{G( \bar{G} + 1 )(K+F)}{( \bar{G} + 1 )(1+GK)} = G_{mf}
+\bar{G}_{mf} = \frac{  G (\bar{F} + \bar{K}) }{1 + G\bar{K} } = \frac{G( \bar{G} + 1 )(F+K)}{( \bar{G} + 1 )(1+GK)} = G_{mf}
 \end{equation}
 \begin{equation}
-\bar{G}_{d} = \frac{  G  }{1 + \bar{K} G } = \frac{G}{( \bar{G} + 1 )(1+GK)} = \frac{G_d}{\bar{G} + 1}
+\bar{G}_{d} = \frac{  G  }{1 + G\bar{K} } = \frac{G}{( \bar{G} + 1 )(1+GK)} = \frac{G_d}{\bar{G} + 1}
 \end{equation}
-\begin{equation}
-\bar{G}_{n} = -\frac{  G \bar{K}  }{1 + \bar{K} G } = -\frac{( \bar{G} + 1 )GK+\bar{G}}{( \bar{G} + 1 )(1+GK)} = \Bigg( 1 +\frac{\bar{\bar{G}}}{GK} \Bigg) G_n
+\begin{equation} \label{eq:Gn_}
+\bar{G}_{n} = -\frac{  G \bar{K}  }{1 + G\bar{K} } = -\frac{( \bar{G} + 1 )GK+\bar{G}}{( \bar{G} + 1 )(1+GK)} = \Bigg( 1 +\frac{\bar{\bar{G}}}{GK} \Bigg) G_n
 \end{equation}
 
 Repare que a função de transferência da saída em função da referência se mantém a mesma com a adição do observador de distúrbios, ou seja, o observador de distúrbios não afeta a contribuição do sinal de referência na dinâmica do sistema.
@@ -3865,7 +3872,7 @@ Pois:
 \lim_{z \rightarrow 1} \bar{\bar{G}}(z) = 1
 \end{equation}
 
-Além disso, é de se esperar que quanto mais rápida a dinâmica de $\bar{\bar{G}}$, maior seja a rejeição a distúrbio, tendo em vista a equação \eqref{eq:G__}.
+Além disso, é de se esperar que quanto mais rápida a dinâmica de $\bar{\bar{G}}$, maior seja a rejeição a distúrbio, tendo em vista a equação \eqref{eq:G__}. Porém, analisando \eqref{eq:Gn_}, é possível concluir que quanto menor a frequência de corte de $\bar{\bar{G}}$, ou seja, quanto mais lenta a dinâmica de $\bar{\bar{G}}$, maior será a rejeição a ruído. Sendo assim, pode-se se dizer que a escolha da frequência de corte de $\bar{\bar{G}}$ é um compromisso entre rejeição a distúrbio e rejeição à ruído.
 
 
 
