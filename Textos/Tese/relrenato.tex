@@ -3745,6 +3745,7 @@ Esta lei de adaptação pode ser explicada da seguinte maneira: $\underline{k}_i$ 
 
 %Sendo $\delta_i$ e $\sigma_i$ as i-\'esimas componentes de $\mdelta$ e $\msigma$, repectivamente, e $\Delta_{i,j}$ o elemento da i-\'esima linha e j-\'esima coluna de $\mDelta$.
 
+
 \subsubsection{Controle Clássico com Observador de Distúrbios}\label{S05-04-04}
 
 Como foi visto anteriormente, a técnica de Linearização por Realimentação idealmente lineariza o sistema de forma exata e desacopla o sistema através da realimentação de termos não lineares da dinâmica do sistema. Sendo assim, a equação \eqref{eq:ModeloLin} pode ser interpretada como o modelo de um sistema linear desacoplado com uma entrada de controle $\mup'$ e uma entrada de distúrbio $\mdelta$. Desta maneira, uma alternativa bastante direta, simples e eficaz para controlar o sistema linearizado é a utilização de técnicas de Controle Clássico.
@@ -3754,7 +3755,7 @@ As técnicas de Controle Clássico já são mais do que consagradas na literatura pa
 Nesta subseção é apresentada uma técnica desenvolvida para desacoplar o projeto de Controle Clássico em duas etapas, o projeto de um controlador levando em conta apenas as características desejadas da dinâmica do sistema em malha fechada, e o projeto de um observador de distúbios, de modo a aumentar a rejeição à disturbio do sistema. \\
 
 
-Seja um sistema de controle SISO discreto cuja planta não possui zeros com $|z| \geq 1$, com a excessão de possíveis zeros em $z=-1$,  dado pelo seguinte diagrama de blocos:
+Seja um sistema de controle SISO discreto cuja planta não possui zeros em ou muito próximos de $z=1$,  dado pelo seguinte diagrama de blocos:
 
 \begin{figure}[H]
 	\centering
@@ -3849,7 +3850,7 @@ Sendo:
 \bar{F} = F(\bar{G}+1) - \bar{G} G^{-1} 
 \end{equation}
 
-Repare que, para que $\bar{K}$ e $\bar{F}$ não sejam funções de transferência impróprias, $\bar{G}$, e consequentemente $\bar{\bar{G}}$, devem ter grau relativo maior ou igual ao grau relativo de $G$. Além disso, caso $\bar{G}$ possua zeros em $z=-1$, $\bar{G}$, e consequentemente $\bar{\bar{G}}$, devem ter a mesma quantidade de zeros neste mesmo lugar, para garantir a estabilidade do sinal de controle. \\
+Repare que, para que $\bar{K}$ e $\bar{F}$ não sejam funções de transferência impróprias, $\bar{G}$, e consequentemente $\bar{\bar{G}}$, devem ter grau relativo maior ou igual ao grau relativo de $G$. Além disso, caso $G$ possua zeros na fronteira ou fora do círculo unitário, $\bar{G}$, e consequentemente $\bar{\bar{G}}$, devem possuir estes mesmos zeros, para garantir a estabilidade do sinal de controle. \\
 
 Sendo assim, a equação \eqref{eq:DinTF} pode ser reescrita como:
 \begin{equation} \label{eq:DinTF2}
