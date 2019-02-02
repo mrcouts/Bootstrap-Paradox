@@ -2363,7 +2363,7 @@ Sendo:
  \mJ_{\omega_r \,i}^\msT \big( \mI_{r\,i} \underaccent{\sim}{\dot{\momega}}_{r\,i} + \momega^\star_{r\,i} \wedge (\mI_{r\,i} \momega^\star_{r\,i}) \big)
 \end{empheq}
 \begin{empheq}[box=\myyellowbox]{equation} \label{eq:gSerial_rot}
-\mg(\mq)^* = \mg(\mq)
+\mg^*(\mq) = \mg(\mq)
 \end{empheq}
 
 Segue abaixo, a dedução.
@@ -2708,21 +2708,20 @@ m_i (\mJ_{v_i} \ddot{\mq} + \underaccent{\sim}{\ma}_i   )  \\
 \end{equation}
 
 Sendo assim, obtemos o modelo dinâmico mostrado anteriormente:
-\begin{equation} \tag{\ref{eq:ModeloMecSerial}}
-\mM(\mq) \ddot{\mq} + \mnu(\mq,\dot{\mq}) + \mg(\mq) = \mu
+\begin{equation} \tag{\ref{eq:ModeloMecSerial_rot}}
+\mM^*(\mq) \ddot{\mq} + \mnu^*(\mq,\dot{\mq}) + \mg^*(\mq) = \mu^*
 \end{equation}
 
 Sendo:
-\begin{equation} \tag{\ref{eq:MSerial}}
-\mM(\mq) = \sum_{i=1}^\nu
-m_i \mJ_{v\,i}^\msT \mJ_{v\,i} + \mJ_{\omega\,i}^\msT \mI_i \mJ_{\omega\,i}
+\begin{equation} \tag{\ref{eq:MSerial_rot}}
+\mM^*(\mq) = \mM(\mq) + \sum_{i=1}^\nu \mJ_{\omega_r \,i}^\msT \mI_{r\,i} \mJ_{\omega_r \,i}
 \end{equation}
-\begin{equation} \tag{\ref{eq:vSerial}}
-\mnu(\mq, \dot{\mq}) = \sum_{i=1}^\nu
- m_i \mJ_{v\,i}^\msT \underaccent{\sim}{\ma}_i + \mJ_{\omega\,i}^\msT \big( \mI_i \underaccent{\sim}{\dot{\momega}}_i + \momega^\star_i \wedge (\mI_i  \momega^\star_i) \big)
+\begin{equation} \tag{\ref{eq:vSerial_rot}}
+\mnu^*(\mq, \dot{\mq}) = \mnu(\mq, \dot{\mq}) + \sum_{i=1}^\nu
+ \mJ_{\omega_r \,i}^\msT \big( \mI_{r\,i} \underaccent{\sim}{\dot{\momega}}_{r\,i} + \momega^\star_{r\,i} \wedge (\mI_{r\,i} \momega^\star_{r\,i}) \big)
 \end{equation}
-\begin{equation} \tag{\ref{eq:gSerial}}
-\mg(\mq) = - \sum_{i=1}^\nu m_i \mJ_{v\,i}^\msT \mgamma
+\begin{equation} \tag{\ref{eq:gSerial_rot}}
+\mg^*(\mq) = \mg(\mq)
 \end{equation}
 
 \subsection{Algoritmo para modelagem de mecanismos paralelos}\label{S05-4}
