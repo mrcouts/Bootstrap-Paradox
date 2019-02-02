@@ -1537,22 +1537,21 @@ Sendo:
 
 \subsubsection{Dinâmica}\label{S05-02-02}
 
-O modelo dinâmico de $\ssB$ é obtido utilizando um procedimento de acoplamento de subsistemas baseado no Método Orsino  \cite{23orsino}, e é dado por:
-\begin{empheq}[box=\mybluebox]{equation} \label{eq:ModeloMecSerial}
-\mM(\mq) \ddot{\mq} + \mnu(\mq,\dot{\mq}) + \mg(\mq) = \mu
+O modelo dinâmico de $\ssB'$ é obtido utilizando um procedimento de acoplamento de subsistemas baseado no Método Orsino  \cite{23orsino}, e é dado por:
+\begin{empheq}[box=\mybluebox]{equation} \label{eq:ModeloMecSerial_rot}
+\mM^*(\mq) \ddot{\mq} + \mnu^*(\mq,\dot{\mq}) + \mg^*(\mq) = \mu^*
 \end{empheq}
 
 Sendo:
-\begin{empheq}[box=\myyellowbox]{equation} \label{eq:MSerial}
-\mM(\mq) = \sum_{i=1}^\nu
-m_i \mJ_{v\,i}^\msT \mJ_{v\,i} + \mJ_{\omega\,i}^\msT \mI_i \mJ_{\omega\,i}
+\begin{empheq}[box=\myyellowbox]{equation} \label{eq:MSerial_rot}
+\mM^*(\mq) = \mM(\mq) + \sum_{i=1}^\nu \mJ_{\omega_r \,i}^\msT \mI_{r\,i} \mJ_{\omega_r \,i}
 \end{empheq}
-\begin{empheq}[box=\myyellowbox]{equation} \label{eq:vSerial}
-\mnu(\mq, \dot{\mq}) = \sum_{i=1}^\nu
- m_i \mJ_{v\,i}^\msT \underaccent{\sim}{\ma}_i + \mJ_{\omega\,i}^\msT \big( \mI_i \underaccent{\sim}{\dot{\momega}}_i + \momega^\star_i \wedge (\mI_i  \momega^\star_i) \big)
+\begin{empheq}[box=\myyellowbox]{equation} \label{eq:vSerial_rot}
+\mnu^*(\mq, \dot{\mq}) = \mnu(\mq, \dot{\mq}) + \sum_{i=1}^\nu
+ \mJ_{\omega_r \,i}^\msT \big( \mI_{r\,i} \underaccent{\sim}{\dot{\momega}}_{r\,i} + \momega^\star_{r\,i} \wedge (\mI_{r\,i} \momega^\star_{r\,i}) \big)
 \end{empheq}
-\begin{empheq}[box=\myyellowbox]{equation} \label{eq:gSerial}
-\mg(\mq) = - \sum_{i=1}^\nu m_i \mJ_{v\,i}^\msT \mgamma
+\begin{empheq}[box=\myyellowbox]{equation} \label{eq:gSerial_rot}
+\mg(\mq)^* = \mg(\mq)
 \end{empheq}
 
 Segue abaixo, a dedução.
@@ -1560,108 +1559,52 @@ Segue abaixo, a dedução.
 
 \subsubsubsection{Modelo dos subsistemas} \label{S05-02-02-01}
 
-O modelo dinâmico de cada ligamento pode ser obtido por Newton-Euler, pois são considerados como corpos rígidos livres no espaço sujeitos apenas à força peso. Sendo assim, através do Teorema do Movimento do Baricentro e do Teorema do Momento Angular, obtemos os esforços não-reativos (ativos e inerciais) aplicados em cada ligamento:
+O modelo dinâmico de cada rotor pode ser obtido por Newton-Euler, pois são considerados como corpos rígidos com inércia puramente rotativa livres no espaço. Os efeitos da massas do rotor, do estator e do redutor podem facilmente incluídos no modelo simplesmente atualizando os valores dos parâmetros de inércia dos ligamentos. Sendo assim, através do Teorema do Momento Angular, obtemos os esforços não-reativos (ativos e inerciais) aplicados em cada rotor:
 
-\begin{equation} \label{eq:Newton-Euler}
-\begin{cases}
-\vf_i = -m_i \va^{\lllN}_{\ttg_i} + m_i \vg  \\
-\vtau_i= -\vI_{\ttg_i} \cdot \dot{\vomega}^{\lllN}_{\lllB_i} - \vomega^{\lllN}_{\lllB_i} \wedge (\vI_{\ttg_i} \cdot \vomega^{\lllN}_{\lllB_i}) 
-\end{cases} \, i = 1,...,\nu
+\begin{equation} \label{eq:Newton-Euler_rot}
+\vtau_{r \,i}= -\vI_{\ttr_i} \cdot \dot{\vomega}^{\lllN}_{\lllR_i} - \vomega^{\lllN}_{\lllR_i} \wedge (\vI_{\ttr_i} \cdot \vomega^{\lllN}_{\lllR_i}) ,\; i = 1,...,\nu
 \end{equation}
 
 Aplicando as equações vetoriais no sistema $\ttN$, temos:
-\begin{equation} \label{eq:Newton-EulerMat}
-\begin{bmatrix}
-\vct{\vf_i}_\ttN \\
-\vct{\vtau_i}_\ttN
-\end{bmatrix}
+\begin{equation} \label{eq:Newton-EulerMat_rot}
+\vct{\vtau_{r \,i}}_\ttN
 =
 -
-\begin{bmatrix}
-m_i \mone & \mzr \\
-\mzr      & \vct{\vI_{\ttg_i}}_{\ttN \rl \ttN}
-\end{bmatrix}
+\vct{\vI_{\ttr_i}}_{\ttN \rl \ttN}
 \cdot
-\begin{bmatrix}
-\vct{\va^{\lllN}_{\ttg_i}}_{\ttN}  \\
-\vct{\dot{\vomega}^{\lllN}_{\lllB_i}}_{\ttN}
-\end{bmatrix}
+\vct{\dot{\vomega}^{\lllN}_{\lllR_i}}_{\ttN}
 -
-\begin{bmatrix}
-\mzr \\
-\vct{\vomega^{\lllN}_{\lllB_i}}_{\ttN} \wedge (\vct{\vI_{\ttg_i}}_{\ttN \rl \ttN} \cdot \vct{\vomega^{\lllN}_{\lllB_i}}_{\ttN})
-\end{bmatrix}
--
-\begin{bmatrix}
--m_i \vct{\vg}_{\ttN} \\
-\mzr
-\end{bmatrix}
+\vct{\vomega^{\lllN}_{\lllR_i}}_{\ttN} \wedge (\vct{\vI_{\ttr_i}}_{\ttN \rl \ttN} \cdot \vct{\vomega^{\lllN}_{\lllR_i}}_{\ttN})
 \end{equation}
 
 Ou seja:
-\begin{empheq}[box=\lightbluebox]{equation} \label{eq:f_i}
-\overline{\mf}_i  = -\begin{Bmatrix}
-\begin{bmatrix}
-m_i \mone & \mzr \\
-\mzr      & \mI_i
-\end{bmatrix}
+\begin{empheq}[box=\lightbluebox]{equation} \label{eq:f_i_rot}
+\overline{\mf}_{r \,i}  =
+-\mI_{r \,i}
 \cdot
-\begin{bmatrix}
-\ma^\star_i  \\
-\dot{\momega}^\star_i
-\end{bmatrix}
-+
-\begin{bmatrix}
-\mzr \\
-\momega^\star_i \wedge (\mI_i \cdot \momega^\star_i)
-\end{bmatrix}
-+
-\begin{bmatrix}
--m_i \mgamma \\
-\mzr
-\end{bmatrix}
-\end{Bmatrix}
+\dot{\momega}^\star_{r \,i}
+-
+\momega^\star_{r \,i} \wedge (\mI_{r \,i} \cdot \momega^\star_{r \,i})
 \end{empheq}
 
 Como subsistemas estão desacoplados, não há forças reativas, portanto o modelo dinâmico de cada subsistema pode ser escrito como:
-\begin{empheq}[box=\mybluebox]{equation}\label{eq:fi_plus_fri}
-\overline{\mf}_i = \mzr
+\begin{empheq}[box=\mybluebox]{equation}\label{eq:fi_plus_fri_rot}
+\overline{\mf}_{r \,i} = \mzr
 \end{empheq}
 
 Além disso, definindo as quasi-velocidades:
-%\begin{equation} \label{eq:M_i}
-%\mM_i (\mq) = \begin{bmatrix}
-%m_i \mone & \mzr \\
-%\mzr      & \mI_i(\mq)
-%\end{bmatrix}
-%\end{equation}
-%\begin{equation} \label{eq:v_i}
-%\mnu_i (\mq, \mp_i) = \begin{bmatrix}
-%\mzr \\
-%\momega^\star_i \wedge (\mI_i(\mq) \cdot \momega^\star_i)
-%\end{bmatrix}
-%\end{equation}
-%\begin{equation} \label{eq:g_i}
-%\mg_i = \begin{bmatrix}
-%-m_i \mgamma \\
-%\mzr
-%\end{bmatrix}
-%\end{equation}
-\begin{empheq}[box=\lightbluebox]{equation} \label{eq:p_i}
-\mp_i = \begin{bmatrix}
-\mv^\star_i  \\
-\momega^\star_i
-\end{bmatrix}
+\begin{empheq}[box=\lightbluebox]{equation} \label{eq:p_i_rot}
+\mp_{r \,i} = \momega^\star_{r \,i}
 \end{empheq}
 
 E as quasi-coordenadas:
-\begin{empheq}[box=\lightbluebox]{equation} \label{eq:pi_i}
-\dd\mpi_i = \mp_i \dd t
+\begin{empheq}[box=\lightbluebox]{equation} \label{eq:pi_i_rot}
+\dd\mpi_{r \,i} = \mp_{r \,i} \dd t
 \end{empheq}
 
 Temos que o trabalho virtual realizado por cada subsistema é dado por:
 \begin{empheq}[box=\mybluebox]{equation} \label{eq:dWiSeriais}
-\delta W_i =  \delta \mpi_i^\msT \cdot \overline{\mf}_i
+\delta W_{r \,i} =  \delta \mpi_{r \,i}^\msT \cdot \overline{\mf}_{r \,i}
 \end{empheq}
 
 %Seja $\mf_i$ o sistema de forças ativas  (considerando os esforços de inércia) aplicado no i-ésimo subsistema, na direção das quasi-velocidades $\mp_i$. $\mf_i$ pode ser obtido pela seguinte expressão:
@@ -2253,7 +2196,536 @@ m_i \mJ_{v\,i}^\msT \mJ_{v\,i} + \mJ_{\omega\,i}^\msT \mI_i \mJ_{\omega\,i}
 %\dot{\mj}_{\omega\,i,j} = \momega^\star_{j-1} \wedge \mj_{\omega\,i,j}
 %\end{empheq}
 
-\subsection{Algoritmo para modelagem de mecanismos paralelos}\label{S05-3}
+\subsection{Inclusão da Dinâmica dos Atuadores em Mecanismos Seriais}\label{S05-3}
+
+Esta subseção tem o intuito de complementar algoritmo de modelagem de mecanismos seriais já apresentado através inclusão da dinâmica dos atuadores. \\ 
+
+Seja $\ssB'$ um sistema mecânico serial de $\nu$ graus de liberdade. Primeiramente, fazemos as seguintes definições:
+
+\begin{itemize}
+\item $\llR_i, \,i=1,...,\nu$: rotor do i-ésimo atuador.
+\item $\ttR_i, \,i=1,...,\nu$: sistema de coordenadas solid\'ario a $\llR_i$.
+\item $J_{r \,i}$: momento de inércia do rotor $\llR_i$.
+\item $\vI_{\ttr_i}$: tensor de in\'ercia do rotor $\llR_i$ em relação a seu centro de massa.
+\item $\mI_{r \,i}$: tensor de in\'ercia $\vI_{\ttr_i}$ escrito na base $\ttN$, ou seja, $\vct{\vI_{\ttr_i}}_{\ttN \rl \ttN}$.
+\item $\vtau_{r \,i}$: Vetor torque não-reativo resultante aplicado em $\llR_i$.
+\item $\overline{\mf}_{r \,i}$: Matriz-coluna de forças não-reativas generalizadas aplicadas no subsistema $\llB_{r \,i}$. É dada por $\overline{\mf}_{r \,i} = \vct{\vtau_i}_\ttN $.
+\end{itemize}
+
+\subsubsection{Cinemática}\label{S05-02-01}
+
+\subsubsubsection{Cinemática de velocidades angulares}\label{S05-02-01-03}
+
+A velocidade angular do i-ésimo rotor pode ser obtida aplicando o príncipio da composição de movimentos para velocidades angulares deduzido anteriormente \eqref{eq:composicao_w}:
+
+\begin{equation} \label{eq:ComposicaoWRotor}
+\vomega_{\lllR_i}^{\lllN} = \vomega_{\lllB_{i-1}}^{\lllN} + \vomega_{\lllR_i}^{\lllB_{i-1}} ,\; i=1,...,\nu
+\end{equation}
+
+Sendo que a velocidade angular relativa de cada rotor é dada por:
+\begin{equation}
+\vomega_{\lllR_i}^{\lllB_{i-1}} = r_i \dot{q}_{i} \vk_{i-1} ,\; i=1,...,\nu
+\end{equation}
+
+Aplicando a equação \eqref{eq:ComposicaoWRotor} no sistema $\ttN$, temos:
+\begin{empheq}[box=\myyellowbox]{equation} \label{eq:ComposicaoWRotor2}
+\momega^\star_{r \,i} = \momega^\star_{i-1} + r_i \dot{q}_{i} \vct{\vk_{i-1}}_{\ttN} ,\; i=1,...,\nu
+\end{empheq}
+
+Sendo:
+\begin{empheq}[box=\lightbluebox]{equation}
+\momega^\star_{r \,i} = \vct{\vomega_{\lllR_i}^{\lllN} }_{\ttN} 
+\end{empheq}
+
+Utilizando a equação \eqref{eq:omega_star_i}, pode-se reescrever \eqref{eq:ComposicaoWRotor2} da seguinte maneira:
+\begin{empheq}[box=\lightbluebox]{equation}
+\momega^\star_{r \,i} (\mq, \dot{\mq}) = \mJ_{\omega_r \,i}(\mq) \cdot \dot{\mq}
+\end{empheq}
+
+Sendo:
+\begin{empheq}[box=\myyellowbox]{equation} \label{eq:jwij_rot}
+\mj_{\omega_r \,i,j}(\mq) = \begin{cases}
+r_i \vct{\vk_{i-1}}_{\ttN}, \;  j = i \\
+\mj_{\omega\,i,j}(\mq), \;\;\;  j\neq i \\
+\end{cases} \, i,j=1,...,\nu
+\end{empheq}
+
+\begin{empheq}[box=\myyellowbox]{equation} \label{eq:Jwi_rot}
+\mJ_{\omega_r \,i}(\mq) = \begin{bmatrix}
+\mj_{\omega_r \,i,1}(\mq) & ... & \mj_{\omega_r \,i,\nu}(\mq)
+\end{bmatrix}
+\end{empheq}
+
+\subsubsubsection{Cinemática de acelerações angulares}\label{S05-02-01-05}
+
+A aceleração angular do i-ésimo rotor pode ser obtida aplicando o príncipio da composição de movimentos para acelerações deduzido anteriormente \eqref{eq:composicao_dw}:
+
+\begin{equation} \label{eq:ComposicaodWRotor}
+\dot{\vomega}_{\lllR_i}^{\lllN} = \dot{\vomega}_{\lllB_{i-1}}^{\lllN} + \dot{\vomega}_{\lllR_i}^{\lllB_{i-1}} +  \vomega_{\lllB_{i-1}}^{\lllN} \wedge \vomega_{\lllR_i}^{\lllB_{i-1}}
+\end{equation}
+
+Sendo que a aceleração angular de relativa de cada rotor é dada por:
+\begin{equation}
+\dot{\vomega}_{\lllR_i}^{\lllB_{i-1}} = r_i \ddot{q}_{i} \vk_{i-1} ,\; i=1,...,\nu
+\end{equation}
+
+Aplicando a equação \eqref{eq:ComposicaodWRotor} no sistema $\ttN$, temos:
+\begin{empheq}[box=\myyellowbox]{equation} \label{eq:ComposicaodWRotor2}
+\dot{\momega}^\star_{r \,i} = \dot{\momega}^\star_{i-1} + r_i \ddot{q}_{i} \vct{\vk_{i-1}}_{\ttN} + \momega^\star_{i-1} \wedge r_i \dot{q}_{i} \vct{\vk_{i-1}}_{\ttN} ,\; i=1,...,\nu
+\end{empheq}
+
+Sendo:
+\begin{empheq}[box=\lightbluebox]{equation}
+\dot{\momega}^\star_{r \,i} = \vct{\dot{\vomega}_{\lllR_i}^{\lllN} }_{\ttN} 
+\end{empheq}
+
+Utilizando a equação \eqref{eq:domega_star_i}, pode-se reescrever \eqref{eq:ComposicaodWRotor2} da seguinte maneira:
+\begin{empheq}[box=\lightbluebox]{equation}
+\dot{\momega}^\star_{r\,i} (\mq,\dot{\mq},\ddot{\mq}) = \mJ_{\omega_r \,i} (\mq) \cdot \ddot{\mq} + \underaccent{\sim}{\dot{\momega}}_{r\,i}  (\mq,\dot{\mq})
+\end{empheq}
+
+Sendo:
+\begin{empheq}[box=\myyellowbox]{equation}
+\underaccent{\sim}{\dot{\momega}}_{r\,i}  (\mq,\dot{\mq}) = \underaccent{\sim}{\dot{\momega}}_{i-1}  (\mq,\dot{\mq}) + \momega^\star_{i-1} (\mq,\dot{\mq}) \wedge  \dot{q}_{i} \mj_{\omega_r \, i,i}(\mq)  ,\; i=1,...,\nu
+\end{empheq}
+
+
+\subsubsection{Dinâmica}\label{S05-02-02}
+
+O modelo dinâmico de $\ssB$ é obtido utilizando um procedimento de acoplamento de subsistemas baseado no Método Orsino  \cite{23orsino}, e é dado por:
+\begin{empheq}[box=\mybluebox]{equation} \label{eq:ModeloMecSerial}
+\mM(\mq) \ddot{\mq} + \mnu(\mq,\dot{\mq}) + \mg(\mq) = \mu
+\end{empheq}
+
+Sendo:
+\begin{empheq}[box=\myyellowbox]{equation} \label{eq:MSerial}
+\mM(\mq) = \sum_{i=1}^\nu
+m_i \mJ_{v\,i}^\msT \mJ_{v\,i} + \mJ_{\omega\,i}^\msT \mI_i \mJ_{\omega\,i}
+\end{empheq}
+\begin{empheq}[box=\myyellowbox]{equation} \label{eq:vSerial}
+\mnu(\mq, \dot{\mq}) = \sum_{i=1}^\nu
+ m_i \mJ_{v\,i}^\msT \underaccent{\sim}{\ma}_i + \mJ_{\omega\,i}^\msT \big( \mI_i \underaccent{\sim}{\dot{\momega}}_i + \momega^\star_i \wedge (\mI_i  \momega^\star_i) \big)
+\end{empheq}
+\begin{empheq}[box=\myyellowbox]{equation} \label{eq:gSerial}
+\mg(\mq) = - \sum_{i=1}^\nu m_i \mJ_{v\,i}^\msT \mgamma
+\end{empheq}
+
+Segue abaixo, a dedução.
+%A idéia é obter o modelo dinâmico do sistema acoplado através dos modelos dos subsistemas desacoplados e dos vínculos cinemáticos entre eles.
+
+\subsubsubsection{Modelo dos subsistemas} \label{S05-02-02-01}
+
+O modelo dinâmico de cada ligamento pode ser obtido por Newton-Euler, pois são considerados como corpos rígidos livres no espaço sujeitos apenas à força peso. Sendo assim, através do Teorema do Movimento do Baricentro e do Teorema do Momento Angular, obtemos os esforços não-reativos (ativos e inerciais) aplicados em cada ligamento:
+
+\begin{equation} \label{eq:Newton-Euler}
+\begin{cases}
+\vf_i = -m_i \va^{\lllN}_{\ttg_i} + m_i \vg  \\
+\vtau_i= -\vI_{\ttg_i} \cdot \dot{\vomega}^{\lllN}_{\lllB_i} - \vomega^{\lllN}_{\lllB_i} \wedge (\vI_{\ttg_i} \cdot \vomega^{\lllN}_{\lllB_i}) 
+\end{cases} \, i = 1,...,\nu
+\end{equation}
+
+Aplicando as equações vetoriais no sistema $\ttN$, temos:
+\begin{equation} \label{eq:Newton-EulerMat}
+\begin{bmatrix}
+\vct{\vf_i}_\ttN \\
+\vct{\vtau_i}_\ttN
+\end{bmatrix}
+=
+-
+\begin{bmatrix}
+m_i \mone & \mzr \\
+\mzr      & \vct{\vI_{\ttg_i}}_{\ttN \rl \ttN}
+\end{bmatrix}
+\cdot
+\begin{bmatrix}
+\vct{\va^{\lllN}_{\ttg_i}}_{\ttN}  \\
+\vct{\dot{\vomega}^{\lllN}_{\lllB_i}}_{\ttN}
+\end{bmatrix}
+-
+\begin{bmatrix}
+\mzr \\
+\vct{\vomega^{\lllN}_{\lllB_i}}_{\ttN} \wedge (\vct{\vI_{\ttg_i}}_{\ttN \rl \ttN} \cdot \vct{\vomega^{\lllN}_{\lllB_i}}_{\ttN})
+\end{bmatrix}
+-
+\begin{bmatrix}
+-m_i \vct{\vg}_{\ttN} \\
+\mzr
+\end{bmatrix}
+\end{equation}
+
+Ou seja:
+\begin{empheq}[box=\lightbluebox]{equation} \label{eq:f_i}
+\overline{\mf}_i  = -\begin{Bmatrix}
+\begin{bmatrix}
+m_i \mone & \mzr \\
+\mzr      & \mI_i
+\end{bmatrix}
+\cdot
+\begin{bmatrix}
+\ma^\star_i  \\
+\dot{\momega}^\star_i
+\end{bmatrix}
++
+\begin{bmatrix}
+\mzr \\
+\momega^\star_i \wedge (\mI_i \cdot \momega^\star_i)
+\end{bmatrix}
++
+\begin{bmatrix}
+-m_i \mgamma \\
+\mzr
+\end{bmatrix}
+\end{Bmatrix}
+\end{empheq}
+
+Como subsistemas estão desacoplados, não há forças reativas, portanto o modelo dinâmico de cada subsistema pode ser escrito como:
+\begin{empheq}[box=\mybluebox]{equation}\label{eq:fi_plus_fri}
+\overline{\mf}_i = \mzr
+\end{empheq}
+
+Além disso, definindo as quasi-velocidades:
+%\begin{equation} \label{eq:M_i}
+%\mM_i (\mq) = \begin{bmatrix}
+%m_i \mone & \mzr \\
+%\mzr      & \mI_i(\mq)
+%\end{bmatrix}
+%\end{equation}
+%\begin{equation} \label{eq:v_i}
+%\mnu_i (\mq, \mp_i) = \begin{bmatrix}
+%\mzr \\
+%\momega^\star_i \wedge (\mI_i(\mq) \cdot \momega^\star_i)
+%\end{bmatrix}
+%\end{equation}
+%\begin{equation} \label{eq:g_i}
+%\mg_i = \begin{bmatrix}
+%-m_i \mgamma \\
+%\mzr
+%\end{bmatrix}
+%\end{equation}
+\begin{empheq}[box=\lightbluebox]{equation} \label{eq:p_i}
+\mp_i = \begin{bmatrix}
+\mv^\star_i  \\
+\momega^\star_i
+\end{bmatrix}
+\end{empheq}
+
+E as quasi-coordenadas:
+\begin{empheq}[box=\lightbluebox]{equation} \label{eq:pi_i}
+\dd\mpi_i = \mp_i \dd t
+\end{empheq}
+
+Temos que o trabalho virtual realizado por cada subsistema é dado por:
+\begin{empheq}[box=\mybluebox]{equation} \label{eq:dWiSeriais}
+\delta W_i =  \delta \mpi_i^\msT \cdot \overline{\mf}_i
+\end{empheq}
+
+%Seja $\mf_i$ o sistema de forças ativas  (considerando os esforços de inércia) aplicado no i-ésimo subsistema, na direção das quasi-velocidades $\mp_i$. $\mf_i$ pode ser obtido pela seguinte expressão:
+
+%\eqref{eq:Newton-EulerMat2} pode ser reescrita como:
+%\begin{equation}
+%\mM_i(\mq) \cdot \dot{\mp}_i + \mnu_i(\mq, \mp_i) + \mg_i = \mf_{r\,i}
+%\end{equation}
+
+%Sendo assim, os sistemas de forças (considerando esforços ativos e de inércia) aplicados em cada subsistema são dados por:
+
+%No caso de os subsistemas estarem desacoplados, temos que $\mf_{r\,i} = \mzr$.
+
+\subsubsubsection{Sistemas de forças ativas generalizadas} \label{S05-02-02-02}
+
+Considere também um subsistema constituido pelos esforços que os atuadores aplicam nas juntas do mecanismo. Primeiramente, definimos a matriz-coluna de quasi-velocidades relativas a esse subsistema:
+%Muitas vezes é conveniente definir um conjunto de quasi-velocidades adicionais $\mp_0$, as quais só fazem sentido para o sistema acoplado, e sistemas de forças ativas generalizadas adicionais $\mf_0$ aplicados na direção das quasi-velocidades adicionais. \\
+
+%Neste algoritmo de modelagem, serão considerados como quasi-velocidades adicionais as derivadas temporais das coordenadas das juntas, ou seja:
+
+
+\begin{empheq}[box=\lightbluebox]{equation} \label{eq:mp_0}
+\mp\ssh = \dot{\mq}
+\end{empheq}
+
+Seja $\mu$ a matriz-coluna de esforços generalizados aplicadas pelos atuadores na direção de $\delta\mq$. Sendo assim, o trabalho virtual realizado por este subsistema é dado por:
+
+\begin{empheq}[box=\mybluebox]{equation} \label{eq:dWsshSeriais}
+\delta W\ssh = \delta \mq^\msT \cdot \mu 
+\end{empheq}
+
+\subsubsubsection{Vínculos cinemáticos entre subsistemas} \label{S05-02-02-03}
+
+Através das equações \eqref{eq:v_star_i}, \eqref{eq:omega_star_i} e \eqref{eq:mp_0}, é possível relacionar as quasi-velocidades de cada subsistema com as quasi-velocidades $\mp\ssh$ da seguinte maneira:
+\begin{equation}
+\underline{\mp_i}(\mq, \mp\ssh) = \mJ_i (\mq) \cdot \mp\ssh, \, i=1,...,\nu
+\end{equation}
+
+Sendo:
+\begin{empheq}[box=\lightbluebox]{equation} \label{eq:J_i}
+\mJ_i(\mq) = \begin{bmatrix}
+\mJ_{v\,i}(\mq) \\
+\mJ_{\omega\,i}(\mq)
+\end{bmatrix}, \, i=1,...,\nu
+\end{empheq}
+
+Seja $\mp\cir$ a matriz coluna que contém as quasi-velocidades de todos os ligamentos:
+\begin{empheq}[box=\lightbluebox]{equation}
+\mp\cir = \begin{bmatrix}
+\mp_1^\msT & ... & \mp_{\nu}^\msT
+\end{bmatrix}^\msT
+\end{empheq}
+
+$\mp\cir$ pode ser expresso em função apenas das quasi-velocidades $\mp\ssh$ da seguinte forma:
+\begin{equation} \label{eq:p_red_em_func_de_p0}
+\underline{\mp\cir}(\mq,\mp\ssh) = \mJ(\mq) \mp\ssh
+\end{equation}
+
+Sendo:
+\begin{empheq}[box=\lightbluebox]{equation} \label{eq:J}
+\mJ(\mq) = \begin{bmatrix}
+\mJ_1(\mq)^\msT & ... & \mJ_{\nu}(\mq)^\msT
+\end{bmatrix}^\msT
+\end{empheq}
+
+Sendo assim, a partir de \eqref{eq:p_red_em_func_de_p0}, os vínculos de quasi-velocidades entre subsistemas podem ser expressos como:
+\begin{empheq}[box=\mybluebox]{equation} \label{eq:VinculosV_seriais}
+\overline{\mp}(\mq,\mp) =  \mA(\mq) \cdot \mp = \mzr
+\end{empheq}
+
+Sendo:
+\begin{empheq}[box=\lightbluebox]{equation}
+\mA(\mq)  = \begin{bmatrix}
+\mJ(\mq) & -\mone
+\end{bmatrix}
+\end{empheq}
+
+\begin{empheq}[box=\lightbluebox]{equation}
+\mp = \begin{bmatrix}
+{\mp\ssh}^\msT & {\mp\cir}^\msT
+\end{bmatrix}^\msT
+\end{empheq}
+%\frac{\partial \overline{\mp}}{\partial \mp}
+
+\subsubsubsection{Acoplamento de subsistemas} \label{S05-02-02-04}
+
+Seja $\mf$ a matriz-coluna contendo todos os sistemas de forças não-reativas generalizadas:
+\begin{empheq}[box=\lightbluebox]{equation} \label{eq:fSeriais}
+\mf = \begin{bmatrix}
+{\mu}^\msT & {\mf\cir}^\msT
+\end{bmatrix}^\msT
+\end{empheq}
+
+Sendo:
+\begin{empheq}[box=\lightbluebox]{equation} \label{eq:fcir}
+\mf\cir = \begin{bmatrix}
+\mf_1^\msT & ... & \mf_\nu^\msT  
+\end{bmatrix}^\msT
+\end{empheq}
+
+Seja $\mpi$ um conjunto de de quasi-coordenadas tal que:
+\begin{equation} \label{eq:quasi-coord}
+\dd \mpi = \mp \, \dd t
+\end{equation}
+
+Ou seja:
+\begin{equation}
+\dd\mpi = \begin{bmatrix}
+\dd{\mpi\ssh}^\msT & \dd{\mpi\cir}^\msT
+\end{bmatrix}^\msT
+\end{equation}
+
+Sendo:
+\begin{equation}
+\dd\mpi\ssh = \dd\mq
+\end{equation}
+
+\begin{equation}
+\dd{\mpi\cir} = \begin{bmatrix}
+\dd\mpi_1^\msT & ... & \dd\mpi_{\nu}^\msT
+\end{bmatrix}^\msT
+\end{equation}
+
+Pelo princípio de d'Alembert, temos que
+\begin{equation} \label{eq:PdASeriais}
+\delta W\ssh + \sum_{i=1}^\nu \delta W_i  = 0
+\end{equation}
+
+Através de \eqref{eq:PdASeriais}, \eqref{eq:dWsshSeriais}, \eqref{eq:dWiSeriais}, \eqref{eq:fSeriais} e \eqref{eq:quasi-coord}, temos que:
+\begin{equation} \label{eq:PdASeriais2}
+\delta \mpi^\msT \cdot \mf = 0
+\end{equation}
+
+
+Além disso, a partir da definição de $\mpi$ \eqref{eq:quasi-coord} e dos vínculos de quasi-velocidades \eqref{eq:VinculosV_seriais}, temos que as variações das quasi-coordenadas $\mpi$ devem respeitar a seguinte relação:
+\begin{equation} \label{eq:vinculosdpiSeriais}
+ \mA(\mq) \cdot \delta \mpi = \mzr
+\end{equation}
+
+
+Subdividindo $\delta\mpi$ em $\delta\mpi\ssh $ e $\delta\mpi\cir$ e considerando $\delta\mpi\ssh$ como variáveis livres, temos:
+\begin{equation}
+\begin{bmatrix}
+\mJ(\mq) & -\mone
+\end{bmatrix}
+\cdot
+\begin{bmatrix}
+\delta\mpi\ssh \\
+\delta\mpi\cir
+\end{bmatrix} = \mzr
+\end{equation}
+\begin{equation}
+\Rightarrow \delta\mpi\cir = \mJ(\mq) \delta\mpi\ssh
+\end{equation}
+\begin{equation} \label{eq:dpidpisshSeriais}
+\therefore
+\delta\mpi = \mC(\mq) \cdot \delta\mpi\ssh
+\end{equation}
+
+
+Sendo:
+\begin{empheq}[box=\lightbluebox]{equation} \label{eq:MatrizC_seriais}
+\mC(\mq) =
+\begin{bmatrix}
+\mone \\
+\mJ(\mq)
+\end{bmatrix}
+\end{empheq}
+
+Repare 	que trocando $\delta\mpi$ por $\mp$ em \eqref{eq:vinculosdpiSeriais}, obtemos os vínculos de quasi-velocidades do sistema \eqref{eq:VinculosV_seriais}. Sendo assim, à partir das expressões \eqref{eq:pre_C} e \eqref{eq:MatrizC_seriais}, temos que $\mC$ respeita a seguinte relação:
+\begin{empheq}[box=\lightbluebox]{equation} \label{eq:relacao_C}
+\mp = \mC(\mq) \cdot \mp\ssh
+\end{empheq}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Repare que essa equação pode ser utilizada para determinar  $\mu$ e $\mlambda$ supondo conhecidas as forças de inércia $\mf\cir$, pois:
+%\begin{equation}
+%\begin{bmatrix}
+%\mu \\
+%\mf\cir
+%\end{bmatrix} + \mA^\msT \mlambda = \mzr
+%\end{equation}
+%\begin{equation}
+%\Rightarrow
+%\begin{bmatrix}
+%\mone \\
+%\mzr
+%\end{bmatrix} \mu +
+%\begin{bmatrix}
+%\mzr \\
+%\mf\cir
+%\end{bmatrix}
+%+ \mA^\msT \mlambda = \mzr
+%\end{equation}
+%\begin{equation}
+%\therefore
+%\begin{bmatrix}
+%\begin{bmatrix}
+%\mone \\
+%\mzr
+%\end{bmatrix} & \mA^\msT
+%\end{bmatrix}
+%\begin{bmatrix}
+%\mu \\
+%\mlambda
+%\end{bmatrix}
+%=
+%\begin{bmatrix}
+%\mzr \\
+%-\mf\cir
+%\end{bmatrix}
+%\end{equation}
+
+%Esta expressão pode ser utilizada para realizar a simulação dinâmica inversa, visto que, se conhecido o movimento do sistema, podem ser obtidos os esforços dos atuadores. Porém, como em geral não há o interesse de se obter as forças reativas aplicadas ao sistema, a presença dos multiplicadores torna a resolução do sistema desnecessariamente custosa. Sendo assim, vamos eliminar os multiplicadores da equação dinâmica, o que possibilitará realizar uma simulação dinâmica inversa muito menos custosa e também possibilitará realizar a simulação dinâmica direta.
+
+
+Sendo assim, substituindo \eqref{eq:dpidpisshSeriais} em \eqref{eq:PdASeriais2}, temos:
+\begin{equation}
+\delta {\mpi\ssh}^\msT \cdot \mC^\msT \mf = \mzr
+\end{equation}
+
+Tendo em vista que as quasi-coordenadas $\mpi\ssh$ são independentes, as variações $\delta\mpi\ssh$ são arbitrárias. Sendo assim, as equações dinâmicas do sistema são dadas por: 
+
+\begin{empheq}[box=\mybluebox]{equation} \label{eq:eq_dinamicas_3}
+\mC^\msT \mf = \mzr
+\end{empheq}
+
+Substituindo \eqref{eq:MatrizC_seriais} e \eqref{eq:fSeriais}  em \eqref{eq:eq_dinamicas_3}, temos:
+\begin{equation} \label{eq:u_Jtfcir}
+\mu + \mJ^\msT \mf\cir = \mzr
+\end{equation}
+
+
+Substituindo \eqref{eq:J}, \eqref{eq:J_i}, \eqref{eq:f_i} e \eqref{eq:fcir} em \eqref{eq:u_Jtfcir}, temos:
+\begin{equation} \label{eq:ModeloDinâmicoSerialSomatorio2}
+\sum_{i=1}^\nu
+\begin{bmatrix}
+\mJ_{v\,i} \\
+\mJ_{\omega\,i}
+\end{bmatrix}^\msT
+\begin{Bmatrix}
+\begin{bmatrix}
+m_i \mone & \mzr \\
+\mzr      & \mI_i
+\end{bmatrix}
+\cdot
+\begin{bmatrix}
+\ma^\star_i  \\
+\dot{\momega}^\star_i
+\end{bmatrix}
++
+\begin{bmatrix}
+\mzr \\
+\momega^\star_i \wedge (\mI_i \cdot \momega^\star_i)
+\end{bmatrix}
++
+\begin{bmatrix}
+-m_i \mgamma \\
+\mzr
+\end{bmatrix}
+\end{Bmatrix}
+=\mu
+\end{equation}
+
+Substituindo \eqref{eq:a_star_i} e  \eqref{eq:domega_star_i} em \eqref{eq:ModeloDinâmicoSerialSomatorio2}, temos:
+\begin{equation}
+\sum_{i=1}^\nu
+\begin{bmatrix}
+\mJ_{v\,i} \\
+\mJ_{\omega\,i}
+\end{bmatrix}^\msT
+\begin{Bmatrix}
+\begin{bmatrix}
+m_i (\mJ_{v_i} \ddot{\mq} + \underaccent{\sim}{\ma}_i   )  \\
+ \mI_i (\mJ_{\omega_i} \ddot{\mq} + \underaccent{\sim}{\dot{\momega}}_i )
+\end{bmatrix}
++
+\begin{bmatrix}
+\mzr \\
+\momega^\star_i \wedge (\mI_i \cdot \momega^\star_i)
+\end{bmatrix}
++
+\begin{bmatrix}
+-m_i \mgamma \\
+\mzr
+\end{bmatrix}
+\end{Bmatrix}
+=\mu
+\end{equation}
+
+Sendo assim, obtemos o modelo dinâmico mostrado anteriormente:
+\begin{equation} \tag{\ref{eq:ModeloMecSerial}}
+\mM(\mq) \ddot{\mq} + \mnu(\mq,\dot{\mq}) + \mg(\mq) = \mu
+\end{equation}
+
+Sendo:
+\begin{equation} \tag{\ref{eq:MSerial}}
+\mM(\mq) = \sum_{i=1}^\nu
+m_i \mJ_{v\,i}^\msT \mJ_{v\,i} + \mJ_{\omega\,i}^\msT \mI_i \mJ_{\omega\,i}
+\end{equation}
+\begin{equation} \tag{\ref{eq:vSerial}}
+\mnu(\mq, \dot{\mq}) = \sum_{i=1}^\nu
+ m_i \mJ_{v\,i}^\msT \underaccent{\sim}{\ma}_i + \mJ_{\omega\,i}^\msT \big( \mI_i \underaccent{\sim}{\dot{\momega}}_i + \momega^\star_i \wedge (\mI_i  \momega^\star_i) \big)
+\end{equation}
+\begin{equation} \tag{\ref{eq:gSerial}}
+\mg(\mq) = - \sum_{i=1}^\nu m_i \mJ_{v\,i}^\msT \mgamma
+\end{equation}
+
+\subsection{Algoritmo para modelagem de mecanismos paralelos}\label{S05-4}
 
 Esta subseção tem o intuito de apresentar um algoritmo genérico para a obtenção do modelo dinâmico de mecanismos paralelos cujo efetuador realiza apenas movimentos de translação. O algoritmo apresentado é implementável em linguagens de programação comumente usadas atualmente, como C++, Java e Python, sem necessitar de recursos de manipulação simbólica. \\
 Para a obtenção do modelo do mecanismo paralelos, são necessários apenas os modelos de mecanismos seriais deduzidos  utilizando o algoritmo apresentado anteriormente, do modelo do efetuador, e de 7 matrizes constantes que são utilizadas para descrever a arquitetura do mecanismo paralelo. \\ 
