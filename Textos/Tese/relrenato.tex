@@ -2273,7 +2273,12 @@ Seja $\ssB'$ um sistema mecânico serial de $\nu$ graus de liberdade. Primeiramen
 
 \subsubsubsection{Cinemática de velocidades angulares}\label{S05-03-01-01}
 
-A velocidade angular do i-ésimo rotor pode ser obtida aplicando o príncipio da composição de movimentos para velocidades angulares deduzido anteriormente \eqref{eq:composicao_w}:
+Devido aos redutores de velocidade e aos fusos de esferas, o deslocamento relativo $q_{r\,i}$ gerado pelo i-ésimo rotor é convertido em um deslocamento $q_i$ através da seguinte relação:
+\begin{empheq}[box=\lightbluebox]{equation} \label{eq:qr}
+\mq_r = \underline{r} \, \mq 
+\end{empheq} 
+
+Sendo assim, a velocidade angular do i-ésimo rotor pode ser obtida aplicando o príncipio da composição de movimentos para velocidades angulares deduzido anteriormente \eqref{eq:composicao_w}:
 
 \begin{equation} \label{eq:ComposicaoWRotor}
 \vomega_{\lllR_i}^{\lllN} = \vomega_{\lllB_{i-1}}^{\lllN} + \vomega_{\lllR_i}^{\lllB_{i-1}} ,\; i=1,...,\nu
@@ -2281,7 +2286,7 @@ A velocidade angular do i-ésimo rotor pode ser obtida aplicando o príncipio da c
 
 Sendo que a velocidade angular relativa de cada rotor é dada por:
 \begin{equation}
-\vomega_{\lllR_i}^{\lllB_{i-1}} = r_i \dot{q}_{i} \vk_{i-1} ,\; i=1,...,\nu
+\vomega_{\lllR_i}^{\lllB_{i-1}} = \dot{q}_{r\,i} \vk_{i-1} = r_i \dot{q}_{i} \vk_{i-1} ,\; i=1,...,\nu
 \end{equation}
 
 Aplicando a equação \eqref{eq:ComposicaoWRotor} no sistema $\ttN$, temos:
@@ -2295,7 +2300,7 @@ Sendo:
 \end{empheq}
 
 Utilizando a equação \eqref{eq:omega_star_i}, pode-se reescrever \eqref{eq:ComposicaoWRotor2} da seguinte maneira:
-\begin{empheq}[box=\lightbluebox]{equation}
+\begin{empheq}[box=\lightbluebox]{equation} \label{eq:VinculosWrot}
 \momega^\star_{r \,i} (\mq, \dot{\mq}) = \mJ_{\omega_r \,i}(\mq) \cdot \dot{\mq}
 \end{empheq}
 
@@ -2370,7 +2375,6 @@ Sendo:
 \end{empheq}
 
 Segue abaixo, a dedução.
-%A idéia é obter o modelo dinâmico do sistema acoplado através dos modelos dos subsistemas desacoplados e dos vínculos cinemáticos entre eles.
 
 \subsubsubsection{Modelo dos subsistemas rotores} \label{S05-03-02-01}
 
@@ -2432,17 +2436,31 @@ Além disso, o trabalho virtual realizado por este subsistema é dado por:
 
 \subsubsubsection{Sistemas de forças ativas generalizadas} \label{S05-03-02-03}
 
-Considere também um subsistema constituido pelos esforços que os atuadores aplicam nas juntas do mecanismo. Os torque gerados pelos atuadores são aplicados na direção dos deslocamentos virtuais relativos dos rotores, os quais são dados por:
-\begin{empheq}[box=\lightbluebox]{equation} \label{eq:qtau}
-\delta\mq_\tau = \underline{r} \, \delta \mq 
-\end{empheq}
-
-Além disso, os torques gerados pelos atuadores são proporcionais à corrente elétrica que flui pelas suas armaduras. Sendo assim, o trabalho virtual realizado por este subsistema é dado por:
+Considere também um subsistema constituido pelos esforços que os atuadores aplicam nas juntas do mecanismo. Os torques gerados pelos atuadores são proporcionais à corrente elétrica que flui pelas suas armaduras pelos atuadores e são aplicados na direção dos deslocamentos virtuais relativos dos rotores. Sendo assim, o trabalho virtual realizado por este subsistema é dado por:
 \begin{empheq}[box=\mybluebox]{equation}
-\delta W_\tau = \delta \mq^\msT \cdot \underline{k_t} \, \mi
+\delta W_\tau = \delta \mq_r^\msT \cdot \underline{k_t} \, \mi
 \end{empheq}
 
-\subsubsubsection{Acoplamento de subsistemas} \label{S05-03-02-04}
+\subsubsubsection{Vínculos entre subsistemas} \label{S05-03-02-04}
+
+Tendo em vista que o sistema mecânico $\ssB'$ tem $\nu$ graus de liberdade, e $\mq$ são um conjunto de $\nu$ coordenadas generalizadas independentes, podemos relacionar os deslocamentos virtuais $\delta \mq_r$ e $\delta \mpi_{r\,i}$, com $i=1,...,\nu$, com os deslocamentos virtuais $\delta \mq$, ou seja, obter os vínculos cinemáticos entre os subsistemas. \\
+
+Para relacionar $\delta \mq_r$ com $\delta \mq$ basta aplicar o operador variação em  \eqref{eq:qr}:
+\begin{equation} \label{eq:deltaqr_rot}
+\delta \mq_r = \underline{r} \, \delta \mq
+\end{equation}
+
+Para relacionar $\delta \mpi_{r\,i}$, aplica-se a relação \eqref{eq:VinculosWrot} em \eqref{eq:pi_i_rot}:
+\begin{equation}
+\dd \mpi_{r\,i} = \mJ_{\omega_r \,i} \, \dd \mq
+\end{equation}
+
+Portanto:
+\begin{equation} \label{eq:deltampi_rot}
+\delta \mpi_{r\,i} = \mJ_{\omega_r \,i} \, \delta \mq
+\end{equation}
+
+\subsubsubsection{Acoplamento de subsistemas} \label{S05-03-02-05}
 
 Tendo em vista que um precedimento mais detalhado para acoplamento de subsistemas já foi apresentado, nesta subseção ele será realizado de forma mais sucinta. \\ 
 
@@ -2456,7 +2474,7 @@ Ou seja:
 \delta\mq_\tau^\msT \cdot \underline{k_t} \, \mi + \delta\mq^\msT \cdot \overline{\mf}_s  + \sum_{i=1}^\nu \delta \mpi_{r \,i}^\msT \cdot \overline{\mf}_{r \,i} = 0
 \end{equation}
 
-Sabe-se que os deslocamentos virtuais $\delta\mq$, $\delta\mq_\tau$ e $\delta \mpi_{r \,i}$, com $i=1,...,\nu$, não são independentes entre si. Porém, é possível relacionar  $\delta\mq_\tau$ e $\delta \mpi_{r \,i}$ com os deslocamentos virtuais $\delta\mq$, os quais são independentes, através das equações \eqref{eq:qtau} e (??). Sendo assim:
+Sabe-se que os deslocamentos virtuais $\delta\mq$, $\delta\mq_\tau$ e $\delta \mpi_{r \,i}$, com $i=1,...,\nu$, não são independentes entre si. Porém, é possível relacionar  $\delta\mq_\tau$ e $\delta \mpi_{r \,i}$ com os deslocamentos virtuais $\delta\mq$  através das equações \eqref{eq:deltaqr_rot} e \eqref{eq:deltampi_rot}. Sendo assim:
 \begin{equation} \label{eq:PdaSeriais_rot3}
 (\underline{r}\delta\mq)^\msT \cdot \underline{k_t} \, \mi + \delta\mq^\msT \cdot \overline{\mf}_s  + \sum_{i=1}^\nu (\mJ_{\omega_r \,i} \, \delta\mq)^\msT \cdot \overline{\mf}_{r \,i} = 0
 \end{equation}
