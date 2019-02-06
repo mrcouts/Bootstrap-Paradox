@@ -2328,7 +2328,7 @@ A aceleração angular do i-ésimo rotor pode ser obtida aplicando o príncipio da c
 
 Sendo que a aceleração angular de relativa de cada rotor é dada por:
 \begin{equation}
-\dot{\vomega}_{\lllR_i}^{\lllB_{i-1}} = r_i \ddot{q}_{i} \vk_{i-1} ,\; i=1,...,\nu
+\dot{\vomega}_{\lllR_i}^{\lllB_{i-1}} = \ddot{q}_{r\,i} \vk_{i-1} = r_i \ddot{q}_{i} \vk_{i-1} ,\; i=1,...,\nu
 \end{equation}
 
 Aplicando a equação \eqref{eq:ComposicaodWRotor} no sistema $\ttN$, temos:
@@ -2342,17 +2342,20 @@ Sendo:
 \end{empheq}
 
 Utilizando a equação \eqref{eq:domega_star_i}, pode-se reescrever \eqref{eq:ComposicaodWRotor2} da seguinte maneira:
-\begin{empheq}[box=\lightbluebox]{equation}
+\begin{empheq}[box=\lightbluebox]{equation} \label{eq:dw_ri}
 \dot{\momega}^\star_{r\,i} (\mq,\dot{\mq},\ddot{\mq}) = \mJ_{\omega_r \,i} (\mq) \cdot \ddot{\mq} + \underaccent{\sim}{\dot{\momega}}_{r\,i}  (\mq,\dot{\mq})
 \end{empheq}
 
 Sendo:
 \begin{empheq}[box=\myyellowbox]{equation}
-\underaccent{\sim}{\dot{\momega}}_{r\,i}  (\mq,\dot{\mq}) = \underaccent{\sim}{\dot{\momega}}_{i-1}  (\mq,\dot{\mq}) + \momega^\star_{i-1} (\mq,\dot{\mq}) \wedge  \dot{q}_{i} \mj_{\omega_r \, i,i}(\mq)  ,\; i=1,...,\nu
+\underaccent{\sim}{\dot{\momega}}_{r\,i}  (\mq,\dot{\mq}) = \begin{cases}
+\mzr, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; i = 1 \\
+\underaccent{\sim}{\dot{\momega}}_{i-1}  (\mq,\dot{\mq}) + \momega^\star_{i-1} (\mq,\dot{\mq}) \wedge  \dot{q}_{i} \mj_{\omega_r \, i,i}(\mq), \, i > 1 
+\end{cases}  ,\; i=1,...,\nu
 \end{empheq}
 
 
-\subsubsection{Dinâmica}\label{S05-03-02}
+\subsubsection{Dinâmica Mecânica}\label{S05-03-02}
 
 O modelo dinâmico de $\ssB'$ é obtido utilizando um procedimento de acoplamento de subsistemas baseado no Método Orsino  \cite{23orsino}, e é dado por:
 \begin{empheq}[box=\mybluebox]{equation} \label{eq:ModeloMecSerial_rot}
@@ -2424,7 +2427,7 @@ Temos que o trabalho virtual realizado por cada subsistema é dado por:
 \subsubsubsection{Modelo do subsistema serial} \label{S05-03-02-02}
 
 O modelo do subsistema serial utilizado é o mesmo que foi deduzido anteriormente considerando $\mu = \mzr$. O efeito das forças ativas aplicadas pelos atuadores será contabilizado na próxima subseção. Sendo assim, os esforços generalizados não-reativos do subsistema serial são dados por:
-\begin{empheq}[box=\lightbluebox]{equation}
+\begin{empheq}[box=\lightbluebox]{equation} \label{eq:fs}
 \overline{\mf}_s = - \mM(\mq) \, \ddot{\mq} - \mnu(\mq,\dot{\mq}) - \mg(\mq)
 \end{empheq}
 
@@ -2485,16 +2488,16 @@ Ou seja:
 \end{equation}
 
 Tendo em vista que as coordenadas $\mq$ são independentes, as variações $\delta\mq$ são arbitrárias. Sendo assim, as equações dinâmicas do sistema são dadas por:
-\begin{equation}
+\begin{equation} \label{eq:Din_rot1}
 \underline{r} \underline{k_t} \, \mi + \overline{\mf}_s  + \sum_{i=1}^\nu \mJ_{\omega_r \,i}^\msT \, \overline{\mf}_{r \,i}  = \mzr
 \end{equation}
 
-Substituindo (??) em (??), temos:
+Substituindo \eqref{eq:f_i_rot} e \eqref{eq:fs} em  \eqref{eq:Din_rot1}, temos:
 \begin{equation} \label{eq:DynSeriais_rot}
 \underline{r} \underline{k_t} \, \mi - \mM \, \ddot{\mq} - \mnu - \mg  - \sum_{i=1}^\nu \mJ_{\omega_r \,i}^\msT \, ( \mI_{r\,i} \cdot \dot{\momega}_{r\,i}^\star + \momega_{r\,i}^\star \wedge (\mI_{r\,i} \cdot \momega_{r\,i}^\star)  )  = \mzr
 \end{equation}
 
-Substituindo (??) em (??):
+Substituindo \eqref{eq:dw_ri} em \eqref{eq:DynSeriais_rot}:
 \begin{equation} \label{eq:DynSeriais_rot2}
 \underline{r} \underline{k_t} \, \mi - \mM \, \ddot{\mq} - \mnu - \mg  - \sum_{i=1}^\nu \mJ_{\omega_r \,i}^\msT \, ( \mI_{r\,i} \cdot (\mJ_{\omega_r \,i}  \cdot \ddot{\mq} + \underaccent{\sim}{\dot{\momega}}_{r\,i}  ) + \momega_{r\,i}^\star \wedge (\mI_{r\,i} \cdot \momega_{r\,i}^\star)  )  = \mzr
 \end{equation}
@@ -2517,6 +2520,26 @@ Sendo:
 \end{equation}
 \begin{equation} \tag{\ref{eq:uSerial_rot}}
 \mu^* = \underline{r} \underline{k_t} \mi
+\end{equation}
+
+\subsubsection{Dinâmica Eletro-Mecânica}\label{S05-02-03}
+
+O modelo do sistema elétrico equivalente de um motor de corrente contínua é dado por uma fonte de tensão variável ligada em série a um indutor, um resistor, e uma força contra-eletromotriz diretamente proporcional à velocidade angular do rotor em relação ao estator, ou seja:
+\begin{equation}
+L \, \frac{\dd i}{\dd t} + R \, i + k_w \, \omega = u
+\end{equation}
+
+Tendo em vista que todas as juntas de um mecanismo paralelo são atuadas, a equação matricial da dinâmica elétrica do sistema é dada por:
+\begin{equation} \label{eq:DinEletrica_rot}
+\underline{L} \, \frac{\dd \mi}{\dd t} + \underline{R} \, \mi + \underline{k_w} \, \dot{\mq}_r = \mup
+\end{equation}
+
+Sendo assim, juntando as equações \eqref{eq:ModeloMecSerial_rot} e \eqref{eq:DinEletrica_rot}, obtemos a dinâmica  do sistema como um todo:
+\begin{equation}
+\begin{cases}
+\mM^*(\mq) \ddot{\mq} + \mnu^*(\mq,\dot{\mq}) + \mg^*(\mq) = \underline{r} \, \underline{k_t} \mi \\
+\underline{L} \, \frac{\dd \mi}{\dd t} + \underline{R} \, \mi + \underline{r} \, \underline{k_w} \, \dot{\mq} = \mup
+\end{cases}
 \end{equation}
 
 \subsection{Algoritmo para modelagem de mecanismos paralelos}\label{S05-4}
