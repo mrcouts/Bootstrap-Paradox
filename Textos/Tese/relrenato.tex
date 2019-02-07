@@ -1831,7 +1831,7 @@ Sendo:
 \end{bmatrix}
 \end{empheq}
 
-Repare 	que trocando $\delta\mpi$ por $\mp$ em \eqref{eq:vinculosdpiSeriais}, obtemos os vínculos de quasi-velocidades do sistema \eqref{eq:VinculosV_seriais}. Sendo assim, à partir das expressões \eqref{eq:pre_C} e \eqref{eq:MatrizC_seriais}, temos que $\mC$ respeita a seguinte relação:
+Repare	que trocando $\delta\mpi$ por $\mp$ em \eqref{eq:vinculosdpiSeriais}, obtemos os vínculos de quasi-velocidades do sistema \eqref{eq:VinculosV_seriais}. Sendo assim, à partir das expressões \eqref{eq:dpidpisshSeriais} e \eqref{eq:MatrizC_seriais}, temos que $\mC$ respeita a seguinte relação:
 \begin{empheq}[box=\lightbluebox]{equation} \label{eq:relacao_C}
 \mp = \mC(\mq) \cdot \mp\ssh
 \end{empheq}
@@ -2257,7 +2257,7 @@ m_i \mJ_{v\,i}^\msT \mJ_{v\,i} + \mJ_{\omega\,i}^\msT \mI_i \mJ_{\omega\,i}
 
 Esta subseção tem o intuito de complementar algoritmo de modelagem de mecanismos seriais já apresentado através inclusão da dinâmica dos atuadores. \\ 
 
-Seja $\ssB'$ um sistema mecânico serial de $\nu$ graus de liberdade. Primeiramente, fazemos as seguintes definições:
+Seja $\ssB'$ um sistema mecânico serial de $\nu$ graus de liberdade, constituido por um mecanismo serial $\ssB$ e $\nu$ atuadores, possivelmente acoplados a redutores de velocidades. Primeiramente, fazemos as seguintes definições:
 
 \begin{itemize}
 \item $\llR_i, \,i=1,...,\nu$: rotor do i-ésimo atuador.
@@ -2269,6 +2269,7 @@ Seja $\ssB'$ um sistema mecânico serial de $\nu$ graus de liberdade. Primeiramen
 \item $\overline{\mf}_{r \,i}, \,i=1,...,\nu$: Matriz-coluna de forças não-reativas generalizadas aplicadas no subsistema $\llB_{r \,i}, \,i=1,...,\nu$. É dada por $\overline{\mf}_{r \,i} = \vct{\vtau_i}_\ttN $.
 \item $q_{r\,i}, \,i=1,...,\nu$: Deslocamentos angular realizado pelo i-ésimo rotor.
 \item $\mq_r$: Matriz-coluna dos deslocamentos angulares realizados pelos rotores.
+\item $\mzeta(\dot{\mq}_r)$: matriz-coluna das forças de atrito generalizadas aplicadas nos rotores, em sentido oposto aos seus deslocamentos.
 \item $\mi$: Matriz-coluna de correntes elétricas que fluem pelas armaduras dos atuadores.
 \item $\mup$: Matriz-coluna de tensões elétricas aplicadas nos terminais dos atuadores.
 \item $r_i, \,i=1,...,\nu$: Relação de transmissão do i-ésimo redutor.
@@ -2383,7 +2384,7 @@ Sendo:
 \mM^*(\mq) = \mM(\mq) + \sum_{i=1}^\nu \mJ_{\omega_r \,i}^\msT \mI_{r\,i} \mJ_{\omega_r \,i}
 \end{empheq}
 \begin{empheq}[box=\myyellowbox]{equation} \label{eq:vSerial_rot}
-\mnu^*(\mq, \dot{\mq}) = \mnu(\mq, \dot{\mq}) + \sum_{i=1}^\nu
+\mnu^*(\mq, \dot{\mq}) = \mnu(\mq, \dot{\mq}) + \underline{r} \, \mzeta(\underline{r} \, \dot{\mq}) + \sum_{i=1}^\nu
  \mJ_{\omega_r \,i}^\msT \big( \mI_{r\,i} \underaccent{\sim}{\dot{\momega}}_{r\,i} + \momega^\star_{r\,i} \wedge (\mI_{r\,i} \momega^\star_{r\,i}) \big)
 \end{empheq}
 \begin{empheq}[box=\myyellowbox]{equation} \label{eq:gSerial_rot}
@@ -2455,12 +2456,12 @@ Além disso, o trabalho virtual realizado por este subsistema é dado por:
 
 \subsubsubsection{Sistemas de forças ativas generalizadas} \label{S05-03-02-03}
 
-Considere também um subsistema constituido pelos esforços que os atuadores aplicam em seus rotores. Os torques gerados pelos atuadores são proporcionais à corrente elétrica que flui pelas suas armaduras e são aplicados na direção dos deslocamentos virtuais relativos dos rotores. Sendo assim, o trabalho virtual realizado por este subsistema é dado por:
+Considere também um subsistema constituido pelos esforços que os atuadores aplicam em seus rotores. Os torques gerados pelos atuadores são proporcionais à corrente elétrica que flui pelas suas armaduras e são aplicados na direção dos deslocamentos virtuais relativos dos rotores. Além disso, é possível que hajam esforços de atrito devido ao atrito gerado nos mancais e nas engrenagens do redutor, aplicados na direção aposta dos deslocamentos virtuais relativos dos rotores. Sendo assim, o trabalho virtual realizado por este subsistema é dado por:
 \begin{empheq}[box=\mybluebox]{equation}
-\delta W_\tau = \delta \mq_r^\msT \cdot \underline{k_t}\mi
+\delta W_\tau = \delta \mq_r^\msT \cdot (\underline{k_t}\,\mi - \mzeta(\dot{\mq}_r) )
 \end{empheq}
 
-%Além disso, é possível que hajam esforços de atrito devido ao atrito gerado nos mancais e nas engrenagens do redutor, aplicados na direção aposta dos deslocamentos virtuais relativos dos rotores .
+%Além disso, é possível que hajam esforços de atrito devido ao atrito gerado nos mancais e nas engrenagens do redutor, aplicados na direção aposta dos deslocamentos virtuais relativos dos rotores.
 
 \subsubsubsection{Vínculos entre subsistemas} \label{S05-03-02-04}
 
@@ -2492,32 +2493,32 @@ Pelo princípio de d'Alembert, temos que
 
 Ou seja:
 \begin{equation} \label{eq:PdaSeriais_rot2}
-\delta\mq_\tau^\msT \cdot \underline{k_t} \, \mi + \delta\mq^\msT \cdot \overline{\mf}_s  + \sum_{i=1}^\nu \delta \mpi_{r \,i}^\msT \cdot \overline{\mf}_{r \,i} = 0
+\delta\mq_\tau^\msT \cdot  (\underline{k_t} \, \mi - \mzeta(\dot{\mq}_r) + \delta\mq^\msT \cdot \overline{\mf}_s  + \sum_{i=1}^\nu \delta \mpi_{r \,i}^\msT \cdot \overline{\mf}_{r \,i} = 0
 \end{equation}
 
 Sabe-se que os deslocamentos virtuais $\delta\mq$, $\delta\mq_\tau$ e $\delta \mpi_{r \,i}$, com $i=1,...,\nu$, não são independentes entre si. Porém, é possível relacionar  $\delta\mq_\tau$ e $\delta \mpi_{r \,i}$ com os deslocamentos virtuais $\delta\mq$  através das equações \eqref{eq:deltaqr_rot} e \eqref{eq:deltampi_rot}. Sendo assim:
 \begin{equation} \label{eq:PdaSeriais_rot3}
-(\underline{r}\delta\mq)^\msT \cdot \underline{k_t} \, \mi + \delta\mq^\msT \cdot \overline{\mf}_s  + \sum_{i=1}^\nu (\mJ_{\omega_r \,i} \, \delta\mq)^\msT \cdot \overline{\mf}_{r \,i} = 0
+(\underline{r}\,\delta\mq)^\msT \cdot (\underline{k_t} \, \mi - \mzeta(\underline{r} \, \dot{\mq})) + \delta\mq^\msT \cdot \overline{\mf}_s  + \sum_{i=1}^\nu (\mJ_{\omega_r \,i} \, \delta\mq)^\msT \cdot \overline{\mf}_{r \,i} = 0
 \end{equation}
 
 Ou seja:
 \begin{equation} \label{eq:PdaSeriais_rot4}
-\delta\mq^\msT \cdot \Bigg( \underline{r} \underline{k_t} \, \mi + \overline{\mf}_s  + \sum_{i=1}^\nu \mJ_{\omega_r \,i}^\msT \, \overline{\mf}_{r \,i} \Bigg) = 0
+\delta\mq^\msT \cdot \Bigg( \underline{r} \, \underline{k_t} \, \mi - \mzeta(\underline{r} \, \dot{\mq}) + \overline{\mf}_s  + \sum_{i=1}^\nu \mJ_{\omega_r \,i}^\msT \, \overline{\mf}_{r \,i} \Bigg) = 0
 \end{equation}
 
 Tendo em vista que as coordenadas $\mq$ são independentes, as variações $\delta\mq$ são arbitrárias. Sendo assim, as equações dinâmicas do sistema são dadas por:
 \begin{equation} \label{eq:Din_rot1}
-\underline{r} \underline{k_t} \, \mi + \overline{\mf}_s  + \sum_{i=1}^\nu \mJ_{\omega_r \,i}^\msT \, \overline{\mf}_{r \,i}  = \mzr
+\underline{r} \, \underline{k_t} \, \mi - \underline{r} \, \mzeta(\underline{r} \, \dot{\mq}) + \overline{\mf}_s  + \sum_{i=1}^\nu \mJ_{\omega_r \,i}^\msT \, \overline{\mf}_{r \,i}  = \mzr
 \end{equation}
 
 Substituindo \eqref{eq:f_i_rot} e \eqref{eq:fs} em  \eqref{eq:Din_rot1}, temos:
 \begin{equation} \label{eq:DynSeriais_rot}
-\underline{r} \underline{k_t} \, \mi - \mM \, \ddot{\mq} - \mnu - \mg  - \sum_{i=1}^\nu \mJ_{\omega_r \,i}^\msT \, ( \mI_{r\,i} \cdot \dot{\momega}_{r\,i}^\star + \momega_{r\,i}^\star \wedge (\mI_{r\,i} \cdot \momega_{r\,i}^\star)  )  = \mzr
+\underline{r} \, \underline{k_t} \, \mi - \underline{r} \, \mzeta(\underline{r} \, \dot{\mq}) - \mM \, \ddot{\mq} - \mnu - \mg  - \sum_{i=1}^\nu \mJ_{\omega_r \,i}^\msT \, ( \mI_{r\,i} \cdot \dot{\momega}_{r\,i}^\star + \momega_{r\,i}^\star \wedge (\mI_{r\,i} \cdot \momega_{r\,i}^\star)  )  = \mzr
 \end{equation}
 
 Substituindo \eqref{eq:dw_ri} em \eqref{eq:DynSeriais_rot}:
 \begin{equation} \label{eq:DynSeriais_rot2}
-\underline{r} \underline{k_t} \, \mi - \mM \, \ddot{\mq} - \mnu - \mg  - \sum_{i=1}^\nu \mJ_{\omega_r \,i}^\msT \, ( \mI_{r\,i} \cdot (\mJ_{\omega_r \,i}  \cdot \ddot{\mq} + \underaccent{\sim}{\dot{\momega}}_{r\,i}  ) + \momega_{r\,i}^\star \wedge (\mI_{r\,i} \cdot \momega_{r\,i}^\star)  )  = \mzr
+\underline{r} \underline{k_t} \, \mi - \underline{r} \, \mzeta(\underline{r} \, \dot{\mq})  - \mM \, \ddot{\mq} - \mnu - \mg  - \sum_{i=1}^\nu \mJ_{\omega_r \,i}^\msT \, ( \mI_{r\,i} \cdot (\mJ_{\omega_r \,i}  \cdot \ddot{\mq} + \underaccent{\sim}{\dot{\momega}}_{r\,i}  ) + \momega_{r\,i}^\star \wedge (\mI_{r\,i} \cdot \momega_{r\,i}^\star)  )  = \mzr
 \end{equation}
 
 Sendo assim, obtemos o modelo dinâmico mostrado anteriormente:
@@ -2530,7 +2531,7 @@ Sendo:
 \mM^*(\mq) = \mM(\mq) + \sum_{i=1}^\nu \mJ_{\omega_r \,i}^\msT \mI_{r\,i} \mJ_{\omega_r \,i}
 \end{equation}
 \begin{equation} \tag{\ref{eq:vSerial_rot}}
-\mnu^*(\mq, \dot{\mq}) = \mnu(\mq, \dot{\mq}) + \sum_{i=1}^\nu
+\mnu^*(\mq, \dot{\mq}) = \mnu(\mq, \dot{\mq}) + \underline{r} \, \mzeta(\underline{r} \, \dot{\mq}) + \sum_{i=1}^\nu
  \mJ_{\omega_r \,i}^\msT \big( \mI_{r\,i} \underaccent{\sim}{\dot{\momega}}_{r\,i} + \momega^\star_{r\,i} \wedge (\mI_{r\,i} \momega^\star_{r\,i}) \big)
 \end{equation}
 \begin{equation} \tag{\ref{eq:gSerial_rot}}
@@ -2603,7 +2604,7 @@ Sejam $\ssB_0$, $\ssB_1$, ..., $\ssB_{n} \,$ $n+1$ subsistemas mec\^anicos e $\s
 \item $\underaccent{\sim}{\ma}_{\ssB_i}(\mq_i, \mp_i), \,i=1, ..., n$: matriz-coluna $\underaccent{\sim}{\ma}$ do subsistema $\ssB_i$.
 \item $\underaccent{\sim}{\dot{\momega}}_{\ssB_i}(\mq_i, \mp_i), \,i=1, ..., n$: matriz-coluna $\underaccent{\sim}{\dot{\momega}}$ do subsistema $\ssB_i$.
 \item $\mM_{\ssB_i}(\mq_i), \,i=0, ..., n$: matriz de in\'ercia generalizada do subsistema $\ssB_i$.
-\item $\mnu_{\ssB_i}(\mq_i, \mp_i), \,i=0, ..., n$: matriz-coluna das forças de inércia girosc\'opica generalizadas do subsistema $\ssB_i$.
+\item $\mnu_{\ssB_i}(\mq_i, \mp_i), \,i=0, ..., n$: matriz-coluna das forças de inércia girosc\'opica e atrito generalizadas do subsistema $\ssB_i$.
 \item $\mg_{\ssB_i}(\mq_i), \,i=0, ..., n$: matriz-coluna dos esfor\c{c}os gravitacionais generalizados do subsistema $\ssB_i$.
 \item $\mu_{\ssB_i}, \,i=0, ..., n$: matriz-coluna dos esfor\c{c}os ativos externos generalizados aplicados ao subsistema $\ssB_i$.
 \end{itemize}
