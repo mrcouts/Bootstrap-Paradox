@@ -2262,11 +2262,27 @@ Seja $\ssB'$ um sistema mecânico serial de $\nu$ graus de liberdade. Primeiramen
 \begin{itemize}
 \item $\llR_i, \,i=1,...,\nu$: rotor do i-ésimo atuador.
 \item $\ttR_i, \,i=1,...,\nu$: sistema de coordenadas solid\'ario a $\llR_i$.
-\item $J_{r \,i}$: momento de inércia do rotor $\llR_i$.
-\item $\vI_{\ttr_i}$: tensor de in\'ercia do rotor $\llR_i$ em relação a seu centro de massa.
-\item $\mI_{r \,i}$: tensor de in\'ercia $\vI_{\ttr_i}$ escrito na base $\ttN$, ou seja, $\vct{\vI_{\ttr_i}}_{\ttN \rl \ttN}$.
-\item $\vtau_{r \,i}$: Vetor torque não-reativo resultante aplicado em $\llR_i$.
-\item $\overline{\mf}_{r \,i}$: Matriz-coluna de forças não-reativas generalizadas aplicadas no subsistema $\llB_{r \,i}$. É dada por $\overline{\mf}_{r \,i} = \vct{\vtau_i}_\ttN $.
+\item $J_{r \,i}, \,i=1,...,\nu$: momento de inércia do rotor $\llR_i$.
+\item $\vI_{\ttr_i}, \,i=1,...,\nu$: tensor de in\'ercia do rotor $\llR_i$ em relação a seu centro de massa.
+\item $\mI_{r \,i}, \,i=1,...,\nu$: tensor de in\'ercia $\vI_{\ttr_i}$ escrito na base $\ttN$, ou seja, $\vct{\vI_{\ttr_i}}_{\ttN \rl \ttN}$.
+\item $\vtau_{r \,i}, \,i=1,...,\nu$: Vetor torque não-reativo resultante aplicado em $\llR_i$.
+\item $\overline{\mf}_{r \,i}, \,i=1,...,\nu$: Matriz-coluna de forças não-reativas generalizadas aplicadas no subsistema $\llB_{r \,i}, \,i=1,...,\nu$. É dada por $\overline{\mf}_{r \,i} = \vct{\vtau_i}_\ttN $.
+\item $q_{r\,i}, \,i=1,...,\nu$: Deslocamentos angular realizado pelo i-ésimo rotor.
+\item $\mq_r$: Matriz-coluna dos deslocamentos angulares realizados pelos rotores.
+\item $\mi$: Matriz-coluna de correntes elétricas que fluem pelas armaduras dos atuadores.
+\item $\mup$: Matriz-coluna de tensões elétricas aplicadas nos terminais dos atuadores.
+\item $r_i, \,i=1,...,\nu$: Relação de transmissão do i-ésimo redutor.
+\item $\underline{r}$: Matriz diagonal de relações de transmissão dos redutores.
+\item $\underline{k_t}$: Matriz diagonal de constantes de torque dos atuadores.
+\item $\underline{k_w}$: Matriz diagonal de constantes de força contra-eletromotriz dos atuadores.
+\item $\underline{R}$: Matriz diagonal de resistências elétricas dos atuadores.
+\item $\underline{L}$: Matriz diagonal de indutâncias dos atuadores.
+\item $i$: Corrente elétrica.
+\item $u$: Tensão elétrica.
+\item $\omega$: Velocidade angular.
+\item $k_w$: Constante de força contra-eletromotriz.
+\item $R$: Resistência elétrica.
+\item $L$: Indutância.
 \end{itemize}
 
 \subsubsection{Cinemática}\label{S05-03-01}
@@ -2439,19 +2455,21 @@ Além disso, o trabalho virtual realizado por este subsistema é dado por:
 
 \subsubsubsection{Sistemas de forças ativas generalizadas} \label{S05-03-02-03}
 
-Considere também um subsistema constituido pelos esforços que os atuadores aplicam nas juntas do mecanismo. Os torques gerados pelos atuadores são proporcionais à corrente elétrica que flui pelas suas armaduras pelos atuadores e são aplicados na direção dos deslocamentos virtuais relativos dos rotores. Sendo assim, o trabalho virtual realizado por este subsistema é dado por:
+Considere também um subsistema constituido pelos esforços que os atuadores aplicam em seus rotores. Os torques gerados pelos atuadores são proporcionais à corrente elétrica que flui pelas suas armaduras e são aplicados na direção dos deslocamentos virtuais relativos dos rotores. Sendo assim, o trabalho virtual realizado por este subsistema é dado por:
 \begin{empheq}[box=\mybluebox]{equation}
-\delta W_\tau = \delta \mq_r^\msT \cdot \underline{k_t} \, \mi
+\delta W_\tau = \delta \mq_r^\msT \cdot \underline{k_t}\mi
 \end{empheq}
+
+%Além disso, é possível que hajam esforços de atrito devido ao atrito gerado nos mancais e nas engrenagens do redutor, aplicados na direção aposta dos deslocamentos virtuais relativos dos rotores .
 
 \subsubsubsection{Vínculos entre subsistemas} \label{S05-03-02-04}
 
 Tendo em vista que o sistema mecânico $\ssB'$ tem $\nu$ graus de liberdade, e $\mq$ são um conjunto de $\nu$ coordenadas generalizadas independentes, podemos relacionar os deslocamentos virtuais $\delta \mq_r$ e $\delta \mpi_{r\,i}$, com $i=1,...,\nu$, com os deslocamentos virtuais $\delta \mq$, ou seja, obter os vínculos cinemáticos entre os subsistemas. \\
 
 Para relacionar $\delta \mq_r$ com $\delta \mq$ basta aplicar o operador variação em  \eqref{eq:qr}:
-\begin{equation} \label{eq:deltaqr_rot}
+\begin{empheq}[box=\mybluebox]{equation} \label{eq:deltaqr_rot}
 \delta \mq_r = \underline{r} \, \delta \mq
-\end{equation}
+\end{empheq}
 
 Para relacionar $\delta \mpi_{r\,i}$, aplica-se a relação \eqref{eq:VinculosWrot} em \eqref{eq:pi_i_rot}:
 \begin{equation}
@@ -2459,18 +2477,18 @@ Para relacionar $\delta \mpi_{r\,i}$, aplica-se a relação \eqref{eq:VinculosWrot
 \end{equation}
 
 Portanto:
-\begin{equation} \label{eq:deltampi_rot}
+\begin{empheq}[box=\mybluebox]{equation} \label{eq:deltampi_rot}
 \delta \mpi_{r\,i} = \mJ_{\omega_r \,i} \, \delta \mq
-\end{equation}
+\end{empheq}
 
 \subsubsubsection{Acoplamento de subsistemas} \label{S05-03-02-05}
 
 Tendo em vista que um precedimento mais detalhado para acoplamento de subsistemas já foi apresentado, nesta subseção ele será realizado de forma mais sucinta. \\ 
 
 Pelo princípio de d'Alembert, temos que
-\begin{equation} \label{eq:PdaSeriais_rot}
+\begin{empheq}[box=\lightbluebox]{equation} \label{eq:PdaSeriais_rot}
 \delta W_\tau + \delta W_s  + \sum_{i=1}^\nu \delta W_{r \,i}  = 0
-\end{equation}
+\end{empheq}
 
 Ou seja:
 \begin{equation} \label{eq:PdaSeriais_rot2}
@@ -2525,22 +2543,22 @@ Sendo:
 \subsubsection{Dinâmica Eletro-Mecânica}\label{S05-02-03}
 
 O modelo do sistema elétrico equivalente de um motor de corrente contínua é dado por uma fonte de tensão variável ligada em série a um indutor, um resistor, e uma força contra-eletromotriz diretamente proporcional à velocidade angular do rotor em relação ao estator, ou seja:
-\begin{equation}
+\begin{empheq}[box=\lightbluebox]{equation}
 L \, \frac{\dd i}{\dd t} + R \, i + k_w \, \omega = u
-\end{equation}
+\end{empheq}
 
 Tendo em vista que todas as juntas de um mecanismo paralelo são atuadas, a equação matricial da dinâmica elétrica do sistema é dada por:
-\begin{equation} \label{eq:DinEletrica_rot}
+\begin{empheq}[box=\lightbluebox]{equation} \label{eq:DinEletrica_rot}
 \underline{L} \, \frac{\dd \mi}{\dd t} + \underline{R} \, \mi + \underline{k_w} \, \dot{\mq}_r = \mup
-\end{equation}
+\end{empheq}
 
 Sendo assim, juntando as equações \eqref{eq:ModeloMecSerial_rot} e \eqref{eq:DinEletrica_rot}, obtemos a dinâmica  do sistema como um todo:
-\begin{equation}
+\begin{empheq}[box=\mybluebox]{equation}
 \begin{cases}
-\mM^*(\mq) \ddot{\mq} + \mnu^*(\mq,\dot{\mq}) + \mg^*(\mq) = \underline{r} \, \underline{k_t} \mi \\
+\mM^*(\mq) \, \ddot{\mq} + \mnu^*(\mq,\dot{\mq}) + \mg^*(\mq) = \underline{r} \, \underline{k_t}\mi   \\
 \underline{L} \, \frac{\dd \mi}{\dd t} + \underline{R} \, \mi + \underline{r} \, \underline{k_w} \, \dot{\mq} = \mup
 \end{cases}
-\end{equation}
+\end{empheq}
 
 \subsection{Algoritmo para modelagem de mecanismos paralelos}\label{S05-4}
 
@@ -4708,7 +4726,7 @@ Um artigo, publicado no peri\'odico {\em International Journal of Mechanisms and
 Um artigo, publicado no {\em Congresso Brasileira de Automática - 2018}, intitulado ``H-Infinity Control of a 3-DOF RRR Spatial Serial Mechanism'' \cite{CBA}, foi escrito em coautoria com a Eng. Isabella Stevani, o Prof. Dr. Diego Colón, e o Prof. Dr. Tarc\'isio Antonio Hess Coelho. O artigo pode ser acessado por \url{https://ssl4799.websiteseguro.com/swge5/PROCEEDINGS/} (doi:10.20906/CPS/CBA2018-0458).
 
 
----DISCIPLINAS CURSADAS---------------------------------------------------------
+%---DISCIPLINAS CURSADAS---------------------------------------------------------
 \newpage
 \section{Disciplinas de pós-graduação}\label{disci}
 
