@@ -2544,7 +2544,7 @@ Sendo:
 \subsubsection{Dinâmica Eletro-Mecânica}\label{S05-02-03}
 
 O modelo do sistema elétrico equivalente de um motor de corrente contínua é dado por uma fonte de tensão variável ligada em série a um indutor, um resistor, e uma força contra-eletromotriz diretamente proporcional à velocidade angular do rotor em relação ao estator, ou seja:
-\begin{empheq}[box=\lightbluebox]{equation}
+\begin{empheq}[box=\lightbluebox]{equation} \label{eq:MotorDC}
 L \, \frac{\dd i}{\dd t} + R \, i + k_w \, \omega = u
 \end{empheq}
 
@@ -4184,8 +4184,44 @@ Pois:
 \lim_{z \rightarrow 1} \bar{\bar{G}}(z) = 1
 \end{equation}
 
-Além disso, é de se esperar que quanto mais rápida a dinâmica de $\bar{\bar{G}}$, maior seja a rejeição a distúrbio, tendo em vista a equação \eqref{eq:G__}. Porém, analisando \eqref{eq:Gn_}, é possível concluir que quanto menor a frequência de corte de $\bar{\bar{G}}$, ou seja, quanto mais lenta a dinâmica de $\bar{\bar{G}}$, menos degradada será a rejeição a ruído. Sendo assim, pode-se se dizer que a escolha da frequência de corte de $\bar{\bar{G}}$ é um compromisso entre rejeição a distúrbio e rejeição à ruído.
+Além disso, é de se esperar que quanto mais rápida a dinâmica de $\bar{\bar{G}}$, maior seja a rejeição a distúrbio, tendo em vista a equação \eqref{eq:G__}. Porém, analisando \eqref{eq:Gn_}, é possível concluir que quanto menor a frequência de corte de $\bar{\bar{G}}$, ou seja, quanto mais lenta a dinâmica de $\bar{\bar{G}}$, menos degradada será a rejeição a ruído. Sendo assim, pode-se se dizer que a escolha da frequência de corte de $\bar{\bar{G}}$ é um compromisso entre rejeição a distúrbio e rejeição à ruído. \\
 
+Aqui seguem aplicações desta técnica para controle de corrente dos atuadores e para controle de posição  aliado à técnica de Linearização pela Realimentação aplicado a mecanismos paralelos ou seriais.
+
+\subsubsubsection{Controle de Corrente}\label{S05-04-04-01}
+
+Como já foi visto anteriormente, o modelo do sistema elétrico equivalente de um motor de corrente contínua é dado pela equação \eqref{eq:MotorDC}:
+\begin{equation} \tag{\ref{eq:MotorDC}}
+L \, \frac{\dd i}{\dd t} + R \, i + k_w \, \omega = u
+\end{equation}
+
+Primeiramente define-se a seguinte lei de controle:
+\begin{equation} \label{eq:leiulinhadc}
+u = u' + k_w \, \omega
+\end{equation}
+
+Substituindo \eqref{eq:leiulinhadc} em \eqref{eq:MotorDC}, temos:
+\begin{equation} \label{eq:MotorDC2}
+L \, \frac{\dd i}{\dd t} + R \, i = u'
+\end{equation}
+
+Aplicando a Transformada de Laplace em \eqref{eq:MotorDC2}, obtemos a seguinte função de transferência:
+\begin{equation}
+\mathcal{G}(s) = \frac{I(s)}{U'(s)} = \frac{1}{L s + R}
+\end{equation}
+
+Discretizando $\mathcal{G}(s)$, considerando um período de amostragem $T$, e utilizando a técnica do segurador de ordem zero, obtemos a seguinte função de transferência:
+\begin{equation}
+G(z) = \frac{I(z)}{U'(z)} = \frac{k}{z - p}
+\end{equation}
+
+Sendo:
+\begin{equation}
+k = \frac{1 - e^{-\frac{R T}{L}}}{R}
+\end{equation}
+\begin{equation}
+p = e^{-\frac{R T}{L}}
+\end{equation}
 
 \subsection{Simulações}\label{S05-4}
 Nesta subseção, será realizada a simulação dinâmica direta do mecânimo 5R utilizando o algoritmo de modelagem e simulação de mecanismos paralelos apresentado, e a lei de controle apresentada na subseção anterior. Serão consideradas incertezas paramétricas, tanto no projeto do controlador, quanto na simulação.
