@@ -4163,7 +4163,7 @@ Y(z) = \bar{G}_{mf}(z) R(z) + \bar{G}_d (z) D(z) + \bar{G}_n (z) N(z)
 \end{equation}
 
 Sendo:
-\begin{equation}
+\begin{equation} \label{eq:Gmf_}
 \bar{G}_{mf} = \frac{  G (\bar{F} + \bar{K}) }{1 + G\bar{K} } = \frac{G( \bar{G} + 1 )(F+K)}{( \bar{G} + 1 )(1+GK)} = G_{mf}
 \end{equation}
 \begin{equation}
@@ -4221,6 +4221,59 @@ k = \frac{1 - e^{-\frac{R T}{L}}}{R}
 \end{equation}
 \begin{equation}
 p = e^{-\frac{R T}{L}}
+\end{equation}
+
+Como o sistema é de primeira ordem e não possui integrador, é proposto o seguinte controlador:
+\begin{equation}
+K(z) = \frac{a z + b}{z + c}
+\end{equation}
+
+Como o controlador proposto possui 3 parâmetros, é possível alocar 2 pólos e impor o ganho do sistema em malha fechada sem pré-alimentação ($F(z)=0$). Tendo em vista que a planta e o controlador são de primeira ordem, o sistema em malha fechada sem pré-alimentação será de segunda ordem. Sendo assim, o controlador proposto é capaz de alocar todos os pólos do sistema.
+
+A função de transferência do sistema em malha fechada sem pré-alimentação pode ser obtida fazendo $F(z)=0$ em \eqref{eq:Gmf_}:
+\begin{equation}
+G_{mf}(z)\Big|_{F=0} = \frac{G K}{1 + G K} = \frac{k (a z + b)}{z^2 + (a k + c - p)z + b k - c p}
+\end{equation}
+
+Sendo assim, o polinômio característico do sistema em malha fechada é dada por:
+\begin{equation}
+P(z) = z^2 + (a k + c - p)z + b k - c p
+\end{equation}
+
+Para alocar os pólos do sistema em malha fechada em $p_1$ e $p_2$, é necessário que:
+\begin{equation}
+P(z) = z^2 +  \alpha z + \beta
+\end{equation}
+
+Sendo:
+\begin{equation}
+\begin{cases}
+\alpha = -p_1 - p_2 \\
+\beta = p_1 p_2
+\end{cases}
+\end{equation}
+
+Além disso, para que o sistema em malha fechada sem pré-alimentação possui ganho $\kappa$, é necessário que:
+\begin{equation}
+\kappa = G_{mf}(z=1)\Big|_{F=0} = \frac{k(a+b)}{k(a+b)+(1+c)(1-p)}
+\end{equation}
+
+Portanto, os parâmetros de $K(z)$ podem ser obtidos resolvendo o seguinte sistema de equações algébricas:
+\begin{equation}
+\begin{cases}
+a k + c - p &= \alpha \\
+b k - c p &= \beta \\
+\frac{k(a+b)}{k(a+b)+(1+c)(1-p)} &= \kappa
+\end{cases}
+\end{equation}
+
+Cuja solução é dada por:
+\begin{equation}
+\begin{cases}
+a = \frac{\alpha(p-\kappa) + \beta(1-\kappa) + p^2 - \kappa}{k (p-1)} \\
+b = \frac{\alpha \big( p (\kappa -1) \big) + \beta (p \kappa - 1) +p (\kappa - p )}{k (p-1)} \\
+c = \frac{(\alpha + \beta)(1-\kappa) + \kappa - p}{p-1}
+\end{cases}
 \end{equation}
 
 \subsection{Simulações}\label{S05-4}
