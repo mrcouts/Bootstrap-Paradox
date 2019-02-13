@@ -2279,7 +2279,7 @@ Seja $\ssB'$ um sistema mecânico serial de $\nu$ graus de liberdade, constituido
 \item $\underline{R}$: Matriz diagonal de resistências elétricas dos atuadores.
 \item $\underline{L}$: Matriz diagonal de indutâncias dos atuadores.
 \item $i$: Corrente elétrica.
-\item $u$: Tensão elétrica.
+\item $\upsilon$: Tensão elétrica.
 \item $\omega$: Velocidade angular.
 \item $k_w$: Constante de força contra-eletromotriz.
 \item $R$: Resistência elétrica.
@@ -2545,7 +2545,7 @@ Sendo:
 
 O modelo do sistema elétrico equivalente de um motor de corrente contínua é dado por uma fonte de tensão variável ligada em série a um indutor, um resistor, e uma força contra-eletromotriz diretamente proporcional à velocidade angular do rotor em relação ao estator, ou seja:
 \begin{empheq}[box=\lightbluebox]{equation} \label{eq:MotorDC}
-L \, \frac{\dd i}{\dd t} + R \, i + k_w \, \omega = u
+L \, \frac{\dd i}{\dd t} + R \, i + k_w \, \omega = \upsilon
 \end{empheq}
 
 Tendo em vista que todas as juntas de um mecanismo paralelo são atuadas, a equação matricial da dinâmica elétrica do sistema é dada por:
@@ -4192,7 +4192,7 @@ Aqui seguem aplicações desta técnica para controle de corrente dos atuadores e p
 
 Como já foi visto anteriormente, o modelo do sistema elétrico equivalente de um motor de corrente contínua é dado pela equação \eqref{eq:MotorDC}:
 \begin{equation} \tag{\ref{eq:MotorDC}}
-L \, \frac{\dd i}{\dd t} + R \, i + k_w \, \omega = u
+L \, \frac{\dd i}{\dd t} + R \, i + k_w \, \omega = \upsilon
 \end{equation}
 
 Primeiramente define-se a seguinte lei de controle:
@@ -4202,17 +4202,17 @@ u = u' + k_w \, \omega
 
 Substituindo \eqref{eq:leiulinhadc} em \eqref{eq:MotorDC}, temos:
 \begin{equation} \label{eq:MotorDC2}
-L \, \frac{\dd i}{\dd t} + R \, i = u'
+L \, \frac{\dd i}{\dd t} + R \, i = \upsilon'
 \end{equation}
 
 Aplicando a Transformada de Laplace em \eqref{eq:MotorDC2}, obtemos a seguinte função de transferência:
 \begin{equation}
-\mathcal{G}(s) = \frac{I(s)}{U'(s)} = \frac{1}{L s + R}
+\mathcal{G}(s) = \frac{I(s)}{\Upsilon'(s)} = \frac{1}{L s + R}
 \end{equation}
 
 Discretizando $\mathcal{G}(s)$, considerando um período de amostragem $T$, e utilizando a técnica do segurador de ordem zero, obtemos a seguinte função de transferência:
 \begin{equation}
-G(z) = \frac{I(z)}{U'(z)} = \frac{k}{z - p}
+G(z) = \frac{I(z)}{\Upsilon'(z)} = \frac{k}{z - p}
 \end{equation}
 
 Sendo:
@@ -4299,6 +4299,84 @@ A partir de $\bar{\bar{G}}$, a expressão de $\bar{G}$ é obtida através da equaçã
 
 \subsubsubsection{Controle de Posição}\label{S05-04-04-02}
 
+O modelo do sistema mecânico linearizado pela realimentação, representado pela equação \eqref{eq:ModeloLin}, na ausência de erros de modelagem, poder ser representado por $\nu$ equações independentes do tipo:
+\begin{equation}
+\ddot{\mathfrak{e}} = u'
+\end{equation}
+
+Aplicando a transformada de Laplace dos dois lados da equação, obtemos a seguinte função de tranferência:
+\begin{equation}
+\frac{E(s)}{U'(s)} = \frac{1}{s^2}
+\end{equation}
+
+Tendo em vista que a entrada $u'$ não permanece constante durante cada período de amostragem, este sistema não pode ser discretizado pela técnica do segurador de ordem zero. Sendo assim, o sistema será discretizado pela técnica da Transformação Bilinear, considerando um período de amostragem $T$, na qual obtemos:
+\begin{equation}
+\frac{E(z)}{U'(z)} = \frac{T^2 (z+1)^2}{4(z-1)^2}
+\end{equation}
+
+Tendo em vista que a entrada $u'$ não responde ao comandos de maneira imediata, e que a função de transfêrencia em malha fechada da malha de corrente é dada por:
+\begin{equation}
+\frac{I(z)}{I_{d}(z)} = \frac{1-\phi}{z - \phi}
+\end{equation}
+
+É razoável assumir que a entrada $u'$ responda a um sinal de referência com a mesma dinâmica, ou seja:
+\begin{equation}
+\frac{U'(z)}{U'_{d}(z)} = \frac{1-\phi}{z - \phi}
+\end{equation}
+
+Sendo assim, a função de transferência em tempo discreto da planta do sistema mecânico linearizado, é dada por:
+\begin{equation}
+G(z) = \frac{E(z)}{U_{d}'(z)} = \frac{k (z+1)^2}{(z-1)^2 (z - \phi)}
+\end{equation}
+
+Sendo:
+\begin{equation}
+k = \frac{T^2 (1-\phi)}{4}
+\end{equation}
+
+Como o sistema é de terceira ordem e possui integrador, é proposto o seguinte controlador:
+\begin{equation}
+K(z) = \frac{a z^2 + b z + c}{z^2 + d z + e}
+\end{equation}
+
+Como o controlador proposto possui 5 parâmetros, é possível alocar 5 pólos. Tendo em vista que a planta é de terceira e o controlador é de segunda ordem, o sistema em malha fechada será de quinta ordem. Sendo assim, o controlador proposto é capaz de alocar todos os pólos do sistema. \\
+
+Como a saída do sistema é o sinal de erro $\mathfrak{e}$, a referência é sempre nula, o que faz perder o sentido a função de transferência $G_{mf}$. Sendo assim, o polinômio característico do sistema em malha fechada será obtida através do denominador da função de transferência do sinal de ruído $G_n(z)$: 
+\begin{equation}
+ \frac{k (z+1)^2 (a z^2 + b z + c)}{z^5 + a_4 z^4 + a_3 z^3 + a_2 z^2 + a_1 z + a_0 }
+\end{equation}
+
+Sendo:
+\begin{equation}
+\begin{cases}
+a_4 &= k \,a +d-\phi -2  \\
+a_3 &= 2 k \, a + k \, b-(\phi + 2)d +e+2 \phi +1 \\
+a_2 &= k \, a+ 2k \, b + k \, c +(2\phi+1)d - (\phi + 2) e -\phi \\
+a_1 &= k \, b + 2k \, c- \phi \,d  +(2 \phi + 1) e  \\
+a_0 &= k \,c - \phi \, e 
+\end{cases}
+\end{equation}
+
+Sendo assim, o polinômio característico do sistema em malha fechada é dada por:
+\begin{equation}
+P(z) = z^5 + a_4 z^4 + a_3 z^3 + a_2 z^2 + a_1 z + a_0
+\end{equation}
+
+Para alocar os pólos do sistema em malha fechada em $p_1$, $p_2$, $p_3$, $p_4$ e $p_5$, é necessário que:
+\begin{equation}
+P(z) = z^5 + \alpha z^4 + \beta z^3 + \gamma z^2 + \delta z + \epsilon
+\end{equation}
+
+Sendo:
+\begin{equation}
+\begin{cases}
+\alpha &= -p_1-p_2-p_3-p_4-p_5\\
+\beta &= p_1 p_2+p_3 p_2+p_4 p_2+p_5 p_2+p_1 p_3+p_1 p_4+p_3 p_4+p_1 p_5+p_3 p_5+p_4 p_5 \\
+\gamma &= -p_1 p_2 p_3-p_1 p_4 p_3-p_2 p_4 p_3-p_1 p_5 p_3-p_2 p_5 p_3-p_4 p_5 p_3-p_1 p_2 p_4-p_1 p_2 p_5-p_1 p_4 p_5-p_2 p_4 p_5\\
+\delta &= p_1 p_2 p_3 p_4+p_1 p_2 p_5 p_4+p_1 p_3 p_5 p_4+p_2 p_3 p_5 p_4+p_1 p_2 p_3 p_5 \\
+\epsilon &= -p_1 p_2 p_3 p_4 p_5
+\end{cases}
+\end{equation}
 
 Portanto, os parâmetros de $K(z)$ podem ser obtidos resolvendo o seguinte sistema de equações algébricas:
 \begin{equation}
