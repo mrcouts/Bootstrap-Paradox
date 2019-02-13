@@ -4118,7 +4118,7 @@ Portanto:
 \end{equation}
 
 Sendo assim, definindo-se $\bar{\bar{G}}$ como uma função de transferência de um filtro passa-baixa com ganho unitário, $\bar{G}$ pode ser obtido em função de $\bar{\bar{G}}$, isolando-o na equação \eqref{eq:G__}:
-\begin{equation}
+\begin{equation} \label{eq:Gbar_Gbarbar}
 \bar{G} = \frac{\bar{\bar{G}}}{1-\bar{\bar{G}}}
 \end{equation}
 
@@ -4148,10 +4148,10 @@ U = \bar{K} E + \bar{F} R
 \end{equation}
 
 Sendo:
-\begin{equation}
+\begin{equation} \label{eq:Kbar}
 \bar{K} = K(\bar{G}+1) + \bar{G} G^{-1} 
 \end{equation}
-\begin{equation}
+\begin{equation} \label{eq:Fbar}
 \bar{F} = F(\bar{G}+1) - \bar{G} G^{-1} 
 \end{equation}
 
@@ -4261,8 +4261,8 @@ Além disso, para que o sistema em malha fechada sem pré-alimentação possui ganho
 Portanto, os parâmetros de $K(z)$ podem ser obtidos resolvendo o seguinte sistema de equações algébricas:
 \begin{equation}
 \begin{cases}
-a k + c - p &= \alpha \\
-b k - c p &= \beta \\
+k \, a + c - p &= \alpha \\
+k \, b - p \, c &= \beta \\
 \frac{k(a+b)}{k(a+b)+(1+c)(1-p)} &= \kappa
 \end{cases}
 \end{equation}
@@ -4270,9 +4270,56 @@ b k - c p &= \beta \\
 Cuja solução é dada por:
 \begin{equation}
 \begin{cases}
-a = \frac{\alpha(p-\kappa) + \beta(1-\kappa) + p^2 - \kappa}{k (p-1)} \\
-b = \frac{\alpha \big( p (\kappa -1) \big) + \beta (p \kappa - 1) +p (\kappa - p )}{k (p-1)} \\
-c = \frac{(\alpha + \beta)(1-\kappa) + \kappa - p}{p-1}
+a = \frac{(p-\kappa)\alpha + (1-\kappa)\beta + p^2 - \kappa}{k (p-1)} \\
+b = \frac{\big( (\kappa -1) p \big)\alpha + (p \kappa - 1)\beta  -p^2 + \kappa p}{k (p-1)} \\
+c = \frac{(1-\kappa)(\alpha + \beta) + \kappa - p}{p-1}
+\end{cases}
+\end{equation}
+
+A função de transferência $F(z)$ pode ser projetada definindo uma dinâmica desejada para o sistema em malha e isolando $F$ na equação \eqref{eq:Gmf}:
+\begin{equation}
+F(z) = G_{mf} G^{-1} + (G_{mf} - 1)K
+\end{equation}
+
+Tendo em vista que na malha de controle de corrente a referência é gerada em tempo real, $F$ não pode ser uma função de transferência imprópria. Sendo assim, $G_{mf}$ deve ter grau relativo maior ou igual ao grau relativo de $G$, que é $1$. Neste caso, uma escolha conveniente para $G_{mf}$ é uma função de transferência com ganho unitário, um pólo, e nenhum zero finito, ou seja:
+\begin{equation}
+G_{mf}(z) = \frac{1-\phi}{z - \phi}
+\end{equation}
+
+O valor de $\phi$ escolhido determina a velocidade de convergência da saída do sistema para o sinal de referência. Escolhendo $\phi = 0$, a dinâmica em malha fechada do sistema será a mais rápida possível, porém exige mais esforço de controle, podendo levar à saturação da entrada. Escolhendo $\phi$ de modo que a malha de corrente seja de $3$ a $5$ vezes mais rápida que a malha de controle de posição em geral é mais do que o suficiente. \\
+
+A função de transferência $\bar{\bar{G}}(z)$, como já foi dito anteriormente, também deve ter grau relativo maior ou igual ao grau relativo de $G$. Tendo em vista que $G$ não possui zeros finitos, uma escolha conveniente para $\bar{\bar{G}}$ é uma função de transferência com as mesmas características da função de transferência $G_{mf}$ escolhida, ou seja:
+\begin{equation}
+\bar{\bar{G}}(z) = \frac{1-\varphi}{z - \varphi}
+\end{equation}
+
+O valor de $\varphi$ determina a velocidade de convergência do observador de disturbios para o sinal de disturbio. Quanto mais próximo de $0$, mais rápida a convergência, porém também é maior a sensibilidade do sistema a ruídos de medição. Sendo assim, escolhas adequadas para $\varphi$ costumam estar entre $0$ e $\phi$, dependendo do nível de ruído de medição. \\
+
+A partir de $\bar{\bar{G}}$, a expressão de $\bar{G}$ é obtida através da equação \eqref{eq:Gbar_Gbarbar}, e como $K$ e $F$ já estão definidas, $\bar{K}$ e $\bar{F}$ são obtidas através das expressões \eqref{eq:Kbar} e \eqref{eq:Fbar}.  
+
+\subsubsubsection{Controle de Posição}\label{S05-04-04-02}
+
+
+Portanto, os parâmetros de $K(z)$ podem ser obtidos resolvendo o seguinte sistema de equações algébricas:
+\begin{equation}
+\begin{cases}
+k \,a +d-\phi -2 &= \alpha \\
+2 k \, a + k \, b-(\phi + 2)d +e+2 \phi +1 &= \beta \\
+k \, a+ 2k \, b + k \, c +(2\phi+1)d - (\phi + 2) e -\phi &= \gamma \\
+k \, b + 2k \, c- \phi \,d  +(2 \phi + 1) e  &= \delta \\
+k \,c - \phi \, e  &= \epsilon
+\end{cases}
+\end{equation}
+
+Cuja solução é dada por:
+
+\begin{equation}
+\begin{cases}
+a = \frac{(4\phi^2 + 5\phi + 4)\alpha + (2\phi + 1)\beta - \phi \, \gamma - \delta + (\phi + 2)\epsilon + 4\phi^3 + 8\phi^2 + 8\phi + 3}{4 k (\phi + 1)^2	} \\
+b = \frac{-(5\phi^2 + 4\phi + 1)\alpha + 2\phi^2 \, \beta + (\phi^2 + 4\phi + 1) \gamma +  2\delta - (\phi^2 +4\phi +5)\epsilon - 8\phi^3 -12\phi^2 - 8\phi - 2}{4 k (\phi + 1)^2	} \\
+c = \frac{(2\phi^2 + \phi)\alpha - \phi^2 \, \beta - \phi \, \gamma +  (\phi^2 + 2\phi) \delta + (2\phi^2 +5\phi +4)\epsilon + 4\phi^3 +5\phi^2 + 2\phi}{4 k (\phi + 1)^2	} \\
+d = \frac{(3\phi + 2)\alpha - (2\phi +1) \beta + \phi \, \gamma + \delta - (\phi +2)\epsilon + 8\phi^2 + 12\phi + 5}{4 (\phi + 1)^2	} \\
+e = \frac{(2\phi + 1)\alpha -\phi \, \beta - \gamma + (\phi + 2) \delta - (2\phi +3)\epsilon + 4\phi^2 + 5\phi + 2}{4 (\phi + 1)^2	}
 \end{cases}
 \end{equation}
 
