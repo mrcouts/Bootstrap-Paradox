@@ -54,7 +54,7 @@ int main(){
     //vec sigma_ = sign(randn(6))*0.5;
     //vec sigma_ = {-0.15,0.15,0.15,0.15,0.15,0.15};
     vec sigma_ = {-0.5,0.5,0.5,0.5,0.5,0.5};
-    vec coef_  = ones(6) + sigma_;
+    vec coef_  = ones(6) + 0*sigma_;
 
     cube I__; I__.zeros(3,3,2);
     I__.slice(0) << 0 << 0   << 0   << endr
@@ -137,7 +137,7 @@ int main(){
     */
 
     //FLControlLaw FL = FLControlLaw(2, lambda*lambda, 2*lambda, &RefObj, &Robot);
-    FLControlLaw FL = FLControlLaw(6, lambda*lambda, 2*lambda, &r_, &dr_, &d2r_, &Robot);
+    FLControlLaw FL = FLControlLaw(2, lambda*lambda, 2*lambda, &r_, &dr_, &d2r_, &Robot);
     Acceleration AC = Acceleration(6, &_Robot, &FL);
 
    
@@ -156,7 +156,7 @@ int main(){
     vec x0_ = join_vert(q0_, zeros(4));
     */
 
-    RK rk = RK("RK8", &AC);
+    RK rk = RK("RK6", &AC);
     rk.Doit(0.00005, 0.6, x0_);
     double t;
     vec ref_; ref_.zeros(2);
