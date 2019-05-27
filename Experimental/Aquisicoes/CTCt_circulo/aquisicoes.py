@@ -4,10 +4,10 @@ import numpy as np
 from math import pi as Pi
 from txt2py import *
 
-A = txt2py("aquisicao_triangulo_SMCt_lambda60_phi20_k363_2.txt")
+A = txt2py("aquisicao_circulo_CTCt_lambda60_3.txt")
 
 #aquisicao_circulo_PIDSMCx_lambda70_phi6_k70_0_3: e_quad = 0.912252649215 | tau_quad = 0.238929403956 | s1_quad = 4.83123738371 | s2_quad = 4.92973723999 | ex_quad = 0.693586588682 | ey_quad = 0.592572814091 | tau1_quad = 0.163618207999 | tau2_quad = 0.174115886943
-#aquisicao_circulo_SMCt_lambda60_phi20_k363_3:    e_quad = 1.0865600936   | tau_quad = 0.237820339378 | s1_quad = 55.7256386861 | s2_quad = 52.1114451708 | ex_quad = 0.89867749944  | ey_quad = 0.610730373405 | tau1_quad = 0.162677093788 | tau2_quad = 0.173478174358
+#aquisicao_SMCt_lambda60_phi20_k363_3:            e_quad = 1.0865600936   | tau_quad = 0.237820339378 | s1_quad = 55.7256386861 | s2_quad = 52.1114451708 | ex_quad = 0.89867749944  | ey_quad = 0.610730373405 | tau1_quad = 0.162677093788 | tau2_quad = 0.173478174358
 #aquisicao_circulo_SMCx_lambda60_phi6_k103_0_3:   e_quad = 1.27647821995  | tau_quad = 0.260967898131 | s1_quad = 8.35898181713 | s2_quad = 4.9935905567  | ex_quad = 0.971027682922 | ey_quad = 0.828554092984 | tau1_quad = 0.169215497632 | tau2_quad = 0.198671485664
 #aquisicao_circulo_PIDx_lambda70_4:               e_quad = 1.28260640104  | tau_quad = 0.219666166256 | s1_quad = 6.09596142926 | s2_quad = 4.45005347346 | ex_quad = 1.14463260263  | ey_quad = 0.578701464488 | tau1_quad = 0.149533211028 | tau2_quad = 0.16091315483
 #aquisicao_circulo_CTCt_lambda60_3:               e_quad = 1.61909535266  | tau_quad = 0.202338133235 | s1_quad = 45.0666924646 | s2_quad = 53.5093564972 | ex_quad = 1.31948403439  | ey_quad = 0.938313190784 | tau1_quad = 0.132682753043 | tau2_quad = 0.152761275217
@@ -78,37 +78,31 @@ s2_quad = (2*s2_quad/(n8-n2))**0.5
 print "e_quad =", e_quad, "| tau_quad =", tau_quad, "| s1_quad =", s1_quad, "| s2_quad =", s2_quad, "| ex_quad =", ex_quad, "| ey_quad =", ey_quad, "| tau1_quad =", tau1_quad, "| tau2_quad =", tau2_quad
 """
 
-plt.figure()
-ax = plt.subplot(111)
-ax.plot(x_np,    y_np,    'r', linewidth=1, label='Trajetoria realizada')
-ax.plot(xref_np, yref_np, 'b', linewidth=1, label='$Trajetoria de referencia')
-#plt.plot(x_np, y_np, 'r', xref_np, yref_np, 'b', linewidth=1)
-#plt.xscale('log')
+fig, ax = plt.subplots()
+ax.plot(xref_np, yref_np, 'b', linewidth=1, label='Referencia')
+ax.plot(x_np,    y_np,    'r', linewidth=1, label='Posicao')
 plt.xlabel('x[mm]')
 plt.ylabel('y[mm]')
-plt.title('Trajetoria')
-ax.legend()
+plt.title('Trajetoria realizada')
+ax.legend(loc=4, ncol=1, prop={'size': 10})
 plt.savefig('xy.png')
 
 plt.figure()
 plt.plot(t_np, ex_np, 'r', linewidth=2)
-#plt.xscale('log')
 plt.xlabel('t[s]')
 plt.ylabel('ex[mm]')
-plt.title('Erro de posicao da coordenada x')
+plt.title('Erro de posicao: coordenada x')
 plt.savefig('ex.png')
 
 plt.figure()
 plt.plot(t_np, ey_np, 'r', linewidth=2)
-#plt.xscale('log')
 plt.xlabel('t[s]')
 plt.ylabel('ey[mm]')
-plt.title('Erro de posicao da coordenada x')
+plt.title('Erro de posicao: coordenada y')
 plt.savefig('ey.png')
 
 plt.figure()
 plt.plot(t_np, tau1_np, 'r', linewidth=2)
-#plt.xscale('log')
 plt.xlabel('t[s]')
 plt.ylabel('tau1[Nm]')
 plt.title('Torque no atuador 1')
@@ -116,7 +110,6 @@ plt.savefig('tau1.png')
 
 plt.figure()
 plt.plot(t_np, tau2_np, 'r', linewidth=2)
-#plt.xscale('log')
 plt.xlabel('t[s]')
 plt.ylabel('tau2[Nm]')
 plt.title('Torque no atuador 2')
@@ -124,7 +117,6 @@ plt.savefig('tau2.png')
 
 plt.figure()
 plt.plot(t_np, u1_np, 'r', linewidth=2)
-#plt.xscale('log')
 plt.xlabel('t[s]')
 plt.ylabel('u1[V]')
 plt.title('Tensao aplicada no atuador 1')
@@ -132,7 +124,6 @@ plt.savefig('u1.png')
 
 plt.figure()
 plt.plot(t_np, u2_np, 'r', linewidth=2)
-#plt.xscale('log')
 plt.xlabel('t[s]')
 plt.ylabel('u2[V]')
 plt.title('Tensao aplicada no atuador 2')
@@ -140,7 +131,6 @@ plt.savefig('u2.png')
 
 plt.figure()
 plt.plot(t_np, s1_np, 'r', linewidth=2)
-#plt.xscale('log')
 plt.xlabel('t[s]')
 plt.ylabel('s1[m/s^2]')
 plt.title('Variavel de escorregamento s1')
@@ -148,7 +138,6 @@ plt.savefig('s1.png')
 
 plt.figure()
 plt.plot(t_np, s2_np, 'r', linewidth=2)
-#plt.xscale('log')
 plt.xlabel('t[s]')
 plt.ylabel('s2[m/s^2]')
 plt.title('Variavel de escorregamento s2')
