@@ -1312,12 +1312,1873 @@ Substituindo \eqref{eq:MatrizC_seriais} e \eqref{eq:fSeriais}  em \eqref{eq:eq_d
 \mu + \mJ^\msT \mf\cir = \mzr
 \end{equation}
 
+Substituindo \eqref{eq:J}, \eqref{eq:J_i}, \eqref{eq:f_i} e \eqref{eq:fcir} em \eqref{eq:u_Jtfcir}, temos:
+\begin{equation} \label{eq:ModeloDinamicoSerialSomatorio2}
+\sum_{i=1}^\nu
+\begin{bmatrix}
+\mJ_{v\,i} \\
+\mJ_{\omega\,i}
+\end{bmatrix}^\msT
+\begin{Bmatrix}
+\begin{bmatrix}
+m_i \mone & \mzr \\
+\mzr      & \mI_i
+\end{bmatrix}
+\cdot
+\begin{bmatrix}
+\ma^\star_i  \\
+\dot{\momega}^\star_i
+\end{bmatrix}
++
+\begin{bmatrix}
+\mzr \\
+\momega^\star_i \wedge (\mI_i \cdot \momega^\star_i)
+\end{bmatrix}
++
+\begin{bmatrix}
+-m_i \mgamma \\
+\mzr
+\end{bmatrix}
+\end{Bmatrix}
+=\mu
+\end{equation}
+
+Substituindo \eqref{eq:a_star_i} e  \eqref{eq:domega_star_i} em \eqref{eq:ModeloDinamicoSerialSomatorio2}, temos:
+\begin{equation}
+\sum_{i=1}^\nu
+\begin{bmatrix}
+\mJ_{v\,i} \\
+\mJ_{\omega\,i}
+\end{bmatrix}^\msT
+\begin{Bmatrix}
+\begin{bmatrix}
+m_i (\mJ_{v_i} \ddot{\mq} + \underaccent{\sim}{\ma}_i   )  \\
+ \mI_i (\mJ_{\omega_i} \ddot{\mq} + \underaccent{\sim}{\dot{\momega}}_i )
+\end{bmatrix}
++
+\begin{bmatrix}
+\mzr \\
+\momega^\star_i \wedge (\mI_i \cdot \momega^\star_i)
+\end{bmatrix}
++
+\begin{bmatrix}
+-m_i \mgamma \\
+\mzr
+\end{bmatrix}
+\end{Bmatrix}
+=\mu
+\end{equation}
+
+Sendo assim, obtemos o modelo dinâmico mostrado anteriormente:
+\begin{equation} \tag{\ref{eq:ModeloMecSerial}}
+\mM(\mq) \ddot{\mq} + \mnu(\mq,\dot{\mq}) + \mg(\mq) = \mu
+\end{equation}
+
+Sendo:
+\begin{equation} \tag{\ref{eq:MSerial}}
+\mM(\mq) = \sum_{i=1}^\nu
+m_i \mJ_{v\,i}^\msT \mJ_{v\,i} + \mJ_{\omega\,i}^\msT \mI_i \mJ_{\omega\,i}
+\end{equation}
+\begin{equation} \tag{\ref{eq:vSerial}}
+\mnu(\mq, \dot{\mq}) = \sum_{i=1}^\nu
+ m_i \mJ_{v\,i}^\msT \underaccent{\sim}{\ma}_i + \mJ_{\omega\,i}^\msT \big( \mI_i \underaccent{\sim}{\dot{\momega}}_i + \momega^\star_i \wedge (\mI_i  \momega^\star_i) \big)
+\end{equation}
+\begin{equation} \tag{\ref{eq:gSerial}}
+\mg(\mq) = - \sum_{i=1}^\nu m_i \mJ_{v\,i}^\msT \mgamma
+\end{equation}
+
+\section{Dinâmica dos atuadores} \label{S05-3}
+
+Esta subseção tem o intuito de complementar algoritmo de modelagem de mecanismos seriais já apresentado através inclusão da dinâmica dos atuadores. \\ 
+
+Seja $\ssB'$ um sistema mecânico serial de $\nu$ graus de liberdade, constituido por um mecanismo serial $\ssB$ e $\nu$ atuadores, possivelmente acoplados a redutores de velocidades. Primeiramente, fazemos as seguintes definições:
+
+\begin{itemize}
+\item $\llR_i, \,i=1,...,\nu$: rotor do i-ésimo atuador.
+\item $\ttR_i, \,i=1,...,\nu$: sistema de coordenadas solid\'ario a $\llR_i$.
+\item $J_{r \,i}, \,i=1,...,\nu$: momento de inércia do rotor $\llR_i$.
+\item $\vI_{\ttr_i}, \,i=1,...,\nu$: tensor de in\'ercia do rotor $\llR_i$ em relação a seu centro de massa.
+\item $\mI_{r \,i}, \,i=1,...,\nu$: tensor de in\'ercia $\vI_{\ttr_i}$ escrito na base $\ttN$, ou seja, $\vct{\vI_{\ttr_i}}_{\ttN \rl \ttN}$.
+\item $\vtau_{r \,i}, \,i=1,...,\nu$: Vetor torque não-reativo resultante aplicado em $\llR_i$.
+\item $\overline{\mf}_{r \,i}, \,i=1,...,\nu$: Matriz-coluna de forças não-reativas generalizadas aplicadas no subsistema $\llB_{r \,i}, \,i=1,...,\nu$. É dada por $\overline{\mf}_{r \,i} = \vct{\vtau_i}_\ttN $.
+\item $q_{r\,i}, \,i=1,...,\nu$: Deslocamentos angular realizado pelo i-ésimo rotor.
+\item $\mq_r$: Matriz-coluna dos deslocamentos angulares realizados pelos rotores.
+\item $\mzeta(\dot{\mq}_r)$: matriz-coluna das forças de atrito generalizadas aplicadas nos rotores, em sentido oposto aos seus deslocamentos.
+\item $\mi$: Matriz-coluna de correntes elétricas que fluem pelas armaduras dos atuadores.
+\item $\mup$: Matriz-coluna de tensões elétricas aplicadas nos terminais dos atuadores.
+\item $r_i, \,i=1,...,\nu$: Relação de transmissão do i-ésimo redutor.
+\item $\underline{r}$: Matriz diagonal de relações de transmissão dos redutores.
+\item $\underline{k_t}$: Matriz diagonal de constantes de torque dos atuadores.
+\item $\underline{k_w}$: Matriz diagonal de constantes de força contra-eletromotriz dos atuadores.
+\item $\underline{R}$: Matriz diagonal de resistências elétricas dos atuadores.
+\item $\underline{L}$: Matriz diagonal de indutâncias dos atuadores.
+\item $i$: Corrente elétrica.
+\item $\upsilon$: Tensão elétrica.
+\item $\omega$: Velocidade angular.
+\item $k_w$: Constante de força contra-eletromotriz.
+\item $R$: Resistência elétrica.
+\item $L$: Indutância.
+\end{itemize}
+
+\subsection{Cinemática}\label{S05-03-01}
+
+\subsubsection{Cinemática de velocidades angulares}\label{S05-03-01-01}
+
+Devido aos redutores de velocidade e aos fusos de esferas, o deslocamento relativo $q_{r\,i}$ gerado pelo i-ésimo rotor é convertido em um deslocamento $q_i$ através da seguinte relação:
+\begin{empheq}[box=\lightbluebox]{equation} \label{eq:qr}
+\mq_r = \underline{r} \, \mq 
+\end{empheq} 
+
+Sendo assim, a velocidade angular do i-ésimo rotor pode ser obtida aplicando o príncipio da composição de movimentos para velocidades angulares deduzido anteriormente \eqref{eq:composicao_w}:
+
+\begin{equation} \label{eq:ComposicaoWRotor}
+\vomega_{\lllR_i}^{\lllN} = \vomega_{\lllB_{i-1}}^{\lllN} + \vomega_{\lllR_i}^{\lllB_{i-1}} ,\; i=1,...,\nu
+\end{equation}
+
+Sendo que a velocidade angular relativa de cada rotor é dada por:
+\begin{equation}
+\vomega_{\lllR_i}^{\lllB_{i-1}} = \dot{q}_{r\,i} \vk_{i-1} = r_i \dot{q}_{i} \vk_{i-1} ,\; i=1,...,\nu
+\end{equation}
+
+Aplicando a equação \eqref{eq:ComposicaoWRotor} no sistema $\ttN$, temos:
+\begin{empheq}[box=\myyellowbox]{equation} \label{eq:ComposicaoWRotor2}
+\momega^\star_{r \,i} = \momega^\star_{i-1} + r_i \dot{q}_{i} \vct{\vk_{i-1}}_{\ttN} ,\; i=1,...,\nu
+\end{empheq}
+
+Sendo:
+\begin{empheq}[box=\lightbluebox]{equation}
+\momega^\star_{r \,i} = \vct{\vomega_{\lllR_i}^{\lllN} }_{\ttN} 
+\end{empheq}
+
+Utilizando a equação \eqref{eq:omega_star_i}, pode-se reescrever \eqref{eq:ComposicaoWRotor2} da seguinte maneira:
+\begin{empheq}[box=\lightbluebox]{equation} \label{eq:VinculosWrot}
+\momega^\star_{r \,i} (\mq, \dot{\mq}) = \mJ_{\omega_r \,i}(\mq) \cdot \dot{\mq}
+\end{empheq}
+
+Sendo:
+\begin{empheq}[box=\myyellowbox]{equation} \label{eq:jwij_rot}
+\mj_{\omega_r \,i,j}(\mq) = \begin{cases}
+r_i \vct{\vk_{i-1}}_{\ttN}, \;  j = i \\
+\mj_{\omega\,i,j}(\mq), \;\;\;  j\neq i \\
+\end{cases} \, i,j=1,...,\nu
+\end{empheq}
+
+\begin{empheq}[box=\myyellowbox]{equation} \label{eq:Jwi_rot}
+\mJ_{\omega_r \,i}(\mq) = \begin{bmatrix}
+\mj_{\omega_r \,i,1}(\mq) & ... & \mj_{\omega_r \,i,\nu}(\mq)
+\end{bmatrix}
+\end{empheq}
+
+\subsubsection{Cinemática de acelerações angulares}\label{S05-03-01-02}
+
+A aceleração angular do i-ésimo rotor pode ser obtida aplicando o príncipio da composição de movimentos para acelerações deduzido anteriormente \eqref{eq:composicao_dw}:
+
+\begin{equation} \label{eq:ComposicaodWRotor}
+\dot{\vomega}_{\lllR_i}^{\lllN} = \dot{\vomega}_{\lllB_{i-1}}^{\lllN} + \dot{\vomega}_{\lllR_i}^{\lllB_{i-1}} +  \vomega_{\lllB_{i-1}}^{\lllN} \wedge \vomega_{\lllR_i}^{\lllB_{i-1}}
+\end{equation}
+
+Sendo que a aceleração angular de relativa de cada rotor é dada por:
+\begin{equation}
+\dot{\vomega}_{\lllR_i}^{\lllB_{i-1}} = \ddot{q}_{r\,i} \vk_{i-1} = r_i \ddot{q}_{i} \vk_{i-1} ,\; i=1,...,\nu
+\end{equation}
+
+Aplicando a equação \eqref{eq:ComposicaodWRotor} no sistema $\ttN$, temos:
+\begin{empheq}[box=\myyellowbox]{equation} \label{eq:ComposicaodWRotor2}
+\dot{\momega}^\star_{r \,i} = \dot{\momega}^\star_{i-1} + r_i \ddot{q}_{i} \vct{\vk_{i-1}}_{\ttN} + \momega^\star_{i-1} \wedge r_i \dot{q}_{i} \vct{\vk_{i-1}}_{\ttN} ,\; i=1,...,\nu
+\end{empheq}
+
+Sendo:
+\begin{empheq}[box=\lightbluebox]{equation}
+\dot{\momega}^\star_{r \,i} = \vct{\dot{\vomega}_{\lllR_i}^{\lllN} }_{\ttN} 
+\end{empheq}
+
+Utilizando a equação \eqref{eq:domega_star_i}, pode-se reescrever \eqref{eq:ComposicaodWRotor2} da seguinte maneira:
+\begin{empheq}[box=\lightbluebox]{equation} \label{eq:dw_ri}
+\dot{\momega}^\star_{r\,i} (\mq,\dot{\mq},\ddot{\mq}) = \mJ_{\omega_r \,i} (\mq) \cdot \ddot{\mq} + \underaccent{\sim}{\dot{\momega}}_{r\,i}  (\mq,\dot{\mq})
+\end{empheq}
+
+Sendo:
+\begin{empheq}[box=\myyellowbox]{equation}
+\underaccent{\sim}{\dot{\momega}}_{r\,i}  (\mq,\dot{\mq}) = \begin{cases}
+\mzr, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; i = 1 \\
+\underaccent{\sim}{\dot{\momega}}_{i-1}  (\mq,\dot{\mq}) + \momega^\star_{i-1} (\mq,\dot{\mq}) \wedge  \dot{q}_{i} \mj_{\omega_r \, i,i}(\mq), \, i > 1 
+\end{cases}  ,\; i=1,...,\nu
+\end{empheq}
+
+
+\subsection{Dinâmica Mecânica}\label{S05-03-02}
+
+O modelo dinâmico de $\ssB'$ é obtido utilizando um procedimento de acoplamento de subsistemas baseado no Método Orsino  \cite{23orsino}, e é dado por:
+\begin{empheq}[box=\mybluebox]{equation} \label{eq:ModeloMecSerial_rot}
+\mM^*(\mq) \ddot{\mq} + \mnu^*(\mq,\dot{\mq}) + \mg^*(\mq) = \mu^*
+\end{empheq}
+
+Sendo:
+\begin{empheq}[box=\myyellowbox]{equation} \label{eq:MSerial_rot}
+\mM^*(\mq) = \mM(\mq) + \sum_{i=1}^\nu \mJ_{\omega_r \,i}^\msT \mI_{r\,i} \mJ_{\omega_r \,i}
+\end{empheq}
+\begin{empheq}[box=\myyellowbox]{equation} \label{eq:vSerial_rot}
+\mnu^*(\mq, \dot{\mq}) = \mnu(\mq, \dot{\mq}) + \underline{r} \, \mzeta(\underline{r} \, \dot{\mq}) + \sum_{i=1}^\nu
+ \mJ_{\omega_r \,i}^\msT \big( \mI_{r\,i} \underaccent{\sim}{\dot{\momega}}_{r\,i} + \momega^\star_{r\,i} \wedge (\mI_{r\,i} \momega^\star_{r\,i}) \big)
+\end{empheq}
+\begin{empheq}[box=\myyellowbox]{equation} \label{eq:gSerial_rot}
+\mg^*(\mq) = \mg(\mq)
+\end{empheq}
+\begin{empheq}[box=\myyellowbox]{equation} \label{eq:uSerial_rot}
+\mu^* = \underline{r} \underline{k_t} \mi
+\end{empheq}
+
+Segue abaixo, a dedução.
+
+\subsubsection{Modelo dos subsistemas rotores} \label{S05-03-02-01}
+
+O modelo dinâmico de cada rotor pode ser obtido por Newton-Euler, pois são considerados como corpos rígidos com inércia puramente rotativa, livres no espaço. Os efeitos da massas do rotor, do estator e do redutor podem facilmente incluídos no modelo simplesmente atualizando os valores dos parâmetros de inércia dos ligamentos. Sendo assim, através do Teorema do Momento Angular, obtemos os esforços inerciais aplicados em cada rotor:
+
+\begin{equation} \label{eq:Newton-Euler_rot}
+\vtau_{r \,i}= -\vI_{\ttr_i} \cdot \dot{\vomega}^{\lllN}_{\lllR_i} - \vomega^{\lllN}_{\lllR_i} \wedge (\vI_{\ttr_i} \cdot \vomega^{\lllN}_{\lllR_i}) ,\; i = 1,...,\nu
+\end{equation}
+
+Aplicando as equações vetoriais no sistema $\ttN$, temos:
+\begin{equation} \label{eq:Newton-EulerMat_rot}
+\vct{\vtau_{r \,i}}_\ttN
+=
+-
+\vct{\vI_{\ttr_i}}_{\ttN \rl \ttN}
+\cdot
+\vct{\dot{\vomega}^{\lllN}_{\lllR_i}}_{\ttN}
+-
+\vct{\vomega^{\lllN}_{\lllR_i}}_{\ttN} \wedge (\vct{\vI_{\ttr_i}}_{\ttN \rl \ttN} \cdot \vct{\vomega^{\lllN}_{\lllR_i}}_{\ttN})
+\end{equation}
+
+Ou seja:
+\begin{empheq}[box=\lightbluebox]{equation} \label{eq:f_i_rot}
+\overline{\mf}_{r \,i}  =
+-\mI_{r \,i}
+\cdot
+\dot{\momega}^\star_{r \,i}
+-
+\momega^\star_{r \,i} \wedge (\mI_{r \,i} \cdot \momega^\star_{r \,i})
+\end{empheq}
+
+Como os subsistemas estão desacoplados, não há forças reativas, portanto o modelo dinâmico de cada subsistema rotor pode ser escrito como:
+\begin{empheq}[box=\mybluebox]{equation}\label{eq:fi_plus_fri_rot}
+\overline{\mf}_{r \,i} = \mzr
+\end{empheq}
+
+Além disso, definindo as quasi-coordenadas:
+\begin{empheq}[box=\lightbluebox]{equation} \label{eq:pi_i_rot}
+\dd\mpi_{r \,i} = \momega^\star_{r \,i} \dd t
+\end{empheq}
+
+Temos que o trabalho virtual realizado por cada subsistema é dado por:
+\begin{empheq}[box=\mybluebox]{equation} \label{eq:dWiSeriais}
+\delta W_{r \,i} =  \delta \mpi_{r \,i}^\msT \cdot \overline{\mf}_{r \,i}
+\end{empheq}
+
+\subsubsection{Modelo do subsistema serial} \label{S05-03-02-02}
+
+O modelo do subsistema serial utilizado é o mesmo que foi deduzido anteriormente considerando $\mu = \mzr$. O efeito das forças ativas aplicadas pelos atuadores será contabilizado na próxima subseção. Sendo assim, os esforços generalizados não-reativos do subsistema serial são dados por:
+\begin{empheq}[box=\lightbluebox]{equation} \label{eq:fs}
+\overline{\mf}_s = - \mM(\mq) \, \ddot{\mq} - \mnu(\mq,\dot{\mq}) - \mg(\mq)
+\end{empheq}
+
+Além disso, o trabalho virtual realizado por este subsistema é dado por:
+\begin{empheq}[box=\mybluebox]{equation}
+\delta W_s =  \delta \mq^\msT \cdot \overline{\mf}_s
+\end{empheq}
+
+
+\subsubsection{Sistemas de forças ativas generalizadas} \label{S05-03-02-03}
+
+Considere também um subsistema constituido pelos esforços que os atuadores aplicam em seus rotores. Os torques gerados pelos atuadores são proporcionais à corrente elétrica que flui pelas suas armaduras e são aplicados na direção dos deslocamentos virtuais relativos dos rotores. Além disso, é possível que hajam esforços de atrito devido ao atrito gerado nos mancais e nas engrenagens do redutor, aplicados na direção aposta dos deslocamentos virtuais relativos dos rotores. Sendo assim, o trabalho virtual realizado por este subsistema é dado por:
+\begin{empheq}[box=\mybluebox]{equation}
+\delta W_\tau = \delta \mq_r^\msT \cdot (\underline{k_t}\,\mi - \mzeta(\dot{\mq}_r) )
+\end{empheq}
+
+%Além disso, é possível que hajam esforços de atrito devido ao atrito gerado nos mancais e nas engrenagens do redutor, aplicados na direção aposta dos deslocamentos virtuais relativos dos rotores.
+
+\subsubsection{Vínculos entre subsistemas} \label{S05-03-02-04}
+
+Tendo em vista que o sistema mecânico $\ssB'$ tem $\nu$ graus de liberdade, e $\mq$ são um conjunto de $\nu$ coordenadas generalizadas independentes, podemos relacionar os deslocamentos virtuais $\delta \mq_r$ e $\delta \mpi_{r\,i}$, com $i=1,...,\nu$, com os deslocamentos virtuais $\delta \mq$, ou seja, obter os vínculos cinemáticos entre os subsistemas. \\
+
+Para relacionar $\delta \mq_r$ com $\delta \mq$ basta aplicar o operador variação em  \eqref{eq:qr}:
+\begin{empheq}[box=\mybluebox]{equation} \label{eq:deltaqr_rot}
+\delta \mq_r = \underline{r} \, \delta \mq
+\end{empheq}
+
+Para relacionar $\delta \mpi_{r\,i}$, aplica-se a relação \eqref{eq:VinculosWrot} em \eqref{eq:pi_i_rot}:
+\begin{equation}
+\dd \mpi_{r\,i} = \mJ_{\omega_r \,i} \, \dd \mq
+\end{equation}
+
+Portanto:
+\begin{empheq}[box=\mybluebox]{equation} \label{eq:deltampi_rot}
+\delta \mpi_{r\,i} = \mJ_{\omega_r \,i} \, \delta \mq
+\end{empheq}
+
+\subsubsection{Acoplamento de subsistemas} \label{S05-03-02-05}
+
+Tendo em vista que um precedimento mais detalhado para acoplamento de subsistemas já foi apresentado, nesta subseção ele será realizado de forma mais sucinta. \\ 
+
+Pelo princípio de d'Alembert, temos que
+\begin{empheq}[box=\lightbluebox]{equation} \label{eq:PdaSeriais_rot}
+\delta W_\tau + \delta W_s  + \sum_{i=1}^\nu \delta W_{r \,i}  = 0
+\end{empheq}
+
+Ou seja:
+\begin{equation} \label{eq:PdaSeriais_rot2}
+\delta\mq_r^\msT \cdot  (\underline{k_t} \, \mi - \mzeta(\dot{\mq}_r) + \delta\mq^\msT \cdot \overline{\mf}_s  + \sum_{i=1}^\nu \delta \mpi_{r \,i}^\msT \cdot \overline{\mf}_{r \,i} = 0
+\end{equation}
+
+Sabe-se que os deslocamentos virtuais $\delta\mq$, $\delta\mq_r$ e $\delta \mpi_{r \,i}$, com $i=1,...,\nu$, não são independentes entre si. Porém, é possível relacionar  $\delta\mq_r$ e $\delta \mpi_{r \,i}$ com os deslocamentos virtuais $\delta\mq$  através das equações \eqref{eq:deltaqr_rot} e \eqref{eq:deltampi_rot}. Sendo assim:
+\begin{equation} \label{eq:PdaSeriais_rot3}
+(\underline{r}\,\delta\mq)^\msT \cdot (\underline{k_t} \, \mi - \mzeta(\underline{r} \, \dot{\mq})) + \delta\mq^\msT \cdot \overline{\mf}_s  + \sum_{i=1}^\nu (\mJ_{\omega_r \,i} \, \delta\mq)^\msT \cdot \overline{\mf}_{r \,i} = 0
+\end{equation}
+
+Ou seja:
+\begin{equation} \label{eq:PdaSeriais_rot4}
+\delta\mq^\msT \cdot \Bigg( \underline{r} \, \underline{k_t} \, \mi - \mzeta(\underline{r} \, \dot{\mq}) + \overline{\mf}_s  + \sum_{i=1}^\nu \mJ_{\omega_r \,i}^\msT \, \overline{\mf}_{r \,i} \Bigg) = 0
+\end{equation}
+
+Tendo em vista que as coordenadas $\mq$ são independentes, as variações $\delta\mq$ são arbitrárias. Sendo assim, as equações dinâmicas do sistema são dadas por:
+\begin{equation} \label{eq:Din_rot1}
+\underline{r} \, \underline{k_t} \, \mi - \underline{r} \, \mzeta(\underline{r} \, \dot{\mq}) + \overline{\mf}_s  + \sum_{i=1}^\nu \mJ_{\omega_r \,i}^\msT \, \overline{\mf}_{r \,i}  = \mzr
+\end{equation}
+
+Substituindo \eqref{eq:f_i_rot} e \eqref{eq:fs} em  \eqref{eq:Din_rot1}, temos:
+\begin{equation} \label{eq:DynSeriais_rot}
+\underline{r} \, \underline{k_t} \, \mi - \underline{r} \, \mzeta(\underline{r} \, \dot{\mq}) - \mM \, \ddot{\mq} - \mnu - \mg  - \sum_{i=1}^\nu \mJ_{\omega_r \,i}^\msT \, ( \mI_{r\,i} \cdot \dot{\momega}_{r\,i}^\star + \momega_{r\,i}^\star \wedge (\mI_{r\,i} \cdot \momega_{r\,i}^\star)  )  = \mzr
+\end{equation}
+
+Substituindo \eqref{eq:dw_ri} em \eqref{eq:DynSeriais_rot}:
+\begin{equation} \label{eq:DynSeriais_rot2}
+\underline{r} \underline{k_t} \, \mi - \underline{r} \, \mzeta(\underline{r} \, \dot{\mq})  - \mM \, \ddot{\mq} - \mnu - \mg  - \sum_{i=1}^\nu \mJ_{\omega_r \,i}^\msT \, ( \mI_{r\,i} \cdot (\mJ_{\omega_r \,i}  \cdot \ddot{\mq} + \underaccent{\sim}{\dot{\momega}}_{r\,i}  ) + \momega_{r\,i}^\star \wedge (\mI_{r\,i} \cdot \momega_{r\,i}^\star)  )  = \mzr
+\end{equation}
+
+Sendo assim, obtemos o modelo dinâmico mostrado anteriormente:
+\begin{equation} \tag{\ref{eq:ModeloMecSerial_rot}}
+\mM^*(\mq) \ddot{\mq} + \mnu^*(\mq,\dot{\mq}) + \mg^*(\mq) = \mu^*
+\end{equation}
+
+Sendo:
+\begin{equation} \tag{\ref{eq:MSerial_rot}}
+\mM^*(\mq) = \mM(\mq) + \sum_{i=1}^\nu \mJ_{\omega_r \,i}^\msT \mI_{r\,i} \mJ_{\omega_r \,i}
+\end{equation}
+\begin{equation} \tag{\ref{eq:vSerial_rot}}
+\mnu^*(\mq, \dot{\mq}) = \mnu(\mq, \dot{\mq}) + \underline{r} \, \mzeta(\underline{r} \, \dot{\mq}) + \sum_{i=1}^\nu
+ \mJ_{\omega_r \,i}^\msT \big( \mI_{r\,i} \underaccent{\sim}{\dot{\momega}}_{r\,i} + \momega^\star_{r\,i} \wedge (\mI_{r\,i} \momega^\star_{r\,i}) \big)
+\end{equation}
+\begin{equation} \tag{\ref{eq:gSerial_rot}}
+\mg^*(\mq) = \mg(\mq)
+\end{equation}
+\begin{equation} \tag{\ref{eq:uSerial_rot}}
+\mu^* = \underline{r} \underline{k_t} \mi
+\end{equation}
+
+\section{Modelo completo}\label{S05-03-03}
+
+O modelo do sistema elétrico equivalente de um motor de corrente contínua é dado por uma fonte de tensão variável ligada em série a um indutor, um resistor, e uma força contra-eletromotriz diretamente proporcional à velocidade angular do rotor em relação ao estator, ou seja:
+\begin{empheq}[box=\lightbluebox]{equation} \label{eq:MotorDC}
+L \, \frac{\dd i}{\dd t} + R \, i + k_w \, \omega = \upsilon
+\end{empheq}
+
+Tendo em vista que todas as juntas de um mecanismo paralelo são atuadas, a equação matricial da dinâmica elétrica do sistema é dada por:
+\begin{empheq}[box=\lightbluebox]{equation} \label{eq:DinEletrica_rot}
+\underline{L} \, \frac{\dd \mi}{\dd t} + \underline{R} \, \mi + \underline{k_w} \, \dot{\mq}_r = \mup
+\end{empheq}
+
+Sendo assim, juntando as equações \eqref{eq:ModeloMecSerial_rot} e \eqref{eq:DinEletrica_rot}, obtemos a dinâmica  do sistema como um todo:
+\begin{empheq}[box=\mybluebox]{equation}
+\begin{cases}
+\mM^*(\mq) \, \ddot{\mq} + \mnu^*(\mq,\dot{\mq}) + \mg^*(\mq) = \underline{r} \, \underline{k_t}\mi   \\
+\underline{L} \, \frac{\dd \mi}{\dd t} + \underline{R} \, \mi + \underline{r} \, \underline{k_w} \, \dot{\mq} = \mup
+\end{cases}
+\end{empheq}
+
+%MODELAGEM DE MANIPULADORES PARALELOS--------------------------------------------------------------
+
+\chapter{Modelagem de manipuladores paralelos}\label{S05-4}
+
+Esta subseção tem o intuito de apresentar um algoritmo genérico para a obtenção do modelo dinâmico de mecanismos paralelos cujo efetuador realiza apenas movimentos de translação. O algoritmo apresentado é implementável em linguagens de programação comumente usadas atualmente, como C++, Java e Python, sem necessitar de recursos de manipulação simbólica. \\
+Para a obtenção do modelo do mecanismo paralelos, são necessários apenas os modelos de mecanismos seriais deduzidos  utilizando o algoritmo apresentado anteriormente, do modelo do efetuador, e de 7 matrizes constantes que são utilizadas para descrever a arquitetura do mecanismo paralelo. \\ 
+
+Para realizar a modelagem de mecanismos paralelos a partir de subsistemas seriais j\'a deduzidos, \'e necess\'ario introduzir mais alguns conceitos: \\
+
+Sejam $\ssB_0$, $\ssB_1$, ..., $\ssB_{n} \,$ $n+1$ subsistemas mec\^anicos e $\ssM$ um sistema mec\^anico de $\nu\ssh$ graus de liberdade gerado pelo acoplamento dos subsistemas citados. Definimos:
+
+\begin{itemize}
+\item $\llN_i, \, i=0,...,n$: referencial inercial relativo ao subsistema $\ssB_i$.
+\item $\ttN_i, \, i=0,...,n$: sistema de coordenadas solidário a $\llN_i$.
+\item $\tto_i, \,i=0,...,n$: origem do sistema $\ttN_i$.
+\item $\ttg$: centro de massa da plataforma/efetuador $\llB_0$.
+\item $\ttB$: sistema de coordenadas solidário a $\ssB_0$ com origem em $\ttg$.
+\item $m$: massa da plataforma/efetuador $\llB_0$.
+%\item $\vI_{\ttg}$: tensor de in\'ercia da plataforma/efetuador $\llB_0$ em relação a seu centro de massa.
+%\item $\mI$: tensor de in\'ercia $\vI_{\ttg}$ escrito na base $\ttN_0$, ou seja, $\vct{\vI_{\ttg}}_{\ttN_0 \rl \ttN_0}$.
+\item $\vf$: Vetor de forças não-reativas (ativas e inerciais) aplicadas no centro de massa da plataforma/efetuador $\llB_0$.
+\item $\vg$: Vetor aceleração gravitacional.
+\item $\mgamma$: Vetor aceleração gravitacional escrito na base $\ttN_0$, ou seja, $\vct{\vg}_{\ttN_0}$.
+\item $\mq_i, \,i=0, ..., n$: matriz-coluna de coordenadas generalizadas do subsistema $\ssB_i$.
+%\item $\mx^\ast$: matriz-coluna de coordenadas generalizadas de posição da plataforma/efetuador $\ssB_0$.
+%\item $\mtheta^\ast$: matriz-coluna de coordenadas generalizadas de orientação da plataforma/efetuador $\ssB_0$.
+\item $\mq^\ast$: matriz-coluna de coordenadas generalizadas da plataforma/efetuador $\ssB_0$. %Definida como $\mq^\ast = \mq_0 = \begin{bmatrix} {\mx^\ast}^\msT & {\mtheta^\ast}^\msT \end{bmatrix}^\msT $.
+\item $\mq^\diamond$: matriz-coluna de coordenadas generalizadas dos subsistemas seriais. Definida como $\mq^\diamond = \begin{bmatrix}  {\mq_1}^\msT & ... & {\mq_{n}}^\msT \end{bmatrix}^\msT $.
+\item $\mq$: matriz-coluna contendo todas as coordenadas generalizadas do sistema $\ssM$. Definida como $\mq = \begin{bmatrix} {\mq^\ast}^\msT & {\mq^\diamond}^\msT \end{bmatrix}^\msT $.
+%\item $\mp_i, \,i=0, ..., n$: matriz-coluna de quasi-velocidades do subsistema $\ssB_i$.
+%\item $\momega^\ast$: matriz-coluna de componentes de velocidade angular da plataforma/efetuador $\ssB_0$.
+%\item $\mp^\ast$: matriz-coluna de quasi-velocidades da plataforma/efetuador $\ssB_0$. Definida como $\mp^\ast = \mp_0 = \begin{bmatrix} {\dot{\mx}^\ast}^\msT & {\momega^\ast}^\msT \end{bmatrix}^\msT $.
+%\item $\mp^\diamond$: matriz-coluna de quasi-velocidades dos subsistemas seriais. Definida como $\mp^\diamond = \dot{\mq}^\diamond $.
+%\item $\mp$: matriz-coluna contendo todas as quasi-velocidades do sistema $\ssM$. Definida como $\mp = \begin{bmatrix} {\mp^\ast}^\msT & {\mp^\diamond}^\msT \end{bmatrix}^\msT $.
+\item $\mq\ssh$: matriz-coluna de $\nu\ssh$ coordenadas generalizadas independentes.
+\item $\mq\cir$: matriz-coluna de coordenadas generalizadas redundantes (contém as componentes de $\mq$ não pertencentes a $\mq\ssh$)
+\item $\overline{\mq}(\mq)$: matriz-coluna dos v\'inculos de posi\c{c}\~ao entre subsistemas. As equa\c{c}\~oes vinculares s\~ao dadas por $\overline{\mq}(\mq) = \mzr $.
+\item $\overline{\momega}(\mq,\dot{\mq})$: matriz-coluna dos v\'inculos de orienta\c{c}\~ao entre subsistemas. As equa\c{c}\~oes vinculares s\~ao dadas por $\overline{\momega}(\mq,\dot{\mq}) = \mzr $.
+\item $\ttx_i, \,i=1, ..., n$: ponto no espa\c{c}o fixo ao efetuador de $\ssB_i$.
+\item $\mx_i(\mq_i), \,i=1, ..., n$: $\vct{\ttx_i}_{\ttN_i}$ escrito em função das coordenadas $\mq_i$.
+\item $\mJ_{v\,\ssB_i}(\mq_i), \,i=1, ..., n$: jacobiano $\mJ_v$ do subsistema $\ssB_i$.
+\item $\mJ_{\omega\,\ssB_i}(\mq_i), \,i=1, ..., n$: jacobiano $\mJ_\omega$ do subsistema $\ssB_i$.
+\item $\underaccent{\sim}{\ma}_{\ssB_i}(\mq_i, \mp_i), \,i=1, ..., n$: matriz-coluna $\underaccent{\sim}{\ma}$ do subsistema $\ssB_i$.
+\item $\underaccent{\sim}{\dot{\momega}}_{\ssB_i}(\mq_i, \mp_i), \,i=1, ..., n$: matriz-coluna $\underaccent{\sim}{\dot{\momega}}$ do subsistema $\ssB_i$.
+\item $\mM_{\ssB_i}(\mq_i), \,i=0, ..., n$: matriz de in\'ercia generalizada do subsistema $\ssB_i$.
+\item $\mnu_{\ssB_i}(\mq_i, \mp_i), \,i=0, ..., n$: matriz-coluna das forças de inércia girosc\'opica e atrito generalizadas do subsistema $\ssB_i$.
+\item $\mg_{\ssB_i}(\mq_i), \,i=0, ..., n$: matriz-coluna dos esfor\c{c}os gravitacionais generalizados do subsistema $\ssB_i$.
+\item $\mu_{\ssB_i}, \,i=0, ..., n$: matriz-coluna dos esfor\c{c}os ativos externos generalizados aplicados ao subsistema $\ssB_i$.
+\end{itemize}
+
+\section{Modelo dos subsistemas} \label{S05-03-01}
+
+O modelo dinâmico de cada subsistema desacoplado pode ser escrito como:
+
+\begin{equation} \label{eq:ModeloDosSubsistemas}
+\overline{\mf}_{\ssB_i}(\mu_i, \mq_i, \dot{\mq}_i, \ddot{\mq}_i) =  \mu_{\ssB_i} - \Big(\mM_{\ssB_i}(\mq_i) \ddot{\mq}_i + \mnu_{\ssB_i}(\mq_i,\dot{\mq}_i) + \mg_{\ssB_i}(\mq_i)\Big) = \mzr, \, i = 0,...,n
+\end{equation}
+
+Sendo que para $i=0$ temos o modelo do efetuador/plataforma e para $i>0$ temos os modelos dos mecanismos seriais obtidos anteriormente. \\
+
+
+O trabalho virtual dos esforços não-reativos (ativos e inerciais) de cada subsistema é dado por:
+\begin{equation}
+\delta W_i = \delta \mq_i^\msT \cdot \overline{\mf}_{\ssB_i}, \, i = 0,...,n
+\end{equation}
+
+Para os subsistemas seriais, as matrizes $\mM_{\ssB_i}$, $\mnu_{\ssB_i}$ e $\mg_{\ssB_i}$ são obtidas utilizando o algoritmo de modelagem de mecanismos seriais apresentado anteriormente. Para o efetuador, iremos utilizar o modelo de um corpo rígido livre no espaço, que realiza apenas translação. Sendo assim, aplicando Teorema do Movimento do Baricentro no efetuador, obtemos os esforços não-reativos  nele aplicados:
+
+%\begin{equation} \label{eq:Newton-EulerE}
+%\begin{cases}
+%m \va^{\lllN_0}_{\ttg} - m \vg = \vzr \\
+%\vI_{\ttg} \cdot \dot{\vomega}^{\lllN_0}_{\lllB_0} + \vomega^{\lllN_0}_{\lllB_0} \wedge (\vI_{\ttg} \cdot \vomega^{\lllN_0}_{\lllB_0}) = \vzr
+%\end{cases}
+%\end{equation}
+
+\begin{equation} \label{eq:Newton-EulerE}
+\vf = -m \va^{\lllN_0}_{\ttg} + m \vg
+\end{equation}
+
+
+Aplicando as equações vetoriais no sistema $\ttN$, temos:
+%\begin{equation} \label{eq:Newton-EulerMatE}
+%\begin{bmatrix}
+%m \mone & \mzr \\
+%\mzr      & \vct{\vI_{\ttg}}_{\ttN_0 \rl \ttN_0}
+%\end{bmatrix}
+%\cdot
+%\begin{bmatrix}
+%\vct{\va^{\lllN_0}_{\ttg}}_{\ttN_0}  \\
+%\vct{\dot{\vomega}^{\lllN_0}_{\lllB_0}}_{\ttN_0}
+%\end{bmatrix}
+%+
+%\begin{bmatrix}
+%\mzr \\
+%\vct{\vomega^{\lllN_0}_{\lllB_0}}_{\ttN_0} \wedge (\vct{\vI_{\ttg}}_{\ttN_0 \rl \ttN_0} \cdot \vct{\vomega^{\lllN_0}_{\lllB_0}}_{\ttN_0})
+%\end{bmatrix}
+%+
+%\begin{bmatrix}
+%-m \vct{\vg}_{\ttN_0} \\
+%\mzr
+%\end{bmatrix}
+%=
+%\mzr
+%\end{equation}
+
+\begin{equation} \label{eq:Newton-EulerMatE}
+\vct{\vf}_{\ttN_0} = -m \vct{\va^{\lllN_0}_{\ttg}}_{\ttN_0}  +m \vct{\vg}_{\ttN_0}
+\end{equation}
+
+Definindo:
+%\begin{equation}
+%\mx^\ast = \vct{\ttg}_{\ttN_0}
+%\end{equation}
+%\begin{equation}
+%\momega^\ast = \vct{\vomega^{\lllN_0}_{\lllB_0}}_{\ttN_0}
+%\end{equation}
+\begin{equation}
+\mq^\ast = \vct{\ttg}_{\ttN_0}
+\end{equation}
+
+Temos:
+%\begin{equation} \label{eq:Newton-EulerMat2E}
+%\begin{bmatrix}
+%m \mone & \mzr \\
+%\mzr      & \mI
+%\end{bmatrix}
+%\cdot
+%\begin{bmatrix}
+%\ddot{\mx}^\ast  \\
+%\dot{\momega}^\ast
+%\end{bmatrix}
+%+
+%\begin{bmatrix}
+%\mzr \\
+%\dot{\momega}^\ast \wedge (\mI \cdot \dot{\momega}^\ast)
+%\end{bmatrix}
+%+
+%\begin{bmatrix}
+%-m \mgamma \\
+%\mzr
+%\end{bmatrix}
+%=
+%\mzr
+%\end{equation}
+\begin{equation} \label{eq:Newton-EulerMat2E}
+\overline{\mf}_{\ssB_0} = -m \ddot{\mq}^\ast + m \mgamma
+\end{equation}
+
+Portanto:
+%\begin{equation}
+%\mM_{\ssB_0}(\mq_0) = 
+%\begin{bmatrix}
+%m \mone & \mzr \\
+%\mzr      & \mI(\mtheta^\ast)
+%\end{bmatrix}
+%\end{equation}
+\begin{equation}
+\mM_{\ssB_0} = m \mone
+\end{equation}
+%\begin{equation}
+%\mnu_{\ssB_0}(\mq_0, \mp_0) = 
+%\begin{bmatrix}
+%\mzr \\
+%\dot{\momega}^\ast \wedge \big(\mI(\mtheta^\ast) \cdot \dot{\momega}^\ast \big)
+%\end{bmatrix}
+%\end{equation}
+\begin{equation}
+\mnu_{\ssB_0} = \mzr
+\end{equation}
+%\begin{equation}
+%\mg_{\ssB_0}(\mq_0) = 
+%\begin{bmatrix}
+%-m \mgamma \\
+%\mzr
+%\end{bmatrix}
+%\end{equation}
+\begin{equation}
+\mg_{\ssB_0} = -m \mgamma
+\end{equation}
+
+
+\section{Vínculos cinemáticos entre subsistemas} \label{S05-03-02}
+
+
+\subsection{Vínculos de posição} \label{S05-03-02-01}
+
+Seja $\ttp_i$ um ponto pertencente à plataforma/efetuador $\ssB_0$ e também ao efetuador do subsistema serial $\ssB_i$. Sendo assim, é possível relacionar as coordenadas do ponto $\ttp_i$ escritas no sistema $\ttN_0$ partindo da plataforma/efetuador $\ssB_0$ e da cadeia serial $\ssB_i$:
+
+\begin{equation}
+\vct{\ttp_i}_{\ttN_0} = \vct{\vone}_{\ttN_0 \rl \ttB} \vct{\ttp_i}_\ttB + \vct{\ttg}_{\ttN_0} = \vct{\vone}_{\ttN_0 \rl \ttN_i} \vct{\ttp_i}_{\ttN_i} + \vct{\tto_i}_{\ttN_0} 
+\end{equation}
+
+%Sabe-se que $\vct{\ttg}_{\ttN_0} = \mx^\ast$ e $\vct{\ttp_i}_{\ttN_i} = \mx_i(\mq_i)$. Tendo em vista que $\vct{\ttp_i}_\ttB$, $\vct{\vone}_{\ttN_0 \rl \ttN_i}$ e $\vct{\tto_i}_{\ttN_0}$ são constantes e que $\vct{\vone}_{\ttN_0 \rl \ttB}$ depende de $\mtheta^\ast$, definindo:
+Sabe-se que $\vct{\ttg}_{\ttN_0} = \mq^\ast$ e $\vct{\ttp_i}_{\ttN_i} = \mx_i(\mq_i)$. Tendo em vista que $\vct{\ttp_i}_\ttB$, $\vct{\vone}_{\ttN_0 \rl \ttN_i}$, $\vct{\tto_i}_{\ttN_0}$ e $\vct{\vone}_{\ttN_0 \rl \ttB}$ são constantes, definindo:
+
+%\begin{equation}
+%\mc_i(\mtheta^\ast) = -\vct{\vone}_{\ttN_0 \rl \ttB} \vct{\ttp_i}_\ttB
+%\end{equation}
+%\begin{equation}
+%\md_i = \vct{\tto_i}_{\ttN_0} 
+%\end{equation}
+\begin{equation}
+\md_i = \vct{\tto_i}_{\ttN_0} -\vct{\vone}_{\ttN_0 \rl \ttB} \vct{\ttp_i}_\ttB
+\end{equation}
+\begin{equation}
+\mE_i = \vct{\vone}_{\ttN_0 \rl \ttB}
+\end{equation}
+
+Temos:
+
+%\begin{equation}
+%\mx^\ast = \mc_i(\mtheta^\ast) + \md_i + \mE_i \cdot \mx_i(\mq_i), \, i = 1,...,n
+%\end{equation}
+\begin{equation}
+\mq^\ast = \md_i + \mE_i \cdot \mx_i(\mq_i), \, i = 1,...,n
+\end{equation}
+
+Assim:
+%\begin{equation} \label{eq:VinculosPosicao}
+%\begin{bmatrix}
+%\mone\\
+%\vdots\\
+%\mone
+%\end{bmatrix}\cdot \mx^\ast =
+%\begin{bmatrix}
+%\mc_1(\mtheta^\ast) \\
+%\vdots \\
+%\mc_n(\mtheta^\ast)
+%\end{bmatrix}
+%+
+%\begin{bmatrix}
+%\md_1 \\
+%\vdots \\
+%\md_n
+%\end{bmatrix}
+%+
+%\begin{bmatrix}
+%\mE_1 & \ldots & \mzr\\
+%\vdots & \ddots & \vdots\\
+%\mzr &\ldots  & \mE_{n}
+%\end{bmatrix}
+%\cdot
+%\begin{bmatrix}
+%\mx_1(\mq_1) \\
+%\vdots \\
+%\mx_n(\mq_n)
+%\end{bmatrix}
+%\end{equation}
+\begin{equation} \label{eq:VinculosPosicao}
+\begin{bmatrix}
+\mone\\
+\vdots\\
+\mone
+\end{bmatrix}\cdot \mq^\ast =
+\begin{bmatrix}
+\md_1 \\
+\vdots \\
+\md_n
+\end{bmatrix}
++
+\begin{bmatrix}
+\mE_1 & \ldots & \mzr\\
+\vdots & \ddots & \vdots\\
+\mzr &\ldots  & \mE_{n}
+\end{bmatrix}
+\cdot
+\begin{bmatrix}
+\mx_1(\mq_1) \\
+\vdots \\
+\mx_n(\mq_n)
+\end{bmatrix}
+\end{equation}
+
+Além disso, em alguns casos é necessário incluir vínculos afins entre as coordenadas generalizadas, ou seja:
+\begin{equation} \label{eq:VinculosPosicaoAfins}
+\mD_{\oplus}\cdot\mq^\ast = \md_{\oplus} + \mF_{\oplus}\cdot\mq^\diamond
+\end{equation}
+
+Juntando a equação \eqref{eq:VinculosPosicaoAfins} à equação \eqref{eq:VinculosPosicao}, temos:
+%\begin{equation} \label{eq:VinculosPosicao2}
+%\begin{bmatrix}
+%\mone\\
+%\vdots\\
+%\mone \\
+%\mD_{\oplus}
+%\end{bmatrix}
+%\cdot
+%\mq^\ast =
+%\begin{bmatrix}
+%\mc_1(\mtheta^\ast) \\
+%\vdots \\
+%\mc_n(\mtheta^\ast) \\
+%\mzr
+%\end{bmatrix}
+%+
+%\begin{bmatrix}
+%\md_1 \\
+%\vdots \\
+%\md_n \\
+%\md_{\oplus}
+%\end{bmatrix}
+%+
+%\begin{bmatrix}
+%\mE_1 & \ldots & \mzr\\
+%\vdots & \ddots & \vdots\\
+%\mzr &\ldots  & \mE_{n} \\
+%\mzr &\ldots  & \mzr
+%\end{bmatrix}
+%\cdot
+%\begin{bmatrix}
+%\mx_1(\mq_1) \\
+%\vdots \\
+%\mx_n(\mq_n)
+%\end{bmatrix}
+%+
+%\begin{bmatrix}
+%\mzr\\
+%\vdots\\
+%\mzr \\
+%\mF_{\oplus}
+%\end{bmatrix}
+%\cdot
+%\mq^\diamond
+%\end{equation}
+\begin{equation} \label{eq:VinculosPosicao2}
+\begin{bmatrix}
+\mone\\
+\vdots\\
+\mone \\
+\mD_{\oplus}
+\end{bmatrix}
+\cdot
+\mq^\ast =
+\begin{bmatrix}
+\md_1 \\
+\vdots \\
+\md_n \\
+\md_{\oplus}
+\end{bmatrix}
++
+\begin{bmatrix}
+\mE_1 & \ldots & \mzr\\
+\vdots & \ddots & \vdots\\
+\mzr &\ldots  & \mE_{n} \\
+\mzr &\ldots  & \mzr
+\end{bmatrix}
+\cdot
+\begin{bmatrix}
+\mx_1(\mq_1) \\
+\vdots \\
+\mx_n(\mq_n)
+\end{bmatrix}
++
+\begin{bmatrix}
+\mzr\\
+\vdots\\
+\mzr \\
+\mF_{\oplus}
+\end{bmatrix}
+\cdot
+\mq^\diamond
+\end{equation}
 
 
 
+Sendo assim, os vínculos de posição entre subsistemas podem ser descritos de maneira genérica por:
+%\begin{equation} \label{eq:VinculosGenericosPosicao}
+%\overline{\mq}(\mq) = \mD \cdot \mx^\ast - \mc(\mtheta^\ast) - \md - \mE \cdot \mx(\mq)
+%- \mF \cdot \mq^\diamond = \mzr
+%\end{equation}
+\begin{equation} \label{eq:VinculosGenericosPosicao}
+\overline{\mq}(\mq) = \mD \cdot \mq^\ast - \md - \mE \cdot \mx(\mq)
+- \mF \cdot \mq^\diamond = \mzr
+\end{equation}
 
 
-\blinddocument
+Sendo:
+
+\begin{equation}
+\mD = \begin{bmatrix}
+\mone &
+\hdots &
+\mone &
+\mD_{\oplus}^\msT &
+\end{bmatrix}^\msT
+\end{equation}
+
+%\begin{equation}
+%\mc(\mtheta^\ast) = 
+%\begin{bmatrix}
+%\mc_1(\mtheta^\ast)^\msT &
+%\hdots &
+%\mc_n(\mtheta^\ast)^\msT &
+%\mzr
+%\end{bmatrix}^\msT
+%\end{equation}
+
+\begin{equation}
+\md  = \begin{bmatrix}
+\md_1^\msT &
+\hdots &
+\md_n^\msT &
+\md_{\oplus}^\msT
+\end{bmatrix}^\msT
+\end{equation}
+
+\begin{equation}
+\mE = \begin{bmatrix}
+\mE_1 & \ldots & \mzr\\
+\vdots & \ddots & \vdots\\
+\mzr &\ldots  & \mE_{n} \\
+\mzr &\ldots  & \mzr
+\end{bmatrix}
+\end{equation}
+
+\begin{equation}
+\mx(\mq) = 
+\begin{bmatrix}
+\mx_1(\mq_1)^\msT &
+\hdots &
+\mx_n(\mq_n)^\msT
+\end{bmatrix}^\msT
+\end{equation}
+
+\subsection{Vínculos de velocidades lineares} \label{S05-03-02-02}
+
+Derivando no tempo a equação \eqref{eq:VinculosGenericosPosicao}, temos:
+%\begin{equation} \label{eq:VinculosGenericosVel}
+%\dot{\overline{\mq}}(\mq,\dot{\mq}) = \mD \cdot \dot{\mq}^\ast- \dot{\mc}(\mtheta^\ast, \momega^\ast) - \mE \cdot \dot{\mx}(\mq,\dot{\mq}) - \mF \cdot \dot{\mq}^\diamond = \mzr
+%\end{equation}
+\begin{equation} \label{eq:VinculosGenericosVel}
+\dot{\overline{\mq}}(\mq,\dot{\mq}) = \mD \cdot \dot{\mq}^\ast - \mE \cdot \dot{\mx}(\mq,\dot{\mq}) - \mF \cdot \dot{\mq}^\diamond = \mzr
+\end{equation}
+
+
+A derivada $\dot{\mx}$ pode ser obtida da seguinte maneira:
+\begin{equation} \label{eq:dxdt}
+\dot{\mx}(\mq,\dot{\mq}) = \frac{\dd}{\dd t}
+\begin{bmatrix}
+\mx_1(\mq_1) \\
+\vdots \\
+\mx_n(\mq_n)
+\end{bmatrix} =
+\begin{bmatrix}
+\mJ_{v\,\ssB_1}(\mq_1) \cdot \dot{\mq}_1 \\
+\vdots \\
+\mJ_{v\,\ssB_n}(\mq_n) \cdot \dot{\mq}_n
+\end{bmatrix}
+=
+\mJ_{\mathsf{v}}(\mq^\diamond) \cdot \dot{\mq}^\diamond
+\end{equation}
+
+Sendo:
+\begin{equation}
+\mJ_{\mathsf{v}}(\mq^\diamond) =
+\begin{bmatrix}
+\mJ_{v\,\ssB_1}(\mq_1) & \ldots & \mzr\\
+\vdots & \ddots & \vdots\\
+\mzr &\ldots  & \mJ_{v\,\ssB_n}(\mq_n)
+\end{bmatrix}
+\end{equation}
+
+%E a derivada $\dot{\mc}$ pode ser obtida da seguinte maneira:
+%\begin{equation} \label{eq:dcdt}
+%\dot{\mc}(\mtheta^\ast,\momega^\ast) = \frac{\dd}{\dd t}
+%\begin{bmatrix}
+%\mc_1(\mtheta^\ast) \\
+%\vdots \\
+%\mc_n(\mtheta^\ast) \\
+%\mzr
+%\end{bmatrix} =
+%\begin{bmatrix}
+%\momega^\ast \wedge \mc_1(\mtheta^\ast) \\
+%\vdots \\
+%\momega^\ast \wedge \mc_n(\mtheta^\ast) \\
+%\mzr
+%\end{bmatrix}
+%=
+%-\mS^\ast(\mtheta^\ast) \cdot \momega^\ast
+%\end{equation}
+%
+%Sendo:
+%\begin{equation}
+%\mS^\ast(\mtheta^\ast) =
+%\begin{bmatrix}
+% \mS\big(\mc_1(\mtheta^\ast)\big) \\
+%\vdots \\
+%\mS\big(\mc_n(\mtheta^\ast)\big) \\
+%\mzr
+%\end{bmatrix}
+%\end{equation}
+
+
+%Assim, substituindo \eqref{eq:dxdt} e \eqref{eq:dcdt} em \eqref{eq:VinculosGenericosVel}, obtemos:
+%\begin{equation} \label{eq:VinculosGenericosVelocidades}
+%\dot{\overline{\mq}}(\mq,\mp) = \mD \cdot \dot{\mx}^\ast + \mS^\ast(\mtheta^\ast) \cdot \momega^\ast - \mE \cdot \mJ_{\mathsf{v}}(\mq^\diamond) \cdot \mp^\diamond  - \mF \cdot \mp^\diamond = \mzr
+%\end{equation}
+Assim, substituindo \eqref{eq:dxdt} em \eqref{eq:VinculosGenericosVel}, obtemos:
+\begin{equation} \label{eq:VinculosGenericosVelocidades}
+\dot{\overline{\mq}}(\mq,\mp) = \mD \cdot \dot{\mq}^\ast - (\mE \cdot \mJ_{\mathsf{v}}(\mq^\diamond) + \mF) \cdot \dot{\mq}^\diamond = \mzr
+\end{equation}
+
+\subsection{Vínculos de velocidades angulares} \label{S05-03-02-03}
+
+Supondo que os efetuadores de cada cadeia serial $\ssB_i$ estejam ligados rigidamente à plataforma/efetuador $\ssB_0$, temos que todos apresentam velocidade angular em relação a $\ttN_0$, tendo em vista que $\lllB_0$ só translada. Sendo assim, obtem-se as seguintes relações:
+
+\begin{equation}
+\vct{\vomega^{\lllN_0}_{\lllB_0}}_{\ttN_0} = \mzr = \vct{\vone}_{\ttN_0 \rl \ttN_i}  \vct{\vomega^{\lllN_i}_{\lllB_0}}_{\ttN_i} , \; i = 1, ... , n
+\end{equation}
+
+Sabe-se que $\vct{\vomega^{\lllN_i}_{\lllB_0}}_{\ttN_i} =  \mJ_{\omega\,\ssB_i}(\mq_i) \dot{\mq}_i$ e que $\mE_i =\vct{\vone}_{\ttN_0 \rl \ttN_i}$. Sendo assim, temos:
+
+\begin{equation}
+\mzr = \mE_i \cdot \mJ_{\omega\,\ssB_i}(\mq_i) \dot{\mq}_i, \, i = 1,...,n
+\end{equation}
+
+Assim:
+%\begin{equation} \label{eq:VinculosVelAng}
+%\begin{bmatrix}
+%\mone\\
+%\vdots\\
+%\mone
+%\end{bmatrix}\cdot \momega^\ast =
+%\begin{bmatrix}
+%\mE_1 & \ldots & \mzr\\
+%\vdots & \ddots & \vdots\\
+%\mzr &\ldots  & \mE_{n}
+%\end{bmatrix}
+%\cdot
+%\begin{bmatrix}
+%\mJ_{\omega\,\ssB_1}(\mq_1) & \ldots & \mzr\\
+%\vdots & \ddots & \vdots\\
+%\mzr &\ldots  & \mJ_{\omega\,\ssB_n}(\mq_n)
+%\end{bmatrix}
+%\begin{bmatrix}
+%\dot{\mq}_1 \\
+%\vdots \\
+%\dot{\mq}_n
+%\end{bmatrix}
+%\end{equation}
+\begin{equation} \label{eq:VinculosVelAng}
+\mzr =
+\begin{bmatrix}
+\mE_1 & \ldots & \mzr\\
+\vdots & \ddots & \vdots\\
+\mzr &\ldots  & \mE_{n}
+\end{bmatrix}
+\cdot
+\begin{bmatrix}
+\mJ_{\omega\,\ssB_1}(\mq_1) & \ldots & \mzr\\
+\vdots & \ddots & \vdots\\
+\mzr &\ldots  & \mJ_{\omega\,\ssB_n}(\mq_n)
+\end{bmatrix}
+\begin{bmatrix}
+\dot{\mq}_1 \\
+\vdots \\
+\dot{\mq}_n
+\end{bmatrix}
+\end{equation}
+
+Sendo assim, os vínculos de posição entre subsistemas podem ser descritos de maneira genérica por:
+%\begin{equation}
+%\overline{\momega}(\mq,\mp) = \mP \cdot \momega^\ast - \mQ \cdot \mJ_{\mathsf{w}}(\mq^\diamond) \cdot \mp^\diamond  = \mzr
+%\end{equation}
+\begin{equation}
+\overline{\momega}(\mq,\dot{\mq}) = - \mQ \cdot \mJ_{\mathsf{w}}(\mq^\diamond) \cdot \dot{\mq}^\diamond  = \mzr
+\end{equation}
+
+Sendo:
+%\begin{equation}
+%\mP = \begin{bmatrix}
+%\mone &
+%\hdots &
+%\mone
+%\end{bmatrix}^\msT
+%\end{equation}
+\begin{equation}
+\mQ = \begin{bmatrix}
+\mE_1 & \ldots & \mzr\\
+\vdots & \ddots & \vdots\\
+\mzr &\ldots  & \mE_{n}
+\end{bmatrix}
+\end{equation}
+
+\begin{equation} \label{eq:VinculosGenericosVelocidadesAngulares}
+\mJ_{\mathsf{w}}(\mq^\diamond) =
+\begin{bmatrix}
+\mJ_{\omega\,\ssB_1}(\mq_1) & \ldots & \mzr\\
+\vdots & \ddots & \vdots\\
+\mzr &\ldots  & \mJ_{\omega\,\ssB_n}(\mq_n)
+\end{bmatrix}
+\end{equation}
+
+\subsection{Vínculos de quasi-velocidades} \label{S05-03-02-04}
+
+Os vínculos de quasi-velocidades são dados pela união dos vínculos de velocidades lineares e dos vínculos de velocidades angulares, ou seja:
+%\begin{equation} \label{eq:VinculosQuasiVel}
+%\overline{\mp}(\mq,\mp) = \begin{bmatrix}
+%\dot{\overline{\mq}}(\mq,\dot{\mq}) \\
+%\overline{\momega}(\mq,\dot{\mq})
+%\end{bmatrix}
+%= 
+%\begin{bmatrix}
+%\mD \cdot \dot{\mx}^\ast + \mS^\ast(\mtheta^\ast) \cdot \momega^\ast - \mE \cdot \mJ_{\mathsf{v}}(\mq^\diamond) \cdot \mp^\diamond  - \mF \cdot \mp^\diamond \\
+%\mP \cdot   \momega^\ast - \mQ \cdot \mJ_{\mathsf{w}}(\mq^\diamond) \cdot \mp^\diamond
+%\end{bmatrix}
+%=
+%\mzr
+%\end{equation}
+\begin{equation} \label{eq:VinculosQuasiVel}
+\overline{\mp}(\mq,\dot{\mq}) = \begin{bmatrix}
+\dot{\overline{\mq}}(\mq,\dot{\mq}) \\
+\overline{\momega}(\mq,\dot{\mq})
+\end{bmatrix}
+= 
+\begin{bmatrix}
+\mD \cdot \dot{\mq}^\ast  - \mE \cdot \mJ_{\mathsf{v}}(\mq^\diamond) \cdot \dot{\mq}^\diamond  - \mF \cdot \dot{\mq}^\diamond \\
+ - \mQ \cdot \mJ_{\mathsf{w}}(\mq^\diamond) \cdot \dot{\mq}^\diamond
+\end{bmatrix}
+=
+\mzr
+\end{equation}
+
+
+Repare que \eqref{eq:VinculosQuasiVel} pode ser reescrita como:
+%\begin{equation}
+%\overline{\mp}(\mq,\mp) = \mA(\mq) \mp = \mzr
+%\end{equation}
+\begin{equation} \label{eq:VinculosQuasiVel2}
+\overline{\mp}(\mq,\dot{\mq}) = \mA(\mq) \dot{\mq} = \mzr
+\end{equation}
+
+Sendo $\mA$ dado por:
+%\begin{equation}
+%\mA(\mq) = 
+%\begin{bmatrix}
+%\mD & \mS^\ast(\mtheta^\ast) & -(\mE \cdot \mJ_{\mathsf{v}}(\mq\cir) + \mF) \\
+%\mzr &  \mP & -\mQ \cdot \mJ_{\mathsf{w}}(\mq\cir) \\
+%\end{bmatrix}
+%\end{equation}
+\begin{equation}
+\mA(\mq) = 
+\begin{bmatrix}
+\mD  & -(\mE \cdot \mJ_{\mathsf{v}}(\mq^\diamond) + \mF) \\
+\mzr & -\mQ \cdot \mJ_{\mathsf{w}}(\mq^\diamond) \\
+\end{bmatrix}
+\end{equation}
+
+\subsection{Vínculos de quasi-acelerações} \label{S05-03-02-05}
+
+Derivando \eqref{eq:VinculosQuasiVel}, temos:
+%\begin{equation} \label{eq:VinculosQuasiAce}
+%\dot{\overline{\mp}}(\mq,\mp,\dot{\mp}) =
+%\begin{bmatrix}
+%\ddot{\overline{\mq}}(\mq,\mp, \dot{\mp}) \\
+%\dot{\overline{\momega}}(\mq,\mp, \dot{\mp})
+%\end{bmatrix}
+%= 
+%\begin{bmatrix}
+%\mD \cdot \ddot{\mq}^\ast - \mE \cdot (\mJ_{\mathsf{v}}(\mq^\diamond) \cdot \dot{\mp}^\diamond + \underaccent{\sim}{\ma}(\mq, \mp))  - \mF \cdot \dot{\mp}^\diamond \\
+%\mP \cdot \dot{\momega}^\ast - \mQ \cdot (\mJ_{\mathsf{w}}(\mq^\diamond) \cdot \dot{\mp}^\diamond + \underaccent{\sim}{ \dot{\momega} }(\mq, \mp))  - \mR \cdot \dot{\mp}^\diamond
+%\end{bmatrix}
+%=
+%\mzr
+%\end{equation}
+\begin{equation} \label{eq:VinculosQuasiAce}
+\dot{\overline{\mp}}(\mq,\dot{\mq},\ddot{\mq}) =
+\begin{bmatrix}
+\ddot{\overline{\mq}}(\mq,\dot{\mq},\ddot{\mq}) \\
+\dot{\overline{\momega}}(\mq,\dot{\mq},\ddot{\mq})
+\end{bmatrix}
+= 
+\begin{bmatrix}
+\mD \cdot \ddot{\mq}^\ast - \mE \cdot (\mJ_{\mathsf{v}}(\mq^\diamond) \cdot \ddot{\mq}^\diamond + \underaccent{\sim}{\ma}(\mq, \dot{\mq}))  - \mF \cdot \ddot{\mq}^\diamond \\
+- \mQ \cdot (\mJ_{\mathsf{w}}(\mq^\diamond) \cdot \ddot{\mq}^\diamond + \underaccent{\sim}{ \dot{\momega} }(\mq, \dot{\mq}))
+\end{bmatrix}
+=
+\mzr
+\end{equation}
+
+Sendo:
+%\begin{equation}
+%\underaccent{\sim}{\ma}(\mq, \mp) = \begin{bmatrix}
+%\underaccent{\sim}{\ma}_{\ssB_1}(\mq, \mp)(\mq_1,\mp_1)^\msT & ... & \underaccent{\sim}{\ma}_{\ssB_n}(\mq, \mp)(\mq_n,\mp_n)^\msT
+%\end{bmatrix}^\msT
+%\end{equation}
+%\begin{equation}
+%\underaccent{\sim}{\dot{\momega}}(\mq, \mp) = \begin{bmatrix}
+%\underaccent{\sim}{\dot{\momega}}_{\ssB_1}(\mq, \mp)(\mq_1,\mp_1)^\msT & ... & \underaccent{\sim}{\dot{\momega}}_{\ssB_n}(\mq, \mp)(\mq_n,\mp_n)^\msT
+%\end{bmatrix}^\msT
+%\end{equation}
+\begin{equation}
+\underaccent{\sim}{\ma}(\mq, \dot{\mq}) = \begin{bmatrix}
+\underaccent{\sim}{\ma}_{\ssB_1}(\mq_1, \dot{\mq}_1)^\msT & ... & \underaccent{\sim}{\ma}_{\ssB_n}(\mq_n, \dot{\mq}_n)^\msT
+\end{bmatrix}^\msT
+\end{equation}
+\begin{equation}
+\underaccent{\sim}{\dot{\momega}}(\mq, \dot{\mq}) = \begin{bmatrix}
+\underaccent{\sim}{\dot{\momega}}_{\ssB_1}(\mq_1, \dot{\mq}_1)^\msT & ... & \underaccent{\sim}{\dot{\momega}}_{\ssB_n}(\mq_n, \dot{\mq}_n)^\msT
+\end{bmatrix}^\msT
+\end{equation}
+
+Repare que \eqref{eq:VinculosQuasiAce} pode ser reescrita como:
+%\begin{equation}
+%\dot{\overline{\mp}}(\mq,\mp,\dot{\mp}) = \mA(\mq)\dot{\mp} + \mb(\mq,\mp) = \mzr
+%\end{equation}
+\begin{equation} \label{eq:VinculosQuasiAce_}
+\dot{\overline{\mp}}(\mq,\dot{\mq},\ddot{\mq}) = \mA(\mq)\ddot{\mq} + \mb(\mq,\dot{\mq}) = \mzr
+\end{equation}
+
+Sendo:
+%\begin{equation}
+%\mb(\mq,\mp) =
+%-\begin{bmatrix}
+%\mE \cdot \underaccent{\sim}{\ma}(\mq, \mp) \\
+%\mQ \cdot \underaccent{\sim}{\dot{\momega}}(\mq, \mp) \\
+%\end{bmatrix}
+%\end{equation}
+\begin{equation}
+\mb(\mq,\dot{\mq}) =
+-\begin{bmatrix}
+\mE \cdot \underaccent{\sim}{\ma}(\mq, \dot{\mq}) \\
+\mQ \cdot \underaccent{\sim}{\dot{\momega}}(\mq, \dot{\mq}) \\
+\end{bmatrix}
+\end{equation}
+
+\section{Acoplamento de subsistemas} \label{S05-03-03}
+
+Seja $\mf$ a matriz-coluna contendo todos os sistemas de forças não-reativas generalizadas:
+\begin{equation} \label{eq:fParalelos}
+\mf = 
+\begin{bmatrix}
+\overline{\mf}_{\ssB_0} \\
+\vdots \\
+\overline{\mf}_{\ssB_n}  
+\end{bmatrix}
+=
+\begin{bmatrix}
+\mu_{\ssB_0} \\
+\vdots \\
+\mu_{\ssB_n} 
+\end{bmatrix}
+-
+\begin{bmatrix}
+\mM_{\ssB_0}(\mq_0) & \ldots & \mzr\\
+\vdots & \ddots & \vdots\\
+\mzr &\ldots  & \mM_{\ssB_n}(\mq_n)
+\end{bmatrix}
+\cdot
+\dot{\mp} \;
+-
+\begin{bmatrix}
+\mnu_{\ssB_0}(\mq_0,\dot{\mq}_0) \\
+\vdots \\
+\mnu_{\ssB_n}(\mq_n,\dot{\mq}_n)  
+\end{bmatrix}
+-
+\begin{bmatrix}
+\mg_{\ssB_0}(\mq_0) \\
+\vdots \\
+\mg_{\ssB_n}(\mq_0)  
+\end{bmatrix}
+\end{equation}
+
+Definindo:
+\begin{equation}
+\mM'(\mq) =
+\begin{bmatrix}
+\mM_{\ssB_0}(\mq_0) & \ldots & \mzr\\
+\vdots & \ddots & \vdots\\
+\mzr &\ldots  & \mM_{\ssB_n}(\mq_n)
+\end{bmatrix}
+\end{equation}
+\begin{equation}
+\mnu'(\mq,\dot{\mq}) =
+\begin{bmatrix}
+\mnu_{\ssB_0}(\mq_0,\dot{\mq}_0)^\msT &
+... &
+\mnu_{\ssB_n}(\mq_n,\dot{\mq}_n)^\msT
+\end{bmatrix}^\msT
+\end{equation}
+\begin{equation}
+\mg'(\mq) =
+\begin{bmatrix}
+\mg_{\ssB_0}(\mq_0)^\msT &
+... &
+\mg_{\ssB_n}(\mq_0)^\msT  
+\end{bmatrix}^\msT
+\end{equation}
+\begin{equation}
+\mu' =
+\begin{bmatrix}
+\mu_{\ssB_0}^\msT &
+... &
+\mu_{\ssB_n}^\msT  
+\end{bmatrix}^\msT
+\end{equation}
+
+\eqref{eq:fParalelos} pode ser reescrita como:
+%\begin{equation}
+%\mf = \mu' - \mM'(\mq) \cdot \dot{\mp} - \mnu'(\mq,\mp) - \mg'(\mq)
+%\end{equation}
+\begin{equation}
+\mf = \mu' - \mM'(\mq) \cdot \ddot{\mq} - \mnu'(\mq,\dot{\mq}) - \mg'(\mq)
+\end{equation}
+
+Pelo princípio de D'Alambert, temos que:
+\begin{equation}
+\sum_{i=0}^n \delta W_i = \sum_{i=0}^n \delta \mq_i^\msT \cdot \overline{\mf}_{\ssB_i} = 0
+\end{equation}
+
+Ou seja:
+\begin{equation} \label{eq:DAlambertParalelos}
+\delta \mq^\msT \cdot \mf = \mzr
+\end{equation}
+
+Além disso, a partir da equação \eqref{eq:VinculosQuasiVel2}, temos que:
+\begin{equation} \label{eq:Adeltaq}
+\mA(\mq) \delta \mq = \mzr
+\end{equation}
+
+$\mq$ pode ser escrita em função de $\mq\ssh$ e $\mq\cir$ da seguinte maneira:
+\begin{equation} \label{eq:QsshQcir}
+\mq = \mQ\ssh \mq\ssh + \mQ\cir \mq\cir
+\end{equation}
+
+Sendo $\mQ\ssh$ e $\mQ\cir$ matrizes constantes que contém apenas zeros e uns, contendo apenas um $"1"$ por coluna.
+Aplicando o operador variação em \eqref{eq:QsshQcir}, tem-se que:
+\begin{equation} \label{eq:deltaQsshQcir}
+\delta\mq = \mQ\ssh \delta\mq\ssh + \mQ\cir \delta\mq\cir
+\end{equation}
+
+Substituindo \eqref{eq:deltaQsshQcir} em \eqref{eq:Adeltaq}, podemos isolar $\delta\mq\cir$ em função de $\delta\mq\ssh$:
+\begin{equation} \label{eq:qcirqssh}
+\delta\mq\cir = -(\mA \mQ\cir)^{-1} \mA \mQ\ssh \delta \mq\ssh
+\end{equation}
+
+Substuindo \eqref{eq:qcirqssh} em \eqref{eq:deltaQsshQcir}, obtemos $\delta\mq$ apenas em função de $\mq$ e $\delta\mq\ssh$:
+\begin{equation} \label{eq:deltamqC}
+\delta \mq = \mC(\mq) \cdot \delta\mq\ssh
+\end{equation}
+
+Sendo:
+\begin{equation} \label{eq:CComplemento}
+\mC(\mq) = \mQ\ssh -(\mA \mQ\cir)^{-1} \mA \mQ\ssh 
+\end{equation}
+
+
+Além disso, repare que $\mC$ respeita a seguinte relação:
+\begin{equation} \label{eq:CCinematica}
+\dot{\mq} = \mC(\mq) \cdot \dot{\mq}\ssh
+\end{equation}
+
+Substuindo \eqref{eq:deltamqC} em \eqref{eq:DAlambertParalelos}, temos:
+\begin{equation}
+\delta {\mq\ssh}^\msT \mC^\msT \mf = \mzr
+\end{equation}
+
+Tendo em vista que $\mq\ssh$ são coordenadas independentes, $\delta \mq\ssh$ são variações arbitrárias. Sendo assim, a equação dinâmica do mecanismo paralelo pode ser escrita como:
+\begin{equation}
+\mC^\msT \mf = \mzr
+\end{equation}
+
+Ou seja:
+\begin{equation} \label{eq:EquacaoDinamicaParalelos}
+\mC(\mq)^\msT (   \mM'(\mq)\ddot{\mq} + \mv'(\mq,\dot{\mq}) + \mg'(\mq) ) = \mC(\mq)^\msT \mu'
+\end{equation}
+
+\section{Simulação dinâmica direta} \label{S05-03-04}
+
+É possível realizar a simulação dinâmica direta do sistema utilizando a equação dinâmica \eqref{eq:EquacaoDinamicaParalelos} e os vínculos de quasi-acelerações \eqref{eq:VinculosQuasiAce}:
+\begin{equation}
+\begin{cases}
+\mC(\mq)^\msT (   \mM'(\mq)\ddot{\mq} + \mv'(\mq,\dot{\mq}) + \mg'(\mq) ) = \mC(\mq)^\msT \mu' \\
+\mA(\mq)\ddot{\mq} + \mb(\mq,\dot{\mq}) = \mzr
+\end{cases}
+\end{equation}
+
+Reescrevendo em forma matricial:
+\begin{equation}
+\begin{bmatrix}
+\mC(\mq)^\msT \mM'(\mq) \\
+\mA(\mq)
+\end{bmatrix}
+\cdot
+\ddot{\mq}
+=
+\begin{bmatrix}
+\mC(\mq)^\msT (\mu' - \mv'(\mq,\dot{\mq}) - \mg'(\mq) ) \\
+-\mb(\mq,\dot{\mq})
+\end{bmatrix}
+\end{equation}
+
+É necessário que as condições iniciais respeitem os vínculos de posição e velocidades. Com isso, teoricamente, os vínculos continuariam sendo respeitados na solução do sistema de EDOs. Porém, devido a erros numéricos de truncamento e erros associados ao método de integração numérica utilizado, os vínculos de posição e velocidade podem deixar de ser respeitados. Esse problema pode ser resolvido utilizando a técnica das constantes de estabilização de Baumgarte \cite{Baumgarte}. A idéia é substituir a equação dos vínculos de aceleração pela seguinte equação:
+\begin{equation} \label{eq:VinculosQuasiAce2}
+\overline{\mp}'(\mq, \dot{\mq}, \ddot{\mq}) =
+\begin{bmatrix}
+\ddot{\overline{\mq}} + 2\lambda \dot{\overline{\mq}} + \lambda^2 \overline{\mq} \\
+\dot{\overline{\momega}} + \lambda \overline{\momega}
+\end{bmatrix}
+=
+\begin{bmatrix}
+\ddot{\overline{\mq}} \\
+\dot{\overline{\momega}}
+\end{bmatrix}
++
+\lambda
+\begin{bmatrix}
+2 \cdot \mone & \mzr \\
+\mzr & \mone
+\end{bmatrix}
+\cdot
+\begin{bmatrix}
+\dot{\overline{\mq}} \\
+\overline{\momega}
+\end{bmatrix}
++
+\lambda^2
+\begin{bmatrix}
+\overline{\mq} \\
+\mzr
+\end{bmatrix}
+= \mzr
+\end{equation}
+
+Substituindo \eqref{eq:VinculosQuasiVel} e \eqref{eq:VinculosQuasiAce} em \eqref{eq:VinculosQuasiAce2}, temos:
+\begin{equation} \label{eq:VinculosQuasiAce3}
+\overline{\mp}'(\mq, \dot{\mq}, \ddot{\mq}) =
+\mA(\mq) \ddot{\mq} + \mb(\mq, \dot{\mq})
++
+\lambda
+\begin{bmatrix}
+2 \cdot \mone & \mzr \\
+\mzr & \mone
+\end{bmatrix}
+\cdot
+\mA(\mq) \cdot \dot{\mq} +
+\lambda^2
+\begin{bmatrix}
+\overline{\mq}(\mq) \\
+\mzr
+\end{bmatrix}
+= \mzr
+\end{equation}
+
+Impondo que \eqref{eq:VinculosQuasiAce3} seja respeitada, garantimos que $\overline{\mq}(\mq)$ e $\overline{\momega}(\mq, \dot{\mq})$ tenderão exponencialmente a zero independentemente das condições iniciais, para $\lambda > 0$, ou seja, irá fazer com que os vínculos de posição e velocidades sejam respeitados mesmo havendo erros de truncamento e erros associados ao método de integração numérica de EDOs. É importante ressaltar que $\lambda$ é superiomente limitado pelo passo de integração $h$ e pelo método de integração, porém, escolhendo $\lambda = 1/h$ já garante a estabilidade do método para praticamente qualquer método de integração numérica de EDOs.
+
+Sendo assim, o sistema de EDOs que será utilizado para realizar a simualação dinâmica direta é dado por:
+\begin{equation}
+\begin{bmatrix}
+\mC(\mq)^\msT \mM'(\mq) \\
+\mA(\mq)
+\end{bmatrix}
+\cdot
+\ddot{\mq}
+=
+\begin{bmatrix}
+\mC(\mq)^\msT (\mu' - \mv'(\mq,\dot{\mq}) - \mg'(\mq) ) \\
+-\mb(\mq,\dot{\mq}) -
+\lambda
+\begin{bmatrix}
+2 \cdot \mone & \mzr \\
+\mzr & \mone
+\end{bmatrix}
+\cdot
+\mA(\mq) \cdot \dot{\mq} -
+\lambda^2
+\begin{bmatrix}
+\overline{\mq}(\mq) \\
+\mzr
+\end{bmatrix} 
+\end{bmatrix}
+\end{equation}
+
+\section{Simulação dinâmica inversa} \label{S05-03-05}
+
+Na simulação dinâmica inversa, são dados os perfis de $\mq\ssh$, $\dot{\mq}\ssh$ e $\ddot{\mq}\ssh$ em função do tempo e obtem-se os perfis dos esforços nos atuadores para a trajetória dada. Para isso, será utilizada a equação dinâmica \eqref{eq:EquacaoDinamicaParalelos}:
+$$ \mC(\mq)^\msT (   \mM'(\mq)\ddot{\mq} + \mv'(\mq,\dot{\mq}) + \mg'(\mq) ) = \mC(\mq)^\msT \mu' $$
+
+Repare que os termos desta equação dependem de $\mq$, $\dot{\mq}$ e $\ddot{\mq}$. Sendo assim, primeiramente é preciso obter $\mq$, $\dot{\mq}$ e $\ddot{\mq}$ dados $\mq\ssh$, $\dot{\mq}\ssh$ e $\ddot{\mq}\ssh$.
+
+$\mq$ é obtido resolvendo numéricamente a equação dos vínculos de posição \eqref{eq:VinculosPosicao2}, a qual é um sistema de equações algébricas não lineares.
+$$ \overline{\mq}(\mq) = \mzr $$
+
+Tendo obtido $\mq$, $\dot{\mq}$ é obtido pela equação \eqref{eq:CCinematica}:
+$$ \dot{\mq} = \mC(\mq) \cdot \dot{\mq}\ssh $$
+
+Para obter $\ddot{\mq}$, substitui-se a segunda derivada temporal da equação \eqref{eq:QsshQcir} na equação dos vínculos de quasi-acelerações \eqref{eq:VinculosQuasiAce_}:
+$$ \mA \mQ\ssh \ddot{\mq}\ssh + \mA \mQ\cir \ddot{\mq}\cir + \mb = \mzr $$
+$$ \Rightarrow  \ddot{\mq}\cir = - (\mA \mQ\cir)^\msI (\mb + \mA \mQ\ssh \ddot{\mq}\ssh) $$
+\begin{equation} \label{eq:d2q_em_funcao}
+\therefore \ddot{\mq} =
+(\mQ\ssh - (\mA \mQ\cir)^\msI  \mA \mQ\ssh) \cdot \ddot{\mq}\ssh - (\mA \mQ\cir)^\msI \mb
+\end{equation}
+
+Comparando \eqref{eq:CComplemento} com \eqref{eq:d2q_em_funcao}, temos:
+\begin{equation} \label{eq:d2q_em_funcao2}
+\therefore \ddot{\mq} = \mC(\mq) \cdot \ddot{\mq}\ssh + \mc(\mq, \dot{\mq})
+\end{equation}
+
+Sendo:
+\begin{equation}
+\mc(\mq, \dot{\mq}) = - (\mA(\mq) \mQ\cir)^\msI \cdot \mb(\mq,\dot{\mq})
+\end{equation}
+
+Além disso, normalmente não há atuadores em todas as juntas do mecanismo paralelo. Sendo assim, $\mu'$ pode ser reescrito como:
+\begin{equation} \label{eq:u_estrela}
+\mu' = \mU \cdot \mu^\star
+\end{equation}
+
+Sendo $\mU$ uma matriz constante composta por zeros e uns, e $\mu^\star$ os esforços aplicados pelos atuadores.
+
+Substituindo \eqref{eq:CCinematica}, \eqref{eq:d2q_em_funcao2} e \eqref{eq:u_estrela} em \eqref{eq:EquacaoDinamicaParalelos}, temos:
+
+\begin{equation}
+\mC^\msT ( \mM' (\mC \cdot \ddot{\mq}\ssh + \mc) + \mv' + \mg') = \mC^\msT \mU \cdot \mu^\star
+\end{equation}
+
+Definindo:
+\begin{equation}
+\mZ(\mq)^\msT = \mC(\mq)^\msT \mU
+\end{equation}
+
+Temos:
+\begin{equation} \label{eq:DinamicaInversa1}
+\mC^\msT \mM' \mC \cdot \ddot{\mq}\ssh + \mC^\msT (   \mM' \mc + \mv' ) + \mC^\msT \mg'  = \mZ^\msT \mu^\star
+\end{equation}
+
+Sendo assim, \eqref{eq:DinamicaInversa1} pode ser reescrita como:
+\begin{equation} \label{eq:DinamicaInversa2}
+\mM_{\ssM} (\mq) \ddot{\mq}\ssh + \mv_{\ssM}(\mq, \dot{\mq}) + \mg_{\ssM}(\mq)   = \mZ(\mq)^{\msT} \mu^\star
+\end{equation}
+
+Sendo: 
+\begin{equation}
+\mM_{\ssM}  =  \mC^\msT \mM' \mC
+\end{equation}
+\begin{equation}
+\mv_{\ssM}  =  \mC^\msT (  \mM'  \mc  + \mv' )
+\end{equation}
+\begin{equation}
+\mg_{\ssM}  = \mC^\msT \mg'
+\end{equation}
+
+Sendo assim, para mecanismos sem atuação redundante, a simulação dinâmica inversa é feita utilizando a equação \eqref{eq:DinamicaInversa2} para obter os esforços nos atuadores, dados $\mq\ssh$, $\dot{\mq}\ssh$ e $\ddot{\mq}\ssh$, obtendo $\mq$ através da solução numérica da equação \eqref{eq:VinculosGenericosPosicao} e $\dot{\mq}$ através de \eqref{eq:CCinematica}. 
+
+Para o caso de mecanismos com atuação redundante, há infinitas para $\mu^\star$ de modo que o mecanismo realize a trajetória desejada. Sendo assim, normalmente é escolhida uma solução que seja solução de um problema de otimização (como a minimização da energia consumida), tendo a equação \eqref{eq:DinamicaInversa2} como restrição.
+
+%CONTROLE---------------------------------------------------------------------------------------
+
+\chapter{Projeto dos controladores}\label{S05-5}
+
+Esta subseção é destinada ao projeto de controladores não lineares, destinados ao controle de posição de plataformas paralelas cujo modelo dinâmico para simulação dinâmica inversa é dado por \eqref{eq:DinamicaInversa2}, utilizando a técnica de Linearização por Realimentação aliada a outras leis de controle não linear, como as leis Controle por Modos Deslizantes em Tempo Contínuo \cite{Slotini, Utkin}, e também aliada a técnicas de controle linear, como a alocação de pólos no espaço de estados (Controle por Torque Computado), alocação de pólos no domínio da frequência com observador de disturbios, e o Controle por Modos Deslizantes em Tempo Discreto.
+
+Para facilitar a leitura das deduções e com o intuito de deixar um pouco menos carregada a notação, será adotada a seguinte notação:
+\begin{equation}
+\mH(\mq) = \mM_{\ssM}(\mq)
+\end{equation}
+\begin{equation}
+\mh(\mq, \dot{\mq}) = \mv_{\ssM}(\mq, \dot{\mq}) + \mg_{\ssM}(\mq)
+\end{equation}
+\begin{equation}
+\mup = \mZ(\mq)^{\msT} \mu^\star
+\end{equation}
+
+Sendo assim, equação \eqref{eq:DinamicaInversa2} pode ser reescrita como:
+\begin{equation} \label{eq:ModeloControle}
+\mH(\mq)  \ddot{\mq}\ssh + \mh(\mq,\dot{\mq}) = \mup
+\end{equation}
+
+Além disso, definimos o erro de controle como sendo:
+\begin{equation}
+\me = \mq\ssh_d - \mq\ssh
+\end{equation}
+Sendo $\mq\ssh_d$ o sinal de referência
+
+\section{Linearização por Realimentação (LR)}\label{S05-05-00}
+
+A técnica de controle conhecida como Linearização por Realimentação consiste utilizar a entrada de controle para cancelar as não linearidades do sistema, de modo a obter um sistema linear equivalente, normalmente desacoplado, no qual é possível utilizar inúmeras técnicas de controle linear.
+
+Tendo em vista a equação dinâmica \eqref{eq:ModeloControle}, é proposta a seguinte lei de Linearização por Realimentação:
+\begin{equation} \label{eq:leiLR}
+\mup = \hat{\mH}(\mq) (\ddot{\mq}\ssh_d - \mup' ) + \hat{\mh}(\mq,\dot{\mq})
+\end{equation}
+
+Sendo $\hat{\mH}$ e $\hat{\mh}$ estimadores para $\mH$ e $\mh$, respectivamente.
+
+Substituindo a lei de controle \eqref{eq:leiLR} em \eqref{eq:ModeloControle}, temos:
+\begin{equation} \label{eq:ModeloLin}
+\ddot{\me}  = \mup' + \mdelta(t,\mq,\dot{\mq}, \mup')
+\end{equation}
+
+Sendo:
+\begin{equation}
+\mdelta = \mH^\msI( \tilde{\mH}(\ddot{\mq}\ssh_d - \mup') + \tilde{\mh} )
+\end{equation}
+\begin{equation} \label{eq:Htil}
+\tilde{\mH} = \mH - \hat{\mH}
+\end{equation} 
+\begin{equation} \label{eq:htil}
+\tilde{\mh} = \mh - \hat{\mh}
+\end{equation}
+
+Repare que, para o caso em que não há erros de modelagem ($\tilde{\mH} = \mzr$ e $\tilde{\mh} = \mzr \Rightarrow \mdelta = \mzr$), a dinâmica de cada componente do erro se comporta como um sistema linear de segunda ordem forçado com inércia unitária e duplo integrador em $s = 0$.
+
+\section{Controle por Torque Computado (CTC)}\label{S05-05-01}
+
+A lei de Controle por Torque Computado tem o intuito de fazer com que a dinâmica de cada componente do erro de controle se comporte como um movimento harmônico amortecido, fazendo com que o erro tenda assintóticamente a zero independentemente da condição inicial, na ausência de erros de modelagem. Para atingir este objetivo, basta utilizar a seguinte lei de realimentação de estados para $\mup'$:
+\begin{equation} \label{eq:leiCTC}
+\mup' = -\underline{k}_v \dot{\me} - \underline{k}_p \me
+\end{equation}
+
+Sendo $\underline{k}_v$ e $\underline{k}_p$ matrizes diagonais positiva-definidas.
+
+Substituindo a lei de controle \eqref{eq:leiCTC} em \eqref{eq:ModeloLin}, temos:
+\begin{equation}
+\ddot{\me} + \underline{k_v} \dot{\me} + \underline{k_p} \me = \mdelta'(t,\mq,\dot{\mq})
+\end{equation}
+
+Sendo:
+\begin{equation}
+\mdelta' = \mH^\msI( \tilde{\mH}(\ddot{\mq}\ssh_d + \underline{k}_v \dot{\me} + \underline{k}_p \me ) + \tilde{\mh} )
+\end{equation}
+
+Repare que o desempenho desta técnica de controle depende diretamente da representatividade do modelo obtido dentro das condições de operação do sistema. 
+
+
+\section{Controle por Modos Deslizantes em Tempo Contínuo}\label{S05-04-03}
+
+O Controle por Modos Deslizantes é uma técnica de controle não-linear robusto, a qual tem como principal vantagem uma menor sensibilidade aos erros de modelagem, sendo robusto tanto a incertezas estruturadas quanto a incertezas não estruturadas. Nesta subseção serão deduzidas 4 leis de controle baseadas nesta técnica.
+
+\subsection{Dedução das leis de controle}\label{S05-04-03-01}
+
+Sejam $\underline{\lambda}$, $\underline{k}_v$ e $\underline{k}_p$ matrizes diagonais positiva-definidas. Assim, pode-se definir uma matriz-coluna $\ms$ de duas maneiras diferentes:
+\begin{equation} \label{eq:SlidingSurfaces}
+\ms = \dot{\me} + \underline{\lambda}\me
+\end{equation}
+
+e
+\begin{equation} \label{eq:SlidingSurfaces_}
+\ms = \ddot{\me} + \underline{k}_v\dot{\me} + \underline{k}_p\me
+\end{equation}
+
+Tendo definido $\ms$, define-se a chamada superfície de escorregamento:
+\begin{equation} \label{eq:SuperficieDeEscorregamento}
+\ms = \mzr
+\end{equation}
+
+Repare que fazendo com o sistema atinja a superfície de escorregamento, o erro de controle tenderá assintóticamente a zero, independente de qual das definições de $\ms$ for escolhida.
+ 
+Seja $V(\ms)$ uma função de Lyapunov dada por:
+\begin{equation}
+V(\ms) = \frac{1}{2} \ms^\msT \mW \, \ms
+\end{equation}
+
+Sendo $\mW$ uma matriz simétrica positiva-definida. Pela teoria de estabilidade de Lyapunov, se $\dot{V} < 0 \,\, \forall \ms \neq \mzr$, $\ms$ converge para $\mzr$ independentemente das condi\c{c}\~oes iniciais do sistema. Para que isso seja poss\'ivel, \'e imposta a seguinte condi\c{c}\~ao:
+\begin{equation} \label{eq:SlidingCondition}
+\frac{\dd}{\dd t} V(\ms) = \ms^\msT \Big( \mW \, \dot{\ms} + \frac{1}{2}  \dot{\mW} \, \ms \Big) \leq -   \ms^\msT \underline{\eta} \sign(\ms) 
+\end{equation}
+\begin{equation}
+\Rightarrow \ms^\msT \Big( \mW \, \dot{\ms} + \frac{1}{2}  \dot{\mW} \, \ms + \underline{\eta} \sign(\ms)  \Big) \leq 0
+\end{equation}
+
+Sendo $\underline{\eta}$ uma matriz diagonal positiva-definida. Repare que $\ms^\msT \underline{\eta} \sign(\ms)$ \'e a soma ponderada dos m\'odulos das componentes de $\ms$, o que implica que $-  \ms^\msT \underline{\eta} \sign(\ms) < 0 \,\, \forall \ms \neq \mzr$. Repare tamb\'em que $V(\ms)$ pode ser interpretada como uma distância quadrática do sistema até a superfície de escorregamento. A imposição da condição \eqref{eq:SlidingCondition} implica que a distância do sistema à superfície de escorregamente é sempre decrescente enquanto o sistema não atingir a superfície de escorregamento, e garante a convergência $\ms$ para zero em tempo finito e, a partir deste momento, a convergência assintótica do erro de controle $\me$ para zero. 
+
+Para ilustrar, considere $\mW = \mone$; se $\dot{\ms} = - \underline{\eta} \,\sign(\ms)$,  \eqref{eq:SlidingCondition} \'e satisfeita e cada componente de $\ms$ respeita a EDO $\dot{s_i} = - \eta_i \,\sign(s_i)$, a qual converge para zero em um tempo finito de $t_i = \frac{|s_i(0)|}{\eta_i}$.
+
+O projeto do controlador \'e feito utilizando a condi\c{c}\~ao \eqref{eq:SlidingCondition}, a qual \'e conhecida como condi\c{c}\~ao de escorregamento, e será subdividido pelas diferentes definições apresentadas para a variável $\ms$ (\eqref{eq:SlidingSurfaces} e \eqref{eq:SlidingSurfaces_}).
+
+\begin{itemize}
+\item[a)] Para $\ms = \dot{\me} + \underline{\lambda}\me$:
+
+Derivando \eqref{eq:SlidingSurfaces} e substituindo em \eqref{eq:SlidingCondition}, temos:
+
+\begin{equation} \label{eq:SlidingCondition2}
+\ms^\msT \Big(\mW (\ddot{\me} + \underline{\lambda} \dot{\me} ) + \frac{1}{2}\dot{\mW} \, \ms + \underline{\eta} \, \sign(\ms) \Big) \leq 0
+\end{equation} \\
+
+
+
+Subtituindo \eqref{eq:ModeloLin} em \eqref{eq:SlidingCondition2}, temos:
+\begin{equation} \label{eq:SlidingCondition3}
+\ms^\msT \Big(\mW \big(\mup' + \underline{\lambda} \dot{\me} + \mH^\msI( \tilde{\mH}(\ddot{\mq}\ssh_d - \mup') + \tilde{\mh} ) \big) + \frac{1}{2}\dot{\mW} \, \ms + \underline{\eta} \, \sign(\ms) \Big) \leq 0
+\end{equation}
+
+Definindo:
+\begin{equation}
+\mup' = - \underline{\lambda} \dot{\me} + \mup''
+\end{equation}
+
+Temos:
+\begin{equation} \label{eq:SlidingCondition3_}
+\ms^\msT \Big(\mW \big( (\mone - \mH^\msI \tilde{\mH} )\mup'' + \mH^\msI( \tilde{\mH}(\ddot{\mq}\ssh_d + \underline{\lambda} \dot{\me}) + \tilde{\mh} ) \big) + \frac{1}{2}\dot{\mW} \, \ms + \underline{\eta} \, \sign(\ms) \Big) \leq 0
+\end{equation}
+
+Note que:
+\begin{equation}
+\mone - \mH^\msI \tilde{\mH} = \mone - \mH^\msI ( \mH - \hat{\mH}) = \mH^\msI \hat{\mH}
+\end{equation}
+
+Sendo assim, são notáveis duas possíveis escolhas para $\mW$ que facilitam o projeto do controlador:
+\begin{equation} \label{eq:W1}
+\mW = \mone
+\end{equation}
+
+e
+\begin{equation} \label{eq:W2}
+\mW = \mH
+\end{equation}
+
+Mais uma vez, o projeto do controlador será subdividido em 2 casos:
+
+\begin{itemize}
+\item[a.1)] Para $\mW = \mone$:
+
+
+Substuindo \eqref{eq:W1} em \eqref{eq:SlidingCondition3_}, obtem-se:
+\begin{equation} \label{eq:SlidingCondition3_a1}
+\ms^\msT \Big((\mone - \mH^\msI \tilde{\mH} )\mup'' + \mH^\msI( \tilde{\mH}(\ddot{\mq}\ssh_d + \underline{\lambda} \dot{\me}) + \tilde{\mh} ) + \underline{\eta} \, \sign(\ms) \Big) \leq 0
+\end{equation}
+
+Para satisfazer \eqref{eq:SlidingCondition3_a1}, é utilizada a seguinte lei de controle:
+\begin{equation} \label{eq:ControlLawSRed}
+\mup'' =  -\underline{k} \sign(\ms)
+\end{equation}
+
+Sendo $\underline{k}$ uma matriz diagonal positiva-definida, com $\underline{k} \geq \underline{\eta} $. Substituindo \eqref{eq:ControlLawSRed} em \eqref{eq:SlidingCondition3_a1}, temos:
+\begin{equation} \label{eq:SlidingCondition4}
+\ms^\msT \Big(- \big(\underline{k} - \underline{\eta} \big)  \sign(\ms) + \mH^\msI \tilde{\mH} \, \underline{k} \sign(\ms) + \mH^\msI( \tilde{\mH}(\ddot{\mq}\ssh_d + \underline{\lambda} \dot{\me}) + \tilde{\mh} ) \Big) \leq 0
+\end{equation}
+
+Pode-se dizer que, \eqref{eq:SlidingCondition4} \'e sempre satisfeita se:
+\begin{equation} \label{eq:DesigualdadeK1}
+ \diag(\underline{k}) - \diag(\underline{\eta}) \geq  | \mH^\msI \tilde{\mH} \, \underline{k} \sign(\ms) + \mH^\msI( \tilde{\mH}(\ddot{\mq}\ssh_d + \underline{\lambda} \dot{\me}) + \tilde{\mh} ) |
+\end{equation}
+
+Aplicando a desigualdade triangular em cada componente do lado direito de \eqref{eq:DesigualdadeK1}, temos:
+\begin{equation}
+| \mH^\msI \tilde{\mH} \, \underline{k} \sign(\ms) + \mH^\msI( \tilde{\mH}(\ddot{\mq}\ssh_d + \underline{\lambda} \dot{\me}) + \tilde{\mh} ) | \leq | \mH^\msI \tilde{\mH}|_{max} \diag(\underline{k}) +  |\mH^\msI \tilde{\mH}|_{max} |\ddot{\mq}\ssh_d + \underline{\lambda} \dot{\me}| + |\mH^\msI\tilde{\mh}|_{max}
+\end{equation}
+
+Portanto, se a seguinte inequa\c{c}\~ao matricial for respeitada:
+\begin{equation} \label{eq:DesigualdadeK2_a1}
+(\mone - | \mH^\msI \tilde{\mH}|_{max} ) \cdot \diag(\underline{k})  \geq \diag(\underline{\eta}) + |\mH^\msI \tilde{\mH}|_{max} |\ddot{\mq}\ssh_d + \underline{\lambda} \dot{\me}| + |\mH^\msI\tilde{\mh}|_{max}
+\end{equation}
+
+\eqref{eq:DesigualdadeK1} ser\'a respeitada, o que garante que a condi\c{c}\~ao de escorregamento \eqref{eq:SlidingCondition} tamb\'em seja respeitada e consequentemente garante a converg\^encia do erro de controle para zero.
+
+Existe solu\c{c}\~ao para \eqref{eq:DesigualdadeK2_a1} apenas se a matriz $\mone - | \mH^\msI \tilde{\mH}|_{max}$ for uma \emph{M-matrix}, ou seja, se módulo do maior autovalor de $| \mH^\msI \tilde{\mH}|_{max}$ for menor que $1$. Se este for o caso, a solução que minimiza a norma de $\diag(\underline{k})$ é dada por:
+\begin{equation} \label{eq:MatrizDiagk_a1}
+\diag(\underline{k})  = (\mone - | \mH^\msI \tilde{\mH}|_{max} )^\msI (\diag(\underline{\eta}) + |\mH^\msI \tilde{\mH}|_{max} |\ddot{\mq}\ssh_d + \underline{\lambda} \dot{\me}| + |\mH^\msI\tilde{\mh}|_{max})
+\end{equation}
+
+\item[a.2)] Para $\mW = \mH$:
+
+
+Substuindo \eqref{eq:W2} em \eqref{eq:SlidingCondition3_}, obtem-se:
+\begin{equation} \label{eq:SlidingCondition3_a2}
+\ms^\msT \Big(\hat{\mH}\mup'' + \frac{1}{2} \dot{\mH} \, \ms +  \tilde{\mH}(\ddot{\mq}\ssh_d + \underline{\lambda} \dot{\me} + \tilde{\mh} ) + \underline{\eta} \, \sign(\ms) \Big) \leq 0
+\end{equation}
+
+Para satisfazer \eqref{eq:SlidingCondition3_a2}, é utilizada a seguinte lei de controle:
+\begin{equation} \label{eq:ControlLawSRed_a2}
+\mup'' =  - \hat{\mH}^\msI \Big( \underline{k} \sign(\ms) +  \frac{1}{2} \dot{\hat{\mH}} \, \ms \Big) 
+\end{equation}
+
+Sendo $\underline{k}$ uma matriz diagonal positiva-definida, com $\underline{k} \geq \underline{\eta} $. Substituindo \eqref{eq:ControlLawSRed} em \eqref{eq:SlidingCondition3_a2}, temos:
+\begin{equation} \label{eq:SlidingCondition4_a2}
+\ms^\msT \Big(- \big(\underline{k} - \underline{\eta} \big)  \sign(\ms) + \frac{1}{2} \dot{\tilde{\mH}} \, \ms + \tilde{\mH}(\ddot{\mq}\ssh_d + \underline{\lambda} \dot{\me}) + \tilde{\mh}  \Big) \leq 0
+\end{equation}
+
+Pode-se dizer que, \eqref{eq:SlidingCondition4_a2} \'e sempre satisfeita se:
+\begin{equation} \label{eq:DesigualdadeK1_a2}
+ \diag(\underline{k}) - \diag(\underline{\eta}) \geq  \Big| \frac{1}{2} \dot{\tilde{\mH}} \, \ms + \tilde{\mH}(\ddot{\mq}\ssh_d + \underline{\lambda} \dot{\me}) + \tilde{\mh} \Big|
+\end{equation}
+
+Aplicando a desigualdade triangular em cada componente do lado direito de \eqref{eq:DesigualdadeK1_a2}, temos:
+\begin{equation}
+\Big| \frac{1}{2} \dot{\tilde{\mH}} \, \ms + \tilde{\mH}(\ddot{\mq}\ssh_d + \underline{\lambda} \dot{\me}) + \tilde{\mh} \Big| \leq  \frac{1}{2}|\dot{\tilde{\mH}}|_{max} |\ms| + |\tilde{\mH}|_{max} |\ddot{\mq}\ssh_d + \underline{\lambda} \dot{\me}| + |\tilde{\mh}|_{max}
+\end{equation}
+
+Portanto, se a seguinte inequa\c{c}\~ao matricial for respeitada:
+\begin{equation} \label{eq:DesigualdadeK2_a2}
+\diag(\underline{k})  \geq \diag(\underline{\eta}) + \frac{1}{2}|\dot{\tilde{\mH}}|_{max} |\ms| + |\tilde{\mH}|_{max} |\ddot{\mq}\ssh_d + \underline{\lambda} \dot{\me}| + |\tilde{\mh}|_{max}
+\end{equation}
+
+\eqref{eq:DesigualdadeK1_a2} ser\'a respeitada, o que garante que a condi\c{c}\~ao de escorregamento \eqref{eq:SlidingCondition} tamb\'em seja respeitada e consequentemente garante a converg\^encia do erro de controle para zero.
+
+Sempre existe solu\c{c}\~ao para \eqref{eq:DesigualdadeK2_a2}, e a solução que minimiza a norma de $\diag(\underline{k})$ é dada por:
+\begin{equation} \label{eq:MatrizDiagk_a2}
+\diag(\underline{k})  = \diag(\underline{\eta}) + \frac{1}{2}|\dot{\tilde{\mH}}|_{max} |\ms| + |\tilde{\mH}|_{max} |\ddot{\mq}\ssh_d + \underline{\lambda} \dot{\me}| + |\tilde{\mh}|_{max}
+\end{equation}
+
+\end{itemize}
+
+Repare que as duas leis de controle previamente deduzidas possuem termos discontínuos, os quais podem gerar o efeito conhecido como \emph{chattering}, o qual pode gerar sérios desgastes nos atuadores do sistema e causar vibrações indesejadas no mecanismo. A utilização da definição \eqref{eq:SlidingSurfaces_} para $\ms$ na dedução da lei de controle diminui bastante o efeito do \emph{chattering}, pois utiliza termos que são integrais de funções discontínuas, o que consequentemente gera um perfil muito mais suave para o esforço de controle. Sendo assim, agora serão deduzidas as leis de controle baseadas na definição \eqref{eq:SlidingSurfaces_} para $\ms$.
+
+\item[b)] Para $\ms = \ddot{\me} + \underline{k}_v \dot{\me} + \underline{k}_p \me  $
+
+Substituindo \eqref{eq:ModeloLin} em \eqref{eq:SlidingSurfaces_}, temos:
+\begin{equation}
+\ms = \mup' + \underline{k}_v \dot{\me} + \underline{k}_p \me + \mdelta
+\end{equation}
+
+Sendo assim, definimos:
+\begin{equation}
+\mup' = -\underline{k}_v \dot{\me} - \underline{k}_p \me + \mup''
+\end{equation}
+
+Portanto:
+\begin{equation}
+\ms = \mup'' + \mH^\msI( \tilde{\mH}(\ddot{\mq}\ssh_d + \underline{k}_v \dot{\me} + \underline{k}_p \me - \mup'') + \tilde{\mh} ) \big)
+\end{equation}
+
+Definindo:
+\begin{equation}
+\msigma = \ddot{\mq}\ssh_d + \underline{k}_v \dot{\me} + \underline{k}_p \me
+\end{equation}
+
+Temos:
+\begin{equation} \label{eq:novo_s_b}
+\ms = (\mone - \mH^\msI \tilde{\mH} )\mup'' + \mH^\msI( \tilde{\mH}\msigma + \tilde{\mh} )
+\end{equation}
+
+Derivando \eqref{eq:novo_s_b}, temos:
+\begin{equation} \label{eq:novo_ds_b}
+\dot{\ms} = (\mone - \mH^\msI \tilde{\mH} )\dot{\mup}'' + \mH^\msI \mepsilon
+\end{equation}
+
+Sendo:
+\begin{equation}
+\mepsilon = ( \dot{\mH} \mH^\msI \tilde{\mH} -\dot{\tilde{\mH}}) \mup'' -  \dot{\mH} \mH^\msI ( \tilde{\mH}\msigma + \tilde{\mh} ) +  \dot{\tilde{\mH}}\msigma + \tilde{\mH} \dot{\msigma} + \dot{\tilde{\mh}}
+\end{equation}
+
+
+Substituindo \eqref{eq:novo_ds_b} em \eqref{eq:SlidingCondition}, temos:
+
+\begin{equation} \label{eq:SlidingCondition2b}
+\ms^\msT \Big(\mW ( (\mone - \mH^\msI \tilde{\mH} )\dot{\mup}'' + \mH^\msI \mepsilon ) + \frac{1}{2}\dot{\mW} \, \ms + \underline{\eta} \, \sign(\ms) \Big) \leq 0
+\end{equation} \\
+
+
+Mais uma vez, são notáveis duas possíveis escolhas para $\mW$ que facilitam o projeto do controlador:
+\begin{equation} \label{eq:W1b}
+\mW = \mone
+\end{equation}
+
+e
+\begin{equation} \label{eq:W2b}
+\mW = \mH
+\end{equation}
+
+Subdividido mais uma vez o projeto do controlador será  em 2 casos:
+
+\begin{itemize}
+\item[b.1)] Para $\mW = \mone$:
+
+
+Substuindo \eqref{eq:W1b} em \eqref{eq:SlidingCondition2b}, obtem-se:
+\begin{equation} \label{eq:SlidingCondition2_b1}
+\ms^\msT \Big((\mone - \mH^\msI \tilde{\mH} )\dot{\mup}'' + \mH^\msI \mepsilon + \underline{\eta} \, \sign(\ms) \Big) \leq 0
+\end{equation}
+
+Para satisfazer \eqref{eq:SlidingCondition2_b1}, é utilizada a seguinte lei de controle:
+\begin{equation} \label{eq:ControlLawSRedb1}
+\dot{\mup}'' =  -\underline{k} \sign(\ms)
+\end{equation}
+
+Sendo $\underline{k}$ uma matriz diagonal positiva-definida, com $\underline{k} \geq \underline{\eta} $. Substituindo \eqref{eq:ControlLawSRedb1} em \eqref{eq:SlidingCondition2_b1}, temos:
+\begin{equation} \label{eq:SlidingCondition4b1}
+\ms^\msT \Big(- \big(\underline{k} - \underline{\eta} \big)  \sign(\ms) + \mH^\msI \tilde{\mH} \, \underline{k} \sign(\ms) + \mH^\msI \mepsilon \Big) \leq 0
+\end{equation}
+
+Pode-se dizer que, \eqref{eq:SlidingCondition4b1} \'e sempre satisfeita se:
+\begin{equation} \label{eq:DesigualdadeK1b1}
+ \diag(\underline{k}) - \diag(\underline{\eta}) \geq  | \mH^\msI \tilde{\mH} \, \underline{k} \sign(\ms) + \mH^\msI \mepsilon |
+\end{equation}
+
+Aplicando a desigualdade triangular em cada componente do lado direito de \eqref{eq:DesigualdadeK1b1}, temos:
+\begin{equation}
+\begin{split}
+| \mH^\msI \tilde{\mH} \, \underline{k} \sign(\ms) + \mH^\msI \Big( ( \dot{\mH} \mH^\msI \tilde{\mH} -\dot{\tilde{\mH}}) \mup'' -  \dot{\mH} \mH^\msI ( \tilde{\mH}\msigma + \tilde{\mh} ) +  \dot{\tilde{\mH}}\msigma + \tilde{\mH} \dot{\msigma} + \dot{\tilde{\mh}} \Big) | \leq \\ |
+ \mH^\msI \tilde{\mH} |_{max} \diag(\underline{k}) + |\mH^\msI ( \dot{\mH} \mH^\msI \tilde{\mH} -\dot{\tilde{\mH}}) |_{max} | \mup'' - \msigma|  + |\mH^\msI \tilde{\mH}|_{max}| \dot{\msigma}| \\
+  + |\mH^\msI \dot{\mH} \mH^\msI  \tilde{\mh}|_{max}+ |\mH^\msI \dot{\tilde{\mh}}|_{max}
+\end{split}
+\end{equation}
+
+Portanto, se a seguinte inequa\c{c}\~ao matricial for respeitada:
+\begin{equation} \label{eq:DesigualdadeK2_b1}
+\begin{split}
+(\mone - | \mH^\msI \tilde{\mH}|_{max} ) \cdot \diag(\underline{k})  \geq \diag(\underline{\eta}) + |\mH^\msI ( \dot{\mH} \mH^\msI \tilde{\mH} -\dot{\tilde{\mH}}) |_{max} | \mup'' -\msigma|  + \\ |\mH^\msI \tilde{\mH}|_{max}| \dot{\msigma}| + |\mH^\msI \dot{\mH} \mH^\msI  \tilde{\mh}|_{max}+ |\mH^\msI \dot{\tilde{\mh}}|_{max}
+\end{split}
+\end{equation}
+
+\eqref{eq:DesigualdadeK1b1} ser\'a respeitada, o que garante que a condi\c{c}\~ao de escorregamento \eqref{eq:SlidingCondition} tamb\'em seja respeitada e consequentemente garante a converg\^encia do erro de controle para zero.
+
+Existe solu\c{c}\~ao para \eqref{eq:DesigualdadeK2_b1} apenas se a matriz $\mone - | \mH^\msI \tilde{\mH}|_{max}$ for uma \emph{M-matrix}, ou seja, se módulo do maior autovalor de $| \mH^\msI \tilde{\mH}|_{max}$ for menor que $1$. Se este for o caso, a solução que minimiza a norma de $\diag(\underline{k})$ é dada por:
+\begin{equation} \label{eq:MatrizDiagk_b1}
+\begin{split}
+\diag(\underline{k})  = (\mone - | \mH^\msI \tilde{\mH}|_{max} )^\msI (\diag(\underline{\eta}) + |\mH^\msI ( \dot{\mH} \mH^\msI \tilde{\mH} -\dot{\tilde{\mH}}) |_{max} | \mup'' -\msigma|  + \\ |\mH^\msI \tilde{\mH}|_{max}| \dot{\msigma}| + |\mH^\msI \dot{\mH} \mH^\msI  \tilde{\mh}|_{max}+ |\mH^\msI \dot{\tilde{\mh}}|_{max}
+\end{split}
+\end{equation}
+
+\item[b.2)] Para $\mW = \mH$:
+
+
+Substuindo \eqref{eq:W2b} em \eqref{eq:SlidingCondition2b}, obtem-se:
+\begin{equation} \label{eq:SlidingCondition2_b2}
+\ms^\msT \Big( \hat{\mH} \dot{\mup}'' + \frac{1}{2} \dot{\mH} \ms  + \mepsilon + \underline{\eta} \, \sign(\ms) \Big) \leq 0
+\end{equation}
+
+Para satisfazer \eqref{eq:SlidingCondition2_b2}, é utilizada a seguinte lei de controle:
+\begin{equation} \label{eq:ControlLawSRed_b2}
+\dot{\mup}'' =  - \hat{\mH}^\msI \Big( \underline{k} \sign(\ms) +  \frac{1}{2} \dot{\hat{\mH}} \, \ms \Big) 
+\end{equation}
+
+Sendo $\underline{k}$ uma matriz diagonal positiva-definida, com $\underline{k} \geq \underline{\eta} $. Substituindo \eqref{eq:ControlLawSRed_b2} em \eqref{eq:SlidingCondition2_b2}, temos:
+\begin{equation} \label{eq:SlidingCondition4_b2}
+\ms^\msT \Big(- \big(\underline{k} - \underline{\eta} \big)  \sign(\ms) + \frac{1}{2} \dot{\tilde{\mH}} \, \ms + \mepsilon  \Big) \leq 0
+\end{equation}
+
+Pode-se dizer que, \eqref{eq:SlidingCondition4_b2} \'e sempre satisfeita se:
+\begin{equation} \label{eq:DesigualdadeK1_b2}
+ \diag(\underline{k}) - \diag(\underline{\eta}) \geq  \Big| \frac{1}{2} \dot{\tilde{\mH}} \, \ms + \mepsilon \Big|
+\end{equation}
+
+Aplicando a desigualdade triangular em cada componente do lado direito de \eqref{eq:DesigualdadeK1_b2}, temos:
+\begin{equation}
+\begin{split}
+\Big| \frac{1}{2} \dot{\tilde{\mH}} \, \ms + ( \dot{\mH} \mH^\msI \tilde{\mH} -\dot{\tilde{\mH}}) \mup'' -  \dot{\mH} \mH^\msI ( \tilde{\mH}\msigma + \tilde{\mh} ) +  \dot{\tilde{\mH}}\msigma + \tilde{\mH} {\msigma} + \dot{\tilde{\mh}} \Big| \leq  \frac{1}{2}|\dot{\tilde{\mH}}|_{max} |\ms| + \\
+ |( \dot{\mH} \mH^\msI \tilde{\mH} -\dot{\tilde{\mH}})|_{max} 	|\mup'' - \msigma | + |\tilde{\mH}|_{max} |\dot{\msigma}| + |\dot{\mH} \mH^\msI \tilde{\mh}|_{max} + |\dot{\tilde{\mh}}|_{max}
+\end{split}
+\end{equation}
+
+Portanto, se a seguinte inequa\c{c}\~ao matricial for respeitada:
+\begin{equation} \label{eq:DesigualdadeK2_b2}
+\diag(\underline{k})  \geq \diag(\underline{\eta}) + \frac{1}{2}|\dot{\tilde{\mH}}|_{max} |\ms| + |( \dot{\mH} \mH^\msI \tilde{\mH} -\dot{\tilde{\mH}})|_{max} 	|\mup'' - \msigma | + |\tilde{\mH}|_{max} |\dot{\msigma}| + |\dot{\mH} \mH^\msI \tilde{\mh}|_{max} + |\dot{\tilde{\mh}}|_{max}
+\end{equation}
+
+\eqref{eq:DesigualdadeK1_b2} ser\'a respeitada, o que garante que a condi\c{c}\~ao de escorregamento \eqref{eq:SlidingCondition} tamb\'em seja respeitada e consequentemente garante a converg\^encia do erro de controle para zero.
+
+Sempre existe solu\c{c}\~ao para \eqref{eq:DesigualdadeK2_b2}, e a solução que minimiza a norma de $\diag(\underline{k})$ é dada por:
+\begin{equation} \label{eq:MatrizDiagk_b2}
+\diag(\underline{k})  = \diag(\underline{\eta}) + \frac{1}{2}|\dot{\tilde{\mH}}|_{max} |\ms| + |( \dot{\mH} \mH^\msI \tilde{\mH} -\dot{\tilde{\mH}})|_{max} 	|\mup'' - \msigma | + |\tilde{\mH}|_{max} |\dot{\msigma}| + |\dot{\mH} \mH^\msI \tilde{\mh}|_{max} + |\dot{\tilde{\mh}}|_{max}
+\end{equation}
+
+\end{itemize}
+
+
+
+\end{itemize}
+
+\subsection{Camada Limite}\label{S05-04-03-02}
+
+Uma técnica muito utilizada para diminuir os efeitos do \emph{chattering} no CMD é substituição da função sinal por uma função de saturação nas leis de controle. Definindo:
+\begin{equation}
+\sat(x) = \begin{cases}
+x, \;\;\;\;\;\;\;\;\; \text{ se } |x| \leq 1 \\
+\sign(x), \text{ se } |x| > 1
+\end{cases}
+\end{equation}
+
+Sendo assim, no lugar de $\sign(\ms)$, será utilizado $\sat(\ms / \phi)$ nas leis de controle, sendo $\phi$ um número positivo conhecido como comprimento da camada limite.
+
+Ao mesmo tempo que a utilização da camada limite diminui os efeitos do \emph{chattering} no sistema, sua utilização não mais garante que o sistema atinja em tempo finito e se mantenha na superfície de escorregamento, apenas garante que o sistema atinja a camada limite ( $-\phi < s_i < \phi, \, i = 1,...,\nu\ssh $ ) em tempo finito, e lá se mantenha. 
+
+
+\subsection{Ganho adaptativo}\label{S05-04-03-03}
+
+O cálculo de $\underline{k}$ pode ser um tanto complexo utilizando as equações \eqref{eq:MatrizDiagk_a1}, \eqref{eq:MatrizDiagk_a2}, \eqref{eq:MatrizDiagk_b1} ou \eqref{eq:MatrizDiagk_b2}, pois depende do módulo máximo de matrizes que não possuem expressões explícitas. Tal cálculo pode ser feito numéricamente discretizando a área de trabalho do mecanismo e atribuindo valores máximos e mínimos para cada parâmetro incerto do sistema, obtendo uma matriz $\underline{k}$ que varia conforme a posição do mecanismo. O uso desta estratégia, porém, poderá resultar na obtenção de valores de $\underline{k}$ muito maiores do que o necessário, o que pode amplificar o fenômeno do \emph{chattering}. Sendo assim, é proposta a obtenção da matriz $\underline{k}$ de forma adaptativa, utilizando a seguinte lei de adaptação:
+
+\begin{equation}
+\underline{k}_i[k] = \begin{cases}
+\big| \underline{k}_i[k-1] + \gamma_i \sign(s_i [k]) \sign(s_i [k-1])  \big|, \, \text{ se } |s_i[k]| \geq \phi \, \text{ ou }  \sign(s_i [k]) = - \sign(s_i [k-1]) \\
+\underline{k}_i[k-1], \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\, \text{ se } |s_i[k]| < \phi \, \text{ e }  \sign(s_i [k]) = \sign(s_i [k-1]) \\
+ 
+\end{cases}
+\end{equation}
+
+Sendo $\gamma_i$ uma constante positiva, a qual determina a velocidade da adaptação. \\
+
+Esta lei de adaptação pode ser explicada da seguinte maneira: $\underline{k}_i$ aumenta enquanto o sistema não atingir a região da camada limite. Enquanto o sistema estiver nesta região, $\underline{k}_i$ se mantém constante ou diminui a cada cruzamento com a superfície de escorregamento. Se o sistema estiver região da camada limite e $\underline{k}_i$ respeitar a inequação \eqref{eq:DesigualdadeK2_a1}, \eqref{eq:DesigualdadeK2_a2}, \eqref{eq:DesigualdadeK2_b1} ou \eqref{eq:DesigualdadeK2_b2} (dependendo da lei de controle utilizada), $\underline{k}_i$ irá dimunuir a cada cruzamento com a superfície de escorregamento, até que o sistema saia ligeiramente da região. Assim que o sistema sair da região, $\underline{k}_i$ irá aumentar até o sistema atingi-la novamente, repetindo este ciclo infinitamente, com $\underline{k}_i$ variando em uma faixa de valores muito próxima do menor valor possível para que o sistema se mantenha na região da camada limite.
+
+%\blinddocument
 
 
 % ========== Referências ==========
@@ -1335,7 +3196,266 @@ Substituindo \eqref{eq:MatrizC_seriais} e \eqref{eq:fSeriais}  em \eqref{eq:eq_d
 % ========== Apêndices (opcional) ==========
 \apendice
 \chapter{}
-\chapter{Beta}
+\chapter{}
+\chapter{Cinemática de corpos rígidos}\label{S05-1}
+
+\section{Conceitos básicos}\label{S05-01-01}
+
+Esta seção tem o intuito de apresentar os conceitos de derivada temporal de vetores em relação a um referencial e as definições velocidade e aceleração. \\
+
+Sejam $\llA$ e $\llB$ dois referenciais, e $\ttp$ e $\tto$ pontos no espaço. Primeiramente, fazemos as seguintes definições:
+
+\begin{itemize}
+\item $\vr_{\tto \rl \ttp}$: vetor que liga o ponto $\tto$ ao ponto $\ttp$, orientado no sentido de $\tto$ até $\ttp$.
+\item $\vv_{\ttp}^{\lllA}$: vetor velocidade do ponto $\ttp$ em relação a $\llA$.
+\item $\va_{\ttp}^{\lllA}$: vetor acelera\c{c}\~ao do ponto $\ttp$ em relação a $\llA$.
+\item $\dot{\va}_{\ttp}^{\lllA}$: vetor sobre-acelera\c{c}\~ao do ponto $\ttp$ em relação a $\llA$.
+\item $\vomega_{\lllB}^{\lllA}$: vetor velocidade angular de $\llB$ em relação a $\llA$.
+\item $\dot{\vomega}_{\lllB}^{\lllA}$: vetor aceleração angular de $\llB$ em relação a $\llA$.
+\item $\ddot{\vomega}_{\lllB}^{\lllA}$: vetor sobre-aceleração angular de $\llB$ em relação a $\llA$.
+\item $\displaystyle\frac{\dd^{[\lllA]}}{\dd t}$: Operador derivada temporal em relação ao referencial $\llA$.
+\end{itemize}
+
+\subsection{Produto vetorial}\label{S05-01-01-00}
+
+Para a realização do cálculo de derivadas vetoriais, frequentemente é necessário o uso do produto vetorial. A notação para o operador produto vetorial utilizada será o "$\wedge$". Com o intuito de deixar as equações mais legíveis, iremos adotar as seguintes convenções:
+
+\begin{equation}
+\va \wedge (\vb \wedge \vc) \equiv \va \wedge \vb \wedge \vc
+\end{equation}
+\begin{equation}
+\va \wedge \big( \vb \wedge ( \vc \wedge \vd) \big) \equiv \va \wedge \vb \wedge \vc \wedge \vd
+\end{equation}
+
+Além disso, vale destacar algumas propriedades básicas do produto vetorial que serão utilizadas durante o texto:
+\begin{equation}
+\va \wedge \va = \vzr
+\end{equation}
+\begin{equation}
+\va \wedge \vb = -\vb \wedge \va
+\end{equation}
+\begin{equation}
+\va \wedge (\vb + \vc) = \va \wedge \vb + \va \wedge \vc
+\end{equation}
+\begin{equation}
+(\lambda \va) \wedge \vb =  \va \wedge (\lambda \vb) = \lambda (\va \wedge \vb)
+\end{equation}
+
+\subsection{Derivada temporal de versores}\label{S05-01-01-01}
+
+Seja %m $\llA$ e $\llB$ dois referenciais referenciais e 
+$\hat{\vx}_{\lllB}$ um versor fixo ao referencial $\llB$. A derivada temporal de $\hat{\vx}_{\lllB}$ em relação ao referencial $\llA$ é definida como:
+\begin{empheq}[box=\mybluebox]{equation} \label{eq:derivada_versor}
+\frac{\dd^{[{\lllA}]} \hat{\vx}_{\lllB} }{\dd t} = \dot{\hat{\vx}}_{\lllB}^{[\lllA]} = \vomega_{\lllB}^{\lllA} \wedge \hat{\vx}_{\lllB}
+\end{empheq}
+
+\subsection{Derivada temporal de vetores}\label{S05-01-01-02} 
+
+Seja $\ttB = \{ \vi_{\ttB}, \vj_{\ttB}, \vk_{\ttB} \}$ uma base ortonormal fixa ao referencial $\llB$ e $\vx$ um vetor cuja decomposição na base $\ttB$ é conhecida e dada por $\vx = x \vi_{\ttB} + y \vj_{\ttB} + z \vk_{\ttB} $. A derivada temporal de $\vx$ em relação ao referencial $\llA$ é definida como:
+\begin{equation}
+\begin{split}
+\frac{\dd^{[{\lllA}]} \vx }{\dd t} &= \dot{\vx}^{[\lllA]} = \dot{x} \vi_{\ttB} + \dot{y} \vj_{\ttB} + \dot{z} \vk_{\ttB} + x \dot{\vi}_{\ttB}^{[\lllA]} + y \dot{\vj}_{\ttB}^{[\lllA]} + z \dot{\vk}_{\ttB}^{[\lllA]} \\
+ &= \dot{x} \vi_{\ttB} + \dot{y} \vj_{\ttB} + \dot{z} \vk_{\ttB} +  \vomega_{\lllB}^{\lllA} \wedge x \vi_{\ttB} +  \vomega_{\lllB}^{\lllA} \wedge y \vj_{\ttB} + \vomega_{\lllB}^{\lllA} \wedge z \vk_{\ttB} \\
+ &= \dot{x} \vi_{\ttB} + \dot{y} \vj_{\ttB} + \dot{z} \vk_{\ttB} + \vomega_{\lllB}^{\lllA} \wedge (x \vi_{\ttB} + y \vj_{\ttB} + z \vk_{\ttB})
+\end{split}
+\end{equation}
+
+Repare que o termo $\dot{x} \vi_{\lllB} + \dot{y} \vj_{\lllB} + \dot{z} \vk_{\lllB}$ é a derivada temporal do vetor $\vx$ no referencial $\llB$. Sendo assim, temos:
+\begin{empheq}[box=\mybluebox]{equation} \label{eq:derivada_vetor}
+\frac{\dd^{[{\lllA}]} \vx }{\dd t} = \dot{\vx}^{[\lllA]} = \dot{\vx}^{[\lllB]}  + \vomega_{\lllB}^{\lllA} \wedge \vx
+\end{empheq}
+
+
+\subsection{Definição de vetor velocidade}\label{S05-01-01-03}
+
+%Seja $\vr_{\tto \rl \ttp}$ o vetor que liga do ponto $\tto$ até o ponto $\ttp$, sendo $\tto$ um ponto fixo ao referencial $\llA$. 
+Supondo que o ponto $\tto$ esteja fixo a $\llA$, a velocidade do ponto $\ttp$ em relação ao referencial $\llA$ é definida como:
+\begin{empheq}[box=\mybluebox]{equation}
+\vv_\ttp^{\lllA} = \frac{\dd^{[\lllA]} \vr_{\tto \rl \ttp}}{\dd t} = \dot{\vr}_{\tto \rl \ttp}^{[\lllA]}
+\end{empheq}
+
+Caso $\tto$ não esteja fixo a $\llA$, temos que:
+\begin{empheq}[box=\almondbox]{equation}
+\frac{\dd^{[\lllA]} \vr_{\tto \rl \ttp}}{\dd t} = \dot{\vr}_{\tto \rl \ttp}^{[\lllA]} = \vv_\ttp^{\lllA} - \vv_\tto^{\lllA}
+\end{empheq}
+
+\subsection{Definição de vetor aceleração}\label{S05-01-01-04}
+
+A aceleração do ponto $\ttp$ em relação ao referencial $\llA$ é definida como:
+\begin{empheq}[box=\mybluebox]{equation}
+\va_\ttp^{\lllA} = \frac{\dd^{[\lllA]} \vv_\ttp^{\lllA} }{\dd t}
+\end{empheq}
+
+
+\section{Equações de Poisson}\label{S05-01-02}
+
+Esta subseção tem o intuito de apresentar as equações básicos da cinemática de corpos rígidos,  as equações de Poisson para velocidades, acelerações e sobre-acelerações.
+
+\subsection{Equação de Poisson para velocidades}\label{S05-01-02-01}
+
+Sejam $\ttp$ e $\tto$ dois pontos pertencentes a um corpo rígido $\llB$, e $\llA$ um referencial. Podemos relacionar a velocidades dos ponto $\ttp$ e $\tto$ em relação a $\llA$ através da equação de Poisson para velocidades:
+\begin{empheq}[box=\mybluebox]{equation}\label{eq:Poisson_v}
+\vv_\ttp^{\lllA} = \vv_\tto^{\lllA} + \vomega_{\lllB}^{\lllA} \wedge \vr_{\tto \rl \ttp}
+\end{empheq}
+
+\subsection{Equação de Poisson para acelerações}\label{S05-01-02-02}
+
+Derivando \eqref{eq:Poisson_v} no tempo em relação a $\llA$, temos:
+\begin{equation}\label{eq:Poisson_a_aux}
+\va_\ttp^{\lllA} = \va_\tto^{\lllA} + \dot{\vomega}_{\lllB}^{\lllA} \wedge \vr_{\tto \rl \ttp} + \vomega_{\lllB}^{\lllA} \wedge (\vv_\ttp^{\lllA} - \vv_\tto^{\lllA})
+\end{equation}
+
+Substituindo \eqref{eq:Poisson_v} em \eqref{eq:Poisson_a_aux}, obtemos a equação de Poisson para acelerações:
+\begin{empheq}[box=\mybluebox]{equation} \label{eq:Poisson_a}
+\va_\ttp^{\lllA} = \va_\tto^{\lllA} + \dot{\vomega}_{\lllB}^{\lllA} \wedge \vr_{\tto \rl \ttp} + \vomega_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA} \wedge \vr_{\tto \rl \ttp}
+\end{empheq}
+
+\section{Composição de movimentos}\label{S05-01-03}
+
+Esta subseção tem o intuito de apresentar um dos princípios básicos da cinemática de corpos rígidos, a composição de movimentos.
+
+\subsection{Composição de velocidades lineares}\label{S05-01-03-01}
+
+Sejam $\llA$ um referencial, e $\ttA$ um sistema de coordenadas fixo a $\llA$, definido pela origem $\tto_\ttA$ e pelos versores $\vi_\ttA$, $\vj_\ttA$ e $\vk_\ttA$. Sejam também $\llB$ um referencial, $\ttB$ um sistema de coordenadas fixo a $\llB$, definido pela origem $\tto_\ttB$ e pelos versores $\vi_\ttB$, $\vj_\ttB$ e $\vk_\ttB$, e $\ttp$ um ponto no espaço. Definindo os vetores $\vr_{\tto_\ttA \rl \tto_\ttB}$, $\vr_{\tto_\ttB \rl \ttp}$ e $\vr_{\tto_\ttA \rl \ttp}$ tem-se que:
+\begin{equation} \label{eq:r_rho}
+\vr_{\tto_\ttA \rl \ttp} = \vr_{\tto_\ttA \rl \tto_\ttB} + \vr_{\tto_\ttB \rl \ttp}
+\end{equation}
+
+Derivando \eqref{eq:r_rho} no tempo em relação a $\llA$, temos:
+\begin{equation} \label{eq:dr_rho_aux}
+\vv_\ttp^{\lllA} = \vv_{\tto_\ttB}^{\lllA} + \dot{\vr}_{\tto_\ttB \rl \ttp}^{[\lllA]}
+\end{equation}
+
+Utilizando a equação \eqref{eq:derivada_vetor}, temos que:
+\begin{equation} 
+\dot{\vr}_{\tto_\ttB \rl \ttp}^{[\lllA]} = \dot{\vr}_{\tto_\ttB \rl \ttp}^{[\lllB]} + \vomega_{\lllB}^{\lllA}  \wedge  \vr_{\tto_\ttB \rl \ttp} 
+\end{equation}
+
+
+Ou seja:
+\begin{equation} \label{eq:drho}
+\dot{\vr}_{\tto_\ttB \rl \ttp}^{[\lllA]} =   \vv_\ttp^{\lllB} + \vomega_{\lllB}^{\lllA} \wedge \vr_{\tto_\ttB \rl \ttp} 
+\end{equation}
+
+Substituindo \eqref{eq:drho} em \eqref{eq:dr_rho_aux}, temos:
+\begin{equation} \label{eq:dr_rho}
+\vv_\ttp^{\lllA} = \vv_{\tto_\ttB}^{\lllA}  + \vomega_{\lllB}^{\lllA} \wedge \vr_{\tto_\ttB \rl \ttp}  + \vv_\ttp^{\lllB}
+\end{equation}
+
+Definindo:
+\begin{empheq}[box=\almondbox]{equation} \label{eq:v_arr}
+\vv_{\ttp \rl \lllB}^{\lllA} = \vv_{\tto_\ttB}^{\lllA}  + \vomega_{\lllB}^{\lllA} \wedge \vr_{\tto_\ttB \rl \ttp}
+\end{empheq}
+
+Temos princípio da composição de movimento para velocidades lineares:
+\begin{empheq}[box=\mybluebox]{equation} \label{eq:Composicao_vel}
+\vv_\ttp^{\lllA} = \vv_{\ttp \rl \lllB}^{\lllA} + \vv_\ttp^{\lllB}
+\end{empheq}
+
+Ou seja, $\vv_\ttp^{\lllA}$ é composto pela soma de $\vv_{\ttp \rl \lllB}^{\lllA}$, que seria a velocidade de $\ttp$ se $\ttp$ estivesse fixo a $\llB$ (movimento de arrastamento), e $\vv_\ttp^{\lllB}$, que seria a velocidade de $\ttp$ se $\llB$ estivesse parado em relação a $\llA$ (movimento relativo).
+
+\subsection{Composição de acelerações lineares}\label{S05-01-03-02}
+
+Derivando \eqref{eq:dr_rho} no tempo em relação a $\llA$, temos:
+\begin{equation} \label{eq:d2r_rho_aux}
+\va_\ttp^{\lllA} = \va_{\tto_\ttB}^{\lllA}  + \dot{\vomega}_{\lllB}^{\lllA} \wedge \vr_{\tto_\ttB \rl \ttp}  + \vomega_{\lllB}^{\lllA} \wedge \dot{\vr}_{\tto_\ttB \rl \ttp}^{[\lllA]} + \vomega_{\lllB}^{\lllA} \wedge \vv_\ttp^{\lllB} + \va_\ttp^{\lllB}
+\end{equation}
+
+Substituindo \eqref{eq:drho} em \eqref{eq:d2r_rho_aux}, temos:
+\begin{equation} \label{eq:d2r_rho}
+\va_\ttp^{\lllA} = \va_{\tto_\ttB}^{\lllA}  + \dot{\vomega}_{\lllB}^{\lllA} \wedge \vr_{\tto_\ttB \rl \ttp} + \vomega_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA} \wedge \vr_{\tto_\ttB \rl \ttp}  + 2 \vomega_{\lllB}^{\lllA} \wedge \vv_\ttp^{\lllB} + \va_\ttp^{\lllB}
+\end{equation}
+
+Definindo:
+\begin{empheq}[box=\almondbox]{equation}
+\va_{\ttp \rl \lllB}^{\lllA} = \va_{\tto_\ttB}^{\lllA}  + \dot{\vomega}_{\lllB}^{\lllA} \wedge \vr_{\tto_\ttB \rl \ttp} + \vomega_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA} \wedge \vr_{\tto_\ttB \rl \ttp}
+\end{empheq}
+
+Temos princípio da composição de movimento para acelerações lineares:
+\begin{empheq}[box=\mybluebox]{equation} \label{eq:Composicao_ace}
+\va_\ttp^{\lllA} = \va_{\ttp \rl \lllB}^{\lllA} + \va_\ttp^{\lllB} + 2\vomega_{\lllB}^{\lllA} \wedge \vv_\ttp^{\lllB}
+\end{empheq}
+
+Ou seja, $\va_\ttp^{\lllA}$ é composto pela soma de $\va_{\ttp \rl \lllB}^{\lllA}$, que seria a aceleração de $\ttp$ se $\ttp$ estivesse fixo a $\llB$ (aceleração de arrastamento), $\va_\ttp^{\lllB}$, que seria a aceleração de $\ttp$ se $\llB$ estivesse parado em relação a $\llA$ (aceleração relativa), e da parcela $2\vomega_{\lllB}^{\lllA} \wedge \vv_\ttp^{\lllB}$ (aceleralção complementar).
+
+\subsection{Composição de velocidades angulares}\label{S05-01-03-04}
+
+Sejam $\llA$ e $\llB$ dois referenciais e $\llC$ um corpo rígido. Sejam também os pontos $\ttp_1$ e $\ttp_2$, ambos fixos a $\llC$.
+
+Aplicando o princípio da composição de movimento para velocidades lineras, temos que:
+
+\begin{equation}
+\vv_{\ttp_1}^{\lllA} = \vv_{\ttp_1 \rl \lllB}^{\lllA} + \vv_{\ttp_1}^{\lllB}
+\end{equation}
+\begin{equation}
+\vv_{\ttp_2}^{\lllA} = \vv_{\ttp_2 \rl \lllB}^{\lllA} + \vv_{\ttp_2}^{\lllB}
+\end{equation}
+
+A partir da equação \eqref{eq:v_arr}, temos que:
+\begin{equation}
+\vv_{\ttp_1 \rl \lllB}^{\lllA} = \vv_{\tto_\ttB}^{\lllA} + \vomega_{\lllB}^{\lllA} \wedge \vr_{\tto_\ttB  \rl \ttp_1} 
+\end{equation}
+\begin{equation}
+\vv_{\ttp_2 \rl \lllB}^{\lllA} = \vv_{\tto_\ttB}^{\lllA} + \vomega_{\lllB}^{\lllA} \wedge \vr_{\tto_\ttB  \rl \ttp_2}
+\end{equation}
+
+Sendo assim, temos:
+\begin{equation} \label{eq:v_p1}
+\vv_{\ttp_1}^{\lllA} = \vv_{\tto_\ttB}^{\lllA} + \vomega_{\lllB}^{\lllA} \wedge \vr_{\tto_\ttB  \rl \ttp_1}  + \vv_{\ttp_1}^{\lllB}
+\end{equation}
+\begin{equation} \label{eq:v_p2}
+\vv_{\ttp_2}^{\lllA} = \vv_{\tto_\ttB}^{\lllA} + \vomega_{\lllB}^{\lllA} \wedge \vr_{\tto_\ttB  \rl \ttp_2} + \vv_{\ttp_2}^{\lllB}
+\end{equation}
+
+Subtraindo \eqref{eq:v_p2} de \eqref{eq:v_p1}, temos:
+\begin{equation} \label{eq:v_p1p2}
+\vv_{\ttp_1}^{\lllA} - \vv_{\ttp_2}^{\lllA} =  \vomega_{\lllB}^{\lllA} \wedge \vr_{\ttp_2  \rl \ttp_1}  + \vv_{\ttp_1}^{\lllB} - \vv_{\ttp_2}^{\lllB}
+\end{equation}
+
+Como $\ttp_1$ e $\ttp_2$ pertencem a um mesmo corpo rígido, temos que:
+\begin{equation} \label{eq:vA_poisson_p1p2}
+\vv_{\ttp_1}^{\lllA} =  \vv_{\ttp_2}^{\lllA} + \vomega_{\lllC}^{\lllA} \wedge \vr_{\ttp_2 \rl \ttp_1}
+\end{equation}
+\begin{equation} \label{eq:vB_poisson_p1p2}
+\vv_{\ttp_1}^{\lllB} =  \vv_{\ttp_2}^{\lllB} + \vomega_{\lllC}^{\lllB} \wedge \vr_{\ttp_2 \rl \ttp_1}
+\end{equation}
+
+Substituindo \eqref{eq:vA_poisson_p1p2} e \eqref{eq:vB_poisson_p1p2} em \eqref{eq:v_p1p2}:
+\begin{equation}
+\vomega_{\lllC}^{\lllA} \wedge \vr_{\ttp_2 \rl \ttp_1} =  \vomega_{\lllB}^{\lllA} \wedge \vr_{\ttp_2  \rl \ttp_1}  + \vomega_{\lllC}^{\lllB} \wedge \vr_{\ttp_2 \rl \ttp_1}
+\end{equation}
+
+Temos princípio da composição de movimento para velocidades angulares:
+\begin{empheq}[box=\mybluebox]{equation} \label{eq:composicao_w}
+\vomega_{\lllC}^{\lllA}  =  \vomega_{\lllB}^{\lllA}   + \vomega_{\lllC}^{\lllB}
+\end{empheq}
+
+Ou seja, $\vomega_{\lllC}^{\lllA}$ é composta pela soma de $\vomega_{\lllB}^{\lllA}$, que seria velocidade angular de  de $\llC$ se $\llC$ estivesse fixo a $\llB$ (velocidade angular de arrastamento), e $\vomega_{\lllC}^{\lllB}$, que seria a velocidade angular de $\llC$ se $\llB$ estivesse parado em relação a $\llA$ (velocidade angular relativa).
+
+Repare que, fazendo $\llC \equiv \llA$, temos que:
+\begin{equation}
+\vzr  =  \vomega_{\lllB}^{\lllA}   + \vomega_{\lllA}^{\lllB}
+\end{equation}
+\begin{empheq}[box=\almondbox]{equation} \label{eq:composicao_wCA}
+\therefore \vomega_{\lllA}^{\lllB}  =   - \vomega_{\lllB}^{\lllA}
+\end{empheq}
+
+\subsection{Composição de acelerações angulares}\label{S05-01-03-05}
+
+Derivando \eqref{eq:composicao_w} no tempo em relação a $\llA$, temos princípio da composição de movimento para acelerações angulares:
+\begin{empheq}[box=\mybluebox]{equation} \label{eq:composicao_dw}
+\dot{\vomega}_{\lllC}^{\lllA}  =  \dot{\vomega}_{\lllB}^{\lllA}   + \dot{\vomega}_{\lllC}^{\lllB} + \vomega_{\lllB}^{\lllA} \wedge \vomega_{\lllC}^{\lllB}
+\end{empheq}
+
+Ou seja, $\dot{\vomega}_{\lllC}^{\lllA}$ é composta pela soma de $\dot{\vomega}_{\lllB}^{\lllA}$, que seria a aceleração angular  de $\llC$ se $\llC$ estivesse fixo a $\llB$ (aceleração angular de arrastamento), $\dot{\vomega}_{\lllC}^{\lllB}$, que seria a aceleração angular de $\llC$ se $\llB$ estivesse parado em relação a $\llA$ (aceleração angular relativa), e da parcela $\vomega_{\lllB}^{\lllA} \wedge \vomega_{\lllC}^{\lllB}$ (aceleralção angular complementar).
+
+Repare que, fazendo $\llC \equiv \llA$ e utilizando \eqref{eq:composicao_wCA}, temos que:
+\begin{equation}
+\vzr =  \dot{\vomega}_{\lllB}^{\lllA}   + \dot{\vomega}_{\lllA}^{\lllB} - \vomega_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA}
+\end{equation}
+\begin{empheq}[box=\almondbox]{equation} \label{eq:composicao_dwCA}
+\therefore \dot{\vomega}_{\lllA}^{\lllB} = - \dot{\vomega}_{\lllB}^{\lllA}
+\end{empheq}
 
 
 % ========== Anexos (opcional) ==========
