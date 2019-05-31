@@ -1,23 +1,46 @@
-\babel@toc {brazil}{}
+\select@language {brazil}
 \contentsline {chapter}{Parte~I:~\MakeUppercase {Introdu\IeC {\c c}\IeC {\~a}o}}{11}
 \contentsline {chapter}{\numberline {1}Introdu\IeC {\c c}\IeC {\~a}o}{12}
 \contentsline {section}{\numberline {1.1}Objetivos}{13}
 \contentsline {section}{\numberline {1.2}Sobre a organiza\IeC {\c c}\IeC {\~a}o do texto}{14}
 \contentsline {chapter}{\numberline {2}Revis\IeC {\~a}o da literatura}{15}
-\contentsline {chapter}{\numberline {3}Metodologia da tese}{20}
-\contentsline {chapter}{\numberline {4}Heading on level\xspace 0 (chapter)}{22}
-\contentsline {section}{\numberline {4.1}Heading on level\xspace 1 (section)}{22}
-\contentsline {subsection}{\numberline {4.1.1}Heading on level\xspace 2 (subsection)}{22}
-\contentsline {subsubsection}{\numberline {4.1.1.1}Heading on level\xspace 3 (subsubsection)}{23}
-\contentsline {paragraph}{Heading on level\xspace 4 (paragraph)}{23}
-\contentsline {section}{\numberline {4.2}Lists}{23}
-\contentsline {subsection}{\numberline {4.2.1}Example for list\xspace (itemize)}{23}
-\contentsline {subsubsection}{\numberline {4.2.1.1}Example for list\xspace (4*itemize)}{24}
-\contentsline {subsection}{\numberline {4.2.2}Example for list\xspace (enumerate)}{24}
-\contentsline {subsubsection}{\numberline {4.2.2.1}Example for list\xspace (4*enumerate)}{24}
-\contentsline {subsection}{\numberline {4.2.3}Example for list\xspace (description)}{25}
-\contentsline {subsubsection}{\numberline {4.2.3.1}Example for list\xspace (4*description)}{25}
-\contentsline {chapter}{Ap\IeC {\^e}ndice{} A}{26}
-\contentsline {chapter}{Ap\IeC {\^e}ndice{} B{} -- Beta}{27}
-\contentsline {chapter}{Anexo{} A{} -- Alpha}{28}
-\contentsline {chapter}{Anexo{} B}{29}
+\contentsline {section}{\numberline {2.1}Modelagem din\IeC {\^a}mica}{15}
+\contentsline {section}{\numberline {2.2}Controle}{18}
+\contentsline {section}{\numberline {2.3}Bancada de ensaios}{22}
+\contentsline {chapter}{\numberline {3}Metodologia da Pesquisa}{23}
+\contentsline {section}{\numberline {3.1}Primeira fase}{23}
+\contentsline {section}{\numberline {3.2}Segunda fase}{23}
+\contentsline {section}{\numberline {3.3}Terceira fase}{23}
+\contentsline {section}{\numberline {3.4}Quarta fase}{24}
+\contentsline {section}{\numberline {3.5}Quinta fase}{24}
+\contentsline {section}{\numberline {3.6}Sexta fase}{24}
+\contentsline {section}{\numberline {3.7}O que tinha antes}{25}
+\contentsline {chapter}{Parte~II:~\MakeUppercase {Modelagem}}{27}
+\contentsline {chapter}{\numberline {4}Modelagem de manipuladores seriais}{28}
+\contentsline {section}{\numberline {4.1}Cinem\IeC {\'a}tica}{29}
+\contentsline {subsection}{\numberline {4.1.1}Cinem\IeC {\'a}tica de posi\IeC {\c c}\IeC {\~a}o}{29}
+\contentsline {subsection}{\numberline {4.1.2}Cinem\IeC {\'a}tica de velocidades lineares}{30}
+\contentsline {subsection}{\numberline {4.1.3}Cinem\IeC {\'a}tica de velocidades angulares}{32}
+\contentsline {subsection}{\numberline {4.1.4}Cinem\IeC {\'a}tica de acelera\IeC {\c c}\IeC {\~o}es lineares}{34}
+\contentsline {subsection}{\numberline {4.1.5}Cinem\IeC {\'a}tica de acelera\IeC {\c c}\IeC {\~o}es angulares}{36}
+\contentsline {section}{\numberline {4.2}Din\IeC {\^a}mica dos elos e juntas}{38}
+\contentsline {subsection}{\numberline {4.2.1}Modelo dos subsistemas}{39}
+\contentsline {subsection}{\numberline {4.2.2}Sistemas de for\IeC {\c c}as ativas generalizadas}{40}
+\contentsline {subsection}{\numberline {4.2.3}V\IeC {\'\i }nculos cinem\IeC {\'a}ticos entre subsistemas}{40}
+\contentsline {subsection}{\numberline {4.2.4}Acoplamento de subsistemas}{41}
+\contentsline {chapter}{\numberline {5}Heading on level\xspace 0 (chapter)}{43}
+\contentsline {section}{\numberline {5.1}Heading on level\xspace 1 (section)}{43}
+\contentsline {subsection}{\numberline {5.1.1}Heading on level\xspace 2 (subsection)}{43}
+\contentsline {subsubsection}{\numberline {5.1.1.1}Heading on level\xspace 3 (subsubsection)}{44}
+\contentsline {paragraph}{Heading on level\xspace 4 (paragraph)}{44}
+\contentsline {section}{\numberline {5.2}Lists}{44}
+\contentsline {subsection}{\numberline {5.2.1}Example for list\xspace (itemize)}{44}
+\contentsline {subsubsection}{\numberline {5.2.1.1}Example for list\xspace (4*itemize)}{45}
+\contentsline {subsection}{\numberline {5.2.2}Example for list\xspace (enumerate)}{45}
+\contentsline {subsubsection}{\numberline {5.2.2.1}Example for list\xspace (4*enumerate)}{45}
+\contentsline {subsection}{\numberline {5.2.3}Example for list\xspace (description)}{46}
+\contentsline {subsubsection}{\numberline {5.2.3.1}Example for list\xspace (4*description)}{46}
+\contentsline {chapter}{Ap\IeC {\^e}ndice{} A}{47}
+\contentsline {chapter}{Ap\IeC {\^e}ndice{} B{} -- Beta}{48}
+\contentsline {chapter}{Anexo{} A{} -- Alpha}{49}
+\contentsline {chapter}{Anexo{} B}{50}
