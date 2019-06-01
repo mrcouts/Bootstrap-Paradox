@@ -1,6 +1,26 @@
 \select@language {brazil}
-\contentsline {figure}{\numberline {1}{\ignorespaces Rob\IeC {\^o} industrial Adept Quattro}}{14}
-\contentsline {figure}{\numberline {2}{\ignorespaces Malha de CTC (Adaptado de \cite {Craig})}}{21}
-\contentsline {figure}{\numberline {3}{\ignorespaces Malha de CTCp (Adaptado de \cite {Craig})}}{21}
-\contentsline {figure}{\numberline {4}{\ignorespaces Malha de controle adaptativo (Adaptado de \cite {Craig})}}{23}
-\contentsline {figure}{\numberline {5}{\ignorespaces Prot\IeC {\'o}tipo do mecanismo 5R}}{28}
+\contentsline {figure}{\numberline {1}{\ignorespaces Rob\IeC {\^o} industrial Adept Quattro}}{15}
+\contentsline {figure}{\numberline {2}{\ignorespaces Malha de CTC (Adaptado de \cite {Craig})}}{22}
+\contentsline {figure}{\numberline {3}{\ignorespaces Malha de CTCp (Adaptado de \cite {Craig})}}{22}
+\contentsline {figure}{\numberline {4}{\ignorespaces Malha de controle adaptativo (Adaptado de \cite {Craig})}}{24}
+\contentsline {figure}{\numberline {5}{\ignorespaces Prot\IeC {\'o}tipo do mecanismo 5R}}{29}
+\contentsline {figure}{\numberline {6}{\ignorespaces Pent\IeC {\'a}gono articulado (5R)}}{79}
+\contentsline {figure}{\numberline {7}{\ignorespaces Mecanismo \relax $\@@underline {\hbox {R}}\mathsurround \z@ $\relax \relax $\@@underline {\hbox {R}}\mathsurround \z@ $\relax }}{80}
+\contentsline {figure}{\numberline {8}{\ignorespaces Espa\IeC {\c c}o de trabalho do mecanismo \relax $\@@underline {\hbox {R}}\mathsurround \z@ $\relax \relax $\@@underline {\hbox {R}}\mathsurround \z@ $\relax }}{82}
+\contentsline {figure}{\numberline {9}{\ignorespaces Fun\IeC {\c c}\IeC {\~a}o de satura\IeC {\c c}\IeC {\~a}o $f_{sat}(x) = \qopname \relax o{tanh}(100 x)$}}{84}
+\contentsline {figure}{\numberline {10}{\ignorespaces Torque aplicado pelo atuador 1}}{85}
+\contentsline {figure}{\numberline {11}{\ignorespaces Torque aplicado pelo atuador 2}}{85}
+\contentsline {figure}{\numberline {12}{\ignorespaces Erro de na coordenada $x$}}{85}
+\contentsline {figure}{\numberline {13}{\ignorespaces Erro de na coordenada $y$}}{85}
+\contentsline {figure}{\numberline {14}{\ignorespaces Vari\IeC {\'a}vel $s_x$}}{85}
+\contentsline {figure}{\numberline {15}{\ignorespaces Vari\IeC {\'a}vel $s_y$}}{85}
+\contentsline {figure}{\numberline {16}{\ignorespaces Torque aplicado pelo atuador 1}}{86}
+\contentsline {figure}{\numberline {17}{\ignorespaces Torque aplicado pelo atuador 2}}{86}
+\contentsline {figure}{\numberline {18}{\ignorespaces Erro de na coordenada $x$}}{86}
+\contentsline {figure}{\numberline {19}{\ignorespaces Erro de na coordenada $x$}}{86}
+\contentsline {figure}{\numberline {20}{\ignorespaces Vari\IeC {\'a}vel $s_x$}}{86}
+\contentsline {figure}{\numberline {21}{\ignorespaces Vari\IeC {\'a}vel $s_y$}}{86}
+\contentsline {figure}{\numberline {22}{\ignorespaces Torque aplicado pelo atuador 1}}{87}
+\contentsline {figure}{\numberline {23}{\ignorespaces Torque aplicado pelo atuador 2}}{87}
+\contentsline {figure}{\numberline {24}{\ignorespaces Erro de na coordenada $x$}}{87}
+\contentsline {figure}{\numberline {25}{\ignorespaces Erro de na coordenada $y$}}{87}

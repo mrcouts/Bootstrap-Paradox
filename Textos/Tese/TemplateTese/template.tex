@@ -20,6 +20,7 @@
 \usepackage{amsmath,amsthm,amsfonts,amssymb}
 \usepackage{graphicx,cite,enumerate}
 
+\usepackage{float}
 \usepackage{multicol}
 \usepackage{color}
 \usepackage{empheq}
@@ -80,7 +81,7 @@
 %		Nome Sobrenome}
 
 % Orientador / Coorientador
-\orientador{Prof. Dr. Tarcisio Antonio Hess Coelho}
+\orientador{Prof. Dr. Tarcisio A. H. Coelho}
 %\coorientador{Nome do coorientador (opcional)}
 
 % Tipo de documento
@@ -205,7 +206,7 @@ Os mecanismos de arquitetura paralela são amplamente utilizados em simuladores 
 
 Há uma série de vantagens em utilizar mecanismos paralelos no lugar dos tradicionais seriais. Dentre elas podemos citar sua grande capacidade de carga, alta precisão de posicionamento, alta rigidez estrutural, e uma redução significativa na inércia \cite{Cheng, Khalil, Merlet2002, Tsai}. Outra característica marcante desse tipo de arquitetura são as altas velocidades e acelerações atingidas, as quais superam muito os valores máximos atingidos utilizando arquitetura serial. Grande parte dessas vantagens se devem à possibilidade de instalação de todos os motores na base imóvel do mecanismo. Como desvantagens podemos citar o menor espaço de trabalho e modelo dinâmico muito mais complexo e de difícil obtenção \cite{Rynaldo, Merlet2002}.
 
-\begin{figure}[h!]
+\begin{figure}[h]
 	\centering
 	\includegraphics[scale=0.17]{../figures/theadeptquat.jpg}  
 	\caption{Robô industrial Adept Quattro}
@@ -429,7 +430,7 @@ Os trabalhos na área de projeto de controle serão feitos utilizando a metodolo
 
 Os trabalhos no âmbito da validação experimental das leis de controle sintetizadas serão realizados no protótipo do mecanismo 5R que encontra-se no laboratório de mecanismos. A bancada experimental do mecanismo 5R já está funcional e já forem realizados alguns testes de leis de controle de trajetória baseadas no modelo dinâmico do mecanismo. Para a realização da validação experimental nesta bancada, será realizada a identificação dos parâmetros do sistema e suas respectivas incertezas, projeto do controlador baseado nos parâmetros e incertezas identificadas, implementação das leis de controle, e aquisição de dados. \\
 
-\begin{figure}[h!]
+\begin{figure}[h]
 	\centering
 	\includegraphics[scale=0.3]{../figures/Clara.jpg}  
 	\caption{Protótipo do mecanismo 5R}
@@ -3178,6 +3179,542 @@ Sendo $\gamma_i$ uma constante positiva, a qual determina a velocidade da adapta
 
 Esta lei de adaptação pode ser explicada da seguinte maneira: $\underline{k}_i$ aumenta enquanto o sistema não atingir a região da camada limite. Enquanto o sistema estiver nesta região, $\underline{k}_i$ se mantém constante ou diminui a cada cruzamento com a superfície de escorregamento. Se o sistema estiver região da camada limite e $\underline{k}_i$ respeitar a inequação \eqref{eq:DesigualdadeK2_a1}, \eqref{eq:DesigualdadeK2_a2}, \eqref{eq:DesigualdadeK2_b1} ou \eqref{eq:DesigualdadeK2_b2} (dependendo da lei de controle utilizada), $\underline{k}_i$ irá dimunuir a cada cruzamento com a superfície de escorregamento, até que o sistema saia ligeiramente da região. Assim que o sistema sair da região, $\underline{k}_i$ irá aumentar até o sistema atingi-la novamente, repetindo este ciclo infinitamente, com $\underline{k}_i$ variando em uma faixa de valores muito próxima do menor valor possível para que o sistema se mantenha na região da camada limite.
 
+%RESULTADOS------------------------------------------------------------------------------------------
+\part{Resultados}
+
+\chapter{Resultados e Discussão}
+\capepigrafe[0.5\textwidth]{``Frase espirituosa de um autor famoso''}{Autor famoso}
+
+\section{Algoritmos e suas implementações}
+
+\section{Simulações}
+
+Nesta seção, será realizada a simulação dinâmica direta do mecânimo 5R utilizando o algoritmo de modelagem e simulação de mecanismos paralelos apresentado, e a lei de controle apresentada na subseção anterior. Serão consideradas incertezas paramétricas, tanto no projeto do controlador, quanto na simulação.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.10]{../figures/5Rscan.jpg}  
+	\caption{Pentágono articulado (5R)}
+	\label{fig:5R}
+\end{figure}
+
+O mecanismo 5R será modelado através do acoplamento de 2 subsistemas seriais $\ssB_1$ e $\ssB_2$ do tipo \underline{R}\underline{R}, e um efetuador pontual $\ssB_0$ de massa $m_0$.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.055]{../figures/RR.jpg}  
+	\caption{Mecanismo \underline{R}\underline{R}}
+	\label{fig:RR}
+\end{figure}
+
+
+\begin{itemize}
+\item[i)] Modelo do efetuador
+
+O modelo do efetuador pontual $\ssB_0$ segue o formato dado pela equação \eqref{eq:ModeloDosSubsistemas}, ou seja:
+\begin{equation}
+\overline{\mf}_{\ssB_0}(\mu_0, \mq_0, \dot{\mq}_0, \ddot{\mq}_0) =  \mu_0 - (\mM_{\ssB_0}(\mq_0) \ddot{\mq}_0 + \mv_{\ssB_0}(\mq_0,\dot{\mq}_0) + \mg_{\ssB_0}(\mq_0)) = \mzr
+\end{equation}
+Para o subsistema em questão, temos:
+\begin{equation}
+\mM_{\ssB_0}(\mq_0) = \begin{bmatrix}
+m_0 & 0 \\
+0 & m_0 \\
+\end{bmatrix}
+\end{equation}
+\begin{equation}
+\mv_{\ssB_0}(\mq_0,\dot{\mq}_0) = \mzr
+\end{equation}
+\begin{equation}
+\mg_{\ssB_0}(\mq_0) = \begin{bmatrix}
+0 &
+m_0 g \\
+\end{bmatrix}^\msT
+\end{equation}
+\begin{equation}
+\mq_0 = \mq\ssh = \begin{bmatrix}
+x &
+y
+\end{bmatrix}^\msT
+\end{equation}
+\begin{equation}
+\mu_0 = \mzr
+\end{equation}
+
+
+
+\item[ii)] Parâmetros de Denavit-Hartemberg das cadeias seriais
+
+\begin{table}[h]
+\begin{center}
+\caption[DH]{Parâmetros de Denavit-Hartemberg do mecanismo \underline{R}\underline{R}}
+\begin{tabular}{|c|c|c|c|c|c|} 
+	\hline
+	\rule[-2mm]{0mm}{6mm}
+	Ligamento & $a_i$ & $\alpha_i$ & $d_i$ & $\theta_i$ \\
+	\hline
+	\rule[-2mm]{0mm}{6mm}
+	(1) & $l_1$ & $0$ & $0$ & $q_1(t)$  \\
+	\rule[-1mm]{0mm}{5mm}
+	(2) & $l_2$ & $0$ & $0$ & $q_2(t)$  \\
+	\hline
+\end{tabular}
+\label{tab:DH}
+\end{center}
+\end{table}
+
+\item[iii)] Arquitetura do mecanismo paralelo
+
+É possível relacionar as coordenadas um ponto no espaço descrito no sistema $\ttN$ com as coordenadas do mesmo ponto escritas nos sistemas $\ttN_1$ e $\ttN_2$ da seguinte maneira:
+\begin{equation}
+\vct{\ttp}_{\ttN} = \begin{bmatrix}
+1 & 0 & 0 \\
+0 & 1 & 0 \\
+0 & 0 & 1 \\
+\end{bmatrix}
+\cdot
+\vct{\ttp}_{\ttN_1}
++
+\begin{bmatrix}
+l_0 \\
+0 \\
+0 
+\end{bmatrix}
+\end{equation}
+\begin{equation}
+\vct{\ttp}_{\ttN} = \begin{bmatrix}
+-1 & 0 & 0 \\
+0 & 1 & 0 \\
+0 & 0 & -1 \\
+\end{bmatrix}
+\cdot
+\vct{\ttp}_{\ttN_2}
++
+\begin{bmatrix}
+-l_0 \\
+0 \\
+0 
+\end{bmatrix}
+\end{equation}
+
+Escolhendo o ponto $\ttp$ como sendo o efetuador do mecanismo paralelo, o qual tem a mesma localização dos efetuadores das cadeias serias neste caso, temos:
+\begin{equation}
+\mq\ssh = 
+\begin{bmatrix}
+1 & 0 & 0 \\
+0 & 1 & 0 \\
+\end{bmatrix}
+\cdot
+\mx_1(\mq_1)
++
+\begin{bmatrix}
+l_0 \\
+0 \\
+\end{bmatrix}
+\end{equation}
+\begin{equation}
+\mq\ssh = 
+\begin{bmatrix}
+-1 & 0 & 0 \\
+0 & 1 & 0 \\
+\end{bmatrix}
+\cdot
+\mx_2(\mq_2)
++
+\begin{bmatrix}
+-l_0 \\
+0 \\
+\end{bmatrix}
+\end{equation}
+
+Sendo assim, temos que os vínculos de posição são dados por:
+\begin{equation}
+\overline{\mq}(\mq) =
+\begin{bmatrix}
+1 & 0 \\
+0 & 1 \\
+1 & 0 \\
+0 & 1 \\
+\end{bmatrix}
+\cdot
+\mq\ssh
+-
+\begin{bmatrix}
+1 & 0 & 0 & 0 & 0 & 0 \\
+0 & 1 & 0 & 0 & 0 & 0 \\
+0 & 0 & 0 & -1 & 0 & 0 \\
+0 & 0 & 0 & 0 & 1 & 0 \\
+\end{bmatrix}
+\cdot
+\mx(\mq\cir)
+-
+\begin{bmatrix}
+l_0 \\
+0 \\
+-l_0 \\
+0 \\
+\end{bmatrix}
+= \mzr
+\end{equation}
+
+Como não temos vínculos de velocidades angulares para esse mecanismo, as matrizes que descrevem a arquitetura do mecanismo são dadas por:
+\begin{multicols}{3}
+\begin{equation}
+\md = \begin{bmatrix}
+l_0 \\
+0 \\
+-l_0 \\
+0 \\
+\end{bmatrix}
+\end{equation} \\
+\begin{equation}
+\mD = \begin{bmatrix}
+1 & 0 \\
+0 & 1 \\
+1 & 0 \\
+0 & 1 \\
+\end{bmatrix}
+\end{equation} \\
+\begin{equation}
+\mE = \begin{bmatrix}
+1 & 0 & 0 & 0 & 0 & 0 \\
+0 & 1 & 0 & 0 & 0 & 0 \\
+0 & 0 & 0 & -1 & 0 & 0 \\
+0 & 0 & 0 & 0 & 1 & 0 \\
+\end{bmatrix}
+\end{equation}
+\end{multicols}
+\begin{equation}
+\mF = \mzr
+\end{equation}
+\begin{equation}
+\mP = \mQ = \mR = \vct{\varnothing}
+\end{equation}
+
+\item[iv)] Parâmetros e incertezas do modelo
+
+Definimos os seguinte parâmetros e incertezas para o mecanismo em questão:
+
+\begin{multicols}{2}
+\begin{itemize}
+\item[-] $l_1 = 0.12 m$
+\item[-] $l_2 = 0.15 m$
+\item[-] $l_{g1} = (0.06 \pm 0.009) m$
+\item[-] $l_{g2} = (0.075 \pm 0.011) m$
+\item[-] $m_0 = 0 \, kg$
+\item[-] $m_1 = (0.143 \pm 0.0215) kg$
+\item[-] $m_2 = (0.171 \pm 0.0257) kg$
+\item[-] $Jz_1 = (171.6 \pm 25.7 ) 10^{-6} kg\cdot m^2$
+\item[-] $Jz_2 = (320.6 \pm 48.1 ) 10^{-6} kg\cdot m^2$
+\item[-] $g = 9.8 m/s^2$
+\end{itemize}
+\end{multicols}
+
+\item[v)] Espaço de trabalho
+
+Dados os parâmetros geométricos defidos acima, obtemos o seguinte espaço de trabalho para o mecanismo:
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.25]{../figures/Workspace.pdf}  
+	\caption{Espaço de trabalho do mecanismo \underline{R}\underline{R}}
+	\label{fig:RRWS}
+\end{figure}
+
+A região em azul escuro é a região não pertencente ao espaço de trabalho do mecanismo. As regiões em azul claro, em amarelo, e em vermelho são regiões pertencententes ao espaço do mecanismo. A região a amarela é considerada singular (próxima a singularidades) e a vermelha é a trajetória a ser seguida pelo mecanismo.
+
+\item[vi)] Controlador
+
+A lei de controle por modos deslizantes que será utilizada na simulação dinâmica direta é dada pelas equações \eqref{eq:ControlLawSRed} e \eqref{eq:MatriDiagk2}. $\mGamma$, $\meta$ e $\meta_{i,j}$ são obtidas da seguinte maneira:
+\begin{itemize}
+\item[$\bullet$] Discretiza-se o espaço de trabalho em um número finito de pontos considerados não-singulares. Foi adotada um discretização de $1 cm$ na horizontal e na vertical.
+\item[$\bullet$] Para cada ponto calcula-se $|\mDelta|$, $|\mdelta_0|$ e $|\mdelta_{i,j}|$ para todas as combinações possíveis de parâmetros, com os parâmetros podendo assumir seu valor mínimo e seu valor máximo. Como temos 6 parâmetros incertos, temos 64 possibilidades.
+\item[$\bullet$] Obtem-se o valor máximo de $|\mDelta|$, $|\mdelta_0|$ e $|\mdelta_{i,j}|$ para cada ponto.
+\item[$\bullet$] Obtem-se o valor máximo de $|\mDelta|$, $|\mdelta_0|$ e $|\mdelta_{i,j}|$ para o espaço de trabalho, a partir do valor máximo em cada ponto.
+\end{itemize}
+
+Realizando-se esse procedimento e adotando $\eta = 20.0$, obtemos:
+\begin{equation}
+\diag(\underline{k}) =
+\begin{bmatrix}
+75.3 \\
+108
+\end{bmatrix}
++
+\begin{bmatrix}
+37.0 \\
+54.1
+\end{bmatrix} \dot{x}^2
++
+\begin{bmatrix}
+22.7 \\
+35.5
+\end{bmatrix} |\dot{x} \dot{y} |
++
+\begin{bmatrix}
+17.5 \\
+28.5
+\end{bmatrix} \dot{y}^2
++
+\begin{bmatrix}
+1.25 & 0.92 \\
+1.68 & 1.65
+\end{bmatrix}
+\cdot
+\begin{bmatrix}
+|\ddot{x}_d + \lambda \dot{e}_x| \\
+|\ddot{y}_d + \lambda \dot{e}_y|
+\end{bmatrix}
+\end{equation}
+
+\item[vi)] Simulação dinâmica direta
+
+Para realizar a simulação dinâmica direta, definimos:
+
+\begin{itemize}
+
+\item[$\bullet$] Parâmetros do mecanismo:
+\begin{multicols}{2}
+\begin{itemize}
+\item[-] $l_1 = 0.12 m$
+\item[-] $l_2 = 0.15 m$
+\item[-] $l_{g1} = 0.051 m$
+\item[-] $l_{g2} = 0.086 m$
+\item[-] $m_0 = 0 \, kg$
+\item[-] $m_1 = 0.1645 kg$
+\item[-] $m_2 = 0.1967 kg$
+\item[-] $Jz_1 = 197.3 \cdot 10^{-6} kg\cdot m^2$
+\item[-] $Jz_2 = 368.7 \cdot 10^{-6} kg\cdot m^2$
+\item[-] $g = 9.8 m/s^2$
+\end{itemize}
+\end{multicols}
+
+\item[$\bullet$] Parâmetros estimados
+\begin{multicols}{2}
+\begin{itemize}
+\item[-] $\hat{l}_1 = 0.12 m$
+\item[-] $\hat{l}_2 = 0.15 m$
+\item[-] $\hat{l}_{g1} = 0.06 m$
+\item[-] $\hat{l}_{g2} = 0.075 m$
+\item[-] $\hat{m}_0 = 0 \, kg$
+\item[-] $\hat{m}_1 = 0.143 kg$
+\item[-] $\hat{m}_2 = 0.171 kg$
+\item[-] $\hat{J}z_1 = 171.6 \cdot 10^{-6} kg\cdot m^2$
+\item[-] $\hat{J}z_2 = 320.6 \cdot 10^{-6} kg\cdot m^2$
+\item[-] $\hat{g} = 9.8 m/s^2$
+\end{itemize}
+\end{multicols}
+
+\item[$\bullet$] Condições iniciais:
+\begin{equation}
+\begin{cases}
+q\ssh_1(0) = 0.07 m\\
+q\ssh_2(0) = 0.17 m \\
+\dot{q}\ssh_1(0) = 0 \\
+\dot{q}\ssh_2(0) = 0 \\
+\end{cases}
+\end{equation}
+
+\item[$\bullet$] Trajetória de referência:
+\begin{equation}
+\begin{cases}
+q\ssh_{1 \, d}(t) = 0.07 \cos(28.57 t) \\
+q\ssh_{2 \, d}(t) = 0.17 + 0.07 \sin(28.57 t) \\
+\end{cases}
+\end{equation}
+
+\item[$\bullet$] Parâmetros do controlador:
+$$ \lambda = 40.0 $$
+$$ \eta = 20.0 $$
+
+Os parâmetros do mecanismo foram escolhidos de modo que haja um erro de $15\%$ em cada parâmetro incerto.
+Os parâmetros do controlar foram escolhidos de modo que o sistema tenha um tempo de alcance às superfícies de escorregamento $t_r  \leq 0.1 s$ (pois $\ms(0) = [0 \; -2]^\msT$) e um tempo de assentamento de $t_a = 0.1 s$, quando o sistema chega nas superfícies de escorregamento. \\
+\end{itemize}
+
+A função $f(x) = \sign(x)$ foi substituida pela função de saturação $f_{sat}(x) = \tanh(100 x)$, a qual tem as seguintes propriedades:
+\begin{itemize}
+\item[-] $f_{sat}(0.023) = -f_{sat}(-0.023) = 0.98$
+\item[-] $f_{sat}(\infty) = -f_{sat}(-\infty) = 1$
+\item[-] $ \frac{\dd f_{sat}}{\dd x} (0) = 100$
+\end{itemize}
+
+Sua utilização garante a estabilidade nas simulações numéricas, evita o chattering nos atuadores, e ainda garante um erro em regime permanente desprezível para esta aplicação.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.4]{../figures/Tanh.pdf}  
+	\caption{Função de saturação $f_{sat}(x) = \tanh(100 x)$}
+	\label{fig:Tanh}
+\end{figure}
+
+\end{itemize}
+
+Aqui seguem os resultados das simulações numéricas:
+
+\newpage
+
+\begin{multicols}{2}
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.31]{../figures/Torque1.pdf}  
+	\caption{Torque aplicado pelo atuador 1}
+	\label{fig:Torque1}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.31]{../figures/Torque2.pdf}  
+	\caption{Torque aplicado pelo atuador 2}
+	\label{fig:Torque2}
+\end{figure}
+\end{multicols}
+\begin{multicols}{2}
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.31]{../figures/ex.pdf}  
+	\caption{Erro de na coordenada $x$}
+	\label{fig:ex}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.31]{../figures/ey.pdf}  
+	\caption{Erro de na coordenada $y$}
+	\label{fig:ey}
+\end{figure}
+\end{multicols}
+\begin{multicols}{2}
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.31]{../figures/sx.pdf}  
+	\caption{Variável $s_x$}
+	\label{fig:sx}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.31]{../figures/sy.pdf}  
+	\caption{Variável $s_y$}
+	\label{fig:sy}
+\end{figure}
+\end{multicols}
+
+Repare que o tempo de alcance de $s_y$ é aproximadamente $t_r = 0.008s < 0.1s$. Além disso, $0.1s$ depois de alcançar a superfície de escorregamento, o erro $e_y$ já é praticamente nulo, como pode-se observar no gráfico da figura \ref{fig:ey}. Sendo assim, temos os resultados coerentes com os parâmetros do controlador adotados. \\
+
+O projeto do controlador foi feito supondo incertezas de $15\%$ nos parâmetros incertos. Porém, realizando a simulação com o mesmo controlador, aumentando para $50\%$ os erros paramétricos, pode-se observar que o sistema ainda consegue ser controlado, com erros de controle na ordem de centésimos de milímetro, como pode ser visto nos resultados abaixo: 
+
+\begin{multicols}{2}
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.31]{../figures/Torque12.pdf}  
+	\caption{Torque aplicado pelo atuador 1}
+	\label{fig:Torque12}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.31]{../figures/Torque22.pdf}  
+	\caption{Torque aplicado pelo atuador 2}
+	\label{fig:Torque22}
+\end{figure}
+\end{multicols}
+\begin{multicols}{2}
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.31]{../figures/ex2.pdf}  
+	\caption{Erro de na coordenada $x$}
+	\label{fig:ex2}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.31]{../figures/ey2.pdf}  
+	\caption{Erro de na coordenada $x$}
+	\label{fig:ey2}
+\end{figure}
+\end{multicols}
+
+\begin{multicols}{2}
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.31]{../figures/sx2.pdf}  
+	\caption{Variável $s_x$}
+	\label{fig:sx2}
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.31]{../figures/sy2.pdf}  
+	\caption{Variável $s_y$}
+	\label{fig:sy2}
+\end{figure}
+\end{multicols}
+
+Para fins de comparação, realizamos a simulação anterior mudando a lei de controle para a tradicional lei de Controle por Torque Computado com amortecimento crítico \cite{Craig}:
+\begin{equation}
+\mup = \hat{\mh}(\mq,\dot{\mq}\ssh) + \hat{\mH}(\mq)( \ddot{\mq}\ssh_d + 2 \lambda \dot{\me} + \lambda^2 \me )
+\end{equation}
+
+Escolhendo $\lambda = 40.0$, obtemos os seguintes resultados:
+
+\begin{multicols}{2}
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.31]{../figures/Torque13.pdf}  
+	\caption{Torque aplicado pelo atuador 1}
+	\label{fig:Torque13}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.31]{../figures/Torque23.pdf}  
+	\caption{Torque aplicado pelo atuador 2}
+	\label{fig:Torque23}
+\end{figure}
+\end{multicols}
+\begin{multicols}{2}
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.31]{../figures/ex3.pdf}  
+	\caption{Erro de na coordenada $x$}
+	\label{fig:ex3}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.31]{../figures/ey3.pdf}  
+	\caption{Erro de na coordenada $y$}
+	\label{fig:ey3}
+\end{figure}
+\end{multicols}
+
+Repare que a lei de Controle por Torque Computado não consegue seguir a trajetória de forma satisfatória, mantendo um erro em regime permanente oscilatório com pico $12 mm$ na coordenada $x$ e $27 mm$ na coordenada $y$.
+
+\section{Ensaios Experimentais}
+
+
+%CONCLUSÃO------------------------------------------------------------------------------------------
+\chapter{Conclusões e temas para pesquisa futura}
+
+\section{Principais contribuições}
+
+A partir dos resultados obtidos no trabalho de formatura realizado na gradua\c{c}\~ao, foi publicado um artigo intitulado ``Development of a controller for a 3-DOF robotic platform for user interaction in rehabilitation therapies'' \cite{Biorob}, o qual foi escrito em coautoria com Eng. Guilherme Martinho Dobrianskyj e o Prof. Dr. Tarc\'isio Ant\^onio Hess Coelho. Este trabalho foi apresentado no BioRob 2014 (IEEE International Conference on Biomedical Robotics and Biomechatronics) na se\c{c}\~ao de posters, no dia 15 de agosto de 2014. O artigo pode ser acessado por \url{http://dx.doi.org/10.1109/BIOROB.2014.6913880}.
+
+Um cap\' itulo de livro, intitulado ``Dynamic modelling
+and control of balanced parallel mechanisms'' \cite{22orsino}, foi escrito em coautoria com o Dr. Renato M. M. Orsino e com o Prof. Dr. Tarcisio Antonio Hess Coelho, para o livro {\em Dynamic balancing of mechanisms and synthesizing of parallel
+robots}  (editado pelo Prof. Dr. Dan Zhang da Universidade do Instituto de Tecnologia
+de Ontario e publicado pela editora Springer).
+Este cap\'itulo de livro trata do uso de uma metodologia de modelagem modular para o
+balanceamento adaptativo e desenvolvimento de algoritmos de controle para mecanismos
+rob\'oticos paralelos. O capítulo pode ser acessado por \url{http://dx.doi.org/10.1007/978-3-319-17683-3_16}.
+
+Um artigo, publicado no peri\'odico {\em International Journal of Mechanisms and Robotic Systems}, intitulado ``A new approach for obtaining the dynamic balancing conditions in serial mechanisms'' \cite{Coutinho}, foi escrito em coautoria com o Prof. Dr. Tarc\'isio Antonio Hess Coelho. O artigo pode ser acessado por \url{http://dx.doi.org/10.1504/IJMRS.2016.077036}.
+
+Um artigo, publicado no {\em Congresso Brasileira de Automática - 2018}, intitulado ``H-Infinity Control of a 3-DOF RRR Spatial Serial Mechanism'' \cite{CBA}, foi escrito em coautoria com a Eng. Isabella Stevani, o Prof. Dr. Diego Colón, e o Prof. Dr. Tarc\'isio Antonio Hess Coelho. O artigo pode ser acessado por \url{https://ssl4799.websiteseguro.com/swge5/PROCEEDINGS/} (doi:10.20906/CPS/CBA2018-0458).
+
+\section{Sugestão de temas para pesquisa futura}
+
+
+
 %\blinddocument
 
 
@@ -3195,8 +3732,8 @@ Esta lei de adaptação pode ser explicada da seguinte maneira: $\underline{k}_i
 
 % ========== Apêndices (opcional) ==========
 \apendice
-\chapter{}
-\chapter{}
+\chapter{Processador utilizado}
+\chapter{Curva dos motores}
 \chapter{Cinemática de corpos rígidos}\label{S05-1}
 
 \section{Conceitos básicos}\label{S05-01-01}
@@ -3459,9 +3996,9 @@ Repare que, fazendo $\llC \equiv \llA$ e utilizando \eqref{eq:composicao_wCA}, t
 
 
 % ========== Anexos (opcional) ==========
-\anexo
-\chapter{Alpha}
-\chapter{}
+%\anexo
+%\chapter{Alpha}
+%\chapter{}
 
 
 
