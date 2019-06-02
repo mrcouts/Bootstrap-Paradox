@@ -3791,17 +3791,62 @@ I = \frac{u - k_e \omega}{R}
 
 \begin{table}[H] 
 \centering
+\caption{Parâmetros da cadeia 1}
+\label{parametrosCadeia1}
+\begin{tabular}{l|l|l}
+Parâmetros   & Valores                  & Unidades   \\ \hline
+$l_1$        & $0.120$                     & $m$        \\
+$l_2$        & $0.160$                     & $m$        \\
+$l_{g1}$     & $0.060$                     & $m$        \\
+$l_{g2}$     & $0.078$                    & $m$        \\
+$m_1$        & $0.062$                    & $kg$       \\
+$m_2$        & $0.124$                    & $kg$       \\
+$J_{z1}$     & $1.073 \cdot 10^{-4}$    & $kg.m^{2}$ \\
+$J_{z2}$     & $4.380 \cdot 10^{-4}$    & $kg.m^{2}$ \\
+\end{tabular}
+\end{table} 
+
+\begin{table}[H] 
+\centering
+\caption{Parâmetros da cadeia 2}
+\label{parametrosCadeia1}
+\begin{tabular}{l|l|l}
+Parâmetros   & Valores                    & Unidades   \\ \hline
+$l_1$        & $0.120$                    & $m$        \\
+$l_2$        & $0.160$                    & $m$        \\
+$l_{g1}$     & $0.060$                    & $m$        \\
+$l_{g2}$     & $0.058$                    & $m$        \\
+$m_1$        & $0.062$                    & $kg$       \\
+$m_2$        & $0.097$                    & $kg$       \\
+$J_{z1}$     & $2.960   \cdot 10^{-4}$    & $kg.m^{2}$ \\
+$J_{z2}$     & $9.800   \cdot 10^{-4}$    & $kg.m^{2}$ \\
+\end{tabular}
+\end{table}
+
+\begin{table}[H] 
+\centering
+\caption{Outros parâmetros do sistema}
+\label{parametrosCadeia1}
+\begin{tabular}{l|l|l}
+Parâmetros   & Valores                  & Unidades   \\ \hline
+$l_0$        & $0.050$                     & $m$     \\
+$m_0$        & $0.000$                     & $kg$     \\
+\end{tabular}
+\end{table}  
+
+\begin{table}[H] 
+\centering
 \caption{Parâmetros do Motor 1}
 \label{parametrosMotor}
 \begin{tabular}{l|l|l}
-Parâmetros  & Valores     & Unidades   \\ \hline
-$R$     & 1.10098     & $\Omega$   \\
-$L$     & 0.667       & $mH$       \\
-$b$     & 0.000122595 & $N s$      \\
-$k_{t}$     & 0.055984     & $Nm/A$     \\
-$\gmu$ & 0.0435651   & $Nm$        \\
-$k_{e}$     & 0.0513822    & $V s/rad$  \\
-$J$ & $1.469*10^{-4}$         & $kg.m^{2}$
+Parâmetros  & Valores               & Unidades   \\ \hline
+$R$         & $1.101$               & $\Omega$   \\
+$L$         & $0.667$               & $mH$       \\
+$b$         & $1.226 \cdot 10^{-4}$ & $N s$      \\
+$k_{t}$     & $5.598 \cdot 10^{-2}$ & $Nm/A$     \\
+$\gmu$      & $4.357 \cdot 10^{-2}$ & $Nm$       \\
+$k_{e}$     & $5.138 \cdot 10^{-2}$ & $V s/rad$  \\
+$J$         & $1.469 \cdot 10^{-4}$ & $kg.m^{2}$
 \end{tabular}
 \end{table} 
 
@@ -3810,14 +3855,14 @@ $J$ & $1.469*10^{-4}$         & $kg.m^{2}$
 \caption{Parâmetros do Motor 2}
 \label{parametrosMotor2}
 \begin{tabular}{l|l|l}
-Parâmetros  & Valores     & Unidades   \\ \hline
-$R$     & 0.829383     & $\Omega$   \\
-$L$     & 0.667       & $mH$       \\
-$b$     & 0.000203914 & $N s$      \\
-$k_{t}$     & 0.0566596     & $Nm/A$     \\
-$\gmu$ &0.0499202   & $Nm$        \\
-$k_{e}$     & 0.0520023    & $V s/rad$  \\
-$J$ & $1.88738*10^{-4}$         & $kg.m^{2}$
+Parâmetros & Valores               & Unidades   \\ \hline
+$R$        & $0.829$               & $\Omega$   \\
+$L$        & $0.667$               & $mH$       \\
+$b$        & $2.039 \cdot 10^{-4}$ & $N s$      \\
+$k_{t}$    & $5.666 \cdot 10^{-2}$ & $Nm/A$     \\
+$\gmu$     & $4.992 \cdot 10^{-2}$ & $Nm$        \\
+$k_{e}$    & $5.200 \cdot 10^{-2}$ & $V s/rad$  \\
+$J$        & $1.887 \cdot10^{-4}$  & $kg.m^{2}$
 \end{tabular}
 \end{table}
 
@@ -3865,7 +3910,266 @@ Um artigo, publicado no {\em Congresso Brasileira de Automática - 2018}, intitu
 
 % ========== Apêndices (opcional) ==========
 \apendice
-\chapter{Funções de transferência de motores DC}
+
+\chapter{Cinemática de corpos rígidos} \label{apendiceA}
+
+\section{Conceitos básicos}\label{S05-01-01}
+
+Esta seção tem o intuito de apresentar os conceitos de derivada temporal de vetores em relação a um referencial e as definições velocidade e aceleração. \\
+
+Sejam $\llA$ e $\llB$ dois referenciais, e $\ttp$ e $\tto$ pontos no espaço. Primeiramente, fazemos as seguintes definições:
+
+\begin{itemize}
+\item $\vr_{\tto \rl \ttp}$: vetor que liga o ponto $\tto$ ao ponto $\ttp$, orientado no sentido de $\tto$ até $\ttp$.
+\item $\vv_{\ttp}^{\lllA}$: vetor velocidade do ponto $\ttp$ em relação a $\llA$.
+\item $\va_{\ttp}^{\lllA}$: vetor acelera\c{c}\~ao do ponto $\ttp$ em relação a $\llA$.
+\item $\vomega_{\lllB}^{\lllA}$: vetor velocidade angular de $\llB$ em relação a $\llA$.
+\item $\dot{\vomega}_{\lllB}^{\lllA}$: vetor aceleração angular de $\llB$ em relação a $\llA$.
+\item $\displaystyle\frac{\dd^{[\lllA]}}{\dd t}$: Operador derivada temporal em relação ao referencial $\llA$.
+\end{itemize}
+
+\subsection{Produto vetorial}\label{S05-01-01-00}
+
+Para a realização do cálculo de derivadas vetoriais, frequentemente é necessário o uso do produto vetorial. A notação para o operador produto vetorial utilizada será o "$\wedge$". Com o intuito de deixar as equações mais legíveis, iremos adotar as seguintes convenções:
+
+\begin{equation}
+\va \wedge (\vb \wedge \vc) \equiv \va \wedge \vb \wedge \vc
+\end{equation}
+\begin{equation}
+\va \wedge \big( \vb \wedge ( \vc \wedge \vd) \big) \equiv \va \wedge \vb \wedge \vc \wedge \vd
+\end{equation}
+
+Além disso, vale destacar algumas propriedades básicas do produto vetorial que serão utilizadas durante o texto:
+\begin{equation}
+\va \wedge \va = \vzr
+\end{equation}
+\begin{equation}
+\va \wedge \vb = -\vb \wedge \va
+\end{equation}
+\begin{equation}
+\va \wedge (\vb + \vc) = \va \wedge \vb + \va \wedge \vc
+\end{equation}
+\begin{equation}
+(\lambda \va) \wedge \vb =  \va \wedge (\lambda \vb) = \lambda (\va \wedge \vb)
+\end{equation}
+
+\subsection{Derivada temporal de versores}\label{S05-01-01-01}
+
+Seja %m $\llA$ e $\llB$ dois referenciais referenciais e 
+$\hat{\vx}_{\lllB}$ um versor fixo ao referencial $\llB$. A derivada temporal de $\hat{\vx}_{\lllB}$ em relação ao referencial $\llA$ é definida como:
+\begin{empheq}[box=\mybluebox]{equation} \label{eq:derivada_versor}
+\frac{\dd^{[{\lllA}]} \hat{\vx}_{\lllB} }{\dd t} = \dot{\hat{\vx}}_{\lllB}^{[\lllA]} = \vomega_{\lllB}^{\lllA} \wedge \hat{\vx}_{\lllB}
+\end{empheq}
+
+\subsection{Derivada temporal de vetores}\label{S05-01-01-02} 
+
+Seja $\ttB = \{ \vi_{\ttB}, \vj_{\ttB}, \vk_{\ttB} \}$ uma base ortonormal fixa ao referencial $\llB$ e $\vx$ um vetor cuja decomposição na base $\ttB$ é conhecida e dada por $\vx = x \vi_{\ttB} + y \vj_{\ttB} + z \vk_{\ttB} $. A derivada temporal de $\vx$ em relação ao referencial $\llA$ é definida como:
+\begin{equation}
+\begin{split}
+\frac{\dd^{[{\lllA}]} \vx }{\dd t} &= \dot{\vx}^{[\lllA]} = \dot{x} \vi_{\ttB} + \dot{y} \vj_{\ttB} + \dot{z} \vk_{\ttB} + x \dot{\vi}_{\ttB}^{[\lllA]} + y \dot{\vj}_{\ttB}^{[\lllA]} + z \dot{\vk}_{\ttB}^{[\lllA]} \\
+ &= \dot{x} \vi_{\ttB} + \dot{y} \vj_{\ttB} + \dot{z} \vk_{\ttB} +  \vomega_{\lllB}^{\lllA} \wedge x \vi_{\ttB} +  \vomega_{\lllB}^{\lllA} \wedge y \vj_{\ttB} + \vomega_{\lllB}^{\lllA} \wedge z \vk_{\ttB} \\
+ &= \dot{x} \vi_{\ttB} + \dot{y} \vj_{\ttB} + \dot{z} \vk_{\ttB} + \vomega_{\lllB}^{\lllA} \wedge (x \vi_{\ttB} + y \vj_{\ttB} + z \vk_{\ttB})
+\end{split}
+\end{equation}
+
+Repare que o termo $\dot{x} \vi_{\lllB} + \dot{y} \vj_{\lllB} + \dot{z} \vk_{\lllB}$ é a derivada temporal do vetor $\vx$ no referencial $\llB$. Sendo assim, temos:
+\begin{empheq}[box=\mybluebox]{equation} \label{eq:derivada_vetor}
+\frac{\dd^{[{\lllA}]} \vx }{\dd t} = \dot{\vx}^{[\lllA]} = \dot{\vx}^{[\lllB]}  + \vomega_{\lllB}^{\lllA} \wedge \vx
+\end{empheq}
+
+
+\subsection{Definição de vetor velocidade}\label{S05-01-01-03}
+
+%Seja $\vr_{\tto \rl \ttp}$ o vetor que liga do ponto $\tto$ até o ponto $\ttp$, sendo $\tto$ um ponto fixo ao referencial $\llA$. 
+Supondo que o ponto $\tto$ esteja fixo a $\llA$, a velocidade do ponto $\ttp$ em relação ao referencial $\llA$ é definida como:
+\begin{empheq}[box=\mybluebox]{equation}
+\vv_\ttp^{\lllA} = \frac{\dd^{[\lllA]} \vr_{\tto \rl \ttp}}{\dd t} = \dot{\vr}_{\tto \rl \ttp}^{[\lllA]}
+\end{empheq}
+
+Caso $\tto$ não esteja fixo a $\llA$, temos que:
+\begin{empheq}[box=\almondbox]{equation}
+\frac{\dd^{[\lllA]} \vr_{\tto \rl \ttp}}{\dd t} = \dot{\vr}_{\tto \rl \ttp}^{[\lllA]} = \vv_\ttp^{\lllA} - \vv_\tto^{\lllA}
+\end{empheq}
+
+\subsection{Definição de vetor aceleração}\label{S05-01-01-04}
+
+A aceleração do ponto $\ttp$ em relação ao referencial $\llA$ é definida como:
+\begin{empheq}[box=\mybluebox]{equation}
+\va_\ttp^{\lllA} = \frac{\dd^{[\lllA]} \vv_\ttp^{\lllA} }{\dd t}
+\end{empheq}
+
+
+\section{Equações de Poisson}\label{S05-01-02}
+
+Esta subseção tem o intuito de apresentar as equações básicos da cinemática de corpos rígidos,  as equações de Poisson para velocidades e acelerações.
+
+\subsection{Equação de Poisson para velocidades}\label{S05-01-02-01}
+
+Sejam $\ttp$ e $\tto$ dois pontos pertencentes a um corpo rígido $\llB$, e $\llA$ um referencial. Podemos relacionar a velocidades dos ponto $\ttp$ e $\tto$ em relação a $\llA$ através da equação de Poisson para velocidades:
+\begin{empheq}[box=\mybluebox]{equation}\label{eq:Poisson_v}
+\vv_\ttp^{\lllA} = \vv_\tto^{\lllA} + \vomega_{\lllB}^{\lllA} \wedge \vr_{\tto \rl \ttp}
+\end{empheq}
+
+\subsection{Equação de Poisson para acelerações}\label{S05-01-02-02}
+
+Derivando \eqref{eq:Poisson_v} no tempo em relação a $\llA$, temos:
+\begin{equation}\label{eq:Poisson_a_aux}
+\va_\ttp^{\lllA} = \va_\tto^{\lllA} + \dot{\vomega}_{\lllB}^{\lllA} \wedge \vr_{\tto \rl \ttp} + \vomega_{\lllB}^{\lllA} \wedge (\vv_\ttp^{\lllA} - \vv_\tto^{\lllA})
+\end{equation}
+
+Substituindo \eqref{eq:Poisson_v} em \eqref{eq:Poisson_a_aux}, obtemos a equação de Poisson para acelerações:
+\begin{empheq}[box=\mybluebox]{equation} \label{eq:Poisson_a}
+\va_\ttp^{\lllA} = \va_\tto^{\lllA} + \dot{\vomega}_{\lllB}^{\lllA} \wedge \vr_{\tto \rl \ttp} + \vomega_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA} \wedge \vr_{\tto \rl \ttp}
+\end{empheq}
+
+\section{Composição de movimentos}\label{S05-01-03}
+
+Esta subseção tem o intuito de apresentar um dos princípios básicos da cinemática de corpos rígidos, a composição de movimentos.
+
+\subsection{Composição de velocidades lineares}\label{S05-01-03-01}
+
+Sejam $\llA$ um referencial, e $\ttA$ um sistema de coordenadas fixo a $\llA$, definido pela origem $\tto_\ttA$ e pelos versores $\vi_\ttA$, $\vj_\ttA$ e $\vk_\ttA$. Sejam também $\llB$ um referencial, $\ttB$ um sistema de coordenadas fixo a $\llB$, definido pela origem $\tto_\ttB$ e pelos versores $\vi_\ttB$, $\vj_\ttB$ e $\vk_\ttB$, e $\ttp$ um ponto no espaço. Definindo os vetores $\vr_{\tto_\ttA \rl \tto_\ttB}$, $\vr_{\tto_\ttB \rl \ttp}$ e $\vr_{\tto_\ttA \rl \ttp}$ tem-se que:
+\begin{equation} \label{eq:r_rho}
+\vr_{\tto_\ttA \rl \ttp} = \vr_{\tto_\ttA \rl \tto_\ttB} + \vr_{\tto_\ttB \rl \ttp}
+\end{equation}
+
+Derivando \eqref{eq:r_rho} no tempo em relação a $\llA$, temos:
+\begin{equation} \label{eq:dr_rho_aux}
+\vv_\ttp^{\lllA} = \vv_{\tto_\ttB}^{\lllA} + \dot{\vr}_{\tto_\ttB \rl \ttp}^{[\lllA]}
+\end{equation}
+
+Utilizando a equação \eqref{eq:derivada_vetor}, temos que:
+\begin{equation} 
+\dot{\vr}_{\tto_\ttB \rl \ttp}^{[\lllA]} = \dot{\vr}_{\tto_\ttB \rl \ttp}^{[\lllB]} + \vomega_{\lllB}^{\lllA}  \wedge  \vr_{\tto_\ttB \rl \ttp} 
+\end{equation}
+
+
+Ou seja:
+\begin{equation} \label{eq:drho}
+\dot{\vr}_{\tto_\ttB \rl \ttp}^{[\lllA]} =   \vv_\ttp^{\lllB} + \vomega_{\lllB}^{\lllA} \wedge \vr_{\tto_\ttB \rl \ttp} 
+\end{equation}
+
+Substituindo \eqref{eq:drho} em \eqref{eq:dr_rho_aux}, temos:
+\begin{equation} \label{eq:dr_rho}
+\vv_\ttp^{\lllA} = \vv_{\tto_\ttB}^{\lllA}  + \vomega_{\lllB}^{\lllA} \wedge \vr_{\tto_\ttB \rl \ttp}  + \vv_\ttp^{\lllB}
+\end{equation}
+
+Definindo:
+\begin{empheq}[box=\almondbox]{equation} \label{eq:v_arr}
+\vv_{\ttp \rl \lllB}^{\lllA} = \vv_{\tto_\ttB}^{\lllA}  + \vomega_{\lllB}^{\lllA} \wedge \vr_{\tto_\ttB \rl \ttp}
+\end{empheq}
+
+Temos princípio da composição de movimento para velocidades lineares:
+\begin{empheq}[box=\mybluebox]{equation} \label{eq:Composicao_vel}
+\vv_\ttp^{\lllA} = \vv_{\ttp \rl \lllB}^{\lllA} + \vv_\ttp^{\lllB}
+\end{empheq}
+
+Ou seja, $\vv_\ttp^{\lllA}$ é composto pela soma de $\vv_{\ttp \rl \lllB}^{\lllA}$, que seria a velocidade de $\ttp$ se $\ttp$ estivesse fixo a $\llB$ (movimento de arrastamento), e $\vv_\ttp^{\lllB}$, que seria a velocidade de $\ttp$ se $\llB$ estivesse parado em relação a $\llA$ (movimento relativo).
+
+\subsection{Composição de acelerações lineares}\label{S05-01-03-02}
+
+Derivando \eqref{eq:dr_rho} no tempo em relação a $\llA$, temos:
+\begin{equation} \label{eq:d2r_rho_aux}
+\va_\ttp^{\lllA} = \va_{\tto_\ttB}^{\lllA}  + \dot{\vomega}_{\lllB}^{\lllA} \wedge \vr_{\tto_\ttB \rl \ttp}  + \vomega_{\lllB}^{\lllA} \wedge \dot{\vr}_{\tto_\ttB \rl \ttp}^{[\lllA]} + \vomega_{\lllB}^{\lllA} \wedge \vv_\ttp^{\lllB} + \va_\ttp^{\lllB}
+\end{equation}
+
+Substituindo \eqref{eq:drho} em \eqref{eq:d2r_rho_aux}, temos:
+\begin{equation} \label{eq:d2r_rho}
+\va_\ttp^{\lllA} = \va_{\tto_\ttB}^{\lllA}  + \dot{\vomega}_{\lllB}^{\lllA} \wedge \vr_{\tto_\ttB \rl \ttp} + \vomega_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA} \wedge \vr_{\tto_\ttB \rl \ttp}  + 2 \vomega_{\lllB}^{\lllA} \wedge \vv_\ttp^{\lllB} + \va_\ttp^{\lllB}
+\end{equation}
+
+Definindo:
+\begin{empheq}[box=\almondbox]{equation}
+\va_{\ttp \rl \lllB}^{\lllA} = \va_{\tto_\ttB}^{\lllA}  + \dot{\vomega}_{\lllB}^{\lllA} \wedge \vr_{\tto_\ttB \rl \ttp} + \vomega_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA} \wedge \vr_{\tto_\ttB \rl \ttp}
+\end{empheq}
+
+Temos princípio da composição de movimento para acelerações lineares:
+\begin{empheq}[box=\mybluebox]{equation} \label{eq:Composicao_ace}
+\va_\ttp^{\lllA} = \va_{\ttp \rl \lllB}^{\lllA} + \va_\ttp^{\lllB} + 2\vomega_{\lllB}^{\lllA} \wedge \vv_\ttp^{\lllB}
+\end{empheq}
+
+Ou seja, $\va_\ttp^{\lllA}$ é composto pela soma de $\va_{\ttp \rl \lllB}^{\lllA}$, que seria a aceleração de $\ttp$ se $\ttp$ estivesse fixo a $\llB$ (aceleração de arrastamento), $\va_\ttp^{\lllB}$, que seria a aceleração de $\ttp$ se $\llB$ estivesse parado em relação a $\llA$ (aceleração relativa), e da parcela $2\vomega_{\lllB}^{\lllA} \wedge \vv_\ttp^{\lllB}$ (aceleralção complementar).
+
+\subsection{Composição de velocidades angulares}\label{S05-01-03-04}
+
+Sejam $\llA$ e $\llB$ dois referenciais e $\llC$ um corpo rígido. Sejam também os pontos $\ttp_1$ e $\ttp_2$, ambos fixos a $\llC$.
+
+Aplicando o princípio da composição de movimento para velocidades lineras, temos que:
+
+\begin{equation}
+\vv_{\ttp_1}^{\lllA} = \vv_{\ttp_1 \rl \lllB}^{\lllA} + \vv_{\ttp_1}^{\lllB}
+\end{equation}
+\begin{equation}
+\vv_{\ttp_2}^{\lllA} = \vv_{\ttp_2 \rl \lllB}^{\lllA} + \vv_{\ttp_2}^{\lllB}
+\end{equation}
+
+A partir da equação \eqref{eq:v_arr}, temos que:
+\begin{equation}
+\vv_{\ttp_1 \rl \lllB}^{\lllA} = \vv_{\tto_\ttB}^{\lllA} + \vomega_{\lllB}^{\lllA} \wedge \vr_{\tto_\ttB  \rl \ttp_1} 
+\end{equation}
+\begin{equation}
+\vv_{\ttp_2 \rl \lllB}^{\lllA} = \vv_{\tto_\ttB}^{\lllA} + \vomega_{\lllB}^{\lllA} \wedge \vr_{\tto_\ttB  \rl \ttp_2}
+\end{equation}
+
+Sendo assim, temos:
+\begin{equation} \label{eq:v_p1}
+\vv_{\ttp_1}^{\lllA} = \vv_{\tto_\ttB}^{\lllA} + \vomega_{\lllB}^{\lllA} \wedge \vr_{\tto_\ttB  \rl \ttp_1}  + \vv_{\ttp_1}^{\lllB}
+\end{equation}
+\begin{equation} \label{eq:v_p2}
+\vv_{\ttp_2}^{\lllA} = \vv_{\tto_\ttB}^{\lllA} + \vomega_{\lllB}^{\lllA} \wedge \vr_{\tto_\ttB  \rl \ttp_2} + \vv_{\ttp_2}^{\lllB}
+\end{equation}
+
+Subtraindo \eqref{eq:v_p2} de \eqref{eq:v_p1}, temos:
+\begin{equation} \label{eq:v_p1p2}
+\vv_{\ttp_1}^{\lllA} - \vv_{\ttp_2}^{\lllA} =  \vomega_{\lllB}^{\lllA} \wedge \vr_{\ttp_2  \rl \ttp_1}  + \vv_{\ttp_1}^{\lllB} - \vv_{\ttp_2}^{\lllB}
+\end{equation}
+
+Como $\ttp_1$ e $\ttp_2$ pertencem a um mesmo corpo rígido, temos que:
+\begin{equation} \label{eq:vA_poisson_p1p2}
+\vv_{\ttp_1}^{\lllA} =  \vv_{\ttp_2}^{\lllA} + \vomega_{\lllC}^{\lllA} \wedge \vr_{\ttp_2 \rl \ttp_1}
+\end{equation}
+\begin{equation} \label{eq:vB_poisson_p1p2}
+\vv_{\ttp_1}^{\lllB} =  \vv_{\ttp_2}^{\lllB} + \vomega_{\lllC}^{\lllB} \wedge \vr_{\ttp_2 \rl \ttp_1}
+\end{equation}
+
+Substituindo \eqref{eq:vA_poisson_p1p2} e \eqref{eq:vB_poisson_p1p2} em \eqref{eq:v_p1p2}:
+\begin{equation}
+\vomega_{\lllC}^{\lllA} \wedge \vr_{\ttp_2 \rl \ttp_1} =  \vomega_{\lllB}^{\lllA} \wedge \vr_{\ttp_2  \rl \ttp_1}  + \vomega_{\lllC}^{\lllB} \wedge \vr_{\ttp_2 \rl \ttp_1}
+\end{equation}
+
+Temos princípio da composição de movimento para velocidades angulares:
+\begin{empheq}[box=\mybluebox]{equation} \label{eq:composicao_w}
+\vomega_{\lllC}^{\lllA}  =  \vomega_{\lllB}^{\lllA}   + \vomega_{\lllC}^{\lllB}
+\end{empheq}
+
+Ou seja, $\vomega_{\lllC}^{\lllA}$ é composta pela soma de $\vomega_{\lllB}^{\lllA}$, que seria velocidade angular de  de $\llC$ se $\llC$ estivesse fixo a $\llB$ (velocidade angular de arrastamento), e $\vomega_{\lllC}^{\lllB}$, que seria a velocidade angular de $\llC$ se $\llB$ estivesse parado em relação a $\llA$ (velocidade angular relativa).
+
+Repare que, fazendo $\llC \equiv \llA$, temos que:
+\begin{equation}
+\vzr  =  \vomega_{\lllB}^{\lllA}   + \vomega_{\lllA}^{\lllB}
+\end{equation}
+\begin{empheq}[box=\almondbox]{equation} \label{eq:composicao_wCA}
+\therefore \vomega_{\lllA}^{\lllB}  =   - \vomega_{\lllB}^{\lllA}
+\end{empheq}
+
+\subsection{Composição de acelerações angulares}\label{S05-01-03-05}
+
+Derivando \eqref{eq:composicao_w} no tempo em relação a $\llA$, temos princípio da composição de movimento para acelerações angulares:
+\begin{empheq}[box=\mybluebox]{equation} \label{eq:composicao_dw}
+\dot{\vomega}_{\lllC}^{\lllA}  =  \dot{\vomega}_{\lllB}^{\lllA}   + \dot{\vomega}_{\lllC}^{\lllB} + \vomega_{\lllB}^{\lllA} \wedge \vomega_{\lllC}^{\lllB}
+\end{empheq}
+
+Ou seja, $\dot{\vomega}_{\lllC}^{\lllA}$ é composta pela soma de $\dot{\vomega}_{\lllB}^{\lllA}$, que seria a aceleração angular  de $\llC$ se $\llC$ estivesse fixo a $\llB$ (aceleração angular de arrastamento), $\dot{\vomega}_{\lllC}^{\lllB}$, que seria a aceleração angular de $\llC$ se $\llB$ estivesse parado em relação a $\llA$ (aceleração angular relativa), e da parcela $\vomega_{\lllB}^{\lllA} \wedge \vomega_{\lllC}^{\lllB}$ (aceleralção angular complementar).
+
+Repare que, fazendo $\llC \equiv \llA$ e utilizando \eqref{eq:composicao_wCA}, temos que:
+\begin{equation}
+\vzr =  \dot{\vomega}_{\lllB}^{\lllA}   + \dot{\vomega}_{\lllA}^{\lllB} - \vomega_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA}
+\end{equation}
+\begin{empheq}[box=\almondbox]{equation} \label{eq:composicao_dwCA}
+\therefore \dot{\vomega}_{\lllA}^{\lllB} = - \dot{\vomega}_{\lllB}^{\lllA}
+\end{empheq}
+
+\chapter{Funções de transferência de motores DC} \label{apendiceB}
 
 Para a modelagem dos motores, será considerado o seguinte circuito de modelo dos motores:
 
@@ -3887,11 +4191,11 @@ Pela lei de Ohm, temos que:
 	   u = L \frac{di}{dt} + R i + k_{e} \omega
 \end{equation}
 
-Sendo $J$ a inércia do rotor e $b$ o coeficiente de atrito viscoso e $\mu$ o coeficiente de atrito seco do mancal do eixo do motor, obtemos pelo teorema do momento angular:
+Sendo $J$ a inércia do rotor e $b$ o coeficiente de atrito viscoso e $\gmu$ o coeficiente de atrito seco do mancal do eixo do motor, obtemos pelo teorema do momento angular:
 
 \begin{equation}
 \label{torqueDist}
-    J \dot{\omega} = T - b\omega - \mu sign(\omega) - \tau_{d}
+    J \dot{\omega} = T - b\omega - \gmu sign(\omega) - \tau_{d}
 \end{equation}
 
 Sendo $\tau_{d} $ o torque que o mecanismo aplica no motor e será considerado um distúrbio.
@@ -3909,10 +4213,10 @@ Substituindo \eqref{torqueMotor} em \eqref{torqueDist},
 \begin{empheq}[left=\empheqlbrace]{gather}
 \label{TLM1}
 	 L \frac{di}{dt} + R i + k_{e} = u 	\\ \label{TLM2}
-     J \dot{\omega} + b\omega + \mu sign(\omega) = k_{t} i - \tau_{d} 
+     J \dot{\omega} + b\omega + \gmu sign(\omega) = k_{t} i - \tau_{d} 
 \end{empheq}
 
-Considerando $\mu = 0$  e aplicando Laplace para condições iniciais nulas nas equações \eqref{TLM1} e \eqref{TLM2}, obtemos:
+Considerando $\gmu = 0$  e aplicando Laplace para condições iniciais nulas nas equações \eqref{TLM1} e \eqref{TLM2}, obtemos:
 
 \begin{empheq}[left=\empheqlbrace]{gather}
 \label{TLM3}	(L s + R) I(s) +  k_{e} W(s) = U(s)
@@ -3974,7 +4278,7 @@ Substituindo as equações \eqref{TLM6} na equação \eqref{TLM5} encontramos,
     
 \item Função de transferência de posição
 
-Integrando em $s$ a equação \eqref{FunctionMotorVel} obtemos a função de transferência de posição do motor.
+Tendo que vista que a velocidade angular é a devirada temporal da posição angular, baste dividir por $s$ as funções de transferência \eqref{FunctionMotorVel} e \eqref{FunctionMotorVeld} para obtermos as função de transferência de posição do motor.
     \begin{equation}
     \label{FunctionMotor}
      G_p(s) = \frac{k_{t}}{s((J s + b)(L s + R) + k_{e} k_{t})}
@@ -3988,9 +4292,9 @@ Integrando em $s$ a equação \eqref{FunctionMotorVel} obtemos a função de tra
 
 \end{itemize}
 
-\chapter{Controlador de Corrente}
+\chapter{Controlador de Corrente} \label{apendiceC}
 
-Como foi visto apêndice anterior, a função de transferência de corrente de um motor DC é dada por:
+Como foi visto no apêndice \ref{apendiceA}, a função de transferência de corrente de um motor DC é dada por:
 
 \begin{equation} \label{functionTransferMotorCorrente}
 G_{I}(s) = \frac{A s+B}{s^2 + C s + D}
@@ -4078,8 +4382,30 @@ Portanto, os parâmetros de $K(z)$ podem ser obtidos resolvendo o seguinte siste
 \end{cases}
 \end{equation}
 
-Cuja solução é dada por:
+O qual é um sistema linear. Representando de forma matricial:
+\begin{equation}
+\begin{bmatrix}
+0 & 0 & \mathcal{B} & \mathcal{D} \\
+0 & \mathcal{B} & \mathcal{A} & \mathcal{C} - \mathcal{D} \\
+\mathcal{B} & \mathcal{A} & 0 & 1 - \mathcal{C} \\
+\mathcal{A} & 0 & 0 & -1
+\end{bmatrix}
+\begin{bmatrix}
+\alpha \\
+\beta \\
+\gamma \\
+\delta
+\end{bmatrix}
+=
+\begin{bmatrix}
+c_0 \\
+c_1 + \mathcal{D} \\
+c_2 + \mathcal{C} - \mathcal{D} \\
+c_3 + 1 - \mathcal{C}
+\end{bmatrix}
+\end{equation}
 
+Sua solução é dada por:
 \begin{equation}
 \begin{cases}
 \alpha = \frac{\mathcal{A}^2 c_1+\mathcal{B} \left(-\mathcal{D} (\mathcal{A}+\mathcal{B})-\mathcal{A} c_2+ \mathcal{B} (\mathcal{C}+ c_3) \right)-\left(\mathcal{C} -c_4 - 1 \right) (\mathcal{B} (\mathcal{B}-\mathcal{C} (\mathcal{A}+\mathcal{B}))+\mathcal{A} \mathcal{D} (\mathcal{A}+\mathcal{B}))}{(\mathcal{A}+\mathcal{B}) \left(\mathcal{A}^2 \mathcal{D}-\mathcal{A} \mathcal{B} \mathcal{C}+\mathcal{B}^2\right)} \\
@@ -4091,7 +4417,7 @@ Cuja solução é dada por:
 
 
 
-\chapter{Curva dos motores}
+\chapter{Curva dos motores} \label{apendiceD}
 
 A curva de velocidade foi obtida aplicando o derivador descrito na seção \ref{derivador} no sinal de posição fornecido pelo encoder . Foi utilizada uma entrada degrau de tensão $6.5V$. As curvas dos motores 1 e 2 podem ser observadas nas figuras \ref{CM2} e \ref{CM3} respectivamente.
 
@@ -4320,266 +4646,6 @@ $k_{e}$     & 0.0520023    & $V s/rad$  \\
 $J$ & $1.88738*10^{-4}$         & $kg.m^{2}$
 \end{tabular}
 \end{table}
-
-\chapter{Cinemática de corpos rígidos}\label{S05-1}
-
-\section{Conceitos básicos}\label{S05-01-01}
-
-Esta seção tem o intuito de apresentar os conceitos de derivada temporal de vetores em relação a um referencial e as definições velocidade e aceleração. \\
-
-Sejam $\llA$ e $\llB$ dois referenciais, e $\ttp$ e $\tto$ pontos no espaço. Primeiramente, fazemos as seguintes definições:
-
-\begin{itemize}
-\item $\vr_{\tto \rl \ttp}$: vetor que liga o ponto $\tto$ ao ponto $\ttp$, orientado no sentido de $\tto$ até $\ttp$.
-\item $\vv_{\ttp}^{\lllA}$: vetor velocidade do ponto $\ttp$ em relação a $\llA$.
-\item $\va_{\ttp}^{\lllA}$: vetor acelera\c{c}\~ao do ponto $\ttp$ em relação a $\llA$.
-\item $\dot{\va}_{\ttp}^{\lllA}$: vetor sobre-acelera\c{c}\~ao do ponto $\ttp$ em relação a $\llA$.
-\item $\vomega_{\lllB}^{\lllA}$: vetor velocidade angular de $\llB$ em relação a $\llA$.
-\item $\dot{\vomega}_{\lllB}^{\lllA}$: vetor aceleração angular de $\llB$ em relação a $\llA$.
-\item $\ddot{\vomega}_{\lllB}^{\lllA}$: vetor sobre-aceleração angular de $\llB$ em relação a $\llA$.
-\item $\displaystyle\frac{\dd^{[\lllA]}}{\dd t}$: Operador derivada temporal em relação ao referencial $\llA$.
-\end{itemize}
-
-\subsection{Produto vetorial}\label{S05-01-01-00}
-
-Para a realização do cálculo de derivadas vetoriais, frequentemente é necessário o uso do produto vetorial. A notação para o operador produto vetorial utilizada será o "$\wedge$". Com o intuito de deixar as equações mais legíveis, iremos adotar as seguintes convenções:
-
-\begin{equation}
-\va \wedge (\vb \wedge \vc) \equiv \va \wedge \vb \wedge \vc
-\end{equation}
-\begin{equation}
-\va \wedge \big( \vb \wedge ( \vc \wedge \vd) \big) \equiv \va \wedge \vb \wedge \vc \wedge \vd
-\end{equation}
-
-Além disso, vale destacar algumas propriedades básicas do produto vetorial que serão utilizadas durante o texto:
-\begin{equation}
-\va \wedge \va = \vzr
-\end{equation}
-\begin{equation}
-\va \wedge \vb = -\vb \wedge \va
-\end{equation}
-\begin{equation}
-\va \wedge (\vb + \vc) = \va \wedge \vb + \va \wedge \vc
-\end{equation}
-\begin{equation}
-(\lambda \va) \wedge \vb =  \va \wedge (\lambda \vb) = \lambda (\va \wedge \vb)
-\end{equation}
-
-\subsection{Derivada temporal de versores}\label{S05-01-01-01}
-
-Seja %m $\llA$ e $\llB$ dois referenciais referenciais e 
-$\hat{\vx}_{\lllB}$ um versor fixo ao referencial $\llB$. A derivada temporal de $\hat{\vx}_{\lllB}$ em relação ao referencial $\llA$ é definida como:
-\begin{empheq}[box=\mybluebox]{equation} \label{eq:derivada_versor}
-\frac{\dd^{[{\lllA}]} \hat{\vx}_{\lllB} }{\dd t} = \dot{\hat{\vx}}_{\lllB}^{[\lllA]} = \vomega_{\lllB}^{\lllA} \wedge \hat{\vx}_{\lllB}
-\end{empheq}
-
-\subsection{Derivada temporal de vetores}\label{S05-01-01-02} 
-
-Seja $\ttB = \{ \vi_{\ttB}, \vj_{\ttB}, \vk_{\ttB} \}$ uma base ortonormal fixa ao referencial $\llB$ e $\vx$ um vetor cuja decomposição na base $\ttB$ é conhecida e dada por $\vx = x \vi_{\ttB} + y \vj_{\ttB} + z \vk_{\ttB} $. A derivada temporal de $\vx$ em relação ao referencial $\llA$ é definida como:
-\begin{equation}
-\begin{split}
-\frac{\dd^{[{\lllA}]} \vx }{\dd t} &= \dot{\vx}^{[\lllA]} = \dot{x} \vi_{\ttB} + \dot{y} \vj_{\ttB} + \dot{z} \vk_{\ttB} + x \dot{\vi}_{\ttB}^{[\lllA]} + y \dot{\vj}_{\ttB}^{[\lllA]} + z \dot{\vk}_{\ttB}^{[\lllA]} \\
- &= \dot{x} \vi_{\ttB} + \dot{y} \vj_{\ttB} + \dot{z} \vk_{\ttB} +  \vomega_{\lllB}^{\lllA} \wedge x \vi_{\ttB} +  \vomega_{\lllB}^{\lllA} \wedge y \vj_{\ttB} + \vomega_{\lllB}^{\lllA} \wedge z \vk_{\ttB} \\
- &= \dot{x} \vi_{\ttB} + \dot{y} \vj_{\ttB} + \dot{z} \vk_{\ttB} + \vomega_{\lllB}^{\lllA} \wedge (x \vi_{\ttB} + y \vj_{\ttB} + z \vk_{\ttB})
-\end{split}
-\end{equation}
-
-Repare que o termo $\dot{x} \vi_{\lllB} + \dot{y} \vj_{\lllB} + \dot{z} \vk_{\lllB}$ é a derivada temporal do vetor $\vx$ no referencial $\llB$. Sendo assim, temos:
-\begin{empheq}[box=\mybluebox]{equation} \label{eq:derivada_vetor}
-\frac{\dd^{[{\lllA}]} \vx }{\dd t} = \dot{\vx}^{[\lllA]} = \dot{\vx}^{[\lllB]}  + \vomega_{\lllB}^{\lllA} \wedge \vx
-\end{empheq}
-
-
-\subsection{Definição de vetor velocidade}\label{S05-01-01-03}
-
-%Seja $\vr_{\tto \rl \ttp}$ o vetor que liga do ponto $\tto$ até o ponto $\ttp$, sendo $\tto$ um ponto fixo ao referencial $\llA$. 
-Supondo que o ponto $\tto$ esteja fixo a $\llA$, a velocidade do ponto $\ttp$ em relação ao referencial $\llA$ é definida como:
-\begin{empheq}[box=\mybluebox]{equation}
-\vv_\ttp^{\lllA} = \frac{\dd^{[\lllA]} \vr_{\tto \rl \ttp}}{\dd t} = \dot{\vr}_{\tto \rl \ttp}^{[\lllA]}
-\end{empheq}
-
-Caso $\tto$ não esteja fixo a $\llA$, temos que:
-\begin{empheq}[box=\almondbox]{equation}
-\frac{\dd^{[\lllA]} \vr_{\tto \rl \ttp}}{\dd t} = \dot{\vr}_{\tto \rl \ttp}^{[\lllA]} = \vv_\ttp^{\lllA} - \vv_\tto^{\lllA}
-\end{empheq}
-
-\subsection{Definição de vetor aceleração}\label{S05-01-01-04}
-
-A aceleração do ponto $\ttp$ em relação ao referencial $\llA$ é definida como:
-\begin{empheq}[box=\mybluebox]{equation}
-\va_\ttp^{\lllA} = \frac{\dd^{[\lllA]} \vv_\ttp^{\lllA} }{\dd t}
-\end{empheq}
-
-
-\section{Equações de Poisson}\label{S05-01-02}
-
-Esta subseção tem o intuito de apresentar as equações básicos da cinemática de corpos rígidos,  as equações de Poisson para velocidades, acelerações e sobre-acelerações.
-
-\subsection{Equação de Poisson para velocidades}\label{S05-01-02-01}
-
-Sejam $\ttp$ e $\tto$ dois pontos pertencentes a um corpo rígido $\llB$, e $\llA$ um referencial. Podemos relacionar a velocidades dos ponto $\ttp$ e $\tto$ em relação a $\llA$ através da equação de Poisson para velocidades:
-\begin{empheq}[box=\mybluebox]{equation}\label{eq:Poisson_v}
-\vv_\ttp^{\lllA} = \vv_\tto^{\lllA} + \vomega_{\lllB}^{\lllA} \wedge \vr_{\tto \rl \ttp}
-\end{empheq}
-
-\subsection{Equação de Poisson para acelerações}\label{S05-01-02-02}
-
-Derivando \eqref{eq:Poisson_v} no tempo em relação a $\llA$, temos:
-\begin{equation}\label{eq:Poisson_a_aux}
-\va_\ttp^{\lllA} = \va_\tto^{\lllA} + \dot{\vomega}_{\lllB}^{\lllA} \wedge \vr_{\tto \rl \ttp} + \vomega_{\lllB}^{\lllA} \wedge (\vv_\ttp^{\lllA} - \vv_\tto^{\lllA})
-\end{equation}
-
-Substituindo \eqref{eq:Poisson_v} em \eqref{eq:Poisson_a_aux}, obtemos a equação de Poisson para acelerações:
-\begin{empheq}[box=\mybluebox]{equation} \label{eq:Poisson_a}
-\va_\ttp^{\lllA} = \va_\tto^{\lllA} + \dot{\vomega}_{\lllB}^{\lllA} \wedge \vr_{\tto \rl \ttp} + \vomega_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA} \wedge \vr_{\tto \rl \ttp}
-\end{empheq}
-
-\section{Composição de movimentos}\label{S05-01-03}
-
-Esta subseção tem o intuito de apresentar um dos princípios básicos da cinemática de corpos rígidos, a composição de movimentos.
-
-\subsection{Composição de velocidades lineares}\label{S05-01-03-01}
-
-Sejam $\llA$ um referencial, e $\ttA$ um sistema de coordenadas fixo a $\llA$, definido pela origem $\tto_\ttA$ e pelos versores $\vi_\ttA$, $\vj_\ttA$ e $\vk_\ttA$. Sejam também $\llB$ um referencial, $\ttB$ um sistema de coordenadas fixo a $\llB$, definido pela origem $\tto_\ttB$ e pelos versores $\vi_\ttB$, $\vj_\ttB$ e $\vk_\ttB$, e $\ttp$ um ponto no espaço. Definindo os vetores $\vr_{\tto_\ttA \rl \tto_\ttB}$, $\vr_{\tto_\ttB \rl \ttp}$ e $\vr_{\tto_\ttA \rl \ttp}$ tem-se que:
-\begin{equation} \label{eq:r_rho}
-\vr_{\tto_\ttA \rl \ttp} = \vr_{\tto_\ttA \rl \tto_\ttB} + \vr_{\tto_\ttB \rl \ttp}
-\end{equation}
-
-Derivando \eqref{eq:r_rho} no tempo em relação a $\llA$, temos:
-\begin{equation} \label{eq:dr_rho_aux}
-\vv_\ttp^{\lllA} = \vv_{\tto_\ttB}^{\lllA} + \dot{\vr}_{\tto_\ttB \rl \ttp}^{[\lllA]}
-\end{equation}
-
-Utilizando a equação \eqref{eq:derivada_vetor}, temos que:
-\begin{equation} 
-\dot{\vr}_{\tto_\ttB \rl \ttp}^{[\lllA]} = \dot{\vr}_{\tto_\ttB \rl \ttp}^{[\lllB]} + \vomega_{\lllB}^{\lllA}  \wedge  \vr_{\tto_\ttB \rl \ttp} 
-\end{equation}
-
-
-Ou seja:
-\begin{equation} \label{eq:drho}
-\dot{\vr}_{\tto_\ttB \rl \ttp}^{[\lllA]} =   \vv_\ttp^{\lllB} + \vomega_{\lllB}^{\lllA} \wedge \vr_{\tto_\ttB \rl \ttp} 
-\end{equation}
-
-Substituindo \eqref{eq:drho} em \eqref{eq:dr_rho_aux}, temos:
-\begin{equation} \label{eq:dr_rho}
-\vv_\ttp^{\lllA} = \vv_{\tto_\ttB}^{\lllA}  + \vomega_{\lllB}^{\lllA} \wedge \vr_{\tto_\ttB \rl \ttp}  + \vv_\ttp^{\lllB}
-\end{equation}
-
-Definindo:
-\begin{empheq}[box=\almondbox]{equation} \label{eq:v_arr}
-\vv_{\ttp \rl \lllB}^{\lllA} = \vv_{\tto_\ttB}^{\lllA}  + \vomega_{\lllB}^{\lllA} \wedge \vr_{\tto_\ttB \rl \ttp}
-\end{empheq}
-
-Temos princípio da composição de movimento para velocidades lineares:
-\begin{empheq}[box=\mybluebox]{equation} \label{eq:Composicao_vel}
-\vv_\ttp^{\lllA} = \vv_{\ttp \rl \lllB}^{\lllA} + \vv_\ttp^{\lllB}
-\end{empheq}
-
-Ou seja, $\vv_\ttp^{\lllA}$ é composto pela soma de $\vv_{\ttp \rl \lllB}^{\lllA}$, que seria a velocidade de $\ttp$ se $\ttp$ estivesse fixo a $\llB$ (movimento de arrastamento), e $\vv_\ttp^{\lllB}$, que seria a velocidade de $\ttp$ se $\llB$ estivesse parado em relação a $\llA$ (movimento relativo).
-
-\subsection{Composição de acelerações lineares}\label{S05-01-03-02}
-
-Derivando \eqref{eq:dr_rho} no tempo em relação a $\llA$, temos:
-\begin{equation} \label{eq:d2r_rho_aux}
-\va_\ttp^{\lllA} = \va_{\tto_\ttB}^{\lllA}  + \dot{\vomega}_{\lllB}^{\lllA} \wedge \vr_{\tto_\ttB \rl \ttp}  + \vomega_{\lllB}^{\lllA} \wedge \dot{\vr}_{\tto_\ttB \rl \ttp}^{[\lllA]} + \vomega_{\lllB}^{\lllA} \wedge \vv_\ttp^{\lllB} + \va_\ttp^{\lllB}
-\end{equation}
-
-Substituindo \eqref{eq:drho} em \eqref{eq:d2r_rho_aux}, temos:
-\begin{equation} \label{eq:d2r_rho}
-\va_\ttp^{\lllA} = \va_{\tto_\ttB}^{\lllA}  + \dot{\vomega}_{\lllB}^{\lllA} \wedge \vr_{\tto_\ttB \rl \ttp} + \vomega_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA} \wedge \vr_{\tto_\ttB \rl \ttp}  + 2 \vomega_{\lllB}^{\lllA} \wedge \vv_\ttp^{\lllB} + \va_\ttp^{\lllB}
-\end{equation}
-
-Definindo:
-\begin{empheq}[box=\almondbox]{equation}
-\va_{\ttp \rl \lllB}^{\lllA} = \va_{\tto_\ttB}^{\lllA}  + \dot{\vomega}_{\lllB}^{\lllA} \wedge \vr_{\tto_\ttB \rl \ttp} + \vomega_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA} \wedge \vr_{\tto_\ttB \rl \ttp}
-\end{empheq}
-
-Temos princípio da composição de movimento para acelerações lineares:
-\begin{empheq}[box=\mybluebox]{equation} \label{eq:Composicao_ace}
-\va_\ttp^{\lllA} = \va_{\ttp \rl \lllB}^{\lllA} + \va_\ttp^{\lllB} + 2\vomega_{\lllB}^{\lllA} \wedge \vv_\ttp^{\lllB}
-\end{empheq}
-
-Ou seja, $\va_\ttp^{\lllA}$ é composto pela soma de $\va_{\ttp \rl \lllB}^{\lllA}$, que seria a aceleração de $\ttp$ se $\ttp$ estivesse fixo a $\llB$ (aceleração de arrastamento), $\va_\ttp^{\lllB}$, que seria a aceleração de $\ttp$ se $\llB$ estivesse parado em relação a $\llA$ (aceleração relativa), e da parcela $2\vomega_{\lllB}^{\lllA} \wedge \vv_\ttp^{\lllB}$ (aceleralção complementar).
-
-\subsection{Composição de velocidades angulares}\label{S05-01-03-04}
-
-Sejam $\llA$ e $\llB$ dois referenciais e $\llC$ um corpo rígido. Sejam também os pontos $\ttp_1$ e $\ttp_2$, ambos fixos a $\llC$.
-
-Aplicando o princípio da composição de movimento para velocidades lineras, temos que:
-
-\begin{equation}
-\vv_{\ttp_1}^{\lllA} = \vv_{\ttp_1 \rl \lllB}^{\lllA} + \vv_{\ttp_1}^{\lllB}
-\end{equation}
-\begin{equation}
-\vv_{\ttp_2}^{\lllA} = \vv_{\ttp_2 \rl \lllB}^{\lllA} + \vv_{\ttp_2}^{\lllB}
-\end{equation}
-
-A partir da equação \eqref{eq:v_arr}, temos que:
-\begin{equation}
-\vv_{\ttp_1 \rl \lllB}^{\lllA} = \vv_{\tto_\ttB}^{\lllA} + \vomega_{\lllB}^{\lllA} \wedge \vr_{\tto_\ttB  \rl \ttp_1} 
-\end{equation}
-\begin{equation}
-\vv_{\ttp_2 \rl \lllB}^{\lllA} = \vv_{\tto_\ttB}^{\lllA} + \vomega_{\lllB}^{\lllA} \wedge \vr_{\tto_\ttB  \rl \ttp_2}
-\end{equation}
-
-Sendo assim, temos:
-\begin{equation} \label{eq:v_p1}
-\vv_{\ttp_1}^{\lllA} = \vv_{\tto_\ttB}^{\lllA} + \vomega_{\lllB}^{\lllA} \wedge \vr_{\tto_\ttB  \rl \ttp_1}  + \vv_{\ttp_1}^{\lllB}
-\end{equation}
-\begin{equation} \label{eq:v_p2}
-\vv_{\ttp_2}^{\lllA} = \vv_{\tto_\ttB}^{\lllA} + \vomega_{\lllB}^{\lllA} \wedge \vr_{\tto_\ttB  \rl \ttp_2} + \vv_{\ttp_2}^{\lllB}
-\end{equation}
-
-Subtraindo \eqref{eq:v_p2} de \eqref{eq:v_p1}, temos:
-\begin{equation} \label{eq:v_p1p2}
-\vv_{\ttp_1}^{\lllA} - \vv_{\ttp_2}^{\lllA} =  \vomega_{\lllB}^{\lllA} \wedge \vr_{\ttp_2  \rl \ttp_1}  + \vv_{\ttp_1}^{\lllB} - \vv_{\ttp_2}^{\lllB}
-\end{equation}
-
-Como $\ttp_1$ e $\ttp_2$ pertencem a um mesmo corpo rígido, temos que:
-\begin{equation} \label{eq:vA_poisson_p1p2}
-\vv_{\ttp_1}^{\lllA} =  \vv_{\ttp_2}^{\lllA} + \vomega_{\lllC}^{\lllA} \wedge \vr_{\ttp_2 \rl \ttp_1}
-\end{equation}
-\begin{equation} \label{eq:vB_poisson_p1p2}
-\vv_{\ttp_1}^{\lllB} =  \vv_{\ttp_2}^{\lllB} + \vomega_{\lllC}^{\lllB} \wedge \vr_{\ttp_2 \rl \ttp_1}
-\end{equation}
-
-Substituindo \eqref{eq:vA_poisson_p1p2} e \eqref{eq:vB_poisson_p1p2} em \eqref{eq:v_p1p2}:
-\begin{equation}
-\vomega_{\lllC}^{\lllA} \wedge \vr_{\ttp_2 \rl \ttp_1} =  \vomega_{\lllB}^{\lllA} \wedge \vr_{\ttp_2  \rl \ttp_1}  + \vomega_{\lllC}^{\lllB} \wedge \vr_{\ttp_2 \rl \ttp_1}
-\end{equation}
-
-Temos princípio da composição de movimento para velocidades angulares:
-\begin{empheq}[box=\mybluebox]{equation} \label{eq:composicao_w}
-\vomega_{\lllC}^{\lllA}  =  \vomega_{\lllB}^{\lllA}   + \vomega_{\lllC}^{\lllB}
-\end{empheq}
-
-Ou seja, $\vomega_{\lllC}^{\lllA}$ é composta pela soma de $\vomega_{\lllB}^{\lllA}$, que seria velocidade angular de  de $\llC$ se $\llC$ estivesse fixo a $\llB$ (velocidade angular de arrastamento), e $\vomega_{\lllC}^{\lllB}$, que seria a velocidade angular de $\llC$ se $\llB$ estivesse parado em relação a $\llA$ (velocidade angular relativa).
-
-Repare que, fazendo $\llC \equiv \llA$, temos que:
-\begin{equation}
-\vzr  =  \vomega_{\lllB}^{\lllA}   + \vomega_{\lllA}^{\lllB}
-\end{equation}
-\begin{empheq}[box=\almondbox]{equation} \label{eq:composicao_wCA}
-\therefore \vomega_{\lllA}^{\lllB}  =   - \vomega_{\lllB}^{\lllA}
-\end{empheq}
-
-\subsection{Composição de acelerações angulares}\label{S05-01-03-05}
-
-Derivando \eqref{eq:composicao_w} no tempo em relação a $\llA$, temos princípio da composição de movimento para acelerações angulares:
-\begin{empheq}[box=\mybluebox]{equation} \label{eq:composicao_dw}
-\dot{\vomega}_{\lllC}^{\lllA}  =  \dot{\vomega}_{\lllB}^{\lllA}   + \dot{\vomega}_{\lllC}^{\lllB} + \vomega_{\lllB}^{\lllA} \wedge \vomega_{\lllC}^{\lllB}
-\end{empheq}
-
-Ou seja, $\dot{\vomega}_{\lllC}^{\lllA}$ é composta pela soma de $\dot{\vomega}_{\lllB}^{\lllA}$, que seria a aceleração angular  de $\llC$ se $\llC$ estivesse fixo a $\llB$ (aceleração angular de arrastamento), $\dot{\vomega}_{\lllC}^{\lllB}$, que seria a aceleração angular de $\llC$ se $\llB$ estivesse parado em relação a $\llA$ (aceleração angular relativa), e da parcela $\vomega_{\lllB}^{\lllA} \wedge \vomega_{\lllC}^{\lllB}$ (aceleralção angular complementar).
-
-Repare que, fazendo $\llC \equiv \llA$ e utilizando \eqref{eq:composicao_wCA}, temos que:
-\begin{equation}
-\vzr =  \dot{\vomega}_{\lllB}^{\lllA}   + \dot{\vomega}_{\lllA}^{\lllB} - \vomega_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA}
-\end{equation}
-\begin{empheq}[box=\almondbox]{equation} \label{eq:composicao_dwCA}
-\therefore \dot{\vomega}_{\lllA}^{\lllB} = - \dot{\vomega}_{\lllB}^{\lllA}
-\end{empheq}
 
 
 % ========== Anexos (opcional) ==========
