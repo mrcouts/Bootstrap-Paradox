@@ -49,6 +49,9 @@
 \newcommand*\almondbox[1]{%
 \colorbox{almond}{\hspace{1em}#1\hspace{1em}}}
 
+\newcommand{\tabtag}[1]{%
+\renewcommand{\thetable}{\ref{#1}}%
+\addtocounter{table}{-1}}
 
 % ========== Language options ==========
 \usepackage[brazil]{babel}
@@ -3189,7 +3192,7 @@ Esta lei de adaptação pode ser explicada da seguinte maneira: $\underline{k}_i
 
 \section{Simulações}
 
-Nesta seção, será realizada a simulação dinâmica direta do mecânimo 5R utilizando o algoritmo de modelagem e simulação de mecanismos paralelos apresentado, e a lei de controle apresentada na subseção anterior. Serão consideradas incertezas paramétricas, tanto no projeto do controlador, quanto na simulação.
+Nesta seção, será realizada a simulação dinâmica direta do mecânismo 5R utilizando o algoritmo de modelagem e simulação de mecanismos paralelos apresentado, e a lei de controle apresentada na subseção anterior. Serão consideradas incertezas paramétricas, tanto no projeto do controlador, quanto na simulação.
 
 \begin{figure}[h]
 	\centering
@@ -3691,6 +3694,136 @@ Repare que a lei de Controle por Torque Computado não consegue seguir a trajet�
 
 \section{Ensaios Experimentais}
 
+Nesta sessão, será descrita a bancada experimental e serão apresentados e discutidos os resultados experimentais do controle do mecanismo 5R utilizando 8 diferentes estratégias de controle
+
+\subsection{Bancada experimental}
+
+A bancada é constituída de:
+
+\begin{itemize}
+\item 2 motores DC modelo PM70 da AMETEK com as seguintes características:
+\begin{itemize}
+\item Corrente nominal de $13A$ 
+\item Torque nominal de $0,5Nm$
+\item Potência útil de $200W$
+\item Tensão de alimentação de $24V$
+\item Rotação nominal de $3600 rpm$
+\item Peso de $1.80 kgf$ 
+\end{itemize}
+\item  2 enconders incrementais do modelo E40S com as seguintes características:
+\begin{itemize}
+\item Resolução de $5000 pulsos/volta$.
+\item Tensão de alimentação de $12V$ a $24V$
+\item 3 canais de saída A, B e Z
+\end{itemize}
+\item 1 driver modelo Pololu Dual VNH5019 Motor Driver Shield com as seguintes características.
+\begin{itemize}
+\item Tensões de operação: $5,5V$ a $24V$
+\item Corrente de saída: até $12A$ contínuos (30A de pico)
+\item Dois canais de saída para motor
+\item Entrada de tensão do sistema pode ser tanto $5V$ quanto $3.3V$
+\item Frequência de operação do PWM de até $20kHz$
+\end{itemize}
+\item 1 Microprocessador responsável pela execução das malhas de controle. O modelo utilizado foi o \textit{Raspberry Pi 2 Model B} com as seguintes características:
+\begin{itemize}
+\item Processador: quadcore ARMv7
+\item 1GB RAM
+\item alimentação de $5V$, $2A$
+\end{itemize}
+\end{itemize}
+
+A arquitetura do sistema pode ser vista na figura \ref{arquitSistema}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{imagens/arqSist.png}
+    \caption{Arquitetura do sistema - Fonte:Própria }
+    \label{arquitSistema}
+\end{figure}
+
+\section{Sistema de controle}
+
+O sistema de controle é constituído de: 
+\begin{itemize}
+\item 2 derivadores para a obtencão da velocidade e aceleração dos motores
+\item Cálculo da corrente que passa pelos motores
+\item Malhas de controles, sendo uma linear (controle de corrente) e uma não linear 
+\end{itemize} 
+
+Pelo enconder obtemos a posição dos motores, com os derivadores obtemos a velocidade e a acelaração. Esses três sinais juntos com suas respectivas referências são utilizadas na malha de controle não linear. A velocidade, junto com a tensão que é enviada ao motor são utilizadas para calcular a corrente que passa no motor. Com o erro entre o valor calculado e a corrente de referência, o controlador calcula e envia a tensão ao motor. A arquitetura pode ser visualizada na figura \ref{arquitControle}.
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{imagens/ArqControle.png}
+    \caption{Arquitetura de controle - Fonte:Própria }
+    \label{arquitControle}
+\end{figure}
+
+\subsection{Derivador}
+\label{derivador}
+
+A partir da posição angular obtida através da leitura do encoder, é possível determinar a velocidade usando um derivador numérico. Uma das formas de se obter o derivador é pelo método das diferenças finitas:
+
+\begin{equation}
+\dot{x}_k = \frac{x_k - x_{k-1}}{T}
+\end{equation}
+
+No entanto, como há ruídos nos sinais obtidos, a utilização  do método das diferenças finitas amplifica os ruídos de alta frequência. Diante disso, optamos por utilizar os derivador derivadores em série com filtros passa-baixa tipo Bessel de segunda ordem (para o cálculo da velocidade a partir da posição) e oitava ordem (para o cálculo da aceleração a partir da velocidade).
+
+\subsection{Cálculo da corrente}
+
+Para o cálculo da corrente foi considerada a equacação da dinâmica elétrica do motor \eqref{eq:DinEletrica_rot}:
+
+\begin{equation}
+\tag{\ref{eq:DinEletrica_rot}}
+	   u = L \frac{di}{dt} + R i + k_{e} \omega
+\end{equation}
+
+A dinâmica elétrica é muito mais rápida que a mecânica, portanto ela será desprezada ($\frac{di}{dt} = 0$). Com isso, obtemos a seguinte equação para o cálculo da corrente:
+
+\begin{equation}
+\label{corrente}
+I = \frac{u - k_e \omega}{R}
+\end{equation}
+
+\subsection{Parâmetros do sistema}
+
+\begin{table}[H] 
+\centering
+\caption{Parâmetros do Motor 1}
+\label{parametrosMotor}
+\begin{tabular}{l|l|l}
+Parâmetros  & Valores     & Unidades   \\ \hline
+$R$     & 1.10098     & $\Omega$   \\
+$L$     & 0.667       & $mH$       \\
+$b$     & 0.000122595 & $N s$      \\
+$k_{t}$     & 0.055984     & $Nm/A$     \\
+$\gmu$ & 0.0435651   & $Nm$        \\
+$k_{e}$     & 0.0513822    & $V s/rad$  \\
+$J$ & $1.469*10^{-4}$         & $kg.m^{2}$
+\end{tabular}
+\end{table} 
+
+\begin{table}[H] 
+\centering
+\caption{Parâmetros do Motor 2}
+\label{parametrosMotor2}
+\begin{tabular}{l|l|l}
+Parâmetros  & Valores     & Unidades   \\ \hline
+$R$     & 0.829383     & $\Omega$   \\
+$L$     & 0.667       & $mH$       \\
+$b$     & 0.000203914 & $N s$      \\
+$k_{t}$     & 0.0566596     & $Nm/A$     \\
+$\gmu$ &0.0499202   & $Nm$        \\
+$k_{e}$     & 0.0520023    & $V s/rad$  \\
+$J$ & $1.88738*10^{-4}$         & $kg.m^{2}$
+\end{tabular}
+\end{table}
+
+
+
+
 
 %CONCLUSÃO------------------------------------------------------------------------------------------
 \chapter{Conclusões e temas para pesquisa futura}
@@ -3732,8 +3865,462 @@ Um artigo, publicado no {\em Congresso Brasileira de Automática - 2018}, intitu
 
 % ========== Apêndices (opcional) ==========
 \apendice
-\chapter{Processador utilizado}
+\chapter{Funções de transferência de motores DC}
+
+Para a modelagem dos motores, será considerado o seguinte circuito de modelo dos motores:
+
+%-------------------------------------
+
+\begin{figure}[!h]
+     \centering
+     \includegraphics[width=0.7\textwidth]{imagens/CircuitoMotor.png}
+     \caption{Circuito elétrico do motor  - Fonte:Própria }
+     \label{CEM1}
+\end{figure}
+
+%-------------------------------------
+
+Pela lei de Ohm, temos que:
+
+\begin{equation}
+\label{eletricaMotor}
+	   u = L \frac{di}{dt} + R i + k_{e} \omega
+\end{equation}
+
+Sendo $J$ a inércia do rotor e $b$ o coeficiente de atrito viscoso e $\mu$ o coeficiente de atrito seco do mancal do eixo do motor, obtemos pelo teorema do momento angular:
+
+\begin{equation}
+\label{torqueDist}
+    J \dot{\omega} = T - b\omega - \mu sign(\omega) - \tau_{d}
+\end{equation}
+
+Sendo $\tau_{d} $ o torque que o mecanismo aplica no motor e será considerado um distúrbio.
+
+Como hipótese, será considerado que o torque fornecido pelo motor é proporcional à corrente de armadura:
+
+\begin{equation}
+\label{torqueMotor}
+	T = k_{t} i
+\end{equation}
+
+Substituindo \eqref{torqueMotor} em \eqref{torqueDist}, 
+
+
+\begin{empheq}[left=\empheqlbrace]{gather}
+\label{TLM1}
+	 L \frac{di}{dt} + R i + k_{e} = u 	\\ \label{TLM2}
+     J \dot{\omega} + b\omega + \mu sign(\omega) = k_{t} i - \tau_{d} 
+\end{empheq}
+
+Considerando $\mu = 0$  e aplicando Laplace para condições iniciais nulas nas equações \eqref{TLM1} e \eqref{TLM2}, obtemos:
+
+\begin{empheq}[left=\empheqlbrace]{gather}
+\label{TLM3}	(L s + R) I(s) +  k_{e} W(s) = U(s)
+	\\
+    ( J s + b s) W(s)  = k_{t} I(s) - \tau_{d}(s)
+    \label{TLM4}
+\end{empheq}
+
+
+  Isolando $ W(s) $ da equação \eqref{TLM4},
+
+  \begin{equation}
+  \label{TLM5}
+  W(s) = \frac{k_t I(s) -  \tau_{d}(s)}{J s +b}
+  \end{equation}
+  
+\begin{itemize}
+
+\item Função de tranferência de corrente
+
+    Substituindo \eqref{TLM5} na equação \eqref{TLM3} temos,
+
+    \begin{equation}
+    \label{TLM6}
+    I(s) = \frac{J s + b}{(L s + R) ( J s + b s) +  k_{t} k_{e}} U(s) + \frac{k_{e}}{(L s + R) ( J s + b s) +  k_{t} k_{e}} \tau_{d}(s)
+    \end{equation}
+
+    Com isso, as funções de transferência do sistema, serão:
+
+    \begin{equation}
+    \label{functionTransferMotor}
+        G_{I}(s) = \frac{I(s)}{U(s)} = \frac{J s+b}{(L s + R) (J s+b)+k_{t}k_{e}}
+    \end{equation}
+
+    \begin{equation}
+    \label{functionTransferDist}
+        G_{Id}(s) = \frac{I(s)}{\tau_{d}(s)} = \frac{k_{e}}{(L s + R)( J s+b)+k_{t}k_{e}}
+    \end{equation}
+
+\item Função de transferência de velocidade
+
+Substituindo as equações \eqref{TLM6} na equação \eqref{TLM5} encontramos,
+
+    \begin{equation}
+     W(s) = \frac{k_{t}}{(J s + b)(L s + R) + k_{e} k_{t}} U(s) - \frac{(L s + R)}{(J s + b)(L s + R) + k_{e} k_{t}} \tau_d(s)
+    \end{equation}
+
+    Logo, temos função de transferência do motor na forma:
+    
+    \begin{equation}
+    \label{FunctionMotorVel}
+     G_v(s) = \frac{k_{t}}{(J s + b)(L s + R) + k_{e} k_{t}} 
+    \end{equation}
+    
+    \begin{equation}
+    \label{FunctionMotorVeld}
+     G_{vd}(s) = - \frac{(L s + R)}{(J s + b)(L s + R) + k_{e} k_{t}}
+    \end{equation}
+    
+\item Função de transferência de posição
+
+Integrando em $s$ a equação \eqref{FunctionMotorVel} obtemos a função de transferência de posição do motor.
+    \begin{equation}
+    \label{FunctionMotor}
+     G_p(s) = \frac{k_{t}}{s((J s + b)(L s + R) + k_{e} k_{t})}
+    \end{equation}
+    
+    \begin{equation}
+    \label{FunctionMotord}
+     G_{pd}(s) = - \frac{(L s + R)}{s((J s + b)(L s + R) + k_{e} k_{t})}
+    \end{equation}
+
+
+\end{itemize}
+
+\chapter{Controlador de Corrente}
+
+Como foi visto apêndice anterior, a função de transferência de corrente de um motor DC é dada por:
+
+\begin{equation} \label{functionTransferMotorCorrente}
+G_{I}(s) = \frac{A s+B}{s^2 + C s + D}
+\end{equation}
+
+Sendo:
+\begin{equation}
+\begin{cases}
+A = 1/L \\
+B = b/LJ \\
+C = b/J + R/L \\
+D = \frac{Rb + k_t k_e}{LJ}
+\end{cases}
+\end{equation}
+
+Discretizado pela técnica do segurador de ordem zero, considerando um período de amostragem $T$, obtemos:
+\begin{equation}
+Gd_{I}(z) = \frac{\mathcal{A} z + \mathcal{B}}{z^2 + \mathcal{C} z + \mathcal{D}}
+\end{equation}
+
+Sendo:
+\begin{equation}
+\begin{cases}
+\mathcal{A} = -  \Big( (BC - 2AD)(e^{T \Delta} -1) + B \Delta (1 + e^{T \Delta} - 2 e^{\frac{T}{2}(\Delta+C)} ) \Big) / \mathcal{E}\\
+\mathcal{B} =   \Big( (BC - 2AD)(e^{T \Delta} -1) - B \Delta (1 + e^{T \Delta} - 2 e^{\frac{T}{2}(\Delta-C)} ) \Big) / \mathcal{E} \\
+\mathcal{C} = 2 D  e^{\frac{T}{2}  (\Delta - C )} \Delta / \mathcal{E} \\
+\mathcal{D} = -2 D  \left(e^{T \Delta}+1\right) / \mathcal{E} \\
+\mathcal{E} = 2 D  e^{\frac{T}{2}(\Delta + C)} \Delta \\
+\Delta = \sqrt{C^2 - 4D}
+\end{cases}
+\end{equation}
+
+Como o sistema é de segunda ordem e não possui integrador, é proposto o seguinte controlador:
+\begin{equation}
+K(z) = \frac{\alpha z^2 + \beta z + \gamma}{(z-1)(z-\delta)}
+\end{equation}
+
+Como o controlador proposto possui 4 parâmetros, é possível alocar 4 pólos. Tendo em vista que a planta e o controlador são de segunda ordem, o sistema em malha fechada será de quarta ordem. Sendo assim, o controlador proposto é capaz de alocar todos os pólos do sistema. \\
+
+A função de transferência do sistema em malha fechada é dada por:
+\begin{equation}
+G_{mf}(z) = \frac{(\mathcal{A} z+\mathcal{B}) \left(\gamma +\alpha  z^2+\beta  z\right)}{z^4 + a_3 z^3 + a_2 z^2 + a_1 z + a_0}
+\end{equation}
+
+Sendo:
+\begin{equation}
+\begin{cases}
+a_0 &=  \mathcal{B} \gamma  + \mathcal{D} \delta\\
+a_1 &= \mathcal{B} \beta + \mathcal{A} \gamma +(\mathcal{C}  -  \mathcal{D}) \delta -\mathcal{D}   \\
+a_2 &= \mathcal{B} \alpha + \mathcal{A} \beta + (1 -\mathcal{C}) \delta -\mathcal{C} +\mathcal{D}  \\
+a_3 &=   \mathcal{A} \alpha -\delta +\mathcal{C} -1
+\end{cases}
+\end{equation}
+
+%(\mathcal{A} z+\mathcal{B}) \left(\gamma +\alpha  z^2+\beta  z\right)+(z-1) (z-\delta ) \left(\mathcal{D}+z^2+\mathcal{C} z\right)
+
+
+Sendo assim, o polinômio característico do sistema em malha fechada é dada por:
+\begin{equation}
+P(z) = z^4 + a_3 z^3 + a_2 z^2 + a_1 z + a_0
+\end{equation}
+
+Para alocar os pólos do sistema em malha fechada em $p_1$, $p_2$, $p_3$, $p_4$, é necessário que:
+\begin{equation}
+P(z) = z^4 + c_3 z^3 + c_2 z^2 + c_1 z + c_0
+\end{equation}
+
+Sendo:
+\begin{equation}
+\begin{cases}
+c_0 &= p_1 p_2 p_3 p_4 \\
+c_1 &= -p_1 p_2 p_3-p_1 p_4 p_3-p_2 p_4 p_3-p_1 p_2 p_4 \\
+c_2 &= p_1 p_2+p_3 p_2+p_4 p_2+p_1 p_3+p_1 p_4+p_3 p_4 \\
+c_3 &= -p_1-p_2-p_3-p_4
+\end{cases}
+\end{equation}
+
+Portanto, os parâmetros de $K(z)$ podem ser obtidos resolvendo o seguinte sistema de equações algébricas:
+\begin{equation}
+\begin{cases}
+\mathcal{B} \gamma  + \mathcal{D} \delta &= c_0 \\
+\mathcal{B} \beta + \mathcal{A} \gamma +(\mathcal{C}  -  \mathcal{D}) \delta -\mathcal{D} &= c_1  \\
+\mathcal{B} \alpha + \mathcal{A} \beta + (1 -\mathcal{C}) \delta -\mathcal{C} +\mathcal{D} &= c_2 \\
+\mathcal{A} \alpha -\delta +\mathcal{C} -1 &= c_3
+\end{cases}
+\end{equation}
+
+Cuja solução é dada por:
+
+\begin{equation}
+\begin{cases}
+\alpha = \frac{\mathcal{A}^2 c_1+\mathcal{B} \left(-\mathcal{D} (\mathcal{A}+\mathcal{B})-\mathcal{A} c_2+ \mathcal{B} (\mathcal{C}+ c_3) \right)-\left(\mathcal{C} -c_4 - 1 \right) (\mathcal{B} (\mathcal{B}-\mathcal{C} (\mathcal{A}+\mathcal{B}))+\mathcal{A} \mathcal{D} (\mathcal{A}+\mathcal{B}))}{(\mathcal{A}+\mathcal{B}) \left(\mathcal{A}^2 \mathcal{D}-\mathcal{A} \mathcal{B} \mathcal{C}+\mathcal{B}^2\right)} \\
+\beta = \frac{\mathcal{C} \left( \mathcal{D} (\mathcal{A}+\mathcal{B})^2+ \mathcal{B} (\mathcal{B}-\mathcal{C} (\mathcal{A}+\mathcal{B})) \right)-\mathcal{A} \mathcal{D}^2 (\mathcal{A}+\mathcal{B})+\left(\mathcal{A} c_3- \mathcal{B} c_4 \right) (\mathcal{D} (\mathcal{A}+\mathcal{B})-\mathcal{C} \mathcal{B})+ (\mathcal{A} (\mathcal{C}-1)-\mathcal{B})(\mathcal{A} c_1 - \mathcal{B} c_2)}{(\mathcal{A}+\mathcal{B}) \left(\mathcal{A}^2 \mathcal{D}-\mathcal{A} \mathcal{B} \mathcal{C}+\mathcal{B}^2\right)} \\
+\gamma = \frac{ \left(\mathcal{A}^2 \mathcal{D}-(\mathcal{A}+\mathcal{B}) (\mathcal{A} \mathcal{C}-\mathcal{B})\right)c_1 +\mathcal{D} \left(\mathcal{B} \left( \mathcal{B} (1-\mathcal{C} + c_4) - \mathcal{A} (\mathcal{C} - \mathcal{D} + c_3) \right)+\mathcal{A}^2( \mathcal{D}+ c_2) \right)}{(\mathcal{A}+\mathcal{B}) \left(\mathcal{A}^2 \mathcal{D}-\mathcal{A} \mathcal{B} \mathcal{C}+\mathcal{B}^2\right)} \\
+\delta = \frac{\mathcal{A}^3 c_1+\mathcal{B} \left(\mathcal{B} (\mathcal{C} (\mathcal{A}+\mathcal{B})-\mathcal{B})-\mathcal{A} \mathcal{D} (\mathcal{A}+\mathcal{B})-\mathcal{A}^2 c_2 +\mathcal{B} \left(\mathcal{A} c_3- \mathcal{B} c_4 \right)\right)}{(\mathcal{A}+\mathcal{B}) \left(\mathcal{A}^2 \mathcal{D}-\mathcal{A} \mathcal{B} \mathcal{C}+\mathcal{B}^2\right)} \\
+\end{cases}
+\end{equation}
+
+
+
 \chapter{Curva dos motores}
+
+A curva de velocidade foi obtida aplicando o derivador descrito na seção \ref{derivador} no sinal de posição fornecido pelo encoder . Foi utilizada uma entrada degrau de tensão $6.5V$. As curvas dos motores 1 e 2 podem ser observadas nas figuras \ref{CM2} e \ref{CM3} respectivamente.
+
+ \begin{figure}[H]
+     \centering
+     \includegraphics[width=0.6\textwidth]{imagens/velMotor1.png}
+     \caption{Curva de velocidade do motor 1  - Fonte:Própria }
+     \label{CM2}
+ \end{figure}
+
+ \begin{figure}[H]
+     \centering
+     \includegraphics[width=0.6\textwidth]{imagens/velMotor2.png}
+     \caption{Curva de velocidade do motor 2  - Fonte:Própria }
+     \label{CM3}
+ \end{figure}
+
+Para obtenção dos parâmetros do motor, foram realizados os seguintes procedimentos: 
+
+\begin{itemize}
+\item O valor de indutância (L) foi medido através de um multímetro e considerado constante independente da velocidade do motor.
+
+\item O valor da constante de força contra-eletromotriz ($k_{e}$) e da resistência ($R$) foram obtidos através do método dos mínimos quadrados implementado sobre os valores medidos da tensão, corrente e velocidade apresentados na tabela \ref{MMQke}. Utilizando a equação elétrica do motor \eqref{eq:DinEletrica_rot} em regime permanente ($\frac{di}{dt} = 0$): 
+
+\begin{equation}
+	   u =  R i + k_{e} \omega
+\end{equation}
+
+\begin{table}[H]
+\centering
+\caption{Medições para obtenção de $k_{e}$ do motor 1}
+\label{MMQke}
+\begin{tabular}{l|l|l}
+$u(V)$     & $i(A)$    & $\omega (rad/s)$        \\ \hline
+1.524 & 0.79 & 12.272  \\
+2.52  & 0.84 & 31.390  \\
+3.51  & 0.89 & 49.755  \\
+4.6   & 0.94 & 68.079  \\
+5.49  & 0.98 & 86.322  \\
+6.51  & 1.02 & 105.736 \\
+7.49  & 1.05 & 123.683 \\
+8.5   & 1.09 & 140.924 \\
+9.49  & 1.11 & 161.111
+\end{tabular}
+\end{table}
+
+Aplicando o método dos mínimos quadrados, temos:
+
+\begin{equation}
+\begin{bmatrix}
+<\omega, \omega> & <\omega, i>\\
+<\omega, i>      & <i, i>
+\end{bmatrix}
+\begin{bmatrix}
+k_{e}\\
+R
+\end{bmatrix}= 
+\begin{bmatrix}
+<\omega, u>\\
+<i, u>
+\end{bmatrix}
+\end{equation}
+
+Sendo o produto interno definido como $ <f,g> = \displaystyle\sum_{i=1}^n f_i \cdot g_i $ obtemos o seguinte sistema linear:
+
+\begin{equation}
+\begin{bmatrix}
+87991.6 & 799.092\\
+799.092 & 8.5289
+\end{bmatrix}
+\begin{bmatrix}
+k_{e}\\
+R
+\end{bmatrix}= 
+\begin{bmatrix}
+5400.99\\
+50.4493
+\end{bmatrix}
+\end{equation}
+
+Obtivemos como resultados
+\begin{equation}
+R = 1.10098 \, \Omega 
+\end{equation}
+\begin{equation}
+k_e = 0.0513822 \, V s/rad
+\end{equation}
+
+\item $k_{t}$ foi obtido seguindo a proporção:
+
+\begin{equation}
+\label{prop}
+k_{t} = \frac{k_{t}'}{k_{e}'} k_{e}
+\end{equation}
+Sendo $k_{t}'$ e $k_{e}'$ valores obtidos da curva fornecida no datasheet do motor (Anexo \ref{DatasheetMotor}) dados por:
+\begin{equation}
+k_{t}' = 0.0467188 \, N m/A
+\end{equation}
+
+\begin{equation}
+k_{e}' = 0.0428786 \, V s/rad
+\end{equation}
+
+Substituindo os valores na equação \eqref{prop}, temos que:
+
+\begin{equation}
+k_t = 0.055984 \, N m/A
+\end{equation}
+
+\item As constantes de atrito viscoso ($b$) e seco ($\gmu$) foram obtidas a partir da equação dinâmica mecânica do motor \eqref{torqueDist} em regime permanente ($\dot{\omega}=0$) com $\omega > 0$, ou seja: 
+
+\begin{equation}
+\label{dimMec}
+b \, \omega+\gmu \ = k_{t} i
+\end{equation}
+
+Aplicando novamente o método dos mínimos quadrados, temos:
+
+\begin{equation}
+\begin{bmatrix}
+<1, 1> & <\omega, 1>\\
+<\omega, 1> & <\omega, \omega>
+\end{bmatrix}
+\begin{bmatrix}
+\gmu\\
+b
+\end{bmatrix}= 
+\begin{bmatrix}
+<1, k_{t} i >\\
+<\omega, k_{t} i >
+\end{bmatrix}
+\end{equation}
+
+Obtemos o seguinte sistema linear:
+
+\begin{equation}
+\begin{bmatrix}
+9 & 779.272\\
+779.272 & 87991.6
+\end{bmatrix}
+\begin{bmatrix}
+\gmu\\
+b
+\end{bmatrix}= 
+\begin{bmatrix}
+0.487621\\
+44.7364
+\end{bmatrix}
+\end{equation}
+
+Logo, temos que: 
+\begin{equation}
+\gmu = 0.0435651 \, Nm
+\end{equation}
+
+\begin{equation}
+b = 0.000122595 \, Nm s/rad
+\end{equation}
+
+\item $J$ foi obtido a partir da curva de velocidades do motor figura \ref{CM2}. Como não houve sobressinal, o tempo de assentamento foi de $0.207 s$.
+
+\begin{equation}
+\label{4sigma}
+ t_{98\%} =\frac{4}{\sigma}
+\end{equation}
+
+Da equação \eqref{4sigma} temos que $p= -19.3237$.
+Então, igualando o denominador da função de transferência do motor \eqref{functionTransferMotor}  a zero e substituindo o valor do pólo:
+\begin{equation}
+[(L s + R) (J s + b) + k_t k_e]_{s = p} = 0
+\end{equation}
+
+Obtemos $J = 1.469 \, 10^{-4} kg \, m^2 $
+
+\end{itemize}
+
+Os valores dos parâmetros obtidos são apresentados na tabela \ref{parametrosMotor}
+
+\begin{table}[H]
+\centering
+\tabtag{parametrosMotor}
+\caption{Parâmetros do Motor 1}
+\begin{tabular}{l|l|l}
+Parâmetros  & Valores     & Unidades   \\ \hline
+$R$     & 1.10098     & $\Omega$   \\
+$L$     & 0.667       & $mH$       \\
+$b$     & 0.000122595 & $N s$      \\
+$k_{t}$     & 0.055984     & $Nm/A$     \\
+$\gmu$ & 0.0435651   & $Nm$        \\
+$k_{e}$     & 0.0513822    & $V s/rad$  \\
+$J$ & $1.469*10^{-4}$         & $kg.m^{2}$
+\end{tabular}
+\end{table}
+
+Analogamente determinamos os parâmetros do motor 2 apresentados na tabela \ref{parametrosMotor2}. Sendo que foi considerado como tempo de assentamento $0.198 s$. A tabela de medições correspondente a esse motor pode ser observada na tabela \ref{MMQke2}.
+
+\begin{table}[H]
+\centering
+\caption{Medições para obtenção de $k_{e}$ do motor 2}
+\label{MMQke2}
+\begin{tabular}{l|l|l}
+$u(V)$     & $i(A)$    & $\omega(rad/s)$       \\ \hline
+1.49  & 0.92 & 13.696  \\
+2.48  & 0.99 & 31.747  \\
+3.47  & 1.06 & 49.909  \\
+4.47  & 1.14 & 67.889  \\
+5.46  & 1.20 & 86.067  \\
+6.47  & 1.27 & 104.681 \\
+7.47  & 1.32 & 122.742 \\
+8.48  & 1.37 & 140.553
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\centering
+\tabtag{parametrosMotor2}
+\caption{Parâmetros do Motor 2}
+\begin{tabular}{l|l|l}
+Parâmetros  & Valores     & Unidades   \\ \hline
+$R$     & 0.829383     & $\Omega$   \\
+$L$     & 0.667       & $mH$       \\
+$b$     & 0.000203914 & $N s$      \\
+$k_{t}$     & 0.0566596     & $Nm/A$     \\
+$\gmu$ &0.0499202   & $Nm$        \\
+$k_{e}$     & 0.0520023    & $V s/rad$  \\
+$J$ & $1.88738*10^{-4}$         & $kg.m^{2}$
+\end{tabular}
+\end{table}
+
 \chapter{Cinemática de corpos rígidos}\label{S05-1}
 
 \section{Conceitos básicos}\label{S05-01-01}
