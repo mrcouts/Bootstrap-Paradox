@@ -1,11 +1,13 @@
-\select@language {brazil}
+\babel@toc {brazil}{}
 \contentsline {table}{\numberline {1}{\ignorespaces DH}}{80}
 \contentsline {table}{\numberline {2}{\ignorespaces Par\IeC {\^a}metros da cadeia 1}}{91}
 \contentsline {table}{\numberline {3}{\ignorespaces Par\IeC {\^a}metros da cadeia 2}}{91}
 \contentsline {table}{\numberline {4}{\ignorespaces Outros par\IeC {\^a}metros do sistema}}{91}
 \contentsline {table}{\numberline {5}{\ignorespaces Par\IeC {\^a}metros do Motor 1}}{92}
 \contentsline {table}{\numberline {6}{\ignorespaces Par\IeC {\^a}metros do Motor 2}}{92}
-\contentsline {table}{\numberline {7}{\ignorespaces Medi\IeC {\c c}\IeC {\~o}es para obten\IeC {\c c}\IeC {\~a}o de $k_{e}$ do motor 1}}{113}
-\contentsline {table}{\numberline {\ref {parametrosMotor}}{\ignorespaces Par\IeC {\^a}metros do Motor 1}}{115}
-\contentsline {table}{\numberline {8}{\ignorespaces Medi\IeC {\c c}\IeC {\~o}es para obten\IeC {\c c}\IeC {\~a}o de $k_{e}$ do motor 2}}{115}
-\contentsline {table}{\numberline {\ref {parametrosMotor2}}{\ignorespaces Par\IeC {\^a}metros do Motor 2}}{116}
+\contentsline {table}{\numberline {7}{\ignorespaces Par\IeC {\^a}metros dos controladores: espa\IeC {\c c}o dos atuadores}}{93}
+\contentsline {table}{\numberline {8}{\ignorespaces Par\IeC {\^a}metros dos controladores: espa\IeC {\c c}o da tarefa}}{93}
+\contentsline {table}{\numberline {9}{\ignorespaces Medi\IeC {\c c}\IeC {\~o}es para obten\IeC {\c c}\IeC {\~a}o de $k_{e}$ do motor 1}}{115}
+\contentsline {table}{\numberline {\ref {parametrosMotor}}{\ignorespaces Par\IeC {\^a}metros do Motor 1}}{117}
+\contentsline {table}{\numberline {10}{\ignorespaces Medi\IeC {\c c}\IeC {\~o}es para obten\IeC {\c c}\IeC {\~a}o de $k_{e}$ do motor 2}}{117}
+\contentsline {table}{\numberline {\ref {parametrosMotor2}}{\ignorespaces Par\IeC {\^a}metros do Motor 2}}{118}

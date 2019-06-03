@@ -1,4 +1,4 @@
-\select@language {brazil}
+\babel@toc {brazil}{}
 \contentsline {chapter}{Parte~I:~\MakeUppercase {Introdu\IeC {\c c}\IeC {\~a}o}}{14}
 \contentsline {chapter}{\numberline {1}Introdu\IeC {\c c}\IeC {\~a}o}{15}
 \contentsline {section}{\numberline {1.1}Objetivos}{16}
@@ -63,29 +63,34 @@
 \contentsline {section}{\numberline {7.2}Simula\IeC {\c c}\IeC {\~o}es}{79}
 \contentsline {section}{\numberline {7.3}Ensaios Experimentais}{87}
 \contentsline {subsection}{\numberline {7.3.1}Bancada experimental}{87}
-\contentsline {section}{\numberline {7.4}Sistema de controle}{89}
-\contentsline {subsection}{\numberline {7.4.1}Derivador}{90}
-\contentsline {subsection}{\numberline {7.4.2}C\IeC {\'a}lculo da corrente}{90}
-\contentsline {subsection}{\numberline {7.4.3}Par\IeC {\^a}metros do sistema}{91}
-\contentsline {chapter}{\numberline {8}Conclus\IeC {\~o}es e temas para pesquisa futura}{93}
-\contentsline {section}{\numberline {8.1}Principais contribui\IeC {\c c}\IeC {\~o}es}{93}
-\contentsline {section}{\numberline {8.2}Sugest\IeC {\~a}o de temas para pesquisa futura}{94}
-\contentsline {chapter}{Refer\IeC {\^e}ncias}{95}
-\contentsline {chapter}{Ap\IeC {\^e}ndice{} A{} -- Cinem\IeC {\'a}tica de corpos r\IeC {\'\i }gidos}{99}
-\contentsline {section}{\numberline {A.1}Conceitos b\IeC {\'a}sicos}{99}
-\contentsline {subsection}{\numberline {A.1.1}Produto vetorial}{99}
-\contentsline {subsection}{\numberline {A.1.2}Derivada temporal de versores}{100}
-\contentsline {subsection}{\numberline {A.1.3}Derivada temporal de vetores}{100}
-\contentsline {subsection}{\numberline {A.1.4}Defini\IeC {\c c}\IeC {\~a}o de vetor velocidade}{100}
-\contentsline {subsection}{\numberline {A.1.5}Defini\IeC {\c c}\IeC {\~a}o de vetor acelera\IeC {\c c}\IeC {\~a}o}{101}
-\contentsline {section}{\numberline {A.2}Equa\IeC {\c c}\IeC {\~o}es de Poisson}{101}
-\contentsline {subsection}{\numberline {A.2.1}Equa\IeC {\c c}\IeC {\~a}o de Poisson para velocidades}{101}
-\contentsline {subsection}{\numberline {A.2.2}Equa\IeC {\c c}\IeC {\~a}o de Poisson para acelera\IeC {\c c}\IeC {\~o}es}{101}
-\contentsline {section}{\numberline {A.3}Composi\IeC {\c c}\IeC {\~a}o de movimentos}{101}
-\contentsline {subsection}{\numberline {A.3.1}Composi\IeC {\c c}\IeC {\~a}o de velocidades lineares}{102}
-\contentsline {subsection}{\numberline {A.3.2}Composi\IeC {\c c}\IeC {\~a}o de acelera\IeC {\c c}\IeC {\~o}es lineares}{103}
-\contentsline {subsection}{\numberline {A.3.3}Composi\IeC {\c c}\IeC {\~a}o de velocidades angulares}{103}
-\contentsline {subsection}{\numberline {A.3.4}Composi\IeC {\c c}\IeC {\~a}o de acelera\IeC {\c c}\IeC {\~o}es angulares}{104}
-\contentsline {chapter}{Ap\IeC {\^e}ndice{} B{} -- Fun\IeC {\c c}\IeC {\~o}es de transfer\IeC {\^e}ncia de motores DC}{106}
-\contentsline {chapter}{Ap\IeC {\^e}ndice{} C{} -- Controlador de Corrente}{109}
-\contentsline {chapter}{Ap\IeC {\^e}ndice{} D{} -- Curva dos motores}{112}
+\contentsline {subsection}{\numberline {7.3.2}Sistema de controle}{89}
+\contentsline {subsection}{\numberline {7.3.3}Derivador}{90}
+\contentsline {subsection}{\numberline {7.3.4}C\IeC {\'a}lculo da corrente}{90}
+\contentsline {subsection}{\numberline {7.3.5}Par\IeC {\^a}metros do sistema}{91}
+\contentsline {subsection}{\numberline {7.3.6}Trajet\IeC {\'o}rias de refer\IeC {\^e}ncia}{92}
+\contentsline {subsection}{\numberline {7.3.7}Condi\IeC {\c c}\IeC {\~o}es iniciais}{93}
+\contentsline {subsection}{\numberline {7.3.8}Par\IeC {\^a}metros dos controladors}{93}
+\contentsline {subsection}{\numberline {7.3.9}Resultados experimental}{94}
+\contentsline {subsubsection}{\numberline {7.3.9.1}PIDq - Trajet\IeC {\'o}ria circular}{94}
+\contentsline {chapter}{\numberline {8}Conclus\IeC {\~o}es e temas para pesquisa futura}{95}
+\contentsline {section}{\numberline {8.1}Principais contribui\IeC {\c c}\IeC {\~o}es}{95}
+\contentsline {section}{\numberline {8.2}Sugest\IeC {\~a}o de temas para pesquisa futura}{96}
+\contentsline {chapter}{Refer\IeC {\^e}ncias}{97}
+\contentsline {chapter}{Ap\IeC {\^e}ndice{} A{} -- Cinem\IeC {\'a}tica de corpos r\IeC {\'\i }gidos}{101}
+\contentsline {section}{\numberline {A.1}Conceitos b\IeC {\'a}sicos}{101}
+\contentsline {subsection}{\numberline {A.1.1}Produto vetorial}{101}
+\contentsline {subsection}{\numberline {A.1.2}Derivada temporal de versores}{102}
+\contentsline {subsection}{\numberline {A.1.3}Derivada temporal de vetores}{102}
+\contentsline {subsection}{\numberline {A.1.4}Defini\IeC {\c c}\IeC {\~a}o de vetor velocidade}{102}
+\contentsline {subsection}{\numberline {A.1.5}Defini\IeC {\c c}\IeC {\~a}o de vetor acelera\IeC {\c c}\IeC {\~a}o}{103}
+\contentsline {section}{\numberline {A.2}Equa\IeC {\c c}\IeC {\~o}es de Poisson}{103}
+\contentsline {subsection}{\numberline {A.2.1}Equa\IeC {\c c}\IeC {\~a}o de Poisson para velocidades}{103}
+\contentsline {subsection}{\numberline {A.2.2}Equa\IeC {\c c}\IeC {\~a}o de Poisson para acelera\IeC {\c c}\IeC {\~o}es}{103}
+\contentsline {section}{\numberline {A.3}Composi\IeC {\c c}\IeC {\~a}o de movimentos}{103}
+\contentsline {subsection}{\numberline {A.3.1}Composi\IeC {\c c}\IeC {\~a}o de velocidades lineares}{104}
+\contentsline {subsection}{\numberline {A.3.2}Composi\IeC {\c c}\IeC {\~a}o de acelera\IeC {\c c}\IeC {\~o}es lineares}{105}
+\contentsline {subsection}{\numberline {A.3.3}Composi\IeC {\c c}\IeC {\~a}o de velocidades angulares}{105}
+\contentsline {subsection}{\numberline {A.3.4}Composi\IeC {\c c}\IeC {\~a}o de acelera\IeC {\c c}\IeC {\~o}es angulares}{106}
+\contentsline {chapter}{Ap\IeC {\^e}ndice{} B{} -- Fun\IeC {\c c}\IeC {\~o}es de transfer\IeC {\^e}ncia de motores DC}{108}
+\contentsline {chapter}{Ap\IeC {\^e}ndice{} C{} -- Controlador de Corrente}{111}
+\contentsline {chapter}{Ap\IeC {\^e}ndice{} D{} -- Curva dos motores}{114}

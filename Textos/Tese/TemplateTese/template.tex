@@ -3741,7 +3741,7 @@ A arquitetura do sistema pode ser vista na figura \ref{arquitSistema}.
     \label{arquitSistema}
 \end{figure}
 
-\section{Sistema de controle}
+\subsection{Sistema de controle}
 
 O sistema de controle é constituído de: 
 \begin{itemize}
@@ -3865,6 +3865,121 @@ $k_{e}$    & $5.200 \cdot 10^{-2}$ & $V s/rad$  \\
 $J$        & $1.887 \cdot10^{-4}$  & $kg.m^{2}$
 \end{tabular}
 \end{table}
+
+\subsection{Trajetórias de referência}
+
+A primeira trajetória a ser realizada é uma trajetória circular com período de 1 segundo. Serão realizados 8 ciclos seguidos de uma parada repentina de 4 segundos. Sua expressão é dada por:
+
+\begin{equation}
+\begin{cases}
+x_d(t) = -0.05 \cos(6.28 t) \\
+y_d(t) = 0.158 - 0.05 \sin(6.28 t) \\
+\end{cases}
+\end{equation}
+
+A segunda trajetória a ser realizada é uma trajetória triangular cujas coordenadas dos vértices (em metros) são:
+
+\begin{equation} \label{eq:zeroMaquina}
+\mx_1 = \begin{bmatrix}
+-0.002 & 0.108 
+\end{bmatrix}^\msT
+\end{equation}
+\begin{equation}
+\mx_2 = \begin{bmatrix}
+0.050 & 0.258 
+\end{bmatrix}^\msT
+\end{equation}
+\begin{equation}
+\mx_3 = \begin{bmatrix}
+-0.050 & 0.258 
+\end{bmatrix}^\msT
+\end{equation}
+
+Serão realizados 2 ciclos, sendo que cada lado do triângulo é percorrido em $0.75s$. Depois de completar os 2 ciclos, será feita uma parada suave de $0.5s$. Em cada lado do triângulo, é parametrizada uma trajetória polinomial de sétima ordem, na qual é imposta a posição inicial e final, velocidade nula, aceleração nula e tranco nulo no início e no final da trajetória. A expressão do polinômio é dada por:
+
+\begin{equation}
+\mx(\mathfrak{t}) = \mx_0 + (\mx_f - \mx_0) (35 \mathfrak{t}^4 - 84 \mathfrak{t}^5 + 70 \mathfrak{t}^6 - 20 \mathfrak{t}^7)
+\end{equation}
+
+Sendo $\mx$ a posição atual, $\mx_0$ a posição inicial, $\mx_f$ a posição final, e $\mathfrak{t}$ a fração do tempo decorrido em relação ao tempo total da trajetória (repare que $\mx(1) = \mx_f$).
+
+\subsection{Condições iniciais}
+
+O mecanismo sempre parte do repouso na posição $\mx_1$, dada pela equação \eqref{eq:zeroMaquina}
+
+\subsection{Parâmetros dos controladors}
+
+\begin{table}[H] 
+\centering
+\caption{Parâmetros dos controladores: espaço dos atuadores}
+\label{tab:parametrosControleAtuadores}
+\begin{tabular}{l|l|l|l|l|l}
+Estratégia & $\lambda [rad/s]$  & $m^*[kg.m^2]$ & $\phi[rad/s^2]$   & $k_1[rad/s^2]$ & $k_2[rad/s^2]$ \\ \hline
+PID        & $35 | 25$          & $3.58 \cdot 10^{-3}$  & -         & -              & -              \\
+PIDSMC     & $35 | 25$          & $3.58 \cdot 10^{-3}$  & $20 | 90$ & $200$          & $200$          \\
+CTC        & $60$               & -                     & -         & -              & -              \\
+SMC        & $60$               & -                     & $20$      & $363$          & $363$          \\
+\end{tabular}
+\end{table}
+
+\begin{table}[H] 
+\centering
+\caption{Parâmetros dos controladores: espaço da tarefa}
+\label{tab:parametrosControleEfetuador}
+\begin{tabular}{l|l|l|l|l|l}
+Estratégia & $\lambda [rad/s]$  & $m^*[kg]$ & $\phi[m/s^2]$ & $k_1[m/s^2]$ & $k_2[m/s^2]$ \\ \hline
+PID        & $70$               & $0.207$   & -             & -            & -            \\
+PIDSMC     & $70$               & $0.207$   & $6$           & $70$         & $0$          \\
+CTC        & $60$               & -         & -             & -            & -            \\
+SMC        & $60$               & -         & $6$           & $103$        & $0$          \\
+\end{tabular}
+\end{table}
+
+\subsection{Resultados experimental}
+
+\subsubsection{PIDq - Trajetória circular}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.35]{../../../Experimental/Aquisicoes/PIDt_circulo/xy.png}  
+	\caption{Trajetória realizada}
+	\label{fig:PIDq_circulo_xy}
+\end{figure}
+\begin{multicols}{2}
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.35]{../../../Experimental/Aquisicoes/PIDt_circulo/ex.png}  
+	\caption{Erro de controle (coordenada x)}
+	\label{fig:PIDq_circulo_xy}
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.35]{../../../Experimental/Aquisicoes/PIDt_circulo/ey.png}  
+	\caption{Erro de controle (coordenada y)}
+	\label{fig:PIDq_circulo_xy}
+\end{figure}
+\end{multicols}
+\begin{multicols}{2}
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.35]{../../../Experimental/Aquisicoes/PIDt_circulo/tau1.png}  
+	\caption{Esforço de controle (atuador 1)}
+	\label{fig:PIDq_circulo_xy}
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.35]{../../../Experimental/Aquisicoes/PIDt_circulo/tau2.png}  
+	\caption{Esforço de controle (atuador 2)}
+	\label{fig:PIDq_circulo_xy}
+\end{figure}
+\end{multicols}
+
+
+
+
+
+
+
 
 
 
