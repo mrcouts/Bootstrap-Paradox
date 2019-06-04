@@ -3935,51 +3935,601 @@ SMC        & $60$               & -         & $6$           & $103$        & $0$
 \end{tabular}
 \end{table}
 
-\subsection{Resultados experimental}
+\subsection{Resultados experimentais}
 
 \subsubsection{PIDq - Trajetória circular}
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.35]{../../../Experimental/Aquisicoes/PIDt_circulo/xy.png}  
+	\includegraphics[scale=0.45]{../../../Experimental/Aquisicoes/PIDt_circulo/xy.png}  
 	\caption{Trajetória realizada}
 	\label{fig:PIDq_circulo_xy}
 \end{figure}
 \begin{multicols}{2}
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.35]{../../../Experimental/Aquisicoes/PIDt_circulo/ex.png}  
+	\includegraphics[scale=0.45]{../../../Experimental/Aquisicoes/PIDt_circulo/ex.png}  
 	\caption{Erro de controle (coordenada x)}
-	\label{fig:PIDq_circulo_xy}
+	\label{fig:PIDq_circulo_ex}
 \end{figure}
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.35]{../../../Experimental/Aquisicoes/PIDt_circulo/ey.png}  
+	\includegraphics[scale=0.45]{../../../Experimental/Aquisicoes/PIDt_circulo/ey.png}  
 	\caption{Erro de controle (coordenada y)}
-	\label{fig:PIDq_circulo_xy}
+	\label{fig:PIDq_circulo_ey}
 \end{figure}
 \end{multicols}
 \begin{multicols}{2}
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.35]{../../../Experimental/Aquisicoes/PIDt_circulo/tau1.png}  
+	\includegraphics[scale=0.45]{../../../Experimental/Aquisicoes/PIDt_circulo/tau1.png}  
 	\caption{Esforço de controle (atuador 1)}
-	\label{fig:PIDq_circulo_xy}
+	\label{fig:PIDq_circulo_tau1}
 \end{figure}
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.35]{../../../Experimental/Aquisicoes/PIDt_circulo/tau2.png}  
+	\includegraphics[scale=0.45]{../../../Experimental/Aquisicoes/PIDt_circulo/tau2.png}  
 	\caption{Esforço de controle (atuador 2)}
-	\label{fig:PIDq_circulo_xy}
+	\label{fig:PIDq_circulo_tau2}
+\end{figure}
+\end{multicols}
+
+\subsubsection{PIDSMCq - Trajetória circular}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.45]{../../../Experimental/Aquisicoes/PIDSMCt_circulo/xy.png}  
+	\caption{Trajetória realizada}
+	\label{fig:PIDSMCq_circulo_xy}
+\end{figure}
+\begin{multicols}{2}
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.45]{../../../Experimental/Aquisicoes/PIDSMCt_circulo/ex.png}  
+	\caption{Erro de controle (coordenada x)}
+	\label{fig:PIDSMCq_circulo_ex}
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.45]{../../../Experimental/Aquisicoes/PIDSMCt_circulo/ey.png}  
+	\caption{Erro de controle (coordenada y)}
+	\label{fig:PIDSMCq_circulo_ey}
+\end{figure}
+\end{multicols}
+\begin{multicols}{2}
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.45]{../../../Experimental/Aquisicoes/PIDSMCt_circulo/tau1.png}  
+	\caption{Esforço de controle (atuador 1)}
+	\label{fig:PIDSMCq_circulo_tau1}
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.45]{../../../Experimental/Aquisicoes/PIDSMCt_circulo/tau2.png}  
+	\caption{Esforço de controle (atuador 2)}
+	\label{fig:PIDSMCq_circulo_tau2}
+\end{figure}
+\end{multicols}
+
+\subsubsection{CTCq - Trajetória circular}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.45]{../../../Experimental/Aquisicoes/CTCt_circulo/xy.png}  
+	\caption{Trajetória realizada}
+	\label{fig:CTCq_circulo_xy}
+\end{figure}
+\begin{multicols}{2}
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.45]{../../../Experimental/Aquisicoes/CTCt_circulo/ex.png}  
+	\caption{Erro de controle (coordenada x)}
+	\label{fig:CTCq_circulo_ex}
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.45]{../../../Experimental/Aquisicoes/CTCt_circulo/ey.png}  
+	\caption{Erro de controle (coordenada y)}
+	\label{fig:CTCq_circulo_ey}
+\end{figure}
+\end{multicols}
+\begin{multicols}{2}
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.45]{../../../Experimental/Aquisicoes/CTCt_circulo/tau1.png}  
+	\caption{Esforço de controle (atuador 1)}
+	\label{fig:CTCq_circulo_tau1}
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.45]{../../../Experimental/Aquisicoes/CTCt_circulo/tau2.png}  
+	\caption{Esforço de controle (atuador 2)}
+	\label{fig:CTCq_circulo_tau2}
+\end{figure}
+\end{multicols}
+
+\subsubsection{SMCq - Trajetória circular}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.45]{../../../Experimental/Aquisicoes/SMCt_circulo/xy.png}  
+	\caption{Trajetória realizada}
+	\label{fig:SMCq_circulo_xy}
+\end{figure}
+\begin{multicols}{2}
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.45]{../../../Experimental/Aquisicoes/SMCt_circulo/ex.png}  
+	\caption{Erro de controle (coordenada x)}
+	\label{fig:SMCq_circulo_ex}
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.45]{../../../Experimental/Aquisicoes/SMCt_circulo/ey.png}  
+	\caption{Erro de controle (coordenada y)}
+	\label{fig:SMCq_circulo_ey}
+\end{figure}
+\end{multicols}
+\begin{multicols}{2}
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.45]{../../../Experimental/Aquisicoes/SMCt_circulo/tau1.png}  
+	\caption{Esforço de controle (atuador 1)}
+	\label{fig:SMCq_circulo_tau1}
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.45]{../../../Experimental/Aquisicoes/SMCt_circulo/tau2.png}  
+	\caption{Esforço de controle (atuador 2)}
+	\label{fig:SMCq_circulo_tau2}
 \end{figure}
 \end{multicols}
 
 
+\subsubsection{PIDx - Trajetória circular}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.45]{../../../Experimental/Aquisicoes/PIDx_circulo/xy.png}  
+	\caption{Trajetória realizada}
+	\label{fig:PIDx_circulo_xy}
+\end{figure}
+\begin{multicols}{2}
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.45]{../../../Experimental/Aquisicoes/PIDx_circulo/ex.png}  
+	\caption{Erro de controle (coordenada x)}
+	\label{fig:PIDx_circulo_ex}
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.45]{../../../Experimental/Aquisicoes/PIDx_circulo/ey.png}  
+	\caption{Erro de controle (coordenada y)}
+	\label{fig:PIDx_circulo_ey}
+\end{figure}
+\end{multicols}
+\begin{multicols}{2}
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.45]{../../../Experimental/Aquisicoes/PIDx_circulo/tau1.png}  
+	\caption{Esforço de controle (atuador 1)}
+	\label{fig:PIDx_circulo_tau1}
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.45]{../../../Experimental/Aquisicoes/PIDx_circulo/tau2.png}  
+	\caption{Esforço de controle (atuador 2)}
+	\label{fig:PIDx_circulo_tau2}
+\end{figure}
+\end{multicols}
+
+\subsubsection{PIDSMCx - Trajetória circular}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.45]{../../../Experimental/Aquisicoes/PIDSMCx_circulo/xy.png}  
+	\caption{Trajetória realizada}
+	\label{fig:PIDSMCx_circulo_xy}
+\end{figure}
+\begin{multicols}{2}
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.45]{../../../Experimental/Aquisicoes/PIDSMCx_circulo/ex.png}  
+	\caption{Erro de controle (coordenada x)}
+	\label{fig:PIDSMCx_circulo_ex}
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.45]{../../../Experimental/Aquisicoes/PIDSMCx_circulo/ey.png}  
+	\caption{Erro de controle (coordenada y)}
+	\label{fig:PIDSMCx_circulo_ey}
+\end{figure}
+\end{multicols}
+\begin{multicols}{2}
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.45]{../../../Experimental/Aquisicoes/PIDSMCx_circulo/tau1.png}  
+	\caption{Esforço de controle (atuador 1)}
+	\label{fig:PIDSMCx_circulo_tau1}
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.45]{../../../Experimental/Aquisicoes/PIDSMCx_circulo/tau2.png}  
+	\caption{Esforço de controle (atuador 2)}
+	\label{fig:PIDSMCx_circulo_tau2}
+\end{figure}
+\end{multicols}
+
+\subsubsection{CTCx - Trajetória circular}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.45]{../../../Experimental/Aquisicoes/CTCx_circulo/xy.png}  
+	\caption{Trajetória realizada}
+	\label{fig:CTCx_circulo_xy}
+\end{figure}
+\begin{multicols}{2}
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.45]{../../../Experimental/Aquisicoes/CTCx_circulo/ex.png}  
+	\caption{Erro de controle (coordenada x)}
+	\label{fig:CTCx_circulo_ex}
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.45]{../../../Experimental/Aquisicoes/CTCx_circulo/ey.png}  
+	\caption{Erro de controle (coordenada y)}
+	\label{fig:CTCx_circulo_ey}
+\end{figure}
+\end{multicols}
+\begin{multicols}{2}
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.45]{../../../Experimental/Aquisicoes/CTCx_circulo/tau1.png}  
+	\caption{Esforço de controle (atuador 1)}
+	\label{fig:CTCx_circulo_tau1}
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.45]{../../../Experimental/Aquisicoes/CTCx_circulo/tau2.png}  
+	\caption{Esforço de controle (atuador 2)}
+	\label{fig:CTCx_circulo_tau2}
+\end{figure}
+\end{multicols}
+
+\subsubsection{SMCx - Trajetória circular}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.45]{../../../Experimental/Aquisicoes/SMCx_circulo/xy.png}  
+	\caption{Trajetória realizada}
+	\label{fig:SMCx_circulo_xy}
+\end{figure}
+\begin{multicols}{2}
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.45]{../../../Experimental/Aquisicoes/SMCx_circulo/ex.png}  
+	\caption{Erro de controle (coordenada x)}
+	\label{fig:SMCx_circulo_ex}
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.45]{../../../Experimental/Aquisicoes/SMCx_circulo/ey.png}  
+	\caption{Erro de controle (coordenada y)}
+	\label{fig:SMCx_circulo_ey}
+\end{figure}
+\end{multicols}
+\begin{multicols}{2}
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.45]{../../../Experimental/Aquisicoes/SMCx_circulo/tau1.png}  
+	\caption{Esforço de controle (atuador 1)}
+	\label{fig:SMCx_circulo_tau1}
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.45]{../../../Experimental/Aquisicoes/SMCx_circulo/tau2.png}  
+	\caption{Esforço de controle (atuador 2)}
+	\label{fig:SMCx_circulo_tau2}
+\end{figure}
+\end{multicols}
+
+\subsubsection{PIDq - Trajetória triangular}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.45]{../../../Experimental/Aquisicoes/PIDt_triangulo/xy.png}  
+	\caption{Trajetória realizada}
+	\label{fig:PIDq_triangulo_xy}
+\end{figure}
+\begin{multicols}{2}
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.45]{../../../Experimental/Aquisicoes/PIDt_triangulo/ex.png}  
+	\caption{Erro de controle (coordenada x)}
+	\label{fig:PIDq_triangulo_ex}
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.45]{../../../Experimental/Aquisicoes/PIDt_triangulo/ey.png}  
+	\caption{Erro de controle (coordenada y)}
+	\label{fig:PIDq_triangulo_ey}
+\end{figure}
+\end{multicols}
+\begin{multicols}{2}
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.45]{../../../Experimental/Aquisicoes/PIDt_triangulo/tau1.png}  
+	\caption{Esforço de controle (atuador 1)}
+	\label{fig:PIDq_triangulo_tau1}
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.45]{../../../Experimental/Aquisicoes/PIDt_triangulo/tau2.png}  
+	\caption{Esforço de controle (atuador 2)}
+	\label{fig:PIDq_triangulo_tau2}
+\end{figure}
+\end{multicols}
+
+\subsubsection{PIDSMCq - Trajetória triangular}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.45]{../../../Experimental/Aquisicoes/PIDSMCt_triangulo/xy.png}  
+	\caption{Trajetória realizada}
+	\label{fig:PIDSMCq_triangulo_xy}
+\end{figure}
+\begin{multicols}{2}
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.45]{../../../Experimental/Aquisicoes/PIDSMCt_triangulo/ex.png}  
+	\caption{Erro de controle (coordenada x)}
+	\label{fig:PIDSMCq_triangulo_ex}
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.45]{../../../Experimental/Aquisicoes/PIDSMCt_triangulo/ey.png}  
+	\caption{Erro de controle (coordenada y)}
+	\label{fig:PIDSMCq_triangulo_ey}
+\end{figure}
+\end{multicols}
+\begin{multicols}{2}
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.45]{../../../Experimental/Aquisicoes/PIDSMCt_triangulo/tau1.png}  
+	\caption{Esforço de controle (atuador 1)}
+	\label{fig:PIDSMCq_triangulo_tau1}
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.45]{../../../Experimental/Aquisicoes/PIDSMCt_triangulo/tau2.png}  
+	\caption{Esforço de controle (atuador 2)}
+	\label{fig:PIDSMCq_triangulo_tau2}
+\end{figure}
+\end{multicols}
+
+\subsubsection{CTCq - Trajetória triangular}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.45]{../../../Experimental/Aquisicoes/CTCt_triangulo/xy.png}  
+	\caption{Trajetória realizada}
+	\label{fig:CTCq_triangulo_xy}
+\end{figure}
+\begin{multicols}{2}
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.45]{../../../Experimental/Aquisicoes/CTCt_triangulo/ex.png}  
+	\caption{Erro de controle (coordenada x)}
+	\label{fig:CTCq_triangulo_ex}
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.45]{../../../Experimental/Aquisicoes/CTCt_triangulo/ey.png}  
+	\caption{Erro de controle (coordenada y)}
+	\label{fig:CTCq_triangulo_ey}
+\end{figure}
+\end{multicols}
+\begin{multicols}{2}
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.45]{../../../Experimental/Aquisicoes/CTCt_triangulo/tau1.png}  
+	\caption{Esforço de controle (atuador 1)}
+	\label{fig:CTCq_triangulo_tau1}
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.45]{../../../Experimental/Aquisicoes/CTCt_triangulo/tau2.png}  
+	\caption{Esforço de controle (atuador 2)}
+	\label{fig:CTCq_triangulo_tau2}
+\end{figure}
+\end{multicols}
+
+\subsubsection{SMCq - Trajetória triangular}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.45]{../../../Experimental/Aquisicoes/SMCt_triangulo/xy.png}  
+	\caption{Trajetória realizada}
+	\label{fig:SMCq_triangulo_xy}
+\end{figure}
+\begin{multicols}{2}
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.45]{../../../Experimental/Aquisicoes/SMCt_triangulo/ex.png}  
+	\caption{Erro de controle (coordenada x)}
+	\label{fig:SMCq_triangulo_ex}
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.45]{../../../Experimental/Aquisicoes/SMCt_triangulo/ey.png}  
+	\caption{Erro de controle (coordenada y)}
+	\label{fig:SMCq_triangulo_ey}
+\end{figure}
+\end{multicols}
+\begin{multicols}{2}
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.45]{../../../Experimental/Aquisicoes/SMCt_triangulo/tau1.png}  
+	\caption{Esforço de controle (atuador 1)}
+	\label{fig:SMCq_triangulo_tau1}
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.45]{../../../Experimental/Aquisicoes/SMCt_triangulo/tau2.png}  
+	\caption{Esforço de controle (atuador 2)}
+	\label{fig:SMCq_triangulo_tau2}
+\end{figure}
+\end{multicols}
 
 
+\subsubsection{PIDx - Trajetória triangular}
 
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.45]{../../../Experimental/Aquisicoes/PIDx_triangulo/xy.png}  
+	\caption{Trajetória realizada}
+	\label{fig:PIDx_triangulo_xy}
+\end{figure}
+\begin{multicols}{2}
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.45]{../../../Experimental/Aquisicoes/PIDx_triangulo/ex.png}  
+	\caption{Erro de controle (coordenada x)}
+	\label{fig:PIDx_triangulo_ex}
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.45]{../../../Experimental/Aquisicoes/PIDx_triangulo/ey.png}  
+	\caption{Erro de controle (coordenada y)}
+	\label{fig:PIDx_triangulo_ey}
+\end{figure}
+\end{multicols}
+\begin{multicols}{2}
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.45]{../../../Experimental/Aquisicoes/PIDx_triangulo/tau1.png}  
+	\caption{Esforço de controle (atuador 1)}
+	\label{fig:PIDx_triangulo_tau1}
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.45]{../../../Experimental/Aquisicoes/PIDx_triangulo/tau2.png}  
+	\caption{Esforço de controle (atuador 2)}
+	\label{fig:PIDx_triangulo_tau2}
+\end{figure}
+\end{multicols}
 
+\subsubsection{PIDSMCx - Trajetória triangular}
 
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.45]{../../../Experimental/Aquisicoes/PIDSMCx_triangulo/xy.png}  
+	\caption{Trajetória realizada}
+	\label{fig:PIDSMCx_triangulo_xy}
+\end{figure}
+\begin{multicols}{2}
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.45]{../../../Experimental/Aquisicoes/PIDSMCx_triangulo/ex.png}  
+	\caption{Erro de controle (coordenada x)}
+	\label{fig:PIDSMCx_triangulo_ex}
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.45]{../../../Experimental/Aquisicoes/PIDSMCx_triangulo/ey.png}  
+	\caption{Erro de controle (coordenada y)}
+	\label{fig:PIDSMCx_triangulo_ey}
+\end{figure}
+\end{multicols}
+\begin{multicols}{2}
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.45]{../../../Experimental/Aquisicoes/PIDSMCx_triangulo/tau1.png}  
+	\caption{Esforço de controle (atuador 1)}
+	\label{fig:PIDSMCx_triangulo_tau1}
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.45]{../../../Experimental/Aquisicoes/PIDSMCx_triangulo/tau2.png}  
+	\caption{Esforço de controle (atuador 2)}
+	\label{fig:PIDSMCx_triangulo_tau2}
+\end{figure}
+\end{multicols}
+
+\subsubsection{CTCx - Trajetória triangular}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.45]{../../../Experimental/Aquisicoes/CTCx_triangulo/xy.png}  
+	\caption{Trajetória realizada}
+	\label{fig:CTCx_triangulo_xy}
+\end{figure}
+\begin{multicols}{2}
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.45]{../../../Experimental/Aquisicoes/CTCx_triangulo/ex.png}  
+	\caption{Erro de controle (coordenada x)}
+	\label{fig:CTCx_triangulo_ex}
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.45]{../../../Experimental/Aquisicoes/CTCx_triangulo/ey.png}  
+	\caption{Erro de controle (coordenada y)}
+	\label{fig:CTCx_triangulo_ey}
+\end{figure}
+\end{multicols}
+\begin{multicols}{2}
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.45]{../../../Experimental/Aquisicoes/CTCx_triangulo/tau1.png}  
+	\caption{Esforço de controle (atuador 1)}
+	\label{fig:CTCx_triangulo_tau1}
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.45]{../../../Experimental/Aquisicoes/CTCx_triangulo/tau2.png}  
+	\caption{Esforço de controle (atuador 2)}
+	\label{fig:CTCx_triangulo_tau2}
+\end{figure}
+\end{multicols}
+
+\subsubsection{SMCx - Trajetória triangular}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.45]{../../../Experimental/Aquisicoes/SMCx_triangulo/xy.png}  
+	\caption{Trajetória realizada}
+	\label{fig:SMCx_triangulo_xy}
+\end{figure}
+\begin{multicols}{2}
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.45]{../../../Experimental/Aquisicoes/SMCx_triangulo/ex.png}  
+	\caption{Erro de controle (coordenada x)}
+	\label{fig:SMCx_triangulo_ex}
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.45]{../../../Experimental/Aquisicoes/SMCx_triangulo/ey.png}  
+	\caption{Erro de controle (coordenada y)}
+	\label{fig:SMCx_triangulo_ey}
+\end{figure}
+\end{multicols}
+\begin{multicols}{2}
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.45]{../../../Experimental/Aquisicoes/SMCx_triangulo/tau1.png}  
+	\caption{Esforço de controle (atuador 1)}
+	\label{fig:SMCx_triangulo_tau1}
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.45]{../../../Experimental/Aquisicoes/SMCx_triangulo/tau2.png}  
+	\caption{Esforço de controle (atuador 2)}
+	\label{fig:SMCx_triangulo_tau2}
+\end{figure}
+\end{multicols}
 
 
 

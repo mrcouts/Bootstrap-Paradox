@@ -39,6 +39,7 @@ u2_np   = np.array([A[i][10] for i in range(len(A))])
 s1_np   = np.array([A[i][11] for i in range(len(A))])
 s2_np   = np.array([A[i][12] for i in range(len(A))])
 
+t_np = 0.001*t_np
 tau1_np = 0.055984*i1_np
 tau2_np = 0.0566596*i2_np
 
@@ -79,8 +80,8 @@ print "e_quad =", e_quad, "| tau_quad =", tau_quad, "| s1_quad =", s1_quad, "| s
 """
 
 fig, ax = plt.subplots()
+ax.plot(xref_np, yref_np, 'b', linewidth=1, label= 'Refer' + u'ê' 'ncia')
 ax.plot(x_np,    y_np,    'r', linewidth=1, label='Trajet' + u'ó' + 'ria real')
-ax.plot(xref_np, yref_np, 'b--', linewidth=1, label= 'Refer' + u'ê' 'ncia')
 plt.xlabel(r'$x[m]$')
 plt.ylabel(r'$y[m]$')
 plt.title('Trajet' + u'ó' + 'ria realizada')
@@ -89,56 +90,56 @@ plt.savefig('xy.png')
 
 plt.figure()
 plt.plot(t_np, ex_np, 'r', linewidth=2)
-plt.xlabel(r'$t[ms]$')
+plt.xlabel(r'$t[s]$')
 plt.ylabel(r'$e_x[m]$')
 plt.title('Erro de posi' + u'ç' + u'ã' + 'o em fun'  + u'ç' + u'ã' 'o do tempo (coordenada x)')
 plt.savefig('ex.png')
 
 plt.figure()
 plt.plot(t_np, ey_np, 'r', linewidth=2)
-plt.xlabel(r'$t[ms]$')
+plt.xlabel(r'$t[s]$')
 plt.ylabel(r'$e_y[m]$')
 plt.title('Erro de posi' + u'ç' + u'ã' + 'o em fun'  + u'ç' + u'ã' 'o do tempo (coordenada y)')
 plt.savefig('ey.png')
 
 plt.figure()
 plt.plot(t_np, tau1_np, 'r', linewidth=2)
-plt.xlabel(r'$t[ms]$')
+plt.xlabel(r'$t[s]$')
 plt.ylabel(r'$\tau_1[Nm]$')
 plt.title('Torque aplicado ' + 'em fun'  + u'ç' + u'ã' 'o do tempo (atuador 1)')
 plt.savefig('tau1.png')
 
 plt.figure()
 plt.plot(t_np, tau2_np, 'r', linewidth=2)
-plt.xlabel(r'$t[ms]$')
+plt.xlabel(r'$t[s]$')
 plt.ylabel(r'$\tau_2[Nm]$')
 plt.title('Torque aplicado ' + 'em fun'  + u'ç' + u'ã' 'o do tempo (atuador 2)')
 plt.savefig('tau2.png')
 
 plt.figure()
 plt.plot(t_np, u1_np, 'r', linewidth=2)
-plt.xlabel(r'$t[ms]$')
+plt.xlabel(r'$t[s]$')
 plt.ylabel(r'$u_1[V]$')
 plt.title('Tens' + u'ã' + 'o aplicada ' + 'em fun'  + u'ç' + u'ã' 'o do tempo (atuador 1)')
 plt.savefig('u1.png')
 
 plt.figure()
 plt.plot(t_np, u2_np, 'r', linewidth=2)
-plt.xlabel(r'$t[ms]$')
+plt.xlabel(r'$t[s]$')
 plt.ylabel(r'$u_2[V]$')
 plt.title('Tens' + u'ã' + 'o aplicada ' + 'em fun'  + u'ç' + u'ã' 'o do tempo (atuador 2)')
 plt.savefig('u2.png')
 
 plt.figure()
 plt.plot(t_np, s1_np, 'r', linewidth=2)
-plt.xlabel(r'$t[ms]$')
+plt.xlabel(r'$t[s]$')
 plt.ylabel(r'$s_1[rad/s^2]$')
 plt.title('Vari' + u'á' + 'vel de escorregamento ' + 'em fun'  + u'ç' + u'ã' 'o do tempo (atuador 1)')
 plt.savefig('s1.png')
 
 plt.figure()
 plt.plot(t_np, s2_np, 'r', linewidth=2)
-plt.xlabel(r'$t[ms]$')
+plt.xlabel(r'$t[s]$')
 plt.ylabel(r'$s_2[rad/s^2]$')
 plt.title('Vari' + u'á' + 'vel de escorregamento ' + 'em fun'  + u'ç' + u'ã' 'o do tempo (atuador 2)')
 plt.savefig('s2.png')
