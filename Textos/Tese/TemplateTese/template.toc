@@ -70,7 +70,7 @@
 \contentsline {subsection}{\numberline {7.3.6}Trajet\IeC {\'o}rias de refer\IeC {\^e}ncia}{96}
 \contentsline {subsection}{\numberline {7.3.7}Condi\IeC {\c c}\IeC {\~o}es iniciais}{97}
 \contentsline {subsection}{\numberline {7.3.8}Par\IeC {\^a}metros dos controladors}{97}
-\contentsline {subsection}{\numberline {7.3.9}Resultados experimental}{98}
+\contentsline {subsection}{\numberline {7.3.9}Resultados experimentais}{98}
 \contentsline {subsubsection}{\numberline {7.3.9.1}PIDq - Trajet\IeC {\'o}ria circular}{98}
 \contentsline {subsubsection}{\numberline {7.3.9.2}PIDSMCq - Trajet\IeC {\'o}ria circular}{99}
 \contentsline {subsubsection}{\numberline {7.3.9.3}CTCq - Trajet\IeC {\'o}ria circular}{100}
