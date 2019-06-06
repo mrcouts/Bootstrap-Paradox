@@ -1,4 +1,4 @@
-\babel@toc {brazil}{}
+\select@language {brazil}
 \contentsline {figure}{\numberline {1}{\ignorespaces Rob\IeC {\^o} industrial Adept Quattro}}{19}
 \contentsline {figure}{\numberline {2}{\ignorespaces Malha de CTC (Adaptado de \cite {Craig})}}{26}
 \contentsline {figure}{\numberline {3}{\ignorespaces Malha de CTCp (Adaptado de \cite {Craig})}}{26}
@@ -106,6 +106,6 @@
 \contentsline {figure}{\numberline {105}{\ignorespaces Erro de controle $e_y$}}{113}
 \contentsline {figure}{\numberline {106}{\ignorespaces Esfor\IeC {\c c}o de controle $\tau _1$}}{113}
 \contentsline {figure}{\numberline {107}{\ignorespaces Esfor\IeC {\c c}o de controle $\tau _2$}}{113}
-\contentsline {figure}{\numberline {108}{\ignorespaces Circuito el\IeC {\'e}trico do motor}}{127}
-\contentsline {figure}{\numberline {109}{\ignorespaces Curva de velocidade do motor 1}}{133}
-\contentsline {figure}{\numberline {110}{\ignorespaces Curva de velocidade do motor 2}}{133}
+\contentsline {figure}{\numberline {108}{\ignorespaces Circuito el\IeC {\'e}trico do motor}}{129}
+\contentsline {figure}{\numberline {109}{\ignorespaces Curva de velocidade do motor 1}}{135}
+\contentsline {figure}{\numberline {110}{\ignorespaces Curva de velocidade do motor 2}}{135}

@@ -1,0 +1,17 @@
+PIDt_circ ->    ex_f = 0.444 | ey_f =-0.195 | e_f = 0.484
+PIDSMCt_circ -> ex_f = 0.116 | ey_f = 0.481 | e_f = 0.494
+CTCt_circ ->    ex_f = 0.903 | ey_f = 0.289 | e_f = 0.949
+SMCt_circ ->    ex_f = 0.039 | ey_f = 0.012 | e_f = 0.041
+PIDx_circ ->    ex_f = 0.423 | ey_f =-0.033 | e_f = 0.425
+PIDSMCx_circ -> ex_f =-0.010 | ey_f = 0.034 | e_f = 0.036
+CTCx_circ ->    ex_f = 0.748 | ey_f = 0.182 | e_f = 0.769
+SMCx_circ ->    ex_f = 0.006 | ey_f = 0.060 | e_f = 0.061
+
+PIDt_tria ->    ex_f = 1.601 | ey_f =-1.152 | e_f = 1.972
+PIDSMCt_tria -> ex_f = 0.762 | ey_f = 0.428 | e_f = 0.874
+CTCt_tria ->    ex_f = 0.099 | ey_f = 0.264 | e_f = 0.279
+SMCt_tria ->    ex_f = 0.028 | ey_f = 0.017 | e_f = 0.033
+PIDx_tria ->    ex_f = 0.368 | ey_f =-0.229 | e_f = 0.434
+PIDSMCx_tria -> ex_f = 0.017 | ey_f =-0.170 | e_f = 0.171
+CTCx_tria ->    ex_f = 0.228 | ey_f =-0.210 | e_f = 0.305
+SMCx_tria ->    ex_f = 0.009 | ey_f = 0.271 | e_f = 0.271

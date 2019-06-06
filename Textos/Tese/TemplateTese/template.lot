@@ -1,4 +1,4 @@
-\babel@toc {brazil}{}
+\select@language {brazil}
 \contentsline {table}{\numberline {1}{\ignorespaces DH}}{84}
 \contentsline {table}{\numberline {2}{\ignorespaces Par\IeC {\^a}metros da cadeia 1}}{95}
 \contentsline {table}{\numberline {3}{\ignorespaces Par\IeC {\^a}metros da cadeia 2}}{95}
@@ -7,7 +7,11 @@
 \contentsline {table}{\numberline {6}{\ignorespaces Par\IeC {\^a}metros do Motor 2}}{96}
 \contentsline {table}{\numberline {7}{\ignorespaces Par\IeC {\^a}metros dos controladores: espa\IeC {\c c}o dos atuadores}}{97}
 \contentsline {table}{\numberline {8}{\ignorespaces Par\IeC {\^a}metros dos controladores: espa\IeC {\c c}o da tarefa}}{97}
-\contentsline {table}{\numberline {9}{\ignorespaces Medi\IeC {\c c}\IeC {\~o}es para obten\IeC {\c c}\IeC {\~a}o de $k_{e}$ do motor 1}}{134}
-\contentsline {table}{\numberline {\ref {parametrosMotor}}{\ignorespaces Par\IeC {\^a}metros do Motor 1}}{136}
-\contentsline {table}{\numberline {10}{\ignorespaces Medi\IeC {\c c}\IeC {\~o}es para obten\IeC {\c c}\IeC {\~a}o de $k_{e}$ do motor 2}}{136}
-\contentsline {table}{\numberline {\ref {parametrosMotor2}}{\ignorespaces Par\IeC {\^a}metros do Motor 2}}{137}
+\contentsline {table}{\numberline {9}{\ignorespaces Valores eficazes de erro e esfor\IeC {\c c}o de controle - Trajet\IeC {\'o}ria circular}}{114}
+\contentsline {table}{\numberline {10}{\ignorespaces Valores eficazes de erro e esfor\IeC {\c c}o de controle - Trajet\IeC {\'o}ria triangular}}{114}
+\contentsline {table}{\numberline {11}{\ignorespaces Valor final do erro de posi\IeC {\c c}\IeC {\~a}o - Trajet\IeC {\'o}ria circular}}{114}
+\contentsline {table}{\numberline {12}{\ignorespaces Valor final do erro de posi\IeC {\c c}\IeC {\~a}o - Trajet\IeC {\'o}ria triangular}}{115}
+\contentsline {table}{\numberline {13}{\ignorespaces Medi\IeC {\c c}\IeC {\~o}es para obten\IeC {\c c}\IeC {\~a}o de $k_{e}$ do motor 1}}{136}
+\contentsline {table}{\numberline {\ref {parametrosMotor}}{\ignorespaces Par\IeC {\^a}metros do Motor 1}}{138}
+\contentsline {table}{\numberline {14}{\ignorespaces Medi\IeC {\c c}\IeC {\~o}es para obten\IeC {\c c}\IeC {\~a}o de $k_{e}$ do motor 2}}{138}
+\contentsline {table}{\numberline {\ref {parametrosMotor2}}{\ignorespaces Par\IeC {\^a}metros do Motor 2}}{139}

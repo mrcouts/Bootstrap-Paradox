@@ -39,9 +39,26 @@ u2_np   = np.array([A[i][10] for i in range(end)])
 s1_np   = np.array([A[i][11] for i in range(end)])
 s2_np   = np.array([A[i][12] for i in range(end)])
 
+x_np = 1000.0*x_np
+y_np = 1000.0*y_np
+xref_np = 1000.0*xref_np
+yref_np = 1000.0*yref_np
+ex_np = 1000.0*ex_np
+ey_np = 1000.0*ey_np
 t_np = 0.001*t_np
 tau1_np = 0.055984*i1_np
 tau2_np = 0.0566596*i2_np
+
+ex_f = 0
+ey_f = 0
+for i in range(end-33,end):
+	ex_f += ex_np[i]
+	ey_f += ey_np[i]
+ex_f = ex_f/33.0
+ey_f = ey_f/33.0
+e_f = (ex_f**2 + ey_f**2)**0.5
+
+print "ex_f =", ex_f, "| ey_f =", ey_f, "| e_f =", e_f
 
 """T = 1000
 Ta = 3
@@ -82,8 +99,8 @@ print "e_quad =", e_quad, "| tau_quad =", tau_quad, "| s1_quad =", s1_quad, "| s
 fig, ax = plt.subplots()
 ax.plot(xref_np, yref_np, 'b', linewidth=1, label= 'Refer' + u'ê' 'ncia')
 ax.plot(x_np,    y_np,    'r', linewidth=1, label='Trajet' + u'ó' + 'ria real')
-plt.xlabel(r'$x[m]$')
-plt.ylabel(r'$y[m]$')
+plt.xlabel(r'$x[mm]$')
+plt.ylabel(r'$y[mm]$')
 plt.axis('equal')
 plt.title('Trajet' + u'ó' + 'ria realizada')
 ax.legend(loc=4, ncol=1, prop={'size': 10})
@@ -92,14 +109,14 @@ plt.savefig('xy.png')
 plt.figure()
 plt.plot(t_np, ex_np, 'r', linewidth=1.01)
 plt.xlabel(r'$t[s]$')
-plt.ylabel(r'$e_x[m]$')
+plt.ylabel(r'$e_x[mm]$')
 plt.title('Erro de posi' + u'ç' + u'ã' + 'o em fun'  + u'ç' + u'ã' 'o do tempo (coordenada x)')
 plt.savefig('ex.png')
 
 plt.figure()
 plt.plot(t_np, ey_np, 'r', linewidth=1.01)
 plt.xlabel(r'$t[s]$')
-plt.ylabel(r'$e_y[m]$')
+plt.ylabel(r'$e_y[mm]$')
 plt.title('Erro de posi' + u'ç' + u'ã' + 'o em fun'  + u'ç' + u'ã' 'o do tempo (coordenada y)')
 plt.savefig('ey.png')
 

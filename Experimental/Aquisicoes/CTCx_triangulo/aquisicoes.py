@@ -23,25 +23,43 @@ A = txt2py("aquisicao_triangulo_CTCx_lambda60_4.txt")
 #aquisicao_triangulo_PIDx_lambda70_6:                e_quad = 2.803854, i_quad = 4.803226, ex_quad = 1.434845, s1_quad = 10.004310, s2_quad = 23.8964730, ey_quad = 2.408903,  i1_quad = 2.968096,  i2_quad = 3.776425 
 #aquisicao_triangulo_PIDSMCt_lambda25_phi90_k200_2:  e_quad = 7.304744, i_quad = 5.331062, ex_quad = 4.019952, s1_quad = 81.700752, s2_quad = 70.6879430, ey_quad = 6.099121,  i1_quad = 3.646859,  i2_quad = 3.888527 
 #aquisicao_triangulo_PIDt_lambda25_2:                e_quad = 7.615739, i_quad = 4.938209, ex_quad = 3.926870, s1_quad = 70.306961, s2_quad = 66.9731520, ey_quad = 6.525272,  i1_quad = 3.150745,  i2_quad = 3.802461 
+end = len(A)
 
+t_np = np.array([A[i][0] for i in range(end)])
+x_np = np.array([A[i][1] for i in range(end)])
+y_np = np.array([A[i][2] for i in range(end)])
+xref_np= np.array([A[i][3] for i in range(end)])
+yref_np= np.array([A[i][4] for i in range(end)])
+ex_np   = np.array([A[i][5] for i in range(end)])
+ey_np   = np.array([A[i][6] for i in range(end)])
+i1_np   = np.array([A[i][7] for i in range(end)])
+i2_np   = np.array([A[i][8] for i in range(end)])
+u1_np   = np.array([A[i][9] for i in range(end)])
+u2_np   = np.array([A[i][10] for i in range(end)])
+s1_np   = np.array([A[i][11] for i in range(end)])
+s2_np   = np.array([A[i][12] for i in range(end)])
 
-t_np = np.array([A[i][0] for i in range(len(A))])
-x_np = np.array([A[i][1] for i in range(len(A))])
-y_np = np.array([A[i][2] for i in range(len(A))])
-xref_np= np.array([A[i][3] for i in range(len(A))])
-yref_np= np.array([A[i][4] for i in range(len(A))])
-ex_np   = np.array([A[i][5] for i in range(len(A))])
-ey_np   = np.array([A[i][6] for i in range(len(A))])
-i1_np   = np.array([A[i][7] for i in range(len(A))])
-i2_np   = np.array([A[i][8] for i in range(len(A))])
-u1_np   = np.array([A[i][9] for i in range(len(A))])
-u2_np   = np.array([A[i][10] for i in range(len(A))])
-s1_np   = np.array([A[i][11] for i in range(len(A))])
-s2_np   = np.array([A[i][12] for i in range(len(A))])
-
+x_np = 1000.0*x_np
+y_np = 1000.0*y_np
+xref_np = 1000.0*xref_np
+yref_np = 1000.0*yref_np
+ex_np = 1000.0*ex_np
+ey_np = 1000.0*ey_np
 t_np = 0.001*t_np
 tau1_np = 0.055984*i1_np
 tau2_np = 0.0566596*i2_np
+
+ex_f = 0
+ey_f = 0
+for i in range(end-33,end):
+	ex_f += ex_np[i]
+	ey_f += ey_np[i]
+ex_f = ex_f/33.0
+ey_f = ey_f/33.0
+e_f = (ex_f**2 + ey_f**2)**0.5
+
+print "ex_f =", ex_f, "| ey_f =", ey_f, "| e_f =", e_f
+
 
 """T = 1000
 Ta = 3
@@ -82,8 +100,9 @@ print "e_quad =", e_quad, "| tau_quad =", tau_quad, "| s1_quad =", s1_quad, "| s
 fig, ax = plt.subplots()
 ax.plot(xref_np, yref_np, 'b', linewidth=1, label= 'Refer' + u'ê' 'ncia')
 ax.plot(x_np,    y_np,    'r', linewidth=1, label='Trajet' + u'ó' + 'ria real')
-plt.xlabel(r'$x[m]$')
-plt.ylabel(r'$y[m]$')
+plt.xlabel(r'$x[mm]$')
+plt.ylabel(r'$y[mm]$')
+plt.axis('equal')
 plt.title('Trajet' + u'ó' + 'ria realizada')
 ax.legend(loc=4, ncol=1, prop={'size': 10})
 plt.savefig('xy.png')
@@ -91,14 +110,14 @@ plt.savefig('xy.png')
 plt.figure()
 plt.plot(t_np, ex_np, 'r', linewidth=2)
 plt.xlabel(r'$t[s]$')
-plt.ylabel(r'$e_x[m]$')
+plt.ylabel(r'$e_x[mm]$')
 plt.title('Erro de posi' + u'ç' + u'ã' + 'o em fun'  + u'ç' + u'ã' 'o do tempo (coordenada x)')
 plt.savefig('ex.png')
 
 plt.figure()
 plt.plot(t_np, ey_np, 'r', linewidth=2)
 plt.xlabel(r'$t[s]$')
-plt.ylabel(r'$e_y[m]$')
+plt.ylabel(r'$e_y[mm]$')
 plt.title('Erro de posi' + u'ç' + u'ã' + 'o em fun'  + u'ç' + u'ã' 'o do tempo (coordenada y)')
 plt.savefig('ey.png')
 
