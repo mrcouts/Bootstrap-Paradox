@@ -70,44 +70,44 @@
 \contentsline {subsection}{\numberline {7.3.6}Trajet\IeC {\'o}rias de refer\IeC {\^e}ncia}{96}
 \contentsline {subsection}{\numberline {7.3.7}Condi\IeC {\c c}\IeC {\~o}es iniciais}{97}
 \contentsline {subsection}{\numberline {7.3.8}Par\IeC {\^a}metros dos controladors}{97}
-\contentsline {subsection}{\numberline {7.3.9}Resultados experimentais}{98}
-\contentsline {subsubsection}{\numberline {7.3.9.1}PIDq - Trajet\IeC {\'o}ria circular}{98}
-\contentsline {subsubsection}{\numberline {7.3.9.2}PIDSMCq - Trajet\IeC {\'o}ria circular}{99}
-\contentsline {subsubsection}{\numberline {7.3.9.3}CTCq - Trajet\IeC {\'o}ria circular}{100}
-\contentsline {subsubsection}{\numberline {7.3.9.4}SMCq - Trajet\IeC {\'o}ria circular}{101}
-\contentsline {subsubsection}{\numberline {7.3.9.5}PIDx - Trajet\IeC {\'o}ria circular}{102}
-\contentsline {subsubsection}{\numberline {7.3.9.6}PIDSMCx - Trajet\IeC {\'o}ria circular}{103}
-\contentsline {subsubsection}{\numberline {7.3.9.7}CTCx - Trajet\IeC {\'o}ria circular}{104}
-\contentsline {subsubsection}{\numberline {7.3.9.8}SMCx - Trajet\IeC {\'o}ria circular}{105}
-\contentsline {subsubsection}{\numberline {7.3.9.9}PIDq - Trajet\IeC {\'o}ria triangular}{106}
-\contentsline {subsubsection}{\numberline {7.3.9.10}PIDSMCq - Trajet\IeC {\'o}ria triangular}{107}
-\contentsline {subsubsection}{\numberline {7.3.9.11}CTCq - Trajet\IeC {\'o}ria triangular}{108}
-\contentsline {subsubsection}{\numberline {7.3.9.12}SMCq - Trajet\IeC {\'o}ria triangular}{109}
-\contentsline {subsubsection}{\numberline {7.3.9.13}PIDx - Trajet\IeC {\'o}ria triangular}{110}
-\contentsline {subsubsection}{\numberline {7.3.9.14}PIDSMCx - Trajet\IeC {\'o}ria triangular}{111}
-\contentsline {subsubsection}{\numberline {7.3.9.15}CTCx - Trajet\IeC {\'o}ria triangular}{112}
-\contentsline {subsubsection}{\numberline {7.3.9.16}SMCx - Trajet\IeC {\'o}ria triangular}{113}
-\contentsline {subsubsection}{\numberline {7.3.9.17}Tabelas comparativas}{114}
-\contentsline {subsubsection}{\numberline {7.3.9.18}Discuss\IeC {\~a}o dos resultados}{115}
-\contentsline {chapter}{\numberline {8}Conclus\IeC {\~o}es e temas para pesquisa futura}{118}
-\contentsline {section}{\numberline {8.1}Principais contribui\IeC {\c c}\IeC {\~o}es}{118}
-\contentsline {section}{\numberline {8.2}Sugest\IeC {\~a}o de temas para pesquisa futura}{119}
-\contentsline {chapter}{Refer\IeC {\^e}ncias}{120}
-\contentsline {chapter}{Ap\IeC {\^e}ndice{} A{} -- Cinem\IeC {\'a}tica de corpos r\IeC {\'\i }gidos}{124}
-\contentsline {section}{\numberline {A.1}Conceitos b\IeC {\'a}sicos}{124}
-\contentsline {subsection}{\numberline {A.1.1}Produto vetorial}{124}
-\contentsline {subsection}{\numberline {A.1.2}Derivada temporal de versores}{125}
-\contentsline {subsection}{\numberline {A.1.3}Derivada temporal de vetores}{125}
-\contentsline {subsection}{\numberline {A.1.4}Defini\IeC {\c c}\IeC {\~a}o de vetor velocidade}{125}
-\contentsline {subsection}{\numberline {A.1.5}Defini\IeC {\c c}\IeC {\~a}o de vetor acelera\IeC {\c c}\IeC {\~a}o}{126}
-\contentsline {section}{\numberline {A.2}Equa\IeC {\c c}\IeC {\~o}es de Poisson}{126}
-\contentsline {subsection}{\numberline {A.2.1}Equa\IeC {\c c}\IeC {\~a}o de Poisson para velocidades}{126}
-\contentsline {subsection}{\numberline {A.2.2}Equa\IeC {\c c}\IeC {\~a}o de Poisson para acelera\IeC {\c c}\IeC {\~o}es}{126}
-\contentsline {section}{\numberline {A.3}Composi\IeC {\c c}\IeC {\~a}o de movimentos}{126}
-\contentsline {subsection}{\numberline {A.3.1}Composi\IeC {\c c}\IeC {\~a}o de velocidades lineares}{127}
-\contentsline {subsection}{\numberline {A.3.2}Composi\IeC {\c c}\IeC {\~a}o de acelera\IeC {\c c}\IeC {\~o}es lineares}{128}
-\contentsline {subsection}{\numberline {A.3.3}Composi\IeC {\c c}\IeC {\~a}o de velocidades angulares}{128}
-\contentsline {subsection}{\numberline {A.3.4}Composi\IeC {\c c}\IeC {\~a}o de acelera\IeC {\c c}\IeC {\~o}es angulares}{129}
-\contentsline {chapter}{Ap\IeC {\^e}ndice{} B{} -- Fun\IeC {\c c}\IeC {\~o}es de transfer\IeC {\^e}ncia de motores DC}{131}
-\contentsline {chapter}{Ap\IeC {\^e}ndice{} C{} -- Controlador de Corrente}{134}
-\contentsline {chapter}{Ap\IeC {\^e}ndice{} D{} -- Curva dos motores}{137}
+\contentsline {subsection}{\numberline {7.3.9}Resultados experimentais}{99}
+\contentsline {subsubsection}{\numberline {7.3.9.1}PDq - Trajet\IeC {\'o}ria circular}{99}
+\contentsline {subsubsection}{\numberline {7.3.9.2}PDMDq - Trajet\IeC {\'o}ria circular}{100}
+\contentsline {subsubsection}{\numberline {7.3.9.3}TCq - Trajet\IeC {\'o}ria circular}{101}
+\contentsline {subsubsection}{\numberline {7.3.9.4}TCMDq - Trajet\IeC {\'o}ria circular}{102}
+\contentsline {subsubsection}{\numberline {7.3.9.5}PDx - Trajet\IeC {\'o}ria circular}{103}
+\contentsline {subsubsection}{\numberline {7.3.9.6}PDMDx - Trajet\IeC {\'o}ria circular}{104}
+\contentsline {subsubsection}{\numberline {7.3.9.7}TCx - Trajet\IeC {\'o}ria circular}{105}
+\contentsline {subsubsection}{\numberline {7.3.9.8}TCMDx - Trajet\IeC {\'o}ria circular}{106}
+\contentsline {subsubsection}{\numberline {7.3.9.9}PDq - Trajet\IeC {\'o}ria triangular}{107}
+\contentsline {subsubsection}{\numberline {7.3.9.10}PDMDq - Trajet\IeC {\'o}ria triangular}{108}
+\contentsline {subsubsection}{\numberline {7.3.9.11}TCq - Trajet\IeC {\'o}ria triangular}{109}
+\contentsline {subsubsection}{\numberline {7.3.9.12}TCMDq - Trajet\IeC {\'o}ria triangular}{110}
+\contentsline {subsubsection}{\numberline {7.3.9.13}PDx - Trajet\IeC {\'o}ria triangular}{111}
+\contentsline {subsubsection}{\numberline {7.3.9.14}PDMDx - Trajet\IeC {\'o}ria triangular}{112}
+\contentsline {subsubsection}{\numberline {7.3.9.15}TCx - Trajet\IeC {\'o}ria triangular}{113}
+\contentsline {subsubsection}{\numberline {7.3.9.16}TCMDx - Trajet\IeC {\'o}ria triangular}{114}
+\contentsline {subsubsection}{\numberline {7.3.9.17}Tabelas comparativas}{115}
+\contentsline {subsubsection}{\numberline {7.3.9.18}Discuss\IeC {\~a}o dos resultados}{116}
+\contentsline {chapter}{\numberline {8}Conclus\IeC {\~o}es e temas para pesquisa futura}{120}
+\contentsline {section}{\numberline {8.1}Principais contribui\IeC {\c c}\IeC {\~o}es}{120}
+\contentsline {section}{\numberline {8.2}Sugest\IeC {\~a}o de temas para pesquisa futura}{121}
+\contentsline {chapter}{Refer\IeC {\^e}ncias}{122}
+\contentsline {chapter}{Ap\IeC {\^e}ndice{} A{} -- Cinem\IeC {\'a}tica de corpos r\IeC {\'\i }gidos}{126}
+\contentsline {section}{\numberline {A.1}Conceitos b\IeC {\'a}sicos}{126}
+\contentsline {subsection}{\numberline {A.1.1}Produto vetorial}{126}
+\contentsline {subsection}{\numberline {A.1.2}Derivada temporal de versores}{127}
+\contentsline {subsection}{\numberline {A.1.3}Derivada temporal de vetores}{127}
+\contentsline {subsection}{\numberline {A.1.4}Defini\IeC {\c c}\IeC {\~a}o de vetor velocidade}{127}
+\contentsline {subsection}{\numberline {A.1.5}Defini\IeC {\c c}\IeC {\~a}o de vetor acelera\IeC {\c c}\IeC {\~a}o}{128}
+\contentsline {section}{\numberline {A.2}Equa\IeC {\c c}\IeC {\~o}es de Poisson}{128}
+\contentsline {subsection}{\numberline {A.2.1}Equa\IeC {\c c}\IeC {\~a}o de Poisson para velocidades}{128}
+\contentsline {subsection}{\numberline {A.2.2}Equa\IeC {\c c}\IeC {\~a}o de Poisson para acelera\IeC {\c c}\IeC {\~o}es}{128}
+\contentsline {section}{\numberline {A.3}Composi\IeC {\c c}\IeC {\~a}o de movimentos}{128}
+\contentsline {subsection}{\numberline {A.3.1}Composi\IeC {\c c}\IeC {\~a}o de velocidades lineares}{129}
+\contentsline {subsection}{\numberline {A.3.2}Composi\IeC {\c c}\IeC {\~a}o de acelera\IeC {\c c}\IeC {\~o}es lineares}{130}
+\contentsline {subsection}{\numberline {A.3.3}Composi\IeC {\c c}\IeC {\~a}o de velocidades angulares}{130}
+\contentsline {subsection}{\numberline {A.3.4}Composi\IeC {\c c}\IeC {\~a}o de acelera\IeC {\c c}\IeC {\~o}es angulares}{131}
+\contentsline {chapter}{Ap\IeC {\^e}ndice{} B{} -- Fun\IeC {\c c}\IeC {\~o}es de transfer\IeC {\^e}ncia de motores DC}{133}
+\contentsline {chapter}{Ap\IeC {\^e}ndice{} C{} -- Controlador de Corrente}{136}
+\contentsline {chapter}{Ap\IeC {\^e}ndice{} D{} -- Curva dos motores}{139}

@@ -3868,7 +3868,7 @@ $J$        & $1.887 \cdot10^{-4}$  & $kg.m^{2}$
 
 \subsection{Trajetórias de referência}
 
-A primeira trajetória a ser realizada é uma trajetória circular com período de 1 segundo. Serão realizados 8 ciclos seguidos de uma parada repentina de 4 segundos. Sua expressão é dada por:
+A primeira trajetória a ser realizada é uma trajetória circular com período de 1 segundo. Serão realizados 8 ciclos seguidos de uma parada repentina. Sua expressão é dada por:
 
 \begin{equation}
 \begin{cases}
@@ -3895,7 +3895,7 @@ A segunda trajetória a ser realizada é uma trajetória triangular cujas coorde
 \end{bmatrix}^\msT
 \end{equation}
 
-Serão realizados 2 ciclos, sendo que cada lado do triângulo é percorrido em $0.75s$. Depois de completar os 2 ciclos, será feita uma parada suave de $0.5s$. Em cada lado do triângulo, é parametrizada uma trajetória polinomial de sétima ordem, na qual é imposta a posição inicial e final, velocidade nula, aceleração nula e tranco nulo no início e no final da trajetória. A expressão do polinômio é dada por:
+Serão realizados 2 ciclos, sendo que cada lado do triângulo é percorrido em $0.75s$, e sendo o trecho I de $\mx_1$ a $\mx_2$, o trecho II de $\mx_2$ a $\mx_3$, e o trecho III de $\mx_3$ a $\mx_1$. Depois de completar os 2 ciclos, será feita uma parada suave. Em cada lado do triângulo, é parametrizada uma trajetória polinomial de sétima ordem, na qual é imposta a posição inicial e final, velocidade nula, aceleração nula e tranco nulo no início e no final da trajetória. A expressão do polinômio é dada por:
 
 \begin{equation}
 \mx(\mathfrak{t}) = \mx_0 + (\mx_f - \mx_0) (35 \mathfrak{t}^4 - 84 \mathfrak{t}^5 + 70 \mathfrak{t}^6 - 20 \mathfrak{t}^7)
@@ -3911,14 +3911,27 @@ O mecanismo sempre parte do repouso na posição $\mx_1$, dada pela equação \e
 
 \begin{table}[H] 
 \centering
-\caption{Parâmetros dos controladores: espaço dos atuadores}
-\label{tab:parametrosControleAtuadores}
+\caption{Parâmetros dos controladores: espaço das juntas - trajetória circular}
+\label{tab:parametrosControleAtuadoresCirculo}
 \begin{tabular}{l|l|l|l|l|l}
 Estratégia & $\lambda [rad/s]$  & $m^*[kg.m^2]$ & $\phi[rad/s^2]$   & $k_1[rad/s^2]$ & $k_2[rad/s^2]$ \\ \hline
-PID        & $35 | 25$          & $3.58 \cdot 10^{-3}$  & -         & -              & -              \\
-PIDSMC     & $35 | 25$          & $3.58 \cdot 10^{-3}$  & $20 | 90$ & $200$          & $200$          \\
-CTC        & $60$               & -                     & -         & -              & -              \\
-SMC        & $60$               & -                     & $20$      & $363$          & $363$          \\
+PDq        & $35$               & $3.58 \cdot 10^{-3}$  & -         & -              & -              \\
+PDMDq      & $35$               & $3.58 \cdot 10^{-3}$  & $20 | 90$ & $200$          & $200$          \\
+TCq        & $60$               & -                     & -         & -              & -              \\
+TCMDq      & $60$               & -                     & $20$      & $363$          & $363$          \\
+\end{tabular}
+\end{table}
+
+\begin{table}[H] 
+\centering
+\caption{Parâmetros dos controladores: espaço das juntas - trajetória triangular}
+\label{tab:parametrosControleAtuadoresTriangulo}
+\begin{tabular}{l|l|l|l|l|l}
+Estratégia & $\lambda [rad/s]$  & $m^*[kg.m^2]$         & $\phi[rad/s^2]$   & $k_1[rad/s^2]$ & $k_2[rad/s^2]$ \\ \hline
+PDq        & $25$               & $3.58 \cdot 10^{-3}$  & -         & -              & -              \\
+PDMDq      & $25$               & $3.58 \cdot 10^{-3}$  & $20 | 90$ & $200$          & $200$          \\
+TCq        & $60$               & -                     & -         & -              & -              \\
+TCMDq      & $60$               & -                     & $20$      & $363$          & $363$          \\
 \end{tabular}
 \end{table}
 
@@ -3928,16 +3941,18 @@ SMC        & $60$               & -                     & $20$      & $363$     
 \label{tab:parametrosControleEfetuador}
 \begin{tabular}{l|l|l|l|l|l}
 Estratégia & $\lambda [rad/s]$  & $m^*[kg]$ & $\phi[m/s^2]$ & $k_1[m/s^2]$ & $k_2[m/s^2]$ \\ \hline
-PID        & $70$               & $0.207$   & -             & -            & -            \\
-PIDSMC     & $70$               & $0.207$   & $6$           & $70$         & $0$          \\
-CTC        & $60$               & -         & -             & -            & -            \\
-SMC        & $60$               & -         & $6$           & $103$        & $0$          \\
+PDx        & $70$               & $0.207$   & -             & -            & -            \\
+PDMDx      & $70$               & $0.207$   & $6$           & $70$         & $0$          \\
+TCx        & $60$               & -         & -             & -            & -            \\
+TCMDx      & $60$               & -         & $6$           & $103$        & $0$          \\
 \end{tabular}
 \end{table}
 
+\newpage
+
 \subsection{Resultados experimentais}
 
-\subsubsection{PIDq - Trajetória circular}
+\subsubsection{PDq - Trajetória circular}
 
 \begin{figure}[H]
 	\centering
@@ -3974,7 +3989,7 @@ SMC        & $60$               & -         & $6$           & $103$        & $0$
 \end{figure}
 \end{multicols}
 
-\subsubsection{PIDSMCq - Trajetória circular}
+\subsubsection{PDMDq - Trajetória circular}
 
 \begin{figure}[H]
 	\centering
@@ -4011,7 +4026,7 @@ SMC        & $60$               & -         & $6$           & $103$        & $0$
 \end{figure}
 \end{multicols}
 
-\subsubsection{CTCq - Trajetória circular}
+\subsubsection{TCq - Trajetória circular}
 
 \begin{figure}[H]
 	\centering
@@ -4048,7 +4063,7 @@ SMC        & $60$               & -         & $6$           & $103$        & $0$
 \end{figure}
 \end{multicols}
 
-\subsubsection{SMCq - Trajetória circular}
+\subsubsection{TCMDq - Trajetória circular}
 
 \begin{figure}[H]
 	\centering
@@ -4086,7 +4101,7 @@ SMC        & $60$               & -         & $6$           & $103$        & $0$
 \end{multicols}
 
 
-\subsubsection{PIDx - Trajetória circular}
+\subsubsection{PDx - Trajetória circular}
 
 \begin{figure}[H]
 	\centering
@@ -4123,7 +4138,7 @@ SMC        & $60$               & -         & $6$           & $103$        & $0$
 \end{figure}
 \end{multicols}
 
-\subsubsection{PIDSMCx - Trajetória circular}
+\subsubsection{PDMDx - Trajetória circular}
 
 \begin{figure}[H]
 	\centering
@@ -4160,7 +4175,7 @@ SMC        & $60$               & -         & $6$           & $103$        & $0$
 \end{figure}
 \end{multicols}
 
-\subsubsection{CTCx - Trajetória circular}
+\subsubsection{TCx - Trajetória circular}
 
 \begin{figure}[H]
 	\centering
@@ -4197,7 +4212,7 @@ SMC        & $60$               & -         & $6$           & $103$        & $0$
 \end{figure}
 \end{multicols}
 
-\subsubsection{SMCx - Trajetória circular}
+\subsubsection{TCMDx - Trajetória circular}
 
 \begin{figure}[H]
 	\centering
@@ -4234,7 +4249,7 @@ SMC        & $60$               & -         & $6$           & $103$        & $0$
 \end{figure}
 \end{multicols}
 
-\subsubsection{PIDq - Trajetória triangular}
+\subsubsection{PDq - Trajetória triangular}
 
 \begin{figure}[H]
 	\centering
@@ -4271,7 +4286,7 @@ SMC        & $60$               & -         & $6$           & $103$        & $0$
 \end{figure}
 \end{multicols}
 
-\subsubsection{PIDSMCq - Trajetória triangular}
+\subsubsection{PDMDq - Trajetória triangular}
 
 \begin{figure}[H]
 	\centering
@@ -4308,7 +4323,7 @@ SMC        & $60$               & -         & $6$           & $103$        & $0$
 \end{figure}
 \end{multicols}
 
-\subsubsection{CTCq - Trajetória triangular}
+\subsubsection{TCq - Trajetória triangular}
 
 \begin{figure}[H]
 	\centering
@@ -4345,7 +4360,7 @@ SMC        & $60$               & -         & $6$           & $103$        & $0$
 \end{figure}
 \end{multicols}
 
-\subsubsection{SMCq - Trajetória triangular}
+\subsubsection{TCMDq - Trajetória triangular}
 
 \begin{figure}[H]
 	\centering
@@ -4383,7 +4398,7 @@ SMC        & $60$               & -         & $6$           & $103$        & $0$
 \end{multicols}
 
 
-\subsubsection{PIDx - Trajetória triangular}
+\subsubsection{PDx - Trajetória triangular}
 
 \begin{figure}[H]
 	\centering
@@ -4420,7 +4435,7 @@ SMC        & $60$               & -         & $6$           & $103$        & $0$
 \end{figure}
 \end{multicols}
 
-\subsubsection{PIDSMCx - Trajetória triangular}
+\subsubsection{PDMDx - Trajetória triangular}
 
 \begin{figure}[H]
 	\centering
@@ -4457,7 +4472,7 @@ SMC        & $60$               & -         & $6$           & $103$        & $0$
 \end{figure}
 \end{multicols}
 
-\subsubsection{CTCx - Trajetória triangular}
+\subsubsection{TCx - Trajetória triangular}
 
 \begin{figure}[H]
 	\centering
@@ -4494,7 +4509,7 @@ SMC        & $60$               & -         & $6$           & $103$        & $0$
 \end{figure}
 \end{multicols}
 
-\subsubsection{SMCx - Trajetória triangular}
+\subsubsection{TCMDx - Trajetória triangular}
 
 \begin{figure}[H]
 	\centering
@@ -4535,18 +4550,18 @@ SMC        & $60$               & -         & $6$           & $103$        & $0$
 
 \begin{table}[H] 
 \centering
-\caption{Valores eficazes de erro e esforço de controle - Trajetória circular}
+\caption{Valores eficazes de erro e esforço de controle (em regime permanente) - Trajetória circular}
 \label{tab:valoresEficazesCirculo}
 \begin{tabular}{l|c|c}
 Estratégia & $e_{ef} [mm]$  & $\tau_{ef} [kg.m^2] $ \\ \hline
-PIDq       & $3.15$         & $0.132$               \\
-PIDSMCq    & $2.37$         & $0.141$               \\
-CTCq       & $1.14$         & $0.143$               \\
-SMCq       & $0.77$         & $0.168$               \\
-PIDx       & $0.91$         & $0.155$               \\
-PIDSMCx    & $0.65$         & $0.169$               \\
-CTCx       & $1.16$         & $0.150$               \\
-SMCx       & $0.90$         & $0.185$               \\
+PDq        & $3.15$         & $0.132$               \\
+PDMDq      & $2.37$         & $0.141$               \\
+TCq        & $1.14$         & $0.143$               \\
+TCMDq      & $0.77$         & $0.168$               \\
+PDx        & $0.91$         & $0.155$               \\
+PDMDx      & $0.65$         & $0.169$               \\
+TCx        & $1.16$         & $0.150$               \\
+TCMDx      & $0.90$         & $0.185$               \\
 \end{tabular}
 \end{table}
 
@@ -4556,27 +4571,27 @@ SMCx       & $0.90$         & $0.185$               \\
 \label{tab:valoresEficazesTriangulo}
 \begin{tabular}{l|c|c}
 Estratégia & $e_{ef} [mm]$  & $\tau_{ef} [kg.m^2] $ \\ \hline
-PIDq       & $5.39$         & $0.197$               \\
-PIDSMCq    & $5.16$         & $0.212$               \\
-CTCq       & $1.85$         & $0.181$               \\
-SMCq       & $1.63$         & $0.191$               \\
-PIDx       & $1.98$         & $0.191$               \\
-PIDSMCx    & $1.79$         & $0.188$               \\
-CTCx       & $1.83$         & $0.188$               \\
-SMCx       & $1.36$         & $0.186$               \\
+PDq        & $5.39$         & $0.197$               \\
+PDMDq      & $5.16$         & $0.212$               \\
+TCq        & $1.85$         & $0.181$               \\
+TCMDq      & $1.63$         & $0.191$               \\
+PDx        & $1.98$         & $0.191$               \\
+PDMDx      & $1.79$         & $0.188$               \\
+TCx        & $1.83$         & $0.188$               \\
+TCMDx      & $1.36$         & $0.186$               \\
 \end{tabular}
 \end{table}
 
 \begin{table}[H] 
 \centering
-\caption{Aumento/diminuição dos valores eficazes de erro e esforço de controle utilizando a associação com o SMC - Trajetória circular}
+\caption{Aumento/diminuição dos valores eficazes de erro e esforço de controle utilizando a associação com o MD - Trajetória circular}
 \label{tab:valoresEficazesCompCirculo}
 \begin{tabular}{l|c|c}
-Estratégia & $e_{ef}$  & $\tau_{ef} $ \\ \hline
-PIDq       & $-24.9\%$         & $6.87\%$               \\
-CTCq       & $-32.9\%$         & $17.5\%$               \\
-PIDx       & $-28.9\%$         & $8.77\%$               \\
-CTCx       & $-22.1\%$         & $23.1\%$               \\
+Estratégia              & $e_{ef}$  & $\tau_{ef} $ \\ \hline
+PDq $\rightarrow$ PDMDq & $-24.9\%$ & $6.87\%$               \\
+TCq $\rightarrow$ TCMDq & $-32.9\%$ & $17.5\%$               \\
+PDx $\rightarrow$ PDMDx & $-28.9\%$ & $8.77\%$               \\
+TCx $\rightarrow$ TCMDx & $-22.1\%$ & $23.1\%$               \\
 \end{tabular}
 \end{table}
 
@@ -4585,11 +4600,11 @@ CTCx       & $-22.1\%$         & $23.1\%$               \\
 \caption{Aumento/diminuição dos valores eficazes de erro e esforço de controle utilizando a associação com o SMC - Trajetória triangular}
 \label{tab:valoresEficazesCompTriangulo}
 \begin{tabular}{l|c|c}
-Estratégia & $e_{ef}$  & $\tau_{ef} $ \\ \hline
-PIDq       & $-4.20\%$         & $7.88\%$               \\
-CTCq       & $-11.5\%$         & $5.45\%$               \\
-PIDx       & $-9.64\%$         & $-1.69\%$               \\
-CTCx       & $-25.5\%$         & $-0.68\%$               \\
+Estratégia              & $e_{ef}$          & $\tau_{ef} $ \\ \hline
+PDq $\rightarrow$ PDMDq & $-4.20\%$         & $7.88\%$               \\
+TCq $\rightarrow$ TCMDq & $-11.5\%$         & $5.45\%$               \\
+PDx $\rightarrow$ PDMDx & $-9.64\%$         & $-1.69\%$               \\
+TCx $\rightarrow$ TCMDx & $-25.5\%$         & $-0.68\%$               \\
 \end{tabular}
 \end{table}
 
@@ -4599,14 +4614,14 @@ CTCx       & $-25.5\%$         & $-0.68\%$               \\
 \label{tab:valorFinalCirculo}
 \begin{tabular}{l|r|r|r}
 Estratégia & $e_x [mm]$ & $e_y [mm]$ & $e [mm]$ \\ \hline
-PIDq       & $ 0.444$   & $-0.195$   & $0.484$  \\
-PIDSMCq    & $ 0.116$   & $ 0.481$   & $0.494$  \\
-CTCq       & $ 0.903$   & $ 0.289$   & $0.949$  \\
-SMCq       & $ 0.039$   & $ 0.012$   & $0.041$  \\
-PIDx       & $ 0.423$   & $-0.033$   & $0.425$  \\
-PIDSMCx    & $-0.010$   & $ 0.034$   & $0.036$  \\
-CTCx       & $ 0.748$   & $ 0.182$   & $0.769$  \\
-SMCx       & $ 0.006$   & $ 0.060$   & $0.061$  \\
+PDq        & $ 0.444$   & $-0.195$   & $0.484$  \\
+PDMDq      & $ 0.116$   & $ 0.481$   & $0.494$  \\
+TCq        & $ 0.903$   & $ 0.289$   & $0.949$  \\
+TCMDq      & $ 0.039$   & $ 0.012$   & $0.041$  \\
+PDx        & $ 0.423$   & $-0.033$   & $0.425$  \\
+PDMDx      & $-0.010$   & $ 0.034$   & $0.036$  \\
+TCx        & $ 0.748$   & $ 0.182$   & $0.769$  \\
+TCMDx      & $ 0.006$   & $ 0.060$   & $0.061$  \\
 \end{tabular}
 \end{table}
 
@@ -4616,14 +4631,14 @@ SMCx       & $ 0.006$   & $ 0.060$   & $0.061$  \\
 \label{tab:valorFinalTriangulo}
 \begin{tabular}{l|r|r|r}
 Estratégia & $e_x [mm]$ & $e_y [mm]$ & $e [mm]$ \\ \hline
-PIDq       & $ 1.601$   & $-1.152$   & $1.972$  \\
-PIDSMCq    & $ 0.762$   & $ 0.428$   & $0.874$  \\
-CTCq       & $ 0.099$   & $ 0.264$   & $0.279$  \\
-SMCq       & $ 0.028$   & $ 0.017$   & $0.033$  \\
-PIDx       & $ 0.368$   & $-0.229$   & $0.434$  \\
-PIDSMCx    & $ 0.017$   & $-0.170$   & $0.171$  \\
-CTCx       & $ 0.228$   & $-0.210$   & $0.305$  \\
-SMCx       & $ 0.009$   & $ 0.271$   & $0.271$  \\
+PDq        & $ 1.601$   & $-1.152$   & $1.972$  \\
+PDMDq      & $ 0.762$   & $ 0.428$   & $0.874$  \\
+TCq        & $ 0.099$   & $ 0.264$   & $0.279$  \\
+TCMDq      & $ 0.028$   & $ 0.017$   & $0.033$  \\
+PDx        & $ 0.368$   & $-0.229$   & $0.434$  \\
+PDMDx      & $ 0.017$   & $-0.170$   & $0.171$  \\
+TCx        & $ 0.228$   & $-0.210$   & $0.305$  \\
+TCMDx      & $ 0.009$   & $ 0.271$   & $0.271$  \\
 \end{tabular}
 \end{table}
 
@@ -4631,15 +4646,23 @@ SMCx       & $ 0.009$   & $ 0.271$   & $0.271$  \\
 
 À partir dos gráficos de seguimento de trajetória, evolução temporal dos erros e esforços de controle, e das tabelas comparativas apresentadas, é possível tirar algumas conclusões sobre as técnicas de controle implementadas.
 
-Primeiramente, analisando as tabelas \ref{tab:valoresEficazesCirculo} e \ref{tab:valoresEficazesTriangulo}, é possível perceber que em todos os casos a associção das técnicas de controle $PID$ e $CTC$ com o $SMC$ obteve uma diminuição no valores eficazes do erro de controle. Na tratória circular, essa associação teve como consequência um aumento perceptível no valor eficaz do esforço de controle, como pode ser visto na tabela \ref{tab:valoresEficazesCompCirculo}, enquanto que, na trajetória triangular, as estratégias controle no espaço dos atuadores tiveram um aumento bem mais sutil, e as estratégias no espaço tarefa tiveram até uma pequena diminuição no custo energético, como pode ser visto na tabela \ref{tab:valoresEficazesCompTriangulo}. De qualquer maneira, mesmo nos casos em que houve aumento no custo energértico, a utilização da associação de técnicas pode ser considerada vantajosa, tendo em vista que, como foi constatado experimentalmente, um aumento de $5rad/s$ nos valores $\lambda$ utilizados já seria o suficiente para comprometer a estabilidade do sistema em todas as estratégias de controle utilizadas, então pode-se concluir que a associação com o $SMC$ é uma maneira eficiente de diminuir o erro de seguimento de trajetória sem comprometer a estabilidade do sistema.  
+Primeiramente, analisando as tabelas \ref{tab:valoresEficazesCirculo} e \ref{tab:valoresEficazesTriangulo}, é possível perceber que em todos os casos a associção das técnicas de controle PD e TC com o MD obteve uma diminuição no valores eficazes do erro de controle. Na tratória circular, essa associação teve como consequência um aumento perceptível no valor eficaz do esforço de controle, como pode ser visto na tabela \ref{tab:valoresEficazesCompCirculo}, enquanto que, na trajetória triangular, as estratégias controle no espaço das juntas tiveram um aumento bem mais sutil, e as estratégias no espaço tarefa tiveram até uma pequena diminuição no custo energético, como pode ser visto na tabela \ref{tab:valoresEficazesCompTriangulo}. De qualquer maneira, mesmo nos casos em que houve aumento no custo energértico, a utilização da associação de técnicas pode ser considerada vantajosa, tendo em vista que, como foi constatado experimentalmente, um aumento de $5rad/s$ nos valores utilizados do parâmetro $\lambda$  já seria o suficiente para comprometer a estabilidade do sistema em todas as estratégias de controle utilizadas, então pode-se concluir que a associação com o MD é uma maneira eficiente de diminuir o erro de seguimento de trajetória sem comprometer a estabilidade do sistema.  
 
-Outro resultado interessante que vale a pena ser comentado é a diminuição do erro estacionário de posição obtida com a utilização da associação das técnicas de controle $PID$ e $CTC$ com o $SMC$. Como pode ser observado nas tabelas \ref{tab:valorFinalCirculo} e \ref{tab:valorFinalTriangulo}, em todos os casos, com excessão do PIDq na trajetória circular e do CTCx na trajetória triangular, houve uma diminuição significativa do erro de posição com a utilização da associação de técnicas. No caso do CTCx na trajetória triangular, houve uma diminuição significativa do erro de posição na direção $x$, mas não na direção $y$. Isso pode ser explicado pelo simples fato de ter sido utilizado um valor nulo para $k_2$ nessa estratégia de controle, o que significa que o $SMC$ teoricamente só estaria atuando na direção $x$. Esse comportamento de atuar no sentido de o erro estacionário de posição praticamente zerar pode ser facilmente observado nas figuras \ref{fig:SMCq_circulo_ex} , \ref{fig:SMCq_circulo_ey}, \ref{fig:PIDSMCx_circulo_ex}, \ref{fig:PIDSMCq_triangulo_ex} e \ref{fig:SMCq_triangulo_ey}, e tem características similares às técnicas de controle que utilizam a integral do erro de controle com esse intuito, com a vantagem da associação com o $SMC$ não degradar o desempenho do sistema durante a trajetória (muito pelo contrário) e de não necessitar da utilização de técnicas de \emph{anti-windup} para garantir a estabilidade do sistema no caso de saturação nos esforços de controle.
+Outro resultado interessante que vale a pena ser comentado é a diminuição do erro estacionário de posição obtida com a utilização da associação das técnicas de controle PD e TC com o MD. Como pode ser observado nas tabelas \ref{tab:valorFinalCirculo} e \ref{tab:valorFinalTriangulo}, em todos os casos, com excessão do PDq na trajetória circular e do TCx na trajetória triangular, houve uma diminuição significativa do erro de posição com a utilização da associação de técnicas. No caso do TCx na trajetória triangular, houve uma diminuição significativa do erro de posição na direção $x$, mas não na direção $y$. Isso pode ser explicado pelo simples fato de ter sido utilizado um valor nulo para $k_2$ nessa estratégia de controle, o que significa que o MD teoricamente só estaria atuando na direção $x$. Esse comportamento de atuar no sentido de o erro estacionário de posição praticamente zerar pode ser facilmente observado nas figuras \ref{fig:SMCq_circulo_ex} , \ref{fig:SMCq_circulo_ey}, \ref{fig:PIDSMCx_circulo_ex}, \ref{fig:PIDSMCq_triangulo_ex} e \ref{fig:SMCq_triangulo_ey}, e tem características similares às técnicas de controle que utilizam a integral do erro de controle com esse intuito, com a vantagem da associação com o MD não degradar o desempenho do sistema durante a trajetória (muito pelo contrário) e de não necessitar da utilização de técnicas de \emph{anti-windup} para garantir a estabilidade do sistema no caso de saturação nos esforços de controle.
 
-Outros fenômenos interessantes observados são que a utilização da associção das técnicas de controle com o SMC em geral adiciona harmônicos nas respostas temporais dos erros de controle e gera um efeito similar ao efeito de batimento, fazendo com que os os valores de pico dos erros variem como se estivessem seguindo uma envoltória senoidal de baixa frequências. Estes fenômenos podem ser observados nas figuras \ref{fig:PIDSMCq_circulo_ex}, \ref{fig:PIDSMCq_circulo_ey}, \ref{fig:SMCq_circulo_ex}, \ref{fig:SMCq_circulo_ey}, \ref{fig:PIDSMCx_circulo_ex} e \ref{fig:SMCx_circulo_ex}.
+Mais uma vez, analisando as tabelas \ref{tab:valoresEficazesCirculo} e \ref{tab:valoresEficazesTriangulo}, pode-se observar que, em relação ao consumo energético, não há uma diferença tão signiticativa entre as estratégias de controle, principalmente na trajetória circular. As estratégias com maior consumo energético são TCx e TCMDx na trajetória circular, e PDq e PDMDq em na trajetória triangular. As estratégias com menor consumo energético são PDq e PDMDq na trajetória circular, e TCq e TCMDx na trajetória triangular. Além disso, em relação aos valores eficazes dos erros de controle, pode-se observar que há diferenças bem mais significativas. As estratégias com os maiores valores eficazes de erro de controle são PDq e PDMDq em ambas as trajetórias. Já as estratégias com os menores valores eficazes de erro de controle são TCMDx em ambas as trajetórias, PDMDx na trajetória circular, e TCMDq na trajetória na trajetória triangular.
 
-Outro efeito interessante que foi observado foi a diminuição dos valores de pico de erro de controle nas trajetórias triangulares, normalmente seguido de um efeito de \emph{undershoot}, quando foi utilizada a associação com o SMC. Isso pode ser observado nas figuras \ref{fig:SMCq_circulo_ex}, \ref{fig:SMCq_circulo_ey}, \ref{fig:PIDSMCx_circulo_ex} e \ref{fig:SMCx_circulo_ex}.
+Também vale a pena comentar o comportamento das estratégias de controle na parte do regime transiente na trajetória circular (partida e parada bruscas). Analisando os gráficos de evolução temporal de erro de controle, é bastante nítido que a estrátégia PDx é a que apresenta o menor erro em regime transiente (figuras \ref{fig:PIDx_circulo_ex} e \ref{fig:PIDx_circulo_ey}), seguida da PDMDx (figuras \ref{fig:PIDSMCx_circulo_ex} e \ref{fig:PIDSMCx_circulo_ey}). Além disso, pode-se observar que, nesse quesito, as estratégias de controle híbridas (associadas ao MD) apresentam um desempenho levemente inferior às não híbridas.
 
-Por fim, vale a pena comentar o desempenho surpreendetemente bom das estratégias $PIDx$ e $PIDSMCx$, muito superior ao desempenho das estratégias $PIDq$ e $PIDSMCq$. Na trajetória circular, a estratégia $PIDSMCx$ obteve os menor valor eficaz de erro de controle e o menor valor de erro estacionário, e a estratégia $PIDx$ apresentou menor valor eficaz de erro de controle e o menor valor de erro estacionário que as estratégias $CTCq$ e $CTCx$, como pode ser visto nas tabelas \ref{tab:valoresEficazesCirculo} e \ref{tab:valorFinalCirculo}. Já na trajetória triangular, apesar dessas estratégias também apresentarem bom desempenho, a estratégia $PIDSMCx$ já não mais supera as estratégias $SMCq$ e $SMCx$ em relação aos valores eficazes de erro de controle, e a estratégia $PIDx$ também já não mais supera as estratégias $SMCq$ e $SMCx$ em relação aos valores eficazes de erro de controle $CTCq$ e $CTCx$ nesse mesmo quesito. Isso pode ser explicado pelo fato de que o valor de $m^*$ utilizado nas estratégias $PIDq$ e $PIDSMCq$ foi baseado na matriz de inércia generalizada escrita no espaço tarefa calculada no centro da trajetória circular, a qual é praticamente diagonal com as componentes da diagonal muito próximas. Sendo assim, o modelo de inércia equivalente constante é muito mais válido para a trajetória circular do que para a trajetória triangular, a qual se afasta muito mais do centro do círculo. Além disso, como o ponto de partida das trajetórias é relativamente próximo da região de pontos quase singulares, as matrizes de inércia generaliza estimadas possuem valores mais altos nesse ponto, o que limita um pouco o maior valor de $\lambda$ que pode ser escolhido de modo a garantir a estabilidade do sistema nas estratégias $CTCq$, $CTCx$, $SMCq$ e $SMCx$, enquanto que nas estratégias $PIDx$ e $PIDSMCx$ a matriz de inércia generaliza estimada é constante e não possue valores tão altos, o que permitiu a utilização de um maior valor de $\lambda$ sem afetar a estabilidade de sistema, o que contribui imensamente para a obtenção de menores valores de erros de controle.
+Um comportamento interessante que foi observado na trajetória circular. Percebe-se que, para as estratégias PDq e PDMDq, o erro de seguimento de trajetória é maior nos trechos II e III (figuras \ref{fig:PIDq_circulo_xy} e \ref{fig:PIDSMCq_circulo_xy}), enquanto que para TCq, TCMCq, TCx e TCMDx, o erro está mais concentrado no trecho I (figuras \ref{fig:CTCq_circulo_xy}, \ref{fig:SMCq_circulo_xy}, \ref{fig:CTCx_circulo_xy} e \ref{fig:SMCx_circulo_xy}), e para PDx e PDMDx o erro está mais concentrado no trecho II (figuras \ref{fig:PIDx_circulo_xy} e \ref{fig:PIDSMCx_circulo_xy}).
+
+Outros fenômenos interessantes observados são que a utilização da associção das técnicas de controle com o MD em geral adiciona harmônicos nas respostas temporais dos erros de controle e gera um efeito similar ao efeito de batimento, fazendo com que os os valores de pico dos erros variem como se estivessem seguindo uma envoltória senoidal de baixa frequências. Estes fenômenos podem ser facilmente observados nas figuras \ref{fig:PIDSMCq_circulo_ex}, \ref{fig:PIDSMCq_circulo_ey}, \ref{fig:SMCq_circulo_ex}, \ref{fig:SMCq_circulo_ey}, \ref{fig:PIDSMCx_circulo_ex} e \ref{fig:SMCx_circulo_ex}.
+
+Outro efeito interessante que foi observado foi a diminuição dos valores de pico de erro de controle nas trajetórias triangulares, normalmente seguido de um efeito de \emph{undershoot}, quando foi utilizada a associação com o MD. Isso pode ser facilmente observado nas figuras \ref{fig:SMCq_circulo_ex}, \ref{fig:SMCq_circulo_ey}, \ref{fig:PIDSMCx_circulo_ex} e \ref{fig:SMCx_circulo_ex}.
+
+Não se pode deixar de mencionar o desempenho surpreendetemente bom das estratégias PDx e PDMDx, muito superior ao desempenho das estratégias PDq e PDMDq. Na trajetória circular, a estratégia PDMDx obteve os menor valor eficaz de erro de controle e o menor valor de erro estacionário, e a estratégia PDx apresentou menor valor eficaz de erro de controle e o menor valor de erro estacionário que as estratégias TCq e TCx, como pode ser visto nas tabelas \ref{tab:valoresEficazesCirculo} e \ref{tab:valorFinalCirculo}. Já na trajetória triangular, apesar dessas estratégias também apresentarem bom desempenho, a estratégia PDMDx já não mais supera as estratégias TCMDq e TCMDx em relação aos valores eficazes de erro de controle, e a estratégia PDx também já não mais supera as estratégias TCMDq e TCMDx em relação aos valores eficazes de erro de controle TCq e TCx nesse mesmo quesito. Isso pode ser explicado pelo fato de que o valor de $m^*$ utilizado nas estratégias PDx e PDMDx foi baseado na matriz de inércia generalizada escrita no espaço tarefa calculada no centro da trajetória circular, a qual é praticamente diagonal com as componentes da diagonal muito próximas. Sendo assim, o modelo de inércia equivalente constante é muito mais válido para a trajetória circular do que para a trajetória triangular, a qual se afasta muito mais do centro do círculo. Além disso, como o ponto de partida das trajetórias é relativamente próximo de uma região singularidades, as matrizes de inércia generaliza estimadas possuem valores mais altos nesse ponto, o que limita um pouco o maior valor de $\lambda$ que pode ser escolhido de modo a garantir a estabilidade do sistema nas estratégias TCq, TCx, TCMDq e TCMDx, enquanto que nas estratégias PDx e PDMDx a matriz de inércia generaliza estimada é constante e não possue valores tão altos, o que permitiu a utilização de um maior valor de $\lambda$ sem afetar a estabilidade de sistema, o que contribui imensamente para a obtenção de menores valores de erros de controle. Isso também explica o fenômeno do todas as estratégias de controle terem um erro relativamente grande no trecho I, como excessão de PDx e PDMDx, se o ponto $\mx_1$ fosse mais afastado das singularidades, muito provavelmente os valores de erro nesse trecho seriam muito inferiores. Além disso, vale comentar que, além de serem competitivas em relação ao erro de controle, as estratégias PDx e PDMDx são competitivas em relação ao consumo energético, tendo em vista que que ambas apresentam valores intermediários de consume energético em ambas as trajetórias.
+
+Por fim, vale fazer a comparação entre o controle no espaço das juntas e o controle no espaço da tarefa. Analisando as tabelas \ref{tab:valoresEficazesCirculo} e \ref{tab:valoresEficazesTriangulo}, pode-se observar que claramente as estratégias PD e PDMD se mostram muito mais eficazes no espaço da tarefa do que no espaço das juntas, tendo em vista a grande diferença nos valores eficazes dos erros de controle e da pequena diferença no custo energético. Já em relação às estratégias TC e TCMD, não há uma diferença de eficiência considerável comparando os dois espaços de trabalho, tendo em vista que na trajetória circular as estratégias no espaço das juntas se mostram ligeiramente superiores, enquando na trajetória circular as estratégias no espaço da tarefas se mostram um pouco superiores.
 
 
 
