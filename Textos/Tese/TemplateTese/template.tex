@@ -223,24 +223,25 @@ Levando-se em conta esta dificuldade de obtenção e a complexidade inerente do 
 %OBJETIVOS E JUSTIFICATIVAS--------------------------------------------
 \section{Objetivos}\label{objetivos}
 
+O objetivo geral desta Tese é contribuir para o aumento do desempenho de manipuladores paralelos. Quanto aos objetivos específicos, propõe-se que este aprimoramento seja realizado mediante o emprego de técnicas de controle baseadas em modelo do manipulador. Neste sentido, almeja-se fornecer recomendações quanto à modelagem dinâmica, à técnica de controle mais adequada, bem como a sua implementação.
 
-Os principais objetivos da tese s\~ao:
-\begin{itemize}
-\item Desenvolvimento de um algoritmo gerador de modelos dinâmicos completos de mecanismos paralelos, de forma implícita. Será utilizada uma metodologia baseada no método Orsino de acoplamento de subsistemas multicorpos \cite{23orsino}.
+%Os principais objetivos da tese s\~ao:
+%\begin{itemize}
+%\item Desenvolvimento de um algoritmo gerador de modelos dinâmicos completos de mecanismos paralelos, de forma implícita. Será utilizada uma metodologia baseada no método Orsino de acoplamento de subsistemas multicorpos \cite{23orsino}.
 
 
-\item Elabora\c{c}\~ao de metodologias de projeto de controlador n\~ao linear robusto, de alto desempenho, aplicável a  mecanismos de arquitetura paralela. Para tanto, serão consideradas as incertezas param\'etricas e a possibilidade de atua\c{c}\~ao redundante \cite{Cheng},  além de estratégias para a síntese de leis de controle com custo computacional consideralvemente menor do que as tradicionais, que empregam o Controle por Torque Computado \cite{Craig, Zubizarreta}.
+%\item Elabora\c{c}\~ao de metodologias de projeto de controlador n\~ao linear robusto, de alto desempenho, aplicável a  mecanismos de arquitetura paralela. Para tanto, serão consideradas as incertezas param\'etricas e a possibilidade de atua\c{c}\~ao redundante \cite{Cheng},  além de estratégias para a síntese de leis de controle com custo computacional consideralvemente menor do que as tradicionais, que empregam o Controle por Torque Computado \cite{Craig, Zubizarreta}.
 
-\item Realizar a modelagem cinemática e dinâmica dos mecanismos 5R \cite{22orsino} e 2\underline{R}SU+\underline{P}PaP \cite{Rynaldo, Kumazawa}, utilizando o algoritmo de modelagem desenvolvido.
+%\item Realizar a modelagem cinemática e dinâmica dos mecanismos 5R \cite{22orsino} e 2\underline{R}SU+\underline{P}PaP \cite{Rynaldo, Kumazawa}, utilizando o algoritmo de modelagem desenvolvido.
 
-\item Realizar o projeto de um controlador de trajetória para os mecanismos escolhidos, utilizando a metodologia de projeto de controle proposta.
+%\item Realizar o projeto de um controlador de trajetória para os mecanismos escolhidos, utilizando a metodologia de projeto de controle proposta.
 
-\item Realizar simula\c{c}\~oes dinâmicas utilizando as leis de controle sintetizadas.
+%\item Realizar simula\c{c}\~oes dinâmicas utilizando as leis de controle sintetizadas.
 
-\item Realizar a validação experimental dos controladores projetados no protótipo dos mecanismos 5R, o qual se encontra no laboratório de mecanismos da EPUSP.
-\end{itemize}
+%\item Realizar a validação experimental dos controladores projetados no protótipo dos mecanismos 5R, o qual se encontra no laboratório de mecanismos da EPUSP.
+%\end{itemize}
 
-É importante ressaltar que os 5 primeiros objetivos citados já foram parcialmente alcançados e que a arquitetura paralela 2\underline{R}SU+\underline{P}PaP foi desenvolvida pelo grupo de pesquisa do Prof. Dr. Tarcio Antonio Hess Coelho, havendo ainda poucos estudos na literatura sobre ela. %Sendo assim, pode-se afirmar que simulações dinâmicas e validações experimentais de leis de controle não linear robusto neste mecanismo tem caráter inédito.
+%É importante ressaltar que os 5 primeiros objetivos citados já foram parcialmente alcançados e que a arquitetura paralela 2\underline{R}SU+\underline{P}PaP foi desenvolvida pelo grupo de pesquisa do Prof. Dr. Tarcio Antonio Hess Coelho, havendo ainda poucos estudos na literatura sobre ela. %Sendo assim, pode-se afirmar que simulações dinâmicas e validações experimentais de leis de controle não linear robusto neste mecanismo tem caráter inédito.
 
 %SOBRE A ORGANIZAÇÃO DO TEXTO--------------------------------------------
 \section{Sobre a organização do texto}\label{organizacao}
@@ -4669,6 +4670,10 @@ Por fim, vale fazer a comparação entre o controle no espaço das juntas e o co
 
 %CONCLUSÃO------------------------------------------------------------------------------------------
 \chapter{Conclusões e temas para pesquisa futura}
+
+\section{Conclusões}
+
+A partir dos resultados experimentais obtidos, algumas conclusões interessantes podem ser tiradas. Foi possível observar que a lei de Controle por Modos Deslizantes prosposta se mostrou bastante eficaz quando associada ao Controle por Torque Computado e ao Controle Proporcional Derivativo, tanto no espaço das juntas, quanto no espaço da tarefa, sempre atuando no sentido de, e conseguindo, diminuir o valor eficaz e em regime estacionário do erro de controle quando comparado com as estratégias de controle puras, sem aumentar demasiadamente o consumo energético, e mantendo a estabilidade do sistema. Além disso, observou-se que o Controle Proporcial Derivativo no espaço tarefa pode ser bastante competitivo com técnicas de controle baseadas em modelo, tanto no valor eficaz e no valor estacionário do erro de controle, quanto no consumo energético, e associado ao Controle por Modos Deslizantes pode obter resultados mais competitivos ainda, mesmo sendo uma estratégia não baseada no modelo dinâmico do mecanismo. Por fim, pôde-se concluir que a escolha do espaço de trabalho para a lei de controle pode influenciar muito no desempenho do sistema para as leis de controle não baseadas em modelo, com o espaço da tarefa se mostrando muita mais adequado, ao contrário do que foi observado nas leis de controle baseadas em modelo, nas quais a escolha do espaço de trabalho não apresentou tanta influência no desempenho do sistema. 
 
 \section{Principais contribuições}
 
