@@ -1,111 +1,111 @@
-\select@language {brazil}
-\contentsline {figure}{\numberline {1}{\ignorespaces Rob\IeC {\^o} industrial Adept Quattro}}{19}
-\contentsline {figure}{\numberline {2}{\ignorespaces Malha de CTC (Adaptado de \cite {Craig})}}{25}
-\contentsline {figure}{\numberline {3}{\ignorespaces Malha de CTCp (Adaptado de \cite {Craig})}}{25}
-\contentsline {figure}{\numberline {4}{\ignorespaces Malha de controle adaptativo (Adaptado de \cite {Craig})}}{27}
-\contentsline {figure}{\numberline {5}{\ignorespaces Prot\IeC {\'o}tipo do mecanismo 5R}}{32}
-\contentsline {figure}{\numberline {6}{\ignorespaces Pent\IeC {\'a}gono articulado (5R)}}{82}
-\contentsline {figure}{\numberline {7}{\ignorespaces Mecanismo \relax $\@@underline {\hbox {R}}\mathsurround \z@ $\relax \relax $\@@underline {\hbox {R}}\mathsurround \z@ $\relax }}{83}
-\contentsline {figure}{\numberline {8}{\ignorespaces Espa\IeC {\c c}o de trabalho do mecanismo \relax $\@@underline {\hbox {R}}\mathsurround \z@ $\relax \relax $\@@underline {\hbox {R}}\mathsurround \z@ $\relax }}{85}
-\contentsline {figure}{\numberline {9}{\ignorespaces Fun\IeC {\c c}\IeC {\~a}o de satura\IeC {\c c}\IeC {\~a}o $f_{sat}(x) = \qopname \relax o{tanh}(100 x)$}}{87}
-\contentsline {figure}{\numberline {10}{\ignorespaces Torque aplicado pelo atuador 1}}{88}
-\contentsline {figure}{\numberline {11}{\ignorespaces Torque aplicado pelo atuador 2}}{88}
-\contentsline {figure}{\numberline {12}{\ignorespaces Erro de na coordenada $x$}}{88}
-\contentsline {figure}{\numberline {13}{\ignorespaces Erro de na coordenada $y$}}{88}
-\contentsline {figure}{\numberline {14}{\ignorespaces Vari\IeC {\'a}vel $s_x$}}{88}
-\contentsline {figure}{\numberline {15}{\ignorespaces Vari\IeC {\'a}vel $s_y$}}{88}
-\contentsline {figure}{\numberline {16}{\ignorespaces Torque aplicado pelo atuador 1}}{89}
-\contentsline {figure}{\numberline {17}{\ignorespaces Torque aplicado pelo atuador 2}}{89}
-\contentsline {figure}{\numberline {18}{\ignorespaces Erro de na coordenada $x$}}{89}
-\contentsline {figure}{\numberline {19}{\ignorespaces Erro de na coordenada $x$}}{89}
-\contentsline {figure}{\numberline {20}{\ignorespaces Vari\IeC {\'a}vel $s_x$}}{89}
-\contentsline {figure}{\numberline {21}{\ignorespaces Vari\IeC {\'a}vel $s_y$}}{89}
-\contentsline {figure}{\numberline {22}{\ignorespaces Torque aplicado pelo atuador 1}}{90}
-\contentsline {figure}{\numberline {23}{\ignorespaces Torque aplicado pelo atuador 2}}{90}
-\contentsline {figure}{\numberline {24}{\ignorespaces Erro de na coordenada $x$}}{90}
-\contentsline {figure}{\numberline {25}{\ignorespaces Erro de na coordenada $y$}}{90}
-\contentsline {figure}{\numberline {26}{\ignorespaces Arquitetura do sistema}}{92}
-\contentsline {figure}{\numberline {27}{\ignorespaces Arquitetura de controle}}{93}
-\contentsline {figure}{\numberline {28}{\ignorespaces Trajet\IeC {\'o}ria realizada}}{98}
-\contentsline {figure}{\numberline {29}{\ignorespaces Erro de controle $e_x$}}{98}
-\contentsline {figure}{\numberline {30}{\ignorespaces Erro de controle $e_y$}}{98}
-\contentsline {figure}{\numberline {31}{\ignorespaces Esfor\IeC {\c c}o de controle $\tau _1$}}{98}
-\contentsline {figure}{\numberline {32}{\ignorespaces Esfor\IeC {\c c}o de controle $\tau _2$}}{98}
-\contentsline {figure}{\numberline {33}{\ignorespaces Trajet\IeC {\'o}ria realizada}}{99}
-\contentsline {figure}{\numberline {34}{\ignorespaces Erro de controle $e_x$}}{99}
-\contentsline {figure}{\numberline {35}{\ignorespaces Erro de controle $e_y$}}{99}
-\contentsline {figure}{\numberline {36}{\ignorespaces Esfor\IeC {\c c}o de controle $\tau _1$}}{99}
-\contentsline {figure}{\numberline {37}{\ignorespaces Esfor\IeC {\c c}o de controle $\tau _2$}}{99}
-\contentsline {figure}{\numberline {38}{\ignorespaces Trajet\IeC {\'o}ria realizada}}{100}
-\contentsline {figure}{\numberline {39}{\ignorespaces Erro de controle $e_x$}}{100}
-\contentsline {figure}{\numberline {40}{\ignorespaces Erro de controle $e_y$}}{100}
-\contentsline {figure}{\numberline {41}{\ignorespaces Esfor\IeC {\c c}o de controle $\tau _1$}}{100}
-\contentsline {figure}{\numberline {42}{\ignorespaces Esfor\IeC {\c c}o de controle $\tau _2$}}{100}
-\contentsline {figure}{\numberline {43}{\ignorespaces Trajet\IeC {\'o}ria realizada}}{101}
-\contentsline {figure}{\numberline {44}{\ignorespaces Erro de controle $e_x$}}{101}
-\contentsline {figure}{\numberline {45}{\ignorespaces Erro de controle $e_y$}}{101}
-\contentsline {figure}{\numberline {46}{\ignorespaces Esfor\IeC {\c c}o de controle $\tau _1$}}{101}
-\contentsline {figure}{\numberline {47}{\ignorespaces Esfor\IeC {\c c}o de controle $\tau _2$}}{101}
-\contentsline {figure}{\numberline {48}{\ignorespaces Trajet\IeC {\'o}ria realizada}}{102}
-\contentsline {figure}{\numberline {49}{\ignorespaces Erro de controle $e_x$}}{102}
-\contentsline {figure}{\numberline {50}{\ignorespaces Erro de controle $e_y$}}{102}
-\contentsline {figure}{\numberline {51}{\ignorespaces Esfor\IeC {\c c}o de controle $\tau _1$}}{102}
-\contentsline {figure}{\numberline {52}{\ignorespaces Esfor\IeC {\c c}o de controle $\tau _2$}}{102}
-\contentsline {figure}{\numberline {53}{\ignorespaces Trajet\IeC {\'o}ria realizada}}{103}
-\contentsline {figure}{\numberline {54}{\ignorespaces Erro de controle $e_x$}}{103}
-\contentsline {figure}{\numberline {55}{\ignorespaces Erro de controle $e_y$}}{103}
-\contentsline {figure}{\numberline {56}{\ignorespaces Esfor\IeC {\c c}o de controle $\tau _1$}}{103}
-\contentsline {figure}{\numberline {57}{\ignorespaces Esfor\IeC {\c c}o de controle $\tau _2$}}{103}
-\contentsline {figure}{\numberline {58}{\ignorespaces Trajet\IeC {\'o}ria realizada}}{104}
-\contentsline {figure}{\numberline {59}{\ignorespaces Erro de controle $e_x$}}{104}
-\contentsline {figure}{\numberline {60}{\ignorespaces Erro de controle $e_y$}}{104}
-\contentsline {figure}{\numberline {61}{\ignorespaces Esfor\IeC {\c c}o de controle $\tau _1$}}{104}
-\contentsline {figure}{\numberline {62}{\ignorespaces Esfor\IeC {\c c}o de controle $\tau _2$}}{104}
-\contentsline {figure}{\numberline {63}{\ignorespaces Trajet\IeC {\'o}ria realizada}}{105}
-\contentsline {figure}{\numberline {64}{\ignorespaces Erro de controle $e_x$}}{105}
-\contentsline {figure}{\numberline {65}{\ignorespaces Erro de controle $e_y$}}{105}
-\contentsline {figure}{\numberline {66}{\ignorespaces Esfor\IeC {\c c}o de controle $\tau _1$}}{105}
-\contentsline {figure}{\numberline {67}{\ignorespaces Esfor\IeC {\c c}o de controle $\tau _2$}}{105}
-\contentsline {figure}{\numberline {68}{\ignorespaces Trajet\IeC {\'o}ria realizada}}{106}
-\contentsline {figure}{\numberline {69}{\ignorespaces Erro de controle $e_x$}}{106}
-\contentsline {figure}{\numberline {70}{\ignorespaces Erro de controle $e_y$}}{106}
-\contentsline {figure}{\numberline {71}{\ignorespaces Esfor\IeC {\c c}o de controle $\tau _1$}}{106}
-\contentsline {figure}{\numberline {72}{\ignorespaces Esfor\IeC {\c c}o de controle $\tau _2$}}{106}
-\contentsline {figure}{\numberline {73}{\ignorespaces Trajet\IeC {\'o}ria realizada}}{107}
-\contentsline {figure}{\numberline {74}{\ignorespaces Erro de controle $e_x$}}{107}
-\contentsline {figure}{\numberline {75}{\ignorespaces Erro de controle $e_y$}}{107}
-\contentsline {figure}{\numberline {76}{\ignorespaces Esfor\IeC {\c c}o de controle $\tau _1$}}{107}
-\contentsline {figure}{\numberline {77}{\ignorespaces Esfor\IeC {\c c}o de controle $\tau _2$}}{107}
-\contentsline {figure}{\numberline {78}{\ignorespaces Trajet\IeC {\'o}ria realizada}}{108}
-\contentsline {figure}{\numberline {79}{\ignorespaces Erro de controle $e_x$}}{108}
-\contentsline {figure}{\numberline {80}{\ignorespaces Erro de controle $e_y$}}{108}
-\contentsline {figure}{\numberline {81}{\ignorespaces Esfor\IeC {\c c}o de controle $\tau _1$}}{108}
-\contentsline {figure}{\numberline {82}{\ignorespaces Esfor\IeC {\c c}o de controle $\tau _2$}}{108}
-\contentsline {figure}{\numberline {83}{\ignorespaces Trajet\IeC {\'o}ria realizada}}{109}
-\contentsline {figure}{\numberline {84}{\ignorespaces Erro de controle $e_x$}}{109}
-\contentsline {figure}{\numberline {85}{\ignorespaces Erro de controle $e_y$}}{109}
-\contentsline {figure}{\numberline {86}{\ignorespaces Esfor\IeC {\c c}o de controle $\tau _1$}}{109}
-\contentsline {figure}{\numberline {87}{\ignorespaces Esfor\IeC {\c c}o de controle $\tau _2$}}{109}
-\contentsline {figure}{\numberline {88}{\ignorespaces Trajet\IeC {\'o}ria realizada}}{110}
-\contentsline {figure}{\numberline {89}{\ignorespaces Erro de controle $e_x$}}{110}
-\contentsline {figure}{\numberline {90}{\ignorespaces Erro de controle $e_y$}}{110}
-\contentsline {figure}{\numberline {91}{\ignorespaces Esfor\IeC {\c c}o de controle $\tau _1$}}{110}
-\contentsline {figure}{\numberline {92}{\ignorespaces Esfor\IeC {\c c}o de controle $\tau _2$}}{110}
-\contentsline {figure}{\numberline {93}{\ignorespaces Trajet\IeC {\'o}ria realizada}}{111}
-\contentsline {figure}{\numberline {94}{\ignorespaces Erro de controle $e_x$}}{111}
-\contentsline {figure}{\numberline {95}{\ignorespaces Erro de controle $e_y$}}{111}
-\contentsline {figure}{\numberline {96}{\ignorespaces Esfor\IeC {\c c}o de controle $\tau _1$}}{111}
-\contentsline {figure}{\numberline {97}{\ignorespaces Esfor\IeC {\c c}o de controle $\tau _2$}}{111}
-\contentsline {figure}{\numberline {98}{\ignorespaces Trajet\IeC {\'o}ria realizada}}{112}
-\contentsline {figure}{\numberline {99}{\ignorespaces Erro de controle $e_x$}}{112}
-\contentsline {figure}{\numberline {100}{\ignorespaces Erro de controle $e_y$}}{112}
-\contentsline {figure}{\numberline {101}{\ignorespaces Esfor\IeC {\c c}o de controle $\tau _1$}}{112}
-\contentsline {figure}{\numberline {102}{\ignorespaces Esfor\IeC {\c c}o de controle $\tau _2$}}{112}
-\contentsline {figure}{\numberline {103}{\ignorespaces Trajet\IeC {\'o}ria realizada}}{113}
-\contentsline {figure}{\numberline {104}{\ignorespaces Erro de controle $e_x$}}{113}
-\contentsline {figure}{\numberline {105}{\ignorespaces Erro de controle $e_y$}}{113}
-\contentsline {figure}{\numberline {106}{\ignorespaces Esfor\IeC {\c c}o de controle $\tau _1$}}{113}
-\contentsline {figure}{\numberline {107}{\ignorespaces Esfor\IeC {\c c}o de controle $\tau _2$}}{113}
-\contentsline {figure}{\numberline {108}{\ignorespaces Circuito el\IeC {\'e}trico do motor}}{132}
-\contentsline {figure}{\numberline {109}{\ignorespaces Curva de velocidade do motor 1}}{138}
-\contentsline {figure}{\numberline {110}{\ignorespaces Curva de velocidade do motor 2}}{138}
+\babel@toc {brazil}{}
+\contentsline {figure}{\numberline {1}{\ignorespaces Rob\IeC {\^o} industrial Adept Quattro}}{18}
+\contentsline {figure}{\numberline {2}{\ignorespaces Malha de CTC (Adaptado de \cite {Craig})}}{24}
+\contentsline {figure}{\numberline {3}{\ignorespaces Malha de CTCp (Adaptado de \cite {Craig})}}{24}
+\contentsline {figure}{\numberline {4}{\ignorespaces Malha de controle adaptativo (Adaptado de \cite {Craig})}}{26}
+\contentsline {figure}{\numberline {5}{\ignorespaces Prot\IeC {\'o}tipo do mecanismo 5R}}{30}
+\contentsline {figure}{\numberline {6}{\ignorespaces Pent\IeC {\'a}gono articulado (5R)}}{80}
+\contentsline {figure}{\numberline {7}{\ignorespaces Mecanismo \relax $\@@underline {\hbox {R}}\mathsurround \z@ $\relax \relax $\@@underline {\hbox {R}}\mathsurround \z@ $\relax }}{81}
+\contentsline {figure}{\numberline {8}{\ignorespaces Espa\IeC {\c c}o de trabalho do mecanismo \relax $\@@underline {\hbox {R}}\mathsurround \z@ $\relax \relax $\@@underline {\hbox {R}}\mathsurround \z@ $\relax }}{83}
+\contentsline {figure}{\numberline {9}{\ignorespaces Fun\IeC {\c c}\IeC {\~a}o de satura\IeC {\c c}\IeC {\~a}o $f_{sat}(x) = \qopname \relax o{tanh}(100 x)$}}{85}
+\contentsline {figure}{\numberline {10}{\ignorespaces Torque aplicado pelo atuador 1}}{86}
+\contentsline {figure}{\numberline {11}{\ignorespaces Torque aplicado pelo atuador 2}}{86}
+\contentsline {figure}{\numberline {12}{\ignorespaces Erro de na coordenada $x$}}{86}
+\contentsline {figure}{\numberline {13}{\ignorespaces Erro de na coordenada $y$}}{86}
+\contentsline {figure}{\numberline {14}{\ignorespaces Vari\IeC {\'a}vel $s_x$}}{86}
+\contentsline {figure}{\numberline {15}{\ignorespaces Vari\IeC {\'a}vel $s_y$}}{86}
+\contentsline {figure}{\numberline {16}{\ignorespaces Torque aplicado pelo atuador 1}}{87}
+\contentsline {figure}{\numberline {17}{\ignorespaces Torque aplicado pelo atuador 2}}{87}
+\contentsline {figure}{\numberline {18}{\ignorespaces Erro de na coordenada $x$}}{87}
+\contentsline {figure}{\numberline {19}{\ignorespaces Erro de na coordenada $x$}}{87}
+\contentsline {figure}{\numberline {20}{\ignorespaces Vari\IeC {\'a}vel $s_x$}}{87}
+\contentsline {figure}{\numberline {21}{\ignorespaces Vari\IeC {\'a}vel $s_y$}}{87}
+\contentsline {figure}{\numberline {22}{\ignorespaces Torque aplicado pelo atuador 1}}{88}
+\contentsline {figure}{\numberline {23}{\ignorespaces Torque aplicado pelo atuador 2}}{88}
+\contentsline {figure}{\numberline {24}{\ignorespaces Erro de na coordenada $x$}}{88}
+\contentsline {figure}{\numberline {25}{\ignorespaces Erro de na coordenada $y$}}{88}
+\contentsline {figure}{\numberline {26}{\ignorespaces Arquitetura do sistema}}{90}
+\contentsline {figure}{\numberline {27}{\ignorespaces Arquitetura de controle}}{91}
+\contentsline {figure}{\numberline {28}{\ignorespaces Trajet\IeC {\'o}ria realizada}}{96}
+\contentsline {figure}{\numberline {29}{\ignorespaces Erro de controle $e_x$}}{96}
+\contentsline {figure}{\numberline {30}{\ignorespaces Erro de controle $e_y$}}{96}
+\contentsline {figure}{\numberline {31}{\ignorespaces Esfor\IeC {\c c}o de controle $\tau _1$}}{96}
+\contentsline {figure}{\numberline {32}{\ignorespaces Esfor\IeC {\c c}o de controle $\tau _2$}}{96}
+\contentsline {figure}{\numberline {33}{\ignorespaces Trajet\IeC {\'o}ria realizada}}{97}
+\contentsline {figure}{\numberline {34}{\ignorespaces Erro de controle $e_x$}}{97}
+\contentsline {figure}{\numberline {35}{\ignorespaces Erro de controle $e_y$}}{97}
+\contentsline {figure}{\numberline {36}{\ignorespaces Esfor\IeC {\c c}o de controle $\tau _1$}}{97}
+\contentsline {figure}{\numberline {37}{\ignorespaces Esfor\IeC {\c c}o de controle $\tau _2$}}{97}
+\contentsline {figure}{\numberline {38}{\ignorespaces Trajet\IeC {\'o}ria realizada}}{98}
+\contentsline {figure}{\numberline {39}{\ignorespaces Erro de controle $e_x$}}{98}
+\contentsline {figure}{\numberline {40}{\ignorespaces Erro de controle $e_y$}}{98}
+\contentsline {figure}{\numberline {41}{\ignorespaces Esfor\IeC {\c c}o de controle $\tau _1$}}{98}
+\contentsline {figure}{\numberline {42}{\ignorespaces Esfor\IeC {\c c}o de controle $\tau _2$}}{98}
+\contentsline {figure}{\numberline {43}{\ignorespaces Trajet\IeC {\'o}ria realizada}}{99}
+\contentsline {figure}{\numberline {44}{\ignorespaces Erro de controle $e_x$}}{99}
+\contentsline {figure}{\numberline {45}{\ignorespaces Erro de controle $e_y$}}{99}
+\contentsline {figure}{\numberline {46}{\ignorespaces Esfor\IeC {\c c}o de controle $\tau _1$}}{99}
+\contentsline {figure}{\numberline {47}{\ignorespaces Esfor\IeC {\c c}o de controle $\tau _2$}}{99}
+\contentsline {figure}{\numberline {48}{\ignorespaces Trajet\IeC {\'o}ria realizada}}{100}
+\contentsline {figure}{\numberline {49}{\ignorespaces Erro de controle $e_x$}}{100}
+\contentsline {figure}{\numberline {50}{\ignorespaces Erro de controle $e_y$}}{100}
+\contentsline {figure}{\numberline {51}{\ignorespaces Esfor\IeC {\c c}o de controle $\tau _1$}}{100}
+\contentsline {figure}{\numberline {52}{\ignorespaces Esfor\IeC {\c c}o de controle $\tau _2$}}{100}
+\contentsline {figure}{\numberline {53}{\ignorespaces Trajet\IeC {\'o}ria realizada}}{101}
+\contentsline {figure}{\numberline {54}{\ignorespaces Erro de controle $e_x$}}{101}
+\contentsline {figure}{\numberline {55}{\ignorespaces Erro de controle $e_y$}}{101}
+\contentsline {figure}{\numberline {56}{\ignorespaces Esfor\IeC {\c c}o de controle $\tau _1$}}{101}
+\contentsline {figure}{\numberline {57}{\ignorespaces Esfor\IeC {\c c}o de controle $\tau _2$}}{101}
+\contentsline {figure}{\numberline {58}{\ignorespaces Trajet\IeC {\'o}ria realizada}}{102}
+\contentsline {figure}{\numberline {59}{\ignorespaces Erro de controle $e_x$}}{102}
+\contentsline {figure}{\numberline {60}{\ignorespaces Erro de controle $e_y$}}{102}
+\contentsline {figure}{\numberline {61}{\ignorespaces Esfor\IeC {\c c}o de controle $\tau _1$}}{102}
+\contentsline {figure}{\numberline {62}{\ignorespaces Esfor\IeC {\c c}o de controle $\tau _2$}}{102}
+\contentsline {figure}{\numberline {63}{\ignorespaces Trajet\IeC {\'o}ria realizada}}{103}
+\contentsline {figure}{\numberline {64}{\ignorespaces Erro de controle $e_x$}}{103}
+\contentsline {figure}{\numberline {65}{\ignorespaces Erro de controle $e_y$}}{103}
+\contentsline {figure}{\numberline {66}{\ignorespaces Esfor\IeC {\c c}o de controle $\tau _1$}}{103}
+\contentsline {figure}{\numberline {67}{\ignorespaces Esfor\IeC {\c c}o de controle $\tau _2$}}{103}
+\contentsline {figure}{\numberline {68}{\ignorespaces Trajet\IeC {\'o}ria realizada}}{104}
+\contentsline {figure}{\numberline {69}{\ignorespaces Erro de controle $e_x$}}{104}
+\contentsline {figure}{\numberline {70}{\ignorespaces Erro de controle $e_y$}}{104}
+\contentsline {figure}{\numberline {71}{\ignorespaces Esfor\IeC {\c c}o de controle $\tau _1$}}{104}
+\contentsline {figure}{\numberline {72}{\ignorespaces Esfor\IeC {\c c}o de controle $\tau _2$}}{104}
+\contentsline {figure}{\numberline {73}{\ignorespaces Trajet\IeC {\'o}ria realizada}}{105}
+\contentsline {figure}{\numberline {74}{\ignorespaces Erro de controle $e_x$}}{105}
+\contentsline {figure}{\numberline {75}{\ignorespaces Erro de controle $e_y$}}{105}
+\contentsline {figure}{\numberline {76}{\ignorespaces Esfor\IeC {\c c}o de controle $\tau _1$}}{105}
+\contentsline {figure}{\numberline {77}{\ignorespaces Esfor\IeC {\c c}o de controle $\tau _2$}}{105}
+\contentsline {figure}{\numberline {78}{\ignorespaces Trajet\IeC {\'o}ria realizada}}{106}
+\contentsline {figure}{\numberline {79}{\ignorespaces Erro de controle $e_x$}}{106}
+\contentsline {figure}{\numberline {80}{\ignorespaces Erro de controle $e_y$}}{106}
+\contentsline {figure}{\numberline {81}{\ignorespaces Esfor\IeC {\c c}o de controle $\tau _1$}}{106}
+\contentsline {figure}{\numberline {82}{\ignorespaces Esfor\IeC {\c c}o de controle $\tau _2$}}{106}
+\contentsline {figure}{\numberline {83}{\ignorespaces Trajet\IeC {\'o}ria realizada}}{107}
+\contentsline {figure}{\numberline {84}{\ignorespaces Erro de controle $e_x$}}{107}
+\contentsline {figure}{\numberline {85}{\ignorespaces Erro de controle $e_y$}}{107}
+\contentsline {figure}{\numberline {86}{\ignorespaces Esfor\IeC {\c c}o de controle $\tau _1$}}{107}
+\contentsline {figure}{\numberline {87}{\ignorespaces Esfor\IeC {\c c}o de controle $\tau _2$}}{107}
+\contentsline {figure}{\numberline {88}{\ignorespaces Trajet\IeC {\'o}ria realizada}}{108}
+\contentsline {figure}{\numberline {89}{\ignorespaces Erro de controle $e_x$}}{108}
+\contentsline {figure}{\numberline {90}{\ignorespaces Erro de controle $e_y$}}{108}
+\contentsline {figure}{\numberline {91}{\ignorespaces Esfor\IeC {\c c}o de controle $\tau _1$}}{108}
+\contentsline {figure}{\numberline {92}{\ignorespaces Esfor\IeC {\c c}o de controle $\tau _2$}}{108}
+\contentsline {figure}{\numberline {93}{\ignorespaces Trajet\IeC {\'o}ria realizada}}{109}
+\contentsline {figure}{\numberline {94}{\ignorespaces Erro de controle $e_x$}}{109}
+\contentsline {figure}{\numberline {95}{\ignorespaces Erro de controle $e_y$}}{109}
+\contentsline {figure}{\numberline {96}{\ignorespaces Esfor\IeC {\c c}o de controle $\tau _1$}}{109}
+\contentsline {figure}{\numberline {97}{\ignorespaces Esfor\IeC {\c c}o de controle $\tau _2$}}{109}
+\contentsline {figure}{\numberline {98}{\ignorespaces Trajet\IeC {\'o}ria realizada}}{110}
+\contentsline {figure}{\numberline {99}{\ignorespaces Erro de controle $e_x$}}{110}
+\contentsline {figure}{\numberline {100}{\ignorespaces Erro de controle $e_y$}}{110}
+\contentsline {figure}{\numberline {101}{\ignorespaces Esfor\IeC {\c c}o de controle $\tau _1$}}{110}
+\contentsline {figure}{\numberline {102}{\ignorespaces Esfor\IeC {\c c}o de controle $\tau _2$}}{110}
+\contentsline {figure}{\numberline {103}{\ignorespaces Trajet\IeC {\'o}ria realizada}}{111}
+\contentsline {figure}{\numberline {104}{\ignorespaces Erro de controle $e_x$}}{111}
+\contentsline {figure}{\numberline {105}{\ignorespaces Erro de controle $e_y$}}{111}
+\contentsline {figure}{\numberline {106}{\ignorespaces Esfor\IeC {\c c}o de controle $\tau _1$}}{111}
+\contentsline {figure}{\numberline {107}{\ignorespaces Esfor\IeC {\c c}o de controle $\tau _2$}}{111}
+\contentsline {figure}{\numberline {108}{\ignorespaces Circuito el\IeC {\'e}trico do motor}}{131}
+\contentsline {figure}{\numberline {109}{\ignorespaces Curva de velocidade do motor 1}}{137}
+\contentsline {figure}{\numberline {110}{\ignorespaces Curva de velocidade do motor 2}}{137}

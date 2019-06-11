@@ -118,13 +118,13 @@
 
 
 % ========== Folha de assinaturas (opcional) ==========
-\begin{folhadeaprovacao}
-	\assinatura{Prof. Dr. Tarcisio Antonio Hess Coelho}
-	\assinatura{Prof. Dr. Renato Maia Matarazzo Orsino}
-	\assinatura{Profª. Dra. Maira Martins da Silva}
-	\assinatura{Prof. Dr. Bruno Augusto Angélico}
-	\assinatura{Prof. Dr. Diego Colón}
-\end{folhadeaprovacao}
+%\begin{folhadeaprovacao}
+%	\assinatura{Prof. Dr. Tarcisio Antonio Hess Coelho}
+%	\assinatura{Prof. Dr. Renato Maia Matarazzo Orsino}
+%	\assinatura{Profª. Dra. Maira Martins da Silva}
+%	\assinatura{Prof. Dr. Bruno Augusto Angélico}
+%	\assinatura{Prof. Dr. Diego Colón}
+%\end{folhadeaprovacao}
 
 
 % ========== Ficha catalográfica ==========
@@ -423,16 +423,16 @@ De modo a avaliar o desempenho previsto pelo uso de diferentes controladores par
 Neste sentido, almeja-se observar se haverá alguma diferença de desempenho se o controle for executado no espaço das juntas ou no da tarefa. Além disso, pretende-se considerar os efeitos da implementação de técnicas de controle puras ou combinadas.
 Para auxiliar na comparação entre as técnicas de controle, serão definidas duas métricas: uma que considere o erro de posicionamento do efetuador e outra a magnitude dos torques dos atuadores.
 
-\section{O que tinha antes} 
-O estágio atual de desenvolvimento do presente projeto ocorre basicamente em três áreas:
-aplicação do algoritmo de modelagem e simulação para os mecanismos 5R \cite{22orsino} e 2\underline{R}SU + \underline{P}PaP \cite{Kumazawa}, o projeto e simulação de controladores não lineares robustos de alto desempenho baseado no modelo dinâmico para os mecanismos citados, e a validação experimental das leis de controle sintetizadas.
+%\section{O que tinha antes} 
+%O estágio atual de desenvolvimento do presente projeto ocorre basicamente em três áreas:
+%aplicação do algoritmo de modelagem e simulação para os mecanismos 5R \cite{22orsino} e 2\underline{R}SU + \underline{P}PaP \cite{Kumazawa}, o projeto e simulação de controladores não lineares robustos de alto desempenho baseado no modelo dinâmico para os mecanismos citados, e a validação experimental das leis de controle sintetizadas.
 
-Os trabalhos no âmbito de modelagem e simulação estão sendo desenvolvidos a partir da aplicação do algoritmo de modelagem cinemática e dinâmica de mecanismos paralelos desenvolvido, baseado na utilização dos parâmetros de Denavit-Hartenberg \cite{Craig, Denavit, Lipkin} e no método Orsino de acoplamento de subsistemas \cite{23orsino}. Toda modelagem será feita em C++, utilizando uma biblioteca otimizada de cálculo matricial (Armadillo).
-As simulações da dinâmica direta do mecanismo serão feitas utilizando o método Runge-Kutta de 8ª ordem \cite{RK} para solução de sistemas de EDOs, de modo a garantir estabilidade numérica do método, mesmo utilizando leis de controle quase descontínuas.
+%Os trabalhos no âmbito de modelagem e simulação estão sendo desenvolvidos a partir da aplicação do algoritmo de modelagem cinemática e dinâmica de mecanismos paralelos desenvolvido, baseado na utilização dos parâmetros de Denavit-Hartenberg \cite{Craig, Denavit, Lipkin} e no método Orsino de acoplamento de subsistemas \cite{23orsino}. Toda modelagem será feita em C++, utilizando uma biblioteca otimizada de cálculo matricial (Armadillo).
+%As simulações da dinâmica direta do mecanismo serão feitas utilizando o método Runge-Kutta de 8ª ordem \cite{RK} para solução de sistemas de EDOs, de modo a garantir estabilidade numérica do método, mesmo utilizando leis de controle quase descontínuas.
 
-Os trabalhos na área de projeto de controle serão feitos utilizando a metodologia desenvolvida de projeto de controladores robustos multivariáveis para mecanismos paralelos, baseada no modelo dinâmico do mecanismo a ser controlado e na técnica de controle por modos deslizantes \cite{Slotini, Utkin}.
+%Os trabalhos na área de projeto de controle serão feitos utilizando a metodologia desenvolvida de projeto de controladores robustos multivariáveis para mecanismos paralelos, baseada no modelo dinâmico do mecanismo a ser controlado e na técnica de controle por modos deslizantes \cite{Slotini, Utkin}.
 
-Os trabalhos no âmbito da validação experimental das leis de controle sintetizadas serão realizados no protótipo do mecanismo 5R que encontra-se no laboratório de mecanismos. A bancada experimental do mecanismo 5R já está funcional e já forem realizados alguns testes de leis de controle de trajetória baseadas no modelo dinâmico do mecanismo. Para a realização da validação experimental nesta bancada, será realizada a identificação dos parâmetros do sistema e suas respectivas incertezas, projeto do controlador baseado nos parâmetros e incertezas identificadas, implementação das leis de controle, e aquisição de dados. \\
+%Os trabalhos no âmbito da validação experimental das leis de controle sintetizadas serão realizados no protótipo do mecanismo 5R que encontra-se no laboratório de mecanismos. A bancada experimental do mecanismo 5R já está funcional e já forem realizados alguns testes de leis de controle de trajetória baseadas no modelo dinâmico do mecanismo. Para a realização da validação experimental nesta bancada, será realizada a identificação dos parâmetros do sistema e suas respectivas incertezas, projeto do controlador baseado nos parâmetros e incertezas identificadas, implementação das leis de controle, e aquisição de dados. \\
 
 \begin{figure}[h]
 	\centering
@@ -2752,7 +2752,7 @@ Para o caso de mecanismos com atuação redundante, há infinitas para $\mu^\sta
 
 \chapter{Projeto dos controladores}\label{S05-5}
 
-Esta subseção é destinada ao projeto de controladores não lineares, destinados ao controle de posição de plataformas paralelas cujo modelo dinâmico para simulação dinâmica inversa é dado por \eqref{eq:DinamicaInversa2}, utilizando a técnica de Linearização por Realimentação aliada a outras leis de controle não linear, como as leis Controle por Modos Deslizantes em Tempo Contínuo \cite{Slotini, Utkin}, e também aliada a técnicas de controle linear, como a alocação de pólos no espaço de estados (Controle por Torque Computado), alocação de pólos no domínio da frequência com observador de disturbios, e o Controle por Modos Deslizantes em Tempo Discreto.
+Esta subseção é destinada ao projeto de controladores não lineares, destinados ao controle de posição de plataformas paralelas cujo modelo dinâmico para simulação dinâmica inversa é dado por \eqref{eq:DinamicaInversa2}, utilizando a técnica de Linearização por Realimentação aliada a outras leis de controle não linear, como as leis Controle por Modos Deslizantes \cite{Slotini, Utkin}, e também aliada a técnicas de controle linear, como a alocação de pólos no espaço de estados (Controle por Torque Computado), alocação de pólos no domínio da frequência com observador de disturbios, e o Controle por Modos Deslizantes em Tempo Discreto.
 
 Para facilitar a leitura das deduções e com o intuito de deixar um pouco menos carregada a notação, será adotada a seguinte notação:
 \begin{equation}
@@ -2827,7 +2827,7 @@ Sendo:
 Repare que o desempenho desta técnica de controle depende diretamente da representatividade do modelo obtido dentro das condições de operação do sistema. 
 
 
-\section{Controle por Modos Deslizantes em Tempo Contínuo}\label{S05-04-03}
+\section{Controle por Modos Deslizantes}\label{S05-04-03}
 
 O Controle por Modos Deslizantes é uma técnica de controle não-linear robusto, a qual tem como principal vantagem uma menor sensibilidade aos erros de modelagem, sendo robusto tanto a incertezas estruturadas quanto a incertezas não estruturadas. Nesta subseção serão deduzidas 4 leis de controle baseadas nesta técnica.
 
@@ -4673,9 +4673,42 @@ Por fim, vale fazer a comparação entre o controle no espaço das juntas e o co
 
 \section{Conclusões}
 
-A partir dos resultados experimentais obtidos, algumas conclusões interessantes podem ser tiradas. Foi possível observar que a lei de Controle por Modos Deslizantes prosposta se mostrou bastante eficaz quando associada ao Controle por Torque Computado e ao Controle Proporcional Derivativo, tanto no espaço das juntas, quanto no espaço da tarefa, sempre atuando no sentido de, e conseguindo, diminuir o valor eficaz e em regime estacionário do erro de controle quando comparado com as estratégias de controle puras, sem aumentar demasiadamente o consumo energético, e mantendo a estabilidade do sistema. Além disso, observou-se que o Controle Proporcial Derivativo no espaço tarefa pode ser bastante competitivo com técnicas de controle baseadas em modelo, tanto no valor eficaz e no valor estacionário do erro de controle, quanto no consumo energético, e associado ao Controle por Modos Deslizantes pode obter resultados mais competitivos ainda, mesmo sendo uma estratégia não baseada no modelo dinâmico do mecanismo. Por fim, pôde-se concluir que a escolha do espaço de trabalho para a lei de controle pode influenciar muito no desempenho do sistema para as leis de controle não baseadas em modelo, com o espaço da tarefa se mostrando muita mais adequado, ao contrário do que foi observado nas leis de controle baseadas em modelo, nas quais a escolha do espaço de trabalho não apresentou tanta influência no desempenho do sistema. 
+Esta Tese de Doutorado abordou como tema, a modelagem dinâmica e o controle de manipuladores paralelos, tendo por objetivo oferecer contribuições para o aumento do seu desempenho. Especificamente, a busca por este aprimoramento foi realizada mediante o emprego de técnicas de controle baseadas no modelo do manipulador. Com relação ao objeto de estudo, escolheu-se o robô denominado Clara, equipamento desenvolvido no LaMMaR. Sua estrutura mecânica corresponde ao mecanismo pentágono articulado, de dois graus de liberdade, que opera no espaço plano. 
+
+A metodologia seguida na pesquisa compreendeu a execução de seis fases, abrangendo desde o desenvolvimento de algoritmos para as modelagens cinemática e dinâmica ao projeto de controladores e sua validação experimental.
+
+Após o desenvolvimento teórico, a execução das simulações e dos ensaios experimentais, foi possível reunir diversas conclusões quanto à modelagem dinâmica, à técnica de controle mais adequada, bem como a sua implementação.
+
+Recomendações quanto à modelagem dinâmica ...
+
+%1.  controle robusto híbrido para manipuladores paralelos 
+%2.  Comparação entre controle no espaço das juntas e da tarefa
+%3.  Modelagem dinâmica e controle de manipuladores paralelos 
+
+%Frases muito longas. Separá-las em mais curtas. Usar parágrafos. Evitar o adjetivo "interessante", prefira "relevante". Você comparou os valores "eficaz" e "estacionário" do erro de controle? O termo "espaço de trabalho" aqui na conclusão foi utilizado no sentido geral: pode ser "espaço das juntas" ou "espaço da tarefa". Na verdade, "espaço de trabalho" se refere à região de alcance do efetuador.
+
+A partir dos resultados experimentais obtidos, algumas conclusões relevantes podem ser tiradas. Quanto à lei de Controle proposta, por Modos Deslizantes, esta se revelou adequada para a sua combinação com outras técnicas, como o Controle por Torque Computado ou o Controle Proporcional Derivativo. 
+
+Além disso, tal combinação permitiu que o efetuador do manipulador realizasse as trajetórias programadas, nos regimes permanente e transitório, com menor erro de seguimento, superando as técnicas puras, tanto no espaço das juntas como no da tarefa. Deve-se ressaltar que tal desempenho foi alcançado, sem que houvesse um aumento significativo do consumo energético, mantendo-se a estabilidade do sistema.
+
+Merece também destaque o desempenho do controle Proporcional Derivativo no espaço da tarefa, que mostrou ser bastante competitivo em comparação às técnicas de controle puras baseadas em modelo, nos critérios erro de seguimento e torque dos atuadores, em trajetórias nos regimes permanente e transitório. 
+
+Por fim, pôde-se concluir que a escolha entre o espaço das juntas e o da tarefa pode influenciar muito no desempenho do sistema para as leis de controle não baseadas em modelo, indicando que o espaço da tarefa é o mais adequado. No entanto, para as leis de controle baseadas em modelo, tal escolha não influenciou significativamente o desempenho do sistema.
+
+
+%A partir dos resultados experimentais obtidos, algumas conclusões interessantes podem ser tiradas. Foi possível observar que a lei de Controle por Modos Deslizantes prosposta se mostrou bastante eficaz quando associada ao Controle por Torque Computado e ao Controle Proporcional Derivativo, tanto no espaço das juntas, quanto no espaço da tarefa, sempre atuando no sentido de, e conseguindo, diminuir o valor eficaz e em regime estacionário do erro de controle quando comparado com as estratégias de controle puras, sem aumentar demasiadamente o consumo energético, e mantendo a estabilidade do sistema. Além disso, observou-se que o Controle Proporcial Derivativo no espaço tarefa pode ser bastante competitivo com técnicas de controle baseadas em modelo, tanto no valor eficaz e no valor estacionário do erro de controle, quanto no consumo energético, e associado ao Controle por Modos Deslizantes pode obter resultados mais competitivos ainda, mesmo sendo uma estratégia não baseada no modelo dinâmico do mecanismo. Por fim, pôde-se concluir que a escolha do espaço de trabalho para a lei de controle pode influenciar muito no desempenho do sistema para as leis de controle não baseadas em modelo, com o espaço da tarefa se mostrando muita mais adequado, ao contrário do que foi observado nas leis de controle baseadas em modelo, nas quais a escolha do espaço de trabalho não apresentou tanta influência no desempenho do sistema. 
 
 \section{Principais contribuições}
+
+Dentre as principais contribuições, destacam-se:
+
+a) desenvolvimento de um algoritmo genérico para modelagem cinemática e dinâmica de manipuladores seriais e paralelos. Este algoritmo poderá integrar os sistemas de controle de outros manipuladores paralelos do LaMMaR, como a Laila e a Dora.
+
+b) a constatação do caráter promissor da combinação de técnicas de controle robusto, como o controle por modos deslizantes, a outras técnicas, no que tange à minimização do erro de seguimento de trajetória, sem aumentar demasiadamente o consumo energético do manipulador.
+
+c) a comparação do desempenho de técnicas combinadas e puras, mediante a execução de ensaios experimentais, com controle da trajetória do efetuador, permitindo a avaliação do comportamento do manipulador, tanto em regime permanente como em regime transitório.
+
+Outras contribuições referem-se às seguintes publicações realizadas durante o desenvolvimento da Tese:
 
 A partir dos resultados obtidos no trabalho de formatura realizado na gradua\c{c}\~ao, foi publicado um artigo intitulado ``Development of a controller for a 3-DOF robotic platform for user interaction in rehabilitation therapies'' \cite{Biorob}, o qual foi escrito em coautoria com Eng. Guilherme Martinho Dobrianskyj e o Prof. Dr. Tarc\'isio Ant\^onio Hess Coelho. Este trabalho foi apresentado no BioRob 2014 (IEEE International Conference on Biomedical Robotics and Biomechatronics) na se\c{c}\~ao de posters, no dia 15 de agosto de 2014. O artigo pode ser acessado por \url{http://dx.doi.org/10.1109/BIOROB.2014.6913880}.
 
@@ -4692,6 +4725,12 @@ Um artigo, publicado no peri\'odico {\em International Journal of Mechanisms and
 Um artigo, publicado no {\em Congresso Brasileira de Automática - 2018}, intitulado ``H-Infinity Control of a 3-DOF RRR Spatial Serial Mechanism'' \cite{CBA}, foi escrito em coautoria com a Eng. Isabella Stevani, o Prof. Dr. Diego Colón, e o Prof. Dr. Tarc\'isio Antonio Hess Coelho. O artigo pode ser acessado por \url{https://ssl4799.websiteseguro.com/swge5/PROCEEDINGS/} (doi:10.20906/CPS/CBA2018-0458).
 
 \section{Sugestão de temas para pesquisa futura}
+
+Investigar a eficácia do emprego de técnicas de controle combinadas para manipuladores paralelos, redundantes e não-redundantes, que operem no espaço tridimensional.
+
+\vspace{0.3cm}
+
+Investigar as condições para a eficácia do uso de técnicas de controle para manipuladores paralelos, não-baseadas em modelo e que atuem no espaço da tarefa.
 
 
 
@@ -4801,25 +4840,25 @@ A aceleração do ponto $\ttp$ em relação ao referencial $\llA$ é definida co
 \end{empheq}
 
 
-\section{Equações de Poisson}\label{S05-01-02}
+\section{Equações de campos de velocidades e acelerações}\label{S05-01-02}
 
-Esta subseção tem o intuito de apresentar as equações básicos da cinemática de corpos rígidos,  as equações de Poisson para velocidades e acelerações.
+Esta subseção tem o intuito de apresentar as equações básicos da cinemática de corpos rígidos,  as equações de campos de velocidades e acelerações.
 
-\subsection{Equação de Poisson para velocidades}\label{S05-01-02-01}
+\subsection{Equação do campo de velocidades}\label{S05-01-02-01}
 
-Sejam $\ttp$ e $\tto$ dois pontos pertencentes a um corpo rígido $\llB$, e $\llA$ um referencial. Podemos relacionar a velocidades dos ponto $\ttp$ e $\tto$ em relação a $\llA$ através da equação de Poisson para velocidades:
+Sejam $\ttp$ e $\tto$ dois pontos pertencentes a um corpo rígido $\llB$, e $\llA$ um referencial. Podemos relacionar a velocidades dos ponto $\ttp$ e $\tto$ em relação a $\llA$ através da equação do campo de velocidades:
 \begin{empheq}[box=\mybluebox]{equation}\label{eq:Poisson_v}
 \vv_\ttp^{\lllA} = \vv_\tto^{\lllA} + \vomega_{\lllB}^{\lllA} \wedge \vr_{\tto \rl \ttp}
 \end{empheq}
 
-\subsection{Equação de Poisson para acelerações}\label{S05-01-02-02}
+\subsection{Equação do campo de acelerações}\label{S05-01-02-02}
 
 Derivando \eqref{eq:Poisson_v} no tempo em relação a $\llA$, temos:
 \begin{equation}\label{eq:Poisson_a_aux}
 \va_\ttp^{\lllA} = \va_\tto^{\lllA} + \dot{\vomega}_{\lllB}^{\lllA} \wedge \vr_{\tto \rl \ttp} + \vomega_{\lllB}^{\lllA} \wedge (\vv_\ttp^{\lllA} - \vv_\tto^{\lllA})
 \end{equation}
 
-Substituindo \eqref{eq:Poisson_v} em \eqref{eq:Poisson_a_aux}, obtemos a equação de Poisson para acelerações:
+Substituindo \eqref{eq:Poisson_v} em \eqref{eq:Poisson_a_aux}, obtemos a equação do campo de acelerações:
 \begin{empheq}[box=\mybluebox]{equation} \label{eq:Poisson_a}
 \va_\ttp^{\lllA} = \va_\tto^{\lllA} + \dot{\vomega}_{\lllB}^{\lllA} \wedge \vr_{\tto \rl \ttp} + \vomega_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA} \wedge \vr_{\tto \rl \ttp}
 \end{empheq}
