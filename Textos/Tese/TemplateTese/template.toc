@@ -1,8 +1,8 @@
-\babel@toc {brazil}{}
+\select@language {brazil}
 \contentsline {chapter}{Parte~I:~\MakeUppercase {Introdu\IeC {\c c}\IeC {\~a}o}}{17}
 \contentsline {chapter}{\numberline {1}Introdu\IeC {\c c}\IeC {\~a}o}{18}
 \contentsline {section}{\numberline {1.1}Objetivos}{19}
-\contentsline {section}{\numberline {1.2}Sobre a organiza\IeC {\c c}\IeC {\~a}o do texto}{19}
+\contentsline {section}{\numberline {1.2}Sobre a organiza\IeC {\c c}\IeC {\~a}o do texto}{20}
 \contentsline {chapter}{\numberline {2}Revis\IeC {\~a}o da literatura}{21}
 \contentsline {section}{\numberline {2.1}Modelagem din\IeC {\^a}mica}{21}
 \contentsline {section}{\numberline {2.2}Controle}{24}
