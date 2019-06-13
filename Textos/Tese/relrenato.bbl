@@ -34,6 +34,11 @@ A.M. Bloch, M. Reyhanoglu, N.H. McClamroch.
 \newblock Control and stabilization of nonholonomic dynamic systems.
 \newblock {\em Automatic Control, IEEE Transactions on}, 37(11): 1746--1757, 1992.
 
+\bibitem{Briot}
+S. Briot, I.A. Bonev.
+\newblock Are parallel robots more accurate than serial robots?
+\newblock {\em Canadian Society for Mechanical Engineering (CSME) Transactions}, 31(4): 445--456, 2007.
+
 \bibitem{Cabral}
 E. L. L. Cabral.
 \newblock Cinem\'atica Direta de Rob\^os Manipuladores.
@@ -43,6 +48,26 @@ E. L. L. Cabral.
 E. F. Camacho, C. B. Alba.
 \newblock {\em {Model predictive control}}.
 \newblock Springer Science \& Business Media, 2013.
+
+\bibitem{Campos}
+L. Campos, F. Bourbonnais, I.A. Bonev, P. Bigras.
+\newblock Development of a five-bar parallel robot with large workspace.
+\newblock {\em Proc. of the ASME IDETC/CIE 2010 Montreal, Quebec, Canada}, August 15--18, 2010. [DETC2010-28962]
+
+\bibitem{CamposBonilla}
+A. A. Campos-Bonilla, R. Guenther, D. Martins.
+\newblock Differential kinematics of serial manipulators using virtual chains
+\newblock {\em Journal of the Brazilian Society of Mechanical Sciences and Engineering}, 24(4): 1--10, 2005.
+
+\bibitem{Carvalho}
+J. C. M. Carvalho, R.C. Ibrahim, T. A. H. Coelho.
+\newblock {\em {MECANISMOS, MÁQUINAS \& ROBÔS: uma abordagem unificada para a análise e síntese}}.
+\newblock ISBN: 978-85-3524654-4, Elsevier Editora Ltda, 2018.
+
+\bibitem{Clavel}
+R. Clavel.  
+\newblock Robots parallèles: du packaging à cadence élevée à la production d’ultra haute précision.
+\newblock {\em Journées Nationales de la Recherche en Robotique}, 8ème Edition, 2011.
 
 \bibitem{Chemori}
 A. Chemori, G. S. Natal, F. Pierrot.
@@ -58,6 +83,11 @@ S-L. Chen, Y-C. Tsai.
 H. Cheng, Y-K. Yiu, Z. Li.
 \newblock Dynamics and control of redundantly actuated parallel manipulators.
 \newblock {\em Mechatronics, IEEE/ASME Transactions on}, 8(4): 483--491, 2003.
+
+\bibitem{Chung}
+W. Chung, L-C. Fu, S-H. Hsu.
+\newblock Motion control.
+\newblock {\em Springer Handbook of Robotics}, Edited by B. Siciliano and O. Khatib, 133--159, 2008.
 
 \bibitem{Codourey}
 A. Codourey.
@@ -112,6 +142,15 @@ M. Ertugrul, O. Kaynak.
 \newblock Neuro sliding mode control of robotic manipulators.
 \newblock {\em Mechatronics}, 10(1): 239--263, 2000.
 
+\bibitem{Fontes1}
+J. V. C. Fontes, M. M. da Silva.
+\newblock On the dynamic performance of parallel kinematic manipulators with actuation and kinematic redundancies
+\newblock {\em Mechanism and Machine Theory}, 103: 148--166, 2016.
+
+\bibitem{Fontes2}
+J. V. C. Fontes, J. C. Santos,  M. M. da Silva.
+\newblock Numerical and experimental evaluation of the dynamic performance of kinematically redundant parallel manipulators
+\newblock {\em Journal of the Brazilian Society of Mechanical Sciences and Engineering}, 40: 142, 2018.
 
 \bibitem{Guldner}
 J. Guldner, V. I. Utkin.
@@ -134,6 +173,11 @@ E. Jarzebowska.
   nonholonomic systems.
 \newblock {\em Nonlinear Analysis: Theory, Methods and Applications},
   71(12):118 -- 131, 2009.
+
+\bibitem{Jiang}
+Y. Jiang, T. Li, L. Wang, F. Chen.
+\newblock Improving tracking accuracy of a novel 3-DOF redundant planar parallel kinematic machine.
+\newblock {\em Mechanism and Machine Theory}, 119: 198--218, 2018.
 
 \bibitem{Kaminski}
 P. C. Kaminski.
@@ -197,10 +241,20 @@ R. M. M. Orsino, T. A. H. Coelho, C. P. Pesce.
 \newblock Analytical mechanics approaches in the dynamic modelling of Delta mechanism
 \newblock {\em Robotica}, 33(4): 953--973, 2015.
 
+\bibitem{Pashkevich}
+A. Pashkevich, D. Chablat, P. Wenger.
+\newblock Kinematics and Workspace Analysis of a Three-Axis Parallel Manipulator: the Orthoglide
+\newblock {\em Robotica}, 24: 39--49, 2006.
+
 \bibitem{RK}
 P. J. Prince, J. R. Dormand.
 \newblock High order embedded Runge-Kutta formulae
 \newblock {\em Journal of Computational and Applied Mathematics}, 7(1): 67--75, 1981.
+
+\bibitem{Ruiz}
+A. G. Ruiz, J. C. Santos, J. Croes, W. Desmet, M. M. da Silva.
+\newblock On redundancy resolution and energy consumption of kinematically redundant planar parallel manipulators
+\newblock {\em Robotica}, 36: 1--13, 2018.
 
 \bibitem{Sadati}
 N. Sadati, R. Ghadami.
@@ -247,6 +301,11 @@ R. A. Tenenbaum.
 \newblock {\em {Fundamentals of Applied Dynamics}}.
 \newblock Springer Science \& Business Media, 2006.
 
+\bibitem{Toscano}
+G. S. Toscano, H. Simas, E. B. Castelan, D. Martins. 
+\newblock A new kinetostatic model for humanoid robots using screw theory
+\newblock {\em Robotica}, 1: 1--18, 2018.
+
 \bibitem{Tsai}
 L. W. Tsai.
 \newblock {\em {Robot Analysis: The Mechanics of Serial and Parallel Manipulators}}.
@@ -273,7 +332,7 @@ J. Wang, J. Wu, L. Wang, Z. You.
 \newblock {\em Mechatronics}, 19(3): 313--324, 2009.
 
 \bibitem{Yen}
-P-L. Yen, C-C. Lai
+P-L. Yen, C-C. Lai.
 \newblock Dynamic modeling and control of a 3-DOF Cartesian parallel manipulator
 \newblock {\em Mechatronics}, 19(3): 390--398, 2009.
 
@@ -281,6 +340,11 @@ P-L. Yen, C-C. Lai
 M. Zeinali, L. Notash.
 \newblock Adaptive sliding mode control with uncertainty estimator for robot manipulators
 \newblock {\em Mechanism and Machine Theory}, 45(1): 80--90, 2010.
+
+\bibitem{Zhan}
+Z. Zhan, X. Zhang, Z. Jian, H. Zhang. 
+\newblock Error modelling and motion reliability analysis of a planar parallel manipulator with multiple uncertainties
+\newblock {\em Mechanism and Machine Theory}, 124: 55--72, 2018.
 
 \bibitem{Zubizarreta}
 A. Zubizarreta, I. Cabanes, M. Marcos, C. Pinto,  E. Portillo.
@@ -302,11 +366,12 @@ A. Zubizarreta, M. Marcos, I. Cabanes, C. Pinto, E. Portillo.
 \newblock Redundant sensor based control of the 3RRR parallel robot
 \newblock {\em Mechanism and machine theory}, 54(1): 1--17, 2012.
 
-
 %\bibitem{Apostila}
 %R. M. M. Orsino, T. A. H. Coelho.
 %\newblock Metodologia para An\'alise e S\'intese de Mecanismos.
 %\newblock {\em Material de apoio para as disciplinas PMR2430 e PMR2331 - Escola Polit\'ecnica da Universidade de
 %S\~ao Paulo}, 2013.
+
+
 
 \end{thebibliography}
