@@ -209,9 +209,9 @@ Abstract...
 
 Os mecanismos de arquitetura paralela são amplamente utilizados em simuladores de voo, simuladores automobilisticos, e tarefas de {\em pick-and-place}. Além disso, também são empregados em sistemas de posicionamento, sistemas de medição, máquinas de usinagem, entre outras tarefas. 
 
-Este tipo de artitetura há mais de duas décadas já atrai pesquisadores e instituições com o intuito de investigar seu grande potencial em vários quesitos, como capacidade de carga, precisão de posicionamento, rigidez estrutural, consumo energético, baixa inércia, e de atingir altas velocidades e acelerações \cite{Cheng, Khalil, Merlet2002, Pashkevich, Tsai}. Grande parte desse potencial se deve à possibilidade de instalação de todos os motores na base imóvel do mecanismo, o que diminui significativamente sua a inércia. 
+Este tipo de arquitetura há mais de duas décadas já atrai pesquisadores e instituições com o intuito de investigar seu grande potencial em vários quesitos, como capacidade de carga, precisão de posicionamento, rigidez estrutural, consumo energético, baixa inércia, e de atingir altas velocidades e acelerações \cite{Cheng, Khalil, Merlet2002, Pashkevich, Tsai}. Grande parte desse potencial se deve à possibilidade de instalação de todos os motores na base imóvel do mecanismo, o que diminui significativamente sua a inércia. 
 
-Atualmente, este grande potêncial já consegue ser muito bem explorado em tarefas de {\em pick-and-place} \cite{Clavel} e usinagem \cite{Pashkevich}, entre outras. Porém, essas caraterísticas promissoras muitas vezes vem ao custo de algumas inconveniências associadas a este tipo de arquitetura, como o grande número de componentes mecânicos, um espaço de trabalho mais limitado, e um modelo dinâmico muito mais complexo e de difícil obtenção \cite{Rynaldo, Merlet2002}. Boa parte destas desvantagens, porém, se mostraram que podem ser contornadas através da escolha cuidadosa das juntas utilizadas, dos parâmetros cinemáticos, da topologia e do design mecânico \cite{Briot, Campos, Jiang, Zhan}.
+Atualmente, este grande potencial já consegue ser muito bem explorado em tarefas de {\em pick-and-place} \cite{Clavel} e usinagem \cite{Pashkevich}, entre outras. Porém, essas características promissoras muitas vezes vem ao custo de algumas inconveniências associadas a este tipo de arquitetura, como o grande número de componentes mecânicos, um espaço de trabalho mais limitado, e um modelo dinâmico muito mais complexo e de difícil obtenção \cite{Rynaldo, Merlet2002}. Boa parte destas desvantagens, porém, podem ser contornadas através da escolha cuidadosa das juntas utilizadas, dos parâmetros cinemáticos, da topologia e do design mecânico \cite{Briot, Campos, Jiang, Zhan}.
 
 \begin{figure}[h]
 	\centering
@@ -222,7 +222,10 @@ Atualmente, este grande potêncial já consegue ser muito bem explorado em taref
 
 Levando-se em conta esta dificuldade de obtenção e a complexidade inerente do modelo dinâmico, o controle de mecanismos de arquitetura paralela é uma tarefa desafiadora. A utilização de estratégias de controle não baseadas em modelo pode deixar muito a desejar na exploração do potencial que estes mecanismos oferecem, principalmente em tarefas de seguimento de trajetória \cite{Chung}, e a utilização de modelos dinâmicos simplificados pode limitar significativamente o desempenho do projeto de controladores baseados em modelo, principalmente quando se trabalha com altas velocidades e acelerações. Além disso, mesmo na hipótese do modelo dinâmico completo estar disponível, o emprego de técnicas de controle não linear pode acarretar um custo  computacional muito elevado \cite{Craig, Slotini, Zubizarreta, Zubizarreta3}. Este paradigma, aliado à escassez de trabalhos publicados com comprovação experimental de técnicas de controle aplicáveis a mecanismos paralelos \cite{Rynaldo}, resulta na exploração insatisfatória dos potenciais promissores de tais máquinas, como resposta dinâmica rápida e alta precisão \cite{Abdellatif}.
 	
-Com o intuito de atacar os problemas da dificuldade de obter modelos dinâmicos completos e diminuir o custo computacional de suas implementações em leis de controle baseadas em modelos, esta tese propõe um algoritmo genérico de modelagem dinâmica de mecanismos paralelos translacionais, o qual pode ser utilizado para calcular previamente termos do modelo dinâmico em um número finito de pontos do espaço de trabalho, sendo necessário apenas o cálculo de interpolações em tempo real. Além disso, atacando o problema da  escassez de trabalhos publicados com comprovação experimental de técnicas de controle aplicáveis a mecanismos paralelos, são obtidos e apresentados resultados experimentais da implementação de 8 diferentes estratégias de controle, tanto baseadas como não baseadas em modelo, incluindo estratégias de controle não linear robusto. Desta maneira, o trabalho desenvolvido nesta tese visa contribuir para uma melhor exploração do grandes potenciais dos mecanismos com este tipo de arquitetura.
+Com o intuito de atacar os problemas da dificuldade de obter modelos dinâmicos completos e diminuir o custo computacional de suas implementações em leis de controle baseadas em modelos, esta tese propõe um algoritmo genérico de modelagem dinâmica de mecanismos paralelos translacionais, o qual pode ser utilizado para calcular previamente termos do modelo dinâmico em um número finito de pontos do espaço de trabalho, sendo necessário apenas o cálculo de interpolações em tempo real.  Além disso, em virtude de existirem poucos  trabalhos publicados, apresentando comprovação experimental de técnicas de controle aplicáveis a mecanismos paralelos, nesta tese, são obtidos e apresentados resultados experimentais da implementação de 8 diferentes estratégias de controle, tanto baseadas como não baseadas em modelo, incluindo estratégias de controle não linear robusto. Desta maneira, o trabalho desenvolvido nesta tese visa contribuir para uma melhor exploração do grandes potenciais dos mecanismos com este tipo de arquitetura.
+
+
+%Além disso, atacando o problema da  escassez de trabalhos publicados com comprovação experimental de técnicas de controle aplicáveis a mecanismos paralelos, são obtidos e apresentados resultados experimentais da implementação de 8 diferentes estratégias de controle, tanto baseadas como não baseadas em modelo, incluindo estratégias de controle não linear robusto. Desta maneira, o trabalho desenvolvido nesta tese visa contribuir para uma melhor exploração do grandes potenciais dos mecanismos com este tipo de arquitetura.
     
     %Uma alternativa para a superação desta dificuldade seria a combinação de técnicas de controle não linear robusto (por exemplo, controle por modos deslizantes \cite{Slotini, Utkin}) com modelos dinâmicos completos de mecanismos paralelos, desenvolvidos a partir de novas metodologias de modelagem de sistemas multicorpos \cite{22orsino, Orsino2013, 23orsino, 21orsino}. Com esta estratégia, torna-se possível sintetizar leis de controle de alto desempenho e custo computacional mais adequado, viabilizando uma maior exploração do potencial promissor dos mecanismos paralelos.
 
@@ -264,7 +267,7 @@ Considerando o tema de pesquisa desta Tese, esta revisão se concentrará em tó
 
 Quando se trata de modelagem dinâmica, os mecanismos seriais possuem características topológicas e cinemáticas que podem ser exploradas para facilitar a geração dos modelos cinemáticos e dinâmicos. Suas estruturas mecânicas correspondem a mecanismos de cadeia aberta, apenas com juntas ativas de um grau de liberdade, rotativas ou prismáticas. Além disso, o número de coordenadas generalizadas coincide com o número de atuadores e com a mobilidade do mecanismo \cite{Craig}. 
 
-De fato, o modelo cinemático pode ser obtido, recursivamente ao longo da cadeia cinemática, pelo emprego de métodos vetoriais ou matriciais, partindo-se da base e se dirigindo ao efetuador \cite{Siciliano}. Tradicionalmente, empregam-se os vetores $\mq$ e $\mx$ para descrever as coordenadas associadas aos atuadores e ao efetuador, respectivamente \cite{Cabral}. Enquanto que o problema direto é de resolução relativamente simples, o problema inverso demanda a realização de um processo mais elaborado. Matematicamente, este corresponde à resolução de um sistema não-linear de equações algébricas. Para algumas topologias que utilizem mecanismos esféricos nos punhos, é possível alcançar o desacoplamento das equações de posição e orientação do efetuador \cite{Waldron}.
+De fato, o modelo cinemático pode ser obtido, recursivamente ao longo da cadeia cinemática, pelo emprego de métodos vetoriais ou matriciais, partindo-se da base e se dirigindo ao efetuador \cite{Siciliano}. Tradicionalmente, empregam-se os vetores $\mq$ e $\mx$ para descrever as coordenadas associadas aos atuadores e ao efetuador, respectivamente \cite{Cabral, Carvalho}. Enquanto que o problema direto é de resolução relativamente simples, o problema inverso demanda a realização de um processo mais elaborado. Matematicamente, este corresponde à resolução de um sistema não-linear de equações algébricas. Para algumas topologias que utilizem mecanismos esféricos nos punhos, é possível alcançar o desacoplamento das equações de posição e orientação do efetuador \cite{Waldron}.
 
 Com relação à dinâmica, a geração das equações também pode ser realizada de modo recursivo, partindo-se do efetuador e se dirigindo à base, sendo que a solução do problema inverso é obtida mediante a resolução de um sistema linear de equações algébricas. Por outro lado, a solução do problema dinâmico direto é alcançada pela integração de um sistema de equações diferenciais ordinárias (ODEs) \cite{Featherstone}.
 
@@ -347,6 +350,16 @@ Além disso, é largamente difundido que a escolha das variáveis cinemáticas i
 
 Na literatura, são conhecidas várias formulações para realizar a modelagem dinâmica de sistemas multicorpos, como os formalismos de Newton-Euler, Lagrange, Gibbs-Appel, Maggi, Boltzmann-Hamel, os métodos de Kane e Udwadia-Kalaba, e os princípios dos trabalhos virtuais e potências virtuais \cite{23orsino}. Porém, na literatura de modelagem de mecanismos paralelos, podemos destacar as seguintes formulações como as mais comumente utilizadas:
 
+\begin{itemize}
+\item Formalismo de Newton-Euler
+\item Formalismo de Lagrange
+\item Princípio dos Trabalhos Virtuais e das Potências Virtuais
+\item Formulação de Lagrange-D'Alembert
+\item Formalismo de Boltzmann-Hamel
+\item Método de Kane
+\item Formulação do Complemento Ortogonal Natural
+\end{itemize}
+
 \subsection{Formalismo de Newton-Euler}
 
 A utilização do formalismo de Newton-Euler é bastante popular para a realização de simulações dinâmicas de mecanismos seriais, tendo em vista que foram desenvolvidos algoritmos recursivos super eficientes para a aplicação deste formalismo neste tipo de arquitetura, como pode ser visto em Featherstone et al. \cite{Featherstone}. Porém, para se beneficiar deste tipo de estratégia em mecanismos paralelos, é necessária a utilização de algoritmos de fechamento de malha, os quais aumentam consideravelmente o custo computacional das simulações. Provavelmente por esta razão, aliada à questão da complexidade de implementação dos algoritmos, não foram encontrados na literatura artigos aplicando esta estratégia na modelagem de mecanismos paralelos. 
@@ -371,7 +384,7 @@ Em \cite{Yao}, é feita a simulação dinâmica inversa de um mecanismo ainda ma
 
 \subsection{Princípio dos Trabalhos Virtuais e das Potências Virtuais}
 
-Levando-se em conta a revisão feita, não foi percebida uma grande diferença de popularidade entre a utilização dos formalismos de Newton-Euler e Lagrange nos artigos que tratam da modelagem dinâmica de mecanismos paralelos. Porém, uma abordagem que se mostrou extremamente popular foi a utilização das formulações do princípio dos trabalhos virtuais ou do princípio das potências virtuais. Dentre os trabalhos que utilizam estes princípios, podemos citar os trabalhos de Arian et al. \cite{Arian} (já comentado), Codourey et al. \cite{Codourey, CodoureyBurdet}, Gallardo-Alvarado et al. \cite{GallardoAlvarado}, Geike et al. \cite{Geike}, Li et al. \cite{LiStaicu, Li}, Staicu et al. \cite{Staicu, Staicu2, Staicu3, StaicuCarpCiocardia, StaicuLiu, StaicuZhang, StaicuZhangRugescu},  Zhao et al. \cite{Zhao, Zhao2} e  Zhu et al. \cite{Zhu}.
+Levando-se em conta a revisão feita, não foi percebida uma grande diferença de popularidade entre a utilização dos formalismos de Newton-Euler e Lagrange nos artigos que tratam da modelagem dinâmica de mecanismos paralelos. Porém, uma abordagem que se mostrou extremamente popular foi a utilização das formulações do princípio dos trabalhos virtuais ou do princípio das potências virtuais. Dentre os trabalhos que utilizam estes princípios, podemos citar os trabalhos de Arian et al. \cite{Arian} (já comentado), Codourey et al. \cite{Codourey, CodoureyBurdet}, Gallardo-Alvarado et al. \cite{GallardoAlvarado}, Geike et al. \cite{Geike}, Li et al. \cite{LiStaicu, Li}, Staicu et al. \cite{Staicu, Staicu2, Staicu3, StaicuCarpCiocardia, StaicuLiu, StaicuZhang, StaicuZhangRugescu}, Wu et. al \cite{Wu}, Zhao et al. \cite{Zhao, Zhao2} e  Zhu et al. \cite{Zhu}.
 
 No trabalhos de Codourey et al. \cite{Codourey, CodoureyBurdet} e no de Li et al. \cite{Li}, são modelados mecanismos paralelos de 3 graus de liberdade, do tipo DELTA nos dois primeiros, e do tipo 3-PRS no terceiro, utilizando o princípio dos trabalhos virtuais. São desprezadas as inércias distribuídas dos elos ligados à plataforma, e suas massas são distribuídas entre as duas pontas em que cada elo é ligado, de modo a simplificar o processo de modelagem.
 
@@ -383,9 +396,38 @@ Nos trabalhos de Staicu et al. \cite{Staicu, Staicu2, Staicu3, StaicuCarpCiocard
 
 Por fim, nos trabalhos de Zhao et al. \cite{Zhao, Zhao2} e de Zhu et al. \cite{Zhu}, são modelados, utilizando o princípio dos trabalhos virtuais e o conceito de jacobianos dos elos, mecanismos paralelos de 6 graus de liberdade nos dois primeiros, e de 3 graus de liberdade no terceiro, sendo que em \cite{Zhao2} o mecanismo possui atuação redundante. Em todos são realizadas simulações dinâmicas inversas.
 
-%\subsection{Formulação de Lagrange-D’Alembert}
-%
-%Além disso, foram encontrados trabalhos que utilizam uma mistura do Princípio dos Trabalhos Virtuais com o formalismo de Lagrange, denominada formulação de Lagrange-D’Alembert, dentre os quais podemos citar o de Cheng et al \cite{ChengLiu} e Yen et al. \cite{Yen}. 
+\subsection{Formulação de Lagrange-D’Alembert}
+
+Além disso, foram encontrados trabalhos que utilizam uma mistura do Princípio dos Trabalhos Virtuais com o formalismo de Lagrange, denominada formulação de Lagrange-D’Alembert, dentre os quais podemos citar o de Cheng et al \cite{ChengLiu} e Yen et al. \cite{Yen}.
+
+O trabalho de Cheng et al \cite{ChengLiu}, pois nele é utilizada a formulação de Lagrange-D’Alembert para deduzir uma formulação de acoplamento de subsistemas. A formulação é utilizada para obter o modelo dinâmico de um mecanismo paralelo de 2 graus de liberdade com atuação redundante. São utilizados os modelos já conhecidos para as cadeias seriais, e é feito o acoplamento dos subsistemas a partir de jacobianos dos vínculos cinemáticos.
+
+Em \cite{Yen}, também é utilizada uma estratégia de acoplamento de subsistemas, também deduzida deduzida a partir formulação de Lagrange-D’Alembert, para obter o modelo dinâmico de um mecanismo paralelo de 3 graus de liberdado. No entanto, neste trabalho, a estratégia não é apresentada de uma maneira mais geral, podendo dar a impressão ao leitor de que isso só foi possível devido à topologia particular do mecanismo em questão. São realizadas simulações dinâmicas diretas do controle de posição do mecanismo, utilizando controladores as técnicas de controle PID e Controle por Torque Computado, as quais são comparadas com resultados experimentais utilizando as mesmas estratégias de controle.
+
+\subsection{Método de Kane}
+
+Uma formulação que é bastante popular na literatura de mecanismos seriais, porém não muito popular na literatura de mecanismos paralelos, é o Método de Kane \cite{Kane}. Dentre os poucos trabalhos que utilizam esta formulação para realizar a modelagem dinâmica de mecanismos paralelos, podemos citar os trabalhos de Ben-Horina et al. \cite{BenHorina} e Shukla et al. \cite{Shukla}.
+
+Em \cite{BenHorina}, é realizada a modelagem dinâmica, utilizando o método de Kane, de um robô paralelo de 6 graus de liberdade, cuja atuação é feita por 3 atuadores planos, os quais apresentam 2 graus de liberdade cada. A modelagem é feita com o auxílio do \emph{software} AUTOLEV. São realizadas simulações dinâmicas inversas do mecanismo proposto, e de mais dois mecanismos de 6 graus de liberdade, para efeito de comparação.
+
+Em \cite{Shukla}, também é realizada a modelagem dinâmica de um mecanismo paralelo de 6 graus de liberdade, uma plataforma de Gough–Stewart, utilizando o método de Kane. São realizadas simulações dinâmicas diretas do controle do mecanismo, considerando a dinâmica dos atuadores, utilizando malhas de controle do tipo PID em cascata e compensadores de atraso.
+
+\subsection{Formalismo de Boltzmann-Hamel}
+
+O Formalismo de Boltzmann-Hamel \cite{Jarzebowska} também não se mostrou muito popular na literatura de modelagem dinâmica de mecanismos paralelos. Dentre os trabalhos encontrados, podemos citar os trabalhos de Abdellatif et al. \cite{Abdellatif2} e o de Altuzarra et al. \cite{20altuzarra}.
+
+Tanto em \cite{Abdellatif2} quanto em \cite{20altuzarra}, são utilizadas as equações de Boltzmann-Hamel para a deduzir formulações que permitem a obtenção do modelo dinâmico explícito de mecanismos paralelos através dos modelos das cadeias seriais, do efetuador, e jacobianos dos vínculos cinemáticos. Em \cite{20altuzarra}, é utilizada a formulação proposta para obter o modelo dinâmico do mecanismo 3-PRS. Em \cite{Abdellatif2} são apresentadas simulações dinâmicas inversa e direta, sendo esta última com leis de controle baseadas no modelo, de um mecanismo paralelo de 6 graus de liberdade.
+
+
+\subsection{Formulação do Complemento Ortogonal Natural}
+
+As formulação do Complemento Ortogonal Natural pode ser considerada uma formulação bastante adequada para a modelagem dinâmica de mecanismos paralelos, tendo em vista 
+
+\cite{Akbarzadeh}, \cite{22orsino}, \cite{Orsino2013}, \cite{23orsino}, \cite{21orsino}, 
+
+
+
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1190,7 +1232,7 @@ Além disso, definindo as quasi-velocidades:
 \end{bmatrix}
 \end{empheq}
 
-E as quasi-coordenadas:
+E as quasi-coordenadas \cite{Jarzebowska2009}:
 \begin{empheq}[box=\lightbluebox]{equation} \label{eq:pi_i}
 \dd\mpi_i = \mp_i \dd t
 \end{empheq}
