@@ -421,9 +421,15 @@ Tanto em \cite{Abdellatif2} quanto em \cite{20altuzarra}, são utilizadas as equ
 
 \subsection{Formulação do Complemento Ortogonal Natural}
 
-As formulação do Complemento Ortogonal Natural pode ser considerada uma formulação bastante adequada para a modelagem dinâmica de mecanismos paralelos, tendo em vista 
+A formulação do Complemento Ortogonal Natural foi proposta por Angeles et al. em \cite{Angeles}. Sua principal idéia é projetar as equações dinâmicas de cada corpo rígido do sistema em um espaço ortogonal às reações vinculares. Este procedimento é realizado através da obtenção de um complemento ortogonal ao jacobiano das equações de vínculo obtido através de relações cinemáticas dos \emph{twists} de cada corpo com um conjunto de quasi-velocidades independentes. Formulações similares são bastante exploradas por Orsino et al. em \cite{22orsino}, e generalizadas em \cite{23orsino}. Dentre os trabalhos que utilizam esta formulação, podemos citar os trabalhos de Akbarzadeh et al. \cite{Akbarzadeh}, Khan et al. \cite{Khan} e Xi et al. \cite{Xi}.
 
-\cite{Akbarzadeh}, \cite{22orsino}, \cite{Orsino2013}, \cite{23orsino}, \cite{21orsino}, 
+Em \cite{Akbarzadeh}, é descrita uma metodologia genérica de modelagem dinâmica multi-corpos utilizando a formulação do Complemento Ortogonal Natural. Basicamente são obtidos os modelos dinâmicos desacoplados de cada corpo rígido, utilizando a formulação de Newton-Euler, e é feito o acomplamento das equações dinâmicas através do uso do Complemento Ortogonal Natural. A metodologia proposta é aplicada em um mecanismo paralelo esférico do tipo SST e são realizadas simulações dinâmicas inversa e direta do mecanismo.
+
+Em \cite{Xi}, é realizada a modelagem dinâmica de um mecanismo paralelos de 6 graus de liberdade, do tipo hexapod, utilizando a formulação do Complemento Ortogonal Natural. São realizadas simulações dinâmicas inversas do mecanismos em altas e baixas velocidades.
+
+Por fim, em \cite{Khan}, é proposta uma metodologia recursiva de modelagem baseada na formulação do Complemento Ortogonal Natural. A metodologia proposta é utilizada para a obtenção do modelo dinâmico de uma mecanismo paralelo plano do tipo 3-RRR, realizando primeiro a modelagem dinâmica das cadeias seriais, e acoplando-as utilizando o Complemento Ortogonal Natural. Também é realizada a simulação dinâmica inversa do mecanismo, utilizando o modelo obtido.
+
+
 
 
 

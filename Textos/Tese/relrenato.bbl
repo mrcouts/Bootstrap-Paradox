@@ -10,6 +10,11 @@ H. Abdellatif, B. Heimann, J. Kotlarski, T. Ortmaier.
 \newblock Practical model-based and robust control of parallel manipulators using passivity and sliding mode theory.
 \newblock {\em Robotics 2010: Current and Future Challenges}, InTech, 2010.
 
+\bibitem{Angeles}
+J. Angeles, S. K. Lee.
+\newblock The Formulation of Dynamical Equations of Holonomic Mechanical Systems Using a Natural Orthogonal Complement
+\newblock {\em Journal of Applied Mechanics}, 55(1): 243--244, 1988.
+
 \bibitem{Arian}
 A. Arian, B. Danaei, H. Abdi, S. Nahavandi.
 \newblock Kinematic and dynamic analysis of the Gantry-Tau, a 3-DoF translational parallel manipulator
@@ -277,6 +282,11 @@ W. Khalil, O. Ibrahim.
 \newblock General Solution for the Dynamic Modeling of Parallel Robots
 \newblock {\em Journal of Intelligent and Robotic Systems}, 49(1): 19--37, 2007.
 
+\bibitem{Khan}
+W. A. Khan, V. N. Krovi, S. K. Saha, J. Angeles.
+\newblock Recursive kinematics and inverse dynamics for a planar 3R parallel manipulator
+\newblock {\em Journal of Dynamic Systems, Measurement, and Control}, 127(4): 529--536, 2005.
+
 \bibitem{Kordjazi}
 H. Kordjazi, A. Akbarzadeh.
 \newblock Inverse dynamics of a 3-prismatic–revolute–revolute planar parallel manipulator using natural orthogonal complement
@@ -331,7 +341,7 @@ H. Lipkin.
 \newblock {\em ASME 2005 International Design Engineering Technical Conferences and Computers and Information in Engineering Conference}, 921--926, American Society of Mechanical Engineers, 2005.
 
 \bibitem{Mariti}
-L. Mariti, N. P. Belfiore, E. Pennestri ; P. P. Valentini.
+L. Mariti, N. P. Belfiore, E. Pennestri, P. P. Valentini.
 \newblock Comparison of solution strategies for multibody dynamics equations
 \newblock {\em International Journal for Numerical Methods in Engineering}, 88(7): 637--656, 2011.
 
@@ -341,7 +351,7 @@ J-P. Merlet.
 \newblock In {\em ASME DETC Conference, {Montreal, 2002}}, 2002.
 
 \bibitem{Merlet}
-J-P. Merlet, C. Gosselin
+J-P. Merlet, C. Gosselin.
 \newblock Parallel Mechanisms and Robots.
 \newblock {\em Springer Handbook of Robotics}, Edited by B. Siciliano and O. Khatib, 269--286, 2008.
 
@@ -350,27 +360,26 @@ P. E. Nikravesh.
 \newblock {\em {Computer-aided analysis of mechanical systems}}.
 \newblock Prentice Hall, 1988.
 
-\bibitem{22orsino}
-R. M. M. Orsino, A. G. Coutinho, T. A. H. Coelho.
-\newblock Dynamic Modelling and Control of Balanced Parallel Mechanisms.
-\newblock {\em Dynamic Balancing of Mechanisms and Synthesizing of Parallel Robots}, 403--445, Springer International Publishing, 2016.
-
 \bibitem{Orsino2013}
 R. M. M. Orsino, T. A. H. Coelho.
-\newblock A contribution for developing more efficient dynamic modelling
-  algorithms of parallel robots.
+\newblock A contribution for developing more efficient dynamic modelling algorithms of parallel robots
 \newblock {\em International Journal of Mechanisms and Robotic Systems},
   1(1): 15 -- 34, 2013.
-
-\bibitem{23orsino}
-R. M. M. Orsino, T. A. H. Coelho.
-\newblock A contribution on the modular modelling of multibody systems
-\newblock {\em Proc. Royal Society A}, 471(2183), The Royal Society, 2015.
 
 \bibitem{21orsino}
 R. M. M. Orsino, T. A. H. Coelho, C. P. Pesce.
 \newblock Analytical mechanics approaches in the dynamic modelling of Delta mechanism
 \newblock {\em Robotica}, 33(4): 953--973, 2015.
+
+\bibitem{22orsino}
+R. M. M. Orsino, A. G. Coutinho, T. A. H. Coelho.
+\newblock Dynamic Modelling and Control of Balanced Parallel Mechanisms
+\newblock {\em Dynamic Balancing of Mechanisms and Synthesizing of Parallel Robots}, 403--445, Springer International Publishing, 2016.
+
+\bibitem{23orsino}
+R. M. M. Orsino, T. A. H. Coelho.
+\newblock A contribution on the modular modelling of multibody systems
+\newblock {\em Proc. Royal Society A}, 471(2183), The Royal Society, 2015.
 
 \bibitem{Pashkevich}
 A. Pashkevich, D. Chablat, P. Wenger.
@@ -564,6 +573,11 @@ J. Wu, J. Wang, L. Wang, T. Li.
 \newblock Dynamics and control of a planar 3-DOF parallel manipulator with actuation redundancy
 \newblock {\em Mechanism and Machine Theory}, 44(4): 835--849, 2009.
 
+\bibitem{Xi}
+F. Xi, R. Sinatra.
+\newblock Inverse dynamics of hexapods using the natural orthogonal complement method
+\newblock {\em Journal of manufacturing systems}, 21(2): 73--82, 2002.
+
 \bibitem{Yao}
 J. Yao, W. Gu, Z. Feng, L. Chen, Y. Xu, Y. Zhao.
 \newblock Dynamic analysis and driving force optimization of a 5-DOF parallel manipulator with redundant actuation
@@ -629,5 +643,8 @@ A. Zubizarreta, M. Marcos, I. Cabanes, C. Pinto, E. Portillo.
 %\newblock Metodologia para An\'alise e S\'intese de Mecanismos.
 %\newblock {\em Material de apoio para as disciplinas PMR2430 e PMR2331 - Escola Polit\'ecnica da Universidade de
 %S\~ao Paulo}, 2013.
+
+
+
 
 \end{thebibliography}
