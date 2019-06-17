@@ -360,16 +360,22 @@ P. E. Nikravesh.
 \newblock {\em {Computer-aided analysis of mechanical systems}}.
 \newblock Prentice Hall, 1988.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \bibitem{Orsino2013}
 R. M. M. Orsino, T. A. H. Coelho.
 \newblock A contribution for developing more efficient dynamic modelling algorithms of parallel robots
 \newblock {\em International Journal of Mechanisms and Robotic Systems},
   1(1): 15 -- 34, 2013.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \bibitem{21orsino}
 R. M. M. Orsino, T. A. H. Coelho, C. P. Pesce.
 \newblock Analytical mechanics approaches in the dynamic modelling of Delta mechanism
 \newblock {\em Robotica}, 33(4): 953--973, 2015.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \bibitem{22orsino}
 R. M. M. Orsino, A. G. Coutinho, T. A. H. Coelho.
@@ -553,10 +559,14 @@ V. Utkin, H. Lee
 \newblock Chattering problem in sliding mode control systems
 \newblock {\em International Workshop on Variable Structure Systems, 2006. VSS'06}, 346--350, 2006.
 
+%++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 \bibitem{Vivas}
 A. Vivas, P. Poignet.
 \newblock Predictive functional control of a parallel robot
 \newblock {\em Control Engineering Practice}, 13(7): 863--874, 2005.
+
+%++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 \bibitem{Waldron}
 K. Waldron, J. Schmiedeler.
