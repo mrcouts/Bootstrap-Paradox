@@ -112,12 +112,12 @@ Dy* Parallel::Doit(vec q0_, vec q1_){
     v_ = join_vert(v__, nR_+1);
     g_ = join_vert(g__, nR_+1);
     // Mh_, vh_ e gh_
-    //dy->Mh_ = solve(Z_.t(), C_.t()*M_*C_);
-    //dy->vh_ = solve(Z_.t(), C_.t()*( M_*join_vert(zeros(dof), solve(Ao_, b_) ) + v_ ));
-    //dy->gh_ = solve(Z_.t(), C_.t()*g_);
-    mat invZ_ = inv(Z_);
-    dy->Mh_ = invZ_.t()*(C_.t()*M_*C_)*invZ_;
-    dy->vh_ = invZ_.t()*(C_.t()*( M_*join_vert(zeros(dof), solve(Ao_, b_) ) + v_ ));
-    dy->gh_ = invZ_.t()*(C_.t()*g_);
+    dy->Mh_ = solve(Z_.t(), C_.t()*M_*C_);
+    dy->vh_ = solve(Z_.t(), C_.t()*( M_*join_vert(zeros(dof), solve(Ao_, b_) ) + v_ ));
+    dy->gh_ = solve(Z_.t(), C_.t()*g_);
+    //mat invZ_ = inv(Z_);
+    //dy->Mh_ = invZ_.t()*(C_.t()*M_*C_)*invZ_;
+    //dy->vh_ = invZ_.t()*(C_.t()*( M_*join_vert(zeros(dof), solve(Ao_, b_) ) + v_ ));
+    //dy->gh_ = invZ_.t()*(C_.t()*g_);
     return dy;
 }

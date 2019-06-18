@@ -1,19 +1,17 @@
 \select@language {brazil}
-\contentsline {table}{\numberline {1}{\ignorespaces DH}}{88}
-\contentsline {table}{\numberline {2}{\ignorespaces Par\IeC {\^a}metros da cadeia 1}}{99}
-\contentsline {table}{\numberline {3}{\ignorespaces Par\IeC {\^a}metros da cadeia 2}}{99}
-\contentsline {table}{\numberline {4}{\ignorespaces Par\IeC {\^a}metros do Motor 1}}{100}
-\contentsline {table}{\numberline {5}{\ignorespaces Par\IeC {\^a}metros do Motor 2}}{100}
-\contentsline {table}{\numberline {6}{\ignorespaces Par\IeC {\^a}metros dos controladores: espa\IeC {\c c}o das juntas - trajet\IeC {\'o}ria circular}}{101}
-\contentsline {table}{\numberline {7}{\ignorespaces Par\IeC {\^a}metros dos controladores: espa\IeC {\c c}o das juntas - trajet\IeC {\'o}ria triangular}}{101}
-\contentsline {table}{\numberline {8}{\ignorespaces Par\IeC {\^a}metros dos controladores: espa\IeC {\c c}o da tarefa}}{102}
-\contentsline {table}{\numberline {9}{\ignorespaces Valores eficazes de erro e esfor\IeC {\c c}o de controle (em regime permanente) - Trajet\IeC {\'o}ria circular}}{119}
-\contentsline {table}{\numberline {10}{\ignorespaces Valores eficazes de erro e esfor\IeC {\c c}o de controle - Trajet\IeC {\'o}ria triangular}}{119}
-\contentsline {table}{\numberline {11}{\ignorespaces Aumento/diminui\IeC {\c c}\IeC {\~a}o dos valores eficazes de erro e esfor\IeC {\c c}o de controle utilizando a associa\IeC {\c c}\IeC {\~a}o com o MD - Trajet\IeC {\'o}ria circular}}{119}
-\contentsline {table}{\numberline {12}{\ignorespaces Aumento/diminui\IeC {\c c}\IeC {\~a}o dos valores eficazes de erro e esfor\IeC {\c c}o de controle utilizando a associa\IeC {\c c}\IeC {\~a}o com o SMC - Trajet\IeC {\'o}ria triangular}}{120}
-\contentsline {table}{\numberline {13}{\ignorespaces Erro estacion\IeC {\'a}rio de posi\IeC {\c c}\IeC {\~a}o - Trajet\IeC {\'o}ria circular}}{120}
-\contentsline {table}{\numberline {14}{\ignorespaces Erro estacion\IeC {\'a}rio de posi\IeC {\c c}\IeC {\~a}o - Trajet\IeC {\'o}ria triangular}}{120}
-\contentsline {table}{\numberline {15}{\ignorespaces Medi\IeC {\c c}\IeC {\~o}es para obten\IeC {\c c}\IeC {\~a}o de $k_{e}$ do motor 1}}{149}
-\contentsline {table}{\numberline {\ref {parametrosMotor}}{\ignorespaces Par\IeC {\^a}metros do Motor 1}}{151}
-\contentsline {table}{\numberline {16}{\ignorespaces Medi\IeC {\c c}\IeC {\~o}es para obten\IeC {\c c}\IeC {\~a}o de $k_{e}$ do motor 2}}{151}
-\contentsline {table}{\numberline {\ref {parametrosMotor2}}{\ignorespaces Par\IeC {\^a}metros do Motor 2}}{152}
+\contentsline {table}{\numberline {1}{\ignorespaces Par\IeC {\^a}metros de Denavit-Hartemberg do mecanismo \relax $\@@underline {\hbox {R}}\mathsurround \z@ $\relax \relax $\@@underline {\hbox {R}}\mathsurround \z@ $\relax }}{90}
+\contentsline {table}{\numberline {2}{\ignorespaces Par\IeC {\^a}metros da cadeia serial 1}}{102}
+\contentsline {table}{\numberline {3}{\ignorespaces Par\IeC {\^a}metros da cadeia 2}}{103}
+\contentsline {table}{\numberline {4}{\ignorespaces Par\IeC {\^a}metros dos controladores: espa\IeC {\c c}o das juntas - trajet\IeC {\'o}ria circular}}{104}
+\contentsline {table}{\numberline {5}{\ignorespaces Par\IeC {\^a}metros dos controladores: espa\IeC {\c c}o das juntas - trajet\IeC {\'o}ria triangular}}{104}
+\contentsline {table}{\numberline {6}{\ignorespaces Par\IeC {\^a}metros dos controladores: espa\IeC {\c c}o da tarefa}}{105}
+\contentsline {table}{\numberline {7}{\ignorespaces Valores eficazes de erro e esfor\IeC {\c c}o de controle (em regime permanente) - Trajet\IeC {\'o}ria circular}}{122}
+\contentsline {table}{\numberline {8}{\ignorespaces Valores eficazes de erro e esfor\IeC {\c c}o de controle - Trajet\IeC {\'o}ria triangular}}{122}
+\contentsline {table}{\numberline {9}{\ignorespaces Aumento/diminui\IeC {\c c}\IeC {\~a}o dos valores eficazes de erro e esfor\IeC {\c c}o de controle utilizando a associa\IeC {\c c}\IeC {\~a}o com o MD - Trajet\IeC {\'o}ria circular}}{123}
+\contentsline {table}{\numberline {10}{\ignorespaces Aumento/diminui\IeC {\c c}\IeC {\~a}o dos valores eficazes de erro e esfor\IeC {\c c}o de controle utilizando a associa\IeC {\c c}\IeC {\~a}o com o SMC - Trajet\IeC {\'o}ria triangular}}{123}
+\contentsline {table}{\numberline {11}{\ignorespaces Erro estacion\IeC {\'a}rio de posi\IeC {\c c}\IeC {\~a}o - Trajet\IeC {\'o}ria circular}}{123}
+\contentsline {table}{\numberline {12}{\ignorespaces Erro estacion\IeC {\'a}rio de posi\IeC {\c c}\IeC {\~a}o - Trajet\IeC {\'o}ria triangular}}{124}
+\contentsline {table}{\numberline {13}{\ignorespaces Medi\IeC {\c c}\IeC {\~o}es para obten\IeC {\c c}\IeC {\~a}o de $k_{e}$ do motor 1}}{153}
+\contentsline {table}{\numberline {14}{\ignorespaces Par\IeC {\^a}metros do Motor 1}}{155}
+\contentsline {table}{\numberline {15}{\ignorespaces Medi\IeC {\c c}\IeC {\~o}es para obten\IeC {\c c}\IeC {\~a}o de $k_{e}$ do motor 2}}{155}
+\contentsline {table}{\numberline {16}{\ignorespaces Par\IeC {\^a}metros do Motor 2}}{156}

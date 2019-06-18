@@ -13,9 +13,10 @@ CLASS5 = Parallel
 CLASS6 = Reference
 CLASS7 = GNR
 CLASS8 = GNR2
+CLASS9 = Filter
 
 # objects
-OBJS = $(NAME).o $(FUNC).o $(CLASS).o $(CLASS2).o $(CLASS3).o $(CLASS4).o $(CLASS5).o $(CLASS6).o $(CLASS7).o $(CLASS8).o RR.o RK.o
+OBJS = $(NAME).o $(FUNC).o $(CLASS).o $(CLASS2).o $(CLASS3).o $(CLASS4).o $(CLASS5).o $(CLASS6).o $(CLASS7).o $(CLASS8).o $(CLASS9).o RR.o RK.o
 
 # compiler and linker
 CC = g++
@@ -39,7 +40,7 @@ all: $(NAME)
 $(NAME) : $(OBJS)
 	$(LD) $(LFLAGS) $(OBJS) -o $(NAME) $(LIBS)
 
-$(NAME).o: $(NAME).cpp $(FUNC).h $(CLASS).h $(CLASS2).h $(CLASS3).h $(CLASS4).h $(CLASS5).h $(CLASS6).h $(CLASS7).h $(CLASS8).h RR.h RK.h
+$(NAME).o: $(NAME).cpp $(FUNC).h $(CLASS).h $(CLASS2).h $(CLASS3).h $(CLASS4).h $(CLASS5).h $(CLASS6).h $(CLASS7).h $(CLASS8).h $(CLASS9).h RR.h RK.h
 	$(CC) $(CFLAGS) $(NAME).cpp
 
 $(FUNC).o: $(FUNC).h $(FUNC).cpp
@@ -66,10 +67,13 @@ $(CLASS6).o: $(CLASS6).h $(CLASS6).cpp
 $(CLASS7).o: $(CLASS7).h $(CLASS7).cpp $(CLASS5).h
 	$(CC) $(CFLAGS) $(CLASS7).cpp
 
+$(CLASS9).o: $(CLASS9).h $(CLASS9).cpp
+	$(CC) $(CFLAGS) $(CLASS9).cpp
+
 RR.o: RR.h RR.cpp
 	$(CC) $(CFLAGS) RR.cpp
 
-RK.o: RK.h RK.cpp $(CLASS4).h $(CLASS7).h 
+RK.o: RK.h RK.cpp $(CLASS4).h $(CLASS7).h $(CLASS9).h
 	$(CC) $(CFLAGS) RK.cpp
 
 $(CLASS8).o: $(CLASS8).h $(CLASS8).cpp $(CLASS7).h RK.h

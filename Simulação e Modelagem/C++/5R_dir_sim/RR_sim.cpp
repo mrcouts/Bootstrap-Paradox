@@ -13,19 +13,19 @@ vec r_(double t){
     double r = 0.07;
     double x0 = 0.0;
     double y0 = 0.17;
-    double w = 2/r;
+    double w = 2*PI;
     return {x0+r*cos(w*t), y0+r*sin(w*t)};
 }
 
 vec dr_(double t){
     double r = 0.07;
-    double w = 2/r;
+    double w = 2*PI;
     return {-w*r*sin(w*t), w*r*cos(w*t)};
 }
 
 vec d2r_(double t){
     double r = 0.07;
-    double w = 2/r;
+    double w = 2*PI;
     return {-w*w*r*cos(w*t), -w*w*r*sin(w*t)};
 }
 
@@ -53,8 +53,8 @@ int main(){
     //vec sigma_ = ((vec){0.3, 0.1, 0.2, 0.1, 0.5, 0.1}) % sign(randn(6))*1.8;
     //vec sigma_ = sign(randn(6))*0.5;
     //vec sigma_ = {-0.15,0.15,0.15,0.15,0.15,0.15};
-    vec sigma_ = {-0.5,0.5,0.5,0.5,0.5,0.5};
-    vec coef_  = ones(6) + 0*sigma_;
+    vec sigma_ = {-1,1,1,1,1,1};
+    vec coef_  = ones(6) + 0.4*sigma_;
 
     cube I__; I__.zeros(3,3,2);
     I__.slice(0) << 0 << 0   << 0   << endr
@@ -75,14 +75,14 @@ int main(){
                   << 0 << 0            << coef_(5)*Jz2 << endr;
 
 
-    Serial RR1 = Serial(2, {l1, l2}, {lg1, lg2},{m1, m2}, I__ , {0, -9.8,0}, &fDH_RR);
-    Serial RR2 = Serial(2, {l1, l2}, {lg1, lg2},{m1, m2}, I__ , {0, -9.8,0}, &fDH_RR);
+    Serial RR1 = Serial(2, {l1, l2}, {lg1, lg2},{m1, m2}, I__ , {0,0,9.8}, &fDH_RR);
+    Serial RR2 = Serial(2, {l1, l2}, {lg1, lg2},{m1, m2}, I__ , {0,0,9.8}, &fDH_RR);
     Serial **RR_ = new Serial* [2];
     RR_[0] = &RR1;
     RR_[1] = &RR2;
 
-    Serial _RR1 = Serial(2, {l1, l2}, {coef_(0)*lg1, coef_(1)*lg2},{coef_(2)*m1, coef_(3)*m2}, _I__ , {0, -9.8,0}, &fDH_RR);
-    Serial _RR2 = Serial(2, {l1, l2}, {coef_(0)*lg1, coef_(1)*lg2},{coef_(2)*m1, coef_(3)*m2}, _I__ , {0, -9.8,0}, &fDH_RR);
+    Serial _RR1 = Serial(2, {l1, l2}, {coef_(0)*lg1, coef_(1)*lg2},{coef_(2)*m1, coef_(3)*m2}, _I__ , {0,0,9.8}, &fDH_RR);
+    Serial _RR2 = Serial(2, {l1, l2}, {coef_(0)*lg1, coef_(1)*lg2},{coef_(2)*m1, coef_(3)*m2}, _I__ , {0,0,9.8}, &fDH_RR);
     Serial **_RR_ = new Serial* [2];
     _RR_[0] = &_RR1;
     _RR_[1] = &_RR2;
@@ -157,7 +157,7 @@ int main(){
     */
 
     RK rk = RK("RK6", &AC);
-    rk.Doit(0.00005, 0.6, x0_);
+    rk.Doit(0.0005, 3.0, x0_);
     double t;
     vec ref_; ref_.zeros(2);
     vec dref_; dref_.zeros(2);
