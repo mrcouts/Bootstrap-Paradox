@@ -10,23 +10,32 @@
 #include "Parallel.h"
 
 vec r_(double t){
-    double r = 0.07;
+    double r = 0.05;
     double x0 = 0.0;
-    double y0 = 0.17;
+    double y0 = 0.158;
     double w = 2*PI;
-    return {x0+r*cos(w*t), y0+r*sin(w*t)};
+    if(t<8.0){
+        return {x0-r*sin(w*t), y0-r*cos(w*t)};}
+    else
+        return {x0-r*sin(w*0), y0-r*cos(w*0)};
 }
 
 vec dr_(double t){
-    double r = 0.07;
+    double r = 0.05;
     double w = 2*PI;
-    return {-w*r*sin(w*t), w*r*cos(w*t)};
+    if(t<8.0){
+        return {-w*r*cos(w*t), +w*r*sin(w*t)};}
+    else
+        return {0,0};
 }
 
 vec d2r_(double t){
-    double r = 0.07;
+    double r = 0.05;
     double w = 2*PI;
-    return {-w*w*r*cos(w*t), -w*w*r*sin(w*t)};
+    if(t<8.0){
+        return {+w*w*r*sin(w*t), w*w*r*cos(w*t)};}
+    else
+        return {0,0};
 }
 
 Dy* (dy_comp)(vec q0_, vec q1_){
@@ -40,49 +49,78 @@ int main(){
     Mecanismo P = Mecanismo(2);
     Mecanismo _P= Mecanismo(2);
 
-    double l1  = 0.12;
-    double l2  = 0.15;
-    double lg1 = 0.5*0.12;
-    double lg2 = 0.5*0.15;
-    double m1 = 0.143;
-    double m2 = 0.171;
-    double Jz1 = 171.6e-6;
-    double Jz2 = 320.6e-6;
+//    double l1  = 0.12;
+//    double l2  = 0.16;
+//    double lg1 = 0.06;
+//    double lg2 = 0.68;
+//    double m1 = 0.062;
+//    double m2 = 0.110;
+//    double Jz1 = 200.6e-6;
+//    double Jz2 = 750.6e-6;
+//
+//    double l1  = 0.12;
+//    double l2  = 0.16;
+//    double lg1 = 0.06;
+//    double lg2 = 0.68;
+//    double m1 = 0.062;
+//    double m2 = 0.110;
+//    double Jz1 = 200.6e-6;
+//    double Jz2 = 750.6e-6;
+//
+//    arma_rng::set_seed_random();
+//    //vec sigma_ = ((vec){0.3, 0.1, 0.2, 0.1, 0.5, 0.1}) % sign(randn(6))*1.8;
+//    //vec sigma_ = sign(randn(6))*0.5;
+//    //vec sigma_ = {-0.15,0.15,0.15,0.15,0.15,0.15};
+    vec sigma_ = {-0.5,0.5,0.5,0.5,0.5,0.5};
+    vec coef_  = ones(6) + 0*sigma_;
+//
+//    cube I__; I__.zeros(3,3,2);
+//    I__.slice(0) << 0 << 0   << 0   << endr
+//                 << 0 << Jz1 << 0   << endr
+//                 << 0 << 0   << Jz1 << endr;
+//
+//    I__.slice(1) << 0 << 0   << 0   << endr
+//                 << 0 << Jz2 << 0   << endr
+//                 << 0 << 0   << Jz2 << endr;
+//
+//    cube _I__; _I__.zeros(3,3,2);
+//    _I__.slice(0) << 0 << 0           << 0            << endr
+//                 << 0 << coef_(4)*Jz1 << 0            << endr
+//                 << 0 << 0            << coef_(4)*Jz1 << endr;
+//
+//    _I__.slice(1) << 0 << 0            << 0            << endr
+//                  << 0 << coef_(5)*Jz2 << 0            << endr
+//                  << 0 << 0            << coef_(5)*Jz2 << endr;
+//
 
-    arma_rng::set_seed_random();
-    //vec sigma_ = ((vec){0.3, 0.1, 0.2, 0.1, 0.5, 0.1}) % sign(randn(6))*1.8;
-    //vec sigma_ = sign(randn(6))*0.5;
-    //vec sigma_ = {-0.15,0.15,0.15,0.15,0.15,0.15};
-    vec sigma_ = {-1,1,1,1,1,1};
-    vec coef_  = ones(6) + 0.4*sigma_;
+    cube I1__; I1__.zeros(3,3,2);
+    I1__.slice(0) << 0 << 0                       << 0          << endr
+                  << 0 << 107.307e-6 + 146.869e-6 << 0          << endr
+                  << 0 << 0                       << 107.307e-6 + 146.869e-6 << endr;
 
-    cube I__; I__.zeros(3,3,2);
-    I__.slice(0) << 0 << 0   << 0   << endr
-                 << 0 << Jz1 << 0   << endr
-                 << 0 << 0   << Jz1 << endr;
+    I1__.slice(1) << 0 << 0        << 0        << endr
+                  << 0 << 438.0e-6 << 0        << endr
+                  << 0 << 0        << 438.0e-6 << endr;
 
-    I__.slice(1) << 0 << 0   << 0   << endr
-                 << 0 << Jz2 << 0   << endr
-                 << 0 << 0   << Jz2 << endr;
+    cube I2__; I2__.zeros(3,3,2);
+    I2__.slice(0) << 0 << 0                        << 0          << endr
+                  << 0 << 107.307e-6 + 188.738e-6  << 0          << endr
+                  << 0 << 0                        << 107.307e-6 + 188.738e-6  << endr;
 
-    cube _I__; _I__.zeros(3,3,2);
-    _I__.slice(0) << 0 << 0           << 0            << endr
-                 << 0 << coef_(4)*Jz1 << 0            << endr
-                 << 0 << 0            << coef_(4)*Jz1 << endr;
+    I2__.slice(1) << 0 << 0          << 0          << endr
+                  << 0 << 301.679e-6 << 0          << endr
+                  << 0 << 0          << 301.679e-6 << endr;
 
-    _I__.slice(1) << 0 << 0            << 0            << endr
-                  << 0 << coef_(5)*Jz2 << 0            << endr
-                  << 0 << 0            << coef_(5)*Jz2 << endr;
-
-
-    Serial RR1 = Serial(2, {l1, l2}, {lg1, lg2},{m1, m2}, I__ , {0,0,9.8}, &fDH_RR);
-    Serial RR2 = Serial(2, {l1, l2}, {lg1, lg2},{m1, m2}, I__ , {0,0,9.8}, &fDH_RR);
+    Serial RR1 = Serial(2, {0.12, 0.16}, {0.06, 0.078},{0.062, 0.124}, I1__ , {0, 0, 9.8}, &fDH_RR);
+    Serial RR2 = Serial(2, {0.12, 0.16}, {0.06, 0.058},{0.062, 0.097}, I2__ , {0, 0, 9.8}, &fDH_RR);
     Serial **RR_ = new Serial* [2];
     RR_[0] = &RR1;
     RR_[1] = &RR2;
 
-    Serial _RR1 = Serial(2, {l1, l2}, {coef_(0)*lg1, coef_(1)*lg2},{coef_(2)*m1, coef_(3)*m2}, _I__ , {0,0,9.8}, &fDH_RR);
-    Serial _RR2 = Serial(2, {l1, l2}, {coef_(0)*lg1, coef_(1)*lg2},{coef_(2)*m1, coef_(3)*m2}, _I__ , {0,0,9.8}, &fDH_RR);
+    //Serial _RR1 = Serial(2, {l1, l2}, {coef_(0)*lg1, coef_(1)*lg2},{coef_(2)*m1, coef_(3)*m2}, _I__ , {0, -0*9.8,0}, &fDH_RR);
+    //Serial _RR2 = Serial(2, {l1, l2}, {coef_(0)*lg1, coef_(1)*lg2},{coef_(2)*m1, coef_(3)*m2}, _I__ , {0, -0*9.8,0}, &fDH_RR);
+    Serial _RR1 = Serial(2, {0.12, 0.16}, {coef_(0)*0.06, coef_(1)*0.078},{coef_(2)*0.062, coef_(3)*0.124}, {1.226e-4, 0}, {4.357e-2, 0}, coef_(4)*I1__ , {0, 0, 9.8}, &fDH_RR);
+    Serial _RR2 = Serial(2, {0.12, 0.16}, {coef_(0)*0.06, coef_(1)*0.058},{coef_(2)*0.062, coef_(3)*0.097}, {2.039e-4, 0}, {4.992e-2, 0}, coef_(4)*I2__ , {0, 0, 9.8}, &fDH_RR);
     Serial **_RR_ = new Serial* [2];
     _RR_[0] = &_RR1;
     _RR_[1] = &_RR2;
@@ -98,7 +136,7 @@ int main(){
     Reference RefObj = Reference(1.2, {0.07, 0.17}, {0.07, 0.17});
 
     //Simulação dinâmica
-    double lambda = 40.0;
+    double lambda = 60.0;
     
     
     //double eta = 93.5768;
@@ -144,7 +182,7 @@ int main(){
     
     
 
-    vec q0_ = {0.0700,  0.1700, 0.4251, 1.7835, 1.3969, 1.3921};
+    vec q0_ = {0.0,  0.108,  0.5375391526183005, 2.308800210309811,  0.5375391526183005, 2.308800210309811};
     vec x0_ = join_vert(q0_, zeros(6));
     
 
@@ -157,7 +195,7 @@ int main(){
     */
 
     RK rk = RK("RK6", &AC);
-    rk.Doit(0.0005, 3.0, x0_);
+    rk.Doit(0.0005, 9.0, x0_);
     double t;
     vec ref_; ref_.zeros(2);
     vec dref_; dref_.zeros(2);

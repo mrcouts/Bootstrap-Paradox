@@ -68,6 +68,45 @@ Serial::Serial(int dof, vec l_, vec lg_, vec m_, cube I__, vec g_, mat (*fDH)(ve
 	this->I__= I__;
 	this->g_ = g_;
 	this->fDH = fDH;
+	b_.zeros(dof);
+	mi_.zeros(dof);
+	u_.zeros(dof);
+	Ig__.zeros(3,3,dof);
+	Hr__.zeros(4,4,dof);
+	H__.zeros(4,4,dof);
+	z__.zeros(3,dof+1);
+	z__(2,0) = 1;
+	o__.zeros(3,dof+1);
+	x_.zeros(3);
+	og__.zeros(3,dof);
+	Jv__.zeros(3,dof,dof);
+	Jw__.zeros(3,dof,dof);
+	Jv_n_.zeros(3,dof);
+	Jw_n_.zeros(3,dof);
+	Mh_.zeros(dof,dof);
+	vh_.zeros(dof);
+	gh_.zeros(dof);
+	v__.zeros(3,dof+1);
+	v___.zeros(3,dof+1,dof);
+	w__.zeros(3,dof+1);
+	a_co_n_i_.zeros(3,dof);
+	dw_co_n_i_.zeros(3,dof);
+	a_co_n_.zeros(3);
+	dw_co_n_.zeros(3);
+	a_co_ij__.zeros(3,dof,dof);
+	a_co__.zeros(3,dof);
+	dw_co__.zeros(3,dof);
+}
+
+Serial::Serial(int dof, vec l_, vec lg_, vec m_, vec b_, vec mi_, cube I__, vec g_, mat (*fDH)(vec, vec, vec)):Mecanismo(dof){
+	this->l_ = l_;
+	this->lg_= lg_;
+	this->m_= m_;
+	this->b_ = b_;
+	this->mi_ = mi_;
+	this->I__= I__;
+	this->g_ = g_;
+	this->fDH = fDH;
 	u_.zeros(dof);
 	Ig__.zeros(3,3,dof);
 	Hr__.zeros(4,4,dof);
@@ -98,6 +137,8 @@ Serial::Serial(int dof, vec l_, vec lg_, vec m_, cube I__, vec g_, mat (*fDH)(ve
 
 Serial::~Serial(){
 	u_.clear();
+	b_.clear();
+	mi_.clear();
 	l_.clear();
 	lg_.clear();
 	Ig__.clear();
@@ -192,6 +233,8 @@ Dy* Serial::Doit(vec q0_, vec q1_){
 		Mh_ += m_(i)*Jv__.slice(i).t()*Jv__.slice(i) + Jw__.slice(i).t()*Ig__.slice(i)*Jw__.slice(i);
 		vh_+= Jw__.slice(i).t()*(cross(Jw__.slice(i)*q1_, Ig__.slice(i)*Jw__.slice(i)*q1_) + Ig__.slice(i)*dw_co__.col(i)) + m_(i)*Jv__.slice(i).t()*a_co__.col(i);
 		gh_+= -m_(i)*Jv__.slice(i).t()*g_; }
+
+	vh_ += b_ % q1_ + mi_ % atan(10*q1_);
 
 	dy->Mh_ = Mh_;
 	dy->vh_ = vh_;

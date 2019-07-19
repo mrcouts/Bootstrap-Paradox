@@ -64,6 +64,7 @@ public:
 class Serial:public Mecanismo {
 public:
     Serial(int dof, vec l_, vec lg_, vec m_, cube I__, vec g_, mat (*fDH)(vec, vec, vec));
+    Serial(int dof, vec l_, vec lg_, vec m_, vec b_, vec mi_, cube I__, vec g_, mat (*fDH)(vec, vec, vec));
     ~Serial();
     Dy* Doit(vec q0_, vec q1_);
     vec Acc(vec q0_, vec q1_, vec u_);
@@ -73,6 +74,8 @@ public:
     vec l_;
     vec lg_;
     vec m_;
+    vec b_;
+    vec mi_;
     cube I__;
     cube Ig__;
     vec g_;
