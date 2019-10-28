@@ -159,6 +159,17 @@
 \begin{frame}{Motiva\c{c}\~ao}
 	\framesubtitle{Grupo de pesquisa}
 	\pause
+	\begin{block}{LaMMaR}
+		Laborat\'orio de Mecanismos, M\'aquinas e Rob\^os
+    \end{block}
+    \begin{figure}[!h]
+        \centering
+        \includegraphics[scale=0.25]{LaMMaR.png}
+    \end{figure}
+\end{frame}
+
+\begin{frame}{Motiva\c{c}\~ao}
+	\framesubtitle{Grupo de pesquisa}
 	\begin{block}{Rob\^os}
 		Giovanna
     \end{block}
@@ -197,7 +208,7 @@
     \end{block}
     \begin{figure}[!h]
         \centering
-        \includegraphics[scale=0.2]{Clara2.jpg}
+        \includegraphics[scale=0.21]{Clara2.jpg}
     \end{figure}
 \end{frame}
 
@@ -237,110 +248,157 @@
 \end{frame}
 
 \begin{frame}{Motiva\c{c}\~ao}
-    \framesubtitle{Controle}
+    \framesubtitle{Controle robusto}
     \pause
-    \begin{block}{Controle descentralizado}
-    	\pause
-        Projeto de controlador de posi\c{c}\~ao para os atuadores, considerando torques do mecanismo como dist\'urbio    
+    \begin{block}{T\'ecnicas mais utilizadas}
+    	\begin{itemize}
+    		\pause
+    		\item[$\bullet$] PID
+    		\begin{itemize}
+    			\pause
+    			\item[--] Controle linear \\[4pt]
+    			\item[--] Simples implementa\c{c}\~ao \\[4pt]
+    			\item[--] N\~ao baseado no modelo din\^amico do mecanismo \\[4pt]
+    			\item[--] Desempenho bastante limitado \\[4pt]
+    		\end{itemize}
+    		\pause
+    		\item[$\bullet$] CTC
+    		\begin{itemize}
+    			\pause
+    			\item[--] Controle n\~ao linear \\[4pt]
+    			\item[--] Baseado no modelo din\^amico do mecanismo \\[4pt]
+    			\item[--] Desempenho limitado pela qualidade do modelo \\[4pt]
+    			\item[--] Implementa\c{c}\~ao mais complexa \\[4pt]
+    		\end{itemize}
+    	\end{itemize}
+    \end{block}
+\end{frame}
+
+\begin{frame}{Motiva\c{c}\~ao}
+    \framesubtitle{Controle robusto}
+    \pause
+    \begin{block}{Controle por Modos Deslizantes}
+    	\begin{itemize}
+    		\pause
+    		\item[--] Controle n\~ao linear robusto \\[4pt]
+    		\item[--] Pode ser baseado no modelo din\^amico do mecanismo \\[4pt]
+    	\end{itemize}
     \end{block}
     \pause
-    \begin{exampleblock}{Vantagens}
-        \begin{itemize}
-            \item[--] Modelagem simples
-            %\item[--] \'E poss\'ivel utilizar controle linear
-            %\item[--] Projeto de controle relativamente simples
-            \item[--] Lei de controle pouco custosa
-        \end{itemize}
+    \begin{exampleblock}{Vantagem}
+    	Desempenho menos dependente da qualidade do modelo
     \end{exampleblock}
     \pause
-    \begin{exampleblock}{Desvantagens}
-        \begin{itemize}
-            \item[--] Necessita de redutores com altas rela\c{c}\~oes de transmiss\~ao
-            \item[--] Desempenho muito limitado
-        \end{itemize}
+    \begin{exampleblock}{Desvantagem}
+        Pode causar chattering
     \end{exampleblock}
 \end{frame}
 
 \begin{frame}{Motiva\c{c}\~ao}
-    \framesubtitle{Controle}
-    \begin{block}{Controle centralizado}
-    	\pause
-        Projeto de controlador de posi\c{c}\~ao considerando a depend\^encia entre as vari\'aveis controladas (baseado no modelo din\^amico)
-    \end{block}
-    \pause
-    \begin{exampleblock}{Vantagens}
-        \begin{itemize}
-            \item[--] Maior desempenho: \'e poss\'ivel realizar trajet\'orias em maiores velocidades
-            \item[--] Permite utilizar {\em direct drive}
-        \end{itemize}
-    \end{exampleblock}
-    \pause
-    \begin{exampleblock}{Desvantagens}
-        \begin{itemize}
-            \item[--] Modelo din\^amico de dif\'icil obten\c{c}\~ao
-            %\item[--] Projeto de controle de maior complexidade
-            \item[--] Lei de controle de alto custo computacional
-        \end{itemize}
-    \end{exampleblock}
-\end{frame}
-
-\begin{frame}{Motiva\c{c}\~ao}
-    \framesubtitle{Controle}
-    \begin{block}{Proposta}
-        Tornar poss\'ivel o projeto e implementa\c{c}\~ao de controladores:
-        \begin{itemize}
-            \item[--]<alert@3> De alto desempenho
-            \item[--]<alert@3> Adequados ao controle de trajet\'oria de mecanismos paralelos
-            \item[--]<alert@4> Que possam sintetizar leis de controle com menor custo computacional
-            \item[--]<alert@4> Alta robustez
-        \end{itemize}
-    \end{block}
-    \pause
-    \begin{exampleblock}{Como?}
-        \begin{itemize}
-            \item[--]<3-> Desenvolvimento e implementa\c{c}\~ao de algoritmo gen\'erico de modelagem e controle de mecanismos paralelos
-            \item[--]<4-> Utiliza\c{c}\~ao de t\'ecnicas de controle robusto
-        \end{itemize}
-    \end{exampleblock}
-\end{frame}
-
-\begin{frame}{Motiva\c{c}\~ao}
-    \framesubtitle{Controle}
-    \begin{table}[H]
-        \begin{center}
-            \begin{tabular}{|c|c|c|c|c|c|} 
-                \hline
-                \rule[-2mm]{0mm}{6mm}
-                T\'ecnica & Desempenho & Custo & Implement. & Modelagem \\
-                \hline
-                \rule[-2mm]{0mm}{6mm}
-                PID & {\color{red} Baixo} & {\color{blue} Baixo} & {\color{blue} Simples} &  {\color{blue} Simples}    \\
-                \rule[-1mm]{0mm}{5mm}
-                CTC$^1$ & {\color{orange} M\'edio} & {\color{teal} M\'edio} & {\color{orange} Mediana} & {\color{orange} Mediana}  \\
-                \rule[-1mm]{0mm}{5mm}
-                Adaptativo$^1$ & {\color{teal} M\'edio/Alto} & {\color{orange} M\'edio/Alto} & {\color{red} Complexa} & {\color{red} Complexa}     \\
-                \rule[-1mm]{0mm}{5mm}
-                CTC$^2$ & {\color{blue} Alto} & {\color{red} Alto} & {\color{red} Complexa} &  {\color{red} Complexa}  \\
-                \rule[-1mm]{0mm}{5mm}
-                CMD$^2$ & {\color{blue} Alto} & {\color{teal} M\'edio} & {\color{red} Complexa} & {\color{red} Complexa} \\
-                \hline
-            \end{tabular}
-            %\label{crono}
-        \end{center}
-    \end{table}
-    $$ $$
-    1: Modelo simplificado \\
-    2: Modelo completo \\
-\end{frame}
-
-\begin{frame}{Motiva\c{c}\~ao}
-    \framesubtitle{Controle}
+    \framesubtitle{Controle robusto}
     \begin{figure}[!h]
         \centering
         \includegraphics[scale=0.30]{Slotine.pdf} \\
         (Slotine 1985)
     \end{figure}  
 \end{frame}
+
+%\begin{frame}{Motiva\c{c}\~ao}
+%    \framesubtitle{Controle}
+%    \pause
+%    \begin{block}{Controle descentralizado}
+%    	\pause
+%        Projeto de controlador de posi\c{c}\~ao para os atuadores, considerando torques do mecanismo como dist\'urbio    
+%    \end{block}
+%    \pause
+%    \begin{exampleblock}{Vantagens}
+%        \begin{itemize}
+%            \item[--] Modelagem simples
+%            %\item[--] \'E poss\'ivel utilizar controle linear
+%            %\item[--] Projeto de controle relativamente simples
+%            \item[--] Lei de controle pouco custosa
+%        \end{itemize}
+%    \end{exampleblock}
+%    \pause
+%    \begin{exampleblock}{Desvantagens}
+%        \begin{itemize}
+%            \item[--] Necessita de redutores com altas rela\c{c}\~oes de transmiss\~ao
+%            \item[--] Desempenho muito limitado
+%        \end{itemize}
+%    \end{exampleblock}
+%\end{frame}
+
+%\begin{frame}{Motiva\c{c}\~ao}
+%    \framesubtitle{Controle}
+%    \begin{block}{Controle centralizado}
+%    	\pause
+%        Projeto de controlador de posi\c{c}\~ao considerando a depend\^encia entre as vari\'aveis controladas (baseado no modelo din\^amico)
+%    \end{block}
+%    \pause
+%    \begin{exampleblock}{Vantagens}
+%        \begin{itemize}
+%            \item[--] Maior desempenho: \'e poss\'ivel realizar trajet\'orias em maiores velocidades
+%            \item[--] Permite utilizar {\em direct drive}
+%        \end{itemize}
+%    \end{exampleblock}
+%    \pause
+%    \begin{exampleblock}{Desvantagens}
+%        \begin{itemize}
+%            \item[--] Modelo din\^amico de dif\'icil obten\c{c}\~ao
+%            %\item[--] Projeto de controle de maior complexidade
+%            \item[--] Lei de controle de alto custo computacional
+%        \end{itemize}
+%    \end{exampleblock}
+%\end{frame}
+
+%\begin{frame}{Motiva\c{c}\~ao}
+%    \framesubtitle{Controle}
+%    \begin{block}{Proposta}
+%        Tornar poss\'ivel o projeto e implementa\c{c}\~ao de controladores:
+%        \begin{itemize}
+%            \item[--]<alert@3> De alto desempenho
+%            \item[--]<alert@3> Adequados ao controle de trajet\'oria de mecanismos paralelos
+%            \item[--]<alert@4> Que possam sintetizar leis de controle com menor custo computacional
+%            \item[--]<alert@4> Alta robustez
+%        \end{itemize}
+%    \end{block}
+%    \pause
+%    \begin{exampleblock}{Como?}
+%        \begin{itemize}
+%            \item[--]<3-> Desenvolvimento e implementa\c{c}\~ao de algoritmo gen\'erico de modelagem e controle de mecanismos paralelos
+%            \item[--]<4-> Utiliza\c{c}\~ao de t\'ecnicas de controle robusto
+%        \end{itemize}
+%    \end{exampleblock}
+%\end{frame}
+
+%\begin{frame}{Motiva\c{c}\~ao}
+%    \framesubtitle{Controle}
+%    \begin{table}[H]
+%        \begin{center}
+%            \begin{tabular}{|c|c|c|c|c|c|} 
+%                \hline
+%                \rule[-2mm]{0mm}{6mm}
+%                T\'ecnica & Desempenho & Custo & Implement. & Modelagem \\
+%                \hline
+%                \rule[-2mm]{0mm}{6mm}
+%                PID & {\color{red} Baixo} & {\color{blue} Baixo} & {\color{blue} Simples} &  {\color{blue} Simples}    \\
+%                \rule[-1mm]{0mm}{5mm}
+%                CTC$^1$ & {\color{orange} M\'edio} & {\color{teal} M\'edio} & {\color{orange} Mediana} & {\color{orange} Mediana}  \\
+%                \rule[-1mm]{0mm}{5mm}
+%                Adaptativo$^1$ & {\color{teal} M\'edio/Alto} & {\color{orange} M\'edio/Alto} & {\color{red} Complexa} & {\color{red} Complexa}     \\
+%                \rule[-1mm]{0mm}{5mm}
+%                CTC$^2$ & {\color{blue} Alto} & {\color{red} Alto} & {\color{red} Complexa} &  {\color{red} Complexa}  \\
+%                \rule[-1mm]{0mm}{5mm}
+%                CMD$^2$ & {\color{blue} Alto} & {\color{teal} M\'edio} & {\color{red} Complexa} & {\color{red} Complexa} \\
+%                \hline
+%            \end{tabular}
+%            %\label{crono}
+%        \end{center}
+%    \end{table}
+%    $$ $$
+%    1: Modelo simplificado \\
+%    2: Modelo completo \\
+%\end{frame}
 
 %\begin{frame}{Motiva\c{c}\~ao}
 %    \framesubtitle{Controle}
@@ -360,79 +418,97 @@
 %\end{frame}
 
 \begin{frame}{Objetivos}
-	\begin{block}{}
+	\pause
+	\begin{block}{Geral}
+		Contribuir para o aumento do desempenho de manipuladores paralelos
+	\end{block}
+	\pause
+	\begin{exampleblock}{Como?}
 		\pause
 		\begin{itemize}
 			\item[$\bullet$] Desenvolvimento de um algoritmo gerador de modelos din\^amicos completos de mecanismos paralelos, de forma impl\'icita \\[8pt]
 			\pause
-			\item[$\bullet$] Elabora\c{c}\~ao de uma metodologia de projeto de controlador n\~ao linear robusto, de alto desempenho, aplic\'avel a mecanismos paralelos \\[8pt]
+			\item[$\bullet$] S\'intese de leis de controle  n\~ao linear robusto, de alto desempenho, aplic\'avel a mecanismos paralelos \\[8pt]
 			\pause
-			\item[$\bullet$] Compara\c{c}\~ao da lei de controle proposta com outras leis de controle encontradas na literatura, atrav\'es de simula\c{c}\~oes e valida\c{c}\~oes experimentais \\[8pt]
-	\end{itemize}
-	\end{block}
+			\item[$\bullet$] Compara\c{c}\~ao de desempenho das leis de controle propostas com as leis de controle mais encontradas na literatura, atrav\'es de ensaios experimentais \\[8pt]
+		\end{itemize}
+	\end{exampleblock}
 \end{frame}
 
 \begin{frame}{Escopo}
     \framesubtitle{Algoritmo de modelagem}
     \pause
-    \begin{block}{Considera}
-        \pause
+    \begin{block}{Mecanismos Paralelos}
         \begin{itemize}
-            \item[--] In\'ercia distribu\'ida \\[6pt]
-            \item[--] A\c{c}\~ao da gravidade \\[6pt]
-            \item[--] <alert@4>Atritos nas juntas \\[6pt]
-            \item[--] <alert@4>Din\^amica dos atuadores \\[6pt]
+            \item[--] Translacionais \\[4pt]
+            \item[--] Efetuador r\'igido \\[4pt]
         \end{itemize}
     \end{block}
     \pause
+    \begin{block}{Considera}
+        \begin{itemize}
+            \item[--] In\'ercia distribu\'ida \\[4pt]
+            \item[--] A\c{c}\~ao da gravidade \\[4pt]
+            \item[--] Atritos nas juntas \\[4pt]
+            \item[--] Din\^amica dos atuadores \\[4pt]
+        \end{itemize}
+    \end{block}
     \pause
     \begin{block}{N\~ao considera}
-        \pause
         \begin{itemize}
-            \item[--] Folga nas juntas \\[6pt]
-            \item[--] Deforma\c{c}\~oes \\[6pt]
+            \item[--] Folga nas juntas \\[4pt]
+            \item[--] Deforma\c{c}\~oes \\[4pt]
         \end{itemize}
     \end{block}
 \end{frame}
 
 \begin{frame}{Escopo}
-    \framesubtitle{Lei de controle proposta}
+    \framesubtitle{Leis de controle}
     \pause
     \begin{block}{Vari\'aveis controladas}
-    	Posi\c{c}\~ao / orienta\c{c}\~ao do efetuador
+    	Posi\c{c}\~ao do efetuador
     \end{block}
     \pause
     \begin{block}{Vari\'aveis monitoradas}
     	Coordenadas dos atuadores
     \end{block}
     \pause
-    \begin{block}{Depend\^encia entre vari\'aveis controladas}
-    	Controle centralizado baseado em modelo
+    \begin{block}{Vari\'aveis manipuladas}
+    	Torque aplicado pelos atuadores
     \end{block}
+%    \pause
+%    \begin{block}{Depend\^encia entre vari\'aveis controladas}
+%    	Controle centralizado baseado em modelo
+%    \end{block}
     \pause
-   	\begin{block}{Estrat\'egia de controle}
-    	Controle por modos deslizantes
+   	\begin{block}{Estrat\'egias de controle}
+    	\begin{itemize}
+    		\item[--] Controle Proporcional Derivativo (PD)
+    		\item[--] Controle por Torque Computado (TC)
+    		\item[--] Controle Proporcional Derivativo + Modos Deslizantes (PDMD)
+    		\item[--] Controle por Torque Computado + Modos Deslizantes (TCMD)
+    	\end{itemize}
     \end{block}
 \end{frame}
 
-\begin{frame}{Escopo}
-    \framesubtitle{Lei de controle proposta}
-    \begin{block}{Considera}
-    	\begin{itemize}
-    		\item[--] Incertezas param\'etricas \\[8pt]
-    		\item[--] Erros na compensa\c{c}\~ao din\^amica \\[8pt]
-    		\item[--] Din\^amica dos atuadores \\[8pt]
-    	\end{itemize}
-    \end{block}
-    \pause
-    \begin{block}{Objetivos}
-    	\begin{itemize}
-    		\item[--] Alta robustez \\[8pt]
-    		\item[--] Alto desempenho em altas velocidades/acelera\c{c}\~oes \\[8pt]
-    		\item[--] Baixo custo computacional \\[8pt]
-    	\end{itemize}
-    \end{block}
-\end{frame}
+%\begin{frame}{Escopo}
+%    \framesubtitle{Lei de controle proposta}
+%    \begin{block}{Considera}
+%    	\begin{itemize}
+%    		\item[--] Incertezas param\'etricas \\[8pt]
+%    		\item[--] Erros na compensa\c{c}\~ao din\^amica \\[8pt]
+%    		\item[--] Din\^amica dos atuadores \\[8pt]
+%    	\end{itemize}
+%    \end{block}
+%    \pause
+%    \begin{block}{Objetivos}
+%    	\begin{itemize}
+%    		\item[--] Alta robustez \\[8pt]
+%    		\item[--] Alto desempenho em altas velocidades/acelera\c{c}\~oes \\[8pt]
+%    		\item[--] Baixo custo computacional \\[8pt]
+%    	\end{itemize}
+%    \end{block}
+%\end{frame}
 
 \begin{frame}{Algoritmo de modelagem}
     \pause
@@ -919,46 +995,6 @@ $$ \overline{\momega}(\mq, \dot{\mq}) = \vct{\varnothing} $$
 
 %\begin{frame}{T\'opicos futuros}
 %\end{frame}
-
-\begin{frame}{Cronograma}
-    \begin{itemize}
-    	\pause
-		\item[(1)]<2-| alert@2> Inclus\~ao de atritos nas juntas e da din\^amica eletro-mec\^anica dos atuadores no algoritmo de modelagem \\[4pt]
-		\item[(2)]<3-| alert@3> Projeto e simula\c{c}\~ao de controlador por tens\~ao para os mecanismos 5R e 2\underline{R}SU+\underline{P}PaP \\[4pt]
-		\item[(3)]<4-| alert@4> Valida\c{c}\~ao experimental dos controladores projetados, utilizando os prot\'otipos \\[4pt]
-		\item[(4)]<5-| alert@5> Escrever artigos sobre modelagem e controle de mecanismos paralelos \\[4pt]
-		\item[(5)]<6-| alert@6> Avalia\c{c}\~ao geral dos resultados \\[4pt]
-		\item[(6)]<7-| alert@7> Preparo da tese \\[4pt]
-    \end{itemize}
-\end{frame}
-
-\begin{frame}{Cronograma}
-    \begin{table}[H]
-		\begin{center}
-			%\caption[Cronograma]{Cronograma -- Planejamento de Atividades por quadrimestre}
-			\begin{tabular}{|c|c|c|c|c|c|} 
-				\hline
-				\rule[-2mm]{0mm}{6mm}
-				Ativ./Quad. & $3^o/16$ & $1^o/17$ & $2^o/17$ & $3^o/17$ \\
-				\hline
-				\rule[-2mm]{0mm}{6mm}
-				(1) & \rule[0mm]{10mm}{2mm} &   &  &    \\
-				\rule[-1mm]{0mm}{5mm}
-				(2) & \rule[0mm]{10mm}{2mm} & \rule[0mm]{10mm}{2mm} &  &    \\
-				\rule[-1mm]{0mm}{5mm}
-				(3) &  & \rule[0mm]{10mm}{2mm} & \rule[0mm]{10mm}{2mm} &     \\
-				\rule[-1mm]{0mm}{5mm}
-				(4) &   & \rule[0mm]{10mm}{2mm} & \rule[0mm]{10mm}{2mm} & \rule[0mm]{10mm}{2mm}    \\
-				\rule[-1mm]{0mm}{5mm}
-				(5) &   &  &  &  \rule[0mm]{10mm}{2mm}   \\
-				\rule[-1mm]{0mm}{5mm}
-				(6) &   & \rule[0mm]{10mm}{2mm} & \rule[0mm]{10mm}{2mm}  &  \rule[0mm]{10mm}{2mm}  \\
-				\hline
-			\end{tabular}
-			%\label{crono}
-		\end{center}
-	\end{table}
-\end{frame}
 
 %-----------------------------------------------------------------------------------------------------------------------------------
 
