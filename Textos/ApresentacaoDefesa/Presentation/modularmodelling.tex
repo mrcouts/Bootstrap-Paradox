@@ -628,10 +628,11 @@
 
 \begin{frame}{Algoritmo de modelagem}
     \framesubtitle{Paralelos: Exemplo}
-	$$ \mq\ssh = 
+	$$ \mq^* = 
 \begin{bmatrix}
 1 & 0 & 0 \\
 0 & 1 & 0 \\
+0 & 0 & 1 \\
 \end{bmatrix}
 \cdot
 \mx_1(\mq_1)
@@ -639,11 +640,13 @@
 \begin{bmatrix}
 l_0 \\
 0 \\
+0 \\
 \end{bmatrix} $$
-$$ \mq\ssh = 
+$$ \mq^* = 
 \begin{bmatrix}
 -1 & 0 & 0 \\
 0 & 1 & 0 \\
+0 & 0 & -1 \\
 \end{bmatrix}
 \cdot
 \mx_2(\mq_2)
@@ -651,36 +654,43 @@ $$ \mq\ssh =
 \begin{bmatrix}
 -l_0 \\
 0 \\
+0 \\
 \end{bmatrix} $$
 \pause
 $$ \overline{\mq}(\mq) =
 \begin{bmatrix}
-1 & 0 \\
-0 & 1 \\
-1 & 0 \\
-0 & 1 \\
+1 & 0 & 0\\
+0 & 1 & 0\\
+0 & 0 & 1\\
+1 & 0 & 0\\
+0 & 1 & 0\\
+0 & 0 & 1\\
 \end{bmatrix}
 \cdot
-\mq\ssh
+\mq^*
 -
 \begin{bmatrix}
 1 & 0 & 0 & 0 & 0 & 0 \\
 0 & 1 & 0 & 0 & 0 & 0 \\
+0 & 0 & 1 & 0 & 0 & 0 \\
 0 & 0 & 0 & -1 & 0 & 0 \\
 0 & 0 & 0 & 0 & 1 & 0 \\
+0 & 0 & 0 & 0 & 0 & -1 \\
 \end{bmatrix}
 \cdot
-\mx(\mq\cir)
+\mx(\mq^\diamond)
 -
 \begin{bmatrix}
 l_0 \\
 0 \\
+0 \\
 -l_0 \\
+0 \\
 0 \\
 \end{bmatrix}
 = \mzr $$
-\pause
-$$ \overline{\momega}(\mq, \dot{\mq}) = \vct{\varnothing} $$    
+%\pause
+%$$ \overline{\momega}(\mq, \dot{\mq}) = \vct{\varnothing} $$    
 \end{frame}
 
 \begin{frame}{Algoritmo de modelagem}
@@ -689,27 +699,113 @@ $$ \overline{\momega}(\mq, \dot{\mq}) = \vct{\varnothing} $$
 		\begin{bmatrix}
 			l_0 &
 			0 &
+			0 &
 			-l_0 &
+			0 &
 			0
 		\end{bmatrix}^\msT $$
     %\begin{multicols}{2}
 		$$ \mD = 
 		\begin{bmatrix}
-			1 & 0 \\
-			0 & 1 \\
-			1 & 0 \\
-			0 & 1 \\
+			1 & 0 & 0\\
+			0 & 1 & 0\\
+			0 & 0 & 1\\
+			1 & 0 & 0\\
+			0 & 1 & 0\\
+			0 & 0 & 1\\
 		\end{bmatrix} $$
 		$$ \mE = 
 		\begin{bmatrix}
 			1 & 0 & 0 & 0 & 0 & 0 \\
 			0 & 1 & 0 & 0 & 0 & 0 \\
+			0 & 0 & 1 & 0 & 0 & 0 \\
 			0 & 0 & 0 & -1 & 0 & 0 \\
 			0 & 0 & 0 & 0 & 1 & 0 \\
+			0 & 0 & 0 & 0 & 0 & -1 \\
 		\end{bmatrix} $$
 	%\end{multicols}
 	$$ \mF = \mzr $$
-	$$ 	\mP = \mQ = \mR = \vct{\varnothing} $$
+%	$$ 	\mP = \mQ = \mR = \vct{\varnothing} $$
+\end{frame}
+
+\begin{frame}{Algoritmo de modelagem}
+    \framesubtitle{Paralelos: Exemplo}
+    $$ \mq\ssh = 
+		\begin{bmatrix}
+			x &
+			y 
+		\end{bmatrix}^\msT
+	$$
+	$$ \mq\cir = 
+		\begin{bmatrix}
+			z &
+			\theta_{1,1} &
+			\theta_{1,2} &
+			\theta_{2,1} &
+			\theta_{2,2} 
+		\end{bmatrix}^\msT
+	$$
+	\pause
+	$$ \mQ\ssh =
+		\begin{bmatrix}
+			1 & 0 \\
+			0 & 1 \\
+			0 & 0 \\
+			0 & 0 \\
+			0 & 0 \\
+			0 & 0 \\
+			0 & 0 \\
+		\end{bmatrix}; \,
+		\mQ\cir =
+		\begin{bmatrix}
+			0 & 0 & 0 & 0 & 0 \\
+			0 & 0 & 0 & 0 & 0 \\
+			1 & 0 & 0 & 0 & 0 \\
+			0 & 1 & 0 & 0 & 0 \\
+			0 & 0 & 1 & 0 & 0 \\
+			0 & 0 & 0 & 1 & 0 \\
+			0 & 0 & 0 & 0 & 1 \\
+		\end{bmatrix} $$
+\end{frame}
+
+\begin{frame}{Algoritmo de modelagem}
+    \framesubtitle{Paralelos: Exemplo}
+    $$ \mq\ssh = 
+		\begin{bmatrix}
+			\theta_{1,1} &
+			\theta_{2,1} 
+		\end{bmatrix}^\msT
+	$$
+	$$ \mq\cir = 
+		\begin{bmatrix}
+			x &
+			y &
+			z &
+			\theta_{1,2} &
+			\theta_{2,2} 
+		\end{bmatrix}^\msT
+	$$
+	\pause
+	$$ \mQ\ssh =
+		\begin{bmatrix}
+			0 & 0 \\
+			0 & 0 \\
+			0 & 0 \\
+			1 & 0 \\
+			0 & 0 \\
+			0 & 1 \\
+			0 & 0 \\
+		\end{bmatrix}; \,
+		\mQ\cir =
+		\begin{bmatrix}
+			1 & 0 & 0 & 0 & 0 \\
+			0 & 1 & 0 & 0 & 0 \\
+			0 & 0 & 1 & 0 & 0 \\
+			0 & 0 & 0 & 0 & 0 \\
+			0 & 0 & 0 & 1 & 0 \\
+			0 & 0 & 0 & 0 & 0 \\
+			0 & 0 & 0 & 0 & 1 \\
+		\end{bmatrix} $$
 \end{frame}
 
 \begin{frame}{Controle}
