@@ -290,7 +290,7 @@
     \end{exampleblock}
     \pause
     \begin{exampleblock}{Desvantagem}
-        Pode causar chattering
+        Pode causar \emph{chattering}
     \end{exampleblock}
 \end{frame}
 
@@ -435,8 +435,8 @@
 	\end{exampleblock}
 \end{frame}
 
-\begin{frame}{Escopo}
-    \framesubtitle{Algoritmo de modelagem}
+\begin{frame}{Algoritmo de modelagem}
+    %\framesubtitle{Escopo}
     \pause
     \begin{block}{Mecanismos Paralelos}
         \begin{itemize}
@@ -459,35 +459,6 @@
             \item[--] Folga nas juntas \\[4pt]
             \item[--] Deforma\c{c}\~oes \\[4pt]
         \end{itemize}
-    \end{block}
-\end{frame}
-
-\begin{frame}{Escopo}
-    \framesubtitle{Leis de controle}
-    \pause
-    \begin{block}{Vari\'aveis controladas}
-    	Posi\c{c}\~ao do efetuador
-    \end{block}
-    \pause
-    \begin{block}{Vari\'aveis monitoradas}
-    	Coordenadas dos atuadores
-    \end{block}
-    \pause
-    \begin{block}{Vari\'aveis manipuladas}
-    	Torque aplicado pelos atuadores
-    \end{block}
-%    \pause
-%    \begin{block}{Depend\^encia entre vari\'aveis controladas}
-%    	Controle centralizado baseado em modelo
-%    \end{block}
-    \pause
-   	\begin{block}{Estrat\'egias de controle}
-    	\begin{itemize}
-    		\item[--] Controle Proporcional Derivativo (PD)
-    		\item[--] Controle por Torque Computado (TC)
-    		\item[--] Controle Proporcional Derivativo + Modos Deslizantes (PDMD)
-    		\item[--] Controle por Torque Computado + Modos Deslizantes (TCMD)
-    	\end{itemize}
     \end{block}
 \end{frame}
 
@@ -517,40 +488,40 @@
     \end{block}
 \end{frame}
 
-\begin{frame}{Algoritmo de modelagem}
-    \begin{block}{Met\'odos de modelagem din\^amica}
-        \pause
-        \begin{itemize}
-            \item[--] Newton-Euler (1760)  \\[4pt]
-            \item[--] <alert@3> Princ\'ipio de D'Alembert (1742) \\[4pt]
-            \item[--] <alert@4> Lagrange (1788) \\[4pt]
-            \item[--] <alert@4> Hamilton (1833) \\[4pt]
-            \item[--] <alert@4> Gibbs-Appel (1879-1900) \\[4pt]
-            \item[--] <alert@4> Maggi (1896) \\[4pt]
-            \item[--] <alert@4> Boltzmann-Hamel (1901) \\[4pt]
-            \item[--] Kane (1965) \\[4pt]
-            \item[--] Udwadia-Kalaba (1992) \\[4pt]
-            \item[--] Orsino (2015) \\[4pt]
-        \end{itemize}
-    \end{block}
-\end{frame}
+%\begin{frame}{Algoritmo de modelagem}
+%    \begin{block}{Met\'odos de modelagem din\^amica}
+%        \pause
+%        \begin{itemize}
+%            \item[--] Newton-Euler (1760)  \\[4pt]
+%            \item[--] <alert@3> Princ\'ipio de D'Alembert (1742) \\[4pt]
+%            \item[--] <alert@4> Lagrange (1788) \\[4pt]
+%            \item[--] <alert@4> Hamilton (1833) \\[4pt]
+%            \item[--] <alert@4> Gibbs-Appel (1879-1900) \\[4pt]
+%            \item[--] <alert@4> Maggi (1896) \\[4pt]
+%            \item[--] <alert@4> Boltzmann-Hamel (1901) \\[4pt]
+%            \item[--] Kane (1965) \\[4pt]
+%            \item[--] Udwadia-Kalaba (1992) \\[4pt]
+%            \item[--] Orsino (2015) \\[4pt]
+%        \end{itemize}
+%    \end{block}
+%\end{frame}
 
-\begin{frame}{Algoritmo de modelagem}
-    \begin{block}{Met\'odos que permitem formula\c{c}\~ao impl\'icita}
-        \pause
-        \begin{itemize}
-            \item[--] Newton-Euler \\[4pt]
-            \item[--] Kane \\[4pt]
-            \item[--] Udwadia-Kalaba \\[4pt]
-            \item[--] Orsino \\[4pt]
-        \end{itemize}
-    \end{block}
-    \pause
-    \begin{block}{M\'etodo escolhido}
-        \pause
-        M\'etodo Orsino: \pause Permite realizar a modelagem de maneira modular
-    \end{block}
-\end{frame}
+%\begin{frame}{Algoritmo de modelagem}
+%    \begin{block}{Met\'odos que permitem formula\c{c}\~ao impl\'icita}
+%        \pause
+%        \begin{itemize}
+%            \item[--] Newton-Euler \\[4pt]
+%            \item[--] Kane \\[4pt]
+%            \item[--] Udwadia-Kalaba \\[4pt]
+%            \item[--] Orsino \\[4pt]
+%        \end{itemize}
+%    \end{block}
+%    \pause
+%    \begin{block}{M\'etodo escolhido}
+%        \pause
+%        M\'etodo Orsino: \pause Permite realizar a modelagem de maneira modular
+%    \end{block}
+%\end{frame}
 
 \begin{frame}{Algoritmo de modelagem}
     \begin{figure}[!h]
@@ -808,75 +779,199 @@ l_0 \\
 		\end{bmatrix} $$
 \end{frame}
 
+%\begin{frame}{Controle}
+%    %\framesubtitle{}
+%    \begin{figure}[!h]
+%        \centering
+%        \includegraphics[scale=0.30]{DiagramaDeBlocos2.png}
+%    \end{figure}  
+%\end{frame}
+
+\begin{frame}{Controle}
+    %\framesubtitle{Escopo}
+    \pause
+    \begin{block}{Vari\'aveis controladas}
+    	Posi\c{c}\~ao do efetuador
+    \end{block}
+    \pause
+    \begin{block}{Vari\'aveis monitoradas}
+    	Coordenadas dos atuadores
+    \end{block}
+    \pause
+    \begin{block}{Vari\'aveis manipuladas}
+    	Torque aplicado pelos atuadores
+    \end{block}
+%    \pause
+%    \begin{block}{Depend\^encia entre vari\'aveis controladas}
+%    	Controle centralizado baseado em modelo
+%    \end{block}
+	\pause
+   	\begin{block}{Estruturas de controle}
+    	\begin{itemize}
+    		\item[--] Espa\c{c}o das juntas
+    		\item[--] Espa\c{c}o da tarefa
+    	\end{itemize}
+    \end{block}
+    %\pause
+   	%\begin{block}{Estrat\'egias de controle}
+    %	\begin{itemize}
+    %		\item[--] Controle Proporcional Derivativo (PD)
+    %		\item[--] Controle por Torque Computado (TC)
+    %		\item[--] Controle Proporcional Derivativo + Modos Deslizantes (PDMD)
+    %		\item[--] Controle por Torque Computado + Modos Deslizantes (TCMD)
+    %	\end{itemize}
+    %\end{block}
+\end{frame}
+
+\begin{frame}{Controle}
+    \framesubtitle{Espa\c{c}o das juntas}
+    \begin{figure}[!h]
+        \centering
+        \includegraphics[scale=0.40]{ControleEspacoDasJuntas.png}
+    \end{figure}  
+\end{frame}
+
+\begin{frame}{Controle}
+    \framesubtitle{Espa\c{c}o das tarefa}
+    \begin{figure}[!h]
+        \centering
+        \includegraphics[scale=0.40]{ControleEspacoDaTarefa.png}
+    \end{figure}  
+\end{frame}
+
 \begin{frame}{Controle}
     \framesubtitle{Lei de controle proposta}
+    \pause
+    \begin{block}{Lei de controle}
+    	$$ \mup = \hat{\mH}(\mq) \Big( \ddot{\mq}\ssh_d + \underline{k}_v\dot{\me} + \underline{k}_p\me + \int_0^t \underline{k} \, \sat(\ms/\phi) \,\dd \tau \Big) +  \hat{\mh}(\mq, \dot{\mq}) $$
+    	Sendo:
+    	$$ \ms = \ddot{\me} + \underline{k}_v\dot{\me} + \underline{k}_p\me $$
+    \end{block}
     \pause
     \begin{block}{Modelo din\^amico}
-    	$$ \mH(\mq)  \ddot{\mq}\ssh + \mh(\mq,\dot{\mq}\ssh) = \mup $$
+    	$$ \mH(\mq)  \ddot{\mq}\ssh + \mh(\mq,\dot{\mq}) = \mup $$
     	Sendo:
-    	$$ \mh(\mq,\dot{\mq}\ssh) = \mgamma(\mq) + \sum_{i=1}^{\nu\ssh} \sum_{j=1}^i \mgamma_{i,j}(\mq) \dot{q}\ssh_i \dot{q}\ssh_j $$
+    	$$ \mh(\mq,\dot{\mq}) = \mg(\mq) + \sum_{i=1}^{\nu\ssh} \sum_{j=i}^{\nu\ssh} \mh_{i,j}(\mq) \dot{q}\ssh_i \dot{q}\ssh_j $$
+    \end{block}
+%   	\begin{block}{Modelo din\^amico estimado}
+%    	$$ \hat{\mH}(\mq)  \ddot{\mq}\ssh + \hat{\mh}(\mq,\dot{\mq}\ssh) = \mup $$
+%    	Sendo:
+%    	$$ \hat{\mh}(\mq,\dot{\mq}\ssh) = \hat{\mgamma}(\mq) + \sum_{i=1}^{\nu\ssh} \sum_{j=1}^i \hat{\mgamma}_{i,j}(\mq) \dot{q}\ssh_i \dot{q}\ssh_j $$
+%   	\end{block}
+\end{frame}
+
+\begin{frame}{Controle}
+    \framesubtitle{Lei de controle proposta}
+    \pause
+    \begin{block}{PD}
+    	$$ \mup = m^* \Big( \ddot{\mq}\ssh_d + \underline{k}_v\dot{\me} + \underline{k}_p\me \Big)$$
+    \end{block}
+     \pause
+    \begin{block}{PDMD}
+    	$$ \mup = m^* \Big( \ddot{\mq}\ssh_d + \underline{k}_v\dot{\me} + \underline{k}_p\me + \int_0^t \underline{k} \, \sat(\ms/\phi) \,\dd \tau \Big) $$
+    \end{block}
+     \pause
+    \begin{block}{TC}
+    	$$ \mup = \hat{\mH}(\mq) \Big( \ddot{\mq}\ssh_d + \underline{k}_v\dot{\me} + \underline{k}_p\me \Big) +  \hat{\mh}(\mq, \dot{\mq}) $$
+    \end{block}
+     \pause
+    \begin{block}{TCMD}
+    	$$ \mup = \hat{\mH}(\mq) \Big( \ddot{\mq}\ssh_d + \underline{k}_v\dot{\me} + \underline{k}_p\me + \int_0^t \underline{k} \, \sat(\ms/\phi) \,\dd \tau \Big) +  \hat{\mh}(\mq, \dot{\mq}) $$
+    \end{block}
+\end{frame}
+
+\begin{frame}{Controle}
+    \framesubtitle{Par\^ametros do controlador}
+    \pause
+    \begin{block}{$\underline{k}_p$ e $\underline{k}_v$}
+    	\begin{itemize}
+    		\item[--] Fazem a aloca\c{c}\~ao dos p\'olos do sistema em malha fechada \\[6pt]
+    		\item[--] Comumente \'e utilizado amortecimento cr\'itico \\[6pt]
+    	\end{itemize}
+    	$$ \underline{k}_p = \lambda^2 \mone; \; \underline{k}_v = 2\lambda \mone $$
     \end{block}
     \pause
-   	\begin{block}{Modelo din\^amico estimado}
-    	$$ \hat{\mH}(\mq)  \ddot{\mq}\ssh + \hat{\mh}(\mq,\dot{\mq}\ssh) = \mup $$
-    	Sendo:
-    	$$ \hat{\mh}(\mq,\dot{\mq}\ssh) = \hat{\mgamma}(\mq) + \sum_{i=1}^{\nu\ssh} \sum_{j=1}^i \hat{\mgamma}_{i,j}(\mq) \dot{q}\ssh_i \dot{q}\ssh_j $$
-   	\end{block}
-\end{frame}
-
-\begin{frame}{Controle}
-    \framesubtitle{Lei de controle proposta}
-   	\begin{block}{Medidores do erro de modelagem}
-   		$$ \mDelta(\mq) = \mH(\mq)^\msI \hat{\mH}(\mq) - \mone $$
-    	$$ \mdelta_0(\mq) = \mH(\mq)^\msI (\hat{\mgamma}(\mq) - \mgamma(\mq)) $$
-    	$$ \mdelta_{i,j}(\mq) = \mH(\mq)^\msI (\hat{\mgamma}_{i,j}(\mq) - \mgamma_{i,j}(\mq)) $$
-   	\end{block}
-\end{frame}
-
-\begin{frame}{Controle}
-    \framesubtitle{Lei de controle proposta}
-	\begin{block}{Lei de controle}
-    	$$ \mup = \hat{\mh} + \hat{\mH}( \ddot{\mq}\ssh_d + \underline{\lambda}\dot{\me} + \underline{k} \sign(\dot{\me} + \underline{\lambda}\me) ) $$
-    	\pause
-    	Sendo:
-    	$$ \diag(\underline{k})  = \meta + \mGamma |\ddot{\mq}\ssh_d + \underline{\lambda}\dot{\me}| + \sum_{i=1}^{\nu\ssh}\sum_{j=1}^{i} \meta_{i,j} |\dot{q}\ssh_i||\dot{q}\ssh_j| $$
-    	$$ \mGamma = (\mone - |\mDelta|_{max} )^\msI |\mDelta|_{max} $$
-    	$$ \meta = (\mone - |\mDelta|_{max} )^\msI ( | \mdelta_0 |_{max} + \diag(\eta \mone) ) $$
-    	$$ \meta_{i,j} = (\mone - |\mDelta|_{max} )^\msI | \mdelta_{i,j} |_{max} $$
-   	\end{block}
-\end{frame}
-
-\begin{frame}{Controle}
-    \framesubtitle{Metodologia de projeto}
-    \begin{block}{}
+    \begin{block}{$m^*$}
     	\begin{itemize}
-    		\pause
-			\item[$\bullet$] Discretizar o espa\c{c}o de trabalho em um n\'umero finito de pontos \\[8pt]
-			\pause
-			\item[$\bullet$] Para cada ponto, calcular $|\mDelta|$, $|\mdelta_0|$ e $|\mdelta_{i,j}|$ para todas as combina\c{c}\~oes poss\'iveis de par\^ametros, com os par\^ametros podendo assumir seu valor m\'inimo e seu valor m\'aximo \\[8pt]
-			\pause
-			\item[$\bullet$] Obter o valor m\'aximo de $|\mDelta|$, $|\mdelta_0|$ e $|\mdelta_{i,j}|$ para cada ponto. \\[8pt]
-			\pause
-			\item[$\bullet$] Obter o valor m\'aximo de $|\mDelta|$, $|\mdelta_0|$ e $|\mdelta_{i,j}|$ para o espa\c{c}o de trabalho, a partir do valor m\'aximo em cada ponto. \\[8pt]
-		\end{itemize}
-	\end{block}
-\end{frame}
-
-\begin{frame}{Controle}
-    \framesubtitle{Vantagens da lei proposta}
-    \begin{block}{}
-    	\begin{itemize}
-    		\pause
-			\item[$\bullet$] Alto desempenho, mesmo em altas velocidades/acelera\c{c}\~oes \\[8pt]
-			\pause
-			\item[$\bullet$] Insens\'ivel incertezas param\'etricas \\[8pt]
-			\pause
-			\item[$\bullet$] Baixo custo computacional, visto que \'e poss\'ivel tabelar $\hat{\mH}$, $\hat{\mgamma}$ e $\hat{\mgamma}_{i,j}$\\[8pt]
-			\pause
-			\item[$\bullet$] Alta robustez \\[8pt]
-		\end{itemize}
+    		\item[--] Par\^ametro de pr\'e-alimenta\c{c}\~ao de acelera\c{c}\~ao \\[6pt]
+    		\item[--] Em um sistema linear SISO, o valor \'otimo seria a in\'ercia do sistema \\[6pt]
+    	\end{itemize}
     \end{block}
 \end{frame}
+
+\begin{frame}{Controle}
+    \framesubtitle{Par\^ametros do controlador}
+    \begin{block}{$\phi$}
+    	\begin{itemize}
+    		\item[--] Comprimento da camada limite\\[6pt]
+    		\item[--] Par\^ametro utilizado para aliviar o \emph{chattering} \\[6pt]
+    		\item[--] Relacionado com o erro m\'aximo em regime permanente \\[6pt]
+    	\end{itemize}
+    	$$ \phi = e_{max}/ \lambda^2 $$
+    \end{block}
+     \pause
+    \begin{block}{$\underline{k}$}
+        \begin{itemize}
+    		\item[--] Par\^ametro de supress\~ao de erros de modelagem \\[6pt]
+    		\item[--] Valores muito altos podem gerar \emph{chattering} \\[6pt]
+    		\item[--] Pode ser obtido atrav\'es da lei de adapta\c{c}\~ao proposta ou experimentalmente \\[6pt]
+    	\end{itemize}
+    \end{block}
+\end{frame}
+
+%\begin{frame}{Controle}
+%    \framesubtitle{Lei de controle proposta}
+%   	\begin{block}{Medidores do erro de modelagem}
+%   		$$ \mDelta(\mq) = \mH(\mq)^\msI \hat{\mH}(\mq) - \mone $$
+%    	$$ \mdelta_0(\mq) = \mH(\mq)^\msI (\hat{\mgamma}(\mq) - \mgamma(\mq)) $$
+%    	$$ \mdelta_{i,j}(\mq) = \mH(\mq)^\msI (\hat{\mgamma}_{i,j}(\mq) - \mgamma_{i,j}(\mq)) $$
+%   	\end{block}
+%\end{frame}
+
+%\begin{frame}{Controle}
+%    \framesubtitle{Lei de controle proposta}
+%	\begin{block}{Lei de controle}
+%    	$$ \mup = \hat{\mh} + \hat{\mH}( \ddot{\mq}\ssh_d + \underline{\lambda}\dot{\me} + \underline{k} \sign(\dot{\me} + \underline{\lambda}\me) ) $$
+%    	\pause
+%    	Sendo:
+%    	$$ \diag(\underline{k})  = \meta + \mGamma |\ddot{\mq}\ssh_d + \underline{\lambda}\dot{\me}| + \sum_{i=1}^{\nu\ssh}\sum_{j=1}^{i} \meta_{i,j} |\dot{q}\ssh_i||\dot{q}\ssh_j| $$
+%    	$$ \mGamma = (\mone - |\mDelta|_{max} )^\msI |\mDelta|_{max} $$
+%    	$$ \meta = (\mone - |\mDelta|_{max} )^\msI ( | \mdelta_0 |_{max} + \diag(\eta \mone) ) $$
+%    	$$ \meta_{i,j} = (\mone - |\mDelta|_{max} )^\msI | \mdelta_{i,j} |_{max} $$
+%   	\end{block}
+%\end{frame}
+
+%\begin{frame}{Controle}
+%    \framesubtitle{Metodologia de projeto}
+%    \begin{block}{}
+%    	\begin{itemize}
+%    		\pause
+%			\item[$\bullet$] Discretizar o espa\c{c}o de trabalho em um n\'umero finito de pontos \\[8pt]
+%			\pause
+%			\item[$\bullet$] Para cada ponto, calcular $|\mDelta|$, $|\mdelta_0|$ e $|\mdelta_{i,j}|$ para todas as combina\c{c}\~oes poss\'iveis de par\^ametros, com os par\^ametros podendo assumir seu valor m\'inimo e seu valor m\'aximo \\[8pt]
+%			\pause
+%			\item[$\bullet$] Obter o valor m\'aximo de $|\mDelta|$, $|\mdelta_0|$ e $|\mdelta_{i,j}|$ para cada ponto. \\[8pt]
+%			\pause
+%			\item[$\bullet$] Obter o valor m\'aximo de $|\mDelta|$, $|\mdelta_0|$ e $|\mdelta_{i,j}|$ para o espa\c{c}o de trabalho, a partir do valor m\'aximo em cada ponto. \\[8pt]
+%		\end{itemize}
+%	\end{block}
+%\end{frame}
+
+%\begin{frame}{Controle}
+%    \framesubtitle{Vantagens da lei proposta}
+%    \begin{block}{}
+%    	\begin{itemize}
+%    		\pause
+%			\item[$\bullet$] Alto desempenho, mesmo em altas velocidades/acelera\c{c}\~oes \\[8pt]
+%			\pause
+%			\item[$\bullet$] Insens\'ivel incertezas param\'etricas \\[8pt]
+%			\pause
+%			\item[$\bullet$] Baixo custo computacional, visto que \'e poss\'ivel tabelar $\hat{\mH}$, $\hat{\mgamma}$ e $\hat{\mgamma}_{i,j}$\\[8pt]
+%			\pause
+%			\item[$\bullet$] Alta robustez \\[8pt]
+%		\end{itemize}
+%    \end{block}
+%\end{frame}
 
 \begin{frame}{Resultados}
 	\framesubtitle{Simula\c{c}\~oes}
