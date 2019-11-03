@@ -77,7 +77,7 @@
 
 
 
-%--- INTRODU\c{c}\~aO -------------------------------------------------------------------------%
+%============================================== REVISÃO DA LITERATURA =======================================================%
 
 
 \begin{frame}{Revisão da Literatura}
@@ -232,6 +232,100 @@
         \end{itemize}
     \end{block}
 \end{frame}
+
+\begin{frame}{Revisão da Literatura}
+    \framesubtitle{Controle}
+    \begin{block}{Controle Proporcional-Integral-Derivativo (PID)}
+        \begin{itemize}
+            \item[$\bullet$] Técnica de controle linear descentralizado \\[8pt]
+            \item[$\bullet$] Não baseado no modelo dinâmico do mecanismo \\[8pt]
+            \item[$\bullet$] Simples implementação \\[8pt]
+            \item[$\bullet$] Baixo custo computacional \\[8pt]
+            \item[$\bullet$] Desempenho bastante limitado \\[8pt]
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+\begin{frame}{Revisão da Literatura}
+    \framesubtitle{Controle}
+    \begin{block}{Controle por Torque Computado (CTC)}
+        \begin{itemize}
+            \item[$\bullet$] Técnica de controle não linear centralizado \\[8pt]
+            \item[$\bullet$] Baseado no modelo dinâmico do mecanismo \\[8pt]
+            \item[$\bullet$] Realiza compensação de não linearidades por realimentação \\[8pt]
+            \item[$\bullet$] Desempenho superior ao PID, porém bastante dependente da qualidade do modelo dinâmico \\[8pt]
+            \item[$\bullet$] Implementação mais complexa \\[8pt]
+            \item[$\bullet$] Maior custo computacional \\[8pt]
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+\begin{frame}{Revisão da Literatura}
+    \framesubtitle{Controle}
+    \begin{block}{Controle por Torque Computado com pré-alimentação (CTCp)}
+        \begin{itemize}
+            \item[$\bullet$] Lei de controle similar ao CTC \\[8pt]
+            \item[$\bullet$] Realiza compensação de não linearidades por pré-alimentação \\[8pt]
+            \item[$\bullet$] Menor custo computacional em relação ao CTC \\[8pt]
+            \item[$\bullet$] Implementação mais simples que o CTC \\[8pt]
+            \item[$\bullet$] Menor robustez em relação ao CTC \\[8pt]
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+\begin{frame}{Revisão da Literatura}
+    \framesubtitle{Controle}
+    \begin{block}{Controle por Torque Computado Estendido (CTCe)}
+        \begin{itemize}
+            \item[$\bullet$] Lei de controle similar ao CTC \\[8pt]
+            \item[$\bullet$] Realiza compensação de não linearidades por realimentação \\[8pt]
+            \item[$\bullet$] Utiliza informação redundante obtida pelo sensoriamento de juntas passivas na lei de controle p/ aumentar robustez \\[8pt]
+            \item[$\bullet$] Robusto a incertezas nos parâmetros cinemáticos \\[8pt]
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+\begin{frame}{Revisão da Literatura}
+    \framesubtitle{Controle}
+    \begin{block}{Controle Preditivo Baseado em Modelo (CPM)}
+        \begin{itemize}
+            \item[$\bullet$] Técnica de controle multi-variável baseado em modelo \\[8pt]
+            \item[$\bullet$] Muito utilizado no controle de processos industriais \\[8pt]
+            \item[$\bullet$] Realiza otimização em tempo real de uma custo que envolve o erro e o esforço de controle em tempo futuro \\[8pt]
+            \item[$\bullet$] Custo computacional bastante dependente da complexidade do modelo \\[8pt]
+            \item[$\bullet$] Maior robustez a incertezas paramétricas  \\[8pt]
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+\begin{frame}{Revisão da Literatura}
+    \framesubtitle{Controle}
+    \begin{block}{Controle Adaptativo (CA)}
+        \begin{itemize}
+            \item[$\bullet$] Técnica de controle baseado em modelo \\[8pt]
+            \item[$\bullet$] Estimação em tempo real de parâmetros do sistema \\[8pt]
+            \item[$\bullet$] Baixa sensibilidade a incertezas paramétricas \\[8pt]
+            \item[$\bullet$] Necessita de modelo dinâmico linear em relação aos parâmetros \\[8pt]
+            \item[$\bullet$] Alternativamente pode realizar a estimação termos não lineares de compensação dinâmica \\[8pt]
+            \item[$\bullet$] Custo computacional adicional relativo a integração das leis de adaptação \\[8pt]
+            \item[$\bullet$] Maior complexidade de projeto e implementação \\[8pt]
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+\begin{frame}{Revisão da Literatura}
+    \framesubtitle{Controle}
+    \begin{block}{Controle por Modos Deslizantes (CMD)}
+        \begin{itemize}
+            \item[$\bullet$] Técnica de controle não linear robusto \\[8pt]
+            \item[$\bullet$] Alta robustez em relação a incertezas estruturadas e não estuturadas \\[8pt]
+            \item[$\bullet$] Desempenho menos dependente da qualidade do modelo dinâmico \\[8pt]
+            \item[$\bullet$] Utiliza funções descontínuas na lei de controle, o que pode causar \emph{chattering} \\[8pt]
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+
 
 
 
