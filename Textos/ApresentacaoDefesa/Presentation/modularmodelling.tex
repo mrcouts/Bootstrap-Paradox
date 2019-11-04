@@ -248,16 +248,32 @@
 
 \begin{frame}{Revisão da Literatura}
     \framesubtitle{Controle}
+    \begin{figure}[!h]
+        \centering
+        \includegraphics[scale=0.45]{PID.png}
+    \end{figure}  
+\end{frame}
+
+\begin{frame}{Revisão da Literatura}
+    \framesubtitle{Controle}
     \begin{block}{Controle por Torque Computado (CTC)}
         \begin{itemize}
-            \item[$\bullet$] Técnica de controle não linear centralizado \\[8pt]
+            \item[$\bullet$] Técnica de controle não linear multivariável \\[8pt]
             \item[$\bullet$] Baseado no modelo dinâmico do mecanismo \\[8pt]
-            \item[$\bullet$] Realiza compensação de não linearidades por realimentação \\[8pt]
-            \item[$\bullet$] Desempenho superior ao PID, porém bastante dependente da qualidade do modelo dinâmico \\[8pt]
+            \item[$\bullet$] Possui uma malha interna de compensação de não linearidades por realimentação e uma malha externa de PID \\[8pt]
+            \item[$\bullet$] Desempenho superior ao PID simples, porém bastante dependente da qualidade do modelo dinâmico \\[8pt]
             \item[$\bullet$] Implementação mais complexa \\[8pt]
             \item[$\bullet$] Maior custo computacional \\[8pt]
         \end{itemize}
     \end{block}
+\end{frame}
+
+\begin{frame}{Revisão da Literatura}
+    \framesubtitle{Controle}
+    \begin{figure}[!h]
+        \centering
+        \includegraphics[scale=0.30]{CTC.jpg}
+    \end{figure}  
 \end{frame}
 
 \begin{frame}{Revisão da Literatura}
@@ -275,12 +291,20 @@
 
 \begin{frame}{Revisão da Literatura}
     \framesubtitle{Controle}
+    \begin{figure}[!h]
+        \centering
+        \includegraphics[scale=0.30]{CTCp.jpg}
+    \end{figure}  
+\end{frame}
+
+\begin{frame}{Revisão da Literatura}
+    \framesubtitle{Controle}
     \begin{block}{Controle por Torque Computado Estendido (CTCe)}
         \begin{itemize}
             \item[$\bullet$] Lei de controle similar ao CTC \\[8pt]
             \item[$\bullet$] Realiza compensação de não linearidades por realimentação \\[8pt]
-            \item[$\bullet$] Utiliza informação redundante obtida pelo sensoriamento de juntas passivas na lei de controle p/ aumentar robustez \\[8pt]
-            \item[$\bullet$] Robusto a incertezas nos parâmetros cinemáticos \\[8pt]
+            \item[$\bullet$] Utiliza informação redundante obtida pelo sensoriamento de juntas passivas na lei de controle \\[8pt]
+            \item[$\bullet$] Maior robustez a incertezas paramétricas \\[8pt]
         \end{itemize}
     \end{block}
 \end{frame}
@@ -291,11 +315,19 @@
         \begin{itemize}
             \item[$\bullet$] Técnica de controle multi-variável baseado em modelo \\[8pt]
             \item[$\bullet$] Muito utilizado no controle de processos industriais \\[8pt]
-            \item[$\bullet$] Realiza otimização em tempo real de uma custo que envolve o erro e o esforço de controle em tempo futuro \\[8pt]
+            \item[$\bullet$] Realiza otimização em tempo real de uma função custo que envolve o erro e o esforço de controle em tempo futuro \\[8pt]
             \item[$\bullet$] Custo computacional bastante dependente da complexidade do modelo \\[8pt]
-            \item[$\bullet$] Maior robustez a incertezas paramétricas  \\[8pt]
+            \item[$\bullet$] Boa robustez a incertezas paramétricas  \\[8pt]
         \end{itemize}
     \end{block}
+\end{frame}
+
+\begin{frame}{Revisão da Literatura}
+    \framesubtitle{Controle}
+    \begin{figure}[!h]
+        \centering
+        \includegraphics[scale=0.30]{CPM.png}
+    \end{figure}  
 \end{frame}
 
 \begin{frame}{Revisão da Literatura}
@@ -306,11 +338,19 @@
             \item[$\bullet$] Estimação em tempo real de parâmetros do sistema \\[8pt]
             \item[$\bullet$] Baixa sensibilidade a incertezas paramétricas \\[8pt]
             \item[$\bullet$] Necessita de modelo dinâmico linear em relação aos parâmetros \\[8pt]
-            \item[$\bullet$] Alternativamente pode realizar a estimação termos não lineares de compensação dinâmica \\[8pt]
+            \item[$\bullet$] Alternativamente pode realizar a estimação de termos não lineares de compensação dinâmica \\[8pt]
             \item[$\bullet$] Custo computacional adicional relativo a integração das leis de adaptação \\[8pt]
             \item[$\bullet$] Maior complexidade de projeto e implementação \\[8pt]
         \end{itemize}
     \end{block}
+\end{frame}
+
+\begin{frame}{Revisão da Literatura}
+    \framesubtitle{Controle}
+    \begin{figure}[!h]
+        \centering
+        \includegraphics[scale=0.30]{CA.jpg}
+    \end{figure}  
 \end{frame}
 
 \begin{frame}{Revisão da Literatura}
@@ -321,9 +361,309 @@
             \item[$\bullet$] Alta robustez em relação a incertezas estruturadas e não estuturadas \\[8pt]
             \item[$\bullet$] Desempenho menos dependente da qualidade do modelo dinâmico \\[8pt]
             \item[$\bullet$] Utiliza funções descontínuas na lei de controle, o que pode causar \emph{chattering} \\[8pt]
+            \item[$\bullet$] Bastante utilizado em combinação com lógica \emph{fuzzy} e redes neurais (Begon \emph{et al.}, 1995; Ertugrul e Kaynak, 2000; Hu e Woo, 2006; Sadati e Ghadami, 2008) \\[8pt]
         \end{itemize}
     \end{block}
 \end{frame}
+
+\begin{frame}{Revisão da Literatura}
+    \framesubtitle{Controle}
+    \begin{figure}[!h]
+        \centering
+        \includegraphics[scale=0.30]{CMD.png}
+    \end{figure}  
+\end{frame}
+
+\begin{frame}{Revisão da Literatura}
+    \framesubtitle{Controle}
+    \begin{block}{Técnicas de controle combinadas}
+        \begin{itemize}
+            \item[$\bullet$] "PD-SMC" (Ouyang, Acob, Pano, 2014)
+            \begin{itemize}
+            	\item[--] Lei de controle combinada não baseada em modelo
+            	\item[--] Simulação
+            	\item[--] Mecanismo serial prismático (PPP)
+            \end{itemize}
+            \item[$\bullet$] "PD-SMC" (Li, Ghasemi, Xie, Gao, 2018)
+            \begin{itemize}
+            	\item[--] Lei de controle combinada não baseada em modelo
+            	\item[--] Experimento (movimento lento, trajetória de 150s, controle por câmera)
+            	\item[--] Mecanismo serial de 6 gl
+            \end{itemize}
+            \item[$\bullet$] "Hybrid PD-SMC" (Acob, 2015)
+            \begin{itemize}
+            	\item[--] Lei de controle combinada não baseada em modelo
+            	\item[--] Simulação
+            	\item[--] Mecanismo serial de 3 gl e mecanismo paralelo de 2 gl
+            \end{itemize}
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+\begin{frame}{Revisão da Literatura}
+    \framesubtitle{Controle}
+    \begin{block}{Técnicas de controle combinadas}
+        \begin{itemize}
+            \item[$\bullet$] "PD-SMC-GA" (Mahmoodabadi, Taherkhorsandi, Talebipour, Castilho-Villar, 2015)
+            \begin{itemize}
+            	\item[--] Lei de controle combinada baseada em modelo
+            	\item[--] Simulação
+            	\item[--] Pêndulo invertido
+            \end{itemize}
+        \item[$\bullet$] "NN-SMC" (Truong, Tran, Ahn, 2019)
+            \begin{itemize}
+            	\item[--] Lei de controle baseada em modelo
+            	\item[--] Experimento (movimento lento, ciclo de 10s)
+            	\item[--] Mecanismo serial hidráulico de 3 gl
+            	\item[--] Rede neural realiza a sintonização em tempo real dos ganho do controlador
+            \end{itemize}
+        \end{itemize}
+    \end{block}
+    $$ $$
+    $$ $$
+\end{frame}
+
+\begin{frame}{Metodologia da Pesquisa}
+	\pause
+    \begin{block}{Modelagem}
+        Desenvolvimento e implementação de algoritmo genérico para modelagem dinâmica de mecanismos paralelos translacionais
+    \end{block}
+    \pause
+    \begin{block}{Controle}
+        Estudo, síntese, e simulação de leis de controle não linear robusto de alto desempenho para mecanismos paralelos 
+    \end{block}
+    \pause
+    \begin{block}{Experimento}
+		Contrução de um protótipo de manipulador paralelo translacional e realização de ensaios experimentais com o intuito de:
+		\begin{itemize}
+			\item[--] Validar a eficácia da utilização do modelo gerado pelo algoritmo em leis de controle baseadas em modelo
+			\item[--] Comparar o desempenho das leis de controle propostas com leis de controle já consagradas pela literatura
+		\end{itemize}
+    \end{block}
+\end{frame}
+
+\begin{frame}{Algoritmo de Modelagem}
+    \framesubtitle{Cadeias seriais}
+	\pause
+    \begin{block}{Elementos}
+		\begin{itemize}
+			\item[--] Elos
+			\item[--] Juntas
+			\item[--] Atuadores
+		\end{itemize}
+    \end{block}
+	\pause
+    \begin{block}{Descrição Topológica}
+		\begin{itemize}
+			\item[--] Parâmetros de Denavit-Hartenberg
+			\item[--] Coordenadas dos centros de massa dos elos nos sistemas móveis
+		\end{itemize}
+    \end{block}
+	\pause
+    \begin{block}{Efeitos considerados}
+		\begin{itemize}
+			\item[--] Ação da gravidade
+			\item[--] Inércia distribuída
+			\item[--] Atritos
+			\item[--] Esforço e dinâmica dos atuadores
+		\end{itemize}
+    \end{block}
+\end{frame}
+
+\begin{frame}{Algoritmo de Modelagem}
+    \framesubtitle{Manipulador paralelo}
+	\pause
+    \begin{block}{Efetuador}
+		\begin{itemize}
+			\item[--] Subsistema $\ssB_0$
+			\item[--] Sistema de coordenadas móvel $\ttB$
+			\item[--] Sistema de coordenadas fixo $\ttN_0$
+		\end{itemize}
+    \end{block}
+	\pause
+    \begin{block}{Cadeias seriais}
+		\begin{itemize}
+			\item[--] Subsistemas $\ssB_1, \ssB_2,...,\ssB_n$
+			\item[--] Sistemas de coordenadas fixos $\ttN_1, \ttN_2,...,\ttN_n$
+		\end{itemize}
+    \end{block}
+	\pause
+    \begin{block}{Coordenadas generalizadas}
+		\begin{itemize}
+			\item[--] $\mq^*$: Coordenadas $x,y,z$ do CM do efetuador $\ssB_0$ no sistema $\ttN_0$
+			\item[--] $\mq_i$: Deslocamentos relativos das juntas da cadeia $\ssB_i$
+			\item[--] $\mq^\diamond$: Concatenação de todos $\mq_i$ 
+			\item[--] $\mq$: Concatenação de $\mq^*$ com $\mq^\diamond$
+		\end{itemize}
+    \end{block}
+\end{frame}
+
+\begin{frame}{Algoritmo de Modelagem}
+    \framesubtitle{Manipulador paralelo}
+    \begin{block}{Cinemática das cadeias seriais}
+		\begin{itemize}
+			\item[--] $\mx_i(\mq_i)$: Coordenadas $x,y,z$ do efetuador de $\ssB_i$ no sistema $\ttN_i$
+			\item[--] $\mv_i(\mq_i, \dot{\mq}_i)$: Velocidade linear do efetuador de $\ssB_i$ no sistema $\ttN_i$
+			\item[--] $\ma_i(\mq_i, \dot{\mq}_i, \ddot{\mq}_i)$: Aceleração linear do efetuador de $\ssB_i$ no sistema $\ttN_i$
+			\item[--] $\momega_i(\mq_i, \dot{\mq}_i)$: Velocidade angular do efetuador de $\ssB_i$ no sistema $\ttN_i$
+			\item[--] $\dot{\momega}_i(\mq_i, \dot{\mq}_i, \ddot{\mq}_i)$: Aceleração angular do efetuador de $\ssB_i$ no sistema $\ttN_i$
+			\\[12pt]
+%			\item[--] $\mx(\mq^\diamond)$: Concatenação de todos $\mx_i(\mq_i)$
+%			\item[--] $\mv(\mq^\diamond, \dot{\mq}^\diamond)$: Concatenação de todos $\mv_i(\mq_i, \dot{\mq}_i)$
+%			\item[--] $\ma(\mq^\diamond, \dot{\mq}^\diamond, \ddot{\mq}^\diamond)$: Concatenação de todos $\ma_i(\mq_i, \dot{\mq}_i, \dot{\mq}_i)$
+%			\item[--] $\momega(\mq^\diamond, \dot{\mq}^\diamond)$: Concatenação de todos $\momega_i(\mq_i, \dot{\mq}_i)$
+%			\item[--] $\dot{\momega}(\mq^\diamond, \dot{\mq}^\diamond, \ddot{\mq}^\diamond)$: Concatenação de todos $\dot{\momega}_i(\mq_i, \dot{\mq}_i, \ddot{\mq}_i)$
+		\end{itemize}
+		\pause
+		$$ \mv(\mq^\diamond, \dot{\mq}^\diamond) = \mJ_{\mathsf{v}}(\mq^\diamond) \cdot \dot{\mq}^\diamond $$
+    	$$ \ma(\mq^\diamond, \dot{\mq}^\diamond, \ddot{\mq}^\diamond) = \mJ_{\mathsf{v}}(\mq^\diamond) \cdot \ddot{\mq}^\diamond + \underaccent{\sim}{\ma}(\mq^\diamond, \dot{\mq}^\diamond) $$
+    	$$ \momega(\mq^\diamond, \dot{\mq}^\diamond) = \mJ_{\mathsf{w}}(\mq^\diamond) \cdot \dot{\mq}^\diamond $$
+    	$$ \dot{\momega}(\mq^\diamond, \dot{\mq}^\diamond, \ddot{\mq}^\diamond) = \mJ_{\mathsf{w}}(\mq^\diamond) \cdot \ddot{\mq}^\diamond + \underaccent{\sim}{\dot{\momega}}(\mq^\diamond, \dot{\mq}^\diamond) $$
+    \end{block}
+\end{frame}
+
+\begin{frame}{Algoritmo de Modelagem}
+    \framesubtitle{Manipulador paralelo}
+    \begin{block}{Vínculos de posição}
+    	Vinculando o efetuador de cada cadeia $\ssB_i$ ao efetuador $\ssB_0$:
+    	\begin{equation} \tag{5.13}
+    		\mq^* = \md_i + \mE_i \, \mx_i(\mq_i), \; i=1,...,n
+    	\end{equation}
+    	$$ \md_i = \vct{\tto_i}_{\ttN_0} - \vct{\boldsymbol{1}}_{\ttN_0 \rl \ttB} \vct{\ttp_i}_{\ttB}  $$
+    \end{block}
+    \begin{figure}[!h]
+        \centering
+        \includegraphics[scale=0.19]{VinculosDePosicao.jpg}
+    \end{figure}  
+\end{frame}
+
+\begin{frame}{Algoritmo de Modelagem}
+    \framesubtitle{Manipulador paralelo}
+    \begin{block}{Vínculos de posição}
+    	Definindo vínculos afins adicionais (se necessário):
+    	\begin{equation} \label{eq:VinculosPosicaoAfins} \tag{5.15}
+			\mD_{\oplus}\cdot\mq^\ast = \md_{\oplus} + \mF_{\oplus}\cdot\mq^\diamond
+		\end{equation}
+		\pause
+    	Juntando todas as equações vinculares obtidas:
+		\begin{equation} \label{eq:VinculosPosicao2} \tag{5.16}
+			\begin{bmatrix}
+				\mone\\
+				\vdots\\
+				\mone \\
+				\mD_{\oplus}
+			\end{bmatrix}
+			\cdot
+			\mq^\ast =
+			\begin{bmatrix}
+				\md_1 \\
+				\vdots \\
+				\md_n \\
+				\md_{\oplus}
+			\end{bmatrix}
+			+
+			\begin{bmatrix}
+				\mE_1 & \ldots & \mzr\\
+				\vdots & \ddots & \vdots\\
+				\mzr &\ldots  & \mE_{n} \\
+				\mzr &\ldots  & \mzr
+			\end{bmatrix}
+			\cdot
+			\begin{bmatrix}
+				\mx_1(\mq_1) \\
+				\vdots \\
+				\mx_n(\mq_n)
+			\end{bmatrix}
+			+
+			\begin{bmatrix}
+				\mzr\\
+				\vdots\\
+				\mzr \\
+				\mF_{\oplus}
+			\end{bmatrix}
+			\cdot
+			\mq^\diamond
+		\end{equation}
+	\pause
+	Assim, temos:
+	\begin{equation} \label{eq:VinculosGenericosPosicao} \tag{5.17}
+		\therefore \overline{\mq}(\mq) = \mD \cdot \mq^\ast - \md - \mE \cdot \mx(\mq)
+		- \mF \cdot \mq^\diamond = \mzr
+	\end{equation}
+    \end{block}
+\end{frame}
+
+\begin{frame}{Algoritmo de Modelagem}
+    \framesubtitle{Manipulador paralelo}
+    \begin{block}{Vínculos de quasi-velocidades}
+		\begin{equation} \label{eq:VinculosQuasiVel} \tag{5.32}
+			\overline{\mp}(\mq,\dot{\mq}) = 
+			\begin{bmatrix}
+				\dot{\overline{\mq}}(\mq,\dot{\mq}) \\
+				\overline{\momega}(\mq,\dot{\mq})
+			\end{bmatrix}
+			= 
+			\begin{bmatrix}
+				\mD \cdot \dot{\mq}^\ast  - \mE \cdot \mJ_{\mathsf{v}}(\mq^\diamond) \cdot \dot{\mq}^\diamond  - \mF \cdot \dot{\mq}^\diamond \\
+				 - \mQ \cdot \mJ_{\mathsf{w}}(\mq^\diamond) \cdot \dot{\mq}^\diamond
+			\end{bmatrix}
+			=
+			\mzr
+		\end{equation}
+
+		\pause
+		\begin{equation} \label{eq:VinculosQuasiVel2} \tag{5.34}
+			\therefore \overline{\mp}(\mq,\dot{\mq}) = \mA(\mq) \dot{\mq} = \mzr
+		\end{equation}
+		Sendo
+		\begin{equation} \tag{5.35}
+			\mA(\mq) = 
+			\begin{bmatrix}
+				\mD  & -(\mE \cdot \mJ_{\mathsf{v}}(\mq^\diamond) + \mF) \\
+				\mzr & -\mQ \cdot \mJ_{\mathsf{w}}(\mq^\diamond) \\
+			\end{bmatrix}
+		\end{equation}
+    \end{block}
+\end{frame}
+
+\begin{frame}{Algoritmo de Modelagem}
+    \framesubtitle{Manipulador paralelo}
+    \begin{block}{Vínculos de quasi-acelerações}
+		\begin{equation} \label{eq:VinculosQuasiAce} \tag{5.36}
+		\begin{split}
+			\dot{\overline{\mp}}(\mq,\dot{\mq},\ddot{\mq}) =
+			\begin{bmatrix}
+				\ddot{\overline{\mq}}(\mq,\dot{\mq},\ddot{\mq}) \\
+				\dot{\overline{\momega}}(\mq,\dot{\mq},\ddot{\mq})
+			\end{bmatrix}
+			= 
+			\begin{bmatrix}
+				\mD \cdot \ddot{\mq}^\ast - \mE \cdot (\mJ_{\mathsf{v}}(\mq^\diamond) \cdot \ddot{\mq}^\diamond + \underaccent{\sim}{\ma}(\mq, \dot{\mq}))  - \mF \cdot \ddot{\mq}^\diamond \\
+				- \mQ \cdot (\mJ_{\mathsf{w}}(\mq^\diamond) \cdot \ddot{\mq}^\diamond + \underaccent{\sim}{ \dot{\momega} }(\mq, \dot{\mq}))
+			\end{bmatrix}
+			\\
+			= \mzr
+		\end{split}
+		\end{equation}
+
+		\pause
+		\begin{equation} \label{eq:VinculosQuasiAce_} \tag{5.39}
+			\therefore \dot{\overline{\mp}}(\mq,\dot{\mq},\ddot{\mq}) = \mA(\mq)\ddot{\mq} + \mb(\mq,\dot{\mq}) = \mzr
+		\end{equation}
+		Sendo
+		\begin{equation} \tag{5.40}
+			\mb(\mq,\dot{\mq}) =
+			-\begin{bmatrix}
+				\mE \cdot \underaccent{\sim}{\ma}(\mq, \dot{\mq}) \\
+				\mQ \cdot \underaccent{\sim}{\dot{\momega}}(\mq, \dot{\mq}) \\
+			\end{bmatrix}
+		\end{equation}
+    \end{block}
+\end{frame}
+
+
+
+
 
 
 
