@@ -51,11 +51,11 @@
 \usepackage{mpmulti}
 \usepackage{multimedia}
 \usepackage[display]{texpower}
-\usepackage{multicol}
 \usepackage[overlay,absolute]{textpos}
 \setlength{\TPHorizModule}{1cm}
 \setlength{\TPVertModule}{1cm}
 \usepackage{multicol}
+\usepackage{subfig}
 
 % - SPECIAL - %
 \usepackage{EXTRAS/special-char}
@@ -957,7 +957,7 @@
 \end{frame}
 
 \begin{frame}{Controle}
-    \framesubtitle{Modos deslizantes}
+    \framesubtitle{Leis utilizadas}
     \begin{block}{PD}
     	$$ \mup = m^* \Big( \ddot{\mq}\ssh_d + \underline{k}_v\dot{\me} + \underline{k}_p\me \Big)$$
     \end{block}
@@ -975,6 +975,105 @@
     \end{block}
 \end{frame}
 
+\begin{frame}{Experimento}
+    \framesubtitle{Bancada Experimental}
+    \pause
+    \begin{figure}[!h]
+        \centering
+        \includegraphics[scale=0.07]{BancadaClara12.jpg}
+    \end{figure}
+\end{frame}
+
+\begin{frame}{Experimento}
+    \framesubtitle{Bancada Experimental}
+    \begin{figure}[!h]
+        \centering
+        \includegraphics[scale=0.24]{5RscanMec.jpg}
+    \end{figure}
+\end{frame}
+
+\begin{frame}{Experimento}
+    \framesubtitle{Bancada Experimental}
+    \begin{figure}[!h]
+        \centering
+        \includegraphics[scale=0.27]{Table.png}
+    \end{figure}
+\end{frame}
+
+\begin{frame}{Experimento}
+    \framesubtitle{PDq - Trejória circular}
+	\begin{figure}[!htb]
+		\centering
+		\subfloat[a)][Trajetória\\ ]{\includegraphics[height=2.8cm,keepaspectratio]{PDq_circulo/xy.png}}
+		\subfloat[b)][$e_x$\\ ]{\includegraphics[height=2.8cm,keepaspectratio]{PDq_circulo/ex.png}}
+		\subfloat[c)][$e_y$\\ ]{\includegraphics[height=2.8cm,keepaspectratio]{PDq_circulo/ey.png}}\\
+		\subfloat[d)][$\tau_1$\\ ]{\includegraphics[height=2.8cm,keepaspectratio]{PDq_circulo/tau1.png}}
+		\subfloat[e)][$\tau_2$\\ ]{\includegraphics[height=2.8cm,keepaspectratio]{PDq_circulo/tau2.png}}
+		\caption{Experimental results -- PD controller.}
+		\label{fig:exp_results_PDq_c}
+	\end{figure}
+\end{frame}
+
+\begin{frame}{Experimento}
+    \framesubtitle{TCMDx - Trejória circular}
+	\begin{figure}[!htb]
+		\centering
+		\subfloat[a)][Trajetória\\ ]{\includegraphics[height=2.8cm,keepaspectratio]{TCMDx_circulo/xy.png}}
+		\subfloat[b)][$e_x$\\ ]{\includegraphics[height=2.8cm,keepaspectratio]{TCMDx_circulo/ex.png}}
+		\subfloat[c)][$e_y$\\ ]{\includegraphics[height=2.8cm,keepaspectratio]{TCMDx_circulo/ey.png}}\\
+		\subfloat[d)][$\tau_1$\\ ]{\includegraphics[height=2.8cm,keepaspectratio]{TCMDx_circulo/tau1.png}}
+		\subfloat[e)][$\tau_2$\\ ]{\includegraphics[height=2.8cm,keepaspectratio]{TCMDx_circulo/tau2.png}}
+		\caption{Experimental results -- PD controller.}
+		\label{fig:exp_results_TCMDx_c}
+	\end{figure}
+\end{frame}
+
+\begin{frame}{Experimento}
+    \framesubtitle{PDq - Trejória triangular}
+	\begin{figure}[!htb]
+		\centering
+		\subfloat[a)][Trajetória\\ ]{\includegraphics[height=2.8cm,keepaspectratio]{PDq_triangulo/xy.png}}
+		\subfloat[b)][$e_x$\\ ]{\includegraphics[height=2.8cm,keepaspectratio]{PDq_triangulo/ex.png}}
+		\subfloat[c)][$e_y$\\ ]{\includegraphics[height=2.8cm,keepaspectratio]{PDq_triangulo/ey.png}}\\
+		\subfloat[d)][$\tau_1$\\ ]{\includegraphics[height=2.8cm,keepaspectratio]{PDq_triangulo/tau1.png}}
+		\subfloat[e)][$\tau_2$\\ ]{\includegraphics[height=2.8cm,keepaspectratio]{PDq_triangulo/tau2.png}}
+		\caption{Experimental results -- PD controller.}
+		\label{fig:exp_results_PDq_t}
+	\end{figure}
+\end{frame}
+
+\begin{frame}{Experimento}
+    \framesubtitle{TCMDx - Trejória triangular}
+	\begin{figure}[!htb]
+		\centering
+		\subfloat[a)][Trajetória\\ ]{\includegraphics[height=2.8cm,keepaspectratio]{TCMDx_triangulo/xy.png}}
+		\subfloat[b)][$e_x$\\ ]{\includegraphics[height=2.8cm,keepaspectratio]{TCMDx_triangulo/ex.png}}
+		\subfloat[c)][$e_y$\\ ]{\includegraphics[height=2.8cm,keepaspectratio]{TCMDx_triangulo/ey.png}}\\
+		\subfloat[d)][$\tau_1$\\ ]{\includegraphics[height=2.8cm,keepaspectratio]{TCMDx_triangulo/tau1.png}}
+		\subfloat[e)][$\tau_2$\\ ]{\includegraphics[height=2.8cm,keepaspectratio]{TCMDx_triangulo/tau2.png}}
+		\caption{Experimental results -- PD controller.}
+		\label{fig:exp_results_TCMDx_t}
+	\end{figure}
+\end{frame}
+
+\begin{frame}{Experimento}
+    \framesubtitle{Resultados}
+    \begin{figure}[!h]
+        \centering
+        \includegraphics[scale=0.40]{TabelasResultados.png}
+    \end{figure}
+\end{frame}
+
+
+
+%\begin{figure}[!htb]
+%	\centering
+%	\subfloat[][CAD\\ ]{\includegraphics[height=5cm,keepaspectratio]{images/5R_clearances.png}}
+%	\qquad
+%	\subfloat[][Prototype\\ ]{\includegraphics[height=5cm,keepaspectratio]{images/parallelconstruction2.png}}
+%	\caption{2-DOF parallel mechanism.}
+%	\label{fig:parallelmechanism}
+%\end{figure}
 
 
 
