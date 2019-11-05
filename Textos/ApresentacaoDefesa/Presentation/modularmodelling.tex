@@ -490,9 +490,9 @@
 	\pause
     \begin{block}{Coordenadas generalizadas}
 		\begin{itemize}
-			\item[--] $\mq^*$: Coordenadas $x,y,z$ do CM do efetuador $\ssB_0$ no sistema $\ttN_0$
-			\item[--] $\mq_i$: Deslocamentos relativos das juntas da cadeia $\ssB_i$
-			\item[--] $\mq^\diamond$: Concatenação de todos $\mq_i$ 
+			\item[--] $\mq^*$ ou $\mq_0$: Coordenadas $x,y,z$ do CM do efetuador $\ssB_0$ no sistema $\ttN_0$
+			\item[--] $\mq_i$: Deslocamentos relativos das juntas da cadeia $\ssB_i, \; i=1,...,n$
+			\item[--] $\mq^\diamond$: Concatenação de todos $\mq_i, \; i=1,...,n$
 			\item[--] $\mq$: Concatenação de $\mq^*$ com $\mq^\diamond$
 		\end{itemize}
     \end{block}
@@ -658,6 +658,320 @@
 				\mQ \cdot \underaccent{\sim}{\dot{\momega}}(\mq, \dot{\mq}) \\
 			\end{bmatrix}
 		\end{equation}
+    \end{block}
+\end{frame}
+
+\begin{frame}{Algoritmo de Modelagem}
+    \framesubtitle{Manipulador paralelo}
+    \begin{block}{Modelos dinâmicos desacoplados}
+    	\begin{equation} \label{eq:ModeloDosSubsistemas} \tag{5.1}
+			\overline{\mf}_{\ssB_i}(\mu_i, \mq_i, \dot{\mq}_i, \ddot{\mq}_i) =  \mu_{\ssB_i} - \Big(\mM_{\ssB_i}(\mq_i) \ddot{\mq}_i + \mnu_{\ssB_i}(\mq_i,\dot{\mq}_i) + \mg_{\ssB_i}(\mq_i)\Big) = \mzr, \, i = 0,...,n
+		\end{equation}
+    \end{block}
+    \pause
+    \begin{block}{Princípio de D'Alambert}
+    	\begin{equation} \tag{5.48}
+			\sum_{i=0}^n \delta W_i = \sum_{i=0}^n \delta \mq_i^\msT \cdot \overline{\mf}_{\ssB_i} = 0
+		\end{equation}
+		\pause
+		Ou seja:
+		\begin{equation} \label{eq:DAlambertParalelos} \tag{5.49}
+			\delta \mq^\msT \cdot \mf = 0
+		\end{equation}
+    \end{block}
+\end{frame}
+
+\begin{frame}{Algoritmo de Modelagem}
+    \framesubtitle{Manipulador paralelo}
+    \begin{block}{Vínculos em forma diferencial}
+    \pause
+    	\begin{equation} \label{eq:Adeltaq} \tag{5.50}
+			\mA(\mq) \delta \mq = \mzr
+		\end{equation}
+	    \pause
+		\begin{equation} \label{eq:deltaQsshQcir} \tag{5.52}
+			\delta\mq = \mQ\ssh \delta\mq\ssh + \mQ\cir \delta\mq\cir
+		\end{equation}
+		\pause
+		\begin{equation} \label{eq:deltamqC} \tag{5.54}
+			\therefore \delta \mq = \mC(\mq) \cdot \delta\mq\ssh
+		\end{equation}
+		\pause
+		Sendo:
+		\begin{equation} \label{eq:CComplemento} \tag{5.55}
+			\mC(\mq) = \mQ\ssh - \mQ\cir (\mA \mQ\cir)^{-1} \mA \mQ\ssh 
+		\end{equation}
+    \end{block}
+    \pause
+    \begin{block}{Equações dinâmicas}
+    	\begin{equation} \tag{5.57/5.58}
+			\delta {\mq\ssh}^\msT \mC^\msT \mf = 0 \Leftrightarrow \mC^\msT \mf = \mzr
+		\end{equation}
+    \end{block}
+\end{frame}
+
+\begin{frame}{Algoritmo de Modelagem}
+    \framesubtitle{Manipulador paralelo}
+    \begin{block}{Dinâmica Direta}
+    	\pause
+    	Sistema de Equações Diferenciais Algébricas
+    	\begin{equation*}
+			\begin{cases}
+			\mC(\mq)^\msT (   \mM'(\mq)\ddot{\mq} + \mnu'(\mq,\dot{\mq}) + \mg'(\mq) ) = \mC(\mq)^\msT \mu' \\
+			\bar{\mq}(\mq) = \mzr
+			\end{cases}
+		\end{equation*}
+		\pause
+		Sistema de Equações Diferenciais
+    	\begin{equation} \tag{5.60}
+			\begin{cases}
+			\mC(\mq)^\msT (   \mM'(\mq)\ddot{\mq} + \mnu'(\mq,\dot{\mq}) + \mg'(\mq) ) = \mC(\mq)^\msT \mu' \\
+			\mA(\mq)\ddot{\mq} + \mb(\mq,\dot{\mq}) = \mzr
+			\end{cases}
+		\end{equation}
+		\pause
+		Utilizando o método de estabilização de Baumgarte
+		\begin{equation} \tag{5.65}
+			\begin{bmatrix}
+				\mC(\mq)^\msT \mM'(\mq) \\
+				\mA(\mq)
+			\end{bmatrix}
+			\cdot
+			\ddot{\mq}
+			=
+			\begin{bmatrix}
+				\mC(\mq)^\msT (\mu' - \mnu'(\mq,\dot{\mq}) - \mg'(\mq) ) \\
+				-\mb(\mq,\dot{\mq}) -
+				2\lambda
+				\mA(\mq) \cdot \dot{\mq} -
+				\lambda^2
+				\overline{\mq}(\mq) \\
+			\end{bmatrix}
+		\end{equation}
+    \end{block}
+\end{frame}
+
+\begin{frame}{Algoritmo de Modelagem}
+    \framesubtitle{Manipulador paralelo}
+    \begin{block}{Dinâmica Direta}
+    	\pause
+    	\begin{equation} \label{eq:DinamicaInversa2} \tag{5.73}
+			\mM_{\ssM} (\mq) \ddot{\mq}\ssh + \mnu_{\ssM}(\mq, \dot{\mq}) + \mg_{\ssM}(\mq)   = \mZ(\mq)^{\msT} \mu^\star
+		\end{equation}
+		\pause
+		Sendo: 
+		\begin{equation} \tag{5.74}
+			\mM_{\ssM}  =  \mC^\msT \mM' \mC
+		\end{equation}
+		\begin{equation} \tag{5.75}
+			\mnu_{\ssM}  =  \mC^\msT (  \mM'  \mc  + \mnu' )
+		\end{equation}
+		\begin{equation} \tag{5.76}
+			\mg_{\ssM}  = \mC^\msT \mg'
+		\end{equation}
+
+		\pause
+		\begin{equation} \tag{5.68}
+			\mc = - (\mA \mQ\cir)^\msI \, \mb
+		\end{equation}
+		\begin{equation} \tag{5.71*}
+			\mZ = \mU^\msT \mC
+		\end{equation}
+		\begin{equation} \label{eq:u_estrela} \tag{5.69}
+			\mu' = \mU \cdot \mu^\star
+		\end{equation}
+    \end{block}
+\end{frame}
+
+\begin{frame}{Controle}
+    %\framesubtitle{Manipulador paralelo}
+    \pause
+    \begin{block}{Modelo}
+    	\begin{equation} \label{eq:ModeloControle} \tag{6.4}
+			\mH(\mq) \, \ddot{\mq}\ssh + \mh(\mq,\dot{\mq}) = \mup
+		\end{equation}
+		\pause
+		Sendo
+		\begin{equation} \tag{6.1}
+			\mH(\mq) = \mM_{\ssM}(\mq)
+		\end{equation}
+		\begin{equation} \tag{6.2}
+			\mh(\mq, \dot{\mq}) = \mv_{\ssM}(\mq, \dot{\mq}) + \mg_{\ssM}(\mq)
+		\end{equation}
+		\begin{equation} \tag{6.3}
+			\mup = \mZ(\mq)^{\msT} \mu^\star
+		\end{equation}
+    \end{block}
+\end{frame}
+
+\begin{frame}{Controle}
+    \framesubtitle{Modos deslizantes}
+    \pause
+    \begin{block}{Superfície de escorregamento}
+    	\begin{equation*} 
+			\sigma: \ms = \underline{\ms}(\mx, \mr) = \mzr
+		\end{equation*} \pause
+		\begin{equation*}
+			\ms = \mzr \Rightarrow \me \rightarrow \mzr
+		\end{equation*}
+    \end{block}
+    \pause
+    \begin{block}{Condição de escorregamento}
+		\begin{equation} \tag{6.17}
+			V(\ms) = \frac{1}{2} \ms^\msT \mW \, \ms
+		\end{equation}
+		\begin{equation} \label{eq:SlidingCondition} \tag{6.18}
+			\frac{\dd}{\dd t} V(\ms)  \leq -   \ms^\msT \underline{\eta} \sign(\ms) 
+		\end{equation}
+    \end{block}
+\end{frame}
+
+\begin{frame}{Controle}
+    \framesubtitle{Modos deslizantes}
+    \pause
+    \begin{block}{Escolha convencional}
+    	\begin{equation} \tag{6.14} 
+			\ms = \dot{\me} + \underline{\lambda} \me
+		\end{equation} 
+		\pause
+		Para $\mW = \mone$:
+		\begin{equation} \tag{6.28*}
+			\mup = \hat{\mH}(\ddot{\mq}\ssh_d + \underline{\lambda} \dot{\me} + \underline{k} \sign(\ms) ) + \hat{\mh}
+		\end{equation}
+		\pause
+		\begin{equation} \label{eq:DesigualdadeK2_a1} \tag{6.32}
+			(\mone - | \mH^\msI \tilde{\mH}|_{max} ) \cdot \diag(\underline{k})  \geq \diag(\underline{\eta}) + |\mH^\msI \tilde{\mH}|_{max} |\ddot{\mq}\ssh_d + \underline{\lambda} \dot{\me}| + |\mH^\msI\tilde{\mh}|_{max}
+		\end{equation}
+	$$ $$	
+    \end{block}
+\end{frame}
+
+\begin{frame}{Controle}
+    \framesubtitle{Modos deslizantes}
+    \begin{block}{Escolha convencional}
+    	\begin{equation} \tag{6.14} 
+			\ms = \dot{\me} + \underline{\lambda} \me
+		\end{equation}
+
+		Para $\mW = \mH$:
+		\begin{equation} \tag{6.35*}
+			\mup = \hat{\mH}(\ddot{\mq}\ssh_d + \underline{\lambda} \dot{\me}) + \frac{1}{2}\dot{\hat{\mH}} \, \ms + \hat{\mh} + \underline{k} \sign(\ms)
+		\end{equation}
+		\pause
+		\begin{equation} \label{eq:DesigualdadeK2_a2} \tag{6.39}
+			\diag(\underline{k})  \geq \diag(\underline{\eta}) + \frac{1}{2}|\dot{\tilde{\mH}}|_{max} |\ms| + |\tilde{\mH}|_{max} |\ddot{\mq}\ssh_d + \underline{\lambda} \dot{\me}| + |\tilde{\mh}|_{max}
+		\end{equation}
+    \end{block}
+\end{frame}
+
+\begin{frame}{Controle}
+    \framesubtitle{Modos deslizantes}
+    \pause
+    \begin{block}{Nova escolha proposta}
+    	\begin{equation} \tag{6.15} 
+			\ms = \ddot{\me} + \underline{k}_v \dot{\me} + \underline{k}_p \me
+		\end{equation} 
+		\pause
+		Para $\mW = \mone$:
+		\begin{equation} \tag{6.52*}
+			\mup = \hat{\mH} \Big(\ddot{\mq}\ssh_d + \underline{k}_v \dot{\me} + \underline{k}_p \me + \int_{0}^t \underline{k} \sign(\ms) \, \dd \tau \Big) + \hat{\mh}
+		\end{equation}
+		\pause
+		\begin{equation} \label{eq:DesigualdadeK2_b1} \tag{6.56}
+		\begin{split}
+			(\mone - | \mH^\msI \tilde{\mH}|_{max} ) \cdot \diag(\underline{k})  \geq \diag(\underline{\eta}) + |\mH^\msI ( \dot{\mH} \mH^\msI \tilde{\mH} -\dot{\tilde{\mH}}) |_{max} | \mup'' -\msigma|  + \\ |\mH^\msI \tilde{\mH}|_{max}| \dot{\msigma}| + |\mH^\msI \dot{\mH} \mH^\msI  \tilde{\mh}|_{max}+ |\mH^\msI \dot{\tilde{\mh}}|_{max}
+		\end{split}
+		\end{equation}
+    \end{block}
+\end{frame}
+
+\begin{frame}{Controle}
+    \framesubtitle{Modos deslizantes}
+    \begin{block}{Nova escolha proposta}
+    	\begin{equation} \tag{6.15} 
+			\ms = \ddot{\me} + \underline{k}_v \dot{\me} + \underline{k}_p \me
+		\end{equation} 
+
+		Para $\mW = \mH$:
+		\begin{equation} \tag{6.59*}
+			\mup = \hat{\mH} \Big(\ddot{\mq}\ssh_d + \underline{k}_v \dot{\me} + \underline{k}_p \me + \int_{0}^t \hat{\mH}^\msI \big( \underline{k} \sign(\ms) +  \frac{1}{2}\dot{\hat{\mH}} \, \ms \big) \, \dd \tau \Big) + \hat{\mh}
+		\end{equation}
+		\pause
+		\begin{equation} \label{eq:DesigualdadeK2_b2} \tag{6.63}
+		\begin{split}
+			\diag(\underline{k})  \geq \diag(\underline{\eta}) + \frac{1}{2}|\dot{\tilde{\mH}}|_{max} |\ms| + |( \dot{\mH} \mH^\msI \tilde{\mH} -\dot{\tilde{\mH}})|_{max} 	|\mup'' - \msigma |  + \\
+			|\tilde{\mH}|_{max} |\dot{\msigma}| + |\dot{\mH} \mH^\msI \tilde{\mh}|_{max} + |\dot{\tilde{\mh}}|_{max}
+		\end{split}			
+		\end{equation}
+		$$ $$
+    \end{block}
+\end{frame}
+
+\begin{frame}{Controle}
+    \framesubtitle{Modos deslizantes}
+    \begin{block}{Camada limite}
+    	\begin{equation*}
+    		\sign(\ms) \rightarrow \sat(\ms/\phi)
+    	\end{equation*}
+    	\begin{equation*}
+    		-\phi < s_i < \phi \Rightarrow e_{max} = \phi/k_p
+    	\end{equation*}
+    \end{block}
+    \begin{figure}[!h]
+        \centering
+        \includegraphics[scale=0.30]{Saturacao.pdf}
+    \end{figure}  
+\end{frame}
+
+\begin{frame}{Controle}
+    \framesubtitle{Modos deslizantes}
+    \begin{block}{Lei de Adaptação}
+    	\begin{itemize}
+    		\item[--] $\underline{k}_i[k+1] = \underline{k}_i[k] + \gamma_i$: Se estiver fora da camada limite e $s_i$ não trocou de sinal 
+    		\item[--] $\underline{k}_i[k+1] = \underline{k}_i[k] - \gamma_i$: Se $s_i$ trocou de sinal e $\underline{k}_i[k] \geq \gamma_i$:
+    		\item[--] $\underline{k}_i[k+1] = \underline{k}_i[k]$: Caso contrário
+    	\end{itemize}
+    \end{block}
+    \begin{figure}[!h]
+        \centering
+        \includegraphics[scale=0.40]{sk.png}
+    \end{figure}
+\end{frame}
+
+\begin{frame}{Controle}
+    \framesubtitle{Modos deslizantes}
+    \begin{block}{Lei de controle escolhida}
+    	$$ \mup = \hat{\mH}(\mq) \Big( \ddot{\mq}\ssh_d + \underline{k}_v\dot{\me} + \underline{k}_p\me + \int_0^t \underline{k} \, \sat(\ms/\phi) \,\dd \tau \Big) +  \hat{\mh}(\mq, \dot{\mq}) $$
+    	Sendo:
+    	$$ \ms = \ddot{\me} + \underline{k}_v\dot{\me} + \underline{k}_p\me $$
+    \end{block}
+    \pause
+    \begin{block}{Propriedades}
+    	\begin{itemize}
+    		\item[--] Robustez característica do CMD
+    		\item[--] Grande redução de \emph{chattering} devido à integral
+    		\item[--] Similar à lei de CTC (adição de 1 termo)
+    		\item[--] Custo computacional muito similar ao do CTC
+    	\end{itemize}
+    \end{block}
+\end{frame}
+
+\begin{frame}{Controle}
+    \framesubtitle{Modos deslizantes}
+    \begin{block}{PD}
+    	$$ \mup = m^* \Big( \ddot{\mq}\ssh_d + \underline{k}_v\dot{\me} + \underline{k}_p\me \Big)$$
+    \end{block}
+     \pause
+    \begin{block}{PDMD}
+    	$$ \mup = m^* \Big( \ddot{\mq}\ssh_d + \underline{k}_v\dot{\me} + \underline{k}_p\me + \int_0^t \underline{k} \, \sat(\ms/\phi) \,\dd \tau \Big) $$
+    \end{block}
+     \pause
+    \begin{block}{TC}
+    	$$ \mup = \hat{\mH}(\mq) \Big( \ddot{\mq}\ssh_d + \underline{k}_v\dot{\me} + \underline{k}_p\me \Big) +  \hat{\mh}(\mq, \dot{\mq}) $$
+    \end{block}
+     \pause
+    \begin{block}{TCMD}
+    	$$ \mup = \hat{\mH}(\mq) \Big( \ddot{\mq}\ssh_d + \underline{k}_v\dot{\me} + \underline{k}_p\me + \int_0^t \underline{k} \, \sat(\ms/\phi) \,\dd \tau \Big) +  \hat{\mh}(\mq, \dot{\mq}) $$
     \end{block}
 \end{frame}
 
