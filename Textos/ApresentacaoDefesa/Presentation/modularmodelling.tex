@@ -1056,24 +1056,77 @@
 	\end{figure}
 \end{frame}
 
-\begin{frame}{Experimento}
-    \framesubtitle{Resultados}
+\begin{frame}{Discussão}
+    %\framesubtitle{Resultados}
     \begin{figure}[!h]
         \centering
-        \includegraphics[scale=0.40]{TabelasResultados.png}
+        \includegraphics[scale=0.40]{Tabela7.png}
     \end{figure}
 \end{frame}
 
+\begin{frame}{Discussão}
+    %\framesubtitle{Resultados}
+    \begin{figure}[!h]
+        \centering
+        \includegraphics[scale=0.40]{Tabela8.png}
+    \end{figure}
+\end{frame}
 
+\begin{frame}{Discussão}
+    \begin{block}{Combinação com MD}
+        \begin{itemize}
+            \item[--] Diminuição do $e_{ef}$ em todos os casos \\[5pt]
+            \item[--] Diminuição considerável do erro estacionário de posição \\[5pt]
+            \item[--] Aumento perceptível do $\tau_{ef}$ na trajetória circular \\[5pt]
+            \item[--] Aumento sutil do $\tau_{ef}$ na trajetória triangular \\[5pt]
+            \item[--] Diminuição nos valores de pico do erro na trajetória triangular \\[5pt]
+            \item[--] Aumento do conteúdo harmônico do esforço de controle \\[5pt]
+        \end{itemize}
+    \end{block}
+    \pause
+    \begin{block}{Espaço das juntas vs Espaço da tarefa}
+        \begin{itemize}
+            \item[--] Desempenho superior do PD e PDMD no espaço da tarefa \\[5pt]
+            \item[--] Desempenho equivalente do TC e TCMD em ambos espaços \\[5 pt]
+        \end{itemize}
+    \end{block}
+\end{frame}
 
-%\begin{figure}[!htb]
-%	\centering
-%	\subfloat[][CAD\\ ]{\includegraphics[height=5cm,keepaspectratio]{images/5R_clearances.png}}
-%	\qquad
-%	\subfloat[][Prototype\\ ]{\includegraphics[height=5cm,keepaspectratio]{images/parallelconstruction2.png}}
-%	\caption{2-DOF parallel mechanism.}
-%	\label{fig:parallelmechanism}
-%\end{figure}
+\begin{frame}{Discussão}
+    \begin{block}{Trajetória circular: partida e parada}
+        \begin{itemize}
+            \item[--] PDx e PDMDx apresentam os menores picos de erro \\[5pt]
+            \item[--] Combinação com MD aumenta os valores de pico do erro \\[5pt]
+        \end{itemize}
+    \end{block}
+    \pause
+    \begin{block}{Trajetória triangular}
+        \begin{itemize}
+            \item[--] Para as leis beseadas em modelos, o erro é maior no trecho I \\[5pt]
+            \item[--] PDq e PDMDq apresentam maior erro nos trechos I e III \\[5pt]
+            \item[--] PDx e PDMDx apresentam maior erro nos trecho II \\[5pt]
+            \item[--] Combinação com MD diminui os valores de pico do erro (efeito \emph{undershoot}) \\[5pt]
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+\begin{frame}{Discussão}
+    \begin{block}{Consumo energético}
+        \begin{itemize}
+            \item[--] Valores de $\tau_{ef}$ muito próximos na trajetória triangular \\[4pt]
+            \item[--] PDq, PDMDq e TCq apresentam os menores valores de $\tau_{ef}$ na trajetória circular \\[4pt]
+            \item[--] TCMDq, PDMDx e TCMDx apresentam os maiores valores de $\tau_{ef}$ na trajetória circular \\[4pt]
+        \end{itemize}
+    \end{block}
+    \pause
+    \begin{block}{Erro de controle}
+        \begin{itemize}
+            \item[--] PDq e PDMDq apresentam os maiores valores de $e_{ef}$ em ambas as trajetórias \\[4pt]
+            \item[--] TCMDx e PDMDx apresentam os menores valores de $e_{ef}$ na trajetória circular \\[4pt]
+            \item[--] TCMDx e TCMDq apresentam os menores valores de $e_{ef}$ na trajetória triangular \\[4pt]
+        \end{itemize}
+    \end{block}
+\end{frame}
 
 
 
