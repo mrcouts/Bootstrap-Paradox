@@ -77,9 +77,9 @@
 
 \begin{frame}{Introdução}
     \framesubtitle{Mecanismos paralelos}
-    \pause
+    %\pause
     \begin{block}{Caracter\'isticas Promissoras}
-    	\pause
+    	%\pause
         \begin{itemize} 
             \item[--] Grande capacidade de carga \\[8pt]
             \item[--] Alta rigidez estrutural \\[8pt]
@@ -88,12 +88,12 @@
             \item[--] Altas velocidades e acelera\c{c}\~oes \\[8pt]
         \end{itemize}
     \end{block}
-    \pause
+    %\pause
     \begin{block}{Inconvenientes}
-    	\pause
+    	%\pause
         \begin{itemize}
         	\item[--] Grande n\'umero de componentes mec\^anicos \\[8pt]
-            \item[--] Pequena \'area de trabalho \\[8pt]
+            \item[--] Pequeno espaço de trabalho \\[8pt]
             \item[--] Din\^amica complexa e n\~ao linear \\[8pt]
         \end{itemize}
     \end{block}
@@ -121,7 +121,7 @@
     \end{block}
     \begin{figure}[!h]
         \centering
-        \includegraphics[scale=0.30]{hexapods.jpg}
+        \includegraphics[scale=0.30]{Simulador.jpg}
     \end{figure}  
 \end{frame}
 
@@ -132,17 +132,24 @@
             \item[--] Usinagem
         \end{itemize}
     \end{block}
+    \begin{multicols}{2}
     \begin{figure}[!h]
         \centering
-        \includegraphics[scale=0.60]{image44.png}
-    \end{figure}  
+        \includegraphics[scale=0.25]{Usinagem1.jpg}
+    \end{figure}
+
+    \begin{figure}[!h]
+        \centering
+        \includegraphics[scale=0.10]{Usinagem2.jpg}
+    \end{figure}
+    \end{multicols}
 \end{frame}
 
 %Grupo de pesquisa
 
 \begin{frame}{Introdução}
 	\framesubtitle{Grupo de pesquisa}
-	\pause
+	%\pause
 	\begin{block}{LaMMaR}
 		Laborat\'orio de Mecanismos, M\'aquinas e Rob\^os
     \end{block}
@@ -197,18 +204,18 @@
 \end{frame}
 
 \begin{frame}{Objetivos}
-	\pause
+	%\pause
 	\begin{block}{Geral}
 		Contribuir para o aumento do desempenho de manipuladores paralelos
 	\end{block}
-	\pause
+	%\pause
 	\begin{exampleblock}{Como?}
-		\pause
+		%\pause
 		\begin{itemize}
 			\item[$\bullet$] Automatização do processo de modelagem dinâmica \\[8pt]
-			\pause
+			%\pause
 			\item[$\bullet$] Emprego de técnicas de controle robusto baseado em modelo \\[8pt]
-			\pause
+			%\pause
 			\item[$\bullet$] Compara\c{c}\~ao de desempenho das leis de controle propostas com as leis de controle mais encontradas na literatura, atrav\'es de ensaios experimentais \\[8pt]
 		\end{itemize}
 	\end{exampleblock}
@@ -219,13 +226,13 @@
 
 \begin{frame}{Revisão da Literatura}
     \framesubtitle{Modelagem Dinâmica}
-    \pause
+    %\pause
         \begin{block}{Influência da topologia do robô}
     	\begin{itemize}
-    		\pause
+    		%\pause
     		\item[$\bullet$] Seriais
     		\begin{itemize}
-    			\pause
+    			%\pause
     			\item[--] Cadeia aberta \\[4pt]
     			\item[--] Juntas ativas de 1 gl \\[4pt]
     			\item[--] N$^\circ$ de coord. gen. = N$^\circ$ atuadores = mobilidade \\[4pt]
@@ -247,7 +254,7 @@
     	\begin{itemize}
     		\item[$\bullet$] Paralelos
     		\begin{itemize}
-    			\pause
+    			%\pause
     			\item[--] Cadeia fechada \\[4pt]
     			\item[--] Juntas de 1, 2 ou 3 gl, ativas ou passivas \\[4pt]
     			\item[--] Grande número de elos \\[4pt]
@@ -256,7 +263,7 @@
     			\item[--] Cinemática direta complexa \\[4pt]
     			\item[--] Cinemática inversa "simples" \\[4pt]
     			\item[--] Dinâmica direta - Sistema de EDAs ou EDOs \\[4pt]
-    			\item[--] Dinâmica inversa - Sistema não linear \\[4pt]
+    			\item[--] Dinâmica inversa - Sistema linear \\[4pt]
     			\item[--] Coord. gen. ind.: coord. dos atuadores ou do efetuador \\[4pt]
     		\end{itemize}
     	\end{itemize}
@@ -305,7 +312,7 @@
 		\mb = \frac{\partial (\mA \dot{\mq})}{\partial \mq} \, \dot{\mq} + 2 \frac{\partial \mA}{\partial t} \, \dot{\mq} + \frac{\partial^2 \bar{\mq}}{\partial t^2}
 	\end{equation}
 	\end{block}
-	\pause
+	%\pause
 	\begin{block}{Método estabilização de Baumgarte}
 		\begin{equation} \label{baumgarte} \tag{2.6}
 			\mb' = \mb + 2\hat{\alpha} \dot{\bar{\mq}} + \hat{\beta}^2 \bar{\mq}
@@ -317,23 +324,23 @@
     \framesubtitle{Modelagem Dinâmica}
         \begin{block}{Propósito}
     	\begin{itemize}
-    		\pause
+    		%\pause
     		\item[$\bullet$] Simulação
     		\begin{itemize}
-    			\pause
+    			%\pause
     			\item[--] Projeto/Dimensionamento do mecanismo/manipulador \\[4pt]
     			\item[--] Grau de detalhamento do modelo depende da aplicação \\[4pt]
-    			\item[--] Não necessita rodar em tempo real \\[4pt]
+    			\item[--] Não é necessário o processamento em tempo real \\[4pt]
     		\end{itemize}
-    		\pause
+    		%\pause
     		\item[$\bullet$] Controle
     		\begin{itemize}
-    			\pause
+    			%\pause
     			\item[--] Projeto do controlador \\[4pt]
     			\item[--] Compensação de não linearidades \\[4pt]
     			\item[--] Modelos demasiadamente complexos dificultam o projeto e podem aumentar o custo computacional \\[4pt]
     			\item[--] Modelos muito simplistas podem comprometer o desempenho \\[4pt]
-    			\item[--] Muitas vezes precisa rodar em tempo real \\[4pt]
+    			\item[--] Muitas vezes é necessário o processamento em tempo real \\[4pt]
     		\end{itemize}
     	\end{itemize}
     \end{block}
@@ -346,7 +353,7 @@
             \item[$\bullet$] Formalismo de Newton-Euler (Arian \emph{et al.}, 2017; Zhang \emph{et al.}, 2014) \\[4pt] % Dasgupta e Mruthyunjaya, 1998; Li \emph{et al.}, 2003; Shiau \emph{et al.}, 2008;
             \item[$\bullet$] Formalismo de Lagrange (Singh e Santhakumar, 2015; Yao \emph{et al.}, 2017) \\[4pt] %Li e Xu, 2005; Singh \emph{et al.}, 2015; Singh \emph{et al.}, 2014;
             \item[$\bullet$] Princípio dos Trabalhos/Potências Virtuais (Gallardo-Alvarado \emph{et al.}, 2018; Li e Staicu, 2012) \\[4pt] %Codourey, 1996; Codourey e Burdet, 1997; Geike e McPhee, 2003; Li e Xu, 2009; Staicu, 2009; Staicu e Carp-Ciocardia, 2003; Staicu \emph{et al.}, 2007; Staicu e Zhang, 2008; Staicu \emph{et al.}, 2006; Wu \emph{et al.}, 2009; Zhao e Gao, 2009; Zhu \emph{et al.}, 2005;
-            \item[$\bullet$] Formulação Lagrange-D'Alambert (Cheng \emph{et al.}, 2001; Yen e Lai, 2009) \\[4pt]
+            \item[$\bullet$] Formulação Lagrange-D'Alembert (Cheng \emph{et al.}, 2001; Yen e Lai, 2009) \\[4pt]
             \item[$\bullet$] Método de Kane (Ben-Horina \emph{et al.}, 1998; Shukla e Karki, 2014) \\[4pt]
             \item[$\bullet$] Formalismo de Boltzmann-Hammel (Abdellatif e Heimann, 2009; Altuzarra \emph{et al.}, 2015) \\[4pt]
             \item[$\bullet$] Formulação do Complemento Ortogonal Natural  (Akbarzadeh \emph{et al.}, 2013; Khan \emph{et al.}, 2005) \\[4pt] %Xi e Sinatra, 2002; 
@@ -356,19 +363,19 @@
 
 \begin{frame}{Revisão da Literatura}
     \framesubtitle{Controle}
-    	\pause
+    	%\pause
         \begin{block}{Propósito}
     	\begin{itemize}
-    		\pause
+    		%\pause
     		\item[$\bullet$] Controle ponto a ponto
     		\begin{itemize}
-    			\pause
+    			%\pause
     			\item[--] \emph{Pick-and-place} \\[6pt]
     		\end{itemize}
-    		\pause
+    		%\pause
     		\item[$\bullet$] Controle de trajetória
     		\begin{itemize}
-    			\pause
+    			%\pause
     			\item[--] Usinagem \\[6pt]
     			\item[--] Soldagem \\[6pt]
     			\item[--] Aplicação de adesivos/selantes \\[6pt]
@@ -380,7 +387,7 @@
 
 \begin{frame}{Revisão da Literatura}
     \framesubtitle{Controle}
-    \pause
+    %\pause
     \begin{block}{Principais técnicas}
         \begin{itemize}
             \item[$\bullet$] Controle Proporcional-Integral-Derivativo \\
@@ -585,15 +592,15 @@
 \end{frame}
 
 \begin{frame}{Metodologia da Pesquisa}
-	\pause
+	%\pause
     \begin{block}{Modelagem}
         Desenvolvimento e implementação de algoritmo genérico para modelagem dinâmica de mecanismos paralelos translacionais
     \end{block}
-    \pause
+    %\pause
     \begin{block}{Controle}
         Estudo, síntese, e simulação de leis de controle não linear robusto de alto desempenho para mecanismos paralelos 
     \end{block}
-    \pause
+    %\pause
     \begin{block}{Experimento}
 		Contrução de um protótipo de manipulador paralelo translacional e realização de ensaios experimentais com o intuito de:
 		\begin{itemize}
@@ -620,14 +627,14 @@
 			\item[--] Atuadores
 		\end{itemize}
     \end{block}
-	\pause
+	%\pause
     \begin{block}{Descrição Topológica}
 		\begin{itemize}
 			\item[--] Parâmetros de Denavit-Hartenberg
 			\item[--] Coordenadas dos centros de massa dos elos nos sistemas móveis
 		\end{itemize}
     \end{block}
-	\pause
+	%\pause
     \begin{block}{Efeitos considerados}
 		\begin{itemize}
 			\item[--] Ação da gravidade
@@ -655,14 +662,14 @@
 			\item[--] Sistema de coordenadas fixo $\ttN_0$
 		\end{itemize}
     \end{block}
-	\pause
+	%\pause
     \begin{block}{Cadeias seriais}
 		\begin{itemize}
 			\item[--] Subsistemas $\ssB_1, \ssB_2,...,\ssB_n$
 			\item[--] Sistemas de coordenadas fixos $\ttN_1, \ttN_2,...,\ttN_n$
 		\end{itemize}
     \end{block}
-	\pause
+	%\pause
     \begin{block}{Coordenadas generalizadas}
 		\begin{itemize}
 			\item[--] $\mq^*$ ou $\mq_0$: Coordenadas $x,y,z$ do CM do efetuador $\ssB_0$ no sistema $\ttN_0$
@@ -689,7 +696,7 @@
 %			\item[--] $\momega(\mq^\diamond, \dot{\mq}^\diamond)$: Concatenação de todos $\momega_i(\mq_i, \dot{\mq}_i)$
 %			\item[--] $\dot{\momega}(\mq^\diamond, \dot{\mq}^\diamond, \ddot{\mq}^\diamond)$: Concatenação de todos $\dot{\momega}_i(\mq_i, \dot{\mq}_i, \ddot{\mq}_i)$
 		\end{itemize}
-		\pause
+		%\pause
 		$$ \mv(\mq^\diamond, \dot{\mq}^\diamond) = \mJ_{\mathsf{v}}(\mq^\diamond) \cdot \dot{\mq}^\diamond $$
     	$$ \ma(\mq^\diamond, \dot{\mq}^\diamond, \ddot{\mq}^\diamond) = \mJ_{\mathsf{v}}(\mq^\diamond) \cdot \ddot{\mq}^\diamond + \underaccent{\sim}{\ma}(\mq^\diamond, \dot{\mq}^\diamond) $$
     	$$ \momega(\mq^\diamond, \dot{\mq}^\diamond) = \mJ_{\mathsf{w}}(\mq^\diamond) \cdot \dot{\mq}^\diamond $$
@@ -719,7 +726,7 @@
     	\begin{equation} \label{eq:VinculosPosicaoAfins} \tag{5.15}
 			\mD_{\oplus}\cdot\mq^\ast = \md_{\oplus} + \mF_{\oplus}\cdot\mq^\diamond
 		\end{equation}
-		\pause
+		%\pause
     	Juntando todas as equações vinculares obtidas:
 		\begin{equation} \label{eq:VinculosPosicao2} \tag{5.16}
 			\begin{bmatrix}
@@ -759,7 +766,7 @@
 			\cdot
 			\mq^\diamond
 		\end{equation}
-	\pause
+	%\pause
 	Assim, temos:
 	\begin{equation} \label{eq:VinculosGenericosPosicao} \tag{5.17}
 		\therefore \overline{\mq}(\mq) = \mD \cdot \mq^\ast - \md - \mE \cdot \mx(\mq)
@@ -786,7 +793,7 @@
 			\mzr
 		\end{equation}
 
-		\pause
+		%\pause
 		\begin{equation} \label{eq:VinculosQuasiVel2} \tag{5.34}
 			\therefore \overline{\mp}(\mq,\dot{\mq}) = \mA(\mq) \dot{\mq} = \mzr
 		\end{equation}
@@ -821,7 +828,7 @@
 		\end{split}
 		\end{equation}
 
-		\pause
+		%\pause
 		\begin{equation} \label{eq:VinculosQuasiAce_} \tag{5.39}
 			\therefore \dot{\overline{\mp}}(\mq,\dot{\mq},\ddot{\mq}) = \mA(\mq)\ddot{\mq} + \mb(\mq,\dot{\mq}) = \mzr
 		\end{equation}
@@ -843,12 +850,12 @@
 			\overline{\mf}_{\ssB_i}(\mu_i, \mq_i, \dot{\mq}_i, \ddot{\mq}_i) =  \mu_{\ssB_i} - \Big(\mM_{\ssB_i}(\mq_i) \ddot{\mq}_i + \mnu_{\ssB_i}(\mq_i,\dot{\mq}_i) + \mg_{\ssB_i}(\mq_i)\Big) = \mzr, \, i = 0,...,n
 		\end{equation}
     \end{block}
-    \pause
-    \begin{block}{Princípio de D'Alambert}
+    %\pause
+    \begin{block}{Princípio de D'Alembert}
     	\begin{equation} \tag{5.48}
 			\sum_{i=0}^n \delta W_i = \sum_{i=0}^n \delta \mq_i^\msT \cdot \overline{\mf}_{\ssB_i} = 0
 		\end{equation}
-		\pause
+		%\pause
 		Ou seja:
 		\begin{equation} \label{eq:DAlambertParalelos} \tag{5.49}
 			\delta \mq^\msT \cdot \mf = 0
@@ -859,25 +866,25 @@
 \begin{frame}{Algoritmo de Modelagem}
     \framesubtitle{Manipulador paralelo}
     \begin{block}{Vínculos em forma diferencial}
-    \pause
+    %\pause
     	\begin{equation} \label{eq:Adeltaq} \tag{5.50}
 			\mA(\mq) \delta \mq = \mzr
 		\end{equation}
-	    \pause
+	    %\pause
 		\begin{equation} \label{eq:deltaQsshQcir} \tag{5.52}
 			\delta\mq = \mQ\ssh \delta\mq\ssh + \mQ\cir \delta\mq\cir
 		\end{equation}
-		\pause
+		%\pause
 		\begin{equation} \label{eq:deltamqC} \tag{5.54}
 			\therefore \delta \mq = \mC(\mq) \cdot \delta\mq\ssh
 		\end{equation}
-		\pause
+		%\pause
 		Sendo:
 		\begin{equation} \label{eq:CComplemento} \tag{5.55}
 			\mC(\mq) = \mQ\ssh - \mQ\cir (\mA \mQ\cir)^{-1} \mA \mQ\ssh 
 		\end{equation}
     \end{block}
-    \pause
+    %\pause
     \begin{block}{Equações dinâmicas}
     	\begin{equation} \tag{5.57/5.58}
 			\delta {\mq\ssh}^\msT \mC^\msT \mf = 0 \Leftrightarrow \mC^\msT \mf = \mzr
@@ -888,7 +895,7 @@
 \begin{frame}{Algoritmo de Modelagem}
     \framesubtitle{Manipulador paralelo}
     \begin{block}{Dinâmica Direta}
-    	\pause
+    	%\pause
     	Sistema de Equações Diferenciais Algébricas
     	\begin{equation*}
 			\begin{cases}
@@ -896,7 +903,7 @@
 			\bar{\mq}(\mq) = \mzr
 			\end{cases}
 		\end{equation*}
-		\pause
+		%\pause
 		Sistema de Equações Diferenciais
     	\begin{equation} \tag{5.60}
 			\begin{cases}
@@ -904,7 +911,7 @@
 			\mA(\mq)\ddot{\mq} + \mb(\mq,\dot{\mq}) = \mzr
 			\end{cases}
 		\end{equation}
-		\pause
+		%\pause
 		Utilizando o método de estabilização de Baumgarte
 		\begin{equation} \tag{5.65}
 			\begin{bmatrix}
@@ -928,12 +935,12 @@
 
 \begin{frame}{Algoritmo de Modelagem}
     \framesubtitle{Manipulador paralelo}
-    \begin{block}{Dinâmica Direta}
-    	\pause
+    \begin{block}{Dinâmica Inversa}
+    	%\pause
     	\begin{equation} \label{eq:DinamicaInversa2} \tag{5.73}
 			\mM_{\ssM} (\mq) \ddot{\mq}\ssh + \mnu_{\ssM}(\mq, \dot{\mq}) + \mg_{\ssM}(\mq)   = \mZ(\mq)^{\msT} \mu^\star
 		\end{equation}
-		\pause
+		%\pause
 		Sendo: 
 		\begin{equation} \tag{5.74}
 			\mM_{\ssM}  =  \mC^\msT \mM' \mC
@@ -945,7 +952,7 @@
 			\mg_{\ssM}  = \mC^\msT \mg'
 		\end{equation}
 
-		\pause
+		%\pause
 		\begin{equation} \tag{5.68}
 			\mc = - (\mA \mQ\cir)^\msI \, \mb
 		\end{equation}
@@ -960,12 +967,12 @@
 
 \begin{frame}{Controle}
     %\framesubtitle{Manipulador paralelo}
-    \pause
+    %\pause
     \begin{block}{Modelo}
     	\begin{equation} \label{eq:ModeloControle} \tag{6.4}
 			\mH(\mq) \, \ddot{\mq}\ssh + \mh(\mq,\dot{\mq}) = \mup
 		\end{equation}
-		\pause
+		%\pause
 		Sendo
 		\begin{equation} \tag{6.1}
 			\mH(\mq) = \mM_{\ssM}(\mq)
@@ -981,16 +988,16 @@
 
 \begin{frame}{Controle}
     \framesubtitle{Modos deslizantes}
-    \pause
+    %\pause
     \begin{block}{Superfície de escorregamento}
     	\begin{equation*} 
 			\sigma: \ms = \underline{\ms}(\mx, \mr) = \mzr
-		\end{equation*} \pause
+		\end{equation*} %\pause
 		\begin{equation*}
 			\ms = \mzr \Rightarrow \me \rightarrow \mzr
 		\end{equation*}
     \end{block}
-    \pause
+    %\pause
     \begin{block}{Condição de escorregamento}
 		\begin{equation} \tag{6.17}
 			V(\ms) = \frac{1}{2} \ms^\msT \mW \, \ms
@@ -1003,17 +1010,17 @@
 
 \begin{frame}{Controle}
     \framesubtitle{Modos deslizantes}
-    \pause
+    %\pause
     \begin{block}{Escolha convencional}
     	\begin{equation} \tag{6.14} 
 			\ms = \dot{\me} + \underline{\lambda} \me
 		\end{equation} 
-		\pause
+		%\pause
 		Para $\mW = \mone$:
 		\begin{equation} \tag{6.28*}
 			\mup = \hat{\mH}(\ddot{\mq}\ssh_d + \underline{\lambda} \dot{\me} + \underline{k} \sign(\ms) ) + \hat{\mh}
 		\end{equation}
-		\pause
+		%\pause
 		\begin{equation} \label{eq:DesigualdadeK2_a1} \tag{6.32}
 			(\mone - | \mH^\msI \tilde{\mH}|_{max} ) \cdot \diag(\underline{k})  \geq \diag(\underline{\eta}) + |\mH^\msI \tilde{\mH}|_{max} |\ddot{\mq}\ssh_d + \underline{\lambda} \dot{\me}| + |\mH^\msI\tilde{\mh}|_{max}
 		\end{equation}
@@ -1032,7 +1039,7 @@
 		\begin{equation} \tag{6.35*}
 			\mup = \hat{\mH}(\ddot{\mq}\ssh_d + \underline{\lambda} \dot{\me}) + \frac{1}{2}\dot{\hat{\mH}} \, \ms + \hat{\mh} + \underline{k} \sign(\ms)
 		\end{equation}
-		\pause
+		%\pause
 		\begin{equation} \label{eq:DesigualdadeK2_a2} \tag{6.39}
 			\diag(\underline{k})  \geq \diag(\underline{\eta}) + \frac{1}{2}|\dot{\tilde{\mH}}|_{max} |\ms| + |\tilde{\mH}|_{max} |\ddot{\mq}\ssh_d + \underline{\lambda} \dot{\me}| + |\tilde{\mh}|_{max}
 		\end{equation}
@@ -1041,17 +1048,17 @@
 
 \begin{frame}{Controle}
     \framesubtitle{Modos deslizantes}
-    \pause
+    %\pause
     \begin{block}{Nova escolha proposta}
     	\begin{equation} \tag{6.15} 
 			\ms = \ddot{\me} + \underline{k}_v \dot{\me} + \underline{k}_p \me
 		\end{equation} 
-		\pause
+		%\pause
 		Para $\mW = \mone$:
 		\begin{equation} \tag{6.52*}
 			\mup = \hat{\mH} \Big(\ddot{\mq}\ssh_d + \underline{k}_v \dot{\me} + \underline{k}_p \me + \int_{0}^t \underline{k} \sign(\ms) \, \dd \tau \Big) + \hat{\mh}
 		\end{equation}
-		\pause
+		%\pause
 		\begin{equation} \label{eq:DesigualdadeK2_b1} \tag{6.56}
 		\begin{split}
 			(\mone - | \mH^\msI \tilde{\mH}|_{max} ) \cdot \diag(\underline{k})  \geq \diag(\underline{\eta}) + |\mH^\msI ( \dot{\mH} \mH^\msI \tilde{\mH} -\dot{\tilde{\mH}}) |_{max} | \mup'' -\msigma|  + \\ |\mH^\msI \tilde{\mH}|_{max}| \dot{\msigma}| + |\mH^\msI \dot{\mH} \mH^\msI  \tilde{\mh}|_{max}+ |\mH^\msI \dot{\tilde{\mh}}|_{max}
@@ -1071,7 +1078,7 @@
 		\begin{equation} \tag{6.59*}
 			\mup = \hat{\mH} \Big(\ddot{\mq}\ssh_d + \underline{k}_v \dot{\me} + \underline{k}_p \me + \int_{0}^t \hat{\mH}^\msI \big( \underline{k} \sign(\ms) +  \frac{1}{2}\dot{\hat{\mH}} \, \ms \big) \, \dd \tau \Big) + \hat{\mh}
 		\end{equation}
-		\pause
+		%\pause
 		\begin{equation} \label{eq:DesigualdadeK2_b2} \tag{6.63}
 		\begin{split}
 			\diag(\underline{k})  \geq \diag(\underline{\eta}) + \frac{1}{2}|\dot{\tilde{\mH}}|_{max} |\ms| + |( \dot{\mH} \mH^\msI \tilde{\mH} -\dot{\tilde{\mH}})|_{max} 	|\mup'' - \msigma |  + \\
@@ -1120,7 +1127,7 @@
     	Sendo:
     	$$ \ms = \ddot{\me} + \underline{k}_v\dot{\me} + \underline{k}_p\me $$
     \end{block}
-    \pause
+    %\pause
     \begin{block}{Propriedades}
     	\begin{itemize}
     		\item[--] Robustez característica do CMD
@@ -1143,15 +1150,15 @@
     \begin{block}{PD}
     	$$ \mup = m^* \Big( \ddot{\mq}\ssh_d + \underline{k}_v\dot{\me} + \underline{k}_p\me \Big)$$
     \end{block}
-     \pause
+     %\pause
     \begin{block}{PDMD}
     	$$ \mup = m^* \Big( \ddot{\mq}\ssh_d + \underline{k}_v\dot{\me} + \underline{k}_p\me + \int_0^t \underline{k} \, \sat(\ms/\phi) \,\dd \tau \Big) $$
     \end{block}
-     \pause
+     %\pause
     \begin{block}{TC}
     	$$ \mup = \hat{\mH}(\mq) \Big( \ddot{\mq}\ssh_d + \underline{k}_v\dot{\me} + \underline{k}_p\me \Big) +  \hat{\mh}(\mq, \dot{\mq}) $$
     \end{block}
-     \pause
+     %\pause
     \begin{block}{TCMD}
     	$$ \mup = \hat{\mH}(\mq) \Big( \ddot{\mq}\ssh_d + \underline{k}_v\dot{\me} + \underline{k}_p\me + \int_0^t \underline{k} \, \sat(\ms/\phi) \,\dd \tau \Big) +  \hat{\mh}(\mq, \dot{\mq}) $$
     \end{block}
@@ -1159,7 +1166,7 @@
 
 \begin{frame}{Experimento}
     \framesubtitle{Bancada Experimental}
-    \pause
+    %\pause
     \begin{figure}[!h]
         \centering
         \includegraphics[scale=0.11]{BancadaExperimental.jpg}
@@ -1183,7 +1190,7 @@
 \end{frame}
 
 \begin{frame}{Experimento}
-    \framesubtitle{PDq - Trejória circular}
+    \framesubtitle{PDq - Trajetória circular}
 	\begin{figure}[!htb]
 		\centering
 		\subfloat[a)][Trajetória\\ ]{\includegraphics[height=2.8cm,keepaspectratio]{PDq_circulo/xy.png}}
@@ -1197,7 +1204,7 @@
 \end{frame}
 
 \begin{frame}{Experimento}
-    \framesubtitle{TCMDx - Trejória circular}
+    \framesubtitle{TCMDx - Trajetória circular}
 	\begin{figure}[!htb]
 		\centering
 		\subfloat[a)][Trajetória\\ ]{\includegraphics[height=2.8cm,keepaspectratio]{TCMDx_circulo/xy.png}}
@@ -1211,7 +1218,7 @@
 \end{frame}
 
 \begin{frame}{Experimento}
-    \framesubtitle{PDq - Trejória triangular}
+    \framesubtitle{PDq - Trajetória triangular}
 	\begin{figure}[!htb]
 		\centering
 		\subfloat[a)][Trajetória\\ ]{\includegraphics[height=2.8cm,keepaspectratio]{PDq_triangulo/xy.png}}
@@ -1225,7 +1232,7 @@
 \end{frame}
 
 \begin{frame}{Experimento}
-    \framesubtitle{TCMDx - Trejória triangular}
+    \framesubtitle{TCMDx - Trajetória triangular}
 	\begin{figure}[!htb]
 		\centering
 		\subfloat[a)][Trajetória\\ ]{\includegraphics[height=2.8cm,keepaspectratio]{TCMDx_triangulo/xy.png}}
@@ -1240,7 +1247,7 @@
 
 \begin{frame}{Discussão}
     %\framesubtitle{Resultados}
-    \pause
+    %\pause
     \begin{figure}[!h]
         \centering
         \includegraphics[scale=0.40]{Tabela7.png}
@@ -1266,7 +1273,7 @@
             \item[--] Aumento do conteúdo harmônico do esforço de controle \\[5pt]
         \end{itemize}
     \end{block}
-    \pause
+    %\pause
     \begin{block}{Espaço das juntas vs Espaço da tarefa}
         \begin{itemize}
             \item[--] Desempenho superior do PD e PDMD no espaço da tarefa \\[5pt]
@@ -1282,7 +1289,7 @@
             \item[--] Combinação com MD aumenta os valores de pico do erro \\[5pt]
         \end{itemize}
     \end{block}
-    \pause
+    %\pause
     \begin{block}{Trajetória triangular}
         \begin{itemize}
             \item[--] Para as leis beseadas em modelos, o erro é maior no trecho I \\[5pt]
@@ -1301,7 +1308,7 @@
             \item[--] TCMDq, PDMDx e TCMDx apresentam os maiores valores de $\tau_{ef}$ na trajetória circular \\[4pt]
         \end{itemize}
     \end{block}
-    \pause
+    %\pause
     \begin{block}{Erro de controle}
         \begin{itemize}
             \item[--] PDq e PDMDq apresentam os maiores valores de $e_{ef}$ em ambas as trajetórias \\[4pt]
@@ -1313,12 +1320,12 @@
 
 \begin{frame}{Conclusões}
     \begin{block}{}
-    	\pause
+    	%\pause
         \begin{itemize}
-            \item[$\bullet$] Algoritmo de modelagem proposto: se mostrou bastante adequado ao seu propósito, facilitando muito o processso de modelagem e implementação do modelo para controle \\[8pt]
-            \pause
+            \item[$\bullet$] Algoritmo de modelagem proposto: se mostrou bastante adequado ao seu propósito, facilitando muito o processo de modelagem e implementação do modelo para controle \\[8pt]
+            %\pause
             \item[$\bullet$] Leis de controle propostas (PDMD e TCMD): também se mostraram bastante adequadas para o controle de mecanismo paralelo, aumentanto o desempenho em relação às leis de controle puras (PD e TC) ao custo de um pequeno aumento no custo computacional e no custo energético \\[8pt]
-            \pause
+            %\pause
             \item[$\bullet$] A escolha entre espaço das juntas e espaço da tarefa: pode ter grande influência no desempenho do sistema, dependendo da lei de controle escolhida \\[8pt]
         \end{itemize}
     \end{block}
@@ -1326,12 +1333,12 @@
 
 \begin{frame}{Principais contribuições}
     \begin{block}{}
-    	\pause
+    	%\pause
         \begin{itemize}
             \item[$\bullet$] Desenvolvimento do algoritmo genérico para modelagem dinâmica de manipuladores paralelos translacionais \\[8pt]
-            \pause
+            %\pause
             \item[$\bullet$] Síntese de uma nova lei de controle não linear robusto para manipuladores robóticos, com desempenho comprovado experimentalmente \\[8pt]
-            \pause
+            %\pause
             \item[$\bullet$] Avaliação e comparação de desempenho entre 8 diferentes estratégias de controle para manipuladores paralelos através de ensaios experimentais \\[8pt]
         \end{itemize}
     \end{block}
@@ -1341,14 +1348,30 @@
     \begin{block}{}
         \begin{itemize}
             \item[$\bullet$] Extensão do algoritmo de modelagem para mecanismos paralelos de até 6 gl no efetuador \\[8pt]
-            \pause
-            \item[$\bullet$] Obtensão de resultados experimentais das leis de controle propostas em um mecanismo paralelo de atuação redundante (Super-Clara) \\[8pt]
+            %\pause
+            \item[$\bullet$] Obtenção de resultados experimentais das leis de controle propostas em um mecanismo paralelo de atuação redundante (Super-Clara) \\[8pt]
         \end{itemize}
     \end{block}
 \end{frame}
 
 \begin{frame}{Agradecimentos}
-
+    \begin{block}{}
+        \begin{itemize}
+            %\pause
+            \item[$\bullet$] CNPq -- Código de financiamento 162502/2015-0 \\[8pt]
+            %\pause
+            \item[$\bullet$] Membros da banca \\[8pt]
+            
+            \item[$\bullet$] Victor Bartholomeu e Juliana de Oliveira-Fuess \\[8pt]
+            %\pause
+            \item[$\bullet$] Décio Rinaldi \\[8pt]
+            %\pause
+            \item[$\bullet$] Prof. Dr. Tarcisio Antonio Hess Coelho \\[8pt]
+            %\pause
+            \item[$\bullet$] Prof. Dr. Renato Maia Matarazzo Orsino \\[8pt]
+            %\pause
+        \end{itemize}
+    \end{block}
 \end{frame}
 
 
