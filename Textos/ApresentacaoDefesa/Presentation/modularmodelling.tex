@@ -75,7 +75,144 @@
     \titlepage
 \end{frame}
 
+\begin{frame}{Introdução}
+    \framesubtitle{Mecanismos paralelos}
+    \pause
+    \begin{block}{Caracter\'isticas Promissoras}
+    	\pause
+        \begin{itemize} 
+            \item[--] Grande capacidade de carga \\[8pt]
+            \item[--] Alta rigidez estrutural \\[8pt]
+            \item[--] Alta precis\~ao de posicionamento \\[8pt]
+            \item[--] Baixa in\'ercia \\[8pt]
+            \item[--] Altas velocidades e acelera\c{c}\~oes \\[8pt]
+        \end{itemize}
+    \end{block}
+    \pause
+    \begin{block}{Inconvenientes}
+    	\pause
+        \begin{itemize}
+        	\item[--] Grande n\'umero de componentes mec\^anicos \\[8pt]
+            \item[--] Pequena \'area de trabalho \\[8pt]
+            \item[--] Din\^amica complexa e n\~ao linear \\[8pt]
+        \end{itemize}
+    \end{block}
+\end{frame}
 
+\begin{frame}{Introdução}
+    \framesubtitle{Mecanismos paralelos}
+    \begin{block}{Aplica\c{c}\~oes}
+        \begin{itemize}
+            \item[--] Pick-and-place
+        \end{itemize}
+    \end{block}
+    \begin{figure}[!h]
+        \centering
+        \includegraphics[scale=0.35]{ABB-Flexpicker-Robot.png}
+    \end{figure}  
+\end{frame}
+
+\begin{frame}{Introdução}
+    \framesubtitle{Mecanismos paralelos}
+    \begin{block}{Aplica\c{c}\~oes}
+        \begin{itemize}
+            \item[--] Simuladores
+        \end{itemize}
+    \end{block}
+    \begin{figure}[!h]
+        \centering
+        \includegraphics[scale=0.30]{hexapods.jpg}
+    \end{figure}  
+\end{frame}
+
+\begin{frame}{Introdução}
+    \framesubtitle{Mecanismos paralelos}
+    \begin{block}{Aplica\c{c}\~oes}
+        \begin{itemize}
+            \item[--] Usinagem
+        \end{itemize}
+    \end{block}
+    \begin{figure}[!h]
+        \centering
+        \includegraphics[scale=0.60]{image44.png}
+    \end{figure}  
+\end{frame}
+
+%Grupo de pesquisa
+
+\begin{frame}{Introdução}
+	\framesubtitle{Grupo de pesquisa}
+	\pause
+	\begin{block}{LaMMaR}
+		Laborat\'orio de Mecanismos, M\'aquinas e Rob\^os
+    \end{block}
+    \begin{figure}[!h]
+        \centering
+        \includegraphics[scale=0.25]{LaMMaR.png}
+    \end{figure}
+\end{frame}
+
+\begin{frame}{Introdução}
+	\framesubtitle{Grupo de pesquisa}
+	\begin{block}{Rob\^os}
+		Giovanna
+    \end{block}
+    \begin{figure}[!h]
+        \centering
+        \includegraphics[scale=0.33]{Giovanna.png}
+    \end{figure}
+\end{frame}
+
+\begin{frame}{Introdução}
+	\framesubtitle{Grupo de pesquisa}
+	\begin{block}{Rob\^os}
+		Dora
+    \end{block}
+    \begin{figure}[!h]
+        \centering
+        \includegraphics[scale=0.33]{Dora.png}
+    \end{figure}
+\end{frame}
+
+\begin{frame}{Introdução}
+	\framesubtitle{Grupo de pesquisa}
+	\begin{block}{Rob\^os}
+		Laila
+    \end{block}
+    \begin{figure}[!h]
+        \centering
+        \includegraphics[scale=0.33]{Laila.jpg}
+    \end{figure}
+\end{frame}
+
+\begin{frame}{Introdução}
+	\framesubtitle{Grupo de pesquisa}
+	\begin{block}{Rob\^os}
+		Clara
+    \end{block}
+    \begin{figure}[!h]
+        \centering
+        \includegraphics[scale=0.21]{Clara2.jpg}
+    \end{figure}
+\end{frame}
+
+\begin{frame}{Objetivos}
+	\pause
+	\begin{block}{Geral}
+		Contribuir para o aumento do desempenho de manipuladores paralelos
+	\end{block}
+	\pause
+	\begin{exampleblock}{Como?}
+		\pause
+		\begin{itemize}
+			\item[$\bullet$] Automatização do processo de modelagem dinâmica \\[8pt]
+			\pause
+			\item[$\bullet$] Emprego de técnicas de controle robusto baseado em modelo \\[8pt]
+			\pause
+			\item[$\bullet$] Compara\c{c}\~ao de desempenho das leis de controle propostas com as leis de controle mais encontradas na literatura, atrav\'es de ensaios experimentais \\[8pt]
+		\end{itemize}
+	\end{exampleblock}
+\end{frame}
 
 %============================================== REVISÃO DA LITERATURA =======================================================%
 
@@ -219,6 +356,30 @@
 
 \begin{frame}{Revisão da Literatura}
     \framesubtitle{Controle}
+    	\pause
+        \begin{block}{Propósito}
+    	\begin{itemize}
+    		\pause
+    		\item[$\bullet$] Controle ponto a ponto
+    		\begin{itemize}
+    			\pause
+    			\item[--] \emph{Pick-and-place} \\[6pt]
+    		\end{itemize}
+    		\pause
+    		\item[$\bullet$] Controle de trajetória
+    		\begin{itemize}
+    			\pause
+    			\item[--] Usinagem \\[6pt]
+    			\item[--] Soldagem \\[6pt]
+    			\item[--] Aplicação de adesivos/selantes \\[6pt]
+    			\item[--] Simuladores de voo/automobilísticos \\[6pt]
+    		\end{itemize}
+    	\end{itemize}
+    \end{block}
+\end{frame}
+
+\begin{frame}{Revisão da Literatura}
+    \framesubtitle{Controle}
     \pause
     \begin{block}{Principais técnicas}
         \begin{itemize}
@@ -250,7 +411,7 @@
     \framesubtitle{Controle}
     \begin{figure}[!h]
         \centering
-        \includegraphics[scale=0.45]{PID.png}
+        \includegraphics[scale=0.38]{PID.jpg}
     \end{figure}  
 \end{frame}
 
@@ -326,7 +487,7 @@
     \framesubtitle{Controle}
     \begin{figure}[!h]
         \centering
-        \includegraphics[scale=0.30]{CPM.png}
+        \includegraphics[scale=0.10]{CPM.jpg}
     \end{figure}  
 \end{frame}
 
@@ -370,7 +531,7 @@
     \framesubtitle{Controle}
     \begin{figure}[!h]
         \centering
-        \includegraphics[scale=0.30]{CMD.png}
+        \includegraphics[scale=0.35]{CMD.jpg}
     \end{figure}  
 \end{frame}
 
@@ -444,7 +605,14 @@
 
 \begin{frame}{Algoritmo de Modelagem}
     \framesubtitle{Cadeias seriais}
-	\pause
+	\begin{figure}[!h]
+        \centering
+        \includegraphics[scale=1.00]{Elo2Serial.jpg}
+    \end{figure} 
+\end{frame}
+
+\begin{frame}{Algoritmo de Modelagem}
+    \framesubtitle{Cadeias seriais}
     \begin{block}{Elementos}
 		\begin{itemize}
 			\item[--] Elos
@@ -472,7 +640,14 @@
 
 \begin{frame}{Algoritmo de Modelagem}
     \framesubtitle{Manipulador paralelo}
-	\pause
+	\begin{figure}[!h]
+        \centering
+        \includegraphics[scale=1.00]{Serial2Paralelo.jpg}
+    \end{figure} 
+\end{frame}
+
+\begin{frame}{Algoritmo de Modelagem}
+    \framesubtitle{Manipulador paralelo}
     \begin{block}{Efetuador}
 		\begin{itemize}
 			\item[--] Subsistema $\ssB_0$
@@ -533,7 +708,7 @@
     \end{block}
     \begin{figure}[!h]
         \centering
-        \includegraphics[scale=0.19]{VinculosDePosicao.jpg}
+        \includegraphics[scale=0.60]{VinculosDePosicao.jpg}
     \end{figure}  
 \end{frame}
 
@@ -957,6 +1132,13 @@
 \end{frame}
 
 \begin{frame}{Controle}
+    \begin{figure}[!h]
+        \centering
+        \includegraphics[scale=0.30]{TCMD.jpg}
+    \end{figure}
+\end{frame}
+
+\begin{frame}{Controle}
     \framesubtitle{Leis utilizadas}
     \begin{block}{PD}
     	$$ \mup = m^* \Big( \ddot{\mq}\ssh_d + \underline{k}_v\dot{\me} + \underline{k}_p\me \Big)$$
@@ -980,7 +1162,7 @@
     \pause
     \begin{figure}[!h]
         \centering
-        \includegraphics[scale=0.07]{BancadaClara12.jpg}
+        \includegraphics[scale=0.11]{BancadaExperimental.jpg}
     \end{figure}
 \end{frame}
 
@@ -1058,6 +1240,7 @@
 
 \begin{frame}{Discussão}
     %\framesubtitle{Resultados}
+    \pause
     \begin{figure}[!h]
         \centering
         \includegraphics[scale=0.40]{Tabela7.png}
@@ -1087,7 +1270,7 @@
     \begin{block}{Espaço das juntas vs Espaço da tarefa}
         \begin{itemize}
             \item[--] Desempenho superior do PD e PDMD no espaço da tarefa \\[5pt]
-            \item[--] Desempenho equivalente do TC e TCMD em ambos espaços \\[5 pt]
+            \item[--] Desempenho equivalente do TC e TCMD em ambos espaços \\[5pt]
         \end{itemize}
     \end{block}
 \end{frame}
@@ -1126,6 +1309,46 @@
             \item[--] TCMDx e TCMDq apresentam os menores valores de $e_{ef}$ na trajetória triangular \\[4pt]
         \end{itemize}
     \end{block}
+\end{frame}
+
+\begin{frame}{Conclusões}
+    \begin{block}{}
+    	\pause
+        \begin{itemize}
+            \item[$\bullet$] Algoritmo de modelagem proposto: se mostrou bastante adequado ao seu propósito, facilitando muito o processso de modelagem e implementação do modelo para controle \\[8pt]
+            \pause
+            \item[$\bullet$] Leis de controle propostas (PDMD e TCMD): também se mostraram bastante adequadas para o controle de mecanismo paralelo, aumentanto o desempenho em relação às leis de controle puras (PD e TC) ao custo de um pequeno aumento no custo computacional e no custo energético \\[8pt]
+            \pause
+            \item[$\bullet$] A escolha entre espaço das juntas e espaço da tarefa: pode ter grande influência no desempenho do sistema, dependendo da lei de controle escolhida \\[8pt]
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+\begin{frame}{Principais contribuições}
+    \begin{block}{}
+    	\pause
+        \begin{itemize}
+            \item[$\bullet$] Desenvolvimento do algoritmo genérico para modelagem dinâmica de manipuladores paralelos translacionais \\[8pt]
+            \pause
+            \item[$\bullet$] Síntese de uma nova lei de controle não linear robusto para manipuladores robóticos, com desempenho comprovado experimentalmente \\[8pt]
+            \pause
+            \item[$\bullet$] Avaliação e comparação de desempenho entre 8 diferentes estratégias de controle para manipuladores paralelos através de ensaios experimentais \\[8pt]
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+\begin{frame}{Trabalhos futuros}
+    \begin{block}{}
+        \begin{itemize}
+            \item[$\bullet$] Extensão do algoritmo de modelagem para mecanismos paralelos de até 6 gl no efetuador \\[8pt]
+            \pause
+            \item[$\bullet$] Obtensão de resultados experimentais das leis de controle propostas em um mecanismo paralelo de atuação redundante (Super-Clara) \\[8pt]
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+\begin{frame}{Agradecimentos}
+
 \end{frame}
 
 

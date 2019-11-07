@@ -86,7 +86,7 @@
 \contentsline {subsection}{\numberline {7.2.6}Estrat\IeC {\'e}gias de controle}{101}
 \contentsline {subsection}{\numberline {7.2.7}Par\IeC {\^a}metros do sistema}{102}
 \contentsline {subsection}{\numberline {7.2.8}Trajet\IeC {\'o}rias de refer\IeC {\^e}ncia}{103}
-\contentsline {subsection}{\numberline {7.2.9}Condi\IeC {\c c}\IeC {\~o}es iniciais}{103}
+\contentsline {subsection}{\numberline {7.2.9}Condi\IeC {\c c}\IeC {\~o}es iniciais}{104}
 \contentsline {subsection}{\numberline {7.2.10}Par\IeC {\^a}metros dos controladores}{104}
 \contentsline {subsection}{\numberline {7.2.11}Resultados experimentais}{105}
 \contentsline {subsubsection}{\numberline {7.2.11.1}PDq - Trajet\IeC {\'o}ria circular}{106}
