@@ -212,11 +212,11 @@
 	\begin{exampleblock}{Como?}
 		%\pause
 		\begin{itemize}
-			\item[$\bullet$] Automatização do processo de modelagem dinâmica \\[8pt]
+			\item[$\bullet$] Facilitando o processo de geração de modelos dinâmicos \\[8pt]
 			%\pause
-			\item[$\bullet$] Emprego de técnicas de controle robusto baseado em modelo \\[8pt]
+			\item[$\bullet$] Empregando de técnicas de controle robusto baseado em modelo \\[8pt]
 			%\pause
-			\item[$\bullet$] Compara\c{c}\~ao de desempenho das leis de controle propostas com as leis de controle mais encontradas na literatura, atrav\'es de ensaios experimentais \\[8pt]
+			\item[$\bullet$] Comparando o desempenho das leis de controle mais encontradas na literatura e das leis de controle propostas, atrav\'es de ensaios experimentais \\[8pt]
 		\end{itemize}
 	\end{exampleblock}
 \end{frame}
@@ -1107,7 +1107,7 @@
 
 \begin{frame}{Controle}
     \framesubtitle{Modos deslizantes}
-    \begin{block}{Lei de Adaptação}
+    \begin{block}{Lei de Adaptação (Monsees, Discrete-Time Sliding Mode Control, 2002)}
     	\begin{itemize}
     		\item[--] $\underline{k}_i[k+1] = \underline{k}_i[k] + \gamma_i$: Se estiver fora da camada limite e $s_i$ não trocou de sinal 
     		\item[--] $\underline{k}_i[k+1] = \underline{k}_i[k] - \gamma_i$: Se $s_i$ trocou de sinal e $\underline{k}_i[k] \geq \gamma_i$:
@@ -1283,19 +1283,19 @@
 \end{frame}
 
 \begin{frame}{Discussão}
-    \begin{block}{Trajetória circular: partida e parada}
-        \begin{itemize}
-            \item[--] PDx e PDMDx apresentam os menores picos de erro \\[5pt]
-            \item[--] Combinação com MD aumenta os valores de pico do erro \\[5pt]
-        \end{itemize}
-    \end{block}
-    %\pause
-    \begin{block}{Trajetória triangular}
+        \begin{block}{Trajetória triangular}
         \begin{itemize}
             \item[--] Para as leis beseadas em modelos, o erro é maior no trecho I \\[5pt]
             \item[--] PDq e PDMDq apresentam maior erro nos trechos I e III \\[5pt]
             \item[--] PDx e PDMDx apresentam maior erro nos trecho II \\[5pt]
             \item[--] Combinação com MD diminui os valores de pico do erro (efeito \emph{undershoot}) \\[5pt]
+        \end{itemize}
+    \end{block}
+    %\pause    
+    \begin{block}{Trajetória circular: partida e parada}
+        \begin{itemize}
+            \item[--] PDx e PDMDx apresentam os menores picos de erro \\[5pt]
+            \item[--] Combinação com MD aumenta os valores de pico do erro \\[5pt]
         \end{itemize}
     \end{block}
 \end{frame}
