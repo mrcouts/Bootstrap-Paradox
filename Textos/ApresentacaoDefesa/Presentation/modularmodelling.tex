@@ -75,6 +75,8 @@
     \titlepage
 \end{frame}
 
+%============================================================== INTRODUÇÃO =======================================================%
+
 \begin{frame}{Introdução}
     \framesubtitle{Mecanismos paralelos}
     %\pause
@@ -203,6 +205,9 @@
     \end{figure}
 \end{frame}
 
+%==================================================== OBJETIVOS =================================================================%
+
+
 \begin{frame}{Objetivos}
 	%\pause
 	\begin{block}{Geral}
@@ -212,11 +217,11 @@
 	\begin{exampleblock}{Como?}
 		%\pause
 		\begin{itemize}
-			\item[$\bullet$] Facilitando o processo de geração de modelos dinâmicos \\[8pt]
+			\item[$\bullet$] Contribuir no processo de geração de modelos dinâmicos \\[8pt]
 			%\pause
-			\item[$\bullet$] Empregando de técnicas de controle robusto baseado em modelo \\[8pt]
+			\item[$\bullet$] Investigar a possibilidade de utilizar/sintetizar leis de controle de maior desempenho do que as propostas na literatura \\[8pt]
 			%\pause
-			\item[$\bullet$] Comparando o desempenho das leis de controle mais encontradas na literatura e das leis de controle propostas, atrav\'es de ensaios experimentais \\[8pt]
+			\item[$\bullet$] Comparar o desempenho diversas estratégias de controle, tanto as mais encontradas na literatura quanto as quanto as estratégias de controle propostas, atrav\'es de ensaios experimentais \\[8pt]
 		\end{itemize}
 	\end{exampleblock}
 \end{frame}
@@ -591,6 +596,9 @@
     $$ $$
 \end{frame}
 
+%============================================== METODOLOGIA DE PESQUISA =======================================================%
+
+
 \begin{frame}{Metodologia da Pesquisa}
 	%\pause
     \begin{block}{Modelagem}
@@ -609,6 +617,9 @@
 		\end{itemize}
     \end{block}
 \end{frame}
+
+%============================================== ALGORITMO DE MODELAGEM =======================================================%
+
 
 \begin{frame}{Algoritmo de Modelagem}
     \framesubtitle{Cadeias seriais}
@@ -680,29 +691,29 @@
     \end{block}
 \end{frame}
 
-\begin{frame}{Algoritmo de Modelagem}
-    \framesubtitle{Manipulador paralelo}
-    \begin{block}{Cinemática das cadeias seriais}
-		\begin{itemize}
-			\item[--] $\mx_i(\mq_i)$: Coordenadas $x,y,z$ do efetuador de $\ssB_i$ no sistema $\ttN_i$
-			\item[--] $\mv_i(\mq_i, \dot{\mq}_i)$: Velocidade linear do efetuador de $\ssB_i$ no sistema $\ttN_i$
-			\item[--] $\ma_i(\mq_i, \dot{\mq}_i, \ddot{\mq}_i)$: Aceleração linear do efetuador de $\ssB_i$ no sistema $\ttN_i$
-			\item[--] $\momega_i(\mq_i, \dot{\mq}_i)$: Velocidade angular do efetuador de $\ssB_i$ no sistema $\ttN_i$
-			\item[--] $\dot{\momega}_i(\mq_i, \dot{\mq}_i, \ddot{\mq}_i)$: Aceleração angular do efetuador de $\ssB_i$ no sistema $\ttN_i$
-			\\[12pt]
-%			\item[--] $\mx(\mq^\diamond)$: Concatenação de todos $\mx_i(\mq_i)$
-%			\item[--] $\mv(\mq^\diamond, \dot{\mq}^\diamond)$: Concatenação de todos $\mv_i(\mq_i, \dot{\mq}_i)$
-%			\item[--] $\ma(\mq^\diamond, \dot{\mq}^\diamond, \ddot{\mq}^\diamond)$: Concatenação de todos $\ma_i(\mq_i, \dot{\mq}_i, \dot{\mq}_i)$
-%			\item[--] $\momega(\mq^\diamond, \dot{\mq}^\diamond)$: Concatenação de todos $\momega_i(\mq_i, \dot{\mq}_i)$
-%			\item[--] $\dot{\momega}(\mq^\diamond, \dot{\mq}^\diamond, \ddot{\mq}^\diamond)$: Concatenação de todos $\dot{\momega}_i(\mq_i, \dot{\mq}_i, \ddot{\mq}_i)$
-		\end{itemize}
-		%\pause
-		$$ \mv(\mq^\diamond, \dot{\mq}^\diamond) = \mJ_{\mathsf{v}}(\mq^\diamond) \cdot \dot{\mq}^\diamond $$
-    	$$ \ma(\mq^\diamond, \dot{\mq}^\diamond, \ddot{\mq}^\diamond) = \mJ_{\mathsf{v}}(\mq^\diamond) \cdot \ddot{\mq}^\diamond + \underaccent{\sim}{\ma}(\mq^\diamond, \dot{\mq}^\diamond) $$
-    	$$ \momega(\mq^\diamond, \dot{\mq}^\diamond) = \mJ_{\mathsf{w}}(\mq^\diamond) \cdot \dot{\mq}^\diamond $$
-    	$$ \dot{\momega}(\mq^\diamond, \dot{\mq}^\diamond, \ddot{\mq}^\diamond) = \mJ_{\mathsf{w}}(\mq^\diamond) \cdot \ddot{\mq}^\diamond + \underaccent{\sim}{\dot{\momega}}(\mq^\diamond, \dot{\mq}^\diamond) $$
-    \end{block}
-\end{frame}
+%\begin{frame}{Algoritmo de Modelagem}
+%    \framesubtitle{Manipulador paralelo}
+%    \begin{block}{Cinemática das cadeias seriais}
+%		\begin{itemize}
+%			\item[--] $\mx_i(\mq_i)$: Coordenadas $x,y,z$ do efetuador de $\ssB_i$ no sistema $\ttN_i$
+%			\item[--] $\mv_i(\mq_i, \dot{\mq}_i)$: Velocidade linear do efetuador de $\ssB_i$ no sistema $\ttN_i$
+%			\item[--] $\ma_i(\mq_i, \dot{\mq}_i, \ddot{\mq}_i)$: Aceleração linear do efetuador de $\ssB_i$ no sistema $\ttN_i$
+%			\item[--] $\momega_i(\mq_i, \dot{\mq}_i)$: Velocidade angular do efetuador de $\ssB_i$ no sistema $\ttN_i$
+%			\item[--] $\dot{\momega}_i(\mq_i, \dot{\mq}_i, \ddot{\mq}_i)$: Aceleração angular do efetuador de $\ssB_i$ no sistema $\ttN_i$
+%			\\[12pt]
+%%			\item[--] $\mx(\mq^\diamond)$: Concatenação de todos $\mx_i(\mq_i)$
+%%			\item[--] $\mv(\mq^\diamond, \dot{\mq}^\diamond)$: Concatenação de todos $\mv_i(\mq_i, \dot{\mq}_i)$
+%%			\item[--] $\ma(\mq^\diamond, \dot{\mq}^\diamond, \ddot{\mq}^\diamond)$: Concatenação de todos $\ma_i(\mq_i, \dot{\mq}_i, \dot{\mq}_i)$
+%%			\item[--] $\momega(\mq^\diamond, \dot{\mq}^\diamond)$: Concatenação de todos $\momega_i(\mq_i, \dot{\mq}_i)$
+%%			\item[--] $\dot{\momega}(\mq^\diamond, \dot{\mq}^\diamond, \ddot{\mq}^\diamond)$: Concatenação de todos $\dot{\momega}_i(\mq_i, \dot{\mq}_i, \ddot{\mq}_i)$
+%		\end{itemize}
+%		%\pause
+%		$$ \mv(\mq^\diamond, \dot{\mq}^\diamond) = \mJ_{\mathsf{v}}(\mq^\diamond) \cdot \dot{\mq}^\diamond $$
+%    	$$ \ma(\mq^\diamond, \dot{\mq}^\diamond, \ddot{\mq}^\diamond) = \mJ_{\mathsf{v}}(\mq^\diamond) \cdot \ddot{\mq}^\diamond + \underaccent{\sim}{\ma}(\mq^\diamond, \dot{\mq}^\diamond) $$
+%    	$$ \momega(\mq^\diamond, \dot{\mq}^\diamond) = \mJ_{\mathsf{w}}(\mq^\diamond) \cdot \dot{\mq}^\diamond $$
+%    	$$ \dot{\momega}(\mq^\diamond, \dot{\mq}^\diamond, \ddot{\mq}^\diamond) = \mJ_{\mathsf{w}}(\mq^\diamond) \cdot \ddot{\mq}^\diamond + \underaccent{\sim}{\dot{\momega}}(\mq^\diamond, \dot{\mq}^\diamond) $$
+%    \end{block}
+%\end{frame}
 
 \begin{frame}{Algoritmo de Modelagem}
     \framesubtitle{Manipulador paralelo}
