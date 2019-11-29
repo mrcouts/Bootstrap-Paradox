@@ -251,15 +251,17 @@ class Serial:
         for i in range(self.dof):
             self.v_ += self.m_[i]*self.Jv__[i].T*self.atil__[i] + self.Jw__[i].T*(self.I__[i]*self.alphatil__[i] + S_(self.w__[i])*self.I__[i]*self.w__[i] )
             
-class Efetuador3D:
-    def __init__(self, m, gamma_, a, b, c):
-        self.q_ = Zeros(3,1)
-        self.dq_ = Zeros(3,1)
+class EfetuadorTranslacional:
+    def __init__(self, m, gamma_, a, b, c, Espacial = True):
+        self.transdof = 3 if Espacial == True else 2
+        self.dof = self.transdof
+        self.q_ = Zeros(self.dof,1)
+        self.dq_ = Zeros(self.dof,1)
         self.R_ = EulerAngles_(a,b,c)
-        self.M_ = m*Eye(3)
-        self.v_ = Zeros(3,1)
-        self.g_ = -m*gamma_
-        self.dof = 3
+        self.M_ = m*Eye(self.dof)
+        self.v_ = Zeros(self.dof,1)
+        self.g_ = -m*gamma_[0:self.dof,0]
+        
         
     def doit_q_(self, q_):
         self.q_ = q_
@@ -281,17 +283,17 @@ class Paralelo:
         self.nq = EndEffector.dof + sum([Serial_[i].dof for i in range(self.n)])
         self.q_ = Zeros(self.nq,1)
         self.dq_ = Zeros(self.nq,1)
-        self.x_ = Zeros(3*self.n,1)
-        self.qbar_ = Zeros(3*self.n,1)
-        self.Jv_ = Zeros(3*self.n,self.nq - EndEffector.dof)
-        self.atil_ = Zeros(3*self.n,1)
-        self.A_ = Zeros(3*self.n, self.nq)
-        self.b_ = Zeros(3*self.n, 1)
+        self.x_ = Zeros(EndEffector.transdof*self.n,1)
+        self.qbar_ = Zeros(EndEffector.transdof*self.n,1)
+        self.Jv_ = Zeros(EndEffector.transdof*self.n,self.nq - EndEffector.dof)
+        self.atil_ = Zeros(EndEffector.transdof*self.n,1)
+        self.A_ = Zeros(EndEffector.transdof*self.n, self.nq)
+        self.b_ = Zeros(EndEffector.transdof*self.n, 1)
         self.Qh_ = Qh_Qo_(lista_ind, self.nq)[0]
         self.Qo_ = Qh_Qo_(lista_ind, self.nq)[1]
         self.U_ = Qh_Qo_(lista_actuator, self.nq)[0]
-        self.Ah_ = Zeros(3*self.n, dof)
-        self.Ao_ = Zeros(3*self.n, self.nq - dof)
+        self.Ah_ = Zeros(EndEffector.transdof*self.n, dof)
+        self.Ao_ = Zeros(EndEffector.transdof*self.n, self.nq - dof)
         self.C_ = Zeros(self.nq, dof)
         self.c_ = Zeros(self.nq, 1)
         self.M_ = Zeros(self.nq,self.nq)
@@ -316,11 +318,11 @@ class Paralelo:
         self.qbarnorm_ = []
         
         for i in range(self.n):
-            self.R__[i] = EulerAngles_(*(angulos__[i].T.tolist()[0]))
+            self.R__[i] = EulerAngles_(*(angulos__[i].T.tolist()[0]))[0:EndEffector.transdof,:]
             
-        self.D_ = np.vstack([ Eye(3) for i in range(dof) ])
+        self.D_ = np.vstack([ Eye(EndEffector.transdof) for i in range(self.n) ])
         self.E_ = np.matrix(block_diag(*self.R__))
-        self.d_ = np.vstack([ origens__[i] - EndEffector.R_*xb__[i] for i in range(dof) ])
+        self.d_ = np.vstack([ (origens__[i] - EndEffector.R_*xb__[i])[0:EndEffector.transdof,:] for i in range(dof) ])
         
     def doit_q_(self, q_):
         self.q_ = q_
@@ -338,7 +340,7 @@ class Paralelo:
         self.A_ = np.hstack([self.D_, -self.E_*self.Jv_])
         self.Ah_ = self.A_*self.Qh_
         self.Ao_ = self.A_*self.Qo_
-        self.C_ = self.Qh_ - self.Qo_*solve(self.Ao_.T*self.Ao_,self.Ao_.T*self.Ah_)
+        self.C_ = self.Qh_ - self.Qo_*solve(self.Ao_,self.Ah_)
         self.ZT_ = self.C_.T*self.U_
         self.M_ = np.matrix(block_diag(*([self.EndEffector.M_] + [self.Serial_[i].M_ for i in range(self.n)])))
         self.g_ = np.vstack([self.EndEffector.g_] + [ self.Serial_[i].g_ for i in range(dof) ])
@@ -357,7 +359,7 @@ class Paralelo:
             self.Serial_[i].doit_q_dq_(q_[soma1:soma2,0], dq_[soma1:soma2,0])
         self.atil_ = np.vstack([ self.Serial_[i].atil_ for i in range(dof) ])
         self.b_ = -self.E_*self.atil_
-        self.c_ = - self.Qo_*solve(self.Ao_.T*self.Ao_,self.Ao_.T*self.b_)
+        self.c_ = - self.Qo_*solve(self.Ao_,self.b_)
         self.v_ = np.vstack([self.EndEffector.v_] + [ self.Serial_[i].v_ for i in range(dof) ])
         self.vh_ = self.C_.T*(self.M_*self.c_ + self.v_)
         
@@ -372,7 +374,7 @@ class Paralelo:
         
     def fdqo_(self, t, qo_):
         self.doit_q_( self.Qh_*self.qhr_(t) + self.Qo_*qo_ )
-        return solve(-self.Ao_.T*self.Ao_,self.Ao_.T*(self.Ah_*self.dqhr_(t) + self.lamb*self.qbar_ ))
+        return solve(-self.Ao_,(self.Ah_*self.dqhr_(t) + self.lamb*self.qbar_ ))
         
         
         
@@ -431,7 +433,7 @@ RR = Serial(dof, l_, lg1_, m1_, I1__, gamma_, fDH_RR)
 RR1 = Serial(dof, l_, lg1_, m1_, I1__, gamma_, fDH_RR)
 RR2 = Serial(dof, l_, lg2_, m2_, I2__, gamma_, fDH_RR)
 RR_ = [RR1, RR2]
-EndEffector = Efetuador3D(0, gamma_, 0, 0, 0)
+EndEffector = EfetuadorTranslacional(0, gamma_, 0, 0, 0, False)
 
 angulos1_ = Zeros(3,1)
 angulos2_ = Zeros(3,1)
@@ -447,8 +449,8 @@ origens__ = [origem1_, origem2_]
 
 xb__ = [Zeros(3,1) for i in range(dof)]
 
-Clara = Paralelo(dof, RR_, EndEffector, angulos__, origens__, xb__, [0,1], [3,5])
-claraq_ = np.matrix([[0.0,  0.108, 0.0,  0.5375391526183005, 2.308800210309811,  0.5375391526183005, 2.308800210309811]]).T
+Clara = Paralelo(dof, RR_, EndEffector, angulos__, origens__, xb__, [0,1], [2,4])
+claraq_ = np.matrix([[0.0,  0.108,  0.5375391526183005, 2.308800210309811,  0.5375391526183005, 2.308800210309811]]).T
 
 
 #RR.doit_q_dq_(q_, dq_)
@@ -477,7 +479,7 @@ dqo_ = Clara.fdqo_(0, Clara.Qo_.T*claraq_)
 claradq_ = Clara.C_*np.matrix([[1.0, 2.0]]).T
 Clara.doit_q_dq_(claraq_, claradq_)
 
-rk = RK('RK3')
+rk = RK('Heun')
 y__, t_ = rk.ApplyParallelInvDyn(0.001, pi, Clara.Qo_.T*claraq_, Clara)
 
 #print Clara.Mh_
@@ -493,25 +495,25 @@ u2_np = np.array([Clara.u__[i][1,0] for i in range(len(t_))])
 
 x_np = np.array([Clara.q__[i][0,0] for i in range(len(t_))])
 y_np = np.array([Clara.q__[i][1,0] for i in range(len(t_))])
-theta11_np = np.array([Clara.q__[i][3,0] for i in range(len(t_))])
-theta12_np = np.array([Clara.q__[i][4,0] for i in range(len(t_))])
-theta21_np = np.array([Clara.q__[i][5,0] for i in range(len(t_))])
-theta22_np = np.array([Clara.q__[i][6,0] for i in range(len(t_))])
+theta11_np = np.array([Clara.q__[i][2,0] for i in range(len(t_))])
+theta12_np = np.array([Clara.q__[i][3,0] for i in range(len(t_))])
+theta21_np = np.array([Clara.q__[i][4,0] for i in range(len(t_))])
+theta22_np = np.array([Clara.q__[i][5,0] for i in range(len(t_))])
 
 
 dx_np = np.array([Clara.dq__[i][0,0] for i in range(len(t_))])
 dy_np = np.array([Clara.dq__[i][1,0] for i in range(len(t_))])
-dtheta11_np = np.array([Clara.dq__[i][3,0] for i in range(len(t_))])
-dtheta12_np = np.array([Clara.dq__[i][4,0] for i in range(len(t_))])
-dtheta21_np = np.array([Clara.dq__[i][5,0] for i in range(len(t_))])
-dtheta22_np = np.array([Clara.dq__[i][6,0] for i in range(len(t_))])
+dtheta11_np = np.array([Clara.dq__[i][2,0] for i in range(len(t_))])
+dtheta12_np = np.array([Clara.dq__[i][3,0] for i in range(len(t_))])
+dtheta21_np = np.array([Clara.dq__[i][4,0] for i in range(len(t_))])
+dtheta22_np = np.array([Clara.dq__[i][5,0] for i in range(len(t_))])
 
 d2x_np = np.array([Clara.d2q__[i][0,0] for i in range(len(t_))])
 d2y_np = np.array([Clara.d2q__[i][1,0] for i in range(len(t_))])
-d2theta11_np = np.array([Clara.d2q__[i][3,0] for i in range(len(t_))])
-d2theta12_np = np.array([Clara.d2q__[i][4,0] for i in range(len(t_))])
-d2theta21_np = np.array([Clara.d2q__[i][5,0] for i in range(len(t_))])
-d2theta22_np = np.array([Clara.d2q__[i][6,0] for i in range(len(t_))])
+d2theta11_np = np.array([Clara.d2q__[i][2,0] for i in range(len(t_))])
+d2theta12_np = np.array([Clara.d2q__[i][3,0] for i in range(len(t_))])
+d2theta21_np = np.array([Clara.d2q__[i][4,0] for i in range(len(t_))])
+d2theta22_np = np.array([Clara.d2q__[i][5,0] for i in range(len(t_))])
 
 plt.figure()
 plt.plot(t_np, x_np, 'r', linewidth=2)
