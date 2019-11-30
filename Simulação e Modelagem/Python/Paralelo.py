@@ -112,7 +112,8 @@ class RK(object):
         u__[nt] = f_(t_[nt], y__[nt])[1]
         return y__, u__, t_
     
-    def ApplyParallelInvDyn(self,h,tf,y0_, ParallelRobot):
+    def ApplyParallelInvDyn(self,h,tf,y0_, ParallelRobot, lamb=100):
+        ParallelRobot.lamb = lamb
         f_ = ParallelRobot.fdqo_
         nt=int(tf/h)
         t_ = [i*h for i in xrange(nt+1)]
@@ -480,7 +481,7 @@ claradq_ = Clara.C_*np.matrix([[1.0, 2.0]]).T
 Clara.doit_q_dq_(claraq_, claradq_)
 
 rk = RK('Heun')
-y__, t_ = rk.ApplyParallelInvDyn(0.001, pi, Clara.Qo_.T*claraq_, Clara)
+y__, t_ = rk.ApplyParallelInvDyn(0.001, pi, Clara.Qo_.T*claraq_, Clara, 10)
 
 #print Clara.Mh_
 #print Clara.vh_
