@@ -60,6 +60,9 @@ class RK(object):
         if method == 'Heun':
             self.a = [[1.0]]
             self.b = [0.5, 0.5]
+        elif method == 'MiddlePoint':
+            self.a = [[0.5]]
+            self.b = [0.0, 1.0]
         elif method == 'RK3':
             self.a = [[0.5],
                       [-1.0, 2.0]]
@@ -69,6 +72,16 @@ class RK(object):
                     [0,0.5],
                     [0,0,1.0]]
             self.b=[1.0/6, 1.0/3, 1.0/3, 1.0/6]
+        elif method=='RK438':
+            self.a=[[1.0/3],
+                    [-1.0/3,1.0],
+                    [1.0,-1.0,1.0]]
+            self.b=[1.0/8, 3.0/8, 3.0/8, 1.0/8]
+        elif method=='RK4Master':
+            self.a=[[0.4],
+                    [0.29697761 ,0.15875964],
+                    [0.21810040,-3.05096516,3.83286476]]
+            self.b=[0.17476028, -0.55148066, 1.20553560, 0.17118478]
         elif method=='RK6':
             self.a=[[0.5],
                     [2.0/9, 4.0/9],
@@ -480,8 +493,8 @@ dqo_ = Clara.fdqo_(0, Clara.Qo_.T*claraq_)
 claradq_ = Clara.C_*np.matrix([[1.0, 2.0]]).T
 Clara.doit_q_dq_(claraq_, claradq_)
 
-rk = RK('Heun')
-y__, t_ = rk.ApplyParallelInvDyn(0.001, pi, Clara.Qo_.T*claraq_, Clara, 10)
+rk = RK('RK6')
+y__, t_ = rk.ApplyParallelInvDyn(0.010, pi, Clara.Qo_.T*claraq_, Clara, 2)
 
 #print Clara.Mh_
 #print Clara.vh_
