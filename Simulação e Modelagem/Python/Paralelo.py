@@ -90,6 +90,17 @@ class RK(object):
                     [-1.0/360, -11.0/36, -1.0/8, 0.5, 1.0/10],
                     [-41.0/260, 22.0/13, 43.0/156, -118.0/39, 32.0/195, 80.0/39]]
             self.b=[13.0/200, 0, 11.0/40, 11.0/40, 4.0/25, 4.0/25, 13.0/200]
+        elif method=='RK7':
+            b8 = 77.0/1440
+            self.a=[[1.0/6],
+                    [0.0, 1.0/3],
+                    [1.0/8, 0.0, 3.0/8],
+                    [148.0/1331, 0.0, 150.0/1331, -56.0/1331],
+                    [-404.0/243, 0.0, -170.0/27, 4024.0/1701, 10648.0/1701],
+                    [2466.0/2401, 0.0, 1242.0/343, -19176.0/16807, -51909.0/16807, 1053.0/2401],
+                    [1.0/(576*b8), 0.0, 0.0, 1.0/(105*b8), -1331.0/(279552*b8), -9.0/(1024*b8), 343.0/(149760*b8)],
+                    [-71.0/32 - 270.0*b8/11, 0.0, -195.0/22, 32.0/7, 29403.0/3584, -729.0/512, 1029.0/1408, 270.0*b8/11]]
+            self.b=[77.0/1440 - b8, 0, 0, 32.0/105, 1771561.0/6289920, 243.0/2560, 16807.0/74880, b8, 11.0/270]
         else:
             raise ValueError('Este metodo nao esta disponivel')
         self.c=[sum(x) for x in self.a]
@@ -106,7 +117,7 @@ class RK(object):
             for j in xrange(1, self.n):
                 k__[j] = f_(t_[i] + self.c[j-1]*h, y__[i] + h*sum([self.a[j-1][k]*k__[k] for k in range(j)])) #dot(self.a[j-1], k__[0:j]))
             y__[i+1] = y__[i] + h*sum([self.b[k]*k__[k] for k in range(self.n) ]) #dot(self.b, k__)
-            print(i)
+            #print(i)
         return y__, t_
                 
     def Apply2(self,h,tf,y0_,f_):
@@ -121,7 +132,7 @@ class RK(object):
             for j in xrange(1, self.n):
                 k__[j] = f_(t_[i] + self.c[j-1]*h, y__[i] + h*sum([self.a[j-1][k]*k__[k] for k in range(j)]))
             y__[i+1] = y__[i] + h*sum([self.b[k]*k__[k] for k in range(self.n) ])
-            print(i)
+            #print(i)
         u__[nt] = f_(t_[nt], y__[nt])[1]
         return y__, u__, t_
     
@@ -390,6 +401,40 @@ class Paralelo:
         self.doit_q_( self.Qh_*self.qhr_(t) + self.Qo_*qo_ )
         return solve(-self.Ao_,(self.Ah_*self.dqhr_(t) + self.lamb*self.qbar_ ))
         
+class GNR:
+    def __init__(self, ParallelRobot, qo0_, qh_, nsteps, method='RK7'):
+        self.ParallelRobot = ParallelRobot
+        self.qo0_ = qo0_
+        self.qh_ = qh_
+        self.nsteps = nsteps
+        self.rk = RK(method)
+        self.ParallelRobot.doit_q_(self.ParallelRobot.Qh_*qh_ + self.ParallelRobot.Qo_*qo0_)
+        self.qbar_ = self.ParallelRobot.qbar_
+
+    def f_(self, t, qo_):
+        self.ParallelRobot.doit_q_(self.ParallelRobot.Qh_*self.qh_ + self.ParallelRobot.Qo_*qo_)
+        return solve(-self.ParallelRobot.Ao_, self.qbar_)
+        
+    def set_qh_(self,qh_):
+        self.qh_ = qh_
+        self.ParallelRobot.doit_q_(self.ParallelRobot.Qh_*qh_ + self.ParallelRobot.Qo_*self.qo0_)
+        self.qbar_ = self.ParallelRobot.qbar_
+        
+    def set_qo0_(self,qo0_):
+        self.qo0_ = qo0_
+        self.ParallelRobot.doit_q_(self.ParallelRobot.Qh_*self.qh_ + self.ParallelRobot.Qo_*self.qo0_)
+        self.qbar_ = self.ParallelRobot.qbar_
+
+    def set_qh_qo0_(self, qh_, qo0_):
+        self.qo0_ = qo0_
+        self.qh_ = qh_
+        self.ParallelRobot.doit_q_(self.ParallelRobot.Qh_*self.qh_ + self.ParallelRobot.Qo_*self.qo0_)
+        self.qbar_ = self.ParallelRobot.qbar_            
+        
+    def doit(self):
+        y__, t_ = self.rk.Apply(1.0/self.nsteps, 1.0, self.qo0_, self.f_)
+        self.ParallelRobot.doit_q_(self.ParallelRobot.Qh_*self.qh_ + self.ParallelRobot.Qo_*y__[-1])
+        
         
         
 fDH_RR = lambda q_, l_, lg_: np.matrix([
@@ -493,8 +538,8 @@ dqo_ = Clara.fdqo_(0, Clara.Qo_.T*claraq_)
 claradq_ = Clara.C_*np.matrix([[1.0, 2.0]]).T
 Clara.doit_q_dq_(claraq_, claradq_)
 
-rk = RK('RK6')
-y__, t_ = rk.ApplyParallelInvDyn(0.010, pi, Clara.Qo_.T*claraq_, Clara, 2)
+rk = RK('RK7')
+y__, t_ = rk.ApplyParallelInvDyn(0.001, 0.010, Clara.Qo_.T*claraq_, Clara, 10)
 
 #print Clara.Mh_
 #print Clara.vh_
@@ -675,3 +720,8 @@ plt.xlabel(r'$t[s]$')
 #plt.ylabel(r'$x[m]$')
 plt.title('Lalala')
 plt.savefig('qbarnorm.png')
+
+gnr = GNR(Clara, Clara.Qo_.T*Clara.q_, np.matrix([[0.0],[0.275]]), 10)
+print gnr.qbar_
+gnr.doit()
+print Clara.qbar_
