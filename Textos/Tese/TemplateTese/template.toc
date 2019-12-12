@@ -8,125 +8,124 @@
 \contentsline {subsection}{\numberline {2.1.1}Formalismo de Newton-Euler}{25}
 \contentsline {subsection}{\numberline {2.1.2}Formalismo de Lagrange}{26}
 \contentsline {subsection}{\numberline {2.1.3}Princ\IeC {\'\i }pio dos Trabalhos Virtuais e das Pot\IeC {\^e}ncias Virtuais}{27}
-\contentsline {subsection}{\numberline {2.1.4}Formula\IeC {\c c}\IeC {\~a}o de Lagrange-D\IeC {\textquoteright }Alembert}{28}
-\contentsline {subsection}{\numberline {2.1.5}M\IeC {\'e}todo de Kane}{29}
-\contentsline {subsection}{\numberline {2.1.6}Formalismo de Boltzmann-Hamel}{29}
-\contentsline {subsection}{\numberline {2.1.7}Formula\IeC {\c c}\IeC {\~a}o do Complemento Ortogonal Natural}{29}
+\contentsline {subsection}{\numberline {2.1.4}M\IeC {\'e}todo de Kane}{28}
+\contentsline {subsection}{\numberline {2.1.5}Formalismo de Boltzmann-Hamel}{29}
+\contentsline {subsection}{\numberline {2.1.6}Formula\IeC {\c c}\IeC {\~a}o do Complemento Ortogonal Natural}{29}
 \contentsline {section}{\numberline {2.2}Controle}{30}
-\contentsline {section}{\numberline {2.3}Conclus\IeC {\~o}es}{35}
-\contentsline {chapter}{\numberline {3}Metodologia da Pesquisa}{37}
-\contentsline {section}{\numberline {3.1}Primeira fase}{37}
-\contentsline {section}{\numberline {3.2}Segunda fase}{37}
-\contentsline {section}{\numberline {3.3}Terceira fase}{37}
-\contentsline {section}{\numberline {3.4}Quarta fase}{38}
-\contentsline {section}{\numberline {3.5}Quinta fase}{38}
-\contentsline {section}{\numberline {3.6}Sexta fase}{38}
-\contentsline {chapter}{Parte~II:~\MakeUppercase {Modelagem}}{40}
-\contentsline {chapter}{\numberline {4}Modelagem de manipuladores seriais}{41}
-\contentsline {section}{\numberline {4.1}Cinem\IeC {\'a}tica}{42}
-\contentsline {subsection}{\numberline {4.1.1}Cinem\IeC {\'a}tica de posi\IeC {\c c}\IeC {\~a}o}{42}
-\contentsline {subsection}{\numberline {4.1.2}Cinem\IeC {\'a}tica de velocidades lineares}{43}
-\contentsline {subsection}{\numberline {4.1.3}Cinem\IeC {\'a}tica de velocidades angulares}{45}
-\contentsline {subsection}{\numberline {4.1.4}Cinem\IeC {\'a}tica de acelera\IeC {\c c}\IeC {\~o}es lineares}{47}
-\contentsline {subsection}{\numberline {4.1.5}Cinem\IeC {\'a}tica de acelera\IeC {\c c}\IeC {\~o}es angulares}{49}
-\contentsline {section}{\numberline {4.2}Din\IeC {\^a}mica dos elos e juntas}{51}
-\contentsline {subsection}{\numberline {4.2.1}Modelo dos subsistemas}{52}
-\contentsline {subsection}{\numberline {4.2.2}Sistemas de for\IeC {\c c}as ativas generalizadas}{53}
-\contentsline {subsection}{\numberline {4.2.3}V\IeC {\'\i }nculos cinem\IeC {\'a}ticos entre subsistemas}{53}
-\contentsline {subsection}{\numberline {4.2.4}Acoplamento de subsistemas}{54}
-\contentsline {section}{\numberline {4.3}Din\IeC {\^a}mica dos atuadores}{56}
-\contentsline {subsection}{\numberline {4.3.1}Cinem\IeC {\'a}tica}{58}
-\contentsline {subsubsection}{\numberline {4.3.1.1}Cinem\IeC {\'a}tica de velocidades angulares}{58}
-\contentsline {subsubsection}{\numberline {4.3.1.2}Cinem\IeC {\'a}tica de acelera\IeC {\c c}\IeC {\~o}es angulares}{59}
-\contentsline {subsection}{\numberline {4.3.2}Din\IeC {\^a}mica Mec\IeC {\^a}nica}{59}
-\contentsline {subsubsection}{\numberline {4.3.2.1}Modelo dos subsistemas rotores}{60}
-\contentsline {subsubsection}{\numberline {4.3.2.2}Modelo do subsistema serial}{61}
-\contentsline {subsubsection}{\numberline {4.3.2.3}Sistemas de for\IeC {\c c}as ativas generalizadas}{61}
-\contentsline {subsubsection}{\numberline {4.3.2.4}V\IeC {\'\i }nculos entre subsistemas}{61}
-\contentsline {subsubsection}{\numberline {4.3.2.5}Acoplamento de subsistemas}{62}
-\contentsline {section}{\numberline {4.4}Modelo completo}{63}
-\contentsline {chapter}{\numberline {5}Modelagem de manipuladores paralelos}{65}
-\contentsline {section}{\numberline {5.1}Modelo dos subsistemas}{67}
-\contentsline {section}{\numberline {5.2}V\IeC {\'\i }nculos cinem\IeC {\'a}ticos entre subsistemas}{68}
-\contentsline {subsection}{\numberline {5.2.1}V\IeC {\'\i }nculos de posi\IeC {\c c}\IeC {\~a}o}{68}
-\contentsline {subsection}{\numberline {5.2.2}V\IeC {\'\i }nculos de velocidades lineares}{69}
-\contentsline {subsection}{\numberline {5.2.3}V\IeC {\'\i }nculos de velocidades angulares}{70}
-\contentsline {subsection}{\numberline {5.2.4}V\IeC {\'\i }nculos de quasi-velocidades}{70}
-\contentsline {subsection}{\numberline {5.2.5}V\IeC {\'\i }nculos de quasi-acelera\IeC {\c c}\IeC {\~o}es}{71}
-\contentsline {section}{\numberline {5.3}Acoplamento de subsistemas}{72}
-\contentsline {section}{\numberline {5.4}Simula\IeC {\c c}\IeC {\~a}o din\IeC {\^a}mica direta}{73}
-\contentsline {section}{\numberline {5.5}Simula\IeC {\c c}\IeC {\~a}o din\IeC {\^a}mica inversa}{75}
-\contentsline {chapter}{\numberline {6}Projeto dos controladores}{77}
-\contentsline {section}{\numberline {6.1}Lineariza\IeC {\c c}\IeC {\~a}o por Realimenta\IeC {\c c}\IeC {\~a}o (LR)}{77}
-\contentsline {section}{\numberline {6.2}Controle por Torque Computado (CTC)}{78}
-\contentsline {section}{\numberline {6.3}Controle por Modos Deslizantes}{79}
-\contentsline {subsection}{\numberline {6.3.1}Dedu\IeC {\c c}\IeC {\~a}o das leis de controle}{79}
-\contentsline {subsection}{\numberline {6.3.2}Camada Limite}{86}
-\contentsline {subsection}{\numberline {6.3.3}Ganho adaptativo}{86}
-\contentsline {chapter}{Parte~III:~\MakeUppercase {Resultados}}{88}
-\contentsline {chapter}{\numberline {7}Resultados e Discuss\IeC {\~a}o}{89}
-\contentsline {section}{\numberline {7.1}Modelagem e Simula\IeC {\c c}\IeC {\~a}o}{89}
-\contentsline {subsection}{\numberline {7.1.1}Modelo do efetuador}{89}
-\contentsline {subsection}{\numberline {7.1.2}Par\IeC {\^a}metros de Denavit-Hartemberg das cadeias seriais}{90}
-\contentsline {subsection}{\numberline {7.1.3}Arquitetura do mecanismo paralelo}{91}
-\contentsline {subsection}{\numberline {7.1.4}Coordenadas dependentes e independentes}{92}
-\contentsline {subsection}{\numberline {7.1.5}Simula\IeC {\c c}\IeC {\~a}o din\IeC {\^a}mica direta}{93}
-\contentsline {subsubsection}{\numberline {7.1.5.1}Par\IeC {\^a}metros do modelo}{93}
-\contentsline {subsubsection}{\numberline {7.1.5.2}Espa\IeC {\c c}o de trabalho}{93}
-\contentsline {subsubsection}{\numberline {7.1.5.3}Condi\IeC {\c c}\IeC {\~o}es iniciais}{94}
-\contentsline {subsubsection}{\numberline {7.1.5.4}Trajet\IeC {\'o}ria de refer\IeC {\^e}ncia}{94}
-\contentsline {subsubsection}{\numberline {7.1.5.5}Par\IeC {\^a}metros do controlador}{94}
-\contentsline {subsubsection}{\numberline {7.1.5.6}Simula\IeC {\c c}\IeC {\~o}es}{94}
-\contentsline {section}{\numberline {7.2}Ensaios Experimentais}{97}
-\contentsline {subsection}{\numberline {7.2.1}Bancada experimental}{97}
-\contentsline {subsection}{\numberline {7.2.2}Sistema de controle}{98}
-\contentsline {subsection}{\numberline {7.2.3}Derivadores num\IeC {\'e}ricos}{100}
-\contentsline {subsection}{\numberline {7.2.4}Observador de corrente}{100}
-\contentsline {subsection}{\numberline {7.2.5}Compensadores de n\IeC {\~a}o-linearidades}{101}
-\contentsline {subsection}{\numberline {7.2.6}Estrat\IeC {\'e}gias de controle}{101}
-\contentsline {subsection}{\numberline {7.2.7}Par\IeC {\^a}metros do sistema}{102}
-\contentsline {subsection}{\numberline {7.2.8}Trajet\IeC {\'o}rias de refer\IeC {\^e}ncia}{103}
-\contentsline {subsection}{\numberline {7.2.9}Condi\IeC {\c c}\IeC {\~o}es iniciais}{104}
-\contentsline {subsection}{\numberline {7.2.10}Par\IeC {\^a}metros dos controladores}{104}
-\contentsline {subsection}{\numberline {7.2.11}Resultados experimentais}{105}
-\contentsline {subsubsection}{\numberline {7.2.11.1}PDq - Trajet\IeC {\'o}ria circular}{106}
-\contentsline {subsubsection}{\numberline {7.2.11.2}PDMDq - Trajet\IeC {\'o}ria circular}{107}
-\contentsline {subsubsection}{\numberline {7.2.11.3}TCq - Trajet\IeC {\'o}ria circular}{108}
-\contentsline {subsubsection}{\numberline {7.2.11.4}TCMDq - Trajet\IeC {\'o}ria circular}{109}
-\contentsline {subsubsection}{\numberline {7.2.11.5}PDx - Trajet\IeC {\'o}ria circular}{110}
-\contentsline {subsubsection}{\numberline {7.2.11.6}PDMDx - Trajet\IeC {\'o}ria circular}{111}
-\contentsline {subsubsection}{\numberline {7.2.11.7}TCx - Trajet\IeC {\'o}ria circular}{112}
-\contentsline {subsubsection}{\numberline {7.2.11.8}TCMDx - Trajet\IeC {\'o}ria circular}{113}
-\contentsline {subsubsection}{\numberline {7.2.11.9}PDq - Trajet\IeC {\'o}ria triangular}{114}
-\contentsline {subsubsection}{\numberline {7.2.11.10}PDMDq - Trajet\IeC {\'o}ria triangular}{115}
-\contentsline {subsubsection}{\numberline {7.2.11.11}TCq - Trajet\IeC {\'o}ria triangular}{116}
-\contentsline {subsubsection}{\numberline {7.2.11.12}TCMDq - Trajet\IeC {\'o}ria triangular}{117}
-\contentsline {subsubsection}{\numberline {7.2.11.13}PDx - Trajet\IeC {\'o}ria triangular}{118}
-\contentsline {subsubsection}{\numberline {7.2.11.14}PDMDx - Trajet\IeC {\'o}ria triangular}{119}
-\contentsline {subsubsection}{\numberline {7.2.11.15}TCx - Trajet\IeC {\'o}ria triangular}{120}
-\contentsline {subsubsection}{\numberline {7.2.11.16}TCMDx - Trajet\IeC {\'o}ria triangular}{121}
-\contentsline {subsubsection}{\numberline {7.2.11.17}Tabelas comparativas}{122}
-\contentsline {subsubsection}{\numberline {7.2.11.18}Discuss\IeC {\~a}o dos resultados}{124}
-\contentsline {chapter}{\numberline {8}Conclus\IeC {\~o}es e temas para pesquisa futura}{128}
-\contentsline {section}{\numberline {8.1}Conclus\IeC {\~o}es}{128}
-\contentsline {section}{\numberline {8.2}Principais contribui\IeC {\c c}\IeC {\~o}es}{129}
-\contentsline {section}{\numberline {8.3}Sugest\IeC {\~a}o de temas para pesquisa futura}{130}
-\contentsline {chapter}{Refer\IeC {\^e}ncias}{131}
-\contentsline {chapter}{Ap\IeC {\^e}ndice{} A{} -- Cinem\IeC {\'a}tica de corpos r\IeC {\'\i }gidos}{139}
-\contentsline {section}{\numberline {A.1}Conceitos b\IeC {\'a}sicos}{139}
-\contentsline {subsection}{\numberline {A.1.1}Produto vetorial}{139}
-\contentsline {subsection}{\numberline {A.1.2}Derivada temporal de versores}{140}
-\contentsline {subsection}{\numberline {A.1.3}Derivada temporal de vetores}{140}
-\contentsline {subsection}{\numberline {A.1.4}Defini\IeC {\c c}\IeC {\~a}o de vetor velocidade}{140}
-\contentsline {subsection}{\numberline {A.1.5}Defini\IeC {\c c}\IeC {\~a}o de vetor acelera\IeC {\c c}\IeC {\~a}o}{141}
-\contentsline {section}{\numberline {A.2}Equa\IeC {\c c}\IeC {\~o}es de campos de velocidades e acelera\IeC {\c c}\IeC {\~o}es}{141}
-\contentsline {subsection}{\numberline {A.2.1}Equa\IeC {\c c}\IeC {\~a}o do campo de velocidades}{141}
-\contentsline {subsection}{\numberline {A.2.2}Equa\IeC {\c c}\IeC {\~a}o do campo de acelera\IeC {\c c}\IeC {\~o}es}{141}
-\contentsline {section}{\numberline {A.3}Composi\IeC {\c c}\IeC {\~a}o de movimentos}{141}
-\contentsline {subsection}{\numberline {A.3.1}Composi\IeC {\c c}\IeC {\~a}o de velocidades lineares}{142}
-\contentsline {subsection}{\numberline {A.3.2}Composi\IeC {\c c}\IeC {\~a}o de acelera\IeC {\c c}\IeC {\~o}es lineares}{143}
-\contentsline {subsection}{\numberline {A.3.3}Composi\IeC {\c c}\IeC {\~a}o de velocidades angulares}{143}
-\contentsline {subsection}{\numberline {A.3.4}Composi\IeC {\c c}\IeC {\~a}o de acelera\IeC {\c c}\IeC {\~o}es angulares}{144}
-\contentsline {chapter}{Ap\IeC {\^e}ndice{} B{} -- Fun\IeC {\c c}\IeC {\~o}es de transfer\IeC {\^e}ncia de motores DC}{146}
-\contentsline {chapter}{Ap\IeC {\^e}ndice{} C{} -- Controlador de Corrente}{149}
-\contentsline {chapter}{Ap\IeC {\^e}ndice{} D{} -- Curva dos motores}{152}
+\contentsline {section}{\numberline {2.3}Conclus\IeC {\~o}es}{34}
+\contentsline {chapter}{\numberline {3}Metodologia da Pesquisa}{36}
+\contentsline {section}{\numberline {3.1}Primeira fase}{36}
+\contentsline {section}{\numberline {3.2}Segunda fase}{36}
+\contentsline {section}{\numberline {3.3}Terceira fase}{36}
+\contentsline {section}{\numberline {3.4}Quarta fase}{37}
+\contentsline {section}{\numberline {3.5}Quinta fase}{37}
+\contentsline {section}{\numberline {3.6}Sexta fase}{37}
+\contentsline {chapter}{Parte~II:~\MakeUppercase {Modelagem}}{39}
+\contentsline {chapter}{\numberline {4}Modelagem de manipuladores seriais}{40}
+\contentsline {section}{\numberline {4.1}Cinem\IeC {\'a}tica}{41}
+\contentsline {subsection}{\numberline {4.1.1}Cinem\IeC {\'a}tica de posi\IeC {\c c}\IeC {\~a}o}{41}
+\contentsline {subsection}{\numberline {4.1.2}Cinem\IeC {\'a}tica de velocidades lineares}{42}
+\contentsline {subsection}{\numberline {4.1.3}Cinem\IeC {\'a}tica de velocidades angulares}{44}
+\contentsline {subsection}{\numberline {4.1.4}Cinem\IeC {\'a}tica de acelera\IeC {\c c}\IeC {\~o}es lineares}{46}
+\contentsline {subsection}{\numberline {4.1.5}Cinem\IeC {\'a}tica de acelera\IeC {\c c}\IeC {\~o}es angulares}{48}
+\contentsline {section}{\numberline {4.2}Din\IeC {\^a}mica dos elos e juntas}{50}
+\contentsline {subsection}{\numberline {4.2.1}Modelo dos subsistemas}{51}
+\contentsline {subsection}{\numberline {4.2.2}Sistemas de for\IeC {\c c}as ativas generalizadas}{52}
+\contentsline {subsection}{\numberline {4.2.3}V\IeC {\'\i }nculos cinem\IeC {\'a}ticos entre subsistemas}{52}
+\contentsline {subsection}{\numberline {4.2.4}Acoplamento de subsistemas}{53}
+\contentsline {section}{\numberline {4.3}Din\IeC {\^a}mica dos atuadores}{55}
+\contentsline {subsection}{\numberline {4.3.1}Cinem\IeC {\'a}tica}{57}
+\contentsline {subsubsection}{\numberline {4.3.1.1}Cinem\IeC {\'a}tica de velocidades angulares}{57}
+\contentsline {subsubsection}{\numberline {4.3.1.2}Cinem\IeC {\'a}tica de acelera\IeC {\c c}\IeC {\~o}es angulares}{58}
+\contentsline {subsection}{\numberline {4.3.2}Din\IeC {\^a}mica Mec\IeC {\^a}nica}{58}
+\contentsline {subsubsection}{\numberline {4.3.2.1}Modelo dos subsistemas rotores}{59}
+\contentsline {subsubsection}{\numberline {4.3.2.2}Modelo do subsistema serial}{60}
+\contentsline {subsubsection}{\numberline {4.3.2.3}Sistemas de for\IeC {\c c}as ativas generalizadas}{60}
+\contentsline {subsubsection}{\numberline {4.3.2.4}V\IeC {\'\i }nculos entre subsistemas}{60}
+\contentsline {subsubsection}{\numberline {4.3.2.5}Acoplamento de subsistemas}{61}
+\contentsline {section}{\numberline {4.4}Modelo completo}{62}
+\contentsline {chapter}{\numberline {5}Modelagem de manipuladores paralelos}{64}
+\contentsline {section}{\numberline {5.1}Modelo dos subsistemas}{66}
+\contentsline {section}{\numberline {5.2}V\IeC {\'\i }nculos cinem\IeC {\'a}ticos entre subsistemas}{67}
+\contentsline {subsection}{\numberline {5.2.1}V\IeC {\'\i }nculos de posi\IeC {\c c}\IeC {\~a}o}{67}
+\contentsline {subsection}{\numberline {5.2.2}V\IeC {\'\i }nculos de velocidades lineares}{68}
+\contentsline {subsection}{\numberline {5.2.3}V\IeC {\'\i }nculos de velocidades angulares}{69}
+\contentsline {subsection}{\numberline {5.2.4}V\IeC {\'\i }nculos de quasi-velocidades}{69}
+\contentsline {subsection}{\numberline {5.2.5}V\IeC {\'\i }nculos de quasi-acelera\IeC {\c c}\IeC {\~o}es}{70}
+\contentsline {section}{\numberline {5.3}Acoplamento de subsistemas}{71}
+\contentsline {section}{\numberline {5.4}Simula\IeC {\c c}\IeC {\~a}o din\IeC {\^a}mica direta}{72}
+\contentsline {section}{\numberline {5.5}Simula\IeC {\c c}\IeC {\~a}o din\IeC {\^a}mica inversa}{74}
+\contentsline {chapter}{\numberline {6}Projeto dos controladores}{76}
+\contentsline {section}{\numberline {6.1}Lineariza\IeC {\c c}\IeC {\~a}o por Realimenta\IeC {\c c}\IeC {\~a}o (LR)}{76}
+\contentsline {section}{\numberline {6.2}Controle por Torque Computado (CTC)}{77}
+\contentsline {section}{\numberline {6.3}Controle por Modos Deslizantes}{78}
+\contentsline {subsection}{\numberline {6.3.1}Dedu\IeC {\c c}\IeC {\~a}o das leis de controle}{78}
+\contentsline {subsection}{\numberline {6.3.2}Camada Limite}{85}
+\contentsline {subsection}{\numberline {6.3.3}Ganho adaptativo}{85}
+\contentsline {chapter}{Parte~III:~\MakeUppercase {Resultados}}{87}
+\contentsline {chapter}{\numberline {7}Resultados e Discuss\IeC {\~a}o}{88}
+\contentsline {section}{\numberline {7.1}Modelagem e Simula\IeC {\c c}\IeC {\~a}o}{88}
+\contentsline {subsection}{\numberline {7.1.1}Modelo do efetuador}{88}
+\contentsline {subsection}{\numberline {7.1.2}Par\IeC {\^a}metros de Denavit-Hartemberg das cadeias seriais}{89}
+\contentsline {subsection}{\numberline {7.1.3}Arquitetura do mecanismo paralelo}{90}
+\contentsline {subsection}{\numberline {7.1.4}Coordenadas dependentes e independentes}{91}
+\contentsline {subsection}{\numberline {7.1.5}Simula\IeC {\c c}\IeC {\~a}o din\IeC {\^a}mica direta}{92}
+\contentsline {subsubsection}{\numberline {7.1.5.1}Par\IeC {\^a}metros do modelo}{92}
+\contentsline {subsubsection}{\numberline {7.1.5.2}Espa\IeC {\c c}o de trabalho}{92}
+\contentsline {subsubsection}{\numberline {7.1.5.3}Condi\IeC {\c c}\IeC {\~o}es iniciais}{93}
+\contentsline {subsubsection}{\numberline {7.1.5.4}Trajet\IeC {\'o}ria de refer\IeC {\^e}ncia}{93}
+\contentsline {subsubsection}{\numberline {7.1.5.5}Par\IeC {\^a}metros do controlador}{93}
+\contentsline {subsubsection}{\numberline {7.1.5.6}Simula\IeC {\c c}\IeC {\~o}es}{93}
+\contentsline {section}{\numberline {7.2}Ensaios Experimentais}{96}
+\contentsline {subsection}{\numberline {7.2.1}Bancada experimental}{96}
+\contentsline {subsection}{\numberline {7.2.2}Sistema de controle}{97}
+\contentsline {subsection}{\numberline {7.2.3}Derivadores num\IeC {\'e}ricos}{99}
+\contentsline {subsection}{\numberline {7.2.4}Observador de corrente}{99}
+\contentsline {subsection}{\numberline {7.2.5}Compensadores de n\IeC {\~a}o-linearidades}{100}
+\contentsline {subsection}{\numberline {7.2.6}Estrat\IeC {\'e}gias de controle}{100}
+\contentsline {subsection}{\numberline {7.2.7}Par\IeC {\^a}metros do sistema}{101}
+\contentsline {subsection}{\numberline {7.2.8}Trajet\IeC {\'o}rias de refer\IeC {\^e}ncia}{102}
+\contentsline {subsection}{\numberline {7.2.9}Condi\IeC {\c c}\IeC {\~o}es iniciais}{103}
+\contentsline {subsection}{\numberline {7.2.10}Par\IeC {\^a}metros dos controladores}{103}
+\contentsline {subsection}{\numberline {7.2.11}Resultados experimentais}{104}
+\contentsline {subsubsection}{\numberline {7.2.11.1}PDq - Trajet\IeC {\'o}ria circular}{105}
+\contentsline {subsubsection}{\numberline {7.2.11.2}PDMDq - Trajet\IeC {\'o}ria circular}{106}
+\contentsline {subsubsection}{\numberline {7.2.11.3}TCq - Trajet\IeC {\'o}ria circular}{107}
+\contentsline {subsubsection}{\numberline {7.2.11.4}TCMDq - Trajet\IeC {\'o}ria circular}{108}
+\contentsline {subsubsection}{\numberline {7.2.11.5}PDx - Trajet\IeC {\'o}ria circular}{109}
+\contentsline {subsubsection}{\numberline {7.2.11.6}PDMDx - Trajet\IeC {\'o}ria circular}{110}
+\contentsline {subsubsection}{\numberline {7.2.11.7}TCx - Trajet\IeC {\'o}ria circular}{111}
+\contentsline {subsubsection}{\numberline {7.2.11.8}TCMDx - Trajet\IeC {\'o}ria circular}{112}
+\contentsline {subsubsection}{\numberline {7.2.11.9}PDq - Trajet\IeC {\'o}ria triangular}{113}
+\contentsline {subsubsection}{\numberline {7.2.11.10}PDMDq - Trajet\IeC {\'o}ria triangular}{114}
+\contentsline {subsubsection}{\numberline {7.2.11.11}TCq - Trajet\IeC {\'o}ria triangular}{115}
+\contentsline {subsubsection}{\numberline {7.2.11.12}TCMDq - Trajet\IeC {\'o}ria triangular}{116}
+\contentsline {subsubsection}{\numberline {7.2.11.13}PDx - Trajet\IeC {\'o}ria triangular}{117}
+\contentsline {subsubsection}{\numberline {7.2.11.14}PDMDx - Trajet\IeC {\'o}ria triangular}{118}
+\contentsline {subsubsection}{\numberline {7.2.11.15}TCx - Trajet\IeC {\'o}ria triangular}{119}
+\contentsline {subsubsection}{\numberline {7.2.11.16}TCMDx - Trajet\IeC {\'o}ria triangular}{120}
+\contentsline {subsubsection}{\numberline {7.2.11.17}Tabelas comparativas}{121}
+\contentsline {subsubsection}{\numberline {7.2.11.18}Discuss\IeC {\~a}o dos resultados}{123}
+\contentsline {chapter}{\numberline {8}Conclus\IeC {\~o}es e temas para pesquisa futura}{127}
+\contentsline {section}{\numberline {8.1}Conclus\IeC {\~o}es}{127}
+\contentsline {section}{\numberline {8.2}Principais contribui\IeC {\c c}\IeC {\~o}es}{128}
+\contentsline {section}{\numberline {8.3}Sugest\IeC {\~a}o de temas para pesquisa futura}{129}
+\contentsline {chapter}{Refer\IeC {\^e}ncias}{130}
+\contentsline {chapter}{Ap\IeC {\^e}ndice{} A{} -- Cinem\IeC {\'a}tica de corpos r\IeC {\'\i }gidos}{138}
+\contentsline {section}{\numberline {A.1}Conceitos b\IeC {\'a}sicos}{138}
+\contentsline {subsection}{\numberline {A.1.1}Produto vetorial}{138}
+\contentsline {subsection}{\numberline {A.1.2}Derivada temporal de versores}{139}
+\contentsline {subsection}{\numberline {A.1.3}Derivada temporal de vetores}{139}
+\contentsline {subsection}{\numberline {A.1.4}Defini\IeC {\c c}\IeC {\~a}o de vetor velocidade}{139}
+\contentsline {subsection}{\numberline {A.1.5}Defini\IeC {\c c}\IeC {\~a}o de vetor acelera\IeC {\c c}\IeC {\~a}o}{140}
+\contentsline {section}{\numberline {A.2}Equa\IeC {\c c}\IeC {\~o}es de campos de velocidades e acelera\IeC {\c c}\IeC {\~o}es}{140}
+\contentsline {subsection}{\numberline {A.2.1}Equa\IeC {\c c}\IeC {\~a}o do campo de velocidades}{140}
+\contentsline {subsection}{\numberline {A.2.2}Equa\IeC {\c c}\IeC {\~a}o do campo de acelera\IeC {\c c}\IeC {\~o}es}{140}
+\contentsline {section}{\numberline {A.3}Composi\IeC {\c c}\IeC {\~a}o de movimentos}{140}
+\contentsline {subsection}{\numberline {A.3.1}Composi\IeC {\c c}\IeC {\~a}o de velocidades lineares}{141}
+\contentsline {subsection}{\numberline {A.3.2}Composi\IeC {\c c}\IeC {\~a}o de acelera\IeC {\c c}\IeC {\~o}es lineares}{142}
+\contentsline {subsection}{\numberline {A.3.3}Composi\IeC {\c c}\IeC {\~a}o de velocidades angulares}{142}
+\contentsline {subsection}{\numberline {A.3.4}Composi\IeC {\c c}\IeC {\~a}o de acelera\IeC {\c c}\IeC {\~o}es angulares}{143}
+\contentsline {chapter}{Ap\IeC {\^e}ndice{} B{} -- Fun\IeC {\c c}\IeC {\~o}es de transfer\IeC {\^e}ncia de motores DC}{145}
+\contentsline {chapter}{Ap\IeC {\^e}ndice{} C{} -- Controlador de Corrente}{148}
+\contentsline {chapter}{Ap\IeC {\^e}ndice{} D{} -- Curva dos motores}{151}

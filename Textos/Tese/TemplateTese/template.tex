@@ -276,9 +276,9 @@ Considerando o tema de pesquisa desta Tese, esta revisão se concentrará em tó
 
 Quando se trata de modelagem dinâmica, os mecanismos seriais possuem características topológicas e cinemáticas que podem ser exploradas para facilitar a geração dos modelos cinemáticos e dinâmicos. Suas estruturas mecânicas correspondem a mecanismos de cadeia aberta, apenas com juntas ativas de um grau de liberdade, rotativas ou prismáticas. Além disso, o número de coordenadas generalizadas coincide com o número de atuadores e com a mobilidade do mecanismo \cite{Craig}. 
 
-De fato, o modelo cinemático pode ser obtido, recursivamente ao longo da cadeia cinemática, pelo emprego de métodos vetoriais ou matriciais, partindo-se da base e se dirigindo ao efetuador \cite{Siciliano}. Tradicionalmente, empregam-se os vetores $\mq$ e $\mx$ para descrever as coordenadas associadas aos atuadores e ao efetuador, respectivamente \cite{Cabral, Carvalho}. Enquanto que o problema direto é de resolução relativamente simples, o problema inverso demanda a realização de um processo mais elaborado. Matematicamente, este corresponde à resolução de um sistema não-linear de equações algébricas. Para algumas topologias que utilizem mecanismos esféricos nos punhos, é possível alcançar o desacoplamento das equações de posição e orientação do efetuador \cite{Waldron}.
+De fato, o modelo cinemático pode ser obtido, recursivamente ao longo da cadeia cinemática, pelo emprego de métodos vetoriais ou matriciais, partindo-se da base e se dirigindo ao efetuador \cite{Siciliano}. Tradicionalmente, empregam-se os vetores $\mq$ e $\mx$ para descrever as coordenadas associadas aos atuadores e ao efetuador, respectivamente \cite{Cabral, Carvalho}. Enquanto que o problema direto é de resolução relativamente simples, o problema inverso demanda a realização de um processo mais elaborado. Matematicamente, este corresponde à resolução de um sistema não-linear de equações algébricas. Para algumas topologias que utilizam mecanismos esféricos nos punhos, é possível alcançar o desacoplamento das equações de posição e orientação do efetuador \cite{Waldron}.
 
-Com relação à dinâmica, a geração das equações também pode ser realizada de modo recursivo, partindo-se do efetuador e se dirigindo à base, sendo que a solução do problema inverso é obtida mediante a resolução de um sistema linear de equações algébricas. Por outro lado, a solução do problema dinâmico direto é alcançada pela integração de um sistema de equações diferenciais ordinárias (ODEs) \cite{Featherstone}.
+Com relação à dinâmica, a geração das equações também pode ser realizada de modo recursivo, partindo-se do efetuador e se dirigindo à base, sendo que a solução do problema inverso é obtida mediante a resolução de um sistema linear de equações algébricas. Por outro lado, a solução do problema dinâmico direto é alcançada pela integração de um sistema de equações diferenciais ordinárias (EDOs) \cite{Featherstone}.
 
 %Não tratar de formalismos clássicos da Mecânica (NE,L,GA etc), apenas citar referências q os descrevam de modo geral (livros, tese Orsino) e de modo específico quando aplicados a manipuladores paralelos (artigos). A seguir, serão tratadas as questões ligadas à topologia dos manipuladores, à geração do modelo, bem como as análises para a sua resolução.
 
@@ -292,16 +292,13 @@ No início do processo de modelagem, é comum  se realizar um corte nas juntas q
 
 Saha e Schielen \cite{Saha} mencionam que a dinâmica inversa, uma vez definida a trajetória do efetuador, determina os esforços dos atuadores necessários para o controle, enquanto que a direta é utilizada em simulações do manipulador com o controlador.
 
-Com relação à dinâmica, Pekal e Fraczek \cite{Pekal2} esclarecem que a solução do problema direto pode ser obtida mediante a resolução de um sistema de equações diferenciais e algébricas (DAEs), representado pelas Eq.(\ref{DAE1}, \ref{DAE2})
+Com relação à dinâmica, Pekal e Fraczek \cite{Pekal2} esclarecem que a solução do problema direto pode ser obtida mediante a resolução de um sistema de equações algébrico-diferenciais (EADs), representado por pelo sistema de equações \eqref{DAE}.
 
-\begin{equation}
-\mM \, \ddot{\mq} + \mA^\msT \,\mlambda = \meta
-\label{DAE1}
-\end{equation}
-%
-\begin{equation}
-\bar{\mq} \, (\mq,t) \, = \, \mzr
-\label{DAE2}
+\begin{equation} \label{DAE}
+\begin{cases}
+\mM \, \ddot{\mq} + \mA^\msT \,\mlambda = \meta \\
+\bar{\mq} \, (t,\mq) \, = \, \mzr
+\end{cases}
 \end{equation}
 
 Sendo
@@ -309,10 +306,10 @@ Sendo
 %\meta = \mu - \mnu - \mg
 %\end{equation}
 \begin{equation}
-\mA(\mq,t) = \frac{\partial \bar{\mq}}{\partial \mq}
+\mA(t,\mq) = \frac{\partial \bar{\mq}}{\partial \mq}
 \end{equation}
 
-Uma alternativa é resolver o sistema representado pela Eq.(\ref{DAE3}), 
+Uma alternativa é resolver o sistema representado pela equação \eqref{DAE3}, 
 
 \begin{equation}
 \underbrace{\left[ \begin{array}{cc}
@@ -340,7 +337,9 @@ sendo
 \mb = \frac{\partial (\mA \dot{\mq})}{\partial \mq} \, \dot{\mq} + 2 \frac{\partial \mA}{\partial t} \, \dot{\mq} + \frac{\partial^2 \bar{\mq}}{\partial t^2}
 \end{equation}
 
-Para melhorar a precisão associada às restrições de posição e velocidade, recomenda-se substituir $\mb$ por $\mb'$, expresso na Eq.(\ref{baumgarte}), que é conhecido como método de Baumgarte para a estabilização das restrições \cite{Baumgarte, Featherstone, Nikravesh}, sendo $\hat{\alpha} = \hat{\beta} = 1/t_c$, com  $0.01 \lesssim t_c \lesssim 0.1 $ \cite{Featherstone}. 
+cuja solução é equivalente à solução de \eqref{DAE} desde que as condições iniciais respeitem as equações vinculares $\bar{\mq}(t, \mq) = \mzr$.
+
+Para melhorar a precisão associada às restrições de posição e velocidade, recomenda-se substituir $\mb$ por $\mb'$, expresso na equação \eqref{baumgarte}, que é conhecido como método de Baumgarte para a estabilização das restrições \cite{Baumgarte, Featherstone, Nikravesh}, sendo $\hat{\alpha} = \hat{\beta} = 1/t_c$, com  $0.01 \lesssim t_c \lesssim 0.1 $ \cite{Featherstone}. 
 %
 \begin{equation}
 \mb' = \mb + 2\hat{\alpha} \dot{\bar{\mq}} + \hat{\beta}^2 \bar{\mq}
@@ -349,21 +348,20 @@ Para melhorar a precisão associada às restrições de posição e velocidade, 
 
 %\vspace{0.5cm}
 
-Um outro modo de aprimorar a precisão é alcançado pela separação das coordenadas $\mq$ em dois grupos: independentes $\mq\ssh$ e dependentes $\mq\cir$. Assim, multiplica-se a Eq.(\ref{DAE1}) pelo complemento ortogonal \cite{Kordjazi} de $\mA^\msT$. Pekal e Fraczek \cite{Pekal} discutem várias alternativas de obtenção do complemento ortogonal, dentre elas, destacam-se a decomposição QR, a decomposição em matrizes de autovalores e autovetores e a decomposição em valores singulares (SVD). Com esta ação, eliminam-se os multiplicadores de Lagrange e o número de equações se reduz à mobilidade do mecanismo. Em seguida, utiliza-se de relações cinemáticas para  escrever as acelerações $\ddot{\mq}$ em função de $\ddot{\mq}\ssh$. Por consequência, somente as acelerações e velocidades independentes serão integradas no sistema de equações diferenciais. Além disso, em cada passo de integração, as variáveis dependentes $\mq\cir$ e $\dot{\mq\cir}$ serão calculadas a partir das independentes, estabilizando as restrições de posição e velocidade.
+Um outro modo de aprimorar a precisão é alcançado pela separação das coordenadas $\mq$ em dois grupos: independentes $\mq\ssh$ e dependentes $\mq\cir$. Assim, multiplica-se a primeira equação de \eqref{DAE} pelo complemento ortogonal \cite{Kordjazi} de $\mA^\msT$. Pekal e Fraczek \cite{Pekal} discutem várias alternativas de obtenção do complemento ortogonal, dentre elas, destacam-se a decomposição QR, a decomposição em matrizes de autovalores e autovetores e a decomposição em valores singulares (DVS). Com esta ação, eliminam-se os multiplicadores de Lagrange e o número de equações se reduz à mobilidade do mecanismo. Em seguida, utiliza-se de relações cinemáticas para  escrever as acelerações $\ddot{\mq}$ em função de $\ddot{\mq}\ssh$. Por consequência, somente as acelerações e velocidades independentes serão integradas no sistema de equações diferenciais. Além disso, em cada passo de integração, as variáveis dependentes $\mq\cir$ e $\dot{\mq}\cir$ serão calculadas a partir das independentes, estabilizando as restrições de posição e velocidade.
 
-Quando a matriz dos coeficientes $\mY$ , expressa na Eq.(\ref{DAE1}), for singular, os métodos numéricos normalmente empregados, como decomposição LU ou QR, não serão capazes de resolver o sistema de equações. Neste caso, costuma-se empregar $\mY^\msP$, ou seja, a matriz inversa de Moore-Penrose. Outras formulações, como as de Udwadia-Kalaba, Udwadia-Phohomsiri e baseadas no método dos mínimos quadrados, também foram propostas para tratar as situações em que $\mY$ é singular.
+%Quando a matriz dos coeficientes $\mY$ , expressa na Eq.(\ref{DAE1}), for singular, os métodos numéricos normalmente empregados, como decomposição LU ou QR, não serão capazes de resolver o sistema de equações. Neste caso, costuma-se empregar $\mY^\msP$, ou seja, a matriz inversa de Moore-Penrose. Outras formulações, como as de Udwadia-Kalaba, Udwadia-Phohomsiri e baseadas no método dos mínimos quadrados, também foram propostas para tratar as situações em que $\mY$ é singular.
 
-Segundo Mariti et al. (2011) \cite{Mariti}, expressar o modelo dinâmico por meio de coordenadas redundantes, independentemente do formalismo escolhido, possui como propósito a realização de simulações de sistemas multicorpos, sendo que um exemplo é o software comercial MSC-Adams. No entanto, se a finalidade for o controle de manipuladores, significando que o modelo é parte integrante de implementações que demandem  cálculos em tempo real, a expresssão das equações dinâmicas nas coordenadas independentes é necessária.
+Segundo Mariti et al. (2011) \cite{Mariti}, expressar o modelo dinâmico por meio de coordenadas redundantes, independentemente do formalismo escolhido, possui como propósito a realização de simulações de sistemas multicorpos, sendo que um exemplo é o software comercial MSC-Adams. No entanto, se a finalidade for o controle de manipuladores, significando que o modelo é parte integrante de implementações que demandem  cálculos em tempo real, a expressão das equações dinâmicas nas coordenadas independentes é necessária.
 
 Além disso, é largamente difundido que a escolha das variáveis cinemáticas independentes recaia sobre as componentes do vetor $\mq^\star$, associadas aos deslocamentos impostos pelos atuadores, e suas derivadas temporais. No entanto, alguns autores \cite{Li, Khalil2} mencionam as vantagens de se escolher as componentes do vetor $\mx$, afirmando que a expressão do modelo dinâmico nestas variáveis é menos complexa.
 
-Na literatura, são conhecidas várias formulações para realizar a modelagem dinâmica de sistemas multicorpos, como os formalismos de Newton-Euler, Lagrange, Gibbs-Appel, Maggi, Boltzmann-Hamel, os métodos de Kane e Udwadia-Kalaba, e os princípios dos trabalhos virtuais e potências virtuais \cite{23orsino}. Porém, na literatura de modelagem de mecanismos paralelos, podemos destacar as seguintes formulações como as mais comumente utilizadas:
+Na literatura, são conhecidas várias formulações para realizar a modelagem dinâmica de sistemas multicorpos, como os formalismos de Newton-Euler, Lagrange, Gibbs-Appel, Maggi, Boltzmann-Hamel, os métodos de Kane e Udwadia-Kalaba, e os Princípios dos Trabalhos Virtuais e Potências Virtuais \cite{23orsino}. Porém, na literatura de modelagem de mecanismos paralelos, podemos destacar as seguintes formulações como as mais comumente utilizadas:
 
 \begin{itemize}
 \item Formalismo de Newton-Euler
 \item Formalismo de Lagrange
 \item Princípio dos Trabalhos Virtuais e das Potências Virtuais
-\item Formulação de Lagrange-D'Alembert
 \item Formalismo de Boltzmann-Hamel
 \item Método de Kane
 \item Formulação do Complemento Ortogonal Natural
@@ -381,37 +379,35 @@ Em \cite{Shiau} e \cite{Zhang}, os mecanismos paralelos 3-PRS e 3-RRR, respectiv
 
 \subsection{Formalismo de Lagrange}
 
-Formulações baseadas na mecânica analítica em geral são muito mais atrativas para realizar a modelagem de mecanismos paralelos, tendo em vista que os esforços vinculares não mais aparecem no equacionamento. Isso justifica a popularidade das escolhas pelo formalismo de Lagrange e pelos princípios dos trabalhos virtuais e das potências virtuais para realizar esta tarefa.
+Formulações baseadas na mecânica analítica em geral são muito mais atrativas para realizar a modelagem de mecanismos paralelos, tendo em vista que os esforços vinculares não mais aparecem no equacionamento. Isso justifica a popularidade das escolhas pelo formalismo de Lagrange e pelos Princípios dos Trabalhos Virtuais e das Potências Virtuais para realizar esta tarefa.
 
 Dentre os trabalhos que utilizam o formalismo de Lagrange, podemos citar os trabalhos de  Li et al. \cite{Li3}, Singh et al. \cite{Singh, Singh2, Singh3} e Yao et al. \cite{Yao}.
 
 Em \cite{Singh}, \cite{Singh2} e \cite{Singh3}, são modelados 3 mecanismos paralelos planos de 3 graus de liberdade utilizando o formalismo de Lagrange. Em todos, são realizadas simulações dinâmicas diretas comparando o desempenho de diversas leis de controle. Apenas em \cite{Singh2} é realizada uma dedução completa do modelo dinâmico mostrando a expressão deduzida do modelo. Curiosamente, são adotadas as coordenadas do efetuador como coordenadas generalizadas, e a dedução se mostra relativamente simples para essa arquitetura escolhida, com essa escolha de variáveis.
 
-Já em \cite{Li3}, um mecanismo paralelo espacial de 3 graus de liberdade é modelado, utilizando o formalismo de Lagrange com multiplicadores e o princípio dos trabalhos virtuais, sendo que no último são utilizadas hipóteses simplificadoras. São realizadas simulações dinâmicas inversas e são comparados os resultados utilizando o modelo completo com os resultados utilizando o modelo simplificado.
+Já em \cite{Li3}, um mecanismo paralelo espacial de 3 graus de liberdade é modelado, utilizando o formalismo de Lagrange com multiplicadores e o Princípio dos Trabalhos Virtuais, sendo que no último são utilizadas hipóteses simplificadoras. São realizadas simulações dinâmicas inversas e são comparados os resultados utilizando o modelo completo com os resultados utilizando o modelo simplificado.
 
-Em \cite{Yao}, é feita a simulação dinâmica inversa de um mecanismo ainda mais complexo, de 5 graus de liberdade e atuação redundante, também utilizando o formalismo de Lagrange e métodos de otimização para determinar os esforços. Este trabalho, porém, também mostra muito pouco da dedução. Assim, dados a complexidade do mecanismo e o fato de que não é comentado em lugar nenhum o uso de coordenadas redundantes, imagina-se que o modelo utilizado seja um modelo simplificado.
+Em \cite{Yao}, é feita a simulação dinâmica inversa de um mecanismo ainda mais complexo, de 5 graus de liberdade com atuação redundante, também utilizando o formalismo de Lagrange e métodos de otimização para determinar os esforços. Este trabalho, porém, também mostra muito pouco da dedução. Assim, dados a complexidade do mecanismo e o fato de que não é comentado em lugar nenhum o uso de coordenadas redundantes, imagina-se que o modelo utilizado seja um modelo simplificado.
+
+Além disso, foram encontrados trabalhos que utilizam o Princípio dos Trabalhos Virtuais aliado ao formalismo de Lagrange, os quais entitulam essa combinação de ``formulação de Lagrange-D’Alembert'', dentre os quais podemos citar o de Cheng et al \cite{ChengLiu} e Yen et al. \cite{Yen}.
+
+No trabalho de Cheng et al \cite{ChengLiu} a ``formulação de Lagrange-D’Alembert'' é utilizada para deduzir uma formulação de acoplamento de subsistemas. A formulação é utilizada para obter o modelo dinâmico de um mecanismo paralelo de 2 graus de liberdade com atuação redundante. São utilizados os modelos já conhecidos para as cadeias seriais, e é feito o acoplamento dos subsistemas a partir de jacobianos dos vínculos cinemáticos.
+
+Em \cite{Yen}, também é utilizada uma estratégia de acoplamento de subsistemas, também deduzida deduzida a partir da ``formulação de Lagrange-D’Alembert'', para obter o modelo dinâmico de um mecanismo paralelo de 3 graus de liberdade. No entanto, neste trabalho, a estratégia não é apresentada de uma maneira mais geral, podendo dar a impressão ao leitor de que isso só foi possível devido à topologia particular do mecanismo em questão. São realizadas simulações dinâmicas diretas do controle de posição do mecanismo, utilizando as técnicas de controle PID e Controle por Torque Computado, as quais são comparadas com resultados experimentais utilizando as mesmas estratégias de controle.
 
 \subsection{Princípio dos Trabalhos Virtuais e das Potências Virtuais}
 
-Levando-se em conta a revisão feita, não foi percebida uma grande diferença de popularidade entre a utilização dos formalismos de Newton-Euler e Lagrange nos artigos que tratam da modelagem dinâmica de mecanismos paralelos. Porém, uma abordagem que se mostrou extremamente popular foi a utilização das formulações do princípio dos trabalhos virtuais ou do princípio das potências virtuais. Dentre os trabalhos que utilizam estes princípios, podemos citar os trabalhos de Arian et al. \cite{Arian} (já comentado), Codourey et al. \cite{Codourey, CodoureyBurdet}, Gallardo-Alvarado et al. \cite{GallardoAlvarado}, Geike et al. \cite{Geike}, Li et al. \cite{LiStaicu, Li}, Staicu et al. \cite{Staicu, Staicu2, Staicu3, StaicuCarpCiocardia, StaicuLiu, StaicuZhang, StaicuZhangRugescu}, Wu et. al \cite{Wu}, Zhao et al. \cite{Zhao, Zhao2} e  Zhu et al. \cite{Zhu}.
+Levando-se em conta a revisão feita, não foi percebida uma grande diferença de popularidade entre a utilização dos formalismos de Newton-Euler e Lagrange nos artigos que tratam da modelagem dinâmica de mecanismos paralelos. Porém, uma abordagem que se mostrou extremamente popular foi a utilização das formulações do Princípio dos Trabalhos Virtuais ou do Princípio das Potências Virtuais. Dentre os trabalhos que utilizam estes princípios, podemos citar os trabalhos de Arian et al. \cite{Arian} (já comentado), Codourey et al. \cite{Codourey, CodoureyBurdet}, Gallardo-Alvarado et al. \cite{GallardoAlvarado}, Geike et al. \cite{Geike}, Li et al. \cite{LiStaicu, Li}, Staicu et al. \cite{Staicu, Staicu2, Staicu3, StaicuCarpCiocardia, StaicuLiu, StaicuZhang, StaicuZhangRugescu}, Wu et. al \cite{Wu}, Zhao et al. \cite{Zhao, Zhao2} e  Zhu et al. \cite{Zhu}.
 
-No trabalhos de Codourey et al. \cite{Codourey, CodoureyBurdet} e no de Li et al. \cite{Li}, são modelados mecanismos paralelos de 3 graus de liberdade, do tipo DELTA nos dois primeiros, e do tipo 3-PRS no terceiro, utilizando o princípio dos trabalhos virtuais. São desprezadas as inércias distribuídas dos elos ligados à plataforma, e suas massas são distribuídas entre as duas pontas em que cada elo é ligado, de modo a simplificar o processo de modelagem.
+No trabalhos de Codourey et al. \cite{Codourey, CodoureyBurdet} e no de Li et al. \cite{Li}, são modelados mecanismos paralelos de 3 graus de liberdade, do tipo DELTA nos dois primeiros, e do tipo 3-PRS no terceiro, utilizando o Princípio dos Trabalhos Virtuais. São desprezadas as inércias distribuídas dos elos ligados à plataforma, e suas massas são distribuídas entre as duas pontas em que cada elo é ligado, de modo a simplificar o processo de modelagem.
 
-Já em \cite{GallardoAlvarado}, é modelado um robô paralelo de 4 graus de liberdade utilizando a teoria das helicóides e o princípio dos trabalhos virtuais.
+Já em \cite{GallardoAlvarado}, é modelado um robô paralelo de 4 graus de liberdade utilizando a teoria das helicóides e o Princípio dos Trabalhos Virtuais.
 
 Em \cite{Geike}, é proposta uma metodologia de modelagem interessante, na qual já se dividem as coordenadas generalizadas em um conjunto de variáveis dependentes e outro de variáveis independentes, utilizando a relação entre seus deslocamentos virtuais para obter as equações de movimento. A metodologia é utilizada para realizar a simulação dinâmica inversa de dois mecanismos paralelos, um de 3 graus de liberdade e outro de 6. Além disso, é discutida qual é a forma mais eficiente de implementação da metodologia desenvolvida.
 
-Nos trabalhos de Staicu et al. \cite{Staicu, Staicu2, Staicu3, StaicuCarpCiocardia, StaicuLiu, StaicuZhang, StaicuZhangRugescu} e no de Li et al. \cite{LiStaicu} são modelados mecanismos paralelos de 3 graus de liberdade utilizando uma metodologia de modelagem recursiva matricial baseada no princípio dos trabalhos virtuais ou no princípio das potências virtuais, e são realizadas simulações dinâmicas inversas. Esses trabalhos apresentam longos equacionamentos para não precisar recorrer a simplificações; porém, em todos os trabalhos, perto do final da dedução do modelo dinâmico, cita-se que será usada a \emph{equação fundamental da dinâmica de robôs paralelos}, a qual está publicada em \cite{StaicuFrances}. Este artigo, porém, está escrito em francês e é muito difícil de ser encontrado.
+Nos trabalhos de Staicu et al. \cite{Staicu, Staicu2, Staicu3, StaicuCarpCiocardia, StaicuLiu, StaicuZhang, StaicuZhangRugescu} e no de Li et al. \cite{LiStaicu} são modelados mecanismos paralelos de 3 graus de liberdade utilizando uma metodologia de modelagem recursiva matricial baseada no Princípio dos Trabalhos Virtuais ou no Princípio das Potências Virtuais, e são realizadas simulações dinâmicas inversas. Esses trabalhos apresentam longos equacionamentos para não precisar recorrer a simplificações; porém, em todos os trabalhos, perto do final da dedução do modelo dinâmico, cita-se que será usada a \emph{equação fundamental da dinâmica de robôs paralelos}, a qual está publicada em \cite{StaicuFrances}. Este artigo, porém, está escrito em francês e é muito difícil de ser encontrado.
 
-Por fim, nos trabalhos de Zhao et al. \cite{Zhao, Zhao2} e de Zhu et al. \cite{Zhu}, são modelados, utilizando o princípio dos trabalhos virtuais e o conceito de jacobianos dos elos, mecanismos paralelos de 6 graus de liberdade nos dois primeiros, e de 3 graus de liberdade no terceiro, sendo que em \cite{Zhao2} o mecanismo possui atuação redundante. Em todos são realizadas simulações dinâmicas inversas.
-
-\subsection{Formulação de Lagrange-D’Alembert}
-
-Além disso, foram encontrados trabalhos que utilizam uma mistura do Princípio dos Trabalhos Virtuais com o formalismo de Lagrange, denominada formulação de Lagrange-D’Alembert, dentre os quais podemos citar o de Cheng et al \cite{ChengLiu} e Yen et al. \cite{Yen}.
-
-O trabalho de Cheng et al \cite{ChengLiu}, pois nele é utilizada a formulação de Lagrange-D’Alembert para deduzir uma formulação de acoplamento de subsistemas. A formulação é utilizada para obter o modelo dinâmico de um mecanismo paralelo de 2 graus de liberdade com atuação redundante. São utilizados os modelos já conhecidos para as cadeias seriais, e é feito o acoplamento dos subsistemas a partir de jacobianos dos vínculos cinemáticos.
-
-Em \cite{Yen}, também é utilizada uma estratégia de acoplamento de subsistemas, também deduzida deduzida a partir formulação de Lagrange-D’Alembert, para obter o modelo dinâmico de um mecanismo paralelo de 3 graus de liberdado. No entanto, neste trabalho, a estratégia não é apresentada de uma maneira mais geral, podendo dar a impressão ao leitor de que isso só foi possível devido à topologia particular do mecanismo em questão. São realizadas simulações dinâmicas diretas do controle de posição do mecanismo, utilizando controladores as técnicas de controle PID e Controle por Torque Computado, as quais são comparadas com resultados experimentais utilizando as mesmas estratégias de controle.
+Por fim, nos trabalhos de Zhao et al. \cite{Zhao, Zhao2} e de Zhu et al. \cite{Zhu}, são modelados, utilizando o Princípio dos Trabalhos Virtuais e o conceito de jacobianos dos elos, mecanismos paralelos de 6 graus de liberdade nos dois primeiros, e de 3 graus de liberdade no terceiro, sendo que em \cite{Zhao2} o mecanismo possui atuação redundante. Em todos são realizadas simulações dinâmicas inversas.
 
 \subsection{Método de Kane}
 
@@ -453,17 +449,17 @@ Existem diversas técnicas propostas pela literatura para realizar o controle de
 
 \begin{itemize}
 \item Controle Proporcional-Integral-Derivativo (PID)
-\item Controle por Torque Computado (CTC)
-\item Controle por Torque Computado com pré-alimentação (CTCp)
-\item Controle por Torque Computado Estendido (CTCe)
-\item Controle Preditivo Baseado em Modelo (CPM)
+\item Controle por Torque Computado (TC)
+\item Controle por Torque Computado com pré-alimentação (TCp)
+\item Controle por Torque Computado Estendido (TCe)
+\item Controle Preditivo Baseado em Modelo (PM)
 \item Controle Adaptativo
-\item Controle por Modos Deslizantes (CMD)
+\item Controle por Modos Deslizantes (MD)
 \end{itemize}
 
 A técnica mais simples consiste na utilização de malhas do tipo PID, controlando cada junta ativa de maneira independente, considerando a dinâmica do mecanismo como distúrbios de controle. Essa técnica é caracterizada por sua facilidade de projeto e implementação, tanto em hardware quanto em software, além de exibir um desempenho satisfatório para movimento lento. Porém, essa técnica não se mostra adequada para a realização de trajetórias em altas velocidades e/ou acelerações \cite{Honegger, Zubizarreta}.
 
-Uma das técnicas de controle mais exploradas na literatura é o Controle por Torque Computado (CTC). Basicamente, é um caso particular da técnica de controle não linear conhecida como Linearização pela Realimentação \cite{Slotini}, aplicado a sistemas mecânicos. A técnica consiste na utilização de duas malhas de controle, uma malha que realiza o desacoplamento do sistema e a compensação das não linearidades, e outra malha composta por PIDs independentes \cite{Craig}, como pode ser visto na figura \ref{fig:CTC}. Como resultado, alcança-se um desempenho  superior  àquele obtido utilizando simples PIDs, permitindo inclusive a realização de trajetórias precisas em altas velocidades e/ou acelerações. No entanto, seu desempenho poderá ser limitado pela qualidade/fidelidade do modelo dinâmico utilizado para a compensação das não linearidades \cite{SlotiniSMC}. Sua implementação também é mais complexa, visto que é necessário calcular o modelo dinâmico inverso em tempo real, o que também aumenta consideravelmente seu custo computacional. Além disso, a técnica é sensível a incertezas estruturadas (paramétricas) e não estruturadas (dinâmicas não modeladas). Como exemplos de utilização do CTC, podem ser citados os trabalhos de Cheng at al. \cite{Cheng}, Li e Wu \cite{Li}, Li e Fu \cite{Li2}, Shang at al. \cite{Shang} e Yen at al. \cite{Yen}.
+Uma das técnicas de controle mais exploradas na literatura é o Controle por Torque Computado (TC). Basicamente, é um caso particular da técnica de controle não linear conhecida como Linearização pela Realimentação \cite{Slotini}, aplicado a sistemas mecânicos. A técnica consiste na utilização de duas malhas de controle, uma malha que realiza o desacoplamento do sistema e a compensação das não linearidades, e outra malha composta por PIDs independentes \cite{Craig}, como pode ser visto na figura \ref{fig:CTC}. Como resultado, alcança-se um desempenho  superior  àquele obtido utilizando simples PIDs, permitindo inclusive a realização de trajetórias precisas em altas velocidades e/ou acelerações. No entanto, seu desempenho poderá ser limitado pela qualidade/fidelidade do modelo dinâmico utilizado para a compensação das não linearidades \cite{SlotiniSMC}. Sua implementação também é mais complexa, visto que é necessário calcular o modelo dinâmico inverso em tempo real, o que também aumenta consideravelmente seu custo computacional. Além disso, a técnica é sensível a incertezas estruturadas (paramétricas) e não estruturadas (dinâmicas não modeladas). Como exemplos de utilização do CTC, podem ser citados os trabalhos de Cheng at al. \cite{Cheng}, Li e Wu \cite{Li}, Li e Fu \cite{Li2}, Shang at al. \cite{Shang} e Yen at al. \cite{Yen}.
 
 \begin{figure}[h]
 	\centering
