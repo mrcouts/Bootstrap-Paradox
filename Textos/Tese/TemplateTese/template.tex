@@ -352,7 +352,7 @@ Um outro modo de aprimorar a precisão é alcançado pela separação das coorde
 
 %Quando a matriz dos coeficientes $\mY$ , expressa na Eq.(\ref{DAE1}), for singular, os métodos numéricos normalmente empregados, como decomposição LU ou QR, não serão capazes de resolver o sistema de equações. Neste caso, costuma-se empregar $\mY^\msP$, ou seja, a matriz inversa de Moore-Penrose. Outras formulações, como as de Udwadia-Kalaba, Udwadia-Phohomsiri e baseadas no método dos mínimos quadrados, também foram propostas para tratar as situações em que $\mY$ é singular.
 
-Segundo Mariti et al. (2011) \cite{Mariti}, expressar o modelo dinâmico por meio de coordenadas redundantes, independentemente do formalismo escolhido, possui como propósito a realização de simulações de sistemas multicorpos, sendo que um exemplo é o software comercial MSC-Adams. No entanto, se a finalidade for o controle de manipuladores, significando que o modelo é parte integrante de implementações que demandem  cálculos em tempo real, a expressão das equações dinâmicas nas coordenadas independentes é necessária.
+Segundo Mariti \emph{et al.} \cite{Mariti}, expressar o modelo dinâmico por meio de coordenadas redundantes, independentemente do formalismo escolhido, possui como propósito a realização de simulações de sistemas multicorpos, sendo que um exemplo é o software comercial MSC-Adams. No entanto, se a finalidade for o controle de manipuladores, significando que o modelo é parte integrante de implementações que demandem  cálculos em tempo real, a expressão das equações dinâmicas nas coordenadas independentes é necessária.
 
 Além disso, é largamente difundido que a escolha das variáveis cinemáticas independentes recaia sobre as componentes do vetor $\mq^\star$, associadas aos deslocamentos impostos pelos atuadores, e suas derivadas temporais. No entanto, alguns autores \cite{Li, Khalil2} mencionam as vantagens de se escolher as componentes do vetor $\mx$, afirmando que a expressão do modelo dinâmico nestas variáveis é menos complexa.
 
@@ -369,9 +369,9 @@ Na literatura, são conhecidas várias formulações para realizar a modelagem d
 
 \subsection{Formalismo de Newton-Euler}
 
-A utilização do formalismo de Newton-Euler é bastante popular para a realização de simulações dinâmicas de mecanismos seriais, tendo em vista que foram desenvolvidos algoritmos recursivos super eficientes para a aplicação deste formalismo neste tipo de arquitetura, como pode ser visto em Featherstone et al. \cite{Featherstone}. Porém, para se beneficiar deste tipo de estratégia em mecanismos paralelos, é necessária a utilização de algoritmos de fechamento de malha, os quais aumentam consideravelmente o custo computacional das simulações. Provavelmente por esta razão, aliada à questão da complexidade de implementação dos algoritmos, não foram encontrados na literatura artigos aplicando esta estratégia na modelagem de mecanismos paralelos. 
+A utilização do formalismo de Newton-Euler é bastante popular para a realização de simulações dinâmicas de mecanismos seriais, tendo em vista que foram desenvolvidos algoritmos recursivos super eficientes para a aplicação deste formalismo neste tipo de arquitetura, como pode ser visto em Featherstone \emph{et al.} \cite{Featherstone}. Porém, para se beneficiar deste tipo de estratégia em mecanismos paralelos, é necessária a utilização de algoritmos de fechamento de malha, os quais aumentam consideravelmente o custo computacional das simulações. Provavelmente por esta razão, aliada à questão da complexidade de implementação dos algoritmos, não foram encontrados na literatura artigos aplicando esta estratégia na modelagem de mecanismos paralelos. 
 
-Apesar da desvantagem de ter que trabalhar com forças reativas no equacionamento, não é raro encontrar na literatura trabalhos que o utilizem. Dentre estes, podemos citar os trabalhos de Arian et al. \cite{Arian}, Dasgupta et al. \cite{Dasgupta}, Li et al. \cite{LiWang}, Shiau et al. \cite{Shiau} e Zhang et al. \cite{Zhang}.
+Apesar da desvantagem de ter que trabalhar com forças reativas no equacionamento, não é raro encontrar na literatura trabalhos que o utilizem. Dentre estes, podemos citar os trabalhos de Arian \emph{et al.} \cite{Arian}, Dasgupta \emph{et al.} \cite{Dasgupta}, Li \emph{et al.} \cite{LiWang}, Shiau \emph{et al.} \cite{Shiau} e Zhang \emph{et al.} \cite{Zhang}.
 
 Em \cite{Arian}, \cite{LiWang} e \cite{Dasgupta}, são feitas a simulações dinâmicas inversas de mecanismos paralelos, de 3 graus de liberdade, nos dois primeiros trabalhos, e de 6 graus de liberdade, no último, utilizando o formalismo de Newton-Euler. Em \cite{Arian} e \cite{LiWang} as simulações são comparadas com \emph{softwares} comerciais. Em \cite{Arian}, também é feita a modelagem utilizando o princípio dos trabalhos virtuais, e são comparados o número de operações e o tempo médio gasto por operação em cada formulação. Como era de se esperar, a formulação do Princípio dos Trabalhos Virtuais se mostrou muito mais eficiente em ambos os quesitos, tendo em vista que não são realizados os cálculos dos esforços reativos. Em \cite{Dasgupta} foi feita uma eliminação de boa parte dos esforços vinculares utilizando manipulações algébricas, o que possibilitou reduzir bastante o custo computacional da simulação.
 
@@ -381,7 +381,7 @@ Em \cite{Shiau} e \cite{Zhang}, os mecanismos paralelos 3-PRS e 3-RRR, respectiv
 
 Formulações baseadas na mecânica analítica em geral são muito mais atrativas para realizar a modelagem de mecanismos paralelos, tendo em vista que os esforços vinculares não mais aparecem no equacionamento. Isso justifica a popularidade das escolhas pelo formalismo de Lagrange e pelos Princípios dos Trabalhos Virtuais e das Potências Virtuais para realizar esta tarefa.
 
-Dentre os trabalhos que utilizam o formalismo de Lagrange, podemos citar os trabalhos de  Li et al. \cite{Li3}, Singh et al. \cite{Singh, Singh2, Singh3} e Yao et al. \cite{Yao}.
+Dentre os trabalhos que utilizam o formalismo de Lagrange, podemos citar os trabalhos de  Li \emph{et al.} \cite{Li3}, Singh \emph{et al.} \cite{Singh, Singh2, Singh3} e Yao \emph{et al.} \cite{Yao}.
 
 Em \cite{Singh}, \cite{Singh2} e \cite{Singh3}, são modelados 3 mecanismos paralelos planos de 3 graus de liberdade utilizando o formalismo de Lagrange. Em todos, são realizadas simulações dinâmicas diretas comparando o desempenho de diversas leis de controle. Apenas em \cite{Singh2} é realizada uma dedução completa do modelo dinâmico mostrando a expressão deduzida do modelo. Curiosamente, são adotadas as coordenadas do efetuador como coordenadas generalizadas, e a dedução se mostra relativamente simples para essa arquitetura escolhida, com essa escolha de variáveis.
 
@@ -389,29 +389,29 @@ Já em \cite{Li3}, um mecanismo paralelo espacial de 3 graus de liberdade é mod
 
 Em \cite{Yao}, é feita a simulação dinâmica inversa de um mecanismo ainda mais complexo, de 5 graus de liberdade com atuação redundante, também utilizando o formalismo de Lagrange e métodos de otimização para determinar os esforços. Este trabalho, porém, também mostra muito pouco da dedução. Assim, dados a complexidade do mecanismo e o fato de que não é comentado em lugar nenhum o uso de coordenadas redundantes, imagina-se que o modelo utilizado seja um modelo simplificado.
 
-Além disso, foram encontrados trabalhos que utilizam o Princípio dos Trabalhos Virtuais aliado ao formalismo de Lagrange, os quais entitulam essa combinação de ``formulação de Lagrange-D’Alembert'', dentre os quais podemos citar o de Cheng et al \cite{ChengLiu} e Yen et al. \cite{Yen}.
+Além disso, foram encontrados trabalhos que utilizam o Princípio dos Trabalhos Virtuais aliado ao formalismo de Lagrange, os quais entitulam essa combinação de ``formulação de Lagrange-D’Alembert'', dentre os quais podemos citar o de Cheng \emph{et al.} \cite{ChengLiu} e Yen \emph{et al.} \cite{Yen}.
 
-No trabalho de Cheng et al \cite{ChengLiu} a ``formulação de Lagrange-D’Alembert'' é utilizada para deduzir uma formulação de acoplamento de subsistemas. A formulação é utilizada para obter o modelo dinâmico de um mecanismo paralelo de 2 graus de liberdade com atuação redundante. São utilizados os modelos já conhecidos para as cadeias seriais, e é feito o acoplamento dos subsistemas a partir de jacobianos dos vínculos cinemáticos.
+No trabalho de Cheng \emph{et al.} \cite{ChengLiu} a ``formulação de Lagrange-D’Alembert'' é utilizada para deduzir uma formulação de acoplamento de subsistemas. A formulação é utilizada para obter o modelo dinâmico de um mecanismo paralelo de 2 graus de liberdade com atuação redundante. São utilizados os modelos já conhecidos para as cadeias seriais, e é feito o acoplamento dos subsistemas a partir de jacobianos dos vínculos cinemáticos.
 
 Em \cite{Yen}, também é utilizada uma estratégia de acoplamento de subsistemas, também deduzida deduzida a partir da ``formulação de Lagrange-D’Alembert'', para obter o modelo dinâmico de um mecanismo paralelo de 3 graus de liberdade. No entanto, neste trabalho, a estratégia não é apresentada de uma maneira mais geral, podendo dar a impressão ao leitor de que isso só foi possível devido à topologia particular do mecanismo em questão. São realizadas simulações dinâmicas diretas do controle de posição do mecanismo, utilizando as técnicas de controle PID e Controle por Torque Computado, as quais são comparadas com resultados experimentais utilizando as mesmas estratégias de controle.
 
 \subsection{Princípio dos Trabalhos Virtuais e das Potências Virtuais}
 
-Levando-se em conta a revisão feita, não foi percebida uma grande diferença de popularidade entre a utilização dos formalismos de Newton-Euler e Lagrange nos artigos que tratam da modelagem dinâmica de mecanismos paralelos. Porém, uma abordagem que se mostrou extremamente popular foi a utilização das formulações do Princípio dos Trabalhos Virtuais ou do Princípio das Potências Virtuais. Dentre os trabalhos que utilizam estes princípios, podemos citar os trabalhos de Arian et al. \cite{Arian} (já comentado), Codourey et al. \cite{Codourey, CodoureyBurdet}, Gallardo-Alvarado et al. \cite{GallardoAlvarado}, Geike et al. \cite{Geike}, Li et al. \cite{LiStaicu, Li}, Staicu et al. \cite{Staicu, Staicu2, Staicu3, StaicuCarpCiocardia, StaicuLiu, StaicuZhang, StaicuZhangRugescu}, Wu et. al \cite{Wu}, Zhao et al. \cite{Zhao, Zhao2} e  Zhu et al. \cite{Zhu}.
+Levando-se em conta a revisão feita, não foi percebida uma grande diferença de popularidade entre a utilização dos formalismos de Newton-Euler e Lagrange nos artigos que tratam da modelagem dinâmica de mecanismos paralelos. Porém, uma abordagem que se mostrou extremamente popular foi a utilização das formulações do Princípio dos Trabalhos Virtuais ou do Princípio das Potências Virtuais. Dentre os trabalhos que utilizam estes princípios, podemos citar os trabalhos de Arian \emph{et al.} \cite{Arian} (já comentado), Codourey \emph{et al.} \cite{Codourey, CodoureyBurdet}, Gallardo-Alvarado \emph{et al.} \cite{GallardoAlvarado}, Geike \emph{et al.} \cite{Geike}, Li \emph{et al.} \cite{LiStaicu, Li}, Staicu \emph{et al.} \cite{Staicu, Staicu2, Staicu3, StaicuCarpCiocardia, StaicuLiu, StaicuZhang, StaicuZhangRugescu}, Wu et. al \cite{Wu}, Zhao \emph{et al.} \cite{Zhao, Zhao2} e  Zhu \emph{et al.} \cite{Zhu}.
 
-No trabalhos de Codourey et al. \cite{Codourey, CodoureyBurdet} e no de Li et al. \cite{Li}, são modelados mecanismos paralelos de 3 graus de liberdade, do tipo DELTA nos dois primeiros, e do tipo 3-PRS no terceiro, utilizando o Princípio dos Trabalhos Virtuais. São desprezadas as inércias distribuídas dos elos ligados à plataforma, e suas massas são distribuídas entre as duas pontas em que cada elo é ligado, de modo a simplificar o processo de modelagem.
+No trabalhos de Codourey \emph{et al.} \cite{Codourey, CodoureyBurdet} e no de Li \emph{et al.} \cite{Li}, são modelados mecanismos paralelos de 3 graus de liberdade, do tipo DELTA nos dois primeiros, e do tipo 3-PRS no terceiro, utilizando o Princípio dos Trabalhos Virtuais. São desprezadas as inércias distribuídas dos elos ligados à plataforma, e suas massas são distribuídas entre as duas pontas em que cada elo é ligado, de modo a simplificar o processo de modelagem.
 
 Já em \cite{GallardoAlvarado}, é modelado um robô paralelo de 4 graus de liberdade utilizando a teoria das helicóides e o Princípio dos Trabalhos Virtuais.
 
 Em \cite{Geike}, é proposta uma metodologia de modelagem interessante, na qual já se dividem as coordenadas generalizadas em um conjunto de variáveis dependentes e outro de variáveis independentes, utilizando a relação entre seus deslocamentos virtuais para obter as equações de movimento. A metodologia é utilizada para realizar a simulação dinâmica inversa de dois mecanismos paralelos, um de 3 graus de liberdade e outro de 6. Além disso, é discutida qual é a forma mais eficiente de implementação da metodologia desenvolvida.
 
-Nos trabalhos de Staicu et al. \cite{Staicu, Staicu2, Staicu3, StaicuCarpCiocardia, StaicuLiu, StaicuZhang, StaicuZhangRugescu} e no de Li et al. \cite{LiStaicu} são modelados mecanismos paralelos de 3 graus de liberdade utilizando uma metodologia de modelagem recursiva matricial baseada no Princípio dos Trabalhos Virtuais ou no Princípio das Potências Virtuais, e são realizadas simulações dinâmicas inversas. Esses trabalhos apresentam longos equacionamentos para não precisar recorrer a simplificações; porém, em todos os trabalhos, perto do final da dedução do modelo dinâmico, cita-se que será usada a \emph{equação fundamental da dinâmica de robôs paralelos}, a qual está publicada em \cite{StaicuFrances}. Este artigo, porém, está escrito em francês e é muito difícil de ser encontrado.
+Nos trabalhos de Staicu \emph{et al.} \cite{Staicu, Staicu2, Staicu3, StaicuCarpCiocardia, StaicuLiu, StaicuZhang, StaicuZhangRugescu} e no de Li \emph{et al.} \cite{LiStaicu} são modelados mecanismos paralelos de 3 graus de liberdade utilizando uma metodologia de modelagem recursiva matricial baseada no Princípio dos Trabalhos Virtuais ou no Princípio das Potências Virtuais, e são realizadas simulações dinâmicas inversas. Esses trabalhos apresentam longos equacionamentos para não precisar recorrer a simplificações; porém, em todos os trabalhos, perto do final da dedução do modelo dinâmico, cita-se que será usada a \emph{equação fundamental da dinâmica de robôs paralelos}, a qual está publicada em \cite{StaicuFrances}. Este artigo, porém, está escrito em francês e é muito difícil de ser encontrado.
 
-Por fim, nos trabalhos de Zhao et al. \cite{Zhao, Zhao2} e de Zhu et al. \cite{Zhu}, são modelados, utilizando o Princípio dos Trabalhos Virtuais e o conceito de jacobianos dos elos, mecanismos paralelos de 6 graus de liberdade nos dois primeiros, e de 3 graus de liberdade no terceiro, sendo que em \cite{Zhao2} o mecanismo possui atuação redundante. Em todos são realizadas simulações dinâmicas inversas.
+Por fim, nos trabalhos de Zhao \emph{et al.} \cite{Zhao, Zhao2} e de Zhu \emph{et al.} \cite{Zhu}, são modelados, utilizando o Princípio dos Trabalhos Virtuais e o conceito de jacobianos dos elos, mecanismos paralelos de 6 graus de liberdade nos dois primeiros, e de 3 graus de liberdade no terceiro, sendo que em \cite{Zhao2} o mecanismo possui atuação redundante. Em todos são realizadas simulações dinâmicas inversas.
 
 \subsection{Método de Kane}
 
-Uma formulação que é bastante popular na literatura de mecanismos seriais, porém não muito popular na literatura de mecanismos paralelos, é o Método de Kane \cite{Kane}. Dentre os poucos trabalhos que utilizam esta formulação para realizar a modelagem dinâmica de mecanismos paralelos, podemos citar os trabalhos de Ben-Horina et al. \cite{BenHorina} e Shukla et al. \cite{Shukla}.
+Uma formulação que é bastante popular na literatura de mecanismos seriais, porém não muito popular na literatura de mecanismos paralelos, é o Método de Kane \cite{Kane}. Dentre os poucos trabalhos que utilizam esta formulação para realizar a modelagem dinâmica de mecanismos paralelos, podemos citar os trabalhos de Ben-Horina \emph{et al.} \cite{BenHorina} e Shukla \emph{et al.} \cite{Shukla}.
 
 Em \cite{BenHorina}, é realizada a modelagem dinâmica, utilizando o método de Kane, de um robô paralelo de 6 graus de liberdade, cuja atuação é feita por 3 atuadores planos, os quais apresentam 2 graus de liberdade cada. A modelagem é feita com o auxílio do \emph{software} AUTOLEV. São realizadas simulações dinâmicas inversas do mecanismo proposto, e de mais dois mecanismos de 6 graus de liberdade, para efeito de comparação.
 
@@ -419,14 +419,14 @@ Em \cite{Shukla}, também é realizada a modelagem dinâmica de um mecanismo par
 
 \subsection{Formalismo de Boltzmann-Hamel}
 
-O Formalismo de Boltzmann-Hamel \cite{Jarzebowska} também não se mostrou muito popular na literatura de modelagem dinâmica de mecanismos paralelos. Dentre os trabalhos encontrados, podemos citar os trabalhos de Abdellatif et al. \cite{Abdellatif2} e o de Altuzarra et al. \cite{20altuzarra}.
+O Formalismo de Boltzmann-Hamel \cite{Jarzebowska} também não se mostrou muito popular na literatura de modelagem dinâmica de mecanismos paralelos. Dentre os trabalhos encontrados, podemos citar os trabalhos de Abdellatif \emph{et al.} \cite{Abdellatif2} e o de Altuzarra \emph{et al.} \cite{20altuzarra}.
 
 Tanto em \cite{Abdellatif2} quanto em \cite{20altuzarra}, são utilizadas as equações de Boltzmann-Hamel para a deduzir formulações que permitem a obtenção do modelo dinâmico explícito de mecanismos paralelos através dos modelos das cadeias seriais, do efetuador, e jacobianos dos vínculos cinemáticos. Em \cite{20altuzarra}, é utilizada a formulação proposta para obter o modelo dinâmico do mecanismo 3-PRS. Em \cite{Abdellatif2} são apresentadas simulações dinâmicas inversa e direta, sendo esta última com leis de controle baseadas no modelo, de um mecanismo paralelo de 6 graus de liberdade.
 
 
 \subsection{Formulação do Complemento Ortogonal Natural}
 
-A formulação do Complemento Ortogonal Natural foi proposta por Angeles et al. em \cite{Angeles}. Sua principal idéia é projetar as equações dinâmicas de cada corpo rígido do sistema em um espaço ortogonal às reações vinculares. Este procedimento é realizado através da obtenção de um complemento ortogonal ao jacobiano das equações de vínculo obtido através de relações cinemáticas dos \emph{twists} de cada corpo com um conjunto de quasi-velocidades independentes. Formulações similares são bastante exploradas por Orsino et al. em \cite{22orsino}, e generalizadas em \cite{23orsino}. Dentre os trabalhos que utilizam esta formulação, podemos citar os trabalhos de Akbarzadeh et al. \cite{Akbarzadeh}, Khan et al. \cite{Khan} e Xi et al. \cite{Xi}.
+A formulação do Complemento Ortogonal Natural foi proposta por Angeles \emph{et al.} em \cite{Angeles}. Sua principal idéia é projetar as equações dinâmicas de cada corpo rígido do sistema em um espaço ortogonal às reações vinculares. Este procedimento é realizado através da obtenção de um complemento ortogonal ao jacobiano das equações de vínculo obtido através de relações cinemáticas dos \emph{twists} de cada corpo com um conjunto de quasi-velocidades independentes. Formulações similares são bastante exploradas por Orsino \emph{et al.} em \cite{22orsino}, e generalizadas em \cite{23orsino}. Dentre os trabalhos que utilizam esta formulação, podemos citar os trabalhos de Akbarzadeh \emph{et al.} \cite{Akbarzadeh}, Khan \emph{et al.} \cite{Khan} e Xi \emph{et al.} \cite{Xi}.
 
 Em \cite{Akbarzadeh}, é descrita uma metodologia genérica de modelagem dinâmica multi-corpos utilizando a formulação do Complemento Ortogonal Natural. Basicamente são obtidos os modelos dinâmicos desacoplados de cada corpo rígido, utilizando a formulação de Newton-Euler, e é feito o acomplamento das equações dinâmicas através do uso do Complemento Ortogonal Natural. A metodologia proposta é aplicada em um mecanismo paralelo esférico do tipo SST e são realizadas simulações dinâmicas inversa e direta do mecanismo.
 
@@ -483,7 +483,7 @@ Uma das técnicas de controle mais exploradas na literatura é o Controle por To
 
 Visando a redução do custo computacional associado ao cálculo do modelo dinâmico em tempo real, alguns autores propõe a utilização do TC com pré-alimentação (TCp) \cite{Khalil, Siciliano, Spong}. Essa técnica é similar ao TC, com a diferença de que a compensação das não linearidades é feita por pré-alimentação e não mais por realimentação, como pode ser visto na figura \ref{fig:CTCp}. Consequentemente, realiza-se o cálculo do modelo dinâmico previamente, diminuindo-se o custo computacional.
 
-De fato, Codourey \cite{Codourey} obteve uma redução de 600\% no erro de posição utilizando o TCp em um ensaio experimental com o robô DELTA, ao substituir os PDs originais. Na simulação do controle de um mecanismo 6-UPS, Wang et al. \cite{Wang} utilizaram em cascata controladores lineares de posição, velocidade e corrente em cada junta ativa, além de  uma compensação dinâmica por pré-alimentação dos distúrbios de torque.
+De fato, Codourey \cite{Codourey} obteve uma redução de 600\% no erro de posição utilizando o TCp em um ensaio experimental com o robô DELTA, ao substituir os PDs originais. Na simulação do controle de um mecanismo 6-UPS, Wang \emph{et al.} \cite{Wang} utilizaram em cascata controladores lineares de posição, velocidade e corrente em cada junta ativa, além de  uma compensação dinâmica por pré-alimentação dos distúrbios de torque.
 
 \begin{figure}[h]
 	\centering
@@ -494,15 +494,15 @@ De fato, Codourey \cite{Codourey} obteve uma redução de 600\% no erro de posi�
 
 \subsection{Controle por Torque Computado Estendido (TCe)}
 
-Com o intuito de melhorar a robustez do TC associada a incertezas paramétricas, Zubizarreta et al. \cite{Zubizarreta, Zubizarreta2, Zubizarreta3, Zubizarreta4} propuseram  o  Controle por Torque Computado Estendido (TCe), que utiliza informação redundante obtida pelo sensoriamento de juntas passivas. Em \cite{Zubizarreta}, os controladores propostos demonstraram maior robustez, principalmente em relação a parâmetros cinemáticos, durante as simulações realizadas com o mecanismo 3-RRR.
+Com o intuito de melhorar a robustez do TC associada a incertezas paramétricas, Zubizarreta \emph{et al.} \cite{Zubizarreta, Zubizarreta2, Zubizarreta3, Zubizarreta4} propuseram  o  Controle por Torque Computado Estendido (TCe), que utiliza informação redundante obtida pelo sensoriamento de juntas passivas. Em \cite{Zubizarreta}, os controladores propostos demonstraram maior robustez, principalmente em relação a parâmetros cinemáticos, durante as simulações realizadas com o mecanismo 3-RRR.
 
 \subsection{Controle Preditivo Baseado em Modelo (PM)}
 
-Outra técnica alternativa, aplicada a mecanismos paralelos, é o Controle Preditivo Baseado em Modelo (PM). Para a sua implementação, o PM necessita minimizar uma função objetivo, dependente das saídas e do esforço de controle, ambos calculados em tempo futuro \cite{Camacho}, como pode ser visto na figura \ref{fig:CPM}. Assim, dependendo do modelo utilizado, o processo de otimização pode agregar um custo computacional que inviabilize o controle, comprometendo a motivação inicial de aprimorar o desempenho do sistema. Como exemplos de utilização do PM, podem ser citados os trabalhos de Vivas et al. \cite{Vivas} e   Duchaine et al. \cite{Duchaine}.
+Outra técnica alternativa, aplicada a mecanismos paralelos, é o Controle Preditivo Baseado em Modelo (PM). Para a sua implementação, o PM necessita minimizar uma função objetivo, dependente das saídas e do esforço de controle, ambos calculados em tempo futuro \cite{Camacho}, como pode ser visto na figura \ref{fig:CPM}. Assim, dependendo do modelo utilizado, o processo de otimização pode agregar um custo computacional que inviabilize o controle, comprometendo a motivação inicial de aprimorar o desempenho do sistema. Como exemplos de utilização do PM, podem ser citados os trabalhos de Vivas \emph{et al.} \cite{Vivas} e   Duchaine \emph{et al.} \cite{Duchaine}.
 
-Com o propósito de controlar o mecanismo H4, Vivas et al. \cite{Vivas} utilizaram  uma malha de PM linear e outra malha para compensação das não linearidades. Após a comparação do desempenho do controlador proposto com  o TC, os autores observaram maior robustez do PM a incertezas paramétricas. 
+Com o propósito de controlar o mecanismo H4, Vivas \emph{et al.} \cite{Vivas} utilizaram  uma malha de PM linear e outra malha para compensação das não linearidades. Após a comparação do desempenho do controlador proposto com  o TC, os autores observaram maior robustez do PM a incertezas paramétricas. 
 
-Duchaine et al. \cite{Duchaine}, por sua vez, propuseram um controlador preditivo baseado no modelo não linear de um mecanismo paralelo de 6 graus de liberdade. Visando a obtenção de uma solução analítica para o problema de otimização, foram adotadas diversas hipóteses simplificadoras no modelo dinâmico do mecanismo. Com o intuito de comparar o controlador proposto com um PID, foram feitos alguns experimentos, onde se observou  que o PM apresentou erro nulo de posição no final da trajetória, enquanto que o PID demorou um tempo considerável para alcançar erro nulo. Foi verificada a equivalência entre o custo computacional dos 2 controladores. 
+Duchaine \emph{et al.} \cite{Duchaine}, por sua vez, propuseram um controlador preditivo baseado no modelo não linear de um mecanismo paralelo de 6 graus de liberdade. Visando a obtenção de uma solução analítica para o problema de otimização, foram adotadas diversas hipóteses simplificadoras no modelo dinâmico do mecanismo. Com o intuito de comparar o controlador proposto com um PID, foram feitos alguns experimentos, onde se observou  que o PM apresentou erro nulo de posição no final da trajetória, enquanto que o PID demorou um tempo considerável para alcançar erro nulo. Foi verificada a equivalência entre o custo computacional dos 2 controladores. 
 
 \begin{figure}[h]
 	\centering
@@ -515,7 +515,7 @@ Duchaine et al. \cite{Duchaine}, por sua vez, propuseram um controlador preditiv
 
 O controle adaptativo, também encontrado na literatura, caracteriza-se pela utilização de leis de adaptação para realizar a estimação em tempo real de parâmetros do sistema ou de termos de compensação dinâmica, como pode ser visto na figura \ref{fig:CA}. Sendo assim, as técnicas de controle adaptativo possibilitam que o sistema se torne praticamente insensível a incertezas paramétricas. Para o caso em que se realiza a estimação em tempo real dos parâmetros do sistema, pode-se dizer que o custo computacional é superior ao do TC, visto que é necessário integrar as leis de adaptação em tempo real. Além disso, é necessário obter o modelo dinâmico linear em relação aos parâmetros do sistema \cite{SlotiniA}, o que pode ser uma tarefa difícil, inviabilizando, em alguns casos, a aplicação da técnica. Em \cite{CodoureyBurdet} é proposto um algoritmo de obtenção do modelo dinâmico simplificado de mecanismos paralelos nesse formato.
 
-Em \cite{SlotiniA} é proposta uma lei de controle que combina o controle adaptativo com a técnica de controle robusto conhecida por Controle por Modos Deslizantes. Chemori et al. \cite{Chemori} utilizaram essa técnica  com o intuito de diminuir os erros de posição em regime permanente no controle de um mecanismo paralelo do tipo PAR2. Por outro lado, Honegger at al. \cite{Honegger} empregaram o controle adaptativo com estimação em tempo real dos parâmetros do sistemas, realizando a compensação dinâmica por pré-alimentação, em um mecanismo  paralelo do tipo Hexaglide.
+Em \cite{SlotiniA} é proposta uma lei de controle que combina o controle adaptativo com a técnica de controle robusto conhecida por Controle por Modos Deslizantes. Chemori \emph{et al.} \cite{Chemori} utilizaram essa técnica  com o intuito de diminuir os erros de posição em regime permanente no controle de um mecanismo paralelo do tipo PAR2. Por outro lado, Honegger at al. \cite{Honegger} empregaram o controle adaptativo com estimação em tempo real dos parâmetros do sistemas, realizando a compensação dinâmica por pré-alimentação, em um mecanismo  paralelo do tipo Hexaglide.
 
 \begin{figure}[h]
 	\centering
@@ -526,11 +526,11 @@ Em \cite{SlotiniA} é proposta uma lei de controle que combina o controle adapta
 
 \subsection{Controle por Modos Deslizantes (MD)}
 
-Outra técnica promissora para aplicação em mecanismos paralelos é o Controle por Modos Deslizantes (MD). A técnica consiste no projeto de leis de controle que levem o sistema para superfícies de escorregamento no espaço de fase, de modo que assim que o sistema atinje e é mantido nas superfícies de escorregamento, o erro de controle decai exponencialmente para zero \cite{Slotini}. Para garantir que o sistema atinja em tempo finito e se mantenha nas superfícies de escorregamento, são utilizados termos descontínuos na lei de controle, o que pode causar problemas de oscilações bruscas em alta frequência nos esforços de controle ({\em chattering}). Em \cite{Guldner}  e  \cite{Utkin2} são propostas técnicas para evitar esse tipo de problema. A grande vantagem da utilização deste tipo de lei de controle é sua grande robustez a incertezas estruturadas e não estruturadas, sendo possível realizar o projeto do controlador de modo a suprimir um dado nível de incertezas paramétricas. Em \cite{SlotiniSMC} é proposta uma metodologia de projeto de Controle por Modos Deslizantes para manipuladores robóticos seriais.
+Outra técnica promissora para aplicação em mecanismos paralelos é o Controle por Modos Deslizantes (MD). A técnica consiste no projeto de leis de controle que levem o sistema para superfícies de escorregamento no espaço de fase, de modo que assim que o sistema atinje e é mantido nas superfícies de escorregamento, o erro de controle decai exponencialmente para zero \cite{Slotini}. Para garantir que o sistema atinja em tempo finito e se mantenha nas superfícies de escorregamento, são utilizados termos descontínuos na lei de controle, o que pode causar problemas de oscilações bruscas em alta frequência nos esforços de controle ({\em chattering}). Em \cite{Guldner}  e  \cite{Utkin2} são propostas técnicas para evitar esse tipo de problema. A grande vantagem da utilização deste tipo de lei de controle é sua grande robustez a incertezas estruturadas e não estruturadas, sendo possível realizar o projeto do controlador de modo a suprimir um dado nível de incertezas paramétricas. Em \cite{SlotiniSMC} é proposta uma metodologia de projeto de Controle por Modos Deslizantes para manipuladores robóticos seriais. A figura \ref{fig:CMD} mostra um diagrama de blocos típico de MD aplicado a sistemas mecânicos. 
 
-Na literatura são encontradas diversos artigos utilizando a técnica de MD aliada à lógica {\em fuzzy} e/ou redes neurais para o controle de manipuladores robóticos \cite{Begon, Ertugrul, Hu, Sadati}. Begon et al. \cite{Begon} propuseram uma lei de controle baseada na teoria de MD e na utilização de lógica {\em fuzzy} para controlar de maneira independente os atuadores de um mecanismo paralelo do tipo Hexa. A técnica proposta teve o intuito de obter a robustez característica do MD sem necessitar de uma lei de controle com termos descontínuos, evitando o {\em chattering}.
+Na literatura são encontradas diversos artigos utilizando a técnica de MD aliada à lógica {\em fuzzy} e/ou redes neurais para o controle de manipuladores robóticos \cite{Begon, Ertugrul, Hu, Sadati}. Begon \emph{et al.} \cite{Begon} propuseram uma lei de controle baseada na teoria de MD e na utilização de lógica {\em fuzzy} para controlar de maneira independente os atuadores de um mecanismo paralelo do tipo Hexa. A técnica proposta teve o intuito de obter a robustez característica do MD sem necessitar de uma lei de controle com termos descontínuos, evitando o {\em chattering}.
 
-Em \cite{Zeinali}, Zeinali et al. desenvolveram uma lei de controle  baseada nas teorias de MD e Controle Adaptativo. O controlador desenvolvido realiza a compensação dinâmica em tempo real do erro de modelagem através de uma lei de adaptação. Além disso, substitui o termo descontínuo da lei de controle por um termo do tipo PID, com o intuito de evitar o {\em chattering}. A estabilidade e robustez da lei de controle proposta foram provadas utilizando a teoria de estabilidade de Lyapunov \cite{Slotini}. A robustez da lei de controle foi verificada através de simulações do controlador proposto aplicado a um mecanismo serial do tipo \underline{R}\underline{R}, nas quais o controlador conseguiu manter erros de posição muito pequenos em regime permanente, mesmo sendo baseado em um modelo muito pobre e na presença de distúrbios de torque. A técnica apresentada se mostra promissora, porém, como no artigo foi feita apenas a simulação da lei de controle em um mecanismo serial bidimensional, ainda não se pode afirmar nada sobre seu desempenho em mecanismos paralelos tridimensionais.
+Em \cite{Zeinali}, Zeinali \emph{et al.} desenvolveram uma lei de controle  baseada nas teorias de MD e Controle Adaptativo. O controlador desenvolvido realiza a compensação dinâmica em tempo real do erro de modelagem através de uma lei de adaptação. Além disso, substitui o termo descontínuo da lei de controle por um termo do tipo PID, com o intuito de evitar o {\em chattering}. A estabilidade e robustez da lei de controle proposta foram provadas utilizando a teoria de estabilidade de Lyapunov \cite{Slotini}. A robustez da lei de controle foi verificada através de simulações do controlador proposto aplicado a um mecanismo serial do tipo \underline{R}\underline{R}, nas quais o controlador conseguiu manter erros de posição muito pequenos em regime permanente, mesmo sendo baseado em um modelo muito pobre e na presença de distúrbios de torque. A técnica apresentada se mostra promissora, porém, como no artigo foi feita apenas a simulação da lei de controle em um mecanismo serial bidimensional, ainda não se pode afirmar nada sobre seu desempenho em mecanismos paralelos tridimensionais.
 
 \begin{figure}[h]
 	\centering
@@ -545,13 +545,13 @@ Após a realização das revisões da literatura relativas à modelagem dinâmic
 
 Primeiramente, em relação à modelagem dinâmica, em boa parte dos trabalhos, a modelagem é realizada de uma maneira um tanto quanto ineficiente, tanto no sentido do trabalho necessário para realizar a dedução, quanto na parte da implementação, como é o caso dos artigos citados que utilizam o formalismo de Newton-Euler. 
 
-Por outro lado, há artigos que propõe formulações que se mostram muito eficientes no processo de modelagem, as quais se utilizam de artifícios de modularidade e/ou recursividade, como os trabalhos citados baseados na formulação do Complemento Ortogonal Natural. No entanto, praticamente todas essas formuluções nessecitam do cálculo de derivadas de jacobianos de maneira simbólica, o que dificulta muito o processo de automatização desses métodos. Além disso, conforme a complexidade dos mecanismos aumenta, essas derivadas tendem a gerar expressões maiores e mais complexas.
+Por outro lado, há artigos que propõe formulações que se mostram muito eficientes no processo de modelagem, as quais se utilizam de artifícios de modularidade e/ou recursividade, como os trabalhos citados baseados na formulação do Complemento Ortogonal Natural. No entanto, praticamente todas essas formulações necessitam do cálculo de derivadas de jacobianos de maneira simbólica, o que dificulta muito o processo de automatização desses métodos. Além disso, conforme a complexidade dos mecanismos aumenta, essas derivadas tendem a gerar expressões maiores e mais complexas.
 
 Também não foram encontrados trabalhos que propõe um conjunto de parâmetros que definam a arquitetura de pelo menos uma classe de mecanismos paralelos, análogos aos parâmetros de Denavit-Hartemberg para os mecanismos seriais \cite{Denavit}.
 
-Com relação à revisão das técnicas de controle aplicadas a mecanismos paralelos, foi possível perceber que, apesar de até que uma boa parte apresentar resultados experimentais \cite{Honegger, Cheng, Shang, Yen, Codourey, Vivas, Duchaine, Chemori, Begon}, são poucos os que realmente apresentam uma análise um pouco mais elaborada. Além disso, há menos trabalhos experimentais que mostram a eficácia  técnicas que podem superar ou bater de frente com o Controle por Torque Computado. Também não foram encontrados trabalhos que tratam da questão da implementação de técnicas de controle baseado em modelo e da questão de como reduzir seu custo computacional.
+Com relação à revisão das técnicas de controle aplicadas a mecanismos paralelos, foi possível perceber que, apesar de até que uma boa parte apresentar resultados experimentais \cite{Honegger, Cheng, Shang, Yen, Codourey, Vivas, Duchaine, Chemori, Begon}, são poucos os que realmente apresentam uma análise um pouco mais elaborada. Além disso, há menos trabalhos experimentais que mostram a eficácia de técnicas que podem superar ou bater de frente com o Controle por Torque Computado. Também não foram encontrados trabalhos que tratam da questão da implementação de técnicas de controle baseado em modelo e da questão de como reduzir seu custo computacional.
 
-Sendo assim, com relação à modelagem dinâmica, esta Tese visa contribuir através do desenvolvimento de um algoritmo genérico para a modelagem dinâmica de mecanismos paralelos que: utiliza estratégias modulares; não necessita do cálculo simbólico de derivadas; e propõe uma maneira de descrever a topologia deste tipo de mecanismo utilizando um conjunto de parâmetros.
+Sendo assim, com relação à modelagem dinâmica, esta Tese visa contribuir através do desenvolvimento de um algoritmo genérico para a modelagem dinâmica de mecanismos paralelos translacionais que: utiliza estratégias modulares; não necessita do cálculo simbólico de derivadas; e propõe uma maneira de descrever a topologia deste tipo de mecanismo utilizando um conjunto de parâmetros.
 
 Em relação ao controle, esta tese visa contruir através da proposição de novas leis de controle híbridas, as quais adicionam termos de controle robusto a técnicas de controle já bastante populares na literatura, e da comprovação experimental da eficácia das técnicas propostas no controle de mecanismos paralelos.
 
@@ -561,28 +561,24 @@ Em relação ao controle, esta tese visa contruir através da proposição de no
 Fundamentalmente, a metodologia desta pesquisa compreende a execução de seis fases, abrangendo desde o desenvolvimento de algoritmos para as modelagens cinemática e dinâmica ao projeto de controladores e sua validação experimental.
 
 \section{Primeira fase} 
-Desenvolver um algoritmo genérico, capaz de gerar os modelos dinâmicos completos de mecanismos paralelos que operem em espaço plano, esférico ou tridimensional. Esta geração parte da definição da topologia do mecanismo paralelo, suas cadeias cinemáticas, descrevendo a localização relativa de seus elos e juntas. 
+Desenvolver um algoritmo genérico, capaz de gerar os modelos dinâmicos completos de mecanismos paralelos translacionais que operem em espaço plano ou tridimensional. Esta geração parte da definição da topologia do mecanismo paralelo, suas cadeias cinemáticas, descrevendo a localização relativa de seus elos e juntas. 
 
-Dentre os efeitos de modelagem considerados, destacam-se os decorrentes da inércia efetiva e acoplada, das forças de Coriolis e centrífugas, da força gravitacional, bem como dos esforços dos atuadores. Pretende-se que a geração dos modelos seja realizada de forma implícita. Para tanto, será empregado o método Recursivo Modular de Modelagem (RMM) proposto por Orsino \cite{23orsino} que, por meio da definição de níveis hierárquicos da estrutura de um sistema mecânico e a descrição da dependência das variáveis cinemáticas envolvidas,  permite o acoplamento de subsistemas multicorpos.
+Dentre os efeitos de modelagem considerados, destacam-se os decorrentes da inércia efetiva e acoplada, das forças de Coriolis e centrífugas, da força gravitacional, bem como dos esforços dos atuadores. Pretende-se que a geração dos modelos seja realizada de forma implícita. Para tanto, será desenvolvida uma metodologia baseada no método Recursivo Modular de Modelagem (RMM) proposto por Orsino \cite{23orsino} que, por meio da definição de níveis hierárquicos da estrutura de um sistema mecânico e a descrição da dependência das variáveis cinemáticas envolvidas,  permite o acoplamento de subsistemas multicorpos.
 
 \section{Segunda fase} 
 Efetuar as modelagens cinemática e dinâmica do mecanismo articulado plano 5R \cite{22orsino}, utilizando o algoritmo desenvolvido na fase anterior.
 
 \section{Terceira fase} 
-Nesta fase, diferentes técnicas de controle serão avaliadas sob a perspectiva de sua utilização em manipuladores paralelos. Assim, 
-em princípio, esta pesquisa foca na síntese de um controlador não-linear robusto e de alto desempenho. Para tanto, serão consideradas as incertezas paramétricas e a possibilidade de atuação redundante \cite{Cheng}, além de estratégias para a determinação de leis de controle com custo computacional
-consideralvemente menor do que as tradicionais, que empreguem o Controle por Torque Computado \cite{Craig, Zubizarreta}.
+Nesta fase, diferentes técnicas de controle serão avaliadas sob a perspectiva de sua utilização em manipuladores paralelos. Assim, em princípio, esta pesquisa foca na síntese de um controlador não-linear robusto e de alto desempenho. Para tanto, serão consideradas as incertezas paramétricas e a possibilidade de atuação redundante \cite{Cheng}, além de estratégias para a determinação de leis de controle com custo computacional consideralvemente menor do que as tradicionais, que empreguem o Controle por Torque Computado \cite{Craig, Zubizarreta}.
 
-\section{Quarta fase} Avaliar o emprego de diferentes técnicas de controle de trajetória aplicadas especificamente para o manipulador 5R,
-empregando a metodologia da terceira fase.
+\section{Quarta fase} Avaliar o emprego de diferentes técnicas de controle de trajetória aplicadas especificamente para o manipulador 5R, empregando a metodologia da terceira fase.
 
 \section{Quinta fase} Realizar diversas simulações que permitam observar a consistência dos resultados, no tocante às análises cinemáticas direta e inversa, bem como das análises dinâmicas direta e inversa. Além disso, serão determinadas as respostas dinâmicas do manipulador sujeito às distintas leis de controle sintetizadas.
 
 \section{Sexta fase} 
 De modo a avaliar o desempenho previsto pelo uso de diferentes controladores para o manipulador paralelo 5R (figura \ref{fig:Clara}), será realizada a validação experimental em uma das bancadas de ensaio do LaMMaR. Para tanto, serão escolhidas duas trajetórias: uma que considere o comportamento em regime permanente e outra em regime transitório. 
 
-Neste sentido, almeja-se observar se haverá alguma diferença de desempenho se o controle for executado no espaço das juntas ou no da tarefa. Além disso, pretende-se considerar os efeitos da implementação de técnicas de controle puras ou combinadas.
-Para auxiliar na comparação entre as técnicas de controle, serão definidas duas métricas: uma que considere o erro de posicionamento do efetuador e outra a magnitude dos torques dos atuadores.
+Neste sentido, almeja-se observar se haverá alguma diferença de desempenho se o controle for executado no espaço das juntas ou no da tarefa. Além disso, pretende-se considerar os efeitos da implementação de técnicas de controle puras ou combinadas. Para auxiliar na comparação entre as técnicas de controle, serão definidas duas métricas: uma que considere o erro de posicionamento do efetuador e outra a magnitude dos torques dos atuadores.
 
 %\section{O que tinha antes} 
 %O estágio atual de desenvolvimento do presente projeto ocorre basicamente em três áreas:
@@ -634,7 +630,7 @@ q_1 & ... & {q}_{\nu}
 \item $\mgamma$: Vetor aceleração gravitacional escrito na base $\ttN$, ou seja, $\vct{\vg}_{\ttN}$.
 \item $\vf_i$: Vetor força não-reativa resultante aplicada no centro de massa de $\llB_i$.
 \item $\vtau_i$: Vetor torque não-reativo resultante aplicado em $\llB_i$.
-\item $\overline{\mf}_i$: Matriz-coluna de forças não-reativas generalizadas aplicadas no subsistema $\llB_i$. É dada por $\overline{\mf}_i = \begin{bmatrix}
+\item $\overline{\mf}_i$: Matriz-coluna de esforços não-reativos generalizados aplicados ao subsistema $\llB_i$. É dada por $\overline{\mf}_i = \begin{bmatrix}
 \vct{\vf_i}_\ttN^\msT &
 \vct{\vtau_i}_\ttN^\msT
 \end{bmatrix}^\msT $.
@@ -687,7 +683,7 @@ Além disso, como $\vct{\ttg_i}_{\ttB_i}$ são dados de entrada do algoritmo, ob
 
 \subsection{Cinemática de velocidades lineares}
 
-A velocidade do efetuador pode ser obtida aplicando recursivamente o príncipio da composição de movimentos para velocidades lineres deduzido anteriormente \eqref{eq:Composicao_vel}:
+A velocidade do efetuador pode ser obtida aplicando recursivamente o príncipio da composição de movimentos para velocidades lineares (equação \eqref{eq:Composicao_vel}):
 
 \begin{equation}
 \vv_{\ttx}^{\lllB_0} = \vv_{\ttx \rl \lllB_1}^{\lllB_0} + \vv_{\ttx}^{\lllB_1}
@@ -816,7 +812,7 @@ Sendo:
 
 \subsection{Cinemática de velocidades angulares}
 
-A velocidade angular do efetuador pode ser obtida aplicando recursivamente o príncipio da composição de movimentos para velocidades angulares deduzido anteriormente \eqref{eq:composicao_w}:
+A velocidade angular do efetuador pode ser obtida aplicando recursivamente o príncipio da composição de movimentos para velocidades angulares (equação \eqref{eq:composicao_w}):
 
 \begin{equation}
 \vomega_{\lllB_\nu}^{\lllB_0} = \vomega_{\lllB_1}^{\lllB_0} + \vomega_{\lllB_\nu}^{\lllB_1}
@@ -901,7 +897,7 @@ Sendo:
 \end{bmatrix}
 \end{empheq}
 
-Para obter as velocidades angulares de cada ligamentos, seguimos a mesma linha de raciocínio e obtemos os seguintes resultados:
+Para obter as velocidades angulares de cada ligamento, seguimos a mesma linha de raciocínio e obtemos os seguintes resultados:
 
 Definindo:
 \begin{empheq}[box=\myyellowbox]{equation} \label{eq:jwij_}
@@ -942,7 +938,7 @@ Sendo:
 
 \subsection{Cinemática de acelerações lineares}
 
-A aceleração do efetuador pode ser obtida aplicando recursivamente o príncipio da composição de movimentos para velocidades lineres deduzido anteriormente \eqref{eq:Composicao_ace}:
+A aceleração do efetuador pode ser obtida aplicando recursivamente o príncipio da composição de movimentos para acelerações lineares (equação \eqref{eq:Composicao_ace}):
 
 \begin{equation}
 \va_{\ttx}^{\lllB_0} = \va_{\ttx \rl \lllB_1}^{\lllB_0} + \va_{\ttx}^{\lllB_1} + 2 \vomega_{\lllB_1}^{\lllB_0} \wedge \vv_{\ttx}^{\lllB_1}
@@ -1061,21 +1057,21 @@ Sendo:
 
 \subsection{Cinemática de acelerações angulares}
 
-A aceleração angular do efetuador pode ser obtida aplicando recursivamente o príncipio da composição de movimentos para acelerações deduzido anteriormente \eqref{eq:composicao_dw}:
+A aceleração angular do efetuador pode ser obtida aplicando recursivamente o príncipio da composição de movimentos para acelerações angulares (equação \eqref{eq:composicao_dw}):
 
 \begin{equation}
-\dot{\vomega}_{\lllB_\nu}^{\lllB_0} = \dot{\vomega}_{\lllB_1}^{\lllB_0} + \dot{\vomega}_{\lllB_\nu}^{\lllB_1} +  \vomega_{\lllB_1}^{\lllB_0} \wedge \vomega_{\lllB_\nu}^{\lllB_1}
+\valpha_{\lllB_\nu}^{\lllB_0} = \valpha_{\lllB_1}^{\lllB_0} + \valpha_{\lllB_\nu}^{\lllB_1} +  \vomega_{\lllB_1}^{\lllB_0} \wedge \vomega_{\lllB_\nu}^{\lllB_1}
 \end{equation}
 \begin{equation}
-\dot{\vomega}_{\lllB_\nu}^{\lllB_1} = \dot{\vomega}_{\lllB_2}^{\lllB_1} + \dot{\vomega}_{\lllB_\nu}^{\lllB_2} +  \vomega_{\lllB_2}^{\lllB_1} \wedge \vomega_{\lllB_\nu}^{\lllB_2}
-\end{equation}
-$$ \vdots $$
-\begin{equation}
-\dot{\vomega}_{\lllB_\nu}^{\lllB_{i-1}} = \dot{\vomega}_{\lllB_i}^{\lllB_{i-1}} + \dot{\vomega}_{\lllB_\nu}^{\lllB_i} +  \vomega_{\lllB_i}^{\lllB_{i-1}} \wedge \vomega_{\lllB_\nu}^{\lllB_i}
+\valpha_{\lllB_\nu}^{\lllB_1} = \valpha_{\lllB_2}^{\lllB_1} + \valpha_{\lllB_\nu}^{\lllB_2} +  \vomega_{\lllB_2}^{\lllB_1} \wedge \vomega_{\lllB_\nu}^{\lllB_2}
 \end{equation}
 $$ \vdots $$
 \begin{equation}
-\dot{\vomega}_{\lllB_\nu}^{\lllB_{\nu-2}} = \dot{\vomega}_{\lllB_{\nu-1}}^{\lllB_{\nu-2}} + \dot{\vomega}_{\lllB_\nu}^{\lllB_{\nu-1}} + \vomega_{\lllB_{\nu-1}}^{\lllB_{\nu-2}} \wedge \vomega_{\lllB_\nu}^{\lllB_{\nu-1}}
+\valpha_{\lllB_\nu}^{\lllB_{i-1}} = \valpha_{\lllB_i}^{\lllB_{i-1}} + \valpha_{\lllB_\nu}^{\lllB_i} +  \vomega_{\lllB_i}^{\lllB_{i-1}} \wedge \vomega_{\lllB_\nu}^{\lllB_i}
+\end{equation}
+$$ \vdots $$
+\begin{equation}
+\valpha_{\lllB_\nu}^{\lllB_{\nu-2}} = \valpha_{\lllB_{\nu-1}}^{\lllB_{\nu-2}} + \valpha_{\lllB_\nu}^{\lllB_{\nu-1}} + \vomega_{\lllB_{\nu-1}}^{\lllB_{\nu-2}} \wedge \vomega_{\lllB_\nu}^{\lllB_{\nu-1}}
 \end{equation}
 
 
@@ -1088,10 +1084,10 @@ Sendo assim, a aceleração angular do efetuador em relação a cada um dos refe
 %\end{cases}\, i=1,...,\nu+1
 %\end{equation}
 \begin{equation}
-\dot{\vomega}_{\lllB_\nu}^{\lllB_{i-1}} =
+\valpha_{\lllB_\nu}^{\lllB_{i-1}} =
 \begin{cases}
 \vzr, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; i = \nu + 1 \\
-\dot{\vomega}_{\lllB_i}^{\lllB_{i-1}} + \dot{\vomega}_{\lllB_\nu}^{\lllB_i} +  \vomega_{\lllB_i}^{\lllB_{i-1}} \wedge \vomega_{\lllB_\nu}^{\lllB_i}, \; 1 \leq i \leq \nu \\
+\valpha_{\lllB_i}^{\lllB_{i-1}} + \valpha_{\lllB_\nu}^{\lllB_i} +  \vomega_{\lllB_i}^{\lllB_{i-1}} \wedge \vomega_{\lllB_\nu}^{\lllB_i}, \; 1 \leq i \leq \nu \\
 \end{cases}\, i=\nu+1,...,1
 \end{equation}
 
@@ -1099,7 +1095,7 @@ Sendo assim, a aceleração angular do efetuador em relação a cada um dos refe
 
 Sendo que a aceleração angular de arrastamento de cada uma das juntas é dada por:
 \begin{equation}
-\dot{\vomega}_{\lllB_{i}}^{\lllB_{i-1}} = 
+\valpha_{\lllB_{i}}^{\lllB_{i-1}} = 
 \begin{cases}
 \vzr, \;\;\;\;\;\;\; \text{i-ésima junta for prismática} \\
 \ddot{q}_{i} \vk_{i-1}, \; \text{i-ésima junta rotativa}
@@ -1108,75 +1104,75 @@ Sendo que a aceleração angular de arrastamento de cada uma das juntas é dada 
 
 Fazendo as seguintes definições:
 \begin{empheq}[box=\lightbluebox]{equation}
-\dot{\momega}_i = \vct{\dot{\vomega}_{\ttx}^{\lllB_{i}} }_{\ttN}
+\malpha_i = \vct{\valpha_{\ttx}^{\lllB_{i}} }_{\ttN}
 \end{empheq}
 
 \begin{empheq}[box=\lightbluebox]{equation}
-\dot{\momega}^\star = \dot{\momega}_0 = \vct{\dot{\vomega}_{\lllB_\nu}^{\lllN} }_{\ttN}
+\malpha^\star = \malpha_0 = \vct{\valpha_{\lllB_\nu}^{\lllN} }_{\ttN}
 \end{empheq}
 
 Temos que:
 \begin{equation}
-\vct{\dot{\vomega}_{\lllB_{i}}^{\lllB_{i-1}} }_{\ttN} = \ddot{q}_{i} \mj_{\omega\,i} , \; i=1,...,\nu
+\vct{\valpha_{\lllB_{i}}^{\lllB_{i-1}} }_{\ttN} = \ddot{q}_{i} \mj_{\omega\,i} , \; i=1,...,\nu
 \end{equation}
 
 \begin{empheq}[box=\myyellowbox]{equation}
-\dot{\momega}_{i-1} =
+\malpha_{i-1} =
 \begin{cases}
 \mzr, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; i = \nu + 1 \\
-\dot{\momega}_i +  \mj_{\omega\,i} \ddot{q}_{i} + (\underaccent{\sim}{\dot{\momega}})_i , \; 1 \leq i \leq \nu \\
+\malpha_i +  \mj_{\omega\,i} \ddot{q}_{i} + (\underaccent{\sim}{\malpha})_i , \; 1 \leq i \leq \nu \\
 \end{cases}\, i=\nu+1,...,1
 \end{empheq}
 
 \begin{empheq}[box=\lightbluebox]{equation} \label{eq:ace_ang_est}
-\dot{\momega}^\star(\mq,\dot{\mq},\ddot{\mq}) = \mJ_\omega (\mq) \cdot \ddot{\mq} +  \underaccent{\sim}{\dot{\momega}}(\mq,\dot{\mq})
+\malpha^\star(\mq,\dot{\mq},\ddot{\mq}) = \mJ_\omega (\mq) \cdot \ddot{\mq} +  \underaccent{\sim}{\malpha}(\mq,\dot{\mq})
 \end{empheq}
 
 Sendo:
 \begin{empheq}[box=\myyellowbox]{equation}
-(\underaccent{\sim}{\dot{\momega}})_i = \dot{q}_i \mj_{\omega\,i} \wedge \momega_i
+(\underaccent{\sim}{\malpha})_i = \dot{q}_i \mj_{\omega\,i} \wedge \momega_i
 \end{empheq}
 
 \begin{empheq}[box=\myyellowbox]{equation} \label{eq:dw_til}
-\underaccent{\sim}{\dot{\momega}} = \sum_{i=1}^\nu (\underaccent{\sim}{\dot{\momega}})_i
+\underaccent{\sim}{\malpha} = \sum_{i=1}^\nu (\underaccent{\sim}{\malpha})_i
 \end{empheq}
 
-Para obter as acelerações angulares dos centros de massa dos ligamentos, seguimos a mesma linha de raciocínio e obtemos os seguintes resultados:
+Para obter as acelerações angulares dos ligamentos, seguimos a mesma linha de raciocínio e obtemos os seguintes resultados:
 
 Definindo:
 \begin{empheq}[box=\lightbluebox]{equation}
-\dot{\momega}_{i,j} = \vct{\dot{\vomega}_{\ttg_i}^{\lllB_{j}}}_{\ttN}
+\malpha_{i,j} = \vct{\valpha_{\ttg_i}^{\lllB_{j}}}_{\ttN}
 \end{empheq}
 
 \begin{empheq}[box=\lightbluebox]{equation}
-\dot{\momega}^\star_i = \dot{\momega}_{i,0} = \vct{\dot{\vomega}_{\lllB_i}^{\lllN} }_{\ttN}
+\malpha^\star_i = \malpha_{i,0} = \vct{\valpha_{\lllB_i}^{\lllN} }_{\ttN}
 \end{empheq}
 
 Temos:
 \begin{empheq}[box=\myyellowbox]{equation}
-\dot{\momega}_{i,j-1} =
+\malpha_{i,j-1} =
 \begin{cases}
 \mzr, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; j = i+1 \\
-\dot{\momega}_{i,j} + \mj_{\omega\,i,j} \ddot{q}_{j}  + (\underaccent{\sim}{\dot{\momega}}_i)_j, \; 1 \leq j \leq i \\
+\malpha_{i,j} + \mj_{\omega\,i,j} \ddot{q}_{j}  + (\underaccent{\sim}{\malpha}_i)_j, \; 1 \leq j \leq i \\
 \end{cases}\, i=1,...,\nu, \, j=i+1,...,1
 \end{empheq}
 
 \begin{empheq}[box=\lightbluebox]{equation}\label{eq:domega_star_i}
-\dot{\momega}^\star_i (\mq,\dot{\mq},\ddot{\mq}) = \mJ_{\omega\,i} (\mq) \cdot \ddot{\mq} + \underaccent{\sim}{\dot{\momega}}_i (\mq,\dot{\mq})
+\malpha^\star_i (\mq,\dot{\mq},\ddot{\mq}) = \mJ_{\omega\,i} (\mq) \cdot \ddot{\mq} + \underaccent{\sim}{\malpha}_i (\mq,\dot{\mq})
 \end{empheq}
 
 Sendo:
 \begin{empheq}[box=\myyellowbox]{equation}
-(\underaccent{\sim}{\dot{\momega}}_i)_j = \dot{q}_j \mj_{\omega\,i,j} \wedge \momega_{i,j}
+(\underaccent{\sim}{\malpha}_i)_j = \dot{q}_j \mj_{\omega\,i,j} \wedge \momega_{i,j}
 \end{empheq}
 
 \begin{empheq}[box=\myyellowbox]{equation}
-\underaccent{\sim}{\dot{\momega}}_i (\mq, \dot{\mq}) = \sum_{j=1}^i (\underaccent{\sim}{\dot{\momega}}_i)_j
+\underaccent{\sim}{\malpha}_i (\mq, \dot{\mq}) = \sum_{j=1}^i (\underaccent{\sim}{\malpha}_i)_j
 \end{empheq}
 
 \section{Dinâmica dos elos e juntas}
 
-O modelo dinâmico de $\ssB$ é obtido utilizando um procedimento de acoplamento de subsistemas baseado no Método Orsino  \cite{23orsino}, e é dado por:
+O modelo dinâmico de $\ssB$ é obtido utilizando um procedimento de acoplamento de subsistemas baseado no método Recursivo Modular de Modelagem (RMM)  \cite{23orsino}, e é dado por:
 \begin{empheq}[box=\mybluebox]{equation} \label{eq:ModeloMecSerial}
 \mM(\mq) \ddot{\mq} + \mnu(\mq,\dot{\mq}) + \mg(\mq) = \mu
 \end{empheq}
@@ -1188,7 +1184,7 @@ m_i \mJ_{v\,i}^\msT \mJ_{v\,i} + \mJ_{\omega\,i}^\msT \mI_i \mJ_{\omega\,i}
 \end{empheq}
 \begin{empheq}[box=\myyellowbox]{equation} \label{eq:vSerial}
 \mnu(\mq, \dot{\mq}) = \sum_{i=1}^\nu
- m_i \mJ_{v\,i}^\msT \underaccent{\sim}{\ma}_i + \mJ_{\omega\,i}^\msT \big( \mI_i \underaccent{\sim}{\dot{\momega}}_i + \momega^\star_i \wedge (\mI_i  \momega^\star_i) \big)
+ m_i \mJ_{v\,i}^\msT \underaccent{\sim}{\ma}_i + \mJ_{\omega\,i}^\msT \big( \mI_i \underaccent{\sim}{\malpha}_i + \momega^\star_i \wedge (\mI_i  \momega^\star_i) \big)
 \end{empheq}
 \begin{empheq}[box=\myyellowbox]{equation} \label{eq:gSerial}
 \mg(\mq) = - \sum_{i=1}^\nu m_i \mJ_{v\,i}^\msT \mgamma
@@ -1203,7 +1199,7 @@ O modelo dinâmico de cada ligamento pode ser obtido por Newton-Euler, pois são
 \begin{equation} \label{eq:Newton-Euler}
 \begin{cases}
 \vf_i = -m_i \va^{\lllN}_{\ttg_i} + m_i \vg  \\
-\vtau_i= -\vI_{\ttg_i} \cdot \dot{\vomega}^{\lllN}_{\lllB_i} - \vomega^{\lllN}_{\lllB_i} \wedge (\vI_{\ttg_i} \cdot \vomega^{\lllN}_{\lllB_i}) 
+\vtau_i= -\vI_{\ttg_i} \cdot \valpha^{\lllN}_{\lllB_i} - \vomega^{\lllN}_{\lllB_i} \wedge (\vI_{\ttg_i} \cdot \vomega^{\lllN}_{\lllB_i}) 
 \end{cases} \, i = 1,...,\nu
 \end{equation}
 
@@ -1222,7 +1218,7 @@ m_i \mone & \mzr \\
 \cdot
 \begin{bmatrix}
 \vct{\va^{\lllN}_{\ttg_i}}_{\ttN}  \\
-\vct{\dot{\vomega}^{\lllN}_{\lllB_i}}_{\ttN}
+\vct{\valpha^{\lllN}_{\lllB_i}}_{\ttN}
 \end{bmatrix}
 -
 \begin{bmatrix}
@@ -1246,7 +1242,7 @@ m_i \mone & \mzr \\
 \cdot
 \begin{bmatrix}
 \ma^\star_i  \\
-\dot{\momega}^\star_i
+\malpha^\star_i
 \end{bmatrix}
 +
 \begin{bmatrix}
@@ -1261,7 +1257,7 @@ m_i \mone & \mzr \\
 \end{Bmatrix}
 \end{empheq}
 
-Como subsistemas estão desacoplados, não há forças reativas, portanto o modelo dinâmico de cada subsistema pode ser escrito como:
+Como os subsistemas estão desacoplados, não há forças reativas, portanto o modelo dinâmico de cada subsistema pode ser escrito como:
 \begin{empheq}[box=\mybluebox]{equation}\label{eq:fi_plus_fri}
 \overline{\mf}_i = \mzr
 \end{empheq}
@@ -1297,12 +1293,12 @@ E as quasi-coordenadas \cite{Jarzebowska2009}:
 \dd\mpi_i = \mp_i \dd t
 \end{empheq}
 
-Temos que o trabalho virtual realizado por cada subsistema é dado por:
+Temos que o trabalho virtual associado a cada subsistema é dado por:
 \begin{empheq}[box=\mybluebox]{equation} \label{eq:dWiSeriais}
 \delta W_i =  \delta \mpi_i^\msT \cdot \overline{\mf}_i
 \end{empheq}
 
-\subsection{Sistemas de forças ativas generalizadas} 
+\subsection{Sistemas de esforços ativos generalizados} 
 
 Considere também um subsistema constituido pelos esforços que os atuadores aplicam nas juntas do mecanismo. Primeiramente, definimos a matriz-coluna de quasi-velocidades relativas a esse subsistema:
 %Muitas vezes é conveniente definir um conjunto de quasi-velocidades adicionais $\mp_0$, as quais só fazem sentido para o sistema acoplado, e sistemas de forças ativas generalizadas adicionais $\mf_0$ aplicados na direção das quasi-velocidades adicionais. \\
@@ -1314,7 +1310,7 @@ Considere também um subsistema constituido pelos esforços que os atuadores apl
 \mp\ssh = \dot{\mq}
 \end{empheq}
 
-Seja $\mu$ a matriz-coluna de esforços generalizados aplicadas pelos atuadores na direção de $\delta\mq$. Sendo assim, o trabalho virtual realizado por este subsistema é dado por:
+Seja $\mu$ a matriz-coluna de esforços generalizados aplicadas pelos atuadores na direção de $\delta\mq$. Sendo assim, o trabalho virtual associado a este subsistema é dado por:
 
 \begin{empheq}[box=\mybluebox]{equation} \label{eq:dWsshSeriais}
 \delta W\ssh = \delta \mq^\msT \cdot \mu 
@@ -1344,7 +1340,7 @@ Seja $\mp\cir$ a matriz coluna que contém as quasi-velocidades de todos os liga
 
 $\mp\cir$ pode ser expresso em função apenas das quasi-velocidades $\mp\ssh$ da seguinte forma:
 \begin{equation} \label{eq:p_red_em_func_de_p0}
-\underline{\mp\cir}(\mq,\mp\ssh) = \mJ(\mq) \mp\ssh
+\underline{\mp\cir}(\mq,\mp\ssh) = \mJ(\mq) \cdot \mp\ssh
 \end{equation}
 
 Sendo:
@@ -1374,7 +1370,7 @@ Sendo:
 
 \subsection{Acoplamento de subsistemas} 
 
-Seja $\mf$ a matriz-coluna contendo todos os sistemas de forças não-reativas generalizadas:
+Seja $\mf$ a matriz-coluna contendo todos os sistemas de esforços não-reativos generalizados:
 \begin{empheq}[box=\lightbluebox]{equation} \label{eq:fSeriais}
 \mf = \begin{bmatrix}
 {\mu}^\msT & {\mf\cir}^\msT
@@ -1493,7 +1489,7 @@ m_i \mone & \mzr \\
 \cdot
 \begin{bmatrix}
 \ma^\star_i  \\
-\dot{\momega}^\star_i
+\malpha^\star_i
 \end{bmatrix}
 +
 \begin{bmatrix}
@@ -1519,7 +1515,7 @@ Substituindo \eqref{eq:a_star_i} e  \eqref{eq:domega_star_i} em \eqref{eq:Modelo
 \begin{Bmatrix}
 \begin{bmatrix}
 m_i (\mJ_{v_i} \ddot{\mq} + \underaccent{\sim}{\ma}_i   )  \\
- \mI_i (\mJ_{\omega_i} \ddot{\mq} + \underaccent{\sim}{\dot{\momega}}_i )
+ \mI_i (\mJ_{\omega_i} \ddot{\mq} + \underaccent{\sim}{\malpha}_i )
 \end{bmatrix}
 +
 \begin{bmatrix}
@@ -1547,7 +1543,7 @@ m_i \mJ_{v\,i}^\msT \mJ_{v\,i} + \mJ_{\omega\,i}^\msT \mI_i \mJ_{\omega\,i}
 \end{equation}
 \begin{equation} \tag{\ref{eq:vSerial}}
 \mnu(\mq, \dot{\mq}) = \sum_{i=1}^\nu
- m_i \mJ_{v\,i}^\msT \underaccent{\sim}{\ma}_i + \mJ_{\omega\,i}^\msT \big( \mI_i \underaccent{\sim}{\dot{\momega}}_i + \momega^\star_i \wedge (\mI_i  \momega^\star_i) \big)
+ m_i \mJ_{v\,i}^\msT \underaccent{\sim}{\ma}_i + \mJ_{\omega\,i}^\msT \big( \mI_i \underaccent{\sim}{\malpha}_i + \momega^\star_i \wedge (\mI_i  \momega^\star_i) \big)
 \end{equation}
 \begin{equation} \tag{\ref{eq:gSerial}}
 \mg(\mq) = - \sum_{i=1}^\nu m_i \mJ_{v\,i}^\msT \mgamma
@@ -1566,10 +1562,10 @@ Seja $\ssB'$ um sistema mecânico serial de $\nu$ graus de liberdade, constituid
 \item $\vI_{\ttr_i}, \,i=1,...,\nu$: tensor de in\'ercia do rotor $\llR_i$ em relação a seu centro de massa.
 \item $\mI_{r \,i}, \,i=1,...,\nu$: tensor de in\'ercia $\vI_{\ttr_i}$ escrito na base $\ttN$, ou seja, $\vct{\vI_{\ttr_i}}_{\ttN \rl \ttN}$.
 \item $\vtau_{r \,i}, \,i=1,...,\nu$: Vetor torque não-reativo resultante aplicado em $\llR_i$.
-\item $\overline{\mf}_{r \,i}, \,i=1,...,\nu$: Matriz-coluna de forças não-reativas generalizadas aplicadas no subsistema $\llB_{r \,i}, \,i=1,...,\nu$. É dada por $\overline{\mf}_{r \,i} = \vct{\vtau_i}_\ttN $.
+\item $\overline{\mf}_{r \,i}, \,i=1,...,\nu$: Matriz-coluna de esforçoes não-reativos generalizados aplicados no subsistema $\llB_{r \,i}, \,i=1,...,\nu$. É dada por $\overline{\mf}_{r \,i} = \vct{\vtau_i}_\ttN $.
 \item $q_{r\,i}, \,i=1,...,\nu$: Deslocamentos angular realizado pelo i-ésimo rotor.
 \item $\mq_r$: Matriz-coluna dos deslocamentos angulares realizados pelos rotores.
-\item $\mzeta(\dot{\mq}_r)$: matriz-coluna das forças de atrito generalizadas aplicadas nos rotores, em sentido oposto aos seus deslocamentos.
+\item $\mzeta(\dot{\mq}_r)$: matriz-coluna dos esforçoes de atrito generalizados aplicados nos rotores, em sentido oposto aos seus deslocamentos.
 \item $\mi$: Matriz-coluna de correntes elétricas que fluem pelas armaduras dos atuadores.
 \item $\mup$: Matriz-coluna de tensões elétricas aplicadas nos terminais dos atuadores.
 \item $r_i, \,i=1,...,\nu$: Relação de transmissão do i-ésimo redutor.
@@ -1595,7 +1591,7 @@ Devido aos redutores de velocidade e aos fusos de esferas, o deslocamento relati
 \mq_r = \underline{r} \, \mq 
 \end{empheq} 
 
-Sendo assim, a velocidade angular do i-ésimo rotor pode ser obtida aplicando o príncipio da composição de movimentos para velocidades angulares deduzido anteriormente \eqref{eq:composicao_w}:
+Sendo assim, a velocidade angular do i-ésimo rotor pode ser obtida aplicando o príncipio da composição de movimentos para velocidades angulares (equação \eqref{eq:composicao_w}):
 
 \begin{equation} \label{eq:ComposicaoWRotor}
 \vomega_{\lllR_i}^{\lllN} = \vomega_{\lllB_{i-1}}^{\lllN} + \vomega_{\lllR_i}^{\lllB_{i-1}} ,\; i=1,...,\nu
@@ -1637,44 +1633,44 @@ r_i \vct{\vk_{i-1}}_{\ttN}, \;  j = i \\
 
 \subsubsection{Cinemática de acelerações angulares}
 
-A aceleração angular do i-ésimo rotor pode ser obtida aplicando o príncipio da composição de movimentos para acelerações deduzido anteriormente \eqref{eq:composicao_dw}:
+A aceleração angular do i-ésimo rotor pode ser obtida aplicando o príncipio da composição de movimentos para acelerações angulares (equação \eqref{eq:composicao_dw}):
 
 \begin{equation} \label{eq:ComposicaodWRotor}
-\dot{\vomega}_{\lllR_i}^{\lllN} = \dot{\vomega}_{\lllB_{i-1}}^{\lllN} + \dot{\vomega}_{\lllR_i}^{\lllB_{i-1}} +  \vomega_{\lllB_{i-1}}^{\lllN} \wedge \vomega_{\lllR_i}^{\lllB_{i-1}}
+\valpha_{\lllR_i}^{\lllN} = \valpha_{\lllB_{i-1}}^{\lllN} + \valpha_{\lllR_i}^{\lllB_{i-1}} +  \vomega_{\lllB_{i-1}}^{\lllN} \wedge \vomega_{\lllR_i}^{\lllB_{i-1}}
 \end{equation}
 
 Sendo que a aceleração angular de relativa de cada rotor é dada por:
 \begin{equation}
-\dot{\vomega}_{\lllR_i}^{\lllB_{i-1}} = \ddot{q}_{r\,i} \vk_{i-1} = r_i \ddot{q}_{i} \vk_{i-1} ,\; i=1,...,\nu
+\valpha_{\lllR_i}^{\lllB_{i-1}} = \ddot{q}_{r\,i} \vk_{i-1} = r_i \ddot{q}_{i} \vk_{i-1} ,\; i=1,...,\nu
 \end{equation}
 
 Aplicando a equação \eqref{eq:ComposicaodWRotor} no sistema $\ttN$, temos:
 \begin{empheq}[box=\myyellowbox]{equation} \label{eq:ComposicaodWRotor2}
-\dot{\momega}^\star_{r \,i} = \dot{\momega}^\star_{i-1} + r_i \ddot{q}_{i} \vct{\vk_{i-1}}_{\ttN} + \momega^\star_{i-1} \wedge r_i \dot{q}_{i} \vct{\vk_{i-1}}_{\ttN} ,\; i=1,...,\nu
+\malpha^\star_{r \,i} = \malpha^\star_{i-1} + r_i \ddot{q}_{i} \vct{\vk_{i-1}}_{\ttN} + \momega^\star_{i-1} \wedge r_i \dot{q}_{i} \vct{\vk_{i-1}}_{\ttN} ,\; i=1,...,\nu
 \end{empheq}
 
 Sendo:
 \begin{empheq}[box=\lightbluebox]{equation}
-\dot{\momega}^\star_{r \,i} = \vct{\dot{\vomega}_{\lllR_i}^{\lllN} }_{\ttN} 
+\malpha^\star_{r \,i} = \vct{\valpha_{\lllR_i}^{\lllN} }_{\ttN} 
 \end{empheq}
 
 Utilizando a equação \eqref{eq:domega_star_i}, pode-se reescrever \eqref{eq:ComposicaodWRotor2} da seguinte maneira:
 \begin{empheq}[box=\lightbluebox]{equation} \label{eq:dw_ri}
-\dot{\momega}^\star_{r\,i} (\mq,\dot{\mq},\ddot{\mq}) = \mJ_{\omega_r \,i} (\mq) \cdot \ddot{\mq} + \underaccent{\sim}{\dot{\momega}}_{r\,i}  (\mq,\dot{\mq})
+\malpha^\star_{r\,i} (\mq,\dot{\mq},\ddot{\mq}) = \mJ_{\omega_r \,i} (\mq) \cdot \ddot{\mq} + \underaccent{\sim}{\malpha}_{r\,i}  (\mq,\dot{\mq})
 \end{empheq}
 
 Sendo:
 \begin{empheq}[box=\myyellowbox]{equation}
-\underaccent{\sim}{\dot{\momega}}_{r\,i}  (\mq,\dot{\mq}) = \begin{cases}
+\underaccent{\sim}{\malpha}_{r\,i}  (\mq,\dot{\mq}) = \begin{cases}
 \mzr, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; i = 1 \\
-\underaccent{\sim}{\dot{\momega}}_{i-1}  (\mq,\dot{\mq}) + \momega^\star_{i-1} (\mq,\dot{\mq}) \wedge  \dot{q}_{i} \mj_{\omega_r \, i,i}(\mq), \, i > 1 
+\underaccent{\sim}{\malpha}_{i-1}  (\mq,\dot{\mq}) + \momega^\star_{i-1} (\mq,\dot{\mq}) \wedge  \dot{q}_{i} \mj_{\omega_r \, i,i}(\mq), \, i > 1 
 \end{cases}  ,\; i=1,...,\nu
 \end{empheq}
 
 
 \subsection{Dinâmica Mecânica}
 
-O modelo dinâmico de $\ssB'$ é obtido utilizando um procedimento de acoplamento de subsistemas baseado no Método Orsino  \cite{23orsino}, e é dado por:
+O modelo dinâmico de $\ssB'$ é obtido utilizando um procedimento de acoplamento de subsistemas baseado no método Recursivo Modular de Modelagem (RMM)  \cite{23orsino}, e é dado por:
 \begin{empheq}[box=\mybluebox]{equation} \label{eq:ModeloMecSerial_rot}
 \mM^*(\mq) \ddot{\mq} + \mnu^*(\mq,\dot{\mq}) + \mg^*(\mq) = \mu^*
 \end{empheq}
@@ -1685,7 +1681,7 @@ Sendo:
 \end{empheq}
 \begin{empheq}[box=\myyellowbox]{equation} \label{eq:vSerial_rot}
 \mnu^*(\mq, \dot{\mq}) = \mnu(\mq, \dot{\mq}) + \underline{r} \, \mzeta(\underline{r} \, \dot{\mq}) + \sum_{i=1}^\nu
- \mJ_{\omega_r \,i}^\msT \big( \mI_{r\,i} \underaccent{\sim}{\dot{\momega}}_{r\,i} + \momega^\star_{r\,i} \wedge (\mI_{r\,i} \momega^\star_{r\,i}) \big)
+ \mJ_{\omega_r \,i}^\msT \big( \mI_{r\,i} \underaccent{\sim}{\malpha}_{r\,i} + \momega^\star_{r\,i} \wedge (\mI_{r\,i} \momega^\star_{r\,i}) \big)
 \end{empheq}
 \begin{empheq}[box=\myyellowbox]{equation} \label{eq:gSerial_rot}
 \mg^*(\mq) = \mg(\mq)
@@ -1701,7 +1697,7 @@ Segue abaixo, a dedução.
 O modelo dinâmico de cada rotor pode ser obtido por Newton-Euler, pois são considerados como corpos rígidos com inércia puramente rotativa, livres no espaço. Os efeitos da massas do rotor, do estator e do redutor podem facilmente incluídos no modelo simplesmente atualizando os valores dos parâmetros de inércia dos ligamentos. Sendo assim, através do Teorema do Momento Angular, obtemos os esforços inerciais aplicados em cada rotor:
 
 \begin{equation} \label{eq:Newton-Euler_rot}
-\vtau_{r \,i}= -\vI_{\ttr_i} \cdot \dot{\vomega}^{\lllN}_{\lllR_i} - \vomega^{\lllN}_{\lllR_i} \wedge (\vI_{\ttr_i} \cdot \vomega^{\lllN}_{\lllR_i}) ,\; i = 1,...,\nu
+\vtau_{r \,i}= -\vI_{\ttr_i} \cdot \valpha^{\lllN}_{\lllR_i} - \vomega^{\lllN}_{\lllR_i} \wedge (\vI_{\ttr_i} \cdot \vomega^{\lllN}_{\lllR_i}) ,\; i = 1,...,\nu
 \end{equation}
 
 Aplicando as equações vetoriais no sistema $\ttN$, temos:
@@ -1711,7 +1707,7 @@ Aplicando as equações vetoriais no sistema $\ttN$, temos:
 -
 \vct{\vI_{\ttr_i}}_{\ttN \rl \ttN}
 \cdot
-\vct{\dot{\vomega}^{\lllN}_{\lllR_i}}_{\ttN}
+\vct{\valpha^{\lllN}_{\lllR_i}}_{\ttN}
 -
 \vct{\vomega^{\lllN}_{\lllR_i}}_{\ttN} \wedge (\vct{\vI_{\ttr_i}}_{\ttN \rl \ttN} \cdot \vct{\vomega^{\lllN}_{\lllR_i}}_{\ttN})
 \end{equation}
@@ -1721,7 +1717,7 @@ Ou seja:
 \overline{\mf}_{r \,i}  =
 -\mI_{r \,i}
 \cdot
-\dot{\momega}^\star_{r \,i}
+\malpha^\star_{r \,i}
 -
 \momega^\star_{r \,i} \wedge (\mI_{r \,i} \cdot \momega^\star_{r \,i})
 \end{empheq}
@@ -1736,7 +1732,7 @@ Além disso, definindo as quasi-coordenadas:
 \dd\mpi_{r \,i} = \momega^\star_{r \,i} \dd t
 \end{empheq}
 
-Temos que o trabalho virtual realizado por cada subsistema é dado por:
+Temos que o trabalho virtual associado a cada subsistema é dado por:
 \begin{empheq}[box=\mybluebox]{equation} \label{eq:dWiSeriais_rot}
 \delta W_{r \,i} =  \delta \mpi_{r \,i}^\msT \cdot \overline{\mf}_{r \,i}
 \end{empheq}
@@ -1748,7 +1744,7 @@ O modelo do subsistema serial utilizado é o mesmo que foi deduzido anteriorment
 \overline{\mf}_s = - \mM(\mq) \, \ddot{\mq} - \mnu(\mq,\dot{\mq}) - \mg(\mq)
 \end{empheq}
 
-Além disso, o trabalho virtual realizado por este subsistema é dado por:
+Além disso, o trabalho virtual associado a este subsistema é dado por:
 \begin{empheq}[box=\mybluebox]{equation}
 \delta W_s =  \delta \mq^\msT \cdot \overline{\mf}_s
 \end{empheq}
@@ -1756,7 +1752,7 @@ Além disso, o trabalho virtual realizado por este subsistema é dado por:
 
 \subsubsection{Sistemas de forças ativas generalizadas} 
 
-Considere também um subsistema constituido pelos esforços que os atuadores aplicam em seus rotores. Os torques gerados pelos atuadores são proporcionais à corrente elétrica que flui pelas suas armaduras e são aplicados na direção dos deslocamentos virtuais relativos dos rotores. Além disso, é possível que hajam esforços de atrito devido ao atrito gerado nos mancais e nas engrenagens do redutor, aplicados na direção aposta dos deslocamentos virtuais relativos dos rotores. Sendo assim, o trabalho virtual realizado por este subsistema é dado por:
+Considere também um subsistema constituido pelos esforços que os atuadores aplicam em seus rotores. Os torques gerados pelos atuadores são proporcionais à corrente elétrica que flui pelas suas armaduras e são aplicados na direção dos deslocamentos virtuais relativos dos rotores. Além disso, é possível que hajam esforços de atrito devido ao atrito gerado nos mancais e nas engrenagens do redutor, aplicados na direção aposta aos deslocamentos virtuais relativos dos rotores. Sendo assim, o trabalho virtual associado a este subsistema é dado por:
 \begin{empheq}[box=\mybluebox]{equation}
 \delta W_\tau = \delta \mq_r^\msT \cdot (\underline{k_t}\,\mi - \mzeta(\dot{\mq}_r) )
 \end{empheq}
@@ -1793,12 +1789,12 @@ Pelo princípio de d'Alembert, temos que
 
 Ou seja:
 \begin{equation} \label{eq:PdaSeriais_rot2}
-\delta\mq_r^\msT \cdot  (\underline{k_t} \, \mi - \mzeta(\dot{\mq}_r) + \delta\mq^\msT \cdot \overline{\mf}_s  + \sum_{i=1}^\nu \delta \mpi_{r \,i}^\msT \cdot \overline{\mf}_{r \,i} = 0
+\delta\mq_r^\msT \cdot  \Big(\underline{k_t} \, \mi - \mzeta(\dot{\mq}_r) + \delta\mq^\msT \cdot \overline{\mf}_s  + \sum_{i=1}^\nu \delta \mpi_{r \,i}^\msT \cdot \overline{\mf}_{r \,i} \Big) = 0
 \end{equation}
 
 Sabe-se que os deslocamentos virtuais $\delta\mq$, $\delta\mq_r$ e $\delta \mpi_{r \,i}$, com $i=1,...,\nu$, não são independentes entre si. Porém, é possível relacionar  $\delta\mq_r$ e $\delta \mpi_{r \,i}$ com os deslocamentos virtuais $\delta\mq$  através das equações \eqref{eq:deltaqr_rot} e \eqref{eq:deltampi_rot}. Sendo assim:
 \begin{equation} \label{eq:PdaSeriais_rot3}
-(\underline{r}\,\delta\mq)^\msT \cdot (\underline{k_t} \, \mi - \mzeta(\underline{r} \, \dot{\mq})) + \delta\mq^\msT \cdot \overline{\mf}_s  + \sum_{i=1}^\nu (\mJ_{\omega_r \,i} \, \delta\mq)^\msT \cdot \overline{\mf}_{r \,i} = 0
+(\underline{r}\,\delta\mq)^\msT \cdot \Big(\underline{k_t} \, \mi - \mzeta(\underline{r} \, \dot{\mq})) + \delta\mq^\msT \cdot \overline{\mf}_s  + \sum_{i=1}^\nu (\mJ_{\omega_r \,i} \, \delta\mq)^\msT \cdot \overline{\mf}_{r \,i} \Big) = 0
 \end{equation}
 
 Ou seja:
@@ -1813,12 +1809,12 @@ Tendo em vista que as coordenadas $\mq$ são independentes, as variações $\del
 
 Substituindo \eqref{eq:f_i_rot} e \eqref{eq:fs} em  \eqref{eq:Din_rot1}, temos:
 \begin{equation} \label{eq:DynSeriais_rot}
-\underline{r} \, \underline{k_t} \, \mi - \underline{r} \, \mzeta(\underline{r} \, \dot{\mq}) - \mM \, \ddot{\mq} - \mnu - \mg  - \sum_{i=1}^\nu \mJ_{\omega_r \,i}^\msT \, ( \mI_{r\,i} \cdot \dot{\momega}_{r\,i}^\star + \momega_{r\,i}^\star \wedge (\mI_{r\,i} \cdot \momega_{r\,i}^\star)  )  = \mzr
+\underline{r} \, \underline{k_t} \, \mi - \underline{r} \, \mzeta(\underline{r} \, \dot{\mq}) - \mM \, \ddot{\mq} - \mnu - \mg  - \sum_{i=1}^\nu \mJ_{\omega_r \,i}^\msT \, ( \mI_{r\,i} \cdot \malpha_{r\,i}^\star + \momega_{r\,i}^\star \wedge (\mI_{r\,i} \cdot \momega_{r\,i}^\star)  )  = \mzr
 \end{equation}
 
 Substituindo \eqref{eq:dw_ri} em \eqref{eq:DynSeriais_rot}:
 \begin{equation} \label{eq:DynSeriais_rot2}
-\underline{r} \underline{k_t} \, \mi - \underline{r} \, \mzeta(\underline{r} \, \dot{\mq})  - \mM \, \ddot{\mq} - \mnu - \mg  - \sum_{i=1}^\nu \mJ_{\omega_r \,i}^\msT \, ( \mI_{r\,i} \cdot (\mJ_{\omega_r \,i}  \cdot \ddot{\mq} + \underaccent{\sim}{\dot{\momega}}_{r\,i}  ) + \momega_{r\,i}^\star \wedge (\mI_{r\,i} \cdot \momega_{r\,i}^\star)  )  = \mzr
+\underline{r} \underline{k_t} \, \mi - \underline{r} \, \mzeta(\underline{r} \, \dot{\mq})  - \mM \, \ddot{\mq} - \mnu - \mg  - \sum_{i=1}^\nu \mJ_{\omega_r \,i}^\msT \, ( \mI_{r\,i} \cdot (\mJ_{\omega_r \,i}  \cdot \ddot{\mq} + \underaccent{\sim}{\malpha}_{r\,i}  ) + \momega_{r\,i}^\star \wedge (\mI_{r\,i} \cdot \momega_{r\,i}^\star)  )  = \mzr
 \end{equation}
 
 Sendo assim, obtemos o modelo dinâmico mostrado anteriormente:
@@ -1832,7 +1828,7 @@ Sendo:
 \end{equation}
 \begin{equation} \tag{\ref{eq:vSerial_rot}}
 \mnu^*(\mq, \dot{\mq}) = \mnu(\mq, \dot{\mq}) + \underline{r} \, \mzeta(\underline{r} \, \dot{\mq}) + \sum_{i=1}^\nu
- \mJ_{\omega_r \,i}^\msT \big( \mI_{r\,i} \underaccent{\sim}{\dot{\momega}}_{r\,i} + \momega^\star_{r\,i} \wedge (\mI_{r\,i} \momega^\star_{r\,i}) \big)
+ \mJ_{\omega_r \,i}^\msT \big( \mI_{r\,i} \underaccent{\sim}{\malpha}_{r\,i} + \momega^\star_{r\,i} \wedge (\mI_{r\,i} \momega^\star_{r\,i}) \big)
 \end{equation}
 \begin{equation} \tag{\ref{eq:gSerial_rot}}
 \mg^*(\mq) = \mg(\mq)
@@ -1898,15 +1894,15 @@ Sejam $\ssB_0$, $\ssB_1$, ..., $\ssB_{n} \,$ $n+1$ subsistemas mec\^anicos e $\s
 \item $\mq\ssh$: matriz-coluna de $\nu\ssh$ coordenadas generalizadas independentes.
 \item $\mq\cir$: matriz-coluna de coordenadas generalizadas redundantes (contém as componentes de $\mq$ não pertencentes a $\mq\ssh$)
 \item $\overline{\mq}(\mq)$: matriz-coluna dos v\'inculos de posi\c{c}\~ao entre subsistemas. As equa\c{c}\~oes vinculares s\~ao dadas por $\overline{\mq}(\mq) = \mzr $.
-\item $\overline{\momega}(\mq,\dot{\mq})$: matriz-coluna dos v\'inculos de orienta\c{c}\~ao entre subsistemas. As equa\c{c}\~oes vinculares s\~ao dadas por $\overline{\momega}(\mq,\dot{\mq}) = \mzr $.
+\item $\overline{\momega}(\mq,\dot{\mq})$: matriz-coluna dos v\'inculos de velocidades angulares entre subsistemas. As equa\c{c}\~oes vinculares s\~ao dadas por $\overline{\momega}(\mq,\dot{\mq}) = \mzr $.
 \item $\ttx_i, \,i=1, ..., n$: ponto no espa\c{c}o fixo ao efetuador de $\ssB_i$.
 \item $\mx_i(\mq_i), \,i=1, ..., n$: $\vct{\ttx_i}_{\ttN_i}$ escrito em função das coordenadas $\mq_i$.
 \item $\mJ_{v\,\ssB_i}(\mq_i), \,i=1, ..., n$: jacobiano $\mJ_v$ do subsistema $\ssB_i$.
 \item $\mJ_{\omega\,\ssB_i}(\mq_i), \,i=1, ..., n$: jacobiano $\mJ_\omega$ do subsistema $\ssB_i$.
-\item $\underaccent{\sim}{\ma}_{\ssB_i}(\mq_i, \mp_i), \,i=1, ..., n$: matriz-coluna $\underaccent{\sim}{\ma}$ do subsistema $\ssB_i$.
-\item $\underaccent{\sim}{\dot{\momega}}_{\ssB_i}(\mq_i, \mp_i), \,i=1, ..., n$: matriz-coluna $\underaccent{\sim}{\dot{\momega}}$ do subsistema $\ssB_i$.
+\item $\underaccent{\sim}{\ma}_{\ssB_i}(\mq_i, \dot{\mq}_i), \,i=1, ..., n$: matriz-coluna $\underaccent{\sim}{\ma}$ do subsistema $\ssB_i$.
+\item $\underaccent{\sim}{\malpha}_{\ssB_i}(\mq_i, \dot{\mq}_i), \,i=1, ..., n$: matriz-coluna $\underaccent{\sim}{\malpha}$ do subsistema $\ssB_i$.
 \item $\mM_{\ssB_i}(\mq_i), \,i=0, ..., n$: matriz de in\'ercia generalizada do subsistema $\ssB_i$.
-\item $\mnu_{\ssB_i}(\mq_i, \mp_i), \,i=0, ..., n$: matriz-coluna das forças de inércia girosc\'opica e atrito generalizadas do subsistema $\ssB_i$.
+\item $\mnu_{\ssB_i}(\mq_i, \dot{\mq}_i), \,i=0, ..., n$: matriz-coluna dos esforços de inércia girosc\'opica e atrito generalizados do subsistema $\ssB_i$.
 \item $\mg_{\ssB_i}(\mq_i), \,i=0, ..., n$: matriz-coluna dos esfor\c{c}os gravitacionais generalizados do subsistema $\ssB_i$.
 \item $\mu_{\ssB_i}, \,i=0, ..., n$: matriz-coluna dos esfor\c{c}os ativos externos generalizados aplicados ao subsistema $\ssB_i$.
 \end{itemize}
@@ -1922,7 +1918,7 @@ O modelo dinâmico de cada subsistema desacoplado pode ser escrito como:
 Sendo que para $i=0$ temos o modelo do efetuador/plataforma e para $i>0$ temos os modelos dos mecanismos seriais obtidos anteriormente. \\
 
 
-O trabalho virtual dos esforços não-reativos (ativos e inerciais) de cada subsistema é dado por:
+O trabalho virtual dos esforços não-reativos (ativos e inerciais) associado a cada subsistema é dado por:
 \begin{equation}
 \delta W_i = \delta \mq_i^\msT \cdot \overline{\mf}_{\ssB_i}, \, i = 0,...,n
 \end{equation}
@@ -1932,7 +1928,7 @@ Para os subsistemas seriais, as matrizes $\mM_{\ssB_i}$, $\mnu_{\ssB_i}$ e $\mg_
 %\begin{equation} \label{eq:Newton-EulerE}
 %\begin{cases}
 %m \va^{\lllN_0}_{\ttg} - m \vg = \vzr \\
-%\vI_{\ttg} \cdot \dot{\vomega}^{\lllN_0}_{\lllB_0} + \vomega^{\lllN_0}_{\lllB_0} \wedge (\vI_{\ttg} \cdot \vomega^{\lllN_0}_{\lllB_0}) = \vzr
+%\vI_{\ttg} \cdot \valpha^{\lllN_0}_{\lllB_0} + \vomega^{\lllN_0}_{\lllB_0} \wedge (\vI_{\ttg} \cdot \vomega^{\lllN_0}_{\lllB_0}) = \vzr
 %\end{cases}
 %\end{equation}
 
@@ -1950,7 +1946,7 @@ Aplicando as equações vetoriais no sistema $\ttN$, temos:
 %\cdot
 %\begin{bmatrix}
 %\vct{\va^{\lllN_0}_{\ttg}}_{\ttN_0}  \\
-%\vct{\dot{\vomega}^{\lllN_0}_{\lllB_0}}_{\ttN_0}
+%\vct{\valpha^{\lllN_0}_{\lllB_0}}_{\ttN_0}
 %\end{bmatrix}
 %+
 %\begin{bmatrix}
@@ -1990,12 +1986,12 @@ Temos:
 %\cdot
 %\begin{bmatrix}
 %\ddot{\mx}^\ast  \\
-%\dot{\momega}^\ast
+%\malpha^\ast
 %\end{bmatrix}
 %+
 %\begin{bmatrix}
 %\mzr \\
-%\dot{\momega}^\ast \wedge (\mI \cdot \dot{\momega}^\ast)
+%\malpha^\ast \wedge (\mI \cdot \malpha^\ast)
 %\end{bmatrix}
 %+
 %\begin{bmatrix}
@@ -2024,7 +2020,7 @@ Portanto:
 %\mnu_{\ssB_0}(\mq_0, \mp_0) = 
 %\begin{bmatrix}
 %\mzr \\
-%\dot{\momega}^\ast \wedge \big(\mI(\mtheta^\ast) \cdot \dot{\momega}^\ast \big)
+%\malpha^\ast \wedge \big(\mI(\mtheta^\ast) \cdot \malpha^\ast \big)
 %\end{bmatrix}
 %\end{equation}
 \begin{equation} \label{eq:v_efetuador}
@@ -2047,14 +2043,14 @@ Portanto:
 
 \subsection{Vínculos de posição} 
 
-Seja $\ttp_i$ um ponto pertencente à plataforma/efetuador $\ssB_0$ e também ao efetuador do subsistema serial $\ssB_i$. Sendo assim, é possível relacionar as coordenadas do ponto $\ttp_i$ escritas no sistema $\ttN_0$ partindo da plataforma/efetuador $\ssB_0$ e da cadeia serial $\ssB_i$:
+Seja $\ttx_i$ um ponto pertencente à plataforma/efetuador $\ssB_0$ e também ao efetuador do subsistema serial $\ssB_i$. Sendo assim, é possível relacionar as coordenadas do ponto $\ttx_i$ escritas no sistema $\ttN_0$ partindo da plataforma/efetuador $\ssB_0$ e da cadeia serial $\ssB_i$:
 
 \begin{equation}
-\vct{\ttp_i}_{\ttN_0} = \vct{\vone}_{\ttN_0 \rl \ttB} \vct{\ttp_i}_\ttB + \vct{\ttg}_{\ttN_0} = \vct{\vone}_{\ttN_0 \rl \ttN_i} \vct{\ttp_i}_{\ttN_i} + \vct{\tto_i}_{\ttN_0} 
+\vct{\ttx_i}_{\ttN_0} = \vct{\vone}_{\ttN_0 \rl \ttB} \vct{\ttx_i}_\ttB + \vct{\ttg}_{\ttN_0} = \vct{\vone}_{\ttN_0 \rl \ttN_i} \vct{\ttx_i}_{\ttN_i} + \vct{\tto_i}_{\ttN_0} 
 \end{equation}
 
 %Sabe-se que $\vct{\ttg}_{\ttN_0} = \mx^\ast$ e $\vct{\ttp_i}_{\ttN_i} = \mx_i(\mq_i)$. Tendo em vista que $\vct{\ttp_i}_\ttB$, $\vct{\vone}_{\ttN_0 \rl \ttN_i}$ e $\vct{\tto_i}_{\ttN_0}$ são constantes e que $\vct{\vone}_{\ttN_0 \rl \ttB}$ depende de $\mtheta^\ast$, definindo:
-Sabe-se que $\vct{\ttg}_{\ttN_0} = \mq^\ast$ e $\vct{\ttp_i}_{\ttN_i} = \mx_i(\mq_i)$. Tendo em vista que $\vct{\ttp_i}_\ttB$, $\vct{\vone}_{\ttN_0 \rl \ttN_i}$, $\vct{\tto_i}_{\ttN_0}$ e $\vct{\vone}_{\ttN_0 \rl \ttB}$ são constantes, definindo:
+Sabe-se que $\vct{\ttg}_{\ttN_0} = \mq^\ast$ e $\vct{\ttx_i}_{\ttN_i} = \mx_i(\mq_i)$. Tendo em vista que $\vct{\ttx_i}_\ttB$, $\vct{\vone}_{\ttN_0 \rl \ttN_i}$, $\vct{\tto_i}_{\ttN_0}$ e $\vct{\vone}_{\ttN_0 \rl \ttB}$ são constantes, definindo:
 
 %\begin{equation}
 %\mc_i(\mtheta^\ast) = -\vct{\vone}_{\ttN_0 \rl \ttB} \vct{\ttp_i}_\ttB
@@ -2063,7 +2059,7 @@ Sabe-se que $\vct{\ttg}_{\ttN_0} = \mq^\ast$ e $\vct{\ttp_i}_{\ttN_i} = \mx_i(\m
 %\md_i = \vct{\tto_i}_{\ttN_0} 
 %\end{equation}
 \begin{equation}
-\md_i = \vct{\tto_i}_{\ttN_0} -\vct{\vone}_{\ttN_0 \rl \ttB} \vct{\ttp_i}_\ttB
+\md_i = \vct{\tto_i}_{\ttN_0} -\vct{\vone}_{\ttN_0 \rl \ttB} \vct{\ttx_i}_\ttB
 \end{equation}
 \begin{equation}
 \mE_i = \vct{\vone}_{\ttN_0 \rl \ttB}
@@ -2277,6 +2273,16 @@ Sendo:
 \end{equation}
 
 \begin{equation}
+\mF = 
+\begin{bmatrix}
+\mzr^\msT &
+\hdots &
+\mzr^\msT &
+\mF_{\oplus}^\msT
+\end{bmatrix}^\msT
+\end{equation}
+
+\begin{equation}
 \mx(\mq) = 
 \begin{bmatrix}
 \mx_1(\mq_1)^\msT &
@@ -2360,7 +2366,7 @@ Sendo:
 %\end{equation}
 Assim, substituindo \eqref{eq:dxdt} em \eqref{eq:VinculosGenericosVel}, obtemos:
 \begin{equation} \label{eq:VinculosGenericosVelocidades}
-\dot{\overline{\mq}}(\mq,\mp) = \mD \cdot \dot{\mq}^\ast - (\mE \cdot \mJ_{\mathsf{v}}(\mq^\diamond) + \mF) \cdot \dot{\mq}^\diamond = \mzr
+\dot{\overline{\mq}}(\mq,\dot{\mq}) = \mD \cdot \dot{\mq}^\ast - (\mE \cdot \mJ_{\mathsf{v}}(\mq^\diamond) + \mF) \cdot \dot{\mq}^\diamond = \mzr
 \end{equation}
 
 \subsection{Vínculos de velocidades angulares} 
@@ -2530,7 +2536,7 @@ Derivando \eqref{eq:VinculosQuasiVel}, temos:
 %= 
 %\begin{bmatrix}
 %\mD \cdot \ddot{\mq}^\ast - \mE \cdot (\mJ_{\mathsf{v}}(\mq^\diamond) \cdot \dot{\mp}^\diamond + \underaccent{\sim}{\ma}(\mq, \mp))  - \mF \cdot \dot{\mp}^\diamond \\
-%\mP \cdot \dot{\momega}^\ast - \mQ \cdot (\mJ_{\mathsf{w}}(\mq^\diamond) \cdot \dot{\mp}^\diamond + \underaccent{\sim}{ \dot{\momega} }(\mq, \mp))  - \mR \cdot \dot{\mp}^\diamond
+%\mP \cdot \malpha^\ast - \mQ \cdot (\mJ_{\mathsf{w}}(\mq^\diamond) \cdot \dot{\mp}^\diamond + \underaccent{\sim}{ \malpha }(\mq, \mp))  - \mR \cdot \dot{\mp}^\diamond
 %\end{bmatrix}
 %=
 %\mzr
@@ -2544,7 +2550,7 @@ Derivando \eqref{eq:VinculosQuasiVel}, temos:
 = 
 \begin{bmatrix}
 \mD \cdot \ddot{\mq}^\ast - \mE \cdot (\mJ_{\mathsf{v}}(\mq^\diamond) \cdot \ddot{\mq}^\diamond + \underaccent{\sim}{\ma}(\mq, \dot{\mq}))  - \mF \cdot \ddot{\mq}^\diamond \\
-- \mQ \cdot (\mJ_{\mathsf{w}}(\mq^\diamond) \cdot \ddot{\mq}^\diamond + \underaccent{\sim}{ \dot{\momega} }(\mq, \dot{\mq}))
+- \mQ \cdot (\mJ_{\mathsf{w}}(\mq^\diamond) \cdot \ddot{\mq}^\diamond + \underaccent{\sim}{ \malpha }(\mq, \dot{\mq}))
 \end{bmatrix}
 =
 \mzr
@@ -2557,8 +2563,8 @@ Sendo:
 %\end{bmatrix}^\msT
 %\end{equation}
 %\begin{equation}
-%\underaccent{\sim}{\dot{\momega}}(\mq, \mp) = \begin{bmatrix}
-%\underaccent{\sim}{\dot{\momega}}_{\ssB_1}(\mq, \mp)(\mq_1,\mp_1)^\msT & ... & \underaccent{\sim}{\dot{\momega}}_{\ssB_n}(\mq, \mp)(\mq_n,\mp_n)^\msT
+%\underaccent{\sim}{\malpha}(\mq, \mp) = \begin{bmatrix}
+%\underaccent{\sim}{\malpha}_{\ssB_1}(\mq, \mp)(\mq_1,\mp_1)^\msT & ... & \underaccent{\sim}{\malpha}_{\ssB_n}(\mq, \mp)(\mq_n,\mp_n)^\msT
 %\end{bmatrix}^\msT
 %\end{equation}
 \begin{equation}
@@ -2567,8 +2573,8 @@ Sendo:
 \end{bmatrix}^\msT
 \end{equation}
 \begin{equation}
-\underaccent{\sim}{\dot{\momega}}(\mq, \dot{\mq}) = \begin{bmatrix}
-\underaccent{\sim}{\dot{\momega}}_{\ssB_1}(\mq_1, \dot{\mq}_1)^\msT & ... & \underaccent{\sim}{\dot{\momega}}_{\ssB_n}(\mq_n, \dot{\mq}_n)^\msT
+\underaccent{\sim}{\malpha}(\mq, \dot{\mq}) = \begin{bmatrix}
+\underaccent{\sim}{\malpha}_{\ssB_1}(\mq_1, \dot{\mq}_1)^\msT & ... & \underaccent{\sim}{\malpha}_{\ssB_n}(\mq_n, \dot{\mq}_n)^\msT
 \end{bmatrix}^\msT
 \end{equation}
 
@@ -2585,14 +2591,14 @@ Sendo:
 %\mb(\mq,\mp) =
 %-\begin{bmatrix}
 %\mE \cdot \underaccent{\sim}{\ma}(\mq, \mp) \\
-%\mQ \cdot \underaccent{\sim}{\dot{\momega}}(\mq, \mp) \\
+%\mQ \cdot \underaccent{\sim}{\malpha}(\mq, \mp) \\
 %\end{bmatrix}
 %\end{equation}
 \begin{equation}
 \mb(\mq,\dot{\mq}) =
 -\begin{bmatrix}
 \mE \cdot \underaccent{\sim}{\ma}(\mq, \dot{\mq}) \\
-\mQ \cdot \underaccent{\sim}{\dot{\momega}}(\mq, \dot{\mq}) \\
+\mQ \cdot \underaccent{\sim}{\malpha}(\mq, \dot{\mq}) \\
 \end{bmatrix}
 \end{equation}
 
@@ -4955,7 +4961,7 @@ Sejam $\llA$ e $\llB$ dois referenciais, e $\ttp$ e $\tto$ pontos no espaço. Pr
 \item $\vv_{\ttp}^{\lllA}$: vetor velocidade do ponto $\ttp$ em relação a $\llA$.
 \item $\va_{\ttp}^{\lllA}$: vetor acelera\c{c}\~ao do ponto $\ttp$ em relação a $\llA$.
 \item $\vomega_{\lllB}^{\lllA}$: vetor velocidade angular de $\llB$ em relação a $\llA$.
-\item $\dot{\vomega}_{\lllB}^{\lllA}$: vetor aceleração angular de $\llB$ em relação a $\llA$.
+\item $\valpha_{\lllB}^{\lllA}$: vetor aceleração angular de $\llB$ em relação a $\llA$.
 \item $\displaystyle\frac{\dd^{[\lllA]}}{\dd t}$: Operador derivada temporal em relação ao referencial $\llA$.
 \end{itemize}
 
@@ -5045,12 +5051,12 @@ Sejam $\ttp$ e $\tto$ dois pontos pertencentes a um corpo rígido $\llB$, e $\ll
 
 Derivando \eqref{eq:Poisson_v} no tempo em relação a $\llA$, temos:
 \begin{equation}\label{eq:Poisson_a_aux}
-\va_\ttp^{\lllA} = \va_\tto^{\lllA} + \dot{\vomega}_{\lllB}^{\lllA} \wedge \vr_{\tto \rl \ttp} + \vomega_{\lllB}^{\lllA} \wedge (\vv_\ttp^{\lllA} - \vv_\tto^{\lllA})
+\va_\ttp^{\lllA} = \va_\tto^{\lllA} + \valpha_{\lllB}^{\lllA} \wedge \vr_{\tto \rl \ttp} + \vomega_{\lllB}^{\lllA} \wedge (\vv_\ttp^{\lllA} - \vv_\tto^{\lllA})
 \end{equation}
 
 Substituindo \eqref{eq:Poisson_v} em \eqref{eq:Poisson_a_aux}, obtemos a equação do campo de acelerações:
 \begin{empheq}[box=\mybluebox]{equation} \label{eq:Poisson_a}
-\va_\ttp^{\lllA} = \va_\tto^{\lllA} + \dot{\vomega}_{\lllB}^{\lllA} \wedge \vr_{\tto \rl \ttp} + \vomega_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA} \wedge \vr_{\tto \rl \ttp}
+\va_\ttp^{\lllA} = \va_\tto^{\lllA} + \valpha_{\lllB}^{\lllA} \wedge \vr_{\tto \rl \ttp} + \vomega_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA} \wedge \vr_{\tto \rl \ttp}
 \end{empheq}
 
 \section{Composição de movimentos}
@@ -5101,17 +5107,17 @@ Ou seja, $\vv_\ttp^{\lllA}$ é composto pela soma de $\vv_{\ttp \rl \lllB}^{\lll
 
 Derivando \eqref{eq:dr_rho} no tempo em relação a $\llA$, temos:
 \begin{equation} \label{eq:d2r_rho_aux}
-\va_\ttp^{\lllA} = \va_{\tto_\ttB}^{\lllA}  + \dot{\vomega}_{\lllB}^{\lllA} \wedge \vr_{\tto_\ttB \rl \ttp}  + \vomega_{\lllB}^{\lllA} \wedge \dot{\vr}_{\tto_\ttB \rl \ttp}^{[\lllA]} + \vomega_{\lllB}^{\lllA} \wedge \vv_\ttp^{\lllB} + \va_\ttp^{\lllB}
+\va_\ttp^{\lllA} = \va_{\tto_\ttB}^{\lllA}  + \valpha_{\lllB}^{\lllA} \wedge \vr_{\tto_\ttB \rl \ttp}  + \vomega_{\lllB}^{\lllA} \wedge \dot{\vr}_{\tto_\ttB \rl \ttp}^{[\lllA]} + \vomega_{\lllB}^{\lllA} \wedge \vv_\ttp^{\lllB} + \va_\ttp^{\lllB}
 \end{equation}
 
 Substituindo \eqref{eq:drho} em \eqref{eq:d2r_rho_aux}, temos:
 \begin{equation} \label{eq:d2r_rho}
-\va_\ttp^{\lllA} = \va_{\tto_\ttB}^{\lllA}  + \dot{\vomega}_{\lllB}^{\lllA} \wedge \vr_{\tto_\ttB \rl \ttp} + \vomega_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA} \wedge \vr_{\tto_\ttB \rl \ttp}  + 2 \vomega_{\lllB}^{\lllA} \wedge \vv_\ttp^{\lllB} + \va_\ttp^{\lllB}
+\va_\ttp^{\lllA} = \va_{\tto_\ttB}^{\lllA}  + \valpha_{\lllB}^{\lllA} \wedge \vr_{\tto_\ttB \rl \ttp} + \vomega_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA} \wedge \vr_{\tto_\ttB \rl \ttp}  + 2 \vomega_{\lllB}^{\lllA} \wedge \vv_\ttp^{\lllB} + \va_\ttp^{\lllB}
 \end{equation}
 
 Definindo:
 \begin{empheq}[box=\almondbox]{equation}
-\va_{\ttp \rl \lllB}^{\lllA} = \va_{\tto_\ttB}^{\lllA}  + \dot{\vomega}_{\lllB}^{\lllA} \wedge \vr_{\tto_\ttB \rl \ttp} + \vomega_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA} \wedge \vr_{\tto_\ttB \rl \ttp}
+\va_{\ttp \rl \lllB}^{\lllA} = \va_{\tto_\ttB}^{\lllA}  + \valpha_{\lllB}^{\lllA} \wedge \vr_{\tto_\ttB \rl \ttp} + \vomega_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA} \wedge \vr_{\tto_\ttB \rl \ttp}
 \end{empheq}
 
 Temos princípio da composição de movimento para acelerações lineares:
@@ -5187,17 +5193,17 @@ Repare que, fazendo $\llC \equiv \llA$, temos que:
 
 Derivando \eqref{eq:composicao_w} no tempo em relação a $\llA$, temos princípio da composição de movimento para acelerações angulares:
 \begin{empheq}[box=\mybluebox]{equation} \label{eq:composicao_dw}
-\dot{\vomega}_{\lllC}^{\lllA}  =  \dot{\vomega}_{\lllB}^{\lllA}   + \dot{\vomega}_{\lllC}^{\lllB} + \vomega_{\lllB}^{\lllA} \wedge \vomega_{\lllC}^{\lllB}
+\valpha_{\lllC}^{\lllA}  =  \valpha_{\lllB}^{\lllA}   + \valpha_{\lllC}^{\lllB} + \vomega_{\lllB}^{\lllA} \wedge \vomega_{\lllC}^{\lllB}
 \end{empheq}
 
-Ou seja, $\dot{\vomega}_{\lllC}^{\lllA}$ é composta pela soma de $\dot{\vomega}_{\lllB}^{\lllA}$, que seria a aceleração angular  de $\llC$ se $\llC$ estivesse fixo a $\llB$ (aceleração angular de arrastamento), $\dot{\vomega}_{\lllC}^{\lllB}$, que seria a aceleração angular de $\llC$ se $\llB$ estivesse parado em relação a $\llA$ (aceleração angular relativa), e da parcela $\vomega_{\lllB}^{\lllA} \wedge \vomega_{\lllC}^{\lllB}$ (aceleralção angular complementar).
+Ou seja, $\valpha_{\lllC}^{\lllA}$ é composta pela soma de $\valpha_{\lllB}^{\lllA}$, que seria a aceleração angular  de $\llC$ se $\llC$ estivesse fixo a $\llB$ (aceleração angular de arrastamento), $\valpha_{\lllC}^{\lllB}$, que seria a aceleração angular de $\llC$ se $\llB$ estivesse parado em relação a $\llA$ (aceleração angular relativa), e da parcela $\vomega_{\lllB}^{\lllA} \wedge \vomega_{\lllC}^{\lllB}$ (aceleralção angular complementar).
 
 Repare que, fazendo $\llC \equiv \llA$ e utilizando \eqref{eq:composicao_wCA}, temos que:
 \begin{equation}
-\vzr =  \dot{\vomega}_{\lllB}^{\lllA}   + \dot{\vomega}_{\lllA}^{\lllB} - \vomega_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA}
+\vzr =  \valpha_{\lllB}^{\lllA}   + \valpha_{\lllA}^{\lllB} - \vomega_{\lllB}^{\lllA} \wedge \vomega_{\lllB}^{\lllA}
 \end{equation}
 \begin{empheq}[box=\almondbox]{equation} \label{eq:composicao_dwCA}
-\therefore \dot{\vomega}_{\lllA}^{\lllB} = - \dot{\vomega}_{\lllB}^{\lllA}
+\therefore \valpha_{\lllA}^{\lllB} = - \valpha_{\lllB}^{\lllA}
 \end{empheq}
 
 \chapter{Funções de transferência de motores DC} \label{chap:FuncoesDeTransferencia}
