@@ -457,52 +457,87 @@ Existem diversas técnicas propostas pela literatura para realizar o controle de
 \item Controle por Modos Deslizantes (MD)
 \end{itemize}
 
-A técnica mais simples consiste na utilização de malhas do tipo PID, controlando cada junta ativa de maneira independente, considerando a dinâmica do mecanismo como distúrbios de controle. Essa técnica é caracterizada por sua facilidade de projeto e implementação, tanto em hardware quanto em software, além de exibir um desempenho satisfatório para movimento lento. Porém, essa técnica não se mostra adequada para a realização de trajetórias em altas velocidades e/ou acelerações \cite{Honegger, Zubizarreta}.
+\subsection{Controle Proporcional-Integral-Derivativo (PID)}
 
-Uma das técnicas de controle mais exploradas na literatura é o Controle por Torque Computado (TC). Basicamente, é um caso particular da técnica de controle não linear conhecida como Linearização pela Realimentação \cite{Slotini}, aplicado a sistemas mecânicos. A técnica consiste na utilização de duas malhas de controle, uma malha que realiza o desacoplamento do sistema e a compensação das não linearidades, e outra malha composta por PIDs independentes \cite{Craig}, como pode ser visto na figura \ref{fig:CTC}. Como resultado, alcança-se um desempenho  superior  àquele obtido utilizando simples PIDs, permitindo inclusive a realização de trajetórias precisas em altas velocidades e/ou acelerações. No entanto, seu desempenho poderá ser limitado pela qualidade/fidelidade do modelo dinâmico utilizado para a compensação das não linearidades \cite{SlotiniSMC}. Sua implementação também é mais complexa, visto que é necessário calcular o modelo dinâmico inverso em tempo real, o que também aumenta consideravelmente seu custo computacional. Além disso, a técnica é sensível a incertezas estruturadas (paramétricas) e não estruturadas (dinâmicas não modeladas). Como exemplos de utilização do CTC, podem ser citados os trabalhos de Cheng at al. \cite{Cheng}, Li e Wu \cite{Li}, Li e Fu \cite{Li2}, Shang at al. \cite{Shang} e Yen at al. \cite{Yen}.
+A técnica mais simples consiste na utilização de malhas do tipo PID, controlando cada junta ativa de maneira independente, considerando a dinâmica do mecanismo como distúrbios de controle. Essa técnica é caracterizada por sua facilidade de projeto e implementação, tanto em hardware quanto em software, além de exibir um desempenho satisfatório para movimento lento. Porém, essa técnica não se mostra adequada para a realização de trajetórias em altas velocidades e/ou acelerações \cite{Honegger, Zubizarreta}. Uma malha típica de PID pode ser vista na figura \ref{fig:PID}.
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[scale=0.385]{../figures/CTC.jpg}  
-	\caption{Malha de CTC (Adaptado de \cite{Craig})}
+	\includegraphics[scale=0.45]{../figures/PID.jpg}  
+	\caption{Malha de Controle Proporcional-Integral-Derivativo}
+	\label{fig:PID}
+\end{figure}
+
+\subsection{Controle por Torque Computado (TC)}
+
+Uma das técnicas de controle mais exploradas na literatura é o Controle por Torque Computado (TC). Basicamente, é um caso particular da técnica de controle não linear conhecida como Linearização pela Realimentação \cite{Slotini}, aplicada a sistemas mecânicos. A técnica consiste na utilização de duas malhas de controle, uma malha que realiza o desacoplamento do sistema e a compensação das não linearidades, e outra malha composta por PIDs independentes \cite{Craig}, como pode ser visto na figura \ref{fig:CTC}. Como resultado, alcança-se um desempenho  superior  àquele obtido utilizando simples PIDs, permitindo inclusive a realização de trajetórias precisas em altas velocidades e/ou acelerações. No entanto, seu desempenho poderá ser limitado pela qualidade/fidelidade do modelo dinâmico utilizado para a compensação das não linearidades \cite{SlotiniSMC}. Sua implementação também é mais complexa, visto que é necessário calcular o modelo dinâmico inverso em tempo real, o que também aumenta consideravelmente seu custo computacional. Além disso, a técnica é sensível a incertezas estruturadas (paramétricas) e não estruturadas (dinâmicas não modeladas). Como exemplos de utilização do TC, podem ser citados os trabalhos de Cheng at al. \cite{Cheng}, Li e Wu \cite{Li}, Li e Fu \cite{Li2}, Shang at al. \cite{Shang} e Yen at al. \cite{Yen}.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.39]{../figures/CTC.jpg}  
+	\caption{Malha de Controle por Torque Computado (Adaptado de \cite{Craig})}
 	\label{fig:CTC}
 \end{figure}
 
-Visando a redução do custo computacional associado ao cálculo do modelo dinâmico em tempo real, alguns autores propõe a utilização do CTC com pré-alimentação (CTCp) \cite{Khalil, Siciliano, Spong}. Essa técnica é similar ao CTC, com a diferença de que a compensação das não linearidades é feita por pré-alimentação e não mais por realimentação, como pode ser visto na figura \ref{fig:CTCp}. Consequentemente, realiza-se o cálculo do modelo dinâmico previamente, diminuindo-se o custo computacional.
+\subsection{Controle por Torque Computado com pré-alimentação (TCp)}
 
-De fato, Codourey \cite{Codourey} obteve uma redução de 600\% no erro de posição utilizando o CTCp em um ensaio experimental com o robô DELTA, ao substituir os PDs originais. Na simulação do controle de um mecanismo 6-UPS, Wang et al. \cite{Wang} utilizaram em cascata controladores lineares de posição, velocidade e corrente em cada junta ativa, além de  uma compensação dinâmica por pré-alimentação dos distúrbios de torque.
+Visando a redução do custo computacional associado ao cálculo do modelo dinâmico em tempo real, alguns autores propõe a utilização do TC com pré-alimentação (TCp) \cite{Khalil, Siciliano, Spong}. Essa técnica é similar ao TC, com a diferença de que a compensação das não linearidades é feita por pré-alimentação e não mais por realimentação, como pode ser visto na figura \ref{fig:CTCp}. Consequentemente, realiza-se o cálculo do modelo dinâmico previamente, diminuindo-se o custo computacional.
+
+De fato, Codourey \cite{Codourey} obteve uma redução de 600\% no erro de posição utilizando o TCp em um ensaio experimental com o robô DELTA, ao substituir os PDs originais. Na simulação do controle de um mecanismo 6-UPS, Wang et al. \cite{Wang} utilizaram em cascata controladores lineares de posição, velocidade e corrente em cada junta ativa, além de  uma compensação dinâmica por pré-alimentação dos distúrbios de torque.
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[scale=0.385]{../figures/CTCp.jpg}  
-	\caption{Malha de CTCp (Adaptado de \cite{Craig})}
+	\includegraphics[scale=0.39]{../figures/CTCp.jpg}  
+	\caption{Malha de Controle por Torque Computado com pré-alimentação (Adaptado de \cite{Craig})}
 	\label{fig:CTCp}
 \end{figure}
 
-Com o intuito de melhorar a robustez do CTC associada a incertezas paramétricas, Zubizarreta et al. \cite{Zubizarreta, Zubizarreta2, Zubizarreta3, Zubizarreta4} propuseram  o  Controle por Torque Computado Estendido (CTCe), que utiliza informação redundante obtida pelo sensoriamento de juntas passivas. Em \cite{Zubizarreta}, os controladores propostos demonstraram maior robustez, principalmente em relação a parâmetros cinemáticos, durante as simulações realizadas com o mecanismo 3-RRR.
+\subsection{Controle por Torque Computado Estendido (TCe)}
 
-Outra técnica alternativa, aplicada a mecanismos paralelos, é o controle preditivo baseado em modelo (CPM). Para a sua implementação, o CPM necessita minimizar uma função objetivo, dependente das saídas e do esforço de controle, ambos calculados em tempo futuro \cite{Camacho}. Assim, dependendo do modelo utilizado, o processo de otimização pode agregar um custo computacional que inviabilize o controle, comprometendo a motivação inicial de aprimorar o desempenho do sistema. Como exemplos de utilização do CPM, podem ser citados os trabalhos de Vivas et al. \cite{Vivas} e   Duchaine et al. \cite{Duchaine}.
+Com o intuito de melhorar a robustez do TC associada a incertezas paramétricas, Zubizarreta et al. \cite{Zubizarreta, Zubizarreta2, Zubizarreta3, Zubizarreta4} propuseram  o  Controle por Torque Computado Estendido (TCe), que utiliza informação redundante obtida pelo sensoriamento de juntas passivas. Em \cite{Zubizarreta}, os controladores propostos demonstraram maior robustez, principalmente em relação a parâmetros cinemáticos, durante as simulações realizadas com o mecanismo 3-RRR.
 
-Com o propósito de controlar o mecanismo H4, Vivas et al. \cite{Vivas} utilizaram  uma malha de CPM linear e outra malha para compensação das não linearidades. Após a comparação do desempenho do controlador proposto com  o CTC, os autores observaram maior robustez do CPM a incertezas paramétricas. 
+\subsection{Controle Preditivo Baseado em Modelo (PM)}
 
-Duchaine et al. \cite{Duchaine}, por sua vez, propuseram um controlador preditivo baseado no modelo não linear de um mecanismo paralelo de 6 graus de liberdade. Visando a obtenção de uma solução analítica para o problema de otimização, foram adotadas diversas hipóteses simplificadoras no modelo dinâmico do mecanismo. Com o intuito de comparar o controlador proposto com um PID, foram feitos alguns experimentos, onde se observou  que o CPM apresentou erro nulo de posição no final da trajetória, enquanto que o PID demorou um tempo considerável para alcançar erro nulo. Foi verificada a equivalência entre o custo computacional dos 2 controladores. 
+Outra técnica alternativa, aplicada a mecanismos paralelos, é o Controle Preditivo Baseado em Modelo (PM). Para a sua implementação, o PM necessita minimizar uma função objetivo, dependente das saídas e do esforço de controle, ambos calculados em tempo futuro \cite{Camacho}, como pode ser visto na figura \ref{fig:CPM}. Assim, dependendo do modelo utilizado, o processo de otimização pode agregar um custo computacional que inviabilize o controle, comprometendo a motivação inicial de aprimorar o desempenho do sistema. Como exemplos de utilização do PM, podem ser citados os trabalhos de Vivas et al. \cite{Vivas} e   Duchaine et al. \cite{Duchaine}.
 
-O controle adaptativo, também encontrado na literatura, caracteriza-se pela utilização de leis de adaptação para realizar a estimação em tempo real de parâmetros do sistema ou de termos de compensação dinâmica, como pode ser visto na figura \ref{fig:CA}. Sendo assim, as técnicas de controle adaptativo possibilitam que o sistema se torne praticamente insensível a incertezas paramétricas. Para o caso em que se realiza a estimação em tempo real dos parâmetros do sistema, pode-se dizer que o custo computacional é superior ao do CTC, visto que é necessário integrar as leis de adaptação em tempo real. Além disso, é necessário obter o modelo dinâmico linear em relação aos parâmetros do sistema \cite{SlotiniA}, o que pode ser uma tarefa difícil, inviabilizando, em alguns casos, a aplicação da técnica. Em \cite{CodoureyBurdet} é proposto um algoritmo de obtenção do modelo dinâmico simplificado de mecanismos paralelos nesse formato.
+Com o propósito de controlar o mecanismo H4, Vivas et al. \cite{Vivas} utilizaram  uma malha de PM linear e outra malha para compensação das não linearidades. Após a comparação do desempenho do controlador proposto com  o TC, os autores observaram maior robustez do PM a incertezas paramétricas. 
+
+Duchaine et al. \cite{Duchaine}, por sua vez, propuseram um controlador preditivo baseado no modelo não linear de um mecanismo paralelo de 6 graus de liberdade. Visando a obtenção de uma solução analítica para o problema de otimização, foram adotadas diversas hipóteses simplificadoras no modelo dinâmico do mecanismo. Com o intuito de comparar o controlador proposto com um PID, foram feitos alguns experimentos, onde se observou  que o PM apresentou erro nulo de posição no final da trajetória, enquanto que o PID demorou um tempo considerável para alcançar erro nulo. Foi verificada a equivalência entre o custo computacional dos 2 controladores. 
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.11]{../figures/CPM.jpg}  
+	\caption{Malha de Controle Preditivo Baseado em Modelo}
+	\label{fig:CPM}
+\end{figure}
+
+\subsection{Controle Adaptativo}
+
+O controle adaptativo, também encontrado na literatura, caracteriza-se pela utilização de leis de adaptação para realizar a estimação em tempo real de parâmetros do sistema ou de termos de compensação dinâmica, como pode ser visto na figura \ref{fig:CA}. Sendo assim, as técnicas de controle adaptativo possibilitam que o sistema se torne praticamente insensível a incertezas paramétricas. Para o caso em que se realiza a estimação em tempo real dos parâmetros do sistema, pode-se dizer que o custo computacional é superior ao do TC, visto que é necessário integrar as leis de adaptação em tempo real. Além disso, é necessário obter o modelo dinâmico linear em relação aos parâmetros do sistema \cite{SlotiniA}, o que pode ser uma tarefa difícil, inviabilizando, em alguns casos, a aplicação da técnica. Em \cite{CodoureyBurdet} é proposto um algoritmo de obtenção do modelo dinâmico simplificado de mecanismos paralelos nesse formato.
 
 Em \cite{SlotiniA} é proposta uma lei de controle que combina o controle adaptativo com a técnica de controle robusto conhecida por Controle por Modos Deslizantes. Chemori et al. \cite{Chemori} utilizaram essa técnica  com o intuito de diminuir os erros de posição em regime permanente no controle de um mecanismo paralelo do tipo PAR2. Por outro lado, Honegger at al. \cite{Honegger} empregaram o controle adaptativo com estimação em tempo real dos parâmetros do sistemas, realizando a compensação dinâmica por pré-alimentação, em um mecanismo  paralelo do tipo Hexaglide.
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[scale=0.385]{../figures/CA.jpg}  
-	\caption{Malha de controle adaptativo (Adaptado de \cite{Craig})}
+	\includegraphics[scale=0.47]{../figures/CA.jpg}  
+	\caption{Malha de Controle Adaptativo (Adaptado de \cite{Craig})}
 	\label{fig:CA}
 \end{figure}
 
-Outra técnica promissora para aplicação em mecanismos paralelos é o Controle por Modos Deslizantes (CMD). A técnica consiste no projeto de leis de controle que levem o sistema para superfícies de escorregamento no espaço de fase, de modo que assim que o sistema atinje e é mantido nas superfícies de escorregamento, o erro de controle decai exponencialmente para zero \cite{Slotini}. Para garantir que o sistema atinja em tempo finito e se mantenha nas superfícies de escorregamento, são utilizados termos descontínuos na lei de controle, o que pode causar problemas de oscilações bruscas em alta frequência nos esforços de controle ({\em chattering}). Em \cite{Guldner}  e  \cite{Utkin2} são propostas técnicas para evitar esse tipo de problema. A grande vantagem da utilização deste tipo de lei de controle é sua grande robustez a incertezas estruturadas e não estruturadas, sendo possível realizar o projeto do controlador de modo a suprimir um dado nível de incertezas paramétricas. Em \cite{SlotiniSMC} é proposta uma metodologia de projeto de Controle por Modos Deslizantes para manipuladores robóticos seriais.
+\subsection{Controle por Modos Deslizantes (MD)}
 
-Na literatura são encontradas diversos artigos utilizando a técnica de CMD aliada à lógica {\em fuzzy} e/ou redes neurais para o controle de manipuladores robóticos \cite{Begon, Ertugrul, Hu, Sadati}. Begon et al. \cite{Begon} propuseram uma lei de controle baseada na teoria de CMD e na utilização de lógica {\em fuzzy} para controlar de maneira independente os atuadores de um mecanismo paralelo do tipo Hexa. A técnica proposta teve o intuito de obter a robustez característica do CDM sem necessitar de uma lei de controle com termos descontínuos, evitando o {\em chattering}.
+Outra técnica promissora para aplicação em mecanismos paralelos é o Controle por Modos Deslizantes (MD). A técnica consiste no projeto de leis de controle que levem o sistema para superfícies de escorregamento no espaço de fase, de modo que assim que o sistema atinje e é mantido nas superfícies de escorregamento, o erro de controle decai exponencialmente para zero \cite{Slotini}. Para garantir que o sistema atinja em tempo finito e se mantenha nas superfícies de escorregamento, são utilizados termos descontínuos na lei de controle, o que pode causar problemas de oscilações bruscas em alta frequência nos esforços de controle ({\em chattering}). Em \cite{Guldner}  e  \cite{Utkin2} são propostas técnicas para evitar esse tipo de problema. A grande vantagem da utilização deste tipo de lei de controle é sua grande robustez a incertezas estruturadas e não estruturadas, sendo possível realizar o projeto do controlador de modo a suprimir um dado nível de incertezas paramétricas. Em \cite{SlotiniSMC} é proposta uma metodologia de projeto de Controle por Modos Deslizantes para manipuladores robóticos seriais.
 
-Em \cite{Zeinali}, Zeinali et al. desenvolveram uma lei de controle  baseada nas teorias de CMD e controle adaptativo. O controlador desenvolvido realiza a compensação dinâmica em tempo real do erro de modelagem através de uma lei de adaptação. Além disso, substitui o termo descontínuo da lei de controle por um termo do tipo PID, com o intuito de evitar o {\em chattering}. A estabilidade e robustez da lei de controle proposta foram provadas utilizando a teoria de estabilidade de Lyapunov \cite{Slotini}. A robustez da lei de controle foi verificada através de simulações do controlador proposto aplicado a um mecanismo serial do tipo \underline{R}\underline{R}, nas quais o controlador conseguiu manter erros de posição muito pequenos em regime permanente, mesmo sendo baseado em um modelo muito pobre e na presença de distúrbios de torque. A técnica apresentada se mostra promissora, porém, como no artigo foi feita apenas a simulação da lei de controle em um mecanismo serial bidimensional, ainda não se pode afirmar nada sobre seu desempenho em mecanismos paralelos tridimensionais.
+Na literatura são encontradas diversos artigos utilizando a técnica de MD aliada à lógica {\em fuzzy} e/ou redes neurais para o controle de manipuladores robóticos \cite{Begon, Ertugrul, Hu, Sadati}. Begon et al. \cite{Begon} propuseram uma lei de controle baseada na teoria de MD e na utilização de lógica {\em fuzzy} para controlar de maneira independente os atuadores de um mecanismo paralelo do tipo Hexa. A técnica proposta teve o intuito de obter a robustez característica do MD sem necessitar de uma lei de controle com termos descontínuos, evitando o {\em chattering}.
+
+Em \cite{Zeinali}, Zeinali et al. desenvolveram uma lei de controle  baseada nas teorias de MD e Controle Adaptativo. O controlador desenvolvido realiza a compensação dinâmica em tempo real do erro de modelagem através de uma lei de adaptação. Além disso, substitui o termo descontínuo da lei de controle por um termo do tipo PID, com o intuito de evitar o {\em chattering}. A estabilidade e robustez da lei de controle proposta foram provadas utilizando a teoria de estabilidade de Lyapunov \cite{Slotini}. A robustez da lei de controle foi verificada através de simulações do controlador proposto aplicado a um mecanismo serial do tipo \underline{R}\underline{R}, nas quais o controlador conseguiu manter erros de posição muito pequenos em regime permanente, mesmo sendo baseado em um modelo muito pobre e na presença de distúrbios de torque. A técnica apresentada se mostra promissora, porém, como no artigo foi feita apenas a simulação da lei de controle em um mecanismo serial bidimensional, ainda não se pode afirmar nada sobre seu desempenho em mecanismos paralelos tridimensionais.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.55]{../figures/CMD.jpg}  
+	\caption{Malha Controle por Modos Deslizantes}
+	\label{fig:CMD}
+\end{figure}
 
 \section{Conclusões}
 
