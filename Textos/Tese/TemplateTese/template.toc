@@ -55,7 +55,7 @@
 \contentsline {section}{\numberline {5.1}Modelo dos subsistemas}{68}
 \contentsline {section}{\numberline {5.2}V\IeC {\'\i }nculos cinem\IeC {\'a}ticos entre subsistemas}{69}
 \contentsline {subsection}{\numberline {5.2.1}V\IeC {\'\i }nculos de posi\IeC {\c c}\IeC {\~a}o}{69}
-\contentsline {subsection}{\numberline {5.2.2}V\IeC {\'\i }nculos de velocidades lineares}{70}
+\contentsline {subsection}{\numberline {5.2.2}V\IeC {\'\i }nculos de velocidades lineares}{71}
 \contentsline {subsection}{\numberline {5.2.3}V\IeC {\'\i }nculos de velocidades angulares}{71}
 \contentsline {subsection}{\numberline {5.2.4}V\IeC {\'\i }nculos de quasi-velocidades}{72}
 \contentsline {subsection}{\numberline {5.2.5}V\IeC {\'\i }nculos de quasi-acelera\IeC {\c c}\IeC {\~o}es}{72}
