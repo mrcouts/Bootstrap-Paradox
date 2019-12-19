@@ -2768,7 +2768,7 @@ Reescrevendo em forma matricial:
 \end{bmatrix}
 \end{equation}
 
-É necessário que as condições iniciais respeitem os vínculos de posição e velocidades. Com isso, teoricamente, os vínculos continuariam sendo respeitados na solução do sistema de EDOs. Porém, devido a erros numéricos de truncamento e erros associados ao método de integração numérica utilizado, os vínculos de posição e velocidade podem deixar de ser respeitados. Esse problema pode ser resolvido utilizando a técnica das constantes de estabilização de Baumgarte \cite{Baumgarte}. A idéia é substituir a equação dos vínculos de quasi-acelerações pela seguinte equação:
+É necessário que as condições iniciais respeitem os vínculos de posição e velocidades. Com isso, teoricamente, os vínculos continuariam sendo respeitados na solução do sistema de EDOs. Porém, devido a erros numéricos de truncamento e erros associados ao método de integração numérica utilizado, haverá um acúmulo de erros que irá aumentar a cada passo de integração, e os vínculos de posição e velocidade eventualmente podem deixar de ser respeitados. Esse problema pode ser resolvido utilizando a técnica das constantes de estabilização de Baumgarte \cite{Baumgarte}. A idéia é substituir a equação dos vínculos de quasi-acelerações pela seguinte equação:
 \begin{equation} \label{eq:VinculosQuasiAce2}
 \overline{\mp}'(\mq, \dot{\mq}, \ddot{\mq}) =
 \begin{bmatrix}
@@ -2820,9 +2820,9 @@ Substituindo \eqref{eq:VinculosQuasiVel} e \eqref{eq:VinculosQuasiAce} em \eqref
 = \mzr
 \end{equation}
 
-Impondo que \eqref{eq:VinculosQuasiAce3} seja respeitada, garantimos que, teoricamente, as componentes de $\overline{\mq}(\mq)$ e $\overline{\momega}(\mq, \dot{\mq})$ tenderão exponencialmente a zero independentemente das condições iniciais, para $\lambda > 0$. Porém, devido aos erros de integração numérica, as componentes de $\overline{\mq}(\mq)$ e $\overline{\momega}(\mq, \dot{\mq})$ não irão convergir para zero, mas sim para uma faixa de valores em torno de zero. Quanto maior a ordem do método de integração numérica e quanto menor o passo de integração, menor será a ordem de grandeza dessa faixa de valores em torno do zero. Se essa faixa de valores for suficientemente pequena, pode-se considerar que os vínculos de posição e velocidades serão respeitados mesmo havendo erros de truncamento e erros associados ao método de integração numérica utilizado. 
+Impondo que \eqref{eq:VinculosQuasiAce3} seja respeitada, garantimos que, teoricamente, as componentes de $\overline{\mq}(\mq)$ e $\overline{\momega}(\mq, \dot{\mq})$ tenderão exponencialmente a zero independentemente das condições iniciais, para $\lambda > 0$. Porém, devido aos erros de integração numérica, as componentes de $\overline{\mq}(\mq)$ e $\overline{\momega}(\mq, \dot{\mq})$ não irão convergir para zero, mas sim para uma faixa de valores em torno de zero. Quanto maior a ordem do método de integração numérica e quanto menor o passo de integração, menor será a ordem de grandeza dessa faixa de valores em torno do zero. Se essa faixa de valores for suficientemente pequena, pode-se considerar que os vínculos de posição e velocidades estão sendo respeitados mesmo havendo erros de truncamento e erros associados ao método de integração numérica utilizado. 
 
-É importante ressaltar que valores muito altos de $\lambda$ podem comprometer a estabilidade numérica da simulação, e valores muito pequenos podem fazer com que o sistema se comporte praticamente como se a técnica das constantes de estabilização de Baumgarte não estivesse sendo utilizada. É seguro dizer que um bom valor de limite superior para $\lambda$ a ser adotado é $1/h$, sendo $h$ o tamanho do passo de integração, pois fazendo $\lambda = 1/h$ já garante a estabilidade do método para praticamente qualquer método de integração numérica de EDOs. Na prática, valores de $\lambda$ em torno de $1/100h$ se mostraram bastante adequados nas simulações realizadas.
+É importante ressaltar que valores muito altos de $\lambda$ podem comprometer a estabilidade numérica da simulação, e valores muito pequenos podem fazer com que a faixa de valores em torno de zero em que as componentes de $\overline{\mq}(\mq)$ e $\overline{\momega}(\mq, \dot{\mq})$ estarão variando pode se tornar muito grande. É seguro dizer que um bom valor de limite superior para $\lambda$ a ser adotado é $1/h$, sendo $h$ o tamanho do passo de integração, pois fazendo $\lambda = 1/h$ já garante a estabilidade do método para praticamente qualquer método de integração numérica de EDOs. Na prática, valores de $\lambda$ em torno de $1/100h$ se mostraram bastante adequados nas simulações realizadas.
 
 Sendo assim, o sistema de EDOs que será utilizado para realizar a simualação dinâmica direta é dado por:
 \begin{equation}
@@ -2851,7 +2851,7 @@ Sendo assim, o sistema de EDOs que será utilizado para realizar a simualação 
 \end{bmatrix}
 \end{equation}
 
-Caso não haja vínculos de orientação, utilizamos:
+Caso não haja vínculos de velocidades angulares, utiliza-se:
 \begin{equation}
 \begin{bmatrix}
 \mC(\mq)^\msT \mM'(\mq) \\
@@ -2954,7 +2954,7 @@ Para o caso de mecanismos com atuação redundante, há infinitas soluções par
 
 \chapter{Projeto dos controladores}
 
-Esta subseção é destinada ao projeto de controladores não lineares, destinados ao controle de posição de plataformas paralelas cujo modelo dinâmico para simulação dinâmica inversa é dado por \eqref{eq:DinamicaInversa2}, utilizando a técnica de Linearização por Realimentação aliada a outras leis de controle não linear, como as leis Controle por Modos Deslizantes \cite{Slotini, Utkin}, e também aliada a técnicas de controle linear, como a alocação de pólos no espaço de estados (Controle por Torque Computado), alocação de pólos no domínio da frequência com observador de disturbios, e o Controle por Modos Deslizantes em Tempo Discreto.
+Esta subseção é destinada ao projeto de controladores não lineares, destinados ao controle de posição de plataformas paralelas cujo modelo dinâmico para simulação dinâmica inversa é dado por \eqref{eq:DinamicaInversa2}, utilizando a técnica de Linearização por Realimentação aliada a outras leis de controle não linear, como as leis Controle por Modos Deslizantes \cite{Slotini, Utkin}, e também aliada a técnicas de controle linear, como a alocação de pólos no espaço de estados em tempo contínuo (Controle por Torque Computado).
 
 Para facilitar a leitura das deduções e com o intuito de deixar um pouco menos carregada a notação, será adotada a seguinte notação:
 \begin{equation}
@@ -2969,7 +2969,7 @@ Para facilitar a leitura das deduções e com o intuito de deixar um pouco menos
 
 Sendo assim, equação \eqref{eq:DinamicaInversa2} pode ser reescrita como:
 \begin{equation} \label{eq:ModeloControle}
-\mH(\mq)  \ddot{\mq}\ssh + \mh(\mq,\dot{\mq}) = \mup
+\mH(\mq) \, \ddot{\mq}\ssh + \mh(\mq,\dot{\mq}) = \mup
 \end{equation}
 
 Além disso, definimos o erro de controle como sendo:
@@ -2980,7 +2980,7 @@ Sendo $\mq\ssh_d$ o sinal de referência
 
 \section{Linearização por Realimentação (LR)}
 
-A técnica de controle conhecida como Linearização por Realimentação consiste utilizar a entrada de controle para cancelar as não linearidades do sistema, de modo a obter um sistema linear equivalente, normalmente desacoplado, no qual é possível utilizar inúmeras técnicas de controle linear.
+A técnica de controle conhecida como Linearização por Realimentação consiste em utilizar a entrada de controle para cancelar as não linearidades do sistema, de modo a obter um sistema linear equivalente, normalmente desacoplado, no qual é possível utilizar inúmeras técnicas de controle linear.
 
 Tendo em vista a equação dinâmica \eqref{eq:ModeloControle}, é proposta a seguinte lei de Linearização por Realimentação:
 \begin{equation} \label{eq:leiLR}
@@ -3007,7 +3007,7 @@ Sendo:
 
 Repare que, para o caso em que não há erros de modelagem ($\tilde{\mH} = \mzr$ e $\tilde{\mh} = \mzr \Rightarrow \mdelta = \mzr$), a dinâmica de cada componente do erro se comporta como um sistema linear de segunda ordem forçado com inércia unitária e duplo integrador em $s = 0$.
 
-\section{Controle por Torque Computado (CTC)} \label{sec:CTC}
+\section{Controle por Torque Computado (TC)} \label{sec:CTC}
 
 A lei de Controle por Torque Computado tem o intuito de fazer com que a dinâmica de cada componente do erro de controle se comporte como um movimento harmônico amortecido, fazendo com que o erro tenda assintóticamente a zero independentemente da condição inicial, na ausência de erros de modelagem. Para atingir este objetivo, basta utilizar a seguinte lei de realimentação de estados para $\mup'$:
 \begin{equation} \label{eq:leiCTC}
@@ -3029,7 +3029,7 @@ Sendo:
 Repare que o desempenho desta técnica de controle depende diretamente da representatividade do modelo obtido dentro das condições de operação do sistema. 
 
 
-\section{Controle por Modos Deslizantes} \label{sec:CMD}
+\section{Controle por Modos Deslizantes (MD)} \label{sec:CMD}
 
 O Controle por Modos Deslizantes é uma técnica de controle não-linear robusto, a qual tem como principal vantagem uma menor sensibilidade aos erros de modelagem, sendo robusto tanto a incertezas estruturadas quanto a incertezas não estruturadas. Nesta subseção serão deduzidas 4 leis de controle baseadas nesta técnica.
 
@@ -3356,7 +3356,7 @@ Sempre existe solu\c{c}\~ao para \eqref{eq:DesigualdadeK2_b2}, e a solução que
 
 \subsection{Camada Limite}
 
-Uma técnica muito utilizada para diminuir os efeitos do \emph{chattering} no CMD é substituição da função sinal por uma função de saturação nas leis de controle. Definindo:
+Uma técnica muito utilizada para diminuir os efeitos do \emph{chattering} no MD é a substituição da função sinal por uma função de saturação nas leis de controle. Definindo:
 \begin{equation}
 \sat(x) = \begin{cases}
 x, \;\;\;\;\;\;\;\;\; \text{ se } |x| \leq 1 \\
@@ -3371,7 +3371,7 @@ Ao mesmo tempo que a utilização da camada limite diminui os efeitos do \emph{c
 
 \subsection{Ganho adaptativo}
 
-O cálculo de $\underline{k}$ pode ser um tanto complexo utilizando as equações \eqref{eq:MatrizDiagk_a1}, \eqref{eq:MatrizDiagk_a2}, \eqref{eq:MatrizDiagk_b1} ou \eqref{eq:MatrizDiagk_b2}, pois depende do módulo máximo de matrizes que não possuem expressões explícitas. Tal cálculo pode ser feito numéricamente discretizando a área de trabalho do mecanismo e atribuindo valores máximos e mínimos para cada parâmetro incerto do sistema, obtendo uma matriz $\underline{k}$ que varia conforme a posição do mecanismo. O uso desta estratégia, porém, poderá resultar na obtenção de valores de $\underline{k}$ muito maiores do que o necessário, o que pode amplificar o fenômeno do \emph{chattering}. Sendo assim, é proposta a obtenção da matriz $\underline{k}$ de forma adaptativa, utilizando a seguinte lei de adaptação:
+O cálculo de $\underline{k}$ pode ser um tanto complexo utilizando as equações \eqref{eq:MatrizDiagk_a1}, \eqref{eq:MatrizDiagk_a2}, \eqref{eq:MatrizDiagk_b1} ou \eqref{eq:MatrizDiagk_b2}, pois depende do módulo máximo de matrizes que não possuem expressões explícitas. Tal cálculo pode ser feito numéricamente discretizando a área de trabalho do mecanismo e atribuindo valores máximos e mínimos para cada parâmetro incerto do sistema, obtendo uma matriz $\underline{k}$ que varia conforme a posição do mecanismo. O uso desta estratégia, porém, poderá resultar na obtenção de valores de $\underline{k}$ muito maiores do que o necessário, o que pode amplificar o fenômeno do \emph{chattering}. Sendo assim, é proposta a obtenção da matriz $\underline{k}$ de forma adaptativa, utilizando a seguinte lei de adaptação, a qual é baseada em uma lei de adaptação proposta em \cite{Monsees}:
 
 \begin{equation}
 \underline{k}_i[k] = \begin{cases}
@@ -3383,7 +3383,7 @@ O cálculo de $\underline{k}$ pode ser um tanto complexo utilizando as equaçõe
 
 Sendo $\gamma_i$ uma constante positiva, a qual determina a velocidade da adaptação. \\
 
-Esta lei de adaptação pode ser explicada da seguinte maneira: $\underline{k}_i$ aumenta enquanto o sistema não atingir a região da camada limite. Enquanto o sistema estiver nesta região, $\underline{k}_i$ se mantém constante ou diminui a cada cruzamento com a superfície de escorregamento. Se o sistema estiver região da camada limite e $\underline{k}_i$ respeitar a inequação \eqref{eq:DesigualdadeK2_a1}, \eqref{eq:DesigualdadeK2_a2}, \eqref{eq:DesigualdadeK2_b1} ou \eqref{eq:DesigualdadeK2_b2} (dependendo da lei de controle utilizada), $\underline{k}_i$ irá dimunuir a cada cruzamento com a superfície de escorregamento, até que o sistema saia ligeiramente da região. Assim que o sistema sair da região, $\underline{k}_i$ irá aumentar até o sistema atingi-la novamente, repetindo este ciclo infinitamente, com $\underline{k}_i$ variando em uma faixa de valores muito próxima do menor valor possível para que o sistema se mantenha na região da camada limite.
+Esta lei de adaptação pode ser explicada da seguinte maneira: $\underline{k}_i$ aumenta enquanto o sistema não atingir a região da camada limite. Enquanto o sistema estiver nesta região, $\underline{k}_i$ se mantém constante ou diminui a cada cruzamento com a superfície de escorregamento. Se o sistema estiver região da camada limite e $\underline{k}_i$ respeitar a inequação \eqref{eq:DesigualdadeK2_a1}, \eqref{eq:DesigualdadeK2_a2}, \eqref{eq:DesigualdadeK2_b1} ou \eqref{eq:DesigualdadeK2_b2} (dependendo da lei de controle utilizada), $\underline{k}_i$ irá diminuir a cada cruzamento com a superfície de escorregamento, até que o sistema saia ligeiramente da região. Assim que o sistema sair da região, $\underline{k}_i$ irá aumentar até o sistema atingi-la novamente, repetindo este ciclo infinitamente, com $\underline{k}_i$ variando em uma faixa de valores muito próxima do menor valor possível para que o sistema se mantenha na região da camada limite.
 
 %RESULTADOS------------------------------------------------------------------------------------------
 \part{Resultados}

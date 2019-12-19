@@ -64,8 +64,8 @@
 \contentsline {section}{\numberline {5.5}Simula\IeC {\c c}\IeC {\~a}o din\IeC {\^a}mica inversa}{76}
 \contentsline {chapter}{\numberline {6}Projeto dos controladores}{79}
 \contentsline {section}{\numberline {6.1}Lineariza\IeC {\c c}\IeC {\~a}o por Realimenta\IeC {\c c}\IeC {\~a}o (LR)}{79}
-\contentsline {section}{\numberline {6.2}Controle por Torque Computado (CTC)}{80}
-\contentsline {section}{\numberline {6.3}Controle por Modos Deslizantes}{81}
+\contentsline {section}{\numberline {6.2}Controle por Torque Computado (TC)}{80}
+\contentsline {section}{\numberline {6.3}Controle por Modos Deslizantes (MD)}{81}
 \contentsline {subsection}{\numberline {6.3.1}Dedu\IeC {\c c}\IeC {\~a}o das leis de controle}{81}
 \contentsline {subsection}{\numberline {6.3.2}Camada Limite}{88}
 \contentsline {subsection}{\numberline {6.3.3}Ganho adaptativo}{88}

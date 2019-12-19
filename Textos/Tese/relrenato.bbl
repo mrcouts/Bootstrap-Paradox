@@ -32,7 +32,7 @@ de arquitetura paralela assim\'etrica de tr\^es graus de liberdade.
 \newblock {\em Tese (Doutorado) - Escola Polit\'ecnica da Universidade de
 S\~ao Paulo. Departamento de Engenharia Mecatr\^onica e de
 Sistemas Mec\^anicos},
-  2013. 
+  2013.
 
 \bibitem{20altuzarra}
 O. Altuzarra, P. M. Eggers, F. J. Campa, C. Roldan-Paraponiaris, C. Pinto.
@@ -354,6 +354,11 @@ J-P. Merlet.
 J-P. Merlet, C. Gosselin.
 \newblock Parallel Mechanisms and Robots.
 \newblock {\em Springer Handbook of Robotics}, Edited by B. Siciliano and O. Khatib, 269--286, 2008.
+
+\bibitem{Monsees}
+G. Monsees.
+\newblock Discrete-Time Sliding Mode Control.
+\newblock {\em Doctoral Thesis - Delft University of Technology}, 2002. 
 
 \bibitem{Nikravesh}
 P. E. Nikravesh.
