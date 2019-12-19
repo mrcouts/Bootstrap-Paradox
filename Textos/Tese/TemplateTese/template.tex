@@ -3417,7 +3417,7 @@ O mecanismo 5R (figura \ref{fig:5R}) será modelado através do acoplamento de 2
 
 \subsection{Modelo do efetuador}
 
-De acordo com as equações \eqref{eq:Newton-EulerMat2E}, \eqref{eq:M_efetuador}, \eqref{eq:v_efetuador} e \eqref{eq:g_efetuador}, os parâmetro $m_0$ (massa do efetuador) e $\mgamma$ definem o modelo do efetuador.
+De acordo com as equações \eqref{eq:Newton-EulerMat2E}, \eqref{eq:M_efetuador}, \eqref{eq:v_efetuador} e \eqref{eq:g_efetuador}, os parâmetros $m_0$ (massa do efetuador) e $\mgamma$ definem o modelo do efetuador.
 
 
 
@@ -3489,9 +3489,9 @@ O vetor gravidade será considerado na direção e sentido do eixo $z$ (perpendi
 
 \subsection{Arquitetura do mecanismo paralelo}
 
-É possível relacionar as coordenadas um ponto no espaço descrito no sistema $\ttN$ com as coordenadas do mesmo ponto escritas nos sistemas $\ttN_1$ e $\ttN_2$ da seguinte maneira:
+É possível relacionar as coordenadas um ponto no espaço descrito no sistema $\ttN_0$ com as coordenadas do mesmo ponto escritas nos sistemas $\ttN_1$ e $\ttN_2$ da seguinte maneira:
 \begin{equation}
-\vct{\ttp}_{\ttN} = \begin{bmatrix}
+\vct{\ttp}_{\ttN_0} = \begin{bmatrix}
 1 & 0 & 0 \\
 0 & 1 & 0 \\
 0 & 0 & 1 \\
@@ -3506,7 +3506,7 @@ l_0 \\
 \end{bmatrix}
 \end{equation}
 \begin{equation}
-\vct{\ttp}_{\ttN} = \begin{bmatrix}
+\vct{\ttp}_{\ttN_0} = \begin{bmatrix}
 -1 & 0 & 0 \\
 0 & 1 & 0 \\
 0 & 0 & -1 \\
@@ -3523,7 +3523,7 @@ l_0 \\
 
 Escolhendo o ponto $\ttp$ como sendo o efetuador do mecanismo paralelo, o qual tem a mesma localização dos efetuadores das cadeias serias neste caso, temos:
 \begin{equation}
-\mq\ssh = 
+\mq_0 = 
 \begin{bmatrix}
 1 & 0 & 0 \\
 0 & 1 & 0 \\
@@ -3539,7 +3539,7 @@ l_0 \\
 \end{bmatrix}
 \end{equation}
 \begin{equation}
-\mq\ssh = 
+\mq_0 = 
 \begin{bmatrix}
 -1 & 0 & 0 \\
 0 & 1 & 0 \\
@@ -3567,7 +3567,7 @@ Sendo assim, temos que os vínculos de posição são dados por:
 0 & 0 & 1 \\
 \end{bmatrix}
 \cdot
-\mq^*
+\mq_0
 -
 \begin{bmatrix}
 1 & 0 & 0 & 0 & 0 & 0 \\
@@ -3578,7 +3578,7 @@ Sendo assim, temos que os vínculos de posição são dados por:
 0 & 0 & 0 & 0 & 0 & -1 \\
 \end{bmatrix}
 \cdot
-\mx(\mq\cir)
+\mx(\mq_\emptyset)
 -
 \begin{bmatrix}
 l_0 \\
@@ -3667,15 +3667,19 @@ Sendo assim, temos que as matrizes $\mQ\ssh$ e $\mQ\cir$ são dadas por:
 0 & 0 \\
 0 & 0 \\
 0 & 0 \\
+0 & 0 \\
+0 & 0 \\
 \end{bmatrix}
 \end{equation} \\
 \begin{equation}
 \mQ\cir = \begin{bmatrix}
-0 & 0 & 0 \\
-0 & 0 & 0 \\
-1 & 0 & 0 \\
-0 & 1 & 0 \\
-0 & 0 & 1 \\
+0 & 0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 & 0 \\
+1 & 0 & 0 & 0 & 0 \\
+0 & 1 & 0 & 0 & 0 \\
+0 & 0 & 1 & 0 & 0 \\
+0 & 0 & 0 & 1 & 0 \\
+0 & 0 & 0 & 0 & 1 \\
 \end{bmatrix}
 \end{equation}
 \end{multicols}
@@ -3738,13 +3742,13 @@ $$ \underline{k}_p = \lambda^2 \mone $$
 $$ \underline{k}_v = 2\lambda \mone $$
 $$ \lambda = 40 \, rad/s $$
 
-Os parâmetros controle por torque computado foram escolhidos de modo que a dinâmica do erro se comporte como uma dinâmica de segunda ordem com amortecimento crítico. O valor de $\lambda$ foi escolhido para o tempo de assentamento do erro de controle seja de $0.1s$, o que é razoável para um sistema mecânico.
+Os parâmetros do Controle por Torque Computado foram escolhidos de modo que a dinâmica do erro de controle se comporte como uma dinâmica de segunda ordem com amortecimento crítico. O valor de $\lambda$ foi escolhido para o tempo de assentamento do erro de controle seja de $0.1s$, o que é razoável para um sistema mecânico.
 
 \subsubsection{Simulações}
 
 Nas figuras \ref{fig:Torque1_0} a \ref{fig:ey_40} são apresentados os resultados de 3 simulações dinâmicas diretas do mecanismo 5R, considerando 3 níveis de incerteza do modelo: 0\%, 20\% e 40\%. Todas as simulações são realizadas utilizando a lei de Control por Torque Computado apresentada na seção \ref{sec:CTC}, utilizando os parâmetros definidos acima.
 
-Nos gráficos pode-se claramente observar o aumento do esforço de controle conforme o nível de incerteza cresce. Também é possível observar que o perfil do erro na coordenada $x$ não sofreu muita inflência do aumento do nível de incerteza, enquando o perfil do erro em $y$ muda bastante de formato.
+Nos gráficos pode-se claramente observar o aumento do esforço de controle conforme o nível de incerteza cresce. Também é possível observar que o perfil do erro na coordenada $x$ não sofreu muita influência com o aumento do nível de incerteza, enquando o perfil do erro em $y$ muda bastante de formato.
 
 \newpage
 
