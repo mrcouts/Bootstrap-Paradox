@@ -3690,25 +3690,30 @@ Para realizar a simulação dinâmica direta, definimos:
 
 \subsubsection{Parâmetros do modelo}
 
-Definimos os seguinte parâmetros para o modelo o mecanismo em questão:
+Definimos os seguinte parâmetros para o modelo o mecanismo em questão na tabela \ref{tab:parametrosSimulacao}:
 
-\begin{multicols}{2}
-\begin{itemize}
-\item[-] $l_1 = 0.12 m$
-\item[-] $l_2 = 0.15 m$
-\item[-] $l_{g1} = 0.06 m$
-\item[-] $l_{g2} = 0.075  m$
-\item[-] $m_0 = 0 \, kg$
-\item[-] $m_1 = 0.143  kg$
-\item[-] $m_2 = 0.171  kg$
-\item[-] $Jz_1 = 171.6 10^{-6} kg\cdot m^2$
-\item[-] $Jz_2 = 320.6 10^{-6} kg\cdot m^2$ \\
-\end{itemize}
-\end{multicols}
+\begin{table}[H] 
+\centering
+\caption{Parâmetros do mecanismo}
+\label{tab:parametrosSimulacao}
+\begin{tabular}{l|l|l}
+Parâmetros   & Valores                  & Unidades      \\ \hline
+$l_0$        & $0.050$                     & $m$        \\
+$l_1$        & $0.120$                     & $m$        \\
+$l_2$        & $0.150$                     & $m$        \\
+$l_{g1}$     & $0.060$                     & $m$        \\
+$l_{g2}$     & $0.075$                    & $m$        \\
+$m_0$        & $0.000$                    & $kg$       \\
+$m_1$        & $0.143$                    & $kg$       \\
+$m_2$        & $0.171$                    & $kg$       \\
+$J_{z1}$     & $1.716 \cdot 10^{-4}$    & $kg.m^{2}$ \\
+$J_{z2}$     & $3.206 \cdot 10^{-4}$    & $kg.m^{2}$ \\
+\end{tabular}
+\end{table}
 
 \subsubsection{Espaço de trabalho}
 
-Dados os parâmetros geométricos defidos acima, obtemos o seguinte espaço de trabalho para o mecanismo (figura \ref{fig:RRWS}):
+Dados os parâmetros geométricos definidos na tabela \ref{tab:parametrosSimulacao}, obtemos o seguinte espaço de trabalho para o mecanismo (figura \ref{fig:RRWS}):
 
 \begin{figure}[h]
 	\centering
@@ -3717,23 +3722,23 @@ Dados os parâmetros geométricos defidos acima, obtemos o seguinte espaço de t
 	\label{fig:RRWS}
 \end{figure}
 
-A região em azul escuro é a região não pertencente ao espaço de trabalho do mecanismo. As regiões em azul claro, em amarelo, e em vermelho são regiões pertencententes ao espaço do mecanismo. A região a amarela é considerada singular (próxima a singularidades) e a vermelha é a trajetória a ser seguida pelo mecanismo.
+A região em azul escuro é a região não pertencente ao espaço de trabalho do mecanismo. As regiões em azul claro, em amarelo, e em vermelho são regiões pertencententes ao espaço de trabalho do mecanismo. A região a amarela é considerada singular (próxima a singularidades) e a vermelha é a trajetória a ser seguida pelo mecanismo.
 
 \subsubsection{Condições iniciais}
 \begin{equation}
 \begin{cases}
-q\ssh_1(0) = 0.07 m\\
-q\ssh_2(0) = 0.17 m \\
-\dot{q}\ssh_1(0) = 0 \\
-\dot{q}\ssh_2(0) = 0 \\
+x(0) = 0.07 m\\
+y(0) = 0.17 m \\
+\dot{x}(0) = 0 \\
+\dot{y}(0) = 0 \\
 \end{cases}
 \end{equation}
 
 \subsubsection{Trajetória de referência}
 \begin{equation}
 \begin{cases}
-q\ssh_{1 \, d}(t) = 0.07 \cos(2 \pi t) \\
-q\ssh_{2 \, d}(t) = 0.17 + 0.07 \sin(2 \pi t) \\
+x_{d}(t) = 0.07 \cos(2 \pi t) \\
+y_{d}(t) = 0.17 + 0.07 \sin(2 \pi t) \\
 \end{cases}
 \end{equation}
 
@@ -3746,11 +3751,7 @@ Os parâmetros do Controle por Torque Computado foram escolhidos de modo que a d
 
 \subsubsection{Simulações}
 
-Nas figuras \ref{fig:Torque1_0} a \ref{fig:ey_40} são apresentados os resultados de 3 simulações dinâmicas diretas do mecanismo 5R, considerando 3 níveis de incerteza do modelo: 0\%, 20\% e 40\%. Todas as simulações são realizadas utilizando a lei de Control por Torque Computado apresentada na seção \ref{sec:CTC}, utilizando os parâmetros definidos acima.
-
-Nos gráficos pode-se claramente observar o aumento do esforço de controle conforme o nível de incerteza cresce. Também é possível observar que o perfil do erro na coordenada $x$ não sofreu muita influência com o aumento do nível de incerteza, enquando o perfil do erro em $y$ muda bastante de formato.
-
-\newpage
+Nas figuras \ref{fig:Torque1_0} a \ref{fig:ey_40} são apresentados os resultados de 3 simulações dinâmicas diretas do mecanismo 5R, considerando 3 níveis de incerteza do modelo: 0\%, 20\% e 40\%. Todas as simulações são realizadas utilizando a lei de Control por Torque Computado apresentada na seção \ref{sec:CTC}, utilizando os parâmetros definidos na tabela \ref{tab:parametrosSimulacao}.
 
 \begin{multicols}{2}
 \begin{figure}[H]
@@ -3844,7 +3845,7 @@ Nos gráficos pode-se claramente observar o aumento do esforço de controle conf
 \end{figure}
 \end{multicols}
 
-\newpage
+Nos gráficos pode-se claramente observar o aumento do esforço de controle conforme o nível de incerteza cresce. Também é possível observar que o perfil do erro na coordenada $x$ não sofreu muita influência com o aumento do nível de incerteza, enquando o perfil do erro em $y$ muda bastante de formato.
 
 Tendo em vista que o presente trabalho tem caráter experimental, as comparações entre o desempenho de diferentes estratégias de controle serão feitas baseadas nos resultados obtidos experimentalmente.
 
@@ -3860,8 +3861,8 @@ A bancada é constituída de:
 \item 2 motores DC modelo PM70 da AMETEK com as seguintes características:
 \begin{itemize}
 \item Corrente nominal de $13A$ 
-\item Torque nominal de $0,5Nm$
-\item Potência útil de $200W$
+\item Torque nominal de $0.5Nm$
+\item Potência nominal de $250W$
 \item Tensão de alimentação de $24V$
 \item Rotação nominal de $3600 rpm$
 \item Peso de $1.80 kgf$ 
@@ -3874,17 +3875,27 @@ A bancada é constituída de:
 \end{itemize}
 \item 1 driver modelo Pololu Dual VNH5019 Motor Driver Shield com as seguintes características.
 \begin{itemize}
-\item Tensões de operação: $5,5V$ a $24V$
+\item Tensão de operação: de $5.5V$ a $24V$
 \item Corrente de saída: até $12A$ contínuos (30A de pico)
 \item Dois canais de saída para motor
-\item Entrada de tensão do sistema pode ser tanto $5V$ quanto $3.3V$
+\item Entrada de tensão compatível com os padrões $5V$ e $3.3V$
 \item Frequência de operação do PWM de até $20kHz$
 \end{itemize}
 \item 1 Microprocessador responsável pela execução das malhas de controle. O modelo utilizado foi o \textit{Raspberry Pi 2 Model B} com as seguintes características:
 \begin{itemize}
 \item Processador: quadcore ARMv7
 \item 1GB RAM
-\item alimentação de $5V$, $2A$
+\item Alimentação de $5V$, $2A$
+\end{itemize}
+\item 1 Fonte de tensão chaveada com as seguintes características:
+\begin{itemize}
+\item Tensão nominal de $24V$
+\item Corrente saída de até $16.25A$
+\end{itemize}
+\item 1 Placa de conversão de níveis de tensão de fabricação própria com as seguintes características:
+\begin{itemize}
+\item Converte os $24V$ gerados pela fonte chaveada para $15V$, para alimentar os encoders
+\item Converte os níveis de tensão das saídas dos encoders de $0V-15V$ para $0V-3.3V$, para poder mandar os sinais do encoder para o \textit{Raspberry Pi}
 \end{itemize}
 \end{itemize}
 
@@ -3908,13 +3919,12 @@ Boa parte dos elementos da bancada podem ser vistos na figura \ref{fig:BancadaCl
 
 O sistema de controle é constituído de: 
 \begin{itemize}
-\item 2 derivadores para a obtencão da velocidade e aceleração dos motores
-\item Cálculo da corrente que passa pelos motores
-\item Malhas de controles, sendo uma linear (controle de corrente) e uma não linear 
+\item Derivadores numéricos para a obtencão da velocidade e aceleração dos motores
+\item Observadores das correntes que passam pelos motores
+\item Malhas de controles (malha de controle de corrente e malha de controle de posição) 
 \end{itemize} 
 
-Pelo enconder obtemos a posição dos motores, com os derivadores obtemos a velocidade e a acelaração. Esses três sinais juntos com suas respectivas referências são utilizadas na malha de controle não linear. A velocidade, junto com a tensão que é enviada ao motor são utilizadas para calcular a corrente que passa no motor. Com o erro entre o valor calculado e a corrente de referência, o controlador calcula e envia a tensão ao motor. Representações da arquitetura de controle no espaço das juntas e no espaço da tarefa podem ser vistas nas figuras \ref{fig:ControleEspacoDasJuntas} e \ref{fig:ControleEspacoDaTarefa}.
-
+Pelos enconders são obtidos os deslocamentos angulares dos motores, e com os derivadores numéricos são obtidos seus sinais de velocidade e acelaração. Esses três sinais juntos com suas respectivas referências são utilizados na malha de controle de posição. Os sinais de velocidade e de tensão que são enviados aos motores são utilizados para estimar as correntes que passam pelos motores. A partir dos erros entre o valores estimados e as correntes de referência, o controlador calcula, a partir da lei de controle, as tensões a serem enviadas aos motores. Representações das arquiteturas de controle implementadas, controle no espaço das juntas e no espaço da tarefa, podem ser vistas nas figuras \ref{fig:ControleEspacoDasJuntas} e \ref{fig:ControleEspacoDaTarefa}.
 
 \begin{figure}[H]
     \centering
@@ -3933,13 +3943,13 @@ Pelo enconder obtemos a posição dos motores, com os derivadores obtemos a velo
 \subsection{Derivadores numéricos}
 \label{derivador}
 
-A partir da posição angular obtida através da leitura do encoder, é possível determinar a velocidade utilizando um derivador numérico. Uma das formas de se obter o derivador é pelo método das diferenças finitas:
+A partir das posições angulares obtidas através da leitura dos encoders, é possível estimar as velocidades angulares dos motores utilizando um derivador numérico. Uma das formas de se implementar um derivador numérico é utilizar o método das diferenças finitas:
 
 \begin{equation}
 \dot{x}_k = \frac{x_k - x_{k-1}}{T}
 \end{equation}
 
-No entanto, como há ruídos nos sinais obtidos, a utilização  do método das diferenças finitas amplifica os ruídos de alta frequência. Diante disso, optamos por utilizar os derivadores em série com filtros passa-baixa tipo Bessel de segunda ordem (para o cálculo da velocidade a partir da posição) e oitava ordem (para o cálculo da aceleração a partir da velocidade).
+No entanto, como há ruídos nos sinais obtidos, a utilização  do método das diferenças finitas amplifica os ruídos de alta frequência. Diante disso, os derivadores numéricos foram utilizados em série com filtros passa-baixa tipo Bessel de segunda ordem (para a estimação da velocidade a partir da posição) e oitava ordem (para a estimação da aceleração a partir da velocidade).
 
 \subsection{Observador de corrente}
 
@@ -3952,7 +3962,7 @@ Para a estimação da corrente elétrica foi considerada a equacação da dinâm
 
 Esta equação pode interpretada como um sistema linear de primeira ordem com entrada $\upsilon - k_{e} \omega $ e polo em $s = -R/L$. Sendo assim, o sistema pode ser considerado naturalmente estável e pode ser utilizado um observador em malha aberta para estimar a corrente elétrica.
 
-Tendo em vista que a frequencia do polo deste sistema está em torno de 240Hz, muito acima das frequências em que o sistema mecânico opera, o observador de corrente será simplemente o cálculo da corrente considerando a equação \eqref{eq:DinamicaEletricaMotor} em retima permanente, ou seja, $\frac{di}{dt} = 0$. Com isso, obtemos a seguinte expressão para o observador de corrente:
+Tendo em vista que a frequencia do polo deste sistema está em torno de 240Hz, muito acima das frequências em que o sistema mecânico opera, o observador de corrente é implementado simplemente a partir do cálculo da corrente considerando a equação \eqref{eq:DinamicaEletricaMotor} em regime permanente, ou seja, $\frac{di}{dt} = 0$. Com isso, obtemos a seguinte expressão para o observador de corrente:
 
 \begin{equation}
 \label{corrente}
@@ -3963,13 +3973,13 @@ Tendo em vista que a frequencia do polo deste sistema está em torno de 240Hz, m
 
 Para implementar as técnicas de controle baseadas em modelo, é utilizado o algoritmo de modelagem proposto para tabelar os termos do modelo dinâmico que dependem apenas da posição.
 
-Tendo em vista que a matriz de inércia generalizada depende apenas da posição, e que a matriz coluna de forças de inércia giroscópicas pode ser expressa como a soma de matrizes coluna dependentes apenas da posição multiplicados por termos quadráticos das velocidades generalizadas, é feita uma discretização da área de trabalho, de modo a calcular o valor destas matrizes em um número finito de pontos e realizar interpolações em tempo real, de modo a obter um valor estimado desses termos da dinâmica em qualquer ponto não singular pertencente à area de trabalho.
+Tendo em vista que a matriz de inércia generalizada depende apenas da posição, e que a matriz coluna de esforços de inérciais giroscópicos pode ser expressa como a soma de matrizes coluna dependentes apenas da posição multiplicados por termos quadráticos das quasi-velocidades independentes, é feita uma discretização da área de trabalho, de modo a calcular o valor destas matrizes em um número finito de pontos e realizar interpolações em tempo real, de modo a obter um valor estimado desses termos da dinâmica em qualquer ponto não singular pertencente à area de trabalho.
 
-A discretização realizada aplica uma malha quadradiculada de lado $5mm$ na área de trabalho do mecanismo, de modo a calcular os termos da dinâmica comentados em cada ponto não singular que esteja na aresta de um dos quadrados.
+A discretização realizada aplica uma malha quadradiculada de lado $5mm$ na área de trabalho do mecanismo, de modo a calcular os termos da dinâmica comentados em cada ponto não singular pertencente à discretização.
 
 \subsection{Estratégias de controle}
 
-Serão realizados os ensaios experimentais utilizando as seguintes estratégias de controle:
+Foram realizados ensaios experimentais utilizando as seguintes estratégias de controle:
 
 \begin{itemize}
 \item Controle Proporcial-Derivativo com pré-alimentação no espaço das juntas (PDq)
@@ -3993,11 +4003,11 @@ Sendo:
 
 Repare que, para $\underline{k} = \mzr$, temos a lei de Controle por Torque Computado. Para $\underline{k} = \mzr$, $\hat{\mh} = \mzr$ e $\hat{\mH}$ constante e diagonal, temos uma lei de Controle Proporcional-Derivativo com pré-alimentação. Sendo assim, para $\underline{k} \neq \mzr$, podemos obter estas mesmas leis de controle, agora com um termo adicional de controle robusto vindo do Controle por Modos Deslizantes.
 
-Esta lei de controle tem a vantagem de, além de poder ser interpretada como uma estratégia híbrida, praticamente eliminar o fenômeno do \emph{chattering}, tendo em vista que o termo descontínuo é suavizado atravez de uma função de saturação e uma integral.
+Esta lei de controle tem a vantagem de, além de poder ser interpretada como uma estratégia híbrida, praticamente elimina o fenômeno do \emph{chattering}, tendo em vista que o termo descontínuo é suavizado atravez de uma função de saturação e uma integral.
 
 \subsection{Parâmetros do sistema}
 
-Nas tabelas \ref{tab:parametrosCadeia1} e \ref{tab:parametrosCadeia2} são apresentados os valores estimados dos parâmetros das cadeias seriais do mecanismo. A massa do efetuador é considerada nula. Os comprimentos dos elos e a distância entre os atuadores são os valores de projeto do sistema e estão de acordo com as medições realizadas. Os parâmetros as massas, momentos de inércia, e posição dos centros de massa foram obtidos a partir do modelo CAD do mecanismo. 
+Nas tabelas \ref{tab:parametrosCadeia1} e \ref{tab:parametrosCadeia2} são apresentados os valores estimados dos parâmetros das cadeias seriais do mecanismo. A massa do efetuador é considerada nula. Os comprimentos dos elos e a distância entre os atuadores são os valores de projeto do sistema e estão de acordo com as medições realizadas. Os parâmetros de inércias, ou seja, as massas, momentos de inércia, e posição dos centros de massa, foram obtidos a partir do modelo CAD do mecanismo. 
 
 \begin{table}[H] 
 \centering
@@ -4041,12 +4051,12 @@ Os valores dos parâmetros estimados dos motores são apresentados nas tabelas \
 
 \subsection{Trajetórias de referência}
 
-A primeira trajetória a ser realizada é uma trajetória circular com período de 1 segundo. Serão realizados 8 ciclos seguidos de uma parada repentina. Sua expressão é dada por:
+A primeira trajetória realizada é uma trajetória circular com período de 1 segundo. São realizados 8 ciclos seguidos de uma parada repentina. Sua expressão é dada por:
 
 \begin{equation}
 \begin{cases}
-x_d(t) = -0.05 \cos(2\pi t) \\
-y_d(t) = 0.158 - 0.05 \sin(2\pi t) \\
+x_d(t) = -0.05 \sin(2\pi t) \\
+y_d(t) = 0.158 - 0.05 \cos(2\pi t) \\
 \end{cases}
 \end{equation}
 
@@ -4068,7 +4078,7 @@ A segunda trajetória a ser realizada é uma trajetória triangular cujas coorde
 \end{bmatrix}^\msT
 \end{equation}
 
-Serão realizados 2 ciclos, sendo que cada lado do triângulo é percorrido em $0.75s$, e sendo o trecho I de $\mx_1$ a $\mx_2$, o trecho II de $\mx_2$ a $\mx_3$, e o trecho III de $\mx_3$ a $\mx_1$. Depois de completar os 2 ciclos, será feita uma parada suave. Em cada lado do triângulo, é parametrizada uma trajetória polinomial de sétima ordem, na qual é imposta a posição inicial e final, velocidade nula, aceleração nula e tranco nulo no início e no final da trajetória. A expressão do polinômio é dada por:
+São realizados 2 ciclos, sendo que cada lado do triângulo é percorrido em $0.75s$, e sendo o trecho I de $\mx_1$ a $\mx_2$, o trecho II de $\mx_2$ a $\mx_3$, e o trecho III de $\mx_3$ a $\mx_1$. Depois de completar os 2 ciclos, é feita uma parada suave. Em cada lado do triângulo, é parametrizada uma trajetória polinomial de sétima ordem, na qual é imposta a posição inicial e final, velocidade nula, aceleração nula e tranco nulo no início e no final da trajetória. A expressão do polinômio é dada por:
 
 \begin{equation}
 \mx(\mathfrak{t}) = \mx_0 + (\mx_f - \mx_0) (35 \mathfrak{t}^4 - 84 \mathfrak{t}^5 + 70 \mathfrak{t}^6 - 20 \mathfrak{t}^7)
@@ -4129,11 +4139,11 @@ TCMDx      & $60$               & -         & $6$           & $103$        & $0$
 \end{tabular}
 \end{table}
 
-Além disso, os controladores de corrente utilizados serão controladores lineares se segunda ordem, projetados por alocação de polos. A expressões das funções de transferência de um motor DC são deduzidas e apresentadas no apêndice \ref{chap:FuncoesDeTransferencia}, e o projeto do controlador é apresentado no apêndice \ref{chap:ControladorDeCorrente}. Tendo em vista que o período de amostragem da malha de corrente é de $1ms$, 3 dos pólos 4 polos da malha de corrente são alocados em $z=0$, $z=0.6$, $z=0.7$. O último polo é alocado na mesma posição do zero em malha aberta do sistema.
+Além disso, os controladores de corrente utilizados são controladores lineares de segunda ordem, projetados por alocação de polos. A expressões das funções de transferência de um motor DC são deduzidas e apresentadas no apêndice \ref{chap:FuncoesDeTransferencia}, e o projeto do controlador é apresentado no apêndice \ref{chap:ControladorDeCorrente}. Tendo em vista que o período de amostragem da malha de corrente é de $1ms$, 3 dos pólos 4 polos da malha de corrente são alocados em $z=0$, $z=0.6$, $z=0.7$. O último polo é alocado na mesma posição do zero em malha aberta do sistema.
 
 \subsection{Resultados experimentais}
 
-Nesta subsessão serão apresentados os gráficos de seguimento de trajetória, da evolução temporal dos erros de controle em $x$ e $y$, e da evolução temporal dos esforços de controle para todas as 8 estratégias de controle definidas, tanto para a trajetória circular, quanto para a trajetória triangular (figuras de \ref{fig:PIDq_circulo_xy} a \ref{fig:SMCx_triangulo_tau2}). Também são apresentadas tabelas de comparação de desempenho e será feita a discussão dos resultados.
+Nesta subsessão são apresentados os gráficos de seguimento de trajetória, da evolução temporal dos erros de controle em $x$ e $y$, e da evolução temporal dos esforços de controle para todas as 8 estratégias de controle definidas, tanto para a trajetória circular, quanto para a trajetória triangular (figuras de \ref{fig:PIDq_circulo_xy} a \ref{fig:SMCx_triangulo_tau2}). Também são apresentadas tabelas de comparação de desempenho e é feita a discussão dos resultados.
 
 \newpage
 
@@ -4793,7 +4803,7 @@ TCx $\rightarrow$ TCMDx & $-22.1\%$ & $23.1\%$               \\
 
 \begin{table}[H] 
 \centering
-\caption{Aumento/diminuição dos valores eficazes de erro e esforço de controle utilizando a associação com o SMC - Trajetória triangular}
+\caption{Aumento/diminuição dos valores eficazes de erro e esforço de controle utilizando a associação com o MD - Trajetória triangular}
 \label{tab:valoresEficazesCombTriangulo}
 \begin{tabular}{l|c|c}
 Estratégia              & $e_{ef}$          & $\tau_{ef} $ \\ \hline
@@ -4840,27 +4850,29 @@ TCMDx      & $ 0.009$   & $ 0.271$   & $0.271$  \\
 \end{tabular}
 \end{table}
 
-\subsubsection{Discussão dos resultados}
+\subsection{Discussão dos resultados}
 
 À partir dos gráficos de seguimento de trajetória, evolução temporal dos erros e esforços de controle, e das tabelas comparativas apresentadas, é possível tirar algumas conclusões sobre as técnicas de controle implementadas.
 
-Primeiramente, analisando as tabelas \ref{tab:valoresEficazesCirculo} e \ref{tab:valoresEficazesTriangulo}, é possível perceber que em todos os casos a associção das técnicas de controle PD e TC com o MD obteve uma diminuição no valores eficazes do erro de controle. Na trajetória circular, essa associação teve como consequência um aumento perceptível no valor eficaz do esforço de controle, como pode ser visto na tabela \ref{tab:valoresEficazesCombCirculo}, enquanto que, na trajetória triangular, as estratégias de controle no espaço das juntas tiveram um aumento bem mais sutil, e as estratégias no espaço tarefa tiveram até uma pequena diminuição no custo energético, como pode ser visto na tabela \ref{tab:valoresEficazesCombTriangulo}. De qualquer maneira, mesmo nos casos em que houve aumento no custo energértico, a utilização da associação de técnicas pode ser considerada vantajosa, tendo em vista que, como foi constatado experimentalmente, um aumento de $5rad/s$ nos valores utilizados do parâmetro $\lambda$  já seria o suficiente para comprometer a estabilidade do sistema em todas as estratégias de controle utilizadas, então pode-se concluir que a associação com o MD é uma maneira eficiente de diminuir o erro de seguimento de trajetória sem comprometer a estabilidade do sistema.  
+Primeiramente, analisando as tabelas \ref{tab:valoresEficazesCirculo} e \ref{tab:valoresEficazesTriangulo}, é possível perceber que em todos os casos a associção das técnicas de controle PD e TC com o MD obteve uma diminuição nos valores eficazes do erro de controle. Na trajetória circular, essa associação teve como consequência um aumento perceptível no valor eficaz do esforço de controle, como pode ser visto na tabela \ref{tab:valoresEficazesCombCirculo}, enquanto que, na trajetória triangular, as estratégias de controle no espaço das juntas tiveram um aumento bem mais sutil, e as estratégias no espaço tarefa tiveram até uma pequena diminuição no custo energético, como pode ser visto na tabela \ref{tab:valoresEficazesCombTriangulo}. De qualquer maneira, mesmo nos casos em que houve aumento no custo energértico, a utilização da associação de técnicas pode ser considerada vantajosa, tendo em vista que, como foi constatado experimentalmente, um aumento de $5rad/s$ nos valores utilizados do parâmetro $\lambda$  já seria o suficiente para comprometer a estabilidade do sistema em todas as estratégias de controle utilizadas, então pode-se concluir que a associação com o MD é uma maneira eficiente de diminuir o erro de seguimento de trajetória sem comprometer a estabilidade do sistema.  
 
-Outro resultado interessante que vale a pena ser comentado é a diminuição do erro estacionário de posição obtida com a utilização da associação das técnicas de controle PD e TC com o MD. Como pode ser observado nas tabelas \ref{tab:valorFinalCirculo} e \ref{tab:valorFinalTriangulo}, em todos os casos, com excessão do PDq na trajetória circular e do TCx na trajetória triangular, houve uma diminuição significativa do erro de posição com a utilização da associação de técnicas. No caso do TCx na trajetória triangular, houve uma diminuição significativa do erro de posição na direção $x$, mas não na direção $y$. Isso pode ser explicado pelo simples fato de ter sido utilizado um valor nulo para $k_2$ nessa estratégia de controle, o que significa que o MD teoricamente só estaria atuando na direção $x$. Esse comportamento de atuar no sentido de o erro estacionário de posição praticamente zerar pode ser facilmente observado nas figuras \ref{fig:SMCq_circulo_ex} , \ref{fig:SMCq_circulo_ey}, \ref{fig:PIDSMCx_circulo_ex}, \ref{fig:PIDSMCq_triangulo_ex} e \ref{fig:SMCq_triangulo_ey}, e tem características similares às técnicas de controle que utilizam a integral do erro de controle com esse intuito, com a vantagem da associação com o MD não degradar o desempenho do sistema durante a trajetória (muito pelo contrário) e de não necessitar da utilização de técnicas de \emph{anti-windup} para garantir a estabilidade do sistema no caso de saturação nos esforços de controle.
+Outro resultado interessante que vale a pena ser comentado é a diminuição do erro estacionário de posição obtida com a utilização da associação das técnicas de controle PD e TC com o MD. Como pode ser observado nas tabelas \ref{tab:valorFinalCirculo} e \ref{tab:valorFinalTriangulo}, em todos os casos, com excessão do PDq na trajetória circular e do TCx na trajetória triangular, houve uma diminuição significativa do erro de posição com a utilização da associação de técnicas. No caso do TCx na trajetória triangular, houve uma diminuição significativa do erro de posição na direção $x$, mas não na direção $y$. Isso pode ser explicado pelo simples fato de ter sido utilizado um valor nulo para $k_2$ nessa estratégia de controle, o que significa que o MD teoricamente só estaria atuando na direção $x$. Esse comportamento de atuar no sentido de o erro estacionário de posição praticamente zerar pode ser facilmente observado nas figuras \ref{fig:SMCq_circulo_ex}, \ref{fig:SMCq_circulo_ey}, \ref{fig:PIDSMCx_circulo_ex}, \ref{fig:SMCx_circulo_ex}, \ref{fig:SMCq_triangulo_ex}, \ref{fig:SMCq_triangulo_ey}, \ref{fig:PIDSMCx_triangulo_ex} e \ref{fig:SMCx_triangulo_ex}, e tem características similares às técnicas de controle que utilizam a integral do erro de controle com este intuito, com a vantagem da associação com o MD não degradar o desempenho do sistema durante a trajetória (muito pelo contrário) e de não necessitar da utilização de técnicas de \emph{anti-windup} para garantir a estabilidade do sistema no caso de saturação nos esforços de controle.
 
-Mais uma vez, analisando as tabelas \ref{tab:valoresEficazesCirculo} e \ref{tab:valoresEficazesTriangulo}, pode-se observar que, em relação ao consumo energético, não há uma diferença tão signiticativa entre as estratégias de controle, principalmente na trajetória circular. As estratégias com maior consumo energético são TCx e TCMDx na trajetória circular, e PDq e PDMDq em na trajetória triangular. As estratégias com menor consumo energético são PDq e PDMDq na trajetória circular, e TCq e TCMDx na trajetória triangular. Além disso, em relação aos valores eficazes dos erros de controle, pode-se observar que há diferenças bem mais significativas. As estratégias com os maiores valores eficazes de erro de controle são PDq e PDMDq em ambas as trajetórias. Já as estratégias com os menores valores eficazes de erro de controle são TCMDx em ambas as trajetórias, PDMDx na trajetória circular, e TCMDq na trajetória na trajetória triangular.
+Mais uma vez, analisando as tabelas \ref{tab:valoresEficazesCirculo} e \ref{tab:valoresEficazesTriangulo}, pode-se observar que, em relação ao consumo energético, não há uma diferença tão signiticativa entre as estratégias de controle, principalmente na trajetória circular. As estratégias com maior consumo energético são PDMDx e TCMDx na trajetória circular, e PDq e PDMDq na trajetória triangular. As estratégias com menor consumo energético são PDq e PDMDq na trajetória circular, e TCq e TCMDx na trajetória triangular. Além disso, em relação aos valores eficazes dos erros de controle, pode-se observar que há diferenças bem mais significativas. As estratégias com os maiores valores eficazes de erro de controle são PDq e PDMDq em ambas as trajetórias. Já as estratégias com os menores valores eficazes de erro de controle são TCMDx em ambas as trajetórias, PDMDx na trajetória circular, e TCMDq na trajetória na trajetória triangular.
 
 Também vale a pena comentar o comportamento das estratégias de controle na parte do regime transiente na trajetória circular (partida e parada bruscas). Analisando os gráficos de evolução temporal de erro de controle, é bastante nítido que a estrátégia PDx é a que apresenta o menor erro em regime transiente (figuras \ref{fig:PIDx_circulo_ex} e \ref{fig:PIDx_circulo_ey}), seguida da PDMDx (figuras \ref{fig:PIDSMCx_circulo_ex} e \ref{fig:PIDSMCx_circulo_ey}). Além disso, pode-se observar que, nesse quesito, as estratégias de controle híbridas (associadas ao MD) apresentam um desempenho levemente inferior às não híbridas.
 
-Um comportamento interessante que foi observado na trajetória circular. Percebe-se que, para as estratégias PDq e PDMDq, o erro de seguimento de trajetória é maior nos trechos II e III (figuras \ref{fig:PIDq_circulo_xy} e \ref{fig:PIDSMCq_circulo_xy}), enquanto que para TCq, TCMCq, TCx e TCMDx, o erro está mais concentrado no trecho I (figuras \ref{fig:CTCq_circulo_xy}, \ref{fig:SMCq_circulo_xy}, \ref{fig:CTCx_circulo_xy} e \ref{fig:SMCx_circulo_xy}), e para PDx e PDMDx o erro está mais concentrado no trecho II (figuras \ref{fig:PIDx_circulo_xy} e \ref{fig:PIDSMCx_circulo_xy}).
+Um comportamento interessante foi observado na trajetória circular. Percebe-se que, para as estratégias PDq e PDMDq, o erro de seguimento de trajetória é maior nos trechos I e III (figuras \ref{fig:PIDq_triangulo_xy} e \ref{fig:PIDSMCq_triangulo_xy}), enquanto que para TCq, TCMCq, TCx e TCMDx, o erro está mais concentrado no trecho I (figuras \ref{fig:CTCq_triangulo_xy}, \ref{fig:SMCq_triangulo_xy}, \ref{fig:CTCx_triangulo_xy} e \ref{fig:SMCx_triangulo_xy}), e para PDx e PDMDx o erro está mais concentrado no trecho II (figuras \ref{fig:PIDx_triangulo_xy} e \ref{fig:PIDSMCx_triangulo_xy}).
 
 Outros fenômenos interessantes observados são que a utilização da associção das técnicas de controle com o MD em geral adiciona harmônicos nas respostas temporais dos erros de controle e gera um efeito similar ao efeito de batimento, fazendo com que os os valores de pico dos erros variem como se estivessem seguindo uma envoltória senoidal de baixa frequências. Estes fenômenos podem ser facilmente observados nas figuras \ref{fig:PIDSMCq_circulo_ex}, \ref{fig:PIDSMCq_circulo_ey}, \ref{fig:SMCq_circulo_ex}, \ref{fig:SMCq_circulo_ey}, \ref{fig:PIDSMCx_circulo_ex} e \ref{fig:SMCx_circulo_ex}.
 
-Outro efeito interessante que foi observado foi a diminuição dos valores de pico de erro de controle nas trajetórias triangulares, normalmente seguido de um efeito de \emph{undershoot}, quando foi utilizada a associação com o MD. Isso pode ser facilmente observado nas figuras \ref{fig:SMCq_circulo_ex}, \ref{fig:SMCq_circulo_ey}, \ref{fig:PIDSMCx_circulo_ex} e \ref{fig:SMCx_circulo_ex}.
+Outro efeito interessante que foi observado foi a diminuição dos valores de pico de erro de controle nas trajetórias triangulares, normalmente seguido de um efeito de \emph{undershoot}, quando foi utilizada a associação com o MD. Isso pode ser facilmente observado nas figuras \ref{fig:SMCq_triangulo_ex}, \ref{fig:SMCq_triangulo_ey}, \ref{fig:PIDSMCx_triangulo_ex} e \ref{fig:SMCx_triangulo_ex}.
 
-Não se pode deixar de mencionar o desempenho surpreendetemente bom das estratégias PDx e PDMDx, muito superior ao desempenho das estratégias PDq e PDMDq. Na trajetória circular, a estratégia PDMDx obteve o menor valor eficaz de erro de controle e o menor valor de erro estacionário, e a estratégia PDx apresentou menor valor eficaz de erro de controle e o menor valor de erro estacionário que as estratégias TCq e TCx, como pode ser visto nas tabelas \ref{tab:valoresEficazesCirculo} e \ref{tab:valorFinalCirculo}. Já na trajetória triangular, apesar dessas estratégias também apresentarem bom desempenho, a estratégia PDMDx já não mais supera as estratégias TCMDq e TCMDx em relação aos valores eficazes de erro de controle, e a estratégia PDx também já não mais supera as estratégias TCMDq e TCMDx em relação aos valores eficazes de erro de controle TCq e TCx nesse mesmo quesito. Isso pode ser explicado pelo fato de que o valor de $m^*$ utilizado nas estratégias PDx e PDMDx foi baseado na matriz de inércia generalizada escrita no espaço tarefa calculada no centro da trajetória circular, a qual é praticamente diagonal com as componentes da diagonal muito próximas. Sendo assim, o modelo de inércia equivalente constante é muito mais válido para a trajetória circular do que para a trajetória triangular, a qual se afasta muito mais do centro do círculo. Além disso, como o ponto de partida das trajetórias é relativamente próximo de uma região singularidades, as matrizes de inércia generaliza estimadas possuem valores mais altos nesse ponto, o que limita um pouco o maior valor de $\lambda$ que pode ser escolhido de modo a garantir a estabilidade do sistema nas estratégias TCq, TCx, TCMDq e TCMDx, enquanto que nas estratégias PDx e PDMDx a matriz de inércia generaliza estimada é constante e não possue valores tão altos, o que permitiu a utilização de um maior valor de $\lambda$ sem afetar a estabilidade de sistema, o que contribui imensamente para a obtenção de menores valores de erros de controle. Isso também explica o fenômeno do todas as estratégias de controle terem um erro relativamente grande no trecho I, como excessão de PDx e PDMDx, se o ponto $\mx_1$ fosse mais afastado das singularidades, muito provavelmente os valores de erro nesse trecho seriam muito inferiores. Além disso, vale comentar que, além de serem competitivas em relação ao erro de controle, as estratégias PDx e PDMDx são competitivas em relação ao consumo energético, tendo em vista que que ambas apresentam valores intermediários de consume energético em ambas as trajetórias.
+Não se pode deixar de mencionar o desempenho surpreendentemente bom das estratégias PDx e PDMDx, muito superior ao desempenho das estratégias PDq e PDMDq. Na trajetória circular, a estratégia PDMDx obteve o menor valor eficaz de erro de controle e o menor valor de erro estacionário, e a estratégia PDx apresentou um menor valor eficaz de erro de controle e um menor valor de erro estacionário que as estratégias TCq e TCx, como pode ser visto nas tabelas \ref{tab:valoresEficazesCirculo} e \ref{tab:valorFinalCirculo}. Já na trajetória triangular, apesar dessas estratégias também apresentarem bom desempenho, a estratégia PDMDx já não mais supera as estratégias TCMDq e TCMDx em relação aos valores eficazes de erro de controle, e a estratégia PDx também já não mais supera as estratégias TCMDq e TCMDx em relação aos valores eficazes de erro de controle nesse mesmo quesito.
 
-Por fim, vale fazer a comparação entre o controle no espaço das juntas e o controle no espaço da tarefa. Analisando as tabelas \ref{tab:valoresEficazesCirculo} e \ref{tab:valoresEficazesTriangulo}, pode-se observar que claramente as estratégias PD e PDMD se mostram muito mais eficazes no espaço da tarefa do que no espaço das juntas, tendo em vista a grande diferença nos valores eficazes dos erros de controle e da pequena diferença no custo energético. Já em relação às estratégias TC e TCMD, não há uma diferença de eficiência considerável comparando os dois espaços de trabalho, tendo em vista que na trajetória circular as estratégias no espaço das juntas se mostram ligeiramente superiores, enquando na trajetória circular as estratégias no espaço da tarefas se mostram um pouco superiores.
+O desempenho surpreendentemente bom do PDx e do PDMDx pode ser explicado pelo fato de que o valor de $m^*$ utilizado nas estratégias PDx e PDMDx foi baseado na matriz de inércia generalizada escrita no espaço tarefa calculada no centro da trajetória circular, a qual é praticamente diagonal com as componentes da diagonal muito próximas. Sendo assim, o modelo de inércia equivalente constante é muito mais válido para a trajetória circular do que para a trajetória triangular, a qual se afasta muito mais do centro do círculo. Além disso, como o ponto de partida das trajetórias é relativamente próximo de uma região quase singular, as matrizes de inércia generaliza estimadas possuem valores mais altos nesse ponto, o que limita um pouco o maior valor de $\lambda$ que pode ser escolhido de modo a garantir a estabilidade do sistema nas estratégias TCq, TCx, TCMDq e TCMDx, enquanto que nas estratégias PDx e PDMDx a matriz de inércia generaliza estimada é constante e não possue valores tão altos, o que permitiu a utilização de um maior valor de $\lambda$ sem afetar a estabilidade de sistema, o que contribui imensamente para a obtenção de menores valores de erros de controle. Isso também explica o fenômeno de todas as estratégias de controle terem um erro relativamente grande no trecho I, com excessão de PDx e PDMDx. Se o ponto $\mx_1$ fosse mais afastado das singularidades, muito provavelmente os valores de erro nesse trecho seriam muito inferiores. Além disso, vale comentar que, além de serem competitivas em relação ao erro de controle, as estratégias PDx e PDMDx são competitivas em relação ao consumo energético, tendo em vista que ambas apresentam valores intermediários de consumo energético em ambas as trajetórias.
+
+Por fim, vale fazer a comparação entre o controle no espaço das juntas e o controle no espaço da tarefa. Analisando as tabelas \ref{tab:valoresEficazesCirculo} e \ref{tab:valoresEficazesTriangulo}, pode-se observar que claramente as estratégias PD e PDMD se mostram muito mais eficazes no espaço da tarefa do que no espaço das juntas, tendo em vista a grande diferença nos valores eficazes dos erros de controle e da pequena diferença no custo energético. Já em relação às estratégias TC e TCMD, não há uma diferença de eficiência considerável comparando os dois espaços, tendo em vista que na trajetória circular as estratégias no espaço das juntas se mostram ligeiramente superiores, enquanto na trajetória circular as estratégias no espaço da tarefa se mostram levemente superiores.
 
 
 
