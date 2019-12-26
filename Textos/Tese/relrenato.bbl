@@ -146,6 +146,11 @@ A. G. Coutinho, T. A. H. Coelho.
 \newblock A new approach for obtaining the dynamic balancing conditions in serial mechanisms.
 \newblock {\em International Journal of Mechanisms and Robotic Systems}, 3(1): 32--47, 2016.
 
+\bibitem{COBEM}
+A. G. Coutinho, V. P. Bartholomeu, I. Stevani, J. M. de Oliveira-Fuess, T. A. H. Coelho, D. C\'olon. 
+\newblock Design And Control Of A 2-DOF Parallel Mechanism
+\newblock In {\em 25th COBEM, Uberl\^andia, Brazil, Paper ID COBEM2019-0373}, 2019.
+
 \bibitem{Craig}
 J. J. Craig.
 \newblock {\em {Introduction to robotics: mechanics and control}}.
@@ -529,7 +534,7 @@ S. Staicu, D. Zhang, R. Rugescu.
 \newblock {\em Robotica}, 24(1): 125--130, 2006.
 
 \bibitem{CBA}
-I. Stevani, A. G. Coutinho, D. C\'olon, T. A. H. Coellho. 
+I. Stevani, A. G. Coutinho, D. C\'olon, T. A. H. Coelho. 
 \newblock H-Infinity Control of a 3-DOF RRR Spatial Serial Mechanism
 \newblock {\em Congresso Brasileiro de Autom\'atica 2018 Conference Proceedings ISSN: 2525-8311}, doi:10.20906/CPS/CBA2018-0458, 2018.
 

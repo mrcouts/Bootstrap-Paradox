@@ -4045,7 +4045,7 @@ $J_{z2}$     & $9.800   \cdot 10^{-4}$    & $kg.m^{2}$ \\
 \end{tabular}
 \end{table}
 
-Os valores dos parâmetros estimados dos motores são apresentados nas tabelas \ref{parametrosMotor} e \ref{parametrosMotor2}, as quais estão no apêndice \ref{cap:CurvaDosMotores}, juntamente com o processo de identificação utilizado.
+Os valores dos parâmetros estimados dos motores são apresentados nas tabelas \ref{parametrosMotor} e \ref{parametrosMotor2}, as quais estão no apêndice \ref{ap:CurvaDosMotores}, juntamente com o processo de identificação utilizado.
 
 
 
@@ -4098,6 +4098,14 @@ O mecanismo sempre parte do repouso na posição $\mx_1$, dada pela equação \e
 
 \subsection{Parâmetros dos controladores}
 
+Com o intuito de que o sistema em malha fechada se comporte como um sistema de segunda ordem com amortecimento crítico, $\underline{k}_p$ e $\underline{k}_v$ são parametrizados em função de um parâmetro $\lambda$, da seguinte maneira:
+\begin{equation}
+\underline{k}_p = \lambda^2 \mone
+\end{equation}
+\begin{equation}
+\underline{k}_v = 2 \lambda \mone
+\end{equation}
+
 Os parâmetros dos controladores de posição utilizados nas trajetórias definidas são apresentados nas tabelas \ref{tab:parametrosControleAtuadoresCirculo}, \ref{tab:parametrosControleAtuadoresTriangulo} e \ref{tab:parametrosControleEfetuador}.
 
 \begin{table}[H] 
@@ -4139,7 +4147,7 @@ TCMDx      & $60$               & -         & $6$           & $103$        & $0$
 \end{tabular}
 \end{table}
 
-Além disso, os controladores de corrente utilizados são controladores lineares de segunda ordem, projetados por alocação de polos. A expressões das funções de transferência de um motor DC são deduzidas e apresentadas no apêndice \ref{chap:FuncoesDeTransferencia}, e o projeto do controlador é apresentado no apêndice \ref{chap:ControladorDeCorrente}. Tendo em vista que o período de amostragem da malha de corrente é de $1ms$, 3 dos pólos 4 polos da malha de corrente são alocados em $z=0$, $z=0.6$, $z=0.7$. O último polo é alocado na mesma posição do zero em malha aberta do sistema.
+Além disso, os controladores de corrente utilizados são controladores lineares de segunda ordem, projetados por alocação de polos. A expressões das funções de transferência de um motor DC são deduzidas e apresentadas no apêndice \ref{ap:FuncoesDeTransferencia}, e o projeto do controlador é apresentado no apêndice \ref{ap:ControladorDeCorrente}. Tendo em vista que o período de amostragem da malha de corrente é de $1ms$, 3 dos pólos 4 polos da malha de corrente são alocados em $z=0$, $z=0.6$, $z=0.7$. O último polo é alocado na mesma posição do zero em malha aberta do sistema.
 
 \subsection{Resultados experimentais}
 
@@ -4882,13 +4890,13 @@ Por fim, vale fazer a comparação entre o controle no espaço das juntas e o co
 
 \section{Conclusões}
 
-Esta Tese de Doutorado abordou como tema, a modelagem dinâmica e o controle de manipuladores paralelos, tendo por objetivo oferecer contribuições para o aumento do seu desempenho. Especificamente, a busca por este aprimoramento foi realizada mediante o emprego de técnicas de controle baseadas no modelo do manipulador. Com relação ao objeto de estudo, escolheu-se o robô denominado Clara, equipamento desenvolvido no LaMMaR. Sua estrutura mecânica corresponde ao mecanismo pentágono articulado, de dois graus de liberdade, que opera no espaço plano. 
+Esta Tese de Doutorado abordou como tema a modelagem dinâmica e o controle de manipuladores paralelos, tendo por objetivo oferecer contribuições para o aumento do seu desempenho. Especificamente, a busca por este aprimoramento foi realizada mediante o emprego de técnicas de controle baseadas no modelo do manipulador. Com relação ao objeto de estudo, escolheu-se o robô denominado Clara, equipamento desenvolvido no LaMMaR. Sua estrutura mecânica corresponde ao mecanismo pentágono articulado, de dois graus de liberdade, que opera no espaço plano. 
 
 A metodologia seguida na pesquisa compreendeu a execução de seis fases, abrangendo desde o desenvolvimento de algoritmos para as modelagens cinemática e dinâmica ao projeto de controladores e sua validação experimental.
 
 Após o desenvolvimento teórico, a execução das simulações e dos ensaios experimentais, foi possível reunir diversas conclusões quanto à modelagem dinâmica, à técnica de controle mais adequada, bem como a sua implementação.
 
-Em relação à modelagem dinâmica, o algoritmo genérico de modelagem de mecanismos paralelos desenvolvido se mostrou bastante promissor, tendo em vista que, além de facilitar o processo de modelagem, ele pode ser implementado no próprio microprocessador que realiza o controle do mecanismo, podendo ser utilizado para tabelar previamente os termos seu modelo dinâmico em função da posição do efetuador. Esta estratégia se mostrou muito vantajosa, pois facilita a implementação de técnicas de controle baseadas em modelo e diminui consideravelmente seus custos computacionais.
+Em relação à modelagem dinâmica, o algoritmo genérico de modelagem de mecanismos paralelos translacionais desenvolvido se mostrou bastante promissor, tendo em vista que, além de facilitar o processo de modelagem, ele pode ser implementado no próprio microprocessador que realiza o controle do mecanismo, podendo ser utilizado para tabelar previamente os termos seu modelo dinâmico em função da posição do efetuador. Esta estratégia se mostrou muito vantajosa, pois facilita a implementação de técnicas de controle baseadas em modelo e diminui consideravelmente seus custos computacionais.
 
 %Recomendações quanto à modelagem dinâmica ...
 
@@ -4898,7 +4906,7 @@ Em relação à modelagem dinâmica, o algoritmo genérico de modelagem de mecan
 
 %Frases muito longas. Separá-las em mais curtas. Usar parágrafos. Evitar o adjetivo "interessante", prefira "relevante". Você comparou os valores "eficaz" e "estacionário" do erro de controle? O termo "espaço de trabalho" aqui na conclusão foi utilizado no sentido geral: pode ser "espaço das juntas" ou "espaço da tarefa". Na verdade, "espaço de trabalho" se refere à região de alcance do efetuador.
 
-A partir dos resultados experimentais obtidos, algumas conclusões relevantes podem ser tiradas. Quanto à lei de Controle proposta, por Modos Deslizantes, esta se revelou adequada para a sua combinação com outras técnicas, como o Controle por Torque Computado ou o Controle Proporcional Derivativo. 
+A partir dos resultados experimentais obtidos, algumas conclusões relevantes podem ser tiradas. Quanto à lei de Controle por Modos Deslizantes proposta, esta apresenta uma caraterística bastante interessante e conveniente: pode ser interpretada como a combinação de outras técnicas técnicas de controle, como o Controle por Torque Computado ou o Controle Proporcional Derivativo, com um termo adicional proveniente do Controle por Modos Deslizantes. 
 
 Além disso, tal combinação permitiu que o efetuador do manipulador realizasse as trajetórias programadas, nos regimes permanente e transitório, com menor erro de seguimento, superando as técnicas puras, tanto no espaço das juntas como no da tarefa. Deve-se ressaltar que tal desempenho foi alcançado, sem que houvesse um aumento significativo do consumo energético, mantendo-se a estabilidade do sistema.
 
@@ -4913,15 +4921,15 @@ Por fim, pôde-se concluir que a escolha entre o espaço das juntas e o da taref
 
 Dentre as principais contribuições, destacam-se:
 
-a) O desenvolvimento de um algoritmo genérico para modelagem cinemática e dinâmica de manipuladores seriais e paralelos. Este algoritmo poderá integrar os sistemas de controle de outros manipuladores paralelos do LaMMaR, como os robôs Laila e Dora.
+a) O desenvolvimento de um algoritmo genérico para modelagem cinemática e dinâmica de manipuladores seriais e paralelos translacionais. Este algoritmo poderá integrar os sistemas de controle de outros manipuladores paralelos do LaMMaR, como os robôs Laila e Dora.
 
-b) A constatação do caráter promissor da combinação de técnicas de controle robusto, como o controle por modos deslizantes, a outras técnicas, no que tange à minimização do erro de seguimento de trajetória, sem aumentar demasiadamente o consumo energético do manipulador.
+b) A síntese de uma nova lei de controle não linear robusto, a qual pode ser interpretada como a combinação das técnicas de Controle por Torque Computado ou Controle Proporcional-Derivativo ao Controle por Modos Deslizantes, e a constatação de seu caráter promissor no que tange à minimização do erro de seguimento de trajetória, sem aumentar demasiadamente o consumo energético do manipulador.
 
 c) A comparação do desempenho de técnicas combinadas e puras, mediante a execução de ensaios experimentais, com controle da trajetória do efetuador, permitindo a avaliação do comportamento do manipulador, tanto em regime permanente como em regime transitório.
 
 Outras contribuições referem-se às seguintes publicações realizadas durante o desenvolvimento da Tese:
 
-A partir dos resultados obtidos no trabalho de formatura realizado na gradua\c{c}\~ao, foi publicado um artigo intitulado ``Development of a controller for a 3-DOF robotic platform for user interaction in rehabilitation therapies'' \cite{Biorob}, o qual foi escrito em coautoria com Eng. Guilherme Martinho Dobrianskyj e o Prof. Dr. Tarc\'isio Ant\^onio Hess Coelho. Este trabalho foi apresentado no BioRob 2014 (IEEE International Conference on Biomedical Robotics and Biomechatronics) na se\c{c}\~ao de posters, no dia 15 de agosto de 2014. O artigo pode ser acessado por \url{http://dx.doi.org/10.1109/BIOROB.2014.6913880}.
+A partir dos resultados obtidos no trabalho de formatura realizado na gradua\c{c}\~ao, foi publicado um artigo intitulado ``Development of a controller for a 3-DOF robotic platform for user interaction in rehabilitation therapies'' \cite{Biorob}, o qual foi escrito em coautoria com Eng. Guilherme Martinho Dobrianskyj e o Prof. Dr. Tarcisio Antonio Hess Coelho. Este trabalho foi apresentado no BioRob 2014 (IEEE International Conference on Biomedical Robotics and Biomechatronics) na se\c{c}\~ao de posters, no dia 15 de agosto de 2014. O artigo pode ser acessado por \url{http://dx.doi.org/10.1109/BIOROB.2014.6913880}.
 
 Um cap\' itulo de livro, intitulado ``Dynamic modelling
 and control of balanced parallel mechanisms'' \cite{22orsino}, foi escrito em coautoria com o Dr. Renato M. M. Orsino e com o Prof. Dr. Tarcisio Antonio Hess Coelho, para o livro {\em Dynamic balancing of mechanisms and synthesizing of parallel
@@ -4931,9 +4939,11 @@ Este cap\'itulo de livro trata do uso de uma metodologia de modelagem modular pa
 balanceamento adaptativo e desenvolvimento de algoritmos de controle para mecanismos
 rob\'oticos paralelos. O capítulo pode ser acessado por \url{http://dx.doi.org/10.1007/978-3-319-17683-3_16}.
 
-Um artigo, publicado no peri\'odico {\em International Journal of Mechanisms and Robotic Systems}, intitulado ``A new approach for obtaining the dynamic balancing conditions in serial mechanisms'' \cite{Coutinho}, foi escrito em coautoria com o Prof. Dr. Tarc\'isio Antonio Hess Coelho. O artigo pode ser acessado por \url{http://dx.doi.org/10.1504/IJMRS.2016.077036}.
+Um artigo, publicado no peri\'odico {\em International Journal of Mechanisms and Robotic Systems}, intitulado ``A new approach for obtaining the dynamic balancing conditions in serial mechanisms'' \cite{Coutinho}, foi escrito em coautoria com o Prof. Dr. Tarcisio Antonio Hess Coelho. O artigo pode ser acessado por \url{http://dx.doi.org/10.1504/IJMRS.2016.077036}.
 
-Um artigo, publicado no {\em Congresso Brasileira de Automática - 2018}, intitulado ``H-Infinity Control of a 3-DOF RRR Spatial Serial Mechanism'' \cite{CBA}, foi escrito em coautoria com a Eng. Isabella Stevani, o Prof. Dr. Diego Colón, e o Prof. Dr. Tarc\'isio Antonio Hess Coelho. O artigo pode ser acessado por \url{https://ssl4799.websiteseguro.com/swge5/PROCEEDINGS/} (doi:10.20906/CPS/CBA2018-0458).
+Um artigo, publicado no {\em Congresso Brasileira de Automática - 2018}, intitulado ``H-Infinity Control of a 3-DOF RRR Spatial Serial Mechanism'' \cite{CBA}. Foi escrito em coautoria com a Eng. Isabella Stevani, o Prof. Dr. Diego Colón, e o Prof. Dr. Tarcisio Antonio Hess Coelho. O artigo pode ser acessado por \url{https://ssl4799.websiteseguro.com/swge5/PROCEEDINGS/} (doi:10.20906/CPS/CBA2018-0458).
+
+Um artigo, publicado no COBEM-2019 ({\em 25$^{th}$ International Congress of Mechanical Engineering - 2019}), intitulado ``Design And Control Of A 2-DOF Parallel Mechanism'' \cite{COBEM}. Foi escrito em coautoria com o Eng. Victor Pacheco Bartholomeu, a Eng. Isabella Stevani, a Eng. Juliana Martins de Oliveira Fuess, o Prof. Dr. Tarcisio Antonio Hess Coelho, e o Prof. Dr. Diego Colón.
 
 \section{Sugestão de temas para pesquisa futura}
 
@@ -4966,7 +4976,7 @@ Generalizar o algoritmo de modelagem proposto para englobar mecanismos paralelos
 % ========== Apêndices (opcional) ==========
 \apendice
 
-\chapter{Cinemática de corpos rígidos} \label{apendiceA}
+\chapter{Cinemática de corpos rígidos} \label{ap:CinCorposRig}
 
 \section{Conceitos básicos}
 
@@ -5051,6 +5061,13 @@ Caso $\tto$ não esteja fixo a $\llA$, temos que:
 A aceleração do ponto $\ttp$ em relação ao referencial $\llA$ é definida como:
 \begin{empheq}[box=\mybluebox]{equation}
 \va_\ttp^{\lllA} = \frac{\dd^{[\lllA]} \vv_\ttp^{\lllA} }{\dd t}
+\end{empheq}
+
+\subsection{Definição de vetor aceleração angular}
+
+A aceleração angular do corpo $\llB$ em relação ao referencial $\llA$ é definida como:
+\begin{empheq}[box=\mybluebox]{equation}
+\valpha_{\lllB}^{\lllA} = \frac{\dd^{[\lllA]} \vomega_{\lllB}^{\lllA} }{\dd t}
 \end{empheq}
 
 
@@ -5224,17 +5241,17 @@ Repare que, fazendo $\llC \equiv \llA$ e utilizando \eqref{eq:composicao_wCA}, t
 \therefore \valpha_{\lllA}^{\lllB} = - \valpha_{\lllB}^{\lllA}
 \end{empheq}
 
-\chapter{Funções de transferência de motores DC} \label{chap:FuncoesDeTransferencia}
+\chapter{Funções de transferência de motores DC} \label{ap:FuncoesDeTransferencia}
 
-Para realizar a modelagem dos motores, será considerado o seguinte circuito circuito equivalente:
+Para realizar a modelagem dos motores, será considerado o seguinte circuito circuito equivalente apresentado na figura \ref{fig:CEM1}.
 
 %-------------------------------------
 
 \begin{figure}[!h]
      \centering
-     \includegraphics[width=0.7\textwidth]{imagens/CircuitoMotor.png}
-     \caption{Circuito elétrico do motor}
-     \label{CEM1}
+     \includegraphics[width=0.7\textwidth]{imagens/DCMotor.png}
+     \caption{Circuito elétrico equivalente e modelo mecânico do motor}
+     \label{fig:CEM1}
 \end{figure}
 
 %-------------------------------------
@@ -5250,7 +5267,7 @@ Sendo $J$ a inércia do rotor, $b$ o coeficiente de atrito viscoso, e $\gmu$ o c
 
 \begin{equation}
 \label{torqueDist}
-    J \dot{\omega} = T - b\omega - \gmu sign(\omega) - \tau_{d}
+    J \dot{\omega} = T - b\omega - \gmu \sign(\omega) - \tau_{d}
 \end{equation}
 
 Sendo $\tau_{d} $ o torque que o mecanismo aplica no motor, o qual será considerado um sinal de distúrbio de controle.
@@ -5287,10 +5304,8 @@ Considerando $\gmu = 0$  e aplicando a Transformada de Laplace para condições 
   \label{TLM5}
   W(s) = \frac{k_t I(s) -  \tau_{d}(s)}{J s +b}
   \end{equation}
-  
-\begin{itemize}
 
-\item Função de tranferência de corrente
+\section{Funções de tranferência de corrente}
 
     Substituindo \eqref{TLM5} na equação \eqref{TLM3} temos,
 
@@ -5299,7 +5314,7 @@ Considerando $\gmu = 0$  e aplicando a Transformada de Laplace para condições 
     I(s) = \frac{J s + b}{(L s + R) ( J s + b s) +  k_{t} k_{e}} U(s) + \frac{k_{e}}{(L s + R) ( J s + b s) +  k_{t} k_{e}} \tau_{d}(s)
     \end{equation}
 
-    Com isso, as funções de transferência do sistema, serão:
+    Assim, as funções de transferência do sistema são dadas por:
 
     \begin{equation}
     \label{functionTransferMotor}
@@ -5311,7 +5326,7 @@ Considerando $\gmu = 0$  e aplicando a Transformada de Laplace para condições 
         G_{Id}(s) = \frac{I(s)}{\tau_{d}(s)} = \frac{k_{e}}{(L s + R)( J s+b)+k_{t}k_{e}}
     \end{equation}
 
-\item Função de transferência de velocidade
+\section{Funções de transferência de velocidade}
 
 Substituindo as equações \eqref{TLM6} na equação \eqref{TLM5} encontramos,
 
@@ -5319,19 +5334,19 @@ Substituindo as equações \eqref{TLM6} na equação \eqref{TLM5} encontramos,
      W(s) = \frac{k_{t}}{(J s + b)(L s + R) + k_{e} k_{t}} U(s) - \frac{(L s + R)}{(J s + b)(L s + R) + k_{e} k_{t}} \tau_d(s)
     \end{equation}
 
-    Logo, temos função de transferência do motor na forma:
+    Logo, temos as funções de transferência do motor na forma:
     
     \begin{equation}
     \label{FunctionMotorVel}
-     G_v(s) = \frac{k_{t}}{(J s + b)(L s + R) + k_{e} k_{t}} 
+     G_v(s) = \frac{W(s)}{U(s)} = \frac{k_{t}}{(J s + b)(L s + R) + k_{e} k_{t}} 
     \end{equation}
     
     \begin{equation}
     \label{FunctionMotorVeld}
-     G_{vd}(s) = - \frac{(L s + R)}{(J s + b)(L s + R) + k_{e} k_{t}}
+     G_{vd}(s) = \frac{W(s)}{\tau_{d}(s)} = - \frac{(L s + R)}{(J s + b)(L s + R) + k_{e} k_{t}}
     \end{equation}
     
-\item Função de transferência de posição
+\section{Funções de transferência de posição}
 
 Tendo que vista que a velocidade angular é a derivada temporal da posição angular, baste dividir por $s$ as funções de transferência \eqref{FunctionMotorVel} e \eqref{FunctionMotorVeld} para obtermos as função de transferência de posição do motor.
     \begin{equation}
@@ -5345,11 +5360,9 @@ Tendo que vista que a velocidade angular é a derivada temporal da posição ang
     \end{equation}
 
 
-\end{itemize}
+\chapter{Controlador de Corrente} \label{ap:ControladorDeCorrente}
 
-\chapter{Controlador de Corrente} \label{chap:ControladorDeCorrente}
-
-Como foi visto no apêndice \ref{apendiceA}, a função de transferência de corrente de um motor DC é dada por:
+Como foi visto no apêndice \ref{ap:FuncoesDeTransferencia}, a função de transferência de corrente de um motor DC é dada por:
 
 \begin{equation} \label{functionTransferMotorCorrente}
 G_{I}(s) = \frac{A s+B}{s^2 + C s + D}
@@ -5472,9 +5485,9 @@ Sua solução é dada por:
 
 
 
-\chapter{Curva dos motores} \label{cap:CurvaDosMotores}
+\chapter{Curva dos motores} \label{ap:CurvaDosMotores}
 
-A curva de velocidade foi obtida aplicando o derivador descrito na seção \ref{derivador} no sinal de posição fornecido pelo encoder . Foi utilizada uma entrada degrau de tensão $6.5V$. As curvas dos motores 1 e 2 podem ser observadas nas figuras \ref{CM2} e \ref{CM3} respectivamente.
+As curvas de velocidades dos motores foram obtidas aplicando o derivador numérico citado na seção \ref{derivador} no sinal de posição fornecido pelo encoders. Foi utilizada uma entrada degrau de tensão $6.5V$. As curvas dos motores 1 e 2 podem ser observadas nas figuras \ref{CM2} e \ref{CM3} respectivamente.
 
  \begin{figure}[H]
      \centering
@@ -5493,9 +5506,9 @@ A curva de velocidade foi obtida aplicando o derivador descrito na seção \ref{
 Para obtenção dos parâmetros do motor, foram realizados os seguintes procedimentos: 
 
 \begin{itemize}
-\item O valor de indutância (L) foi medido através de um multímetro e considerado constante independente da velocidade do motor.
+\item O valor de indutância (L) foi medido através de um multímetro e considerado constante independentemente da velocidade do motor.
 
-\item O valor da constante de força contra-eletromotriz ($k_{e}$) e da resistência ($R$) foram obtidos através do método dos mínimos quadrados implementado sobre os valores medidos da tensão, corrente e velocidade apresentados na tabela \ref{MMQke}. Utilizando a equação elétrica do motor \eqref{eq:DinEletrica_rot} em regime permanente ($\frac{di}{dt} = 0$): 
+\item O valor da constante de força contra-eletromotriz ($k_{e}$) e da resistência ($R$) foram obtidos através do método dos mínimos quadrados implementado sobre os valores medidos da tensão, corrente e velocidade apresentados na tabela \ref{MMQke}. Utilizando a equação do circuito elétrico equivalente do motor \eqref{eletricaMotor} em regime permanente ($\frac{di}{dt} = 0$): 
 
 \begin{equation}
 	   u =  R i + k_{e} \omega
@@ -5567,7 +5580,7 @@ k_e = 0.0513822 \, V s/rad
 \label{prop}
 k_{t} = \frac{k_{t}'}{k_{e}'} k_{e}
 \end{equation}
-Sendo $k_{t}'$ e $k_{e}'$ valores obtidos da curva fornecida no datasheet do motor dados por:
+Sendo $k_{t}'$ e $k_{e}'$ valores obtidos da curva fornecida no datasheet do motor, dados por:
 \begin{equation}
 k_{t}' = 0.0467188 \, N m/A
 \end{equation}
@@ -5632,14 +5645,14 @@ Logo, temos que:
 b = 0.000122595 \, Nm s/rad
 \end{equation}
 
-\item $J$ foi obtido a partir da curva de velocidades do motor figura \ref{CM2}. Como não houve sobressinal, o tempo de assentamento foi de $0.207 s$.
+\item $J$ foi obtido a partir da curva de velocidades do motor (figura \ref{CM2}). Como não houve sobressinal, o tempo de assentamento obtido foi de $0.207 s$.
 
 \begin{equation}
 \label{4sigma}
  t_{98\%} =\frac{4}{\sigma}
 \end{equation}
 
-Da equação \eqref{4sigma} temos que $p= -19.3237$.
+Da equação \eqref{4sigma} temos que $p= -19.3237  \, rad/s$.
 Então, igualando o denominador da função de transferência do motor \eqref{functionTransferMotor}  a zero e substituindo o valor do pólo:
 \begin{equation}
 [(L s + R) (J s + b) + k_t k_e]_{s = p} = 0
