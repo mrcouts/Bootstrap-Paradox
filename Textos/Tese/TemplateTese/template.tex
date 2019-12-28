@@ -31,6 +31,7 @@
 \usepackage{accents}
 \usepackage{special-char}
 \usepackage{fancybox}
+\usepackage{longtable}
 
 \definecolor{myblue}{rgb}{.75, .75, 1}
 \newcommand*\mybluebox[1]{%
@@ -203,6 +204,43 @@ Aiming to fully explore the potential of this kind of architecture, in this thes
 % ========== Listas (opcional) ==========
 \listadefiguras
 \listadetabelas
+\chapter*{Convenções de Notação}
+\begin{longtable}{lp{0.6\textwidth}}
+  $a, b, \hdots $ & Escalares, componentes de matrizes-coluna, componentes de matrizes ou índices \\
+  $\underline{a}, \underline{b}, \hdots $ & Matrizes diagonais \\
+  $A, B, \hdots$ & Escalares, componentes de matrizes-coluna ou componentes de matrizes \\
+  $\ma, \mb, \hdots$ & Matrizes-coluna \\
+  $\mA, \mB, \hdots$ & Matrizes \\
+  $\va, \vb, \hdots$ & Vetores físicos \\
+  $\hat{\va}, \hat{\vb}, \hdots$ & Versores físicos \\
+  $\vA, \vB, \hdots$ & Tensores físicos de segunda ordem ou transformações lineares \\
+  $\tta, \ttb, \hdots$ & Pontos no espaço \\
+  $\ttA, \ttB, \hdots$ & Sistemas de coordenadas \\
+  $\llA, \llB, \hdots$ & Corpos rígidos ou referenciais \\
+  $\ssA, \ssB, \hdots$ & Sistema ou subsistema mecânico \\
+  $\ccos(.)$ & Notação compacta para $\cos(.)$ \\
+  $\dd$ & Operador diferencial \\
+  $\diag(.)$ & Matriz-coluna cujos elementos são a diagonal de uma matriz quadrada \\
+  $g$ & Aceleração gravitacional \\
+  $\vct{\ttp}_{\ttB}$ & Matriz-coluna formada pelas coordenadas do ponto $\ttp$ no sistema de coordenadas $\ttB$ \\
+  $\hvct{\ttp}_{\ttB}$ & Matriz-coluna formada pelas coordenadas do ponto $\ttp$ no sistema de coordenadas $\ttB$ em coordenadas homog\^eneas, ou seja: $\hvct{\ttp}_{\ttB} = \begin{bmatrix}
+[\ttp]_{\ttB} \\
+1
+\end{bmatrix} $ \\
+  $\ssin(.)$ & Notação compacta para $\sin(.)$ \\
+  $[\vv]_{\ttB}$ & Matriz-coluna formada pelas componentes do vetor $\vv$ na base do sistema de coordenadas $\ttB$ \\
+  $\dl$ & Operador variação \\
+  $\mzr$ & Matriz-coluna nula ou matriz nula \\
+  $\mone$ & Matriz identidade \\
+  $\vzr$ & Vetor nulo \\
+  $\vone$ & Operador identidade \\
+  $\nvct{\vone}_{\ttA \rl \ttB} $ & Matriz de mudança de base, i.e. $\nvct{\vv}_{\ttA} = \nvct{\vone}_{\ttA \rl \ttB} \cdot \nvct{\vv}_{\ttB} $ \\
+  $\hvct{\vone}_{\ttA \rl \ttB}$ & Matriz de transformação homogênea, i.e. $\hvct{\ttp}_{\ttA} = \hvct{\vone}_{\ttA \rl \ttB} \cdot \hvct{\ttp}_{\ttB}$ \\
+  $\ntmat{\cdot}$ & Matriz transposta \\
+  $\nimat{\cdot}$ & Matriz inversa \\
+  $\npmat{\cdot}$ & Matriz pseudo-inversa \\
+  $\nmmat{\cdot}$ & Módulo aplicado em cada componente da matriz ou matriz-coluna
+\end{longtable}
 
 % ========== Sumário ==========
 \sumario
@@ -1295,7 +1333,7 @@ E as quasi-coordenadas \cite{Jarzebowska2009}:
 
 Temos que o trabalho virtual associado a cada subsistema é dado por:
 \begin{empheq}[box=\mybluebox]{equation} \label{eq:dWiSeriais}
-\delta W_i =  \delta \mpi_i^\msT \cdot \overline{\mf}_i
+\dl W_i =  \dl \mpi_i^\msT \cdot \overline{\mf}_i
 \end{empheq}
 
 \subsection{Sistemas de esforços ativos generalizados} 
@@ -1310,10 +1348,10 @@ Considere também um subsistema constituido pelos esforços que os atuadores apl
 \mp\ssh = \dot{\mq}
 \end{empheq}
 
-Seja $\mu$ a matriz-coluna de esforços generalizados aplicadas pelos atuadores na direção de $\delta\mq$. Sendo assim, o trabalho virtual associado a este subsistema é dado por:
+Seja $\mu$ a matriz-coluna de esforços generalizados aplicadas pelos atuadores na direção de $\dl\mq$. Sendo assim, o trabalho virtual associado a este subsistema é dado por:
 
 \begin{empheq}[box=\mybluebox]{equation} \label{eq:dWsshSeriais}
-\delta W\ssh = \delta \mq^\msT \cdot \mu 
+\dl W\ssh = \dl \mq^\msT \cdot \mu 
 \end{empheq}
 
 \subsection{Vínculos cinemáticos entre subsistemas} 
@@ -1331,7 +1369,7 @@ Sendo:
 \end{bmatrix}, \, i=1,...,\nu
 \end{empheq}
 
-Seja $\mp\cir$ a matriz coluna que contém as quasi-velocidades de todos os ligamentos:
+Seja $\mp\cir$ a matriz-coluna que contém as quasi-velocidades de todos os ligamentos:
 \begin{empheq}[box=\lightbluebox]{equation}
 \mp\cir = \begin{bmatrix}
 \mp_1^\msT & ... & \mp_{\nu}^\msT
@@ -1409,38 +1447,38 @@ Sendo:
 
 Pelo princípio de d'Alembert, temos que
 \begin{equation} \label{eq:PdASeriais}
-\delta W\ssh + \sum_{i=1}^\nu \delta W_i  = 0
+\dl W\ssh + \sum_{i=1}^\nu \dl W_i  = 0
 \end{equation}
 
 Através de \eqref{eq:PdASeriais}, \eqref{eq:dWsshSeriais}, \eqref{eq:dWiSeriais}, \eqref{eq:fSeriais} e \eqref{eq:quasi-coord}, temos que:
 \begin{equation} \label{eq:PdASeriais2}
-\delta \mpi^\msT \cdot \mf = 0
+\dl \mpi^\msT \cdot \mf = 0
 \end{equation}
 
 
 Além disso, a partir da definição de $\mpi$ \eqref{eq:quasi-coord} e dos vínculos de quasi-velocidades \eqref{eq:VinculosV_seriais}, temos que as variações das quasi-coordenadas $\mpi$ devem respeitar a seguinte relação:
 \begin{equation} \label{eq:vinculosdpiSeriais}
- \mA(\mq) \cdot \delta \mpi = \mzr
+ \mA(\mq) \cdot \dl \mpi = \mzr
 \end{equation}
 
 
-Subdividindo $\delta\mpi$ em $\delta\mpi\ssh $ e $\delta\mpi\cir$ e considerando $\delta\mpi\ssh$ como variáveis livres, temos:
+Subdividindo $\dl\mpi$ em $\dl\mpi\ssh $ e $\dl\mpi\cir$ e considerando $\dl\mpi\ssh$ como variáveis livres, temos:
 \begin{equation}
 \begin{bmatrix}
 \mJ(\mq) & -\mone
 \end{bmatrix}
 \cdot
 \begin{bmatrix}
-\delta\mpi\ssh \\
-\delta\mpi\cir
+\dl\mpi\ssh \\
+\dl\mpi\cir
 \end{bmatrix} = \mzr
 \end{equation}
 \begin{equation}
-\Rightarrow \delta\mpi\cir = \mJ(\mq) \delta\mpi\ssh
+\Rightarrow \dl\mpi\cir = \mJ(\mq) \dl\mpi\ssh
 \end{equation}
 \begin{equation} \label{eq:dpidpisshSeriais}
 \therefore
-\delta\mpi = \mC(\mq) \cdot \delta\mpi\ssh
+\dl\mpi = \mC(\mq) \cdot \dl\mpi\ssh
 \end{equation}
 
 
@@ -1453,17 +1491,17 @@ Sendo:
 \end{bmatrix}
 \end{empheq}
 
-Repare	que trocando $\delta\mpi$ por $\mp$ em \eqref{eq:vinculosdpiSeriais}, obtemos os vínculos de quasi-velocidades do sistema \eqref{eq:VinculosV_seriais}. Sendo assim, à partir das expressões \eqref{eq:dpidpisshSeriais} e \eqref{eq:MatrizC_seriais}, temos que $\mC$ respeita a seguinte relação:
+Repare	que trocando $\dl\mpi$ por $\mp$ em \eqref{eq:vinculosdpiSeriais}, obtemos os vínculos de quasi-velocidades do sistema \eqref{eq:VinculosV_seriais}. Sendo assim, à partir das expressões \eqref{eq:dpidpisshSeriais} e \eqref{eq:MatrizC_seriais}, temos que $\mC$ respeita a seguinte relação:
 \begin{empheq}[box=\lightbluebox]{equation} \label{eq:relacao_C}
 \mp = \mC(\mq) \cdot \mp\ssh
 \end{empheq}
 
 Sendo assim, substituindo \eqref{eq:dpidpisshSeriais} em \eqref{eq:PdASeriais2}, temos:
 \begin{equation}
-\delta {\mpi\ssh}^\msT \cdot \mC^\msT \mf = \mzr
+\dl {\mpi\ssh}^\msT \cdot \mC^\msT \mf = \mzr
 \end{equation}
 
-Tendo em vista que as quasi-coordenadas $\mpi\ssh$ são independentes, as variações $\delta\mpi\ssh$ são arbitrárias. Sendo assim, as equações dinâmicas do sistema são dadas por: 
+Tendo em vista que as quasi-coordenadas $\mpi\ssh$ são independentes, as variações $\dl\mpi\ssh$ são arbitrárias. Sendo assim, as equações dinâmicas do sistema são dadas por: 
 
 \begin{empheq}[box=\mybluebox]{equation} \label{eq:eq_dinamicas_3}
 \mC^\msT \mf = \mzr
@@ -1734,7 +1772,7 @@ Além disso, definindo as quasi-coordenadas:
 
 Temos que o trabalho virtual associado a cada subsistema é dado por:
 \begin{empheq}[box=\mybluebox]{equation} \label{eq:dWiSeriais_rot}
-\delta W_{r \,i} =  \delta \mpi_{r \,i}^\msT \cdot \overline{\mf}_{r \,i}
+\dl W_{r \,i} =  \dl \mpi_{r \,i}^\msT \cdot \overline{\mf}_{r \,i}
 \end{empheq}
 
 \subsubsection{Modelo do subsistema serial} 
@@ -1746,7 +1784,7 @@ O modelo do subsistema serial utilizado é o mesmo que foi deduzido anteriorment
 
 Além disso, o trabalho virtual associado a este subsistema é dado por:
 \begin{empheq}[box=\mybluebox]{equation}
-\delta W_s =  \delta \mq^\msT \cdot \overline{\mf}_s
+\dl W_s =  \dl \mq^\msT \cdot \overline{\mf}_s
 \end{empheq}
 
 
@@ -1754,28 +1792,28 @@ Além disso, o trabalho virtual associado a este subsistema é dado por:
 
 Considere também um subsistema constituido pelos esforços que os atuadores aplicam em seus rotores. Os torques gerados pelos atuadores são proporcionais à corrente elétrica que flui pelas suas armaduras e são aplicados na direção dos deslocamentos virtuais relativos dos rotores. Além disso, é possível que hajam esforços de atrito devido ao atrito gerado nos mancais e nas engrenagens do redutor, aplicados na direção aposta aos deslocamentos virtuais relativos dos rotores. Sendo assim, o trabalho virtual associado a este subsistema é dado por:
 \begin{empheq}[box=\mybluebox]{equation}
-\delta W_\tau = \delta \mq_r^\msT \cdot (\underline{k_t}\,\mi - \mzeta(\dot{\mq}_r) )
+\dl W_\tau = \dl \mq_r^\msT \cdot (\underline{k_t}\,\mi - \mzeta(\dot{\mq}_r) )
 \end{empheq}
 
 %Além disso, é possível que hajam esforços de atrito devido ao atrito gerado nos mancais e nas engrenagens do redutor, aplicados na direção aposta dos deslocamentos virtuais relativos dos rotores.
 
 \subsubsection{Vínculos entre subsistemas} 
 
-Tendo em vista que o sistema mecânico $\ssB'$ tem $\nu$ graus de liberdade, e $\mq$ são um conjunto de $\nu$ coordenadas generalizadas independentes, podemos relacionar os deslocamentos virtuais $\delta \mq_r$ e $\delta \mpi_{r\,i}$, com $i=1,...,\nu$, com os deslocamentos virtuais $\delta \mq$, ou seja, obter os vínculos cinemáticos entre os subsistemas. \\
+Tendo em vista que o sistema mecânico $\ssB'$ tem $\nu$ graus de liberdade, e $\mq$ são um conjunto de $\nu$ coordenadas generalizadas independentes, podemos relacionar os deslocamentos virtuais $\dl \mq_r$ e $\dl \mpi_{r\,i}$, com $i=1,...,\nu$, com os deslocamentos virtuais $\dl \mq$, ou seja, obter os vínculos cinemáticos entre os subsistemas. \\
 
-Para relacionar $\delta \mq_r$ com $\delta \mq$ basta aplicar o operador variação em  \eqref{eq:qr}:
+Para relacionar $\dl \mq_r$ com $\dl \mq$ basta aplicar o operador variação em  \eqref{eq:qr}:
 \begin{empheq}[box=\mybluebox]{equation} \label{eq:deltaqr_rot}
-\delta \mq_r = \underline{r} \, \delta \mq
+\dl \mq_r = \underline{r} \, \dl \mq
 \end{empheq}
 
-Para relacionar $\delta \mpi_{r\,i}$, aplica-se a relação \eqref{eq:VinculosWrot} em \eqref{eq:pi_i_rot}:
+Para relacionar $\dl \mpi_{r\,i}$, aplica-se a relação \eqref{eq:VinculosWrot} em \eqref{eq:pi_i_rot}:
 \begin{equation}
 \dd \mpi_{r\,i} = \mJ_{\omega_r \,i} \, \dd \mq
 \end{equation}
 
 Portanto:
 \begin{empheq}[box=\mybluebox]{equation} \label{eq:deltampi_rot}
-\delta \mpi_{r\,i} = \mJ_{\omega_r \,i} \, \delta \mq
+\dl \mpi_{r\,i} = \mJ_{\omega_r \,i} \, \dl \mq
 \end{empheq}
 
 \subsubsection{Acoplamento de subsistemas}
@@ -1784,25 +1822,25 @@ Tendo em vista que um precedimento mais detalhado para acoplamento de subsistema
 
 Pelo princípio de d'Alembert, temos que
 \begin{empheq}[box=\lightbluebox]{equation} \label{eq:PdaSeriais_rot}
-\delta W_\tau + \delta W_s  + \sum_{i=1}^\nu \delta W_{r \,i}  = 0
+\dl W_\tau + \dl W_s  + \sum_{i=1}^\nu \dl W_{r \,i}  = 0
 \end{empheq}
 
 Ou seja:
 \begin{equation} \label{eq:PdaSeriais_rot2}
-\delta\mq_r^\msT \cdot  \Big(\underline{k_t} \, \mi - \mzeta(\dot{\mq}_r) + \delta\mq^\msT \cdot \overline{\mf}_s  + \sum_{i=1}^\nu \delta \mpi_{r \,i}^\msT \cdot \overline{\mf}_{r \,i} \Big) = 0
+\dl\mq_r^\msT \cdot  \Big(\underline{k_t} \, \mi - \mzeta(\dot{\mq}_r) + \dl\mq^\msT \cdot \overline{\mf}_s  + \sum_{i=1}^\nu \dl \mpi_{r \,i}^\msT \cdot \overline{\mf}_{r \,i} \Big) = 0
 \end{equation}
 
-Sabe-se que os deslocamentos virtuais $\delta\mq$, $\delta\mq_r$ e $\delta \mpi_{r \,i}$, com $i=1,...,\nu$, não são independentes entre si. Porém, é possível relacionar  $\delta\mq_r$ e $\delta \mpi_{r \,i}$ com os deslocamentos virtuais $\delta\mq$  através das equações \eqref{eq:deltaqr_rot} e \eqref{eq:deltampi_rot}. Sendo assim:
+Sabe-se que os deslocamentos virtuais $\dl\mq$, $\dl\mq_r$ e $\dl \mpi_{r \,i}$, com $i=1,...,\nu$, não são independentes entre si. Porém, é possível relacionar  $\dl\mq_r$ e $\dl \mpi_{r \,i}$ com os deslocamentos virtuais $\dl\mq$  através das equações \eqref{eq:deltaqr_rot} e \eqref{eq:deltampi_rot}. Sendo assim:
 \begin{equation} \label{eq:PdaSeriais_rot3}
-(\underline{r}\,\delta\mq)^\msT \cdot \Big(\underline{k_t} \, \mi - \mzeta(\underline{r} \, \dot{\mq})) + \delta\mq^\msT \cdot \overline{\mf}_s  + \sum_{i=1}^\nu (\mJ_{\omega_r \,i} \, \delta\mq)^\msT \cdot \overline{\mf}_{r \,i} \Big) = 0
+(\underline{r}\,\dl\mq)^\msT \cdot \Big(\underline{k_t} \, \mi - \mzeta(\underline{r} \, \dot{\mq})) + \dl\mq^\msT \cdot \overline{\mf}_s  + \sum_{i=1}^\nu (\mJ_{\omega_r \,i} \, \dl\mq)^\msT \cdot \overline{\mf}_{r \,i} \Big) = 0
 \end{equation}
 
 Ou seja:
 \begin{equation} \label{eq:PdaSeriais_rot4}
-\delta\mq^\msT \cdot \Bigg( \underline{r} \, \underline{k_t} \, \mi - \mzeta(\underline{r} \, \dot{\mq}) + \overline{\mf}_s  + \sum_{i=1}^\nu \mJ_{\omega_r \,i}^\msT \, \overline{\mf}_{r \,i} \Bigg) = 0
+\dl\mq^\msT \cdot \Bigg( \underline{r} \, \underline{k_t} \, \mi - \mzeta(\underline{r} \, \dot{\mq}) + \overline{\mf}_s  + \sum_{i=1}^\nu \mJ_{\omega_r \,i}^\msT \, \overline{\mf}_{r \,i} \Bigg) = 0
 \end{equation}
 
-Tendo em vista que as coordenadas $\mq$ são independentes, as variações $\delta\mq$ são arbitrárias. Sendo assim, as equações dinâmicas do sistema são dadas por:
+Tendo em vista que as coordenadas $\mq$ são independentes, as variações $\dl\mq$ são arbitrárias. Sendo assim, as equações dinâmicas do sistema são dadas por:
 \begin{equation} \label{eq:Din_rot1}
 \underline{r} \, \underline{k_t} \, \mi - \underline{r} \, \mzeta(\underline{r} \, \dot{\mq}) + \overline{\mf}_s  + \sum_{i=1}^\nu \mJ_{\omega_r \,i}^\msT \, \overline{\mf}_{r \,i}  = \mzr
 \end{equation}
@@ -1925,7 +1963,7 @@ Sendo que para $i=0$ temos o modelo do efetuador/plataforma e para $i>0$ temos o
 
 O trabalho virtual dos esforços não-reativos (ativos e inerciais) associado a cada subsistema é dado por:
 \begin{equation}
-\delta W_i = \delta \mq_i^\msT \cdot \overline{\mf}_{\ssB_i}, \, i = 0,...,n
+\dl W_i = \dl \mq_i^\msT \cdot \overline{\mf}_{\ssB_i}, \, i = 0,...,n
 \end{equation}
 
 Para os subsistemas seriais, as matrizes $\mM_{\ssB_i}$, $\mnu_{\ssB_i}$ e $\mg_{\ssB_i}$ são obtidas utilizando o algoritmo de modelagem de mecanismos seriais apresentado anteriormente. Para o efetuador, iremos utilizar o modelo de um corpo rígido livre no espaço, que realiza apenas translação. Sendo assim, aplicando Teorema do Movimento do Baricentro no efetuador, obtemos os esforços não-reativos  nele aplicados:
@@ -2683,17 +2721,17 @@ Definindo:
 
 Pelo princípio de D'Alembert, temos que:
 \begin{equation}
-\sum_{i=0}^n \delta W_i = \sum_{i=0}^n \delta \mq_i^\msT \cdot \overline{\mf}_{\ssB_i} = 0
+\sum_{i=0}^n \dl W_i = \sum_{i=0}^n \dl \mq_i^\msT \cdot \overline{\mf}_{\ssB_i} = 0
 \end{equation}
 
 Ou seja:
 \begin{equation} \label{eq:DAlambertParalelos}
-\delta \mq^\msT \cdot \mf = \mzr
+\dl \mq^\msT \cdot \mf = \mzr
 \end{equation}
 
 Além disso, a partir da equação \eqref{eq:VinculosQuasiVel2}, temos que:
 \begin{equation} \label{eq:Adeltaq}
-\mA(\mq) \cdot \delta \mq = \mzr
+\mA(\mq) \cdot \dl \mq = \mzr
 \end{equation}
 
 $\mq$ pode ser escrita em função de $\mq\ssh$ e $\mq\cir$ da seguinte maneira:
@@ -2704,17 +2742,17 @@ $\mq$ pode ser escrita em função de $\mq\ssh$ e $\mq\cir$ da seguinte maneira:
 Sendo $\mQ\ssh$ e $\mQ\cir$ matrizes constantes que contém apenas zeros e uns, contendo apenas um $"1"$ por coluna.
 Aplicando o operador variação em \eqref{eq:QsshQcir}, tem-se que:
 \begin{equation} \label{eq:deltaQsshQcir}
-\delta\mq = \mQ\ssh \delta\mq\ssh + \mQ\cir \delta\mq\cir
+\dl\mq = \mQ\ssh \dl\mq\ssh + \mQ\cir \dl\mq\cir
 \end{equation}
 
-Substituindo \eqref{eq:deltaQsshQcir} em \eqref{eq:Adeltaq}, podemos isolar $\delta\mq\cir$ em função de $\delta\mq\ssh$:
+Substituindo \eqref{eq:deltaQsshQcir} em \eqref{eq:Adeltaq}, podemos isolar $\dl\mq\cir$ em função de $\dl\mq\ssh$:
 \begin{equation} \label{eq:qcirqssh}
-\delta\mq\cir = -(\mA \mQ\cir)^{-1} \mA \mQ\ssh \delta \mq\ssh
+\dl\mq\cir = -(\mA \mQ\cir)^{-1} \mA \mQ\ssh \dl \mq\ssh
 \end{equation}
 
-Substuindo \eqref{eq:qcirqssh} em \eqref{eq:deltaQsshQcir}, obtemos $\delta\mq$ apenas em função de $\mq$ e $\delta\mq\ssh$:
+Substuindo \eqref{eq:qcirqssh} em \eqref{eq:deltaQsshQcir}, obtemos $\dl\mq$ apenas em função de $\mq$ e $\dl\mq\ssh$:
 \begin{equation} \label{eq:deltamqC}
-\delta \mq = \mC(\mq) \cdot \delta\mq\ssh
+\dl \mq = \mC(\mq) \cdot \dl\mq\ssh
 \end{equation}
 
 Sendo:
@@ -2730,10 +2768,10 @@ Além disso, repare que $\mC$ respeita a seguinte relação:
 
 Substuindo \eqref{eq:deltamqC} em \eqref{eq:DAlambertParalelos}, temos:
 \begin{equation}
-\delta {\mq\ssh}^\msT \mC^\msT \mf = \mzr
+\dl {\mq\ssh}^\msT \mC^\msT \mf = \mzr
 \end{equation}
 
-Tendo em vista que $\mq\ssh$ são coordenadas independentes, $\delta \mq\ssh$ são variações arbitrárias. Sendo assim, a equação dinâmica do mecanismo paralelo pode ser escrita como:
+Tendo em vista que $\mq\ssh$ são coordenadas independentes, $\dl \mq\ssh$ são variações arbitrárias. Sendo assim, a equação dinâmica do mecanismo paralelo pode ser escrita como:
 \begin{equation}
 \mC^\msT \mf = \mzr
 \end{equation}
@@ -3973,7 +4011,7 @@ Tendo em vista que a frequencia do polo deste sistema está em torno de 240Hz, m
 
 Para implementar as técnicas de controle baseadas em modelo, é utilizado o algoritmo de modelagem proposto para tabelar os termos do modelo dinâmico que dependem apenas da posição.
 
-Tendo em vista que a matriz de inércia generalizada depende apenas da posição, e que a matriz coluna de esforços de inérciais giroscópicos pode ser expressa como a soma de matrizes coluna dependentes apenas da posição multiplicados por termos quadráticos das quasi-velocidades independentes, é feita uma discretização da área de trabalho, de modo a calcular o valor destas matrizes em um número finito de pontos e realizar interpolações em tempo real, de modo a obter um valor estimado desses termos da dinâmica em qualquer ponto não singular pertencente à area de trabalho.
+Tendo em vista que a matriz de inércia generalizada depende apenas da posição, e que a matriz-coluna de esforços de inérciais giroscópicos pode ser expressa como a soma de matrizes coluna dependentes apenas da posição multiplicados por termos quadráticos das quasi-velocidades independentes, é feita uma discretização da área de trabalho, de modo a calcular o valor destas matrizes em um número finito de pontos e realizar interpolações em tempo real, de modo a obter um valor estimado desses termos da dinâmica em qualquer ponto não singular pertencente à area de trabalho.
 
 A discretização realizada aplica uma malha quadradiculada de lado $5mm$ na área de trabalho do mecanismo, de modo a calcular os termos da dinâmica comentados em cada ponto não singular pertencente à discretização.
 
@@ -5397,7 +5435,7 @@ Sendo:
 
 Como o sistema é de segunda ordem e não possui integrador, é proposto o seguinte controlador:
 \begin{equation}
-K(z) = \frac{\alpha z^2 + \beta z + \gamma}{(z-1)(z-\delta)}
+K(z) = \frac{\alpha z^2 + \beta z + \gamma}{(z-1)(z-\dl)}
 \end{equation}
 
 Como o controlador proposto possui 4 parâmetros, é possível alocar 4 pólos. Tendo em vista que a planta e o controlador são de segunda ordem, o sistema em malha fechada será de quarta ordem. Sendo assim, o controlador proposto é capaz de alocar todos os pólos do sistema. \\
@@ -5410,14 +5448,14 @@ G_{mf}(z) = \frac{(\mathcal{A} z+\mathcal{B}) \left(\gamma +\alpha  z^2+\beta  z
 Sendo:
 \begin{equation}
 \begin{cases}
-a_0 &=  \mathcal{B} \gamma  + \mathcal{D} \delta\\
-a_1 &= \mathcal{B} \beta + \mathcal{A} \gamma +(\mathcal{C}  -  \mathcal{D}) \delta -\mathcal{D}   \\
-a_2 &= \mathcal{B} \alpha + \mathcal{A} \beta + (1 -\mathcal{C}) \delta -\mathcal{C} +\mathcal{D}  \\
-a_3 &=   \mathcal{A} \alpha -\delta +\mathcal{C} -1
+a_0 &=  \mathcal{B} \gamma  + \mathcal{D} \dl\\
+a_1 &= \mathcal{B} \beta + \mathcal{A} \gamma +(\mathcal{C}  -  \mathcal{D}) \dl -\mathcal{D}   \\
+a_2 &= \mathcal{B} \alpha + \mathcal{A} \beta + (1 -\mathcal{C}) \dl -\mathcal{C} +\mathcal{D}  \\
+a_3 &=   \mathcal{A} \alpha -\dl +\mathcal{C} -1
 \end{cases}
 \end{equation}
 
-%(\mathcal{A} z+\mathcal{B}) \left(\gamma +\alpha  z^2+\beta  z\right)+(z-1) (z-\delta ) \left(\mathcal{D}+z^2+\mathcal{C} z\right)
+%(\mathcal{A} z+\mathcal{B}) \left(\gamma +\alpha  z^2+\beta  z\right)+(z-1) (z-\dl ) \left(\mathcal{D}+z^2+\mathcal{C} z\right)
 
 
 Sendo assim, o polinômio característico do sistema em malha fechada é dada por:
@@ -5443,10 +5481,10 @@ c_3 &= -p_1-p_2-p_3-p_4
 Portanto, os parâmetros de $K(z)$ podem ser obtidos resolvendo o seguinte sistema de equações algébricas:
 \begin{equation}
 \begin{cases}
-\mathcal{B} \gamma  + \mathcal{D} \delta &= c_0 \\
-\mathcal{B} \beta + \mathcal{A} \gamma +(\mathcal{C}  -  \mathcal{D}) \delta -\mathcal{D} &= c_1  \\
-\mathcal{B} \alpha + \mathcal{A} \beta + (1 -\mathcal{C}) \delta -\mathcal{C} +\mathcal{D} &= c_2 \\
-\mathcal{A} \alpha -\delta +\mathcal{C} -1 &= c_3
+\mathcal{B} \gamma  + \mathcal{D} \dl &= c_0 \\
+\mathcal{B} \beta + \mathcal{A} \gamma +(\mathcal{C}  -  \mathcal{D}) \dl -\mathcal{D} &= c_1  \\
+\mathcal{B} \alpha + \mathcal{A} \beta + (1 -\mathcal{C}) \dl -\mathcal{C} +\mathcal{D} &= c_2 \\
+\mathcal{A} \alpha -\dl +\mathcal{C} -1 &= c_3
 \end{cases}
 \end{equation}
 
@@ -5462,7 +5500,7 @@ O qual é um sistema linear. Representando de forma matricial:
 \alpha \\
 \beta \\
 \gamma \\
-\delta
+\dl
 \end{bmatrix}
 =
 \begin{bmatrix}
@@ -5479,7 +5517,7 @@ Sua solução é dada por:
 \alpha = \frac{\mathcal{A}^2 c_1+\mathcal{B} \left(-\mathcal{D} (\mathcal{A}+\mathcal{B})-\mathcal{A} c_2+ \mathcal{B} (\mathcal{C}+ c_3) \right)-\left(\mathcal{C} -c_4 - 1 \right) (\mathcal{B} (\mathcal{B}-\mathcal{C} (\mathcal{A}+\mathcal{B}))+\mathcal{A} \mathcal{D} (\mathcal{A}+\mathcal{B}))}{(\mathcal{A}+\mathcal{B}) \left(\mathcal{A}^2 \mathcal{D}-\mathcal{A} \mathcal{B} \mathcal{C}+\mathcal{B}^2\right)} \\
 \beta = \frac{\mathcal{C} \left( \mathcal{D} (\mathcal{A}+\mathcal{B})^2+ \mathcal{B} (\mathcal{B}-\mathcal{C} (\mathcal{A}+\mathcal{B})) \right)-\mathcal{A} \mathcal{D}^2 (\mathcal{A}+\mathcal{B})+\left(\mathcal{A} c_3- \mathcal{B} c_4 \right) (\mathcal{D} (\mathcal{A}+\mathcal{B})-\mathcal{C} \mathcal{B})+ (\mathcal{A} (\mathcal{C}-1)-\mathcal{B})(\mathcal{A} c_1 - \mathcal{B} c_2)}{(\mathcal{A}+\mathcal{B}) \left(\mathcal{A}^2 \mathcal{D}-\mathcal{A} \mathcal{B} \mathcal{C}+\mathcal{B}^2\right)} \\
 \gamma = \frac{ \left(\mathcal{A}^2 \mathcal{D}-(\mathcal{A}+\mathcal{B}) (\mathcal{A} \mathcal{C}-\mathcal{B})\right)c_1 +\mathcal{D} \left(\mathcal{B} \left( \mathcal{B} (1-\mathcal{C} + c_4) - \mathcal{A} (\mathcal{C} - \mathcal{D} + c_3) \right)+\mathcal{A}^2( \mathcal{D}+ c_2) \right)}{(\mathcal{A}+\mathcal{B}) \left(\mathcal{A}^2 \mathcal{D}-\mathcal{A} \mathcal{B} \mathcal{C}+\mathcal{B}^2\right)} \\
-\delta = \frac{\mathcal{A}^3 c_1+\mathcal{B} \left(\mathcal{B} (\mathcal{C} (\mathcal{A}+\mathcal{B})-\mathcal{B})-\mathcal{A} \mathcal{D} (\mathcal{A}+\mathcal{B})-\mathcal{A}^2 c_2 +\mathcal{B} \left(\mathcal{A} c_3- \mathcal{B} c_4 \right)\right)}{(\mathcal{A}+\mathcal{B}) \left(\mathcal{A}^2 \mathcal{D}-\mathcal{A} \mathcal{B} \mathcal{C}+\mathcal{B}^2\right)} \\
+\dl = \frac{\mathcal{A}^3 c_1+\mathcal{B} \left(\mathcal{B} (\mathcal{C} (\mathcal{A}+\mathcal{B})-\mathcal{B})-\mathcal{A} \mathcal{D} (\mathcal{A}+\mathcal{B})-\mathcal{A}^2 c_2 +\mathcal{B} \left(\mathcal{A} c_3- \mathcal{B} c_4 \right)\right)}{(\mathcal{A}+\mathcal{B}) \left(\mathcal{A}^2 \mathcal{D}-\mathcal{A} \mathcal{B} \mathcal{C}+\mathcal{B}^2\right)} \\
 \end{cases}
 \end{equation}
 
