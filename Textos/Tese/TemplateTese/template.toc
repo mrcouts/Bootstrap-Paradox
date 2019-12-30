@@ -139,4 +139,11 @@
 \contentsline {section}{\numberline {B.2}Fun\IeC {\c c}\IeC {\~o}es de transfer\IeC {\^e}ncia de velocidade}{154}
 \contentsline {section}{\numberline {B.3}Fun\IeC {\c c}\IeC {\~o}es de transfer\IeC {\^e}ncia de posi\IeC {\c c}\IeC {\~a}o}{154}
 \contentsline {chapter}{Ap\IeC {\^e}ndice{} C{} -- Controlador de Corrente}{155}
-\contentsline {chapter}{Ap\IeC {\^e}ndice{} D{} -- Curva dos motores}{158}
+\contentsline {chapter}{Ap\IeC {\^e}ndice{} D{} -- Curvas e identifica\IeC {\c c}\IeC {\~a}o dos par\IeC {\^a}metros dos motores}{158}
+\contentsline {chapter}{Ap\IeC {\^e}ndice{} E{} -- Cinem\IeC {\'a}tica de Quaternions}{163}
+\contentsline {section}{\numberline {E.1}Motiva\IeC {\c c}\IeC {\~a}o}{163}
+\contentsline {section}{\numberline {E.2}Defini\IeC {\c c}\IeC {\~o}es}{164}
+\contentsline {subsection}{\numberline {E.2.1}Quaternion unit\IeC {\'a}rio}{164}
+\contentsline {subsection}{\numberline {E.2.2}Produto de quaternions}{164}
+\contentsline {subsection}{\numberline {E.2.3}Quaternion inverso/conjugado}{165}
+\contentsline {subsection}{\numberline {E.2.4}Rota\IeC {\c c}\IeC {\~o}es elementares}{165}

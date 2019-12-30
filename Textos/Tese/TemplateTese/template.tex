@@ -640,7 +640,7 @@ Neste sentido, almeja-se observar se haverá alguma diferença de desempenho se 
 
 \part{Modelagem}
 	
-\chapter{Modelagem de manipuladores seriais}
+\chapter{Modelagem de manipuladores seriais} \label{cap:Seriais}
 \capepigrafe[0.5\textwidth]{``Não é que eu goste de complicar as coisas, elas é que gostam de ser complicadas comigo''}{Lewis Carroll}
 
 Este capítulo tem o intuito de apresentar um algoritmo genérico para a obtenção do modelo cinemático e dinâmico de mecanismos seriais. O algoritmo apresentado é implementável em linguagens de programação comumente usadas atualmente, como C++, Java e Python, sem necessitar de recursos de manipulação simbólica. \\
@@ -4041,7 +4041,7 @@ Sendo:
 
 Repare que, para $\underline{k} = \mzr$, temos a lei de Controle por Torque Computado. Para $\underline{k} = \mzr$, $\hat{\mh} = \mzr$ e $\hat{\mH}$ constante e diagonal, temos uma lei de Controle Proporcional-Derivativo com pré-alimentação. Sendo assim, para $\underline{k} \neq \mzr$, podemos obter estas mesmas leis de controle, agora com um termo adicional de controle robusto vindo do Controle por Modos Deslizantes.
 
-Esta lei de controle tem a vantagem de, além de poder ser interpretada como uma estratégia híbrida, praticamente elimina o fenômeno do \emph{chattering}, tendo em vista que o termo descontínuo é suavizado atravez de uma função de saturação e uma integral.
+Esta lei de controle tem a vantagem de, além de poder ser interpretada como uma estratégia híbrida, praticamente elimina o fenômeno do \emph{chattering}, tendo em vista que o termo descontínuo é suavizado através de uma função de saturação e uma integral.
 
 \subsection{Parâmetros do sistema}
 
@@ -5018,7 +5018,7 @@ Generalizar o algoritmo de modelagem proposto para englobar mecanismos paralelos
 
 \section{Conceitos básicos}
 
-Esta seção tem o intuito de apresentar os conceitos de derivada temporal de vetores em relação a um referencial e as definições velocidade e aceleração. \\
+Este apêndice tem o intuito de apresentar os conceitos de derivada temporal de vetores em relação a um referencial e as definições velocidade e aceleração. \\
 
 Sejam $\llA$ e $\llB$ dois referenciais, e $\ttp$ e $\tto$ pontos no espaço. Primeiramente, fazemos as seguintes definições:
 
@@ -5281,7 +5281,9 @@ Repare que, fazendo $\llC \equiv \llA$ e utilizando \eqref{eq:composicao_wCA}, t
 
 \chapter{Funções de transferência de motores DC} \label{ap:FuncoesDeTransferencia}
 
-Para realizar a modelagem dos motores, será considerado o seguinte circuito circuito equivalente apresentado na figura \ref{fig:CEM1}.
+Este apêndice tem o intuito de mostrar a dedução e apresentar as funções de transferência de um motor de corrente contínua. \\
+
+Para realizar a modelagem dos motores, será considerado o seguinte circuito equivalente apresentado na figura \ref{fig:CEM1}.
 
 %-------------------------------------
 
@@ -5399,6 +5401,8 @@ Tendo que vista que a velocidade angular é a derivada temporal da posição ang
 
 
 \chapter{Controlador de Corrente} \label{ap:ControladorDeCorrente}
+
+Este apêndice tem o intuito de mostrar o projeto do controlador de corrente utilizado na implementação experimental das leis de controle de posição. \\
 
 Como foi visto no apêndice \ref{ap:FuncoesDeTransferencia}, a função de transferência de corrente de um motor DC é dada por:
 
@@ -5523,7 +5527,9 @@ Sua solução é dada por:
 
 
 
-\chapter{Curva dos motores} \label{ap:CurvaDosMotores}
+\chapter{Curvas e identificação dos parâmetros dos motores} \label{ap:CurvaDosMotores}
+
+Este apêndice tem o intuito de mostrar como foi feita a identificação dos parâmetros dos motores através das curvas de velocidades obtidadas e das equações de seu modelo dinâmico. \\
 
 As curvas de velocidades dos motores foram obtidas aplicando o derivador numérico citado na seção \ref{derivador} no sinal de posição fornecido pelo encoders. Foi utilizada uma entrada degrau de tensão $6.5V$. As curvas dos motores 1 e 2 podem ser observadas nas figuras \ref{CM2} e \ref{CM3} respectivamente.
 
@@ -5752,6 +5758,111 @@ $k_{e}$    & $5.200 \cdot 10^{-2}$ & $V s/rad$  \\
 $J$        & $1.887 \cdot10^{-4}$  & $kg.m^{2}$
 \end{tabular}
 \end{table}
+
+\chapter{Cinemática de Quaternions} \label{ap:Quat}
+Este apêndice tem o intuito apresentar alguns conceitos básicos relativos à utilização de quaternions unitários para descrever a orientação de um corpo rígido no espaço.
+\section{Motivação}
+Existem várias maneiras de representar a orientação de um corpo rígido no espaço, como a utilização de matrizes de rotação, angulos de Euler e quaternions unitários.
+
+Como foi visto no capítulo \ref{cap:Seriais}, utilizando a convenção de Denavit-Hartemberg é possível obter a orientação do efetuador de um mecanismo serial na representação de matriz de rotação. Esta representação possui o inconveniente de possuir um grande número de parâmetros para representar a orientação (9 parâmetros para representar 3 graus de liberdade de rotação). Além disso, a multiplicação de matrizes de rotação leva ao acúmulo de erros numéricos, o que pode fazer com que a matriz perca as condições necessárias para ser uma matriz de rotação.
+
+A representação por ângulos de Euler possui a vantagem de ter o mínimo número de parâmetros possível (3 parâmetros para representar 3 graus de liberdade de rotação). Porém, este tipo de representação perde um grau de liberdade quando o ângulo intermediário alinha os eixos de rotação do primeiro e do terceiro ângulo, o que pode ser bastante inconveniente.
+
+A representação por quaternions unitários possui um número não tão grande de parâmetros (4 parâmetros para representar 3 graus de liberdade de rotação), pode ser facilmente renormalizada (de modo a evitar o acúmulo de erros numéricos) e não possui o problema de perder graus de liberdade dependendo da configuração.Sendo assim, pode-se dizer que esta é uma forma bastante conveniênte de representar a orientação de um corpo rígido no espaço.
+
+\section{Definições}
+
+\subsection{Quaternion unitário}
+Um quaternion pode ser representado pela seguinte matriz-coluna:
+\begin{equation}
+\breve{\mq} = \begin{bmatrix}
+q_i & q_j & q_k & q_r 
+\end{bmatrix}^\msT
+\end{equation}
+
+A matriz-coluna $\breve{\mq}^\mathsf{v} = \begin{bmatrix} q_i & q_j & q_k \end{bmatrix}^\msT$ é conhecida como parte vetorial e o escalar $q_r$ como a parte real do quaternion.
+
+Um quaternion é dito unitário quando respeita a seguinte propriedade:
+\begin{equation}
+\breve{\mq}^\msT \breve{\mq} = \begin{bmatrix}
+q_i^2 + q_j^2 + q_k^2 + q_r^2
+\end{bmatrix}  = 
+\begin{bmatrix}
+1
+\end{bmatrix}
+\end{equation}
+
+\subsection{Produto de quaternions}
+
+Da mesma maneira que a composição de rotações consecutivas pode ser feita através da multiplicação de matrizes de rotação, ela também pode ser feita através da multiplicação de quaternions unitários, seguindo a mesma lógica. O produto de dois quaternions pode ser definido da seguinte maneira:
+\begin{equation}
+\breve{\mq}_1 \otimes \breve{\mq}_2 = \breve{\mQ}_{\mathsf{I}} (\breve{\mq}_1) \cdot \breve{\mq}_2 = \breve{\mQ}_{\mathsf{I}\mathsf{I}} (\breve{\mq}_2) \cdot \breve{\mq}_1
+\end{equation}
+
+Sendo:
+\begin{equation}
+\breve{\mQ}_{\mathsf{I}} (\breve{\mq}) =
+\begin{bmatrix}
+\begin{array}{rrrr}
+q_r & -q_k & q_j & q_i \\
+q_k & q_r & -q_i & q_j \\
+-q_j & q_i & q_r & q_k \\
+-q_i & -q_j & - q_k & q_r
+\end{array}
+\end{bmatrix}
+\end{equation}
+
+\begin{equation}
+\breve{\mQ}_{\mathsf{I}\mathsf{I}} (\breve{\mq}) =
+\begin{bmatrix}
+\begin{array}{rrrr}
+q_r & q_k & -q_j & q_i \\
+-q_k & q_r & q_i & q_j \\
+q_j & -q_i & q_r & q_k \\
+-q_i & -q_j & - q_k & q_r
+\end{array}
+\end{bmatrix}
+\end{equation}
+
+\subsection{Quaternion inverso/conjugado}
+Da mesma maneira que é possível definir a multiplicação de quaternions, também é possível definir o quaternion inverso $\breve{\mq}^\msI$, o qual apresenta a seguinte propriedade:
+\begin{equation}
+\breve{\mq} \otimes \breve{\mq}^\msI = \breve{\mq}^\msI \otimes \breve{\mq} = \begin{bmatrix}
+0 & 0 & 0 & 1
+\end{bmatrix}^\msT
+\end{equation}
+
+Também é possível definir o quaternion conjugado $\breve{\mq}'$ como o quaternion com a parte vetorial com sinal invertido e a parte real com o mesmo sinal, ou seja:
+\begin{equation}
+\breve{\mq}' = \begin{bmatrix}
+-q_i & -q_j & -q_k & q_r &
+\end{bmatrix}^\msT
+\end{equation}
+
+Para o caso de quaternions unitários, temos que o quaternion inverso é igual ao quaternion conjugado, ou seja:
+\begin{equation}
+\breve{\mq}^\msI = \breve{\mq}'
+\end{equation}
+
+\subsection{Rotações elementares}
+As rotações de um angulo $\theta$ em torno dos eixo $x$, $y$ e $z$ podem ser representadas pelos seguintes quaternions unitários, respectivamente:
+\begin{equation}
+\breve{\mq}_x (\theta) = \begin{bmatrix}
+\sign(\sin\theta) \sqrt{\frac{1-\cos\theta}{2}} & 0 & 0 & \sqrt{\frac{1+\cos\theta}{2}}
+\end{bmatrix}^\msT
+\end{equation}
+
+\begin{equation}
+\breve{\mq}_y (\theta) = \begin{bmatrix}
+0 & \sign(\sin\theta) \sqrt{\frac{1-\cos\theta}{2}} & 0 & \sqrt{\frac{1+\cos\theta}{2}}
+\end{bmatrix}^\msT
+\end{equation}
+
+\begin{equation}
+\breve{\mq}_z (\theta) = \begin{bmatrix}
+0 & 0 & \sign(\sin\theta) \sqrt{\frac{1-\cos\theta}{2}} & \sqrt{\frac{1+\cos\theta}{2}}
+\end{bmatrix}^\msT
+\end{equation}
 
 
 % ========== Anexos (opcional) ==========
