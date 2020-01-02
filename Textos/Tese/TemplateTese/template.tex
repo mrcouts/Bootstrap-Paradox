@@ -33,6 +33,9 @@
 \usepackage{fancybox}
 \usepackage{longtable}
 
+\newcommand{\ii}{\hat{\textbf{\itshape\i}}}
+\newcommand{\jj}{\hat{\textbf{\itshape\j}}}
+
 \definecolor{myblue}{rgb}{.75, .75, 1}
 \newcommand*\mybluebox[1]{%
 \colorbox{myblue}{\hspace{1em}#1\hspace{1em}}}
@@ -210,6 +213,7 @@ Aiming to fully explore the potential of this kind of architecture, in this thes
   $\underline{a}, \underline{b}, \hdots $ & Matrizes diagonais \\
   $A, B, \hdots$ & Escalares, componentes de matrizes-coluna ou componentes de matrizes \\
   $\ma, \mb, \hdots$ & Matrizes-coluna \\
+  $\breve{\ma}, \breve{\mb}, \hdots$ & Quaternions \\
   $\mA, \mB, \hdots$ & Matrizes \\
   $\va, \vb, \hdots$ & Vetores físicos \\
   $\hat{\va}, \hat{\vb}, \hdots$ & Versores físicos \\
@@ -221,14 +225,15 @@ Aiming to fully explore the potential of this kind of architecture, in this thes
   $\ccos(.)$ & Notação compacta para $\cos(.)$ \\
   $\dd$ & Operador diferencial \\
   $\diag(.)$ & Matriz-coluna cujos elementos são a diagonal de uma matriz quadrada \\
-  $g$ & Aceleração gravitacional \\
+  %$g$ & Aceleração gravitacional \\
   $\vct{\ttp}_{\ttB}$ & Matriz-coluna formada pelas coordenadas do ponto $\ttp$ no sistema de coordenadas $\ttB$ \\
   $\hvct{\ttp}_{\ttB}$ & Matriz-coluna formada pelas coordenadas do ponto $\ttp$ no sistema de coordenadas $\ttB$ em coordenadas homog\^eneas, ou seja: $\hvct{\ttp}_{\ttB} = \begin{bmatrix}
 [\ttp]_{\ttB} \\
 1
 \end{bmatrix} $ \\
   $\ssin(.)$ & Notação compacta para $\sin(.)$ \\
-  $[\vv]_{\ttB}$ & Matriz-coluna formada pelas componentes do vetor $\vv$ na base do sistema de coordenadas $\ttB$ \\
+  $\mS(.)$ & Matriz anti-simétrica de produto vetorial entre matrizes-colunas, ou seja, $\vct{\va \wedge \vb}_{\ttA} = \mS(\ma) \cdot \mb $, sendo $\ma = \vct{\va}_{\ttA}$ e $\mb = \vct{\vb}_{\ttA}$ \\
+  $[\vu]_{\ttB}$ & Matriz-coluna formada pelas componentes do vetor $\vu$ na base do sistema de coordenadas $\ttB$ \\
   $\dl$ & Operador variação \\
   $\mzr$ & Matriz-coluna nula ou matriz nula \\
   $\mone$ & Matriz identidade \\
@@ -236,6 +241,8 @@ Aiming to fully explore the potential of this kind of architecture, in this thes
   $\vone$ & Operador identidade \\
   $\nvct{\vone}_{\ttA \rl \ttB} $ & Matriz de mudança de base, i.e. $\nvct{\vv}_{\ttA} = \nvct{\vone}_{\ttA \rl \ttB} \cdot \nvct{\vv}_{\ttB} $ \\
   $\hvct{\vone}_{\ttA \rl \ttB}$ & Matriz de transformação homogênea, i.e. $\hvct{\ttp}_{\ttA} = \hvct{\vone}_{\ttA \rl \ttB} \cdot \hvct{\ttp}_{\ttB}$ \\
+  $\otimes$ & Operador produto de quaternions \\
+  $\wedge$ & Operador produto vetorial \\
   $\ntmat{\cdot}$ & Matriz transposta \\
   $\nimat{\cdot}$ & Matriz inversa \\
   $\npmat{\cdot}$ & Matriz pseudo-inversa \\
@@ -704,12 +711,12 @@ As matrizes  $\hvct{\vone}_{\ttN \rl \ttB_i}$ apresentam o seguinte formato:
 \begin{empheq}[box=\lightbluebox]{equation} \label{eq:H__2}
 \hvct{\vone}_{\ttN \rl \ttB_i} =
 \begin{bmatrix}
-\vct{\vi_{i}}_{\ttN} & \vct{\vj_{i}}_{\ttN} & \vct{\vk_{i}}_{\ttN} & \vct{\tto_i}_{\ttN} \\
+\vct{\vi_{i}}_{\ttN} & \vct{\vj_{i}}_{\ttN} & [\vk_{i}]_{\ttN} & \vct{\tto_i}_{\ttN} \\
 0 & 0 & 0 & 1
 \end{bmatrix}
 \end{empheq}
 
-Sendo assim, tendo obtido $\hvct{\vone}_{\ttN \rl \ttB_i}$, automaticamente obtemos $\vct{\vi_{i}}_{\ttN}, \vct{\vj_{i}}_{\ttN}, \vct{\vk_{i}}_{\ttN}$ e $\vct{\tto_i}_{\ttN}$. Note que também obtemos as coordenadas do efetuador no sistema da base, pois
+Sendo assim, tendo obtido $\hvct{\vone}_{\ttN \rl \ttB_i}$, automaticamente obtemos $\vct{\vi_{i}}_{\ttN}, \vct{\vj_{i}}_{\ttN}, [\vk_{i}]_{\ttN}$ e $\vct{\tto_i}_{\ttN}$. Note que também obtemos as coordenadas do efetuador no sistema da base, pois
 \begin{empheq}[box=\myyellowbox]{equation} \label{eq:x_}
 \vct{\ttx}_{\ttN} = \vct{\tto_{\nu}}_{\ttN}
 \end{empheq}
@@ -773,8 +780,8 @@ Sendo que, a partir da equação \eqref{eq:Poisson_v}, a velocidade de arrastame
 Fazendo as seguintes definições:
 \begin{empheq}[box=\myyellowbox]{equation} \label{eq:jvi_}
 \mj_{v\,i}(\mq) = \begin{cases}
-\vct{\vk_{i-1}}_{\ttN}, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; \text{i-ésima junta prismática} \\
-\vct{\vk_{i-1}}_{\ttN}\wedge (\vct{\ttx}_{\ttN}-\vct{\tto_{i-1}}_{\ttN}) , \; \text{i-ésima junta rotativa} \\
+[\vk_{i-1}]_{\ttN}, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; \text{i-ésima junta prismática} \\
+\mS([\vk_{i-1}]_{\ttN})\cdot (\vct{\ttx}_{\ttN}-\vct{\tto_{i-1}}_{\ttN}) , \; \text{i-ésima junta rotativa} \\
 \end{cases} \, i=1,...,\nu
 \end{empheq}
 
@@ -815,8 +822,8 @@ Definindo:
 \begin{empheq}[box=\myyellowbox]{equation} \label{eq:jvij_}
 \mj_{v\,i,j}(\mq) = \begin{cases}
 \mzr, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; j>i \\
-\vct{\vk_{j-1}}_{\ttN}, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; j\leq i  \text{ e j-ésima junta prismática} \\
-\vct{\vk_{j-1}}_{\ttN}\wedge (\vct{\ttg_i}_{\ttN}-\vct{\tto_{j-1}}_{\ttN}) , \; j\leq i \text{ e j-ésima junta rotativa} \\
+[\vk_{j-1}]_{\ttN}, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; j\leq i  \text{ e j-ésima junta prismática} \\
+\mS([\vk_{j-1}]_{\ttN})\cdot (\vct{\ttg_i}_{\ttN}-\vct{\tto_{j-1}}_{\ttN}) , \; j\leq i \text{ e j-ésima junta rotativa} \\
 \end{cases} \, i,j=1,...,\nu
 \end{empheq}
 
@@ -899,7 +906,7 @@ Fazendo as seguintes definições:
 \begin{empheq}[box=\myyellowbox]{equation}  \label{eq:jwi_}
 \mj_{\omega\,i}(\mq) = \begin{cases}
 \mzr, \;\;\;\;\;\;\;\; \text{i-ésima junta prismática} \\
-\vct{\vk_{i-1}}_{\ttN} , \text{i-ésima junta rotativa} \\
+[\vk_{i-1}]_{\ttN} , \text{i-ésima junta rotativa} \\
 \end{cases} \, i=1,...,\nu
 \end{empheq}
 
@@ -1036,7 +1043,7 @@ Fazendo as seguintes definições:
 
 Temos que:
 \begin{equation}
-\vct{\va_{\ttx \rl \lllB_{i}}^{\lllB_{i-1}} }_{\ttN} = \ddot{q}_{i} \mj_{v\,i} + \dot{q}^2_{i} \mj_{\omega\,i} \wedge \mj_{v\,i}, \; i=1,...,\nu
+\vct{\va_{\ttx \rl \lllB_{i}}^{\lllB_{i-1}} }_{\ttN} = \ddot{q}_{i} \mj_{v\,i} + \dot{q}^2_{i} \mS(\mj_{\omega\,i}) \cdot \mj_{v\,i}, \; i=1,...,\nu
 \end{equation}
 
 \begin{empheq}[box=\myyellowbox]{equation}
@@ -1053,7 +1060,7 @@ Temos que:
 
 Sendo:
 \begin{empheq}[box=\myyellowbox]{equation}
-(\underaccent{\sim}{\ma})_i = \dot{q}_{i} \mj_{\omega\,i} \wedge ( \dot{q}_{i}  \mj_{v\,i} + 2  \mv_i)
+(\underaccent{\sim}{\ma})_i = \dot{q}_{i} \mS( \mj_{\omega\,i} ) \cdot ( \dot{q}_{i}  \mj_{v\,i} + 2  \mv_i)
 \end{empheq}
 
 \begin{empheq}[box=\myyellowbox]{equation} \label{eq:a_til}
@@ -1086,7 +1093,7 @@ Temos:
 
 Sendo:
 \begin{empheq}[box=\myyellowbox]{equation}
-(\underaccent{\sim}{\ma}_i)_j = \dot{q}_{j} \mj_{\omega\,i,j} \wedge ( \dot{q}_{j} \mj_{v\,i,j} + 2  \mv_{i,j})
+(\underaccent{\sim}{\ma}_i)_j = \dot{q}_{j} \mS( \mj_{\omega\,i,j} ) \cdot ( \dot{q}_{j} \mj_{v\,i,j} + 2  \mv_{i,j})
 \end{empheq}
 
 \begin{empheq}[box=\myyellowbox]{equation}
@@ -1168,7 +1175,7 @@ Temos que:
 
 Sendo:
 \begin{empheq}[box=\myyellowbox]{equation}
-(\underaccent{\sim}{\malpha})_i = \dot{q}_i \mj_{\omega\,i} \wedge \momega_i
+(\underaccent{\sim}{\malpha})_i = \dot{q}_i \mS( \mj_{\omega\,i} ) \cdot \momega_i
 \end{empheq}
 
 \begin{empheq}[box=\myyellowbox]{equation} \label{eq:dw_til}
@@ -1201,7 +1208,7 @@ Temos:
 
 Sendo:
 \begin{empheq}[box=\myyellowbox]{equation}
-(\underaccent{\sim}{\malpha}_i)_j = \dot{q}_j \mj_{\omega\,i,j} \wedge \momega_{i,j}
+(\underaccent{\sim}{\malpha}_i)_j = \dot{q}_j \mS( \mj_{\omega\,i,j} ) \cdot \momega_{i,j}
 \end{empheq}
 
 \begin{empheq}[box=\myyellowbox]{equation}
@@ -1222,7 +1229,7 @@ m_i \mJ_{v\,i}^\msT \mJ_{v\,i} + \mJ_{\omega\,i}^\msT \mI_i \mJ_{\omega\,i}
 \end{empheq}
 \begin{empheq}[box=\myyellowbox]{equation} \label{eq:vSerial}
 \mnu(\mq, \dot{\mq}) = \sum_{i=1}^\nu
- m_i \mJ_{v\,i}^\msT \underaccent{\sim}{\ma}_i + \mJ_{\omega\,i}^\msT \big( \mI_i \underaccent{\sim}{\malpha}_i + \momega^\star_i \wedge (\mI_i  \momega^\star_i) \big)
+ m_i \mJ_{v\,i}^\msT \underaccent{\sim}{\ma}_i + \mJ_{\omega\,i}^\msT \big( \mI_i \underaccent{\sim}{\malpha}_i + \mS( \momega^\star_i ) \cdot \mI_i \momega^\star_i \big)
 \end{empheq}
 \begin{empheq}[box=\myyellowbox]{equation} \label{eq:gSerial}
 \mg(\mq) = - \sum_{i=1}^\nu m_i \mJ_{v\,i}^\msT \mgamma
@@ -1261,7 +1268,7 @@ m_i \mone & \mzr \\
 -
 \begin{bmatrix}
 \mzr \\
-\vct{\vomega^{\lllN}_{\lllB_i}}_{\ttN} \wedge (\vct{\vI_{\ttg_i}}_{\ttN \rl \ttN} \cdot \vct{\vomega^{\lllN}_{\lllB_i}}_{\ttN})
+\mS( \vct{\vomega^{\lllN}_{\lllB_i}}_{\ttN} ) \cdot \vct{\vI_{\ttg_i}}_{\ttN \rl \ttN} \cdot \vct{\vomega^{\lllN}_{\lllB_i}}_{\ttN}
 \end{bmatrix}
 -
 \begin{bmatrix}
@@ -1285,7 +1292,7 @@ m_i \mone & \mzr \\
 +
 \begin{bmatrix}
 \mzr \\
-\momega^\star_i \wedge (\mI_i \cdot \momega^\star_i)
+\mS ( \momega^\star_i ) \cdot \mI_i \cdot \momega^\star_i
 \end{bmatrix}
 +
 \begin{bmatrix}
@@ -1532,7 +1539,7 @@ m_i \mone & \mzr \\
 +
 \begin{bmatrix}
 \mzr \\
-\momega^\star_i \wedge (\mI_i \cdot \momega^\star_i)
+\mS( \momega^\star_i ) \cdot \mI_i \cdot \momega^\star_i
 \end{bmatrix}
 +
 \begin{bmatrix}
@@ -1558,7 +1565,7 @@ m_i (\mJ_{v_i} \ddot{\mq} + \underaccent{\sim}{\ma}_i   )  \\
 +
 \begin{bmatrix}
 \mzr \\
-\momega^\star_i \wedge (\mI_i \cdot \momega^\star_i)
+\mS( \momega^\star_i ) \cdot \mI_i \cdot \momega^\star_i
 \end{bmatrix}
 +
 \begin{bmatrix}
@@ -1581,7 +1588,7 @@ m_i \mJ_{v\,i}^\msT \mJ_{v\,i} + \mJ_{\omega\,i}^\msT \mI_i \mJ_{\omega\,i}
 \end{equation}
 \begin{equation} \tag{\ref{eq:vSerial}}
 \mnu(\mq, \dot{\mq}) = \sum_{i=1}^\nu
- m_i \mJ_{v\,i}^\msT \underaccent{\sim}{\ma}_i + \mJ_{\omega\,i}^\msT \big( \mI_i \underaccent{\sim}{\malpha}_i + \momega^\star_i \wedge (\mI_i  \momega^\star_i) \big)
+ m_i \mJ_{v\,i}^\msT \underaccent{\sim}{\ma}_i + \mJ_{\omega\,i}^\msT \big( \mI_i \underaccent{\sim}{\malpha}_i + \mS( \momega^\star_i ) \cdot \mI_i  \momega^\star_i \big)
 \end{equation}
 \begin{equation} \tag{\ref{eq:gSerial}}
 \mg(\mq) = - \sum_{i=1}^\nu m_i \mJ_{v\,i}^\msT \mgamma
@@ -1642,7 +1649,7 @@ Sendo que a velocidade angular relativa de cada rotor é dada por:
 
 Aplicando a equação \eqref{eq:ComposicaoWRotor} no sistema $\ttN$, temos:
 \begin{empheq}[box=\myyellowbox]{equation} \label{eq:ComposicaoWRotor2}
-\momega^\star_{r \,i} = \momega^\star_{i-1} + r_i \dot{q}_{i} \vct{\vk_{i-1}}_{\ttN} ,\; i=1,...,\nu
+\momega^\star_{r \,i} = \momega^\star_{i-1} + r_i \dot{q}_{i} [\vk_{i-1}]_{\ttN} ,\; i=1,...,\nu
 \end{empheq}
 
 Sendo:
@@ -1658,7 +1665,7 @@ Utilizando a equação \eqref{eq:omega_star_i}, pode-se reescrever \eqref{eq:Com
 Sendo:
 \begin{empheq}[box=\myyellowbox]{equation} \label{eq:jwij_rot}
 \mj_{\omega_r \,i,j}(\mq) = \begin{cases}
-r_i \vct{\vk_{i-1}}_{\ttN}, \;  j = i \\
+r_i [\vk_{i-1}]_{\ttN}, \;  j = i \\
 \mj_{\omega\,i,j}(\mq), \;\;\;  j\neq i \\
 \end{cases} \, i,j=1,...,\nu
 \end{empheq}
@@ -1684,7 +1691,7 @@ Sendo que a aceleração angular de relativa de cada rotor é dada por:
 
 Aplicando a equação \eqref{eq:ComposicaodWRotor} no sistema $\ttN$, temos:
 \begin{empheq}[box=\myyellowbox]{equation} \label{eq:ComposicaodWRotor2}
-\malpha^\star_{r \,i} = \malpha^\star_{i-1} + r_i \ddot{q}_{i} \vct{\vk_{i-1}}_{\ttN} + \momega^\star_{i-1} \wedge r_i \dot{q}_{i} \vct{\vk_{i-1}}_{\ttN} ,\; i=1,...,\nu
+\malpha^\star_{r \,i} = \malpha^\star_{i-1} + r_i \ddot{q}_{i} [\vk_{i-1}]_{\ttN} + r_i \dot{q}_{i} \mS( \momega^\star_{i-1} ) \cdot [\vk_{i-1}]_{\ttN} ,\; i=1,...,\nu
 \end{empheq}
 
 Sendo:
@@ -1699,9 +1706,9 @@ Utilizando a equação \eqref{eq:domega_star_i}, pode-se reescrever \eqref{eq:Co
 
 Sendo:
 \begin{empheq}[box=\myyellowbox]{equation}
-\underaccent{\sim}{\malpha}_{r\,i}  (\mq,\dot{\mq}) = \begin{cases}
-\mzr, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; i = 1 \\
-\underaccent{\sim}{\malpha}_{i-1}  (\mq,\dot{\mq}) + \momega^\star_{i-1} (\mq,\dot{\mq}) \wedge  \dot{q}_{i} \mj_{\omega_r \, i,i}(\mq), \, i > 1 
+\underaccent{\sim}{\malpha}_{r\,i}  = \begin{cases}
+\mzr, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; i = 1 \\
+\underaccent{\sim}{\malpha}_{i-1}  + \dot{q}_{i} \mS( \momega^\star_{i-1} ) \cdot \mj_{\omega_r \, i,i}, \, i > 1 
 \end{cases}  ,\; i=1,...,\nu
 \end{empheq}
 
@@ -1719,7 +1726,7 @@ Sendo:
 \end{empheq}
 \begin{empheq}[box=\myyellowbox]{equation} \label{eq:vSerial_rot}
 \mnu^*(\mq, \dot{\mq}) = \mnu(\mq, \dot{\mq}) + \underline{r} \, \mzeta(\underline{r} \, \dot{\mq}) + \sum_{i=1}^\nu
- \mJ_{\omega_r \,i}^\msT \big( \mI_{r\,i} \underaccent{\sim}{\malpha}_{r\,i} + \momega^\star_{r\,i} \wedge (\mI_{r\,i} \momega^\star_{r\,i}) \big)
+ \mJ_{\omega_r \,i}^\msT \big( \mI_{r\,i} \underaccent{\sim}{\malpha}_{r\,i} + \mS( \momega^\star_{r\,i} ) \cdot \mI_{r\,i} \momega^\star_{r\,i} \big)
 \end{empheq}
 \begin{empheq}[box=\myyellowbox]{equation} \label{eq:gSerial_rot}
 \mg^*(\mq) = \mg(\mq)
@@ -1747,7 +1754,7 @@ Aplicando as equações vetoriais no sistema $\ttN$, temos:
 \cdot
 \vct{\valpha^{\lllN}_{\lllR_i}}_{\ttN}
 -
-\vct{\vomega^{\lllN}_{\lllR_i}}_{\ttN} \wedge (\vct{\vI_{\ttr_i}}_{\ttN \rl \ttN} \cdot \vct{\vomega^{\lllN}_{\lllR_i}}_{\ttN})
+\mS( \vct{\vomega^{\lllN}_{\lllR_i}}_{\ttN} ) \cdot \vct{\vI_{\ttr_i}}_{\ttN \rl \ttN} \cdot \vct{\vomega^{\lllN}_{\lllR_i}}_{\ttN}
 \end{equation}
 
 Ou seja:
@@ -1757,7 +1764,7 @@ Ou seja:
 \cdot
 \malpha^\star_{r \,i}
 -
-\momega^\star_{r \,i} \wedge (\mI_{r \,i} \cdot \momega^\star_{r \,i})
+\mS( \momega^\star_{r \,i} ) \cdot \mI_{r \,i} \cdot \momega^\star_{r \,i}
 \end{empheq}
 
 Como os subsistemas estão desacoplados, não há forças reativas, portanto o modelo dinâmico de cada subsistema rotor pode ser escrito como:
@@ -1847,12 +1854,12 @@ Tendo em vista que as coordenadas $\mq$ são independentes, as variações $\dl\
 
 Substituindo \eqref{eq:f_i_rot} e \eqref{eq:fs} em  \eqref{eq:Din_rot1}, temos:
 \begin{equation} \label{eq:DynSeriais_rot}
-\underline{r} \, \underline{k_t} \, \mi - \underline{r} \, \mzeta(\underline{r} \, \dot{\mq}) - \mM \, \ddot{\mq} - \mnu - \mg  - \sum_{i=1}^\nu \mJ_{\omega_r \,i}^\msT \, ( \mI_{r\,i} \cdot \malpha_{r\,i}^\star + \momega_{r\,i}^\star \wedge (\mI_{r\,i} \cdot \momega_{r\,i}^\star)  )  = \mzr
+\underline{r} \, \underline{k_t} \, \mi - \underline{r} \, \mzeta(\underline{r} \, \dot{\mq}) - \mM \, \ddot{\mq} - \mnu - \mg  - \sum_{i=1}^\nu \mJ_{\omega_r \,i}^\msT \, ( \mI_{r\,i} \cdot \malpha_{r\,i}^\star + \mS( \momega_{r\,i}^\star ) \cdot  \mI_{r\,i} \cdot \momega_{r\,i}^\star)    = \mzr
 \end{equation}
 
 Substituindo \eqref{eq:dw_ri} em \eqref{eq:DynSeriais_rot}:
 \begin{equation} \label{eq:DynSeriais_rot2}
-\underline{r} \underline{k_t} \, \mi - \underline{r} \, \mzeta(\underline{r} \, \dot{\mq})  - \mM \, \ddot{\mq} - \mnu - \mg  - \sum_{i=1}^\nu \mJ_{\omega_r \,i}^\msT \, ( \mI_{r\,i} \cdot (\mJ_{\omega_r \,i}  \cdot \ddot{\mq} + \underaccent{\sim}{\malpha}_{r\,i}  ) + \momega_{r\,i}^\star \wedge (\mI_{r\,i} \cdot \momega_{r\,i}^\star)  )  = \mzr
+\underline{r} \underline{k_t} \, \mi - \underline{r} \, \mzeta(\underline{r} \, \dot{\mq})  - \mM \, \ddot{\mq} - \mnu - \mg  - \sum_{i=1}^\nu \mJ_{\omega_r \,i}^\msT \, ( \mI_{r\,i} \cdot (\mJ_{\omega_r \,i}  \cdot \ddot{\mq} + \underaccent{\sim}{\malpha}_{r\,i}  ) + \mS( \momega_{r\,i}^\star ) \cdot \mI_{r\,i} \cdot \momega_{r\,i}^\star  )  = \mzr
 \end{equation}
 
 Sendo assim, obtemos o modelo dinâmico mostrado anteriormente:
@@ -1866,7 +1873,7 @@ Sendo:
 \end{equation}
 \begin{equation} \tag{\ref{eq:vSerial_rot}}
 \mnu^*(\mq, \dot{\mq}) = \mnu(\mq, \dot{\mq}) + \underline{r} \, \mzeta(\underline{r} \, \dot{\mq}) + \sum_{i=1}^\nu
- \mJ_{\omega_r \,i}^\msT \big( \mI_{r\,i} \underaccent{\sim}{\malpha}_{r\,i} + \momega^\star_{r\,i} \wedge (\mI_{r\,i} \momega^\star_{r\,i}) \big)
+ \mJ_{\omega_r \,i}^\msT \big( \mI_{r\,i} \underaccent{\sim}{\malpha}_{r\,i} + \mS( \momega^\star_{r\,i} ) \cdot \mI_{r\,i} \momega^\star_{r\,i} \big)
 \end{equation}
 \begin{equation} \tag{\ref{eq:gSerial_rot}}
 \mg^*(\mq) = \mg(\mq)
@@ -2088,7 +2095,7 @@ Portanto:
 
 Seja $\ttx_i$ um ponto pertencente à plataforma/efetuador $\llB_0$ e também ao efetuador $\llB_i$. Sendo assim, é possível relacionar a posição do ponto $\ttx_i$ em relação a $\tto_0$, seguindo tanto pela da plataforma/efetuador $\ssB_0$, quanto pela cadeia serial $\ssB_i$:
 \begin{equation}
-\overrightarrow{\tto_0 \ttx_i} = \overrightarrow{\tto_0 \ttg} + \overrightarrow{\ttg \, \ttx_i} = \overrightarrow{\tto_0 \tto_i} + \overrightarrow{\tto_i \ttx_i}
+\vr_{\tto_0 \rl \ttx_i} = \vr_{\tto_0 \rl \ttg} + \vr_{\ttg \rl \ttx_i} = \vr_{\tto_0 \rl \tto_i} + \vr_{\tto_i \rl \ttx_i}
 \end{equation}
 
 Aplicando a equação vetorial no sistema $\ttN_0$:
@@ -5770,7 +5777,7 @@ A representação por ângulos de Euler possui a vantagem de ter o mínimo núme
 
 A representação por quaternions unitários possui um número não tão grande de parâmetros (4 parâmetros para representar 3 graus de liberdade de rotação), pode ser facilmente renormalizada (de modo a evitar o acúmulo de erros numéricos) e não possui o problema de perder graus de liberdade dependendo da configuração. Sendo assim, pode-se dizer que esta é uma forma bastante conveniênte de representar a orientação de um corpo rígido no espaço.
 
-\section{Definições}
+\section{Definições, propriedades e fórmulas de conversão}
 
 \subsection{Quaternion unitário}
 Um quaternion pode ser representado pela seguinte matriz-coluna:
@@ -5954,15 +5961,17 @@ Pode-se relacionar a derivada temporal de $\breve{\mq}$ e $\momega$ das seguinte
 \begin{equation}
 \dot{\breve{\mq}} = \breve{\mC}(\breve{\mq}) \cdot \momega
 \end{equation}
-
 \begin{equation}
 \momega = 4 \breve{\mC}^\msT (\breve{\mq})\cdot \dot{\breve{\mq}}
 \end{equation}
 
 Além disso, repare que 
-
 \begin{equation}
 \breve{\mC}^\msT (\breve{\mq})\cdot \breve{\mq} = \mzr
+\end{equation}
+
+\begin{equation}
+\breve{\mC}^\msT (\breve{\mq}_1)\cdot \breve{\mq}_2 = -\breve{\mC}^\msT (\breve{\mq}_2)\cdot \breve{\mq}_1
 \end{equation}
 
 

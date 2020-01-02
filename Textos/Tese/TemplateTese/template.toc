@@ -123,12 +123,12 @@
 \contentsline {subsection}{\numberline {A.1.1}Produto vetorial}{146}
 \contentsline {subsection}{\numberline {A.1.2}Derivada temporal de versores}{147}
 \contentsline {subsection}{\numberline {A.1.3}Derivada temporal de vetores}{147}
-\contentsline {subsection}{\numberline {A.1.4}Defini\IeC {\c c}\IeC {\~a}o de vetor velocidade}{147}
+\contentsline {subsection}{\numberline {A.1.4}Defini\IeC {\c c}\IeC {\~a}o de vetor velocidade}{148}
 \contentsline {subsection}{\numberline {A.1.5}Defini\IeC {\c c}\IeC {\~a}o de vetor acelera\IeC {\c c}\IeC {\~a}o}{148}
 \contentsline {subsection}{\numberline {A.1.6}Defini\IeC {\c c}\IeC {\~a}o de vetor acelera\IeC {\c c}\IeC {\~a}o angular}{148}
 \contentsline {section}{\numberline {A.2}Equa\IeC {\c c}\IeC {\~o}es de campos de velocidades e acelera\IeC {\c c}\IeC {\~o}es}{148}
 \contentsline {subsection}{\numberline {A.2.1}Equa\IeC {\c c}\IeC {\~a}o do campo de velocidades}{148}
-\contentsline {subsection}{\numberline {A.2.2}Equa\IeC {\c c}\IeC {\~a}o do campo de acelera\IeC {\c c}\IeC {\~o}es}{148}
+\contentsline {subsection}{\numberline {A.2.2}Equa\IeC {\c c}\IeC {\~a}o do campo de acelera\IeC {\c c}\IeC {\~o}es}{149}
 \contentsline {section}{\numberline {A.3}Composi\IeC {\c c}\IeC {\~a}o de movimentos}{149}
 \contentsline {subsection}{\numberline {A.3.1}Composi\IeC {\c c}\IeC {\~a}o de velocidades lineares}{149}
 \contentsline {subsection}{\numberline {A.3.2}Composi\IeC {\c c}\IeC {\~a}o de acelera\IeC {\c c}\IeC {\~o}es lineares}{150}
@@ -142,7 +142,7 @@
 \contentsline {chapter}{Ap\IeC {\^e}ndice{} D{} -- Curvas e identifica\IeC {\c c}\IeC {\~a}o dos par\IeC {\^a}metros dos motores}{159}
 \contentsline {chapter}{Ap\IeC {\^e}ndice{} E{} -- Cinem\IeC {\'a}tica de Quaternions}{164}
 \contentsline {section}{\numberline {E.1}Motiva\IeC {\c c}\IeC {\~a}o}{164}
-\contentsline {section}{\numberline {E.2}Defini\IeC {\c c}\IeC {\~o}es}{165}
+\contentsline {section}{\numberline {E.2}Defini\IeC {\c c}\IeC {\~o}es, propriedades e f\IeC {\'o}rmulas de convers\IeC {\~a}o}{165}
 \contentsline {subsection}{\numberline {E.2.1}Quaternion unit\IeC {\'a}rio}{165}
 \contentsline {subsection}{\numberline {E.2.2}Produto de quaternions}{165}
 \contentsline {subsection}{\numberline {E.2.3}Quaternion inverso/conjugado}{166}
