@@ -222,31 +222,42 @@ Aiming to fully explore the potential of this kind of architecture, in this thes
   $\ttA, \ttB, \hdots$ & Sistemas de coordenadas \\
   $\llA, \llB, \hdots$ & Corpos rígidos ou referenciais \\
   $\ssA, \ssB, \hdots$ & Sistema ou subsistema mecânico \\
-  $\ccos(.)$ & Notação compacta para $\cos(.)$ \\
-  $\dd$ & Operador diferencial \\
-  $\diag(.)$ & Matriz-coluna cujos elementos são a diagonal de uma matriz quadrada \\
-  %$g$ & Aceleração gravitacional \\
+  $\{\vi_\ttB, \vj_\ttB, \vk_\ttB \}$ & Base ortonormal do sistema de coordenadas $\ttB$ \\
   $\vct{\ttp}_{\ttB}$ & Matriz-coluna formada pelas coordenadas do ponto $\ttp$ no sistema de coordenadas $\ttB$ \\
   $\hvct{\ttp}_{\ttB}$ & Matriz-coluna formada pelas coordenadas do ponto $\ttp$ no sistema de coordenadas $\ttB$ em coordenadas homog\^eneas, ou seja: $\hvct{\ttp}_{\ttB} = \begin{bmatrix}
 [\ttp]_{\ttB} \\
 1
 \end{bmatrix} $ \\
-  $\ssin(.)$ & Notação compacta para $\sin(.)$ \\
-  $\mS(.)$ & Matriz anti-simétrica de produto vetorial entre matrizes-colunas, ou seja, $\vct{\va \wedge \vb}_{\ttA} = \mS(\ma) \cdot \mb $, sendo $\ma = \vct{\va}_{\ttA}$ e $\mb = \vct{\vb}_{\ttA}$ \\
   $[\vu]_{\ttB}$ & Matriz-coluna formada pelas componentes do vetor $\vu$ na base do sistema de coordenadas $\ttB$ \\
+  $\nvct{\vone}_{\ttA \rl \ttB} $ & Matriz de mudança de base, i.e. $\nvct{\vu}_{\ttA} = \nvct{\vone}_{\ttA \rl \ttB} \cdot \nvct{\vu}_{\ttB} $ \\
+  $\hvct{\vone}_{\ttA \rl \ttB}$ & Matriz de transformação homogênea, i.e. $\hvct{\ttp}_{\ttA} = \hvct{\vone}_{\ttA \rl \ttB} \cdot \hvct{\ttp}_{\ttB}$ \\
+  $\vf$ & Vetor força \\
+  $\vtau$ & Vetor torque \\
+  $\vg$ & Vetor aceleração gravitacional \\
+  $\vr_{\tta \rl \ttb}$ & Vetor que liga o ponto $\tta$ ao ponto $\ttb$, orientado no sentido de $\tta$ até $\ttb$ \\
+  $\vv_\ttp^{\lllA}$ & Vetor velocidade do ponto $\ttp$ em relação ao ref. $\llA$ \\
+  $\va_\ttp^{\lllA}$ & Vetor velocidade do ponto $\ttp$ em relação ao ref. $\llA$ \\
+  $\vomega_{\lllB}^{\lllA}$ & Vetor velocidade angular do corpo rígido (ou referencial) $\llB$ em relação ao referencial $\llA$ \\
+  $\valpha_{\lllB}^{\lllA}$ & Vetor aceleração angular do corpo rígido (ou referencial) $\llB$ em relação ao referencial $\llA$ \\
+  $t$ & Tempo \\
+  $\ccos(.)$ & Notação compacta para $\cos(.)$ \\
+  $\ssin(.)$ & Notação compacta para $\sin(.)$ \\
+  $\dd$ & Operador diferencial \\
   $\dl$ & Operador variação \\
+  $\displaystyle\frac{\dd^{[\lllA]}}{\dd t}$ & Operador derivada temporal em relação ao ref. $\llA$ \\
+  $\diag(.)$ & Matriz-coluna cujos elementos são a diagonal de uma matriz quadrada \\
+  %$g$ & Aceleração gravitacional \\
+  $\wedge$ & Operador produto vetorial \\
+  $\mS(.)$ & Matriz de produto vetorial entre matrizes-colunas de ordem 3, ou seja, $\vct{\va \wedge \vb}_{\ttA} = \mS(\ma) \cdot \mb = -\mS(\mb) \cdot \ma $, sendo $\ma = \vct{\va}_{\ttA}$ e $\mb = \vct{\vb}_{\ttA}$ \\
   $\mzr$ & Matriz-coluna nula ou matriz nula \\
   $\mone$ & Matriz identidade \\
   $\vzr$ & Vetor nulo \\
-  $\vone$ & Operador identidade \\
-  $\nvct{\vone}_{\ttA \rl \ttB} $ & Matriz de mudança de base, i.e. $\nvct{\vv}_{\ttA} = \nvct{\vone}_{\ttA \rl \ttB} \cdot \nvct{\vv}_{\ttB} $ \\
-  $\hvct{\vone}_{\ttA \rl \ttB}$ & Matriz de transformação homogênea, i.e. $\hvct{\ttp}_{\ttA} = \hvct{\vone}_{\ttA \rl \ttB} \cdot \hvct{\ttp}_{\ttB}$ \\
+  $\vone$ & Operador linear identidade \\
   $\otimes$ & Operador produto de quaternions \\
-  $\wedge$ & Operador produto vetorial \\
   $\ntmat{\cdot}$ & Matriz transposta \\
   $\nimat{\cdot}$ & Matriz inversa \\
   $\npmat{\cdot}$ & Matriz pseudo-inversa \\
-  $\nmmat{\cdot}$ & Módulo aplicado em cada componente da matriz ou matriz-coluna
+  $\nmmat{\cdot}$ & Módulo aplicado em cada componente de uma matriz ou matriz-coluna
 \end{longtable}
 
 % ========== Sumário ==========
@@ -5063,6 +5074,33 @@ Além disso, vale destacar algumas propriedades básicas do produto vetorial que
 (\lambda \va) \wedge \vb =  \va \wedge (\lambda \vb) = \lambda (\va \wedge \vb)
 \end{equation}
 
+Também é possível definir o produto vetorial para matrizes-coluna de ordem 3. 
+Sejam $\va$ e $\vb$ dois vetores e $\ttA$ um sistema de coordenadas.
+%e $\ma$ e $\mb$ duas matrizes-coluna tais que $\ma = \vct{\va}_{\ttA}$ e $\mb = \vct{\vb}_{\ttA}$.
+
+Definindo:
+\begin{empheq}[box=\almondbox]{equation}
+\mS(\ma) = \begin{bmatrix}
+0 & -a_3 & a_2 \\
+a_3 & 0 & -a_1 \\
+-a_2 & a_1 & 0
+\end{bmatrix}
+\end{empheq}
+
+Sendo
+\begin{equation}
+\ma = \begin{bmatrix}
+a_1 &
+a_2 &
+a_3
+\end{bmatrix}^\msT
+\end{equation}
+
+Temos que
+\begin{empheq}[box=\mybluebox]{equation}
+\vct{\va \wedge \vb}_{\ttA} = \mS(\vct{\va}_{\ttA}) \cdot \vct{\vb}_{\ttA} = -\mS(\vct{\vb}_{\ttA}) \cdot \vct{\va}_{\ttA}
+\end{empheq}
+
 \subsection{Derivada temporal de versores}
 
 Seja %m $\llA$ e $\llB$ dois referenciais referenciais e 
@@ -5082,11 +5120,43 @@ Seja $\ttB = \{ \vi_{\ttB}, \vj_{\ttB}, \vk_{\ttB} \}$ uma base ortonormal fixa 
 \end{split}
 \end{equation}
 
-Repare que o termo $\dot{x} \vi_{\lllB} + \dot{y} \vj_{\lllB} + \dot{z} \vk_{\lllB}$ é a derivada temporal do vetor $\vx$ no referencial $\llB$. Sendo assim, temos:
+Repare que o termo $\dot{x} \vi_{\ttB} + \dot{y} \vj_{\ttB} + \dot{z} \vk_{\ttB}$ é a derivada temporal do vetor $\vx$ no referencial $\llB$. Sendo assim, temos:
 \begin{empheq}[box=\mybluebox]{equation} \label{eq:derivada_vetor}
 \frac{\dd^{[{\lllA}]} \vx }{\dd t} = \dot{\vx}^{[\lllA]} = \dot{\vx}^{[\lllB]}  + \vomega_{\lllB}^{\lllA} \wedge \vx
 \end{empheq}
 
+\subsection{Derivada temporal de matrizes de rotação}
+
+Sejam $\llA$ e $\llB$ dois referenciais, e $\ttA$ e $\ttB = \{ \vi_{\ttB}, \vj_{\ttB}, \vk_{\ttB} \}$ duas bases ortonormais fixas a $\llA$ e $\llB$, respectivamente. Sendo assim, a matriz de rotação $\vct{\vone}_{\ttA \rl \ttB}$ é dada por:
+\begin{equation} \label{eq:MatrizDeRotacao}
+\vct{\vone}_{\ttA \rl \ttB} =
+\begin{bmatrix}
+\vct{\vi_\ttB}_\ttA & \vct{\vj_\ttB}_\ttA & [\vk_\ttB]_\ttA
+\end{bmatrix}
+\end{equation}
+
+Derivando \eqref{eq:MatrizDeRotacao}, temos:
+\begin{equation}
+\begin{split}
+\frac{\dd \vct{\vone}_{\ttA \rl \ttB}}{\dd t}  &= \begin{bmatrix}
+\vct{\frac{\dd^{[\lllA]} \vi_\ttB}{\dd t}}_\ttA & \vct{\frac{\dd^{[\lllA]} \vj_\ttB}{\dd t}}_\ttA & \vct{\frac{\dd^{[\lllA]} \vk_\ttB}{\dd t}}_\ttA
+\end{bmatrix} \\
+&= \begin{bmatrix}
+\vct{\vomega_{\lllB}^{\lllA} \wedge \vi_\ttB}_\ttA & \vct{\vomega_{\lllB}^{\lllA} \wedge \vj_\ttB}_\ttA & [\vomega_{\lllB}^{\lllA} \wedge \vk_\ttB]_\ttA
+\end{bmatrix} \\
+&= \begin{bmatrix}
+\mS( \vct{\vomega_{\lllB}^{\lllA}}_\ttA ) \cdot \vct{\vi_\ttB}_\ttA & \mS( \vct{\vomega_{\lllB}^{\lllA}}_\ttA ) \cdot \vct{\vj_\ttB}_\ttA & \mS( \vct{\vomega_{\lllB}^{\lllA}}_\ttA ) \cdot [\vk_\ttB]_\ttA
+\end{bmatrix} \\
+&= \mS( \vct{\vomega_{\lllB}^{\lllA}}_\ttA ) \cdot \begin{bmatrix}
+\vct{\vi_\ttB}_\ttA & \vct{\vj_\ttB}_\ttA & [\vk_\ttB]_\ttA
+\end{bmatrix}
+\end{split}
+\end{equation}
+
+Portanto:
+\begin{empheq}[box=\mybluebox]{equation}
+\frac{\dd \vct{\vone}_{\ttA \rl \ttB}}{\dd t} = \mS( \vct{\vomega_{\lllB}^{\lllA}}_\ttA ) \cdot \vct{\vone}_{\ttA \rl \ttB}
+\end{empheq}
 
 \subsection{Definição de vetor velocidade}
 
@@ -5939,7 +6009,7 @@ Repare que esta expressão não está sujeita a instabilidades numéricas, dado 
 
 \subsection{Conversão Derivada de Quaternion $\leftrightarrow$ Velocidade Angular}
 
-Sejam $\llA$ e $\llB$ dois referenciais, e $\ttA$ e $\ttB$ dois sistemas de referênciais fixos a $\llA$ e $\llB$, respectivamente. Sejam também $\breve{\mq}$ um quaternion que representa a mesma rotação que a matriz $\vct{\vone}_{\ttA \rl \ttB}$, e $\momega$ uma matriz-coluna tal que $\momega = \vct{\vomega_{\lllB}^{\lllA}}_{\ttA}$.
+Sejam $\llA$ e $\llB$ dois referenciais, e $\ttA$ e $\ttB$ dois sistemas de referênciais fixos a $\llA$ e $\llB$, respectivamente. Sejam também $\breve{\mq}$ um quaternion unitário que representa a mesma rotação que a matriz $\vct{\vone}_{\ttA \rl \ttB}$, e $\momega$ uma matriz-coluna tal que $\momega = \vct{\vomega_{\lllB}^{\lllA}}_{\ttA}$.
 
 Definindo a seguinte matriz:
 
