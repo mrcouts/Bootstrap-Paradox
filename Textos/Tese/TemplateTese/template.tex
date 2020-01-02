@@ -5768,7 +5768,7 @@ Como foi visto no capítulo \ref{cap:Seriais}, utilizando a convenção de Denav
 
 A representação por ângulos de Euler possui a vantagem de ter o mínimo número de parâmetros possível (3 parâmetros para representar 3 graus de liberdade de rotação). Porém, este tipo de representação perde um grau de liberdade quando o ângulo intermediário alinha os eixos de rotação do primeiro e do terceiro ângulo, o que pode ser bastante inconveniente.
 
-A representação por quaternions unitários possui um número não tão grande de parâmetros (4 parâmetros para representar 3 graus de liberdade de rotação), pode ser facilmente renormalizada (de modo a evitar o acúmulo de erros numéricos) e não possui o problema de perder graus de liberdade dependendo da configuração.Sendo assim, pode-se dizer que esta é uma forma bastante conveniênte de representar a orientação de um corpo rígido no espaço.
+A representação por quaternions unitários possui um número não tão grande de parâmetros (4 parâmetros para representar 3 graus de liberdade de rotação), pode ser facilmente renormalizada (de modo a evitar o acúmulo de erros numéricos) e não possui o problema de perder graus de liberdade dependendo da configuração. Sendo assim, pode-se dizer que esta é uma forma bastante conveniênte de representar a orientação de um corpo rígido no espaço.
 
 \section{Definições}
 
@@ -5784,13 +5784,11 @@ A matriz-coluna $\breve{\mq}^\mathsf{v} = \begin{bmatrix} q_i & q_j & q_k \end{b
 
 Um quaternion é dito unitário quando respeita a seguinte propriedade:
 \begin{equation}
-\breve{\mq}^\msT \breve{\mq} = \begin{bmatrix}
-q_i^2 + q_j^2 + q_k^2 + q_r^2
-\end{bmatrix}  = 
-\begin{bmatrix}
-1
-\end{bmatrix}
+\breve{\mq}^\msT \breve{\mq} = 
+q_i^2 + q_j^2 + q_k^2 + q_r^2 = 1
 \end{equation}
+
+%Como foi dito anteriormente, quaternions unitários são utilizados para representar rotações. Além disso, os quaternions $\breve{\mq}$ e $-\breve{\mq}$ representam a mesma rotação.
 
 \subsection{Produto de quaternions}
 
@@ -5804,10 +5802,10 @@ Sendo:
 \breve{\mQ}_{\mathsf{I}} (\breve{\mq}) =
 \begin{bmatrix}
 \begin{array}{rrrr}
-q_r & -q_k & q_j & q_i \\
-q_k & q_r & -q_i & q_j \\
--q_j & q_i & q_r & q_k \\
--q_i & -q_j & - q_k & q_r
+q_r & -q_k & q_j & \;\; q_i \\
+q_k & q_r & -q_i & \;\; q_j \\
+-q_j & q_i & q_r & \;\; q_k \\
+-q_i & -q_j & - q_k & \;\; q_r
 \end{array}
 \end{bmatrix}
 \end{equation}
@@ -5816,10 +5814,10 @@ q_k & q_r & -q_i & q_j \\
 \breve{\mQ}_{\mathsf{I}\mathsf{I}} (\breve{\mq}) =
 \begin{bmatrix}
 \begin{array}{rrrr}
-q_r & q_k & -q_j & q_i \\
--q_k & q_r & q_i & q_j \\
-q_j & -q_i & q_r & q_k \\
--q_i & -q_j & - q_k & q_r
+q_r & q_k & -q_j & \;\; q_i \\
+-q_k & q_r & q_i & \;\; q_j \\
+q_j & -q_i & q_r & \;\; q_k \\
+-q_i & -q_j & - q_k  & \;\; q_r
 \end{array}
 \end{bmatrix}
 \end{equation}
@@ -5863,6 +5861,110 @@ As rotações de um angulo $\theta$ em torno dos eixo $x$, $y$ e $z$ podem ser r
 0 & 0 & \sign(\sin\theta) \sqrt{\frac{1-\cos\theta}{2}} & \sqrt{\frac{1+\cos\theta}{2}}
 \end{bmatrix}^\msT
 \end{equation}
+
+\subsection{Conversão Matriz de Rotação $\rightarrow$ Quaternion}
+
+Serão apresentadas 4 fórmulas de conversão da representação de orientação por matrizes de rotação para representação por quaternions. Seja uma matriz de rotação $\mA$ dada por:
+\begin{equation}
+\mA = \begin{bmatrix}
+A_{11} & A_{12} & A_{13} \\
+A_{21} & A_{22} & A_{33} \\
+A_{31} & A_{32} & A_{33} \\
+\end{bmatrix}
+\end{equation}
+
+Assim, as expressões das fórmulas de conversão são dadas por:
+\begin{equation}
+\begin{cases} \label{eq:Matriz2Quat0}
+S = 2 \sqrt{1 + A_{11} + A_{22} + A_{33}} \\
+q_i = (A_{32} - A_{23})/S \\
+q_j = (A_{13} - A_{31})/S \\
+q_k = (A_{21} - A_{12})/S \\
+q_r = S/4
+\end{cases}
+\end{equation}
+
+\begin{equation}
+\begin{cases} \label{eq:Matriz2Quat1}
+S = 2 \sqrt{1 + A_{11} - A_{22} - A_{33}} \\
+q_i = S/4 \\
+q_j = (A_{12} + A_{21})/S \\
+q_k = (A_{13} + A_{31})/S \\
+q_r = (A_{32} - A_{23})/S
+\end{cases}
+\end{equation}
+
+\begin{equation} \label{eq:Matriz2Quat2}
+\begin{cases}
+S = 2 \sqrt{1 - A_{11} + A_{22} - A_{33}} \\
+q_i = (A_{12} + A_{12})/S \\
+q_j = S/4 \\
+q_k = (A_{23} + A_{32})/S \\
+q_r = (A_{13} - A_{31})/S
+\end{cases}
+\end{equation}
+
+\begin{equation} \label{eq:Matriz2Quat3}
+\begin{cases} 
+S = 2 \sqrt{1 - A_{11} - A_{22} + A_{33}} \\
+q_i = (A_{13} + A_{31})/S \\
+q_j = (A_{23} + A_{32})/S \\
+q_k = S/4 \\
+q_r = (A_{21} - A_{12})/S
+\end{cases}
+\end{equation}
+
+Com o intuito de evitar raízes de números negativos, divisões por zero, e problemas numéricos relacionados a raízes e divisões por números próximos a zero, recomenda-se utilizar a seguinte estratégia: caso o traço de $\mA$ seja maior que zero, utilize a expressão \eqref{eq:Matriz2Quat0}. Caso contrário, utilize as expressões \eqref{eq:Matriz2Quat1}, \eqref{eq:Matriz2Quat2} ou \eqref{eq:Matriz2Quat3}, dependendo de qual for o maior elemento da diagonal principal de $\mA$. Caso  seja $A_{11}$, utilize a expressão \eqref{eq:Matriz2Quat1}; caso seja $A_{22}$, utilize a expressão \eqref{eq:Matriz2Quat2}; caso seja $A_{33}$, utilize a expressão \eqref{eq:Matriz2Quat3}.
+
+\subsection{Conversão Quaternion $\rightarrow$ Matriz de Rotação}
+
+A conversão da representação de orientação por quatertions para a representação por matrizes de rotação é dada pela seguinte expressão:
+
+\begin{equation} \label{eq:Quat2Matriz}
+\mA = \begin{bmatrix}
+1 - 2 q_j^2 - 2 q_k^2 & 2(q_i q_j - q_k q_r) & 2(q_i q_k + q_j q_r) \\
+2(q_i q_j + q_k q_r) & 1 - 2 q_i^2 - 2q_k^2 & 2(q_j q_k - q_i q_r) \\
+2(q_i q_k - q_j q_r) & 2(q_i q_r + q_j q_k) & 1 - 2 q_i^2 - 2 q_j^2
+\end{bmatrix}
+\end{equation}
+
+Repare que esta expressão não está sujeita a instabilidades numéricas, dado que há apenas multiplicações, somas e subtrações. Além disso, repare que invertendo o sinal de cada componente do quaternion, a expressão \eqref{eq:Quat2Matriz} contínua a mesma, ou seja, $\breve{\mq}$ e $-\breve{\mq}$ representam a mesma rotação. 
+
+\subsection{Conversão Derivada de Quaternion $\leftrightarrow$ Velocidade Angular}
+
+Sejam $\llA$ e $\llB$ dois referenciais, e $\ttA$ e $\ttB$ dois sistemas de referênciais fixos a $\llA$ e $\llB$, respectivamente. Sejam também $\breve{\mq}$ um quaternion que representa a mesma rotação que a matriz $\vct{\vone}_{\ttA \rl \ttB}$, e $\momega$ uma matriz-coluna tal que $\momega = \vct{\vomega_{\lllB}^{\lllA}}_{\ttA}$.
+
+Definindo a seguinte matriz:
+
+\begin{equation}
+\breve{\mC}(\breve{\mq}) =
+\frac{1}{2}
+\begin{bmatrix}
+\begin{array}{rrr}
+q_r & q_k & -q_j \\
+-q_k & q_r & q_i\\
+q_j & -q_i & q_r\\
+-q_i & -q_j & - q_k
+\end{array}
+\end{bmatrix}
+\end{equation}
+
+Pode-se relacionar a derivada temporal de $\breve{\mq}$ e $\momega$ das seguintes maneiras:
+
+\begin{equation}
+\dot{\breve{\mq}} = \breve{\mC}(\breve{\mq}) \cdot \momega
+\end{equation}
+
+\begin{equation}
+\momega = 4 \breve{\mC}^\msT (\breve{\mq})\cdot \dot{\breve{\mq}}
+\end{equation}
+
+Além disso, repare que 
+
+\begin{equation}
+\breve{\mC}^\msT (\breve{\mq})\cdot \breve{\mq} = \mzr
+\end{equation}
+
 
 
 % ========== Anexos (opcional) ==========
