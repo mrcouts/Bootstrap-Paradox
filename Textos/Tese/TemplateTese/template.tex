@@ -32,6 +32,7 @@
 \usepackage{special-char}
 \usepackage{fancybox}
 \usepackage{longtable}
+\usepackage{booktabs}
 
 \newcommand{\ii}{\hat{\textbf{\itshape\i}}}
 \newcommand{\jj}{\hat{\textbf{\itshape\j}}}
@@ -207,7 +208,7 @@ Aiming to fully explore the potential of this kind of architecture, in this thes
 % ========== Listas (opcional) ==========
 \listadefiguras
 \listadetabelas
-\chapter*{Convenções de Notação}
+\chapter*{Lista de Símbolos e Convenções}
 \begin{longtable}{lp{0.6\textwidth}}
   $a, b, \hdots $ & Escalares, componentes de matrizes-coluna, componentes de matrizes ou índices \\
   $\underline{a}, \underline{b}, \hdots $ & Matrizes diagonais \\
@@ -223,7 +224,7 @@ Aiming to fully explore the potential of this kind of architecture, in this thes
   $\llA, \llB, \hdots$ & Corpos rígidos ou referenciais \\
   $\ssA, \ssB, \hdots$ & Sistema ou subsistema mecânico \\
   $\llN$ & Referencial inercial \\
-  $\ttg_{\lllB}$ & Centro de massa do corpo rígido $\llB$ \\ 
+  $\ttg_{\lllB}$ & Centro de massa do corpo rígido $\llB$ \\
   $\tto_{\ttB}$ & Origem dos sistema de coordenadas $\ttB$ \\
   $\{\vi_\ttB, \vj_\ttB, \vk_\ttB \}$ & Base ortonormal do sistema de coordenadas $\ttB$ \\
   $\vct{\ttp}_{\ttB}$ & Matriz-coluna formada pelas coordenadas do ponto $\ttp$ no sistema de coordenadas $\ttB$ \\
@@ -234,27 +235,45 @@ Aiming to fully explore the potential of this kind of architecture, in this thes
   $[\vu]_{\ttB}$ & Matriz-coluna formada pelas componentes do vetor $\vu$ na base do sistema de coordenadas $\ttB$ \\
   $\nvct{\vone}_{\ttA \rl \ttB} $ & Matriz de mudança de base, i.e. $\nvct{\vu}_{\ttA} = \nvct{\vone}_{\ttA \rl \ttB} \cdot \nvct{\vu}_{\ttB} $ \\
   $\hvct{\vone}_{\ttA \rl \ttB}$ & Matriz de transformação homogênea, i.e. $\hvct{\ttp}_{\ttA} = \hvct{\vone}_{\ttA \rl \ttB} \cdot \hvct{\ttp}_{\ttB}$ \\
-  $\vf$ & Vetor força \\
-  $\vtau$ & Vetor torque \\
   $\vg$ & Vetor aceleração gravitacional \\
   $\vr_{\tta \rl \ttb}$ & Vetor que liga o ponto $\tta$ ao ponto $\ttb$, orientado no sentido de $\tta$ até $\ttb$ \\
   $\vv_\ttp^{\lllA}$ & Vetor velocidade do ponto $\ttp$ em relação ao ref. $\llA$ \\
   $\va_\ttp^{\lllA}$ & Vetor velocidade do ponto $\ttp$ em relação ao ref. $\llA$ \\
   $\vomega_{\lllB}^{\lllA}$ & Vetor velocidade angular do corpo rígido (ou referencial) $\llB$ em relação ao referencial $\llA$ \\
   $\valpha_{\lllB}^{\lllA}$ & Vetor aceleração angular do corpo rígido (ou referencial) $\llB$ em relação ao referencial $\llA$ \\
+  $\vf_{\lllB}$ & Vetor força não reativa aplicada no centro de massa do corpo rígido $\llB$ \\
+  $\vtau_{\lllB}$ & Vetor torque não reativo aplicada no corpo rígido $\llB$ \\
+  $\vI_{\lllB}$ & Tensor de inércia do corpo rígido $\llB$ em relação a seu centro de massa \\
   $\mq$ & Coordenadas generalizadas \\
   $\mpi$ & Quasi-coordenadas \\
   $\mp$ & Quasi-velocidades \\
   $\dot{\mp}$ & Quasi-acelerações \\
+  $\mu$ & Esforços ativos generalizados (provenientes de atuadores) \\
   $\mM$ & Matriz de inércia generalizada \\
-  $\mnu$ & Matriz-coluna de esforços inérciais giroscópicos generalizados \\
+  $\mnu$ & Matriz-coluna de esforços inérciais giroscópicos e de atrito generalizados \\
   $\mg$ & Matriz-coluna de esforços gravitacionais generalizados \\
+  $\dl W$ & Trabalho virtual \\
+  $m$ & Massa \\
+  $J$ & Momento de inércia \\
+  $b$ & Coeficiente de atrito viscoso \\
+  $\gmu$ & Coeficiente de atrito seco \\
+  $i$ & Corrente elétrica ou índice genérico \\
+  $u$ & Tensão elétrica \\
+  $\omega$ & Velocidade angular \\
+  $k_e$ & Constante de força contra-eletromotriz \\
+  $R$ & Resistência elétrica \\
+  $L$ & Indutância \\
   $t$ & Tempo \\
   $\ccos(.)$ & Notação compacta para $\cos(.)$ \\
   $\ssin(.)$ & Notação compacta para $\sin(.)$ \\
   $\dd$ & Operador diferencial \\
   $\dl$ & Operador variação \\
+  $\displaystyle\frac{\del (.)}{\del x}$ & Derivada parcial em relação ao escalar $x$ \\
+  \addlinespace[0.2cm]
+  $\displaystyle\frac{\del (.)}{\del \mx}$ & Gradiente ou jacobiano em relação à matriz-coluna $\mx$ \\
+  \addlinespace[0.2cm]
   $\displaystyle\frac{\dd (\boxdot) }{\dd t} = (\dot{\boxdot})$ & Operador derivada temporal \\
+  \addlinespace[0.2cm]
   $\displaystyle\frac{\dd^{[\lllA]}(\boxdot)}{\dd t} = (\dot{\boxdot}^{[\lllA]})$ & Operador derivada temporal em relação ao referencial $\llA$ (se aplica apenas a vetores físicos) \\
   $\diag(.)$ & Matriz-coluna cujos elementos são a diagonal de uma matriz quadrada \\
   %$g$ & Aceleração gravitacional \\
@@ -687,19 +706,19 @@ Seja $\ssB$ um sistema mecânico serial de $\nu$ graus de liberdade. Primeiramen
 %\item $\ttg_i, \,i=1,...,\nu$: centro de massa de $\llB_i$.
 \item $\ttx$: ponto no espa\c{c}o fixo ao efetuador.
 \item $m_i$: massa do ligamento $\llB_i$.
-\item $\vI_{\lllB_i}$: tensor de in\'ercia do ligamento $\llB_i$ em relação a seu centro de massa.
+%\item $\vI_{\lllB_i}$: tensor de in\'ercia do ligamento $\llB_i$ em relação a seu centro de massa.
 \item $\mI_i$: tensor de in\'ercia $\vI_{\lllB_i}$ escrito na base $\ttN$, ou seja, $\vct{\vI_{\lllB_i}}_{\ttN \rl \ttN}$.
 \item $q_i, \,i=1,...,\nu$: deslocamento relativo (angular ou linear) da i-ésima junta.
 \item  $\mq$: matriz-coluna de $\nu$ coordenadas generalizadas independentes. É dada por $\mq = \begin{bmatrix}
 q_1 & ... & {q}_{\nu}
 \end{bmatrix}^\msT $.
-\item $\vg$: Vetor aceleração gravitacional.
-\item $\mgamma$: Vetor aceleração gravitacional escrito na base $\ttN$, ou seja, $\vct{\vg}_{\ttN}$.
-\item $\vf_i$: Vetor força não-reativa resultante aplicada no centro de massa de $\llB_i$.
-\item $\vtau_i$: Vetor torque não-reativo resultante aplicado em $\llB_i$.
-\item $\overline{\mf}_i$: Matriz-coluna de esforços não-reativos generalizados aplicados ao subsistema $\llB_i$. É dada por $\overline{\mf}_i = \begin{bmatrix}
-\vct{\vf_i}_\ttN^\msT &
-\vct{\vtau_i}_\ttN^\msT
+%\item $\vg$: Vetor aceleração gravitacional.
+\item $\mgamma$: vetor aceleração gravitacional escrito na base $\ttN$, ou seja, $\vct{\vg}_{\ttN}$.
+%\item $\vf_i$: Vetor força não-reativa resultante aplicada no centro de massa de $\llB_i$.
+%\item $\vtau_i$: Vetor torque não-reativo resultante aplicado em $\llB_i$.
+\item $\overline{\mf}_i$: matriz-coluna de esforços não-reativos generalizados aplicados ao subsistema $\llB_i$. É dada por $\overline{\mf}_i = \begin{bmatrix}
+\vct{\vf_{\lllB_i}}_\ttN^\msT &
+\vct{\vtau_{\lllB_i}}_\ttN^\msT
 \end{bmatrix}^\msT $.
 \end{itemize}
 
@@ -1265,16 +1284,16 @@ O modelo dinâmico de cada ligamento pode ser obtido por Newton-Euler, pois são
 
 \begin{equation} \label{eq:Newton-Euler}
 \begin{cases}
-\vf_i = -m_i \va^{\lllN}_{\ttg_{\lllB_i}} + m_i \vg  \\
-\vtau_i= -\vI_{\lllB_i} \cdot \valpha^{\lllN}_{\lllB_i} - \vomega^{\lllN}_{\lllB_i} \wedge (\vI_{\lllB_i} \cdot \vomega^{\lllN}_{\lllB_i}) 
+\vf_{\lllB_i} = -m_i \va^{\lllN}_{\ttg_{\lllB_i}} + m_i \vg  \\
+\vtau_{\lllB_i} = -\vI_{\lllB_i} \cdot \valpha^{\lllN}_{\lllB_i} - \vomega^{\lllN}_{\lllB_i} \wedge (\vI_{\lllB_i} \cdot \vomega^{\lllN}_{\lllB_i}) 
 \end{cases} \, i = 1,...,\nu
 \end{equation}
 
 Aplicando as equações vetoriais no sistema $\ttN$, temos:
 \begin{equation} \label{eq:Newton-EulerMat}
 \begin{bmatrix}
-\vct{\vf_i}_\ttN \\
-\vct{\vtau_i}_\ttN
+\vct{\vf_{\lllB_i}}_\ttN \\
+\vct{\vtau_{\lllB_i}}_\ttN
 \end{bmatrix}
 =
 -
@@ -1623,30 +1642,24 @@ Esta subseção tem o intuito de complementar algoritmo de modelagem de mecanism
 Seja $\ssB'$ um sistema mecânico serial de $\nu$ graus de liberdade, constituido por um mecanismo serial $\ssB$ e $\nu$ atuadores, possivelmente acoplados a redutores de velocidades. Primeiramente, fazemos as seguintes definições:
 
 \begin{itemize}
-\item $\llR_i, \,i=1,...,\nu$: rotor do i-ésimo atuador.
-\item $\ttR_i, \,i=1,...,\nu$: sistema de coordenadas solid\'ario a $\llR_i$.
-\item $J_{r \,i}, \,i=1,...,\nu$: momento de inércia do rotor $\llR_i$.
-\item $\vI_{\ttr_i}, \,i=1,...,\nu$: tensor de in\'ercia do rotor $\llR_i$ em relação a seu centro de massa.
-\item $\mI_{r \,i}, \,i=1,...,\nu$: tensor de in\'ercia $\vI_{\ttr_i}$ escrito na base $\ttN$, ou seja, $\vct{\vI_{\ttr_i}}_{\ttN \rl \ttN}$.
-\item $\vtau_{r \,i}, \,i=1,...,\nu$: Vetor torque não-reativo resultante aplicado em $\llR_i$.
-\item $\overline{\mf}_{r \,i}, \,i=1,...,\nu$: Matriz-coluna de esforçoes não-reativos generalizados aplicados no subsistema $\llB_{r \,i}, \,i=1,...,\nu$. É dada por $\overline{\mf}_{r \,i} = \vct{\vtau_i}_\ttN $.
+\item $\llR_i, \,i=1,...,\nu$: Rotor do i-ésimo atuador.
+\item $\ttR_i, \,i=1,...,\nu$: Sistema de coordenadas solid\'ario a $\llR_i$.
+\item $J_{r \,i}, \,i=1,...,\nu$: Momento de inércia do rotor $\llR_i$.
+%\item $\vI_{\lllR_i}, \,i=1,...,\nu$: tensor de in\'ercia do rotor $\llR_i$ em relação a seu centro de massa.
+\item $\mI_{r \,i}, \,i=1,...,\nu$: Tensor de in\'ercia $\vI_{\lllR_i}$ escrito na base $\ttN$, ou seja, $\vct{\vI_{\lllR_i}}_{\ttN \rl \ttN}$.
+%\item $\vtau_{r \,i}, \,i=1,...,\nu$: Vetor torque não-reativo resultante aplicado em $\llR_i$.
+\item $\overline{\mf}_{r \,i}, \,i=1,...,\nu$: Matriz-coluna de esforços não-reativos generalizados aplicados no subsistema $\llB_{r \,i}, \,i=1,...,\nu$. É dada por $\overline{\mf}_{r \,i} = \vct{\vtau_{\lllR_i}}_\ttN $.
 \item $q_{r\,i}, \,i=1,...,\nu$: Deslocamentos angular realizado pelo i-ésimo rotor.
 \item $\mq_r$: Matriz-coluna dos deslocamentos angulares realizados pelos rotores.
-\item $\mzeta(\dot{\mq}_r)$: matriz-coluna dos esforçoes de atrito generalizados aplicados nos rotores, em sentido oposto aos seus deslocamentos.
+\item $\mzeta(\dot{\mq}_r)$: Matriz-coluna dos esforços de atrito generalizados aplicados nos rotores, em sentido oposto aos seus deslocamentos.
 \item $\mi$: Matriz-coluna de correntes elétricas que fluem pelas armaduras dos atuadores.
 \item $\mup$: Matriz-coluna de tensões elétricas aplicadas nos terminais dos atuadores.
 \item $r_i, \,i=1,...,\nu$: Relação de transmissão do i-ésimo redutor.
 \item $\underline{r}$: Matriz diagonal de relações de transmissão dos redutores.
 \item $\underline{k_t}$: Matriz diagonal de constantes de torque dos atuadores.
-\item $\underline{k_w}$: Matriz diagonal de constantes de força contra-eletromotriz dos atuadores.
+\item $\underline{k_e}$: Matriz diagonal de constantes de força contra-eletromotriz dos atuadores.
 \item $\underline{R}$: Matriz diagonal de resistências elétricas dos atuadores.
 \item $\underline{L}$: Matriz diagonal de indutâncias dos atuadores.
-\item $i$: Corrente elétrica.
-\item $\upsilon$: Tensão elétrica.
-\item $\omega$: Velocidade angular.
-\item $k_w$: Constante de força contra-eletromotriz.
-\item $R$: Resistência elétrica.
-\item $L$: Indutância.
 \end{itemize}
 
 \subsection{Cinemática}
@@ -1764,19 +1777,19 @@ Segue abaixo, a dedução.
 O modelo dinâmico de cada rotor pode ser obtido por Newton-Euler, pois são considerados como corpos rígidos com inércia puramente rotativa, livres no espaço. Os efeitos da massas do rotor, do estator e do redutor podem facilmente incluídos no modelo simplesmente atualizando os valores dos parâmetros de inércia dos ligamentos. Sendo assim, através do Teorema do Momento Angular, obtemos os esforços inerciais aplicados em cada rotor:
 
 \begin{equation} \label{eq:Newton-Euler_rot}
-\vtau_{r \,i}= -\vI_{\ttr_i} \cdot \valpha^{\lllN}_{\lllR_i} - \vomega^{\lllN}_{\lllR_i} \wedge (\vI_{\ttr_i} \cdot \vomega^{\lllN}_{\lllR_i}) ,\; i = 1,...,\nu
+\vtau_{\lllR_i}= -\vI_{\lllR_i} \cdot \valpha^{\lllN}_{\lllR_i} - \vomega^{\lllN}_{\lllR_i} \wedge (\vI_{\lllR_i} \cdot \vomega^{\lllN}_{\lllR_i}) ,\; i = 1,...,\nu
 \end{equation}
 
 Aplicando as equações vetoriais no sistema $\ttN$, temos:
 \begin{equation} \label{eq:Newton-EulerMat_rot}
-\vct{\vtau_{r \,i}}_\ttN
+\vct{\vtau_{\lllR_i}}_\ttN
 =
 -
-\vct{\vI_{\ttr_i}}_{\ttN \rl \ttN}
+\vct{\vI_{\lllR_i}}_{\ttN \rl \ttN}
 \cdot
 \vct{\valpha^{\lllN}_{\lllR_i}}_{\ttN}
 -
-\mS( \vct{\vomega^{\lllN}_{\lllR_i}}_{\ttN} ) \cdot \vct{\vI_{\ttr_i}}_{\ttN \rl \ttN} \cdot \vct{\vomega^{\lllN}_{\lllR_i}}_{\ttN}
+\mS( \vct{\vomega^{\lllN}_{\lllR_i}}_{\ttN} ) \cdot \vct{\vI_{\lllR_i}}_{\ttN \rl \ttN} \cdot \vct{\vomega^{\lllN}_{\lllR_i}}_{\ttN}
 \end{equation}
 
 Ou seja:
@@ -1908,19 +1921,19 @@ Sendo:
 
 O modelo do sistema elétrico equivalente de um motor de corrente contínua é dado por uma fonte de tensão variável ligada em série a um indutor, um resistor, e uma força contra-eletromotriz diretamente proporcional à velocidade angular do rotor em relação ao estator, ou seja:
 \begin{empheq}[box=\lightbluebox]{equation} \label{eq:MotorDC}
-L \, \frac{\dd i}{\dd t} + R \, i + k_w \, \omega = \upsilon
+L \, \frac{\dd i}{\dd t} + R \, i + k_e \, \omega = u
 \end{empheq}
 
 Tendo em vista que todas as juntas de um mecanismo paralelo são atuadas, a equação matricial da dinâmica elétrica do sistema é dada por:
 \begin{empheq}[box=\lightbluebox]{equation} \label{eq:DinEletrica_rot}
-\underline{L} \, \frac{\dd \mi}{\dd t} + \underline{R} \, \mi + \underline{k_w} \, \dot{\mq}_r = \mup
+\underline{L} \, \frac{\dd \mi}{\dd t} + \underline{R} \, \mi + \underline{k_e} \, \dot{\mq}_r = \mup
 \end{empheq}
 
 Sendo assim, juntando as equações \eqref{eq:ModeloMecSerial_rot} e \eqref{eq:DinEletrica_rot}, obtemos a dinâmica  do sistema como um todo:
 \begin{empheq}[box=\mybluebox]{equation}
 \begin{cases}
 \mM^*(\mq) \, \ddot{\mq} + \mnu^*(\mq,\dot{\mq}) + \mg^*(\mq) = \underline{r} \, \underline{k_t}\mi   \\
-\underline{L} \, \frac{\dd \mi}{\dd t} + \underline{R} \, \mi + \underline{r} \, \underline{k_w} \, \dot{\mq} = \mup
+\underline{L} \, \frac{\dd \mi}{\dd t} + \underline{R} \, \mi + \underline{r} \, \underline{k_e} \, \dot{\mq} = \mup
 \end{cases}
 \end{empheq}
 
@@ -1940,18 +1953,18 @@ Sejam $\ssB_0$, $\ssB_1$, ..., $\ssB_{n} \,$ $n+1$ subsistemas mec\^anicos e $\s
 \item $\ssB_i, \, i=1,...,n$: i-ésimo subsistema serial.
 \item $\llB_0$: Corpo rígido plataforma/efetuador do manipulador paralelo.
 \item $\llB_i, \, i=1,...,n$: Corpo rígido efetuador do subsistema serial $\ssB_i$.
-\item $\llN$: referencial inercial.
+%\item $\llN$: referencial inercial.
 \item $\ttN_i, \, i=0,...,n$: sistema de coordenadas da base fixa do subsistema $\ssB_i$, solidário a $\llN$.
 %\item $\tto_i, \,i=0,...,n$: origem do sistema $\ttN_i$.
-\item $\ttg$: centro de massa da plataforma/efetuador $\llB_0$.
+%\item $\ttg$: centro de massa da plataforma/efetuador $\llB_0$.
 \item $\ttx_i, \,i=1, ..., n$: ponto no espa\c{c}o fixo ao efetuador de $\ssB_i$.
-\item $\ttB_0$: sistema de coordenadas solidário a $\llB_0$ com origem em $\ttg$.
+\item $\ttB_0$: sistema de coordenadas solidário a $\llB_0$ com origem em $\ttg_{\lllB_0}$.
 \item $\ttB_i, \,i=1, ..., n$: sistema de coordenadas solidário a $\llB_i$ com origem em $\ttx_i$.
 \item $m$: massa da plataforma/efetuador $\llB_0$.
 %\item $\vI_{\ttg}$: tensor de in\'ercia da plataforma/efetuador $\llB_0$ em relação a seu centro de massa.
 %\item $\mI$: tensor de in\'ercia $\vI_{\ttg}$ escrito na base $\ttN_0$, ou seja, $\vct{\vI_{\ttg}}_{\ttN_0 \rl \ttN_0}$.
-\item $\vf$: Vetor de forças não-reativas (ativas e inerciais) aplicadas no centro de massa da plataforma/efetuador $\llB_0$.
-\item $\vg$: Vetor aceleração gravitacional.
+%\item $\vf$: Vetor de forças não-reativas (ativas e inerciais) aplicadas no centro de massa da plataforma/efetuador $\llB_0$.
+%\item $\vg$: Vetor aceleração gravitacional.
 \item $\mgamma$: Vetor aceleração gravitacional escrito na base $\ttN_0$, ou seja, $\vct{\vg}_{\ttN_0}$.
 \item $\mq_i, \,i=0, ..., n$: matriz-coluna de coordenadas generalizadas do subsistema $\ssB_i$.
 %\item $\mx^\ast$: matriz-coluna de coordenadas generalizadas de posição da plataforma/efetuador $\ssB_0$.
@@ -2005,7 +2018,7 @@ Para os subsistemas seriais, as matrizes $\mM_{\ssB_i}$, $\mnu_{\ssB_i}$ e $\mg_
 %\end{equation}
 
 \begin{equation} \label{eq:Newton-EulerE}
-\vf = -m \va^{\lllN_0}_{\ttg} + m \vg
+\vf_{\lllB_0} = -m \va^{\lllN}_{\ttg_{\lllB_0}} + m \vg
 \end{equation}
 
 
@@ -2035,7 +2048,7 @@ Aplicando as equações vetoriais no sistema $\ttN$, temos:
 %\end{equation}
 
 \begin{equation} \label{eq:Newton-EulerMatE}
-\vct{\vf}_{\ttN_0} = -m \vct{\va^{\lllN_0}_{\ttg}}_{\ttN_0}  +m \vct{\vg}_{\ttN_0}
+\vct{\vf_{\lllB_0}}_{\ttN_0} = -m \vct{\va^{\lllN}_{\ttg_{\lllB_0}}}_{\ttN_0}  +m \vct{\vg}_{\ttN_0}
 \end{equation}
 
 Definindo:
@@ -2046,7 +2059,7 @@ Definindo:
 %\momega^\ast = \vct{\vomega^{\lllN_0}_{\lllB_0}}_{\ttN_0}
 %\end{equation}
 \begin{equation}
-\mq_0 = \vct{\ttg}_{\ttN_0}
+\mq_0 = \vct{\ttg_{\lllB_0}}_{\ttN_0}
 \end{equation}
 
 Temos:
@@ -2117,16 +2130,16 @@ Portanto:
 
 Seja $\ttx_i$ um ponto pertencente à plataforma/efetuador $\llB_0$ e também ao efetuador $\llB_i$. Sendo assim, é possível relacionar a posição do ponto $\ttx_i$ em relação a $\tto_{\ttN_0}$, seguindo tanto pela da plataforma/efetuador $\ssB_0$, quanto pela cadeia serial $\ssB_i$:
 \begin{equation}
-\vr_{\tto_{\tttN_0} \rl \ttx_i} = \vr_{\tto_{\tttN_0} \rl \ttg} + \vr_{\ttg \rl \ttx_i} = \vr_{\tto_{\tttN_0} \rl \tto_{\tttN_i}} + \vr_{\tto_{\tttN_i} \rl \ttx_i}
+\vr_{\tto_{\tttN_0} \rl \ttx_i} = \vr_{\tto_{\tttN_0} \rl \ttg_{\lllB_0}} + \vr_{\ttg_{\lllB_0} \rl \ttx_i} = \vr_{\tto_{\tttN_0} \rl \tto_{\tttN_i}} + \vr_{\tto_{\tttN_i} \rl \ttx_i}
 \end{equation}
 
 Aplicando a equação vetorial no sistema $\ttN_0$:
 \begin{equation}
-\vct{\ttx_i}_{\ttN_0} =  \vct{\ttg}_{\ttN_0} + \vct{\vone}_{\ttN_0 \rl \ttB_0} \vct{\ttx_i}_{\ttB_0} = \vct{\tto_{\ttN_i}}_{\ttN_0}  + \vct{\vone}_{\ttN_0 \rl \ttN_i} \vct{\ttx_i}_{\ttN_i}
+\vct{\ttx_i}_{\ttN_0} =  \vct{\ttg_{\lllB_0}}_{\ttN_0} + \vct{\vone}_{\ttN_0 \rl \ttB_0} \vct{\ttx_i}_{\ttB_0} = \vct{\tto_{\ttN_i}}_{\ttN_0}  + \vct{\vone}_{\ttN_0 \rl \ttN_i} \vct{\ttx_i}_{\ttN_i}
 \end{equation}
 
 %Sabe-se que $\vct{\ttg}_{\ttN_0} = \mx^\ast$ e $\vct{\ttp_i}_{\ttN_i} = \mx_i(\mq_i)$. Tendo em vista que $\vct{\ttp_i}_\ttB$, $\vct{\vone}_{\ttN_0 \rl \ttN_i}$ e $\vct{\tto_i}_{\ttN_0}$ são constantes e que $\vct{\vone}_{\ttN_0 \rl \ttB}$ depende de $\mtheta^\ast$, definindo:
-Sabe-se que $\vct{\ttg}_{\ttN_0} = \mq_0$ e $\vct{\ttx_i}_{\ttN_i} = \mx_i(\mq_i)$. Tendo em vista que $\vct{\ttx_i}_\ttB$, $\vct{\vone}_{\ttN_0 \rl \ttN_i}$, $\vct{\tto_{\ttN_i}}_{\ttN_0}$ e $\vct{\vone}_{\ttN_0 \rl \ttB_0}$ são constantes, definindo:
+Sabe-se que $\vct{\ttg_{\lllB_0}}_{\ttN_0} = \mq_0$ e $\vct{\ttx_i}_{\ttN_i} = \mx_i(\mq_i)$. Tendo em vista que $\vct{\ttx_i}_\ttB$, $\vct{\vone}_{\ttN_0 \rl \ttN_i}$, $\vct{\tto_{\ttN_i}}_{\ttN_0}$ e $\vct{\vone}_{\ttN_0 \rl \ttB_0}$ são constantes, definindo:
 
 %\begin{equation}
 %\mc_i(\mtheta^\ast) = -\vct{\vone}_{\ttN_0 \rl \ttB} \vct{\ttp_i}_\ttB
@@ -2450,10 +2463,10 @@ Assim, substituindo \eqref{eq:dxdt} em \eqref{eq:VinculosGenericosVel}, obtemos:
 Supondo que os efetuadores $\llB_i$ de cada cadeia serial estejam ligados rigidamente à plataforma/efetuador $\llB_0$, temos que todos apresentam velocidade angular nula em relação a $\ttN_0$, tendo em vista que $\llB_0$ só translada. Sendo assim, obtem-se as seguintes relações:
 
 \begin{equation}
-\vomega^{\lllN_0}_{\lllB_i} = \vomega^{\lllN_0}_{\lllB_0} = \vzr  , \; i = 1, ... , n
+\vomega^{\lllN}_{\lllB_i} = \vomega^{\lllN}_{\lllB_0} = \vzr  , \; i = 1, ... , n
 \end{equation}
 
-Sabe-se que $\vct{\vomega^{\lllN_i}_{\lllB_0}}_{\ttN_i} =  \mJ_{\omega\,\ssB_i}(\mq_i) \cdot \dot{\mq}_i$. Sendo assim, temos:
+Sabe-se que $\vct{\vomega^{\lllN}_{\lllB_0}}_{\ttN_i} =  \mJ_{\omega\,\ssB_i}(\mq_i) \cdot \dot{\mq}_i$. Sendo assim, temos:
 
 \begin{equation}
 \mJ_{\omega\,\ssB_i}(\mq_i) \cdot \dot{\mq}_i = \mzr, \, i = 1,...,n
@@ -4024,16 +4037,16 @@ Para a estimação da corrente elétrica foi considerada a equacação da dinâm
 
 \begin{equation}
 \tag{\ref{eq:DinEletrica_rot}} \label{eq:DinamicaEletricaMotor}
-	   \upsilon = L \frac{di}{dt} + R i + k_{e} \omega
+	   u = L \frac{di}{dt} + R i + k_{e} \omega
 \end{equation}
 
-Esta equação pode interpretada como um sistema linear de primeira ordem com entrada $\upsilon - k_{e} \omega $ e polo em $s = -R/L$. Sendo assim, o sistema pode ser considerado naturalmente estável e pode ser utilizado um observador em malha aberta para estimar a corrente elétrica.
+Esta equação pode interpretada como um sistema linear de primeira ordem com entrada $u - k_{e} \omega $ e polo em $s = -R/L$. Sendo assim, o sistema pode ser considerado naturalmente estável e pode ser utilizado um observador em malha aberta para estimar a corrente elétrica.
 
 Tendo em vista que a frequencia do polo deste sistema está em torno de 240Hz, muito acima das frequências em que o sistema mecânico opera, o observador de corrente é implementado simplemente a partir do cálculo da corrente considerando a equação \eqref{eq:DinamicaEletricaMotor} em regime permanente, ou seja, $\frac{di}{dt} = 0$. Com isso, obtemos a seguinte expressão para o observador de corrente:
 
 \begin{equation}
 \label{corrente}
-\hat{i} = \frac{\upsilon - k_e \omega}{R}
+\hat{i} = \frac{u - k_e \omega}{R}
 \end{equation}
 
 \subsection{Compensadores de não-linearidades}
@@ -5621,7 +5634,7 @@ Substituindo \eqref{torqueMotor} em \eqref{torqueDist},
 \begin{empheq}[left=\empheqlbrace]{gather}
 \label{TLM1}
 	 L \frac{di}{dt} + R i + k_{e} = u 	\\ \label{TLM2}
-     J \dot{\omega} + b\omega + \gmu sign(\omega) = k_{t} i - \tau_{d} 
+     J \dot{\omega} + b\omega + \gmu \sign(\omega) = k_{t} i - \tau_{d} 
 \end{empheq}
 
 Considerando $\gmu = 0$  e aplicando a Transformada de Laplace para condições iniciais nulas nas equações \eqref{TLM1} e \eqref{TLM2}, obtemos:

@@ -47,10 +47,10 @@
 \contentsline {subsection}{\numberline {4.3.2}Din\IeC {\^a}mica Mec\IeC {\^a}nica}{64}
 \contentsline {subsubsection}{\numberline {4.3.2.1}Modelo dos subsistemas rotores}{64}
 \contentsline {subsubsection}{\numberline {4.3.2.2}Modelo do subsistema serial}{65}
-\contentsline {subsubsection}{\numberline {4.3.2.3}Sistemas de for\IeC {\c c}as ativas generalizadas}{66}
+\contentsline {subsubsection}{\numberline {4.3.2.3}Sistemas de for\IeC {\c c}as ativas generalizadas}{65}
 \contentsline {subsubsection}{\numberline {4.3.2.4}V\IeC {\'\i }nculos entre subsistemas}{66}
 \contentsline {subsubsection}{\numberline {4.3.2.5}Acoplamento de subsistemas}{66}
-\contentsline {section}{\numberline {4.4}Modelo completo}{68}
+\contentsline {section}{\numberline {4.4}Modelo completo}{67}
 \contentsline {chapter}{\numberline {5}Modelagem de manipuladores paralelos}{69}
 \contentsline {section}{\numberline {5.1}Modelo dos subsistemas}{71}
 \contentsline {section}{\numberline {5.2}V\IeC {\'\i }nculos cinem\IeC {\'a}ticos entre subsistemas}{72}
