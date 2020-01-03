@@ -1,61 +1,61 @@
 \select@language {brazil}
-\contentsline {chapter}{Parte~I:~\MakeUppercase {Introdu\IeC {\c c}\IeC {\~a}o}}{21}
-\contentsline {chapter}{\numberline {1}Introdu\IeC {\c c}\IeC {\~a}o}{22}
-\contentsline {section}{\numberline {1.1}Objetivos}{23}
-\contentsline {section}{\numberline {1.2}Sobre a organiza\IeC {\c c}\IeC {\~a}o do texto}{24}
-\contentsline {chapter}{\numberline {2}Revis\IeC {\~a}o da literatura}{25}
-\contentsline {section}{\numberline {2.1}Modelagem din\IeC {\^a}mica}{25}
-\contentsline {subsection}{\numberline {2.1.1}Formalismo de Newton-Euler}{28}
-\contentsline {subsection}{\numberline {2.1.2}Formalismo de Lagrange}{29}
-\contentsline {subsection}{\numberline {2.1.3}Princ\IeC {\'\i }pio dos Trabalhos Virtuais e das Pot\IeC {\^e}ncias Virtuais}{30}
-\contentsline {subsection}{\numberline {2.1.4}M\IeC {\'e}todo de Kane}{31}
-\contentsline {subsection}{\numberline {2.1.5}Formalismo de Boltzmann-Hamel}{32}
-\contentsline {subsection}{\numberline {2.1.6}Formula\IeC {\c c}\IeC {\~a}o do Complemento Ortogonal Natural}{32}
-\contentsline {section}{\numberline {2.2}Controle}{33}
-\contentsline {subsection}{\numberline {2.2.1}Controle Proporcional-Integral-Derivativo (PID)}{33}
-\contentsline {subsection}{\numberline {2.2.2}Controle por Torque Computado (TC)}{34}
-\contentsline {subsection}{\numberline {2.2.3}Controle por Torque Computado com pr\IeC {\'e}-alimenta\IeC {\c c}\IeC {\~a}o (TCp)}{34}
-\contentsline {subsection}{\numberline {2.2.4}Controle por Torque Computado Estendido (TCe)}{35}
-\contentsline {subsection}{\numberline {2.2.5}Controle Preditivo Baseado em Modelo (PM)}{36}
-\contentsline {subsection}{\numberline {2.2.6}Controle Adaptativo}{37}
-\contentsline {subsection}{\numberline {2.2.7}Controle por Modos Deslizantes (MD)}{38}
-\contentsline {section}{\numberline {2.3}Conclus\IeC {\~o}es}{39}
-\contentsline {chapter}{\numberline {3}Metodologia da Pesquisa}{41}
-\contentsline {section}{\numberline {3.1}Primeira fase}{41}
-\contentsline {section}{\numberline {3.2}Segunda fase}{41}
-\contentsline {section}{\numberline {3.3}Terceira fase}{41}
-\contentsline {section}{\numberline {3.4}Quarta fase}{42}
-\contentsline {section}{\numberline {3.5}Quinta fase}{42}
-\contentsline {section}{\numberline {3.6}Sexta fase}{42}
-\contentsline {chapter}{Parte~II:~\MakeUppercase {Modelagem}}{44}
-\contentsline {chapter}{\numberline {4}Modelagem de manipuladores seriais}{45}
-\contentsline {section}{\numberline {4.1}Cinem\IeC {\'a}tica}{46}
-\contentsline {subsection}{\numberline {4.1.1}Cinem\IeC {\'a}tica de posi\IeC {\c c}\IeC {\~a}o}{46}
-\contentsline {subsection}{\numberline {4.1.2}Cinem\IeC {\'a}tica de velocidades lineares}{47}
-\contentsline {subsection}{\numberline {4.1.3}Cinem\IeC {\'a}tica de velocidades angulares}{49}
-\contentsline {subsection}{\numberline {4.1.4}Cinem\IeC {\'a}tica de acelera\IeC {\c c}\IeC {\~o}es lineares}{51}
-\contentsline {subsection}{\numberline {4.1.5}Cinem\IeC {\'a}tica de acelera\IeC {\c c}\IeC {\~o}es angulares}{53}
-\contentsline {section}{\numberline {4.2}Din\IeC {\^a}mica dos elos e juntas}{55}
+\contentsline {chapter}{Parte~I:~\MakeUppercase {Introdu\IeC {\c c}\IeC {\~a}o}}{22}
+\contentsline {chapter}{\numberline {1}Introdu\IeC {\c c}\IeC {\~a}o}{23}
+\contentsline {section}{\numberline {1.1}Objetivos}{24}
+\contentsline {section}{\numberline {1.2}Sobre a organiza\IeC {\c c}\IeC {\~a}o do texto}{25}
+\contentsline {chapter}{\numberline {2}Revis\IeC {\~a}o da literatura}{26}
+\contentsline {section}{\numberline {2.1}Modelagem din\IeC {\^a}mica}{26}
+\contentsline {subsection}{\numberline {2.1.1}Formalismo de Newton-Euler}{29}
+\contentsline {subsection}{\numberline {2.1.2}Formalismo de Lagrange}{30}
+\contentsline {subsection}{\numberline {2.1.3}Princ\IeC {\'\i }pio dos Trabalhos Virtuais e das Pot\IeC {\^e}ncias Virtuais}{31}
+\contentsline {subsection}{\numberline {2.1.4}M\IeC {\'e}todo de Kane}{32}
+\contentsline {subsection}{\numberline {2.1.5}Formalismo de Boltzmann-Hamel}{33}
+\contentsline {subsection}{\numberline {2.1.6}Formula\IeC {\c c}\IeC {\~a}o do Complemento Ortogonal Natural}{33}
+\contentsline {section}{\numberline {2.2}Controle}{34}
+\contentsline {subsection}{\numberline {2.2.1}Controle Proporcional-Integral-Derivativo (PID)}{34}
+\contentsline {subsection}{\numberline {2.2.2}Controle por Torque Computado (TC)}{35}
+\contentsline {subsection}{\numberline {2.2.3}Controle por Torque Computado com pr\IeC {\'e}-alimenta\IeC {\c c}\IeC {\~a}o (TCp)}{35}
+\contentsline {subsection}{\numberline {2.2.4}Controle por Torque Computado Estendido (TCe)}{36}
+\contentsline {subsection}{\numberline {2.2.5}Controle Preditivo Baseado em Modelo (PM)}{37}
+\contentsline {subsection}{\numberline {2.2.6}Controle Adaptativo}{38}
+\contentsline {subsection}{\numberline {2.2.7}Controle por Modos Deslizantes (MD)}{39}
+\contentsline {section}{\numberline {2.3}Conclus\IeC {\~o}es}{40}
+\contentsline {chapter}{\numberline {3}Metodologia da Pesquisa}{42}
+\contentsline {section}{\numberline {3.1}Primeira fase}{42}
+\contentsline {section}{\numberline {3.2}Segunda fase}{42}
+\contentsline {section}{\numberline {3.3}Terceira fase}{42}
+\contentsline {section}{\numberline {3.4}Quarta fase}{43}
+\contentsline {section}{\numberline {3.5}Quinta fase}{43}
+\contentsline {section}{\numberline {3.6}Sexta fase}{43}
+\contentsline {chapter}{Parte~II:~\MakeUppercase {Modelagem}}{45}
+\contentsline {chapter}{\numberline {4}Modelagem de manipuladores seriais}{46}
+\contentsline {section}{\numberline {4.1}Cinem\IeC {\'a}tica}{47}
+\contentsline {subsection}{\numberline {4.1.1}Cinem\IeC {\'a}tica de posi\IeC {\c c}\IeC {\~a}o}{47}
+\contentsline {subsection}{\numberline {4.1.2}Cinem\IeC {\'a}tica de velocidades lineares}{48}
+\contentsline {subsection}{\numberline {4.1.3}Cinem\IeC {\'a}tica de velocidades angulares}{50}
+\contentsline {subsection}{\numberline {4.1.4}Cinem\IeC {\'a}tica de acelera\IeC {\c c}\IeC {\~o}es lineares}{52}
+\contentsline {subsection}{\numberline {4.1.5}Cinem\IeC {\'a}tica de acelera\IeC {\c c}\IeC {\~o}es angulares}{54}
+\contentsline {section}{\numberline {4.2}Din\IeC {\^a}mica dos elos e juntas}{56}
 \contentsline {subsection}{\numberline {4.2.1}Modelo dos subsistemas}{56}
 \contentsline {subsection}{\numberline {4.2.2}Sistemas de esfor\IeC {\c c}os ativos generalizados}{57}
-\contentsline {subsection}{\numberline {4.2.3}V\IeC {\'\i }nculos cinem\IeC {\'a}ticos entre subsistemas}{57}
-\contentsline {subsection}{\numberline {4.2.4}Acoplamento de subsistemas}{58}
-\contentsline {section}{\numberline {4.3}Din\IeC {\^a}mica dos atuadores}{60}
+\contentsline {subsection}{\numberline {4.2.3}V\IeC {\'\i }nculos cinem\IeC {\'a}ticos entre subsistemas}{58}
+\contentsline {subsection}{\numberline {4.2.4}Acoplamento de subsistemas}{59}
+\contentsline {section}{\numberline {4.3}Din\IeC {\^a}mica dos atuadores}{61}
 \contentsline {subsection}{\numberline {4.3.1}Cinem\IeC {\'a}tica}{62}
 \contentsline {subsubsection}{\numberline {4.3.1.1}Cinem\IeC {\'a}tica de velocidades angulares}{62}
 \contentsline {subsubsection}{\numberline {4.3.1.2}Cinem\IeC {\'a}tica de acelera\IeC {\c c}\IeC {\~o}es angulares}{63}
-\contentsline {subsection}{\numberline {4.3.2}Din\IeC {\^a}mica Mec\IeC {\^a}nica}{63}
+\contentsline {subsection}{\numberline {4.3.2}Din\IeC {\^a}mica Mec\IeC {\^a}nica}{64}
 \contentsline {subsubsection}{\numberline {4.3.2.1}Modelo dos subsistemas rotores}{64}
 \contentsline {subsubsection}{\numberline {4.3.2.2}Modelo do subsistema serial}{65}
-\contentsline {subsubsection}{\numberline {4.3.2.3}Sistemas de for\IeC {\c c}as ativas generalizadas}{65}
-\contentsline {subsubsection}{\numberline {4.3.2.4}V\IeC {\'\i }nculos entre subsistemas}{65}
+\contentsline {subsubsection}{\numberline {4.3.2.3}Sistemas de for\IeC {\c c}as ativas generalizadas}{66}
+\contentsline {subsubsection}{\numberline {4.3.2.4}V\IeC {\'\i }nculos entre subsistemas}{66}
 \contentsline {subsubsection}{\numberline {4.3.2.5}Acoplamento de subsistemas}{66}
-\contentsline {section}{\numberline {4.4}Modelo completo}{67}
+\contentsline {section}{\numberline {4.4}Modelo completo}{68}
 \contentsline {chapter}{\numberline {5}Modelagem de manipuladores paralelos}{69}
 \contentsline {section}{\numberline {5.1}Modelo dos subsistemas}{71}
 \contentsline {section}{\numberline {5.2}V\IeC {\'\i }nculos cinem\IeC {\'a}ticos entre subsistemas}{72}
 \contentsline {subsection}{\numberline {5.2.1}V\IeC {\'\i }nculos de posi\IeC {\c c}\IeC {\~a}o}{72}
-\contentsline {subsection}{\numberline {5.2.2}V\IeC {\'\i }nculos de velocidades lineares}{74}
+\contentsline {subsection}{\numberline {5.2.2}V\IeC {\'\i }nculos de velocidades lineares}{73}
 \contentsline {subsection}{\numberline {5.2.3}V\IeC {\'\i }nculos de velocidades angulares}{74}
 \contentsline {subsection}{\numberline {5.2.4}V\IeC {\'\i }nculos de quasi-velocidades}{75}
 \contentsline {subsection}{\numberline {5.2.5}V\IeC {\'\i }nculos de quasi-acelera\IeC {\c c}\IeC {\~o}es}{75}
@@ -135,19 +135,19 @@
 \contentsline {subsection}{\numberline {A.3.2}Composi\IeC {\c c}\IeC {\~a}o de acelera\IeC {\c c}\IeC {\~o}es lineares}{151}
 \contentsline {subsection}{\numberline {A.3.3}Composi\IeC {\c c}\IeC {\~a}o de velocidades angulares}{151}
 \contentsline {subsection}{\numberline {A.3.4}Composi\IeC {\c c}\IeC {\~a}o de acelera\IeC {\c c}\IeC {\~o}es angulares}{153}
-\contentsline {chapter}{Ap\IeC {\^e}ndice{} B{} -- Fun\IeC {\c c}\IeC {\~o}es de transfer\IeC {\^e}ncia de motores DC}{154}
-\contentsline {section}{\numberline {B.1}Fun\IeC {\c c}\IeC {\~o}es de tranfer\IeC {\^e}ncia de corrente}{155}
-\contentsline {section}{\numberline {B.2}Fun\IeC {\c c}\IeC {\~o}es de transfer\IeC {\^e}ncia de velocidade}{156}
-\contentsline {section}{\numberline {B.3}Fun\IeC {\c c}\IeC {\~o}es de transfer\IeC {\^e}ncia de posi\IeC {\c c}\IeC {\~a}o}{156}
-\contentsline {chapter}{Ap\IeC {\^e}ndice{} C{} -- Controlador de Corrente}{157}
-\contentsline {chapter}{Ap\IeC {\^e}ndice{} D{} -- Curvas e identifica\IeC {\c c}\IeC {\~a}o dos par\IeC {\^a}metros dos motores}{160}
-\contentsline {chapter}{Ap\IeC {\^e}ndice{} E{} -- Cinem\IeC {\'a}tica de Quaternions}{165}
-\contentsline {section}{\numberline {E.1}Motiva\IeC {\c c}\IeC {\~a}o}{165}
-\contentsline {section}{\numberline {E.2}Defini\IeC {\c c}\IeC {\~o}es, propriedades e f\IeC {\'o}rmulas de convers\IeC {\~a}o}{166}
-\contentsline {subsection}{\numberline {E.2.1}Quaternion unit\IeC {\'a}rio}{166}
-\contentsline {subsection}{\numberline {E.2.2}Produto de quaternions}{166}
-\contentsline {subsection}{\numberline {E.2.3}Quaternion inverso/conjugado}{167}
-\contentsline {subsection}{\numberline {E.2.4}Rota\IeC {\c c}\IeC {\~o}es elementares}{167}
-\contentsline {subsection}{\numberline {E.2.5}Convers\IeC {\~a}o Matriz de Rota\IeC {\c c}\IeC {\~a}o $\rightarrow $ Quaternion}{167}
-\contentsline {subsection}{\numberline {E.2.6}Convers\IeC {\~a}o Quaternion $\rightarrow $ Matriz de Rota\IeC {\c c}\IeC {\~a}o}{169}
-\contentsline {subsection}{\numberline {E.2.7}Convers\IeC {\~a}o Derivada de Quaternion $\leftrightarrow $ Velocidade Angular}{169}
+\contentsline {chapter}{Ap\IeC {\^e}ndice{} B{} -- Cinem\IeC {\'a}tica de Orienta\IeC {\c c}\IeC {\~a}o via Quaternions}{154}
+\contentsline {section}{\numberline {B.1}Motiva\IeC {\c c}\IeC {\~a}o}{154}
+\contentsline {section}{\numberline {B.2}Defini\IeC {\c c}\IeC {\~o}es, propriedades e f\IeC {\'o}rmulas de convers\IeC {\~a}o}{155}
+\contentsline {subsection}{\numberline {B.2.1}Quaternion unit\IeC {\'a}rio}{155}
+\contentsline {subsection}{\numberline {B.2.2}Produto de quaternions}{155}
+\contentsline {subsection}{\numberline {B.2.3}Quaternion inverso/conjugado}{156}
+\contentsline {subsection}{\numberline {B.2.4}Rota\IeC {\c c}\IeC {\~o}es elementares}{156}
+\contentsline {subsection}{\numberline {B.2.5}Convers\IeC {\~a}o Matriz de Rota\IeC {\c c}\IeC {\~a}o $\rightarrow $ Quaternion}{156}
+\contentsline {subsection}{\numberline {B.2.6}Convers\IeC {\~a}o Quaternion $\rightarrow $ Matriz de Rota\IeC {\c c}\IeC {\~a}o}{158}
+\contentsline {subsection}{\numberline {B.2.7}Convers\IeC {\~a}o Derivada de Quaternion $\leftrightarrow $ Velocidade Angular}{158}
+\contentsline {chapter}{Ap\IeC {\^e}ndice{} C{} -- Fun\IeC {\c c}\IeC {\~o}es de transfer\IeC {\^e}ncia de motores DC}{159}
+\contentsline {section}{\numberline {C.1}Fun\IeC {\c c}\IeC {\~o}es de tranfer\IeC {\^e}ncia de corrente}{160}
+\contentsline {section}{\numberline {C.2}Fun\IeC {\c c}\IeC {\~o}es de transfer\IeC {\^e}ncia de velocidade}{161}
+\contentsline {section}{\numberline {C.3}Fun\IeC {\c c}\IeC {\~o}es de transfer\IeC {\^e}ncia de posi\IeC {\c c}\IeC {\~a}o}{161}
+\contentsline {chapter}{Ap\IeC {\^e}ndice{} D{} -- Controlador de Corrente}{162}
+\contentsline {chapter}{Ap\IeC {\^e}ndice{} E{} -- Curvas e identifica\IeC {\c c}\IeC {\~a}o dos par\IeC {\^a}metros dos motores}{165}

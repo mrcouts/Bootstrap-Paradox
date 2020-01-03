@@ -222,6 +222,9 @@ Aiming to fully explore the potential of this kind of architecture, in this thes
   $\ttA, \ttB, \hdots$ & Sistemas de coordenadas \\
   $\llA, \llB, \hdots$ & Corpos rígidos ou referenciais \\
   $\ssA, \ssB, \hdots$ & Sistema ou subsistema mecânico \\
+  $\llN$ & Referencial inercial \\
+  $\ttg_{\lllB}$ & Centro de massa do corpo rígido $\llB$ \\ 
+  $\tto_{\ttB}$ & Origem dos sistema de coordenadas $\ttB$ \\
   $\{\vi_\ttB, \vj_\ttB, \vk_\ttB \}$ & Base ortonormal do sistema de coordenadas $\ttB$ \\
   $\vct{\ttp}_{\ttB}$ & Matriz-coluna formada pelas coordenadas do ponto $\ttp$ no sistema de coordenadas $\ttB$ \\
   $\hvct{\ttp}_{\ttB}$ & Matriz-coluna formada pelas coordenadas do ponto $\ttp$ no sistema de coordenadas $\ttB$ em coordenadas homog\^eneas, ou seja: $\hvct{\ttp}_{\ttB} = \begin{bmatrix}
@@ -239,12 +242,20 @@ Aiming to fully explore the potential of this kind of architecture, in this thes
   $\va_\ttp^{\lllA}$ & Vetor velocidade do ponto $\ttp$ em relação ao ref. $\llA$ \\
   $\vomega_{\lllB}^{\lllA}$ & Vetor velocidade angular do corpo rígido (ou referencial) $\llB$ em relação ao referencial $\llA$ \\
   $\valpha_{\lllB}^{\lllA}$ & Vetor aceleração angular do corpo rígido (ou referencial) $\llB$ em relação ao referencial $\llA$ \\
+  $\mq$ & Coordenadas generalizadas \\
+  $\mpi$ & Quasi-coordenadas \\
+  $\mp$ & Quasi-velocidades \\
+  $\dot{\mp}$ & Quasi-acelerações \\
+  $\mM$ & Matriz de inércia generalizada \\
+  $\mnu$ & Matriz-coluna de esforços inérciais giroscópicos generalizados \\
+  $\mg$ & Matriz-coluna de esforços gravitacionais generalizados \\
   $t$ & Tempo \\
   $\ccos(.)$ & Notação compacta para $\cos(.)$ \\
   $\ssin(.)$ & Notação compacta para $\sin(.)$ \\
   $\dd$ & Operador diferencial \\
   $\dl$ & Operador variação \\
-  $\displaystyle\frac{\dd^{[\lllA]}}{\dd t}$ & Operador derivada temporal em relação ao ref. $\llA$ \\
+  $\displaystyle\frac{\dd (\boxdot) }{\dd t} = (\dot{\boxdot})$ & Operador derivada temporal \\
+  $\displaystyle\frac{\dd^{[\lllA]}(\boxdot)}{\dd t} = (\dot{\boxdot}^{[\lllA]})$ & Operador derivada temporal em relação ao referencial $\llA$ (se aplica apenas a vetores físicos) \\
   $\diag(.)$ & Matriz-coluna cujos elementos são a diagonal de uma matriz quadrada \\
   %$g$ & Aceleração gravitacional \\
   $\wedge$ & Operador produto vetorial \\
@@ -671,13 +682,13 @@ Seja $\ssB$ um sistema mecânico serial de $\nu$ graus de liberdade. Primeiramen
 \item $\ttN$ ou $\ttB_0$: sistema de coordenadas da base do mecanismo, fixo a $\llN$.
 \item $\llB_i, \,i=1,...,\nu$: i-ésimo ligamento.
 \item $\ttB_i, \,i=1,...,\nu$: sistema de coordenadas solid\'ario a $\llB_i$.
-\item $\tto_i, \,i=0,...,\nu$: origem do sistema $\ttB_i$.
-\item $\{\vi_i, \vj_i, \vk_i\}, \,i=0,...,\nu$: base ortonormal do sistema $\ttB_i$.
-\item $\ttg_i, \,i=1,...,\nu$: centro de massa de $\llB_i$.
+%\item $\tto_i, \,i=0,...,\nu$: origem do sistema $\ttB_i$.
+%\item $\{\vi_i, \vj_i, \vk_i\}, \,i=0,...,\nu$: base ortonormal do sistema $\ttB_i$.
+%\item $\ttg_i, \,i=1,...,\nu$: centro de massa de $\llB_i$.
 \item $\ttx$: ponto no espa\c{c}o fixo ao efetuador.
-\item $m_i$: massa da barra $\llB_i$.
-\item $\vI_{\ttg_i}$: tensor de in\'ercia da barra $\llB_i$ em relação a seu centro de massa.
-\item $\mI_i$: tensor de in\'ercia $\vI_{\ttg_i}$ escrito na base $\ttN$, ou seja, $\vct{\vI_{\ttg_i}}_{\ttN \rl \ttN}$.
+\item $m_i$: massa do ligamento $\llB_i$.
+\item $\vI_{\lllB_i}$: tensor de in\'ercia do ligamento $\llB_i$ em relação a seu centro de massa.
+\item $\mI_i$: tensor de in\'ercia $\vI_{\lllB_i}$ escrito na base $\ttN$, ou seja, $\vct{\vI_{\lllB_i}}_{\ttN \rl \ttN}$.
 \item $q_i, \,i=1,...,\nu$: deslocamento relativo (angular ou linear) da i-ésima junta.
 \item  $\mq$: matriz-coluna de $\nu$ coordenadas generalizadas independentes. É dada por $\mq = \begin{bmatrix}
 q_1 & ... & {q}_{\nu}
@@ -722,19 +733,19 @@ As matrizes  $\hvct{\vone}_{\ttN \rl \ttB_i}$ apresentam o seguinte formato:
 \begin{empheq}[box=\lightbluebox]{equation} \label{eq:H__2}
 \hvct{\vone}_{\ttN \rl \ttB_i} =
 \begin{bmatrix}
-\vct{\vi_{i}}_{\ttN} & \vct{\vj_{i}}_{\ttN} & [\vk_{i}]_{\ttN} & \vct{\tto_i}_{\ttN} \\
+\vct{\vi_{\ttB_i}}_{\ttN} & \vct{\vj_{\ttB_i}}_{\ttN} & [\vk_{\ttB_i}]_{\ttN} & \vct{\tto_{\ttB_i}}_{\ttN} \\
 0 & 0 & 0 & 1
 \end{bmatrix}
 \end{empheq}
 
-Sendo assim, tendo obtido $\hvct{\vone}_{\ttN \rl \ttB_i}$, automaticamente obtemos $\vct{\vi_{i}}_{\ttN}, \vct{\vj_{i}}_{\ttN}, [\vk_{i}]_{\ttN}$ e $\vct{\tto_i}_{\ttN}$. Note que também obtemos as coordenadas do efetuador no sistema da base, pois
+Sendo assim, tendo obtido $\hvct{\vone}_{\ttN \rl \ttB_i}$, automaticamente obtemos $\vct{\vi_{\ttB_i}}_{\ttN}, \vct{\vj_{\ttB_i}}_{\ttN}, [\vk_{\ttB_i}]_{\ttN}$ e $\vct{\tto_{\ttB_i}}_{\ttN}$. Note que também obtemos as coordenadas do efetuador no sistema da base, pois
 \begin{empheq}[box=\myyellowbox]{equation} \label{eq:x_}
-\vct{\ttx}_{\ttN} = \vct{\tto_{\nu}}_{\ttN}
+\vct{\ttx}_{\ttN} = \vct{\tto_{\ttB_\nu}}_{\ttN}
 \end{empheq}
 
-Além disso, como $\vct{\ttg_i}_{\ttB_i}$ são dados de entrada do algoritmo, obtemos as coordenadas dos centros de massa dos ligamentos no sistema da base através da seguinte expressão:
+Além disso, como $\vct{\ttg_{\lllB_i}}_{\ttB_i}$ são dados de entrada do algoritmo, obtemos as coordenadas dos centros de massa dos ligamentos no sistema da base através da seguinte expressão:
 \begin{empheq}[box=\myyellowbox]{equation} \label{eq:og__}
-\hvct{\ttg_i}_{\ttN} = \hvct{\vone}_{\ttN \rl \ttB_i} \cdot \hvct{\ttg_i}_{\ttB_i}
+\hvct{\ttg_{\lllB_i}}_{\ttN} = \hvct{\vone}_{\ttN \rl \ttB_i} \cdot \hvct{\ttg_{\lllB_i}}_{\ttB_i}
 \end{empheq}
 
 \subsection{Cinemática de velocidades lineares}
@@ -783,16 +794,16 @@ Sendo que, a partir da equação \eqref{eq:Poisson_v}, a velocidade de arrastame
 \begin{equation}
 \vv_{\ttx \rl \lllB_{i}}^{\lllB_{i-1}} = 
 \begin{cases}
-\dot{q}_{i} \vk_{i-1}, \;\;\;\;\;\;\;\;\;\;\;\;\;\; \text{i-ésima junta prismática} \\
-\dot{q}_{i} \vk_{i-1} \wedge \vr_{\tto_{i-1} \rl \ttx}, \; \text{i-ésima junta rotativa}
+\dot{q}_{i} \vk_{\ttB_{i-1}}, \;\;\;\;\;\;\;\;\;\;\;\;\;\; \text{i-ésima junta prismática} \\
+\dot{q}_{i} \vk_{\ttB_{i-1}} \wedge \vr_{\tto_{\tttB_{i-1}} \rl \ttx}, \; \text{i-ésima junta rotativa}
 \end{cases}\, i=1,...,\nu
 \end{equation}
 
 Fazendo as seguintes definições:
 \begin{empheq}[box=\myyellowbox]{equation} \label{eq:jvi_}
 \mj_{v\,i}(\mq) = \begin{cases}
-[\vk_{i-1}]_{\ttN}, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; \text{i-ésima junta prismática} \\
-\mS([\vk_{i-1}]_{\ttN})\cdot (\vct{\ttx}_{\ttN}-\vct{\tto_{i-1}}_{\ttN}) , \; \text{i-ésima junta rotativa} \\
+[\vk_{\ttB_{i-1}}]_{\ttN}, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; \text{i-ésima junta prismática} \\
+\mS([\vk_{\ttB_{i-1}}]_{\ttN})\cdot (\vct{\ttx}_{\ttN}-\vct{\tto_{\ttB_{i-1}}}_{\ttN}) , \; \text{i-ésima junta rotativa} \\
 \end{cases} \, i=1,...,\nu
 \end{empheq}
 
@@ -833,17 +844,17 @@ Definindo:
 \begin{empheq}[box=\myyellowbox]{equation} \label{eq:jvij_}
 \mj_{v\,i,j}(\mq) = \begin{cases}
 \mzr, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; j>i \\
-[\vk_{j-1}]_{\ttN}, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; j\leq i  \text{ e j-ésima junta prismática} \\
-\mS([\vk_{j-1}]_{\ttN})\cdot (\vct{\ttg_i}_{\ttN}-\vct{\tto_{j-1}}_{\ttN}) , \; j\leq i \text{ e j-ésima junta rotativa} \\
+[\vk_{\ttB_{j-1}}]_{\ttN}, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; j\leq i  \text{ e j-ésima junta prismática} \\
+\mS([\vk_{\ttB_{j-1}}]_{\ttN})\cdot (\vct{\ttg_{\lllB_i}}_{\ttN}-\vct{\tto_{\ttB_{j-1}}}_{\ttN}) , \; j\leq i \text{ e j-ésima junta rotativa} \\
 \end{cases} \, i,j=1,...,\nu
 \end{empheq}
 
 \begin{empheq}[box=\lightbluebox]{equation}
-\mv_{i,j} = \vct{\vv_{\ttg_i}^{\lllB_{j}}}_{\ttN}
+\mv_{i,j} = \vct{\vv_{\ttg_{\lllB_i}}^{\lllB_{j}}}_{\ttN}
 \end{empheq}
 
 \begin{empheq}[box=\lightbluebox]{equation}
-\mv^\star_i  = \mv_{i,0} = \vct{\vv_{\ttg_i}^{\lllN} }_{\ttN}
+\mv^\star_i  = \mv_{i,0} = \vct{\vv_{\ttg_{\lllB_i}}^{\lllN} }_{\ttN}
 \end{empheq}
 
 Temos:
@@ -909,7 +920,7 @@ Sendo que a velocidade angular de arrastamento de cada uma das juntas é dada po
 \vomega_{\lllB_{i}}^{\lllB_{i-1}} = 
 \begin{cases}
 \vzr, \;\;\;\;\;\;\; \text{i-ésima junta prismática} \\
-\dot{q}_{i} \vk_{i-1}, \; \text{i-ésima junta rotativa}
+\dot{q}_{i} \vk_{\ttB_{i-1}}, \; \text{i-ésima junta rotativa}
 \end{cases}\, i=1,...,\nu
 \end{equation}
 
@@ -917,7 +928,7 @@ Fazendo as seguintes definições:
 \begin{empheq}[box=\myyellowbox]{equation}  \label{eq:jwi_}
 \mj_{\omega\,i}(\mq) = \begin{cases}
 \mzr, \;\;\;\;\;\;\;\; \text{i-ésima junta prismática} \\
-[\vk_{i-1}]_{\ttN} , \text{i-ésima junta rotativa} \\
+[\vk_{\ttB_{i-1}}]_{\ttN} , \text{i-ésima junta rotativa} \\
 \end{cases} \, i=1,...,\nu
 \end{empheq}
 
@@ -1038,8 +1049,8 @@ Sendo que, a partir da equação \eqref{eq:Poisson_a}, a aceleração de arrasta
 \begin{equation}
 \va_{\ttx \rl \lllB_{i}}^{\lllB_{i-1}} = 
 \begin{cases}
-\ddot{q}_{i} \vk_{i-1}, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; \text{i-ésima junta prismática} \\
-\ddot{q}_{i} \vk_{i-1} \wedge \vr_{\tto_{i-1} \rl \ttx} + \dot{q}^2_{i} \vk_{i-1} \wedge \vk_{i-1} \wedge \vr_{\tto_{i-1} \rl \ttx} , \; \text{i-ésima junta rotativa}
+\ddot{q}_{i} \vk_{\ttB_{i-1}}, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; \text{i-ésima junta prismática} \\
+\ddot{q}_{i} \vk_{\ttB_{i-1}} \wedge \vr_{\tto_{\tttB_{i-1}} \rl \ttx} + \dot{q}^2_{i} \vk_{\ttB_{i-1}} \wedge \vk_{\ttB_{i-1}} \wedge \vr_{\tto_{\tttB_{i-1}} \rl \ttx} , \; \text{i-ésima junta rotativa}
 \end{cases}\, i=1,...,\nu
 \end{equation}
 
@@ -1082,11 +1093,11 @@ Para obter as acelerações dos centros de massa dos ligamentos, seguimos a mesm
 
 Definindo:
 \begin{empheq}[box=\lightbluebox]{equation}
-\ma_{i,j} = \vct{\va_{\ttg_i}^{\lllB_{j}}}_{\ttN}
+\ma_{i,j} = \vct{\va_{\ttg_{\lllB_i}}^{\lllB_{j}}}_{\ttN}
 \end{empheq}
 
 \begin{empheq}[box=\lightbluebox]{equation}
-\ma^\star_i = \ma_{i,0} = \vct{\va_{\ttg_i}^{\lllN} }_{\ttN}
+\ma^\star_i = \ma_{i,0} = \vct{\va_{\ttg_{\lllB_i}}^{\lllN} }_{\ttN}
 \end{empheq}
 
 Temos:
@@ -1154,7 +1165,7 @@ Sendo que a aceleração angular de arrastamento de cada uma das juntas é dada 
 \valpha_{\lllB_{i}}^{\lllB_{i-1}} = 
 \begin{cases}
 \vzr, \;\;\;\;\;\;\; \text{i-ésima junta for prismática} \\
-\ddot{q}_{i} \vk_{i-1}, \; \text{i-ésima junta rotativa}
+\ddot{q}_{i} \vk_{\ttB_{i-1}}, \; \text{i-ésima junta rotativa}
 \end{cases}\, i=1,...,\nu
 \end{equation}
 
@@ -1197,7 +1208,7 @@ Para obter as acelerações angulares dos ligamentos, seguimos a mesma linha de 
 
 Definindo:
 \begin{empheq}[box=\lightbluebox]{equation}
-\malpha_{i,j} = \vct{\valpha_{\ttg_i}^{\lllB_{j}}}_{\ttN}
+\malpha_{i,j} = \vct{\valpha_{\ttg_{\lllB_i}}^{\lllB_{j}}}_{\ttN}
 \end{empheq}
 
 \begin{empheq}[box=\lightbluebox]{equation}
@@ -1254,8 +1265,8 @@ O modelo dinâmico de cada ligamento pode ser obtido por Newton-Euler, pois são
 
 \begin{equation} \label{eq:Newton-Euler}
 \begin{cases}
-\vf_i = -m_i \va^{\lllN}_{\ttg_i} + m_i \vg  \\
-\vtau_i= -\vI_{\ttg_i} \cdot \valpha^{\lllN}_{\lllB_i} - \vomega^{\lllN}_{\lllB_i} \wedge (\vI_{\ttg_i} \cdot \vomega^{\lllN}_{\lllB_i}) 
+\vf_i = -m_i \va^{\lllN}_{\ttg_{\lllB_i}} + m_i \vg  \\
+\vtau_i= -\vI_{\lllB_i} \cdot \valpha^{\lllN}_{\lllB_i} - \vomega^{\lllN}_{\lllB_i} \wedge (\vI_{\lllB_i} \cdot \vomega^{\lllN}_{\lllB_i}) 
 \end{cases} \, i = 1,...,\nu
 \end{equation}
 
@@ -1269,17 +1280,17 @@ Aplicando as equações vetoriais no sistema $\ttN$, temos:
 -
 \begin{bmatrix}
 m_i \mone & \mzr \\
-\mzr      & \vct{\vI_{\ttg_i}}_{\ttN \rl \ttN}
+\mzr      & \vct{\vI_{\lllB_i}}_{\ttN \rl \ttN}
 \end{bmatrix}
 \cdot
 \begin{bmatrix}
-\vct{\va^{\lllN}_{\ttg_i}}_{\ttN}  \\
+\vct{\va^{\lllN}_{\ttg_{\lllB_i}}}_{\ttN}  \\
 \vct{\valpha^{\lllN}_{\lllB_i}}_{\ttN}
 \end{bmatrix}
 -
 \begin{bmatrix}
 \mzr \\
-\mS( \vct{\vomega^{\lllN}_{\lllB_i}}_{\ttN} ) \cdot \vct{\vI_{\ttg_i}}_{\ttN \rl \ttN} \cdot \vct{\vomega^{\lllN}_{\lllB_i}}_{\ttN}
+\mS( \vct{\vomega^{\lllN}_{\lllB_i}}_{\ttN} ) \cdot \vct{\vI_{\lllB_i}}_{\ttN \rl \ttN} \cdot \vct{\vomega^{\lllN}_{\lllB_i}}_{\ttN}
 \end{bmatrix}
 -
 \begin{bmatrix}
@@ -1655,12 +1666,12 @@ Sendo assim, a velocidade angular do i-ésimo rotor pode ser obtida aplicando o 
 
 Sendo que a velocidade angular relativa de cada rotor é dada por:
 \begin{equation}
-\vomega_{\lllR_i}^{\lllB_{i-1}} = \dot{q}_{r\,i} \vk_{i-1} = r_i \dot{q}_{i} \vk_{i-1} ,\; i=1,...,\nu
+\vomega_{\lllR_i}^{\lllB_{i-1}} = \dot{q}_{r\,i} \vk_{\ttB_{i-1}} = r_i \dot{q}_{i} \vk_{\ttB_{i-1}} ,\; i=1,...,\nu
 \end{equation}
 
 Aplicando a equação \eqref{eq:ComposicaoWRotor} no sistema $\ttN$, temos:
 \begin{empheq}[box=\myyellowbox]{equation} \label{eq:ComposicaoWRotor2}
-\momega^\star_{r \,i} = \momega^\star_{i-1} + r_i \dot{q}_{i} [\vk_{i-1}]_{\ttN} ,\; i=1,...,\nu
+\momega^\star_{r \,i} = \momega^\star_{i-1} + r_i \dot{q}_{i} [\vk_{\ttB_{i-1}}]_{\ttN} ,\; i=1,...,\nu
 \end{empheq}
 
 Sendo:
@@ -1676,7 +1687,7 @@ Utilizando a equação \eqref{eq:omega_star_i}, pode-se reescrever \eqref{eq:Com
 Sendo:
 \begin{empheq}[box=\myyellowbox]{equation} \label{eq:jwij_rot}
 \mj_{\omega_r \,i,j}(\mq) = \begin{cases}
-r_i [\vk_{i-1}]_{\ttN}, \;  j = i \\
+r_i [\vk_{\ttB_{i-1}}]_{\ttN}, \;  j = i \\
 \mj_{\omega\,i,j}(\mq), \;\;\;  j\neq i \\
 \end{cases} \, i,j=1,...,\nu
 \end{empheq}
@@ -1697,12 +1708,12 @@ A aceleração angular do i-ésimo rotor pode ser obtida aplicando o príncipio 
 
 Sendo que a aceleração angular de relativa de cada rotor é dada por:
 \begin{equation}
-\valpha_{\lllR_i}^{\lllB_{i-1}} = \ddot{q}_{r\,i} \vk_{i-1} = r_i \ddot{q}_{i} \vk_{i-1} ,\; i=1,...,\nu
+\valpha_{\lllR_i}^{\lllB_{i-1}} = \ddot{q}_{r\,i} \vk_{\ttB_{i-1}} = r_i \ddot{q}_{i} \vk_{\ttB_{i-1}} ,\; i=1,...,\nu
 \end{equation}
 
 Aplicando a equação \eqref{eq:ComposicaodWRotor} no sistema $\ttN$, temos:
 \begin{empheq}[box=\myyellowbox]{equation} \label{eq:ComposicaodWRotor2}
-\malpha^\star_{r \,i} = \malpha^\star_{i-1} + r_i \ddot{q}_{i} [\vk_{i-1}]_{\ttN} + r_i \dot{q}_{i} \mS( \momega^\star_{i-1} ) \cdot [\vk_{i-1}]_{\ttN} ,\; i=1,...,\nu
+\malpha^\star_{r \,i} = \malpha^\star_{i-1} + r_i \ddot{q}_{i} [\vk_{\ttB_{i-1}}]_{\ttN} + r_i \dot{q}_{i} \mS( \momega^\star_{i-1} ) \cdot [\vk_{\ttB_{i-1}}]_{\ttN} ,\; i=1,...,\nu
 \end{empheq}
 
 Sendo:
@@ -1931,7 +1942,7 @@ Sejam $\ssB_0$, $\ssB_1$, ..., $\ssB_{n} \,$ $n+1$ subsistemas mec\^anicos e $\s
 \item $\llB_i, \, i=1,...,n$: Corpo rígido efetuador do subsistema serial $\ssB_i$.
 \item $\llN$: referencial inercial.
 \item $\ttN_i, \, i=0,...,n$: sistema de coordenadas da base fixa do subsistema $\ssB_i$, solidário a $\llN$.
-\item $\tto_i, \,i=0,...,n$: origem do sistema $\ttN_i$.
+%\item $\tto_i, \,i=0,...,n$: origem do sistema $\ttN_i$.
 \item $\ttg$: centro de massa da plataforma/efetuador $\llB_0$.
 \item $\ttx_i, \,i=1, ..., n$: ponto no espa\c{c}o fixo ao efetuador de $\ssB_i$.
 \item $\ttB_0$: sistema de coordenadas solidário a $\llB_0$ com origem em $\ttg$.
@@ -2104,18 +2115,18 @@ Portanto:
 
 \subsection{Vínculos de posição} 
 
-Seja $\ttx_i$ um ponto pertencente à plataforma/efetuador $\llB_0$ e também ao efetuador $\llB_i$. Sendo assim, é possível relacionar a posição do ponto $\ttx_i$ em relação a $\tto_0$, seguindo tanto pela da plataforma/efetuador $\ssB_0$, quanto pela cadeia serial $\ssB_i$:
+Seja $\ttx_i$ um ponto pertencente à plataforma/efetuador $\llB_0$ e também ao efetuador $\llB_i$. Sendo assim, é possível relacionar a posição do ponto $\ttx_i$ em relação a $\tto_{\ttN_0}$, seguindo tanto pela da plataforma/efetuador $\ssB_0$, quanto pela cadeia serial $\ssB_i$:
 \begin{equation}
-\vr_{\tto_0 \rl \ttx_i} = \vr_{\tto_0 \rl \ttg} + \vr_{\ttg \rl \ttx_i} = \vr_{\tto_0 \rl \tto_i} + \vr_{\tto_i \rl \ttx_i}
+\vr_{\tto_{\tttN_0} \rl \ttx_i} = \vr_{\tto_{\tttN_0} \rl \ttg} + \vr_{\ttg \rl \ttx_i} = \vr_{\tto_{\tttN_0} \rl \tto_{\tttN_i}} + \vr_{\tto_{\tttN_i} \rl \ttx_i}
 \end{equation}
 
 Aplicando a equação vetorial no sistema $\ttN_0$:
 \begin{equation}
-\vct{\ttx_i}_{\ttN_0} =  \vct{\ttg}_{\ttN_0} + \vct{\vone}_{\ttN_0 \rl \ttB_0} \vct{\ttx_i}_{\ttB_0} = \vct{\tto_i}_{\ttN_0}  + \vct{\vone}_{\ttN_0 \rl \ttN_i} \vct{\ttx_i}_{\ttN_i}
+\vct{\ttx_i}_{\ttN_0} =  \vct{\ttg}_{\ttN_0} + \vct{\vone}_{\ttN_0 \rl \ttB_0} \vct{\ttx_i}_{\ttB_0} = \vct{\tto_{\ttN_i}}_{\ttN_0}  + \vct{\vone}_{\ttN_0 \rl \ttN_i} \vct{\ttx_i}_{\ttN_i}
 \end{equation}
 
 %Sabe-se que $\vct{\ttg}_{\ttN_0} = \mx^\ast$ e $\vct{\ttp_i}_{\ttN_i} = \mx_i(\mq_i)$. Tendo em vista que $\vct{\ttp_i}_\ttB$, $\vct{\vone}_{\ttN_0 \rl \ttN_i}$ e $\vct{\tto_i}_{\ttN_0}$ são constantes e que $\vct{\vone}_{\ttN_0 \rl \ttB}$ depende de $\mtheta^\ast$, definindo:
-Sabe-se que $\vct{\ttg}_{\ttN_0} = \mq_0$ e $\vct{\ttx_i}_{\ttN_i} = \mx_i(\mq_i)$. Tendo em vista que $\vct{\ttx_i}_\ttB$, $\vct{\vone}_{\ttN_0 \rl \ttN_i}$, $\vct{\tto_i}_{\ttN_0}$ e $\vct{\vone}_{\ttN_0 \rl \ttB_0}$ são constantes, definindo:
+Sabe-se que $\vct{\ttg}_{\ttN_0} = \mq_0$ e $\vct{\ttx_i}_{\ttN_i} = \mx_i(\mq_i)$. Tendo em vista que $\vct{\ttx_i}_\ttB$, $\vct{\vone}_{\ttN_0 \rl \ttN_i}$, $\vct{\tto_{\ttN_i}}_{\ttN_0}$ e $\vct{\vone}_{\ttN_0 \rl \ttB_0}$ são constantes, definindo:
 
 %\begin{equation}
 %\mc_i(\mtheta^\ast) = -\vct{\vone}_{\ttN_0 \rl \ttB} \vct{\ttp_i}_\ttB
@@ -2124,7 +2135,7 @@ Sabe-se que $\vct{\ttg}_{\ttN_0} = \mq_0$ e $\vct{\ttx_i}_{\ttN_i} = \mx_i(\mq_i
 %\md_i = \vct{\tto_i}_{\ttN_0} 
 %\end{equation}
 \begin{equation}
-\md_i = \vct{\tto_i}_{\ttN_0} -\vct{\vone}_{\ttN_0 \rl \ttB_0} \vct{\ttx_i}_{\ttB_0}
+\md_i = \vct{\tto_{\ttN_i}}_{\ttN_0} -\vct{\vone}_{\ttN_0 \rl \ttB_0} \vct{\ttx_i}_{\ttB_0}
 \end{equation}
 \begin{equation}
 \mE_i = \vct{\vone}_{\ttN_0 \rl \ttN_i}
@@ -5111,7 +5122,7 @@ $\hat{\vx}_{\lllB}$ um versor fixo ao referencial $\llB$. A derivada temporal de
 
 \subsection{Derivada temporal de vetores}
 
-Seja $\ttB = \{ \vi_{\ttB}, \vj_{\ttB}, \vk_{\ttB} \}$ uma base ortonormal fixa ao referencial $\llB$ e $\vx$ um vetor cuja decomposição na base $\ttB$ é conhecida e dada por $\vx = x \vi_{\ttB} + y \vj_{\ttB} + z \vk_{\ttB} $. A derivada temporal de $\vx$ em relação ao referencial $\llA$ é definida como:
+Seja $\ttB$ um sistema de coordenadas fixo ao referencial $\llB$ e $\vx$ um vetor cuja decomposição na base de $\ttB$ é conhecida e dada por $\vx = x \vi_{\ttB} + y \vj_{\ttB} + z \vk_{\ttB} $. A derivada temporal de $\vx$ em relação ao referencial $\llA$ é definida como:
 \begin{equation}
 \begin{split}
 \frac{\dd^{[{\lllA}]} \vx }{\dd t} &= \dot{\vx}^{[\lllA]} = \dot{x} \vi_{\ttB} + \dot{y} \vj_{\ttB} + \dot{z} \vk_{\ttB} + x \dot{\vi}_{\ttB}^{[\lllA]} + y \dot{\vj}_{\ttB}^{[\lllA]} + z \dot{\vk}_{\ttB}^{[\lllA]} \\
@@ -5127,7 +5138,7 @@ Repare que o termo $\dot{x} \vi_{\ttB} + \dot{y} \vj_{\ttB} + \dot{z} \vk_{\ttB}
 
 \subsection{Derivada temporal de matrizes de rotação}
 
-Sejam $\llA$ e $\llB$ dois referenciais, e $\ttA$ e $\ttB = \{ \vi_{\ttB}, \vj_{\ttB}, \vk_{\ttB} \}$ duas bases ortonormais fixas a $\llA$ e $\llB$, respectivamente. Sendo assim, a matriz de rotação $\vct{\vone}_{\ttA \rl \ttB}$ é dada por:
+Sejam $\llA$ e $\llB$ dois referenciais, e $\ttA$ e $\ttB$ dois sistemas de referência fixos a $\llA$ e $\llB$, respectivamente. Sendo assim, a matriz de rotação $\vct{\vone}_{\ttA \rl \ttB}$ é dada por:
 \begin{equation} \label{eq:MatrizDeRotacao}
 \vct{\vone}_{\ttA \rl \ttB} =
 \begin{bmatrix}
@@ -5355,6 +5366,214 @@ Repare que, fazendo $\llC \equiv \llA$ e utilizando \eqref{eq:composicao_wCA}, t
 \begin{empheq}[box=\almondbox]{equation} \label{eq:composicao_dwCA}
 \therefore \valpha_{\lllA}^{\lllB} = - \valpha_{\lllB}^{\lllA}
 \end{empheq}
+
+\chapter{Cinemática de Orientação via Quaternions} \label{ap:Quat}
+Este apêndice tem o intuito apresentar alguns conceitos básicos relativos à utilização de quaternions unitários para descrever a orientação de um corpo rígido no espaço.
+\section{Motivação}
+Existem várias maneiras de representar a orientação de um corpo rígido no espaço, como a utilização de matrizes de rotação, angulos de Euler e quaternions unitários.
+
+Como foi visto no capítulo \ref{cap:Seriais}, utilizando a convenção de Denavit-Hartemberg é possível obter a orientação do efetuador de um mecanismo serial na representação de matriz de rotação. Esta representação possui o inconveniente de possuir um grande número de parâmetros para representar a orientação (9 parâmetros para representar 3 graus de liberdade de rotação). Além disso, a composição de rotações consecutivas através da multiplicação de matrizes de rotação leva ao acúmulo de erros numéricos, o que pode fazer com que a matriz perca as condições necessárias para ser uma matriz de rotação.
+
+A representação por ângulos de Euler possui a vantagem de ter o mínimo número de parâmetros possível (3 parâmetros para representar 3 graus de liberdade de rotação). Porém, este tipo de representação perde um grau de liberdade quando o ângulo intermediário alinha os eixos de rotação do primeiro e do terceiro ângulo, o que pode ser bastante inconveniente. Além disso, este tipo de representação não possui uma maneira de compor rotações consecutivas.
+
+A representação por quaternions unitários possui um número não tão grande de parâmetros (4 parâmetros para representar 3 graus de liberdade de rotação), permite compor rotações consecutivas, pode ser facilmente renormalizada (de modo a evitar o acúmulo de erros numéricos) e não possui o problema de perder graus de liberdade dependendo da configuração. Sendo assim, pode-se dizer que esta é uma forma bastante conveniênte de representar a orientação de um corpo rígido no espaço.
+
+\section{Definições, propriedades e fórmulas de conversão}
+
+\subsection{Quaternion unitário}
+Um quaternion pode ser representado pela seguinte matriz-coluna:
+\begin{equation}
+\breve{\mq} = \begin{bmatrix}
+q_i & q_j & q_k & q_r 
+\end{bmatrix}^\msT
+\end{equation}
+
+A matriz-coluna $\breve{\mq}^\mathsf{v} = \begin{bmatrix} q_i & q_j & q_k \end{bmatrix}^\msT$ é conhecida como parte vetorial e o escalar $q_r$ como a parte real do quaternion.
+
+Um quaternion é dito unitário quando respeita a seguinte propriedade:
+\begin{equation}
+\breve{\mq}^\msT \breve{\mq} = 
+q_i^2 + q_j^2 + q_k^2 + q_r^2 = 1
+\end{equation}
+
+%Como foi dito anteriormente, quaternions unitários são utilizados para representar rotações. Além disso, os quaternions $\breve{\mq}$ e $-\breve{\mq}$ representam a mesma rotação.
+
+\subsection{Produto de quaternions}
+
+Da mesma maneira que a composição de rotações consecutivas pode ser feita através da multiplicação de matrizes de rotação, ela também pode ser feita através da multiplicação de quaternions unitários, seguindo a mesma lógica. O produto de dois quaternions pode ser definido da seguinte maneira:
+\begin{equation}
+\breve{\ma} \otimes \breve{\mb} = \breve{\mQ}_{\mathsf{I}} (\breve{\ma}) \cdot \breve{\mb} = \breve{\mQ}_{\mathsf{I}\mathsf{I}} (\breve{\mb}) \cdot \breve{\ma}
+\end{equation}
+
+Sendo:
+\begin{equation}
+\breve{\mQ}_{\mathsf{I}} (\breve{\mq}) =
+\begin{bmatrix}
+\begin{array}{rrrr}
+q_r & -q_k & q_j & \;\; q_i \\
+q_k & q_r & -q_i & \;\; q_j \\
+-q_j & q_i & q_r & \;\; q_k \\
+-q_i & -q_j & - q_k & \;\; q_r
+\end{array}
+\end{bmatrix}
+\end{equation}
+
+\begin{equation}
+\breve{\mQ}_{\mathsf{I}\mathsf{I}} (\breve{\mq}) =
+\begin{bmatrix}
+\begin{array}{rrrr}
+q_r & q_k & -q_j & \;\; q_i \\
+-q_k & q_r & q_i & \;\; q_j \\
+q_j & -q_i & q_r & \;\; q_k \\
+-q_i & -q_j & - q_k  & \;\; q_r
+\end{array}
+\end{bmatrix}
+\end{equation}
+
+\subsection{Quaternion inverso/conjugado}
+Da mesma maneira que é possível definir a multiplicação de quaternions, também é possível definir o quaternion inverso $\breve{\mq}^\msI$, o qual apresenta a seguinte propriedade:
+\begin{equation}
+\breve{\mq} \otimes \breve{\mq}^\msI = \breve{\mq}^\msI \otimes \breve{\mq} = \begin{bmatrix}
+0 & 0 & 0 & 1
+\end{bmatrix}^\msT
+\end{equation}
+
+Também é possível definir o quaternion conjugado $\breve{\mq}'$ como o quaternion com a parte vetorial com sinal invertido e a parte real com o mesmo sinal, ou seja:
+\begin{equation}
+\breve{\mq}' = \begin{bmatrix}
+-q_i & -q_j & -q_k & q_r &
+\end{bmatrix}^\msT
+\end{equation}
+
+Para o caso de quaternions unitários, temos que o quaternion inverso é igual ao quaternion conjugado, ou seja:
+\begin{equation}
+\breve{\mq}^\msI = \breve{\mq}'
+\end{equation}
+
+\subsection{Rotações elementares}
+As rotações de um angulo $\theta$ em torno dos eixo $x$, $y$ e $z$ podem ser representadas pelos seguintes quaternions unitários, respectivamente:
+\begin{equation}
+\breve{\mq}_x (\theta) = \begin{bmatrix}
+\sign(\sin\theta) \sqrt{\frac{1-\cos\theta}{2}} & 0 & 0 & \sqrt{\frac{1+\cos\theta}{2}}
+\end{bmatrix}^\msT
+\end{equation}
+
+\begin{equation}
+\breve{\mq}_y (\theta) = \begin{bmatrix}
+0 & \sign(\sin\theta) \sqrt{\frac{1-\cos\theta}{2}} & 0 & \sqrt{\frac{1+\cos\theta}{2}}
+\end{bmatrix}^\msT
+\end{equation}
+
+\begin{equation}
+\breve{\mq}_z (\theta) = \begin{bmatrix}
+0 & 0 & \sign(\sin\theta) \sqrt{\frac{1-\cos\theta}{2}} & \sqrt{\frac{1+\cos\theta}{2}}
+\end{bmatrix}^\msT
+\end{equation}
+
+\subsection{Conversão Matriz de Rotação $\rightarrow$ Quaternion}
+
+Serão apresentadas 4 fórmulas de conversão da representação de orientação por matrizes de rotação para representação por quaternions. Seja uma matriz de rotação $\mA$ dada por:
+\begin{equation}
+\mA = \begin{bmatrix}
+A_{11} & A_{12} & A_{13} \\
+A_{21} & A_{22} & A_{33} \\
+A_{31} & A_{32} & A_{33} \\
+\end{bmatrix}
+\end{equation}
+
+Assim, as expressões das fórmulas de conversão são dadas por:
+\begin{equation}
+\begin{cases} \label{eq:Matriz2Quat0}
+S = 2 \sqrt{1 + A_{11} + A_{22} + A_{33}} \\
+q_i = (A_{32} - A_{23})/S \\
+q_j = (A_{13} - A_{31})/S \\
+q_k = (A_{21} - A_{12})/S \\
+q_r = S/4
+\end{cases}
+\end{equation}
+
+\begin{equation}
+\begin{cases} \label{eq:Matriz2Quat1}
+S = 2 \sqrt{1 + A_{11} - A_{22} - A_{33}} \\
+q_i = S/4 \\
+q_j = (A_{12} + A_{21})/S \\
+q_k = (A_{13} + A_{31})/S \\
+q_r = (A_{32} - A_{23})/S
+\end{cases}
+\end{equation}
+
+\begin{equation} \label{eq:Matriz2Quat2}
+\begin{cases}
+S = 2 \sqrt{1 - A_{11} + A_{22} - A_{33}} \\
+q_i = (A_{12} + A_{12})/S \\
+q_j = S/4 \\
+q_k = (A_{23} + A_{32})/S \\
+q_r = (A_{13} - A_{31})/S
+\end{cases}
+\end{equation}
+
+\begin{equation} \label{eq:Matriz2Quat3}
+\begin{cases} 
+S = 2 \sqrt{1 - A_{11} - A_{22} + A_{33}} \\
+q_i = (A_{13} + A_{31})/S \\
+q_j = (A_{23} + A_{32})/S \\
+q_k = S/4 \\
+q_r = (A_{21} - A_{12})/S
+\end{cases}
+\end{equation}
+
+Com o intuito de evitar raízes de números negativos, divisões por zero, e problemas numéricos relacionados a raízes e divisões por números próximos a zero, recomenda-se utilizar a seguinte estratégia: caso o traço de $\mA$ seja maior que zero, utilize a expressão \eqref{eq:Matriz2Quat0}. Caso contrário, utilize as expressões \eqref{eq:Matriz2Quat1}, \eqref{eq:Matriz2Quat2} ou \eqref{eq:Matriz2Quat3}, dependendo de qual for o maior elemento da diagonal principal de $\mA$. Caso  seja $A_{11}$, utilize a expressão \eqref{eq:Matriz2Quat1}; caso seja $A_{22}$, utilize a expressão \eqref{eq:Matriz2Quat2}; caso seja $A_{33}$, utilize a expressão \eqref{eq:Matriz2Quat3}.
+
+\subsection{Conversão Quaternion $\rightarrow$ Matriz de Rotação}
+
+A conversão da representação de orientação por quatertions para a representação por matrizes de rotação é dada pela seguinte expressão:
+
+\begin{equation} \label{eq:Quat2Matriz}
+\mA = \begin{bmatrix}
+1 - 2 q_j^2 - 2 q_k^2 & 2(q_i q_j - q_k q_r) & 2(q_i q_k + q_j q_r) \\
+2(q_i q_j + q_k q_r) & 1 - 2 q_i^2 - 2q_k^2 & 2(q_j q_k - q_i q_r) \\
+2(q_i q_k - q_j q_r) & 2(q_i q_r + q_j q_k) & 1 - 2 q_i^2 - 2 q_j^2
+\end{bmatrix}
+\end{equation}
+
+Repare que esta expressão não está sujeita a instabilidades numéricas, dado que há apenas multiplicações, somas e subtrações. Além disso, repare que invertendo o sinal de cada componente do quaternion, a expressão \eqref{eq:Quat2Matriz} contínua a mesma, ou seja, $\breve{\mq}$ e $-\breve{\mq}$ representam a mesma rotação. 
+
+\subsection{Conversão Derivada de Quaternion $\leftrightarrow$ Velocidade Angular}
+
+Sejam $\llA$ e $\llB$ dois referenciais, e $\ttA$ e $\ttB$ dois sistemas de referênciais fixos a $\llA$ e $\llB$, respectivamente. Sejam também $\breve{\mq}$ um quaternion unitário que representa a mesma rotação que a matriz $\vct{\vone}_{\ttA \rl \ttB}$, e $\momega$ uma matriz-coluna tal que $\momega = \vct{\vomega_{\lllB}^{\lllA}}_{\ttA}$.
+
+Definindo a seguinte matriz:
+
+\begin{equation}
+\breve{\mC}(\breve{\mq}) =
+\frac{1}{2}
+\begin{bmatrix}
+\begin{array}{rrr}
+q_r & q_k & -q_j \\
+-q_k & q_r & q_i\\
+q_j & -q_i & q_r\\
+-q_i & -q_j & - q_k
+\end{array}
+\end{bmatrix}
+\end{equation}
+
+Pode-se relacionar a derivada temporal de $\breve{\mq}$ e $\momega$ das seguintes maneiras:
+
+\begin{equation}
+\dot{\breve{\mq}} = \breve{\mC}(\breve{\mq}) \cdot \momega
+\end{equation}
+\begin{equation}
+\momega = 4 \breve{\mC}^\msT (\breve{\mq})\cdot \dot{\breve{\mq}}
+\end{equation}
+
+Além disso, repare que 
+\begin{equation}
+\breve{\mC}^\msT (\breve{\mq})\cdot \breve{\mq} = \mzr
+\end{equation}
+
+\begin{equation}
+\breve{\mC}^\msT (\breve{\ma})\cdot \breve{\mb} = -\breve{\mC}^\msT (\breve{\mb})\cdot \breve{\ma}
+\end{equation}
 
 \chapter{Funções de transferência de motores DC} \label{ap:FuncoesDeTransferencia}
 
@@ -5835,214 +6054,6 @@ $k_{e}$    & $5.200 \cdot 10^{-2}$ & $V s/rad$  \\
 $J$        & $1.887 \cdot10^{-4}$  & $kg.m^{2}$
 \end{tabular}
 \end{table}
-
-\chapter{Cinemática de Quaternions} \label{ap:Quat}
-Este apêndice tem o intuito apresentar alguns conceitos básicos relativos à utilização de quaternions unitários para descrever a orientação de um corpo rígido no espaço.
-\section{Motivação}
-Existem várias maneiras de representar a orientação de um corpo rígido no espaço, como a utilização de matrizes de rotação, angulos de Euler e quaternions unitários.
-
-Como foi visto no capítulo \ref{cap:Seriais}, utilizando a convenção de Denavit-Hartemberg é possível obter a orientação do efetuador de um mecanismo serial na representação de matriz de rotação. Esta representação possui o inconveniente de possuir um grande número de parâmetros para representar a orientação (9 parâmetros para representar 3 graus de liberdade de rotação). Além disso, a multiplicação de matrizes de rotação leva ao acúmulo de erros numéricos, o que pode fazer com que a matriz perca as condições necessárias para ser uma matriz de rotação.
-
-A representação por ângulos de Euler possui a vantagem de ter o mínimo número de parâmetros possível (3 parâmetros para representar 3 graus de liberdade de rotação). Porém, este tipo de representação perde um grau de liberdade quando o ângulo intermediário alinha os eixos de rotação do primeiro e do terceiro ângulo, o que pode ser bastante inconveniente.
-
-A representação por quaternions unitários possui um número não tão grande de parâmetros (4 parâmetros para representar 3 graus de liberdade de rotação), pode ser facilmente renormalizada (de modo a evitar o acúmulo de erros numéricos) e não possui o problema de perder graus de liberdade dependendo da configuração. Sendo assim, pode-se dizer que esta é uma forma bastante conveniênte de representar a orientação de um corpo rígido no espaço.
-
-\section{Definições, propriedades e fórmulas de conversão}
-
-\subsection{Quaternion unitário}
-Um quaternion pode ser representado pela seguinte matriz-coluna:
-\begin{equation}
-\breve{\mq} = \begin{bmatrix}
-q_i & q_j & q_k & q_r 
-\end{bmatrix}^\msT
-\end{equation}
-
-A matriz-coluna $\breve{\mq}^\mathsf{v} = \begin{bmatrix} q_i & q_j & q_k \end{bmatrix}^\msT$ é conhecida como parte vetorial e o escalar $q_r$ como a parte real do quaternion.
-
-Um quaternion é dito unitário quando respeita a seguinte propriedade:
-\begin{equation}
-\breve{\mq}^\msT \breve{\mq} = 
-q_i^2 + q_j^2 + q_k^2 + q_r^2 = 1
-\end{equation}
-
-%Como foi dito anteriormente, quaternions unitários são utilizados para representar rotações. Além disso, os quaternions $\breve{\mq}$ e $-\breve{\mq}$ representam a mesma rotação.
-
-\subsection{Produto de quaternions}
-
-Da mesma maneira que a composição de rotações consecutivas pode ser feita através da multiplicação de matrizes de rotação, ela também pode ser feita através da multiplicação de quaternions unitários, seguindo a mesma lógica. O produto de dois quaternions pode ser definido da seguinte maneira:
-\begin{equation}
-\breve{\mq}_1 \otimes \breve{\mq}_2 = \breve{\mQ}_{\mathsf{I}} (\breve{\mq}_1) \cdot \breve{\mq}_2 = \breve{\mQ}_{\mathsf{I}\mathsf{I}} (\breve{\mq}_2) \cdot \breve{\mq}_1
-\end{equation}
-
-Sendo:
-\begin{equation}
-\breve{\mQ}_{\mathsf{I}} (\breve{\mq}) =
-\begin{bmatrix}
-\begin{array}{rrrr}
-q_r & -q_k & q_j & \;\; q_i \\
-q_k & q_r & -q_i & \;\; q_j \\
--q_j & q_i & q_r & \;\; q_k \\
--q_i & -q_j & - q_k & \;\; q_r
-\end{array}
-\end{bmatrix}
-\end{equation}
-
-\begin{equation}
-\breve{\mQ}_{\mathsf{I}\mathsf{I}} (\breve{\mq}) =
-\begin{bmatrix}
-\begin{array}{rrrr}
-q_r & q_k & -q_j & \;\; q_i \\
--q_k & q_r & q_i & \;\; q_j \\
-q_j & -q_i & q_r & \;\; q_k \\
--q_i & -q_j & - q_k  & \;\; q_r
-\end{array}
-\end{bmatrix}
-\end{equation}
-
-\subsection{Quaternion inverso/conjugado}
-Da mesma maneira que é possível definir a multiplicação de quaternions, também é possível definir o quaternion inverso $\breve{\mq}^\msI$, o qual apresenta a seguinte propriedade:
-\begin{equation}
-\breve{\mq} \otimes \breve{\mq}^\msI = \breve{\mq}^\msI \otimes \breve{\mq} = \begin{bmatrix}
-0 & 0 & 0 & 1
-\end{bmatrix}^\msT
-\end{equation}
-
-Também é possível definir o quaternion conjugado $\breve{\mq}'$ como o quaternion com a parte vetorial com sinal invertido e a parte real com o mesmo sinal, ou seja:
-\begin{equation}
-\breve{\mq}' = \begin{bmatrix}
--q_i & -q_j & -q_k & q_r &
-\end{bmatrix}^\msT
-\end{equation}
-
-Para o caso de quaternions unitários, temos que o quaternion inverso é igual ao quaternion conjugado, ou seja:
-\begin{equation}
-\breve{\mq}^\msI = \breve{\mq}'
-\end{equation}
-
-\subsection{Rotações elementares}
-As rotações de um angulo $\theta$ em torno dos eixo $x$, $y$ e $z$ podem ser representadas pelos seguintes quaternions unitários, respectivamente:
-\begin{equation}
-\breve{\mq}_x (\theta) = \begin{bmatrix}
-\sign(\sin\theta) \sqrt{\frac{1-\cos\theta}{2}} & 0 & 0 & \sqrt{\frac{1+\cos\theta}{2}}
-\end{bmatrix}^\msT
-\end{equation}
-
-\begin{equation}
-\breve{\mq}_y (\theta) = \begin{bmatrix}
-0 & \sign(\sin\theta) \sqrt{\frac{1-\cos\theta}{2}} & 0 & \sqrt{\frac{1+\cos\theta}{2}}
-\end{bmatrix}^\msT
-\end{equation}
-
-\begin{equation}
-\breve{\mq}_z (\theta) = \begin{bmatrix}
-0 & 0 & \sign(\sin\theta) \sqrt{\frac{1-\cos\theta}{2}} & \sqrt{\frac{1+\cos\theta}{2}}
-\end{bmatrix}^\msT
-\end{equation}
-
-\subsection{Conversão Matriz de Rotação $\rightarrow$ Quaternion}
-
-Serão apresentadas 4 fórmulas de conversão da representação de orientação por matrizes de rotação para representação por quaternions. Seja uma matriz de rotação $\mA$ dada por:
-\begin{equation}
-\mA = \begin{bmatrix}
-A_{11} & A_{12} & A_{13} \\
-A_{21} & A_{22} & A_{33} \\
-A_{31} & A_{32} & A_{33} \\
-\end{bmatrix}
-\end{equation}
-
-Assim, as expressões das fórmulas de conversão são dadas por:
-\begin{equation}
-\begin{cases} \label{eq:Matriz2Quat0}
-S = 2 \sqrt{1 + A_{11} + A_{22} + A_{33}} \\
-q_i = (A_{32} - A_{23})/S \\
-q_j = (A_{13} - A_{31})/S \\
-q_k = (A_{21} - A_{12})/S \\
-q_r = S/4
-\end{cases}
-\end{equation}
-
-\begin{equation}
-\begin{cases} \label{eq:Matriz2Quat1}
-S = 2 \sqrt{1 + A_{11} - A_{22} - A_{33}} \\
-q_i = S/4 \\
-q_j = (A_{12} + A_{21})/S \\
-q_k = (A_{13} + A_{31})/S \\
-q_r = (A_{32} - A_{23})/S
-\end{cases}
-\end{equation}
-
-\begin{equation} \label{eq:Matriz2Quat2}
-\begin{cases}
-S = 2 \sqrt{1 - A_{11} + A_{22} - A_{33}} \\
-q_i = (A_{12} + A_{12})/S \\
-q_j = S/4 \\
-q_k = (A_{23} + A_{32})/S \\
-q_r = (A_{13} - A_{31})/S
-\end{cases}
-\end{equation}
-
-\begin{equation} \label{eq:Matriz2Quat3}
-\begin{cases} 
-S = 2 \sqrt{1 - A_{11} - A_{22} + A_{33}} \\
-q_i = (A_{13} + A_{31})/S \\
-q_j = (A_{23} + A_{32})/S \\
-q_k = S/4 \\
-q_r = (A_{21} - A_{12})/S
-\end{cases}
-\end{equation}
-
-Com o intuito de evitar raízes de números negativos, divisões por zero, e problemas numéricos relacionados a raízes e divisões por números próximos a zero, recomenda-se utilizar a seguinte estratégia: caso o traço de $\mA$ seja maior que zero, utilize a expressão \eqref{eq:Matriz2Quat0}. Caso contrário, utilize as expressões \eqref{eq:Matriz2Quat1}, \eqref{eq:Matriz2Quat2} ou \eqref{eq:Matriz2Quat3}, dependendo de qual for o maior elemento da diagonal principal de $\mA$. Caso  seja $A_{11}$, utilize a expressão \eqref{eq:Matriz2Quat1}; caso seja $A_{22}$, utilize a expressão \eqref{eq:Matriz2Quat2}; caso seja $A_{33}$, utilize a expressão \eqref{eq:Matriz2Quat3}.
-
-\subsection{Conversão Quaternion $\rightarrow$ Matriz de Rotação}
-
-A conversão da representação de orientação por quatertions para a representação por matrizes de rotação é dada pela seguinte expressão:
-
-\begin{equation} \label{eq:Quat2Matriz}
-\mA = \begin{bmatrix}
-1 - 2 q_j^2 - 2 q_k^2 & 2(q_i q_j - q_k q_r) & 2(q_i q_k + q_j q_r) \\
-2(q_i q_j + q_k q_r) & 1 - 2 q_i^2 - 2q_k^2 & 2(q_j q_k - q_i q_r) \\
-2(q_i q_k - q_j q_r) & 2(q_i q_r + q_j q_k) & 1 - 2 q_i^2 - 2 q_j^2
-\end{bmatrix}
-\end{equation}
-
-Repare que esta expressão não está sujeita a instabilidades numéricas, dado que há apenas multiplicações, somas e subtrações. Além disso, repare que invertendo o sinal de cada componente do quaternion, a expressão \eqref{eq:Quat2Matriz} contínua a mesma, ou seja, $\breve{\mq}$ e $-\breve{\mq}$ representam a mesma rotação. 
-
-\subsection{Conversão Derivada de Quaternion $\leftrightarrow$ Velocidade Angular}
-
-Sejam $\llA$ e $\llB$ dois referenciais, e $\ttA$ e $\ttB$ dois sistemas de referênciais fixos a $\llA$ e $\llB$, respectivamente. Sejam também $\breve{\mq}$ um quaternion unitário que representa a mesma rotação que a matriz $\vct{\vone}_{\ttA \rl \ttB}$, e $\momega$ uma matriz-coluna tal que $\momega = \vct{\vomega_{\lllB}^{\lllA}}_{\ttA}$.
-
-Definindo a seguinte matriz:
-
-\begin{equation}
-\breve{\mC}(\breve{\mq}) =
-\frac{1}{2}
-\begin{bmatrix}
-\begin{array}{rrr}
-q_r & q_k & -q_j \\
--q_k & q_r & q_i\\
-q_j & -q_i & q_r\\
--q_i & -q_j & - q_k
-\end{array}
-\end{bmatrix}
-\end{equation}
-
-Pode-se relacionar a derivada temporal de $\breve{\mq}$ e $\momega$ das seguintes maneiras:
-
-\begin{equation}
-\dot{\breve{\mq}} = \breve{\mC}(\breve{\mq}) \cdot \momega
-\end{equation}
-\begin{equation}
-\momega = 4 \breve{\mC}^\msT (\breve{\mq})\cdot \dot{\breve{\mq}}
-\end{equation}
-
-Além disso, repare que 
-\begin{equation}
-\breve{\mC}^\msT (\breve{\mq})\cdot \breve{\mq} = \mzr
-\end{equation}
-
-\begin{equation}
-\breve{\mC}^\msT (\breve{\mq}_1)\cdot \breve{\mq}_2 = -\breve{\mC}^\msT (\breve{\mq}_2)\cdot \breve{\mq}_1
-\end{equation}
 
 
 
