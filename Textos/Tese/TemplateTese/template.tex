@@ -1990,6 +1990,10 @@ Sejam $\ssB_0$, $\ssB_1$, ..., $\ssB_{n} \,$ $n+1$ subsistemas mec\^anicos e $\s
 \item $\mnu_{\ssB_i}(\mq_i, \dot{\mq}_i), \,i=0, ..., n$: matriz-coluna dos esforços de inércia girosc\'opica e atrito generalizados do subsistema $\ssB_i$.
 \item $\mg_{\ssB_i}(\mq_i), \,i=0, ..., n$: matriz-coluna dos esfor\c{c}os gravitacionais generalizados do subsistema $\ssB_i$.
 \item $\mu_{\ssB_i}, \,i=0, ..., n$: matriz-coluna dos esfor\c{c}os ativos externos generalizados aplicados ao subsistema $\ssB_i$.
+\item $\breve{\mq}_0$: representação via quaternion unitário da matriz $\vct{\vone}_{\ttN_0 \rl \ttB_0}$ (orientação do efetuador/plataforma do mecanismo paralelos).
+\item $\breve{\mq}_i, \,i=0, ..., n$: representação via quaternion unitário da matriz $\vct{\vone}_{\ttN_i \rl \ttB_i}$ (orientação do efetuador da cadeia serial $\ssB_i$).
+\item $\breve{\mn}_i, \,i=0, ..., n$: representação via quaternion unitário da matriz $\vct{\vone}_{\ttN_0 \rl \ttN_i}$.
+\item $\breve{\mb}_i, \,i=0, ..., n$: representação via quaternion unitário da matriz $\vct{\vone}_{\ttB_i \rl \ttB_0}$.
 \end{itemize}
 
 \section{Modelo dos subsistemas} 
@@ -2378,6 +2382,28 @@ Sendo:
 \hdots &
 \mx_n(\mq_n)^\msT
 \end{bmatrix}^\msT
+\end{equation}
+
+\subsection{Vínculos de orientação}
+
+Supondo que os efetuadores $\llB_i$ de cada cadeia serial estejam ligados rigidamente à plataforma/efetuador $\llB_0$, temos que as matrizes de rotação $\vct{\vone}_{\ttB_i \rl \ttB_0}$ são constantes e conhecidas. Além disso, tendo em vista que o efetuador/plataforma do mecanismo paralelo só translada, a matriz de rotação $\vct{\vone}_{\ttN_0 \rl \ttB_0}$ também é constante e conhecida. Sendo assim, é possível obter as seguintes relações:
+\begin{equation}
+\vct{\vone}_{\ttN_0 \rl \ttB_0} = \vct{\vone}_{\ttN_0 \rl \ttN_i} \cdot \vct{\vone}_{\ttN_i \rl \ttB_i} \cdot \vct{\vone}_{\ttB_i \rl \ttB_0}
+\end{equation}
+
+Passando para a representação por quaternions unitários, temos:
+\begin{equation}
+\breve{\mq}_0 = \breve{\mn}_i \otimes \breve{\mq}_i \otimes \breve{\mb}_i
+\end{equation}
+
+Utilizando as definições de produto de quaternions apresentadas no apêndice \ref{ap:Quat} (equações \eqref{eq:ProdQuat}, \eqref{eq:ProdQuat1} e \eqref{eq:ProdQuat2}), temos:
+\begin{equation}
+\breve{\mq}_0 = \breve{\mQ}_i \cdot \breve{\mq}_i
+\end{equation}
+
+Sendo
+\begin{equation}
+\breve{\mQ}_i = \breve{\mQ}_{\mathsf{I}}(\breve{\mn}_i) \cdot \breve{\mQ}_{\mathsf{I}\mathsf{I}} (\breve{\mb}_i)
 \end{equation}
 
 \subsection{Vínculos de velocidades lineares} 
@@ -5414,12 +5440,12 @@ q_i^2 + q_j^2 + q_k^2 + q_r^2 = 1
 \subsection{Produto de quaternions}
 
 Da mesma maneira que a composição de rotações consecutivas pode ser feita através da multiplicação de matrizes de rotação, ela também pode ser feita através da multiplicação de quaternions unitários, seguindo a mesma lógica. O produto de dois quaternions pode ser definido da seguinte maneira:
-\begin{equation}
+\begin{equation} \label{eq:ProdQuat}
 \breve{\ma} \otimes \breve{\mb} = \breve{\mQ}_{\mathsf{I}} (\breve{\ma}) \cdot \breve{\mb} = \breve{\mQ}_{\mathsf{I}\mathsf{I}} (\breve{\mb}) \cdot \breve{\ma}
 \end{equation}
 
 Sendo:
-\begin{equation}
+\begin{equation} \label{eq:ProdQuat1}
 \breve{\mQ}_{\mathsf{I}} (\breve{\mq}) =
 \begin{bmatrix}
 \begin{array}{rrrr}
@@ -5431,7 +5457,7 @@ q_k & q_r & -q_i & \;\; q_j \\
 \end{bmatrix}
 \end{equation}
 
-\begin{equation}
+\begin{equation} \label{eq:ProdQuat2}
 \breve{\mQ}_{\mathsf{I}\mathsf{I}} (\breve{\mq}) =
 \begin{bmatrix}
 \begin{array}{rrrr}
