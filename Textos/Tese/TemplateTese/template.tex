@@ -2386,7 +2386,7 @@ Sendo:
 
 \subsection{Vínculos de orientação}
 
-Supondo que os efetuadores $\llB_i$ de cada cadeia serial estejam ligados rigidamente à plataforma/efetuador $\llB_0$, temos que as matrizes de rotação $\vct{\vone}_{\ttB_i \rl \ttB_0}$ são constantes e conhecidas. Além disso, tendo em vista que o efetuador/plataforma do mecanismo paralelo só translada, a matriz de rotação $\vct{\vone}_{\ttN_0 \rl \ttB_0}$ também é constante e conhecida. Sendo assim, é possível obter as seguintes relações:
+Supondo que os efetuadores $\llB_i$ de cada cadeia serial estejam ligados rigidamente à plataforma/efetuador $\llB_0$, temos que as matrizes de rotação $\vct{\vone}_{\ttB_i \rl \ttB_0}$ são constantes e conhecidas. Além disso, tendo em vista que o efetuador/plataforma do mecanismo paralelo só translada, a matriz de rotação $\vct{\vone}_{\ttN_0 \rl \ttB_0}$ também é constante e conhecida. Sendo assim, é possível obter a seguinte relação:
 \begin{equation}
 \vct{\vone}_{\ttN_0 \rl \ttB_0} = \vct{\vone}_{\ttN_0 \rl \ttN_i} \cdot \vct{\vone}_{\ttN_i \rl \ttB_i} \cdot \vct{\vone}_{\ttB_i \rl \ttB_0}
 \end{equation}
@@ -2397,13 +2397,111 @@ Passando para a representação por quaternions unitários, temos:
 \end{equation}
 
 Utilizando as definições de produto de quaternions apresentadas no apêndice \ref{ap:Quat} (equações \eqref{eq:ProdQuat}, \eqref{eq:ProdQuat1} e \eqref{eq:ProdQuat2}), temos:
-\begin{equation}
+\begin{equation} \label{eq:VincQuat}
 \breve{\mq}_0 = \breve{\mQ}_i \cdot \breve{\mq}_i
 \end{equation}
 
 Sendo
 \begin{equation}
 \breve{\mQ}_i = \breve{\mQ}_{\mathsf{I}}(\breve{\mn}_i) \cdot \breve{\mQ}_{\mathsf{I}\mathsf{I}} (\breve{\mb}_i)
+\end{equation}
+
+A equação \eqref{eq:VincQuat} poderia ser utilizada como equação vincular de orientação. Porém, tendo em vista que é uma equação que relaciona matrizes-coluna de ordem 4, haveria 4 equações escalares para restringir 3 graus de liberdade, ou seja, um número maior de equações do que o necessário. Deste modo, será apresentada uma maneira alternativa de representar os vínculos de orientação sem utilizar mais equações do que o necessário.
+
+Considere o seguinte problema de otimização com restrição:
+\begin{equation}
+\begin{aligned}
+& \underset{\breve{\mq}}{\text{Min}}
+& & (\breve{\mq} -\breve{\mp})^\msT (\breve{\mq} -\breve{\mp}) \\
+& \text{tal que}
+& & \breve{\mq}^\msT \breve{\mq} - 1 = 0 \\
+\end{aligned}
+\end{equation}
+
+Para o caso de $\breve{\mp}$ também ser um quaternion unitário, a solução do problema é claramente $\breve{\mq} = \breve{\mp}$. Porém, vamos resolver o problema sem utilizar esta suposição.
+
+O problema pode ser convertido num problema de otimização sem restrições através do uso de multiplicadores de Lagrange:
+\begin{equation}
+\begin{aligned}
+& \underset{\breve{\mq}, \lambda}{\text{Min}}
+& & \mathfrak{L}(\breve{\mq}, \lambda) = (\breve{\mq} -\breve{\mp})^\msT (\breve{\mq} -\breve{\mp}) + \lambda(\breve{\mq}^\msT \breve{\mq} - 1) \\
+\end{aligned}
+\end{equation}
+
+Aplicando o operador variação na função Lagrangeana, temos:
+\begin{equation} \label{eq:varLagrangeana1}
+\begin{split}
+\dl \mathfrak{L} &= 2 \, \dl \breve{\mq}^\msT (\breve{\mq} -\breve{\mp}) + 2\lambda \, \dl \breve{\ma}^\msT \breve{\mq} + \dl \lambda(\breve{\mq}^\msT \breve{\mq} - 1) \\
+&= 2 \, \dl \breve{\mq}^\msT \big((1+2\lambda)\breve{\mq} -\breve{\mp} \big) + \dl \lambda(\breve{\mq}^\msT \breve{\mp} - 1) \\
+\end{split}
+\end{equation}
+
+Como pode ser visto no apêndice \ref{ap:Quat} (subsessão \ref{subsec:DerivadaQuat}), é possível relacionar derivadas temporais de quaternions unitários com velocidades angulares:
+\begin{equation} \tag{\ref{eq:dQuat2w}}
+\dot{\breve{\mq}} = \breve{\mC}(\breve{\mq}) \cdot \momega
+\end{equation}
+
+Definindo:
+\begin{equation}
+\dd \mpi = \momega  \, \dd t
+\end{equation}
+
+Temos que:
+\begin{equation} \label{eq:varQuat}
+\dl \breve{\mq} = \breve{\mC}(\breve{\mq}) \cdot \dl \mpi
+\end{equation}
+
+Substituindo a equação \eqref{eq:varQuat} em \eqref{eq:varLagrangeana1}, temos que:
+\begin{equation}
+\dl \mathfrak{L} = 2 \, \dl \mpi^\msT \breve{\mC}(\breve{\mq})^\msT \big((1+2\lambda)\breve{\mq} -\breve{\mp} \big) + \dl \lambda(\breve{\mq}^\msT \breve{\mq} - 1) \\
+\end{equation}
+
+Tendo em vista que
+\begin{equation} \tag{\ref{eq:CQuatZero}}
+\breve{\mC}^\msT (\breve{\mq})\cdot \breve{\mq} = \mzr
+\end{equation}
+
+Temos:
+\begin{equation}
+\dl \mathfrak{L} = -2 \, \dl \mpi^\msT \breve{\mC}^\msT (\breve{\mq}) \cdot \breve{\mp}  + \dl \lambda(\breve{\mq}^\msT \breve{\mq} - 1) \\
+\end{equation}
+
+Sendo assim, impondo a estacionariadade da função Lagrangeana ($\dl \mathfrak{L} = 0$), temos:
+\begin{equation}
+\begin{cases}
+\breve{\mC}^\msT(\breve{\mq}) \cdot \breve{\mp} = \mzr \\
+\breve{\mq}^\msT \breve{\mq} = 1
+\end{cases}
+\end{equation}
+
+Como já foi comentado anteriomente, para o caso de $\breve{\mp}$ também ser unitário, a solução do problema é $\breve{\mq} = \breve{\mp}$. Sendo assim, temos que, para $\breve{\mq}$ e $\breve{\mp}$ unitários:
+\begin{equation}
+\breve{\mC}^\msT(\breve{\mq}) \cdot \breve{\mp} = \mzr \Rightarrow \breve{\mq} = \breve{\mp}
+\end{equation}
+
+Além disso, a partir da expressão de $\breve{\mC}$, é fácil verificar que:
+\begin{equation}
+\breve{\mq} = \breve{\mp} \Rightarrow \breve{\mC}^\msT(\breve{\mq}) \cdot \breve{\mp} = \mzr
+\end{equation}
+
+Portanto:
+\begin{equation}
+\breve{\mC}^\msT(\breve{\mq}) \cdot \breve{\mp} = \mzr \Leftrightarrow \breve{\mq} = \breve{\mp}
+\end{equation}
+
+Sendo assim, a equação \eqref{eq:VincQuat} pode ser reescrita como:
+\begin{equation}
+\breve{\mC}^\msT(\breve{\mq}_0) \cdot \breve{\mQ}_i \cdot \breve{\mq}_i = \mzr
+\end{equation}
+
+Aplicando para cada uma das cadeias, as equações vinculares de orientação são dadas por:
+\begin{equation}
+\overline{\breve{\mq}}(\mq) = \begin{bmatrix}
+\breve{\mC}^\msT(\breve{\mq}_0) \cdot \breve{\mQ}_1 \cdot \breve{\mq}_1 (\mq_1) \\
+\breve{\mC}^\msT(\breve{\mq}_0) \cdot \breve{\mQ}_2 \cdot \breve{\mq}_2 (\mq_2) \\
+\vdots \\
+\breve{\mC}^\msT(\breve{\mq}_0) \cdot \breve{\mQ}_n \cdot \breve{\mq}_n (\mq_n)
+\end{bmatrix} = \mzr
 \end{equation}
 
 \subsection{Vínculos de velocidades lineares} 
@@ -5577,7 +5675,7 @@ A conversão da representação de orientação por quatertions para a represent
 
 Repare que esta expressão não está sujeita a instabilidades numéricas, dado que há apenas multiplicações, somas e subtrações. Além disso, repare que invertendo o sinal de cada componente do quaternion, a expressão \eqref{eq:Quat2Matriz} contínua a mesma, ou seja, $\breve{\mq}$ e $-\breve{\mq}$ representam a mesma rotação. 
 
-\subsection{Conversão Derivada de Quaternion $\leftrightarrow$ Velocidade Angular}
+\subsection{Conversão Derivada de Quaternion $\leftrightarrow$ Velocidade Angular} \label{subsec:DerivadaQuat}
 
 Sejam $\llA$ e $\llB$ dois referenciais, e $\ttA$ e $\ttB$ dois sistemas de referênciais fixos a $\llA$ e $\llB$, respectivamente. Sejam também $\breve{\mq}$ um quaternion unitário que representa a mesma rotação que a matriz $\vct{\vone}_{\ttA \rl \ttB}$, e $\momega$ uma matriz-coluna tal que $\momega = \vct{\vomega_{\lllB}^{\lllA}}_{\ttA}$.
 
@@ -5598,7 +5696,7 @@ q_j & -q_i & q_r\\
 
 Pode-se relacionar a derivada temporal de $\breve{\mq}$ e $\momega$ das seguintes maneiras:
 
-\begin{equation}
+\begin{equation} \label{eq:dQuat2w}
 \dot{\breve{\mq}} = \breve{\mC}(\breve{\mq}) \cdot \momega
 \end{equation}
 \begin{equation}
@@ -5606,7 +5704,7 @@ Pode-se relacionar a derivada temporal de $\breve{\mq}$ e $\momega$ das seguinte
 \end{equation}
 
 Além disso, repare que 
-\begin{equation}
+\begin{equation} \label{eq:CQuatZero}
 \breve{\mC}^\msT (\breve{\mq})\cdot \breve{\mq} = \mzr
 \end{equation}
 
