@@ -721,7 +721,10 @@ plt.xlabel(r'$t[s]$')
 plt.title('Lalala')
 plt.savefig('qbarnorm.png')
 
-gnr = GNR(Clara, Clara.Qo_.T*Clara.q_, np.matrix([[0.0],[0.275]]), 10)
-print gnr.qbar_
+gnr = GNR(Clara, 
+          np.matrix([[0.5375391526183005, 2.308800210309811,  0.5375391526183005, 2.308800210309811]]).T, 
+          np.matrix([[0.17,0.16]]).T, 
+          5)
+print norm(gnr.qbar_, np.inf)
 gnr.doit()
-print Clara.qbar_
+print norm(Clara.qbar_, np.inf)

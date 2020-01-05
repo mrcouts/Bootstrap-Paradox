@@ -1,4 +1,4 @@
-\select@language {brazil}
+\babel@toc {brazil}{}
 \contentsline {chapter}{Parte~I:~\MakeUppercase {Introdu\IeC {\c c}\IeC {\~a}o}}{22}
 \contentsline {chapter}{\numberline {1}Introdu\IeC {\c c}\IeC {\~a}o}{23}
 \contentsline {section}{\numberline {1.1}Objetivos}{24}
@@ -61,7 +61,7 @@
 \contentsline {subsection}{\numberline {5.2.5}Derivada temporal dos v\IeC {\'\i }nculos de orienta\IeC {\c c}\IeC {\~a}o}{77}
 \contentsline {subsection}{\numberline {5.2.6}V\IeC {\'\i }nculos de quasi-velocidades}{78}
 \contentsline {subsection}{\numberline {5.2.7}V\IeC {\'\i }nculos de quasi-acelera\IeC {\c c}\IeC {\~o}es}{79}
-\contentsline {section}{\numberline {5.3}Acoplamento de subsistemas}{79}
+\contentsline {section}{\numberline {5.3}Acoplamento de subsistemas}{80}
 \contentsline {section}{\numberline {5.4}Simula\IeC {\c c}\IeC {\~a}o din\IeC {\^a}mica direta}{81}
 \contentsline {section}{\numberline {5.5}Simula\IeC {\c c}\IeC {\~a}o din\IeC {\^a}mica inversa}{83}
 \contentsline {chapter}{\numberline {6}Projeto dos controladores}{85}

@@ -1988,6 +1988,8 @@ Sejam $\ssB_0$, $\ssB_1$, ..., $\ssB_{n} \,$ $n+1$ subsistemas mec\^anicos e $\s
 \item $\mJ_{\omega\,\ssB_i}(\mq_i), \,i=1, ..., n$: jacobiano $\mJ_\omega$ do subsistema $\ssB_i$.
 \item $\underaccent{\sim}{\ma}_{\ssB_i}(\mq_i, \dot{\mq}_i), \,i=1, ..., n$: matriz-coluna $\underaccent{\sim}{\ma}$ do subsistema $\ssB_i$.
 \item $\underaccent{\sim}{\malpha}_{\ssB_i}(\mq_i, \dot{\mq}_i), \,i=1, ..., n$: matriz-coluna $\underaccent{\sim}{\malpha}$ do subsistema $\ssB_i$.
+\item $\mv_{\ssB_i}(\mq_i, \dot{\mq}_i), \,i=1, ..., n$: $\vct{\vv_{\ttx_i}^{\lllN}}_{\ttN_i} = \mJ_{v\,\ssB_i}(\mq_i) \cdot \dot{\mq}_i$, ou seja matriz-coluna de componentes velocidade do efetuador da cadeia serial $\ssB_i$.
+\item $\momega_{\ssB_i}(\mq_i, \dot{\mq}_i), \,i=1, ..., n$: $\vct{\vomega_{\lllB_i}^{\lllN}}_{\ttN_i} = \mJ_{\omega\,\ssB_i}(\mq_i) \cdot \dot{\mq}_i$, ou seja matriz-coluna de componentes velocidade angular do efetuador da cadeia serial $\ssB_i$.
 \item $\mM_{\ssB_i}(\mq_i), \,i=0, ..., n$: matriz de in\'ercia generalizada do subsistema $\ssB_i$.
 \item $\mnu_{\ssB_i}(\mq_i, \dot{\mq}_i), \,i=0, ..., n$: matriz-coluna dos esforços de inércia girosc\'opica e atrito generalizados do subsistema $\ssB_i$.
 \item $\mg_{\ssB_i}(\mq_i), \,i=0, ..., n$: matriz-coluna dos esfor\c{c}os gravitacionais generalizados do subsistema $\ssB_i$.
@@ -2494,7 +2496,7 @@ Portanto:
 \end{equation}
 
 Sendo assim, a equação \eqref{eq:VincQuat} pode ser reescrita como:
-\begin{equation}
+\begin{equation} \label{eq:VinculosOrientacao_i}
 \breve{\mC}^\msT(\breve{\mq}_0) \cdot \breve{\mQ}_i \cdot \breve{\mq}_i = \mzr
 \end{equation}
 
@@ -2603,25 +2605,37 @@ Assim, substituindo \eqref{eq:dxdt} em \eqref{eq:VinculosGenericosVel}, obtemos:
 \subsection{Derivada temporal dos vínculos de orientação}
 
 Derivando \eqref{eq:VinculosOrientacao} no tempo, temos:
-\begin{equation*} 
-\begin{split}
-\dot{\overline{\breve{\mq}}}(\mq, \dot{\mq}) &= \begin{bmatrix}
+\begin{equation} 
+\dot{\overline{\breve{\mq}}}(\mq, \dot{\mq}) = \begin{bmatrix}
 \breve{\mC}^\msT(\breve{\mq}_0) \cdot \breve{\mQ}_1 \cdot \breve{\mC}(\breve{\mq}_1(\mq_1)) \cdot \momega_{\ssB_1}(\mq_1, \dot{\mq}_1) \\
 \vdots \\
 \breve{\mC}^\msT(\breve{\mq}_0) \cdot \breve{\mQ}_n \cdot \breve{\mC}(\breve{\mq}_n(\mq_n)) \cdot \momega_{\ssB_n}(\mq_n, \dot{\mq}_n)
-\end{bmatrix} \\
-&= \begin{bmatrix}
-\breve{\mC}^\msT(\breve{\mq}_0) \cdot \breve{\mQ}_1 \cdot \breve{\mC}(\breve{\mq}_1(\mq_1)) \cdot \mJ_{\omega\,\ssB_1}(\mq_1) \cdot \dot{\mq}_1  \\
+\end{bmatrix} = \mzr
+\end{equation}
+
+Tendo em vista que
+\begin{equation}
+\momega_{\ssB_i}(\mq_i, \dot{\mq}_i) = \mJ_{\omega\,\ssB_i}(\mq_i) \cdot \dot{\mq}_i
+\end{equation}
+
+E definindo
+\begin{equation}
+\mG_i (\mq_i) = \breve{\mC}^\msT(\breve{\mq}_0) \cdot \breve{\mQ}_i \cdot \breve{\mC}(\breve{\mq}_i(\mq_i))
+\end{equation}
+
+Temos:
+\begin{equation*}
+\dot{\overline{\breve{\mq}}}(\mq, \dot{\mq}) = \begin{bmatrix}
+\mG_1 (\mq_1) \cdot \mJ_{\omega\,\ssB_1}(\mq_1) \cdot \dot{\mq}_1  \\
 \vdots \\
-\breve{\mC}^\msT(\breve{\mq}_0) \cdot \breve{\mQ}_n \cdot \breve{\mC}(\breve{\mq}_n(\mq_n)) \cdot \mJ_{\omega\,\ssB_n}(\mq_n) \cdot \dot{\mq}_n
-\end{bmatrix} \\
-\end{split}
+\mG_n (\mq_n) \cdot \mJ_{\omega\,\ssB_n}(\mq_n) \cdot \dot{\mq}_n
+\end{bmatrix}
 \end{equation*}
 \begin{equation} \label{eq:dVinculosOrientacao}
 = \begin{bmatrix}
-\breve{\mC}^\msT(\breve{\mq}_0) \cdot \breve{\mQ}_1 \cdot \breve{\mC}(\breve{\mq}_1(\mq_1)) & \ldots & \mzr\\
+\mG_1 (\mq_1) & \ldots & \mzr\\
 \vdots & \ddots & \vdots\\
-\mzr &\ldots  & \breve{\mC}^\msT(\breve{\mq}_0) \cdot \breve{\mQ}_n \cdot \breve{\mC}(\breve{\mq}_n(\mq_n))
+\mzr &\ldots  & \mG_n (\mq_n)
 \end{bmatrix}
 \begin{bmatrix}
 \mJ_{\omega\,\ssB_1}(\mq_1) & \ldots & \mzr\\
@@ -2644,9 +2658,9 @@ Sendo:
 \begin{equation}
 \mG(\mq_\emptyset) =
 \begin{bmatrix}
-\breve{\mC}^\msT(\breve{\mq}_0) \cdot \breve{\mQ}_1 \cdot \breve{\mC}(\breve{\mq}_1(\mq_1)) & \ldots & \mzr\\
+\mG_1 (\mq_1) & \ldots & \mzr\\
 \vdots & \ddots & \vdots\\
-\mzr &\ldots  & \breve{\mC}^\msT(\breve{\mq}_0) \cdot \breve{\mQ}_n \cdot \breve{\mC}(\breve{\mq}_n(\mq_n))
+\mzr &\ldots  & \mG_n (\mq_n)
 \end{bmatrix}
 \end{equation}
 
@@ -2825,7 +2839,7 @@ Os vínculos de quasi-velocidades são dados pela derivada temporal dos vínculo
 = 
 \begin{bmatrix}
 \mD \cdot \ddot{\mq}_0 - \mE \cdot (\mJ_{\mathsf{v}}(\mq_\emptyset) \cdot \ddot{\mq}_\emptyset + \underaccent{\sim}{\ma}(\mq_\emptyset, \dot{\mq}_\emptyset))  - \mF \cdot \ddot{\mq}_\emptyset \\
-\mG(\mq_\emptyset) \cdot ( \mJ_{\mathsf{w}}(\mq_\emptyset) \cdot \ddot{\mq}_\emptyset + \underaccent{\sim}{ \malpha }(\mq_\emptyset, \dot{\mq}_\emptyset) ) + \dot{\mG}(\mq_\emptyset, \dot{\mq}_\emptyset) \cdot  \mJ_{\mathsf{w}}(\mq_\emptyset) \cdot \dot{\mq}_\emptyset
+\mG(\mq_\emptyset) \cdot ( \mJ_{\mathsf{w}}(\mq_\emptyset) \cdot \ddot{\mq}_\emptyset + \underaccent{\sim}{ \malpha }(\mq_\emptyset, \dot{\mq}_\emptyset) ) + \dot{\mG}(\mq_\emptyset, \dot{\mq}_\emptyset) \cdot  \momega(\mq_\emptyset, \dot{\mq}_\emptyset)
 \end{bmatrix}
 =
 \mzr
@@ -2852,6 +2866,24 @@ Sendo:
 \underaccent{\sim}{\malpha}_{\ssB_1}(\mq_1, \dot{\mq}_1)^\msT & ... & \underaccent{\sim}{\malpha}_{\ssB_n}(\mq_n, \dot{\mq}_n)^\msT
 \end{bmatrix}^\msT
 \end{equation}
+\begin{equation}
+\momega(\mq_\emptyset, \dot{\mq}_\emptyset) = \mJ_{\mathsf{w}}(\mq_\emptyset) \cdot \dot{\mq}_\emptyset = \begin{bmatrix}
+\momega_{\ssB_1}(\mq_1, \dot{\mq}_1)^\msT & ... & \momega_{\ssB_n}(\mq_n, \dot{\mq}_n)^\msT
+\end{bmatrix}^\msT
+\end{equation}
+
+\begin{equation}
+\dot{\mG}(\mq_\emptyset, \dot{\mq}_\emptyset) =
+\begin{bmatrix}
+\dot{\mG}_1 (\mq_1, \dot{\mq}_1) & \ldots & \mzr\\
+\vdots & \ddots & \vdots\\
+\mzr &\ldots  & \dot{\mG}_n (\mq_n, \dot{\mq}_n)
+\end{bmatrix}
+\end{equation}
+
+\begin{equation}
+\dot{\mG}_i (\mq_i, \dot{\mq}_i) = \breve{\mC}^\msT(\breve{\mq}_0) \cdot \breve{\mQ}_i \cdot \breve{\mC}\big( \breve{\mC}( \breve{\mq}_i(\mq_i) ) \cdot \momega_{\ssB_i} (\mq_i, \dot{\mq}_i) \big)
+\end{equation}
 
 Repare que \eqref{eq:VinculosQuasiAce} pode ser reescrita como:
 %\begin{equation}
@@ -2873,7 +2905,7 @@ Sendo:
 \mb(\mq,\dot{\mq}) =
 \begin{bmatrix}
 -\mE \cdot \underaccent{\sim}{\ma}(\mq_\emptyset, \dot{\mq}_\emptyset) \\
-\mG(\mq_\emptyset) \cdot \underaccent{\sim}{\malpha}(\mq_\emptyset, \dot{\mq}_\emptyset)  + \dot{\mG}(\mq_\emptyset, \dot{\mq}_\emptyset) \cdot  \mJ_{\mathsf{w}}(\mq_\emptyset) \cdot \dot{\mq}_\emptyset \\
+\mG(\mq_\emptyset) \cdot \underaccent{\sim}{\malpha}(\mq_\emptyset, \dot{\mq}_\emptyset)  + \dot{\mG}(\mq_\emptyset, \dot{\mq}_\emptyset) \cdot  \momega(\mq_\emptyset, \dot{\mq}_\emptyset) \\
 \end{bmatrix}
 \end{equation}
 
@@ -3051,88 +3083,20 @@ Reescrevendo em forma matricial:
 
 É necessário que as condições iniciais respeitem os vínculos de posição e velocidades. Com isso, teoricamente, os vínculos continuariam sendo respeitados na solução do sistema de EDOs. Porém, devido a erros numéricos de truncamento e erros associados ao método de integração numérica utilizado, haverá um acúmulo de erros que irá aumentar a cada passo de integração, e os vínculos de posição e velocidade eventualmente podem deixar de ser respeitados. Esse problema pode ser resolvido utilizando a técnica das constantes de estabilização de Baumgarte \cite{Baumgarte}. A idéia é substituir a equação dos vínculos de quasi-acelerações pela seguinte equação:
 \begin{equation} \label{eq:VinculosQuasiAce2}
-\overline{\mp}'(\mq, \dot{\mq}, \ddot{\mq}) =
-\begin{bmatrix}
-\ddot{\overline{\mq}} + 2\lambda \dot{\overline{\mq}} + \lambda^2 \overline{\mq} \\
-\dot{\overline{\momega}} + \lambda \overline{\momega}
-\end{bmatrix}
-=
-\begin{bmatrix}
-\ddot{\overline{\mq}} \\
-\dot{\overline{\momega}}
-\end{bmatrix}
-+
-\lambda
-\begin{bmatrix}
-2 \cdot \mone & \mzr \\
-\mzr & \mone
-\end{bmatrix}
-\cdot
-\begin{bmatrix}
-\dot{\overline{\mq}} \\
-\overline{\momega}
-\end{bmatrix}
-+
-\lambda^2
-\begin{bmatrix}
-\overline{\mq} \\
-\mzr
-\end{bmatrix}
-= \mzr
+\ddot{\overline{\mq}}'(\mq, \dot{\mq}, \ddot{\mq}) =
+\ddot{\overline{\mq}} + 2\lambda \dot{\overline{\mq}} + \lambda^2 \overline{\mq} = \mzr
 \end{equation}
 
 Substituindo \eqref{eq:VinculosQuasiVel} e \eqref{eq:VinculosQuasiAce} em \eqref{eq:VinculosQuasiAce2}, temos:
 \begin{equation} \label{eq:VinculosQuasiAce3}
-\overline{\mp}'(\mq, \dot{\mq}, \ddot{\mq}) =
-\mA(\mq) \ddot{\mq} + \mb(\mq, \dot{\mq})
-+
-\lambda
-\begin{bmatrix}
-2 \cdot \mone & \mzr \\
-\mzr & \mone
-\end{bmatrix}
-\cdot
-\mA(\mq) \cdot \dot{\mq} +
-\lambda^2
-\begin{bmatrix}
-\overline{\mq}(\mq) \\
-\mzr
-\end{bmatrix}
-= \mzr
+\ddot{\overline{\mq}}'(\mq, \dot{\mq}, \ddot{\mq}) = \mA(\mq) \ddot{\mq} + \mb(\mq, \dot{\mq}) + 2\lambda \mA(\mq) \cdot \dot{\mq} + \lambda^2 \overline{\mq}(\mq) = \mzr
 \end{equation}
 
-Impondo que \eqref{eq:VinculosQuasiAce3} seja respeitada, garantimos que, teoricamente, as componentes de $\overline{\mq}(\mq)$ e $\overline{\momega}(\mq, \dot{\mq})$ tenderão exponencialmente a zero independentemente das condições iniciais, para $\lambda > 0$. Porém, devido aos erros de integração numérica, as componentes de $\overline{\mq}(\mq)$ e $\overline{\momega}(\mq, \dot{\mq})$ não irão convergir para zero, mas sim para uma faixa de valores em torno de zero. Quanto maior a ordem do método de integração numérica e quanto menor o passo de integração, menor será a ordem de grandeza dessa faixa de valores em torno do zero. Se essa faixa de valores for suficientemente pequena, pode-se considerar que os vínculos de posição e velocidades estão sendo respeitados mesmo havendo erros de truncamento e erros associados ao método de integração numérica utilizado. 
+Impondo que \eqref{eq:VinculosQuasiAce3} seja respeitada, garantimos que, teoricamente, as componentes de $\overline{\mq}(\mq)$ tenderão exponencialmente a zero independentemente das condições iniciais, para $\lambda > 0$. Porém, devido aos erros de integração numérica, as componentes de $\overline{\mq}(\mq)$ não irão convergir para zero, mas sim para uma faixa de valores em torno de zero. Quanto maior a ordem do método de integração numérica e quanto menor o passo de integração, menor será a ordem de grandeza dessa faixa de valores em torno do zero. Se essa faixa de valores for suficientemente pequena, pode-se considerar que os vínculos de posição e velocidades estão sendo respeitados mesmo havendo erros de truncamento e erros associados ao método de integração numérica utilizado. 
 
-É importante ressaltar que valores muito altos de $\lambda$ podem comprometer a estabilidade numérica da simulação, e valores muito pequenos podem fazer com que a faixa de valores em torno de zero em que as componentes de $\overline{\mq}(\mq)$ e $\overline{\momega}(\mq, \dot{\mq})$ estarão variando pode se tornar muito grande. É seguro dizer que um bom valor de limite superior para $\lambda$ a ser adotado é $1/h$, sendo $h$ o tamanho do passo de integração, pois fazendo $\lambda = 1/h$ já garante a estabilidade do método para praticamente qualquer método de integração numérica de EDOs. Na prática, valores de $\lambda$ em torno de $1/100h$ se mostraram bastante adequados nas simulações realizadas.
+É importante ressaltar que valores muito altos de $\lambda$ podem comprometer a estabilidade numérica da simulação, e valores muito pequenos podem fazer com que a faixa de valores em torno de zero em que as componentes de $\overline{\mq}(\mq)$ estarão variando pode se tornar muito grande. É seguro dizer que um bom valor de limite superior para $\lambda$ a ser adotado é $1/h$, sendo $h$ o tamanho do passo de integração, pois fazendo $\lambda = 1/h$ já garante a estabilidade do método para praticamente qualquer método de integração numérica de EDOs. Na prática, valores de $\lambda$ em torno de $1/100h$ se mostraram bastante adequados nas simulações realizadas.
 
 Sendo assim, o sistema de EDOs que será utilizado para realizar a simualação dinâmica direta é dado por:
-\begin{equation}
-\begin{bmatrix}
-\mC(\mq)^\msT \mM'(\mq) \\
-\mA(\mq)
-\end{bmatrix}
-\cdot
-\ddot{\mq}
-=
-\begin{bmatrix}
-\mC(\mq)^\msT (\mu' - \mv'(\mq,\dot{\mq}) - \mg'(\mq) ) \\
--\mb(\mq,\dot{\mq}) -
-\lambda
-\begin{bmatrix}
-2 \cdot \mone & \mzr \\
-\mzr & \mone
-\end{bmatrix}
-\cdot
-\mA(\mq) \cdot \dot{\mq} -
-\lambda^2
-\begin{bmatrix}
-\overline{\mq}(\mq) \\
-\mzr
-\end{bmatrix} 
-\end{bmatrix}
-\end{equation}
-
-Caso não haja vínculos de velocidades angulares, utiliza-se:
 \begin{equation}
 \begin{bmatrix}
 \mC(\mq)^\msT \mM'(\mq) \\
