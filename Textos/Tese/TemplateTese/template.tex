@@ -720,15 +720,21 @@ q_1 & ... & {q}_{\nu}
 \vct{\vf_{\lllB_i}}_\ttN^\msT &
 \vct{\vtau_{\lllB_i}}_\ttN^\msT
 \end{bmatrix}^\msT $.
+\item $\mR_i, \,i=1, ..., \nu$: matriz de rotação $\vct{\vone}_{\ttN \rl \ttB_i}$.
+\item $\mR'_i, \,i=1, ..., \nu$: matriz de rotação $\vct{\vone}_{\ttB_{i-1} \rl \ttB_i}$.
+\item $\breve{\mr}_i, \,i=1, ..., \nu$: representação via quaternion unitário da matriz de rotação $\vct{\vone}_{\ttN \rl \ttB_i}$.
+\item $\breve{\mr}'_i, \,i=1, ..., \nu$: representação via quaternion unitário da matriz de rotação $\vct{\vone}_{\ttB_{i-1} \rl \ttB_i}$.
+\item $\mo_i, \,i=1, ..., \nu$: origem $\tto_{\ttB_i}$ no sistema de coordenadas $\ttN$, ou seja $\vct{\tto_{\ttB_i}}_\ttN$.
+\item $\mo'_i, \,i=1, ..., \nu$: origem $\tto_{\ttB_i}$ no sistema de coordenadas $\ttB_{i-1}$, ou seja $\vct{\tto_{\ttB_i}}_{\ttB_{i-1}}$.
 \end{itemize}
 
 \section{Cinemática}
 
 \subsection{Cinemática de posição}
 
-Dados os parâmetros de Denavit-Hartemberg $a_i$, $\alpha_i$, $d_i$ e $\theta_i$, com $1 \leq i \leq \nu$, é possível obter as matrizes de transformação homogênea $\hvct{\vone}_{\ttB_{i-1} \rl \ttB_i}$ a partir da seguinte expressão \cite{Cabral} :
+Dados os parâmetros de Denavit-Hartemberg $a_i$, $\alpha_i$, $d_i$ e $\theta_i$, com $1 \leq i \leq \nu$, é possível obter as matrizes de transformação homogênea $\hvct{\vone}_{\ttB_{i-1} \rl \ttB_i}$ a partir da seguinte expressão \cite{Cabral}:
 
-\begin{empheq}[box=\myyellowbox]{equation} \label{eq:TransformacaoHomogeneaDH}
+\begin{equation} \label{eq:TransformacaoHomogeneaDH}
 \hvct{\vone}_{\ttB_{i-1} \rl \ttB_i} =
 \begin{bmatrix}
 \ccos\theta_i & -\ssin\theta_i \ccos\alpha_i &  \ssin\theta_i \ssin\alpha_i & a_i\ccos\theta_i \\
@@ -736,16 +742,106 @@ Dados os parâmetros de Denavit-Hartemberg $a_i$, $\alpha_i$, $d_i$ e $\theta_i$
 0             &  \ssin\alpha_i               &  \ccos\alpha_i               & d_i \\
 0             & 0                            & 0                            & 1
 \end{bmatrix},\, i=1,...,\nu
+\end{equation}
+
+Logo:
+\begin{equation}
+\mR'_i(q_i) = \vct{\vone}_{\ttB_{i-1} \rl \ttB_i} =
+\begin{bmatrix}
+\ccos\theta_i & -\ssin\theta_i \ccos\alpha_i &  \ssin\theta_i \ssin\alpha_i \\
+\ssin\theta_i &  \ccos\theta_i \ccos\alpha_i & -\ccos\theta_i \ssin\alpha_i \\
+0             &  \ssin\alpha_i               &  \ccos\alpha_i
+\end{bmatrix},\, i=1,...,\nu
+\end{equation}
+
+\begin{empheq}[box=\myyellowbox]{equation}
+\mo'_i(q_i) = \vct{\tto_{\ttB_i}}_{\ttB_{i-1}} =
+\begin{bmatrix}
+a_i\ccos\theta_i &
+a_i\ssin\theta_i &
+d_i
+\end{bmatrix}^\msT,\, i=1,...,\nu
 \end{empheq}
 
-Tendo obtido $\hvct{\vone}_{\ttB_{i-1} \rl \ttB_i}$, é possível obter as transformações homogêneas que relacionam os sistemas solidários aos ligamentos ($\ttB_i$) ao sistema da base ($\ttN$) pela seguinte expressão recursiva:
+A cinemática de posição do efetuador poderia ser feita a partir da composição (produtos) de matrizes de transformação homogênea. Este tipo de estratégia é bastante conveniente quando se trata da realização de cálculos simbólicos. Entretanto, não é muito adequada para implementações numéricas, devido ao acúmulo de erros numéricos gerado pela multiplicação de matrizes de rotação.
 
-\begin{empheq}[box=\myyellowbox]{equation} \label{eq:H__}
-\hvct{\vone}_{\ttN \rl \ttB_i} =
+Uma representação de rotação por quaterion unitário equivalente à matriz $\mR'_i(q_i)$ é dada por:
+\begin{empheq}[box=\myyellowbox]{equation}
+\breve{\mr}'_i(q_i) =
+\begin{bmatrix}
+\sign(\ssin \alpha_i) \sqrt{(1+\ccos \theta_i)(1-\ccos \alpha_i)}/2 \\
+\sign(\ssin \theta_i \ssin \alpha_i) \sqrt{(1-\ccos \theta_i)(1-\ccos \alpha_i)}/2 \\
+\sign(\ssin \theta_i) \sqrt{(1-\ccos \theta_i)(1+\ccos \alpha_i)}/2 \\
+\sqrt{(1+\ccos \theta_i)(1+\ccos \alpha_i)}/2
+\end{bmatrix},\, i=1,...,\nu
+\end{empheq}
+
+Para solucionar este paradigma, as composições de rotações e translações serão feitas separadamente, sendo que a composição de rotações será feita atravez da multiplicação de quaternions unitários. 
+
+Tendo obtido $\vct{\vone}_{\ttB_{i-1} \rl \ttB_i}$, seria possível obter as matrizes de rotação que relacionam os sistemas solidários aos ligamentos ($\ttB_i$) ao sistema da base ($\ttN$) pela seguinte expressão recursiva:
+\begin{equation} \label{eq:H__}
+\begin{split}
+\vct{\vone}_{\ttN \rl \ttB_i} =
 \begin{cases}
-\hvct{\vone}_{\ttB_0 \rl \ttB_1}, \text{se } i=1 \\
-\hvct{\vone}_{\ttN \rl \ttB_{i-1}} \cdot \hvct{\vone}_{\ttB_{i-1} \rl \ttB_i}  , \text{se } i>1
-\end{cases} \, i=1,...,\nu
+\vct{\vone}_{\ttB_0 \rl \ttB_1}, & \text{se } i=1 \\
+\vct{\vone}_{\ttN \rl \ttB_{i-1}} \cdot \vct{\vone}_{\ttB_{i-1} \rl \ttB_i}  , & \text{se } i>1
+\end{cases} \; i=1,...,\nu
+\end{split}
+\end{equation}
+
+Ou seja
+\begin{equation}
+\begin{split}
+\mR_i(\mq) =
+\begin{cases}
+\mR'_1(q_1), & \text{se } i=1 \\
+\mR_{i-1}(\mq) \cdot \mR'_i(q_i), & \text{se } i>1
+\end{cases} \; i=1,...,\nu
+\end{split}
+\end{equation}
+
+A composição de rotações utilizando quaternions unitários é obtida através de uma expressão análoga:
+\begin{empheq}[box=\myyellowbox]{equation}
+\begin{split}
+\breve{\mr}_i(\mq) =
+\begin{cases}
+\breve{\mr}'_1(q_1), & \text{se } i=1 \\
+\breve{\mr}_{i-1}(\mq) \otimes \breve{\mr}'_i(q_i), & \text{se } i>1
+\end{cases} \; i=1,...,\nu
+\end{split}
+\end{empheq}
+
+Para evitar o acúmulo de erros numéricos, basta renormalizar cada quaternion obtido através do produto de dois outros.
+
+As expressões das matrizes de rotação $\mR_i(\mq)$ podem ser obtidas através da fórmula de conversão de quaternions unitários para matrizes de rotação apresentada no apêndice \ref{ap:Quat}:
+\begin{empheq}[box=\myyellowbox]{equation} \tag{\ref{eq:Quat2Matriz}}
+\mR = \begin{bmatrix}
+1 - 2 q_j^2 - 2 q_k^2 & 2(q_i q_j - q_k q_r) & 2(q_i q_k + q_j q_r) \\
+2(q_i q_j + q_k q_r) & 1 - 2 q_i^2 - 2q_k^2 & 2(q_j q_k - q_i q_r) \\
+2(q_i q_k - q_j q_r) & 2(q_i q_r + q_j q_k) & 1 - 2 q_i^2 - 2 q_j^2
+\end{bmatrix}
+\end{empheq}
+
+A composição de translações pode ser feita da seguinte maneira:
+\begin{equation}
+\begin{split}
+\vct{\tto_{\ttB_i}}_{\ttN} =
+\begin{cases}
+\vct{\tto_{\ttB_1}}_{\ttB_0}, & \text{se } i=1 \\
+\vct{\tto_{\ttB_{i-1}}}_{\ttN} +  \vct{\vone}_{\ttN \rl \ttB_{i-1}} \cdot \vct{\tto_{\ttB_i}}_{\ttB_{i-1}}   , & \text{se } i>1
+\end{cases} \; i=1,...,\nu
+\end{split}
+\end{equation}
+
+Ou seja
+\begin{empheq}[box=\myyellowbox]{equation}
+\begin{split}
+\mo_i(\mq) =
+\begin{cases}
+\mo'_1(q_1), & \text{se } i=1 \\
+\mo_{i-1}(\mq) +  \mR_{i-1}(\mq) \cdot \mo'_i(q_i)   , & \text{se } i>1
+\end{cases} \; i=1,...,\nu
+\end{split}
 \end{empheq}
 
 As matrizes  $\hvct{\vone}_{\ttN \rl \ttB_i}$ apresentam o seguinte formato:
@@ -1994,10 +2090,10 @@ Sejam $\ssB_0$, $\ssB_1$, ..., $\ssB_{n} \,$ $n+1$ subsistemas mec\^anicos e $\s
 \item $\mnu_{\ssB_i}(\mq_i, \dot{\mq}_i), \,i=0, ..., n$: matriz-coluna dos esforços de inércia girosc\'opica e atrito generalizados do subsistema $\ssB_i$.
 \item $\mg_{\ssB_i}(\mq_i), \,i=0, ..., n$: matriz-coluna dos esfor\c{c}os gravitacionais generalizados do subsistema $\ssB_i$.
 \item $\mu_{\ssB_i}, \,i=0, ..., n$: matriz-coluna dos esfor\c{c}os ativos externos generalizados aplicados ao subsistema $\ssB_i$.
-\item $\breve{\mq}_0$: representação via quaternion unitário da matriz $\vct{\vone}_{\ttN_0 \rl \ttB_0}$ (orientação do efetuador/plataforma do mecanismo paralelos).
-\item $\breve{\mq}_i, \,i=0, ..., n$: representação via quaternion unitário da matriz $\vct{\vone}_{\ttN_i \rl \ttB_i}$ (orientação do efetuador da cadeia serial $\ssB_i$).
-\item $\breve{\mn}_i, \,i=0, ..., n$: representação via quaternion unitário da matriz $\vct{\vone}_{\ttN_0 \rl \ttN_i}$.
-\item $\breve{\mb}_i, \,i=0, ..., n$: representação via quaternion unitário da matriz $\vct{\vone}_{\ttB_i \rl \ttB_0}$.
+\item $\breve{\mq}_0$: representação via quaternion unitário da matriz de rotação $\vct{\vone}_{\ttN_0 \rl \ttB_0}$ (orientação do efetuador/plataforma do mecanismo paralelos).
+\item $\breve{\mq}_i, \,i=0, ..., n$: representação via quaternion unitário da matriz de rotação $\vct{\vone}_{\ttN_i \rl \ttB_i}$ (orientação do efetuador da cadeia serial $\ssB_i$).
+\item $\breve{\mn}_i, \,i=0, ..., n$: representação via quaternion unitário da matriz de rotação $\vct{\vone}_{\ttN_0 \rl \ttN_i}$.
+\item $\breve{\mb}_i, \,i=0, ..., n$: representação via quaternion unitário da matriz de rotação $\vct{\vone}_{\ttB_i \rl \ttB_0}$.
 \end{itemize}
 
 \section{Modelo dos subsistemas} 
@@ -5650,64 +5746,64 @@ As rotações de um angulo $\theta$ em torno dos eixo $x$, $y$ e $z$ podem ser r
 
 \subsection{Conversão Matriz de Rotação $\rightarrow$ Quaternion}
 
-Serão apresentadas 4 fórmulas de conversão da representação de orientação por matrizes de rotação para representação por quaternions. Seja uma matriz de rotação $\mA$ dada por:
+Serão apresentadas 4 fórmulas de conversão da representação de orientação por matrizes de rotação para representação por quaternions. Seja uma matriz de rotação $\mR$ dada por:
 \begin{equation}
-\mA = \begin{bmatrix}
-A_{11} & A_{12} & A_{13} \\
-A_{21} & A_{22} & A_{33} \\
-A_{31} & A_{32} & A_{33} \\
+\mR = \begin{bmatrix}
+R_{11} & R_{12} & R_{13} \\
+R_{21} & R_{22} & R_{33} \\
+R_{31} & R_{32} & R_{33} \\
 \end{bmatrix}
 \end{equation}
 
 Assim, as expressões das fórmulas de conversão são dadas por:
 \begin{equation}
 \begin{cases} \label{eq:Matriz2Quat0}
-S = 2 \sqrt{1 + A_{11} + A_{22} + A_{33}} \\
-q_i = (A_{32} - A_{23})/S \\
-q_j = (A_{13} - A_{31})/S \\
-q_k = (A_{21} - A_{12})/S \\
+S = 2 \sqrt{1 + R_{11} + R_{22} + R_{33}} \\
+q_i = (R_{32} - R_{23})/S \\
+q_j = (R_{13} - R_{31})/S \\
+q_k = (R_{21} - R_{12})/S \\
 q_r = S/4
 \end{cases}
 \end{equation}
 
 \begin{equation}
 \begin{cases} \label{eq:Matriz2Quat1}
-S = 2 \sqrt{1 + A_{11} - A_{22} - A_{33}} \\
+S = 2 \sqrt{1 + R_{11} - R_{22} - R_{33}} \\
 q_i = S/4 \\
-q_j = (A_{12} + A_{21})/S \\
-q_k = (A_{13} + A_{31})/S \\
-q_r = (A_{32} - A_{23})/S
+q_j = (R_{12} + R_{21})/S \\
+q_k = (R_{13} + R_{31})/S \\
+q_r = (R_{32} - R_{23})/S
 \end{cases}
 \end{equation}
 
 \begin{equation} \label{eq:Matriz2Quat2}
 \begin{cases}
-S = 2 \sqrt{1 - A_{11} + A_{22} - A_{33}} \\
-q_i = (A_{12} + A_{12})/S \\
+S = 2 \sqrt{1 - R_{11} + R_{22} - R_{33}} \\
+q_i = (R_{12} + R_{12})/S \\
 q_j = S/4 \\
-q_k = (A_{23} + A_{32})/S \\
-q_r = (A_{13} - A_{31})/S
+q_k = (R_{23} + R_{32})/S \\
+q_r = (R_{13} - R_{31})/S
 \end{cases}
 \end{equation}
 
 \begin{equation} \label{eq:Matriz2Quat3}
 \begin{cases} 
-S = 2 \sqrt{1 - A_{11} - A_{22} + A_{33}} \\
-q_i = (A_{13} + A_{31})/S \\
-q_j = (A_{23} + A_{32})/S \\
+S = 2 \sqrt{1 - R_{11} - R_{22} + R_{33}} \\
+q_i = (R_{13} + R_{31})/S \\
+q_j = (R_{23} + R_{32})/S \\
 q_k = S/4 \\
-q_r = (A_{21} - A_{12})/S
+q_r = (R_{21} - R_{12})/S
 \end{cases}
 \end{equation}
 
-Com o intuito de evitar raízes de números negativos, divisões por zero, e problemas numéricos relacionados a raízes e divisões por números próximos a zero, recomenda-se utilizar a seguinte estratégia: caso o traço de $\mA$ seja maior que zero, utilize a expressão \eqref{eq:Matriz2Quat0}. Caso contrário, utilize as expressões \eqref{eq:Matriz2Quat1}, \eqref{eq:Matriz2Quat2} ou \eqref{eq:Matriz2Quat3}, dependendo de qual for o maior elemento da diagonal principal de $\mA$. Caso  seja $A_{11}$, utilize a expressão \eqref{eq:Matriz2Quat1}; caso seja $A_{22}$, utilize a expressão \eqref{eq:Matriz2Quat2}; caso seja $A_{33}$, utilize a expressão \eqref{eq:Matriz2Quat3}.
+Com o intuito de evitar raízes de números negativos, divisões por zero, e problemas numéricos relacionados a raízes e divisões por números próximos a zero, recomenda-se utilizar a seguinte estratégia: caso o traço de $\mR$ seja maior que zero, utilize a expressão \eqref{eq:Matriz2Quat0}. Caso contrário, utilize as expressões \eqref{eq:Matriz2Quat1}, \eqref{eq:Matriz2Quat2} ou \eqref{eq:Matriz2Quat3}, dependendo de qual for o maior elemento da diagonal principal de $\mR$. Caso  seja $R_{11}$, utilize a expressão \eqref{eq:Matriz2Quat1}; caso seja $R_{22}$, utilize a expressão \eqref{eq:Matriz2Quat2}; caso seja $R_{33}$, utilize a expressão \eqref{eq:Matriz2Quat3}.
 
 \subsection{Conversão Quaternion $\rightarrow$ Matriz de Rotação}
 
 A conversão da representação de orientação por quatertions para a representação por matrizes de rotação é dada pela seguinte expressão:
 
 \begin{equation} \label{eq:Quat2Matriz}
-\mA = \begin{bmatrix}
+\mR = \begin{bmatrix}
 1 - 2 q_j^2 - 2 q_k^2 & 2(q_i q_j - q_k q_r) & 2(q_i q_k + q_j q_r) \\
 2(q_i q_j + q_k q_r) & 1 - 2 q_i^2 - 2q_k^2 & 2(q_j q_k - q_i q_r) \\
 2(q_i q_k - q_j q_r) & 2(q_i q_r + q_j q_k) & 1 - 2 q_i^2 - 2 q_j^2
