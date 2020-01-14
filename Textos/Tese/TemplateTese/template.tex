@@ -224,7 +224,7 @@ Aiming to fully explore the potential of this kind of architecture, in this thes
   $\llA, \llB, \hdots$ & Corpos rígidos ou referenciais \\
   $\ssA, \ssB, \hdots$ & Sistema ou subsistema mecânico \\
   $\llN$ & Referencial inercial \\
-  $\ttg_{\lllB}$ & Centro de massa do corpo rígido $\llB$ \\
+  $\ttc_{\lllB}$ & Centro de massa do corpo rígido $\llB$ \\
   $\tto_{\ttB}$ & Origem dos sistema de coordenadas $\ttB$ \\
   $\{\vi_\ttB, \vj_\ttB, \vk_\ttB \}$ & Base ortonormal do sistema de coordenadas $\ttB$ \\
   $\vct{\ttp}_{\ttB}$ & Matriz-coluna formada pelas coordenadas do ponto $\ttp$ no sistema de coordenadas $\ttB$ \\
@@ -235,7 +235,7 @@ Aiming to fully explore the potential of this kind of architecture, in this thes
   $[\vu]_{\ttB}$ & Matriz-coluna formada pelas componentes do vetor $\vu$ na base do sistema de coordenadas $\ttB$ \\
   $\nvct{\vone}_{\ttA \rl \ttB} $ & Matriz de mudança de base, i.e. $\nvct{\vu}_{\ttA} = \nvct{\vone}_{\ttA \rl \ttB} \cdot \nvct{\vu}_{\ttB} $ \\
   $\hvct{\vone}_{\ttA \rl \ttB}$ & Matriz de transformação homogênea, i.e. $\hvct{\ttp}_{\ttA} = \hvct{\vone}_{\ttA \rl \ttB} \cdot \hvct{\ttp}_{\ttB}$ \\
-  $\vg$ & Vetor aceleração gravitacional \\
+  $\vgamma$ & Vetor aceleração gravitacional \\
   $\vr_{\tta \rl \ttb}$ & Vetor que liga o ponto $\tta$ ao ponto $\ttb$, orientado no sentido de $\tta$ até $\ttb$ \\
   $\vv_\ttp^{\lllA}$ & Vetor velocidade do ponto $\ttp$ em relação ao ref. $\llA$ \\
   $\va_\ttp^{\lllA}$ & Vetor velocidade do ponto $\ttp$ em relação ao ref. $\llA$ \\
@@ -703,7 +703,7 @@ Seja $\ssB$ um sistema mecânico serial de $\nu$ graus de liberdade. Primeiramen
 \item $\ttB_i, \,i=1,...,\nu$: sistema de coordenadas solid\'ario a $\llB_i$.
 %\item $\tto_i, \,i=0,...,\nu$: origem do sistema $\ttB_i$.
 %\item $\{\vi_i, \vj_i, \vk_i\}, \,i=0,...,\nu$: base ortonormal do sistema $\ttB_i$.
-%\item $\ttg_i, \,i=1,...,\nu$: centro de massa de $\llB_i$.
+\item $\ttc_{\lllB_i}, \,i=1,...,\nu$: centro de massa do ligamento $\llB_i$.
 \item $\ttx$: ponto no espa\c{c}o fixo ao efetuador.
 \item $m_i$: massa do ligamento $\llB_i$.
 %\item $\vI_{\lllB_i}$: tensor de in\'ercia do ligamento $\llB_i$ em relação a seu centro de massa.
@@ -713,7 +713,7 @@ Seja $\ssB$ um sistema mecânico serial de $\nu$ graus de liberdade. Primeiramen
 q_1 & ... & {q}_{\nu}
 \end{bmatrix}^\msT $.
 %\item $\vg$: Vetor aceleração gravitacional.
-\item $\mgamma$: vetor aceleração gravitacional escrito na base $\ttN$, ou seja, $\vct{\vg}_{\ttN}$.
+\item $\mgamma$: vetor aceleração gravitacional escrito na base $\ttN$, ou seja, $\vct{\vgamma}_{\ttN}$.
 %\item $\vf_i$: Vetor força não-reativa resultante aplicada no centro de massa de $\llB_i$.
 %\item $\vtau_i$: Vetor torque não-reativo resultante aplicado em $\llB_i$.
 \item $\overline{\mf}_i$: matriz-coluna de esforços não-reativos generalizados aplicados ao subsistema $\llB_i$. É dada por $\overline{\mf}_i = \begin{bmatrix}
@@ -726,6 +726,8 @@ q_1 & ... & {q}_{\nu}
 \item $\breve{\mr}'_i, \,i=1, ..., \nu$: representação via quaternion unitário da matriz de rotação $\vct{\vone}_{\ttB_{i-1} \rl \ttB_i}$.
 \item $\mo_i, \,i=1, ..., \nu$: origem $\tto_{\ttB_i}$ no sistema de coordenadas $\ttN$, ou seja $\vct{\tto_{\ttB_i}}_\ttN$.
 \item $\mo'_i, \,i=1, ..., \nu$: origem $\tto_{\ttB_i}$ no sistema de coordenadas $\ttB_{i-1}$, ou seja $\vct{\tto_{\ttB_i}}_{\ttB_{i-1}}$.
+\item $\mc_{\cM\,i}, \,i=1, ..., \nu$: centro de massa $\ttc_{\lllB_i}$ no sistema de coordenadas $\ttN$, ou seja $\vct{\ttc_{\lllB_i}}_\ttN$.
+\item $\mc'_{\cM\,i}, \,i=1, ..., \nu$: centro de massa $\ttc_{\lllB_i}$ no sistema de coordenadas $\ttB_{i}$, ou seja $\vct{\ttc_{\lllB_i}}_{\ttB_{i}}$.
 \end{itemize}
 
 \section{Cinemática}
@@ -733,7 +735,6 @@ q_1 & ... & {q}_{\nu}
 \subsection{Cinemática de posição}
 
 Dados os parâmetros de Denavit-Hartemberg $a_i$, $\alpha_i$, $d_i$ e $\theta_i$, com $1 \leq i \leq \nu$, é possível obter as matrizes de transformação homogênea $\hvct{\vone}_{\ttB_{i-1} \rl \ttB_i}$ a partir da seguinte expressão \cite{Cabral}:
-
 \begin{equation} \label{eq:TransformacaoHomogeneaDH}
 \hvct{\vone}_{\ttB_{i-1} \rl \ttB_i} =
 \begin{bmatrix}
@@ -813,13 +814,17 @@ A composição de rotações utilizando quaternions unitários é obtida atravé
 
 Para evitar o acúmulo de erros numéricos, basta renormalizar cada quaternion obtido através do produto de dois outros.
 
-As expressões das matrizes de rotação $\mR_i(\mq)$ podem ser obtidas através da fórmula de conversão de quaternions unitários para matrizes de rotação apresentada no apêndice \ref{ap:Quat}:
-\begin{empheq}[box=\myyellowbox]{equation} \tag{\ref{eq:Quat2Matriz}}
-\mR = \begin{bmatrix}
+As expressões das matrizes de rotação $\mR_i(\mq)$ podem ser obtidas através da fórmula de conversão de quaternions unitários para matrizes de rotação apresentada no apêndice \ref{ap:Quat}.
+\begin{equation} \tag{\ref{eq:Quat2Matriz}}
+\mR = \underline{\mR}(\breve{\mq}) = \begin{bmatrix}
 1 - 2 q_j^2 - 2 q_k^2 & 2(q_i q_j - q_k q_r) & 2(q_i q_k + q_j q_r) \\
 2(q_i q_j + q_k q_r) & 1 - 2 q_i^2 - 2q_k^2 & 2(q_j q_k - q_i q_r) \\
 2(q_i q_k - q_j q_r) & 2(q_i q_r + q_j q_k) & 1 - 2 q_i^2 - 2 q_j^2
 \end{bmatrix}
+\end{equation}
+
+\begin{empheq}[box=\myyellowbox]{equation}
+\mR_i(\mq) = \underline{\mR}(\breve{\mr}_i),\, i=1,...,\nu
 \end{empheq}
 
 A composição de translações pode ser feita da seguinte maneira:
@@ -844,6 +849,22 @@ Ou seja
 \end{split}
 \end{empheq}
 
+Sendo assim, também é obtida a posição do efetuador no sistema $\ttN$:
+\begin{empheq}[box=\myyellowbox]{equation}
+\mx(\mq) = \mo_\nu (\mq)
+\end{empheq}
+
+Tendo obtidos as matrizes de rotação $\vct{\vone}_{\ttN \rl \ttB_i}$ e as coordenadas das origens dos sistemas de referência no sistema $\ttN$,  temos que as coordenadas dos centros de massa dos ligamentos são dadas por:
+\begin{equation}
+\vct{\ttc_{\lllB_i}}_{\ttN} = \vct{\tto_{\ttB_i}}_{\ttN} + \vct{\vone}_{\ttN \rl \ttB_i} \cdot \vct{\ttc_{\lllB_i}}_{\ttB_i} \; i=1,...,\nu
+\end{equation}
+
+Ou seja
+\begin{empheq}[box=\myyellowbox]{equation}
+\mc_{\cM \,i}(\mq) = \mo_i(\mq) + \mR_i(\mq) \cdot \mc_{\cM \,i}'(\mq), \; i=1,...,\nu
+\end{empheq}
+
+
 As matrizes  $\hvct{\vone}_{\ttN \rl \ttB_i}$ apresentam o seguinte formato:
 \begin{empheq}[box=\lightbluebox]{equation} \label{eq:H__2}
 \hvct{\vone}_{\ttN \rl \ttB_i} =
@@ -858,9 +879,9 @@ Sendo assim, tendo obtido $\hvct{\vone}_{\ttN \rl \ttB_i}$, automaticamente obte
 \vct{\ttx}_{\ttN} = \vct{\tto_{\ttB_\nu}}_{\ttN}
 \end{empheq}
 
-Além disso, como $\vct{\ttg_{\lllB_i}}_{\ttB_i}$ são dados de entrada do algoritmo, obtemos as coordenadas dos centros de massa dos ligamentos no sistema da base através da seguinte expressão:
+Além disso, como $\vct{\ttc_{\lllB_i}}_{\ttB_i}$ são dados de entrada do algoritmo, obtemos as coordenadas dos centros de massa dos ligamentos no sistema da base através da seguinte expressão:
 \begin{empheq}[box=\myyellowbox]{equation} \label{eq:og__}
-\hvct{\ttg_{\lllB_i}}_{\ttN} = \hvct{\vone}_{\ttN \rl \ttB_i} \cdot \hvct{\ttg_{\lllB_i}}_{\ttB_i}
+\hvct{\ttc_{\lllB_i}}_{\ttN} = \hvct{\vone}_{\ttN \rl \ttB_i} \cdot \hvct{\ttc_{\lllB_i}}_{\ttB_i}
 \end{empheq}
 
 \subsection{Cinemática de velocidades lineares}
@@ -960,16 +981,16 @@ Definindo:
 \mj_{v\,i,j}(\mq) = \begin{cases}
 \mzr, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; j>i \\
 [\vk_{\ttB_{j-1}}]_{\ttN}, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; j\leq i  \text{ e j-ésima junta prismática} \\
-\mS([\vk_{\ttB_{j-1}}]_{\ttN})\cdot (\vct{\ttg_{\lllB_i}}_{\ttN}-\vct{\tto_{\ttB_{j-1}}}_{\ttN}) , \; j\leq i \text{ e j-ésima junta rotativa} \\
+\mS([\vk_{\ttB_{j-1}}]_{\ttN})\cdot (\vct{\ttc_{\lllB_i}}_{\ttN}-\vct{\tto_{\ttB_{j-1}}}_{\ttN}) , \; j\leq i \text{ e j-ésima junta rotativa} \\
 \end{cases} \, i,j=1,...,\nu
 \end{empheq}
 
 \begin{empheq}[box=\lightbluebox]{equation}
-\mv_{i,j} = \vct{\vv_{\ttg_{\lllB_i}}^{\lllB_{j}}}_{\ttN}
+\mv_{i,j} = \vct{\vv_{\ttc_{\lllB_i}}^{\lllB_{j}}}_{\ttN}
 \end{empheq}
 
 \begin{empheq}[box=\lightbluebox]{equation}
-\mv^\star_i  = \mv_{i,0} = \vct{\vv_{\ttg_{\lllB_i}}^{\lllN} }_{\ttN}
+\mv^\star_i  = \mv_{i,0} = \vct{\vv_{\ttc_{\lllB_i}}^{\lllN} }_{\ttN}
 \end{empheq}
 
 Temos:
@@ -1208,11 +1229,11 @@ Para obter as acelerações dos centros de massa dos ligamentos, seguimos a mesm
 
 Definindo:
 \begin{empheq}[box=\lightbluebox]{equation}
-\ma_{i,j} = \vct{\va_{\ttg_{\lllB_i}}^{\lllB_{j}}}_{\ttN}
+\ma_{i,j} = \vct{\va_{\ttc_{\lllB_i}}^{\lllB_{j}}}_{\ttN}
 \end{empheq}
 
 \begin{empheq}[box=\lightbluebox]{equation}
-\ma^\star_i = \ma_{i,0} = \vct{\va_{\ttg_{\lllB_i}}^{\lllN} }_{\ttN}
+\ma^\star_i = \ma_{i,0} = \vct{\va_{\ttc_{\lllB_i}}^{\lllN} }_{\ttN}
 \end{empheq}
 
 Temos:
@@ -1323,7 +1344,7 @@ Para obter as acelerações angulares dos ligamentos, seguimos a mesma linha de 
 
 Definindo:
 \begin{empheq}[box=\lightbluebox]{equation}
-\malpha_{i,j} = \vct{\valpha_{\ttg_{\lllB_i}}^{\lllB_{j}}}_{\ttN}
+\malpha_{i,j} = \vct{\valpha_{\ttc_{\lllB_i}}^{\lllB_{j}}}_{\ttN}
 \end{empheq}
 
 \begin{empheq}[box=\lightbluebox]{equation}
@@ -1380,7 +1401,7 @@ O modelo dinâmico de cada ligamento pode ser obtido por Newton-Euler, pois são
 
 \begin{equation} \label{eq:Newton-Euler}
 \begin{cases}
-\vf_{\lllB_i} = -m_i \va^{\lllN}_{\ttg_{\lllB_i}} + m_i \vg  \\
+\vf_{\lllB_i} = -m_i \va^{\lllN}_{\ttc_{\lllB_i}} + m_i \vgamma  \\
 \vtau_{\lllB_i} = -\vI_{\lllB_i} \cdot \valpha^{\lllN}_{\lllB_i} - \vomega^{\lllN}_{\lllB_i} \wedge (\vI_{\lllB_i} \cdot \vomega^{\lllN}_{\lllB_i}) 
 \end{cases} \, i = 1,...,\nu
 \end{equation}
@@ -1399,7 +1420,7 @@ m_i \mone & \mzr \\
 \end{bmatrix}
 \cdot
 \begin{bmatrix}
-\vct{\va^{\lllN}_{\ttg_{\lllB_i}}}_{\ttN}  \\
+\vct{\va^{\lllN}_{\ttc_{\lllB_i}}}_{\ttN}  \\
 \vct{\valpha^{\lllN}_{\lllB_i}}_{\ttN}
 \end{bmatrix}
 -
@@ -1409,7 +1430,7 @@ m_i \mone & \mzr \\
 \end{bmatrix}
 -
 \begin{bmatrix}
--m_i \vct{\vg}_{\ttN} \\
+-m_i \vct{\vgamma}_{\ttN} \\
 \mzr
 \end{bmatrix}
 \end{equation}
@@ -2047,21 +2068,22 @@ Sejam $\ssB_0$, $\ssB_1$, ..., $\ssB_{n} \,$ $n+1$ subsistemas mec\^anicos e $\s
 \begin{itemize}
 \item $\ssB_0$: Subsistema plataforma/efetuador do manipulador paralelo.
 \item $\ssB_i, \, i=1,...,n$: i-ésimo subsistema serial.
-\item $\llB_0$: Corpo rígido plataforma/efetuador do manipulador paralelo.
-\item $\llB_i, \, i=1,...,n$: Corpo rígido efetuador do subsistema serial $\ssB_i$.
+\item $\llX_0$: Corpo rígido plataforma/efetuador do manipulador paralelo.
+\item $\llX_i, \, i=1,...,n$: Corpo rígido efetuador do subsistema serial $\ssB_i$.
 %\item $\llN$: referencial inercial.
 \item $\ttN_i, \, i=0,...,n$: sistema de coordenadas da base fixa do subsistema $\ssB_i$, solidário a $\llN$.
 %\item $\tto_i, \,i=0,...,n$: origem do sistema $\ttN_i$.
 %\item $\ttg$: centro de massa da plataforma/efetuador $\llB_0$.
-\item $\ttx_i, \,i=1, ..., n$: ponto no espa\c{c}o fixo ao efetuador de $\ssB_i$.
-\item $\ttB_0$: sistema de coordenadas solidário a $\llB_0$ com origem em $\ttg_{\lllB_0}$.
-\item $\ttB_i, \,i=1, ..., n$: sistema de coordenadas solidário a $\llB_i$ com origem em $\ttx_i$.
-\item $m$: massa da plataforma/efetuador $\llB_0$.
+\item $\ttx_0$: ponto no espa\c{c}o fixo ao centro de massa de $\llX_0$.
+\item $\ttx_i, \,i=1, ..., n$: ponto no espa\c{c}o fixo a $\llX_i$.
+\item $\ttX_0$: sistema de coordenadas solidário a $\llX_0$ com origem em $\ttx_0$.
+\item $\ttX_i, \,i=1, ..., n$: sistema de coordenadas solidário a $\llX_i$ com origem em $\ttx_i$.
+\item $m$: massa da plataforma/efetuador $\llX_0$.
 %\item $\vI_{\ttg}$: tensor de in\'ercia da plataforma/efetuador $\llB_0$ em relação a seu centro de massa.
 %\item $\mI$: tensor de in\'ercia $\vI_{\ttg}$ escrito na base $\ttN_0$, ou seja, $\vct{\vI_{\ttg}}_{\ttN_0 \rl \ttN_0}$.
 %\item $\vf$: Vetor de forças não-reativas (ativas e inerciais) aplicadas no centro de massa da plataforma/efetuador $\llB_0$.
 %\item $\vg$: Vetor aceleração gravitacional.
-\item $\mgamma$: Vetor aceleração gravitacional escrito na base $\ttN_0$, ou seja, $\vct{\vg}_{\ttN_0}$.
+\item $\mgamma$: Vetor aceleração gravitacional escrito na base $\ttN_0$, ou seja, $\vct{\vgamma}_{\ttN_0}$.
 \item $\mq_i, \,i=0, ..., n$: matriz-coluna de coordenadas generalizadas do subsistema $\ssB_i$.
 %\item $\mx^\ast$: matriz-coluna de coordenadas generalizadas de posição da plataforma/efetuador $\ssB_0$.
 %\item $\mtheta^\ast$: matriz-coluna de coordenadas generalizadas de orientação da plataforma/efetuador $\ssB_0$.
@@ -2076,24 +2098,24 @@ Sejam $\ssB_0$, $\ssB_1$, ..., $\ssB_{n} \,$ $n+1$ subsistemas mec\^anicos e $\s
 \item $\mq\ssh$: matriz-coluna de $\nu\ssh$ coordenadas generalizadas independentes.
 \item $\mq\cir$: matriz-coluna de coordenadas generalizadas redundantes (contém as componentes de $\mq$ não pertencentes a $\mq\ssh$)
 \item $\overline{\mx}(\mq)$: matriz-coluna dos vínculos de posição entre subsistemas. As equações vinculares são dadas por $\overline{\mx}(\mq) = \mzr $.
-\item $\overline{\breve{\mq}}(\mq)$: matriz-coluna dos vínculos de orientação entre subsistemas. As equações vinculares são dadas por $\overline{\breve{\mq}}(\mq) = \mzr $.
+\item $\overline{\breve{\mx}}(\mq)$: matriz-coluna dos vínculos de orientação entre subsistemas. As equações vinculares são dadas por $\overline{\breve{\mx}}(\mq) = \mzr $.
 \item $\overline{\mq}(\mq)$: matriz-coluna dos vínculos de coordenadas generalizadas entre subsistemas. As equações vinculares são dadas por $\overline{\mq}(\mq) = \mzr $.
 %\item $\overline{\momega}(\mq,\dot{\mq})$: matriz-coluna dos v\'inculos de velocidades angulares entre subsistemas. As equa\c{c}\~oes vinculares s\~ao dadas por $\overline{\momega}(\mq,\dot{\mq}) = \mzr $.
 \item $\mx_i(\mq_i), \,i=1, ..., n$: $\vct{\ttx_i}_{\ttN_i}$ escrito em função das coordenadas $\mq_i$.
-\item $\mJ_{v\,\ssB_i}(\mq_i), \,i=1, ..., n$: jacobiano $\mJ_v$ do subsistema $\ssB_i$.
-\item $\mJ_{\omega\,\ssB_i}(\mq_i), \,i=1, ..., n$: jacobiano $\mJ_\omega$ do subsistema $\ssB_i$.
-\item $\underaccent{\sim}{\ma}_{\ssB_i}(\mq_i, \dot{\mq}_i), \,i=1, ..., n$: matriz-coluna $\underaccent{\sim}{\ma}$ do subsistema $\ssB_i$.
-\item $\underaccent{\sim}{\malpha}_{\ssB_i}(\mq_i, \dot{\mq}_i), \,i=1, ..., n$: matriz-coluna $\underaccent{\sim}{\malpha}$ do subsistema $\ssB_i$.
-\item $\mv_{\ssB_i}(\mq_i, \dot{\mq}_i), \,i=1, ..., n$: $\vct{\vv_{\ttx_i}^{\lllN}}_{\ttN_i} = \mJ_{v\,\ssB_i}(\mq_i) \cdot \dot{\mq}_i$, ou seja matriz-coluna de componentes velocidade do efetuador da cadeia serial $\ssB_i$.
-\item $\momega_{\ssB_i}(\mq_i, \dot{\mq}_i), \,i=1, ..., n$: $\vct{\vomega_{\lllB_i}^{\lllN}}_{\ttN_i} = \mJ_{\omega\,\ssB_i}(\mq_i) \cdot \dot{\mq}_i$, ou seja matriz-coluna de componentes velocidade angular do efetuador da cadeia serial $\ssB_i$.
+\item $\mJ_{v\,\lllX_i}(\mq_i), \,i=1, ..., n$: jacobiano de velocidades $\mJ_v$ do subsistema $\ssB_i$.
+\item $\mJ_{\omega\,\lllX_i}(\mq_i), \,i=1, ..., n$: jacobiano de velocidades angulares $\mJ_\omega$ do subsistema $\ssB_i$.
+\item $\underaccent{\sim}{\ma}_{\lllX_i}(\mq_i, \dot{\mq}_i), \,i=1, ..., n$: matriz-coluna $\underaccent{\sim}{\ma}$ do subsistema $\ssB_i$.
+\item $\underaccent{\sim}{\malpha}_{\lllX_i}(\mq_i, \dot{\mq}_i), \,i=1, ..., n$: matriz-coluna $\underaccent{\sim}{\malpha}$ do subsistema $\ssB_i$.
+\item $\mv_{\lllX_i}(\mq_i, \dot{\mq}_i), \,i=1, ..., n$: $\vct{\vv_{\ttx_i}^{\lllN}}_{\ttN_i} = \mJ_{v\,\lllX_i}(\mq_i) \cdot \dot{\mq}_i$, ou seja matriz-coluna de componentes velocidade do efetuador $\llX_i$.
+\item $\momega_{\lllX_i}(\mq_i, \dot{\mq}_i), \,i=1, ..., n$: $\vct{\vomega_{\lllB_i}^{\lllN}}_{\ttN_i} = \mJ_{\omega\,\lllX_i}(\mq_i) \cdot \dot{\mq}_i$, ou seja matriz-coluna de componentes velocidade angular do efetuador $\llX_i$.
 \item $\mM_{\ssB_i}(\mq_i), \,i=0, ..., n$: matriz de in\'ercia generalizada do subsistema $\ssB_i$.
 \item $\mnu_{\ssB_i}(\mq_i, \dot{\mq}_i), \,i=0, ..., n$: matriz-coluna dos esforços de inércia girosc\'opica e atrito generalizados do subsistema $\ssB_i$.
 \item $\mg_{\ssB_i}(\mq_i), \,i=0, ..., n$: matriz-coluna dos esfor\c{c}os gravitacionais generalizados do subsistema $\ssB_i$.
 \item $\mu_{\ssB_i}, \,i=0, ..., n$: matriz-coluna dos esfor\c{c}os ativos externos generalizados aplicados ao subsistema $\ssB_i$.
-\item $\breve{\mq}_0$: representação via quaternion unitário da matriz de rotação $\vct{\vone}_{\ttN_0 \rl \ttB_0}$ (orientação do efetuador/plataforma do mecanismo paralelos).
-\item $\breve{\mq}_i, \,i=0, ..., n$: representação via quaternion unitário da matriz de rotação $\vct{\vone}_{\ttN_i \rl \ttB_i}$ (orientação do efetuador da cadeia serial $\ssB_i$).
+\item $\breve{\mx}_0$: representação via quaternion unitário da matriz de rotação $\vct{\vone}_{\ttN_0 \rl \ttX_0}$ (orientação do efetuador/plataforma do mecanismo paralelos).
+\item $\breve{\mx}_i, \,i=0, ..., n$: representação via quaternion unitário da matriz de rotação $\vct{\vone}_{\ttN_i \rl \ttX_i}$ (orientação do efetuador da cadeia serial $\ssB_i$).
 \item $\breve{\mn}_i, \,i=0, ..., n$: representação via quaternion unitário da matriz de rotação $\vct{\vone}_{\ttN_0 \rl \ttN_i}$.
-\item $\breve{\mb}_i, \,i=0, ..., n$: representação via quaternion unitário da matriz de rotação $\vct{\vone}_{\ttB_i \rl \ttB_0}$.
+\item $\breve{\mx}'_i, \,i=0, ..., n$: representação via quaternion unitário da matriz de rotação $\vct{\vone}_{\ttX_i \rl \ttX_0}$.
 \end{itemize}
 
 \section{Modelo dos subsistemas} 
@@ -2122,7 +2144,7 @@ Para os subsistemas seriais, as matrizes $\mM_{\ssB_i}$, $\mnu_{\ssB_i}$ e $\mg_
 %\end{equation}
 
 \begin{equation} \label{eq:Newton-EulerE}
-\vf_{\lllB_0} = -m \va^{\lllN}_{\ttg_{\lllB_0}} + m \vg
+\vf_{\lllX_0} = -m \va^{\lllN}_{\ttx_0} + m \vgamma
 \end{equation}
 
 
@@ -2152,7 +2174,7 @@ Aplicando as equações vetoriais no sistema $\ttN$, temos:
 %\end{equation}
 
 \begin{equation} \label{eq:Newton-EulerMatE}
-\vct{\vf_{\lllB_0}}_{\ttN_0} = -m \vct{\va^{\lllN}_{\ttg_{\lllB_0}}}_{\ttN_0}  +m \vct{\vg}_{\ttN_0}
+\vct{\vf_{\lllB_0}}_{\ttN_0} = -m \vct{\va^{\lllN}_{\ttx_0}}_{\ttN_0}  +m \vct{\vgamma}_{\ttN_0}
 \end{equation}
 
 Definindo:
@@ -2163,7 +2185,7 @@ Definindo:
 %\momega^\ast = \vct{\vomega^{\lllN_0}_{\lllB_0}}_{\ttN_0}
 %\end{equation}
 \begin{equation}
-\mq_0 = \vct{\ttg_{\lllB_0}}_{\ttN_0}
+\mq_0 = \vct{\ttx_0}_{\ttN_0}
 \end{equation}
 
 Temos:
@@ -2232,18 +2254,18 @@ Portanto:
 
 \subsection{Vínculos de posição} 
 
-Seja $\ttx_i$ um ponto pertencente à plataforma/efetuador $\llB_0$ e também ao efetuador $\llB_i$. Sendo assim, é possível relacionar a posição do ponto $\ttx_i$ em relação a $\tto_{\ttN_0}$, seguindo tanto pela da plataforma/efetuador $\ssB_0$, quanto pela cadeia serial $\ssB_i$:
+Seja $\ttx_i$ um ponto pertencente à plataforma/efetuador $\llX_0$ e também ao efetuador $\llX_i$. Sendo assim, é possível relacionar a posição do ponto $\ttx_i$ em relação a $\tto_{\ttN_0}$, seguindo tanto pela da plataforma/efetuador $\ssB_0$, quanto pela cadeia serial $\ssB_i$:
 \begin{equation}
-\vr_{\tto_{\tttN_0} \rl \ttx_i} = \vr_{\tto_{\tttN_0} \rl \ttg_{\lllB_0}} + \vr_{\ttg_{\lllB_0} \rl \ttx_i} = \vr_{\tto_{\tttN_0} \rl \tto_{\tttN_i}} + \vr_{\tto_{\tttN_i} \rl \ttx_i}
+\vr_{\tto_{\tttN_0} \rl \ttx_i} = \vr_{\tto_{\tttN_0} \rl \ttx_0} + \vr_{\ttx_0 \rl \ttx_i} = \vr_{\tto_{\tttN_0} \rl \tto_{\tttN_i}} + \vr_{\tto_{\tttN_i} \rl \ttx_i}
 \end{equation}
 
 Aplicando a equação vetorial no sistema $\ttN_0$:
 \begin{equation}
-\vct{\ttx_i}_{\ttN_0} =  \vct{\ttg_{\lllB_0}}_{\ttN_0} + \vct{\vone}_{\ttN_0 \rl \ttB_0} \vct{\ttx_i}_{\ttB_0} = \vct{\tto_{\ttN_i}}_{\ttN_0}  + \vct{\vone}_{\ttN_0 \rl \ttN_i} \vct{\ttx_i}_{\ttN_i}
+\vct{\ttx_i}_{\ttN_0} =  \vct{\ttx_0}_{\ttN_0} + \vct{\vone}_{\ttN_0 \rl \ttX_0} \vct{\ttx_i}_{\ttX_0} = \vct{\tto_{\ttN_i}}_{\ttN_0}  + \vct{\vone}_{\ttN_0 \rl \ttN_i} \vct{\ttx_i}_{\ttN_i}
 \end{equation}
 
 %Sabe-se que $\vct{\ttg}_{\ttN_0} = \mx^\ast$ e $\vct{\ttp_i}_{\ttN_i} = \mx_i(\mq_i)$. Tendo em vista que $\vct{\ttp_i}_\ttB$, $\vct{\vone}_{\ttN_0 \rl \ttN_i}$ e $\vct{\tto_i}_{\ttN_0}$ são constantes e que $\vct{\vone}_{\ttN_0 \rl \ttB}$ depende de $\mtheta^\ast$, definindo:
-Sabe-se que $\vct{\ttg_{\lllB_0}}_{\ttN_0} = \mq_0$ e $\vct{\ttx_i}_{\ttN_i} = \mx_i(\mq_i)$. Tendo em vista que $\vct{\ttx_i}_\ttB$, $\vct{\vone}_{\ttN_0 \rl \ttN_i}$, $\vct{\tto_{\ttN_i}}_{\ttN_0}$ e $\vct{\vone}_{\ttN_0 \rl \ttB_0}$ são constantes, definindo:
+Sabe-se que $\vct{\ttx_0}_{\ttN_0} = \mq_0$ e $\vct{\ttx_i}_{\ttN_i} = \mx_i(\mq_i)$. Tendo em vista que $\vct{\ttx_i}_{\ttX_0}$, $\vct{\vone}_{\ttN_0 \rl \ttN_i}$, $\vct{\tto_{\ttN_i}}_{\ttN_0}$ e $\vct{\vone}_{\ttN_0 \rl \ttX_0}$ são constantes, definindo:
 
 %\begin{equation}
 %\mc_i(\mtheta^\ast) = -\vct{\vone}_{\ttN_0 \rl \ttB} \vct{\ttp_i}_\ttB
@@ -2252,7 +2274,7 @@ Sabe-se que $\vct{\ttg_{\lllB_0}}_{\ttN_0} = \mq_0$ e $\vct{\ttx_i}_{\ttN_i} = \
 %\md_i = \vct{\tto_i}_{\ttN_0} 
 %\end{equation}
 \begin{equation}
-\md_i = \vct{\tto_{\ttN_i}}_{\ttN_0} -\vct{\vone}_{\ttN_0 \rl \ttB_0} \vct{\ttx_i}_{\ttB_0}
+\md_i = \vct{\tto_{\ttN_i}}_{\ttN_0} -\vct{\vone}_{\ttN_0 \rl \ttX_0} \vct{\ttx_i}_{\ttX_0}
 \end{equation}
 \begin{equation}
 \mE_i = \vct{\vone}_{\ttN_0 \rl \ttN_i}
@@ -2486,26 +2508,26 @@ Sendo:
 
 \subsection{Vínculos de orientação}
 
-Supondo que os efetuadores $\llB_i$ de cada cadeia serial estejam ligados rigidamente à plataforma/efetuador $\llB_0$, temos que as matrizes de rotação $\vct{\vone}_{\ttB_i \rl \ttB_0}$ são constantes e conhecidas. Além disso, tendo em vista que o efetuador/plataforma do mecanismo paralelo só translada, a matriz de rotação $\vct{\vone}_{\ttN_0 \rl \ttB_0}$ também é constante e conhecida. Sendo assim, é possível obter a seguinte relação:
+Supondo que os efetuadores $\llX_i$ de cada cadeia serial estejam ligados rigidamente à plataforma/efetuador $\llX_0$, temos que as matrizes de rotação $\vct{\vone}_{\ttX_i \rl \ttX_0}$ são constantes e conhecidas. Além disso, tendo em vista que o efetuador/plataforma do mecanismo paralelo só translada, a matriz de rotação $\vct{\vone}_{\ttN_0 \rl \ttX_0}$ também é constante e conhecida. Sendo assim, é possível obter a seguinte relação:
 \begin{equation}
-\vct{\vone}_{\ttN_0 \rl \ttB_0} = \vct{\vone}_{\ttN_0 \rl \ttN_i} \cdot \vct{\vone}_{\ttN_i \rl \ttB_i} \cdot \vct{\vone}_{\ttB_i \rl \ttB_0}
+\vct{\vone}_{\ttN_0 \rl \ttX_0} = \vct{\vone}_{\ttN_0 \rl \ttN_i} \cdot \vct{\vone}_{\ttN_i \rl \ttX_i} \cdot \vct{\vone}_{\ttX_i \rl \ttX_0}
 \end{equation}
 
 Passando para a representação por quaternions unitários, temos:
 \begin{equation}
-\breve{\mq}_0 = \pm \, \breve{\mn}_i \otimes \breve{\mq}_i \otimes \breve{\mb}_i
+\breve{\mx}_0 = \pm \, \breve{\mn}_i \otimes \breve{\mx}_i \otimes \breve{\mx}'_i
 \end{equation}
 
 O sinal $\pm$ vem do fato de que dois quaternions com sinais opostos representam a mesma rotação.
 
 Utilizando as definições de produto de quaternions apresentadas no apêndice \ref{ap:Quat} (equações \eqref{eq:ProdQuat}, \eqref{eq:ProdQuat1} e \eqref{eq:ProdQuat2}), temos:
 \begin{equation} \label{eq:VincQuat}
-\breve{\mq}_0 = \pm \, \breve{\mQ}_i \cdot \breve{\mq}_i
+\breve{\mx}_0 = \pm \, \breve{\mQ}_i \cdot \breve{\mx}_i
 \end{equation}
 
 Sendo
 \begin{equation}
-\breve{\mQ}_i = \breve{\mQ}_{\mathsf{I}}(\breve{\mn}_i) \cdot \breve{\mQ}_{\mathsf{I}\mathsf{I}} (\breve{\mb}_i)
+\breve{\mQ}_i = \breve{\mQ}_{\mathsf{I}}(\breve{\mn}_i) \cdot \breve{\mQ}_{\mathsf{I}\mathsf{I}} (\breve{\mx}'_i)
 \end{equation}
 
 A equação \eqref{eq:VincQuat} poderia ser utilizada como equação vincular de orientação (escolhendo o sinal de $+$ ou de $-$). Porém, tendo em vista que é uma equação que relaciona matrizes-coluna de ordem 4, haveria 4 equações escalares para restringir 3 graus de liberdade, ou seja, um número maior de equações do que o necessário. Deste modo, será apresentada uma maneira alternativa de representar os vínculos de orientação sem utilizar mais equações do que o necessário.
@@ -2593,16 +2615,16 @@ Portanto:
 
 Sendo assim, a equação \eqref{eq:VincQuat} pode ser reescrita como:
 \begin{equation} \label{eq:VinculosOrientacao_i}
-\breve{\mC}^\msT(\breve{\mq}_0) \cdot \breve{\mQ}_i \cdot \breve{\mq}_i = \mzr
+\breve{\mC}^\msT(\breve{\mx}_0) \cdot \breve{\mQ}_i \cdot \breve{\mx}_i = \mzr
 \end{equation}
 
 Aplicando para cada uma das cadeias, as equações vinculares de orientação são dadas por:
 \begin{equation} \label{eq:VinculosOrientacao}
-\overline{\breve{\mq}}(\mq) = \begin{bmatrix}
-\breve{\mC}^\msT(\breve{\mq}_0) \cdot \breve{\mQ}_1 \cdot \breve{\mq}_1 (\mq_1) \\
-\breve{\mC}^\msT(\breve{\mq}_0) \cdot \breve{\mQ}_2 \cdot \breve{\mq}_2 (\mq_2) \\
+\overline{\breve{\mx}}(\mq) = \begin{bmatrix}
+\breve{\mC}^\msT(\breve{\mx}_0) \cdot \breve{\mQ}_1 \cdot \breve{\mx}_1 (\mq_1) \\
+\breve{\mC}^\msT(\breve{\mx}_0) \cdot \breve{\mQ}_2 \cdot \breve{\mx}_2 (\mq_2) \\
 \vdots \\
-\breve{\mC}^\msT(\breve{\mq}_0) \cdot \breve{\mQ}_n \cdot \breve{\mq}_n (\mq_n)
+\breve{\mC}^\msT(\breve{\mx}_0) \cdot \breve{\mQ}_n \cdot \breve{\mx}_n (\mq_n)
 \end{bmatrix} = \mzr
 \end{equation}
 
@@ -2611,7 +2633,7 @@ Os vínculos de coordenadas generalizadas são dados pela união dos vínculos d
 \begin{equation}
 \overline{\mq}(\mq) = \begin{bmatrix}
 \overline{\mx} (\mq) \\
-\overline{\breve{\mq}} (\mq) 
+\overline{\breve{\mx}} (\mq) 
 \end{bmatrix} = \mzr
 \end{equation}
 
@@ -2702,29 +2724,29 @@ Assim, substituindo \eqref{eq:dxdt} em \eqref{eq:VinculosGenericosVel}, obtemos:
 
 Derivando \eqref{eq:VinculosOrientacao} no tempo, temos:
 \begin{equation} 
-\dot{\overline{\breve{\mq}}}(\mq, \dot{\mq}) = \begin{bmatrix}
-\breve{\mC}^\msT(\breve{\mq}_0) \cdot \breve{\mQ}_1 \cdot \breve{\mC}(\breve{\mq}_1(\mq_1)) \cdot \momega_{\ssB_1}(\mq_1, \dot{\mq}_1) \\
+\dot{\overline{\breve{\mx}}}(\mq, \dot{\mq}) = \begin{bmatrix}
+\breve{\mC}^\msT(\breve{\mx}_0) \cdot \breve{\mQ}_1 \cdot \breve{\mC}(\breve{\mx}_1(\mq_1)) \cdot \momega_{\lllX_1}(\mq_1, \dot{\mq}_1) \\
 \vdots \\
-\breve{\mC}^\msT(\breve{\mq}_0) \cdot \breve{\mQ}_n \cdot \breve{\mC}(\breve{\mq}_n(\mq_n)) \cdot \momega_{\ssB_n}(\mq_n, \dot{\mq}_n)
+\breve{\mC}^\msT(\breve{\mx}_0) \cdot \breve{\mQ}_n \cdot \breve{\mC}(\breve{\mx}_n(\mq_n)) \cdot \momega_{\lllX_n}(\mq_n, \dot{\mq}_n)
 \end{bmatrix} = \mzr
 \end{equation}
 
 Tendo em vista que
 \begin{equation}
-\momega_{\ssB_i}(\mq_i, \dot{\mq}_i) = \mJ_{\omega\,\ssB_i}(\mq_i) \cdot \dot{\mq}_i
+\momega_{\lllX_i}(\mq_i, \dot{\mq}_i) = \mJ_{\omega\,\lllX_i}(\mq_i) \cdot \dot{\mq}_i
 \end{equation}
 
 E definindo
 \begin{equation}
-\mG_i (\mq_i) = \breve{\mC}^\msT(\breve{\mq}_0) \cdot \breve{\mQ}_i \cdot \breve{\mC}(\breve{\mq}_i(\mq_i))
+\mG_i (\mq_i) = \breve{\mC}^\msT(\breve{\mx}_0) \cdot \breve{\mQ}_i \cdot \breve{\mC}(\breve{\mx}_i(\mq_i))
 \end{equation}
 
 Temos:
 \begin{equation*}
-\dot{\overline{\breve{\mq}}}(\mq, \dot{\mq}) = \begin{bmatrix}
-\mG_1 (\mq_1) \cdot \mJ_{\omega\,\ssB_1}(\mq_1) \cdot \dot{\mq}_1  \\
+\dot{\overline{\breve{\mx}}}(\mq, \dot{\mq}) = \begin{bmatrix}
+\mG_1 (\mq_1) \cdot \mJ_{\omega\,\lllX_1}(\mq_1) \cdot \dot{\mq}_1  \\
 \vdots \\
-\mG_n (\mq_n) \cdot \mJ_{\omega\,\ssB_n}(\mq_n) \cdot \dot{\mq}_n
+\mG_n (\mq_n) \cdot \mJ_{\omega\,\lllX_n}(\mq_n) \cdot \dot{\mq}_n
 \end{bmatrix}
 \end{equation*}
 \begin{equation} \label{eq:dVinculosOrientacao}
@@ -2734,9 +2756,9 @@ Temos:
 \mzr &\ldots  & \mG_n (\mq_n)
 \end{bmatrix}
 \begin{bmatrix}
-\mJ_{\omega\,\ssB_1}(\mq_1) & \ldots & \mzr\\
+\mJ_{\omega\,\lllX_1}(\mq_1) & \ldots & \mzr\\
 \vdots & \ddots & \vdots\\
-\mzr &\ldots  & \mJ_{\omega\,\ssB_n}(\mq_n)
+\mzr &\ldots  & \mJ_{\omega\,\lllX_n}(\mq_n)
 \end{bmatrix}
 \begin{bmatrix}
 \dot{\mq}_1 \\
@@ -2747,7 +2769,7 @@ Temos:
 
 Sendo assim, a derivada temporal dos vínculos de orientação pode ser descrita de maneira genérica por:
 \begin{equation}
-\dot{\overline{\breve{\mq}}}(\mq, \dot{\mq}) = \mG(\mq_\emptyset) \cdot \mJ_{\mathsf{w}}(\mq_\emptyset) \cdot \dot{\mq}_\emptyset  = \mzr
+\dot{\overline{\breve{\mx}}}(\mq, \dot{\mq}) = \mG(\mq_\emptyset) \cdot \mJ_{\mathsf{w}}(\mq_\emptyset) \cdot \dot{\mq}_\emptyset  = \mzr
 \end{equation}
 
 Sendo:
@@ -2763,9 +2785,9 @@ Sendo:
 \begin{equation}
 \mJ_{\mathsf{w}}(\mq_\emptyset) =
 \begin{bmatrix}
-\mJ_{\omega\,\ssB_1}(\mq_1) & \ldots & \mzr\\
+\mJ_{\omega\,\lllX_1}(\mq_1) & \ldots & \mzr\\
 \vdots & \ddots & \vdots\\
-\mzr &\ldots  & \mJ_{\omega\,\ssB_n}(\mq_n)
+\mzr &\ldots  & \mJ_{\omega\,\lllX_n}(\mq_n)
 \end{bmatrix}
 \end{equation}
 
@@ -2850,7 +2872,7 @@ Os vínculos de quasi-velocidades são dados pela derivada temporal dos vínculo
 \begin{equation} \label{eq:VinculosQuasiVel}
 \dot{\overline{\mq}}(\mq,\dot{\mq}) = \begin{bmatrix}
 \dot{\overline{\mx}}(\mq,\dot{\mq}) \\
-\dot{\overline{\breve{\mq}}}(\mq,\dot{\mq})
+\dot{\overline{\breve{\mx}}}(\mq,\dot{\mq})
 \end{bmatrix}
 = 
 \begin{bmatrix}
@@ -2882,7 +2904,7 @@ Repare que \eqref{eq:VinculosQuasiVel} pode ser reescrita como:
 %\overline{\mp}(\mq,\mp) = \mA(\mq) \mp = \mzr
 %\end{equation}
 \begin{equation} \label{eq:VinculosQuasiVel2}
-\overline{\mp}(\mq,\dot{\mq}) = \mA(\mq) \cdot \dot{\mq} = \mzr
+\dot{\overline{\mq}}(\mq,\dot{\mq}) = \mA(\mq) \cdot \dot{\mq} = \mzr
 \end{equation}
 
 Sendo $\mA$ dado por:
@@ -2930,7 +2952,7 @@ Os vínculos de quasi-velocidades são dados pela derivada temporal dos vínculo
 \ddot{\overline{\mq}}(\mq,\dot{\mq},\ddot{\mq}) =
 \begin{bmatrix}
 \ddot{\overline{\mx}}(\mq,\dot{\mq},\ddot{\mq}) \\
-\ddot{\overline{\breve{\mq}}}(\mq,\dot{\mq},\ddot{\mq})
+\ddot{\overline{\breve{\mx}}}(\mq,\dot{\mq},\ddot{\mq})
 \end{bmatrix}
 = 
 \begin{bmatrix}
@@ -2954,17 +2976,17 @@ Sendo:
 %\end{equation}
 \begin{equation}
 \underaccent{\sim}{\ma}(\mq_\emptyset, \dot{\mq}_\emptyset) = \begin{bmatrix}
-\underaccent{\sim}{\ma}_{\ssB_1}(\mq_1, \dot{\mq}_1)^\msT & ... & \underaccent{\sim}{\ma}_{\ssB_n}(\mq_n, \dot{\mq}_n)^\msT
+\underaccent{\sim}{\ma}_{\lllX_1}(\mq_1, \dot{\mq}_1)^\msT & ... & \underaccent{\sim}{\ma}_{\lllX_n}(\mq_n, \dot{\mq}_n)^\msT
 \end{bmatrix}^\msT
 \end{equation}
 \begin{equation}
 \underaccent{\sim}{\malpha}(\mq_\emptyset, \dot{\mq}_\emptyset) = \begin{bmatrix}
-\underaccent{\sim}{\malpha}_{\ssB_1}(\mq_1, \dot{\mq}_1)^\msT & ... & \underaccent{\sim}{\malpha}_{\ssB_n}(\mq_n, \dot{\mq}_n)^\msT
+\underaccent{\sim}{\malpha}_{\lllX_1}(\mq_1, \dot{\mq}_1)^\msT & ... & \underaccent{\sim}{\malpha}_{\lllX_n}(\mq_n, \dot{\mq}_n)^\msT
 \end{bmatrix}^\msT
 \end{equation}
 \begin{equation}
 \momega(\mq_\emptyset, \dot{\mq}_\emptyset) = \mJ_{\mathsf{w}}(\mq_\emptyset) \cdot \dot{\mq}_\emptyset = \begin{bmatrix}
-\momega_{\ssB_1}(\mq_1, \dot{\mq}_1)^\msT & ... & \momega_{\ssB_n}(\mq_n, \dot{\mq}_n)^\msT
+\momega_{\lllX_1}(\mq_1, \dot{\mq}_1)^\msT & ... & \momega_{\lllX_n}(\mq_n, \dot{\mq}_n)^\msT
 \end{bmatrix}^\msT
 \end{equation}
 
@@ -2978,7 +3000,7 @@ Sendo:
 \end{equation}
 
 \begin{equation}
-\dot{\mG}_i (\mq_i, \dot{\mq}_i) = \breve{\mC}^\msT(\breve{\mq}_0) \cdot \breve{\mQ}_i \cdot \breve{\mC}\big( \breve{\mC}( \breve{\mq}_i(\mq_i) ) \cdot \momega_{\ssB_i} (\mq_i, \dot{\mq}_i) \big)
+\dot{\mG}_i (\mq_i, \dot{\mq}_i) = \breve{\mC}^\msT(\breve{\mx}_0) \cdot \breve{\mQ}_i \cdot \breve{\mC}\big( \breve{\mC}( \breve{\mx}_i(\mq_i) ) \cdot \momega_{\lllX_i} (\mq_i, \dot{\mq}_i) \big)
 \end{equation}
 
 Repare que \eqref{eq:VinculosQuasiAce} pode ser reescrita como:
@@ -3183,7 +3205,7 @@ Reescrevendo em forma matricial:
 \ddot{\overline{\mq}} + 2\lambda \dot{\overline{\mq}} + \lambda^2 \overline{\mq} = \mzr
 \end{equation}
 
-Substituindo \eqref{eq:VinculosQuasiVel} e \eqref{eq:VinculosQuasiAce} em \eqref{eq:VinculosQuasiAce2}, temos:
+Substituindo \eqref{eq:VinculosQuasiVel2} e \eqref{eq:VinculosQuasiAce_} em \eqref{eq:VinculosQuasiAce2}, temos:
 \begin{equation} \label{eq:VinculosQuasiAce3}
 \ddot{\overline{\mq}}'(\mq, \dot{\mq}, \ddot{\mq}) = \mA(\mq) \ddot{\mq} + \mb(\mq, \dot{\mq}) + 2\lambda \mA(\mq) \cdot \dot{\mq} + \lambda^2 \overline{\mq}(\mq) = \mzr
 \end{equation}
@@ -5712,16 +5734,16 @@ Da mesma maneira que é possível definir a multiplicação de quaternions, tamb
 \end{bmatrix}^\msT
 \end{equation}
 
-Também é possível definir o quaternion conjugado $\breve{\mq}'$ como o quaternion com a parte vetorial com sinal invertido e a parte real com o mesmo sinal, ou seja:
+Também é possível definir o quaternion conjugado $\breve{\mq}^*$ como o quaternion com a parte vetorial com sinal invertido e a parte real com o mesmo sinal, ou seja:
 \begin{equation}
-\breve{\mq}' = \begin{bmatrix}
+\breve{\mq}^* = \begin{bmatrix}
 -q_i & -q_j & -q_k & q_r &
 \end{bmatrix}^\msT
 \end{equation}
 
 Para o caso de quaternions unitários, temos que o quaternion inverso é igual ao quaternion conjugado, ou seja:
 \begin{equation}
-\breve{\mq}^\msI = \breve{\mq}'
+\breve{\mq}^\msI = \breve{\mq}^*
 \end{equation}
 
 \subsection{Rotações elementares}
@@ -5803,7 +5825,7 @@ Com o intuito de evitar raízes de números negativos, divisões por zero, e pro
 A conversão da representação de orientação por quatertions para a representação por matrizes de rotação é dada pela seguinte expressão:
 
 \begin{equation} \label{eq:Quat2Matriz}
-\mR = \begin{bmatrix}
+\mR = \underline{\mR}(\breve{\mq}) = \begin{bmatrix}
 1 - 2 q_j^2 - 2 q_k^2 & 2(q_i q_j - q_k q_r) & 2(q_i q_k + q_j q_r) \\
 2(q_i q_j + q_k q_r) & 1 - 2 q_i^2 - 2q_k^2 & 2(q_j q_k - q_i q_r) \\
 2(q_i q_k - q_j q_r) & 2(q_i q_r + q_j q_k) & 1 - 2 q_i^2 - 2 q_j^2
