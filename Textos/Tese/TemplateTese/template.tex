@@ -2102,20 +2102,20 @@ Sejam $\ssB_0$, $\ssB_1$, ..., $\ssB_{n} \,$ $n+1$ subsistemas mec\^anicos e $\s
 \item $\overline{\mq}(\mq)$: matriz-coluna dos vínculos de coordenadas generalizadas entre subsistemas. As equações vinculares são dadas por $\overline{\mq}(\mq) = \mzr $.
 %\item $\overline{\momega}(\mq,\dot{\mq})$: matriz-coluna dos v\'inculos de velocidades angulares entre subsistemas. As equa\c{c}\~oes vinculares s\~ao dadas por $\overline{\momega}(\mq,\dot{\mq}) = \mzr $.
 \item $\mx_i(\mq_i), \,i=1, ..., n$: $\vct{\ttx_i}_{\ttN_i}$ escrito em função das coordenadas $\mq_i$.
-\item $\mJ_{v\,\lllX_i}(\mq_i), \,i=1, ..., n$: jacobiano de velocidades $\mJ_v$ do subsistema $\ssB_i$.
-\item $\mJ_{\omega\,\lllX_i}(\mq_i), \,i=1, ..., n$: jacobiano de velocidades angulares $\mJ_\omega$ do subsistema $\ssB_i$.
-\item $\underaccent{\sim}{\ma}_{\lllX_i}(\mq_i, \dot{\mq}_i), \,i=1, ..., n$: matriz-coluna $\underaccent{\sim}{\ma}$ do subsistema $\ssB_i$.
-\item $\underaccent{\sim}{\malpha}_{\lllX_i}(\mq_i, \dot{\mq}_i), \,i=1, ..., n$: matriz-coluna $\underaccent{\sim}{\malpha}$ do subsistema $\ssB_i$.
-\item $\mv_{\lllX_i}(\mq_i, \dot{\mq}_i), \,i=1, ..., n$: $\vct{\vv_{\ttx_i}^{\lllN}}_{\ttN_i} = \mJ_{v\,\lllX_i}(\mq_i) \cdot \dot{\mq}_i$, ou seja matriz-coluna de componentes velocidade do efetuador $\llX_i$.
-\item $\momega_{\lllX_i}(\mq_i, \dot{\mq}_i), \,i=1, ..., n$: $\vct{\vomega_{\lllB_i}^{\lllN}}_{\ttN_i} = \mJ_{\omega\,\lllX_i}(\mq_i) \cdot \dot{\mq}_i$, ou seja matriz-coluna de componentes velocidade angular do efetuador $\llX_i$.
+\item $\mJ_{v\,\ssB_i}(\mq_i), \,i=1, ..., n$: jacobiano de velocidades $\mJ_v$ do subsistema $\ssB_i$.
+\item $\mJ_{\omega\,\ssB_i}(\mq_i), \,i=1, ..., n$: jacobiano de velocidades angulares $\mJ_\omega$ do subsistema $\ssB_i$.
+\item $\underaccent{\sim}{\ma}_{\ssB_i}(\mq_i, \dot{\mq}_i), \,i=1, ..., n$: matriz-coluna $\underaccent{\sim}{\ma}$ do subsistema $\ssB_i$.
+\item $\underaccent{\sim}{\malpha}_{\ssB_i}(\mq_i, \dot{\mq}_i), \,i=1, ..., n$: matriz-coluna $\underaccent{\sim}{\malpha}$ do subsistema $\ssB_i$.
+\item $\mv_{\ssB_i}(\mq_i, \dot{\mq}_i), \,i=1, ..., n$: $\vct{\vv_{\ttx_i}^{\lllN}}_{\ttN_i} = \mJ_{v\,\ssB_i}(\mq_i) \cdot \dot{\mq}_i$, ou seja matriz-coluna de componentes velocidade do efetuador $\llX_i$.
+\item $\momega_{\ssB_i}(\mq_i, \dot{\mq}_i), \,i=1, ..., n$: $\vct{\vomega_{\lllB_i}^{\lllN}}_{\ttN_i} = \mJ_{\omega\,\ssB_i}(\mq_i) \cdot \dot{\mq}_i$, ou seja matriz-coluna de componentes velocidade angular do efetuador $\llX_i$.
 \item $\mM_{\ssB_i}(\mq_i), \,i=0, ..., n$: matriz de in\'ercia generalizada do subsistema $\ssB_i$.
 \item $\mnu_{\ssB_i}(\mq_i, \dot{\mq}_i), \,i=0, ..., n$: matriz-coluna dos esforços de inércia girosc\'opica e atrito generalizados do subsistema $\ssB_i$.
 \item $\mg_{\ssB_i}(\mq_i), \,i=0, ..., n$: matriz-coluna dos esfor\c{c}os gravitacionais generalizados do subsistema $\ssB_i$.
 \item $\mu_{\ssB_i}, \,i=0, ..., n$: matriz-coluna dos esfor\c{c}os ativos externos generalizados aplicados ao subsistema $\ssB_i$.
 \item $\breve{\mx}_0$: representação via quaternion unitário da matriz de rotação $\vct{\vone}_{\ttN_0 \rl \ttX_0}$ (orientação do efetuador/plataforma do mecanismo paralelos).
-\item $\breve{\mx}_i, \,i=0, ..., n$: representação via quaternion unitário da matriz de rotação $\vct{\vone}_{\ttN_i \rl \ttX_i}$ (orientação do efetuador da cadeia serial $\ssB_i$).
-\item $\breve{\mn}_i, \,i=0, ..., n$: representação via quaternion unitário da matriz de rotação $\vct{\vone}_{\ttN_0 \rl \ttN_i}$.
-\item $\breve{\mx}'_i, \,i=0, ..., n$: representação via quaternion unitário da matriz de rotação $\vct{\vone}_{\ttX_i \rl \ttX_0}$.
+\item $\breve{\mx}_i, \,i=1, ..., n$: representação via quaternion unitário da matriz de rotação $\vct{\vone}_{\ttN_i \rl \ttX_i}$ (orientação do efetuador da cadeia serial $\ssB_i$).
+\item $\breve{\mn}_i, \,i=1, ..., n$: representação via quaternion unitário da matriz de rotação $\vct{\vone}_{\ttN_0 \rl \ttN_i}$.
+\item $\breve{\mx}'_i, \,i=1, ..., n$: representação via quaternion unitário da matriz de rotação $\vct{\vone}_{\ttX_i \rl \ttX_0}$.
 \end{itemize}
 
 \section{Modelo dos subsistemas} 
@@ -2667,12 +2667,12 @@ A derivada $\dot{\mx}$ pode ser obtida da seguinte maneira:
 \mJ_{v\,\ssB_n}(\mq_n) \cdot \dot{\mq}_n
 \end{bmatrix}
 =
-\mJ_{\mathsf{v}}(\mq_\emptyset) \cdot \dot{\mq}_\emptyset
+\mJ_v^\star(\mq_\emptyset) \cdot \dot{\mq}_\emptyset
 \end{equation}
 
 Sendo:
 \begin{equation}
-\mJ_{\mathsf{v}}(\mq_\emptyset) =
+\mJ_v^\star(\mq_\emptyset) =
 \begin{bmatrix}
 \mJ_{v\,\ssB_1}(\mq_1) & \ldots & \mzr\\
 \vdots & \ddots & \vdots\\
@@ -2713,11 +2713,11 @@ Sendo:
 
 %Assim, substituindo \eqref{eq:dxdt} e \eqref{eq:dcdt} em \eqref{eq:VinculosGenericosVel}, obtemos:
 %\begin{equation} \label{eq:VinculosGenericosVelocidades}
-%\dot{\overline{\mq}}(\mq,\mp) = \mD \cdot \dot{\mx}^\ast + \mS^\ast(\mtheta^\ast) \cdot \momega^\ast - \mE \cdot \mJ_{\mathsf{v}}(\mq^\diamond) \cdot \mp^\diamond  - \mF \cdot \mp^\diamond = \mzr
+%\dot{\overline{\mq}}(\mq,\mp) = \mD \cdot \dot{\mx}^\ast + \mS^\ast(\mtheta^\ast) \cdot \momega^\ast - \mE \cdot \mJ_v^\star(\mq^\diamond) \cdot \mp^\diamond  - \mF \cdot \mp^\diamond = \mzr
 %\end{equation}
 Assim, substituindo \eqref{eq:dxdt} em \eqref{eq:VinculosGenericosVel}, obtemos:
 \begin{equation} \label{eq:VinculosGenericosVelocidades}
-\dot{\overline{\mx}}(\mq,\dot{\mq}) = \mD \cdot \dot{\mq}_0 - (\mE \cdot \mJ_{\mathsf{v}}(\mq_\emptyset) + \mF) \cdot \dot{\mq}_\emptyset = \mzr
+\dot{\overline{\mx}}(\mq,\dot{\mq}) = \mD \cdot \dot{\mq}_0 - (\mE \cdot \mJ_v^\star(\mq_\emptyset) + \mF) \cdot \dot{\mq}_\emptyset = \mzr
 \end{equation}
 
 \subsection{Derivada temporal dos vínculos de orientação}
@@ -2725,15 +2725,15 @@ Assim, substituindo \eqref{eq:dxdt} em \eqref{eq:VinculosGenericosVel}, obtemos:
 Derivando \eqref{eq:VinculosOrientacao} no tempo, temos:
 \begin{equation} 
 \dot{\overline{\breve{\mx}}}(\mq, \dot{\mq}) = \begin{bmatrix}
-\breve{\mC}^\msT(\breve{\mx}_0) \cdot \breve{\mQ}_1 \cdot \breve{\mC}(\breve{\mx}_1(\mq_1)) \cdot \momega_{\lllX_1}(\mq_1, \dot{\mq}_1) \\
+\breve{\mC}^\msT(\breve{\mx}_0) \cdot \breve{\mQ}_1 \cdot \breve{\mC}(\breve{\mx}_1(\mq_1)) \cdot \momega_{\ssB_1}(\mq_1, \dot{\mq}_1) \\
 \vdots \\
-\breve{\mC}^\msT(\breve{\mx}_0) \cdot \breve{\mQ}_n \cdot \breve{\mC}(\breve{\mx}_n(\mq_n)) \cdot \momega_{\lllX_n}(\mq_n, \dot{\mq}_n)
+\breve{\mC}^\msT(\breve{\mx}_0) \cdot \breve{\mQ}_n \cdot \breve{\mC}(\breve{\mx}_n(\mq_n)) \cdot \momega_{\ssB_n}(\mq_n, \dot{\mq}_n)
 \end{bmatrix} = \mzr
 \end{equation}
 
 Tendo em vista que
 \begin{equation}
-\momega_{\lllX_i}(\mq_i, \dot{\mq}_i) = \mJ_{\omega\,\lllX_i}(\mq_i) \cdot \dot{\mq}_i
+\momega_{\ssB_i}(\mq_i, \dot{\mq}_i) = \mJ_{\omega\,\ssB_i}(\mq_i) \cdot \dot{\mq}_i
 \end{equation}
 
 E definindo
@@ -2744,9 +2744,9 @@ E definindo
 Temos:
 \begin{equation*}
 \dot{\overline{\breve{\mx}}}(\mq, \dot{\mq}) = \begin{bmatrix}
-\mG_1 (\mq_1) \cdot \mJ_{\omega\,\lllX_1}(\mq_1) \cdot \dot{\mq}_1  \\
+\mG_1 (\mq_1) \cdot \mJ_{\omega\,\ssB_1}(\mq_1) \cdot \dot{\mq}_1  \\
 \vdots \\
-\mG_n (\mq_n) \cdot \mJ_{\omega\,\lllX_n}(\mq_n) \cdot \dot{\mq}_n
+\mG_n (\mq_n) \cdot \mJ_{\omega\,\ssB_n}(\mq_n) \cdot \dot{\mq}_n
 \end{bmatrix}
 \end{equation*}
 \begin{equation} \label{eq:dVinculosOrientacao}
@@ -2756,9 +2756,9 @@ Temos:
 \mzr &\ldots  & \mG_n (\mq_n)
 \end{bmatrix}
 \begin{bmatrix}
-\mJ_{\omega\,\lllX_1}(\mq_1) & \ldots & \mzr\\
+\mJ_{\omega\,\ssB_1}(\mq_1) & \ldots & \mzr\\
 \vdots & \ddots & \vdots\\
-\mzr &\ldots  & \mJ_{\omega\,\lllX_n}(\mq_n)
+\mzr &\ldots  & \mJ_{\omega\,\ssB_n}(\mq_n)
 \end{bmatrix}
 \begin{bmatrix}
 \dot{\mq}_1 \\
@@ -2769,7 +2769,7 @@ Temos:
 
 Sendo assim, a derivada temporal dos vínculos de orientação pode ser descrita de maneira genérica por:
 \begin{equation}
-\dot{\overline{\breve{\mx}}}(\mq, \dot{\mq}) = \mG(\mq_\emptyset) \cdot \mJ_{\mathsf{w}}(\mq_\emptyset) \cdot \dot{\mq}_\emptyset  = \mzr
+\dot{\overline{\breve{\mx}}}(\mq, \dot{\mq}) = \mG(\mq_\emptyset) \cdot \mJ_\omega^\star(\mq_\emptyset) \cdot \dot{\mq}_\emptyset  = \mzr
 \end{equation}
 
 Sendo:
@@ -2783,11 +2783,11 @@ Sendo:
 \end{equation}
 
 \begin{equation}
-\mJ_{\mathsf{w}}(\mq_\emptyset) =
+\mJ_\omega^\star(\mq_\emptyset) =
 \begin{bmatrix}
-\mJ_{\omega\,\lllX_1}(\mq_1) & \ldots & \mzr\\
+\mJ_{\omega\,\ssB_1}(\mq_1) & \ldots & \mzr\\
 \vdots & \ddots & \vdots\\
-\mzr &\ldots  & \mJ_{\omega\,\lllX_n}(\mq_n)
+\mzr &\ldots  & \mJ_{\omega\,\ssB_n}(\mq_n)
 \end{bmatrix}
 \end{equation}
 
@@ -2843,10 +2843,10 @@ Sendo:
 %
 %Sendo assim, os vínculos de velocidade angular entre subsistemas podem ser descritos de maneira genérica por:
 %%\begin{equation}
-%%\overline{\momega}(\mq,\mp) = \mP \cdot \momega^\ast - \mQ \cdot \mJ_{\mathsf{w}}(\mq^\diamond) \cdot \mp^\diamond  = \mzr
+%%\overline{\momega}(\mq,\mp) = \mP \cdot \momega^\ast - \mQ \cdot \mJ_\omega^\star(\mq^\diamond) \cdot \mp^\diamond  = \mzr
 %%\end{equation}
 %\begin{equation}
-%\overline{\momega}(\mq,\dot{\mq}) = \mJ_{\mathsf{w}}(\mq_\emptyset) \cdot \dot{\mq}_\emptyset  = \mzr
+%\overline{\momega}(\mq,\dot{\mq}) = \mJ_\omega^\star(\mq_\emptyset) \cdot \dot{\mq}_\emptyset  = \mzr
 %\end{equation}
 %
 %Sendo:
@@ -2858,7 +2858,7 @@ Sendo:
 %%\end{bmatrix}^\msT
 %%\end{equation}
 %\begin{equation} \label{eq:VinculosGenericosVelocidadesAngulares}
-%\mJ_{\mathsf{w}}(\mq_\emptyset) =
+%\mJ_\omega^\star(\mq_\emptyset) =
 %\begin{bmatrix}
 %\mJ_{\omega\,\ssB_1}(\mq_1) & \ldots & \mzr\\
 %\vdots & \ddots & \vdots\\
@@ -2876,8 +2876,8 @@ Os vínculos de quasi-velocidades são dados pela derivada temporal dos vínculo
 \end{bmatrix}
 = 
 \begin{bmatrix}
-\mD \cdot \dot{\mq}_0  - \mE \cdot \mJ_{\mathsf{v}}(\mq_\emptyset) \cdot \dot{\mq}_\emptyset  - \mF \cdot \dot{\mq}_\emptyset \\
-  \mG(\mq_\emptyset) \cdot \mJ_{\mathsf{w}}(\mq_\emptyset) \cdot \dot{\mq}_\emptyset
+\mD \cdot \dot{\mq}_0  - \mE \cdot \mJ_v^\star(\mq_\emptyset) \cdot \dot{\mq}_\emptyset  - \mF \cdot \dot{\mq}_\emptyset \\
+  \mG(\mq_\emptyset) \cdot \mJ_\omega^\star(\mq_\emptyset) \cdot \dot{\mq}_\emptyset
 \end{bmatrix}
 =
 \mzr
@@ -2890,8 +2890,8 @@ Os vínculos de quasi-velocidades são dados pela derivada temporal dos vínculo
 %\end{bmatrix}
 %= 
 %\begin{bmatrix}
-%\mD \cdot \dot{\mx}^\ast + \mS^\ast(\mtheta^\ast) \cdot \momega^\ast - \mE \cdot \mJ_{\mathsf{v}}(\mq^\diamond) \cdot \mp^\diamond  - \mF \cdot \mp^\diamond \\
-%\mP \cdot   \momega^\ast - \mQ \cdot \mJ_{\mathsf{w}}(\mq^\diamond) \cdot \mp^\diamond
+%\mD \cdot \dot{\mx}^\ast + \mS^\ast(\mtheta^\ast) \cdot \momega^\ast - \mE \cdot \mJ_v^\star(\mq^\diamond) \cdot \mp^\diamond  - \mF \cdot \mp^\diamond \\
+%\mP \cdot   \momega^\ast - \mQ \cdot \mJ_\omega^\star(\mq^\diamond) \cdot \mp^\diamond
 %\end{bmatrix}
 %=
 %\mzr
@@ -2911,15 +2911,15 @@ Sendo $\mA$ dado por:
 %\begin{equation}
 %\mA(\mq) = 
 %\begin{bmatrix}
-%\mD & \mS^\ast(\mtheta^\ast) & -(\mE \cdot \mJ_{\mathsf{v}}(\mq\cir) + \mF) \\
-%\mzr &  \mP & -\mQ \cdot \mJ_{\mathsf{w}}(\mq\cir) \\
+%\mD & \mS^\ast(\mtheta^\ast) & -(\mE \cdot \mJ_v^\star(\mq\cir) + \mF) \\
+%\mzr &  \mP & -\mQ \cdot \mJ_\omega^\star(\mq\cir) \\
 %\end{bmatrix}
 %\end{equation}
 \begin{equation}
 \mA(\mq) = 
 \begin{bmatrix}
-\mD  & -(\mE \cdot \mJ_{\mathsf{v}}(\mq_\emptyset) + \mF) \\
-\mzr &  \mG(\mq_\emptyset) \cdot \mJ_{\mathsf{w}}(\mq_\emptyset) \\
+\mD  & -(\mE \cdot \mJ_v^\star(\mq_\emptyset) + \mF) \\
+\mzr &  \mG(\mq_\emptyset) \cdot \mJ_\omega^\star(\mq_\emptyset) \\
 \end{bmatrix}
 \end{equation}
 
@@ -2927,7 +2927,7 @@ No caso de não haverem vínculos de orientação entre os efetuadores das cadei
 \begin{equation}
 \mA(\mq) = 
 \begin{bmatrix}
-\mD  & -(\mE \cdot \mJ_{\mathsf{v}}(\mq_\emptyset) + \mF) \\
+\mD  & -(\mE \cdot \mJ_v^\star(\mq_\emptyset) + \mF) \\
 \end{bmatrix}
 \end{equation}
 
@@ -2942,8 +2942,8 @@ Os vínculos de quasi-velocidades são dados pela derivada temporal dos vínculo
 %\end{bmatrix}
 %= 
 %\begin{bmatrix}
-%\mD \cdot \ddot{\mq}^\ast - \mE \cdot (\mJ_{\mathsf{v}}(\mq^\diamond) \cdot \dot{\mp}^\diamond + \underaccent{\sim}{\ma}(\mq, \mp))  - \mF \cdot \dot{\mp}^\diamond \\
-%\mP \cdot \malpha^\ast - \mQ \cdot (\mJ_{\mathsf{w}}(\mq^\diamond) \cdot \dot{\mp}^\diamond + \underaccent{\sim}{ \malpha }(\mq, \mp))  - \mR \cdot \dot{\mp}^\diamond
+%\mD \cdot \ddot{\mq}^\ast - \mE \cdot (\mJ_v^\star(\mq^\diamond) \cdot \dot{\mp}^\diamond + \underaccent{\sim}{\ma}(\mq, \mp))  - \mF \cdot \dot{\mp}^\diamond \\
+%\mP \cdot \malpha^\ast - \mQ \cdot (\mJ_\omega^\star(\mq^\diamond) \cdot \dot{\mp}^\diamond + \underaccent{\sim}{ \malpha }(\mq, \mp))  - \mR \cdot \dot{\mp}^\diamond
 %\end{bmatrix}
 %=
 %\mzr
@@ -2956,8 +2956,8 @@ Os vínculos de quasi-velocidades são dados pela derivada temporal dos vínculo
 \end{bmatrix}
 = 
 \begin{bmatrix}
-\mD \cdot \ddot{\mq}_0 - \mE \cdot (\mJ_{\mathsf{v}}(\mq_\emptyset) \cdot \ddot{\mq}_\emptyset + \underaccent{\sim}{\ma}(\mq_\emptyset, \dot{\mq}_\emptyset))  - \mF \cdot \ddot{\mq}_\emptyset \\
-\mG(\mq_\emptyset) \cdot ( \mJ_{\mathsf{w}}(\mq_\emptyset) \cdot \ddot{\mq}_\emptyset + \underaccent{\sim}{ \malpha }(\mq_\emptyset, \dot{\mq}_\emptyset) ) + \dot{\mG}(\mq_\emptyset, \dot{\mq}_\emptyset) \cdot  \momega(\mq_\emptyset, \dot{\mq}_\emptyset)
+\mD \cdot \ddot{\mq}_0 - \mE \cdot (\mJ_v^\star(\mq_\emptyset) \cdot \ddot{\mq}_\emptyset + \underaccent{\sim}{\ma}^\star(\mq_\emptyset, \dot{\mq}_\emptyset))  - \mF \cdot \ddot{\mq}_\emptyset \\
+\mG(\mq_\emptyset) \cdot ( \mJ_\omega^\star(\mq_\emptyset) \cdot \ddot{\mq}_\emptyset + \underaccent{\sim}{ \malpha }^\star(\mq_\emptyset, \dot{\mq}_\emptyset) ) + \dot{\mG}(\mq_\emptyset, \dot{\mq}_\emptyset) \cdot  \momega^\star(\mq_\emptyset, \dot{\mq}_\emptyset)
 \end{bmatrix}
 =
 \mzr
@@ -2975,18 +2975,18 @@ Sendo:
 %\end{bmatrix}^\msT
 %\end{equation}
 \begin{equation}
-\underaccent{\sim}{\ma}(\mq_\emptyset, \dot{\mq}_\emptyset) = \begin{bmatrix}
-\underaccent{\sim}{\ma}_{\lllX_1}(\mq_1, \dot{\mq}_1)^\msT & ... & \underaccent{\sim}{\ma}_{\lllX_n}(\mq_n, \dot{\mq}_n)^\msT
+\underaccent{\sim}{\ma}^\star(\mq_\emptyset, \dot{\mq}_\emptyset) = \begin{bmatrix}
+\underaccent{\sim}{\ma}_{\ssB_1}(\mq_1, \dot{\mq}_1)^\msT & ... & \underaccent{\sim}{\ma}_{\ssB_n}(\mq_n, \dot{\mq}_n)^\msT
 \end{bmatrix}^\msT
 \end{equation}
 \begin{equation}
-\underaccent{\sim}{\malpha}(\mq_\emptyset, \dot{\mq}_\emptyset) = \begin{bmatrix}
-\underaccent{\sim}{\malpha}_{\lllX_1}(\mq_1, \dot{\mq}_1)^\msT & ... & \underaccent{\sim}{\malpha}_{\lllX_n}(\mq_n, \dot{\mq}_n)^\msT
+\underaccent{\sim}{\malpha}^\star(\mq_\emptyset, \dot{\mq}_\emptyset) = \begin{bmatrix}
+\underaccent{\sim}{\malpha}_{\ssB_1}(\mq_1, \dot{\mq}_1)^\msT & ... & \underaccent{\sim}{\malpha}_{\ssB_n}(\mq_n, \dot{\mq}_n)^\msT
 \end{bmatrix}^\msT
 \end{equation}
 \begin{equation}
-\momega(\mq_\emptyset, \dot{\mq}_\emptyset) = \mJ_{\mathsf{w}}(\mq_\emptyset) \cdot \dot{\mq}_\emptyset = \begin{bmatrix}
-\momega_{\lllX_1}(\mq_1, \dot{\mq}_1)^\msT & ... & \momega_{\lllX_n}(\mq_n, \dot{\mq}_n)^\msT
+\momega^\star(\mq_\emptyset, \dot{\mq}_\emptyset) = \mJ_\omega^\star(\mq_\emptyset) \cdot \dot{\mq}_\emptyset = \begin{bmatrix}
+\momega_{\ssB_1}(\mq_1, \dot{\mq}_1)^\msT & ... & \momega_{\ssB_n}(\mq_n, \dot{\mq}_n)^\msT
 \end{bmatrix}^\msT
 \end{equation}
 
@@ -3000,7 +3000,7 @@ Sendo:
 \end{equation}
 
 \begin{equation}
-\dot{\mG}_i (\mq_i, \dot{\mq}_i) = \breve{\mC}^\msT(\breve{\mx}_0) \cdot \breve{\mQ}_i \cdot \breve{\mC}\big( \breve{\mC}( \breve{\mx}_i(\mq_i) ) \cdot \momega_{\lllX_i} (\mq_i, \dot{\mq}_i) \big)
+\dot{\mG}_i (\mq_i, \dot{\mq}_i) = \breve{\mC}^\msT(\breve{\mx}_0) \cdot \breve{\mQ}_i \cdot \breve{\mC}\big( \breve{\mC}( \breve{\mx}_i(\mq_i) ) \cdot \momega_{\ssB_i} (\mq_i, \dot{\mq}_i) \big)
 \end{equation}
 
 Repare que \eqref{eq:VinculosQuasiAce} pode ser reescrita como:
@@ -3022,14 +3022,14 @@ Sendo:
 \begin{equation}
 \mb(\mq,\dot{\mq}) =
 \begin{bmatrix}
--\mE \cdot \underaccent{\sim}{\ma}(\mq_\emptyset, \dot{\mq}_\emptyset) \\
-\mG(\mq_\emptyset) \cdot \underaccent{\sim}{\malpha}(\mq_\emptyset, \dot{\mq}_\emptyset)  + \dot{\mG}(\mq_\emptyset, \dot{\mq}_\emptyset) \cdot  \momega(\mq_\emptyset, \dot{\mq}_\emptyset) \\
+-\mE \cdot \underaccent{\sim}{\ma}^\star(\mq_\emptyset, \dot{\mq}_\emptyset) \\
+\mG(\mq_\emptyset) \cdot \underaccent{\sim}{\malpha}^\star(\mq_\emptyset, \dot{\mq}_\emptyset)  + \dot{\mG}(\mq_\emptyset, \dot{\mq}_\emptyset) \cdot  \momega^\star(\mq_\emptyset, \dot{\mq}_\emptyset) \\
 \end{bmatrix}
 \end{equation}
 
 Para o caso de não haver vínculos de orientação, temos simplesmente:
 \begin{equation}
-\mb(\mq,\dot{\mq}) =-\mE \cdot \underaccent{\sim}{\ma}(\mq_\emptyset, \dot{\mq}_\emptyset)
+\mb(\mq,\dot{\mq}) =-\mE \cdot \underaccent{\sim}{\ma}^\star(\mq_\emptyset, \dot{\mq}_\emptyset)
 \end{equation}
 
 \section{Acoplamento de subsistemas} 
