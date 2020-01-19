@@ -900,6 +900,130 @@ Tendo em vista que as coordenadas dos versores $\vk_{\ttB_i}$ no sistema $\ttN$ 
 \end{split}
 \end{empheq}
 
+\subsection{Cinemática de velocidades angulares - novo}
+
+Sabe-se que a velocidade angular de cada ligamento $\llB_i$ em relação ao referência anterior $\llB_{i-1}$ é dada por:
+\begin{equation} \label{eq:VelAngRel}
+\begin{split}
+\vomega_{\lllB_{i}}^{\lllB_{i-1}} = 
+\begin{cases}
+\vzr, & \text{i-ésima junta prismática} \\
+\dot{q}_{i} \vk_{\ttB_{i-1}}, & \text{i-ésima junta rotativa}
+\end{cases}\, i=1,...,\nu
+\end{split}
+\end{equation}
+
+Sendo assim, definindo:
+\begin{empheq}[box=\myyellowbox]{equation}  \label{eq:jwi_}
+\begin{split}
+\mj_{\omega\,i}(\mq) = \begin{cases}
+\mzr, & \text{i-ésima junta prismática} \\
+\mk_{i-1} , & \text{i-ésima junta rotativa} \\
+\end{cases} \, i=1,...,\nu
+\end{split}
+\end{empheq}
+
+Aplicando \eqref{eq:VelAngRel} no sistema $\ttN$, temos que:
+\begin{empheq}[box=\myyellowbox]{equation}
+\momega'_i(\mq, \dot{q}_i) = \mj_{\omega\,i} (\mq) \, \dot{q}_i, \, i=1,...,\nu
+\end{empheq}
+
+Para obter a velocidade angular de cada ligamento em relação ao referencial $\llN$, parte-se do ligamente $\llB_1$. Tendo em vista que $\llB_0$ e $\llN$ são o mesmo referencial, temos que:
+\begin{equation}
+\vct{\momega_{\lllB_1}^{\lllN}}_\ttN = \vct{\momega_{\lllB_1}^{\lllB_0}}_\ttN
+\end{equation}
+
+Ou seja
+\begin{equation}
+\momega_1(\mq, \dot{\mq}) = \momega'_1(\mq, \dot{q}_1) = \mj_{\omega\,1} (\mq) \, \dot{q}_1
+\end{equation}
+
+Além disso, tendo em vista que $\dot{q}_i$ pode ser escrito como
+\begin{equation}
+\dot{q}_i = \frac{\partial \mq}{\partial q_i}^\msT \dot{\mq}
+\end{equation}
+
+Sendo
+\begin{equation}
+\begin{split}
+\frac{\partial \mq}{\partial q_j} \llbracket i \rrbracket =
+\begin{cases}
+0, & \text{ se } i \neq j \\
+1, & \text{ se } i = j 
+\end{cases}
+\, i=1,...,\nu
+\end{split}
+\end{equation}
+
+$\momega_1$ pode ser escrito como:
+\begin{empheq}[box=\lightbluebox]{equation}
+\momega_1(\mq, \dot{\mq}) = \mJ_{\omega\,1}(\mq) \, \dot{\mq}
+\end{empheq}
+
+Sendo
+\begin{empheq}[box=\lightbluebox]{equation}
+\mJ_{\omega\,1}(\mq) = \mj_{\omega\,1}(\mq) \, \frac{\partial \mq}{\partial q_1}^\msT
+\end{empheq}
+
+Para obter a velocidade angular dos outros ligamentos, utiliza-se o princípio de composição de movimento para velocidades angulares (equação \eqref{eq:composicao_w}) para $i>1$:
+\begin{equation} \label{eq:ComposicaoW}
+\vomega_{\lllB_i}^{\lllN} = \vomega_{\lllB_{i-1}}^{\lllN} + \vomega_{\lllB_i}^{\lllB_{i-1}} 
+\end{equation}
+
+Aplicando \eqref{eq:ComposicaoW} no sistema $\ttN$, temos que:
+\begin{equation}
+\momega_i(\mq, \dot{\mq}) = \momega_{i-1}(\mq, \dot{\mq}) + \momega'_i(\mq, \dot{q}_i)
+\end{equation}
+
+Portanto:
+\begin{empheq}[box=\myyellowbox]{equation}
+\begin{split}
+\momega_i(\mq, \dot{\mq}) = 
+\begin{cases}
+\momega'_1(\mq, \dot{q}_1) & \text{ se } i=1 \\
+\momega_{i-1}(\mq, \dot{\mq}) + \momega'_i(\mq, \dot{q}_i) & \text{ se } i>1 \\
+\end{cases}
+, \; i=1,...,\nu
+\end{split}
+\end{empheq}
+
+Além disso, supondo que
+\begin{equation}
+\momega_i(\mq, \dot{\mq}) = \mJ_{\omega\,i}(\mq) \, \dot{\mq}
+\end{equation}
+
+Temos que:
+\begin{equation}
+\momega_i(\mq, \dot{\mq}) = \mJ_{\omega\,i-1}(\mq) \, \dot{\mq} + \mj_{\omega\,i}(\mq) \, \frac{\partial \mq}{\partial q_i}^\msT \dot{\mq} = \Big(\mJ_{\omega\,i-1}(\mq) + \mj_{\omega\,i}(\mq) \, \frac{\partial \mq}{\partial q_i}^\msT \Big) \, \dot{\mq}
+\end{equation}
+
+Portanto, pelo princípio da indução finita
+\begin{empheq}[box=\mybluebox]{equation}
+\momega_i(\mq, \dot{\mq}) = \mJ_{\omega\,i}(\mq) \, \dot{\mq}, \; i=1,...,\nu
+\end{empheq}
+
+Sendo:
+\begin{empheq}[box=\myyellowbox]{equation}
+\begin{split}
+\mJ_{\omega\,i}(\mq) = 
+\begin{cases}
+\mj_{\omega\,1}(\mq) \, \frac{\partial \mq}{\partial q_1}^\msT & \text{ se } i=1 \\
+\mJ_{\omega\,i-1}(\mq) + \mj_{\omega\,i}(\mq) \, \frac{\partial \mq}{\partial q_i}^\msT & \text{ se } i>1 \\
+\end{cases}
+, \; i=1,...,\nu
+\end{split}
+\end{empheq}
+
+Com relação à velocidade angular do efetuador, tendo em vista que o efetuador é solidário a $\llB_\nu$, temos que:
+\begin{empheq}[box=\myyellowbox]{equation}
+\momega(\mq, \dot{\mq}) = \momega_\nu(\mq, \dot{\mq}) = \mJ_\omega(\mq) \, \dot{\mq}
+\end{empheq}
+
+Sendo:
+\begin{empheq}[box=\myyellowbox]{equation}
+\mJ_\omega(\mq) = \mJ_{\omega\,\nu}(\mq)
+\end{empheq}
+
 \subsection{Cinemática de velocidades lineares}
 
 A velocidade do efetuador pode ser obtida aplicando recursivamente o príncipio da composição de movimentos para velocidades lineares (equação \eqref{eq:Composicao_vel}):
