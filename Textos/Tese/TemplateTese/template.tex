@@ -33,6 +33,7 @@
 \usepackage{fancybox}
 \usepackage{longtable}
 \usepackage{booktabs}
+\usepackage{stmaryrd}
 
 \newcommand{\ii}{\hat{\textbf{\itshape\i}}}
 \newcommand{\jj}{\hat{\textbf{\itshape\j}}}
@@ -223,6 +224,10 @@ Aiming to fully explore the potential of this kind of architecture, in this thes
   $\ttA, \ttB, \hdots$ & Sistemas de coordenadas \\
   $\llA, \llB, \hdots$ & Corpos rígidos ou referenciais \\
   $\ssA, \ssB, \hdots$ & Sistema ou subsistema mecânico \\
+  $\ma \llbracket i \rrbracket $ & i-ésimo elemento da matriz-coluna $\ma$ \\
+  $\mA \llbracket i,j \rrbracket $ & elemento da i-ésima linha e j-ésima coluna da matriz $\mA$ \\
+  $\mA \llbracket i,: \rrbracket $ & i-ésima linha da matriz $\mA$ \\
+  $\mA \llbracket :,j \rrbracket $ & j-ésima coluna da matriz $\mA$ \\
   $\llN$ & Referencial inercial \\
   $\ttc_{\lllB}$ & Centro de massa do corpo rígido $\llB$ \\
   $\tto_{\ttB}$ & Origem dos sistema de coordenadas $\ttB$ \\
@@ -700,11 +705,12 @@ Seja $\ssB$ um sistema mecânico serial de $\nu$ graus de liberdade. Primeiramen
 \item $\llN$ ou $\llB_0$: referencial inercial.
 \item $\ttN$ ou $\ttB_0$: sistema de coordenadas da base do mecanismo, fixo a $\llN$.
 \item $\llB_i, \,i=1,...,\nu$: i-ésimo ligamento.
-\item $\ttB_i, \,i=1,...,\nu$: sistema de coordenadas solid\'ario a $\llB_i$.
+\item $\ttB_i, \,i=1,...,\nu$: sistema de coordenadas solidário a $\llB_i$.
 %\item $\tto_i, \,i=0,...,\nu$: origem do sistema $\ttB_i$.
 %\item $\{\vi_i, \vj_i, \vk_i\}, \,i=0,...,\nu$: base ortonormal do sistema $\ttB_i$.
 \item $\ttc_{\lllB_i}, \,i=1,...,\nu$: centro de massa do ligamento $\llB_i$.
-\item $\ttx$: ponto no espa\c{c}o fixo ao efetuador.
+\item $\ttx$: ponto no espaço fixo ao efetuador.
+\item $\ttX$: sistema de coordenadas fixo ao efetuador, com origem em $\ttx$ e a mesma base de $\ttB_\nu$. 
 \item $m_i$: massa do ligamento $\llB_i$.
 %\item $\vI_{\lllB_i}$: tensor de in\'ercia do ligamento $\llB_i$ em relação a seu centro de massa.
 \item $\mI_i$: tensor de in\'ercia $\vI_{\lllB_i}$ escrito na base $\ttN$, ou seja, $\vct{\vI_{\lllB_i}}_{\ttN \rl \ttN}$.
@@ -722,12 +728,17 @@ q_1 & ... & {q}_{\nu}
 \end{bmatrix}^\msT $.
 \item $\mR_i, \,i=1, ..., \nu$: matriz de rotação $\vct{\vone}_{\ttN \rl \ttB_i}$.
 \item $\mR'_i, \,i=1, ..., \nu$: matriz de rotação $\vct{\vone}_{\ttB_{i-1} \rl \ttB_i}$.
+\item $\mX$: matriz de rotação $\vct{\vone}_{\ttN \rl \ttX}$.
 \item $\breve{\mr}_i, \,i=1, ..., \nu$: representação via quaternion unitário da matriz de rotação $\vct{\vone}_{\ttN \rl \ttB_i}$.
 \item $\breve{\mr}'_i, \,i=1, ..., \nu$: representação via quaternion unitário da matriz de rotação $\vct{\vone}_{\ttB_{i-1} \rl \ttB_i}$.
-\item $\mo_i, \,i=1, ..., \nu$: origem $\tto_{\ttB_i}$ no sistema de coordenadas $\ttN$, ou seja $\vct{\tto_{\ttB_i}}_\ttN$.
+\item $\breve{\mx}, \,i=1, ..., \nu$: representação via quaternion unitário da matriz de rotação $\vct{\vone}_{\ttN \rl \ttX}$.
+\item $\mo_i, \,i=0, ..., \nu$: origem $\tto_{\ttB_i}$ no sistema de coordenadas $\ttN$, ou seja $\vct{\tto_{\ttB_i}}_\ttN$.
 \item $\mo'_i, \,i=1, ..., \nu$: origem $\tto_{\ttB_i}$ no sistema de coordenadas $\ttB_{i-1}$, ou seja $\vct{\tto_{\ttB_i}}_{\ttB_{i-1}}$.
+\item $\mx, \,i=1, ..., \nu$: ponto $\ttx$ no sistema de coordenadas $\ttN$, ou seja $\vct{\ttx}_\ttN$.
 \item $\mc_{\cM\,i}, \,i=1, ..., \nu$: centro de massa $\ttc_{\lllB_i}$ no sistema de coordenadas $\ttN$, ou seja $\vct{\ttc_{\lllB_i}}_\ttN$.
 \item $\mc'_{\cM\,i}, \,i=1, ..., \nu$: centro de massa $\ttc_{\lllB_i}$ no sistema de coordenadas $\ttB_{i}$, ou seja $\vct{\ttc_{\lllB_i}}_{\ttB_{i}}$.
+\item $\mk_i, \,i=0, ..., \nu$: componentes do versor $\vk_{\ttB_i}$ no sistema de coordenadas $\ttN$, ou seja $[\vk_{\ttB_i}]_\ttN$.
+\item $\momega_i, \,i=1, ..., \nu$: componentes de velocidade angular do ligamento $\llB_i$ no sistema $\ttN$, ou seja $\vct{\vomega_{\lllB_i}}_\ttN$
 \end{itemize}
 
 \section{Cinemática}
@@ -824,7 +835,7 @@ As expressões das matrizes de rotação $\mR_i(\mq)$ podem ser obtidas através
 \end{equation}
 
 \begin{empheq}[box=\myyellowbox]{equation}
-\mR_i(\mq) = \underline{\mR}(\breve{\mr}_i),\, i=1,...,\nu
+\mR_i(\mq) = \underline{\mR}(\breve{\mr}_i(\mq)),\, i=1,...,\nu
 \end{empheq}
 
 A composição de translações pode ser feita da seguinte maneira:
@@ -838,23 +849,30 @@ A composição de translações pode ser feita da seguinte maneira:
 \end{split}
 \end{equation}
 
-Ou seja
+Tendo em vista que $\mo_0 = \vct{\tto_{\ttB_0}}_{\ttB_0} = \mzr$, temos que:
 \begin{empheq}[box=\myyellowbox]{equation}
 \begin{split}
 \mo_i(\mq) =
 \begin{cases}
+\mzr, & \text{se } i=0 \\
 \mo'_1(q_1), & \text{se } i=1 \\
 \mo_{i-1}(\mq) +  \mR_{i-1}(\mq) \cdot \mo'_i(q_i)   , & \text{se } i>1
-\end{cases} \; i=1,...,\nu
+\end{cases} \; i=0,...,\nu
 \end{split}
 \end{empheq}
 
-Sendo assim, também é obtida a posição do efetuador no sistema $\ttN$:
+Sendo assim,  a posição do efetuador no sistema $\ttN$ e as representações por quaternion e matriz de rotação da orientação do efetuador são dadas por:
 \begin{empheq}[box=\myyellowbox]{equation}
 \mx(\mq) = \mo_\nu (\mq)
 \end{empheq}
+\begin{empheq}[box=\myyellowbox]{equation}
+\breve{\mx}(\mq) = \breve{\mr}_\nu (\mq)
+\end{empheq}
+\begin{empheq}[box=\myyellowbox]{equation}
+\mX(\mq) = \mR_\nu (\mq)
+\end{empheq}
 
-Tendo obtidos as matrizes de rotação $\vct{\vone}_{\ttN \rl \ttB_i}$ e as coordenadas das origens dos sistemas de referência no sistema $\ttN$,  temos que as coordenadas dos centros de massa dos ligamentos são dadas por:
+Tendo obtidos as matrizes de rotação $\vct{\vone}_{\ttN \rl \ttB_i}$ e as coordenadas das origens $\tto_{\ttB_i}$ no sistema $\ttN$,  temos que as coordenadas dos centros de massa dos ligamentos são dadas por:
 \begin{equation}
 \vct{\ttc_{\lllB_i}}_{\ttN} = \vct{\tto_{\ttB_i}}_{\ttN} + \vct{\vone}_{\ttN \rl \ttB_i} \cdot \vct{\ttc_{\lllB_i}}_{\ttB_i} \; i=1,...,\nu
 \end{equation}
@@ -864,24 +882,22 @@ Ou seja
 \mc_{\cM \,i}(\mq) = \mo_i(\mq) + \mR_i(\mq) \cdot \mc_{\cM \,i}'(\mq), \; i=1,...,\nu
 \end{empheq}
 
-
-As matrizes  $\hvct{\vone}_{\ttN \rl \ttB_i}$ apresentam o seguinte formato:
+Além disso, sabe-se que as matrizes de rotação  $\vct{\vone}_{\ttN \rl \ttB_i}$ apresentam o seguinte formato:
 \begin{empheq}[box=\lightbluebox]{equation} \label{eq:H__2}
-\hvct{\vone}_{\ttN \rl \ttB_i} =
+\vct{\vone}_{\ttN \rl \ttB_i} =
 \begin{bmatrix}
-\vct{\vi_{\ttB_i}}_{\ttN} & \vct{\vj_{\ttB_i}}_{\ttN} & [\vk_{\ttB_i}]_{\ttN} & \vct{\tto_{\ttB_i}}_{\ttN} \\
-0 & 0 & 0 & 1
+\vct{\vi_{\ttB_i}}_{\ttN} & \vct{\vj_{\ttB_i}}_{\ttN} & [\vk_{\ttB_i}]_{\ttN}
 \end{bmatrix}
 \end{empheq}
 
-Sendo assim, tendo obtido $\hvct{\vone}_{\ttN \rl \ttB_i}$, automaticamente obtemos $\vct{\vi_{\ttB_i}}_{\ttN}, \vct{\vj_{\ttB_i}}_{\ttN}, [\vk_{\ttB_i}]_{\ttN}$ e $\vct{\tto_{\ttB_i}}_{\ttN}$. Note que também obtemos as coordenadas do efetuador no sistema da base, pois
-\begin{empheq}[box=\myyellowbox]{equation} \label{eq:x_}
-\vct{\ttx}_{\ttN} = \vct{\tto_{\ttB_\nu}}_{\ttN}
-\end{empheq}
-
-Além disso, como $\vct{\ttc_{\lllB_i}}_{\ttB_i}$ são dados de entrada do algoritmo, obtemos as coordenadas dos centros de massa dos ligamentos no sistema da base através da seguinte expressão:
-\begin{empheq}[box=\myyellowbox]{equation} \label{eq:og__}
-\hvct{\ttc_{\lllB_i}}_{\ttN} = \hvct{\vone}_{\ttN \rl \ttB_i} \cdot \hvct{\ttc_{\lllB_i}}_{\ttB_i}
+Tendo em vista que as coordenadas dos versores $\vk_{\ttB_i}$ no sistema $\ttN$ serão utilizadas no cálculo dos jacobianos de velocidades e velocidades angulares, e que $\vct{\vk_{\ttB_0}}_{\ttN} = \begin{bmatrix} 0 & 0 & 1 \end{bmatrix}^\msT$, estas podem ser obtidas simplesmente por:
+\begin{empheq}[box=\myyellowbox]{equation}
+\begin{split}
+\mk_i(\mq) = \begin{cases}
+\begin{bmatrix} 0 & 0 & 1 \end{bmatrix}^\msT, & \text{se } i=0 \\
+ \mR_i  (\mq) \llbracket :,3 \rrbracket, & \text{se } i>0
+\end{cases} \; i=0,...,\nu
+\end{split}
 \end{empheq}
 
 \subsection{Cinemática de velocidades lineares}
@@ -2076,8 +2092,7 @@ Sejam $\ssB_0$, $\ssB_1$, ..., $\ssB_{n} \,$ $n+1$ subsistemas mec\^anicos e $\s
 %\item $\ttg$: centro de massa da plataforma/efetuador $\llB_0$.
 \item $\ttx_0$: ponto no espa\c{c}o fixo ao centro de massa de $\llX_0$.
 \item $\ttx_i, \,i=1, ..., n$: ponto no espa\c{c}o fixo a $\llX_i$.
-\item $\ttX_0$: sistema de coordenadas solidário a $\llX_0$ com origem em $\ttx_0$.
-\item $\ttX_i, \,i=1, ..., n$: sistema de coordenadas solidário a $\llX_i$ com origem em $\ttx_i$.
+\item $\ttX_i, \,i=0, ..., n$: sistema de coordenadas solidário a $\llX_i$ com origem em $\ttx_i$.
 \item $m$: massa da plataforma/efetuador $\llX_0$.
 %\item $\vI_{\ttg}$: tensor de in\'ercia da plataforma/efetuador $\llB_0$ em relação a seu centro de massa.
 %\item $\mI$: tensor de in\'ercia $\vI_{\ttg}$ escrito na base $\ttN_0$, ou seja, $\vct{\vI_{\ttg}}_{\ttN_0 \rl \ttN_0}$.
