@@ -1032,7 +1032,7 @@ Sabe-se que a velocidade do centro de massa de cada ligamento $\ttc_{\llB_i}$ em
 \vv_{\ttc_{\lllB_{i}}}^{\lllB_{i-1}} = 
 \begin{cases}
 \dot{q}_{i} \vk_{\ttB_{i-1}}, & \text{i-ésima junta prismática} \\
-\dot{q}_{i} \vk_{\ttB_{i-1}} \wedge \vr_{\tto_{i-1} \rl \ttc_{\lllB_i}}, & \text{i-ésima junta rotativa}
+\vomega_{\lllB_{i}}^{\lllB_{i-1}} \wedge \vr_{\tto_{i-1} \rl \ttc_{\lllB_i}}, & \text{i-ésima junta rotativa}
 \end{cases}\, i=1,...,\nu
 \end{split}
 \end{equation}
@@ -1095,7 +1095,7 @@ Portanto:
 \mv'_1(\mq, \dot{q}_1) & \text{ se } i=1 \\
 \mv_{i-1}(\mq, \dot{\mq}) + \mv'_i(\mq, \dot{q}_i) + \mS(\momega_{i-1}(\mq, \dot{\mq})) \cdot (\mc_{\cM\,i}(\mq) - \mc_{\cM\,i-1}(\mq)) & \text{ se } i>1 \\
 \end{cases}
-, \; i=1,...,\nu
+\; i=1,...,\nu
 \end{split}
 \end{equation}
 
@@ -1137,6 +1137,220 @@ Com relação à velocidade do efetuador, tendo em vista que o efetuador é soli
 Sendo:
 \begin{empheq}[box=\myyellowbox]{equation}
 \mJ_v(\mq) = \mJ_{v\,\nu}(\mq) - \mS(\mx(\mq) - \mc_{\cM\,\nu}(\mq)) \cdot \mJ_{\omega\,\nu}(\mq)
+\end{empheq}
+
+\subsection{Cinemática de acelerações angulares - novo}
+
+Sabe-se que a aceleração angular de cada ligamento $\llB_i$ em relação ao referencial anterior $\llB_{i-1}$ é dada por:
+\begin{equation} \label{eq:AcAngRel}
+\begin{split}
+\valpha_{\lllB_{i}}^{\lllB_{i-1}} = 
+\begin{cases}
+\vzr, & \text{i-ésima junta prismática} \\
+\ddot{q}_{i} \vk_{\ttB_{i-1}}, & \text{i-ésima junta rotativa}
+\end{cases}\, i=1,...,\nu
+\end{split}
+\end{equation}
+
+Sendo assim, temos que:
+\begin{empheq}[box=\lightbluebox]{equation}
+\malpha'_i(\mq, \ddot{q}_i) = \mj_{\omega\,i} (\mq) \, \ddot{q}_i, \, i=1,...,\nu
+\end{empheq}
+
+Para obter a aceleração angular de cada ligamento em relação ao referencial $\llN$, parte-se do ligamente $\llB_1$. Tendo em vista que $\llB_0$ e $\llN$ são o mesmo referencial, temos que:
+\begin{equation}
+\vct{\valpha_{\lllB_1}^{\lllN}}_\ttN = \vct{\valpha_{\lllB_1}^{\lllB_0}}_\ttN
+\end{equation}
+
+Ou seja
+\begin{equation}
+\malpha_1(\mq, \dot{\mq}, \ddot{\mq}) = \malpha'_1(\mq, \ddot{q}_1) = \mj_{\omega\,1} (\mq) \, \ddot{q}_1
+\end{equation}
+
+Sendo assim, $\malpha_1$ pode ser escrito de forma genérica como:
+\begin{empheq}[box=\lightbluebox]{equation}
+\malpha_1(\mq, \dot{\mq}, \ddot{\mq}) = \mJ_{\omega\,1}(\mq) \, \ddot{\mq} + \underaccent{\sim}{\malpha}_1 (\mq, \dot{\mq})
+\end{empheq}
+
+Sendo
+\begin{empheq}[box=\lightbluebox]{equation}
+\underaccent{\sim}{\malpha}_1 (\mq, \dot{\mq}) = \mzr
+\end{empheq}
+
+Para obter a aceleração angular dos outros ligamentos, utiliza-se o princípio de composição de movimento para acelerações angulares (equação \eqref{eq:composicao_w}):
+\begin{equation} \label{eq:ComposicaodW}
+\valpha_{\lllB_i}^{\lllN} = \valpha_{\lllB_{i-1}}^{\lllN} + \valpha_{\lllB_i}^{\lllB_{i-1}} + \vomega_{\lllB_{i-1}}^{\lllN} \wedge \vomega_{\lllB_i}^{\lllB_{i-1}} 
+\end{equation}
+
+Aplicando \eqref{eq:ComposicaodW} no sistema $\ttN$, temos que:
+\begin{equation}
+\malpha_i(\mq, \dot{\mq}) = \malpha_{i-1}(\mq, \dot{\mq}) + \malpha'_i(\mq, \dot{q}_i) + \mS(\momega_{i-1}(\mq, \dot{\mq})) \cdot \momega'_i(\mq, \dot{q}_i)
+\end{equation}
+
+Portanto:
+\begin{empheq}[box=\lightbluebox]{equation}
+\begin{split}
+\malpha_i(\mq, \dot{\mq}) = 
+\begin{cases}
+\malpha'_1(\mq, \dot{q}_1) & \text{ se } i=1 \\
+\malpha_{i-1}(\mq, \dot{\mq}) + \malpha'_i(\mq, \dot{q}_i) + \mS(\momega_{i-1}(\mq, \dot{\mq})) \cdot \momega'_i(\mq, \dot{q}_i) & \text{ se } i>1 \\
+\end{cases}
+\; i=1,...,\nu
+\end{split}
+\end{empheq}
+
+Além disso, supondo que
+\begin{equation}
+\malpha_i(\mq, \dot{\mq}, \ddot{\mq}) = \mJ_{\omega\,i}(\mq) \, \ddot{\mq} + \underaccent{\sim}{\ma}_i (\mq, \dot{\mq})
+\end{equation}
+
+Temos que:
+\begin{equation}
+\begin{split}
+\malpha_i(\mq, \dot{\mq}) &= \mJ_{\omega\,i-1}(\mq) \, \ddot{\mq} + \underaccent{\sim}{\ma}_{i-1} (\mq, \dot{\mq}) + \mj_{\omega\,i}(\mq) \, \frac{\partial \mq}{\partial q_i}^\msT \ddot{\mq} + \mS(\momega_{i-1}(\mq, \dot{\mq})) \cdot \momega'_i(\mq, \dot{q}_i) \\
+&= \Big(\mJ_{\omega\,i-1}(\mq) + \mj_{\omega\,i}(\mq) \, \frac{\partial \mq}{\partial q_i}^\msT \Big) \, \ddot{\mq} + \underaccent{\sim}{\ma}_{i-1} (\mq, \dot{\mq}) + \mS(\momega_{i-1}(\mq, \dot{\mq})) \cdot \momega'_i(\mq, \dot{q}_i) \\
+&= \mJ_{\omega\,i}(\mq) \, \ddot{\mq} + \underaccent{\sim}{\ma}_{i-1} (\mq, \dot{\mq}) + \mS(\momega_{i-1}(\mq, \dot{\mq})) \cdot \momega'_i(\mq, \dot{q}_i)
+\end{split}
+\end{equation}
+
+Portanto, pelo princípio da indução finita
+\begin{empheq}[box=\mybluebox]{equation}
+\malpha_i(\mq, \dot{\mq}, \ddot{\mq}) = \mJ_{\omega\,i}(\mq) \, \ddot{\mq} + \underaccent{\sim}{\malpha}_i (\mq, \dot{\mq}), \; i=1,...,\nu
+\end{empheq}
+
+Sendo:
+\begin{empheq}[box=\myyellowbox]{equation}
+\begin{split}
+\underaccent{\sim}{\ma}_i (\mq, \dot{\mq}) = 
+\begin{cases}
+\mzr & \text{ se } i=1 \\
+\underaccent{\sim}{\ma}_{i-1} (\mq, \dot{\mq}) + \mS(\momega_{i-1}(\mq, \dot{\mq})) \cdot \momega'_i(\mq, \dot{q}_i) & \text{ se } i>1 \\
+\end{cases}
+, \; i=1,...,\nu
+\end{split}
+\end{empheq}
+
+Com relação à aceleração angular do efetuador, tendo em vista que o efetuador é solidário a $\llB_\nu$, temos que:
+\begin{empheq}[box=\mybluebox]{equation}
+\malpha(\mq, \dot{\mq},\ddot{\mq}) = \malpha_\nu(\mq, \dot{\mq}, \ddot{\mq}) = \mJ_\omega(\mq) \, \ddot{\mq} + \underaccent{\sim}{\ma} (\mq, \dot{\mq})
+\end{empheq}
+
+Sendo:
+\begin{empheq}[box=\myyellowbox]{equation}
+\underaccent{\sim}{\ma} (\mq, \dot{\mq}) = \underaccent{\sim}{\ma}_\nu (\mq, \dot{\mq})
+\end{empheq}
+
+\subsection{Cinemática de acelerações lineares - novo}
+
+Sabe-se que a aceleração do centro de massa de cada ligamento $\ttc_{\llB_i}$ em relação ao referencial anterior $\llB_{i-1}$ é dada por:
+\begin{equation} \label{eq:AcLinRel}
+\begin{split}
+\va_{\ttc_{\lllB_{i}}}^{\lllB_{i-1}} = 
+\begin{cases}
+\ddot{q}_{i} \vk_{\ttB_{i-1}}, & \text{i-ésima junta prismática} \\
+\ddot{q}_{i} \vk_{\ttB_{i-1}} \wedge \vr_{\tto_{i-1} \rl \ttc_{\lllB_i}} + \dot{q}_{i}^2 \vk_{\ttB_{i-1}} \wedge \vk_{\ttB_{i-1}} \wedge \vr_{\tto_{i-1} \rl \ttc_{\lllB_i}} , & \text{i-ésima junta rotativa}
+\end{cases}\, i=1,...,\nu
+\end{split}
+\end{equation}
+
+%Tendo em vista que , para juntas rotativas $\mj_{v\,i}(\mq) = \vct{ \vk_{\ttB_{i-1}} \wedge \vr_{\tto_{i-1} \rl \ttc_{\lllB_i}}}_\ttN$ e $\mj_{\omega\,i}(\mq) = \vct{ \vk_{\ttB_{i-1}}}_\ttN$, e para juntas prismáticas $\mj_{v\,i}(\mq) = \vct{ \vk_{\ttB_{i-1}}}_\ttN$ e $\mj_{\omega\,i}(\mq) = \mzr$, 
+
+Sendo assim, temos que:
+\begin{empheq}[box=\lightbluebox]{equation}
+\ma'_i(\mq, \ddot{q}_i) = \mj_{v\,i} (\mq) \, \ddot{q}_i + \mS(\momega'_i(\mq, \dot{q}_i)) \cdot \mv'_i(\mq, \dot{q}_i) , \, i=1,...,\nu
+\end{empheq}
+
+Para obter a aceleração do centro de massa de cada ligamento em relação ao referencial $\llN$, parte-se do ligamente $\llB_1$. Tendo em vista que $\llB_0$ e $\llN$ são o mesmo referencial, temos que:
+\begin{equation}
+\vct{\va_{\ttc_{\lllB_1}}^{\lllN}}_\ttN = \vct{\va_{\ttc_{\lllB_1}}^{\lllB_0}}_\ttN
+\end{equation}
+
+Ou seja
+\begin{equation}
+\ma_1(\mq, \dot{\mq}, \ddot{\mq}) = \ma'_1(\mq, \ddot{q}_1) = \mj_{v\,1} (\mq) \, \ddot{q}_1
+\end{equation}
+
+Sendo assim, $\ma_1$ pode ser escrito de forma genérica como:
+\begin{empheq}[box=\lightbluebox]{equation}
+\ma_1(\mq, \dot{\mq}, \ddot{\mq}) = \mJ_{v\,1}(\mq) \, \ddot{\mq} + \underaccent{\sim}{\ma}_1 (\mq, \dot{\mq})
+\end{empheq}
+
+Sendo
+\begin{empheq}[box=\lightbluebox]{equation}
+\underaccent{\sim}{\ma}_1 (\mq, \dot{\mq}) = \mS(\momega'_i(\mq, \dot{q}_i)) \cdot \mv'_i(\mq, \dot{q}_i)
+\end{empheq}
+
+Para obter a aceleração do centro de massa dos outros ligamentos, utiliza-se o princípio de composição de movimento para acelerações lineares (equação \eqref{eq:Composicao_ace}):
+\begin{equation} \label{eq:ComposicaoAc}
+\va_{\ttc_{\lllB_i}}^{\lllN} = \va_{\ttc_{\lllB_{i}} \rl \lllB_{i-1}}^{\lllN} + \va_{\ttc_{\lllB_i}}^{\lllB_{i-1}} + 2 \vomega_{\lllB_{i-1}}^{\lllN} \wedge \vv_{\ttc_{\lllB_i}}^{\lllB_{i-1}} 
+\end{equation}
+
+%%%%%%%% CONTINUAR DAQUI %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+$\va_{\ttc_{\lllB_i} \rl \lllB_{i-1}}^{\lllN}$ pode ser relacionado com a aceleração do centro de massa do ligamento anterior através a equação do campo de acelerações \eqref{eq:Poisson_a}:
+\begin{equation} \label{eq:AceleracaoDeArrastamento}
+\va_{\ttc_{\lllB_i} \rl \lllB_{i-1}}^{\lllN} = \va_{\ttc_{\lllB_{i-1}}}^{\lllN} + \valpha_{\lllB_{i-1}}^{\lllN} \wedge \vr_{\ttc_{\lllB_{i-1}} \rl \ttc_{\lllB_{i}}} + \vomega_{\lllB_{i-1}}^{\lllN} \wedge \vomega_{\lllB_{i-1}}^{\lllN} \wedge \vr_{\ttc_{\lllB_{i-1}} \rl \ttc_{\lllB_{i}}}
+\end{equation}
+
+Substituindo \eqref{eq:AceleracaoDeArrastamento} em \eqref{eq:ComposicaoAc} e aplicando no sistema $\ttN$, temos que:
+\begin{equation}
+\begin{split}
+\ma_i(\mq, \dot{\mq}, \ddot{\mq}) &= \ma_{i-1}(\mq, \dot{\mq}, \ddot{\mq}) + \ma'_i(\mq, \ddot{q}_i) + 2 \mS(\momega'_{i-1}(\mq, \dot{q}_{i-1})) \cdot \mv'_i(\mq, \dot{q}_i)\\
+  &+ \big(\mS(\malpha_{i-1}(\mq, \dot{\mq}, \ddot{\mq})) + \mS^2 (\momega_{i-1}(\mq, \dot{\mq})\big) \cdot (\mc_{\cM\,i}(\mq) - \mc_{\cM\,i-1}(\mq))
+\end{split}
+\end{equation}
+
+Portanto:
+\begin{empheq}[box=\lightbluebox]{equation}
+\begin{split}
+\ma_i = 
+\begin{cases}
+\ma'_1 & \text{ se } i=1 \\
+\ma_{i-1} + \ma'_i + 2 \mS(\momega'_{i-1}) \cdot \mv'_i + \big(\mS(\malpha_{i-1}) + \mS^2 (\momega_{i-1})\big) \cdot (\mc_{\cM\,i} - \mc_{\cM\,i-1}) & \text{ se } i>1 \\
+\end{cases}
+\; i=1,...,\nu
+\end{split}
+\end{empheq}
+
+Além disso, supondo que
+\begin{equation}
+\ma_i(\mq, \dot{\mq}, \ddot{\mq}) = \mJ_{v\,i}(\mq) \, \ddot{\mq} + \underaccent{\sim}{\ma}_i (\mq, \dot{\mq})
+\end{equation}
+
+Temos que:
+\begin{equation}
+\begin{split}
+\ma_i(\mq, \dot{\mq}) &= \mJ_{v\,i-1}(\mq) \, \ddot{\mq} + \underaccent{\sim}{\ma}_{i-1} (\mq, \dot{\mq}) + \mj_{v\,i}(\mq) \, \frac{\partial \mq}{\partial q_i}^\msT \ddot{\mq} + \mS(\momega'_i(\mq, \dot{q}_i)) \cdot \mv'_i(\mq, \dot{q}_i) + 2\mS(\momega_{i-1}(\mq, \dot{\mq})) \cdot \mv'_i(\mq, \dot{q}_i) \\
+&= \Big(\mJ_{\omega\,i-1}(\mq) + \mj_{\omega\,i}(\mq) \, \frac{\partial \mq}{\partial q_i}^\msT \Big) \, \ddot{\mq} + \underaccent{\sim}{\ma}_{i-1} (\mq, \dot{\mq}) + \mS(\momega_{i-1}(\mq, \dot{\mq})) \cdot \momega'_i(\mq, \dot{q}_i) \\
+&= \mJ_{\omega\,i}(\mq) \, \ddot{\mq} + \underaccent{\sim}{\ma}_{i-1} (\mq, \dot{\mq}) + \mS(\momega_{i-1}(\mq, \dot{\mq})) \cdot \momega'_i(\mq, \dot{q}_i)
+\end{split}
+\end{equation}
+
+Portanto, pelo princípio da indução finita
+\begin{empheq}[box=\mybluebox]{equation}
+\malpha_i(\mq, \dot{\mq}, \ddot{\mq}) = \mJ_{\omega\,i}(\mq) \, \ddot{\mq} + \underaccent{\sim}{\ma}_i (\mq, \dot{\mq}), \; i=1,...,\nu
+\end{empheq}
+
+Sendo:
+\begin{empheq}[box=\myyellowbox]{equation}
+\begin{split}
+\underaccent{\sim}{\ma}_i (\mq, \dot{\mq}) = 
+\begin{cases}
+\mzr & \text{ se } i=1 \\
+\underaccent{\sim}{\ma}_{i-1} (\mq, \dot{\mq}) + \mS(\momega_{i-1}(\mq, \dot{\mq})) \cdot \momega'_i(\mq, \dot{q}_i) & \text{ se } i>1 \\
+\end{cases}
+, \; i=1,...,\nu
+\end{split}
+\end{empheq}
+
+Com relação à aceleração angular do efetuador, tendo em vista que o efetuador é solidário a $\llB_\nu$, temos que:
+\begin{empheq}[box=\mybluebox]{equation}
+\malpha(\mq, \dot{\mq},\ddot{\mq}) = \malpha_\nu(\mq, \dot{\mq}, \ddot{\mq}) = \mJ_\omega(\mq) \, \ddot{\mq} + \underaccent{\sim}{\ma} (\mq, \dot{\mq})
+\end{empheq}
+
+Sendo:
+\begin{empheq}[box=\myyellowbox]{equation}
+\underaccent{\sim}{\ma} (\mq, \dot{\mq}) = \underaccent{\sim}{\ma}_\nu (\mq, \dot{\mq})
 \end{empheq}
 
 \subsection{Cinemática de velocidades lineares}
