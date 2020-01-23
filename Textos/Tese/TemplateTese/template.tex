@@ -276,9 +276,9 @@ Aiming to fully explore the potential of this kind of architecture, in this thes
   $\ssin(.)$ & Notação compacta para $\sin(.)$ \\
   $\dd$ & Operador diferencial \\
   $\dl$ & Operador variação \\
-  $\displaystyle\frac{\del (.)}{\del x}$ & Derivada parcial em relação ao escalar $x$ \\
+  $\displaystyle\frac{\del (.)}{\del x} = \partial_x (.)$ & Derivada parcial em relação ao escalar $x$ \\
   \addlinespace[0.2cm]
-  $\displaystyle\frac{\del (.)}{\del \mx}$ & Gradiente ou jacobiano em relação à matriz-coluna $\mx$ \\
+  $\displaystyle\frac{\del (.)}{\del \mx} = \partial_\mx (.)$ & Gradiente ou jacobiano em relação à matriz-coluna $\mx$ \\
   \addlinespace[0.2cm]
   $\displaystyle\frac{\dd (\boxdot) }{\dd t} = (\dot{\boxdot})$ & Operador derivada temporal \\
   \addlinespace[0.2cm]
@@ -719,6 +719,7 @@ Seja $\ssB$ um sistema mecânico serial de $\nu$ graus de liberdade. Primeiramen
 \item $m_i$: massa do ligamento $\llB_i$.
 %\item $\vI_{\lllB_i}$: tensor de in\'ercia do ligamento $\llB_i$ em relação a seu centro de massa.
 \item $\mI_i$: tensor de in\'ercia $\vI_{\lllB_i}$ escrito na base $\ttN$, ou seja, $\vct{\vI_{\lllB_i}}_{\ttN \rl \ttN}$.
+\item $\mI'_i$: tensor de in\'ercia $\vI_{\lllB_i}$ escrito na base $\ttB_i$, ou seja, $\vct{\vI_{\lllB_i}}_{\ttB_i \rl \ttB_i}$.
 \item $q_i, \,i=1,...,\nu$: deslocamento relativo (angular ou linear) da i-ésima junta.
 \item  $\mq$: matriz-coluna de $\nu$ coordenadas generalizadas independentes. É dada por $\mq = \begin{bmatrix}
 q_1 & ... & {q}_{\nu}
@@ -743,7 +744,18 @@ q_1 & ... & {q}_{\nu}
 \item $\mc_{\cM\,i}, \,i=1, ..., \nu$: centro de massa $\ttc_{\lllB_i}$ no sistema de coordenadas $\ttN$, ou seja $\vct{\ttc_{\lllB_i}}_\ttN$.
 \item $\mc'_{\cM\,i}, \,i=1, ..., \nu$: centro de massa $\ttc_{\lllB_i}$ no sistema de coordenadas $\ttB_{i}$, ou seja $\vct{\ttc_{\lllB_i}}_{\ttB_{i}}$.
 \item $\mk_i, \,i=0, ..., \nu$: componentes do versor $\vk_{\ttB_i}$ no sistema de coordenadas $\ttN$, ou seja $[\vk_{\ttB_i}]_\ttN$.
-\item $\momega_i, \,i=1, ..., \nu$: componentes de velocidade angular do ligamento $\llB_i$ no sistema $\ttN$, ou seja $\vct{\vomega_{\lllB_i}}_\ttN$
+\item $\momega_i, \,i=1, ..., \nu$: componentes de velocidade angular do ligamento $\llB_i$ em relação ao referencial $\llN$ no sistema $\ttN$, ou seja $\vct{\vomega_{\lllB_i}^{\lllN}}_\ttN$.
+\item $\momega'_i, \,i=1, ..., \nu$: componentes de velocidade angular do ligamento $\llB_i$ em relação ao referencial $\llB_{i-1}$ no sistema $\ttN$, ou seja $\vct{\vomega_{\lllB_i}^{\lllB_{i-1}}}_\ttN$.
+\item $\momega$: componentes de velocidade angular do efetuador em relação ao referencial $\llN$ no sistema $\ttN$, ou seja $\vct{\vomega_{\lllB_\nu}^{\lllN}}_\ttN$.
+\item $\mv_i, \,i=1, ..., \nu$: componentes de velocidade do centro de massa do ligamento $\llB_i$ em relação ao referencial $\llN$ no sistema $\ttN$, ou seja $\vct{\vv_{\ttc_{\lllB_i}}^{\lllN}}_\ttN$.
+\item $\mv'_i, \,i=1, ..., \nu$: componentes de velocidade do centro de massa do ligamento $\llB_i$ em relação ao referencial $\llB_{i-1}$ no sistema $\ttN$, ou seja $\vct{\vv_{\ttc_{\lllB_i}}^{\lllB_{i-1}}}_\ttN$.
+\item $\mv$: componentes de velocidade do efetuador em relação ao referencial $\llN$ no sistema $\ttN$, ou seja $\vct{\vv_{\ttx}^{\lllN}}_\ttN$.
+\item $\malpha_i, \,i=1, ..., \nu$: componentes de aceleração angular do ligamento $\llB_i$ em relação ao referencial $\llN$ no sistema $\ttN$, ou seja $\vct{\valpha_{\lllB_i}^{\lllN}}_\ttN$.
+\item $\malpha'_i, \,i=1, ..., \nu$: componentes de aceleração angular do ligamento $\llB_i$ em relação ao referencial $\llB_{i-1}$ no sistema $\ttN$, ou seja $\vct{\valpha_{\lllB_i}^{\lllB_{i-1}}}_\ttN$.
+\item $\malpha$: componentes de aceleração angular do efetuador em relação ao referencial $\llN$ no sistema $\ttN$, ou seja $\vct{\valpha_{\lllB_\nu}^{\lllN}}_\ttN$.
+\item $\ma_i, \,i=1, ..., \nu$: componentes de aceleração do centro de massa do ligamento $\llB_i$ em relação ao referencial $\llN$ no sistema $\ttN$, ou seja $\vct{\va_{\ttc_{\lllB_i}}^{\lllN}}_\ttN$.
+\item $\ma'_i, \,i=1, ..., \nu$: componentes de aceleração do centro de massa do ligamento $\llB_i$ em relação ao referencial $\llB_{i-1}$ no sistema $\ttN$, ou seja $\vct{\va_{\ttc_{\lllB_i}}^{\lllB_{i-1}}}_\ttN$.
+\item $\ma$: componentes de aceleração do efetuador em relação ao referencial $\llN$ no sistema $\ttN$, ou seja $\vct{\va_{\ttx}^{\lllN}}_\ttN$.
 \end{itemize}
 
 \section{Cinemática}
@@ -795,7 +807,7 @@ Uma representação de rotação por quaterion unitário equivalente à matriz $
 
 Para solucionar este paradigma, as composições de rotações e translações serão feitas separadamente, sendo que a composição de rotações será feita atravez da multiplicação de quaternions unitários. 
 
-Tendo obtido $\vct{\vone}_{\ttB_{i-1} \rl \ttB_i}$, seria possível obter as matrizes de rotação que relacionam os sistemas solidários aos ligamentos ($\ttB_i$) ao sistema da base ($\ttN$) pela seguinte expressão recursiva:
+Tendo obtido $\vct{\vone}_{\ttB_{i-1} \rl \ttB_i}$, seria possível obter as matrizes de rotação que relacionam os sistemas de coordenadas solidários aos ligamentos ($\ttB_i$) ao sistema de coordenadas da base ($\ttN$) pela seguinte expressão recursiva:
 \begin{equation} \label{eq:H__}
 \begin{split}
 \vct{\vone}_{\ttN \rl \ttB_i} =
@@ -923,13 +935,13 @@ Sendo assim, definindo:
 \begin{split}
 \mj_{\omega\,i}(\mq) = \begin{cases}
 \mzr, & \text{i-ésima junta prismática} \\
-\mk_{i-1}(\mq) , & \text{i-ésima junta rotativa} \\
+\mk_{i-1} , & \text{i-ésima junta rotativa} \\
 \end{cases} \, i=1,...,\nu
 \end{split}
 \end{empheq}
 
-Aplicando \eqref{eq:VelAngRel} no sistema $\ttN$, temos que:
-\begin{empheq}[box=\myyellowbox]{equation}
+Aplicando \eqref{eq:VelAngRel} no sistema $\ttN$ e utilizando a definição \eqref{eq:jwi_}, temos que:
+\begin{empheq}[box=\myyellowbox]{equation} \label{eq:wlinha}
 \momega'_i(\mq, \dot{q}_i) = \mj_{\omega\,i} (\mq) \, \dot{q}_i, \, i=1,...,\nu
 \end{empheq}
 
@@ -944,14 +956,14 @@ Ou seja
 \end{equation}
 
 Além disso, tendo em vista que $\dot{q}_i$ pode ser escrito como
-\begin{equation}
-\dot{q}_i = \frac{\partial \mq}{\partial q_i}^\msT \dot{\mq}
+\begin{equation} \label{eq:ZerosOne}
+\dot{q}_i = \partial_{q_i} \mq^\msT \dot{\mq}
 \end{equation}
 
 Sendo
 \begin{equation}
 \begin{split}
-\frac{\partial \mq}{\partial q_j} \llbracket i \rrbracket =
+\partial_{q_j} \mq \llbracket i \rrbracket =
 \begin{cases}
 0, & \text{ se } i \neq j \\
 1, & \text{ se } i = j 
@@ -967,17 +979,17 @@ $\momega_1$ pode ser escrito como:
 
 Sendo
 \begin{empheq}[box=\lightbluebox]{equation}
-\mJ_{\omega\,1}(\mq) = \mj_{\omega\,1}(\mq) \, \frac{\partial \mq}{\partial q_1}^\msT
+\mJ_{\omega\,1}(\mq) = \mj_{\omega\,1} \, \partial_{q_1} \mq^\msT
 \end{empheq}
 
-Para obter a velocidade angular dos outros ligamentos, utiliza-se o princípio de composição de movimento para velocidades angulares (equação \eqref{eq:composicao_w}) para $i>1$:
+Para obter a velocidade angular dos outros ligamentos, utiliza-se o princípio de composição de movimento para velocidades angulares (equação \eqref{eq:composicao_w}):
 \begin{equation} \label{eq:ComposicaoW}
 \vomega_{\lllB_i}^{\lllN} = \vomega_{\lllB_{i-1}}^{\lllN} + \vomega_{\lllB_i}^{\lllB_{i-1}} 
 \end{equation}
 
 Aplicando \eqref{eq:ComposicaoW} no sistema $\ttN$, temos que:
-\begin{equation}
-\momega_i(\mq, \dot{\mq}) = \momega_{i-1}(\mq, \dot{\mq}) + \momega'_i(\mq, \dot{q}_i)
+\begin{equation} \label{eq:ComposicaoWsimples}
+\momega_i(\mq, \dot{\mq}) = \momega_{i-1} + \momega'_i
 \end{equation}
 
 Portanto:
@@ -985,21 +997,21 @@ Portanto:
 \begin{split}
 \momega_i(\mq, \dot{\mq}) = 
 \begin{cases}
-\momega'_1(\mq, \dot{q}_1) & \text{ se } i=1 \\
-\momega_{i-1}(\mq, \dot{\mq}) + \momega'_i(\mq, \dot{q}_i) & \text{ se } i>1 \\
+\momega'_1 & \text{ se } i=1 \\
+\momega_{i-1} + \momega'_i & \text{ se } i>1 \\
 \end{cases}
 , \; i=1,...,\nu
 \end{split}
 \end{empheq}
 
 Além disso, supondo que
-\begin{equation}
+\begin{equation} \label{eq:Jw_suposicao}
 \momega_i(\mq, \dot{\mq}) = \mJ_{\omega\,i}(\mq) \, \dot{\mq}
 \end{equation}
 
-Temos que:
+Substituindo \eqref{eq:Jw_suposicao} e \eqref{eq:wlinha} em \eqref{eq:ComposicaoWsimples}, temos que:
 \begin{equation}
-\momega_i(\mq, \dot{\mq}) = \mJ_{\omega\,i-1}(\mq) \, \dot{\mq} + \mj_{\omega\,i}(\mq) \, \frac{\partial \mq}{\partial q_i}^\msT \dot{\mq} = \Big(\mJ_{\omega\,i-1}(\mq) + \mj_{\omega\,i}(\mq) \, \frac{\partial \mq}{\partial q_i}^\msT \Big) \, \dot{\mq}
+\momega_i(\mq, \dot{\mq}) = \mJ_{\omega\,i-1} \, \dot{\mq} + \mj_{\omega\,i} \, \partial_{q_i} \mq^\msT \dot{\mq} = \Big(\mJ_{\omega\,i-1} + \mj_{\omega\,i} \, \partial_{q_i} \mq^\msT \Big) \, \dot{\mq}
 \end{equation}
 
 Portanto, pelo princípio da indução finita
@@ -1012,8 +1024,8 @@ Sendo:
 \begin{split}
 \mJ_{\omega\,i}(\mq) = 
 \begin{cases}
-\mj_{\omega\,1}(\mq) \, \frac{\partial \mq}{\partial q_1}^\msT & \text{ se } i=1 \\
-\mJ_{\omega\,i-1}(\mq) + \mj_{\omega\,i}(\mq) \, \frac{\partial \mq}{\partial q_i}^\msT & \text{ se } i>1 \\
+\mj_{\omega\,1} \, \partial_{q_1} \mq^\msT & \text{ se } i=1 \\
+\mJ_{\omega\,i-1} + \mj_{\omega\,i} \, \partial_{q_i} \mq^\msT & \text{ se } i>1 \\
 \end{cases}
 , \; i=1,...,\nu
 \end{split}
@@ -1043,17 +1055,17 @@ Sabe-se que a velocidade do centro de massa de cada ligamento $\ttc_{\llB_i}$ em
 \end{equation}
 
 Sendo assim, definindo:
-\begin{empheq}[box=\myyellowbox]{equation}  \label{eq:jwi_}
+\begin{empheq}[box=\myyellowbox]{equation}  \label{eq:jvi_}
 \begin{split}
 \mj_{v\,i}(\mq) = \begin{cases}
-\mk_{i-1}(\mq), & \text{i-ésima junta prismática} \\
-\mS(\mk_{i-1}(\mq)) \cdot (\mc_{\cM \,i}(\mq) - \mo_{i-1}(\mq)) , & \text{i-ésima junta rotativa} \\
+\mk_{i-1}, & \text{i-ésima junta prismática} \\
+\mS(\mk_{i-1}) \cdot (\mc_{\cM \,i} - \mo_{i-1}) , & \text{i-ésima junta rotativa} \\
 \end{cases} \, i=1,...,\nu
 \end{split}
 \end{empheq}
 
-Aplicando \eqref{eq:VelLinRel} no sistema $\ttN$, temos que:
-\begin{empheq}[box=\myyellowbox]{equation}
+Aplicando \eqref{eq:VelLinRel} no sistema $\ttN$ e utilizando a definição \eqref{eq:jvi_}, temos que:
+\begin{empheq}[box=\myyellowbox]{equation} \label{eq:vlinha}
 \mv'_i(\mq, \dot{q}_i) = \mj_{v\,i} (\mq) \, \dot{q}_i, \, i=1,...,\nu
 \end{empheq}
 
@@ -1074,7 +1086,7 @@ $\mv_1$ pode ser escrito como:
 
 Sendo
 \begin{empheq}[box=\lightbluebox]{equation}
-\mJ_{v\,1}(\mq) = \mj_{v\,1}(\mq) \, \frac{\partial \mq}{\partial q_1}^\msT
+\mJ_{v\,1}(\mq) = \mj_{v\,1}(\mq) \, \partial_{q_1} \mq^\msT
 \end{empheq}
 
 Para obter a velocidade dos centros de massa dos outros ligamentos, utiliza-se o princípio de composição de movimento para velocidades lineares (equação \eqref{eq:Composicao_vel}):
@@ -1082,38 +1094,39 @@ Para obter a velocidade dos centros de massa dos outros ligamentos, utiliza-se o
 \vv_{\ttc_{\lllB_i}}^{\lllN} = \vv_{\ttc_{\lllB_i} \rl \lllB_{i-1}}^{\lllN} + \vv_{\ttc_{\lllB_i}}^{\lllB_{i-1}}
 \end{equation}
 
-$\vv_{\ttc_{\lllB_i} \rl \lllB_{i-1}}^{\lllN}$ pode ser relacionado com a velocidade do centro de massa do ligamento anterior através a equação do campo de velocidades \ref{eq:Poisson_v}:
+$\vv_{\ttc_{\lllB_i} \rl \lllB_{i-1}}^{\lllN}$ pode ser relacionado com a velocidade do centro de massa do ligamento anterior através a equação do campo de velocidades \eqref{eq:Poisson_v}:
 \begin{equation} \label{eq:VelocidadeDeArrastamento}
 \vv_{\ttc_{\lllB_i} \rl \lllB_{i-1}}^{\lllN} = \vv_{\ttc_{\lllB_{i-1}}}^{\lllN} + \vomega_{\lllB_{i-1}}^{\lllN} \wedge \vr_{\ttc_{\lllB_{i-1}} \rl \ttc_{\lllB_{i}}}
 \end{equation}
 
 Substituindo \eqref{eq:VelocidadeDeArrastamento} em \eqref{eq:ComposicaoV} e aplicando no sistema $\ttN$, temos que:
-\begin{equation}
-\mv_i(\mq, \dot{\mq}) = \mv_{i-1}(\mq, \dot{\mq}) + \mv'_i(\mq, \dot{q}_i) + \mS(\momega_{i-1}(\mq, \dot{\mq})) \cdot (\mc_{\cM\,i}(\mq) - \mc_{\cM\,i-1}(\mq))
+\begin{equation} \label{eq:ComposicaoVsimples}
+\mv_i(\mq, \dot{\mq}) = \mv_{i-1} + \mv'_i + \mS(\momega_{i-1}) \cdot (\mc_{\cM\,i} - \mc_{\cM\,i-1})
 \end{equation}
 
 Portanto:
-\begin{equation}
+\begin{empheq}[box=\lightbluebox]{equation}
 \begin{split}
 \mv_i(\mq, \dot{\mq}) = 
 \begin{cases}
-\mv'_1(\mq, \dot{q}_1) & \text{ se } i=1 \\
-\mv_{i-1}(\mq, \dot{\mq}) + \mv'_i(\mq, \dot{q}_i) + \mS(\momega_{i-1}(\mq, \dot{\mq})) \cdot (\mc_{\cM\,i}(\mq) - \mc_{\cM\,i-1}(\mq)) & \text{ se } i>1 \\
+\mv'_1 & \text{ se } i=1 \\
+\mv_{i-1} + \mv'_i + \mS(\momega_{i-1}) \cdot (\mc_{\cM\,i} - \mc_{\cM\,i-1}) & \text{ se } i>1 \\
 \end{cases}
 \; i=1,...,\nu
 \end{split}
-\end{equation}
+\end{empheq}
 
 Além disso, supondo que
-\begin{equation}
+\begin{equation} \label{eq:Jv_suposicao}
 \mv_i(\mq, \dot{\mq}) = \mJ_{v\,i}(\mq) \, \dot{\mq}
 \end{equation}
 
-Temos que:
+
+Substituindo \eqref{eq:Jv_suposicao} e \eqref{eq:vlinha} em \eqref{eq:ComposicaoVsimples}, temos que:
 \begin{equation}
 \begin{split}
-\mv_i(\mq, \dot{\mq}) &= \mJ_{v\,i-1}(\mq) \, \dot{\mq} + \mj_{v\,i}(\mq) \, \frac{\partial \mq}{\partial q_i}^\msT \dot{\mq} + \mS(\mJ_{\omega\,i-1}(\mq) \, \dot{\mq}) \cdot (\mc_{\cM\,i}(\mq) - \mc_{\cM\,i-1}(\mq)) \\
- &= \Big(\mJ_{v\,i-1}(\mq) + \mj_{v\,i}(\mq) \, \frac{\partial \mq}{\partial q_i}^\msT - \mS(\mc_{\cM\,i}(\mq) - \mc_{\cM\,i-1}(\mq)) \cdot \mJ_{\omega\,i-1}(\mq)  \Big) \, \dot{\mq}
+\mv_i(\mq, \dot{\mq}) &= \mJ_{v\,i-1} \, \dot{\mq} + \mj_{v\,i} \, \partial_{q_i} \mq^\msT \dot{\mq} + \mS(\mJ_{\omega\,i-1} \, \dot{\mq}) \cdot (\mc_{\cM\,i} - \mc_{\cM\,i-1}) \\
+ &= \Big(\mJ_{v\,i-1} + \mj_{v\,i} \, \partial_{q_i} \mq^\msT - \mS(\mc_{\cM\,i} - \mc_{\cM\,i-1}) \cdot \mJ_{\omega\,i-1}  \Big) \, \dot{\mq}
 \end{split}
 \end{equation}
 
@@ -1127,8 +1140,8 @@ Sendo:
 \begin{split}
 \mJ_{v\,i}(\mq) = 
 \begin{cases}
-\mj_{v\,1}(\mq) \, \frac{\partial \mq}{\partial q_1}^\msT & \text{ se } i=1 \\
-\mJ_{v\,i-1}(\mq) - \mS\big(\mc_{\cM\,i}(\mq) - \mc_{\cM\,i-1}(\mq)\big) \cdot \mJ_{\omega\,i-1}(\mq) + \mj_{v\,i}(\mq) \, \frac{\partial \mq}{\partial q_i}^\msT & \text{ se } i>1 \\
+\mj_{v\,1} \, \partial_{q_1} \mq^\msT & \text{ se } i=1 \\
+\mJ_{v\,i-1} - \mS\big(\mc_{\cM\,i} - \mc_{\cM\,i-1} \big) \cdot \mJ_{\omega\,i-1} + \mj_{v\,i} \, \partial_{q_i} \mq^\msT & \text{ se } i>1 \\
 \end{cases}
 , \; i=1,...,\nu
 \end{split}
@@ -1136,12 +1149,12 @@ Sendo:
 
 Com relação à velocidade do efetuador, tendo em vista que o efetuador é solidário a $\llB_\nu$, aplicando a equação do campo de velocidades \eqref{eq:Poisson_v}, temos que:
 \begin{empheq}[box=\myyellowbox]{equation}
-\mv(\mq, \dot{\mq}) = \mv_\nu(\mq, \dot{\mq}) + \mS(\momega_\nu(\mq, \dot{\mq})) \cdot (\mx(\mq) - \mc_{\cM\,\nu}(\mq)) = \mJ_v(\mq) \, \dot{\mq}
+\mv(\mq, \dot{\mq}) = \mv_\nu + \mS(\momega_\nu) \cdot (\mx - \mc_{\cM\,\nu}) = \mJ_v(\mq) \, \dot{\mq}
 \end{empheq}
 
 Sendo:
 \begin{empheq}[box=\myyellowbox]{equation}
-\mJ_v(\mq) = \mJ_{v\,\nu}(\mq) - \mS(\mx(\mq) - \mc_{\cM\,\nu}(\mq)) \cdot \mJ_{\omega\,\nu}(\mq)
+\mJ_v(\mq) = \mJ_{v\,\nu} - \mS(\mx - \mc_{\cM\,\nu}) \cdot \mJ_{\omega\,\nu}
 \end{empheq}
 
 \subsection{Cinemática de acelerações angulares}
@@ -1157,8 +1170,8 @@ Sabe-se que a aceleração angular de cada ligamento $\llB_i$ em relação ao re
 \end{split}
 \end{equation}
 
-Sendo assim, temos que:
-\begin{empheq}[box=\lightbluebox]{equation}
+Sendo assim, aplicando \eqref{eq:AcAngRel} no sistema $\ttN$ e utilizando a definição \eqref{eq:jwi_}, temos que:
+\begin{empheq}[box=\lightbluebox]{equation} \label{eq:alphalinha}
 \malpha'_i(\mq, \ddot{q}_i) = \mj_{\omega\,i} (\mq) \, \ddot{q}_i, \, i=1,...,\nu
 \end{empheq}
 
@@ -1169,7 +1182,7 @@ Para obter a aceleração angular de cada ligamento em relação ao referencial 
 
 Ou seja
 \begin{equation}
-\malpha_1(\mq, \dot{\mq}, \ddot{\mq}) = \malpha'_1(\mq, \ddot{q}_1) = \mj_{\omega\,1} (\mq) \, \ddot{q}_1
+\malpha_1(\mq, \dot{\mq}, \ddot{\mq}) = \malpha'_1(\mq, \ddot{q}_1) = \mj_{\omega\,1} \, \partial_{q_1} \mq^\msT \ddot{\mq}
 \end{equation}
 
 Sendo assim, $\malpha_1$ pode ser escrito de forma genérica como:
@@ -1188,8 +1201,8 @@ Para obter a aceleração angular dos outros ligamentos, utiliza-se o princípio
 \end{equation}
 
 Aplicando \eqref{eq:ComposicaodW} no sistema $\ttN$, temos que:
-\begin{equation}
-\malpha_i(\mq, \dot{\mq}) = \malpha_{i-1}(\mq, \dot{\mq}) + \malpha'_i(\mq, \dot{q}_i) + \mS(\momega_{i-1}(\mq, \dot{\mq})) \cdot \momega'_i(\mq, \dot{q}_i)
+\begin{equation} \label{eq:ComposicaoALPHAsimples}
+\malpha_i(\mq, \dot{\mq}) = \malpha_{i-1} + \malpha'_i + \mS(\momega_{i-1}) \cdot \momega'_i
 \end{equation}
 
 Portanto:
@@ -1197,29 +1210,29 @@ Portanto:
 \begin{split}
 \malpha_i(\mq, \dot{\mq}) = 
 \begin{cases}
-\malpha'_1(\mq, \dot{q}_1) & \text{ se } i=1 \\
-\malpha_{i-1}(\mq, \dot{\mq}) + \malpha'_i(\mq, \dot{q}_i) + \mS(\momega_{i-1}(\mq, \dot{\mq})) \cdot \momega'_i(\mq, \dot{q}_i) & \text{ se } i>1 \\
+\malpha'_1 & \text{ se } i=1 \\
+\malpha_{i-1} + \malpha'_i + \mS(\momega_{i-1}) \cdot \momega'_i & \text{ se } i>1 \\
 \end{cases}
 \; i=1,...,\nu
 \end{split}
 \end{empheq}
 
 Além disso, supondo que
-\begin{equation}
+\begin{equation} \label{eq:alphatil_suposicao}
 \malpha_i(\mq, \dot{\mq}, \ddot{\mq}) = \mJ_{\omega\,i}(\mq) \, \ddot{\mq} + \underaccent{\sim}{\malpha}_i (\mq, \dot{\mq})
 \end{equation}
 
-Temos que:
+Substituindo \eqref{eq:alphatil_suposicao} e \eqref{eq:alphalinha} em \eqref{eq:ComposicaoALPHAsimples}, temos que:
 \begin{equation}
 \begin{split}
-\malpha_i(\mq, \dot{\mq}) &= \mJ_{\omega\,i-1}(\mq) \, \ddot{\mq} + \underaccent{\sim}{\malpha}_{i-1} (\mq, \dot{\mq}) + \mj_{\omega\,i}(\mq) \, \frac{\partial \mq}{\partial q_i}^\msT \ddot{\mq} + \mS(\momega_{i-1}(\mq, \dot{\mq})) \cdot \momega'_i(\mq, \dot{q}_i) \\
-&= \Big(\mJ_{\omega\,i-1}(\mq) + \mj_{\omega\,i}(\mq) \, \frac{\partial \mq}{\partial q_i}^\msT \Big) \, \ddot{\mq} + \underaccent{\sim}{\malpha}_{i-1} (\mq, \dot{\mq}) + \mS(\momega_{i-1}(\mq, \dot{\mq})) \cdot \momega'_i(\mq, \dot{q}_i) \\
-&= \mJ_{\omega\,i}(\mq) \, \ddot{\mq} + \underaccent{\sim}{\malpha}_{i-1} (\mq, \dot{\mq}) + \mS(\momega_{i-1}(\mq, \dot{\mq})) \cdot \momega'_i(\mq, \dot{q}_i)
+\malpha_i(\mq, \dot{\mq}) &= \mJ_{\omega\,i-1} \, \ddot{\mq} + \underaccent{\sim}{\malpha}_{i-1}  + \mj_{\omega\,i} \, \partial_{q_i} \mq^\msT \ddot{\mq} + \mS(\momega_{i-1}) \cdot \momega'_i \\
+&= \Big(\mJ_{\omega\,i-1} + \mj_{\omega\,i} \, \partial_{q_i} \mq^\msT \Big) \, \ddot{\mq} + \underaccent{\sim}{\malpha}_{i-1} + \mS(\momega_{i-1}) \cdot \momega'_i \\
+&= \mJ_{\omega\,i} \, \ddot{\mq} + \underaccent{\sim}{\malpha}_{i-1} + \mS(\momega_{i-1}) \cdot \momega'_i
 \end{split}
 \end{equation}
 
 Portanto, pelo princípio da indução finita
-\begin{empheq}[box=\mybluebox]{equation}
+\begin{empheq}[box=\mybluebox]{equation} \label{eq:alphatil_provado}
 \malpha_i(\mq, \dot{\mq}, \ddot{\mq}) = \mJ_{\omega\,i}(\mq) \, \ddot{\mq} + \underaccent{\sim}{\malpha}_i (\mq, \dot{\mq}), \; i=1,...,\nu
 \end{empheq}
 
@@ -1229,7 +1242,7 @@ Sendo:
 \underaccent{\sim}{\malpha}_i (\mq, \dot{\mq}) = 
 \begin{cases}
 \mzr & \text{ se } i=1 \\
-\underaccent{\sim}{\malpha}_{i-1} (\mq, \dot{\mq}) + \mS(\momega_{i-1}(\mq, \dot{\mq})) \cdot \momega'_i(\mq, \dot{q}_i) & \text{ se } i>1 \\
+\underaccent{\sim}{\malpha}_{i-1} + \mS(\momega_{i-1}) \cdot \momega'_i & \text{ se } i>1 \\
 \end{cases}
 , \; i=1,...,\nu
 \end{split}
@@ -1260,9 +1273,9 @@ Sabe-se que a aceleração do centro de massa de cada ligamento $\ttc_{\llB_i}$ 
 
 %Tendo em vista que , para juntas rotativas $\mj_{v\,i}(\mq) = \vct{ \vk_{\ttB_{i-1}} \wedge \vr_{\tto_{i-1} \rl \ttc_{\lllB_i}}}_\ttN$ e $\mj_{\omega\,i}(\mq) = \vct{ \vk_{\ttB_{i-1}}}_\ttN$, e para juntas prismáticas $\mj_{v\,i}(\mq) = \vct{ \vk_{\ttB_{i-1}}}_\ttN$ e $\mj_{\omega\,i}(\mq) = \mzr$, 
 
-Sendo assim, temos que:
-\begin{empheq}[box=\lightbluebox]{equation}
-\ma'_i(\mq, \ddot{q}_i) = \mj_{v\,i} (\mq) \, \ddot{q}_i + \mS(\momega'_i(\mq, \dot{q}_i)) \cdot \mv'_i(\mq, \dot{q}_i) , \, i=1,...,\nu
+Aplicando \eqref{eq:AcLinRel} no sistema $\ttN$ e utilizando as definições \eqref{eq:jwi_}, \eqref{eq:wlinha}, \eqref{eq:jvi_} e \eqref{eq:vlinha}, temos que:
+\begin{empheq}[box=\lightbluebox]{equation} \label{eq:alinha}
+\ma'_i(\mq, \dot{q}_i, \ddot{q}_i) = \mj_{v\,i}  \, \ddot{q}_i + \mS(\momega'_i) \cdot \mv'_i , \, i=1,...,\nu
 \end{empheq}
 
 Para obter a aceleração do centro de massa de cada ligamento em relação ao referencial $\llN$, parte-se do ligamente $\llB_1$. Tendo em vista que $\llB_0$ e $\llN$ são o mesmo referencial, temos que:
@@ -1272,7 +1285,7 @@ Para obter a aceleração do centro de massa de cada ligamento em relação ao r
 
 Ou seja
 \begin{equation}
-\ma_1(\mq, \dot{\mq}, \ddot{\mq}) = \ma'_1(\mq, \ddot{q}_1) = \mj_{v\,1} (\mq) \, \ddot{q}_1
+\ma_1(\mq, \dot{\mq}, \ddot{\mq}) = \ma'_1(\mq, \dot{q}_1, \ddot{q}_1) = \mj_{v\,1}  \, \partial_{q_1} \mq^\msT \, \ddot{\mq} + \mS(\momega'_1) \cdot \mv'_1
 \end{equation}
 
 Sendo assim, $\ma_1$ pode ser escrito de forma genérica como:
@@ -1282,7 +1295,7 @@ Sendo assim, $\ma_1$ pode ser escrito de forma genérica como:
 
 Sendo
 \begin{empheq}[box=\lightbluebox]{equation}
-\underaccent{\sim}{\ma}_1 (\mq, \dot{\mq}) = \mS(\momega'_i(\mq, \dot{q}_i)) \cdot \mv'_i(\mq, \dot{q}_i)
+\underaccent{\sim}{\ma}_1 (\mq, \dot{\mq}) = \mS(\momega'_i) \cdot \mv'_i
 \end{empheq}
 
 Para obter a aceleração do centro de massa dos outros ligamentos, utiliza-se o princípio de composição de movimento para acelerações lineares (equação \eqref{eq:Composicao_ace}):
@@ -1290,19 +1303,14 @@ Para obter a aceleração do centro de massa dos outros ligamentos, utiliza-se o
 \va_{\ttc_{\lllB_i}}^{\lllN} = \va_{\ttc_{\lllB_{i}} \rl \lllB_{i-1}}^{\lllN} + \va_{\ttc_{\lllB_i}}^{\lllB_{i-1}} + 2 \vomega_{\lllB_{i-1}}^{\lllN} \wedge \vv_{\ttc_{\lllB_i}}^{\lllB_{i-1}} 
 \end{equation}
 
-%%%%%%%% CONTINUAR DAQUI %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 $\va_{\ttc_{\lllB_i} \rl \lllB_{i-1}}^{\lllN}$ pode ser relacionado com a aceleração do centro de massa do ligamento anterior através a equação do campo de acelerações \eqref{eq:Poisson_a}:
 \begin{equation} \label{eq:AceleracaoDeArrastamento}
 \va_{\ttc_{\lllB_i} \rl \lllB_{i-1}}^{\lllN} = \va_{\ttc_{\lllB_{i-1}}}^{\lllN} + \valpha_{\lllB_{i-1}}^{\lllN} \wedge \vr_{\ttc_{\lllB_{i-1}} \rl \ttc_{\lllB_{i}}} + \vomega_{\lllB_{i-1}}^{\lllN} \wedge \vomega_{\lllB_{i-1}}^{\lllN} \wedge \vr_{\ttc_{\lllB_{i-1}} \rl \ttc_{\lllB_{i}}}
 \end{equation}
 
-Substituindo \eqref{eq:AceleracaoDeArrastamento} em \eqref{eq:ComposicaoAc} e aplicando no sistema $\ttN$, temos que:
-\begin{equation}
-\begin{split}
-\ma_i(\mq, \dot{\mq}, \ddot{\mq}) &= \ma_{i-1}(\mq, \dot{\mq}, \ddot{\mq}) + \ma'_i(\mq, \ddot{q}_i) + 2 \mS(\momega'_{i-1}(\mq, \dot{q}_{i-1})) \cdot \mv'_i(\mq, \dot{q}_i)\\
-  &+ \big(\mS(\malpha_{i-1}(\mq, \dot{\mq}, \ddot{\mq})) + \mS^2 (\momega_{i-1}(\mq, \dot{\mq})\big) \cdot (\mc_{\cM\,i}(\mq) - \mc_{\cM\,i-1}(\mq))
-\end{split}
+Substituindo \eqref{eq:AceleracaoDeArrastamento} em \eqref{eq:ComposicaoAc} e aplicando no sistema $\ttN$, temos que: 
+\begin{equation} \label{eq:ComposicaoAsimples}
+\ma_i(\mq, \dot{\mq}, \ddot{\mq}) = \ma_{i-1} + \ma'_i + 2 \mS(\momega'_{i-1}) \cdot \mv'_i + \big(\mS(\malpha_{i-1}) + \mS^2 (\momega_{i-1}) \big) \cdot (\mc_{\cM\,i} - \mc_{\cM\,i-1})
 \end{equation}
 
 Portanto:
@@ -1318,16 +1326,16 @@ Portanto:
 \end{empheq}
 
 Além disso, supondo que
-\begin{equation}
+\begin{equation} \label{eq:atil_suposicao}
 \ma_i(\mq, \dot{\mq}, \ddot{\mq}) = \mJ_{v\,i}(\mq) \, \ddot{\mq} + \underaccent{\sim}{\ma}_i (\mq, \dot{\mq})
 \end{equation}
 
-Temos que:
+Substituindo \eqref{eq:alphatil_provado}, \eqref{eq:atil_suposicao} e \eqref{eq:alinha} em \eqref{eq:ComposicaoAsimples}, temos que:
 \begin{equation}
 \begin{split}
-\ma_i &= \mJ_{v\,i-1} \, \ddot{\mq} + \underaccent{\sim}{\ma}_{i-1} + \mj_{v\,i} \, \frac{\partial \mq}{\partial q_i}^\msT \ddot{\mq} + \mS(\momega'_i) \cdot \mv'_i + 2 \mS(\momega'_{i-1}) \cdot \mv'_i \\ 
+\ma_i &= \mJ_{v\,i-1} \, \ddot{\mq} + \underaccent{\sim}{\ma}_{i-1} + \mj_{v\,i} \, \partial_{q_i} \mq^\msT \ddot{\mq} + \mS(\momega'_i) \cdot \mv'_i + 2 \mS(\momega'_{i-1}) \cdot \mv'_i \\ 
 &+ \big(\mS(\mJ_{\omega\,i-1} \, \ddot{\mq} + \underaccent{\sim}{\malpha}_{i-1}) + \mS^2 (\momega_{i-1})\big) \cdot (\mc_{\cM\,i} - \mc_{\cM\,i-1}) \\
-&= \Big( \mJ_{v\,i-1} - \mS(\mc_{\cM\,i} - \mc_{\cM\,i-1}) \cdot \mJ_{\omega\,i-1}  + \mj_{v\,i} \, \frac{\partial \mq}{\partial q_i}^\msT \Big) \ddot{\mq} + \underaccent{\sim}{\ma}_{i-1} +  \big(\mS(\momega'_i) + 2 \mS(\momega'_{i-1}) \big) \cdot \mv'_i \\ 
+&= \Big( \mJ_{v\,i-1} - \mS(\mc_{\cM\,i} - \mc_{\cM\,i-1}) \cdot \mJ_{\omega\,i-1}  + \mj_{v\,i} \, \partial_{q_i} \mq^\msT \Big) \ddot{\mq} + \underaccent{\sim}{\ma}_{i-1} +  \big(\mS(\momega'_i) + 2 \mS(\momega'_{i-1}) \big) \cdot \mv'_i \\ 
 &+ \big(\mS(\underaccent{\sim}{\malpha}_{i-1}) + \mS^2 (\momega_{i-1})\big) \cdot (\mc_{\cM\,i} - \mc_{\cM\,i-1}) \\
 &= \mJ_{v\,i} \, \ddot{\mq} + \underaccent{\sim}{\ma}_{i-1} +  \big(\mS(\momega'_i) + 2 \mS(\momega'_{i-1}) \big) \cdot \mv'_i + \big(\mS(\underaccent{\sim}{\malpha}_{i-1}) + \mS^2 (\momega_{i-1})\big) \cdot (\mc_{\cM\,i} - \mc_{\cM\,i-1}) \\
 \end{split}
@@ -1341,6 +1349,7 @@ Portanto, pelo princípio da indução finita
 Sendo:
 \begin{empheq}[box=\myyellowbox]{equation}
 \begin{split}
+\, \\
 \underaccent{\sim}{\ma}_i = 
 \begin{cases}
 \mS(\momega'_i) \cdot \mv'_i & \text{ se } i=1 \\
@@ -1352,12 +1361,12 @@ i=1,...,\nu
 
 Com relação à aceleração do efetuador, tendo em vista que o efetuador é solidário a $\llB_\nu$, temos que:
 \begin{empheq}[box=\mybluebox]{equation}
-\ma(\mq, \dot{\mq},\ddot{\mq}) = \ma_\nu(\mq, \dot{\mq}, \ddot{\mq}) + \big(\mS(\malpha_\nu(\mq, \dot{\mq}, \ddot{\mq})) + \mS^2(\momega_\nu(\mq, \dot{\mq})) \cdot (\mx(\mq) - \mc_{\cM\,\nu}(\mq) \big) = \mJ_v(\mq) \, \ddot{\mq} + \underaccent{\sim}{\ma} (\mq, \dot{\mq})
+\ma(\mq, \dot{\mq},\ddot{\mq}) = \ma_\nu + \big(\mS(\malpha_\nu) + \mS^2(\momega_\nu) \big) \cdot (\mx - \mc_{\cM\,\nu} ) = \mJ_v(\mq) \, \ddot{\mq} + \underaccent{\sim}{\ma} (\mq, \dot{\mq})
 \end{empheq}
 
 Sendo:
 \begin{empheq}[box=\myyellowbox]{equation}
-\underaccent{\sim}{\ma} (\mq, \dot{\mq}) = \underaccent{\sim}{\ma}_\nu (\mq, \dot{\mq}) + \big(\mS(\underaccent{\sim}{\malpha}_\nu(\mq, \dot{\mq})) + \mS^2(\momega_\nu(\mq, \dot{\mq})) \cdot (\mx(\mq) - \mc_{\cM\,\nu}(\mq) \big)
+\underaccent{\sim}{\ma} (\mq, \dot{\mq}) = \underaccent{\sim}{\ma}_\nu  + \big(\mS(\underaccent{\sim}{\malpha}_\nu) + \mS^2(\momega_\nu) \big) \cdot (\mx - \mc_{\cM\,\nu} )
 \end{empheq}
 
 %\subsection{Cinemática de velocidades lineares}
@@ -1863,7 +1872,7 @@ m_i \mJ_{v\,i}^\msT \mJ_{v\,i} + \mJ_{\omega\,i}^\msT \mI_i \mJ_{\omega\,i}
 \end{empheq}
 \begin{empheq}[box=\myyellowbox]{equation} \label{eq:vSerial}
 \mnu(\mq, \dot{\mq}) = \sum_{i=1}^\nu
- m_i \mJ_{v\,i}^\msT \underaccent{\sim}{\ma}_i + \mJ_{\omega\,i}^\msT \big( \mI_i \underaccent{\sim}{\malpha}_i + \mS( \momega^\star_i ) \cdot \mI_i \momega^\star_i \big)
+ m_i \mJ_{v\,i}^\msT \underaccent{\sim}{\ma}_i + \mJ_{\omega\,i}^\msT \big( \mI_i \underaccent{\sim}{\malpha}_i + \mS( \momega_i ) \cdot \mI_i \momega_i \big)
 \end{empheq}
 \begin{empheq}[box=\myyellowbox]{equation} \label{eq:gSerial}
 \mg(\mq) = - \sum_{i=1}^\nu m_i \mJ_{v\,i}^\msT \mgamma
@@ -1920,13 +1929,13 @@ m_i \mone & \mzr \\
 \end{bmatrix}
 \cdot
 \begin{bmatrix}
-\ma^\star_i  \\
-\malpha^\star_i
+\ma_i  \\
+\malpha_i
 \end{bmatrix}
 +
 \begin{bmatrix}
 \mzr \\
-\mS ( \momega^\star_i ) \cdot \mI_i \cdot \momega^\star_i
+\mS ( \momega_i ) \cdot \mI_i \cdot \momega_i
 \end{bmatrix}
 +
 \begin{bmatrix}
@@ -1951,7 +1960,7 @@ Além disso, definindo as quasi-velocidades:
 %\begin{equation} \label{eq:v_i}
 %\mnu_i (\mq, \mp_i) = \begin{bmatrix}
 %\mzr \\
-%\momega^\star_i \wedge (\mI_i(\mq) \cdot \momega^\star_i)
+%\momega_i \wedge (\mI_i(\mq) \cdot \momega_i)
 %\end{bmatrix}
 %\end{equation}
 %\begin{equation} \label{eq:g_i}
@@ -1962,8 +1971,8 @@ Além disso, definindo as quasi-velocidades:
 %\end{equation}
 \begin{empheq}[box=\lightbluebox]{equation} \label{eq:p_i}
 \mp_i = \begin{bmatrix}
-\mv^\star_i  \\
-\momega^\star_i
+\mv_i  \\
+\momega_i
 \end{bmatrix}
 \end{empheq}
 
@@ -2167,13 +2176,13 @@ m_i \mone & \mzr \\
 \end{bmatrix}
 \cdot
 \begin{bmatrix}
-\ma^\star_i  \\
-\malpha^\star_i
+\ma_i  \\
+\malpha_i
 \end{bmatrix}
 +
 \begin{bmatrix}
 \mzr \\
-\mS( \momega^\star_i ) \cdot \mI_i \cdot \momega^\star_i
+\mS( \momega_i ) \cdot \mI_i \cdot \momega_i
 \end{bmatrix}
 +
 \begin{bmatrix}
@@ -2199,7 +2208,7 @@ m_i (\mJ_{v_i} \ddot{\mq} + \underaccent{\sim}{\ma}_i   )  \\
 +
 \begin{bmatrix}
 \mzr \\
-\mS( \momega^\star_i ) \cdot \mI_i \cdot \momega^\star_i
+\mS( \momega_i ) \cdot \mI_i \cdot \momega_i
 \end{bmatrix}
 +
 \begin{bmatrix}
@@ -2222,7 +2231,7 @@ m_i \mJ_{v\,i}^\msT \mJ_{v\,i} + \mJ_{\omega\,i}^\msT \mI_i \mJ_{\omega\,i}
 \end{equation}
 \begin{equation} \tag{\ref{eq:vSerial}}
 \mnu(\mq, \dot{\mq}) = \sum_{i=1}^\nu
- m_i \mJ_{v\,i}^\msT \underaccent{\sim}{\ma}_i + \mJ_{\omega\,i}^\msT \big( \mI_i \underaccent{\sim}{\malpha}_i + \mS( \momega^\star_i ) \cdot \mI_i  \momega^\star_i \big)
+ m_i \mJ_{v\,i}^\msT \underaccent{\sim}{\ma}_i + \mJ_{\omega\,i}^\msT \big( \mI_i \underaccent{\sim}{\malpha}_i + \mS( \momega_i ) \cdot \mI_i  \momega_i \big)
 \end{equation}
 \begin{equation} \tag{\ref{eq:gSerial}}
 \mg(\mq) = - \sum_{i=1}^\nu m_i \mJ_{v\,i}^\msT \mgamma
@@ -2277,17 +2286,17 @@ Sendo que a velocidade angular relativa de cada rotor é dada por:
 
 Aplicando a equação \eqref{eq:ComposicaoWRotor} no sistema $\ttN$, temos:
 \begin{empheq}[box=\myyellowbox]{equation} \label{eq:ComposicaoWRotor2}
-\momega^\star_{r \,i} = \momega^\star_{i-1} + r_i \dot{q}_{i} [\vk_{\ttB_{i-1}}]_{\ttN} ,\; i=1,...,\nu
+\momega_{r \,i} = \momega_{i-1} + r_i \dot{q}_{i} [\vk_{\ttB_{i-1}}]_{\ttN} ,\; i=1,...,\nu
 \end{empheq}
 
 Sendo:
 \begin{empheq}[box=\lightbluebox]{equation}
-\momega^\star_{r \,i} = \vct{\vomega_{\lllR_i}^{\lllN} }_{\ttN} 
+\momega_{r \,i} = \vct{\vomega_{\lllR_i}^{\lllN} }_{\ttN} 
 \end{empheq}
 
 Utilizando a equação \eqref{eq:omega_star_i}, pode-se reescrever \eqref{eq:ComposicaoWRotor2} da seguinte maneira:
 \begin{empheq}[box=\lightbluebox]{equation} \label{eq:VinculosWrot}
-\momega^\star_{r \,i} (\mq, \dot{\mq}) = \mJ_{\omega_r \,i}(\mq) \cdot \dot{\mq}
+\momega_{r \,i} (\mq, \dot{\mq}) = \mJ_{\omega_r \,i}(\mq) \cdot \dot{\mq}
 \end{empheq}
 
 Sendo:
@@ -2319,24 +2328,24 @@ Sendo que a aceleração angular de relativa de cada rotor é dada por:
 
 Aplicando a equação \eqref{eq:ComposicaodWRotor} no sistema $\ttN$, temos:
 \begin{empheq}[box=\myyellowbox]{equation} \label{eq:ComposicaodWRotor2}
-\malpha^\star_{r \,i} = \malpha^\star_{i-1} + r_i \ddot{q}_{i} [\vk_{\ttB_{i-1}}]_{\ttN} + r_i \dot{q}_{i} \mS( \momega^\star_{i-1} ) \cdot [\vk_{\ttB_{i-1}}]_{\ttN} ,\; i=1,...,\nu
+\malpha_{r \,i} = \malpha_{i-1} + r_i \ddot{q}_{i} [\vk_{\ttB_{i-1}}]_{\ttN} + r_i \dot{q}_{i} \mS( \momega_{i-1} ) \cdot [\vk_{\ttB_{i-1}}]_{\ttN} ,\; i=1,...,\nu
 \end{empheq}
 
 Sendo:
 \begin{empheq}[box=\lightbluebox]{equation}
-\malpha^\star_{r \,i} = \vct{\valpha_{\lllR_i}^{\lllN} }_{\ttN} 
+\malpha_{r \,i} = \vct{\valpha_{\lllR_i}^{\lllN} }_{\ttN} 
 \end{empheq}
 
 Utilizando a equação \eqref{eq:domega_star_i}, pode-se reescrever \eqref{eq:ComposicaodWRotor2} da seguinte maneira:
 \begin{empheq}[box=\lightbluebox]{equation} \label{eq:dw_ri}
-\malpha^\star_{r\,i} (\mq,\dot{\mq},\ddot{\mq}) = \mJ_{\omega_r \,i} (\mq) \cdot \ddot{\mq} + \underaccent{\sim}{\malpha}_{r\,i}  (\mq,\dot{\mq})
+\malpha_{r\,i} (\mq,\dot{\mq},\ddot{\mq}) = \mJ_{\omega_r \,i} (\mq) \cdot \ddot{\mq} + \underaccent{\sim}{\malpha}_{r\,i}  (\mq,\dot{\mq})
 \end{empheq}
 
 Sendo:
 \begin{empheq}[box=\myyellowbox]{equation}
 \underaccent{\sim}{\malpha}_{r\,i}  = \begin{cases}
 \mzr, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; i = 1 \\
-\underaccent{\sim}{\malpha}_{i-1}  + \dot{q}_{i} \mS( \momega^\star_{i-1} ) \cdot \mj_{\omega_r \, i,i}, \, i > 1 
+\underaccent{\sim}{\malpha}_{i-1}  + \dot{q}_{i} \mS( \momega_{i-1} ) \cdot \mj_{\omega_r \, i,i}, \, i > 1 
 \end{cases}  ,\; i=1,...,\nu
 \end{empheq}
 
@@ -2354,7 +2363,7 @@ Sendo:
 \end{empheq}
 \begin{empheq}[box=\myyellowbox]{equation} \label{eq:vSerial_rot}
 \mnu^*(\mq, \dot{\mq}) = \mnu(\mq, \dot{\mq}) + \underline{r} \, \mzeta(\underline{r} \, \dot{\mq}) + \sum_{i=1}^\nu
- \mJ_{\omega_r \,i}^\msT \big( \mI_{r\,i} \underaccent{\sim}{\malpha}_{r\,i} + \mS( \momega^\star_{r\,i} ) \cdot \mI_{r\,i} \momega^\star_{r\,i} \big)
+ \mJ_{\omega_r \,i}^\msT \big( \mI_{r\,i} \underaccent{\sim}{\malpha}_{r\,i} + \mS( \momega_{r\,i} ) \cdot \mI_{r\,i} \momega_{r\,i} \big)
 \end{empheq}
 \begin{empheq}[box=\myyellowbox]{equation} \label{eq:gSerial_rot}
 \mg^*(\mq) = \mg(\mq)
@@ -2390,9 +2399,9 @@ Ou seja:
 \overline{\mf}_{r \,i}  =
 -\mI_{r \,i}
 \cdot
-\malpha^\star_{r \,i}
+\malpha_{r \,i}
 -
-\mS( \momega^\star_{r \,i} ) \cdot \mI_{r \,i} \cdot \momega^\star_{r \,i}
+\mS( \momega_{r \,i} ) \cdot \mI_{r \,i} \cdot \momega_{r \,i}
 \end{empheq}
 
 Como os subsistemas estão desacoplados, não há forças reativas, portanto o modelo dinâmico de cada subsistema rotor pode ser escrito como:
@@ -2402,7 +2411,7 @@ Como os subsistemas estão desacoplados, não há forças reativas, portanto o m
 
 Além disso, definindo as quasi-coordenadas:
 \begin{empheq}[box=\lightbluebox]{equation} \label{eq:pi_i_rot}
-\dd\mpi_{r \,i} = \momega^\star_{r \,i} \dd t
+\dd\mpi_{r \,i} = \momega_{r \,i} \dd t
 \end{empheq}
 
 Temos que o trabalho virtual associado a cada subsistema é dado por:
@@ -2482,12 +2491,12 @@ Tendo em vista que as coordenadas $\mq$ são independentes, as variações $\dl\
 
 Substituindo \eqref{eq:f_i_rot} e \eqref{eq:fs} em  \eqref{eq:Din_rot1}, temos:
 \begin{equation} \label{eq:DynSeriais_rot}
-\underline{r} \, \underline{k_t} \, \mi - \underline{r} \, \mzeta(\underline{r} \, \dot{\mq}) - \mM \, \ddot{\mq} - \mnu - \mg  - \sum_{i=1}^\nu \mJ_{\omega_r \,i}^\msT \, ( \mI_{r\,i} \cdot \malpha_{r\,i}^\star + \mS( \momega_{r\,i}^\star ) \cdot  \mI_{r\,i} \cdot \momega_{r\,i}^\star)    = \mzr
+\underline{r} \, \underline{k_t} \, \mi - \underline{r} \, \mzeta(\underline{r} \, \dot{\mq}) - \mM \, \ddot{\mq} - \mnu - \mg  - \sum_{i=1}^\nu \mJ_{\omega_r \,i}^\msT \, ( \mI_{r\,i} \cdot \malpha_{r\,i} + \mS( \momega_{r\,i} ) \cdot  \mI_{r\,i} \cdot \momega_{r\,i})    = \mzr
 \end{equation}
 
 Substituindo \eqref{eq:dw_ri} em \eqref{eq:DynSeriais_rot}:
 \begin{equation} \label{eq:DynSeriais_rot2}
-\underline{r} \underline{k_t} \, \mi - \underline{r} \, \mzeta(\underline{r} \, \dot{\mq})  - \mM \, \ddot{\mq} - \mnu - \mg  - \sum_{i=1}^\nu \mJ_{\omega_r \,i}^\msT \, ( \mI_{r\,i} \cdot (\mJ_{\omega_r \,i}  \cdot \ddot{\mq} + \underaccent{\sim}{\malpha}_{r\,i}  ) + \mS( \momega_{r\,i}^\star ) \cdot \mI_{r\,i} \cdot \momega_{r\,i}^\star  )  = \mzr
+\underline{r} \underline{k_t} \, \mi - \underline{r} \, \mzeta(\underline{r} \, \dot{\mq})  - \mM \, \ddot{\mq} - \mnu - \mg  - \sum_{i=1}^\nu \mJ_{\omega_r \,i}^\msT \, ( \mI_{r\,i} \cdot (\mJ_{\omega_r \,i}  \cdot \ddot{\mq} + \underaccent{\sim}{\malpha}_{r\,i}  ) + \mS( \momega_{r\,i} ) \cdot \mI_{r\,i} \cdot \momega_{r\,i}  )  = \mzr
 \end{equation}
 
 Sendo assim, obtemos o modelo dinâmico mostrado anteriormente:
@@ -2501,7 +2510,7 @@ Sendo:
 \end{equation}
 \begin{equation} \tag{\ref{eq:vSerial_rot}}
 \mnu^*(\mq, \dot{\mq}) = \mnu(\mq, \dot{\mq}) + \underline{r} \, \mzeta(\underline{r} \, \dot{\mq}) + \sum_{i=1}^\nu
- \mJ_{\omega_r \,i}^\msT \big( \mI_{r\,i} \underaccent{\sim}{\malpha}_{r\,i} + \mS( \momega^\star_{r\,i} ) \cdot \mI_{r\,i} \momega^\star_{r\,i} \big)
+ \mJ_{\omega_r \,i}^\msT \big( \mI_{r\,i} \underaccent{\sim}{\malpha}_{r\,i} + \mS( \momega_{r\,i} ) \cdot \mI_{r\,i} \momega_{r\,i} \big)
 \end{equation}
 \begin{equation} \tag{\ref{eq:gSerial_rot}}
 \mg^*(\mq) = \mg(\mq)

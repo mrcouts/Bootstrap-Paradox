@@ -29,10 +29,10 @@
 \contentsline {section}{\numberline {3.6}Sexta fase}{43}
 \contentsline {chapter}{Parte~II:~\MakeUppercase {Modelagem}}{45}
 \contentsline {chapter}{\numberline {4}Modelagem de manipuladores seriais}{46}
-\contentsline {section}{\numberline {4.1}Cinem\IeC {\'a}tica}{47}
-\contentsline {subsection}{\numberline {4.1.1}Cinem\IeC {\'a}tica de posi\IeC {\c c}\IeC {\~a}o}{47}
-\contentsline {subsection}{\numberline {4.1.2}Cinem\IeC {\'a}tica de velocidades angulares}{50}
-\contentsline {subsection}{\numberline {4.1.3}Cinem\IeC {\'a}tica de velocidades lineares}{52}
+\contentsline {section}{\numberline {4.1}Cinem\IeC {\'a}tica}{48}
+\contentsline {subsection}{\numberline {4.1.1}Cinem\IeC {\'a}tica de posi\IeC {\c c}\IeC {\~a}o}{48}
+\contentsline {subsection}{\numberline {4.1.2}Cinem\IeC {\'a}tica de velocidades angulares}{51}
+\contentsline {subsection}{\numberline {4.1.3}Cinem\IeC {\'a}tica de velocidades lineares}{53}
 \contentsline {subsection}{\numberline {4.1.4}Cinem\IeC {\'a}tica de acelera\IeC {\c c}\IeC {\~o}es angulares}{55}
 \contentsline {subsection}{\numberline {4.1.5}Cinem\IeC {\'a}tica de acelera\IeC {\c c}\IeC {\~o}es lineares}{57}
 \contentsline {section}{\numberline {4.2}Din\IeC {\^a}mica dos elos e juntas}{59}
