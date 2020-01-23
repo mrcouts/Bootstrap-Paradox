@@ -756,6 +756,7 @@ q_1 & ... & {q}_{\nu}
 \item $\ma_i, \,i=1, ..., \nu$: componentes de aceleração do centro de massa do ligamento $\llB_i$ em relação ao referencial $\llN$ no sistema $\ttN$, ou seja $\vct{\va_{\ttc_{\lllB_i}}^{\lllN}}_\ttN$.
 \item $\ma'_i, \,i=1, ..., \nu$: componentes de aceleração do centro de massa do ligamento $\llB_i$ em relação ao referencial $\llB_{i-1}$ no sistema $\ttN$, ou seja $\vct{\va_{\ttc_{\lllB_i}}^{\lllB_{i-1}}}_\ttN$.
 \item $\ma$: componentes de aceleração do efetuador em relação ao referencial $\llN$ no sistema $\ttN$, ou seja $\vct{\va_{\ttx}^{\lllN}}_\ttN$.
+\item $\mu$: matriz-coluna dos esforços ativos generalizados aplicados pelos atuadores das juntas.
 \end{itemize}
 
 \section{Cinemática}
@@ -917,6 +918,16 @@ Tendo em vista que as coordenadas dos versores $\vk_{\ttB_i}$ no sistema $\ttN$ 
 \end{split}
 \end{empheq}
 
+As matrizes de rotação obtidas também podem ser utilizadas para passar o tensor de inércia do centro de massa de cada ligamento para o sistema $\ttN$:
+\begin{equation}
+\vct{\vI_{\lllB_i}}_{\ttN \rl \ttN} = \vct{\vone}_{\ttN \rl \ttB_i} \cdot \vct{\vI_{\lllB_i}}_{\ttB_i \rl \ttB_i} \cdot \vct{\vone}_{\ttB_i \rl \ttN}, \; i=1,...,\nu
+\end{equation}
+
+Ou seja:
+\begin{empheq}[box=\myyellowbox]{equation}
+\mI_i (\mq) = \mR_i(\mq) \cdot \mI'_i \cdot \mR_i(\mq)^\msT, \; i=1,...,\nu
+\end{empheq}
+
 \subsection{Cinemática de velocidades angulares}
 
 Sabe-se que a velocidade angular de cada ligamento $\llB_i$ em relação ao referencial anterior $\llB_{i-1}$ é dada por:
@@ -945,7 +956,7 @@ Aplicando \eqref{eq:VelAngRel} no sistema $\ttN$ e utilizando a definição \eqr
 \momega'_i(\mq, \dot{q}_i) = \mj_{\omega\,i} (\mq) \, \dot{q}_i, \, i=1,...,\nu
 \end{empheq}
 
-Para obter a velocidade angular de cada ligamento em relação ao referencial $\llN$, parte-se do ligamente $\llB_1$. Tendo em vista que $\llB_0$ e $\llN$ são o mesmo referencial, temos que:
+Para obter a velocidade angular de cada ligamento em relação ao referencial $\llN$, parte-se do ligamento $\llB_1$. Tendo em vista que $\llB_0$ e $\llN$ são o mesmo referencial, temos que:
 \begin{equation}
 \vct{\vomega_{\lllB_1}^{\lllN}}_\ttN = \vct{\vomega_{\lllB_1}^{\lllB_0}}_\ttN
 \end{equation}
@@ -1015,7 +1026,7 @@ Substituindo \eqref{eq:Jw_suposicao} e \eqref{eq:wlinha} em \eqref{eq:Composicao
 \end{equation}
 
 Portanto, pelo princípio da indução finita
-\begin{empheq}[box=\mybluebox]{equation}
+\begin{empheq}[box=\mybluebox]{equation} \label{eq:w_ligamentos}
 \momega_i(\mq, \dot{\mq}) = \mJ_{\omega\,i}(\mq) \, \dot{\mq}, \; i=1,...,\nu
 \end{empheq}
 
@@ -1049,7 +1060,7 @@ Sabe-se que a velocidade do centro de massa de cada ligamento $\ttc_{\llB_i}$ em
 \vv_{\ttc_{\lllB_{i}}}^{\lllB_{i-1}} = 
 \begin{cases}
 \dot{q}_{i} \vk_{\ttB_{i-1}}, & \text{i-ésima junta prismática} \\
-\vomega_{\lllB_{i}}^{\lllB_{i-1}} \wedge \vr_{\tto_{i-1} \rl \ttc_{\lllB_i}}, & \text{i-ésima junta rotativa}
+\dot{q}_{i} \vk_{\ttB_{i-1}} \wedge \vr_{\tto_{i-1} \rl \ttc_{\lllB_i}}, & \text{i-ésima junta rotativa}
 \end{cases}\, i=1,...,\nu
 \end{split}
 \end{equation}
@@ -1069,7 +1080,7 @@ Aplicando \eqref{eq:VelLinRel} no sistema $\ttN$ e utilizando a definição \eqr
 \mv'_i(\mq, \dot{q}_i) = \mj_{v\,i} (\mq) \, \dot{q}_i, \, i=1,...,\nu
 \end{empheq}
 
-Para obter a velocidade do centro de massa de cada ligamento em relação ao referencial $\llN$, parte-se do ligamente $\llB_1$. Tendo em vista que $\llB_0$ e $\llN$ são o mesmo referencial, temos que:
+Para obter a velocidade do centro de massa de cada ligamento em relação ao referencial $\llN$, parte-se do ligamento $\llB_1$. Tendo em vista que $\llB_0$ e $\llN$ são o mesmo referencial, temos que:
 \begin{equation}
 \vct{\vv_{\ttc_{\lllB_1}}^{\lllN}}_\ttN = \vct{\vv_{\ttc_{\lllB_1}}^{\lllB_0}}_\ttN
 \end{equation}
@@ -1131,7 +1142,7 @@ Substituindo \eqref{eq:Jv_suposicao} e \eqref{eq:vlinha} em \eqref{eq:Composicao
 \end{equation}
 
 Portanto, pelo princípio da indução finita
-\begin{empheq}[box=\mybluebox]{equation}
+\begin{empheq}[box=\mybluebox]{equation} \label{eq:v_centrosdemassa}
 \mv_i(\mq, \dot{\mq}) = \mJ_{v\,i}(\mq) \, \dot{\mq}, \; i=1,...,\nu
 \end{empheq}
 
@@ -1175,7 +1186,7 @@ Sendo assim, aplicando \eqref{eq:AcAngRel} no sistema $\ttN$ e utilizando a defi
 \malpha'_i(\mq, \ddot{q}_i) = \mj_{\omega\,i} (\mq) \, \ddot{q}_i, \, i=1,...,\nu
 \end{empheq}
 
-Para obter a aceleração angular de cada ligamento em relação ao referencial $\llN$, parte-se do ligamente $\llB_1$. Tendo em vista que $\llB_0$ e $\llN$ são o mesmo referencial, temos que:
+Para obter a aceleração angular de cada ligamento em relação ao referencial $\llN$, parte-se do ligamento $\llB_1$. Tendo em vista que $\llB_0$ e $\llN$ são o mesmo referencial, temos que:
 \begin{equation}
 \vct{\valpha_{\lllB_1}^{\lllN}}_\ttN = \vct{\valpha_{\lllB_1}^{\lllB_0}}_\ttN
 \end{equation}
@@ -1278,7 +1289,7 @@ Aplicando \eqref{eq:AcLinRel} no sistema $\ttN$ e utilizando as definições \eq
 \ma'_i(\mq, \dot{q}_i, \ddot{q}_i) = \mj_{v\,i}  \, \ddot{q}_i + \mS(\momega'_i) \cdot \mv'_i , \, i=1,...,\nu
 \end{empheq}
 
-Para obter a aceleração do centro de massa de cada ligamento em relação ao referencial $\llN$, parte-se do ligamente $\llB_1$. Tendo em vista que $\llB_0$ e $\llN$ são o mesmo referencial, temos que:
+Para obter a aceleração do centro de massa de cada ligamento em relação ao referencial $\llN$, parte-se do ligamento $\llB_1$. Tendo em vista que $\llB_0$ e $\llN$ são o mesmo referencial, temos que:
 \begin{equation}
 \vct{\va_{\ttc_{\lllB_1}}^{\lllN}}_\ttN = \vct{\va_{\ttc_{\lllB_1}}^{\lllB_0}}_\ttN
 \end{equation}
@@ -1342,7 +1353,7 @@ Substituindo \eqref{eq:alphatil_provado}, \eqref{eq:atil_suposicao} e \eqref{eq:
 \end{equation}
 
 Portanto, pelo princípio da indução finita
-\begin{empheq}[box=\mybluebox]{equation}
+\begin{empheq}[box=\mybluebox]{equation} \label{eq:a_centrosdemassa}
 \ma_i(\mq, \dot{\mq}, \ddot{\mq}) = \mJ_{v\,i}(\mq) \, \ddot{\mq} + \underaccent{\sim}{\ma}_i (\mq, \dot{\mq}), \; i=1,...,\nu
 \end{empheq}
 
@@ -1882,8 +1893,7 @@ Segue abaixo, a dedução.
 
 \subsection{Modelo dos subsistemas} 
 
-O modelo dinâmico de cada ligamento pode ser obtido por Newton-Euler, pois são considerados como corpos rígidos livres no espaço sujeitos apenas à força peso. Sendo assim, através do Teorema do Movimento do Baricentro e do Teorema do Momento Angular, obtemos os esforços não-reativos (ativos e inerciais) aplicados em cada ligamento:
-
+O modelo dinâmico de cada ligamento pode ser obtido por Newton-Euler, pois são considerados como corpos rígidos livres no espaço sujeitos apenas à força peso. Sendo assim, através das equações de Newton-Euler, obtemos os esforços não-reativos (ativos e inerciais) aplicados em cada ligamento:
 \begin{equation} \label{eq:Newton-Euler}
 \begin{cases}
 \vf_{\lllB_i} = -m_i \va^{\lllN}_{\ttc_{\lllB_i}} + m_i \vgamma  \\
@@ -1922,7 +1932,7 @@ m_i \mone & \mzr \\
 
 Ou seja:
 \begin{empheq}[box=\lightbluebox]{equation} \label{eq:f_i}
-\overline{\mf}_i  = -\begin{Bmatrix}
+\overline{\mf}_i(\mq, \dot{\mq}, \ddot{\mq})  = -\begin{Bmatrix}
 \begin{bmatrix}
 m_i \mone & \mzr \\
 \mzr      & \mI_i
@@ -1947,7 +1957,7 @@ m_i \mone & \mzr \\
 
 Como os subsistemas estão desacoplados, não há forças reativas, portanto o modelo dinâmico de cada subsistema pode ser escrito como:
 \begin{empheq}[box=\mybluebox]{equation}\label{eq:fi_plus_fri}
-\overline{\mf}_i = \mzr
+\overline{\mf}_i(\mq, \dot{\mq}, \ddot{\mq}) = \mzr
 \end{empheq}
 
 Além disso, definindo as quasi-velocidades:
@@ -1998,7 +2008,7 @@ Considere também um subsistema constituido pelos esforços que os atuadores apl
 \mp\ssh = \dot{\mq}
 \end{empheq}
 
-Seja $\mu$ a matriz-coluna de esforços generalizados aplicadas pelos atuadores na direção de $\dl\mq$. Sendo assim, o trabalho virtual associado a este subsistema é dado por:
+Tendo em vista que $\mu$ é a matriz-coluna de esforços generalizados aplicadas pelos atuadores na direção de $\dl\mq$, o trabalho virtual associado a este subsistema é dado por:
 
 \begin{empheq}[box=\mybluebox]{equation} \label{eq:dWsshSeriais}
 \dl W\ssh = \dl \mq^\msT \cdot \mu 
@@ -2006,9 +2016,9 @@ Seja $\mu$ a matriz-coluna de esforços generalizados aplicadas pelos atuadores 
 
 \subsection{Vínculos cinemáticos entre subsistemas} 
 
-Através das equações \eqref{eq:v_star_i}, \eqref{eq:omega_star_i} e \eqref{eq:mp_0}, é possível relacionar as quasi-velocidades de cada subsistema com as quasi-velocidades $\mp\ssh$ da seguinte maneira:
+Através das equações \eqref{eq:w_ligamentos}, \eqref{eq:v_centrosdemassa} e \eqref{eq:mp_0}, é possível relacionar as quasi-velocidades de cada subsistema com as quasi-velocidades $\mp\ssh$ da seguinte maneira:
 \begin{equation}
-\underline{\mp_i}(\mq, \mp\ssh) = \mJ_i (\mq) \cdot \mp\ssh, \, i=1,...,\nu
+\mp_i = \mJ_i (\mq) \cdot \mp\ssh, \, i=1,...,\nu
 \end{equation}
 
 Sendo:
@@ -2019,7 +2029,7 @@ Sendo:
 \end{bmatrix}, \, i=1,...,\nu
 \end{empheq}
 
-Seja $\mp\cir$ a matriz-coluna que contém as quasi-velocidades de todos os ligamentos:
+Definindo $\mp\cir$ como a matriz-coluna que contém as quasi-velocidades de todos os ligamentos:
 \begin{empheq}[box=\lightbluebox]{equation}
 \mp\cir = \begin{bmatrix}
 \mp_1^\msT & ... & \mp_{\nu}^\msT
@@ -2028,7 +2038,7 @@ Seja $\mp\cir$ a matriz-coluna que contém as quasi-velocidades de todos os liga
 
 $\mp\cir$ pode ser expresso em função apenas das quasi-velocidades $\mp\ssh$ da seguinte forma:
 \begin{equation} \label{eq:p_red_em_func_de_p0}
-\underline{\mp\cir}(\mq,\mp\ssh) = \mJ(\mq) \cdot \mp\ssh
+\mp\cir = \mJ(\mq) \cdot \mp\ssh
 \end{equation}
 
 Sendo:
@@ -2124,7 +2134,7 @@ Subdividindo $\dl\mpi$ em $\dl\mpi\ssh $ e $\dl\mpi\cir$ e considerando $\dl\mpi
 \end{bmatrix} = \mzr
 \end{equation}
 \begin{equation}
-\Rightarrow \dl\mpi\cir = \mJ(\mq) \dl\mpi\ssh
+\Rightarrow \dl\mpi\cir = \mJ(\mq) \cdot \dl\mpi\ssh
 \end{equation}
 \begin{equation} \label{eq:dpidpisshSeriais}
 \therefore
@@ -2193,7 +2203,7 @@ m_i \mone & \mzr \\
 =\mu
 \end{equation}
 
-Substituindo \eqref{eq:a_star_i} e  \eqref{eq:domega_star_i} em \eqref{eq:ModeloDinamicoSerialSomatorio2}, temos:
+Substituindo \eqref{eq:alphatil_provado} e  \eqref{eq:a_centrosdemassa} em \eqref{eq:ModeloDinamicoSerialSomatorio2}, temos:
 \begin{equation}
 \sum_{i=1}^\nu
 \begin{bmatrix}
@@ -2244,24 +2254,26 @@ Esta subseção tem o intuito de complementar algoritmo de modelagem de mecanism
 Seja $\ssB'$ um sistema mecânico serial de $\nu$ graus de liberdade, constituido por um mecanismo serial $\ssB$ e $\nu$ atuadores, possivelmente acoplados a redutores de velocidades. Primeiramente, fazemos as seguintes definições:
 
 \begin{itemize}
-\item $\llR_i, \,i=1,...,\nu$: Rotor do i-ésimo atuador.
-\item $\ttR_i, \,i=1,...,\nu$: Sistema de coordenadas solid\'ario a $\llR_i$.
-\item $J_{r \,i}, \,i=1,...,\nu$: Momento de inércia do rotor $\llR_i$.
+\item $\llR_i, \,i=1,...,\nu$: rotor do i-ésimo atuador.
+\item $\ttR_i, \,i=1,...,\nu$: sistema de coordenadas solid\'ario a $\llR_i$.
+\item $J_{r \,i}, \,i=1,...,\nu$: momento de inércia do rotor $\llR_i$.
 %\item $\vI_{\lllR_i}, \,i=1,...,\nu$: tensor de in\'ercia do rotor $\llR_i$ em relação a seu centro de massa.
-\item $\mI_{r \,i}, \,i=1,...,\nu$: Tensor de in\'ercia $\vI_{\lllR_i}$ escrito na base $\ttN$, ou seja, $\vct{\vI_{\lllR_i}}_{\ttN \rl \ttN}$.
+\item $\mI_{r \,i}, \,i=1,...,\nu$: tensor de in\'ercia $\vI_{\lllR_i}$ escrito na base de $\ttN$, ou seja, $\vct{\vI_{\lllR_i}}_{\ttN \rl \ttN}$.
+\item $\mI'_{r \,i}, \,i=1,...,\nu$: tensor de in\'ercia $\vI_{\lllR_i}$ escrito na base de $\ttB_i$, ou seja, $\vct{\vI_{\lllR_i}}_{\ttB_i \rl \ttB_i}$.
 %\item $\vtau_{r \,i}, \,i=1,...,\nu$: Vetor torque não-reativo resultante aplicado em $\llR_i$.
-\item $\overline{\mf}_{r \,i}, \,i=1,...,\nu$: Matriz-coluna de esforços não-reativos generalizados aplicados no subsistema $\llB_{r \,i}, \,i=1,...,\nu$. É dada por $\overline{\mf}_{r \,i} = \vct{\vtau_{\lllR_i}}_\ttN $.
-\item $q_{r\,i}, \,i=1,...,\nu$: Deslocamentos angular realizado pelo i-ésimo rotor.
-\item $\mq_r$: Matriz-coluna dos deslocamentos angulares realizados pelos rotores.
-\item $\mzeta(\dot{\mq}_r)$: Matriz-coluna dos esforços de atrito generalizados aplicados nos rotores, em sentido oposto aos seus deslocamentos.
-\item $\mi$: Matriz-coluna de correntes elétricas que fluem pelas armaduras dos atuadores.
-\item $\mup$: Matriz-coluna de tensões elétricas aplicadas nos terminais dos atuadores.
-\item $r_i, \,i=1,...,\nu$: Relação de transmissão do i-ésimo redutor.
-\item $\underline{r}$: Matriz diagonal de relações de transmissão dos redutores.
-\item $\underline{k_t}$: Matriz diagonal de constantes de torque dos atuadores.
-\item $\underline{k_e}$: Matriz diagonal de constantes de força contra-eletromotriz dos atuadores.
-\item $\underline{R}$: Matriz diagonal de resistências elétricas dos atuadores.
-\item $\underline{L}$: Matriz diagonal de indutâncias dos atuadores.
+\item $\overline{\mf}_{r \,i}, \,i=1,...,\nu$: matriz-coluna de esforços não-reativos generalizados aplicados no rotor $\llR_{i}, \,i=1,...,\nu$. É dada por $\overline{\mf}_{r \,i} = \vct{\vtau_{\lllR_i}}_\ttN $.
+\item $q_{r\,i}, \,i=1,...,\nu$: deslocamento angular realizado pelo i-ésimo rotor.
+\item $\mq_r$: matriz-coluna dos deslocamentos angulares realizados pelos rotores, ou seja $\mq_r = \begin{bmatrix} q_{r\,1} & \hdots & q_{r\,\nu}  \end{bmatrix}^\msT$.
+\item $\momega_{r \,i}, \,i=1,...,\nu$ : componentes de velocidade angular do rotor $\llR_i$ em relação a $\llN$ no sistema $\ttN$, ou seja $\vct{\vomega_{\lllR_i}^{\lllN} }_{\ttN} $.
+\item $\mzeta$: matriz-coluna dos esforços de atrito generalizados aplicados nos rotores, em sentido oposto aos seus deslocamentos.
+\item $\mi$: matriz-coluna de correntes elétricas que fluem pelas armaduras dos atuadores.
+\item $\mup$: matriz-coluna de tensões elétricas aplicadas nos terminais dos atuadores.
+\item $r_i, \,i=1,...,\nu$: relação de transmissão do i-ésimo redutor.
+\item $\underline{r}$: matriz diagonal de relações de transmissão dos redutores.
+\item $\underline{k_t}$: matriz diagonal de constantes de torque dos atuadores.
+\item $\underline{k_e}$: matriz diagonal de constantes de força contra-eletromotriz dos atuadores.
+\item $\underline{R}$: matriz diagonal de resistências elétricas dos atuadores.
+\item $\underline{L}$: matriz diagonal de indutâncias dos atuadores.
 \end{itemize}
 
 \subsection{Cinemática}
@@ -2273,80 +2285,156 @@ Devido aos redutores de velocidade e aos fusos de esferas, o deslocamento relati
 \mq_r = \underline{r} \, \mq 
 \end{empheq} 
 
-Sendo assim, a velocidade angular do i-ésimo rotor pode ser obtida aplicando o príncipio da composição de movimentos para velocidades angulares (equação \eqref{eq:composicao_w}):
-
-\begin{equation} \label{eq:ComposicaoWRotor}
-\vomega_{\lllR_i}^{\lllN} = \vomega_{\lllB_{i-1}}^{\lllN} + \vomega_{\lllR_i}^{\lllB_{i-1}} ,\; i=1,...,\nu
-\end{equation}
-
-Sendo que a velocidade angular relativa de cada rotor é dada por:
-\begin{equation}
+Sabe-se que a velocidade angular de cada rotor $\llR_i$ em relação ao referencial anterior $\llB_{i-1}$ é dada por:
+\begin{equation} \label{eq:VelAngRotorRel}
 \vomega_{\lllR_i}^{\lllB_{i-1}} = \dot{q}_{r\,i} \vk_{\ttB_{i-1}} = r_i \dot{q}_{i} \vk_{\ttB_{i-1}} ,\; i=1,...,\nu
 \end{equation}
 
-Aplicando a equação \eqref{eq:ComposicaoWRotor} no sistema $\ttN$, temos:
-\begin{empheq}[box=\myyellowbox]{equation} \label{eq:ComposicaoWRotor2}
-\momega_{r \,i} = \momega_{i-1} + r_i \dot{q}_{i} [\vk_{\ttB_{i-1}}]_{\ttN} ,\; i=1,...,\nu
+Aplicando \eqref{eq:VelAngRotorRel} no sistema $\ttN$, temos que:
+\begin{empheq}[box=\myyellowbox]{equation} \label{eq:wlinha_rotor}
+\momega'_{r\,i}(\mq, \dot{q}_i) = r_i \dot{q}_i \mk_{i-1} (\mq), \, i=1,...,\nu
 \end{empheq}
 
-Sendo:
+Para obter a velocidade angular de cada rotor em relação ao referencial $\llN$, parte-se do rotor $\llR_1$. Tendo em vista que $\llB_0$ e $\llN$ são o mesmo referencial, temos que:
+\begin{equation}
+\vct{\vomega_{\lllR_1}^{\lllN}}_\ttN = \vct{\vomega_{\lllR_1}^{\lllB_0}}_\ttN
+\end{equation}
+
+Ou seja
+\begin{equation}
+\momega_{r\,1}(\mq, \dot{\mq}) = \momega'_{r\,1}(\mq, \dot{q}_1) = r_1 \dot{q}_1 \mk_{i-1}(\mq)
+\end{equation}
+
+$\momega_{r\,1}$ pode ser escrito como:
 \begin{empheq}[box=\lightbluebox]{equation}
-\momega_{r \,i} = \vct{\vomega_{\lllR_i}^{\lllN} }_{\ttN} 
+\momega_{r\,1}(\mq, \dot{\mq}) = \mJ_{\omega_r\,1}(\mq) \, \dot{\mq}
 \end{empheq}
 
-Utilizando a equação \eqref{eq:omega_star_i}, pode-se reescrever \eqref{eq:ComposicaoWRotor2} da seguinte maneira:
-\begin{empheq}[box=\lightbluebox]{equation} \label{eq:VinculosWrot}
-\momega_{r \,i} (\mq, \dot{\mq}) = \mJ_{\omega_r \,i}(\mq) \cdot \dot{\mq}
+Sendo
+\begin{empheq}[box=\lightbluebox]{equation}
+\mJ_{\omega_r\,1}(\mq) = r_1 \mk_{i-1} \, \partial_{q_1} \mq^\msT
 \end{empheq}
 
-Sendo:
-\begin{empheq}[box=\myyellowbox]{equation} \label{eq:jwij_rot}
-\mj_{\omega_r \,i,j}(\mq) = \begin{cases}
-r_i [\vk_{\ttB_{i-1}}]_{\ttN}, \;  j = i \\
-\mj_{\omega\,i,j}(\mq), \;\;\;  j\neq i \\
-\end{cases} \, i,j=1,...,\nu
+Para obter a velocidade angular dos outros rotores, utiliza-se o princípio de composição de movimento para velocidades angulares (equação \eqref{eq:composicao_w}):
+\begin{equation} \label{eq:ComposicaoWRotor}
+\vomega_{\lllR_i}^{\lllN} = \vomega_{\lllB_{i-1}}^{\lllN} + \vomega_{\lllR_i}^{\lllB_{i-1}}
+\end{equation}
+
+Aplicando \eqref{eq:ComposicaoWRotor} no sistema $\ttN$, temos que:
+\begin{equation} \label{eq:ComposicaoWRotorsimples}
+\momega_{r \,i}(\mq, \dot{\mq}) = \momega_{i-1} + \momega'_{r\,i}
+\end{equation}
+
+Portanto:
+\begin{empheq}[box=\myyellowbox]{equation} \label{eq:ComposicaoWRotor2}
+\begin{split}
+\momega_{r \,i}(\mq, \dot{\mq}) = 
+\begin{cases}
+\momega'_{r \,1} & \text{ se } i = 1 \\
+\momega_{i-1} + \momega'_{r \,i} & \text{ se } i > 1
+\end{cases} \; i=1,...,\nu
+\end{split}
 \end{empheq}
 
-\begin{empheq}[box=\myyellowbox]{equation} \label{eq:Jwi_rot}
-\mJ_{\omega_r \,i}(\mq) = \begin{bmatrix}
-\mj_{\omega_r \,i,1}(\mq) & ... & \mj_{\omega_r \,i,\nu}(\mq)
-\end{bmatrix}
+Além disso, substituindo \eqref{eq:w_ligamentos} e \eqref{eq:wlinha_rotor} em \eqref{eq:ComposicaoWRotorsimples}, temos que:
+\begin{equation}
+\momega_{r\,i}(\mq, \dot{\mq}) = \mJ_{\omega\,i-1} \, \dot{\mq} + r_i \mk_{i-1} \, \partial_{q_i} \mq^\msT \dot{\mq} = \Big(\mJ_{\omega\,i-1} + r_i \mk_{i-1} \, \partial_{q_i} \mq^\msT \Big) \, \dot{\mq}
+\end{equation}
+
+Portanto:
+\begin{empheq}[box=\mybluebox]{equation} \label{eq:w_rotores}
+\momega_{r\,i}(\mq, \dot{\mq}) = \mJ_{\omega_r\,i}(\mq) \, \dot{\mq}, \; i=1,...,\nu
+\end{empheq}
+
+Sendo
+\begin{empheq}[box=\myyellowbox]{equation}
+\begin{split}
+\mJ_{\omega_r\,i}(\mq) = 
+\begin{cases}
+r_1 \mk_{0} \, \partial_{q_1} \mq^\msT & \text{ se } i=1 \\
+\mJ_{\omega\,i-1} + r_i \mk_{i-1} \, \partial_{q_i} \mq^\msT & \text{ se } i>1 \\
+\end{cases}
+, \; i=1,...,\nu
+\end{split}
 \end{empheq}
 
 \subsubsection{Cinemática de acelerações angulares}
 
-A aceleração angular do i-ésimo rotor pode ser obtida aplicando o príncipio da composição de movimentos para acelerações angulares (equação \eqref{eq:composicao_dw}):
-
-\begin{equation} \label{eq:ComposicaodWRotor}
-\valpha_{\lllR_i}^{\lllN} = \valpha_{\lllB_{i-1}}^{\lllN} + \valpha_{\lllR_i}^{\lllB_{i-1}} +  \vomega_{\lllB_{i-1}}^{\lllN} \wedge \vomega_{\lllR_i}^{\lllB_{i-1}}
-\end{equation}
-
-Sendo que a aceleração angular de relativa de cada rotor é dada por:
-\begin{equation}
+Sabe-se que a aceleração angular de cada rotor $\llR_i$ em relação ao referencial anterior $\llB_{i-1}$ é dada por:
+\begin{equation} \label{eq:AcAngRotorRel}
 \valpha_{\lllR_i}^{\lllB_{i-1}} = \ddot{q}_{r\,i} \vk_{\ttB_{i-1}} = r_i \ddot{q}_{i} \vk_{\ttB_{i-1}} ,\; i=1,...,\nu
 \end{equation}
 
-Aplicando a equação \eqref{eq:ComposicaodWRotor} no sistema $\ttN$, temos:
-\begin{empheq}[box=\myyellowbox]{equation} \label{eq:ComposicaodWRotor2}
-\malpha_{r \,i} = \malpha_{i-1} + r_i \ddot{q}_{i} [\vk_{\ttB_{i-1}}]_{\ttN} + r_i \dot{q}_{i} \mS( \momega_{i-1} ) \cdot [\vk_{\ttB_{i-1}}]_{\ttN} ,\; i=1,...,\nu
+Aplicando \eqref{eq:AcAngRotorRel} no sistema $\ttN$, temos que:
+\begin{empheq}[box=\myyellowbox]{equation} \label{eq:alphalinha_rotor}
+\malpha'_{r\,i}(\mq, \ddot{q}_i) = r_i \ddot{q}_i \mk_{i-1} (\mq), \, i=1,...,\nu
 \end{empheq}
 
-Sendo:
+Para obter a aceleração angular de cada rotor em relação ao referencial $\llN$, parte-se do rotor $\llR_1$. Tendo em vista que $\llB_0$ e $\llN$ são o mesmo referencial, temos que:
+\begin{equation}
+\vct{\valpha_{\lllR_1}^{\lllN}}_\ttN = \vct{\valpha_{\lllR_1}^{\lllB_0}}_\ttN
+\end{equation}
+
+Ou seja
+\begin{equation}
+\malpha_{r\,1}(\mq, \dot{\mq}, \ddot{\mq}) = \malpha'_{r\,1}(\mq, \ddot{q}_1) = r_1 \ddot{q}_1 \mk_{i-1}(\mq)
+\end{equation}
+
+$\malpha_{r\,1}$ pode ser escrito como:
 \begin{empheq}[box=\lightbluebox]{equation}
-\malpha_{r \,i} = \vct{\valpha_{\lllR_i}^{\lllN} }_{\ttN} 
+\malpha_{r\,1}(\mq, \dot{\mq}, \ddot{\mq}) = \mJ_{\omega_r\,1}(\mq) \, \ddot{\mq} + \underaccent{\sim}{\malpha}_{r\,1}(\mq, \dot{\mq})
 \end{empheq}
 
-Utilizando a equação \eqref{eq:domega_star_i}, pode-se reescrever \eqref{eq:ComposicaodWRotor2} da seguinte maneira:
-\begin{empheq}[box=\lightbluebox]{equation} \label{eq:dw_ri}
-\malpha_{r\,i} (\mq,\dot{\mq},\ddot{\mq}) = \mJ_{\omega_r \,i} (\mq) \cdot \ddot{\mq} + \underaccent{\sim}{\malpha}_{r\,i}  (\mq,\dot{\mq})
+Sendo
+\begin{empheq}[box=\lightbluebox]{equation}
+\underaccent{\sim}{\malpha}_{r\,1}(\mq, \dot{\mq}) = \mzr
 \end{empheq}
 
-Sendo:
+Para obter a aceleração angular dos outros rotores, utiliza-se o princípio de composição de movimento para acelerações angulares (equação \eqref{eq:composicao_dw}):
+\begin{equation} \label{eq:ComposicaodWRotor}
+\valpha_{\lllR_i}^{\lllN} = \valpha_{\lllB_{i-1}}^{\lllN} + \valpha_{\lllR_i}^{\lllB_{i-1}} + \vomega_{\lllB_{i-1}}^{\lllN} \wedge \vomega_{\lllR_i}^{\lllB_{i-1}}
+\end{equation}
+
+Aplicando \eqref{eq:ComposicaoWRotor} no sistema $\ttN$, temos que:
+\begin{equation} \label{eq:ComposicaodWRotorsimples}
+\momega_{r \,i}(\mq, \dot{\mq}) = \malpha_{i-1} + \malpha'_{r\,i} +  \mS(\momega_{i-1}) \cdot \momega'_{r\,i}
+\end{equation}
+
+Portanto:
+\begin{empheq}[box=\lightbluebox]{equation} \label{eq:ComposicaodWRotor2}
+\begin{split}
+\malpha_{r \,i}(\mq, \dot{\mq}, \ddot{\mq}) = 
+\begin{cases}
+\malpha'_{r \,1} & \text{ se } i = 1 \\
+\malpha_{i-1} + \malpha'_{r\,i} +  \mS(\momega_{i-1}) \cdot \momega'_{r\,i} & \text{ se } i > 1
+\end{cases} \; i=1,...,\nu
+\end{split}
+\end{empheq}
+
+Além disso, substituindo \eqref{eq:alphatil_provado} e \eqref{eq:alphalinha_rotor} em \eqref{eq:ComposicaodWRotorsimples}, temos que:
+\begin{equation}
+\begin{split}
+\malpha_{r\,i}(\mq, \dot{\mq}, \ddot{\mq}) &= \mJ_{\omega\,i-1} \, \dot{\mq} + \underaccent{\sim}{\malpha}_{i-1} + r_i \mk_{i-1} \, \partial_{q_i} \mq^\msT \ddot{\mq} + \mS(\momega_{i-1}) \cdot \momega'_{r\,i}\\ 
+&= \Big(\mJ_{\omega\,i-1} + r_i \mk_{i-1} \, \partial_{q_i} \mq^\msT \Big) \, \ddot{\mq} + \underaccent{\sim}{\malpha}_{i-1} + \mS(\momega_{i-1}) \cdot \momega'_{r\,i} \\
+&= \mJ_{\omega_r\,i} \cdot \ddot{\mq} + \underaccent{\sim}{\malpha}_{i-1} + \mS(\momega_{i-1}) \cdot \momega'_{r\,i}
+\end{split}
+\end{equation}
+
+Portanto:
+\begin{empheq}[box=\mybluebox]{equation} \label{eq:alpha_rotores}
+\malpha_{r\,i}(\mq, \dot{\mq}, \ddot{\mq}) = \mJ_{\omega_r\,i}(\mq) \, \ddot{\mq} + \underaccent{\sim}{\malpha}_{r\,i}, \; i=1,...,\nu
+\end{empheq}
+
+Sendo
 \begin{empheq}[box=\myyellowbox]{equation}
-\underaccent{\sim}{\malpha}_{r\,i}  = \begin{cases}
-\mzr, \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; i = 1 \\
-\underaccent{\sim}{\malpha}_{i-1}  + \dot{q}_{i} \mS( \momega_{i-1} ) \cdot \mj_{\omega_r \, i,i}, \, i > 1 
-\end{cases}  ,\; i=1,...,\nu
+\begin{split}
+\underaccent{\sim}{\malpha}_{r\,i}(\mq, \dot{\mq}) = 
+\begin{cases}
+\mzr & \text{ se } i=1 \\
+\underaccent{\sim}{\malpha}_{i-1} + \mS(\momega_{i-1}) \cdot \momega'_{r\,i} & \text{ se } i>1 \\
+\end{cases}
+\; i=1,...,\nu
+\end{split}
 \end{empheq}
 
 
@@ -2354,7 +2442,7 @@ Sendo:
 
 O modelo dinâmico de $\ssB'$ é obtido utilizando um procedimento de acoplamento de subsistemas baseado no método Recursivo Modular de Modelagem (RMM)  \cite{23orsino}, e é dado por:
 \begin{empheq}[box=\mybluebox]{equation} \label{eq:ModeloMecSerial_rot}
-\mM^*(\mq) \ddot{\mq} + \mnu^*(\mq,\dot{\mq}) + \mg^*(\mq) = \mu^*
+\mM^*(\mq) \, \ddot{\mq} + \mnu^*(\mq,\dot{\mq}) + \mg^*(\mq) = \mu^*
 \end{empheq}
 
 Sendo:
@@ -6042,7 +6130,7 @@ Temos princípio da composição de movimento para velocidades lineares:
 \vv_\ttp^{\lllA} = \vv_{\ttp \rl \lllB}^{\lllA} + \vv_\ttp^{\lllB}
 \end{empheq}
 
-Ou seja, $\vv_\ttp^{\lllA}$ é composto pela soma de $\vv_{\ttp \rl \lllB}^{\lllA}$, que seria a velocidade de $\ttp$ se $\ttp$ estivesse fixo a $\llB$ (movimento de arrastamento), e $\vv_\ttp^{\lllB}$, que seria a velocidade de $\ttp$ se $\llB$ estivesse parado em relação a $\llA$ (movimento relativo).
+Ou seja, $\vv_\ttp^{\lllA}$ é composto pela soma de $\vv_{\ttp \rl \lllB}^{\lllA}$, que seria a velocidade de $\ttp$ se $\ttp$ estivesse fixo a $\llB$ (movimento de arrastamento), e $\vv_\ttp^{\lllB}$, que é a velocidade de $\ttp$ em relação a $\llB$ (movimento relativo).
 
 \subsection{Composição de acelerações lineares}
 
@@ -6066,7 +6154,7 @@ Temos princípio da composição de movimento para acelerações lineares:
 \va_\ttp^{\lllA} = \va_{\ttp \rl \lllB}^{\lllA} + \va_\ttp^{\lllB} + 2\vomega_{\lllB}^{\lllA} \wedge \vv_\ttp^{\lllB}
 \end{empheq}
 
-Ou seja, $\va_\ttp^{\lllA}$ é composto pela soma de $\va_{\ttp \rl \lllB}^{\lllA}$, que seria a aceleração de $\ttp$ se $\ttp$ estivesse fixo a $\llB$ (aceleração de arrastamento), $\va_\ttp^{\lllB}$, que seria a aceleração de $\ttp$ se $\llB$ estivesse parado em relação a $\llA$ (aceleração relativa), e da parcela $2\vomega_{\lllB}^{\lllA} \wedge \vv_\ttp^{\lllB}$ (aceleralção complementar).
+Ou seja, $\va_\ttp^{\lllA}$ é composto pela soma de $\va_{\ttp \rl \lllB}^{\lllA}$, que seria a aceleração de $\ttp$ se $\ttp$ estivesse fixo a $\llB$ (aceleração de arrastamento), $\va_\ttp^{\lllB}$, que é a aceleração de $\ttp$ em relação a $\llB$ (aceleração relativa), e da parcela $2\vomega_{\lllB}^{\lllA} \wedge \vv_\ttp^{\lllB}$ (aceleralção complementar).
 
 \subsection{Composição de velocidades angulares}
 
@@ -6120,7 +6208,7 @@ Temos princípio da composição de movimento para velocidades angulares:
 \vomega_{\lllC}^{\lllA}  =  \vomega_{\lllB}^{\lllA}   + \vomega_{\lllC}^{\lllB}
 \end{empheq}
 
-Ou seja, $\vomega_{\lllC}^{\lllA}$ é composta pela soma de $\vomega_{\lllB}^{\lllA}$, que seria velocidade angular de  de $\llC$ se $\llC$ estivesse fixo a $\llB$ (velocidade angular de arrastamento), e $\vomega_{\lllC}^{\lllB}$, que seria a velocidade angular de $\llC$ se $\llB$ estivesse parado em relação a $\llA$ (velocidade angular relativa).
+Ou seja, $\vomega_{\lllC}^{\lllA}$ é composta pela soma de $\vomega_{\lllB}^{\lllA}$, que seria velocidade angular de  de $\llC$ se $\llC$ estivesse fixo a $\llB$ (velocidade angular de arrastamento), e $\vomega_{\lllC}^{\lllB}$, que é a velocidade angular de $\llC$ em relação a $\llB$ (velocidade angular relativa).
 
 Repare que, fazendo $\llC \equiv \llA$, temos que:
 \begin{equation}
@@ -6137,7 +6225,7 @@ Derivando \eqref{eq:composicao_w} no tempo em relação a $\llA$, temos princíp
 \valpha_{\lllC}^{\lllA}  =  \valpha_{\lllB}^{\lllA}   + \valpha_{\lllC}^{\lllB} + \vomega_{\lllB}^{\lllA} \wedge \vomega_{\lllC}^{\lllB}
 \end{empheq}
 
-Ou seja, $\valpha_{\lllC}^{\lllA}$ é composta pela soma de $\valpha_{\lllB}^{\lllA}$, que seria a aceleração angular  de $\llC$ se $\llC$ estivesse fixo a $\llB$ (aceleração angular de arrastamento), $\valpha_{\lllC}^{\lllB}$, que seria a aceleração angular de $\llC$ se $\llB$ estivesse parado em relação a $\llA$ (aceleração angular relativa), e da parcela $\vomega_{\lllB}^{\lllA} \wedge \vomega_{\lllC}^{\lllB}$ (aceleralção angular complementar).
+Ou seja, $\valpha_{\lllC}^{\lllA}$ é composta pela soma de $\valpha_{\lllB}^{\lllA}$, que seria a aceleração angular  de $\llC$ se $\llC$ estivesse fixo a $\llB$ (aceleração angular de arrastamento), $\valpha_{\lllC}^{\lllB}$, que é a aceleração angular de $\llC$ em relação a $\llB$ (aceleração angular relativa), e da parcela $\vomega_{\lllB}^{\lllA} \wedge \vomega_{\lllC}^{\lllB}$ (aceleralção angular complementar).
 
 Repare que, fazendo $\llC \equiv \llA$ e utilizando \eqref{eq:composicao_wCA}, temos que:
 \begin{equation}
