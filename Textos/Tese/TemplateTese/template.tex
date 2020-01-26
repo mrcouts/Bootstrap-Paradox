@@ -2105,10 +2105,10 @@ Sendo:
 \end{bmatrix}^\msT
 \end{equation}
 
-Pelo princípio de d'Alembert, temos que
-\begin{equation} \label{eq:PdASeriais}
+Pelo princípio de D'Alembert, temos que
+\begin{empheq}[box=\mybluebox]{equation} \label{eq:PdASeriais}
 \dl W\ssh + \sum_{i=1}^\nu \dl W_i  = 0
-\end{equation}
+\end{empheq}
 
 Através de \eqref{eq:PdASeriais}, \eqref{eq:dWsshSeriais}, \eqref{eq:dWiSeriais}, \eqref{eq:fSeriais} e \eqref{eq:quasi-coord}, temos que:
 \begin{equation} \label{eq:PdASeriais2}
@@ -2577,7 +2577,7 @@ Portanto:
 Tendo em vista que um precedimento mais detalhado para acoplamento de subsistemas já foi apresentado, nesta subseção ele será realizado de forma mais sucinta. \\ 
 
 Pelo princípio de d'Alembert, temos que
-\begin{empheq}[box=\lightbluebox]{equation} \label{eq:PdaSeriais_rot}
+\begin{empheq}[box=\mybluebox]{equation} \label{eq:PdaSeriais_rot}
 \dl W_\tau + \dl W_s  + \sum_{i=1}^\nu \dl W_{r \,i}  = 0
 \end{empheq}
 
@@ -2859,21 +2859,21 @@ Sabe-se que $\vct{\ttx_0}_{\ttN_0} = \mq_0$ e $\vct{\ttx_i}_{\ttN_i} = \mx_i(\mq
 %\begin{equation}
 %\md_i = \vct{\tto_i}_{\ttN_0} 
 %\end{equation}
-\begin{equation}
-\md_i = \vct{\tto_{\ttN_i}}_{\ttN_0} -\vct{\vone}_{\ttN_0 \rl \ttX_0} \vct{\ttx_i}_{\ttX_0}
-\end{equation}
-\begin{equation}
-\mE_i = \vct{\vone}_{\ttN_0 \rl \ttN_i}
-\end{equation}
+\begin{empheq}[box=\myyellowbox]{equation}
+\md_i = \vct{\tto_{\ttN_i}}_{\ttN_0} -\vct{\vone}_{\ttN_0 \rl \ttX_0} \vct{\ttx_i}_{\ttX_0}, \; i = 1, \hdots, n
+\end{empheq}
+\begin{empheq}[box=\myyellowbox]{equation}
+\mE_i = \vct{\vone}_{\ttN_0 \rl \ttN_i}, \; i = 1, \hdots, n
+\end{empheq}
 
 Temos:
 
 %\begin{equation}
 %\mx^\ast = \mc_i(\mtheta^\ast) + \md_i + \mE_i \cdot \mx_i(\mq_i), \, i = 1,...,n
 %\end{equation}
-\begin{equation}
+\begin{empheq}[box=\lightbluebox]{equation}
 \mq_0 = \md_i + \mE_i \cdot \mx_i(\mq_i), \, i = 1,...,n
-\end{equation}
+\end{empheq}
 
 Assim:
 %\begin{equation} \label{eq:VinculosPosicao}
@@ -2932,9 +2932,9 @@ Assim:
 \end{equation}
 
 Além disso, em alguns casos é necessário incluir vínculos afins entre as coordenadas generalizadas, ou seja:
-\begin{equation} \label{eq:VinculosPosicaoAfins}
+\begin{empheq}[box=\lightbluebox]{equation} \label{eq:VinculosPosicaoAfins}
 \mD_{\oplus}\cdot\mq_0 = \md_{\oplus} + \mF_{\oplus}\cdot\mq_\emptyset
-\end{equation}
+\end{empheq}
 
 Juntando a equação \eqref{eq:VinculosPosicaoAfins} à equação \eqref{eq:VinculosPosicao}, temos:
 %\begin{equation} \label{eq:VinculosPosicao2}
@@ -3035,14 +3035,14 @@ Sendo assim, os vínculos de posição entre subsistemas podem ser descritos de 
 
 Sendo:
 
-\begin{equation}
+\begin{empheq}[box=\myyellowbox]{equation}
 \mD = \begin{bmatrix}
 \mone &
 \hdots &
 \mone &
 \mD_{\oplus}^\msT &
 \end{bmatrix}^\msT
-\end{equation}
+\end{empheq}
 
 %\begin{equation}
 %\mc(\mtheta^\ast) = 
@@ -3054,25 +3054,25 @@ Sendo:
 %\end{bmatrix}^\msT
 %\end{equation}
 
-\begin{equation}
+\begin{empheq}[box=\myyellowbox]{equation}
 \md  = \begin{bmatrix}
 \md_1^\msT &
 \hdots &
 \md_n^\msT &
 \md_{\oplus}^\msT
 \end{bmatrix}^\msT
-\end{equation}
+\end{empheq}
 
-\begin{equation}
+\begin{empheq}[box=\myyellowbox]{equation}
 \mE = \begin{bmatrix}
 \mE_1 & \ldots & \mzr\\
 \vdots & \ddots & \vdots\\
 \mzr &\ldots  & \mE_{n} \\
 \mzr &\ldots  & \mzr
 \end{bmatrix}
-\end{equation}
+\end{empheq}
 
-\begin{equation}
+\begin{empheq}[box=\myyellowbox]{equation}
 \mF = 
 \begin{bmatrix}
 \mzr^\msT &
@@ -3080,16 +3080,16 @@ Sendo:
 \mzr^\msT &
 \mF_{\oplus}^\msT
 \end{bmatrix}^\msT
-\end{equation}
+\end{empheq}
 
-\begin{equation}
+\begin{empheq}[box=\myyellowbox]{equation}
 \mx(\mq_\emptyset) = 
 \begin{bmatrix}
 \mx_1(\mq_1)^\msT &
 \hdots &
 \mx_n(\mq_n)^\msT
 \end{bmatrix}^\msT
-\end{equation}
+\end{empheq}
 
 \subsection{Vínculos de orientação}
 
@@ -3099,9 +3099,9 @@ Supondo que os efetuadores $\llX_i$ de cada cadeia serial estejam ligados rigida
 \end{equation}
 
 Passando para a representação por quaternions unitários, temos:
-\begin{equation}
+\begin{empheq}[box=\lightbluebox]{equation}
 \breve{\mx}_0 = \pm \, \breve{\mn}_i \otimes \breve{\mx}_i \otimes \breve{\mx}'_i
-\end{equation}
+\end{empheq}
 
 O sinal $\pm$ vem do fato de que dois quaternions com sinais opostos representam a mesma rotação.
 
@@ -3111,21 +3111,21 @@ Utilizando as definições de produto de quaternions apresentadas no apêndice \
 \end{equation}
 
 Sendo
-\begin{equation}
-\breve{\mQ}_i = \breve{\mQ}_{\mathsf{I}}(\breve{\mn}_i) \cdot \breve{\mQ}_{\mathsf{I}\mathsf{I}} (\breve{\mx}'_i)
-\end{equation}
+\begin{empheq}[box=\myyellowbox]{equation}
+\breve{\mQ}_i = \breve{\mQ}_{\mathsf{I}}(\breve{\mn}_i) \cdot \breve{\mQ}_{\mathsf{I}\mathsf{I}} (\breve{\mx}'_i), \; i = 1, \hdots, n
+\end{empheq}
 
 A equação \eqref{eq:VincQuat} poderia ser utilizada como equação vincular de orientação (escolhendo o sinal de $+$ ou de $-$). Porém, tendo em vista que é uma equação que relaciona matrizes-coluna de ordem 4, haveria 4 equações escalares para restringir 3 graus de liberdade, ou seja, um número maior de equações do que o necessário. Deste modo, será apresentada uma maneira alternativa de representar os vínculos de orientação sem utilizar mais equações do que o necessário.
 
 Considere o seguinte problema de otimização com restrição:
-\begin{equation}
+\begin{empheq}[box=\lightbluebox]{equation}
 \begin{aligned}
 & \underset{\breve{\mq}}{\text{Min/Max}}
 & & (\breve{\mq} -\breve{\mp})^\msT (\breve{\mq} -\breve{\mp}) \\
 & \text{tal que}
 & & \breve{\mq}^\msT \breve{\mq} - 1 = 0 \\
 \end{aligned}
-\end{equation}
+\end{empheq}
 
 Para o caso de $\breve{\mp}$ também ser um quaternion unitário, as únicas soluções do problema são claramente $\breve{\mq} = \breve{\mp}$ (minimização) e $\breve{\mq} = -\breve{\mp}$ (maximização). Porém, vamos resolver o problema sem utilizar esta suposição.
 
@@ -3194,14 +3194,14 @@ Além disso, tendo em vista a equação \eqref{eq:CQuatZero}, temos que:
 \end{equation}
 
 Portanto:
-\begin{equation}
+\begin{empheq}[box=\lightbluebox]{equation}
 \breve{\mC}^\msT(\breve{\mq}) \cdot \breve{\mp} = \mzr \Leftrightarrow \breve{\mq} = \pm \, \breve{\mp}
-\end{equation}
+\end{empheq}
 
 Sendo assim, a equação \eqref{eq:VincQuat} pode ser reescrita como:
-\begin{equation} \label{eq:VinculosOrientacao_i}
+\begin{empheq}[box=\lightbluebox]{equation} \label{eq:VinculosOrientacao_i}
 \breve{\mC}^\msT(\breve{\mx}_0) \cdot \breve{\mQ}_i \cdot \breve{\mx}_i = \mzr
-\end{equation}
+\end{empheq}
 
 Aplicando para cada uma das cadeias, as equações vinculares de orientação são dadas por:
 \begin{empheq}[box=\mybluebox]{equation} \label{eq:VinculosOrientacao}
@@ -3256,14 +3256,14 @@ A derivada $\dot{\mx}$ pode ser obtida da seguinte maneira:
 \end{equation}
 
 Sendo:
-\begin{equation}
+\begin{empheq}[box=\myyellowbox]{equation}
 \mJ_v^\star(\mq_\emptyset) =
 \begin{bmatrix}
 \mJ_{v\,\ssB_1}(\mq_1) & \ldots & \mzr\\
 \vdots & \ddots & \vdots\\
 \mzr &\ldots  & \mJ_{v\,\ssB_n}(\mq_n)
 \end{bmatrix}
-\end{equation}
+\end{empheq}
 
 %E a derivada $\dot{\mc}$ pode ser obtida da seguinte maneira:
 %\begin{equation} \label{eq:dcdt}
@@ -3318,13 +3318,13 @@ Derivando \eqref{eq:VinculosOrientacao} no tempo, temos:
 
 Tendo em vista que
 \begin{equation}
-\momega_{\ssB_i}(\mq_i, \dot{\mq}_i) = \mJ_{\omega\,\ssB_i}(\mq_i) \cdot \dot{\mq}_i
+\momega_{\ssB_i}(\mq_i, \dot{\mq}_i) = \mJ_{\omega\,\ssB_i}(\mq_i) \cdot \dot{\mq}_i, \; i = 1, \hdots, n
 \end{equation}
 
 E definindo
-\begin{equation}
-\mG_i (\mq_i) = \breve{\mC}^\msT(\breve{\mx}_0) \cdot \breve{\mQ}_i \cdot \breve{\mC}(\breve{\mx}_i(\mq_i))
-\end{equation}
+\begin{empheq}[box=\myyellowbox]{equation}
+\mG_i (\mq_i) = \breve{\mC}^\msT(\breve{\mx}_0) \cdot \breve{\mQ}_i \cdot \breve{\mC}(\breve{\mx}_i), \; i = 1, \hdots, n
+\end{empheq}
 
 Temos:
 \begin{equation*}
@@ -3358,23 +3358,23 @@ Sendo assim, a derivada temporal dos vínculos de orientação pode ser descrita
 \end{empheq}
 
 Sendo:
-\begin{equation}
+\begin{empheq}[box=\myyellowbox]{equation}
 \mG(\mq_\emptyset) =
 \begin{bmatrix}
 \mG_1 (\mq_1) & \ldots & \mzr\\
 \vdots & \ddots & \vdots\\
 \mzr &\ldots  & \mG_n (\mq_n)
 \end{bmatrix}
-\end{equation}
+\end{empheq}
 
-\begin{equation}
+\begin{empheq}[box=\myyellowbox]{equation}
 \mJ_\omega^\star(\mq_\emptyset) =
 \begin{bmatrix}
 \mJ_{\omega\,\ssB_1}(\mq_1) & \ldots & \mzr\\
 \vdots & \ddots & \vdots\\
 \mzr &\ldots  & \mJ_{\omega\,\ssB_n}(\mq_n)
 \end{bmatrix}
-\end{equation}
+\end{empheq}
 
 
 %Supondo que os efetuadores $\llB_i$ de cada cadeia serial estejam ligados rigidamente à plataforma/efetuador $\llB_0$, temos que todos apresentam velocidade angular nula em relação a $\ttN_0$, tendo em vista que $\llB_0$ só translada. Sendo assim, obtem-se as seguintes relações:
@@ -3461,8 +3461,8 @@ Os vínculos de quasi-velocidades são dados pela derivada temporal dos vínculo
 \end{bmatrix}
 = 
 \begin{bmatrix}
-\mD \cdot \dot{\mq}_0  - \mE \cdot \mJ_v^\star(\mq_\emptyset) \cdot \dot{\mq}_\emptyset  - \mF \cdot \dot{\mq}_\emptyset \\
-  \mG(\mq_\emptyset) \cdot \mJ_\omega^\star(\mq_\emptyset) \cdot \dot{\mq}_\emptyset
+\mD \cdot \dot{\mq}_0  - \mE \cdot \mJ_v^\star \cdot \dot{\mq}_\emptyset  - \mF \cdot \dot{\mq}_\emptyset \\
+  \mG \cdot \mJ_\omega^\star \cdot \dot{\mq}_\emptyset
 \end{bmatrix}
 =
 \mzr
@@ -3488,9 +3488,9 @@ Repare que \eqref{eq:VinculosQuasiVel} pode ser reescrita como:
 %\begin{equation}
 %\overline{\mp}(\mq,\mp) = \mA(\mq) \mp = \mzr
 %\end{equation}
-\begin{equation} \label{eq:VinculosQuasiVel2}
+\begin{empheq}[box=\mybluebox]{equation} \label{eq:VinculosQuasiVel2}
 \dot{\overline{\mq}}(\mq,\dot{\mq}) = \mA(\mq) \cdot \dot{\mq} = \mzr
-\end{equation}
+\end{empheq}
 
 Sendo $\mA$ dado por:
 %\begin{equation}
@@ -3541,8 +3541,8 @@ Os vínculos de quasi-velocidades são dados pela derivada temporal dos vínculo
 \end{bmatrix}
 = 
 \begin{bmatrix}
-\mD \cdot \ddot{\mq}_0 - \mE \cdot (\mJ_v^\star(\mq_\emptyset) \cdot \ddot{\mq}_\emptyset + \underaccent{\sim}{\ma}^\star(\mq_\emptyset, \dot{\mq}_\emptyset))  - \mF \cdot \ddot{\mq}_\emptyset \\
-\mG(\mq_\emptyset) \cdot ( \mJ_\omega^\star(\mq_\emptyset) \cdot \ddot{\mq}_\emptyset + \underaccent{\sim}{ \malpha }^\star(\mq_\emptyset, \dot{\mq}_\emptyset) ) + \dot{\mG}(\mq_\emptyset, \dot{\mq}_\emptyset) \cdot  \momega^\star(\mq_\emptyset, \dot{\mq}_\emptyset)
+\mD \cdot \ddot{\mq}_0 - \mE \cdot (\mJ_v^\star \cdot \ddot{\mq}_\emptyset + \underaccent{\sim}{\ma}^\star)  - \mF \cdot \ddot{\mq}_\emptyset \\
+\mG \cdot ( \mJ_\omega^\star \cdot \ddot{\mq}_\emptyset + \underaccent{\sim}{ \malpha }^\star ) + \dot{\mG} \cdot  \momega^\star
 \end{bmatrix}
 =
 \mzr
@@ -3559,42 +3559,42 @@ Sendo:
 %\underaccent{\sim}{\malpha}_{\ssB_1}(\mq, \mp)(\mq_1,\mp_1)^\msT & ... & \underaccent{\sim}{\malpha}_{\ssB_n}(\mq, \mp)(\mq_n,\mp_n)^\msT
 %\end{bmatrix}^\msT
 %\end{equation}
-\begin{equation}
+\begin{empheq}[box=\myyellowbox]{equation}
 \underaccent{\sim}{\ma}^\star(\mq_\emptyset, \dot{\mq}_\emptyset) = \begin{bmatrix}
 \underaccent{\sim}{\ma}_{\ssB_1}(\mq_1, \dot{\mq}_1)^\msT & ... & \underaccent{\sim}{\ma}_{\ssB_n}(\mq_n, \dot{\mq}_n)^\msT
 \end{bmatrix}^\msT
-\end{equation}
-\begin{equation}
+\end{empheq}
+\begin{empheq}[box=\myyellowbox]{equation}
 \underaccent{\sim}{\malpha}^\star(\mq_\emptyset, \dot{\mq}_\emptyset) = \begin{bmatrix}
 \underaccent{\sim}{\malpha}_{\ssB_1}(\mq_1, \dot{\mq}_1)^\msT & ... & \underaccent{\sim}{\malpha}_{\ssB_n}(\mq_n, \dot{\mq}_n)^\msT
 \end{bmatrix}^\msT
-\end{equation}
-\begin{equation}
+\end{empheq}
+\begin{empheq}[box=\myyellowbox]{equation}
 \momega^\star(\mq_\emptyset, \dot{\mq}_\emptyset) = \mJ_\omega^\star(\mq_\emptyset) \cdot \dot{\mq}_\emptyset = \begin{bmatrix}
 \momega_{\ssB_1}(\mq_1, \dot{\mq}_1)^\msT & ... & \momega_{\ssB_n}(\mq_n, \dot{\mq}_n)^\msT
 \end{bmatrix}^\msT
-\end{equation}
+\end{empheq}
 
-\begin{equation}
+\begin{empheq}[box=\myyellowbox]{equation}
 \dot{\mG}(\mq_\emptyset, \dot{\mq}_\emptyset) =
 \begin{bmatrix}
 \dot{\mG}_1 (\mq_1, \dot{\mq}_1) & \ldots & \mzr\\
 \vdots & \ddots & \vdots\\
 \mzr &\ldots  & \dot{\mG}_n (\mq_n, \dot{\mq}_n)
 \end{bmatrix}
-\end{equation}
+\end{empheq}
 
-\begin{equation}
-\dot{\mG}_i (\mq_i, \dot{\mq}_i) = \breve{\mC}^\msT(\breve{\mx}_0) \cdot \breve{\mQ}_i \cdot \breve{\mC}\big( \breve{\mC}( \breve{\mx}_i(\mq_i) ) \cdot \momega_{\ssB_i} (\mq_i, \dot{\mq}_i) \big)
-\end{equation}
+\begin{empheq}[box=\myyellowbox]{equation}
+\dot{\mG}_i (\mq_i, \dot{\mq}_i) = \breve{\mC}^\msT(\breve{\mx}_0) \cdot \breve{\mQ}_i \cdot \breve{\mC}\big( \breve{\mC}( \breve{\mx}_i ) \cdot \momega_{\ssB_i} \big)
+\end{empheq}
 
 Repare que \eqref{eq:VinculosQuasiAce} pode ser reescrita como:
 %\begin{equation}
 %\dot{\overline{\mp}}(\mq,\mp,\dot{\mp}) = \mA(\mq)\dot{\mp} + \mb(\mq,\mp) = \mzr
 %\end{equation}
-\begin{equation} \label{eq:VinculosQuasiAce_}
+\begin{empheq}[box=\mybluebox]{equation} \label{eq:VinculosQuasiAce_}
 \ddot{\overline{\mq}}(\mq,\dot{\mq},\ddot{\mq}) = \mA(\mq) \cdot \ddot{\mq} + \mb(\mq,\dot{\mq}) = \mzr
-\end{equation}
+\end{empheq}
 
 Sendo:
 %\begin{equation}
@@ -3656,51 +3656,51 @@ Seja $\mf$ a matriz-coluna contendo todos os sistemas de forças não-reativas g
 \end{equation}
 
 Definindo:
-\begin{equation}
+\begin{empheq}[box=\myyellowbox]{equation}
 \mM'(\mq) =
 \begin{bmatrix}
 \mM_{\ssB_0}(\mq_0) & \ldots & \mzr\\
 \vdots & \ddots & \vdots\\
 \mzr &\ldots  & \mM_{\ssB_n}(\mq_n)
 \end{bmatrix}
-\end{equation}
-\begin{equation}
+\end{empheq}
+\begin{empheq}[box=\myyellowbox]{equation}
 \mnu'(\mq,\dot{\mq}) =
 \begin{bmatrix}
 \mnu_{\ssB_0}(\mq_0,\dot{\mq}_0)^\msT &
 ... &
 \mnu_{\ssB_n}(\mq_n,\dot{\mq}_n)^\msT
 \end{bmatrix}^\msT
-\end{equation}
-\begin{equation}
+\end{empheq}
+\begin{empheq}[box=\myyellowbox]{equation}
 \mg'(\mq) =
 \begin{bmatrix}
 \mg_{\ssB_0}(\mq_0)^\msT &
 ... &
 \mg_{\ssB_n}(\mq_0)^\msT  
 \end{bmatrix}^\msT
-\end{equation}
-\begin{equation}
+\end{empheq}
+\begin{empheq}[box=\myyellowbox]{equation}
 \mu' =
 \begin{bmatrix}
 \mu_{\ssB_0}^\msT &
 ... &
 \mu_{\ssB_n}^\msT  
 \end{bmatrix}^\msT
-\end{equation}
+\end{empheq}
 
 \eqref{eq:fParalelos} pode ser reescrita como:
 %\begin{equation}
 %\mf = \mu' - \mM'(\mq) \cdot \dot{\mp} - \mnu'(\mq,\mp) - \mg'(\mq)
 %\end{equation}
-\begin{equation}
+\begin{empheq}[box=\lightbluebox]{equation}
 \mf = \mu' - \mM'(\mq) \cdot \ddot{\mq} - \mnu'(\mq,\dot{\mq}) - \mg'(\mq)
-\end{equation}
+\end{empheq}
 
 Pelo princípio de D'Alembert, temos que:
-\begin{equation}
+\begin{empheq}[box=\mybluebox]{equation}
 \sum_{i=0}^n \dl W_i = \sum_{i=0}^n \dl \mq_i^\msT \cdot \overline{\mf}_{\ssB_i} = 0
-\end{equation}
+\end{empheq}
 
 Ou seja:
 \begin{equation} \label{eq:DAlambertParalelos}
@@ -3713,9 +3713,9 @@ Além disso, a partir da equação \eqref{eq:VinculosQuasiVel2}, temos que:
 \end{equation}
 
 $\mq$ pode ser escrita em função de $\mq\ssh$ e $\mq\cir$ da seguinte maneira:
-\begin{equation} \label{eq:QsshQcir}
+\begin{empheq}[box=\lightbluebox]{equation} \label{eq:QsshQcir}
 \mq = \mQ\ssh \mq\ssh + \mQ\cir \mq\cir
-\end{equation}
+\end{empheq}
 
 Sendo $\mQ\ssh$ e $\mQ\cir$ matrizes constantes que contém apenas zeros e uns, contendo apenas um $"1"$ por coluna.
 Aplicando o operador variação em \eqref{eq:QsshQcir}, tem-se que:
@@ -3734,15 +3734,15 @@ Substuindo \eqref{eq:qcirqssh} em \eqref{eq:deltaQsshQcir}, obtemos $\dl\mq$ ape
 \end{equation}
 
 Sendo:
-\begin{equation} \label{eq:CComplemento}
+\begin{empheq}[box=\myyellowbox]{equation} \label{eq:CComplemento}
 \mC(\mq) = \mQ\ssh - \mQ\cir (\mA \mQ\cir)^{-1} \mA \mQ\ssh 
-\end{equation}
+\end{empheq}
 
 
 Além disso, repare que $\mC$ respeita a seguinte relação:
-\begin{equation} \label{eq:CCinematica}
+\begin{empheq}[box=\lightbluebox]{equation} \label{eq:CCinematica}
 \dot{\mq} = \mC(\mq) \cdot \dot{\mq}\ssh
-\end{equation}
+\end{empheq}
 
 Substuindo \eqref{eq:deltamqC} em \eqref{eq:DAlambertParalelos}, temos:
 \begin{equation}
@@ -3750,9 +3750,9 @@ Substuindo \eqref{eq:deltamqC} em \eqref{eq:DAlambertParalelos}, temos:
 \end{equation}
 
 Tendo em vista que $\mq\ssh$ são coordenadas independentes, $\dl \mq\ssh$ são variações arbitrárias. Sendo assim, a equação dinâmica do mecanismo paralelo pode ser escrita como:
-\begin{equation}
+\begin{empheq}[box=\mybluebox]{equation}
 \mC^\msT \mf = \mzr
-\end{equation}
+\end{empheq}
 
 Ou seja:
 \begin{equation} \label{eq:EquacaoDinamicaParalelos}
@@ -3785,10 +3785,10 @@ Reescrevendo em forma matricial:
 \end{equation}
 
 É necessário que as condições iniciais respeitem os vínculos de posição e velocidades. Com isso, teoricamente, os vínculos continuariam sendo respeitados na solução do sistema de EDOs. Porém, devido a erros numéricos de truncamento e erros associados ao método de integração numérica utilizado, haverá um acúmulo de erros que irá aumentar a cada passo de integração, e os vínculos de posição e velocidade eventualmente podem deixar de ser respeitados. Esse problema pode ser resolvido utilizando a técnica das constantes de estabilização de Baumgarte \cite{Baumgarte}. A idéia é substituir a equação dos vínculos de quasi-acelerações pela seguinte equação:
-\begin{equation} \label{eq:VinculosQuasiAce2}
+\begin{empheq}[box=\mybluebox]{equation} \label{eq:VinculosQuasiAce2}
 \ddot{\overline{\mq}}'(\mq, \dot{\mq}, \ddot{\mq}) =
 \ddot{\overline{\mq}} + 2\lambda \dot{\overline{\mq}} + \lambda^2 \overline{\mq} = \mzr
-\end{equation}
+\end{empheq}
 
 Substituindo \eqref{eq:VinculosQuasiVel2} e \eqref{eq:VinculosQuasiAce_} em \eqref{eq:VinculosQuasiAce2}, temos:
 \begin{equation} \label{eq:VinculosQuasiAce3}
@@ -3800,7 +3800,7 @@ Impondo que \eqref{eq:VinculosQuasiAce3} seja respeitada, garantimos que, teoric
 É importante ressaltar que valores muito altos de $\lambda$ podem comprometer a estabilidade numérica da simulação, e valores muito pequenos podem fazer com que a faixa de valores em torno de zero em que as componentes de $\overline{\mq}(\mq)$ estarão variando pode se tornar muito grande. É seguro dizer que um bom valor de limite superior para $\lambda$ a ser adotado é $1/h$, sendo $h$ o tamanho do passo de integração, pois fazendo $\lambda = 1/h$ já garante a estabilidade do método para praticamente qualquer método de integração numérica de EDOs. Na prática, valores de $\lambda$ em torno de $1/100h$ se mostraram bastante adequados nas simulações realizadas.
 
 Sendo assim, o sistema de EDOs que será utilizado para realizar a simualação dinâmica direta é dado por:
-\begin{equation}
+\begin{empheq}[box=\myyellowbox]{equation}
 \begin{bmatrix}
 \mC(\mq)^\msT \mM'(\mq) \\
 \mA(\mq)
@@ -3816,7 +3816,7 @@ Sendo assim, o sistema de EDOs que será utilizado para realizar a simualação 
 \lambda^2
 \overline{\mq}(\mq) \\
 \end{bmatrix}
-\end{equation}
+\end{empheq}
 
 \section{Simulação dinâmica inversa} 
 
@@ -3846,19 +3846,19 @@ $$ \Rightarrow  \ddot{\mq}\cir = - (\mA \mQ\cir)^\msI (\mb + \mA \mQ\ssh \ddot{\
 \end{equation}
 
 Comparando \eqref{eq:CComplemento} com \eqref{eq:d2q_em_funcao}, temos:
-\begin{equation} \label{eq:d2q_em_funcao2}
+\begin{empheq}[box=\mybluebox]{equation} \label{eq:d2q_em_funcao2}
 \therefore \ddot{\mq} = \mC(\mq) \cdot \ddot{\mq}\ssh + \mc(\mq, \dot{\mq})
-\end{equation}
+\end{empheq}
 
 Sendo:
-\begin{equation}
-\mc(\mq, \dot{\mq}) = - (\mA(\mq) \mQ\cir)^\msI \cdot \mb(\mq,\dot{\mq})
-\end{equation}
+\begin{empheq}[box=\myyellowbox]{equation}
+\mc(\mq, \dot{\mq}) = - (\mA \mQ\cir)^\msI \cdot \mb
+\end{empheq}
 
 Além disso, normalmente não há atuadores em todas as juntas do mecanismo paralelo. Sendo assim, $\mu'$ pode ser reescrito como:
-\begin{equation} \label{eq:u_estrela}
+\begin{empheq}[box=\mybluebox]{equation} \label{eq:u_estrela}
 \mu' = \mU \cdot \mu^\star
-\end{equation}
+\end{empheq}
 
 Sendo $\mU$ uma matriz constante composta por zeros e uns, e $\mu^\star$ os esforços aplicados pelos atuadores.
 
@@ -3869,9 +3869,9 @@ Substituindo \eqref{eq:CCinematica}, \eqref{eq:d2q_em_funcao2} e \eqref{eq:u_est
 \end{equation}
 
 Definindo:
-\begin{equation}
+\begin{empheq}[box=\myyellowbox]{equation}
 \mZ(\mq)^\msT = \mC(\mq)^\msT \mU
-\end{equation}
+\end{empheq}
 
 Temos:
 \begin{equation} \label{eq:DinamicaInversa1}
@@ -3879,20 +3879,20 @@ Temos:
 \end{equation}
 
 Sendo assim, \eqref{eq:DinamicaInversa1} pode ser reescrita como:
-\begin{equation} \label{eq:DinamicaInversa2}
+\begin{empheq}[box=\mybluebox]{equation} \label{eq:DinamicaInversa2}
 \mM_{\ssM} (\mq) \, \ddot{\mq}\ssh + \mv_{\ssM}(\mq, \dot{\mq}) + \mg_{\ssM}(\mq)   = \mZ(\mq)^{\msT} \mu^\star
-\end{equation}
+\end{empheq}
 
 Sendo: 
-\begin{equation}
+\begin{empheq}[box=\myyellowbox]{equation}
 \mM_{\ssM}  =  \mC^\msT \mM' \mC
-\end{equation}
-\begin{equation}
+\end{empheq}
+\begin{empheq}[box=\myyellowbox]{equation}
 \mv_{\ssM}  =  \mC^\msT (  \mM'  \mc  + \mv' )
-\end{equation}
-\begin{equation}
+\end{empheq}
+\begin{empheq}[box=\myyellowbox]{equation}
 \mg_{\ssM}  = \mC^\msT \mg'
-\end{equation}
+\end{empheq}
 
 Sendo assim, para mecanismos sem atuação redundante, a simulação dinâmica inversa é feita utilizando a equação \eqref{eq:DinamicaInversa2} para obter os esforços dos atuadores, dados $\mq\ssh$, $\dot{\mq}\ssh$ e $\ddot{\mq}\ssh$, obtendo $\mq$ através da solução numérica da equação \eqref{eq:VinculosGenericosPosicao} e $\dot{\mq}$ através de \eqref{eq:CCinematica}. 
 
