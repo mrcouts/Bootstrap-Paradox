@@ -125,7 +125,7 @@
 \falsafolhaderosto
 \folhaderosto
 \includepdf[pages=1]{FichaCatalografica.pdf}
-\clearpage\thispagestyle{empty}\addtocounter{page}{-1} \clearpage
+%\clearpage\thispagestyle{empty}\addtocounter{page}{-1} \clearpage
 
 
 % ========== Folha de assinaturas (opcional) ==========
@@ -303,6 +303,17 @@ Aiming to fully explore the potential of this kind of architecture, in this thes
   $\ttX$ & Sistema de referência fixo a efetuador \\
 \end{longtable}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{center} \begin{Large} \textbf{Sistemas ou subsistemas mecânicos} \end{Large} \end{center}
+\begin{longtable}{lp{0.6\textwidth}}
+  $\ssB$ & Subsistema ligamento (corpo rígido livre no espaço) \\
+  $\ssF$ & Subsistema de esforços ativos \\
+  $\llP$ & Sistema mecanismo paralelo \\
+  $\llS$ & Sistema ou subsistema mecanismo serial \\
+  $\llR$ & Subsistema rotor (corpo rígido com inércia puramente rotacional) \\
+  $\ssT$ & Subsistema de esforços ativos \\
+  $\llX$ & Subsistema efetuador de mecanismo paralelo translacional (corpo rígido que translada livremente no espaço) \\
+\end{longtable}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{center} \begin{Large} \textbf{Matrizes} \end{Large} \end{center}
 \begin{longtable}{lp{0.6\textwidth}}
   $\ma$ & Componentes de aceleração \\
@@ -311,9 +322,10 @@ Aiming to fully explore the potential of this kind of architecture, in this thes
   $\mC$ & Matriz cujas colunas formam a base de um complemento ortogonal ao subespaço formado pelas linhas de um jacobiano de equações vinculares  \\
   $\me$ & Erro de controle \\
   $\mf$ & Componentes de esforços não reativos generalizados \\
-  $\mg$ & Matriz-coluna de esforços gravitacionais generalizados \\
-  $\mh$ & Matriz-coluna de esforços gravitacionais, inérciais giroscópicos e de atrito generalizados \\
+  $\mg$ & Esforços gravitacionais generalizados \\
+  $\mh$ & Esforços gravitacionais, inérciais giroscópicos e de atrito generalizados \\
   $\mH$ & Matriz de inércia generalizada \\
+  $\mi$ & Correntes elétricas que fluem pelas armaduras dos atuadores \\ 
   $\mI$ & Representação matricial de tensor de inércia \\
   $\mJ$ & Jacobiano \\
   $\mJ_v$ & Jacobiano de velocidades \\
@@ -330,17 +342,18 @@ Aiming to fully explore the potential of this kind of architecture, in this thes
   $\mq\cir$ & Coordenadas generalizadas redundantes \\
   $\overline{\mq}$ & Matriz-coluna de vínculos de coordenadas generalizadas \\
   $\mR$ & Matriz de rotação de um ligamento \\
-  $\ms$ & Matriz-coluna de variáveis de escorregamento \\
+  $\ms$ & Variáveis de escorregamento \\
   $\mu$ & Esforços ativos generalizados provenientes de atuadores \\
   $\mu^\lightning$ & Tensões elétricas aplicadas nos terminais dos atuadores  \\
   $\mv$ & Componentes de velocidade \\
   $\mx$ & Coordenadas de um efetuador \\
   $\malpha$ & Componentes de aceleração angular \\
   $\mgamma$ & Componentes de aceleração gravitacional \\
-  $\mzeta$ & Matriz-coluna de esforços e de atrito generalizados \\
+  $\mzeta$ & Esforços de atrito generalizados \\
   $\mlambda$ & Multiplicadores de Lagrange \\
-  $\mnu$ & Matriz-coluna de esforços inérciais giroscópicos e de atrito generalizados \\
-  $\mxi$ & Coordenadas generalizadas independentes \\
+  $\mnu$ & Esforços inérciais giroscópicos e de atrito generalizados \\
+  $\mxi$ & Variáveis controladas \\
+  $\mxi_d$ & Referência de controle \\
   $\mpi$ & Quasi-coordenadas \\
   $\mpi\ssh$ & Quasi-coordenadas independentes \\
   $\mpi\cir$ & Quasi-coordenadas redundantes\\
@@ -365,6 +378,7 @@ Aiming to fully explore the potential of this kind of architecture, in this thes
   $l_g$ & Distância entre o começo de um ligamento e seu centro de massa \\
   $L$ & Indutância \\
   $m$ & Massa \\
+  $n$ & Número de cadeiais mecânicas de um mecanismo paralelo \\
   $p$ & Pólo de função de transferência \\
   $r$ & Relação de transmissão \\
   $s$ & Variável de escorregamento ou variável da Transformada de Laplace \\
@@ -375,10 +389,12 @@ Aiming to fully explore the potential of this kind of architecture, in this thes
   $V$ & Função de Lyapunov \\
   $z$ & Variável da Transformada Z \\
   $\dl W$ & Trabalho virtual \\
-  $\phi$ & Comprimento da camada limite \\
+  $\theta$ & Ângulo \\
   $\lambda$ & Multiplicador de Lagrange, ganho de controle ou constante de estabilização de Baumgarte \\
+  $\nu$ & Número de ligamentos de um mecanismo serial \\
   $\gmu$ & Coeficiente de atrito seco \\
   $\tau$ & Torque \\
+  $\phi$ & Comprimento da camada limite \\
   $\omega$ & Velocidade angular \\
 \end{longtable}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -387,6 +403,7 @@ Aiming to fully explore the potential of this kind of architecture, in this thes
   $\ccos(.)$ & Notação compacta para $\cos(.)$ \\
   $\diag(.)$ & Matriz-coluna cujos elementos são a diagonal de uma matriz quadrada \\
   $\ssin(.)$ & Notação compacta para $\sin(.)$ \\
+  $\sat(.)$ & Função saturação \\
   $\sign(.)$ & Função sinal \\
   $\mS(.)$ & Matriz de produto vetorial entre matrizes-colunas de ordem 3, ou seja, $\vct{\va \wedge \vb}_{\ttA} = \mS(\ma) \cdot \mb = -\mS(\mb) \cdot \ma $, sendo $\ma = \vct{\va}_{\ttA}$ e $\mb = \vct{\vb}_{\ttA}$ \\
 \end{longtable}
@@ -504,15 +521,15 @@ Com relação à dinâmica, Pekal e Fraczek \cite{Pekal2} esclarecem que a solu�
 
 \begin{equation} \label{DAE}
 \begin{cases}
-\mM \, \ddot{\mq} + \mA^\msT \,\mlambda = \meta \\
+\mM(t,\mq) \, \ddot{\mq} + \mA(t,\mq)^\msT \,\mlambda = \meta(t,\mu,\mq, \dot{\mq}) \\
 \bar{\mq} \, (t,\mq) \, = \, \mzr
 \end{cases}
 \end{equation}
 
 Sendo
-%\begin{equation}
-%\meta = \mu - \mnu - \mg
-%\end{equation}
+\begin{equation}
+\meta(t,\mu,\mq, \dot{\mq}) = \mu - \mnu(t,\mq,\dot{\mq}) - \mg(t,\mq)
+\end{equation}
 \begin{equation}
 \mA(t,\mq) = \frac{\partial \bar{\mq}}{\partial \mq}
 \end{equation}
@@ -520,11 +537,11 @@ Sendo
 Uma alternativa é resolver o sistema representado pela equação \eqref{DAE3}, 
 
 \begin{equation}
-\underbrace{\left[ \begin{array}{cc}
+\left[ \begin{array}{cc}
 \mM & \mA^\msT \\
 \mA & \mzr
 \end{array}
-\right]}_{\mY}
+\right]
 \left[ \begin{array}{c}
 \ddot{\mq} \\
 \mlambda
@@ -542,15 +559,15 @@ Uma alternativa é resolver o sistema representado pela equação \eqref{DAE3},
 
 sendo
 \begin{equation}
-\mb = \frac{\partial (\mA \dot{\mq})}{\partial \mq} \, \dot{\mq} + 2 \frac{\partial \mA}{\partial t} \, \dot{\mq} + \frac{\partial^2 \bar{\mq}}{\partial t^2}
+\mb(t,\mq,\dot{\mq}) = \frac{\partial (\mA \dot{\mq})}{\partial \mq} \, \dot{\mq} + 2 \frac{\partial \mA}{\partial t} \, \dot{\mq} + \frac{\partial^2 \bar{\mq}}{\partial t^2}
 \end{equation}
 
 cuja solução é equivalente à solução de \eqref{DAE} desde que as condições iniciais respeitem as equações vinculares $\bar{\mq}(t, \mq) = \mzr$.
 
-Para melhorar a precisão associada às restrições de posição e velocidade, recomenda-se substituir $\mb$ por $\mb'$, expresso na equação \eqref{baumgarte}, que é conhecido como método de Baumgarte para a estabilização das restrições \cite{Baumgarte, Featherstone, Nikravesh}, sendo $\hat{\alpha} = \hat{\beta} = 1/t_c$, com  $0.01 \lesssim t_c \lesssim 0.1 $ \cite{Featherstone}. 
+Para melhorar a precisão associada às restrições de posição e velocidade, recomenda-se substituir $\mb$ por $\mb'$, expresso na equação \eqref{baumgarte}, que é conhecido como método de Baumgarte para a estabilização das restrições \cite{Baumgarte, Featherstone, Nikravesh}, sendo $\lambda = 1/t_c$, com  $0.01 \lesssim t_c \lesssim 0.1 $ \cite{Featherstone}. 
 %
 \begin{equation}
-\mb' = \mb + 2\hat{\alpha} \dot{\bar{\mq}} + \hat{\beta}^2 \bar{\mq}
+\mb'(t,\mq,\dot{\mq}) = \mb + 2\lambda \dot{\bar{\mq}} + \lambda^2 \bar{\mq}
 \label{baumgarte}
 \end{equation}
 
@@ -562,7 +579,7 @@ Um outro modo de aprimorar a precisão é alcançado pela separação das coorde
 
 Segundo Mariti \emph{et al.} \cite{Mariti}, expressar o modelo dinâmico por meio de coordenadas redundantes, independentemente do formalismo escolhido, possui como propósito a realização de simulações de sistemas multicorpos, sendo que um exemplo é o software comercial MSC-Adams. No entanto, se a finalidade for o controle de manipuladores, significando que o modelo é parte integrante de implementações que demandem  cálculos em tempo real, a expressão das equações dinâmicas nas coordenadas independentes é necessária.
 
-Além disso, é largamente difundido que a escolha das variáveis cinemáticas independentes recaia sobre as componentes do vetor $\mq^\star$, associadas aos deslocamentos impostos pelos atuadores, e suas derivadas temporais. No entanto, alguns autores \cite{Li, Khalil2} mencionam as vantagens de se escolher as componentes do vetor $\mx$, afirmando que a expressão do modelo dinâmico nestas variáveis é menos complexa.
+Além disso, é largamente difundido que a escolha das coordenadas generalizadas independentes recaia sobre os deslocamentos impostos pelos atuadores. No entanto, alguns autores \cite{Li, Khalil2} mencionam as vantagens de se escolher as coordenadas do efetuador, afirmando que a expressão do modelo dinâmico nestas variáveis é menos complexa.
 
 Na literatura, são conhecidas várias formulações para realizar a modelagem dinâmica de sistemas multicorpos, como os formalismos de Newton-Euler, Lagrange, Gibbs-Appel, Maggi, Boltzmann-Hamel, os métodos de Kane e Udwadia-Kalaba, e os Princípios dos Trabalhos Virtuais e Potências Virtuais \cite{23orsino}. Porém, na literatura de modelagem de mecanismos paralelos, podemos destacar as seguintes formulações como as mais comumente utilizadas:
 
@@ -682,7 +699,7 @@ Uma das técnicas de controle mais exploradas na literatura é o Controle por To
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[scale=0.39]{../figures/CTC.jpg}  
+	\includegraphics[scale=0.39]{../figures/CTCnew.jpg}  
 	\caption{Malha de Controle por Torque Computado (Adaptado de \cite{Craig})}
 	\label{fig:CTC}
 \end{figure}
@@ -695,7 +712,7 @@ De fato, Codourey \cite{Codourey} obteve uma redução de 600\% no erro de posi�
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[scale=0.39]{../figures/CTCp.jpg}  
+	\includegraphics[scale=0.39]{../figures/CTCpnew.jpg}  
 	\caption{Malha de Controle por Torque Computado com pré-alimentação (Adaptado de \cite{Craig})}
 	\label{fig:CTCp}
 \end{figure}
@@ -727,7 +744,7 @@ Em \cite{SlotiniA} é proposta uma lei de controle que combina o controle adapta
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[scale=0.47]{../figures/CA.jpg}  
+	\includegraphics[scale=0.47]{../figures/CAnew.jpg}  
 	\caption{Malha de Controle Adaptativo (Adaptado de \cite{Craig})}
 	\label{fig:CA}
 \end{figure}
@@ -742,7 +759,7 @@ Em \cite{Zeinali}, Zeinali \emph{et al.} desenvolveram uma lei de controle  base
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[scale=0.55]{../figures/CMD.jpg}  
+	\includegraphics[scale=0.55]{../figures/CMDnew.jpg}  
 	\caption{Malha Controle por Modos Deslizantes}
 	\label{fig:CMD}
 \end{figure}
@@ -816,7 +833,7 @@ Neste sentido, almeja-se observar se haverá alguma diferença de desempenho se 
 Este capítulo tem o intuito de apresentar um algoritmo genérico para a obtenção do modelo cinemático e dinâmico de mecanismos seriais. O algoritmo apresentado é implementável em linguagens de programação comumente usadas atualmente, como C++, Java e Python, sem necessitar de recursos de manipulação simbólica. \\
 Para a obtenção do modelo, são necessários apenas os parametros de Denavit-Hartemberg \cite{Craig, Denavit, Lipkin, Cabral} do mecanismo e as posições dos centros de massa dos ligamentos em relação aos sistemas de coordenadas fixos aos ligamentos. \\ 
 
-Seja $\ssB$ um sistema mecânico serial de $\nu$ graus de liberdade. Primeiramente, fazemos as seguintes definições:
+Sejam $\ssB_1,\hdots,\ssB_\nu$ $\nu$ subsistemas ligamentos, $\ssF$ um subsistema de esforços ativos generalizados, e $\ssS$ um sistema mecânico serial de $\nu$ graus de liberdade. Primeiramente, fazemos as seguintes definições:
 
 \begin{itemize}
 \item $\llN$ ou $\llB_0$: referencial inercial.
@@ -825,7 +842,7 @@ Seja $\ssB$ um sistema mecânico serial de $\nu$ graus de liberdade. Primeiramen
 \item $\ttB_i, \,i=1,...,\nu$: sistema de coordenadas solidário a $\llB_i$.
 %\item $\tto_i, \,i=0,...,\nu$: origem do sistema $\ttB_i$.
 %\item $\{\vi_i, \vj_i, \vk_i\}, \,i=0,...,\nu$: base ortonormal do sistema $\ttB_i$.
-\item $\ttc_{\lllB_i}, \,i=1,...,\nu$: centro de massa do ligamento $\llB_i$.
+%\item $\ttc_{\lllB_i}, \,i=1,...,\nu$: centro de massa do ligamento $\llB_i$.
 \item $\ttx$: ponto no espaço fixo ao efetuador.
 \item $\ttX$: sistema de coordenadas fixo ao efetuador, com origem em $\ttx$ e a mesma base de $\ttB_\nu$. 
 \item $m_i$: massa do ligamento $\llB_i$.
@@ -840,7 +857,7 @@ q_1 & ... & {q}_{\nu}
 \item $\mgamma$: vetor aceleração gravitacional escrito na base $\ttN$, ou seja, $\vct{\vgamma}_{\ttN}$.
 %\item $\vf_i$: Vetor força não-reativa resultante aplicada no centro de massa de $\llB_i$.
 %\item $\vtau_i$: Vetor torque não-reativo resultante aplicado em $\llB_i$.
-\item $\overline{\mf}_i$: matriz-coluna de esforços não-reativos generalizados aplicados ao subsistema $\llB_i$. É dada por $\overline{\mf}_i = \begin{bmatrix}
+\item $\overline{\mf}_{\ssB_i}, \,i=1, ..., \nu$: matriz-coluna de esforços não-reativos generalizados aplicados ao subsistema $\ssB_i$. É dada por $\overline{\mf}_{\ssB_i} = \begin{bmatrix}
 \vct{\vf_{\lllB_i}}_\ttN^\msT &
 \vct{\vtau_{\lllB_i}}_\ttN^\msT
 \end{bmatrix}^\msT $.
@@ -868,12 +885,14 @@ q_1 & ... & {q}_{\nu}
 \item $\ma_i, \,i=1, ..., \nu$: componentes de aceleração do centro de massa do ligamento $\llB_i$ em relação ao referencial $\llN$ no sistema $\ttN$, ou seja $\vct{\va_{\ttc_{\lllB_i}}^{\lllN}}_\ttN$.
 \item $\ma'_i, \,i=1, ..., \nu$: componentes de aceleração do centro de massa do ligamento $\llB_i$ em relação ao referencial $\llB_{i-1}$ no sistema $\ttN$, ou seja $\vct{\va_{\ttc_{\lllB_i}}^{\lllB_{i-1}}}_\ttN$.
 \item $\ma$: componentes de aceleração do efetuador em relação ao referencial $\llN$ no sistema $\ttN$, ou seja $\vct{\va_{\ttx}^{\lllN}}_\ttN$.
-\item $\mu$: matriz-coluna dos esforços ativos generalizados aplicados pelos atuadores das juntas.
+\item $\mu$: matriz-coluna dos esforços ativos generalizados aplicados pelos atuadores.
 \end{itemize}
 
 Para facilitar a leitura das equações, nas expressões que envolvem o indice $i$, estará subentendido que $i$ varia de $1$ a $\nu$, ou seja, $i=1,\hdots,\nu$, a menos que seja explicitado de forma diferente. A dependência das variáveis, indicada por parênteses, também será omitida em algumas equações para facilitar a leitura.
 
 Algumas equações serão destacadas através de cores. A cor amarela indica equações que devem ser implementadas no algoritmo. A cor azul escura indica equações de destaque no desenvolvimento. A cor azul clara indica equações de destaque secundário no desenvolvimento.
+
+\newpage
 
 \section{Cinemática}
 
@@ -1029,7 +1048,7 @@ Tendo em vista que as coordenadas dos versores $\vk_{\ttB_i}$ no sistema $\ttN$ 
 \begin{split}
 \mk_i(\mq) = \begin{cases}
 \begin{bmatrix} 0 & 0 & 1 \end{bmatrix}^\msT, & \text{se } i=0 \\
- \mR_i  (\mq) \llbracket :,3 \rrbracket, & \text{se } i>0
+ \mR_i   \llbracket :,3 \rrbracket, & \text{se } i>0
 \end{cases} \; i=0,...,\nu
 \end{split}
 \end{empheq}
@@ -1962,9 +1981,9 @@ Sendo:
 %
 \section{Dinâmica dos elos e juntas}
 
-O modelo dinâmico de $\ssB$ é obtido utilizando um procedimento de acoplamento de subsistemas baseado no método Recursivo Modular de Modelagem (RMM)  \cite{23orsino}, e é dado por:
+O modelo dinâmico de $\ssS$ é obtido utilizando um procedimento de acoplamento de subsistemas baseado no método Recursivo Modular de Modelagem (RMM)  \cite{23orsino}, e é dado por:
 \begin{empheq}[box=\mybluebox]{equation} \label{eq:ModeloMecSerial}
-\mM(\mq) \ddot{\mq} + \mnu(\mq,\dot{\mq}) + \mg(\mq) = \mu
+\mM(\mq) \, \ddot{\mq} + \mnu(\mq,\dot{\mq}) + \mg(\mq) = \mu
 \end{empheq}
 
 Sendo:
@@ -2023,7 +2042,7 @@ m_i \mone & \mzr \\
 
 Ou seja:
 \begin{empheq}[box=\mybluebox]{equation} \label{eq:f_i}
-\overline{\mf}_i(\mq, \dot{\mq}, \ddot{\mq})  = -\begin{Bmatrix}
+\overline{\mf}_{\ssB_i}(\mq, \dot{\mq}, \ddot{\mq})  = -\begin{Bmatrix}
 \begin{bmatrix}
 m_i \mone & \mzr \\
 \mzr      & \mI_i
@@ -2048,7 +2067,7 @@ m_i \mone & \mzr \\
 
 Como os subsistemas estão desacoplados, não há forças reativas, portanto o modelo dinâmico de cada subsistema pode ser escrito como:
 \begin{empheq}[box=\mybluebox]{equation}\label{eq:fi_plus_fri}
-\overline{\mf}_i(\mq, \dot{\mq}, \ddot{\mq}) = \mzr
+\overline{\mf}_{\ssB_i}(\mq, \dot{\mq}, \ddot{\mq}) = \mzr
 \end{empheq}
 
 Além disso, definindo as quasi-velocidades:
@@ -2084,12 +2103,12 @@ E as quasi-coordenadas \cite{Jarzebowska2009}:
 
 Temos que o trabalho virtual associado a cada subsistema é dado por:
 \begin{empheq}[box=\mybluebox]{equation} \label{eq:dWiSeriais}
-\dl W_i =  \dl \mpi_i^\msT \cdot \overline{\mf}_i
+\dl W_{\ssB_i} =  \dl \mpi_i^\msT \cdot \overline{\mf}_{\ssB_i}
 \end{empheq}
 
 \subsection{Sistemas de esforços ativos generalizados} 
 
-Considere também um subsistema constituido pelos esforços que os atuadores aplicam nas juntas do mecanismo. Primeiramente, definimos a matriz-coluna de quasi-velocidades relativas a esse subsistema:
+Considere também o subsistema $\ssF$, o que é constituido pelos esforços que os atuadores aplicam nas juntas do mecanismo. Primeiramente, definimos a matriz-coluna de quasi-velocidades relativas a esse subsistema:
 %Muitas vezes é conveniente definir um conjunto de quasi-velocidades adicionais $\mp_0$, as quais só fazem sentido para o sistema acoplado, e sistemas de forças ativas generalizadas adicionais $\mf_0$ aplicados na direção das quasi-velocidades adicionais. \\
 
 %Neste algoritmo de modelagem, serão considerados como quasi-velocidades adicionais as derivadas temporais das coordenadas das juntas, ou seja:
@@ -2102,7 +2121,7 @@ Considere também um subsistema constituido pelos esforços que os atuadores apl
 Tendo em vista que $\mu$ é a matriz-coluna de esforços generalizados aplicadas pelos atuadores na direção de $\dl\mq$, o trabalho virtual associado a este subsistema é dado por:
 
 \begin{empheq}[box=\mybluebox]{equation} \label{eq:dWsshSeriais}
-\dl W\ssh = \dl \mq^\msT \cdot \mu 
+\dl W_\ssF = \dl \mq^\msT \cdot \mu 
 \end{empheq}
 
 \subsection{Vínculos cinemáticos entre subsistemas} 
@@ -2198,7 +2217,7 @@ Sendo:
 
 Pelo princípio de D'Alembert, temos que
 \begin{empheq}[box=\mybluebox]{equation} \label{eq:PdASeriais}
-\dl W\ssh + \sum_{i=1}^\nu \dl W_i  = 0
+\dl W_\ssF + \sum_{i=1}^\nu \dl W_{\ssB_i}  = 0
 \end{empheq}
 
 Através de \eqref{eq:PdASeriais}, \eqref{eq:dWsshSeriais}, \eqref{eq:dWiSeriais}, \eqref{eq:fSeriais} e \eqref{eq:quasi-coord}, temos que:
@@ -2322,7 +2341,7 @@ m_i (\mJ_{v_i} \ddot{\mq} + \underaccent{\sim}{\ma}_i   )  \\
 
 Sendo assim, obtemos o modelo dinâmico mostrado anteriormente:
 \begin{equation} \tag{\ref{eq:ModeloMecSerial}}
-\mM(\mq) \ddot{\mq} + \mnu(\mq,\dot{\mq}) + \mg(\mq) = \mu
+\mM(\mq) \, \ddot{\mq} + \mnu(\mq,\dot{\mq}) + \mg(\mq) = \mu
 \end{equation}
 
 Sendo:
@@ -2342,7 +2361,7 @@ m_i \mJ_{v\,i}^\msT \mJ_{v\,i} + \mJ_{\omega\,i}^\msT \mI_i \mJ_{\omega\,i}
 
 Esta subseção tem o intuito de complementar algoritmo de modelagem de mecanismos seriais já apresentado através inclusão da dinâmica dos atuadores. \\ 
 
-Seja $\ssB'$ um sistema mecânico serial de $\nu$ graus de liberdade, constituido por um mecanismo serial $\ssB$ e $\nu$ atuadores, possivelmente acoplados a redutores de velocidades. Primeiramente, fazemos as seguintes definições:
+Sejam $\ssR_1,\hdots,\ssR_\nu$ $\nu$ subsistemas rotores dos atuadores, os quais possivelmente estarão a acoplados a redutores de velocidades, $\ssT$ um subsistema de esforços ativos generalizados aplicados aos rotores,  e $\ssS'$ um sistema mecânico serial de $\nu$ graus de liberdade, constituido por um mecanismo serial $\ssS$ e os subsistemas citados anteriormente. Primeiramente, fazemos as seguintes definições:
 
 \begin{itemize}
 \item $\llR_i, \,i=1,...,\nu$: rotor do i-ésimo atuador.
@@ -2352,22 +2371,24 @@ Seja $\ssB'$ um sistema mecânico serial de $\nu$ graus de liberdade, constituid
 \item $\mI_{r \,i}, \,i=1,...,\nu$: tensor de in\'ercia $\vI_{\lllR_i}$ escrito na base de $\ttN$, ou seja, $\vct{\vI_{\lllR_i}}_{\ttN \rl \ttN}$.
 \item $\mI'_{r \,i}, \,i=1,...,\nu$: tensor de in\'ercia $\vI_{\lllR_i}$ escrito na base de $\ttB_i$, ou seja, $\vct{\vI_{\lllR_i}}_{\ttB_i \rl \ttB_i}$.
 %\item $\vtau_{r \,i}, \,i=1,...,\nu$: Vetor torque não-reativo resultante aplicado em $\llR_i$.
-\item $\overline{\mf}_{r \,i}, \,i=1,...,\nu$: matriz-coluna de esforços não-reativos generalizados aplicados no rotor $\llR_{i}, \,i=1,...,\nu$. É dada por $\overline{\mf}_{r \,i} = \vct{\vtau_{\lllR_i}}_\ttN $.
+\item $\overline{\mf}_{\ssR_i}, \,i=1,...,\nu$: matriz-coluna de esforços não-reativos generalizados aplicados no rotor $\llR_{i}, \,i=1,...,\nu$. É dada por $\overline{\mf}_{\ssR_i} = \vct{\vtau_{\lllR_i}}_\ttN $.
 \item $q_{r\,i}, \,i=1,...,\nu$: deslocamento angular realizado pelo i-ésimo rotor.
 \item $\mq_r$: matriz-coluna dos deslocamentos angulares realizados pelos rotores, ou seja $\mq_r = \begin{bmatrix} q_{r\,1} & \hdots & q_{r\,\nu}  \end{bmatrix}^\msT$.
 \item $\momega_{r \,i}, \,i=1,...,\nu$ : componentes de velocidade angular do rotor $\llR_i$ em relação a $\llN$ no sistema $\ttN$, ou seja $\vct{\vomega_{\lllR_i}^{\lllN} }_{\ttN} $.
-\item $\mzeta$: matriz-coluna dos esforços de atrito generalizados aplicados nos rotores, em sentido oposto aos seus deslocamentos.
-\item $\mi$: matriz-coluna de correntes elétricas que fluem pelas armaduras dos atuadores.
-\item $\mup$: matriz-coluna de tensões elétricas aplicadas nos terminais dos atuadores.
+%\item $\mzeta$: matriz-coluna dos esforços de atrito generalizados aplicados nos rotores, em sentido oposto aos seus deslocamentos.
+%\item $\mi$: matriz-coluna de correntes elétricas que fluem pelas armaduras dos atuadores.
+%\item $\mu^\lightning$: matriz-coluna de tensões elétricas aplicadas nos terminais dos atuadores.
 \item $r_i, \,i=1,...,\nu$: relação de transmissão do i-ésimo redutor.
-\item $\underline{r}$: matriz diagonal de relações de transmissão dos redutores.
-\item $\underline{b}$: matriz diagonal de coeficientes de atrito viscoso.
-\item $\underline{\gmu}$: matriz diagonal de coeficientes de atrito seco.
-\item $\underline{k_t}$: matriz diagonal de constantes de torque dos atuadores.
-\item $\underline{k_e}$: matriz diagonal de constantes de força contra-eletromotriz dos atuadores.
-\item $\underline{R}$: matriz diagonal de resistências elétricas dos atuadores.
-\item $\underline{L}$: matriz diagonal de indutâncias dos atuadores.
+%\item $\underline{r}$: matriz diagonal de relações de transmissão dos redutores.
+%\item $\underline{b}$: matriz diagonal de coeficientes de atrito viscoso.
+%\item $\underline{\gmu}$: matriz diagonal de coeficientes de atrito seco.
+%\item $\underline{k_t}$: matriz diagonal de constantes de torque dos atuadores.
+%\item $\underline{k_e}$: matriz diagonal de constantes de força contra-eletromotriz dos atuadores.
+%\item $\underline{R}$: matriz diagonal de resistências elétricas dos atuadores.
+%\item $\underline{L}$: matriz diagonal de indutâncias dos atuadores.
 \end{itemize}
+
+\newpage
 
 \subsection{Cinemática}
 
@@ -2531,7 +2552,7 @@ Sendo
 
 \subsection{Dinâmica Mecânica}
 
-O modelo dinâmico de $\ssB'$ é obtido utilizando um procedimento de acoplamento de subsistemas baseado no método Recursivo Modular de Modelagem (RMM)  \cite{23orsino}, e é dado por:
+O modelo dinâmico de $\ssS'$ é obtido utilizando um procedimento de acoplamento de subsistemas baseado no método Recursivo Modular de Modelagem (RMM)  \cite{23orsino}, e é dado por:
 \begin{empheq}[box=\mybluebox]{equation} \label{eq:ModeloMecSerial_rot}
 \mM^*(\mq) \, \ddot{\mq} + \mnu^*(\mq,\dot{\mq}) + \mg^*(\mq) = \mu^*
 \end{empheq}
@@ -2575,7 +2596,7 @@ Aplicando as equações vetoriais no sistema $\ttN$, temos:
 
 Ou seja:
 \begin{empheq}[box=\mybluebox]{equation} \label{eq:f_i_rot}
-\overline{\mf}_{r \,i} (\mq, \dot{\mq}, \ddot{\mq})  =
+\overline{\mf}_{\ssR_i} (\mq, \dot{\mq}, \ddot{\mq})  =
 -\mI_{r \,i}
 \cdot
 \malpha_{r \,i}
@@ -2600,7 +2621,7 @@ Ou seja
 
 Como os subsistemas estão desacoplados, não há esforços reativos, portanto o modelo dinâmico de cada subsistema rotor pode ser escrito como:
 \begin{empheq}[box=\mybluebox]{equation}\label{eq:fi_plus_fri_rot}
-\overline{\mf}_{r \,i}(\mq, \dot{\mq}, \ddot{\mq}) = \mzr
+\overline{\mf}_{\ssR_i}(\mq, \dot{\mq}, \ddot{\mq}) = \mzr
 \end{empheq}
 
 Além disso, definindo as quasi-coordenadas:
@@ -2610,19 +2631,19 @@ Além disso, definindo as quasi-coordenadas:
 
 Temos que o trabalho virtual associado a cada subsistema é dado por:
 \begin{empheq}[box=\mybluebox]{equation} \label{eq:dWiSeriais_rot}
-\dl W_{r \,i} =  \dl \mpi_{r \,i}^\msT \cdot \overline{\mf}_{r \,i}
+\dl W_{\ssR_i} =  \dl \mpi_{r \,i}^\msT \cdot \overline{\mf}_{\ssR_i}
 \end{empheq}
 
 \subsubsection{Modelo do subsistema serial} 
 
 O modelo do subsistema serial utilizado é o mesmo que foi deduzido anteriormente considerando $\mu = \mzr$. O efeito das forças ativas aplicadas pelos atuadores será contabilizado na próxima subseção. Sendo assim, os esforços generalizados não-reativos do subsistema serial são dados por:
 \begin{empheq}[box=\mybluebox]{equation} \label{eq:fs}
-\overline{\mf}_s(\mq, \dot{\mq}, \ddot{\mq}) = - \mM(\mq) \, \ddot{\mq} - \mnu(\mq,\dot{\mq}) - \mg(\mq)
+\overline{\mf}_\ssS(\mq, \dot{\mq}, \ddot{\mq}) = - \mM(\mq) \, \ddot{\mq} - \mnu(\mq,\dot{\mq}) - \mg(\mq)
 \end{empheq}
 
 Além disso, o trabalho virtual associado a este subsistema é dado por:
 \begin{empheq}[box=\mybluebox]{equation}
-\dl W_s =  \dl \mq^\msT \cdot \overline{\mf}_s
+\dl W_\ssS =  \dl \mq^\msT \cdot \overline{\mf}_\ssS
 \end{empheq}
 
 
@@ -2630,7 +2651,7 @@ Além disso, o trabalho virtual associado a este subsistema é dado por:
 
 Considere também um subsistema constituido pelos esforços que os atuadores aplicam em seus rotores. Os torques gerados pelos atuadores são proporcionais à corrente elétrica que flui pelas suas armaduras e são aplicados na direção dos deslocamentos virtuais relativos dos rotores. Além disso, é possível que hajam esforços de atrito devido ao atrito gerado nos mancais e nas engrenagens do redutor, aplicados na direção aposta aos deslocamentos virtuais relativos dos rotores. Sendo assim, o trabalho virtual associado a este subsistema é dado por:
 \begin{empheq}[box=\mybluebox]{equation}
-\dl W_\tau = \dl \mq_r^\msT \cdot (\underline{k_t}\,\mi - \mzeta )
+\dl W_\ssT = \dl \mq_r^\msT \cdot (\underline{k_t}\,\mi - \mzeta )
 \end{empheq}
 
 Sendo
@@ -2644,7 +2665,7 @@ Considerando modelo de atrito viscoso e atrito seco de Coulomb.
 
 \subsubsection{Vínculos entre subsistemas} 
 
-Tendo em vista que o sistema mecânico $\ssB'$ tem $\nu$ graus de liberdade, e que $\mq$ é uma matriz-culuna de $\nu$ coordenadas generalizadas independentes, podemos relacionar os deslocamentos virtuais $\dl \mq_r$ e $\dl \mpi_{r\,i}$ com os deslocamentos virtuais $\dl \mq$, ou seja, obter os vínculos cinemáticos entre os subsistemas. \\
+Tendo em vista que o sistema mecânico $\ssS'$ tem $\nu$ graus de liberdade, e que $\mq$ é uma matriz-culuna de $\nu$ coordenadas generalizadas independentes, podemos relacionar os deslocamentos virtuais $\dl \mq_r$ e $\dl \mpi_{r\,i}$ com os deslocamentos virtuais $\dl \mq$, ou seja, obter os vínculos cinemáticos entre os subsistemas. \\
 
 Para relacionar $\dl \mq_r$ com $\dl \mq$ basta aplicar o operador variação em  \eqref{eq:qr}:
 \begin{empheq}[box=\mybluebox]{equation} \label{eq:deltaqr_rot}
@@ -2667,27 +2688,27 @@ Tendo em vista que um precedimento mais detalhado para acoplamento de subsistema
 
 Pelo princípio de d'Alembert, temos que
 \begin{empheq}[box=\mybluebox]{equation} \label{eq:PdaSeriais_rot}
-\dl W_\tau + \dl W_s  + \sum_{i=1}^\nu \dl W_{r \,i}  = 0
+\dl W_\ssT + \dl W_\ssS  + \sum_{i=1}^\nu \dl W_{\ssR_i}  = 0
 \end{empheq}
 
 Ou seja:
 \begin{equation} \label{eq:PdaSeriais_rot2}
-\dl\mq_r^\msT \cdot  \Big(\underline{k_t} \, \mi - \mzeta + \dl\mq^\msT \cdot \overline{\mf}_s  + \sum_{i=1}^\nu \dl \mpi_{r \,i}^\msT \cdot \overline{\mf}_{r \,i} \Big) = 0
+\dl\mq_r^\msT \cdot  \Big(\underline{k_t} \, \mi - \mzeta\Big) + \dl\mq^\msT \cdot \overline{\mf}_\ssS  + \sum_{i=1}^\nu \dl \mpi_{r \,i}^\msT \cdot \overline{\mf}_{\ssR_i}  = 0
 \end{equation}
 
 Sabe-se que os deslocamentos virtuais $\dl\mq$, $\dl\mq_r$ e $\dl \mpi_{r \,i}$, com $i=1,...,\nu$, não são independentes entre si. Porém, é possível relacionar  $\dl\mq_r$ e $\dl \mpi_{r \,i}$ com os deslocamentos virtuais $\dl\mq$  através das equações \eqref{eq:deltaqr_rot} e \eqref{eq:deltampi_rot}. Sendo assim:
 \begin{equation} \label{eq:PdaSeriais_rot3}
-(\underline{r}\,\dl\mq)^\msT \cdot \Big(\underline{k_t} \, \mi - \mzeta + \dl\mq^\msT \cdot \overline{\mf}_s  + \sum_{i=1}^\nu (\mJ_{\omega_r \,i} \, \dl\mq)^\msT \cdot \overline{\mf}_{r \,i} \Big) = 0
+(\underline{r}\,\dl\mq)^\msT \cdot \Big(\underline{k_t} \, \mi - \mzeta \Big) + \dl\mq^\msT \cdot \overline{\mf}_\ssS  + \sum_{i=1}^\nu (\mJ_{\omega_r \,i} \, \dl\mq)^\msT \cdot \overline{\mf}_{\ssR_i}  = 0
 \end{equation}
 
 Ou seja:
 \begin{equation} \label{eq:PdaSeriais_rot4}
-\dl\mq^\msT \cdot \Bigg( \underline{r} \, \underline{k_t} \, \mi - \mzeta + \overline{\mf}_s  + \sum_{i=1}^\nu \mJ_{\omega_r \,i}^\msT \, \overline{\mf}_{r \,i} \Bigg) = 0
+\dl\mq^\msT \cdot \Bigg( \underline{r} \, \underline{k_t} \, \mi - \underline{r} \mzeta + \overline{\mf}_\ssS  + \sum_{i=1}^\nu \mJ_{\omega_r \,i}^\msT \, \overline{\mf}_{\ssR_i} \Bigg) = 0
 \end{equation}
 
 Tendo em vista que as coordenadas $\mq$ são independentes, as variações $\dl\mq$ são arbitrárias. Sendo assim, as equações dinâmicas do sistema são dadas por:
 \begin{equation} \label{eq:Din_rot1}
-\underline{r} \, \underline{k_t} \, \mi - \underline{r} \, \mzeta + \overline{\mf}_s  + \sum_{i=1}^\nu \mJ_{\omega_r \,i}^\msT \, \overline{\mf}_{r \,i}  = \mzr
+\underline{r} \, \underline{k_t} \, \mi - \underline{r} \, \mzeta + \overline{\mf}_\ssS  + \sum_{i=1}^\nu \mJ_{\omega_r \,i}^\msT \, \overline{\mf}_{\ssR_i}  = \mzr
 \end{equation}
 
 Substituindo \eqref{eq:f_i_rot} e \eqref{eq:fs} em  \eqref{eq:Din_rot1}, temos:
@@ -2749,15 +2770,15 @@ Para a obtenção do modelo do mecanismo paralelos, são necessários apenas os 
 
 Para realizar a modelagem de mecanismos paralelos a partir de subsistemas seriais j\'a deduzidos, \'e necess\'ario introduzir mais alguns conceitos: \\
 
-Sejam $\ssB_0$, $\ssB_1$, ..., $\ssB_{n} \,$ $n+1$ subsistemas mec\^anicos e $\ssM$ um sistema mec\^anico de $\nu\ssh$ graus de liberdade gerado pelo acoplamento dos subsistemas citados. Definimos:
+Sejam $\ssS_0$, $\ssS_1$, ..., $\ssS_{n} \,$ $n+1$ subsistemas mec\^anicos e $\ssP$ um sistema mec\^anico de $\nu\ssh$ graus de liberdade gerado pelo acoplamento dos subsistemas citados. Definimos:
 
 \begin{itemize}
-\item $\ssB_0$: Subsistema plataforma/efetuador do manipulador paralelo.
-\item $\ssB_i, \, i=1,...,n$: i-ésimo subsistema serial.
+\item $\ssS_0$ ou $\ssX$: Subsistema plataforma/efetuador do manipulador paralelo.
+\item $\ssS_i, \, i=1,...,n$: i-ésimo subsistema serial.
 \item $\llX_0$: Corpo rígido plataforma/efetuador do manipulador paralelo.
-\item $\llX_i, \, i=1,...,n$: Corpo rígido efetuador do subsistema serial $\ssB_i$.
+\item $\llX_i, \, i=1,...,n$: Corpo rígido efetuador do subsistema serial $\ssS_i$.
 %\item $\llN$: referencial inercial.
-\item $\ttN_i, \, i=0,...,n$: sistema de coordenadas da base fixa do subsistema $\ssB_i$, solidário a $\llN$.
+\item $\ttN_i, \, i=0,...,n$: sistema de coordenadas da base fixa do subsistema $\ssS_i$, solidário a $\llN$.
 %\item $\tto_i, \,i=0,...,n$: origem do sistema $\ttN_i$.
 %\item $\ttg$: centro de massa da plataforma/efetuador $\llB_0$.
 \item $\ttx_0$: ponto no espa\c{c}o fixo ao centro de massa de $\llX_0$.
@@ -2769,37 +2790,37 @@ Sejam $\ssB_0$, $\ssB_1$, ..., $\ssB_{n} \,$ $n+1$ subsistemas mec\^anicos e $\s
 %\item $\vf$: Vetor de forças não-reativas (ativas e inerciais) aplicadas no centro de massa da plataforma/efetuador $\llB_0$.
 %\item $\vg$: Vetor aceleração gravitacional.
 \item $\mgamma$: Vetor aceleração gravitacional escrito na base $\ttN_0$, ou seja, $\vct{\vgamma}_{\ttN_0}$.
-\item $\mq_0$: matriz-coluna de coordenadas generalizadas do subsistema $\ssB_0$. São as coordenadas do centro de massa da plataforma/efetuador $\llX_0$ no sistema $\ttN_0$, ou seja $\vct{\ttx_0}_{\ttN_0}$.
-\item $\mq_i, \,i=1, ..., n$: matriz-coluna de coordenadas generalizadas do subsistema $\ssB_i$.
-%\item $\mx^\ast$: matriz-coluna de coordenadas generalizadas de posição da plataforma/efetuador $\ssB_0$.
-%\item $\mtheta^\ast$: matriz-coluna de coordenadas generalizadas de orientação da plataforma/efetuador $\ssB_0$.
-%\item $\mq^\ast$: matriz-coluna de coordenadas generalizadas da plataforma/efetuador $\ssB_0$. %Definida como $\mq^\ast = \mq_0 = \begin{bmatrix} {\mx^\ast}^\msT & {\mtheta^\ast}^\msT \end{bmatrix}^\msT $.
+\item $\mq_0$: matriz-coluna de coordenadas generalizadas do subsistema $\ssS_0$. São as coordenadas do centro de massa da plataforma/efetuador $\llX_0$ no sistema $\ttN_0$, ou seja $\vct{\ttx_0}_{\ttN_0}$.
+\item $\mq_i, \,i=1, ..., n$: matriz-coluna de coordenadas generalizadas do subsistema $\ssS_i$.
+%\item $\mx^\ast$: matriz-coluna de coordenadas generalizadas de posição da plataforma/efetuador $\ssS_0$.
+%\item $\mtheta^\ast$: matriz-coluna de coordenadas generalizadas de orientação da plataforma/efetuador $\ssS_0$.
+%\item $\mq^\ast$: matriz-coluna de coordenadas generalizadas da plataforma/efetuador $\ssS_0$. %Definida como $\mq^\ast = \mq_0 = \begin{bmatrix} {\mx^\ast}^\msT & {\mtheta^\ast}^\msT \end{bmatrix}^\msT $.
 \item $\mq_\emptyset$: matriz-coluna de coordenadas generalizadas dos subsistemas seriais. Definida como $\mq_\emptyset = \begin{bmatrix}  {\mq_1}^\msT & ... & {\mq_{n}}^\msT \end{bmatrix}^\msT $.
-\item $\mq$: matriz-coluna contendo todas as coordenadas generalizadas do sistema $\ssM$. Definida como $\mq = \begin{bmatrix} {\mq_0}^\msT & {\mq_\emptyset}^\msT \end{bmatrix}^\msT $.
-%\item $\mp_i, \,i=0, ..., n$: matriz-coluna de quasi-velocidades do subsistema $\ssB_i$.
-%\item $\momega^\ast$: matriz-coluna de componentes de velocidade angular da plataforma/efetuador $\ssB_0$.
-%\item $\mp^\ast$: matriz-coluna de quasi-velocidades da plataforma/efetuador $\ssB_0$. Definida como $\mp^\ast = \mp_0 = \begin{bmatrix} {\dot{\mx}^\ast}^\msT & {\momega^\ast}^\msT \end{bmatrix}^\msT $.
+\item $\mq$: matriz-coluna contendo todas as coordenadas generalizadas do sistema $\ssP$. Definida como $\mq = \begin{bmatrix} {\mq_0}^\msT & {\mq_\emptyset}^\msT \end{bmatrix}^\msT $.
+%\item $\mp_i, \,i=0, ..., n$: matriz-coluna de quasi-velocidades do subsistema $\ssS_i$.
+%\item $\momega^\ast$: matriz-coluna de componentes de velocidade angular da plataforma/efetuador $\ssS_0$.
+%\item $\mp^\ast$: matriz-coluna de quasi-velocidades da plataforma/efetuador $\ssS_0$. Definida como $\mp^\ast = \mp_0 = \begin{bmatrix} {\dot{\mx}^\ast}^\msT & {\momega^\ast}^\msT \end{bmatrix}^\msT $.
 %\item $\mp^\diamond$: matriz-coluna de quasi-velocidades dos subsistemas seriais. Definida como $\mp^\diamond = \dot{\mq}^\diamond $.
-%\item $\mp$: matriz-coluna contendo todas as quasi-velocidades do sistema $\ssM$. Definida como $\mp = \begin{bmatrix} {\mp^\ast}^\msT & {\mp^\diamond}^\msT \end{bmatrix}^\msT $.
-\item $\mq\ssh$: matriz-coluna de $\nu\ssh$ coordenadas generalizadas independentes.
-\item $\mq\cir$: matriz-coluna de coordenadas generalizadas redundantes (contém as componentes de $\mq$ não pertencentes a $\mq\ssh$)
+%\item $\mp$: matriz-coluna contendo todas as quasi-velocidades do sistema $\ssP$. Definida como $\mp = \begin{bmatrix} {\mp^\ast}^\msT & {\mp^\diamond}^\msT \end{bmatrix}^\msT $.
+%\item $\mq\ssh$: matriz-coluna de $\nu\ssh$ coordenadas generalizadas independentes.
+%\item $\mq\cir$: matriz-coluna de coordenadas generalizadas redundantes (contém as componentes de $\mq$ não pertencentes a $\mq\ssh$)
 \item $\overline{\mx}(\mq)$: matriz-coluna dos vínculos de posição entre subsistemas. As equações vinculares são dadas por $\overline{\mx}(\mq) = \mzr $.
 \item $\overline{\breve{\mx}}(\mq)$: matriz-coluna dos vínculos de orientação entre subsistemas. As equações vinculares são dadas por $\overline{\breve{\mx}}(\mq) = \mzr $.
 \item $\overline{\mq}(\mq)$: matriz-coluna dos vínculos de coordenadas generalizadas entre subsistemas. As equações vinculares são dadas por $\overline{\mq}(\mq) = \mzr $.
 %\item $\overline{\momega}(\mq,\dot{\mq})$: matriz-coluna dos v\'inculos de velocidades angulares entre subsistemas. As equa\c{c}\~oes vinculares s\~ao dadas por $\overline{\momega}(\mq,\dot{\mq}) = \mzr $.
 \item $\mx_i(\mq_i), \,i=1, ..., n$: $\vct{\ttx_i}_{\ttN_i}$ escrito em função das coordenadas $\mq_i$.
-\item $\mJ_{v\,\ssB_i}(\mq_i), \,i=1, ..., n$: jacobiano de velocidades $\mJ_v$ do subsistema $\ssB_i$.
-\item $\mJ_{\omega\,\ssB_i}(\mq_i), \,i=1, ..., n$: jacobiano de velocidades angulares $\mJ_\omega$ do subsistema $\ssB_i$.
-\item $\underaccent{\sim}{\ma}_{\ssB_i}(\mq_i, \dot{\mq}_i), \,i=1, ..., n$: matriz-coluna $\underaccent{\sim}{\ma}$ do subsistema $\ssB_i$.
-\item $\underaccent{\sim}{\malpha}_{\ssB_i}(\mq_i, \dot{\mq}_i), \,i=1, ..., n$: matriz-coluna $\underaccent{\sim}{\malpha}$ do subsistema $\ssB_i$.
-\item $\mv_{\ssB_i}(\mq_i, \dot{\mq}_i), \,i=1, ..., n$: $\vct{\vv_{\ttx_i}^{\lllN}}_{\ttN_i} = \mJ_{v\,\ssB_i}(\mq_i) \cdot \dot{\mq}_i$, ou seja matriz-coluna de componentes velocidade do efetuador $\llX_i$.
-\item $\momega_{\ssB_i}(\mq_i, \dot{\mq}_i), \,i=1, ..., n$: $\vct{\vomega_{\lllB_i}^{\lllN}}_{\ttN_i} = \mJ_{\omega\,\ssB_i}(\mq_i) \cdot \dot{\mq}_i$, ou seja matriz-coluna de componentes velocidade angular do efetuador $\llX_i$.
-\item $\mM_{\ssB_i}(\mq_i), \,i=0, ..., n$: matriz de in\'ercia generalizada do subsistema $\ssB_i$.
-\item $\mnu_{\ssB_i}(\mq_i, \dot{\mq}_i), \,i=0, ..., n$: matriz-coluna dos esforços de inércia girosc\'opica e atrito generalizados do subsistema $\ssB_i$.
-\item $\mg_{\ssB_i}(\mq_i), \,i=0, ..., n$: matriz-coluna dos esfor\c{c}os gravitacionais generalizados do subsistema $\ssB_i$.
-\item $\mu_{\ssB_i}, \,i=0, ..., n$: matriz-coluna dos esfor\c{c}os ativos externos generalizados aplicados ao subsistema $\ssB_i$.
+\item $\mJ_{v\,\ssS_i}(\mq_i), \,i=1, ..., n$: jacobiano de velocidades $\mJ_v$ do subsistema $\ssS_i$.
+\item $\mJ_{\omega\,\ssS_i}(\mq_i), \,i=1, ..., n$: jacobiano de velocidades angulares $\mJ_\omega$ do subsistema $\ssS_i$.
+\item $\underaccent{\sim}{\ma}_{\ssS_i}(\mq_i, \dot{\mq}_i), \,i=1, ..., n$: matriz-coluna $\underaccent{\sim}{\ma}$ do subsistema $\ssS_i$.
+\item $\underaccent{\sim}{\malpha}_{\ssS_i}(\mq_i, \dot{\mq}_i), \,i=1, ..., n$: matriz-coluna $\underaccent{\sim}{\malpha}$ do subsistema $\ssS_i$.
+\item $\mv_{\ssS_i}(\mq_i, \dot{\mq}_i), \,i=1, ..., n$: $\vct{\vv_{\ttx_i}^{\lllN}}_{\ttN_i} = \mJ_{v\,\ssS_i}(\mq_i) \cdot \dot{\mq}_i$, ou seja matriz-coluna de componentes velocidade do efetuador $\llX_i$.
+\item $\momega_{\ssS_i}(\mq_i, \dot{\mq}_i), \,i=1, ..., n$: $\vct{\vomega_{\lllB_i}^{\lllN}}_{\ttN_i} = \mJ_{\omega\,\ssS_i}(\mq_i) \cdot \dot{\mq}_i$, ou seja matriz-coluna de componentes velocidade angular do efetuador $\llX_i$.
+\item $\mM_{\ssS_i}(\mq_i), \,i=0, ..., n$: matriz de in\'ercia generalizada do subsistema $\ssS_i$.
+\item $\mnu_{\ssS_i}(\mq_i, \dot{\mq}_i), \,i=0, ..., n$: matriz-coluna dos esforços de inércia girosc\'opica e atrito generalizados do subsistema $\ssS_i$.
+\item $\mg_{\ssS_i}(\mq_i), \,i=0, ..., n$: matriz-coluna dos esfor\c{c}os gravitacionais generalizados do subsistema $\ssS_i$.
+\item $\mu_{\ssS_i}, \,i=0, ..., n$: matriz-coluna dos esfor\c{c}os ativos externos generalizados aplicados ao subsistema $\ssS_i$.
 \item $\breve{\mx}_0$: representação via quaternion unitário da matriz de rotação $\vct{\vone}_{\ttN_0 \rl \ttX_0}$ (orientação do efetuador/plataforma do mecanismo paralelos).
-\item $\breve{\mx}_i, \,i=1, ..., n$: representação via quaternion unitário da matriz de rotação $\vct{\vone}_{\ttN_i \rl \ttX_i}$ (orientação do efetuador da cadeia serial $\ssB_i$).
+\item $\breve{\mx}_i, \,i=1, ..., n$: representação via quaternion unitário da matriz de rotação $\vct{\vone}_{\ttN_i \rl \ttX_i}$ (orientação do efetuador da cadeia serial $\ssS_i$).
 \item $\breve{\mn}_i, \,i=1, ..., n$: representação via quaternion unitário da matriz de rotação $\vct{\vone}_{\ttN_0 \rl \ttN_i}$.
 \item $\breve{\mx}'_i, \,i=1, ..., n$: representação via quaternion unitário da matriz de rotação $\vct{\vone}_{\ttX_i \rl \ttX_0}$.
 \end{itemize}
@@ -2813,7 +2834,7 @@ Algumas equações serão destacadas através de cores. A cor amarela indica equ
 O modelo dinâmico de cada subsistema desacoplado pode ser escrito como:
 
 \begin{empheq}[box=\mybluebox]{equation} \label{eq:ModeloDosSubsistemas}
-\overline{\mf}_{\ssB_i}(\mu_i, \mq_i, \dot{\mq}_i, \ddot{\mq}_i) =  \mu_{\ssB_i} - \Big(\mM_{\ssB_i}(\mq_i) \, \ddot{\mq}_i + \mnu_{\ssB_i}(\mq_i,\dot{\mq}_i) + \mg_{\ssB_i}(\mq_i)\Big) = \mzr, \, i = 0,...,n
+\overline{\mf}_{\ssS_i}(\mu_i, \mq_i, \dot{\mq}_i, \ddot{\mq}_i) =  \mu_{\ssS_i} - \Big(\mM_{\ssS_i}(\mq_i) \, \ddot{\mq}_i + \mnu_{\ssS_i}(\mq_i,\dot{\mq}_i) + \mg_{\ssS_i}(\mq_i)\Big) = \mzr, \, i = 0,...,n
 \end{empheq}
 
 Sendo que para $i=0$ temos o modelo do efetuador/plataforma e para $i>0$ temos os modelos dos mecanismos seriais obtidos anteriormente. \\
@@ -2821,10 +2842,10 @@ Sendo que para $i=0$ temos o modelo do efetuador/plataforma e para $i>0$ temos o
 
 O trabalho virtual dos esforços não-reativos (ativos e inerciais) associado a cada subsistema é dado por:
 \begin{empheq}[box=\mybluebox]{equation}
-\dl W_i = \dl \mq_i^\msT \cdot \overline{\mf}_{\ssB_i}, \, i = 0,...,n
+\dl W_{\ssS_i} = \dl \mq_i^\msT \cdot \overline{\mf}_{\ssS_i}, \, i = 0,...,n
 \end{empheq}
 
-Para os subsistemas seriais, as matrizes $\mM_{\ssB_i}$, $\mnu_{\ssB_i}$ e $\mg_{\ssB_i}$ são obtidas utilizando o algoritmo de modelagem de mecanismos seriais apresentado anteriormente. Para o efetuador, iremos utilizar o modelo de um corpo rígido livre no espaço, que realiza apenas translação. Sendo assim, aplicando Teorema do Movimento do Baricentro no efetuador, obtemos os esforços não-reativos  nele aplicados:
+Para os subsistemas seriais, as matrizes $\mM_{\ssS_i}$, $\mnu_{\ssS_i}$ e $\mg_{\ssS_i}$ são obtidas utilizando o algoritmo de modelagem de mecanismos seriais apresentado anteriormente. Para o efetuador, iremos utilizar o modelo de um corpo rígido livre no espaço, que realiza apenas translação. Sendo assim, aplicando Teorema do Movimento do Baricentro no efetuador, obtemos os esforços não-reativos  nele aplicados:
 
 %\begin{equation} \label{eq:Newton-EulerE}
 %\begin{cases}
@@ -2892,39 +2913,39 @@ Ou seja
 %\mzr
 %\end{equation}
 \begin{empheq}[box=\mybluebox]{equation} \label{eq:Newton-EulerMat2E}
-\overline{\mf}_{\ssB_0} (\mq, \dot{\mq}, \ddot{\mq})= -m \ddot{\mq}_0 + m \mgamma
+\overline{\mf}_{\ssS_0} (\mq, \dot{\mq}, \ddot{\mq})= -m \ddot{\mq}_0 + m \mgamma
 \end{empheq}
 
 Portanto:
 %\begin{equation}
-%\mM_{\ssB_0}(\mq_0) = 
+%\mM_{\ssS_0}(\mq_0) = 
 %\begin{bmatrix}
 %m \mone & \mzr \\
 %\mzr      & \mI(\mtheta^\ast)
 %\end{bmatrix}
 %\end{equation}
 \begin{empheq}[box=\myyellowbox]{equation} \label{eq:M_efetuador}
-\mM_{\ssB_0} = m \mone
+\mM_{\ssS_0} = m \mone
 \end{empheq}
 %\begin{equation}
-%\mnu_{\ssB_0}(\mq_0, \mp_0) = 
+%\mnu_{\ssS_0}(\mq_0, \mp_0) = 
 %\begin{bmatrix}
 %\mzr \\
 %\malpha^\ast \wedge \big(\mI(\mtheta^\ast) \cdot \malpha^\ast \big)
 %\end{bmatrix}
 %\end{equation}
 \begin{empheq}[box=\myyellowbox]{equation} \label{eq:v_efetuador}
-\mnu_{\ssB_0} = \mzr
+\mnu_{\ssS_0} = \mzr
 \end{empheq}
 %\begin{equation}
-%\mg_{\ssB_0}(\mq_0) = 
+%\mg_{\ssS_0}(\mq_0) = 
 %\begin{bmatrix}
 %-m \mgamma \\
 %\mzr
 %\end{bmatrix}
 %\end{equation}
 \begin{empheq}[box=\myyellowbox]{equation} \label{eq:g_efetuador}
-\mg_{\ssB_0} = -m \mgamma
+\mg_{\ssS_0} = -m \mgamma
 \end{empheq}
 
 
@@ -2933,7 +2954,7 @@ Portanto:
 
 \subsection{Vínculos de posição} 
 
-Seja $\ttx_i$ um ponto pertencente à plataforma/efetuador $\llX_0$ e também ao efetuador $\llX_i$. Sendo assim, é possível relacionar a posição do ponto $\ttx_i$ em relação a $\tto_{\ttN_0}$, seguindo tanto pela da plataforma/efetuador $\ssB_0$, quanto pela cadeia serial $\ssB_i$:
+Seja $\ttx_i$ um ponto pertencente à plataforma/efetuador $\llX_0$ e também ao efetuador $\llX_i$. Sendo assim, é possível relacionar a posição do ponto $\ttx_i$ em relação a $\tto_{\ttN_0}$, seguindo tanto pela da plataforma/efetuador $\ssS_0$, quanto pela cadeia serial $\ssS_i$:
 \begin{equation}
 \vr_{\tto_{\tttN_0} \rl \ttx_i} = \vr_{\tto_{\tttN_0} \rl \ttx_0} + \vr_{\ttx_0 \rl \ttx_i} = \vr_{\tto_{\tttN_0} \rl \tto_{\tttN_i}} + \vr_{\tto_{\tttN_i} \rl \ttx_i}
 \end{equation}
@@ -3340,9 +3361,9 @@ A derivada $\dot{\mx}$ pode ser obtida da seguinte maneira:
 \mx_n(\mq_n)
 \end{bmatrix} =
 \begin{bmatrix}
-\mJ_{v\,\ssB_1}(\mq_1) \cdot \dot{\mq}_1 \\
+\mJ_{v\,\ssS_1}(\mq_1) \cdot \dot{\mq}_1 \\
 \vdots \\
-\mJ_{v\,\ssB_n}(\mq_n) \cdot \dot{\mq}_n
+\mJ_{v\,\ssS_n}(\mq_n) \cdot \dot{\mq}_n
 \end{bmatrix}
 =
 \mJ_v^\star(\mq_\emptyset) \cdot \dot{\mq}_\emptyset
@@ -3352,9 +3373,9 @@ Sendo:
 \begin{empheq}[box=\myyellowbox]{equation}
 \mJ_v^\star(\mq_\emptyset) =
 \begin{bmatrix}
-\mJ_{v\,\ssB_1}(\mq_1) & \ldots & \mzr\\
+\mJ_{v\,\ssS_1}(\mq_1) & \ldots & \mzr\\
 \vdots & \ddots & \vdots\\
-\mzr &\ldots  & \mJ_{v\,\ssB_n}(\mq_n)
+\mzr &\ldots  & \mJ_{v\,\ssS_n}(\mq_n)
 \end{bmatrix}
 \end{empheq}
 
@@ -3403,15 +3424,15 @@ Assim, substituindo \eqref{eq:dxdt} em \eqref{eq:VinculosGenericosVel}, obtemos:
 Derivando \eqref{eq:VinculosOrientacao} no tempo, temos:
 \begin{equation} 
 \dot{\overline{\breve{\mx}}}(\mq, \dot{\mq}) = \begin{bmatrix}
-\breve{\mC}^\msT(\breve{\mx}_0) \cdot \breve{\mQ}_1 \cdot \breve{\mC}(\breve{\mx}_1(\mq_1)) \cdot \momega_{\ssB_1}(\mq_1, \dot{\mq}_1) \\
+\breve{\mC}^\msT(\breve{\mx}_0) \cdot \breve{\mQ}_1 \cdot \breve{\mC}(\breve{\mx}_1(\mq_1)) \cdot \momega_{\ssS_1}(\mq_1, \dot{\mq}_1) \\
 \vdots \\
-\breve{\mC}^\msT(\breve{\mx}_0) \cdot \breve{\mQ}_n \cdot \breve{\mC}(\breve{\mx}_n(\mq_n)) \cdot \momega_{\ssB_n}(\mq_n, \dot{\mq}_n)
+\breve{\mC}^\msT(\breve{\mx}_0) \cdot \breve{\mQ}_n \cdot \breve{\mC}(\breve{\mx}_n(\mq_n)) \cdot \momega_{\ssS_n}(\mq_n, \dot{\mq}_n)
 \end{bmatrix} = \mzr
 \end{equation}
 
 Tendo em vista que
 \begin{equation}
-\momega_{\ssB_i}(\mq_i, \dot{\mq}_i) = \mJ_{\omega\,\ssB_i}(\mq_i) \cdot \dot{\mq}_i
+\momega_{\ssS_i}(\mq_i, \dot{\mq}_i) = \mJ_{\omega\,\ssS_i}(\mq_i) \cdot \dot{\mq}_i
 \end{equation}
 
 E definindo
@@ -3422,9 +3443,9 @@ E definindo
 Temos:
 \begin{equation*}
 \dot{\overline{\breve{\mx}}}(\mq, \dot{\mq}) = \begin{bmatrix}
-\mG_1 (\mq_1) \cdot \mJ_{\omega\,\ssB_1}(\mq_1) \cdot \dot{\mq}_1  \\
+\mG_1 (\mq_1) \cdot \mJ_{\omega\,\ssS_1}(\mq_1) \cdot \dot{\mq}_1  \\
 \vdots \\
-\mG_n (\mq_n) \cdot \mJ_{\omega\,\ssB_n}(\mq_n) \cdot \dot{\mq}_n
+\mG_n (\mq_n) \cdot \mJ_{\omega\,\ssS_n}(\mq_n) \cdot \dot{\mq}_n
 \end{bmatrix}
 \end{equation*}
 \begin{equation} \label{eq:dVinculosOrientacao}
@@ -3434,9 +3455,9 @@ Temos:
 \mzr &\ldots  & \mG_n (\mq_n)
 \end{bmatrix}
 \begin{bmatrix}
-\mJ_{\omega\,\ssB_1}(\mq_1) & \ldots & \mzr\\
+\mJ_{\omega\,\ssS_1}(\mq_1) & \ldots & \mzr\\
 \vdots & \ddots & \vdots\\
-\mzr &\ldots  & \mJ_{\omega\,\ssB_n}(\mq_n)
+\mzr &\ldots  & \mJ_{\omega\,\ssS_n}(\mq_n)
 \end{bmatrix}
 \begin{bmatrix}
 \dot{\mq}_1 \\
@@ -3463,9 +3484,9 @@ Sendo:
 \begin{empheq}[box=\myyellowbox]{equation}
 \mJ_\omega^\star(\mq_\emptyset) =
 \begin{bmatrix}
-\mJ_{\omega\,\ssB_1}(\mq_1) & \ldots & \mzr\\
+\mJ_{\omega\,\ssS_1}(\mq_1) & \ldots & \mzr\\
 \vdots & \ddots & \vdots\\
-\mzr &\ldots  & \mJ_{\omega\,\ssB_n}(\mq_n)
+\mzr &\ldots  & \mJ_{\omega\,\ssS_n}(\mq_n)
 \end{bmatrix}
 \end{empheq}
 
@@ -3476,10 +3497,10 @@ Sendo:
 %\vomega^{\lllN}_{\lllB_i} = \vomega^{\lllN}_{\lllB_0} = \vzr  , \; i = 1, ... , n
 %\end{equation}
 
-%Sabe-se que $\vct{\vomega^{\lllN}_{\lllB_0}}_{\ttN_i} =  \mJ_{\omega\,\ssB_i}(\mq_i) \cdot \dot{\mq}_i$. Sendo assim, temos:
+%Sabe-se que $\vct{\vomega^{\lllN}_{\lllB_0}}_{\ttN_i} =  \mJ_{\omega\,\ssS_i}(\mq_i) \cdot \dot{\mq}_i$. Sendo assim, temos:
 
 %\begin{equation}
-%\mJ_{\omega\,\ssB_i}(\mq_i) \cdot \dot{\mq}_i = \mzr, \, i = 1,...,n
+%\mJ_{\omega\,\ssS_i}(\mq_i) \cdot \dot{\mq}_i = \mzr, \, i = 1,...,n
 %\end{equation}
 
 %Assim:
@@ -3496,9 +3517,9 @@ Sendo:
 %%\end{bmatrix}
 %%\cdot
 %%\begin{bmatrix}
-%%\mJ_{\omega\,\ssB_1}(\mq_1) & \ldots & \mzr\\
+%%\mJ_{\omega\,\ssS_1}(\mq_1) & \ldots & \mzr\\
 %%\vdots & \ddots & \vdots\\
-%%\mzr &\ldots  & \mJ_{\omega\,\ssB_n}(\mq_n)
+%%\mzr &\ldots  & \mJ_{\omega\,\ssS_n}(\mq_n)
 %%\end{bmatrix}
 %%\begin{bmatrix}
 %%\dot{\mq}_1 \\
@@ -3508,9 +3529,9 @@ Sendo:
 %%\end{equation}
 %\begin{equation} \label{eq:VinculosVelAng}
 %\begin{bmatrix}
-%\mJ_{\omega\,\ssB_1}(\mq_1) & \ldots & \mzr\\
+%\mJ_{\omega\,\ssS_1}(\mq_1) & \ldots & \mzr\\
 %\vdots & \ddots & \vdots\\
-%\mzr &\ldots  & \mJ_{\omega\,\ssB_n}(\mq_n)
+%\mzr &\ldots  & \mJ_{\omega\,\ssS_n}(\mq_n)
 %\end{bmatrix}
 %\begin{bmatrix}
 %\dot{\mq}_1 \\
@@ -3538,9 +3559,9 @@ Sendo:
 %\begin{equation} \label{eq:VinculosGenericosVelocidadesAngulares}
 %\mJ_\omega^\star(\mq_\emptyset) =
 %\begin{bmatrix}
-%\mJ_{\omega\,\ssB_1}(\mq_1) & \ldots & \mzr\\
+%\mJ_{\omega\,\ssS_1}(\mq_1) & \ldots & \mzr\\
 %\vdots & \ddots & \vdots\\
-%\mzr &\ldots  & \mJ_{\omega\,\ssB_n}(\mq_n)
+%\mzr &\ldots  & \mJ_{\omega\,\ssS_n}(\mq_n)
 %\end{bmatrix}
 %\end{equation}
 
@@ -3644,27 +3665,27 @@ Os vínculos de quasi-velocidades são dados pela derivada temporal dos vínculo
 Sendo:
 %\begin{equation}
 %\underaccent{\sim}{\ma}(\mq, \mp) = \begin{bmatrix}
-%\underaccent{\sim}{\ma}_{\ssB_1}(\mq, \mp)(\mq_1,\mp_1)^\msT & ... & \underaccent{\sim}{\ma}_{\ssB_n}(\mq, \mp)(\mq_n,\mp_n)^\msT
+%\underaccent{\sim}{\ma}_{\ssS_1}(\mq, \mp)(\mq_1,\mp_1)^\msT & ... & \underaccent{\sim}{\ma}_{\ssS_n}(\mq, \mp)(\mq_n,\mp_n)^\msT
 %\end{bmatrix}^\msT
 %\end{equation}
 %\begin{equation}
 %\underaccent{\sim}{\malpha}(\mq, \mp) = \begin{bmatrix}
-%\underaccent{\sim}{\malpha}_{\ssB_1}(\mq, \mp)(\mq_1,\mp_1)^\msT & ... & \underaccent{\sim}{\malpha}_{\ssB_n}(\mq, \mp)(\mq_n,\mp_n)^\msT
+%\underaccent{\sim}{\malpha}_{\ssS_1}(\mq, \mp)(\mq_1,\mp_1)^\msT & ... & \underaccent{\sim}{\malpha}_{\ssS_n}(\mq, \mp)(\mq_n,\mp_n)^\msT
 %\end{bmatrix}^\msT
 %\end{equation}
 \begin{empheq}[box=\myyellowbox]{equation}
 \underaccent{\sim}{\ma}^\star(\mq_\emptyset, \dot{\mq}_\emptyset) = \begin{bmatrix}
-\underaccent{\sim}{\ma}_{\ssB_1}(\mq_1, \dot{\mq}_1)^\msT & ... & \underaccent{\sim}{\ma}_{\ssB_n}(\mq_n, \dot{\mq}_n)^\msT
+\underaccent{\sim}{\ma}_{\ssS_1}(\mq_1, \dot{\mq}_1)^\msT & ... & \underaccent{\sim}{\ma}_{\ssS_n}(\mq_n, \dot{\mq}_n)^\msT
 \end{bmatrix}^\msT
 \end{empheq}
 \begin{empheq}[box=\myyellowbox]{equation}
 \underaccent{\sim}{\malpha}^\star(\mq_\emptyset, \dot{\mq}_\emptyset) = \begin{bmatrix}
-\underaccent{\sim}{\malpha}_{\ssB_1}(\mq_1, \dot{\mq}_1)^\msT & ... & \underaccent{\sim}{\malpha}_{\ssB_n}(\mq_n, \dot{\mq}_n)^\msT
+\underaccent{\sim}{\malpha}_{\ssS_1}(\mq_1, \dot{\mq}_1)^\msT & ... & \underaccent{\sim}{\malpha}_{\ssS_n}(\mq_n, \dot{\mq}_n)^\msT
 \end{bmatrix}^\msT
 \end{empheq}
 \begin{empheq}[box=\myyellowbox]{equation}
 \momega^\star(\mq_\emptyset, \dot{\mq}_\emptyset) = \mJ_\omega^\star(\mq_\emptyset) \cdot \dot{\mq}_\emptyset = \begin{bmatrix}
-\momega_{\ssB_1}(\mq_1, \dot{\mq}_1)^\msT & ... & \momega_{\ssB_n}(\mq_n, \dot{\mq}_n)^\msT
+\momega_{\ssS_1}(\mq_1, \dot{\mq}_1)^\msT & ... & \momega_{\ssS_n}(\mq_n, \dot{\mq}_n)^\msT
 \end{bmatrix}^\msT
 \end{empheq}
 
@@ -3678,7 +3699,7 @@ Sendo:
 \end{empheq}
 
 \begin{empheq}[box=\myyellowbox]{equation}
-\dot{\mG}_i (\mq_i, \dot{\mq}_i) = \breve{\mC}^\msT(\breve{\mx}_0) \cdot \breve{\mQ}_i \cdot \breve{\mC}\big( \breve{\mC}( \breve{\mx}_i ) \cdot \momega_{\ssB_i} \big)
+\dot{\mG}_i (\mq_i, \dot{\mq}_i) = \breve{\mC}^\msT(\breve{\mx}_0) \cdot \breve{\mQ}_i \cdot \breve{\mC}\big( \breve{\mC}( \breve{\mx}_i ) \cdot \momega_{\ssS_i} \big)
 \end{empheq}
 
 Repare que \eqref{eq:VinculosQuasiAce} pode ser reescrita como:
@@ -3716,35 +3737,35 @@ Seja $\mf$ a matriz-coluna contendo todos os sistemas de forças não-reativas g
 \begin{equation} \label{eq:fParalelos}
 \mf = 
 \begin{bmatrix}
-\overline{\mf}_{\ssB_0} \\
+\overline{\mf}_{\ssS_0} \\
 \vdots \\
-\overline{\mf}_{\ssB_n}  
+\overline{\mf}_{\ssS_n}  
 \end{bmatrix}
 =
 \begin{bmatrix}
-\mu_{\ssB_0} \\
+\mu_{\ssS_0} \\
 \vdots \\
-\mu_{\ssB_n} 
+\mu_{\ssS_n} 
 \end{bmatrix}
 -
 \begin{bmatrix}
-\mM_{\ssB_0}(\mq_0) & \ldots & \mzr\\
+\mM_{\ssS_0}(\mq_0) & \ldots & \mzr\\
 \vdots & \ddots & \vdots\\
-\mzr &\ldots  & \mM_{\ssB_n}(\mq_n)
+\mzr &\ldots  & \mM_{\ssS_n}(\mq_n)
 \end{bmatrix}
 \cdot
 \ddot{\mq} \;
 -
 \begin{bmatrix}
-\mnu_{\ssB_0}(\mq_0,\dot{\mq}_0) \\
+\mnu_{\ssS_0}(\mq_0,\dot{\mq}_0) \\
 \vdots \\
-\mnu_{\ssB_n}(\mq_n,\dot{\mq}_n)  
+\mnu_{\ssS_n}(\mq_n,\dot{\mq}_n)  
 \end{bmatrix}
 -
 \begin{bmatrix}
-\mg_{\ssB_0}(\mq_0) \\
+\mg_{\ssS_0}(\mq_0) \\
 \vdots \\
-\mg_{\ssB_n}(\mq_0)  
+\mg_{\ssS_n}(\mq_0)  
 \end{bmatrix}
 \end{equation}
 
@@ -3752,33 +3773,33 @@ Definindo:
 \begin{empheq}[box=\myyellowbox]{equation}
 \mM'(\mq) =
 \begin{bmatrix}
-\mM_{\ssB_0}(\mq_0) & \ldots & \mzr\\
+\mM_{\ssS_0}(\mq_0) & \ldots & \mzr\\
 \vdots & \ddots & \vdots\\
-\mzr &\ldots  & \mM_{\ssB_n}(\mq_n)
+\mzr &\ldots  & \mM_{\ssS_n}(\mq_n)
 \end{bmatrix}
 \end{empheq}
 \begin{empheq}[box=\myyellowbox]{equation}
 \mnu'(\mq,\dot{\mq}) =
 \begin{bmatrix}
-\mnu_{\ssB_0}(\mq_0,\dot{\mq}_0)^\msT &
+\mnu_{\ssS_0}(\mq_0,\dot{\mq}_0)^\msT &
 ... &
-\mnu_{\ssB_n}(\mq_n,\dot{\mq}_n)^\msT
+\mnu_{\ssS_n}(\mq_n,\dot{\mq}_n)^\msT
 \end{bmatrix}^\msT
 \end{empheq}
 \begin{empheq}[box=\myyellowbox]{equation}
 \mg'(\mq) =
 \begin{bmatrix}
-\mg_{\ssB_0}(\mq_0)^\msT &
+\mg_{\ssS_0}(\mq_0)^\msT &
 ... &
-\mg_{\ssB_n}(\mq_0)^\msT  
+\mg_{\ssS_n}(\mq_0)^\msT  
 \end{bmatrix}^\msT
 \end{empheq}
 \begin{empheq}[box=\myyellowbox]{equation}
 \mu' =
 \begin{bmatrix}
-\mu_{\ssB_0}^\msT &
+\mu_{\ssS_0}^\msT &
 ... &
-\mu_{\ssB_n}^\msT  
+\mu_{\ssS_n}^\msT  
 \end{bmatrix}^\msT
 \end{empheq}
 
@@ -3792,7 +3813,7 @@ Definindo:
 
 Pelo princípio de D'Alembert, temos que:
 \begin{empheq}[box=\mybluebox]{equation}
-\sum_{i=0}^n \dl W_i = \sum_{i=0}^n \dl \mq_i^\msT \cdot \overline{\mf}_{\ssB_i} = 0
+\sum_{i=0}^n \dl W_{\ssS_i} = \sum_{i=0}^n \dl \mq_i^\msT \cdot \overline{\mf}_{\ssS_i} = 0
 \end{empheq}
 
 Ou seja:
@@ -3998,18 +4019,18 @@ Temos:
 
 Sendo assim, \eqref{eq:DinamicaInversa1} pode ser reescrita como:
 \begin{empheq}[box=\mybluebox]{equation} \label{eq:DinamicaInversa2}
-\mM_{\ssM} (\mq\ssh) \, \ddot{\mq}\ssh + \mv_{\ssM}(\mq\ssh, \dot{\mq}\ssh) + \mg_{\ssM}(\mq\ssh)   = \mZ(\mq\ssh)^{\msT} \mu^\star
+\mM_{\ssP} (\mq\ssh) \, \ddot{\mq}\ssh + \mv_{\ssP}(\mq\ssh, \dot{\mq}\ssh) + \mg_{\ssP}(\mq\ssh)   = \mZ(\mq\ssh)^{\msT} \mu^\star
 \end{empheq}
 
 Sendo: 
 \begin{empheq}[box=\myyellowbox]{equation} 
-\mM_{\ssM}(\mq\ssh)  =  \mC\big(\underline{\mq}(\mq\ssh)\big)^\msT \cdot \mM'\big(\underline{\mq}(\mq\ssh)\big) \cdot \mC\big(\underline{\mq}(\mq\ssh)\big)
+\mM_{\ssP}(\mq\ssh)  =  \mC\big(\underline{\mq}(\mq\ssh)\big)^\msT \cdot \mM'\big(\underline{\mq}(\mq\ssh)\big) \cdot \mC\big(\underline{\mq}(\mq\ssh)\big)
 \end{empheq}
 \begin{empheq}[box=\myyellowbox]{equation}
-\mv_{\ssM}(\mq\ssh, \dot{\mq}\ssh)  =  \mC\big(\underline{\mq}(\mq\ssh)\big)^\msT \Big(  \mM'\big(\underline{\mq}(\mq\ssh)\big) \cdot \mc\big(\underline{\mq}(\mq\ssh), \underline{\dot{\mq}}(\mq\ssh,\dot{\mq}\ssh) \big)  + \mv'\big(\underline{\mq}(\mq\ssh)\big) \Big)
+\mv_{\ssP}(\mq\ssh, \dot{\mq}\ssh)  =  \mC\big(\underline{\mq}(\mq\ssh)\big)^\msT \Big(  \mM'\big(\underline{\mq}(\mq\ssh)\big) \cdot \mc\big(\underline{\mq}(\mq\ssh), \underline{\dot{\mq}}(\mq\ssh,\dot{\mq}\ssh) \big)  + \mv'\big(\underline{\mq}(\mq\ssh)\big) \Big)
 \end{empheq}
 \begin{empheq}[box=\myyellowbox]{equation}
-\mg_{\ssM}(\mq\ssh)  = \mC\big(\underline{\mq}(\mq\ssh)\big)^\msT \cdot \mg'\big(\underline{\mq}(\mq\ssh)\big)
+\mg_{\ssP}(\mq\ssh)  = \mC\big(\underline{\mq}(\mq\ssh)\big)^\msT \cdot \mg'\big(\underline{\mq}(\mq\ssh)\big)
 \end{empheq}
 \begin{empheq}[box=\myyellowbox]{equation}
 \mZ(\mq\ssh)^\msT = \mC(\underline{\mq}(\mq\ssh)\big)^\msT \mU
@@ -4030,10 +4051,10 @@ Para facilitar a leitura das deduções e com o intuito de deixar um pouco menos
 \mxi = \mq\ssh
 \end{equation}
 \begin{equation}
-\mH(\mxi) = \mM_{\ssM}(\mq\ssh)
+\mH(\mxi) = \mM_{\ssP}(\mq\ssh)
 \end{equation}
 \begin{equation}
-\mh(\mxi, \dot{\mxi}) = \mv_{\ssM}(\mq\ssh, \dot{\mq}\ssh) + \mg_{\ssM}(\mq\ssh)
+\mh(\mxi, \dot{\mxi}) = \mv_{\ssP}(\mq\ssh, \dot{\mq}\ssh) + \mg_{\ssP}(\mq\ssh)
 \end{equation}
 \begin{equation}
 \mup = \mZ(\mq\ssh)^{\msT} \mu^\star
@@ -4566,15 +4587,15 @@ O vetor gravidade será considerado na direção e sentido do eixo $z$ (perpendi
 
 \subsection{Arquitetura do mecanismo paralelo}
 
-É possível relacionar as coordenadas um ponto no espaço descrito no sistema $\ttN_0$ com as coordenadas do mesmo ponto escritas nos sistemas $\ttN_1$ e $\ttN_2$ da seguinte maneira:
+É possível relacionar as coordenadas do efetuador do mecanismo paralelos descrito no sistema $\ttN_0$ com as coordenadas dos efetuadores das cadeias serias nos sistemas $\ttN_1$ e $\ttN_2$ da seguinte maneira:
 \begin{equation}
-\vct{\ttp}_{\ttN_0} = \begin{bmatrix}
+\vct{\ttx_0}_{\ttN_0} = \begin{bmatrix}
 1 & 0 & 0 \\
 0 & 1 & 0 \\
 0 & 0 & 1 \\
 \end{bmatrix}
 \cdot
-\vct{\ttp}_{\ttN_1}
+\vct{\ttx_1}_{\ttN_1}
 +
 \begin{bmatrix}
 l_0 \\
@@ -4583,13 +4604,13 @@ l_0 \\
 \end{bmatrix}
 \end{equation}
 \begin{equation}
-\vct{\ttp}_{\ttN_0} = \begin{bmatrix}
+\vct{\ttx_0}_{\ttN_0} = \begin{bmatrix}
 -1 & 0 & 0 \\
 0 & 1 & 0 \\
 0 & 0 & -1 \\
 \end{bmatrix}
 \cdot
-\vct{\ttp}_{\ttN_2}
+\vct{\ttx_2}_{\ttN_2}
 +
 \begin{bmatrix}
 -l_0 \\
@@ -4598,7 +4619,7 @@ l_0 \\
 \end{bmatrix}
 \end{equation}
 
-Escolhendo o ponto $\ttp$ como sendo o efetuador do mecanismo paralelo, o qual tem a mesma localização dos efetuadores das cadeias serias neste caso, temos:
+Sendo assim, temos:
 \begin{equation}
 \mq_0 = 
 \begin{bmatrix}
@@ -4655,7 +4676,7 @@ Sendo assim, temos que os vínculos de posição são dados por:
 0 & 0 & 0 & 0 & 0 & -1 \\
 \end{bmatrix}
 \cdot
-\mx(\mq_\emptyset)
+\mx^\star(\mq_\emptyset)
 -
 \begin{bmatrix}
 l_0 \\
@@ -4668,7 +4689,7 @@ l_0 \\
 = \mzr
 \end{equation}
 
-Sendo assim, as matrizes que descrevem a arquitetura do mecanismo são dadas por:
+Portanto, as matrizes que descrevem a arquitetura do mecanismo são dadas por:
 \begin{equation}
 \md = \begin{bmatrix}
 l_0 &
@@ -5070,7 +5091,7 @@ Foram realizados ensaios experimentais utilizando as seguintes estratégias de c
 \end{itemize}
 
 Todas as leis de controle podem ser obtidas através da seguinte lei de controle, deduzida em \ref{sec:CMD}:
-\begin{equation}
+\begin{equation} \label{eq:LeiTCMD}
 \mu' = \hat{\mH} \cdot \Big(\ddot{\mxi}_d + \underline{k}_v \dot{\me} + \underline{k}_p \me + \int_0^t \underline{k} \, \sat(\ms/\phi)\,d \tau \Big) + \hat{\mh}
 \end{equation}
 Sendo:
@@ -5081,6 +5102,16 @@ Sendo:
 Repare que, para $\underline{k} = \mzr$, temos a lei de Controle por Torque Computado. Para $\underline{k} = \mzr$, $\hat{\mh} = \mzr$ e $\hat{\mH}$ constante e diagonal, temos uma lei de Controle Proporcional-Derivativo com pré-alimentação. Sendo assim, para $\underline{k} \neq \mzr$, podemos obter estas mesmas leis de controle, agora com um termo adicional de controle robusto vindo do Controle por Modos Deslizantes.
 
 Esta lei de controle tem a vantagem de, além de poder ser interpretada como uma estratégia híbrida, praticamente elimina o fenômeno do \emph{chattering}, tendo em vista que o termo descontínuo é suavizado através de uma função de saturação e uma integral.
+
+Um diagrama de blocos que representa o caso geral da lei de controle da equação \eqref{eq:LeiTCMD} pode ser visto na figura \ref{fig:TCMD}.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.39]{../figures/TCMD.jpg}  
+	\caption{Malha de TCMD}
+	\label{fig:TCMD}
+\end{figure}
+
 
 \subsection{Parâmetros do sistema}
 
