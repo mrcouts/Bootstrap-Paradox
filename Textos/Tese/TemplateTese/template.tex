@@ -214,6 +214,7 @@ Aiming to fully explore the potential of this kind of architecture, in this thes
 \listadetabelas
 \chapter*{Lista de Símbolos e Convenções}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{center} \begin{Large} \textbf{Alfabetos matemáticos} \end{Large} \end{center}
 \begin{longtable}{lp{0.6\textwidth}}
   $a, b, \hdots $ & Escalares, componentes de matrizes-coluna, componentes de matrizes ou índices \\
@@ -225,20 +226,13 @@ Aiming to fully explore the potential of this kind of architecture, in this thes
   $\va, \vb, \hdots$ & Vetores físicos \\
   $\hat{\va}, \hat{\vb}, \hdots$ & Versores físicos \\
   $\vA, \vB, \hdots$ & Tensores físicos de segunda ordem ou transformações lineares \\
+  $\llA, \llB, \hdots$ & Corpos rígidos ou referenciais \\
   $\tta, \ttb, \hdots$ & Pontos no espaço \\
   $\ttA, \ttB, \hdots$ & Sistemas de coordenadas \\
-  $\llA, \llB, \hdots$ & Corpos rígidos ou referenciais \\
   $\ssA, \ssB, \hdots$ & Sistema ou subsistema mecânico \\
 \end{longtable}
-\begin{center} \begin{Large} \textbf{Convenções de matrizes} \end{Large} \end{center}
-\begin{longtable}{lp{0.6\textwidth}}
-  $\ma \llbracket i \rrbracket $ & i-ésimo elemento da matriz-coluna $\ma$ \\
-  $\mA \llbracket i,j \rrbracket $ & elemento da i-ésima linha e j-ésima coluna da matriz $\mA$ \\
-  $\mA \llbracket i,: \rrbracket $ & i-ésima linha da matriz $\mA$ \\
-  $\mA \llbracket :,j \rrbracket $ & j-ésima coluna da matriz $\mA$ \\
-\end{longtable}
-\newpage
-\begin{center} \begin{Large} \textbf{Representações matriciais de pontos e vetores} \end{Large} \end{center}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{center} \begin{Large} \textbf{Representações matriciais de Pontos e Vetores} \end{Large} \end{center}
 \begin{longtable}{lp{0.6\textwidth}}
   $\vct{\ttp}_{\ttB}$ & Matriz-coluna formada pelas coordenadas do ponto $\ttp$ no sistema de coordenadas $\ttB$ \\
   $\hvct{\ttp}_{\ttB}$ & Matriz-coluna formada pelas coordenadas do ponto $\ttp$ no sistema de coordenadas $\ttB$ em coordenadas homog\^eneas, ou seja: $\hvct{\ttp}_{\ttB} = \begin{bmatrix}
@@ -247,14 +241,23 @@ Aiming to fully explore the potential of this kind of architecture, in this thes
 \end{bmatrix} $ \\
   $[\vu]_{\ttB}$ & Matriz-coluna formada pelas componentes do vetor $\vu$ na base do sistema de coordenadas $\ttB$ \\
 \end{longtable}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{center} \begin{Large} \textbf{Representação de Matrizes de Rotação e Transformação Homogênea} \end{Large} \end{center}
 \begin{longtable}{lp{0.6\textwidth}}
   $\nvct{\vone}_{\ttA \rl \ttB} $ & Matriz de mudança de base, i.e. $\nvct{\vu}_{\ttA} = \nvct{\vone}_{\ttA \rl \ttB} \cdot \nvct{\vu}_{\ttB} $ \\
   $\hvct{\vone}_{\ttA \rl \ttB}$ & Matriz de transformação homogênea, i.e. $\hvct{\ttp}_{\ttA} = \hvct{\vone}_{\ttA \rl \ttB} \cdot \hvct{\ttp}_{\ttB}$ \\
 \end{longtable}
-\begin{center} \begin{Large} \textbf{Vetores e Tensores} \end{Large} \end{center}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{center} \begin{Large} \textbf{Convenções de Matrizes} \end{Large} \end{center}
 \begin{longtable}{lp{0.6\textwidth}}
-  $\vgamma$ & Vetor aceleração gravitacional \\
+  $\ma \llbracket i \rrbracket $ & i-ésimo elemento da matriz-coluna $\ma$ \\
+  $\mA \llbracket i,j \rrbracket $ & elemento da i-ésima linha e j-ésima coluna da matriz $\mA$ \\
+  $\mA \llbracket i,: \rrbracket $ & i-ésima linha da matriz $\mA$ \\
+  $\mA \llbracket :,j \rrbracket $ & j-ésima coluna da matriz $\mA$ \\
+\end{longtable}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{center} \begin{Large} \textbf{Convenções de Vetores e Tensores} \end{Large} \end{center}
+\begin{longtable}{lp{0.6\textwidth}}
   $\vr_{\tta \rl \ttb}$ & Vetor que liga o ponto $\tta$ ao ponto $\ttb$, orientado no sentido de $\tta$ até $\ttb$ \\
   $\vv_\ttp^{\lllA}$ & Vetor velocidade do ponto $\ttp$ em relação ao ref. $\llA$ \\
   $\va_\ttp^{\lllA}$ & Vetor velocidade do ponto $\ttp$ em relação ao ref. $\llA$ \\
@@ -263,55 +266,131 @@ Aiming to fully explore the potential of this kind of architecture, in this thes
   $\vf_{\lllB}$ & Vetor força não reativa aplicada no centro de massa do corpo rígido $\llB$ \\
   $\vtau_{\lllB}$ & Vetor torque não reativo aplicada no corpo rígido $\llB$ \\
   $\vI_{\lllB}$ & Tensor de inércia do corpo rígido $\llB$ em relação a seu centro de massa \\
-  $\vzr$ & Vetor nulo \\
-  $\vone$ & Tensor identidade \\
   $\{\vi_\ttB, \vj_\ttB, \vk_\ttB \}$ & Base ortonormal do sistema de coordenadas $\ttB$ \\
 \end{longtable}
-\begin{center} \begin{Large} \textbf{Pontos} \end{Large} \end{center}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{center} \begin{Large} \textbf{Convenções de Pontos} \end{Large} \end{center}
 \begin{longtable}{lp{0.6\textwidth}}
   $\ttc_{\lllB}$ & Centro de massa do corpo rígido $\llB$ \\
-  $\tto_{\ttB}$ & Origem dos sistema de coordenadas $\ttB$ \\
+  $\tto_{\ttB}$ & Origem do sistema de coordenadas $\ttB$ \\
 \end{longtable}
-\begin{center} \begin{Large} \textbf{Referenciais} \end{Large} \end{center}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{center} \begin{Large} \textbf{Outros Vetores e Tensores} \end{Large} \end{center}
 \begin{longtable}{lp{0.6\textwidth}}
-  $\llN$ & Referencial inercial \\
+  $\vgamma$ & Vetor aceleração gravitacional \\
+  $\vzr$ & Vetor nulo \\
+  $\vone$ & Tensor identidade \\
 \end{longtable}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{center} \begin{Large} \textbf{Outros Pontos} \end{Large} \end{center}
+\begin{longtable}{lp{0.6\textwidth}}
+  $\ttx$ & Ponto fixo a um efetuador \\
+\end{longtable}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{center} \begin{Large} \textbf{Corpos rígidos e Referenciais} \end{Large} \end{center}
+\begin{longtable}{lp{0.6\textwidth}}
+  $\llB$ & Ligamento ou referencial fixo a ligamento \\
+  $\llN$ & Referencial inercial \\
+  $\llR$ & Rotor ou referencial fixo a rotor \\
+  $\llX$ & Efetuador ou referencial fixo a efetuador \\
+\end{longtable}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{center} \begin{Large} \textbf{Sistemas de referência} \end{Large} \end{center}
+\begin{longtable}{lp{0.6\textwidth}}
+  $\ttB$ & Sistema de referência fixo a ligamento \\
+  $\ttN$ & Sistema de referência fixo a referencial inercial \\
+  $\ttR$ & Sistema de referência fixo a rotor \\
+  $\ttX$ & Sistema de referência fixo a efetuador \\
+\end{longtable}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{center} \begin{Large} \textbf{Matrizes} \end{Large} \end{center}
 \begin{longtable}{lp{0.6\textwidth}}
-  $\mq$ & Coordenadas generalizadas \\
-  $\mpi$ & Quasi-coordenadas \\
-  $\mp$ & Quasi-velocidades \\
-  $\dot{\mp}$ & Quasi-acelerações \\
-  $\mu$ & Esforços ativos generalizados (provenientes de atuadores) \\
-  $\mM$ & Matriz de inércia generalizada \\
-  $\mnu$ & Matriz-coluna de esforços inérciais giroscópicos e de atrito generalizados \\
+  $\ma$ & Componentes de aceleração \\
+  $\mA$ & Jacobiano de equações vinculares \\
+  $\mc_{\cM}$ & Coordenadas do centro de massa de corpo rígido \\
+  $\mC$ & Matriz cujas colunas formam a base de um complemento ortogonal ao subespaço formado pelas linhas de um jacobiano de equações vinculares  \\
+  $\me$ & Erro de controle \\
+  $\mf$ & Componentes de esforços não reativos generalizados \\
   $\mg$ & Matriz-coluna de esforços gravitacionais generalizados \\
+  $\mh$ & Matriz-coluna de esforços gravitacionais, inérciais giroscópicos e de atrito generalizados \\
+  $\mH$ & Matriz de inércia generalizada \\
+  $\mI$ & Representação matricial de tensor de inércia \\
+  $\mJ$ & Jacobiano \\
+  $\mJ_v$ & Jacobiano de velocidades \\
+  $\mJ_\omega$ & Jacobiano de velocidades angulares \\
+  $\mk$ & Componentes do versor $\vk$ de um sistema de coordenadas \\
+  $\mM$ & Matriz de inércia generalizada \\
+  $\mo$ & Coodenadas da origem de um sistema de coordenadas \\
+  $\mp$ & Quasi-velocidades \\
+  $\mp\ssh$ & Quasi-velocidades independentes \\
+  $\mp\cir$ & Quasi-velocidades redundantes \\
+  $\overline{\mp}$ & Matriz-coluna de vínculos de quasi-velocidades \\
+  $\mq$ & Coordenadas generalizadas \\
+  $\mq\ssh$ & Coordenadas generalizadas independentes \\
+  $\mq\cir$ & Coordenadas generalizadas redundantes \\
+  $\overline{\mq}$ & Matriz-coluna de vínculos de coordenadas generalizadas \\
+  $\mR$ & Matriz de rotação de um ligamento \\
+  $\ms$ & Matriz-coluna de variáveis de escorregamento \\
+  $\mu$ & Esforços ativos generalizados provenientes de atuadores \\
+  $\mu^\lightning$ & Tensões elétricas aplicadas nos terminais dos atuadores  \\
+  $\mv$ & Componentes de velocidade \\
+  $\mx$ & Coordenadas de um efetuador \\
+  $\malpha$ & Componentes de aceleração angular \\
+  $\mgamma$ & Componentes de aceleração gravitacional \\
+  $\mzeta$ & Matriz-coluna de esforços e de atrito generalizados \\
+  $\mlambda$ & Multiplicadores de Lagrange \\
+  $\mnu$ & Matriz-coluna de esforços inérciais giroscópicos e de atrito generalizados \\
+  $\mxi$ & Coordenadas generalizadas independentes \\
+  $\mpi$ & Quasi-coordenadas \\
+  $\mpi\ssh$ & Quasi-coordenadas independentes \\
+  $\mpi\cir$ & Quasi-coordenadas redundantes\\
+  $\mup$ & Entrada de controle \\
+  $\momega$ & Componentes de velocidade angular \\
   $\mzr$ & Matriz-coluna nula ou matriz nula \\
   $\mone$ & Matriz identidade \\
 \end{longtable}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{center} \begin{Large} \textbf{Escalares} \end{Large} \end{center}
 \begin{longtable}{lp{0.6\textwidth}}
-  $\dl W$ & Trabalho virtual \\
-  $m$ & Massa \\
-  $J$ & Momento de inércia \\
   $b$ & Coeficiente de atrito viscoso \\
-  $\gmu$ & Coeficiente de atrito seco \\
   $i$ & Corrente elétrica ou índice genérico \\
-  $u$ & Tensão elétrica \\
-  $\omega$ & Velocidade angular \\
+  $j$ & Índice genérico \\
+  $J$ & Momento de inércia \\
+  $k$ & Ganho de controle ou índice relativo a tempo discreto \\
   $k_e$ & Constante de força contra-eletromotriz \\
-  $R$ & Resistência elétrica \\
+  $k_t$ & Constante de torque \\
+  $k_p$ & Ganho proporcional \\
+  $k_v$ & Ganho derivativo \\
+  $l$ & Comprimento de um ligamento \\
+  $l_g$ & Distância entre o começo de um ligamento e seu centro de massa \\
   $L$ & Indutância \\
+  $m$ & Massa \\
+  $p$ & Pólo de função de transferência \\
+  $r$ & Relação de transmissão \\
+  $s$ & Variável de escorregamento ou variável da Transformada de Laplace \\
+  $R$ & Resistência elétrica \\
   $t$ & Tempo \\
+  $T$ & Torque \\
+  $u$ & Tensão elétrica \\
+  $V$ & Função de Lyapunov \\
+  $z$ & Variável da Transformada Z \\
+  $\dl W$ & Trabalho virtual \\
+  $\phi$ & Comprimento da camada limite \\
+  $\lambda$ & Multiplicador de Lagrange, ganho de controle ou constante de estabilização de Baumgarte \\
+  $\gmu$ & Coeficiente de atrito seco \\
+  $\tau$ & Torque \\
+  $\omega$ & Velocidade angular \\
 \end{longtable}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{center} \begin{Large} \textbf{Funções} \end{Large} \end{center}
 \begin{longtable}{lp{0.6\textwidth}}
   $\ccos(.)$ & Notação compacta para $\cos(.)$ \\
+  $\diag(.)$ & Matriz-coluna cujos elementos são a diagonal de uma matriz quadrada \\
   $\ssin(.)$ & Notação compacta para $\sin(.)$ \\
   $\sign(.)$ & Função sinal \\
-  $\diag(.)$ & Matriz-coluna cujos elementos são a diagonal de uma matriz quadrada \\
   $\mS(.)$ & Matriz de produto vetorial entre matrizes-colunas de ordem 3, ou seja, $\vct{\va \wedge \vb}_{\ttA} = \mS(\ma) \cdot \mb = -\mS(\mb) \cdot \ma $, sendo $\ma = \vct{\va}_{\ttA}$ e $\mb = \vct{\vb}_{\ttA}$ \\
 \end{longtable}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{center} \begin{Large} \textbf{Operadores} \end{Large} \end{center}
 \begin{longtable}{lp{0.6\textwidth}}
   $\dd$ & Operador diferencial \\
@@ -2268,7 +2347,7 @@ Seja $\ssB'$ um sistema mecânico serial de $\nu$ graus de liberdade, constituid
 \begin{itemize}
 \item $\llR_i, \,i=1,...,\nu$: rotor do i-ésimo atuador.
 \item $\ttR_i, \,i=1,...,\nu$: sistema de coordenadas solidário a $\llR_i$, com eixo $z$ paralelo ao eixo $z$ de $\llR_i$.
-\item $J_{r \,i}, \,i=1,...,\nu$: momento de inércia do rotor $\llR_i$.
+%\item $J_{r \,i}, \,i=1,...,\nu$: momento de inércia do rotor $\llR_i$.
 %\item $\vI_{\lllR_i}, \,i=1,...,\nu$: tensor de in\'ercia do rotor $\llR_i$ em relação a seu centro de massa.
 \item $\mI_{r \,i}, \,i=1,...,\nu$: tensor de in\'ercia $\vI_{\lllR_i}$ escrito na base de $\ttN$, ou seja, $\vct{\vI_{\lllR_i}}_{\ttN \rl \ttN}$.
 \item $\mI'_{r \,i}, \,i=1,...,\nu$: tensor de in\'ercia $\vI_{\lllR_i}$ escrito na base de $\ttB_i$, ou seja, $\vct{\vI_{\lllR_i}}_{\ttB_i \rl \ttB_i}$.
@@ -2650,14 +2729,14 @@ L \, \frac{\dd i}{\dd t} + R \, i + k_e \, \omega = u
 
 Tendo em vista que todas as juntas de um mecanismo serial são atuadas, a equação matricial da dinâmica elétrica do sistema é dada por:
 \begin{empheq}[box=\lightbluebox]{equation} \label{eq:DinEletrica_rot}
-\underline{L} \, \frac{\dd \mi}{\dd t} + \underline{R} \, \mi + \underline{k_e} \, \dot{\mq}_r = \mup
+\underline{L} \, \frac{\dd \mi}{\dd t} + \underline{R} \, \mi + \underline{k_e} \, \dot{\mq}_r = \mu^\lightning
 \end{empheq}
 
 Sendo assim, juntando as equações \eqref{eq:ModeloMecSerial_rot} e \eqref{eq:DinEletrica_rot}, obtemos a dinâmica  do sistema como um todo:
 \begin{empheq}[box=\mybluebox]{equation}
 \begin{cases}
 \mM^*(\mq) \, \ddot{\mq} + \mnu^*(\mq,\dot{\mq}) + \mg^*(\mq) = \underline{r} \, \underline{k_t}\mi   \\
-\underline{L} \, \frac{\dd \mi}{\dd t} + \underline{R} \, \mi + \underline{r} \, \underline{k_e} \, \dot{\mq} = \mup
+\underline{L} \, \frac{\dd \mi}{\dd t} + \underline{R} \, \mi + \underline{r} \, \underline{k_e} \, \dot{\mq} = \mu^\lightning
 \end{cases}
 \end{empheq}
 
@@ -2785,7 +2864,7 @@ Aplicando as equações vetoriais no sistema $\ttN$, temos:
 %\end{equation}
 
 \begin{equation} \label{eq:Newton-EulerMatE}
-\vct{\vf_{\lllB_0}}_{\ttN_0} = -m \vct{\va^{\lllN}_{\ttx_0}}_{\ttN_0}  +m \vct{\vgamma}_{\ttN_0}
+\vct{\vf_{\lllX_0}}_{\ttN_0} = -m \vct{\va^{\lllN}_{\ttx_0}}_{\ttN_0}  +m \vct{\vgamma}_{\ttN_0}
 \end{equation}
 
 Ou seja
@@ -5976,20 +6055,20 @@ Generalizar o algoritmo de modelagem proposto para englobar mecanismos paralelos
 
 \chapter{Cinemática de corpos rígidos} \label{ap:CinCorposRig}
 
+Este apêndice tem o intuito de apresentar os conceitos de derivada temporal de vetores em relação a um referencial, as definições velocidade e aceleração, as equações de campos de velocidades e acelerações em um corpo rígido, e os princípios de composição de movimento.
+
 \section{Conceitos básicos}
-
-Este apêndice tem o intuito de apresentar os conceitos de derivada temporal de vetores em relação a um referencial e as definições velocidade e aceleração. \\
-
-Sejam $\llA$ e $\llB$ dois referenciais, e $\ttp$ e $\tto$ pontos no espaço. Primeiramente, fazemos as seguintes definições:
-
-\begin{itemize}
-\item $\vr_{\tto \rl \ttp}$: vetor que liga o ponto $\tto$ ao ponto $\ttp$, orientado no sentido de $\tto$ até $\ttp$.
-\item $\vv_{\ttp}^{\lllA}$: vetor velocidade do ponto $\ttp$ em relação a $\llA$.
-\item $\va_{\ttp}^{\lllA}$: vetor acelera\c{c}\~ao do ponto $\ttp$ em relação a $\llA$.
-\item $\vomega_{\lllB}^{\lllA}$: vetor velocidade angular de $\llB$ em relação a $\llA$.
-\item $\valpha_{\lllB}^{\lllA}$: vetor aceleração angular de $\llB$ em relação a $\llA$.
-\item $\displaystyle\frac{\dd^{[\lllA]}}{\dd t}$: Operador derivada temporal em relação ao referencial $\llA$.
-\end{itemize}
+%Sejam $\llA$ e $\llB$ dois referenciais, e $\ttp$ e $\tto$ pontos no espaço. 
+%Primeiramente, fazemos as seguintes definições:
+%
+%\begin{itemize}
+%\item $\vr_{\tto \rl \ttp}$: vetor que liga o ponto $\tto$ ao ponto $\ttp$, orientado no sentido de $\tto$ até $\ttp$.
+%\item $\vv_{\ttp}^{\lllA}$: vetor velocidade do ponto $\ttp$ em relação a $\llA$.
+%\item $\va_{\ttp}^{\lllA}$: vetor acelera\c{c}\~ao do ponto $\ttp$ em relação a $\llA$.
+%\item $\vomega_{\lllB}^{\lllA}$: vetor velocidade angular de $\llB$ em relação a $\llA$.
+%\item $\valpha_{\lllB}^{\lllA}$: vetor aceleração angular de $\llB$ em relação a $\llA$.
+%\item $\displaystyle\frac{\dd^{[\lllA]}}{\dd t}$: Operador derivada temporal em relação ao referencial $\llA$.
+%\end{itemize}
 
 \subsection{Produto vetorial}
 
@@ -6649,7 +6728,7 @@ D = \frac{Rb + k_t k_e}{LJ}
 
 Discretizado pela técnica do segurador de ordem zero, considerando um período de amostragem $T$, obtemos:
 \begin{equation}
-Gd_{I}(z) = \frac{\mathcal{A} z + \mathcal{B}}{z^2 + \mathcal{C} z + \mathcal{D}}
+G_{d\,I}(z) = \frac{\mathcal{A} z + \mathcal{B}}{z^2 + \mathcal{C} z + \mathcal{D}}
 \end{equation}
 
 Sendo:
@@ -6666,7 +6745,7 @@ Sendo:
 
 Como o sistema é de segunda ordem e não possui integrador, é proposto o seguinte controlador:
 \begin{equation}
-K(z) = \frac{\alpha z^2 + \beta z + \gamma}{(z-1)(z-\dl)}
+K(z) = \frac{\alpha z^2 + \beta z + \gamma}{(z-1)(z-\delta)}
 \end{equation}
 
 Como o controlador proposto possui 4 parâmetros, é possível alocar 4 pólos. Tendo em vista que a planta e o controlador são de segunda ordem, o sistema em malha fechada será de quarta ordem. Sendo assim, o controlador proposto é capaz de alocar todos os pólos do sistema. \\
@@ -6679,14 +6758,14 @@ G_{mf}(z) = \frac{(\mathcal{A} z+\mathcal{B}) \left(\gamma +\alpha  z^2+\beta  z
 Sendo:
 \begin{equation}
 \begin{cases}
-a_0 &=  \mathcal{B} \gamma  + \mathcal{D} \dl\\
-a_1 &= \mathcal{B} \beta + \mathcal{A} \gamma +(\mathcal{C}  -  \mathcal{D}) \dl -\mathcal{D}   \\
-a_2 &= \mathcal{B} \alpha + \mathcal{A} \beta + (1 -\mathcal{C}) \dl -\mathcal{C} +\mathcal{D}  \\
-a_3 &=   \mathcal{A} \alpha -\dl +\mathcal{C} -1
+a_0 &=  \mathcal{B} \gamma  + \mathcal{D} \delta\\
+a_1 &= \mathcal{B} \beta + \mathcal{A} \gamma +(\mathcal{C}  -  \mathcal{D}) \delta -\mathcal{D}   \\
+a_2 &= \mathcal{B} \alpha + \mathcal{A} \beta + (1 -\mathcal{C}) \delta -\mathcal{C} +\mathcal{D}  \\
+a_3 &=   \mathcal{A} \alpha -\delta +\mathcal{C} -1
 \end{cases}
 \end{equation}
 
-%(\mathcal{A} z+\mathcal{B}) \left(\gamma +\alpha  z^2+\beta  z\right)+(z-1) (z-\dl ) \left(\mathcal{D}+z^2+\mathcal{C} z\right)
+%(\mathcal{A} z+\mathcal{B}) \left(\gamma +\alpha  z^2+\beta  z\right)+(z-1) (z-\delta ) \left(\mathcal{D}+z^2+\mathcal{C} z\right)
 
 
 Sendo assim, o polinômio característico do sistema em malha fechada é dada por:
@@ -6712,10 +6791,10 @@ c_3 &= -p_1-p_2-p_3-p_4
 Portanto, os parâmetros de $K(z)$ podem ser obtidos resolvendo o seguinte sistema de equações algébricas:
 \begin{equation}
 \begin{cases}
-\mathcal{B} \gamma  + \mathcal{D} \dl &= c_0 \\
-\mathcal{B} \beta + \mathcal{A} \gamma +(\mathcal{C}  -  \mathcal{D}) \dl -\mathcal{D} &= c_1  \\
-\mathcal{B} \alpha + \mathcal{A} \beta + (1 -\mathcal{C}) \dl -\mathcal{C} +\mathcal{D} &= c_2 \\
-\mathcal{A} \alpha -\dl +\mathcal{C} -1 &= c_3
+\mathcal{B} \gamma  + \mathcal{D} \delta &= c_0 \\
+\mathcal{B} \beta + \mathcal{A} \gamma +(\mathcal{C}  -  \mathcal{D}) \delta -\mathcal{D} &= c_1  \\
+\mathcal{B} \alpha + \mathcal{A} \beta + (1 -\mathcal{C}) \delta -\mathcal{C} +\mathcal{D} &= c_2 \\
+\mathcal{A} \alpha -\delta +\mathcal{C} -1 &= c_3
 \end{cases}
 \end{equation}
 
@@ -6731,7 +6810,7 @@ O qual é um sistema linear. Representando de forma matricial:
 \alpha \\
 \beta \\
 \gamma \\
-\dl
+\delta
 \end{bmatrix}
 =
 \begin{bmatrix}
@@ -6748,7 +6827,7 @@ Sua solução é dada por:
 \alpha = \frac{\mathcal{A}^2 c_1+\mathcal{B} \left(-\mathcal{D} (\mathcal{A}+\mathcal{B})-\mathcal{A} c_2+ \mathcal{B} (\mathcal{C}+ c_3) \right)-\left(\mathcal{C} -c_4 - 1 \right) (\mathcal{B} (\mathcal{B}-\mathcal{C} (\mathcal{A}+\mathcal{B}))+\mathcal{A} \mathcal{D} (\mathcal{A}+\mathcal{B}))}{(\mathcal{A}+\mathcal{B}) \left(\mathcal{A}^2 \mathcal{D}-\mathcal{A} \mathcal{B} \mathcal{C}+\mathcal{B}^2\right)} \\
 \beta = \frac{\mathcal{C} \left( \mathcal{D} (\mathcal{A}+\mathcal{B})^2+ \mathcal{B} (\mathcal{B}-\mathcal{C} (\mathcal{A}+\mathcal{B})) \right)-\mathcal{A} \mathcal{D}^2 (\mathcal{A}+\mathcal{B})+\left(\mathcal{A} c_3- \mathcal{B} c_4 \right) (\mathcal{D} (\mathcal{A}+\mathcal{B})-\mathcal{C} \mathcal{B})+ (\mathcal{A} (\mathcal{C}-1)-\mathcal{B})(\mathcal{A} c_1 - \mathcal{B} c_2)}{(\mathcal{A}+\mathcal{B}) \left(\mathcal{A}^2 \mathcal{D}-\mathcal{A} \mathcal{B} \mathcal{C}+\mathcal{B}^2\right)} \\
 \gamma = \frac{ \left(\mathcal{A}^2 \mathcal{D}-(\mathcal{A}+\mathcal{B}) (\mathcal{A} \mathcal{C}-\mathcal{B})\right)c_1 +\mathcal{D} \left(\mathcal{B} \left( \mathcal{B} (1-\mathcal{C} + c_4) - \mathcal{A} (\mathcal{C} - \mathcal{D} + c_3) \right)+\mathcal{A}^2( \mathcal{D}+ c_2) \right)}{(\mathcal{A}+\mathcal{B}) \left(\mathcal{A}^2 \mathcal{D}-\mathcal{A} \mathcal{B} \mathcal{C}+\mathcal{B}^2\right)} \\
-\dl = \frac{\mathcal{A}^3 c_1+\mathcal{B} \left(\mathcal{B} (\mathcal{C} (\mathcal{A}+\mathcal{B})-\mathcal{B})-\mathcal{A} \mathcal{D} (\mathcal{A}+\mathcal{B})-\mathcal{A}^2 c_2 +\mathcal{B} \left(\mathcal{A} c_3- \mathcal{B} c_4 \right)\right)}{(\mathcal{A}+\mathcal{B}) \left(\mathcal{A}^2 \mathcal{D}-\mathcal{A} \mathcal{B} \mathcal{C}+\mathcal{B}^2\right)} \\
+\delta = \frac{\mathcal{A}^3 c_1+\mathcal{B} \left(\mathcal{B} (\mathcal{C} (\mathcal{A}+\mathcal{B})-\mathcal{B})-\mathcal{A} \mathcal{D} (\mathcal{A}+\mathcal{B})-\mathcal{A}^2 c_2 +\mathcal{B} \left(\mathcal{A} c_3- \mathcal{B} c_4 \right)\right)}{(\mathcal{A}+\mathcal{B}) \left(\mathcal{A}^2 \mathcal{D}-\mathcal{A} \mathcal{B} \mathcal{C}+\mathcal{B}^2\right)} \\
 \end{cases}
 \end{equation}
 
