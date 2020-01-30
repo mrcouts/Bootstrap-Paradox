@@ -195,7 +195,8 @@ No entanto, dada a sua maior complexidade mecânica, os modelos dinâmicos se to
 
 Dado o alto grau de acoplamento e de não linearidades deste tipo de sistema, a utilização de técnicas de controle não baseadas em modelo pode deixar muito a desejar. Por outro lado, dada a grande complexidade dos modelos, a utilização de técnicas de controles baseadas em modelo pode ser de difícil implementação e de alto custo computacional.
 
-Com o intuito de explorar ao máximo o potêncial deste tipo de arquitetura, nesta Tese são feitos o desenvolvimento de algoritmos de modelagem cinemática e dinâmica, os quais facilitam muito o processo de modelagem e de implementação em tempo real, projetos de controladores robustos baseados em modelo, de modo a diminuir a sensibilidade a incertezas do modelo, e a validação experimental dos controladores propostos em um mecanismo do tipo pentágono articulado, comparando-os com outras técnicas de controle frequentemente utilizadas na literatura.
+Com o intuito de explorar ao máximo o potencial deste tipo de arquitetura, nesta Tese é desenvolvido um algoritmo de modelagem cinemática e dinâmica para mecanismos paralelos translacionais, o qual facilita muito o processo de modelagem e de implementação em tempo real. Além disso, é sintetizada uma nova lei de controle não linear robusto baseada no Controle por Modos Deslizantes, a qual diminui a sensibilidade do sistema a incertezas do modelo sem apresentar \emph{chattering}. Por fim, em uma bancada experimental constituída de um manipulador paralelo plano de dois graus de liberdade, do tipo pentágono articulado, são feitas a validação da lei de controle proposta e a comparação de desempenho com as tradicionais leis de Controle por Torque Computado e Controle Proporcional Derivativo. Os resultados experimentais confirmam o caráter promissor da lei de controle proposta.
+%Com o intuito de explorar ao máximo o potêncial deste tipo de arquitetura, nesta Tese são feitos o desenvolvimento de algoritmos de modelagem cinemática e dinâmica, os quais facilitam muito o processo de modelagem e de implementação em tempo real, projetos de controladores robustos baseados em modelo, de modo a diminuir a sensibilidade a incertezas do modelo, e a validação experimental dos controladores propostos em um mecanismo do tipo pentágono articulado, comparando-os com outras técnicas de controle frequentemente utilizadas na literatura.
 %
 \\[3\baselineskip]
 %
@@ -214,7 +215,11 @@ However, given their greater mechanical complexity, the dynamic models become mu
 
 Given the high degree of dynamic coupling and non-linearities of this kind of system, the use of control techniques that are not model-based may not be the best solution. On the other hand, due to the great complexity of the dynamic models, the use of model-based control techniques may be difficult to implement and may have a high computational cost.
 
-Aiming to fully explore the potential of this kind of architecture, in this thesis are developed kinematic and dynamic modelling algorithms, which greatly facilitate the modelling and real-time implementation process, robust model-based controller designs, in order to reduce the uncertainty sensitivity of the model, and validation of the proposed controllers in an articulated pentagon type mechanism, comparing them with other control techniques frequently used in the literature.
+Aiming to fully explore the potential of this kind of architecture, in this thesis, a kinematic and dynamic modelling algorithm for translational parallel mechanisms, which greatly facilitate the modelling and real-time implementation process, is developed. Furthermore, a new  non-linear robust control law based on the Sliding Mode Control technique is designed, which reduces the sensitivity to model uncertainties without presenting the chattering phenomenon. Last but not least, in an experimental bed composed of a 2-dof planar parallel manipulator, an articulated pentagon type mechanism, the  validation of the proposed control law and the comparison of performance with the traditional Computed Torque Control and Proportional Derivative Control laws are done.
+%
+%Com o intuito de explorar ao máximo o potêncial deste tipo de arquitetura, nesta Tese é desenvolvido um algoritmo de modelagem cinemática e dinâmica para mecanismos paralelos translacionais, o qual facilita muito o processo de modelagem e de implementação em tempo real. Além disso, é sintetizada uma nova lei de controle não linear robusto baseada no Controle por Modos Deslizantes, a qual diminui a sensibilidade do sistema a incertezas do modelo sem apresentar \emph{chattering}. Por fim, em uma bancada experimental constituída de um manipulador paralelo plano de dois graus de liberdade, do tipo pentágono articulado, são feitas a validação da lei de controle proposta e a comparação de desempenho com as tradicionais leis de Controle por Torque Computado e Controle Proporcional Derivativo. Os resultados experimentais confirmam o caráter promissor da lei de controle proposta.
+%
+%Aiming to fully explore the potential of this kind of architecture, in this thesis are developed kinematic and dynamic modelling algorithms, which greatly facilitate the modelling and real-time implementation process, robust model-based controller designs, in order to reduce the uncertainty sensitivity of the model, and validation of the proposed controllers in an articulated pentagon type mechanism, comparing them with other control techniques frequently used in the literature.
 %
 \\[3\baselineskip]
 %
@@ -476,9 +481,19 @@ Com o intuito de atacar os problemas da dificuldade de obter modelos dinâmicos 
     %Uma alternativa para a superação desta dificuldade seria a combinação de técnicas de controle não linear robusto (por exemplo, controle por modos deslizantes \cite{Slotini, Utkin}) com modelos dinâmicos completos de mecanismos paralelos, desenvolvidos a partir de novas metodologias de modelagem de sistemas multicorpos \cite{22orsino, Orsino2013, 23orsino, 21orsino}. Com esta estratégia, torna-se possível sintetizar leis de controle de alto desempenho e custo computacional mais adequado, viabilizando uma maior exploração do potencial promissor dos mecanismos paralelos.
 
 %OBJETIVOS E JUSTIFICATIVAS--------------------------------------------
+\newpage
 \section{Objetivos}\label{objetivos}
 
-O objetivo geral desta Tese é contribuir para o aumento do desempenho de manipuladores paralelos. Quanto aos objetivos específicos, propõe-se que este aprimoramento seja realizado mediante o emprego de técnicas de controle baseadas em modelo do manipulador. Neste sentido, almeja-se fornecer recomendações quanto à modelagem dinâmica, à técnica de controle mais adequada, bem como a sua implementação.
+O objetivo geral desta Tese é contribuir para o aumento do desempenho de manipuladores paralelos. Quanto aos objetivos específicos, podemos citar:
+
+\begin{itemize}
+\item[a)] O desenvolvimento de um algoritmo genérico para modelagem cinemática e dinâmica de manipuladores paralelos translacionais, com o intuito de facilitar o processo de modelagem e implementação em tempo real.
+\item[b)] A síntese de uma nova lei de controle de posição para mecanismos paralelos, de alto desempenho e com baixa sensibilidade a incertezas do modelo.
+\item[c)] A validação experimental da lei de controle proposta e a comparação do desempenho de 8 diferentes estratégias de controle, baseadas na lei proposta e em outras leis de controle muito utilizadas na literatura de mecanismos paralelos (Controle por Toque Computado e Controle Proporcional Derivativo), tanto no espaço das juntas quanto no espaço da tarefa, em uma bancada experimental desenvolvida.
+\end{itemize}
+
+
+
 
 %%%%% BASEAR NAS CONTRIBUIÇÕES %%%%%%%%%%%%%%%%
 
@@ -2794,7 +2809,7 @@ Sendo assim, juntando as equações \eqref{eq:ModeloMecSerial_rot} e \eqref{eq:D
 
 \chapter{Modelagem de manipuladores paralelos}
 
-Esta subseção tem o intuito de apresentar um algoritmo genérico para a obtenção do modelo dinâmico de mecanismos paralelos cujo efetuador realiza apenas movimentos de translação a partir do modelo de suas cadeias seriais, como está representado pela figura \ref{fig:AcoplamentoMecParaleloFig}. 
+Este capítulo tem o intuito de apresentar um algoritmo genérico para a obtenção do modelo dinâmico de mecanismos paralelos cujo efetuador realiza apenas movimentos de translação a partir do modelo de suas cadeias seriais, como está representado pela figura \ref{fig:AcoplamentoMecParaleloFig}. 
 \begin{figure}[h]
 	\centering
 	\includegraphics[scale=1.0]{imagens/Serial2Paralelo.jpg}  
@@ -3333,49 +3348,49 @@ Substituindo a equação \eqref{eq:varQuat} em \eqref{eq:varLagrangeana1}, temos
 
 Tendo em vista que
 \begin{equation} \tag{\ref{eq:CQuatZero}}
-\breve{\mC}^\msT (\breve{\mq})\cdot \breve{\mq} = \mzr
+\breve{\mC} (\breve{\mq})^\msT \breve{\mq} = \mzr
 \end{equation}
 
 Temos:
 \begin{equation}
-\dl \mathfrak{L} = -2 \, \dl \mpi^\msT \breve{\mC}^\msT (\breve{\mq}) \cdot \breve{\mp}  + \dl \lambda(\breve{\mq}^\msT \breve{\mq} - 1) \\
+\dl \mathfrak{L} = -2 \, \dl \mpi^\msT \breve{\mC} (\breve{\mq}) ^\msT \breve{\mp}  + \dl \lambda(\breve{\mq}^\msT \breve{\mq} - 1) \\
 \end{equation}
 
 Sendo assim, impondo a estacionariadade da função Lagrangeana ($\dl \mathfrak{L} = 0$), temos:
 \begin{equation}
 \begin{cases}
-\breve{\mC}^\msT(\breve{\mq}) \cdot \breve{\mp} = \mzr \\
+\breve{\mC}(\breve{\mq})^\msT \breve{\mp} = \mzr \\
 \breve{\mq}^\msT \breve{\mq} = 1
 \end{cases}
 \end{equation}
 
 Como já foi comentado anteriomente, para o caso de $\breve{\mp}$ também ser unitário, as únicas soluções do problema são $\breve{\mq} = \pm \,\breve{\mp}$. Sendo assim, temos que, para $\breve{\mq}$ e $\breve{\mp}$ unitários:
 \begin{equation}
-\breve{\mC}^\msT(\breve{\mq}) \cdot \breve{\mp} = \mzr \Rightarrow \breve{\mq} = \pm \, \breve{\mp}
+\breve{\mC}(\breve{\mq})^\msT \breve{\mp} = \mzr \Rightarrow \breve{\mq} = \pm \, \breve{\mp}
 \end{equation}
 
 Além disso, tendo em vista a equação \eqref{eq:CQuatZero}, temos que:
 \begin{equation}
-\breve{\mq} = \pm \, \breve{\mp} \Rightarrow \breve{\mC}^\msT(\breve{\mq}) \cdot \breve{\mp} = \mzr
+\breve{\mq} = \pm \, \breve{\mp} \Rightarrow \breve{\mC}(\breve{\mq})^\msT \breve{\mp} = \mzr
 \end{equation}
 
 Portanto:
 \begin{empheq}[box=\lightbluebox]{equation}
-\breve{\mC}^\msT(\breve{\mq}) \cdot \breve{\mp} = \mzr \Leftrightarrow \breve{\mq} = \pm \, \breve{\mp}
+\breve{\mC}(\breve{\mq})^\msT \breve{\mp} = \mzr \Leftrightarrow \breve{\mq} = \pm \, \breve{\mp}
 \end{empheq}
 
 Sendo assim, a equação \eqref{eq:VincQuat} pode ser reescrita como:
 \begin{empheq}[box=\lightbluebox]{equation} \label{eq:VinculosOrientacao_i}
-\breve{\mC}^\msT(\breve{\mx}_0) \cdot \breve{\mQ}_i \cdot \breve{\mx}_i = \mzr
+\breve{\mC}(\breve{\mx}_0)^\msT \cdot \breve{\mQ}_i \cdot \breve{\mx}_i = \mzr
 \end{empheq}
 
 Aplicando para cada uma das cadeias, as equações vinculares de orientação são dadas por:
 \begin{empheq}[box=\mybluebox]{equation} \label{eq:VinculosOrientacao}
 \overline{\breve{\mx}}(\mq) = \begin{bmatrix}
-\breve{\mC}^\msT(\breve{\mx}_0) \cdot \breve{\mQ}_1 \cdot \breve{\mx}_1 (\mq_1) \\
-\breve{\mC}^\msT(\breve{\mx}_0) \cdot \breve{\mQ}_2 \cdot \breve{\mx}_2 (\mq_2) \\
+\breve{\mC}(\breve{\mx}_0)^\msT \cdot \breve{\mQ}_1 \cdot \breve{\mx}_1 (\mq_1) \\
+\breve{\mC}(\breve{\mx}_0)^\msT \cdot \breve{\mQ}_2 \cdot \breve{\mx}_2 (\mq_2) \\
 \vdots \\
-\breve{\mC}^\msT(\breve{\mx}_0) \cdot \breve{\mQ}_n \cdot \breve{\mx}_n (\mq_n)
+\breve{\mC}(\breve{\mx}_0)^\msT \cdot \breve{\mQ}_n \cdot \breve{\mx}_n (\mq_n)
 \end{bmatrix} = \mzr
 \end{empheq}
 
@@ -3410,12 +3425,12 @@ A derivada $\dot{\mx}$ pode ser obtida da seguinte maneira:
 \begin{bmatrix}
 \mx_1(\mq_1) \\
 \vdots \\
-\mx_n(\mq_n)
+\,\mx_n(\mq_n)
 \end{bmatrix} =
 \begin{bmatrix}
 \mJ_{v\,\ssS_1}(\mq_1) \cdot \dot{\mq}_1 \\
 \vdots \\
-\mJ_{v\,\ssS_n}(\mq_n) \cdot \dot{\mq}_n
+\,\mJ_{v\,\ssS_n}(\mq_n) \cdot \dot{\mq}_n
 \end{bmatrix}
 =
 \mJ_v^\star(\mq_\emptyset) \cdot \dot{\mq}_\emptyset
@@ -3476,9 +3491,9 @@ Assim, substituindo \eqref{eq:dxdt} em \eqref{eq:VinculosGenericosVel}, obtemos:
 Derivando \eqref{eq:VinculosOrientacao} no tempo, temos:
 \begin{equation} 
 \dot{\overline{\breve{\mx}}}(\mq, \dot{\mq}) = \begin{bmatrix}
-\breve{\mC}^\msT(\breve{\mx}_0) \cdot \breve{\mQ}_1 \cdot \breve{\mC}(\breve{\mx}_1(\mq_1)) \cdot \momega_{\ssS_1}(\mq_1, \dot{\mq}_1) \\
+\breve{\mC}(\breve{\mx}_0)^\msT \cdot \breve{\mQ}_1 \cdot \breve{\mC}(\breve{\mx}_1(\mq_1)) \cdot \momega_{\ssS_1}(\mq_1, \dot{\mq}_1) \\
 \vdots \\
-\breve{\mC}^\msT(\breve{\mx}_0) \cdot \breve{\mQ}_n \cdot \breve{\mC}(\breve{\mx}_n(\mq_n)) \cdot \momega_{\ssS_n}(\mq_n, \dot{\mq}_n)
+\,\breve{\mC}(\breve{\mx}_0)^\msT \cdot \breve{\mQ}_n \cdot \breve{\mC}(\breve{\mx}_n(\mq_n)) \cdot \momega_{\ssS_n}(\mq_n, \dot{\mq}_n)
 \end{bmatrix} = \mzr
 \end{equation}
 
@@ -3497,7 +3512,7 @@ Temos:
 \dot{\overline{\breve{\mx}}}(\mq, \dot{\mq}) = \begin{bmatrix}
 \mG_1 (\mq_1) \cdot \mJ_{\omega\,\ssS_1}(\mq_1) \cdot \dot{\mq}_1  \\
 \vdots \\
-\mG_n (\mq_n) \cdot \mJ_{\omega\,\ssS_n}(\mq_n) \cdot \dot{\mq}_n
+\,\mG_n (\mq_n) \cdot \mJ_{\omega\,\ssS_n}(\mq_n) \cdot \dot{\mq}_n
 \end{bmatrix}
 \end{equation*}
 \begin{equation} \label{eq:dVinculosOrientacao}
@@ -3751,7 +3766,7 @@ Sendo:
 \end{empheq}
 
 \begin{empheq}[box=\myyellowbox]{equation}
-\dot{\mG}_i (\mq_i, \dot{\mq}_i) = \breve{\mC}^\msT(\breve{\mx}_0) \cdot \breve{\mQ}_i \cdot \breve{\mC}\big( \breve{\mC}( \breve{\mx}_i ) \cdot \momega_{\ssS_i} \big)
+\dot{\mG}_i (\mq_i, \dot{\mq}_i) = \breve{\mC}(\breve{\mx}_0)^\msT \cdot \breve{\mQ}_i \cdot \breve{\mC}\big( \breve{\mC}( \breve{\mx}_i ) \cdot \momega_{\ssS_i} \big)
 \end{empheq}
 
 Repare que \eqref{eq:VinculosQuasiAce} pode ser reescrita como:
@@ -3828,7 +3843,7 @@ Seja $\mf$ a matriz-coluna contendo todos os sistemas de forças não-reativas g
 
 Definindo:
 \begin{empheq}[box=\myyellowbox]{equation}
-\mM'(\mq) =
+\mM(\mq) =
 \begin{bmatrix}
 \mM_{\ssE}(\mq_0) & \mzr & \ldots & \mzr \\
 \mzr & \mM_{\ssS_1}(\mq_1) & \ldots & \mzr\\
@@ -3837,7 +3852,7 @@ Definindo:
 \end{bmatrix}
 \end{empheq}
 \begin{empheq}[box=\myyellowbox]{equation}
-\mnu'(\mq,\dot{\mq}) =
+\mnu(\mq,\dot{\mq}) =
 \begin{bmatrix}
 \mnu_{\ssE}(\mq_0,\dot{\mq}_0)^\msT &
 \mnu_{\ssS_1}(\mq_1,\dot{\mq}_1)^\msT &
@@ -3846,7 +3861,7 @@ Definindo:
 \end{bmatrix}^\msT
 \end{empheq}
 \begin{empheq}[box=\myyellowbox]{equation}
-\mg'(\mq) =
+\mg(\mq) =
 \begin{bmatrix}
 \mg_{\ssE}(\mq_0)^\msT &
 \mg_{\ssS_1}(\mq_1)^\msT &
@@ -3855,7 +3870,7 @@ Definindo:
 \end{bmatrix}^\msT
 \end{empheq}
 \begin{empheq}[box=\myyellowbox]{equation}
-\mu' =
+\mu =
 \begin{bmatrix}
 \mu_{\ssE}^\msT &
 \mu_{\ssS_1}^\msT &
@@ -3869,7 +3884,7 @@ Definindo:
 %\mf = \mu' - \mM'(\mq) \cdot \dot{\mp} - \mnu'(\mq,\mp) - \mg'(\mq)
 %\end{equation}
 \begin{empheq}[box=\lightbluebox]{equation}
-\mf = \mu' - \mM'(\mq) \cdot \ddot{\mq} - \mnu'(\mq,\dot{\mq}) - \mg'(\mq)
+\mf = \mu - \mM(\mq) \cdot \ddot{\mq} - \mnu(\mq,\dot{\mq}) - \mg(\mq)
 \end{empheq}
 
 Pelo princípio de D'Alembert, temos que:
@@ -3942,7 +3957,7 @@ Tendo em vista que $\mq\ssh$ são coordenadas independentes, $\dl \mq\ssh$ são 
 
 Ou seja:
 \begin{equation} \label{eq:EquacaoDinamicaParalelos}
-\mC(\mq)^\msT (   \mM'(\mq) \, \ddot{\mq} + \mnu'(\mq,\dot{\mq}) + \mg'(\mq) ) = \mC(\mq)^\msT \mu'
+\mC(\mq)^\msT (   \mM(\mq) \, \ddot{\mq} + \mnu(\mq,\dot{\mq}) + \mg(\mq) ) = \mC(\mq)^\msT \mu
 \end{equation}
 
 \section{Simulação dinâmica direta} 
@@ -3950,7 +3965,7 @@ Ou seja:
 É possível realizar a simulação dinâmica direta do sistema utilizando a equação dinâmica \eqref{eq:EquacaoDinamicaParalelos} e os vínculos de quasi-acelerações \eqref{eq:VinculosQuasiAce}:
 \begin{equation}
 \begin{cases}
-\mC(\mq)^\msT (   \mM'(\mq) \, \ddot{\mq} + \mnu'(\mq,\dot{\mq}) + \mg'(\mq) ) = \mC(\mq)^\msT \mu' \\
+\mC(\mq)^\msT (   \mM(\mq) \, \ddot{\mq} + \mnu(\mq,\dot{\mq}) + \mg(\mq) ) = \mC(\mq)^\msT \mu \\
 \mA(\mq)\ddot{\mq} + \mb(\mq,\dot{\mq}) = \mzr
 \end{cases}
 \end{equation}
@@ -3958,14 +3973,14 @@ Ou seja:
 Reescrevendo em forma matricial:
 \begin{equation}
 \begin{bmatrix}
-\mC(\mq)^\msT \mM'(\mq) \\
+\mC(\mq)^\msT \mM(\mq) \\
 \mA(\mq)
 \end{bmatrix}
 \cdot
 \ddot{\mq}
 =
 \begin{bmatrix}
-\mC(\mq)^\msT (\mu' - \mnu'(\mq,\dot{\mq}) - \mg'(\mq) ) \\
+\mC(\mq)^\msT (\mu - \mnu(\mq,\dot{\mq}) - \mg(\mq) ) \\
 -\mb(\mq,\dot{\mq})
 \end{bmatrix}
 \end{equation}
@@ -3988,14 +4003,14 @@ Impondo que \eqref{eq:VinculosQuasiAce3} seja respeitada, garantimos que, teoric
 Sendo assim, o sistema de EDOs que será utilizado para realizar a simualação dinâmica direta é dado por:
 \begin{empheq}[box=\myyellowbox]{equation}
 \begin{bmatrix}
-\mC(\mq)^\msT \mM'(\mq) \\
+\mC(\mq)^\msT \mM(\mq) \\
 \mA(\mq)
 \end{bmatrix}
 \cdot
 \ddot{\mq}
 =
 \begin{bmatrix}
-\mC(\mq)^\msT (\mu' - \mnu'(\mq,\dot{\mq}) - \mg'(\mq) ) \\
+\mC(\mq)^\msT (\mu - \mnu(\mq,\dot{\mq}) - \mg(\mq) ) \\
 -\mb(\mq,\dot{\mq}) -
 2\lambda
 \mA(\mq) \cdot \dot{\mq} -
@@ -4007,14 +4022,14 @@ Sendo assim, o sistema de EDOs que será utilizado para realizar a simualação 
 No caso de $\mA \mQ\cir$ possuir mais linhas do que colunas, a matriz que multiplica $\ddot{\mq}$ na equação anterior não será quadrada. Como já foi comentado anteriormente, essa situação acontece quando há equações vinculares redundantes. Neste caso, a equação \eqref{eq:VinculosQuasiAce_} é substuituida por ela mesma multiplicada pela esquerda pela matriz $(\mA \mQ\cir)^\msT$, resultando no seguinte sistemas de EDOs para realizae a simulação dinâmica direta:
 \begin{empheq}[box=\almondbox]{equation}
 \begin{bmatrix}
-\mC(\mq)^\msT \mM'(\mq) \\
+\mC(\mq)^\msT \mM(\mq) \\
 (\mA(\mq) \cdot \mQ\cir)^\msT \mA(\mq)
 \end{bmatrix}
 \cdot
 \ddot{\mq}
 =
 \begin{bmatrix}
-\mC(\mq)^\msT (\mu' - \mnu'(\mq,\dot{\mq}) - \mg'(\mq) ) \\
+\mC(\mq)^\msT (\mu - \mnu(\mq,\dot{\mq}) - \mg(\mq) ) \\
 -(\mA(\mq) \cdot \mQ\cir)^\msT(\mb(\mq,\dot{\mq}) +
 2\lambda
 \mA(\mq) \cdot \dot{\mq} +
@@ -4028,7 +4043,7 @@ No caso de $\mA \mQ\cir$ possuir mais linhas do que colunas, a matriz que multip
 
 Na simulação dinâmica inversa, são dados os perfis de $\mq\ssh$, $\dot{\mq}\ssh$ e $\ddot{\mq}\ssh$ em função do tempo e obtem-se os perfis dos esforços nos atuadores para a trajetória dada. Para isso, será utilizada a equação dinâmica \eqref{eq:EquacaoDinamicaParalelos}:
 \begin{equation} \tag{\ref{eq:EquacaoDinamicaParalelos}}
-\mC(\mq)^\msT (   \mM'(\mq) \, \ddot{\mq} + \mnu'(\mq,\dot{\mq}) + \mg'(\mq) ) = \mC(\mq)^\msT \mu'
+\mC(\mq)^\msT (   \mM(\mq) \, \ddot{\mq} + \mnu(\mq,\dot{\mq}) + \mg(\mq) ) = \mC(\mq)^\msT \mu
 \end{equation}
 
 Repare que os termos desta equação dependem de $\mq$, $\dot{\mq}$ e $\ddot{\mq}$. Sendo assim, primeiramente é preciso obter $\mq$, $\dot{\mq}$ e $\ddot{\mq}$ dados $\mq\ssh$, $\dot{\mq}\ssh$ e $\ddot{\mq}\ssh$.
@@ -4044,9 +4059,9 @@ Ou seja, dado $\mq\ssh$, $\mq\cir$ é obtido resolvendo \eqref{eq:VinculosPosica
 \end{equation}
 
 Sendo $\underline{\mq}\cir(\mq\ssh)$ uma função matricial implícita. Logo:
-\begin{equation}
+\begin{empheq}[box=\myyellowbox]{equation}
 \mq = \underline{\mq}(\mq\ssh) = \mQ\ssh \mq\ssh + \mQ\cir \underline{\mq}\cir(\mq\ssh)
-\end{equation}
+\end{empheq}
 
 Tendo obtido $\mq$, $\dot{\mq}$ é obtido pela equação \eqref{eq:CCinematica}:
 \begin{equation} \tag{\ref{eq:CCinematica}}
@@ -4054,9 +4069,9 @@ Tendo obtido $\mq$, $\dot{\mq}$ é obtido pela equação \eqref{eq:CCinematica}:
 \end{equation}
 
 Logo:
-\begin{equation}
+\begin{empheq}[box=\myyellowbox]{equation}
 \dot{\mq} = \underline{\dot{\mq}}(\mq\ssh, \dot{\mq}\ssh) = \mC\big( \underline{\mq}(\mq\ssh) \big) \cdot \dot{\mq}\ssh
-\end{equation}
+\end{empheq}
 
 Para obter $\ddot{\mq}$, substitui-se a segunda derivada temporal da equação \eqref{eq:QsshQcir} na equação dos vínculos de quasi-acelerações \eqref{eq:VinculosQuasiAce_}:
 $$ \mA \mQ\ssh \ddot{\mq}\ssh + \mA \mQ\cir \ddot{\mq}\cir + \mb = \mzr $$
@@ -4084,18 +4099,18 @@ Sendo:
 
 Além disso, normalmente não há atuadores em todas as juntas do mecanismo paralelo. Sendo assim, $\mu'$ pode ser reescrito como:
 \begin{empheq}[box=\mybluebox]{equation} \label{eq:u_estrela}
-\mu' = \mU \cdot \mu^\star
+\mu = \mU \cdot \mu^\star
 \end{empheq}
 
 Sendo $\mU$ uma matriz constante composta por zeros e uns, e $\mu^\star$ os esforços aplicados pelos atuadores, dada por:
 \begin{empheq}[box=\myyellowbox]{equation}
-\mU = \partial_{\mu^\star} \mu'
+\mU = \partial_{\mu^\star} \mu
 \end{empheq}
 
 Substituindo \eqref{eq:CCinematica}, \eqref{eq:d2q_em_funcao2} e \eqref{eq:u_estrela} em \eqref{eq:EquacaoDinamicaParalelos}, temos:
 
 \begin{equation}
-\mC^\msT ( \mM' (\mC \cdot \ddot{\mq}\ssh + \mc) + \mnu' + \mg') = \mC^\msT \mU \cdot \mu^\star
+\mC^\msT ( \mM \cdot (\mC \cdot \ddot{\mq}\ssh + \mc) + \mnu + \mg) = \mC^\msT \mU \cdot \mu^\star
 \end{equation}
 
 Definindo:
@@ -4105,7 +4120,7 @@ Definindo:
 
 Temos:
 \begin{equation} \label{eq:DinamicaInversa1}
-\mC^\msT \mM' \mC \cdot \ddot{\mq}\ssh + \mC^\msT (   \mM' \mc + \mnu' ) + \mC^\msT \mg'  = \mZ^\msT \mu^\star
+\mC^\msT \mM \, \mC \cdot \ddot{\mq}\ssh + \mC^\msT (   \mM \, \mc + \mnu ) + \mC^\msT \mg  = \mZ^\msT \mu^\star
 \end{equation}
 
 Sendo assim, \eqref{eq:DinamicaInversa1} pode ser reescrita como:
@@ -4115,13 +4130,13 @@ Sendo assim, \eqref{eq:DinamicaInversa1} pode ser reescrita como:
 
 Sendo: 
 \begin{empheq}[box=\myyellowbox]{equation} 
-\mM_{\ssP}(\mq\ssh)  =  \mC\big(\underline{\mq}(\mq\ssh)\big)^\msT \cdot \mM'\big(\underline{\mq}(\mq\ssh)\big) \cdot \mC\big(\underline{\mq}(\mq\ssh)\big)
+\mM_{\ssP}(\mq\ssh)  =  \mC\big(\underline{\mq}(\mq\ssh)\big)^\msT \cdot \mM\big(\underline{\mq}(\mq\ssh)\big) \cdot \mC\big(\underline{\mq}(\mq\ssh)\big)
 \end{empheq}
 \begin{empheq}[box=\myyellowbox]{equation}
-\mnu_{\ssP}(\mq\ssh, \dot{\mq}\ssh)  =  \mC\big(\underline{\mq}(\mq\ssh)\big)^\msT \Big(  \mM'\big(\underline{\mq}(\mq\ssh)\big) \cdot \mc\big(\underline{\mq}(\mq\ssh), \underline{\dot{\mq}}(\mq\ssh,\dot{\mq}\ssh) \big)  + \mnu'\big(\underline{\mq}(\mq\ssh)\big) \Big)
+\mnu_{\ssP}(\mq\ssh, \dot{\mq}\ssh)  =  \mC\big(\underline{\mq}(\mq\ssh)\big)^\msT \Big(  \mM\big(\underline{\mq}(\mq\ssh)\big) \cdot \mc\big(\underline{\mq}(\mq\ssh), \underline{\dot{\mq}}(\mq\ssh,\dot{\mq}\ssh) \big)  + \mnu\big(\underline{\mq}(\mq\ssh)\big) \Big)
 \end{empheq}
 \begin{empheq}[box=\myyellowbox]{equation}
-\mg_{\ssP}(\mq\ssh)  = \mC\big(\underline{\mq}(\mq\ssh)\big)^\msT \cdot \mg'\big(\underline{\mq}(\mq\ssh)\big)
+\mg_{\ssP}(\mq\ssh)  = \mC\big(\underline{\mq}(\mq\ssh)\big)^\msT \cdot \mg\big(\underline{\mq}(\mq\ssh)\big)
 \end{empheq}
 \begin{empheq}[box=\myyellowbox]{equation}
 \mZ(\mq\ssh)^\msT = \mC(\underline{\mq}(\mq\ssh)\big)^\msT \mU
@@ -4135,7 +4150,7 @@ Para o caso de mecanismos com atuação redundante, há infinitas soluções par
 
 \chapter{Projeto dos controladores}
 
-Esta subseção é destinada ao projeto de controladores não lineares, destinados ao controle de posição de plataformas paralelas cujo modelo dinâmico para simulação dinâmica inversa é dado por \eqref{eq:DinamicaInversa2}, utilizando a técnica de Linearização por Realimentação aliada a outras leis de controle não linear, como as leis Controle por Modos Deslizantes \cite{Slotini, Utkin}, e também aliada a técnicas de controle linear, como a alocação de pólos no espaço de estados em tempo contínuo (Controle por Torque Computado).
+Este capítulo é destinado ao projeto de controladores não lineares, destinados ao controle de posição de plataformas paralelas cujo modelo dinâmico para simulação dinâmica inversa é dado por \eqref{eq:DinamicaInversa2}, utilizando a técnica de Linearização por Realimentação aliada a outras leis de controle não linear, como as leis Controle por Modos Deslizantes \cite{Slotini, Utkin}, e também aliada a técnicas de controle linear, como a alocação de pólos no espaço de estados em tempo contínuo (Controle por Torque Computado).
 
 Para facilitar a leitura das deduções e com o intuito de deixar um pouco menos carregada a notação, será adotada a seguinte notação:
 \begin{equation}
@@ -4160,7 +4175,9 @@ Além disso, definimos o erro de controle como sendo:
 \begin{equation}
 \me = \mxi_d - \mxi
 \end{equation}
-Sendo $\mxi_d$ o sinal de referência
+Sendo $\mxi_d$ o sinal de referência \\
+
+Nas próximas sessões, as principais equações serão destacadas através de cores. A cor azul escura indica equações de destaque no desenvolvimento. A cor azul clara indica equações de destaque secundário no desenvolvimento.
 
 \newpage
 
@@ -6697,16 +6714,16 @@ Pode-se relacionar a derivada temporal de $\breve{\mq}$ e $\momega$ das seguinte
 \dot{\breve{\mq}} = \breve{\mC}(\breve{\mq}) \cdot \momega
 \end{equation}
 \begin{equation}
-\momega = 4 \breve{\mC}^\msT (\breve{\mq})\cdot \dot{\breve{\mq}}
+\momega = 4 \breve{\mC} (\breve{\mq})^\msT \dot{\breve{\mq}}
 \end{equation}
 
 Além disso, repare que 
 \begin{equation} \label{eq:CQuatZero}
-\breve{\mC}^\msT (\breve{\mq})\cdot \breve{\mq} = \mzr
+\breve{\mC} (\breve{\mq})^\msT \breve{\mq} = \mzr
 \end{equation}
 
 \begin{equation}
-\breve{\mC}^\msT (\breve{\ma})\cdot \breve{\mb} = -\breve{\mC}^\msT (\breve{\mb})\cdot \breve{\ma}
+\breve{\mC} (\breve{\ma})^\msT \breve{\mb} = -\breve{\mC} (\breve{\mb})^\msT \breve{\ma}
 \end{equation}
 
 \chapter{Funções de transferência de motores DC} \label{ap:FuncoesDeTransferencia}

@@ -1,7 +1,7 @@
 \select@language {brazil}
 \contentsline {chapter}{Parte~I:~\MakeUppercase {Introdu\IeC {\c c}\IeC {\~a}o}}{27}
 \contentsline {chapter}{\numberline {1}Introdu\IeC {\c c}\IeC {\~a}o}{28}
-\contentsline {section}{\numberline {1.1}Objetivos}{29}
+\contentsline {section}{\numberline {1.1}Objetivos}{30}
 \contentsline {section}{\numberline {1.2}Sobre a organiza\IeC {\c c}\IeC {\~a}o do texto}{30}
 \contentsline {chapter}{\numberline {2}Revis\IeC {\~a}o da literatura}{31}
 \contentsline {section}{\numberline {2.1}Modelagem din\IeC {\^a}mica}{31}
