@@ -1072,8 +1072,12 @@
 	\vspace{\authorTitleLength}
     {\tituloformat \ABNTuppercasetitulodata}
 
-    % comentário
-    \vspace{2cm}
+    \vspace{1cm}
+    \begin{center}
+    	\textbf{Versão corrigida}
+    \end{center}
+    %\comentario{Versão corrigida} % comentário
+    \vspace{1cm}
     \hspace{.5\textwidth} % posicionando a minipage 
     \begin{minipage}{.49\textwidth}
       \begin{espacoumemeio}
