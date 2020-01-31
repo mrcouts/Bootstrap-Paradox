@@ -1,4 +1,4 @@
-\babel@toc {brazil}{}
+\select@language {brazil}
 \contentsline {chapter}{Parte~I:~\MakeUppercase {Introdu\IeC {\c c}\IeC {\~a}o}}{27}
 \contentsline {chapter}{\numberline {1}Introdu\IeC {\c c}\IeC {\~a}o}{28}
 \contentsline {section}{\numberline {1.1}Objetivos}{30}
@@ -23,7 +23,7 @@
 \contentsline {chapter}{\numberline {3}Metodologia da Pesquisa}{47}
 \contentsline {section}{\numberline {3.1}Primeira fase}{47}
 \contentsline {section}{\numberline {3.2}Segunda fase}{47}
-\contentsline {section}{\numberline {3.3}Terceira fase}{47}
+\contentsline {section}{\numberline {3.3}Terceira fase}{48}
 \contentsline {section}{\numberline {3.4}Quarta fase}{48}
 \contentsline {section}{\numberline {3.5}Quinta fase}{48}
 \contentsline {section}{\numberline {3.6}Sexta fase}{48}
@@ -39,7 +39,7 @@
 \contentsline {subsection}{\numberline {4.2.1}Modelo dos subsistemas}{65}
 \contentsline {subsection}{\numberline {4.2.2}Sistemas de esfor\IeC {\c c}os ativos generalizados}{66}
 \contentsline {subsection}{\numberline {4.2.3}V\IeC {\'\i }nculos cinem\IeC {\'a}ticos entre subsistemas}{67}
-\contentsline {subsection}{\numberline {4.2.4}Acoplamento de subsistemas}{67}
+\contentsline {subsection}{\numberline {4.2.4}Acoplamento de subsistemas}{68}
 \contentsline {section}{\numberline {4.3}Din\IeC {\^a}mica dos atuadores}{70}
 \contentsline {subsection}{\numberline {4.3.1}Cinem\IeC {\'a}tica}{71}
 \contentsline {subsubsection}{\numberline {4.3.1.1}Cinem\IeC {\'a}tica de velocidades angulares}{71}
@@ -88,7 +88,7 @@
 \contentsline {section}{\numberline {7.2}Ensaios Experimentais}{118}
 \contentsline {subsection}{\numberline {7.2.1}Bancada experimental}{118}
 \contentsline {subsection}{\numberline {7.2.2}Sistema de controle}{120}
-\contentsline {subsection}{\numberline {7.2.3}Derivadores num\IeC {\'e}ricos}{121}
+\contentsline {subsection}{\numberline {7.2.3}Derivadores num\IeC {\'e}ricos}{122}
 \contentsline {subsection}{\numberline {7.2.4}Observador de corrente}{122}
 \contentsline {subsection}{\numberline {7.2.5}Compensadores de n\IeC {\~a}o-linearidades}{122}
 \contentsline {subsection}{\numberline {7.2.6}Estrat\IeC {\'e}gias de controle}{123}

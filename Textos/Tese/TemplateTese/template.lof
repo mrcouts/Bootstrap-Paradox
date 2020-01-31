@@ -1,4 +1,4 @@
-\babel@toc {brazil}{}
+\select@language {brazil}
 \contentsline {figure}{\numberline {1}{\ignorespaces Rob\IeC {\^o} industrial Adept Quattro - Retirada de PhysOrg.com}}{28}
 \contentsline {figure}{\numberline {2}{\ignorespaces Malha de Controle Proporcional-Integral-Derivativo}}{40}
 \contentsline {figure}{\numberline {3}{\ignorespaces Malha de Controle por Torque Computado (Adaptado de \cite {Craig})}}{41}
@@ -8,7 +8,7 @@
 \contentsline {figure}{\numberline {7}{\ignorespaces Malha Controle por Modos Deslizantes}}{45}
 \contentsline {figure}{\numberline {8}{\ignorespaces Prot\IeC {\'o}tipo do mecanismo 5R}}{49}
 \contentsline {figure}{\numberline {9}{\ignorespaces Modelagem de mecanismo serial a partir do modelo de seus ligamentos}}{51}
-\contentsline {figure}{\numberline {10}{\ignorespaces Diagrama de acoplamento de subsistemas}}{51}
+\contentsline {figure}{\numberline {10}{\ignorespaces Diagrama de acoplamento de subsistemas}}{52}
 \contentsline {figure}{\numberline {11}{\ignorespaces Diagrama de acoplamento de subsistemas}}{70}
 \contentsline {figure}{\numberline {12}{\ignorespaces Modelagem de mecanismo paralelo a partir do modelo de suas cadeias mec\IeC {\^a}nicas}}{79}
 \contentsline {figure}{\numberline {13}{\ignorespaces Acoplamento de subsistemas: mecanismo paralelos}}{80}

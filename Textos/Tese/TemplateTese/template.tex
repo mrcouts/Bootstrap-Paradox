@@ -203,7 +203,7 @@ Com o intuito de explorar ao máximo o potencial deste tipo de arquitetura, nest
 
 %Detelhar mais o mecanismo, a bancada, a finalidade do controle, dizer quais técnicas, "os resultados experimentais obtidos mostram..."
 
-\textbf{Palavras-Chave} -- Mecanismos paralelos, Robótica, Modelagem dinâmica , Controle, Controle não linear.
+\textbf{Palavras-Chave} -- Mecanismos paralelos, Robótica, Modelagem dinâmica, Controle, Controle não linear.
 \end{resumo}
 
 
@@ -815,24 +815,24 @@ Em relação ao controle, esta tese visa contruir através da proposição de no
 Fundamentalmente, a metodologia desta pesquisa compreende a execução de seis fases, abrangendo desde o desenvolvimento de algoritmos para as modelagens cinemática e dinâmica ao projeto de controladores e sua validação experimental.
 
 \section{Primeira fase} 
-Desenvolver um algoritmo genérico, capaz de gerar os modelos dinâmicos completos de mecanismos paralelos translacionais que operem em espaço plano ou tridimensional. Esta geração parte da definição da topologia do mecanismo paralelo, suas cadeias cinemáticas, descrevendo a localização relativa de seus elos e juntas. 
+Desenvolvimento de um algoritmo genérico, capaz de gerar os modelos dinâmicos completos de mecanismos paralelos translacionais que operam em espaço plano ou tridimensional. Esta geração parte da definição da topologia do mecanismo paralelo, suas cadeias cinemáticas, descrevendo a localização relativa de seus elos e juntas.
 
-Dentre os efeitos de modelagem considerados, destacam-se os decorrentes da inércia efetiva e acoplada, das forças de Coriolis e centrífugas, da força gravitacional, bem como dos esforços dos atuadores. Pretende-se que a geração dos modelos seja realizada de forma implícita. Para tanto, será desenvolvida uma metodologia baseada no método Recursivo Modular de Modelagem (RMM) proposto por Orsino \cite{23orsino} que, por meio da definição de níveis hierárquicos da estrutura de um sistema mecânico e a descrição da dependência das variáveis cinemáticas envolvidas,  permite o acoplamento de subsistemas multicorpos.
+Dentre os efeitos de modelagem considerados, destacam-se os decorrentes da inércia efetiva e acoplada, das forças de Coriolis e centrífugas, da força gravitacional, bem como dos esforços dos atuadores. O algoritmo permite que a geração dos modelos seja realizada de forma implícita. Para tanto, foi desenvolvida uma metodologia baseada no método Recursivo Modular de Modelagem (RMM) proposto por Orsino \cite{23orsino} que, por meio da definição de níveis hierárquicos da estrutura de um sistema mecânico e a descrição da dependência das variáveis cinemáticas envolvidas,  permite o acoplamento de subsistemas multicorpos.
 
 \section{Segunda fase} 
-Efetuar as modelagens cinemática e dinâmica do mecanismo articulado plano 5R \cite{22orsino}, utilizando o algoritmo desenvolvido na fase anterior.
+Realização da modelagem cinemática e dinâmica do mecanismo articulado plano 5R \cite{22orsino}, utilizando o algoritmo desenvolvido na fase anterior.
 
 \section{Terceira fase} 
-Nesta fase, diferentes técnicas de controle serão avaliadas sob a perspectiva de sua utilização em manipuladores paralelos. Assim, em princípio, esta pesquisa foca na síntese de um controlador não-linear robusto e de alto desempenho. Para tanto, serão consideradas as incertezas paramétricas e a possibilidade de atuação redundante \cite{Cheng}, além de estratégias para a determinação de leis de controle com custo computacional consideralvemente menor do que as tradicionais, que empreguem o Controle por Torque Computado \cite{Craig, Zubizarreta}.
+Nesta fase, diferentes técnicas de controle foram avaliadas sob a perspectiva de sua utilização em manipuladores paralelos. Assim, em princípio, esta pesquisa se focou na síntese de um controlador não-linear robusto e de alto desempenho. Para tanto, foram levadas em conta as incertezas paramétricas e a possibilidade de atuação redundante \cite{Cheng}, além de estratégias para a determinação de leis de controle com custo computacional consideralvemente menor do que as tradicionais, como a lei de Controle por Torque Computado \cite{Craig, Zubizarreta}.
 
-\section{Quarta fase} Avaliar o emprego de diferentes técnicas de controle de trajetória aplicadas especificamente para o manipulador 5R, empregando a metodologia da terceira fase.
+\section{Quarta fase} Avaliação do emprego de diferentes técnicas de controle de trajetória aplicadas especificamente para o manipulador 5R, empregando a metodologia da terceira fase.
 
-\section{Quinta fase} Realizar diversas simulações que permitam observar a consistência dos resultados, no tocante às análises cinemáticas direta e inversa, bem como das análises dinâmicas direta e inversa. Além disso, serão determinadas as respostas dinâmicas do manipulador sujeito às distintas leis de controle sintetizadas.
+\section{Quinta fase} Realização de diversas simulações que permiram observar a consistência dos resultados, no tocante às análises cinemáticas direta e inversa, bem como das análises dinâmicas direta e inversa. Além disso, foram determinadas as respostas dinâmicas do manipulador sujeito às distintas leis de controle sintetizadas.
 
 \section{Sexta fase} 
-De modo a avaliar o desempenho previsto pelo uso de diferentes controladores para o manipulador paralelo 5R (figura \ref{fig:Clara}), será realizada a validação experimental em uma das bancadas de ensaio do LaMMaR. Para tanto, serão escolhidas duas trajetórias: uma que considere o comportamento em regime permanente e outra em regime transitório. 
+De modo a avaliar o desempenho previsto pelo uso de diferentes controladores para o manipulador paralelo 5R (figura \ref{fig:Clara}), foi realizada a validação experimental em uma das bancadas de ensaio do LaMMaR. Para tanto, foram escolhidas duas trajetórias: uma que considera o comportamento em regime permanente e outra em regime transitório. 
 
-Neste sentido, almeja-se observar se haverá alguma diferença de desempenho se o controle for executado no espaço das juntas ou no da tarefa. Além disso, pretende-se considerar os efeitos da implementação de técnicas de controle puras ou combinadas. Para auxiliar na comparação entre as técnicas de controle, serão definidas duas métricas: uma que considere o erro de posicionamento do efetuador e outra a magnitude dos torques dos atuadores.
+Neste sentido, almejava-se também observar se haveria alguma diferença de desempenho se o controle fosse executado no espaço das juntas ou no da tarefa. Para auxiliar na comparação entre as técnicas de controle, foram definidas duas métricas: uma que considera o erro de posicionamento do efetuador e outra a magnitude dos torques dos atuadores.
 
 %\section{O que tinha antes} 
 %O estágio atual de desenvolvimento do presente projeto ocorre basicamente em três áreas:
@@ -867,7 +867,7 @@ Este capítulo tem o intuito de apresentar um algoritmo genérico para a obtenç
 	\label{fig:AcoplamentoMecSerialFig}
 \end{figure}
 
-O algoritmo apresentado é implementável em linguagens de programação comumente utilizadas atualmente, como C++, Java e Python, sem necessitar de recursos de manipulação simbólica. Para a obtenção do modelo, são necessários apenas os parametros de Denavit-Hartemberg \cite{Craig, Denavit, Lipkin, Cabral} do mecanismo e as posições dos centros de massa dos ligamentos em relação aos sistemas de coordenadas fixos aos ligamentos.
+O algoritmo apresentado é implementável em linguagens de programação comumente utilizadas atualmente, como C++, Java e Python, sem necessitar de recursos de manipulação simbólica. Para a obtenção do modelo, são necessários apenas os parametros de Denavit-Hartemberg \cite{Craig, Denavit, Lipkin, Cabral} do mecanismo e as posições dos centros de massa dos ligamentos em relação aos sistemas de coordenadas fixos aos ligamentos. Uma implementação do algoritmo pode ser encontrada em \url{https://github.com/mrcouts/robotics}.
 
 Sejam $\ssB_1,\hdots,\ssB_\nu$ $\nu$ subsistemas ligamentos, $\ssF$ um subsistema de esforços ativos generalizados, e $\ssS$ um sistema mecânico serial de $\nu$ graus de liberdade. Um diagrama de acoplamento dos subsistemas é representado pela figura \ref{fig:AcoplamentoMecSerial}.
 \begin{figure}[H]
@@ -2817,7 +2817,7 @@ Este capítulo tem o intuito de apresentar um algoritmo genérico para a obtenç
 	\label{fig:AcoplamentoMecParaleloFig}
 \end{figure}
 
-O algoritmo apresentado é implementável em linguagens de programação comumente utilizadas atualmente, como C++, Java e Python, sem necessitar de recursos de manipulação simbólica. Para a obtenção do modelo do mecanismo paralelos, são necessários apenas os modelos de mecanismos seriais deduzidos  utilizando o algoritmo apresentado anteriormente, do modelo do efetuador, e de 7 matrizes constantes que são utilizadas para descrever a arquitetura do mecanismo paralelo. 
+O algoritmo apresentado é implementável em linguagens de programação comumente utilizadas atualmente, como C++, Java e Python, sem necessitar de recursos de manipulação simbólica. Para a obtenção do modelo do mecanismo paralelos, são necessários apenas os modelos de mecanismos seriais deduzidos  utilizando o algoritmo apresentado anteriormente, do modelo do efetuador, e de 4 matrizes constantes que são utilizadas para descrever a arquitetura do mecanismo paralelo.  Uma implementação do algoritmo pode ser encontrada em \url{https://github.com/mrcouts/robotics}.
 
 Para realizar a modelagem de mecanismos paralelos a partir de subsistemas seriais j\'a deduzidos, \'e necess\'ario introduzir mais alguns conceitos. Sejam $\ssS_1, \hdots, \ssS_{n}$ $n$ subsistemas seriais, $\ssE$ o subsistema do efetuador do mecanismo paralelo e $\ssP$ um sistema mecânico mecanismo paralelo gerado pelo acoplamento dos subsistemas citados. O acoplamento dos subsistemas é representado pela figura \ref{fig:AcoplamentoMecParalelo}.
 \begin{figure}[h]
@@ -4928,7 +4928,7 @@ Dados os parâmetros geométricos definidos na tabela \ref{tab:parametrosSimulac
 	\label{fig:RRWS}
 \end{figure}
 
-A região em azul escuro é a região não pertencente ao espaço de trabalho do mecanismo. As regiões em azul claro, em amarelo, e em vermelho são regiões pertencententes ao espaço de trabalho do mecanismo. A região a amarela é considerada singular (próxima a singularidades) e a vermelha é a trajetória a ser seguida pelo mecanismo.
+A região em azul escuro é a região não pertencente ao espaço de trabalho do mecanismo. As regiões em azul claro, em amarelo, e em vermelho são regiões pertencententes ao espaço de trabalho do mecanismo. A região vermelha é a trajetória a ser seguida pelo mecanismo. A região a amarela é considerada singular (próxima a singularidades), e um ponto é considerado pertencente a essa região quando $|\det(\mA\mQ\cir)| < 1.6 \cdot 10^{-6}$, para $\mq\ssh = \begin{bmatrix} x & y \end{bmatrix}^\msT$ ou $|\det(\mA\mQ\cir)| < 10^{-11}$, para $\mq\ssh = \begin{bmatrix} \theta_{11} & \theta_{21} \end{bmatrix}^\msT$.
 
 \subsubsection{Condições iniciais}
 \begin{equation}
@@ -4962,13 +4962,13 @@ Nas figuras \ref{fig:Torque1_0} a \ref{fig:ey_40} são apresentados os resultado
 \begin{multicols}{2}
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.42]{imagens/tau1_0.png}  
+	\includegraphics[scale=0.40]{imagens/tau1_0.png}  
 	\caption{$\tau_1$: sem incerteza}
 	\label{fig:Torque1_0}
 \end{figure}
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.42]{imagens/tau2_0.png}  
+	\includegraphics[scale=0.40]{imagens/tau2_0.png}  
 	\caption{$\tau_2$: sem incerteza}
 	\label{fig:Torque2_0}
 \end{figure}
@@ -4977,13 +4977,13 @@ Nas figuras \ref{fig:Torque1_0} a \ref{fig:ey_40} são apresentados os resultado
 \begin{multicols}{2}
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.42]{imagens/tau1_20.png}  
+	\includegraphics[scale=0.40]{imagens/tau1_20.png}  
 	\caption{$\tau_1$: 20\% de incerteza}
 	\label{fig:Torque1_20}
 \end{figure}
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.42]{imagens/tau2_20.png}  
+	\includegraphics[scale=0.40]{imagens/tau2_20.png}  
 	\caption{$\tau_2$: 20\% de incerteza}
 	\label{fig:Torque2_20}
 \end{figure}
@@ -4992,13 +4992,13 @@ Nas figuras \ref{fig:Torque1_0} a \ref{fig:ey_40} são apresentados os resultado
 \begin{multicols}{2}
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.42]{imagens/tau1_40.png}  
+	\includegraphics[scale=0.40]{imagens/tau1_40.png}  
 	\caption{$\tau_1$: 40\% de incerteza}
 	\label{fig:Torque1_40}
 \end{figure}
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.42]{imagens/tau2_40.png}  
+	\includegraphics[scale=0.40]{imagens/tau2_40.png}  
 	\caption{$\tau_2$: 40\% de incerteza}
 	\label{fig:Torque2_40}
 \end{figure}
@@ -5009,13 +5009,13 @@ Nas figuras \ref{fig:Torque1_0} a \ref{fig:ey_40} são apresentados os resultado
 \begin{multicols}{2}
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.42]{imagens/ex_0.png}  
+	\includegraphics[scale=0.40]{imagens/ex_0.png}  
 	\caption{$e_x$: sem incerteza}
 	\label{fig:ex_0}
 \end{figure}
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.42]{imagens/ey_0.png}  
+	\includegraphics[scale=0.40]{imagens/ey_0.png}  
 	\caption{$e_y$: sem incerteza}
 	\label{fig:ey_0}
 \end{figure}
@@ -5024,13 +5024,13 @@ Nas figuras \ref{fig:Torque1_0} a \ref{fig:ey_40} são apresentados os resultado
 \begin{multicols}{2}
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.42]{imagens/ex_20.png}  
+	\includegraphics[scale=0.40]{imagens/ex_20.png}  
 	\caption{$e_x$: 20\% de incerteza}
 	\label{fig:ex_20}
 \end{figure}
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.42]{imagens/ey_20.png}  
+	\includegraphics[scale=0.40]{imagens/ey_20.png}  
 	\caption{$e_y$: 20\% de incerteza}
 	\label{fig:ey_20}
 \end{figure}
@@ -5039,17 +5039,19 @@ Nas figuras \ref{fig:Torque1_0} a \ref{fig:ey_40} são apresentados os resultado
 \begin{multicols}{2}
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.42]{imagens/ex_40.png}  
+	\includegraphics[scale=0.40]{imagens/ex_40.png}  
 	\caption{$e_x$: 40\% de incerteza}
 	\label{fig:ex_40}
 \end{figure}
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.42]{imagens/ey_40.png}  
+	\includegraphics[scale=0.40]{imagens/ey_40.png}  
 	\caption{$e_y$: 40\% de incerteza}
 	\label{fig:ey_40}
 \end{figure}
 \end{multicols}
+
+\newpage
 
 Nos gráficos pode-se claramente observar o aumento do esforço de controle conforme o nível de incerteza cresce. Também é possível observar que o perfil do erro na coordenada $x$ não sofreu muita influência com o aumento do nível de incerteza, enquando o perfil do erro em $y$ muda bastante de formato.
 
@@ -5146,11 +5148,12 @@ Pelos enconders são obtidos os deslocamentos angulares dos motores, e com os de
     \label{fig:ControleEspacoDaTarefa}
 \end{figure}
 
+Repare que na estratégia de controle no espaço da tarefa, a posição do efetuador não é medida, mas estimada a partir da leitura dos encoders e da cinemática direta. Esta estatégia foi adotada tendo em vista que a medição direta da posição do efetuador a partir de câmeras e processamento de imagens acarretaria um aumento muito significativo no custo computacional da malha de controle, o que tornaria inviável a utilização da frequência de amostragem de 333Hz adotada e tornaria possível apenas a realização de trajetórias em baixa velocidade. Este tipo de estratégia é discutida em \cite{Craig}.
+
 \subsection{Derivadores numéricos}
 \label{derivador}
 
 A partir das posições angulares obtidas através da leitura dos encoders, é possível estimar as velocidades angulares dos motores utilizando um derivador numérico. Uma das formas de se implementar um derivador numérico é utilizar o método das diferenças finitas:
-
 \begin{equation}
 \dot{x}_k = \frac{x_k - x_{k-1}}{T}
 \end{equation}
@@ -5160,7 +5163,6 @@ No entanto, como há ruídos nos sinais obtidos, a utilização  do método das 
 \subsection{Observador de corrente}
 
 Para a estimação da corrente elétrica foi considerada a equacação da dinâmica elétrica do motor \eqref{eq:DinEletrica_rot}:
-
 \begin{equation}
 \tag{\ref{eq:DinEletrica_rot}} \label{eq:DinamicaEletricaMotor}
 	   u = L \frac{di}{dt} + R i + k_{e} \omega
@@ -5212,7 +5214,6 @@ Repare que, para $\underline{k} = \mzr$, temos a lei de Controle por Torque Comp
 Esta lei de controle tem a vantagem de, além de poder ser interpretada como uma estratégia híbrida, praticamente elimina o fenômeno do \emph{chattering}, tendo em vista que o termo descontínuo é suavizado através de uma função de saturação e uma integral.
 
 Um diagrama de blocos que representa o caso geral da lei de controle da equação \eqref{eq:LeiTCMD} pode ser visto na figura \ref{fig:TCMD}.
-
 \begin{figure}[h]
 	\centering
 	\includegraphics[scale=0.39]{../figures/TCMD.jpg}  
@@ -5223,8 +5224,10 @@ Um diagrama de blocos que representa o caso geral da lei de controle da equaçã
 
 \subsection{Parâmetros do sistema}
 
-Nas tabelas \ref{tab:parametrosCadeia1} e \ref{tab:parametrosCadeia2} são apresentados os valores estimados dos parâmetros das cadeias seriais do mecanismo. A massa do efetuador é considerada nula. Os comprimentos dos elos e a distância entre os atuadores são os valores de projeto do sistema e estão de acordo com as medições realizadas. Os parâmetros de inércias, ou seja, as massas, momentos de inércia, e posição dos centros de massa, foram obtidos a partir do modelo CAD do mecanismo. 
+Nas tabelas \ref{tab:parametrosCadeia1} e \ref{tab:parametrosCadeia2} são apresentados os valores estimados dos parâmetros das cadeias seriais do mecanismo. A massa do efetuador é considerada nula. Os comprimentos dos elos e a distância entre os atuadores são os valores de projeto do sistema e estão de acordo com as medições realizadas. Os parâmetros de inércias, ou seja, as massas, momentos de inércia, e posição dos centros de massa, foram obtidos a partir do modelo CAD do mecanismo.
 
+Os valores dos parâmetros estimados dos motores são apresentados nas tabelas \ref{parametrosMotor} e \ref{parametrosMotor2}, as quais estão no apêndice \ref{ap:CurvaDosMotores}, juntamente com o processo de identificação utilizado. 
+\begin{multicols}{2}
 \begin{table}[H] 
 \centering
 \caption{Parâmetros da cadeia serial 1}
@@ -5260,15 +5263,11 @@ $J_{z1}$     & $2.960   \cdot 10^{-4}$    & $kg.m^{2}$ \\
 $J_{z2}$     & $9.800   \cdot 10^{-4}$    & $kg.m^{2}$ \\
 \end{tabular}
 \end{table}
-
-Os valores dos parâmetros estimados dos motores são apresentados nas tabelas \ref{parametrosMotor} e \ref{parametrosMotor2}, as quais estão no apêndice \ref{ap:CurvaDosMotores}, juntamente com o processo de identificação utilizado.
-
-
+\end{multicols}
 
 \subsection{Trajetórias de referência}
 
 A primeira trajetória realizada é uma trajetória circular com período de 1 segundo. São realizados 8 ciclos seguidos de uma parada repentina. Sua expressão é dada por:
-
 \begin{equation}
 \begin{cases}
 x_d(t) = -0.05 \sin(2\pi t) \\
@@ -5277,7 +5276,6 @@ y_d(t) = 0.158 - 0.05 \cos(2\pi t) \\
 \end{equation}
 
 A segunda trajetória a ser realizada é uma trajetória triangular cujas coordenadas dos vértices (em metros) são:
-
 \begin{equation} \label{eq:zeroMaquina}
 \mx_1 = \begin{bmatrix}
 -0.002 & 0.108 
@@ -5295,17 +5293,14 @@ A segunda trajetória a ser realizada é uma trajetória triangular cujas coorde
 \end{equation}
 
 São realizados 2 ciclos, sendo que cada lado do triângulo é percorrido em $0.75s$, e sendo o trecho I de $\mx_1$ a $\mx_2$, o trecho II de $\mx_2$ a $\mx_3$, e o trecho III de $\mx_3$ a $\mx_1$. Depois de completar os 2 ciclos, é feita uma parada suave. Em cada lado do triângulo, é parametrizada uma trajetória polinomial de sétima ordem, na qual é imposta a posição inicial e final, velocidade nula, aceleração nula e tranco nulo no início e no final da trajetória. A expressão do polinômio é dada por:
-
 \begin{equation}
 \mx(\mathfrak{t}) = \mx_0 + (\mx_f - \mx_0) (35 \mathfrak{t}^4 - 84 \mathfrak{t}^5 + 70 \mathfrak{t}^6 - 20 \mathfrak{t}^7)
 \end{equation}
-
 Sendo $\mx$ a posição atual, $\mx_0$ a posição inicial, $\mx_f$ a posição final, e $\mathfrak{t}$ a fração do tempo decorrido em relação ao tempo total da trajetória (repare que $\mx(1) = \mx_f$).
 
 \subsection{Condições iniciais}
 
 O mecanismo sempre parte do repouso na posição $\mx_1$, dada pela equação \eqref{eq:zeroMaquina}
-
 \begin{equation} \label{eq:zeroMaquina}
 \mx_1 = \begin{bmatrix}
 -0.002 & 0.108 
@@ -5323,7 +5318,6 @@ Com o intuito de que o sistema em malha fechada se comporte como um sistema de s
 \end{equation}
 
 Os parâmetros dos controladores de posição utilizados nas trajetórias definidas são apresentados nas tabelas \ref{tab:parametrosControleAtuadoresCirculo}, \ref{tab:parametrosControleAtuadoresTriangulo} e \ref{tab:parametrosControleEfetuador}.
-
 \begin{table}[H] 
 \centering
 \caption{Parâmetros dos controladores: espaço das juntas - trajetória circular}
@@ -5336,7 +5330,6 @@ TCq        & $60$               & -                     & -         & -         
 TCMDq      & $60$               & -                     & $20$      & $363$          & $363$          \\
 \end{tabular}
 \end{table}
-
 \begin{table}[H] 
 \centering
 \caption{Parâmetros dos controladores: espaço das juntas - trajetória triangular}
@@ -5349,7 +5342,6 @@ TCq        & $60$               & -                     & -         & -         
 TCMDq      & $60$               & -                     & $20$      & $363$          & $363$          \\
 \end{tabular}
 \end{table}
-
 \begin{table}[H] 
 \centering
 \caption{Parâmetros dos controladores: espaço da tarefa}
@@ -5362,7 +5354,6 @@ TCx        & $60$               & -         & -             & -            & -  
 TCMDx      & $60$               & -         & $6$           & $103$        & $0$          \\
 \end{tabular}
 \end{table}
-
 Além disso, os controladores de corrente utilizados são controladores lineares de segunda ordem, projetados por alocação de polos. A expressões das funções de transferência de um motor DC são deduzidas e apresentadas no apêndice \ref{ap:FuncoesDeTransferencia}, e o projeto do controlador é apresentado no apêndice \ref{ap:ControladorDeCorrente}. Tendo em vista que o período de amostragem da malha de corrente é de $1ms$, 3 dos pólos 4 polos da malha de corrente são alocados em $z=0$, $z=0.6$, $z=0.7$. O último polo é alocado na mesma posição do zero em malha aberta do sistema.
 
 \subsection{Resultados experimentais}
@@ -5375,20 +5366,20 @@ Nesta subsessão são apresentados os gráficos de seguimento de trajetória, da
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.39]{../../../Experimental/Aquisicoes/PIDt_circulo/xy.png}  
+	\includegraphics[scale=0.37]{../../../Experimental/Aquisicoes/PIDt_circulo/xy.png}  
 	\caption{Trajetória realizada}
 	\label{fig:PIDq_circulo_xy}
 \end{figure}
 \begin{multicols}{2}
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.39]{../../../Experimental/Aquisicoes/PIDt_circulo/ex.png}  
+	\includegraphics[scale=0.37]{../../../Experimental/Aquisicoes/PIDt_circulo/ex.png}  
 	\caption{Erro de controle $e_x$}
 	\label{fig:PIDq_circulo_ex}
 \end{figure}
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.39]{../../../Experimental/Aquisicoes/PIDt_circulo/ey.png}  
+	\includegraphics[scale=0.37]{../../../Experimental/Aquisicoes/PIDt_circulo/ey.png}  
 	\caption{Erro de controle $e_y$}
 	\label{fig:PIDq_circulo_ey}
 \end{figure}
@@ -5396,13 +5387,13 @@ Nesta subsessão são apresentados os gráficos de seguimento de trajetória, da
 \begin{multicols}{2}
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.39]{../../../Experimental/Aquisicoes/PIDt_circulo/tau1.png}  
+	\includegraphics[scale=0.37]{../../../Experimental/Aquisicoes/PIDt_circulo/tau1.png}  
 	\caption{Esforço de controle $\tau_1$}
 	\label{fig:PIDq_circulo_tau1}
 \end{figure}
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.39]{../../../Experimental/Aquisicoes/PIDt_circulo/tau2.png}  
+	\includegraphics[scale=0.37]{../../../Experimental/Aquisicoes/PIDt_circulo/tau2.png}  
 	\caption{Esforço de controle $\tau_2$}
 	\label{fig:PIDq_circulo_tau2}
 \end{figure}
@@ -6136,12 +6127,11 @@ Por fim, pôde-se concluir que a escolha entre o espaço das juntas e o da taref
 \section{Principais contribuições}
 
 Dentre as principais contribuições, destacam-se:
-
-a) O desenvolvimento de um algoritmo genérico para modelagem cinemática e dinâmica de manipuladores seriais e paralelos translacionais. Este algoritmo poderá integrar os sistemas de controle de outros manipuladores paralelos do LaMMaR, como os robôs Laila e Dora.
-
-b) A síntese de uma nova lei de controle não linear robusto, a qual pode ser interpretada como a combinação das técnicas de Controle por Torque Computado ou Controle Proporcional-Derivativo ao Controle por Modos Deslizantes, e a constatação de seu caráter promissor no que tange à minimização do erro de seguimento de trajetória, sem aumentar demasiadamente o consumo energético do manipulador.
-
-c) A comparação do desempenho de técnicas combinadas e puras, mediante a execução de ensaios experimentais, com controle da trajetória do efetuador, permitindo a avaliação do comportamento do manipulador, tanto em regime permanente como em regime transitório.
+\begin{itemize}
+\item[a)] O desenvolvimento de um algoritmo genérico para modelagem cinemática e dinâmica de manipuladores seriais e paralelos translacionais. Este algoritmo poderá integrar os sistemas de controle de outros manipuladores paralelos do LaMMaR, como os robôs Laila e Dora.
+\item[b)] A síntese de uma nova lei de controle não linear robusto, a qual pode ser interpretada como a combinação das técnicas de Controle por Torque Computado ou Controle Proporcional-Derivativo ao Controle por Modos Deslizantes, e a constatação de seu caráter promissor no que tange à minimização do erro de seguimento de trajetória, sem aumentar demasiadamente o consumo energético do manipulador.
+\item[c)] A comparação do desempenho de técnicas combinadas e puras, mediante a execução de ensaios experimentais, com controle da trajetória do efetuador, permitindo a avaliação do comportamento do manipulador, tanto em regime permanente como em regime transitório.
+\end{itemize}
 
 Outras contribuições referem-se às seguintes publicações realizadas durante o desenvolvimento da Tese:
 
