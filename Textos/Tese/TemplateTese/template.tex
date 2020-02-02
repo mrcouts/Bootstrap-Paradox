@@ -395,6 +395,7 @@ Aiming to fully explore the potential of this kind of architecture, in this thes
   $l$ & Comprimento de um ligamento \\
   $l_g$ & Distância entre o começo de um ligamento e seu centro de massa \\
   $L$ & Indutância \\
+  $\mathfrak{L}$ & Função Lagrangeana \\
   $m$ & Massa \\
   $n$ & Número de cadeiais mecânicas de um mecanismo paralelo \\
   $p$ & Pólo de função de transferência \\
@@ -445,6 +446,7 @@ Aiming to fully explore the potential of this kind of architecture, in this thes
   $\npmat{\cdot}$ & Matriz pseudo-inversa \\
   $\nmmat{\cdot}$ & Módulo aplicado em cada componente de uma matriz ou matriz-coluna
 \end{longtable}
+\setcounter{table}{0}
 
 % ========== Sumário ==========
 \sumario
@@ -647,7 +649,7 @@ Além disso, foram encontrados trabalhos que utilizam o Princípio dos Trabalhos
 
 No trabalho de Cheng \emph{et al.} \cite{ChengLiu} a ``formulação de Lagrange-D’Alembert'' é utilizada para deduzir uma formulação de acoplamento de subsistemas. A formulação é utilizada para obter o modelo dinâmico de um mecanismo paralelo de 2 graus de liberdade com atuação redundante. São utilizados os modelos já conhecidos para as cadeias seriais, e é feito o acoplamento dos subsistemas a partir de jacobianos dos vínculos cinemáticos.
 
-Em \cite{Yen}, também é utilizada uma estratégia de acoplamento de subsistemas, também deduzida deduzida a partir da ``formulação de Lagrange-D’Alembert'', para obter o modelo dinâmico de um mecanismo paralelo de 3 graus de liberdade. No entanto, neste trabalho, a estratégia não é apresentada de uma maneira mais geral, podendo dar a impressão ao leitor de que isso só foi possível devido à topologia particular do mecanismo em questão. São realizadas simulações dinâmicas diretas do controle de posição do mecanismo, utilizando as técnicas de controle PID e Controle por Torque Computado, as quais são comparadas com resultados experimentais utilizando as mesmas estratégias de controle.
+Em \cite{Yen}, também é utilizada uma estratégia de acoplamento de subsistemas, também deduzida a partir da ``formulação de Lagrange-D’Alembert'', para obter o modelo dinâmico de um mecanismo paralelo de 3 graus de liberdade. No entanto, neste trabalho, a estratégia não é apresentada de uma maneira mais geral, podendo dar a impressão ao leitor de que isso só foi possível devido à topologia particular do mecanismo em questão. São realizadas simulações dinâmicas diretas do controle de posição do mecanismo, utilizando as técnicas de controle PID e Controle por Torque Computado, as quais são comparadas com resultados experimentais utilizando as mesmas estratégias de controle.
 
 \subsection{Princípio dos Trabalhos Virtuais e das Potências Virtuais}
 
@@ -971,7 +973,7 @@ d_i
 
 A cinemática de posição do efetuador poderia ser feita a partir da composição (produtos) de matrizes de transformação homogênea. Este tipo de estratégia é bastante conveniente quando se trata da realização de cálculos simbólicos. Entretanto, não é muito adequada para implementações numéricas, devido ao acúmulo de erros numéricos gerado pela multiplicação de matrizes de rotação.
 
-Uma representação de rotação por quaterion unitário equivalente à matriz $\mR'_i(q_i)$ é dada por:
+Uma representação de rotação por quaternion unitário equivalente à matriz $\mR'_i(q_i)$ é dada por:
 \begin{empheq}[box=\myyellowbox]{equation}
 \breve{\mr}'_i(q_i) =
 \begin{bmatrix}
@@ -1278,7 +1280,7 @@ Para obter a velocidade dos centros de massa dos outros ligamentos, utiliza-se o
 \vv_{\ttc_{\lllB_i}}^{\lllN} = \vv_{\ttc_{\lllB_i} \rl \lllB_{i-1}}^{\lllN} + \vv_{\ttc_{\lllB_i}}^{\lllB_{i-1}}
 \end{equation}
 
-$\vv_{\ttc_{\lllB_i} \rl \lllB_{i-1}}^{\lllN}$ pode ser relacionado com a velocidade do centro de massa do ligamento anterior através a equação do campo de velocidades \eqref{eq:Poisson_v}:
+$\vv_{\ttc_{\lllB_i} \rl \lllB_{i-1}}^{\lllN}$ pode ser relacionado com a velocidade do centro de massa do ligamento anterior através da equação do campo de velocidades \eqref{eq:Poisson_v}:
 \begin{equation} \label{eq:VelocidadeDeArrastamento}
 \vv_{\ttc_{\lllB_i} \rl \lllB_{i-1}}^{\lllN} = \vv_{\ttc_{\lllB_{i-1}}}^{\lllN} + \vomega_{\lllB_{i-1}}^{\lllN} \wedge \vr_{\ttc_{\lllB_{i-1}} \rl \ttc_{\lllB_{i}}}
 \end{equation}
@@ -1474,7 +1476,7 @@ Para obter a aceleração do centro de massa dos outros ligamentos, utiliza-se o
 \begin{equation} \label{eq:ComposicaoAc}
 \va_{\ttc_{\lllB_i}}^{\lllN} = \va_{\ttc_{\lllB_{i}} \rl \lllB_{i-1}}^{\lllN} + \va_{\ttc_{\lllB_i}}^{\lllB_{i-1}} + 2 \vomega_{\lllB_{i-1}}^{\lllN} \wedge \vv_{\ttc_{\lllB_i}}^{\lllB_{i-1}} 
 \end{equation}
-$\va_{\ttc_{\lllB_i} \rl \lllB_{i-1}}^{\lllN}$ pode ser relacionado com a aceleração do centro de massa do ligamento anterior através a equação do campo de acelerações \eqref{eq:Poisson_a}:
+$\va_{\ttc_{\lllB_i} \rl \lllB_{i-1}}^{\lllN}$ pode ser relacionado com a aceleração do centro de massa do ligamento anterior através da equação do campo de acelerações \eqref{eq:Poisson_a}:
 \begin{equation} \label{eq:AceleracaoDeArrastamento}
 \va_{\ttc_{\lllB_i} \rl \lllB_{i-1}}^{\lllN} = \va_{\ttc_{\lllB_{i-1}}}^{\lllN} + \valpha_{\lllB_{i-1}}^{\lllN} \wedge \vr_{\ttc_{\lllB_{i-1}} \rl \ttc_{\lllB_{i}}} + \vomega_{\lllB_{i-1}}^{\lllN} \wedge \vomega_{\lllB_{i-1}}^{\lllN} \wedge \vr_{\ttc_{\lllB_{i-1}} \rl \ttc_{\lllB_{i}}}
 \end{equation}
@@ -2147,7 +2149,7 @@ Temos que o trabalho virtual associado a cada subsistema é dado por:
 
 \subsection{Sistemas de esforços ativos generalizados} 
 
-Considere também o subsistema $\ssF$, o que é constituido pelos esforços que os atuadores aplicam nas juntas do mecanismo. Primeiramente, definimos a matriz-coluna de quasi-velocidades relativas a esse subsistema:
+Considere também o subsistema $\ssF$, o que é constituído pelos esforços que os atuadores aplicam nas juntas do mecanismo. Primeiramente, definimos a matriz-coluna de quasi-velocidades relativas a esse subsistema:
 %Muitas vezes é conveniente definir um conjunto de quasi-velocidades adicionais $\mp_0$, as quais só fazem sentido para o sistema acoplado, e sistemas de forças ativas generalizadas adicionais $\mf_0$ aplicados na direção das quasi-velocidades adicionais. \\
 
 %Neste algoritmo de modelagem, serão considerados como quasi-velocidades adicionais as derivadas temporais das coordenadas das juntas, ou seja:
@@ -2398,9 +2400,9 @@ m_i \mJ_{v\,i}^\msT \mJ_{v\,i} + \mJ_{\omega\,i}^\msT \mI_i \mJ_{\omega\,i}
 
 \section{Dinâmica dos atuadores}
 
-Esta subseção tem o intuito de complementar algoritmo de modelagem de mecanismos seriais já apresentado através inclusão da dinâmica dos atuadores. \\ 
+Esta subseção tem o intuito de complementar algoritmo de modelagem de mecanismos seriais já apresentado através da inclusão da dinâmica dos atuadores. \\ 
 
-Sejam $\ssR_1,\hdots,\ssR_\nu$ $\nu$ subsistemas rotores dos atuadores, os quais possivelmente estarão a acoplados a redutores de velocidades, $\ssT$ um subsistema de esforços ativos generalizados aplicados aos rotores,  e $\ssS'$ um sistema mecânico serial de $\nu$ graus de liberdade, constituido por um mecanismo serial $\ssS$ e os subsistemas citados anteriormente. Um diagrama de acoplamento dos subsistemas é representado pelo figura \ref{fig:AcoplamentoMecSerialRotores}.
+Sejam $\ssR_1,\hdots,\ssR_\nu$ $\nu$ subsistemas rotores dos atuadores, os quais possivelmente estarão acoplados a redutores de velocidades, $\ssT$ um subsistema de esforços ativos generalizados aplicados aos rotores,  e $\ssS'$ um sistema mecânico serial de $\nu$ graus de liberdade, constituído por um mecanismo serial $\ssS$ e os subsistemas citados anteriormente. Um diagrama de acoplamento dos subsistemas é representado pela figura \ref{fig:AcoplamentoMecSerialRotores}.
 \begin{figure}[h]
 	\centering
 	\includegraphics[scale=0.42]{imagens/DiagramaAcoplamentoMecSerialRotores.png}  
@@ -2693,7 +2695,7 @@ Além disso, o trabalho virtual associado a este subsistema é dado por:
 
 \subsubsection{Sistemas de forças ativas generalizadas} 
 
-Considere também um subsistema constituido pelos esforços que os atuadores aplicam em seus rotores. Os torques gerados pelos atuadores são proporcionais à corrente elétrica que flui pelas suas armaduras e são aplicados na direção dos deslocamentos virtuais relativos dos rotores. Além disso, é possível que hajam esforços de atrito devido ao atrito gerado nos mancais e nas engrenagens do redutor, aplicados na direção aposta aos deslocamentos virtuais relativos dos rotores. Sendo assim, o trabalho virtual associado a este subsistema é dado por:
+Considere também um subsistema constituído pelos esforços que os atuadores aplicam em seus rotores. Os torques gerados pelos atuadores são proporcionais à corrente elétrica que flui pelas suas armaduras e são aplicados na direção dos deslocamentos virtuais relativos dos rotores. Além disso, é possível que hajam esforços de atrito devido ao atrito gerado nos mancais e nas engrenagens do redutor, aplicados na direção aposta aos deslocamentos virtuais relativos dos rotores. Sendo assim, o trabalho virtual associado a este subsistema é dado por:
 \begin{empheq}[box=\mybluebox]{equation}
 \dl W_\ssT = \dl \mq_r^\msT \cdot (\underline{k_t}\,\mi - \mzeta )
 \end{empheq}
@@ -2876,7 +2878,11 @@ Sendo assim, definimos:
 %\item $\mnu_{\ssS_i}(\mq_i, \dot{\mq}_i), \,i=0, ..., n$: matriz-coluna dos esforços de inércia girosc\'opica e atrito generalizados do subsistema $\ssS_i$.
 %\item $\mg_{\ssS_i}(\mq_i), \,i=0, ..., n$: matriz-coluna dos esfor\c{c}os gravitacionais generalizados do subsistema $\ssS_i$.
 %\item $\mu_{\ssS_i}, \,i=0, ..., n$: matriz-coluna dos esfor\c{c}os ativos externos generalizados aplicados ao subsistema $\ssS_i$.
-\item $\breve{\mx}_0$: representação via quaternion unitário da matriz de rotação $\vct{\vone}_{\ttN_0 \rl \ttX_0}$ (orientação do efetuador/plataforma do mecanismo paralelos).
+\item $\mo_{\cN\,i}, \,i=1, ..., n$: coordenadas da origem do sistema $\ttN_i$ no sistema $\ttN_0$, ou seja $\vct{\tto_{\ttN_i}}_{\ttN_0}$.
+\item $\mx'_i, \,i=1, ..., n$: coordenadas efetuador de $\ssS_i$ no sistema $\ttX_0$, ou seja $\vct{\ttx_i}_{\ttX_0}$.
+\item $\mX_0$: matriz de rotação $\vct{\vone}_{\ttN_0 \rl \ttX_0}$ (orientação do efetuador/plataforma do mecanismo paralelo).
+\item $\mN_i, \,i=1, ..., n$: matriz de rotação $\vct{\vone}_{\ttN_0 \rl \ttN_i}$.
+\item $\breve{\mx}_0$: representação via quaternion unitário da matriz de rotação $\vct{\vone}_{\ttN_0 \rl \ttX_0}$ (orientação do efetuador/plataforma do mecanismo paralelo).
 \item $\breve{\mx}_i, \,i=1, ..., n$: representação via quaternion unitário da matriz de rotação $\vct{\vone}_{\ttN_i \rl \ttX_i}$ (orientação do efetuador da cadeia serial $\ssS_i$).
 \item $\breve{\mn}_i, \,i=1, ..., n$: representação via quaternion unitário da matriz de rotação $\vct{\vone}_{\ttN_0 \rl \ttN_i}$.
 \item $\breve{\mx}'_i, \,i=1, ..., n$: representação via quaternion unitário da matriz de rotação $\vct{\vone}_{\ttX_i \rl \ttX_0}$.
@@ -2885,8 +2891,6 @@ Sendo assim, definimos:
 Para facilitar a leitura das equações, nas expressões que envolvem o indice $i$, estará subentendido que $i$ varia de $1$ a $n$, ou seja, $i=1,\hdots,n$, a menos que seja explicitado de forma diferente.
 
 Algumas equações serão destacadas através de cores. A cor amarela indica equações que devem ser implementadas no algoritmo. A cor salmão indica uma equação alternativa a ser implementada em um caso espefícico no lugar da equação amarela que estará logo acima. A cor azul escura indica equações de destaque no desenvolvimento. A cor azul clara indica equações de destaque secundário no desenvolvimento.
-
-\newpage
 
 \section{Modelo dos subsistemas} 
 
@@ -3021,7 +3025,7 @@ Sabe-se que $\ttx_i$ é um ponto pertencente à plataforma/efetuador $\llX_0$ e 
 	\label{fig:VinculosDePosicao}
 \end{figure}
 
-Sendo assim, é possível relacionar a posição do ponto $\ttx_i$ em relação a $\tto_{\ttN_0}$, seguindo tanto pela da plataforma/efetuador $\ssE$, quanto pela cadeia serial $\ssS_i$:
+Sendo assim, é possível relacionar a posição do ponto $\ttx_i$ em relação a $\tto_{\ttN_0}$, seguindo tanto pela plataforma/efetuador $\ssE$, quanto pela cadeia serial $\ssS_i$:
 \begin{equation}
 \vr_{\tto_{\tttN_0} \rl \ttx_i} = \vr_{\tto_{\tttN_0} \rl \ttx_0} + \vr_{\ttx_0 \rl \ttx_i} = \vr_{\tto_{\tttN_0} \rl \tto_{\tttN_i}} + \vr_{\tto_{\tttN_i} \rl \ttx_i}
 \end{equation}
@@ -3031,9 +3035,13 @@ Aplicando a equação vetorial no sistema $\ttN_0$:
 \vct{\ttx_i}_{\ttN_0} =  \vct{\ttx_0}_{\ttN_0} + \vct{\vone}_{\ttN_0 \rl \ttX_0} \vct{\ttx_i}_{\ttX_0} = \vct{\tto_{\ttN_i}}_{\ttN_0}  + \vct{\vone}_{\ttN_0 \rl \ttN_i} \vct{\ttx_i}_{\ttN_i}
 \end{equation}
 
-%Sabe-se que $\vct{\ttg}_{\ttN_0} = \mx^\ast$ e $\vct{\ttp_i}_{\ttN_i} = \mx_i(\mq_i)$. Tendo em vista que $\vct{\ttp_i}_\ttB$, $\vct{\vone}_{\ttN_0 \rl \ttN_i}$ e $\vct{\tto_i}_{\ttN_0}$ são constantes e que $\vct{\vone}_{\ttN_0 \rl \ttB}$ depende de $\mtheta^\ast$, definindo:
-Sabe-se que $\vct{\ttx_0}_{\ttN_0} = \mq_0$ e $\vct{\ttx_i}_{\ttN_i} = \mx_i(\mq_i)$. Tendo em vista que $\vct{\ttx_i}_{\ttX_0}$, $\vct{\vone}_{\ttN_0 \rl \ttN_i}$, $\vct{\tto_{\ttN_i}}_{\ttN_0}$ e $\vct{\vone}_{\ttN_0 \rl \ttX_0}$ são constantes, definindo:
+Ou seja
+\begin{equation}
+\vct{\ttx_i}_{\ttN_0} =  \mq_0 + \mX_0 \cdot \mx'_i = \mo_{\cN\,i}  + \mN_i \cdot \mx_i(\mq_i)
+\end{equation}
 
+%Sabe-se que $\vct{\ttg}_{\ttN_0} = \mx^\ast$ e $\vct{\ttp_i}_{\ttN_i} = \mx_i(\mq_i)$. Tendo em vista que $\vct{\ttp_i}_\ttB$, $\vct{\vone}_{\ttN_0 \rl \ttN_i}$ e $\vct{\tto_i}_{\ttN_0}$ são constantes e que $\vct{\vone}_{\ttN_0 \rl \ttB}$ depende de $\mtheta^\ast$, definindo:
+Tendo em vista que $\mx'_i$, $\mN_i$, $\mo_{\cN\,i}$ e $\mX_0$ são constantes, definindo:
 %\begin{equation}
 %\mc_i(\mtheta^\ast) = -\vct{\vone}_{\ttN_0 \rl \ttB} \vct{\ttp_i}_\ttB
 %\end{equation}
@@ -3041,19 +3049,18 @@ Sabe-se que $\vct{\ttx_0}_{\ttN_0} = \mq_0$ e $\vct{\ttx_i}_{\ttN_i} = \mx_i(\mq
 %\md_i = \vct{\tto_i}_{\ttN_0} 
 %\end{equation}
 \begin{empheq}[box=\myyellowbox]{equation}
-\md_i = \vct{\tto_{\ttN_i}}_{\ttN_0} -\vct{\vone}_{\ttN_0 \rl \ttX_0} \vct{\ttx_i}_{\ttX_0}
+\md_i = \mo_{\cN\,i} -\mX_0 \cdot \mx'_i
 \end{empheq}
-\begin{empheq}[box=\myyellowbox]{equation}
-\mE_i = \vct{\vone}_{\ttN_0 \rl \ttN_i}
-\end{empheq}
+%\begin{empheq}[box=\myyellowbox]{equation}
+%\mE_i = \mN_i
+%\end{empheq}
 
 Temos:
-
 %\begin{equation}
 %\mx^\ast = \mc_i(\mtheta^\ast) + \md_i + \mE_i \cdot \mx_i(\mq_i), \, i = 1,...,n
 %\end{equation}
 \begin{empheq}[box=\lightbluebox]{equation}
-\mq_0 = \md_i + \mE_i \cdot \mx_i(\mq_i)
+\mq_0 = \md_i + \mN_i \cdot \mx_i(\mq_i)
 \end{empheq}
 
 Assim:
@@ -3100,9 +3107,9 @@ Assim:
 \end{bmatrix}
 +
 \begin{bmatrix}
-\mE_1 & \ldots & \mzr\\
+\mN_1 & \ldots & \mzr\\
 \vdots & \ddots & \vdots\\
-\mzr &\ldots  & \mE_{n}
+\mzr &\ldots  & \mN_{n}
 \end{bmatrix}
 \cdot
 \begin{bmatrix}
@@ -3180,9 +3187,9 @@ Juntando a equação \eqref{eq:VinculosPosicaoAfins} à equação \eqref{eq:Vinc
 \end{bmatrix}
 +
 \begin{bmatrix}
-\mE_1 & \ldots & \mzr\\
+\mN_1 & \ldots & \mzr\\
 \vdots & \ddots & \vdots\\
-\mzr &\ldots  & \mE_{n} \\
+\mzr &\ldots  & \mN_{n} \\
 \mzr &\ldots  & \mzr
 \end{bmatrix}
 \cdot
@@ -3246,9 +3253,9 @@ Sendo:
 
 \begin{empheq}[box=\myyellowbox]{equation}
 \mE = \begin{bmatrix}
-\mE_1 & \ldots & \mzr\\
+\mN_1 & \ldots & \mzr\\
 \vdots & \ddots & \vdots\\
-\mzr &\ldots  & \mE_{n} \\
+\mzr &\ldots  & \mN_{n} \\
 \mzr &\ldots  & \mzr
 \end{bmatrix}
 \end{empheq}
@@ -3326,7 +3333,7 @@ Aplicando o operador variação na função Lagrangeana, temos:
 \end{split}
 \end{equation}
 
-Como pode ser visto no apêndice \ref{ap:Quat} (subsessão \ref{subsec:DerivadaQuat}), é possível relacionar derivadas temporais de quaternions unitários com velocidades angulares:
+Como pode ser visto no apêndice \ref{ap:Quat} (subseção \ref{subsec:DerivadaQuat}), é possível relacionar derivadas temporais de quaternions unitários com velocidades angulares:
 \begin{equation} \tag{\ref{eq:dQuat2w}}
 \dot{\breve{\mq}} = \breve{\mC}(\breve{\mq}) \cdot \momega
 \end{equation}
@@ -3356,7 +3363,7 @@ Temos:
 \dl \mathfrak{L} = -2 \, \dl \mpi^\msT \breve{\mC} (\breve{\mq}) ^\msT \breve{\mp}  + \dl \lambda(\breve{\mq}^\msT \breve{\mq} - 1) \\
 \end{equation}
 
-Sendo assim, impondo a estacionariadade da função Lagrangeana ($\dl \mathfrak{L} = 0$), temos:
+Sendo assim, impondo a estacionariedade da função Lagrangeana ($\dl \mathfrak{L} = 0$), temos:
 \begin{equation}
 \begin{cases}
 \breve{\mC}(\breve{\mq})^\msT \breve{\mp} = \mzr \\
@@ -4019,7 +4026,7 @@ Sendo assim, o sistema de EDOs que será utilizado para realizar a simualação 
 \end{bmatrix}
 \end{empheq}
 
-No caso de $\mA \mQ\cir$ possuir mais linhas do que colunas, a matriz que multiplica $\ddot{\mq}$ na equação anterior não será quadrada. Como já foi comentado anteriormente, essa situação acontece quando há equações vinculares redundantes. Neste caso, a equação \eqref{eq:VinculosQuasiAce_} é substuituida por ela mesma multiplicada pela esquerda pela matriz $(\mA \mQ\cir)^\msT$, resultando no seguinte sistemas de EDOs para realizae a simulação dinâmica direta:
+No caso de $\mA \mQ\cir$ possuir mais linhas do que colunas, a matriz que multiplica $\ddot{\mq}$ na equação anterior não será quadrada. Como já foi comentado anteriormente, essa situação acontece quando há equações vinculares redundantes. Neste caso, a equação \eqref{eq:VinculosQuasiAce_} é substuituida por ela mesma multiplicada pela esquerda pela matriz $(\mA \mQ\cir)^\msT$, resultando no seguinte sistemas de EDOs para realizar a simulação dinâmica direta:
 \begin{empheq}[box=\almondbox]{equation}
 \begin{bmatrix}
 \mC(\mq)^\msT \mM(\mq) \\
@@ -4048,7 +4055,7 @@ Na simulação dinâmica inversa, são dados os perfis de $\mq\ssh$, $\dot{\mq}\
 
 Repare que os termos desta equação dependem de $\mq$, $\dot{\mq}$ e $\ddot{\mq}$. Sendo assim, primeiramente é preciso obter $\mq$, $\dot{\mq}$ e $\ddot{\mq}$ dados $\mq\ssh$, $\dot{\mq}\ssh$ e $\ddot{\mq}\ssh$.
 
-$\mq$ é obtido resolvendo numéricamente a equação dos vínculos de posição \eqref{eq:VinculosPosicao2}, a qual é um sistema de equações algébricas não lineares.
+$\mq$ é obtido resolvendo numericamente a equação dos vínculos de posição \eqref{eq:VinculosPosicao2}, a qual é um sistema de equações algébricas não lineares.
 \begin{equation} \tag{\ref{eq:VinculosPosicao2}}
 \overline{\mq}(\mq) = \mzr
 \end{equation}
@@ -4177,7 +4184,7 @@ Além disso, definimos o erro de controle como sendo:
 \end{equation}
 Sendo $\mxi_d$ o sinal de referência \\
 
-Nas próximas sessões, as principais equações serão destacadas através de cores. A cor azul escura indica equações de destaque no desenvolvimento. A cor azul clara indica equações de destaque secundário no desenvolvimento.
+Nas próximas seções, as principais equações serão destacadas através de cores. A cor azul escura indica equações de destaque no desenvolvimento. A cor azul clara indica equações de destaque secundário no desenvolvimento.
 
 \newpage
 
@@ -4212,7 +4219,7 @@ Repare que, para o caso em que não há erros de modelagem ($\tilde{\mH} = \mzr$
 
 \section{Controle por Torque Computado (TC)} \label{sec:CTC}
 
-A lei de Controle por Torque Computado tem o intuito de fazer com que a dinâmica de cada componente do erro de controle se comporte como um movimento harmônico amortecido, fazendo com que o erro tenda assintóticamente a zero independentemente da condição inicial, na ausência de erros de modelagem. Para atingir este objetivo, basta utilizar a seguinte lei de realimentação de estados para $\mup'$:
+A lei de Controle por Torque Computado tem o intuito de fazer com que a dinâmica de cada componente do erro de controle se comporte como um movimento harmônico amortecido, fazendo com que o erro tenda assintoticamente a zero independentemente da condição inicial, na ausência de erros de modelagem. Para atingir este objetivo, basta utilizar a seguinte lei de realimentação de estados para $\mup'$:
 \begin{empheq}[box=\mybluebox]{equation} \label{eq:leiCTC}
 \mup' = -\underline{k}_v \dot{\me} - \underline{k}_p \me
 \end{empheq}
@@ -4253,7 +4260,7 @@ Tendo definido $\ms$, define-se a chamada superfície de escorregamento:
 \ms = \mzr
 \end{equation}
 
-Repare que fazendo com o sistema atinja a superfície de escorregamento, o erro de controle tenderá assintóticamente a zero, independente de qual das definições de $\ms$ for escolhida.
+Repare que fazendo com o sistema atinja a superfície de escorregamento, o erro de controle tenderá assintoticamente a zero, independente de qual das definições de $\ms$ for escolhida.
  
 Seja $V(\ms)$ uma função de Lyapunov dada por:
 \begin{equation}
@@ -4400,7 +4407,7 @@ Sempre existe solu\c{c}\~ao para \eqref{eq:DesigualdadeK2_a2}, e a solução que
 
 \end{itemize}
 
-Repare que as duas leis de controle previamente deduzidas possuem termos discontínuos, os quais podem gerar o efeito conhecido como \emph{chattering}, o qual pode gerar sérios desgastes nos atuadores do sistema e causar vibrações indesejadas no mecanismo. A utilização da definição \eqref{eq:SlidingSurfaces_} para $\ms$ na dedução da lei de controle diminui bastante o efeito do \emph{chattering}, pois utiliza termos que são integrais de funções discontínuas, o que consequentemente gera um perfil muito mais suave para o esforço de controle. Sendo assim, agora serão deduzidas as leis de controle baseadas na definição \eqref{eq:SlidingSurfaces_} para $\ms$.
+Repare que as duas leis de controle previamente deduzidas possuem termos descontínuos, os quais podem gerar o efeito conhecido como \emph{chattering}, o qual pode gerar sérios desgastes nos atuadores do sistema e causar vibrações indesejadas no mecanismo. A utilização da definição \eqref{eq:SlidingSurfaces_} para $\ms$ na dedução da lei de controle diminui bastante o efeito do \emph{chattering}, pois utiliza termos que são integrais de funções descontínuas, o que consequentemente gera um perfil muito mais suave para o esforço de controle. Sendo assim, agora serão deduzidas as leis de controle baseadas na definição \eqref{eq:SlidingSurfaces_} para $\ms$.
 
 \item[b)] Para $\ms = \ddot{\me} + \underline{k}_v \dot{\me} + \underline{k}_p \me  $
 
@@ -4457,7 +4464,7 @@ e
 \mW = \mH
 \end{equation}
 
-Subdividido mais uma vez o projeto do controlador será  em 2 casos:
+Subdividido mais uma vez o projeto do controlador em 2 casos:
 
 \begin{itemize}
 \item[b.1)] Para $\mW = \mone$:
@@ -4577,7 +4584,7 @@ Ao mesmo tempo que a utilização da camada limite diminui os efeitos do \emph{c
 
 \subsection{Ganho adaptativo}
 
-O cálculo de $\underline{k}$ pode ser um tanto complexo utilizando as equações \eqref{eq:MatrizDiagk_a1}, \eqref{eq:MatrizDiagk_a2}, \eqref{eq:MatrizDiagk_b1} ou \eqref{eq:MatrizDiagk_b2}, pois depende do módulo máximo de matrizes que não possuem expressões explícitas. Tal cálculo pode ser feito numéricamente discretizando a área de trabalho do mecanismo e atribuindo valores máximos e mínimos para cada parâmetro incerto do sistema, obtendo uma matriz $\underline{k}$ que varia conforme a posição do mecanismo. O uso desta estratégia, porém, poderá resultar na obtenção de valores de $\underline{k}$ muito maiores do que o necessário, o que pode amplificar o fenômeno do \emph{chattering}. Sendo assim, é proposta a obtenção da matriz $\underline{k}$ de forma adaptativa, utilizando a seguinte lei de adaptação, a qual é baseada em uma lei de adaptação proposta em \cite{Monsees}:
+O cálculo de $\underline{k}$ pode ser um tanto complexo utilizando as equações \eqref{eq:MatrizDiagk_a1}, \eqref{eq:MatrizDiagk_a2}, \eqref{eq:MatrizDiagk_b1} ou \eqref{eq:MatrizDiagk_b2}, pois depende do módulo máximo de matrizes que não possuem expressões explícitas. Tal cálculo pode ser feito numericamente discretizando a área de trabalho do mecanismo e atribuindo valores máximos e mínimos para cada parâmetro incerto do sistema, obtendo uma matriz $\underline{k}$ que varia conforme a posição do mecanismo. O uso desta estratégia, porém, poderá resultar na obtenção de valores de $\underline{k}$ muito maiores do que o necessário, o que pode amplificar o fenômeno do \emph{chattering}. Sendo assim, é proposta a obtenção da matriz $\underline{k}$ de forma adaptativa, utilizando a seguinte lei de adaptação, a qual é baseada em uma lei de adaptação proposta em \cite{Monsees}:
 
 \begin{equation}
 \underline{k}_i[k] = \begin{cases}
@@ -4610,7 +4617,7 @@ Nesta seção, será realizada a simulação dinâmica direta do mecânismo 5R u
 	\label{fig:5R}
 \end{figure}
 
-O mecanismo 5R (figura \ref{fig:5R}) será modelado através do acoplamento de 2 subsistemas seriais $\ssB_1$ e $\ssB_2$ do tipo \underline{R}\underline{R} (figura \ref{fig:RR}), e um efetuador pontual $\ssB_0$ de massa $m_0$.
+O mecanismo paralelo 5R (figura \ref{fig:5R}), o qual será denominado sistema $\ssP$, será modelado através do acoplamento de 2 subsistemas seriais $\ssS_1$ e $\ssS_2$ do tipo \underline{R}\underline{R} (figura \ref{fig:RR}), e do efetuador pontual $\ssE$ de massa $m_0$.
 
 \begin{figure}[h]
 	\centering
@@ -4621,12 +4628,9 @@ O mecanismo 5R (figura \ref{fig:5R}) será modelado através do acoplamento de 2
 
 
 
-\subsection{Modelo do efetuador}
+\subsection{Modelo do efetuador $\ssE$}
 
 De acordo com as equações \eqref{eq:Newton-EulerMat2E}, \eqref{eq:M_efetuador}, \eqref{eq:v_efetuador} e \eqref{eq:g_efetuador}, os parâmetros $m_0$ (massa do efetuador) e $\mgamma$ definem o modelo do efetuador.
-
-
-
 %O modelo do efetuador pontual $\ssB_0$ segue o formato dado pela equação \eqref{eq:ModeloDosSubsistemas}, ou seja:
 %\begin{equation}
 %\overline{\mf}_{\ssB_0}(\mu_0, \mq_0, \dot{\mq}_0, \ddot{\mq}_0) =  \mu_0 - (\mM_{\ssB_0}(\mq_0) \ddot{\mq}_0 + \mv_{\ssB_0}(\mq_0,\dot{\mq}_0) + \mg_{\ssB_0}(\mq_0)) = \mzr
@@ -4644,6 +4648,11 @@ O vetor gravidade será considerado na direção e sentido do eixo $z$ (perpendi
 \mgamma = \begin{bmatrix}
 0 & 0 & g
 \end{bmatrix}^\msT
+\end{equation}
+
+Além disso, a orientação do efetuador de $\ssP$ é a mesma do sistema $\ttN_0$, logo:
+\begin{equation}
+\breve{\mx}_0 = \begin{bmatrix} 0 & 0 & 0 & 1 \end{bmatrix}
 \end{equation}
 
 %\begin{equation}
@@ -4673,131 +4682,153 @@ O vetor gravidade será considerado na direção e sentido do eixo $z$ (perpendi
 
 
 
-\subsection{Parâmetros de Denavit-Hartemberg das cadeias seriais}
+\subsection{Arquitetura das cadeias seriais $\ssS_i$}
+
+A arquitetura das cadeias seriais \'e definida pelos parâmetros de Denavit-Hartemberg e as coordenadas dos centros de massa dos ligamentos $\mc'_{\cM\,i}$, os quais podem ser vistos na tabela \ref{tab:DH}.
 
 \begin{table}[H]
 \begin{center}
-\caption{Parâmetros de Denavit-Hartemberg do mecanismo \underline{R}\underline{R}}
-\begin{tabular}{|c|c|c|c|c|c|} 
+\caption{Parâmetros de Denavit-Hartemberg de $\ssS_1$ e $\ssS_2$ e centros de massa de seus elos}
+\begin{tabular}{|c|c|c|c|c|c|c|} 
 	\hline
 	\rule[-2mm]{0mm}{6mm}
-	Ligamento & $a_i$ & $\alpha_i$ & $d_i$ & $\theta_i$ \\
+	Ligamento & $a_i$ & $\alpha_i$ & $d_i$ & $\theta_i$ & $\mc'_{\cM\,i}$ \\
 	\hline
 	\rule[-2mm]{0mm}{6mm}
-	(1) & $l_1$ & $0$ & $0$ & $q_1(t)$  \\
+	(1) & $l_1$ & $0$ & $0$ & $q_1(t)$ & $\begin{bmatrix} l_{g1} - l_1 & 0 & 0 \end{bmatrix}^\msT$ \\
 	\rule[-1mm]{0mm}{5mm}
-	(2) & $l_2$ & $0$ & $0$ & $q_2(t)$  \\
+	(2) & $l_2$ & $0$ & $0$ & $q_2(t)$ & $\begin{bmatrix} l_{g2} - l_2 & 0 & 0 \end{bmatrix}^\msT$ \\
 	\hline
 \end{tabular}
 \label{tab:DH}
 \end{center}
 \end{table}
 
-\subsection{Arquitetura do mecanismo paralelo}
+\subsection{Arquitetura do mecanismo paralelo $\ssP$}
+Tendo em vista que para formar o mecanismo paralelo $\ssP$ basta vincular a posição dos efetuadores de $\ssS_1$ e $\ssS_2$ com a posição do efetuador $\ssE$ (não há vínculos de posição adicionais nem vínculos de orientação), os parâmetros da tabela $\ref{tab:ArquiteturaParalelo}$ são suficientes para definir a arquitetura de $\ssP$.
 
-É possível relacionar as coordenadas do efetuador do mecanismo paralelos descrito no sistema $\ttN_0$ com as coordenadas dos efetuadores das cadeias serias nos sistemas $\ttN_1$ e $\ttN_2$ da seguinte maneira:
-\begin{equation}
-\vct{\ttx_0}_{\ttN_0} = \begin{bmatrix}
-1 & 0 & 0 \\
-0 & 1 & 0 \\
-0 & 0 & 1 \\
-\end{bmatrix}
-\cdot
-\vct{\ttx_1}_{\ttN_1}
-+
-\begin{bmatrix}
-l_0 \\
-0 \\
-0 
-\end{bmatrix}
-\end{equation}
-\begin{equation}
-\vct{\ttx_0}_{\ttN_0} = \begin{bmatrix}
--1 & 0 & 0 \\
-0 & 1 & 0 \\
-0 & 0 & -1 \\
-\end{bmatrix}
-\cdot
-\vct{\ttx_2}_{\ttN_2}
-+
-\begin{bmatrix}
--l_0 \\
-0 \\
-0 
-\end{bmatrix}
-\end{equation}
+\begin{table}[H]
+\begin{center}
+\caption{Parâmetros da arquitetura de $\ssP$}
+\begin{tabular}{|c|c|c|c|c|} 
+	\hline
+	\rule[-2mm]{0mm}{6mm}
+	Ligamento & $\mo_{\cN\,i}$ & $\mx'_i$ & $\breve{\mn}_i$\\
+	\hline
+	\rule[-2mm]{0mm}{6mm}
+	(1) & $\begin{bmatrix} l_0 & 0 & 0 \end{bmatrix}^\msT$ & $\begin{bmatrix} 0 & 0 & 0 \end{bmatrix}^\msT$ & $\begin{bmatrix} 0 & 0 & 0 & 1 \end{bmatrix}^\msT$ \\
+	\rule[-1mm]{0mm}{5mm}
+	(2) & $\begin{bmatrix} -l_0 & 0 & 0 \end{bmatrix}^\msT$ & $\begin{bmatrix} 0 & 0 & 0 \end{bmatrix}^\msT$ & $\begin{bmatrix} 0 & 1 & 0 & 0 \end{bmatrix}^\msT$ \\
+	\hline
+\end{tabular}
+\label{tab:ArquiteturaParalelo}
+\end{center}
+\end{table}
 
-Sendo assim, temos:
-\begin{equation}
-\mq_0 = 
-\begin{bmatrix}
-1 & 0 & 0 \\
-0 & 1 & 0 \\
-0 & 0 & 1 \\
-\end{bmatrix}
-\cdot
-\mx_1(\mq_1)
-+
-\begin{bmatrix}
-l_0 \\
-0 \\
-0 \\
-\end{bmatrix}
-\end{equation}
-\begin{equation}
-\mq_0 = 
-\begin{bmatrix}
--1 & 0 & 0 \\
-0 & 1 & 0 \\
-0 & 0 & -1 \\
-\end{bmatrix}
-\cdot
-\mx_2(\mq_2)
-+
-\begin{bmatrix}
--l_0 \\
-0 \\
-0 \\
-\end{bmatrix}
-\end{equation}
+%É possível relacionar as coordenadas do efetuador do mecanismo paralelos descrito no sistema $\ttN_0$ com as coordenadas dos efetuadores das cadeias serias nos sistemas $\ttN_1$ e $\ttN_2$ da seguinte maneira:
+%\begin{equation}
+%\vct{\ttx_0}_{\ttN_0} = \begin{bmatrix}
+%1 & 0 & 0 \\
+%0 & 1 & 0 \\
+%0 & 0 & 1 \\
+%\end{bmatrix}
+%\cdot
+%\vct{\ttx_1}_{\ttN_1}
+%+
+%\begin{bmatrix}
+%l_0 \\
+%0 \\
+%0 
+%\end{bmatrix}
+%\end{equation}
+%\begin{equation}
+%\vct{\ttx_0}_{\ttN_0} = \begin{bmatrix}
+%-1 & 0 & 0 \\
+%0 & 1 & 0 \\
+%0 & 0 & -1 \\
+%\end{bmatrix}
+%\cdot
+%\vct{\ttx_2}_{\ttN_2}
+%+
+%\begin{bmatrix}
+%-l_0 \\
+%0 \\
+%0 
+%\end{bmatrix}
+%\end{equation}
+%
+%Sendo assim, temos:
+%\begin{equation}
+%\mq_0 = 
+%\begin{bmatrix}
+%1 & 0 & 0 \\
+%0 & 1 & 0 \\
+%0 & 0 & 1 \\
+%\end{bmatrix}
+%\cdot
+%\mx_1(\mq_1)
+%+
+%\begin{bmatrix}
+%l_0 \\
+%0 \\
+%0 \\
+%\end{bmatrix}
+%\end{equation}
+%\begin{equation}
+%\mq_0 = 
+%\begin{bmatrix}
+%-1 & 0 & 0 \\
+%0 & 1 & 0 \\
+%0 & 0 & -1 \\
+%\end{bmatrix}
+%\cdot
+%\mx_2(\mq_2)
+%+
+%\begin{bmatrix}
+%-l_0 \\
+%0 \\
+%0 \\
+%\end{bmatrix}
+%\end{equation}
+%
+%Sendo assim, temos que os vínculos de posição são dados por:
+%\begin{equation}
+%\overline{\mq}(\mq) =
+%\begin{bmatrix}
+%1 & 0 & 0 \\
+%0 & 1 & 0 \\
+%0 & 0 & 1 \\
+%1 & 0 & 0 \\
+%0 & 1 & 0 \\
+%0 & 0 & 1 \\
+%\end{bmatrix}
+%\cdot
+%\mq_0
+%-
+%\begin{bmatrix}
+%1 & 0 & 0 & 0 & 0 & 0 \\
+%0 & 1 & 0 & 0 & 0 & 0 \\
+%0 & 0 & 1 & 0 & 0 & 0 \\
+%0 & 0 & 0 & -1 & 0 & 0 \\
+%0 & 0 & 0 & 0 & 1 & 0 \\
+%0 & 0 & 0 & 0 & 0 & -1 \\
+%\end{bmatrix}
+%\cdot
+%\mx^\star(\mq_\emptyset)
+%-
+%\begin{bmatrix}
+%l_0 \\
+%0 \\
+%0 \\
+%-l_0 \\
+%0 \\
+%0 \\
+%\end{bmatrix}
+%= \mzr
+%\end{equation}
 
-Sendo assim, temos que os vínculos de posição são dados por:
-\begin{equation}
-\overline{\mq}(\mq) =
-\begin{bmatrix}
-1 & 0 & 0 \\
-0 & 1 & 0 \\
-0 & 0 & 1 \\
-1 & 0 & 0 \\
-0 & 1 & 0 \\
-0 & 0 & 1 \\
-\end{bmatrix}
-\cdot
-\mq_0
--
-\begin{bmatrix}
-1 & 0 & 0 & 0 & 0 & 0 \\
-0 & 1 & 0 & 0 & 0 & 0 \\
-0 & 0 & 1 & 0 & 0 & 0 \\
-0 & 0 & 0 & -1 & 0 & 0 \\
-0 & 0 & 0 & 0 & 1 & 0 \\
-0 & 0 & 0 & 0 & 0 & -1 \\
-\end{bmatrix}
-\cdot
-\mx^\star(\mq_\emptyset)
--
-\begin{bmatrix}
-l_0 \\
-0 \\
-0 \\
--l_0 \\
-0 \\
-0 \\
-\end{bmatrix}
-= \mzr
-\end{equation}
-
-Portanto, as matrizes que descrevem a arquitetura do mecanismo são dadas por:
+%Portanto, as matrizes que descrevem a arquitetura do mecanismo são dadas por:
+Consequentemente:
 \begin{equation}
 \md = \begin{bmatrix}
 l_0 &
@@ -4834,7 +4865,7 @@ l_0 &
 
 \subsection{Coordenadas dependentes e independentes}
 
-Tende em vista que o mecanismo em questão possui duas cadeias seriais de 2 graus de liberdade, temos:
+Tendo em vista que o mecanismo em questão possui duas cadeias seriais de 2 graus de liberdade, temos:
 \begin{equation}
 \mq = \begin{bmatrix}
 \mq_0 \\
@@ -4928,7 +4959,7 @@ Dados os parâmetros geométricos definidos na tabela \ref{tab:parametrosSimulac
 	\label{fig:RRWS}
 \end{figure}
 
-A região em azul escuro é a região não pertencente ao espaço de trabalho do mecanismo. As regiões em azul claro, em amarelo, e em vermelho são regiões pertencententes ao espaço de trabalho do mecanismo. A região vermelha é a trajetória a ser seguida pelo mecanismo. A região a amarela é considerada singular (próxima a singularidades), e um ponto é considerado pertencente a essa região quando $|\det(\mA\mQ\cir)| < 1.6 \cdot 10^{-6}$, para $\mq\ssh = \begin{bmatrix} x & y \end{bmatrix}^\msT$ ou $|\det(\mA\mQ\cir)| < 10^{-11}$, para $\mq\ssh = \begin{bmatrix} \theta_{11} & \theta_{21} \end{bmatrix}^\msT$.
+A região em azul escuro é a região não pertencente ao espaço de trabalho do mecanismo. As regiões em azul claro, em amarelo, e em vermelho são regiões pertencententes ao espaço de trabalho do mecanismo. A região vermelha é a trajetória a ser seguida pelo mecanismo. A região amarela é considerada singular (próxima a singularidades), e um ponto é considerado pertencente a essa região quando $|\det(\mA\mQ\cir)| < 1.6 \cdot 10^{-6}$, para $\mq\ssh = \begin{bmatrix} x & y \end{bmatrix}^\msT$ ou $|\det(\mA\mQ\cir)| < 10^{-11}$, para $\mq\ssh = \begin{bmatrix} \theta_{1,1} & \theta_{2,1} \end{bmatrix}^\msT$.
 
 \subsubsection{Condições iniciais}
 \begin{equation}
@@ -4959,16 +4990,18 @@ Os parâmetros do Controle por Torque Computado foram escolhidos de modo que a d
 
 Nas figuras \ref{fig:Torque1_0} a \ref{fig:ey_40} são apresentados os resultados de 3 simulações dinâmicas diretas do mecanismo 5R, considerando 3 níveis de incerteza do modelo: 0\%, 20\% e 40\%. Todas as simulações são realizadas utilizando a lei de Control por Torque Computado apresentada na seção \ref{sec:CTC}, utilizando os parâmetros definidos na tabela \ref{tab:parametrosSimulacao}.
 
+\newpage
+
 \begin{multicols}{2}
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.40]{imagens/tau1_0.png}  
+	\includegraphics[scale=0.42]{imagens/tau1_0.png}  
 	\caption{$\tau_1$: sem incerteza}
 	\label{fig:Torque1_0}
 \end{figure}
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.40]{imagens/tau2_0.png}  
+	\includegraphics[scale=0.42]{imagens/tau2_0.png}  
 	\caption{$\tau_2$: sem incerteza}
 	\label{fig:Torque2_0}
 \end{figure}
@@ -4977,13 +5010,13 @@ Nas figuras \ref{fig:Torque1_0} a \ref{fig:ey_40} são apresentados os resultado
 \begin{multicols}{2}
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.40]{imagens/tau1_20.png}  
+	\includegraphics[scale=0.42]{imagens/tau1_20.png}  
 	\caption{$\tau_1$: 20\% de incerteza}
 	\label{fig:Torque1_20}
 \end{figure}
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.40]{imagens/tau2_20.png}  
+	\includegraphics[scale=0.42]{imagens/tau2_20.png}  
 	\caption{$\tau_2$: 20\% de incerteza}
 	\label{fig:Torque2_20}
 \end{figure}
@@ -4992,13 +5025,13 @@ Nas figuras \ref{fig:Torque1_0} a \ref{fig:ey_40} são apresentados os resultado
 \begin{multicols}{2}
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.40]{imagens/tau1_40.png}  
+	\includegraphics[scale=0.42]{imagens/tau1_40.png}  
 	\caption{$\tau_1$: 40\% de incerteza}
 	\label{fig:Torque1_40}
 \end{figure}
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.40]{imagens/tau2_40.png}  
+	\includegraphics[scale=0.42]{imagens/tau2_40.png}  
 	\caption{$\tau_2$: 40\% de incerteza}
 	\label{fig:Torque2_40}
 \end{figure}
@@ -5009,13 +5042,13 @@ Nas figuras \ref{fig:Torque1_0} a \ref{fig:ey_40} são apresentados os resultado
 \begin{multicols}{2}
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.40]{imagens/ex_0.png}  
+	\includegraphics[scale=0.42]{imagens/ex_0.png}  
 	\caption{$e_x$: sem incerteza}
 	\label{fig:ex_0}
 \end{figure}
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.40]{imagens/ey_0.png}  
+	\includegraphics[scale=0.42]{imagens/ey_0.png}  
 	\caption{$e_y$: sem incerteza}
 	\label{fig:ey_0}
 \end{figure}
@@ -5024,13 +5057,13 @@ Nas figuras \ref{fig:Torque1_0} a \ref{fig:ey_40} são apresentados os resultado
 \begin{multicols}{2}
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.40]{imagens/ex_20.png}  
+	\includegraphics[scale=0.42]{imagens/ex_20.png}  
 	\caption{$e_x$: 20\% de incerteza}
 	\label{fig:ex_20}
 \end{figure}
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.40]{imagens/ey_20.png}  
+	\includegraphics[scale=0.42]{imagens/ey_20.png}  
 	\caption{$e_y$: 20\% de incerteza}
 	\label{fig:ey_20}
 \end{figure}
@@ -5039,13 +5072,13 @@ Nas figuras \ref{fig:Torque1_0} a \ref{fig:ey_40} são apresentados os resultado
 \begin{multicols}{2}
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.40]{imagens/ex_40.png}  
+	\includegraphics[scale=0.42]{imagens/ex_40.png}  
 	\caption{$e_x$: 40\% de incerteza}
 	\label{fig:ex_40}
 \end{figure}
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.40]{imagens/ey_40.png}  
+	\includegraphics[scale=0.42]{imagens/ey_40.png}  
 	\caption{$e_y$: 40\% de incerteza}
 	\label{fig:ey_40}
 \end{figure}
@@ -5059,7 +5092,7 @@ Tendo em vista que o presente trabalho tem caráter experimental, as comparaçõ
 
 \section{Ensaios Experimentais}
 
-Nesta sessão, será descrita a bancada experimental e serão apresentados e discutidos os resultados experimentais do controle do mecanismo 5R utilizando 8 diferentes estratégias de controle.
+Nesta seção, será descrita a bancada experimental e serão apresentados e discutidos os resultados experimentais do controle do mecanismo 5R utilizando 8 diferentes estratégias de controle.
 
 \subsection{Bancada experimental}
 
@@ -5168,7 +5201,7 @@ Para a estimação da corrente elétrica foi considerada a equacação da dinâm
 	   u = L \frac{di}{dt} + R i + k_{e} \omega
 \end{equation}
 
-Esta equação pode interpretada como um sistema linear de primeira ordem com entrada $u - k_{e} \omega $ e polo em $s = -R/L$. Sendo assim, o sistema pode ser considerado naturalmente estável e pode ser utilizado um observador em malha aberta para estimar a corrente elétrica.
+Esta equação pode ser interpretada como um sistema linear de primeira ordem com entrada $u - k_{e} \omega $ e polo em $s = -R/L$. Sendo assim, o sistema pode ser considerado naturalmente estável e pode ser utilizado um observador em malha aberta para estimar a corrente elétrica.
 
 Tendo em vista que a frequencia do polo deste sistema está em torno de 240Hz, muito acima das frequências em que o sistema mecânico opera, o observador de corrente é implementado simplemente a partir do cálculo da corrente considerando a equação \eqref{eq:DinamicaEletricaMotor} em regime permanente, ou seja, $\frac{di}{dt} = 0$. Com isso, obtemos a seguinte expressão para o observador de corrente:
 
@@ -5181,7 +5214,7 @@ Tendo em vista que a frequencia do polo deste sistema está em torno de 240Hz, m
 
 Para implementar as técnicas de controle baseadas em modelo, é utilizado o algoritmo de modelagem proposto para tabelar os termos do modelo dinâmico que dependem apenas da posição.
 
-Tendo em vista que a matriz de inércia generalizada depende apenas da posição, e que a matriz-coluna de esforços de inérciais giroscópicos pode ser expressa como a soma de matrizes coluna dependentes apenas da posição multiplicados por termos quadráticos das quasi-velocidades independentes, é feita uma discretização da área de trabalho, de modo a calcular o valor destas matrizes em um número finito de pontos e realizar interpolações em tempo real, de modo a obter um valor estimado desses termos da dinâmica em qualquer ponto não singular pertencente à area de trabalho.
+Tendo em vista que a matriz de inércia generalizada depende apenas da posição, e que a matriz-coluna de esforços de inérciais giroscópicos pode ser expressa como a soma de matrizes coluna dependentes apenas da posição multiplicados por termos quadráticos das quasi-velocidades independentes, é feita uma discretização da área de trabalho, de modo a calcular o valor destas matrizes em um número finito de pontos e realizar interpolações em tempo real, de modo a obter um valor estimado desses termos da dinâmica em qualquer ponto não singular pertencente à área de trabalho.
 
 A discretização realizada aplica uma malha quadradiculada de lado $5mm$ na área de trabalho do mecanismo, de modo a calcular os termos da dinâmica comentados em cada ponto não singular pertencente à discretização.
 
@@ -5354,11 +5387,11 @@ TCx        & $60$               & -         & -             & -            & -  
 TCMDx      & $60$               & -         & $6$           & $103$        & $0$          \\
 \end{tabular}
 \end{table}
-Além disso, os controladores de corrente utilizados são controladores lineares de segunda ordem, projetados por alocação de polos. A expressões das funções de transferência de um motor DC são deduzidas e apresentadas no apêndice \ref{ap:FuncoesDeTransferencia}, e o projeto do controlador é apresentado no apêndice \ref{ap:ControladorDeCorrente}. Tendo em vista que o período de amostragem da malha de corrente é de $1ms$, 3 dos pólos 4 polos da malha de corrente são alocados em $z=0$, $z=0.6$, $z=0.7$. O último polo é alocado na mesma posição do zero em malha aberta do sistema.
+Além disso, os controladores de corrente utilizados são controladores lineares de segunda ordem, projetados por alocação de polos. A expressões das funções de transferência de um motor DC são deduzidas e apresentadas no apêndice \ref{ap:FuncoesDeTransferencia}, e o projeto do controlador é apresentado no apêndice \ref{ap:ControladorDeCorrente}. Tendo em vista que o período de amostragem da malha de corrente é de $1ms$, 3 dos pólos 4 da malha de corrente são alocados em $z=0$, $z=0.6$, $z=0.7$. O último polo é alocado na mesma posição do zero em malha aberta do sistema.
 
 \subsection{Resultados experimentais}
 
-Nesta subsessão são apresentados os gráficos de seguimento de trajetória, da evolução temporal dos erros de controle em $x$ e $y$, e da evolução temporal dos esforços de controle para todas as 8 estratégias de controle definidas, tanto para a trajetória circular, quanto para a trajetória triangular (figuras de \ref{fig:PIDq_circulo_xy} a \ref{fig:SMCx_triangulo_tau2}). Também são apresentadas tabelas de comparação de desempenho e é feita a discussão dos resultados.
+Nesta subseção são apresentados os gráficos de seguimento de trajetória, da evolução temporal dos erros de controle em $x$ e $y$, e da evolução temporal dos esforços de controle para todas as 8 estratégias de controle definidas, tanto para a trajetória circular, quanto para a trajetória triangular (figuras de \ref{fig:PIDq_circulo_xy} a \ref{fig:SMCx_triangulo_tau2}). Também são apresentadas tabelas de comparação de desempenho e é feita a discussão dos resultados.
 
 \newpage
 
@@ -6667,7 +6700,7 @@ Com o intuito de evitar raízes de números negativos, divisões por zero, e pro
 
 \subsection{Conversão Quaternion $\rightarrow$ Matriz de Rotação}
 
-A conversão da representação de orientação por quatertions para a representação por matrizes de rotação é dada pela seguinte expressão:
+A conversão da representação de orientação por quaternions para a representação por matrizes de rotação é dada pela seguinte expressão:
 
 \begin{equation} \label{eq:Quat2Matriz}
 \mR = \underline{\mR}(\breve{\mq}) = \begin{bmatrix}
@@ -6857,7 +6890,7 @@ D = \frac{Rb + k_t k_e}{LJ}
 \end{cases}
 \end{equation}
 
-Discretizado pela técnica do segurador de ordem zero, considerando um período de amostragem $T$, obtemos:
+Discretizando pela técnica do segurador de ordem zero, considerando um período de amostragem $T$, obtemos:
 \begin{equation}
 G_{d\,I}(z) = \frac{\mathcal{A} z + \mathcal{B}}{z^2 + \mathcal{C} z + \mathcal{D}}
 \end{equation}
