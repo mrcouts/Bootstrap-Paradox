@@ -977,12 +977,17 @@ Uma representação de rotação por quaternion unitário equivalente à matriz 
 \begin{empheq}[box=\myyellowbox]{equation}
 \breve{\mr}'_i(q_i) =
 \begin{bmatrix}
-\sign(\ssin \alpha_i) \sqrt{(1+\ccos \theta_i)(1-\ccos \alpha_i)}/2 \\
-\sign(\ssin \theta_i \ssin \alpha_i) \sqrt{(1-\ccos \theta_i)(1-\ccos \alpha_i)}/2 \\
-\sign(\ssin \theta_i) \sqrt{(1-\ccos \theta_i)(1+\ccos \alpha_i)}/2 \\
-\sqrt{(1+\ccos \theta_i)(1+\ccos \alpha_i)}/2
+\ccos (\frac{\theta_i}{2}) \, \ssin (\frac{\alpha_i}{2})\\
+\ssin (\frac{\theta_i}{2}) \, \ssin (\frac{\alpha_i}{2})\\
+\ssin (\frac{\theta_i}{2}) \, \ccos (\frac{\alpha_i}{2})\\
+\ccos (\frac{\theta_i}{2}) \, \ccos (\frac{\alpha_i}{2})\\
 \end{bmatrix}
 \end{empheq}
+%\sqrt{(1+\ccos \theta_i)(1-\ccos \alpha_i)}/2 
+%\sqrt{(1-\ccos \theta_i)(1-\ccos \alpha_i)}/2
+%\sqrt{(1-\ccos \theta_i)(1+\ccos \alpha_i)}/2
+%\sqrt{(1+\ccos \theta_i)(1+\ccos \alpha_i)}/2
+
 
 Para solucionar este paradigma, as composições de rotações e translações serão feitas separadamente, sendo que a composição de rotações será feita atravez da multiplicação de quaternions unitários. 
 
@@ -6626,22 +6631,22 @@ Para o caso de quaternions unitários, temos que o quaternion inverso é igual a
 \end{equation}
 
 \subsection{Rotações elementares}
-As rotações de um angulo $\theta \in (-\pi, \pi)$ em torno dos eixo $x$, $y$ e $z$ podem ser representadas pelos seguintes quaternions unitários, respectivamente:
+As rotações de um angulo $\theta$ em torno dos eixo $x$, $y$ e $z$ podem ser representadas pelos seguintes quaternions unitários, respectivamente:
 \begin{equation}
 \breve{\mq}_x (\theta) = \begin{bmatrix}
-\sign(\sin\theta) \sqrt{\frac{1-\cos\theta}{2}} & 0 & 0 & \sqrt{\frac{1+\cos\theta}{2}}
+\sin(\frac{\theta}{2}) & 0 & 0 & \cos(\frac{\theta}{2})
 \end{bmatrix}^\msT
 \end{equation}
-
+%\sqrt{\frac{1-\cos\theta}{2}}
+%\sqrt{\frac{1+\cos\theta}{2}}
 \begin{equation}
 \breve{\mq}_y (\theta) = \begin{bmatrix}
-0 & \sign(\sin\theta) \sqrt{\frac{1-\cos\theta}{2}} & 0 & \sqrt{\frac{1+\cos\theta}{2}}
+0 & \sin(\frac{\theta}{2}) & 0 & \cos(\frac{\theta}{2})
 \end{bmatrix}^\msT
 \end{equation}
-
 \begin{equation}
 \breve{\mq}_z (\theta) = \begin{bmatrix}
-0 & 0 & \sign(\sin\theta) \sqrt{\frac{1-\cos\theta}{2}} & \sqrt{\frac{1+\cos\theta}{2}}
+0 & 0 & \sin(\frac{\theta}{2}) & \cos(\frac{\theta}{2})
 \end{bmatrix}^\msT
 \end{equation}
 
