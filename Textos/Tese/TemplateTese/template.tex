@@ -4149,7 +4149,8 @@ Sendo:
 \mZ(\mq\ssh)^\msT = \mC(\underline{\mq}(\mq\ssh)\big)^\msT \mU
 \end{empheq}
 
-Sendo assim, para mecanismos sem atuação redundante, a simulação dinâmica inversa é feita utilizando a equação \eqref{eq:DinamicaInversa2} para obter os esforços dos atuadores, dados $\mq\ssh$, $\dot{\mq}\ssh$ e $\ddot{\mq}\ssh$, obtendo $\mq$ através da solução numérica da equação \eqref{eq:VinculosGenericosPosicao} e $\dot{\mq}$ através de \eqref{eq:CCinematica}. 
+Sendo assim, para mecanismos sem atuação redundante, a simulação dinâmica inversa é feita utilizando a equação \eqref{eq:DinamicaInversa2} para obter os esforços dos atuadores, dados $\mq\ssh$, $\dot{\mq}\ssh$ e $\ddot{\mq}\ssh$.
+%, obtendo $\mq$ através da solução numérica da equação \eqref{eq:VinculosGenericosPosicao} e $\dot{\mq}$ através de \eqref{eq:CCinematica}. 
 
 Para o caso de mecanismos com atuação redundante, há infinitas soluções para $\mu^\star$ de modo que o mecanismo realize a trajetória desejada. Sendo assim, normalmente é escolhida uma solução que seja solução de um problema de otimização (como a minimização da energia consumida), tendo a equação \eqref{eq:DinamicaInversa2} como restrição.
 
@@ -6625,7 +6626,7 @@ Para o caso de quaternions unitários, temos que o quaternion inverso é igual a
 \end{equation}
 
 \subsection{Rotações elementares}
-As rotações de um angulo $\theta$ em torno dos eixo $x$, $y$ e $z$ podem ser representadas pelos seguintes quaternions unitários, respectivamente:
+As rotações de um angulo $\theta \in (-\pi, \pi)$ em torno dos eixo $x$, $y$ e $z$ podem ser representadas pelos seguintes quaternions unitários, respectivamente:
 \begin{equation}
 \breve{\mq}_x (\theta) = \begin{bmatrix}
 \sign(\sin\theta) \sqrt{\frac{1-\cos\theta}{2}} & 0 & 0 & \sqrt{\frac{1+\cos\theta}{2}}
