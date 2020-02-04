@@ -354,11 +354,11 @@ Aiming to fully explore the potential of this kind of architecture, in this thes
   $\mp$ & Quasi-velocidades \\
   $\mp\ssh$ & Quasi-velocidades independentes \\
   $\mp\cir$ & Quasi-velocidades redundantes \\
-  $\overline{\mp}$ & Matriz-coluna de vínculos de quasi-velocidades \\
+  $\overline{\mp}$ & Matriz-coluna de vínculos entre quasi-velocidades \\
   $\mq$ & Coordenadas generalizadas \\
   $\mq\ssh$ & Coordenadas generalizadas independentes \\
   $\mq\cir$ & Coordenadas generalizadas redundantes \\
-  $\overline{\mq}$ & Matriz-coluna de vínculos de coordenadas generalizadas \\
+  $\overline{\mq}$ & Matriz-coluna de vínculos entre coordenadas generalizadas \\
   $\mR$ & Matriz de rotação de um ligamento \\
   $\ms$ & Variáveis de escorregamento \\
   $\mu$ & Esforços ativos generalizados provenientes de atuadores \\
@@ -475,7 +475,7 @@ Atualmente, este grande potencial já consegue ser muito bem explorado em tarefa
 
 Levando-se em conta esta dificuldade de obtenção e a complexidade inerente do modelo dinâmico, o controle de mecanismos de arquitetura paralela é uma tarefa desafiadora. A utilização de estratégias de controle não baseadas em modelo pode deixar muito a desejar na exploração do potencial que estes mecanismos oferecem, principalmente em tarefas de seguimento de trajetória \cite{Chung}, e a utilização de modelos dinâmicos simplificados pode limitar significativamente o desempenho do projeto de controladores baseados em modelo, principalmente quando se trabalha com altas velocidades e acelerações. Além disso, mesmo na hipótese do modelo dinâmico completo estar disponível, o emprego de técnicas de controle não linear pode acarretar um custo  computacional muito elevado \cite{Craig, Slotini, Zubizarreta, Zubizarreta3}. Este paradigma, aliado à escassez de trabalhos publicados com comprovação experimental de técnicas de controle aplicáveis a mecanismos paralelos \cite{Rynaldo}, resulta na exploração insatisfatória dos potenciais promissores de tais máquinas, como resposta dinâmica rápida e alta precisão \cite{Abdellatif}.
 	
-Com o intuito de atacar os problemas da dificuldade de obter modelos dinâmicos completos e diminuir o custo computacional de suas implementações em leis de controle baseadas em modelos, esta tese propõe um algoritmo genérico de modelagem dinâmica de mecanismos paralelos translacionais, o qual pode ser utilizado para calcular previamente termos do modelo dinâmico em um número finito de pontos do espaço de trabalho, sendo necessário apenas o cálculo de interpolações em tempo real.  Além disso, em virtude de existirem poucos  trabalhos publicados apresentando comprovação experimental de técnicas de controle aplicáveis a mecanismos paralelos, nesta tese, são obtidos e apresentados resultados experimentais da implementação de 8 diferentes estratégias de controle, tanto baseadas como não baseadas em modelo, incluindo estratégias de controle não linear robusto. Desta maneira, o trabalho desenvolvido nesta tese visa contribuir para uma melhor exploração do grandes potenciais dos mecanismos com este tipo de arquitetura.
+Com o intuito de atacar os problemas da dificuldade de obter modelos dinâmicos completos e diminuir o custo computacional de suas implementações em leis de controle baseadas em modelos, esta tese propõe um algoritmo genérico de modelagem dinâmica de mecanismos paralelos translacionais, o qual pode ser utilizado para calcular previamente termos do modelo dinâmico em um número finito de pontos do espaço de trabalho, sendo necessário apenas o cálculo de interpolações em tempo real.  Além disso, em virtude de existirem poucos  trabalhos publicados apresentando comprovação experimental de técnicas de controle aplicáveis a mecanismos paralelos, nesta tese, são obtidos e apresentados resultados experimentais da implementação de 8 diferentes estratégias de controle, tanto baseadas como não baseadas em modelo, incluindo estratégias de controle não linear robusto, em um mecanismo paralelo plano do tipo pentágono articulado. Desta maneira, o trabalho desenvolvido nesta tese visa contribuir para uma melhor exploração do grandes potenciais dos mecanismos com este tipo de arquitetura.
 
 
 %Além disso, atacando o problema da  escassez de trabalhos publicados com comprovação experimental de técnicas de controle aplicáveis a mecanismos paralelos, são obtidos e apresentados resultados experimentais da implementação de 8 diferentes estratégias de controle, tanto baseadas como não baseadas em modelo, incluindo estratégias de controle não linear robusto. Desta maneira, o trabalho desenvolvido nesta tese visa contribuir para uma melhor exploração do grandes potenciais dos mecanismos com este tipo de arquitetura.
@@ -520,7 +520,7 @@ O objetivo geral desta Tese é contribuir para o aumento do desempenho de manipu
 %SOBRE A ORGANIZAÇÃO DO TEXTO--------------------------------------------
 \section{Sobre a organização do texto}\label{organizacao}
 
-O capítulo 2 apresenta a revisão da Literatura sobre o assunto, sendo que a metodologia da pesquisa é descrita no capítulo 3. A seguir, os capítulos 4 e 5 abordam a modelagem dinâmica de manipuladores seriais e paralelos, respectivamente. Com relação ao projeto dos controladores, este assunto é elaborado no capítulo 6. No capítulo 7 são apresentados os resultados mais relevantes desta Tese, além da pertinente discussão. Por fim, no capítulo 8, apresentam-se as principais conclusões da Tese e os temas sugeridos para pesquisa futura.
+O capítulo 2 apresenta a revisão da Literatura sobre a modelagem e o controle de mecanismos paralelos, sendo que a metodologia da pesquisa é descrita no capítulo 3. A seguir, os capítulos 4 e 5 abordam a modelagem dinâmica de manipuladores seriais e paralelos, respectivamente. Com relação ao projeto dos controladores por Linearização pela Realimentação e Modos Deslizantes, este assunto é elaborado no capítulo 6. No capítulo 7 são apresentados os resultados mais relevantes desta Tese, como a comparação do desempenho entre 8 estratégias de controle através de ensaios experimentais, além da pertinente discussão. Por fim, no capítulo 8, apresentam-se as principais conclusões da Tese e os temas sugeridos para pesquisa futura.
 
 %REVISAO--------------------------------------------------------------------
 \chapter{Revisão da literatura}\label{revision}
@@ -530,11 +530,11 @@ Considerando o tema de pesquisa desta Tese, esta revisão se concentrará em tó
 
 \section{Modelagem dinâmica}
 
-Quando se trata de modelagem dinâmica, os mecanismos seriais possuem características topológicas e cinemáticas que podem ser exploradas para facilitar a geração dos modelos cinemáticos e dinâmicos. Suas estruturas mecânicas correspondem a mecanismos de cadeia aberta, apenas com juntas ativas de um grau de liberdade, rotativas ou prismáticas. Além disso, o número de coordenadas generalizadas coincide com o número de atuadores e com a mobilidade do mecanismo \cite{Craig}. 
+Quando se trata de modelagem dinâmica, os mecanismos seriais possuem características topológicas e cinemáticas que podem ser exploradas para facilitar a geração dos modelos cinemáticos e dinâmicos. Suas estruturas mecânicas correspondem a mecanismos de cadeia aberta, apenas com juntas ativas de um grau de liberdade, rotativas ou prismáticas. Além disso, o número de coordenadas generalizadas tipicamente coincide com o número de atuadores e com a mobilidade do mecanismo \cite{Craig}. 
 
-De fato, o modelo cinemático pode ser obtido, recursivamente ao longo da cadeia cinemática, pelo emprego de métodos vetoriais ou matriciais, partindo-se da base e se dirigindo ao efetuador \cite{Siciliano}. Tradicionalmente, empregam-se os vetores $\mq$ e $\mx$ para descrever as coordenadas associadas aos atuadores e ao efetuador, respectivamente \cite{Cabral, Carvalho}. Enquanto que o problema direto é de resolução relativamente simples, o problema inverso demanda a realização de um processo mais elaborado. Matematicamente, este corresponde à resolução de um sistema não-linear de equações algébricas. Para algumas topologias que utilizam mecanismos esféricos nos punhos, é possível alcançar o desacoplamento das equações de posição e orientação do efetuador \cite{Waldron}.
+De fato, o modelo cinemático pode ser obtido, recursivamente ao longo da cadeia cinemática, pelo emprego de métodos vetoriais ou matriciais, partindo-se da base e se dirigindo ao efetuador \cite{Siciliano}. Tradicionalmente, empregam-se os vetores $\mq$ e $\mx$ para descrever as coordenadas associadas aos atuadores e ao efetuador, respectivamente \cite{Cabral, Carvalho}. Enquanto o problema direto é de resolução relativamente simples, o problema inverso demanda a realização de um processo mais elaborado. Matematicamente, este corresponde à resolução de um sistema não-linear de equações algébricas. Para algumas topologias que utilizam mecanismos esféricos nos punhos, é possível alcançar o desacoplamento das equações de posição e orientação do efetuador \cite{Waldron}.
 
-Com relação à dinâmica, a geração das equações também pode ser realizada de modo recursivo, partindo-se do efetuador e se dirigindo à base, sendo que a solução do problema inverso é obtida mediante a resolução de um sistema linear de equações algébricas. Por outro lado, a solução do problema dinâmico direto é alcançada pela integração de um sistema de equações diferenciais ordinárias (EDOs) \cite{Featherstone}.
+Com relação à dinâmica, a geração das equações também pode ser realizada de modo recursivo, partindo-se do efetuador e se dirigindo à base, sendo que a solução do problema inverso é obtida mediante a resolução de um sistema linear de equações algébricas. Por outro lado, a solução do problema dinâmico direto é alcançada pela integração de um sistema de equações diferenciais ordinárias (EDOs) não lineares \cite{Featherstone}.
 
 %Não tratar de formalismos clássicos da Mecânica (NE,L,GA etc), apenas citar referências q os descrevam de modo geral (livros, tese Orsino) e de modo específico quando aplicados a manipuladores paralelos (artigos). A seguir, serão tratadas as questões ligadas à topologia dos manipuladores, à geração do modelo, bem como as análises para a sua resolução.
 
@@ -595,7 +595,7 @@ sendo
 
 cuja solução é equivalente à solução de \eqref{DAE} desde que as condições iniciais respeitem as equações vinculares $\bar{\mq}(t, \mq) = \mzr$.
 
-Para melhorar a precisão associada às restrições de posição e velocidade, recomenda-se substituir $\mb$ por $\mb'$, expresso na equação \eqref{baumgarte}, que é conhecido como método de Baumgarte para a estabilização das restrições \cite{Baumgarte, Featherstone, Nikravesh}, sendo $\lambda = 1/t_c$, com  $0.01 \lesssim t_c \lesssim 0.1 $ \cite{Featherstone}. 
+Para melhorar a precisão numérica associada às restrições de posição e velocidade, recomenda-se substituir $\mb$ por $\mb'$, expresso na equação \eqref{baumgarte}, que é conhecido como método de Baumgarte para a estabilização das restrições \cite{Baumgarte, Featherstone, Nikravesh}, sendo $\lambda = 1/t_c$, com  $0.01 \lesssim t_c \lesssim 0.1 $ \cite{Featherstone}. 
 %
 \begin{equation}
 \mb'(t,\mq,\dot{\mq}) = \mb + 2\lambda \dot{\bar{\mq}} + \lambda^2 \bar{\mq}
@@ -608,7 +608,7 @@ Um outro modo de aprimorar a precisão é alcançado pela separação das coorde
 
 %Quando a matriz dos coeficientes $\mY$ , expressa na Eq.(\ref{DAE1}), for singular, os métodos numéricos normalmente empregados, como decomposição LU ou QR, não serão capazes de resolver o sistema de equações. Neste caso, costuma-se empregar $\mY^\msP$, ou seja, a matriz inversa de Moore-Penrose. Outras formulações, como as de Udwadia-Kalaba, Udwadia-Phohomsiri e baseadas no método dos mínimos quadrados, também foram propostas para tratar as situações em que $\mY$ é singular.
 
-Segundo Mariti \emph{et al.} \cite{Mariti}, expressar o modelo dinâmico por meio de coordenadas redundantes, independentemente do formalismo escolhido, possui como propósito a realização de simulações de sistemas multicorpos, sendo que um exemplo é o software comercial MSC-Adams. No entanto, se a finalidade for o controle de manipuladores, significando que o modelo é parte integrante de implementações que demandem  cálculos em tempo real, a expressão das equações dinâmicas nas coordenadas independentes é necessária.
+Segundo Mariti \emph{et al.} \cite{Mariti}, expressar o modelo dinâmico por meio de coordenadas redundantes, independentemente do formalismo escolhido, possui como propósito a realização de simulações de sistemas multicorpos, sendo que um exemplo é o software comercial MSC-Adams. No entanto, se a finalidade for o controle de manipuladores, significando que o modelo é parte integrante de implementações que demandem  cálculos em tempo real, a expressão das equações dinâmicas nas coordenadas independentes é altamente desejável.
 
 Além disso, é largamente difundido que a escolha das coordenadas generalizadas independentes recaia sobre os deslocamentos impostos pelos atuadores. No entanto, alguns autores \cite{Li, Khalil2} mencionam as vantagens de se escolher as coordenadas do efetuador, afirmando que a expressão do modelo dinâmico nestas variáveis é menos complexa.
 
@@ -625,31 +625,25 @@ Na literatura, são conhecidas várias formulações para realizar a modelagem d
 
 \subsection{Formalismo de Newton-Euler}
 
-A utilização do formalismo de Newton-Euler é bastante popular para a realização de simulações dinâmicas de mecanismos seriais, tendo em vista que foram desenvolvidos algoritmos recursivos super eficientes para a aplicação deste formalismo neste tipo de arquitetura, como pode ser visto em Featherstone \emph{et al.} \cite{Featherstone}. Porém, para se beneficiar deste tipo de estratégia em mecanismos paralelos, é necessária a utilização de algoritmos de fechamento de malha, os quais aumentam consideravelmente o custo computacional das simulações. Provavelmente por esta razão, aliada à questão da complexidade de implementação dos algoritmos, não foram encontrados na literatura artigos aplicando esta estratégia na modelagem de mecanismos paralelos. 
+A utilização do formalismo de Newton-Euler é bastante popular para a realização de simulações dinâmicas de mecanismos seriais, tendo em vista que foram desenvolvidos algoritmos recursivos bastante eficientes para a aplicação deste formalismo neste tipo de arquitetura, como pode ser visto nos trabalhos de Featherstone \emph{et al.} \cite{Featherstone}. Porém, para se beneficiar deste tipo de estratégia em mecanismos paralelos, é necessária a utilização de algoritmos de fechamento de malha, os quais aumentam consideravelmente o custo computacional das simulações. Provavelmente por esta razão, aliada à questão da complexidade de implementação dos algoritmos, não foram encontrados na literatura artigos aplicando estes algoritmos recursivos na modelagem de mecanismos paralelos. 
 
 Apesar da desvantagem de ter que trabalhar com forças reativas no equacionamento, não é raro encontrar na literatura trabalhos que o utilizem. Dentre estes, podemos citar os trabalhos de Arian \emph{et al.} \cite{Arian}, Dasgupta \emph{et al.} \cite{Dasgupta}, Li \emph{et al.} \cite{LiWang}, Shiau \emph{et al.} \cite{Shiau} e Zhang \emph{et al.} \cite{Zhang}.
 
 Em \cite{Arian}, \cite{LiWang} e \cite{Dasgupta}, são feitas a simulações dinâmicas inversas de mecanismos paralelos, de 3 graus de liberdade, nos dois primeiros trabalhos, e de 6 graus de liberdade, no último, utilizando o formalismo de Newton-Euler. Em \cite{Arian} e \cite{LiWang} as simulações são comparadas com \emph{softwares} comerciais. Em \cite{Arian}, também é feita a modelagem utilizando o princípio dos trabalhos virtuais, e são comparados o número de operações e o tempo médio gasto por operação em cada formulação. Como era de se esperar, a formulação do Princípio dos Trabalhos Virtuais se mostrou muito mais eficiente em ambos os quesitos, tendo em vista que não são realizados os cálculos dos esforços reativos. Em \cite{Dasgupta} foi feita uma eliminação de boa parte dos esforços vinculares utilizando manipulações algébricas, o que possibilitou reduzir bastante o custo computacional da simulação.
 
-Em \cite{Shiau} e \cite{Zhang}, os mecanismos paralelos 3-PRS e 3-RRR, respectivamente, são modelados  também utilizando o formalismo de Newton-Euler. Em ambos os trabalhos é considerado o efeito de folgas, e em \cite{Shiau} também o de atritos. A partir dos modelos obtidos, em ambos são feitas simulações dinâmicas diretas. Em \cite{Zhang} é utilizado o método de estabilização de Baumgarte \cite{Baumgarte} para estabilizar a integração numérica. Em \cite{Shiau}, além das simulações, é feita a linearização do modelo dinâmico para determinar as frequências naturais do mecanismo em função da posição do efetuador.
+Em \cite{Shiau} e \cite{Zhang}, os mecanismos paralelos 3-PRS e 3-RRR, respectivamente, são modelados  também utilizando o formalismo de Newton-Euler. Em ambos os trabalhos é considerado o efeito de folgas, e em \cite{Shiau} também o de atritos. A partir dos modelos obtidos, em ambos são feitas simulações dinâmicas diretas. Em \cite{Zhang} é utilizado o método de estabilização de Baumgarte \cite{Baumgarte} na integração numérica. Em \cite{Shiau}, além das simulações, é feita a linearização do modelo dinâmico para determinar as frequências naturais do mecanismo em função da posição do efetuador.
 
 \subsection{Formalismo de Lagrange}
 
-Formulações baseadas na mecânica analítica em geral são muito mais atrativas para realizar a modelagem de mecanismos paralelos, tendo em vista que os esforços vinculares não mais aparecem no equacionamento. Isso justifica a popularidade das escolhas pelo formalismo de Lagrange e pelos Princípios dos Trabalhos Virtuais e das Potências Virtuais para realizar esta tarefa.
+Formulações baseadas na mecânica analítica em geral são muito mais atrativas para realizar a modelagem de mecanismos paralelos, tendo em vista que os esforços vinculares associados a vínculos holônomos não mais aparecem no equacionamento. Isso justifica a popularidade das escolhas pelo formalismo de Lagrange e pelos Princípios dos Trabalhos Virtuais e das Potências Virtuais para realizar esta tarefa.
 
 Dentre os trabalhos que utilizam o formalismo de Lagrange, podemos citar os trabalhos de  Li \emph{et al.} \cite{Li3}, Singh \emph{et al.} \cite{Singh, Singh2, Singh3} e Yao \emph{et al.} \cite{Yao}.
 
-Em \cite{Singh}, \cite{Singh2} e \cite{Singh3}, são modelados 3 mecanismos paralelos planos de 3 graus de liberdade utilizando o formalismo de Lagrange. Em todos, são realizadas simulações dinâmicas diretas comparando o desempenho de diversas leis de controle. Apenas em \cite{Singh2} é realizada uma dedução completa do modelo dinâmico mostrando a expressão deduzida do modelo. Curiosamente, são adotadas as coordenadas do efetuador como coordenadas generalizadas, e a dedução se mostra relativamente simples para essa arquitetura escolhida, com essa escolha de variáveis.
+Em \cite{Singh}, \cite{Singh2} e \cite{Singh3}, são modelados 3 mecanismos paralelos planos de 3 graus de liberdade utilizando o formalismo de Lagrange. Em todos, são realizadas simulações dinâmicas diretas comparando o desempenho de diversas leis de controle. Apenas em \cite{Singh2} é realizada uma dedução completa do modelo dinâmico mostrando a expressão deduzida do modelo. Curiosamente, são adotadas as coordenadas do efetuador como coordenadas generalizadas, e a dedução se mostra relativamente simples para a arquitetura escolhida (3-PPR em formato de U), com essa escolha de variáveis.
 
 Já em \cite{Li3}, um mecanismo paralelo espacial de 3 graus de liberdade é modelado, utilizando o formalismo de Lagrange com multiplicadores e o Princípio dos Trabalhos Virtuais, sendo que no último são utilizadas hipóteses simplificadoras. São realizadas simulações dinâmicas inversas e são comparados os resultados utilizando o modelo completo com os resultados utilizando o modelo simplificado.
 
-Em \cite{Yao}, é feita a simulação dinâmica inversa de um mecanismo ainda mais complexo, de 5 graus de liberdade com atuação redundante, também utilizando o formalismo de Lagrange e métodos de otimização para determinar os esforços. Este trabalho, porém, também mostra muito pouco da dedução. Assim, dados a complexidade do mecanismo e o fato de que não é comentado em lugar nenhum o uso de coordenadas redundantes, imagina-se que o modelo utilizado seja um modelo simplificado.
-
-Além disso, foram encontrados trabalhos que utilizam o Princípio dos Trabalhos Virtuais aliado ao formalismo de Lagrange, os quais entitulam essa combinação de ``formulação de Lagrange-D’Alembert'', dentre os quais podemos citar o de Cheng \emph{et al.} \cite{ChengLiu} e Yen \emph{et al.} \cite{Yen}.
-
-No trabalho de Cheng \emph{et al.} \cite{ChengLiu} a ``formulação de Lagrange-D’Alembert'' é utilizada para deduzir uma formulação de acoplamento de subsistemas. A formulação é utilizada para obter o modelo dinâmico de um mecanismo paralelo de 2 graus de liberdade com atuação redundante. São utilizados os modelos já conhecidos para as cadeias seriais, e é feito o acoplamento dos subsistemas a partir de jacobianos dos vínculos cinemáticos.
-
-Em \cite{Yen}, também é utilizada uma estratégia de acoplamento de subsistemas, também deduzida a partir da ``formulação de Lagrange-D’Alembert'', para obter o modelo dinâmico de um mecanismo paralelo de 3 graus de liberdade. No entanto, neste trabalho, a estratégia não é apresentada de uma maneira mais geral, podendo dar a impressão ao leitor de que isso só foi possível devido à topologia particular do mecanismo em questão. São realizadas simulações dinâmicas diretas do controle de posição do mecanismo, utilizando as técnicas de controle PID e Controle por Torque Computado, as quais são comparadas com resultados experimentais utilizando as mesmas estratégias de controle.
+Em \cite{Yao}, é feita a simulação dinâmica inversa de um mecanismo ainda mais complexo, de 5 graus de liberdade com atuação redundante, também utilizando o formalismo de Lagrange e métodos de otimização para determinar os esforços. Este trabalho, porém, também mostra muito pouco da dedução. Assim, dados a complexidade do mecanismo e o fato de que não é comentado em lugar nenhum o uso de coordenadas redundantes, imagina-se que possivelmente o modelo utilizado seja um modelo simplificado.
 
 \subsection{Princípio dos Trabalhos Virtuais e das Potências Virtuais}
 
@@ -659,11 +653,18 @@ No trabalhos de Codourey \emph{et al.} \cite{Codourey, CodoureyBurdet} e no de L
 
 Já em \cite{GallardoAlvarado}, é modelado um robô paralelo de 4 graus de liberdade utilizando a teoria das helicóides e o Princípio dos Trabalhos Virtuais.
 
-Em \cite{Geike}, é proposta uma metodologia de modelagem interessante, na qual já se dividem as coordenadas generalizadas em um conjunto de variáveis dependentes e outro de variáveis independentes, utilizando a relação entre seus deslocamentos virtuais para obter as equações de movimento. A metodologia é utilizada para realizar a simulação dinâmica inversa de dois mecanismos paralelos, um de 3 graus de liberdade e outro de 6. Além disso, é discutida qual é a forma mais eficiente de implementação da metodologia desenvolvida.
+Em \cite{Geike}, é proposta uma metodologia de modelagem, na qual já se dividem as coordenadas generalizadas em um conjunto de variáveis dependentes e outro de variáveis independentes, utilizando a relação entre seus deslocamentos virtuais para obter as equações de movimento. A metodologia é utilizada para realizar a simulação dinâmica inversa de dois mecanismos paralelos, um de 3 graus de liberdade e outro de 6. Além disso, é discutida qual é a forma mais eficiente de implementação da metodologia desenvolvida.
 
 Nos trabalhos de Staicu \emph{et al.} \cite{Staicu, Staicu2, Staicu3, StaicuCarpCiocardia, StaicuLiu, StaicuZhang, StaicuZhangRugescu} e no de Li \emph{et al.} \cite{LiStaicu} são modelados mecanismos paralelos de 3 graus de liberdade utilizando uma metodologia de modelagem recursiva matricial baseada no Princípio dos Trabalhos Virtuais ou no Princípio das Potências Virtuais, e são realizadas simulações dinâmicas inversas. Esses trabalhos apresentam longos equacionamentos para não precisar recorrer a simplificações; porém, em todos os trabalhos, perto do final da dedução do modelo dinâmico, cita-se que será usada a \emph{equação fundamental da dinâmica de robôs paralelos}, a qual está publicada em \cite{StaicuFrances}. Este artigo, porém, está escrito em francês e é muito difícil de ser encontrado.
 
 Por fim, nos trabalhos de Zhao \emph{et al.} \cite{Zhao, Zhao2} e de Zhu \emph{et al.} \cite{Zhu}, são modelados, utilizando o Princípio dos Trabalhos Virtuais e o conceito de jacobianos dos elos, mecanismos paralelos de 6 graus de liberdade nos dois primeiros, e de 3 graus de liberdade no terceiro, sendo que em \cite{Zhao2} o mecanismo possui atuação redundante. Em todos são realizadas simulações dinâmicas inversas.
+
+Além disso, foram encontrados trabalhos que utilizam o Princípio dos Trabalhos Virtuais aliado às equações de Lagrange, os quais entitulam essa combinação de ``formulação de Lagrange-D’Alembert'', dentre os quais podemos citar o de Cheng \emph{et al.} \cite{ChengLiu} e Yen \emph{et al.} \cite{Yen}.
+
+No trabalho de Cheng \emph{et al.} \cite{ChengLiu} a ``formulação de Lagrange-D’Alembert'' é utilizada para deduzir uma formulação de acoplamento de subsistemas. A formulação é utilizada para obter o modelo dinâmico de um mecanismo paralelo de 2 graus de liberdade com atuação redundante. São utilizados os modelos já conhecidos para as cadeias seriais, e é feito o acoplamento dos subsistemas a partir de jacobianos dos vínculos cinemáticos.
+
+Em \cite{Yen}, também é utilizada uma estratégia de acoplamento de subsistemas, também deduzida a partir da ``formulação de Lagrange-D’Alembert'', para obter o modelo dinâmico de um mecanismo paralelo de 3 graus de liberdade. No entanto, neste trabalho, a estratégia não é apresentada de uma maneira mais geral, podendo dar a impressão ao leitor de que isso só foi possível devido à topologia particular do mecanismo em questão. São realizadas simulações dinâmicas diretas do controle de posição do mecanismo, utilizando as técnicas de controle PID e Controle por Torque Computado, as quais são comparadas com resultados experimentais utilizando as mesmas estratégias de controle.
+
 
 \subsection{Método de Kane}
 
@@ -682,7 +683,7 @@ Tanto em \cite{Abdellatif2} quanto em \cite{20altuzarra}, são utilizadas as equ
 
 \subsection{Formulação do Complemento Ortogonal Natural}
 
-A formulação do Complemento Ortogonal Natural foi proposta por Angeles \emph{et al.} em \cite{Angeles}. Sua principal idéia é projetar as equações dinâmicas de cada corpo rígido do sistema em um espaço ortogonal às reações vinculares. Este procedimento é realizado através da obtenção de um complemento ortogonal ao jacobiano das equações de vínculo obtido através de relações cinemáticas dos \emph{twists} de cada corpo com um conjunto de quasi-velocidades independentes. Formulações similares são bastante exploradas por Orsino \emph{et al.} em \cite{22orsino}, e generalizadas em \cite{23orsino}. Dentre os trabalhos que utilizam esta formulação, podemos citar os trabalhos de Akbarzadeh \emph{et al.} \cite{Akbarzadeh}, Khan \emph{et al.} \cite{Khan} e Xi \emph{et al.} \cite{Xi}.
+A formulação do Complemento Ortogonal Natural foi proposta por Angeles \emph{et al.} em \cite{Angeles}, inspirada nas equações de Maggi. Sua principal idéia é projetar as equações dinâmicas de cada corpo rígido do sistema em um espaço ortogonal às reações vinculares. Este procedimento é realizado através da obtenção de um complemento ortogonal ao jacobiano das equações de vínculo obtido através de relações cinemáticas dos \emph{twists} de cada corpo com um conjunto de quasi-velocidades independentes. Formulações similares são bastante exploradas por Orsino \emph{et al.} em \cite{22orsino}, e generalizadas em \cite{23orsino} (Metodologia Modular de Modelagem). Dentre os trabalhos que utilizam esta formulação, podemos citar os trabalhos de Akbarzadeh \emph{et al.} \cite{Akbarzadeh}, Khan \emph{et al.} \cite{Khan} e Xi \emph{et al.} \cite{Xi}.
 
 Em \cite{Akbarzadeh}, é descrita uma metodologia genérica de modelagem dinâmica multi-corpos utilizando a formulação do Complemento Ortogonal Natural. Basicamente são obtidos os modelos dinâmicos desacoplados de cada corpo rígido, utilizando a formulação de Newton-Euler, e é feito o acomplamento das equações dinâmicas através do uso do Complemento Ortogonal Natural. A metodologia proposta é aplicada em um mecanismo paralelo esférico do tipo SST e são realizadas simulações dinâmicas inversa e direta do mecanismo.
 
@@ -805,9 +806,9 @@ Por outro lado, há artigos que propõe formulações que se mostram muito efici
 
 Também não foram encontrados trabalhos que propõe um conjunto de parâmetros que definam a arquitetura de pelo menos uma classe de mecanismos paralelos, análogos aos parâmetros de Denavit-Hartemberg para os mecanismos seriais \cite{Denavit}.
 
-Com relação à revisão das técnicas de controle aplicadas a mecanismos paralelos, foi possível perceber que, apesar de até que uma boa parte apresentar resultados experimentais \cite{Honegger, Cheng, Shang, Yen, Codourey, Vivas, Duchaine, Chemori, Begon}, são poucos os que realmente apresentam uma análise um pouco mais elaborada. Além disso, há menos trabalhos experimentais que mostram a eficácia de técnicas que podem superar ou bater de frente com o Controle por Torque Computado. Também não foram encontrados trabalhos que tratam da questão da implementação de técnicas de controle baseado em modelo e da questão de como reduzir seu custo computacional.
+Com relação à revisão das técnicas de controle aplicadas a mecanismos paralelos, foi possível perceber que, apesar de até que uma boa parte apresentar resultados experimentais \cite{Honegger, Cheng, Shang, Yen, Codourey, Vivas, Duchaine, Chemori, Begon}, são poucos os que realmente apresentam uma análise um pouco mais elaborada. Além disso, há menos trabalhos experimentais que mostram a eficácia de técnicas que podem superar ou obter desempenho similar ao Controle por Torque Computado. Também não foram encontrados trabalhos que tratam da questão da implementação de técnicas de controle baseado em modelo e da questão de como reduzir seu custo computacional.
 
-Sendo assim, com relação à modelagem dinâmica, esta Tese visa contribuir através do desenvolvimento de um algoritmo genérico para a modelagem dinâmica de mecanismos paralelos translacionais que: utiliza estratégias modulares; não necessita do cálculo simbólico de derivadas; e propõe uma maneira de descrever a topologia deste tipo de mecanismo utilizando um conjunto de parâmetros.
+Sendo assim, com relação à modelagem dinâmica, esta Tese visa contribuir através do desenvolvimento de um algoritmo genérico para a modelagem dinâmica de mecanismos paralelos translacionais que: (1) utiliza estratégias modulares; (2) não necessita do cálculo simbólico de derivadas; e (3) propõe uma maneira de descrever a topologia deste tipo de mecanismo utilizando um conjunto de parâmetros.
 
 Em relação ao controle, esta tese visa contruir através da proposição de novas leis de controle híbridas, as quais adicionam termos de controle robusto a técnicas de controle já bastante populares na literatura, e da comprovação experimental da eficácia das técnicas propostas no controle de mecanismos paralelos.
 
@@ -819,7 +820,7 @@ Fundamentalmente, a metodologia desta pesquisa compreende a execução de seis f
 \section{Primeira fase} 
 Desenvolvimento de um algoritmo genérico, capaz de gerar os modelos dinâmicos completos de mecanismos paralelos translacionais que operam em espaço plano ou tridimensional. Esta geração parte da definição da topologia do mecanismo paralelo, suas cadeias cinemáticas, descrevendo a localização relativa de seus elos e juntas.
 
-Dentre os efeitos de modelagem considerados, destacam-se os decorrentes da inércia efetiva e acoplada, das forças de Coriolis e centrífugas, da força gravitacional, bem como dos esforços dos atuadores. O algoritmo permite que a geração dos modelos seja realizada de forma implícita. Para tanto, foi desenvolvida uma metodologia baseada no método Recursivo Modular de Modelagem (RMM) proposto por Orsino \cite{23orsino} que, por meio da definição de níveis hierárquicos da estrutura de um sistema mecânico e a descrição da dependência das variáveis cinemáticas envolvidas,  permite o acoplamento de subsistemas multicorpos.
+Dentre os efeitos de modelagem considerados, destacam-se os decorrentes da inércia efetiva e acoplada, das forças de Coriolis e centrífugas, da força gravitacional, bem como dos esforços dos atuadores. O algoritmo permite que a geração dos modelos seja realizada de forma implícita. Para tanto, foi desenvolvida uma metodologia baseada na Metodologia Modular de Modelagem (MMM) proposta por Orsino \cite{23orsino} que, por meio da definição de níveis hierárquicos da estrutura de um sistema mecânico e a descrição da dependência das variáveis cinemáticas envolvidas,  permite o acoplamento de subsistemas multicorpos.
 
 \section{Segunda fase} 
 Realização da modelagem cinemática e dinâmica do mecanismo articulado plano 5R \cite{22orsino}, utilizando o algoritmo desenvolvido na fase anterior.
@@ -869,7 +870,7 @@ Este capítulo tem o intuito de apresentar um algoritmo genérico para a obtenç
 	\label{fig:AcoplamentoMecSerialFig}
 \end{figure}
 
-O algoritmo apresentado é implementável em linguagens de programação comumente utilizadas atualmente, como C++, Java e Python, sem necessitar de recursos de manipulação simbólica. Para a obtenção do modelo, são necessários apenas os parametros de Denavit-Hartemberg \cite{Craig, Denavit, Lipkin, Cabral} do mecanismo e as posições dos centros de massa dos ligamentos em relação aos sistemas de coordenadas fixos aos ligamentos. Uma implementação do algoritmo pode ser encontrada em \url{https://github.com/mrcouts/robotics}.
+O algoritmo apresentado é implementável em linguagens de programação comumente utilizadas atualmente, como C++, Java e Python, sem necessitar de recursos de manipulação simbólica. Para a obtenção do modelo, são necessários apenas os parametros de Denavit-Hartemberg \cite{Craig, Denavit, Lipkin, Cabral} do mecanismo e as posições dos centros de massa dos ligamentos em relação aos sistemas de coordenadas fixos aos ligamentos supostos rígidos. Uma implementação do algoritmo pode ser encontrada em \url{https://github.com/mrcouts/robotics}.
 
 Sejam $\ssB_1,\hdots,\ssB_\nu$ $\nu$ subsistemas ligamentos, $\ssF$ um subsistema de esforços ativos generalizados, e $\ssS$ um sistema mecânico serial de $\nu$ graus de liberdade. Um diagrama de acoplamento dos subsistemas é representado pela figura \ref{fig:AcoplamentoMecSerial}.
 \begin{figure}[H]
@@ -2027,7 +2028,7 @@ Sendo:
 %
 \section{Dinâmica dos elos e juntas}
 
-O modelo dinâmico de $\ssS$ é obtido utilizando um procedimento de acoplamento de subsistemas baseado no método Recursivo Modular de Modelagem (RMM)  \cite{23orsino}, e é dado por:
+O modelo dinâmico de $\ssS$ é obtido utilizando um procedimento de acoplamento de subsistemas baseado na Metodologia Modular de Modelagem (MMM)  \cite{23orsino}, e é dado por:
 \begin{empheq}[box=\mybluebox]{equation} \label{eq:ModeloMecSerial}
 \mM_\ssS(\mq) \, \ddot{\mq} + \mnu_\ssS(\mq,\dot{\mq}) + \mg_\ssS(\mq) = \mu_\ssS
 \end{empheq}
@@ -2049,7 +2050,7 @@ Segue abaixo, a dedução.
 
 \subsection{Modelo dos subsistemas} 
 
-O modelo dinâmico de cada ligamento pode ser obtido por Newton-Euler, pois são considerados como corpos rígidos livres no espaço sujeitos apenas à força peso. Sendo assim, através das equações de Newton-Euler, obtemos os esforços não-reativos (ativos e inerciais) aplicados em cada ligamento:
+O modelo dinâmico de cada ligamento pode ser obtido pelo formalismo de Newton-Euler, pois são considerados como corpos rígidos livres no espaço sujeitos apenas à força peso. Sendo assim, através das equações de Newton-Euler, obtemos os esforços não-reativos (ativos e inerciais) aplicados a cada ligamento:
 \begin{equation} \label{eq:Newton-Euler}
 \begin{cases}
 \vf_{\lllB_i} = -m_i \va^{\lllN}_{\ttc_{\lllB_i}} + m_i \vgamma  \\
@@ -2204,7 +2205,7 @@ Sendo:
 \end{bmatrix}^\msT
 \end{empheq}
 
-Sendo assim, a partir de \eqref{eq:p_red_em_func_de_p0}, os vínculos de quasi-velocidades entre subsistemas podem ser expressos como:
+Sendo assim, a partir de \eqref{eq:p_red_em_func_de_p0}, os vínculos entre quasi-velocidades entre subsistemas podem ser expressos como:
 \begin{empheq}[box=\mybluebox]{equation} \label{eq:VinculosV_seriais}
 \overline{\mp}(\mq,\mp) =  \mA(\mq) \cdot \mp = \mzr
 \end{empheq}
@@ -2234,7 +2235,7 @@ Seja $\mf$ a matriz-coluna contendo todos os sistemas de esforços não-reativos
 Sendo:
 \begin{empheq}[box=\lightbluebox]{equation} \label{eq:fcir}
 \mf\cir = \begin{bmatrix}
-\mf_1^\msT & ... & \mf_\nu^\msT  
+\overline{\mf}_{\ssB_1}^\msT & ... & \overline{\mf}_{\ssB_\nu}^\msT  
 \end{bmatrix}^\msT
 \end{empheq}
 
@@ -2261,7 +2262,7 @@ Sendo:
 \end{bmatrix}^\msT
 \end{equation}
 
-Pelo princípio de D'Alembert, temos que
+Pelo princípio de D'Alembert, temos que, para deslocamentos virtuais compatíveis com os vínculos do sistema:
 \begin{empheq}[box=\mybluebox]{equation} \label{eq:PdASeriais}
 \dl W_\ssF + \sum_{i=1}^\nu \dl W_{\ssB_i}  = 0
 \end{empheq}
@@ -2272,7 +2273,7 @@ Através de \eqref{eq:PdASeriais}, \eqref{eq:dWsshSeriais}, \eqref{eq:dWiSeriais
 \end{equation}
 
 
-Além disso, a partir da definição de $\mpi$ \eqref{eq:quasi-coord} e dos vínculos de quasi-velocidades \eqref{eq:VinculosV_seriais}, temos que as variações das quasi-coordenadas $\mpi$ devem respeitar a seguinte relação:
+Além disso, a partir da definição de $\mpi$ \eqref{eq:quasi-coord} e dos vínculos entre quasi-velocidades \eqref{eq:VinculosV_seriais}, temos que as variações das quasi-coordenadas $\mpi$ devem respeitar a seguinte relação:
 \begin{equation} \label{eq:vinculosdpiSeriais}
  \mA(\mq) \cdot \dl \mpi = \mzr
 \end{equation}
@@ -2307,7 +2308,7 @@ Sendo:
 \end{bmatrix}
 \end{empheq}
 
-Repare	que trocando $\dl\mpi$ por $\mp$ em \eqref{eq:vinculosdpiSeriais}, obtemos os vínculos de quasi-velocidades do sistema \eqref{eq:VinculosV_seriais}. Sendo assim, à partir das expressões \eqref{eq:dpidpisshSeriais} e \eqref{eq:MatrizC_seriais}, temos que $\mC$ respeita a seguinte relação:
+Repare	que trocando $\dl\mpi$ por $\mp$ em \eqref{eq:vinculosdpiSeriais}, obtemos os vínculos entre quasi-velocidades do sistema \eqref{eq:VinculosV_seriais}. Sendo assim, à partir das expressões \eqref{eq:dpidpisshSeriais} e \eqref{eq:MatrizC_seriais}, temos que $\mC$ respeita a seguinte relação:
 \begin{equation} \label{eq:relacao_C}
 \mp = \mC(\mq) \cdot \mp\ssh
 \end{equation}
@@ -2421,7 +2422,7 @@ Primeiramente, fazemos as seguintes definições:
 \item $\ttR_i, \,i=1,...,\nu$: sistema de coordenadas solidário a $\llR_i$, com eixo $z$ paralelo ao eixo $z$ de $\llR_i$.
 %\item $J_{r \,i}, \,i=1,...,\nu$: momento de inércia do rotor $\llR_i$.
 %\item $\vI_{\lllR_i}, \,i=1,...,\nu$: tensor de in\'ercia do rotor $\llR_i$ em relação a seu centro de massa.
-\item $\mI_{r \,i}, \,i=1,...,\nu$: tensor de in\'ercia $\vI_{\lllR_i}$ escrito na base de $\ttN$, ou seja, $\vct{\vI_{\lllR_i}}_{\ttN \rl \ttN}$.
+\item $\mI_{r \,i}, \,i=1,...,\nu$: forma matricial do tensor de in\'ercia $\vI_{\lllR_i}$ escrito na base de $\ttN$, ou seja, $\vct{\vI_{\lllR_i}}_{\ttN \rl \ttN}$.
 \item $\mI'_{r \,i}, \,i=1,...,\nu$: tensor de in\'ercia $\vI_{\lllR_i}$ escrito na base de $\ttB_i$, ou seja, $\vct{\vI_{\lllR_i}}_{\ttB_i \rl \ttB_i}$.
 %\item $\vtau_{r \,i}, \,i=1,...,\nu$: Vetor torque não-reativo resultante aplicado em $\llR_i$.
 \item $\overline{\mf}_{\ssR_i}, \,i=1,...,\nu$: matriz-coluna de esforços não-reativos generalizados aplicados no rotor $\llR_{i}, \,i=1,...,\nu$. É dada por $\overline{\mf}_{\ssR_i} = \vct{\vtau_{\lllR_i}}_\ttN $.
@@ -2603,7 +2604,7 @@ Sendo
 
 \subsection{Dinâmica Mecânica}
 
-O modelo dinâmico de $\ssS'$ é obtido utilizando um procedimento de acoplamento de subsistemas baseado no método Recursivo Modular de Modelagem (RMM)  \cite{23orsino}, e é dado por:
+O modelo dinâmico de $\ssS'$ é obtido utilizando um procedimento de acoplamento de subsistemas baseado na Metodologia Modular de Modelagem (MMM)  \cite{23orsino}, e é dado por:
 \begin{empheq}[box=\mybluebox]{equation} \label{eq:ModeloMecSerial_rot}
 \mM_{\ssS'}(\mq) \, \ddot{\mq} + \mnu_{\ssS'}(\mq,\dot{\mq}) + \mg_{\ssS'}(\mq) = \mu_{\ssS'}
 \end{empheq}
@@ -2700,7 +2701,7 @@ Além disso, o trabalho virtual associado a este subsistema é dado por:
 
 \subsubsection{Sistemas de forças ativas generalizadas} 
 
-Considere também um subsistema constituído pelos esforços que os atuadores aplicam em seus rotores. Os torques gerados pelos atuadores são proporcionais à corrente elétrica que flui pelas suas armaduras e são aplicados na direção dos deslocamentos virtuais relativos dos rotores. Além disso, é possível que hajam esforços de atrito devido ao atrito gerado nos mancais e nas engrenagens do redutor, aplicados na direção aposta aos deslocamentos virtuais relativos dos rotores. Sendo assim, o trabalho virtual associado a este subsistema é dado por:
+Considere também um subsistema constituído pelos esforços que os atuadores aplicam em seus rotores. Os torques gerados pelos atuadores são proporcionais à corrente elétrica que flui pelas suas armaduras e são aplicados na direção dos deslocamentos virtuais relativos dos rotores. Além disso, é possível que haja esforços de atrito devido ao atrito gerado nos mancais e nas engrenagens do redutor, aplicados na direção aposta aos deslocamentos virtuais relativos dos rotores. Sendo assim, o trabalho virtual associado a este subsistema é dado por:
 \begin{empheq}[box=\mybluebox]{equation}
 \dl W_\ssT = \dl \mq_r^\msT \cdot (\underline{k_t}\,\mi - \mzeta )
 \end{empheq}
@@ -2816,7 +2817,7 @@ Sendo assim, juntando as equações \eqref{eq:ModeloMecSerial_rot} e \eqref{eq:D
 
 \chapter{Modelagem de manipuladores paralelos}
 
-Este capítulo tem o intuito de apresentar um algoritmo genérico para a obtenção do modelo dinâmico de mecanismos paralelos cujo efetuador realiza apenas movimentos de translação a partir do modelo de suas cadeias seriais, como está representado pela figura \ref{fig:AcoplamentoMecParaleloFig}. 
+Este capítulo tem o intuito de apresentar um algoritmo genérico baseado na Metodologia Modular de Modelagem (MMM)  \cite{23orsino} para a obtenção do modelo dinâmico de mecanismos paralelos cujo efetuador realiza apenas movimentos de translação a partir do modelo de suas cadeias seriais, como está representado pela figura \ref{fig:AcoplamentoMecParaleloFig}. 
 \begin{figure}[h]
 	\centering
 	\includegraphics[scale=1.0]{imagens/Serial2Paralelo.jpg}  
@@ -2830,7 +2831,7 @@ Para realizar a modelagem de mecanismos paralelos a partir de subsistemas seriai
 \begin{figure}[h]
 	\centering
 	\includegraphics[scale=0.42]{imagens/DiagramaAcoplamentoMecParalelos.png}  
-	\caption{Acoplamento de subsistemas: mecanismo paralelos}
+	\caption{Diagrama de acoplamento de subsistemas}
 	\label{fig:AcoplamentoMecParalelo}
 \end{figure}
 
@@ -2870,7 +2871,7 @@ Sendo assim, definimos:
 %\item $\mq\cir$: matriz-coluna de coordenadas generalizadas redundantes (contém as componentes de $\mq$ não pertencentes a $\mq\ssh$)
 \item $\overline{\mx}(\mq)$: matriz-coluna dos vínculos de posição entre subsistemas. As equações vinculares são dadas por $\overline{\mx}(\mq) = \mzr $.
 \item $\overline{\breve{\mx}}(\mq)$: matriz-coluna dos vínculos de orientação entre subsistemas. As equações vinculares são dadas por $\overline{\breve{\mx}}(\mq) = \mzr $.
-\item $\overline{\mq}(\mq)$: matriz-coluna dos vínculos de coordenadas generalizadas entre subsistemas. As equações vinculares são dadas por $\overline{\mq}(\mq) = \mzr $.
+\item $\overline{\mq}(\mq)$: matriz-coluna dos vínculos entre coordenadas generalizadas entre subsistemas. As equações vinculares são dadas por $\overline{\mq}(\mq) = \mzr $.
 %\item $\overline{\momega}(\mq,\dot{\mq})$: matriz-coluna dos v\'inculos de velocidades angulares entre subsistemas. As equa\c{c}\~oes vinculares s\~ao dadas por $\overline{\momega}(\mq,\dot{\mq}) = \mzr $.
 \item $\mx_i(\mq_i), \,i=1, ..., n$: $\vct{\ttx_i}_{\ttN_i}$ escrito em função das coordenadas $\mq_i$.
 \item $\mJ_{v\,\ssS_i}(\mq_i), \,i=1, ..., n$: jacobiano de velocidades $\mJ_v$ do subsistema $\ssS_i$.
@@ -3124,7 +3125,7 @@ Assim:
 \end{bmatrix}
 \end{equation}
 
-Além disso, em alguns casos é necessário incluir vínculos afins entre as coordenadas generalizadas, ou seja:
+Além disso, em alguns casos é necessário incluir vínculos afins entre as coordenadas generalizadas, como vínculos cinemáticos devidos à transmissão por correias ou engrenagens, ou seja:
 \begin{empheq}[box=\lightbluebox]{equation} \label{eq:VinculosPosicaoAfins}
 \mD_{\oplus}\cdot\mq_0 = \md_{\oplus} + \mF_{\oplus}\cdot\mq_\emptyset
 \end{empheq}
@@ -3406,23 +3407,23 @@ Aplicando para cada uma das cadeias, as equações vinculares de orientação s�
 \end{bmatrix} = \mzr
 \end{empheq}
 
-\subsection{Vínculos de coordenadas generalizadas}
-Os vínculos de coordenadas generalizadas são dados pela união dos vínculos de posição e dos vínculos de orientação (se estes existirem) , ou seja:
-\begin{empheq}[box=\myyellowbox]{equation}
+\subsection{Vínculos entre coordenadas generalizadas}
+Os vínculos entre coordenadas generalizadas são dados pela união dos vínculos de posição e dos vínculos de orientação (se estes existirem) , ou seja:
+\begin{empheq}[box=\myyellowbox]{equation} \label{eq:VinculosCoordGen}
 \overline{\mq}(\mq) = \begin{bmatrix}
 \overline{\mx} (\mq) \\
 \overline{\breve{\mx}} (\mq) 
 \end{bmatrix} = \mzr
 \end{empheq}
 
-No caso de não haver vínculos de orientação entre os efetuadores das cadeias seriais e o efetuador do mecanismo paralelo (efetuador pontual, ou cadeiais seriais ligadas ao efetuador através de juntas esféricas, no caso de mecanismos espaciais, ou juntas de rotação, no caso de mecanismos planos), os vínculos de coordenadas generalizadas são os vínculos de posição, ou seja:
+No caso de não haver vínculos de orientação entre os efetuadores das cadeias seriais e o efetuador do mecanismo paralelo (efetuador pontual, ou cadeiais seriais ligadas ao efetuador através de juntas esféricas, no caso de mecanismos espaciais, ou juntas de rotação, no caso de mecanismos planos), os vínculos entre coordenadas generalizadas são os vínculos de posição, ou seja:
 \begin{empheq}[box=\almondbox]{equation}
 \overline{\mq}(\mq) = \overline{\mx} (\mq) = \mzr
 \end{empheq} 
 
 \subsection{Derivada temporal dos vínculos de posição} 
 
-Derivando no tempo a equação \eqref{eq:VinculosGenericosPosicao}, temos:
+Tendo em vista que $\md$, $\mD$, $\mE$ e $\mF$ são constantes, derivando no tempo a equação \eqref{eq:VinculosGenericosPosicao}, temos:
 %\begin{equation} \label{eq:VinculosGenericosVel}
 %\dot{\overline{\mq}}(\mq,\dot{\mq}) = \mD \cdot \dot{\mq}^\ast- \dot{\mc}(\mtheta^\ast, \momega^\ast) - \mE \cdot \dot{\mx}(\mq,\dot{\mq}) - \mF \cdot \dot{\mq}^\diamond = \mzr
 %\end{equation}
@@ -3431,7 +3432,7 @@ Derivando no tempo a equação \eqref{eq:VinculosGenericosPosicao}, temos:
 \end{equation}
 
 
-A derivada $\dot{\mx}$ pode ser obtida da seguinte maneira:
+Tendo em vista a equação \eqref{eq:v_centrosdemassa}, a derivada $\dot{\mx}$ pode ser obtida da seguinte maneira:
 \begin{equation} \label{eq:dxdt}
 \dot{\mx}^\star(\mq_\emptyset,\dot{\mq}_\emptyset) = \frac{\dd}{\dd t}
 \begin{bmatrix}
@@ -3509,7 +3510,7 @@ Derivando \eqref{eq:VinculosOrientacao} no tempo, temos:
 \end{bmatrix} = \mzr
 \end{equation}
 
-Tendo em vista que
+Tendo em vista a equação \eqref{eq:w_ligamentos}:
 \begin{equation}
 \momega_{\ssS_i}(\mq_i, \dot{\mq}_i) = \mJ_{\omega\,\ssS_i}(\mq_i) \cdot \dot{\mq}_i
 \end{equation}
@@ -3644,9 +3645,9 @@ Sendo:
 %\end{bmatrix}
 %\end{equation}
 
-\subsection{Vínculos de quasi-velocidades} 
+\subsection{Vínculos entre quasi-velocidades} 
 
-Os vínculos de quasi-velocidades são dados pela derivada temporal dos vínculos de velocidades  de coordenadas generalizadas. No caso de existirem vínculos de orientação, temos:
+Os vínculos entre quasi-velocidades são dados pela derivada temporal dos vínculos entre coordenadas generalizadas. No caso de existirem vínculos de orientação, temos:
 \begin{equation} \label{eq:VinculosQuasiVel}
 \dot{\overline{\mq}}(\mq,\dot{\mq}) = \begin{bmatrix}
 \dot{\overline{\mx}}(\mq,\dot{\mq}) \\
@@ -3710,8 +3711,8 @@ No caso de não haverem vínculos de orientação entre os efetuadores das cadei
 \end{empheq}
 
 
-\subsection{Vínculos de quasi-acelerações} 
-Os vínculos de quasi-velocidades são dados pela derivada temporal dos vínculos de velocidades  de coordenadas generalizadas. Derivando \eqref{eq:VinculosQuasiVel}, temos:
+\subsection{Vínculos entre quasi-acelerações} 
+Os vínculos entre quasi-acelerações são dados pela derivada temporal dos vínculos entre quasi-velocidades. Tendo em vista as equações \eqref{eq:a_centrosdemassa} e \eqref{eq:alphatil_provado}, derivando \eqref{eq:VinculosQuasiVel}, temos:
 %\begin{equation} \label{eq:VinculosQuasiAce}
 %\dot{\overline{\mp}}(\mq,\mp,\dot{\mp}) =
 %\begin{bmatrix}
@@ -3906,7 +3907,7 @@ Pelo princípio de D'Alembert, temos que:
 
 Ou seja:
 \begin{equation} \label{eq:DAlambertParalelos}
-\dl \mq^\msT \cdot \mf = \mzr
+\dl \mq^\msT \cdot \mf = 0
 \end{equation}
 
 Além disso, a partir da equação \eqref{eq:VinculosQuasiVel2}, temos que:
@@ -3974,7 +3975,7 @@ Ou seja:
 
 \section{Simulação dinâmica direta} 
 
-É possível realizar a simulação dinâmica direta do sistema utilizando a equação dinâmica \eqref{eq:EquacaoDinamicaParalelos} e os vínculos de quasi-acelerações \eqref{eq:VinculosQuasiAce}:
+É possível realizar a simulação dinâmica direta do sistema utilizando a equação dinâmica \eqref{eq:EquacaoDinamicaParalelos} e os vínculos entre quasi-acelerações \eqref{eq:VinculosQuasiAce}:
 \begin{equation}
 \begin{cases}
 \mC(\mq)^\msT (   \mM(\mq) \, \ddot{\mq} + \mnu(\mq,\dot{\mq}) + \mg(\mq) ) = \mC(\mq)^\msT \mu \\
@@ -3997,7 +3998,7 @@ Reescrevendo em forma matricial:
 \end{bmatrix}
 \end{equation}
 
-É necessário que as condições iniciais respeitem os vínculos de posição e velocidades. Com isso, teoricamente, os vínculos continuariam sendo respeitados na solução do sistema de EDOs. Porém, devido a erros numéricos de truncamento e erros associados ao método de integração numérica utilizado, haverá um acúmulo de erros que irá aumentar a cada passo de integração, e os vínculos de posição e velocidade eventualmente podem deixar de ser respeitados. Esse problema pode ser resolvido utilizando a técnica das constantes de estabilização de Baumgarte \cite{Baumgarte}. A idéia é substituir a equação dos vínculos de quasi-acelerações pela seguinte equação:
+É necessário que as condições iniciais respeitem os vínculos entre coordenadas generalizadas e os vínculos entre quasi-velocidades. Com isso, teoricamente, os vínculos continuariam sendo respeitados na solução do sistema de EDOs. Porém, devido a erros numéricos de truncamento e erros inerentes ao método de integração numérica utilizado, haverá um acúmulo de erros que irá aumentar a cada passo de integração, e os vínculos entre coordenadas generalizadas e entre quasi-velocidades eventualmente podem deixar de ser respeitados. Esse problema pode ser resolvido utilizando a técnica das constantes de estabilização de Baumgarte \cite{Baumgarte}. A idéia é substituir a equação dos vínculos entre quasi-acelerações pela seguinte equação:
 \begin{empheq}[box=\mybluebox]{equation} \label{eq:VinculosQuasiAce2}
 \ddot{\overline{\mq}}'(\mq, \dot{\mq}, \ddot{\mq}) =
 \ddot{\overline{\mq}} + 2\lambda \dot{\overline{\mq}} + \lambda^2 \overline{\mq} = \mzr
@@ -4005,10 +4006,10 @@ Reescrevendo em forma matricial:
 
 Substituindo \eqref{eq:VinculosQuasiVel2} e \eqref{eq:VinculosQuasiAce_} em \eqref{eq:VinculosQuasiAce2}, temos:
 \begin{equation} \label{eq:VinculosQuasiAce3}
-\ddot{\overline{\mq}}'(\mq, \dot{\mq}, \ddot{\mq}) = \mA(\mq) \ddot{\mq} + \mb(\mq, \dot{\mq}) + 2\lambda \mA(\mq) \cdot \dot{\mq} + \lambda^2 \overline{\mq}(\mq) = \mzr
+\ddot{\overline{\mq}}'(\mq, \dot{\mq}, \ddot{\mq}) = \mA(\mq) \, \ddot{\mq} + \mb(\mq, \dot{\mq}) + 2\lambda \mA(\mq) \, \dot{\mq} + \lambda^2 \overline{\mq}(\mq) = \mzr
 \end{equation}
 
-Impondo que \eqref{eq:VinculosQuasiAce3} seja respeitada, garantimos que, teoricamente, as componentes de $\overline{\mq}(\mq)$ tenderão exponencialmente a zero independentemente das condições iniciais, para $\lambda > 0$. Porém, devido aos erros de integração numérica, as componentes de $\overline{\mq}(\mq)$ não irão convergir para zero, mas sim para uma faixa de valores em torno de zero. Quanto maior a ordem do método de integração numérica e quanto menor o passo de integração, menor será a ordem de grandeza dessa faixa de valores em torno do zero. Se essa faixa de valores for suficientemente pequena, pode-se considerar que os vínculos de posição e velocidades estão sendo respeitados mesmo havendo erros de truncamento e erros associados ao método de integração numérica utilizado. 
+Impondo que \eqref{eq:VinculosQuasiAce3} seja respeitada, tenta-se impor uma dinâmica tal que as componentes de $\overline{\mq}(\mq)$ tenderão exponencialmente a zero independentemente das condições iniciais, para $\lambda > 0$. Porém, devido aos erros de integração numérica, as componentes de $\overline{\mq}(\mq)$ não irão convergir para zero, mas sim para uma faixa de valores em torno de zero. Quanto maior a ordem do método de integração numérica e quanto menor o passo de integração, menor será a ordem de grandeza dessa faixa de valores em torno do zero. Se essa faixa de valores for suficientemente pequena, pode-se considerar que os vínculos entre coordenadas generalizadas e entre quasi-velocidades estão sendo respeitados mesmo havendo erros de truncamento e erros associados ao método de integração numérica utilizado. 
 
 É importante ressaltar que valores muito altos de $\lambda$ podem comprometer a estabilidade numérica da simulação, e valores muito pequenos podem fazer com que a faixa de valores em torno de zero em que as componentes de $\overline{\mq}(\mq)$ estarão variando pode se tornar muito grande. É seguro dizer que um bom valor de limite superior para $\lambda$ a ser adotado é $1/h$, sendo $h$ o tamanho do passo de integração, pois fazendo $\lambda = 1/h$ já garante a estabilidade do método para praticamente qualquer método de integração numérica de EDOs. Na prática, valores de $\lambda$ em torno de $1/100h$ se mostraram bastante adequados nas simulações realizadas.
 
@@ -4060,12 +4061,12 @@ Na simulação dinâmica inversa, são dados os perfis de $\mq\ssh$, $\dot{\mq}\
 
 Repare que os termos desta equação dependem de $\mq$, $\dot{\mq}$ e $\ddot{\mq}$. Sendo assim, primeiramente é preciso obter $\mq$, $\dot{\mq}$ e $\ddot{\mq}$ dados $\mq\ssh$, $\dot{\mq}\ssh$ e $\ddot{\mq}\ssh$.
 
-$\mq$ é obtido resolvendo numericamente a equação dos vínculos de posição \eqref{eq:VinculosPosicao2}, a qual é um sistema de equações algébricas não lineares.
-\begin{equation} \tag{\ref{eq:VinculosPosicao2}}
+$\mq$ é obtido resolvendo numericamente a equação dos vínculos entre coordenadas generalizadas \eqref{eq:VinculosCoordGen}, a qual é um sistema de equações algébricas não lineares.
+\begin{equation} \tag{\ref{eq:VinculosCoordGen}}
 \overline{\mq}(\mq) = \mzr
 \end{equation}
 
-Ou seja, dado $\mq\ssh$, $\mq\cir$ é obtido resolvendo \eqref{eq:VinculosPosicao2} numericamente:
+Ou seja, dado $\mq\ssh$, $\mq\cir$ é obtido resolvendo \eqref{eq:VinculosCoordGen} numericamente:
 \begin{equation}
 \mq\cir = \underline{\mq}\cir(\mq\ssh)
 \end{equation}
@@ -4085,7 +4086,7 @@ Logo:
 \dot{\mq} = \underline{\dot{\mq}}(\mq\ssh, \dot{\mq}\ssh) = \mC\big( \underline{\mq}(\mq\ssh) \big) \cdot \dot{\mq}\ssh
 \end{empheq}
 
-Para obter $\ddot{\mq}$, substitui-se a segunda derivada temporal da equação \eqref{eq:QsshQcir} na equação dos vínculos de quasi-acelerações \eqref{eq:VinculosQuasiAce_}:
+Para obter $\ddot{\mq}$, substitui-se a segunda derivada temporal da equação \eqref{eq:QsshQcir} na equação dos vínculos entre quasi-acelerações \eqref{eq:VinculosQuasiAce_}:
 $$ \mA \mQ\ssh \ddot{\mq}\ssh + \mA \mQ\cir \ddot{\mq}\cir + \mb = \mzr $$
 $$ \Rightarrow  \ddot{\mq}\cir = - (\mA \mQ\cir)^\msI (\mb + \mA \mQ\ssh \ddot{\mq}\ssh) $$
 \begin{equation} \label{eq:d2q_em_funcao}
@@ -4225,7 +4226,7 @@ Repare que, para o caso em que não há erros de modelagem ($\tilde{\mH} = \mzr$
 
 \section{Controle por Torque Computado (TC)} \label{sec:CTC}
 
-A lei de Controle por Torque Computado tem o intuito de fazer com que a dinâmica de cada componente do erro de controle se comporte como um movimento harmônico amortecido, fazendo com que o erro tenda assintoticamente a zero independentemente da condição inicial, na ausência de erros de modelagem. Para atingir este objetivo, basta utilizar a seguinte lei de realimentação de estados para $\mup'$:
+A lei de Controle por Torque Computado tem o intuito de fazer com que a dinâmica de cada componente do erro de controle se comporte como um movimento harmônico amortecido, de modo que o erro tenda assintoticamente a zero independentemente da condição inicial, na ausência de erros de modelagem. Para atingir este objetivo, basta utilizar a seguinte lei de realimentação de estados para $\mup'$:
 \begin{empheq}[box=\mybluebox]{equation} \label{eq:leiCTC}
 \mup' = -\underline{k}_v \dot{\me} - \underline{k}_p \me
 \end{empheq}
@@ -5183,7 +5184,7 @@ Pelos enconders são obtidos os deslocamentos angulares dos motores, e com os de
 \begin{figure}[H]
     \centering
     \includegraphics[scale=0.5]{imagens/ControleEspacoDaTarefa.png}
-    \caption{Arquitetura de controle: espaço das juntas}
+    \caption{Arquitetura de controle: espaço da tarefa}
     \label{fig:ControleEspacoDaTarefa}
 \end{figure}
 
