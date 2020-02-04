@@ -4011,7 +4011,7 @@ Substituindo \eqref{eq:VinculosQuasiVel2} e \eqref{eq:VinculosQuasiAce_} em \eqr
 
 Impondo que \eqref{eq:VinculosQuasiAce3} seja respeitada, tenta-se impor uma dinâmica tal que as componentes de $\overline{\mq}(\mq)$ tenderão exponencialmente a zero independentemente das condições iniciais, para $\lambda > 0$. Porém, devido aos erros de integração numérica, as componentes de $\overline{\mq}(\mq)$ não irão convergir para zero, mas sim para uma faixa de valores em torno de zero. Quanto maior a ordem do método de integração numérica e quanto menor o passo de integração, menor será a ordem de grandeza dessa faixa de valores em torno do zero. Se essa faixa de valores for suficientemente pequena, pode-se considerar que os vínculos entre coordenadas generalizadas e entre quasi-velocidades estão sendo respeitados mesmo havendo erros de truncamento e erros associados ao método de integração numérica utilizado. 
 
-É importante ressaltar que valores muito altos de $\lambda$ podem comprometer a estabilidade numérica da simulação, e valores muito pequenos podem fazer com que a faixa de valores em torno de zero em que as componentes de $\overline{\mq}(\mq)$ estarão variando pode se tornar muito grande. É seguro dizer que um bom valor de limite superior para $\lambda$ a ser adotado é $1/h$, sendo $h$ o tamanho do passo de integração, pois fazendo $\lambda = 1/h$ já garante a estabilidade do método para praticamente qualquer método de integração numérica de EDOs. Na prática, valores de $\lambda$ em torno de $1/100h$ se mostraram bastante adequados nas simulações realizadas.
+É importante ressaltar que valores muito altos de $\lambda$ podem comprometer a estabilidade numérica da simulação, e valores muito pequenos podem fazer com que a faixa de valores em torno de zero em que as componentes de $\overline{\mq}(\mq)$ estarão variando pode se tornar muito grande. É seguro dizer que um bom valor de limite superior para $\lambda$ a ser adotado é $1/h$, sendo $h$ o tamanho do passo de integração, pois o pólo $s = -1/h$ pertence ao centro da região de estabilidade do Runge-Kutta explicito de ordem 1 (método de Euler), e consequentemente pertence à região de estabilidade de métodos Runge-Kutta de maior ordem e da maioria dos métodos de integração numérica de EDOs. Na prática, valores de $\lambda$ em torno de $1/100h$ se mostraram bastante adequados nas simulações realizadas.
 
 Sendo assim, o sistema de EDOs que será utilizado para realizar a simualação dinâmica direta é dado por:
 \begin{empheq}[box=\myyellowbox]{equation}
@@ -5093,7 +5093,7 @@ Nas figuras \ref{fig:Torque1_0} a \ref{fig:ey_40} são apresentados os resultado
 
 \newpage
 
-Nos gráficos pode-se claramente observar o aumento do esforço de controle conforme o nível de incerteza cresce. Também é possível observar que o perfil do erro na coordenada $x$ não sofreu muita influência com o aumento do nível de incerteza, enquando o perfil do erro em $y$ muda bastante de formato.
+Nos gráficos pode-se claramente observar o aumento do esforço de controle conforme o nível de incerteza cresce. Também é possível observar que o perfil do erro na coordenada $x$ não sofreu muita influência com o aumento do nível de incerteza, enquanto o perfil do erro em $y$ muda bastante de formato.
 
 Tendo em vista que o presente trabalho tem caráter experimental, as comparações entre o desempenho de diferentes estratégias de controle serão feitas baseadas nos resultados obtidos experimentalmente.
 
@@ -5202,7 +5202,7 @@ No entanto, como há ruídos nos sinais obtidos, a utilização  do método das 
 
 \subsection{Observador de corrente}
 
-Para a estimação da corrente elétrica foi considerada a equacação da dinâmica elétrica do motor \eqref{eq:DinEletrica_rot}:
+Para a estimação da corrente elétrica foi considerada a equação da dinâmica elétrica do motor \eqref{eq:DinEletrica_rot}:
 \begin{equation}
 \tag{\ref{eq:DinEletrica_rot}} \label{eq:DinamicaEletricaMotor}
 	   u = L \frac{di}{dt} + R i + k_{e} \omega
@@ -5221,7 +5221,7 @@ Tendo em vista que a frequencia do polo deste sistema está em torno de 240Hz, m
 
 Para implementar as técnicas de controle baseadas em modelo, é utilizado o algoritmo de modelagem proposto para tabelar os termos do modelo dinâmico que dependem apenas da posição.
 
-Tendo em vista que a matriz de inércia generalizada depende apenas da posição, e que a matriz-coluna de esforços de inérciais giroscópicos pode ser expressa como a soma de matrizes coluna dependentes apenas da posição multiplicados por termos quadráticos das quasi-velocidades independentes, é feita uma discretização da área de trabalho, de modo a calcular o valor destas matrizes em um número finito de pontos e realizar interpolações em tempo real, de modo a obter um valor estimado desses termos da dinâmica em qualquer ponto não singular pertencente à área de trabalho.
+Tendo em vista que a matriz de inércia generalizada depende apenas da posição, e que a matriz-coluna de esforços de inérciais giroscópicos pode ser expressa como a soma de matrizes coluna dependentes apenas da posição multiplicados por termos quadráticos das quasi-velocidades independentes, é feita uma discretização da área de trabalho, de modo a calcular o valor destas matrizes em um número finito de pontos e realizar interpolações bilineares em tempo real, de modo a obter um valor estimado desses termos da dinâmica em qualquer ponto não singular pertencente à área de trabalho.
 
 A discretização realizada aplica uma malha quadradiculada de lado $5mm$ na área de trabalho do mecanismo, de modo a calcular os termos da dinâmica comentados em cada ponto não singular pertencente à discretização.
 
@@ -5307,7 +5307,7 @@ $J_{z2}$     & $9.800   \cdot 10^{-4}$    & $kg.m^{2}$ \\
 
 \subsection{Trajetórias de referência}
 
-A primeira trajetória realizada é uma trajetória circular com período de 1 segundo. São realizados 8 ciclos seguidos de uma parada repentina. Sua expressão é dada por:
+A primeira trajetória realizada é uma trajetória circular com período de 1 segundo. São realizados 8 ciclos seguidos de uma parada repentina ($x_d(t) = y_d(t) = 0 \text{ para } t > 8s$). Sua expressão é dada por:
 \begin{equation}
 \begin{cases}
 x_d(t) = -0.05 \sin(2\pi t) \\
@@ -5398,7 +5398,7 @@ Além disso, os controladores de corrente utilizados são controladores lineares
 
 \subsection{Resultados experimentais}
 
-Nesta subseção são apresentados os gráficos de seguimento de trajetória, da evolução temporal dos erros de controle em $x$ e $y$, e da evolução temporal dos esforços de controle para todas as 8 estratégias de controle definidas, tanto para a trajetória circular, quanto para a trajetória triangular (figuras de \ref{fig:PIDq_circulo_xy} a \ref{fig:SMCx_triangulo_tau2}). Também são apresentadas tabelas de comparação de desempenho e é feita a discussão dos resultados.
+Nesta subseção são apresentados os gráficos de seguimento de trajetória, da evolução temporal dos erros de controle em $x$ e $y$, obtidos através do modelo cinemático, e da evolução temporal dos esforços de controle para todas as 8 estratégias de controle definidas, tanto para a trajetória circular, quanto para a trajetória triangular (figuras de \ref{fig:PIDq_circulo_xy} a \ref{fig:SMCx_triangulo_tau2}). Também são apresentadas tabelas de comparação de desempenho e é feita a discussão dos resultados.
 
 \newpage
 
@@ -6001,10 +6001,10 @@ Nesta subseção são apresentados os gráficos de seguimento de trajetória, da
 As tabelas \ref{tab:valoresEficazesCirculo} e \ref{tab:valoresEficazesTriangulo} apresentam os valores eficazes dos erros de posição e dos esforços de controle nas trajetórias circular e triangular, para cada estratégia de controle, os quais são calculados da seguinte maneira:
 
 \begin{equation}
-e_{ef} = \sqrt{ \frac{1}{N}\sum_{k=1}^N e_x^2[k] + e_y^2[k] }
+e_{ef} = \sqrt{ \frac{1}{N}\sum_{k=1}^N \Big( e_x^2[k] + e_y^2[k] \Big) }
 \end{equation}
 \begin{equation}
-\tau_{ef} = \sqrt{ \frac{1}{N}\sum_{k=1}^N \tau_1^2[k] + \tau_2^2[k] }
+\tau_{ef} = \sqrt{ \frac{1}{N}\sum_{k=1}^N \Big( \tau_1^2[k] + \tau_2^2[k] \Big) }
 \end{equation}
 
 \begin{table}[H] 
@@ -6012,15 +6012,15 @@ e_{ef} = \sqrt{ \frac{1}{N}\sum_{k=1}^N e_x^2[k] + e_y^2[k] }
 \caption{Valores eficazes de erro e esforço de controle (em regime permanente) - Trajetória circular}
 \label{tab:valoresEficazesCirculo}
 \begin{tabular}{l|c|c}
-Estratégia & $e_{ef} [mm]$  & $\tau_{ef} [N.m] $ \\ \hline
-PDq        & $3.15$         & $0.132$               \\
-PDMDq      & $2.37$         & $0.141$               \\
-TCq        & $1.14$         & $0.143$               \\
-TCMDq      & $0.77$         & $0.168$               \\
-PDx        & $0.91$         & $0.155$               \\
-PDMDx      & $0.65$         & $0.169$               \\
-TCx        & $1.16$         & $0.150$               \\
-TCMDx      & $0.90$         & $0.185$               \\
+Estratégia & $e_{ef} [mm]$      & $\tau_{ef} [N.m] $ \\ \hline
+PDq        & $3.15$             & $\textbf{0.132}$      \\
+PDMDq      & $2.37$             & $0.141$               \\
+TCq        & $1.14$             & $0.143$               \\
+TCMDq      & $0.77$             & $0.168$               \\
+PDx        & $0.91$             & $0.155$               \\
+PDMDx      & $\textbf{0.65}$    & $0.169$               \\
+TCx        & $1.16$             & $0.150$               \\
+TCMDx      & $0.90$             & $0.185$               \\
 \end{tabular}
 \end{table}
 
@@ -6032,12 +6032,12 @@ TCMDx      & $0.90$         & $0.185$               \\
 Estratégia & $e_{ef} [mm]$  & $\tau_{ef} [N.m] $ \\ \hline
 PDq        & $5.39$         & $0.197$               \\
 PDMDq      & $5.16$         & $0.212$               \\
-TCq        & $1.85$         & $0.181$               \\
+TCq        & $1.85$         & $\textbf{0.181}$      \\
 TCMDq      & $1.63$         & $0.191$               \\
 PDx        & $1.98$         & $0.191$               \\
 PDMDx      & $1.79$         & $0.188$               \\
 TCx        & $1.83$         & $0.188$               \\
-TCMDx      & $1.36$         & $0.186$               \\
+TCMDx      & $\textbf{1.36}$& $0.186$               \\
 \end{tabular}
 \end{table}
 
@@ -6111,7 +6111,7 @@ TCMDx      & $ 0.009$   & $ 0.271$   & $0.271$  \\
 
 Primeiramente, analisando as tabelas \ref{tab:valoresEficazesCirculo} e \ref{tab:valoresEficazesTriangulo}, é possível perceber que em todos os casos a associção das técnicas de controle PD e TC com o MD obteve uma diminuição nos valores eficazes do erro de controle. Na trajetória circular, essa associação teve como consequência um aumento perceptível no valor eficaz do esforço de controle, como pode ser visto na tabela \ref{tab:valoresEficazesCombCirculo}, enquanto que, na trajetória triangular, as estratégias de controle no espaço das juntas tiveram um aumento bem mais sutil, e as estratégias no espaço tarefa tiveram até uma pequena diminuição no custo energético, como pode ser visto na tabela \ref{tab:valoresEficazesCombTriangulo}. De qualquer maneira, mesmo nos casos em que houve aumento no custo energértico, a utilização da associação de técnicas pode ser considerada vantajosa, tendo em vista que, como foi constatado experimentalmente, um aumento de $5rad/s$ nos valores utilizados do parâmetro $\lambda$  já seria o suficiente para comprometer a estabilidade do sistema em todas as estratégias de controle utilizadas, então pode-se concluir que a associação com o MD é uma maneira eficiente de diminuir o erro de seguimento de trajetória sem comprometer a estabilidade do sistema.  
 
-Outro resultado interessante que vale a pena ser comentado é a diminuição do erro estacionário de posição obtida com a utilização da associação das técnicas de controle PD e TC com o MD. Como pode ser observado nas tabelas \ref{tab:valorFinalCirculo} e \ref{tab:valorFinalTriangulo}, em todos os casos, com excessão do PDq na trajetória circular e do TCx na trajetória triangular, houve uma diminuição significativa do erro de posição com a utilização da associação de técnicas. No caso do TCx na trajetória triangular, houve uma diminuição significativa do erro de posição na direção $x$, mas não na direção $y$. Isso pode ser explicado pelo simples fato de ter sido utilizado um valor nulo para $k_2$ nessa estratégia de controle, o que significa que o MD teoricamente só estaria atuando na direção $x$. Esse comportamento de atuar no sentido de o erro estacionário de posição praticamente zerar pode ser facilmente observado nas figuras \ref{fig:SMCq_circulo_ex}, \ref{fig:SMCq_circulo_ey}, \ref{fig:PIDSMCx_circulo_ex}, \ref{fig:SMCx_circulo_ex}, \ref{fig:SMCq_triangulo_ex}, \ref{fig:SMCq_triangulo_ey}, \ref{fig:PIDSMCx_triangulo_ex} e \ref{fig:SMCx_triangulo_ex}, e tem características similares às técnicas de controle que utilizam a integral do erro de controle com este intuito, com a vantagem da associação com o MD não degradar o desempenho do sistema durante a trajetória (muito pelo contrário) e de não necessitar da utilização de técnicas de \emph{anti-windup} para garantir a estabilidade do sistema no caso de saturação nos esforços de controle.
+Outro resultado interessante que vale a pena ser comentado é a diminuição do erro estacionário de posição obtida com a utilização da associação das técnicas de controle PD e TC com o MD. Como pode ser observado nas tabelas \ref{tab:valorFinalCirculo} e \ref{tab:valorFinalTriangulo}, em todos os casos, com exceção do PDq na trajetória circular e do TCx na trajetória triangular, houve uma diminuição significativa do erro de posição com a utilização da associação de técnicas. No caso do TCx na trajetória triangular, houve uma diminuição significativa do erro de posição na direção $x$, mas não na direção $y$. Isso pode ser explicado pelo simples fato de ter sido utilizado um valor nulo para $k_2$ nessa estratégia de controle, o que significa que o MD teoricamente só estaria atuando na direção $x$. Esse comportamento de atuar no sentido de o erro estacionário de posição praticamente zerar pode ser facilmente observado nas figuras \ref{fig:SMCq_circulo_ex}, \ref{fig:SMCq_circulo_ey}, \ref{fig:PIDSMCx_circulo_ex}, \ref{fig:SMCx_circulo_ex}, \ref{fig:SMCq_triangulo_ex}, \ref{fig:SMCq_triangulo_ey}, \ref{fig:PIDSMCx_triangulo_ex} e \ref{fig:SMCx_triangulo_ex}, e tem características similares às técnicas de controle que utilizam a integral do erro de controle com este intuito, com a vantagem da associação com o MD não degradar o desempenho do sistema durante a trajetória (muito pelo contrário) e de não necessitar da utilização de técnicas de \emph{anti-windup} para garantir a estabilidade do sistema no caso de saturação nos esforços de controle.
 
 Mais uma vez, analisando as tabelas \ref{tab:valoresEficazesCirculo} e \ref{tab:valoresEficazesTriangulo}, pode-se observar que, em relação ao consumo energético, não há uma diferença tão signiticativa entre as estratégias de controle, principalmente na trajetória circular. As estratégias com maior consumo energético são PDMDx e TCMDx na trajetória circular, e PDq e PDMDq na trajetória triangular. As estratégias com menor consumo energético são PDq e PDMDq na trajetória circular, e TCq e TCMDx na trajetória triangular. Além disso, em relação aos valores eficazes dos erros de controle, pode-se observar que há diferenças bem mais significativas. As estratégias com os maiores valores eficazes de erro de controle são PDq e PDMDq em ambas as trajetórias. Já as estratégias com os menores valores eficazes de erro de controle são TCMDx em ambas as trajetórias, PDMDx na trajetória circular, e TCMDq na trajetória na trajetória triangular.
 
@@ -6123,11 +6123,11 @@ Outros fenômenos interessantes observados são que a utilização da associçã
 
 Outro efeito interessante que foi observado foi a diminuição dos valores de pico de erro de controle nas trajetórias triangulares, normalmente seguido de um efeito de \emph{undershoot}, quando foi utilizada a associação com o MD. Isso pode ser facilmente observado nas figuras \ref{fig:SMCq_triangulo_ex}, \ref{fig:SMCq_triangulo_ey}, \ref{fig:PIDSMCx_triangulo_ex} e \ref{fig:SMCx_triangulo_ex}.
 
-Não se pode deixar de mencionar o desempenho surpreendentemente bom das estratégias PDx e PDMDx, muito superior ao desempenho das estratégias PDq e PDMDq. Na trajetória circular, a estratégia PDMDx obteve o menor valor eficaz de erro de controle e o menor valor de erro estacionário, e a estratégia PDx apresentou um menor valor eficaz de erro de controle e um menor valor de erro estacionário que as estratégias TCq e TCx, como pode ser visto nas tabelas \ref{tab:valoresEficazesCirculo} e \ref{tab:valorFinalCirculo}. Já na trajetória triangular, apesar dessas estratégias também apresentarem bom desempenho, a estratégia PDMDx já não mais supera as estratégias TCMDq e TCMDx em relação aos valores eficazes de erro de controle, e a estratégia PDx também já não mais supera as estratégias TCMDq e TCMDx em relação aos valores eficazes de erro de controle nesse mesmo quesito.
+Não se pode deixar de mencionar o desempenho surpreendentemente bom das estratégias PDx e PDMDx, tendo em vista que são estratégias de controle não baseadas em modelo, muito superior ao desempenho das estratégias PDq e PDMDq. Na trajetória circular, a estratégia PDMDx obteve o menor valor eficaz de erro de controle e o menor valor de erro estacionário, e a estratégia PDx apresentou um menor valor eficaz de erro de controle e um menor valor de erro estacionário que as estratégias TCq e TCx, como pode ser visto nas tabelas \ref{tab:valoresEficazesCirculo} e \ref{tab:valorFinalCirculo}. Já na trajetória triangular, apesar dessas estratégias também apresentarem bom desempenho, a estratégia PDMDx já não mais supera as estratégias TCMDq e TCMDx em relação aos valores eficazes de erro de controle, e a estratégia PDx também já não mais supera as estratégias TCMDq e TCMDx em relação aos valores eficazes de erro de controle nesse mesmo quesito.
 
-O desempenho surpreendentemente bom do PDx e do PDMDx pode ser explicado pelo fato de que o valor de $m^*$ utilizado nas estratégias PDx e PDMDx foi baseado na matriz de inércia generalizada escrita no espaço tarefa calculada no centro da trajetória circular, a qual é praticamente diagonal com as componentes da diagonal muito próximas. Sendo assim, o modelo de inércia equivalente constante é muito mais válido para a trajetória circular do que para a trajetória triangular, a qual se afasta muito mais do centro do círculo. Além disso, como o ponto de partida das trajetórias é relativamente próximo de uma região quase singular, as matrizes de inércia generaliza estimadas possuem valores mais altos nesse ponto, o que limita um pouco o maior valor de $\lambda$ que pode ser escolhido de modo a garantir a estabilidade do sistema nas estratégias TCq, TCx, TCMDq e TCMDx, enquanto que nas estratégias PDx e PDMDx a matriz de inércia generaliza estimada é constante e não possue valores tão altos, o que permitiu a utilização de um maior valor de $\lambda$ sem afetar a estabilidade de sistema, o que contribui imensamente para a obtenção de menores valores de erros de controle. Isso também explica o fenômeno de todas as estratégias de controle terem um erro relativamente grande no trecho I, com excessão de PDx e PDMDx. Se o ponto $\mx_1$ fosse mais afastado das singularidades, muito provavelmente os valores de erro nesse trecho seriam muito inferiores. Além disso, vale comentar que, além de serem competitivas em relação ao erro de controle, as estratégias PDx e PDMDx são competitivas em relação ao consumo energético, tendo em vista que ambas apresentam valores intermediários de consumo energético em ambas as trajetórias.
+O desempenho surpreendentemente bom do PDx e do PDMDx pode ser explicado pelo fato de que o valor de $m^*$ utilizado nas estratégias PDx e PDMDx foi baseado na matriz de inércia generalizada escrita no espaço tarefa calculada no centro da trajetória circular, a qual é praticamente diagonal com as componentes da diagonal muito próximas. Sendo assim, o modelo de inércia equivalente constante é muito mais adequado para a trajetória circular do que para a trajetória triangular, a qual se afasta muito mais do centro do círculo. Além disso, como o ponto de partida das trajetórias é relativamente próximo de uma região quase singular, as matrizes de inércia generalizada estimadas possuem valores mais altos nesse ponto, o que limita um pouco o maior valor de $\lambda$ que pode ser escolhido de modo a garantir a estabilidade do sistema nas estratégias TCq, TCx, TCMDq e TCMDx, enquanto que nas estratégias PDx e PDMDx a matriz de inércia generalizada estimada é constante e não possui valores tão altos, o que permitiu a utilização de um maior valor de $\lambda$ sem afetar a estabilidade de sistema, o que contribui imensamente para a obtenção de menores valores de erros de controle. Isso também explica o fenômeno de todas as estratégias de controle terem um erro relativamente grande no trecho I, com excessão de PDx e PDMDx. Se o ponto $\mx_1$ fosse mais afastado das singularidades, muito provavelmente os valores de erro nesse trecho seriam muito inferiores. Além disso, vale comentar que, além de serem competitivas em relação ao erro de controle, as estratégias PDx e PDMDx são competitivas em relação ao consumo energético, tendo em vista que ambas apresentam valores intermediários de consumo energético em ambas as trajetórias.
 
-Por fim, vale fazer a comparação entre o controle no espaço das juntas e o controle no espaço da tarefa. Analisando as tabelas \ref{tab:valoresEficazesCirculo} e \ref{tab:valoresEficazesTriangulo}, pode-se observar que claramente as estratégias PD e PDMD se mostram muito mais eficazes no espaço da tarefa do que no espaço das juntas, tendo em vista a grande diferença nos valores eficazes dos erros de controle e da pequena diferença no custo energético. Já em relação às estratégias TC e TCMD, não há uma diferença de eficiência considerável comparando os dois espaços, tendo em vista que na trajetória circular as estratégias no espaço das juntas se mostram ligeiramente superiores, enquanto na trajetória circular as estratégias no espaço da tarefa se mostram levemente superiores.
+Por fim, vale fazer a comparação entre o controle no espaço das juntas e o controle no espaço da tarefa. Analisando as tabelas \ref{tab:valoresEficazesCirculo} e \ref{tab:valoresEficazesTriangulo}, pode-se observar que claramente as estratégias PD e PDMD se mostram muito mais eficazes no espaço da tarefa do que no espaço das juntas, tendo em vista a grande diferença nos valores eficazes dos erros de controle e da pequena diferença no custo energético. Já em relação às estratégias TC e TCMD, não há uma diferença de eficiência considerável comparando os dois espaços, tendo em vista que na trajetória circular as estratégias no espaço das juntas se mostram ligeiramente superiores, enquanto na trajetória triangular as estratégias no espaço da tarefa se mostram levemente superiores.
 
 
 
@@ -6137,7 +6137,7 @@ Por fim, vale fazer a comparação entre o controle no espaço das juntas e o co
 
 \section{Conclusões}
 
-Esta Tese de Doutorado abordou como tema a modelagem dinâmica e o controle de manipuladores paralelos, tendo por objetivo oferecer contribuições para o aumento do seu desempenho. Especificamente, a busca por este aprimoramento foi realizada mediante o emprego de técnicas de controle baseadas no modelo do manipulador. Com relação ao objeto de estudo, escolheu-se o robô denominado Clara, equipamento desenvolvido no LaMMaR. Sua estrutura mecânica corresponde ao mecanismo pentágono articulado, de dois graus de liberdade, que opera no espaço plano. 
+Esta Tese de Doutorado abordou a modelagem dinâmica e o controle de manipuladores paralelos, tendo por objetivo oferecer contribuições para o aumento do seu desempenho. Especificamente, a busca por este aprimoramento foi realizada mediante o emprego de técnicas de controle baseadas no modelo do manipulador. Com relação ao objeto de estudo, escolheu-se o robô denominado Clara, equipamento desenvolvido no LaMMaR. Sua estrutura mecânica corresponde ao mecanismo pentágono articulado, de dois graus de liberdade, que opera no espaço plano. 
 
 A metodologia seguida na pesquisa compreendeu a execução de seis fases, abrangendo desde o desenvolvimento de algoritmos para as modelagens cinemática e dinâmica ao projeto de controladores e sua validação experimental.
 
@@ -6193,15 +6193,11 @@ Um artigo, publicado no COBEM-2019 ({\em 25$^{th}$ International Congress of Mec
 
 \section{Sugestão de temas para pesquisa futura}
 
-Investigar a eficácia do emprego de técnicas de controle combinadas para manipuladores paralelos, redundantes e não-redundantes, que operem no espaço tridimensional.
-
-\vspace{0.3cm}
-
-Investigar as condições para a eficácia do uso de técnicas de controle para manipuladores paralelos, não-baseadas em modelo e que atuem no espaço da tarefa.
-
-\vspace{0.3cm}
-
-Generalizar o algoritmo de modelagem proposto para englobar mecanismos paralelos de até 6 graus de liberdade.
+\begin{itemize}
+\item Investigar a eficácia do emprego de técnicas de controle combinadas para manipuladores paralelos, redundantes e não-redundantes, que operem no espaço tridimensional.
+\item Investigar as condições para a eficácia do uso de técnicas de controle para manipuladores paralelos, não-baseadas em modelo e que atuem no espaço da tarefa.
+\item Generalizar o algoritmo de modelagem proposto para englobar mecanismos paralelos de até 6 graus de liberdade.
+\end{itemize}
 
 
 %\blinddocument
