@@ -4938,30 +4938,68 @@ Para realizar a simulação dinâmica direta, definimos:
 
 \subsubsection{Parâmetros do modelo}
 
-Definimos os seguintes parâmetros para o modelo do mecanismo em questão na tabela \ref{tab:parametrosSimulacao}:
+Definimos os seguintes parâmetros para o modelo do mecanismo em questão nas tabelas \ref{tab:parametrosSimulacao1} e \ref{tab:parametrosSimulacao2} :
 
+\begin{multicols}{2}
 \begin{table}[H] 
 \centering
-\caption{Parâmetros do mecanismo}
-\label{tab:parametrosSimulacao}
+\caption{Parâmetros da cadeia serial 1}
+\label{tab:parametrosSimulacao1}
 \begin{tabular}{l|l|l}
 Parâmetros   & Valores                  & Unidades      \\ \hline
 $l_0$        & $0{,}050$                     & $m$        \\
 $l_1$        & $0{,}120$                     & $m$        \\
-$l_2$        & $0{,}150$                     & $m$        \\
+$l_2$        & $0{,}160$                     & $m$        \\
 $l_{g1}$     & $0{,}060$                     & $m$        \\
-$l_{g2}$     & $0{,}075$                    & $m$        \\
-$m_0$        & $0{,}000$                    & $kg$       \\
-$m_1$        & $0{,}143$                    & $kg$       \\
-$m_2$        & $0{,}171$                    & $kg$       \\
-$J_{z1}$     & $1{,}716 \cdot 10^{-4}$    & $kg.m^{2}$ \\
-$J_{z2}$     & $3{,}206 \cdot 10^{-4}$    & $kg.m^{2}$ \\
+$l_{g2}$     & $0{,}078$                    & $m$        \\
+$m_1$        & $0{,}062$                    & $kg$       \\
+$m_2$        & $0{,}124$                    & $kg$       \\
+$J_{z1}$     & $2{,}542 \cdot 10^{-4}$    & $kg.m^{2}$ \\
+$J_{z2}$     & $5{,}769 \cdot 10^{-4}$    & $kg.m^{2}$ \\
+\end{tabular}
+\end{table} 
+
+\begin{table}[H] 
+\centering
+\caption{Parâmetros da cadeia 2}
+\label{tab:parametrosSimulacao2}
+\begin{tabular}{l|l|l}
+Parâmetros   & Valores                    & Unidades   \\ \hline
+$l_0$        & $0{,}050$                    & $m$        \\
+$l_1$        & $0{,}120$                    & $m$        \\
+$l_2$        & $0{,}160$                    & $m$        \\
+$l_{g1}$     & $0{,}060$                    & $m$        \\
+$l_{g2}$     & $0{,}058$                    & $m$        \\
+$m_1$        & $0{,}062$                    & $kg$       \\
+$m_2$        & $0{,}097$                    & $kg$       \\
+$J_{z1}$     & $2{,}960   \cdot 10^{-4}$    & $kg.m^{2}$ \\
+$J_{z2}$     & $3{,}307   \cdot 10^{-4}$    & $kg.m^{2}$ \\
 \end{tabular}
 \end{table}
+\end{multicols}
+
+%\begin{table}[H] 
+%\centering
+%\caption{Parâmetros do mecanismo}
+%\label{tab:parametrosSimulacao}
+%\begin{tabular}{l|l|l}
+%Parâmetros   & Valores                  & Unidades      \\ \hline
+%$l_0$        & $0{,}050$                     & $m$        \\
+%$l_1$        & $0{,}120$                     & $m$        \\
+%$l_2$        & $0{,}150$                     & $m$        \\
+%$l_{g1}$     & $0{,}060$                     & $m$        \\
+%$l_{g2}$     & $0{,}075$                    & $m$        \\
+%$m_0$        & $0{,}000$                    & $kg$       \\
+%$m_1$        & $0{,}143$                    & $kg$       \\
+%$m_2$        & $0{,}171$                    & $kg$       \\
+%$J_{z1}$     & $1{,}716 \cdot 10^{-4}$    & $kg.m^{2}$ \\
+%$J_{z2}$     & $3{,}206 \cdot 10^{-4}$    & $kg.m^{2}$ \\
+%\end{tabular}
+%\end{table}
 
 \subsubsection{Espaço de trabalho}
 
-Dados os parâmetros geométricos definidos na tabela \ref{tab:parametrosSimulacao}, obtemos o seguinte espaço de trabalho para o mecanismo (figura \ref{fig:RRWS}):
+Dados os parâmetros geométricos definidos nas tabelas \ref{tab:parametrosSimulacao1} e \ref{tab:parametrosSimulacao2}, obtemos o seguinte espaço de trabalho para o mecanismo (figura \ref{fig:RRWS}):
 
 \begin{figure}[h]
 	\centering
@@ -4974,21 +5012,22 @@ Dados os parâmetros geométricos definidos na tabela \ref{tab:parametrosSimulac
 A região amarela é considerada singular (próxima a singularidades), e um ponto é considerado pertencente a essa região quando $|\det(\mA\mQ\cir)| < 1{,}6 \cdot 10^{-6}$, para $\mq\ssh = \begin{bmatrix} x & y \end{bmatrix}^\msT$ ou $|\det(\mA\mQ\cir)| < 10^{-11}$, para $\mq\ssh = \begin{bmatrix} \theta_{1,1} & \theta_{2,1} \end{bmatrix}^\msT$.
 
 \subsubsection{Trajetória de referência}
-A trajetória de referência foi escolhida como sendo uma trajetória circular de grande diâmetro, de modo que a trajetória fique boa parte do tempo próxima da região consideradas singular. Sua expressão é dada por:
+Foi escolhida a mesma trajetória circular utilizada nos ensaios experimentais como trajetória de referência, com o intuito de observar o comportamento em regime permanente dos erros e esforços de controle.
+%A trajetória de referência foi escolhida como sendo uma trajetória circular de grande diâmetro, de modo que a trajetória fique boa parte do tempo próxima da região consideradas singular. Sua expressão é dada por:
 \begin{equation}
 \begin{cases}
-x_{d}(t) = 0{,}07 \cos(2 \pi t) \\
-y_{d}(t) = 0{,}17 + 0{,}07 \sin(2 \pi t) \\
+x_{d}(t) = -0{,}05 \sin(2 \pi t) \\
+y_{d}(t) = 0{,}158 - 0{,}05 \cos(2 \pi t) \\
 \end{cases}
 \end{equation}
 
 \subsubsection{Condições iniciais}
-As condições inicias foram escolhidas de modo o mecanismo parta do repouso e que a posição inicial coincida com o sinal de referência em $t=0$. 
+As condições inicias foram escolhidas de modo a posição e velocidade inicial coincida com as referências de posição e velocidade em $t=0$, de modo a minimizar os picos de torque no inicio da trajetória, tendo em vista que o intuito é observar o comportamento do sistema em regime permanente. 
 \begin{equation}
 \begin{cases}
-x(0) = 0{,}07 m\\
-y(0) = 0{,}17 m \\
-\dot{x}(0) = 0 \\
+x(0) = 0\\
+y(0) = 0{,}108 \\
+\dot{x}(0) = -\pi/10 \\
 \dot{y}(0) = 0 \\
 \end{cases}
 \end{equation}
@@ -4996,24 +5035,24 @@ y(0) = 0{,}17 m \\
 \subsubsection{Parâmetros do controlador}
 $$ \underline{k}_p = \lambda^2 \mone $$
 $$ \underline{k}_v = 2\lambda \mone $$
-$$ \lambda = 40 \, rad/s $$
+$$ \lambda = 60 \, rad/s $$
 
-Os parâmetros do Controle por Torque Computado foram escolhidos de modo que a dinâmica do erro de controle se comporte como uma dinâmica de segunda ordem com amortecimento crítico. O valor de $\lambda$ foi escolhido para que o tempo de assentamento do erro de controle seja de $0{,}1s$, o que é razoável para um sistema mecânico.
+Os parâmetros do Controle por Torque Computado foram escolhidos de modo que a dinâmica do erro de controle se comporte como uma dinâmica de segunda ordem com amortecimento crítico. O valor de $\lambda$ foi escolhido sendo o mesmo utilizado nos ensaios experimentais.
 
 \subsubsection{Simulações}
 
-Nas figuras \ref{fig:Torque1_0} a \ref{fig:ey_40} são apresentados os resultados de 3 simulações dinâmicas diretas do mecanismo 5R, considerando 3 níveis de incerteza nos parâmetros inerciais (massas, momentos de inércia e posição dos centros de massa): 0\%, 20\% e 40\%. Todas as simulações são realizadas utilizando a lei de Controle por Torque Computado apresentada na seção \ref{sec:CTC}, utilizando os parâmetros definidos na tabela \ref{tab:parametrosSimulacao}.
+Nas figuras \ref{fig:Torque1_0} a \ref{fig:ey_40} são apresentados os resultados de 3 simulações dinâmicas diretas do mecanismo 5R, considerando 3 níveis de incerteza nos parâmetros inerciais (massas, momentos de inércia e posição dos centros de massa): 0\%, 20\% e 40\%. Todas as simulações são realizadas utilizando a lei de Controle por Torque Computado apresentada na seção \ref{sec:CTC}, utilizando os parâmetros definidos nas tabelas \ref{tab:parametrosSimulacao1} e \ref{tab:parametrosSimulacao2}.
 
 \begin{multicols}{2}
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.4]{imagens/tau1_0.png}  
+	\includegraphics[scale=0.4]{imagens/0/tau1.png}  
 	\caption{$\tau_1$: sem incerteza}
 	\label{fig:Torque1_0}
 \end{figure}
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.4]{imagens/tau2_0.png}  
+	\includegraphics[scale=0.4]{imagens/0/tau2.png}  
 	\caption{$\tau_2$: sem incerteza}
 	\label{fig:Torque2_0}
 \end{figure}
@@ -5022,13 +5061,13 @@ Nas figuras \ref{fig:Torque1_0} a \ref{fig:ey_40} são apresentados os resultado
 \begin{multicols}{2}
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.4]{imagens/tau1_20.png}  
+	\includegraphics[scale=0.4]{imagens/20/tau1.png}  
 	\caption{$\tau_1$: 20\% de incerteza}
 	\label{fig:Torque1_20}
 \end{figure}
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.4]{imagens/tau2_20.png}  
+	\includegraphics[scale=0.4]{imagens/20/tau2.png}  
 	\caption{$\tau_2$: 20\% de incerteza}
 	\label{fig:Torque2_20}
 \end{figure}
@@ -5037,13 +5076,13 @@ Nas figuras \ref{fig:Torque1_0} a \ref{fig:ey_40} são apresentados os resultado
 \begin{multicols}{2}
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.4]{imagens/tau1_40.png}  
+	\includegraphics[scale=0.4]{imagens/40/tau1.png}  
 	\caption{$\tau_1$: 40\% de incerteza}
 	\label{fig:Torque1_40}
 \end{figure}
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.4]{imagens/tau2_40.png}  
+	\includegraphics[scale=0.4]{imagens/40/tau2.png}  
 	\caption{$\tau_2$: 40\% de incerteza}
 	\label{fig:Torque2_40}
 \end{figure}
@@ -5054,13 +5093,13 @@ Nas figuras \ref{fig:Torque1_0} a \ref{fig:ey_40} são apresentados os resultado
 \begin{multicols}{2}
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.42]{imagens/ex_0.png}  
+	\includegraphics[scale=0.42]{imagens/0/ex.png}  
 	\caption{$e_x$: sem incerteza}
 	\label{fig:ex_0}
 \end{figure}
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.42]{imagens/ey_0.png}  
+	\includegraphics[scale=0.42]{imagens/0/ey.png}  
 	\caption{$e_y$: sem incerteza}
 	\label{fig:ey_0}
 \end{figure}
@@ -5069,13 +5108,13 @@ Nas figuras \ref{fig:Torque1_0} a \ref{fig:ey_40} são apresentados os resultado
 \begin{multicols}{2}
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.42]{imagens/ex_20.png}  
+	\includegraphics[scale=0.42]{imagens/20/ex.png}  
 	\caption{$e_x$: 20\% de incerteza}
 	\label{fig:ex_20}
 \end{figure}
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.42]{imagens/ey_20.png}  
+	\includegraphics[scale=0.42]{imagens/20/ey.png}  
 	\caption{$e_y$: 20\% de incerteza}
 	\label{fig:ey_20}
 \end{figure}
@@ -5084,13 +5123,13 @@ Nas figuras \ref{fig:Torque1_0} a \ref{fig:ey_40} são apresentados os resultado
 \begin{multicols}{2}
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.42]{imagens/ex_40.png}  
+	\includegraphics[scale=0.42]{imagens/40/ex.png}  
 	\caption{$e_x$: 40\% de incerteza}
 	\label{fig:ex_40}
 \end{figure}
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.42]{imagens/ey_40.png}  
+	\includegraphics[scale=0.42]{imagens/40/ey.png}  
 	\caption{$e_y$: 40\% de incerteza}
 	\label{fig:ey_40}
 \end{figure}
@@ -5098,7 +5137,7 @@ Nas figuras \ref{fig:Torque1_0} a \ref{fig:ey_40} são apresentados os resultado
 
 \newpage
 
-Nos gráficos pode-se claramente observar o aumento do esforço de controle conforme o nível de incerteza cresce. Também é possível observar que o perfil do erro na coordenada $x$ não sofreu muita influência com o aumento do nível de incerteza, enquanto o perfil do erro em $y$ muda bastante de formato.
+Nos gráficos pode-se observar o aumento do esforço de controle conforme o nível de incerteza cresce. Também é possível observar que o perfil do erro na coordenada $x$  sofreu pouca influência com o aumento do nível de incerteza, enquanto o perfil do erro em $y$ apresenta uma mudança sutil.
 
 Tendo em vista que o presente trabalho tem caráter experimental, as comparações entre o desempenho de diferentes estratégias de controle serão feitas baseadas nos resultados obtidos experimentalmente.
 
@@ -5288,8 +5327,8 @@ $l_{g1}$     & $0{,}060$                     & $m$        \\
 $l_{g2}$     & $0{,}078$                    & $m$        \\
 $m_1$        & $0{,}062$                    & $kg$       \\
 $m_2$        & $0{,}124$                    & $kg$       \\
-$J_{z1}$     & $1{,}073 \cdot 10^{-4}$    & $kg.m^{2}$ \\
-$J_{z2}$     & $4{,}380 \cdot 10^{-4}$    & $kg.m^{2}$ \\
+$J_{z1}$     & $2{,}542 \cdot 10^{-4}$    & $kg.m^{2}$ \\
+$J_{z2}$     & $5{,}769 \cdot 10^{-4}$    & $kg.m^{2}$ \\
 \end{tabular}
 \end{table} 
 
@@ -5307,7 +5346,7 @@ $l_{g2}$     & $0{,}058$                    & $m$        \\
 $m_1$        & $0{,}062$                    & $kg$       \\
 $m_2$        & $0{,}097$                    & $kg$       \\
 $J_{z1}$     & $2{,}960   \cdot 10^{-4}$    & $kg.m^{2}$ \\
-$J_{z2}$     & $9{,}800   \cdot 10^{-4}$    & $kg.m^{2}$ \\
+$J_{z2}$     & $3{,}307   \cdot 10^{-4}$    & $kg.m^{2}$ \\
 \end{tabular}
 \end{table}
 \end{multicols}

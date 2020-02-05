@@ -81,7 +81,7 @@
 \contentsline {subsection}{\numberline {7.1.5}Simula\IeC {\c c}\IeC {\~a}o din\IeC {\^a}mica direta}{113}
 \contentsline {subsubsection}{\numberline {7.1.5.1}Par\IeC {\^a}metros do modelo}{113}
 \contentsline {subsubsection}{\numberline {7.1.5.2}Espa\IeC {\c c}o de trabalho}{114}
-\contentsline {subsubsection}{\numberline {7.1.5.3}Trajet\IeC {\'o}ria de refer\IeC {\^e}ncia}{115}
+\contentsline {subsubsection}{\numberline {7.1.5.3}Trajet\IeC {\'o}ria de refer\IeC {\^e}ncia}{114}
 \contentsline {subsubsection}{\numberline {7.1.5.4}Condi\IeC {\c c}\IeC {\~o}es iniciais}{115}
 \contentsline {subsubsection}{\numberline {7.1.5.5}Par\IeC {\^a}metros do controlador}{115}
 \contentsline {subsubsection}{\numberline {7.1.5.6}Simula\IeC {\c c}\IeC {\~o}es}{115}

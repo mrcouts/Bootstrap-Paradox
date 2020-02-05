@@ -723,7 +723,7 @@ plt.savefig('qbarnorm.png')
 
 gnr = GNR(Clara, 
           np.matrix([[0.5375391526183005, 2.308800210309811,  0.5375391526183005, 2.308800210309811]]).T, 
-          np.matrix([[0.17,0.16]]).T, 
+          np.matrix([[-0.000,0.108]]).T, 
           5)
 print norm(gnr.qbar_, np.inf)
 gnr.doit()
