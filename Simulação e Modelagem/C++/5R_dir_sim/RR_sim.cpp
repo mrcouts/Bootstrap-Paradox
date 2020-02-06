@@ -71,8 +71,8 @@ int main(){
 //    //vec sigma_ = ((vec){0.3, 0.1, 0.2, 0.1, 0.5, 0.1}) % sign(randn(6))*1.8;
 //    //vec sigma_ = sign(randn(6))*0.5;
 //    //vec sigma_ = {-0.15,0.15,0.15,0.15,0.15,0.15};
-    vec sigma_ = {-1.0,1.0,1.0,1.0,1.0,1.0};
-    vec coef_  = ones(6) + 0.2*sigma_;
+    vec sigma_ = { 0.29, -0.3, 0.00480, -0.31, -0.06, 0.13, -0.25, 0.19, 0.074, 0.053, -0.130, -0.045, -0.16, 0.036};
+    vec coef_  = ones(14) - 1.0*sigma_;
 //
 //    cube I__; I__.zeros(3,3,2);
 //    I__.slice(0) << 0 << 0   << 0   << endr
@@ -111,6 +111,14 @@ int main(){
                   << 0 << 301.679e-6 << 0          << endr
                   << 0 << 0          << 301.679e-6 << endr;
 
+    cube _I1__; _I1__.zeros(3,3,2);
+    _I1__.slice(0) = coef_(5)*I1__.slice(0);
+    _I1__.slice(1) = coef_(6)*I1__.slice(1);
+
+    cube _I2__; _I2__.zeros(3,3,2);
+    _I2__.slice(0) = coef_(12)*I2__.slice(0);
+    _I2__.slice(1) = coef_(13)*I2__.slice(1);
+
     Serial RR1 = Serial(2, {0.12, 0.16}, {0.06, 0.078},{0.062, 0.124}, {1.226e-4, 0}, {0*4.357e-2, 0}, I1__ , {0, 0, 9.8}, &fDH_RR);
     Serial RR2 = Serial(2, {0.12, 0.16}, {0.06, 0.058},{0.062, 0.097}, {2.039e-4, 0}, {0*4.992e-2, 0}, I2__ , {0, 0, 9.8}, &fDH_RR);
     Serial **RR_ = new Serial* [2];
@@ -119,8 +127,8 @@ int main(){
 
     //Serial _RR1 = Serial(2, {l1, l2}, {coef_(0)*lg1, coef_(1)*lg2},{coef_(2)*m1, coef_(3)*m2}, _I__ , {0, -0*9.8,0}, &fDH_RR);
     //Serial _RR2 = Serial(2, {l1, l2}, {coef_(0)*lg1, coef_(1)*lg2},{coef_(2)*m1, coef_(3)*m2}, _I__ , {0, -0*9.8,0}, &fDH_RR);
-    Serial _RR1 = Serial(2, {0.12, 0.16}, {coef_(0)*0.06, coef_(1)*0.078},{coef_(2)*0.062, coef_(3)*0.124}, {coef_(0)*1.226e-4, 0}, {4.357e-2, 0}, coef_(4)*I1__ , {0, 0, 9.8}, &fDH_RR);
-    Serial _RR2 = Serial(2, {0.12, 0.16}, {coef_(0)*0.06, coef_(1)*0.058},{coef_(2)*0.062, coef_(3)*0.097}, {coef_(0)*2.039e-4, 0}, {4.992e-2, 0}, coef_(4)*I2__ , {0, 0, 9.8}, &fDH_RR);
+    Serial _RR1 = Serial(2, {0.12, 0.16}, {coef_(0)*0.06, coef_(1)*0.078},{coef_(2)*0.062, coef_(3)*0.124},  {coef_(4)*1.226e-4, 0},  {4.357e-2, 0}, _I1__ , {0, 0, 9.8}, &fDH_RR);
+    Serial _RR2 = Serial(2, {0.12, 0.16}, {coef_(7)*0.06, coef_(8)*0.058},{coef_(9)*0.062, coef_(10)*0.097}, {coef_(11)*2.039e-4, 0}, {4.992e-2, 0}, _I2__ , {0, 0, 9.8}, &fDH_RR);
     Serial **_RR_ = new Serial* [2];
     _RR_[0] = &_RR1;
     _RR_[1] = &_RR2;
