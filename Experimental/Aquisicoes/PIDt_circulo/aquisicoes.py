@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from math import pi as Pi
 from txt2py import *
+from matplotlib.ticker import MultipleLocator
 
 A = txt2py("aquisicao_circulo_PIDt_lambda35_11.txt")
 
@@ -96,11 +97,14 @@ s2_quad = (2*s2_quad/(n8-n2))**0.5
 print "e_quad =", e_quad, "| tau_quad =", tau_quad, "| s1_quad =", s1_quad, "| s2_quad =", s2_quad, "| ex_quad =", ex_quad, "| ey_quad =", ey_quad, "| tau1_quad =", tau1_quad, "| tau2_quad =", tau2_quad
 """
 
+ml_minor = MultipleLocator(1)
+ml_major = MultipleLocator(4)
+
 fig, ax = plt.subplots()
 ax.plot(xref_np, yref_np, 'b', linewidth=1, label= 'Refer' + u'ê' 'ncia')
 ax.plot(x_np,    y_np,    'r', linewidth=1, label='Trajet' + u'ó' + 'ria real')
-plt.xlabel(r'$x[mm]$')
-plt.ylabel(r'$y[mm]$')
+plt.xlabel(r'$x[mm]$', fontsize=18)
+plt.ylabel(r'$y[mm]$', fontsize=18)
 plt.axis('equal')
 plt.title('Trajet' + u'ó' + 'ria realizada')
 ax.legend(loc=4, ncol=1, prop={'size': 10})
@@ -108,32 +112,36 @@ plt.savefig('xy.png')
 
 plt.figure()
 plt.plot(t_np, ex_np, 'r', linewidth=1.01)
-plt.xlabel(r'$t[s]$')
-plt.ylabel(r'$e_x[mm]$')
-plt.ylim(-9.5, 9.5) 
+plt.xlabel(r'$t[s]$', fontsize=18)
+plt.ylabel(r'$e_x[mm]$', fontsize=18)
+plt.ylim(-9.5, 9.5)
+plt.axes().yaxis.set_minor_locator(ml_minor)
+plt.axes().yaxis.set_major_locator(ml_major) 
 plt.title('Erro de posi' + u'ç' + u'ã' + 'o em fun'  + u'ç' + u'ã' 'o do tempo (coordenada x)')
 plt.savefig('ex.png')
 
 plt.figure()
 plt.plot(t_np, ey_np, 'r', linewidth=1.01)
-plt.xlabel(r'$t[s]$')
-plt.ylabel(r'$e_y[mm]$')
-plt.ylim(-9.5, 9.5) 
+plt.xlabel(r'$t[s]$', fontsize=18)
+plt.ylabel(r'$e_y[mm]$', fontsize=18)
+plt.ylim(-9.5, 9.5)
+plt.axes().yaxis.set_minor_locator(ml_minor)
+plt.axes().yaxis.set_major_locator(ml_major) 
 plt.title('Erro de posi' + u'ç' + u'ã' + 'o em fun'  + u'ç' + u'ã' 'o do tempo (coordenada y)')
 plt.savefig('ey.png')
 
 plt.figure()
 plt.plot(t_np, tau1_np, 'r', linewidth=1.01)
-plt.xlabel(r'$t[s]$')
-plt.ylabel(r'$\tau_1[Nm]$')
+plt.xlabel(r'$t[s]$', fontsize=18)
+plt.ylabel(r'$\tau_1[Nm]$', fontsize=18)
 plt.ylim(-0.7, 0.7) 
 plt.title('Torque aplicado ' + 'em fun'  + u'ç' + u'ã' 'o do tempo (atuador 1)')
 plt.savefig('tau1.png')
 
 plt.figure()
 plt.plot(t_np, tau2_np, 'r', linewidth=1.01)
-plt.xlabel(r'$t[s]$')
-plt.ylabel(r'$\tau_2[Nm]$')
+plt.xlabel(r'$t[s]$', fontsize=18)
+plt.ylabel(r'$\tau_2[Nm]$', fontsize=18)
 plt.ylim(-0.7, 0.7) 
 plt.title('Torque aplicado ' + 'em fun'  + u'ç' + u'ã' 'o do tempo (atuador 2)')
 plt.savefig('tau2.png')
