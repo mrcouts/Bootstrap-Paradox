@@ -138,7 +138,7 @@
 \falsafolhaderosto
 \folhaderosto
 \includepdf[pages=1]{FichaCatalografica.pdf}
-\clearpage\thispagestyle{empty}\addtocounter{page}{-1} \clearpage
+%\clearpage\thispagestyle{empty}\addtocounter{page}{-1} \clearpage
 
 
 % ========== Folha de assinaturas (opcional) ==========
@@ -4938,12 +4938,12 @@ Para realizar a simulação dinâmica direta, definimos:
 
 \subsubsection{Parâmetros do modelo}
 
-Definimos os seguintes parâmetros para o modelo do mecanismo em questão nas tabelas \ref{tab:parametrosSimulacao1} e \ref{tab:parametrosSimulacao2} :
-
+Os parâmetros nominais do modelo, considerando os coeficientes de atrito seco e viscoso dos atuadores, são apresentados nas tabelas \ref{tab:parametrosSimulacao1} e \ref{tab:parametrosSimulacao2}. Estes parâmetros, com excessão de $\gmu$, sempre serão utilizados na parte de compensação de não linearidades do controlador. 
+%Definimos os seguintes parâmetros para o modelo do mecanismo em questão nas tabelas \ref{tab:parametrosSimulacao1} e \ref{tab:parametrosSimulacao2}:
 \begin{multicols}{2}
 \begin{table}[H] 
 \centering
-\caption{Parâmetros da cadeia serial 1}
+\caption{Parâmetros nominais: cadeia $\ssS_1$}
 \label{tab:parametrosSimulacao1}
 \begin{tabular}{l|l|l}
 Parâmetros   & Valores                  & Unidades      \\ \hline
@@ -4951,17 +4951,19 @@ $l_0$        & $0{,}050$                     & $m$        \\
 $l_1$        & $0{,}120$                     & $m$        \\
 $l_2$        & $0{,}160$                     & $m$        \\
 $l_{g1}$     & $0{,}060$                     & $m$        \\
-$l_{g2}$     & $0{,}078$                    & $m$        \\
-$m_1$        & $0{,}062$                    & $kg$       \\
-$m_2$        & $0{,}124$                    & $kg$       \\
-$J_{z1}$     & $2{,}542 \cdot 10^{-4}$    & $kg.m^{2}$ \\
-$J_{z2}$     & $5{,}769 \cdot 10^{-4}$    & $kg.m^{2}$ \\
+$l_{g2}$     & $0{,}078$                     & $m$        \\
+$m_1$        & $0{,}062$                     & $kg$       \\
+$m_2$        & $0{,}124$                     & $kg$       \\
+$J_{z1}$     & $2{,}542 \cdot 10^{-4}$       & $kg.m^{2}$ \\
+$J_{z2}$     & $5{,}769 \cdot 10^{-4}$       & $kg.m^{2}$ \\
+$b$          & $1{,}226 \cdot 10^{-4}$       & $N s$      \\
+$\gmu$       & $4{,}457 \cdot 10^{-2}$       & $Nm$        \\
 \end{tabular}
-\end{table} 
+\end{table}
 
 \begin{table}[H] 
 \centering
-\caption{Parâmetros da cadeia 2}
+\caption{Parâmetros nominais: cadeia $\ssS_2$}
 \label{tab:parametrosSimulacao2}
 \begin{tabular}{l|l|l}
 Parâmetros   & Valores                    & Unidades   \\ \hline
@@ -4974,6 +4976,94 @@ $m_1$        & $0{,}062$                    & $kg$       \\
 $m_2$        & $0{,}097$                    & $kg$       \\
 $J_{z1}$     & $2{,}960   \cdot 10^{-4}$    & $kg.m^{2}$ \\
 $J_{z2}$     & $3{,}307   \cdot 10^{-4}$    & $kg.m^{2}$ \\
+$b$          & $2{,}039 \cdot 10^{-4}$      & $N s$      \\
+$\gmu$       & $4{,}992 \cdot 10^{-2}$      & $Nm$        \\
+\end{tabular}
+\end{table}
+\end{multicols}
+
+Serão realizadas 3 simulações, uma com o mecanismo $\ssP$ com os parâmetros nominais, e duas com incertezas nos parâmetros $l_{g1}$, $l_{g2}$, $m_1$, $m_2$, $J_{z1}$, $J_{z2}$ e $b$ de cada cadeia.  Nas tabelas \ref{tab:parametrosSimulacao3} e \ref{tab:parametrosSimulacao4}, os novos valores dos parâmetros citados foram obtidos através da geração de números aleatórios com distribuição normal, com média nos valores nominais e desvio padrão de 20\%.
+\begin{multicols}{2}
+\begin{table}[H] 
+\centering
+\caption{Parâmetros c/ incerteza de 20\%: cadeia $\ssS_1$}
+\label{tab:parametrosSimulacao3}
+\begin{tabular}{l|l|l}
+Parâmetros   & Valores                  & Unidades      \\ \hline
+$l_0$        & $0{,}050$                     & $m$        \\
+$l_1$        & $0{,}120$                     & $m$        \\
+$l_2$        & $0{,}160$                     & $m$        \\
+$l_{g1}$     & $0{,}043$                     & $m$        \\
+$l_{g2}$     & $0{,}101$                     & $m$        \\
+$m_1$        & $0{,}062$                     & $kg$       \\
+$m_2$        & $0{,}162$                     & $kg$       \\
+$J_{z1}$     & $2{,}212 \cdot 10^{-4}$       & $kg.m^{2}$ \\
+$J_{z2}$     & $7{,}211 \cdot 10^{-4}$       & $kg.m^{2}$ \\
+$b$          & $1{,}300 \cdot 10^{-4}$       & $N s$      \\
+$\gmu$       & $4{,}457 \cdot 10^{-2}$       & $Nm$        \\
+\end{tabular}
+\end{table} 
+
+\begin{table}[H] 
+\centering
+\caption{Parâmetros c/ incerteza de 20\%: cadeia $\ssS_2$}
+\label{tab:parametrosSimulacao4}
+\begin{tabular}{l|l|l}
+Parâmetros   & Valores                    & Unidades   \\ \hline
+$l_0$        & $0{,}050$                    & $m$        \\
+$l_1$        & $0{,}120$                    & $m$        \\
+$l_2$        & $0{,}160$                    & $m$        \\
+$l_{g1}$     & $0{,}049$                    & $m$        \\
+$l_{g2}$     & $0{,}054$                    & $m$        \\
+$m_1$        & $0{,}059$                    & $kg$       \\
+$m_2$        & $0{,}110$                    & $kg$       \\
+$J_{z1}$     & $2{,}486   \cdot 10^{-4}$    & $kg.m^{2}$ \\
+$J_{z2}$     & $3{,}188   \cdot 10^{-4}$    & $kg.m^{2}$ \\
+$b$          & $2{,}134 \cdot 10^{-4}$      & $N s$      \\
+$\gmu$       & $4{,}992 \cdot 10^{-2}$      & $Nm$        \\
+\end{tabular}
+\end{table}
+\end{multicols}
+
+Nas tabelas \ref{tab:parametrosSimulacao5} e \ref{tab:parametrosSimulacao6}, os novos valores dos parâmetros incertos foram obtidos dobrando a porcentagem de desvio dos valores das tabelas \ref{tab:parametrosSimulacao3} e \ref{tab:parametrosSimulacao4} em relação aos parâmetros nominais.
+\begin{multicols}{2}
+\begin{table}[H] 
+\centering
+\caption{Parâmetros c/ incerteza de 40\%: cadeia $\ssS_1$}
+\label{tab:parametrosSimulacao5}
+\begin{tabular}{l|l|l}
+Parâmetros   & Valores                  & Unidades      \\ \hline
+$l_0$        & $0{,}050$                     & $m$        \\
+$l_1$        & $0{,}120$                     & $m$        \\
+$l_2$        & $0{,}160$                     & $m$        \\
+$l_{g1}$     & $0{,}025$                     & $m$        \\
+$l_{g2}$     & $0{,}125$                     & $m$        \\
+$m_1$        & $0{,}061$                     & $kg$       \\
+$m_2$        & $0{,}201$                     & $kg$       \\
+$J_{z1}$     & $1{,}881 \cdot 10^{-4}$       & $kg.m^{2}$ \\
+$J_{z2}$     & $8{,}654 \cdot 10^{-4}$       & $kg.m^{2}$ \\
+$b$          & $1{,}373 \cdot 10^{-4}$       & $N s$      \\
+$\gmu$       & $4{,}457 \cdot 10^{-2}$       & $Nm$        \\
+\end{tabular}
+\end{table} 
+
+\begin{table}[H] 
+\centering
+\caption{Parâmetros c/ incerteza de 40\%: cadeia $\ssS_2$}
+\label{tab:parametrosSimulacao6}
+\begin{tabular}{l|l|l}
+Parâmetros   & Valores                    & Unidades   \\ \hline
+$l_0$        & $0{,}050$                    & $m$        \\
+$l_1$        & $0{,}120$                    & $m$        \\
+$l_2$        & $0{,}160$                    & $m$        \\
+$l_{g1}$     & $0{,}037$                    & $m$        \\
+$l_{g2}$     & $0{,}049$                    & $m$        \\
+$m_1$        & $0{,}055$                    & $kg$       \\
+$m_2$        & $0{,}122$                    & $kg$       \\
+$J_{z1}$     & $2{,}013   \cdot 10^{-4}$    & $kg.m^{2}$ \\
+$J_{z2}$     & $3{,}069   \cdot 10^{-4}$    & $kg.m^{2}$ \\
+$b$          & $2{,}222 \cdot 10^{-4}$      & $N s$      \\
+$\gmu$       & $4{,}992 \cdot 10^{-2}$      & $Nm$        \\
 \end{tabular}
 \end{table}
 \end{multicols}
@@ -5022,7 +5112,7 @@ y_{d}(t) = 0{,}158 - 0{,}05 \cos(2 \pi t) \\
 \end{equation}
 
 \subsubsection{Condições iniciais}
-As condições inicias foram escolhidas de modo a posição e velocidade inicial coincida com as referências de posição e velocidade em $t=0$, de modo a minimizar os picos de torque no inicio da trajetória, tendo em vista que o intuito é observar o comportamento do sistema em regime permanente. 
+As condições inicias foram escolhidas de modo que a posição e velocidade inicial coincida com as referências de posição e velocidade em $t=0$, de modo a minimizar os picos de torque no inicio da trajetória, tendo em vista que o intuito é observar o comportamento do sistema em regime permanente. 
 \begin{equation}
 \begin{cases}
 x(0) = 0\\
@@ -5041,18 +5131,20 @@ Os parâmetros do Controle por Torque Computado foram escolhidos de modo que a d
 
 \subsubsection{Simulações}
 
-Nas figuras \ref{fig:Torque1_0} a \ref{fig:ey_40} são apresentados os resultados de 3 simulações dinâmicas diretas do mecanismo 5R, considerando 3 níveis de incerteza nos parâmetros inerciais (massas, momentos de inércia e posição dos centros de massa): 0\%, 20\% e 40\%. Todas as simulações são realizadas utilizando a lei de Controle por Torque Computado apresentada na seção \ref{sec:CTC}, utilizando os parâmetros definidos nas tabelas \ref{tab:parametrosSimulacao1} e \ref{tab:parametrosSimulacao2}.
+Nas figuras \ref{fig:Torque1_0} a \ref{fig:ey_40} são apresentados os resultados de 3 simulações dinâmicas diretas do mecanismo 5R, considerando 3 níveis de incerteza nos parâmetros inerciais e no coeficiente de atrito viscoso: 0\%, 20\% e 40\%. Todas as simulações são realizadas utilizando a lei de Controle por Torque Computado apresentada na seção \ref{sec:CTC}, utilizando os parâmetros definidos nas tabelas \ref{tab:parametrosSimulacao1} e \ref{tab:parametrosSimulacao2}, sem realizar a compensação de atrito seco.
+
+\newpage
 
 \begin{multicols}{2}
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.4]{imagens/0/tau1.png}  
+	\includegraphics[scale=0.42]{imagens/0/tau1.png}  
 	\caption{$\tau_1$: sem incerteza}
 	\label{fig:Torque1_0}
 \end{figure}
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.4]{imagens/0/tau2.png}  
+	\includegraphics[scale=0.42]{imagens/0/tau2.png}  
 	\caption{$\tau_2$: sem incerteza}
 	\label{fig:Torque2_0}
 \end{figure}
@@ -5061,13 +5153,13 @@ Nas figuras \ref{fig:Torque1_0} a \ref{fig:ey_40} são apresentados os resultado
 \begin{multicols}{2}
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.4]{imagens/20/tau1.png}  
+	\includegraphics[scale=0.42]{imagens/20/tau1.png}  
 	\caption{$\tau_1$: 20\% de incerteza}
 	\label{fig:Torque1_20}
 \end{figure}
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.4]{imagens/20/tau2.png}  
+	\includegraphics[scale=0.42]{imagens/20/tau2.png}  
 	\caption{$\tau_2$: 20\% de incerteza}
 	\label{fig:Torque2_20}
 \end{figure}
@@ -5076,13 +5168,13 @@ Nas figuras \ref{fig:Torque1_0} a \ref{fig:ey_40} são apresentados os resultado
 \begin{multicols}{2}
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.4]{imagens/40/tau1.png}  
+	\includegraphics[scale=0.42]{imagens/40/tau1.png}  
 	\caption{$\tau_1$: 40\% de incerteza}
 	\label{fig:Torque1_40}
 \end{figure}
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.4]{imagens/40/tau2.png}  
+	\includegraphics[scale=0.42]{imagens/40/tau2.png}  
 	\caption{$\tau_2$: 40\% de incerteza}
 	\label{fig:Torque2_40}
 \end{figure}
@@ -5157,7 +5249,7 @@ A bancada é constituída de:
 \item Potência nominal de $250W$
 \item Tensão de alimentação de $24V$
 \item Rotação nominal de $3600 rpm$
-\item Peso de $1{,}80 kgf$ 
+\item Masa de $1{,}80 kg$ 
 \end{itemize}
 \item  2 enconders incrementais do modelo E40S com as seguintes características:
 \begin{itemize}
@@ -5278,12 +5370,12 @@ Foram realizados ensaios experimentais utilizando as seguintes estratégias de c
 \begin{itemize}
 \item Controle Proporcional-Derivativo com pré-alimentação no espaço das juntas (PDq)
 \item Controle Proporcional-Derivativo com pré-alimentação no espaço da tarefa (PDx)
-\item Controle por Toque Computado no espaço das juntas (TCq)
-\item Controle por Toque Computado no espaço da tarefa (TCx)
+\item Controle por Torque Computado no espaço das juntas (TCq)
+\item Controle por Torque Computado no espaço da tarefa (TCx)
 \item Controle Proporcional-Derivativo + Modos Deslizantes no espaço das juntas (PDMDq)
 \item Controle Proporcional-Derivativo + Modos Deslizantes no espaço da tarefa (PDMDx)
-\item Controle por Toque Computado + Modos Deslizantes no espaço das juntas (TCMDq)
-\item Controle por Toque Computado + Modos Deslizantes no espaço da tarefa (TCMDx)
+\item Controle por Torque Computado + Modos Deslizantes no espaço das juntas (TCMDq)
+\item Controle por Torque Computado + Modos Deslizantes no espaço da tarefa (TCMDx)
 \end{itemize}
 
 Todas as leis de controle podem ser obtidas através da seguinte lei de controle, deduzida na seção \ref{sec:CMD}:
@@ -5310,46 +5402,9 @@ Um diagrama de blocos que representa o caso geral da lei de controle da equaçã
 
 \subsection{Parâmetros do sistema}
 
-Nas tabelas \ref{tab:parametrosCadeia1} e \ref{tab:parametrosCadeia2} são apresentados os valores estimados dos parâmetros das cadeias seriais do mecanismo. A massa do efetuador é considerada nula. Os comprimentos dos elos e a distância entre os atuadores são os valores de projeto do sistema e estão de acordo com as medições realizadas. Os parâmetros de inércias, ou seja, as massas, momentos de inércia, e posição dos centros de massa, foram obtidos a partir do modelo CAD do mecanismo.
+Os valores estimados dos parâmetros das cadeias seriais do mecanismo são os mesmos apresentados nas tabelas \ref{tab:parametrosSimulacao1} e \ref{tab:parametrosSimulacao2}. A massa do efetuador é considerada nula. Os comprimentos dos elos e a distância entre os atuadores são os valores de projeto do sistema e estão de acordo com as medições realizadas. Os parâmetros inerciais, ou seja, as massas, momentos de inércia, e posição dos centros de massa, foram obtidos a partir do modelo CAD do mecanismo. Os momentos de inércia $J_{z1}$ já consideram a inércia dos atuadores.
 
-Os valores dos parâmetros estimados dos motores são apresentados nas tabelas \ref{parametrosMotor} e \ref{parametrosMotor2}, as quais estão no apêndice \ref{ap:CurvaDosMotores}, juntamente com o processo de identificação utilizado. 
-\begin{multicols}{2}
-\begin{table}[H] 
-\centering
-\caption{Parâmetros da cadeia serial 1}
-\label{tab:parametrosCadeia1}
-\begin{tabular}{l|l|l}
-Parâmetros   & Valores                  & Unidades      \\ \hline
-$l_0$        & $0{,}050$                     & $m$        \\
-$l_1$        & $0{,}120$                     & $m$        \\
-$l_2$        & $0{,}160$                     & $m$        \\
-$l_{g1}$     & $0{,}060$                     & $m$        \\
-$l_{g2}$     & $0{,}078$                    & $m$        \\
-$m_1$        & $0{,}062$                    & $kg$       \\
-$m_2$        & $0{,}124$                    & $kg$       \\
-$J_{z1}$     & $2{,}542 \cdot 10^{-4}$    & $kg.m^{2}$ \\
-$J_{z2}$     & $5{,}769 \cdot 10^{-4}$    & $kg.m^{2}$ \\
-\end{tabular}
-\end{table} 
-
-\begin{table}[H] 
-\centering
-\caption{Parâmetros da cadeia 2}
-\label{tab:parametrosCadeia2}
-\begin{tabular}{l|l|l}
-Parâmetros   & Valores                    & Unidades   \\ \hline
-$l_0$        & $0{,}050$                    & $m$        \\
-$l_1$        & $0{,}120$                    & $m$        \\
-$l_2$        & $0{,}160$                    & $m$        \\
-$l_{g1}$     & $0{,}060$                    & $m$        \\
-$l_{g2}$     & $0{,}058$                    & $m$        \\
-$m_1$        & $0{,}062$                    & $kg$       \\
-$m_2$        & $0{,}097$                    & $kg$       \\
-$J_{z1}$     & $2{,}960   \cdot 10^{-4}$    & $kg.m^{2}$ \\
-$J_{z2}$     & $3{,}307   \cdot 10^{-4}$    & $kg.m^{2}$ \\
-\end{tabular}
-\end{table}
-\end{multicols}
+Os valores dos parâmetros estimados dos motores são apresentados nas tabelas \ref{parametrosMotor} e \ref{parametrosMotor2}, as quais estão no apêndice \ref{ap:CurvaDosMotores}, juntamente com o processo de identificação utilizado.
 
 \subsection{Trajetórias de referência}
 
