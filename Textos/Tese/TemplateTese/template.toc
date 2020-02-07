@@ -88,14 +88,14 @@
 \contentsline {section}{\numberline {7.2}Ensaios Experimentais}{121}
 \contentsline {subsection}{\numberline {7.2.1}Bancada experimental}{121}
 \contentsline {subsection}{\numberline {7.2.2}Sistema de controle}{123}
-\contentsline {subsection}{\numberline {7.2.3}Derivadores num\IeC {\'e}ricos}{125}
+\contentsline {subsection}{\numberline {7.2.3}Derivadores num\IeC {\'e}ricos}{124}
 \contentsline {subsection}{\numberline {7.2.4}Observador de corrente}{125}
 \contentsline {subsection}{\numberline {7.2.5}Compensadores de n\IeC {\~a}o-linearidades}{125}
 \contentsline {subsection}{\numberline {7.2.6}Estrat\IeC {\'e}gias de controle}{126}
 \contentsline {subsection}{\numberline {7.2.7}Par\IeC {\^a}metros do sistema}{127}
-\contentsline {subsection}{\numberline {7.2.8}Trajet\IeC {\'o}rias de refer\IeC {\^e}ncia}{128}
+\contentsline {subsection}{\numberline {7.2.8}Trajet\IeC {\'o}rias de refer\IeC {\^e}ncia}{127}
 \contentsline {subsection}{\numberline {7.2.9}Condi\IeC {\c c}\IeC {\~o}es iniciais}{128}
-\contentsline {subsection}{\numberline {7.2.10}Par\IeC {\^a}metros dos controladores}{129}
+\contentsline {subsection}{\numberline {7.2.10}Par\IeC {\^a}metros dos controladores}{128}
 \contentsline {subsection}{\numberline {7.2.11}Resultados experimentais}{130}
 \contentsline {subsubsection}{\numberline {7.2.11.1}PDq - Trajet\IeC {\'o}ria circular}{131}
 \contentsline {subsubsection}{\numberline {7.2.11.2}PDMDq - Trajet\IeC {\'o}ria circular}{132}

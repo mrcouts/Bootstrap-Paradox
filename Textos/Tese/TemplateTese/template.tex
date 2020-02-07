@@ -4938,7 +4938,7 @@ Para realizar a simulação dinâmica direta, definimos:
 
 \subsubsection{Parâmetros do modelo}
 
-Os parâmetros nominais do modelo, considerando os coeficientes de atrito seco e viscoso dos atuadores, são apresentados nas tabelas \ref{tab:parametrosSimulacao1} e \ref{tab:parametrosSimulacao2}. Estes parâmetros, com excessão de $\gmu$, sempre serão utilizados na parte de compensação de não linearidades do controlador. 
+Os parâmetros nominais do modelo, considerando os coeficientes de atrito seco e viscoso dos atuadores, são apresentados nas tabelas \ref{tab:parametrosSimulacao1} e \ref{tab:parametrosSimulacao2}. Estes parâmetros, com exceção de $\gmu$, sempre serão utilizados na parte de compensação de não linearidades do controlador. 
 %Definimos os seguintes parâmetros para o modelo do mecanismo em questão nas tabelas \ref{tab:parametrosSimulacao1} e \ref{tab:parametrosSimulacao2}:
 \begin{multicols}{2}
 \begin{table}[H] 
@@ -4982,7 +4982,7 @@ $\gmu$       & $4{,}992 \cdot 10^{-2}$      & $Nm$        \\
 \end{table}
 \end{multicols}
 
-Serão realizadas 3 simulações, uma com o mecanismo $\ssP$ com os parâmetros nominais, e duas com incertezas nos parâmetros $l_{g1}$, $l_{g2}$, $m_1$, $m_2$, $J_{z1}$, $J_{z2}$ e $b$ de cada cadeia.  Nas tabelas \ref{tab:parametrosSimulacao3} e \ref{tab:parametrosSimulacao4}, os novos valores dos parâmetros citados foram obtidos através da geração de números aleatórios com distribuição normal, com média nos valores nominais e desvio padrão de 20\%.
+Serão realizadas 3 simulações, uma com o mecanismo 5R com os parâmetros nominais, e duas com incertezas nos parâmetros $l_{g1}$, $l_{g2}$, $m_1$, $m_2$, $J_{z1}$, $J_{z2}$ e $b$ de cada cadeia.  Os novos valores dos parâmetros citados foram obtidos através da geração de números aleatórios com distribuição normal, com média nos valores nominais e desvio padrão de 20\%, e podem ser vistos nas tabelas \ref{tab:parametrosSimulacao3} e \ref{tab:parametrosSimulacao4}.
 \begin{multicols}{2}
 \begin{table}[H] 
 \centering
@@ -5106,8 +5106,8 @@ Foi escolhida a mesma trajetória circular utilizada nos ensaios experimentais c
 %A trajetória de referência foi escolhida como sendo uma trajetória circular de grande diâmetro, de modo que a trajetória fique boa parte do tempo próxima da região consideradas singular. Sua expressão é dada por:
 \begin{equation}
 \begin{cases}
-x_{d}(t) = -0{,}05 \sin(2 \pi t) \\
-y_{d}(t) = 0{,}158 - 0{,}05 \cos(2 \pi t) \\
+x_{d}(t) = -0{,}05 \sin(2 \pi t) \;[m]  \\
+y_{d}(t) = 0{,}158 - 0{,}05 \cos(2 \pi t) \; [m] \\
 \end{cases}
 \end{equation}
 
@@ -5116,8 +5116,8 @@ As condições inicias foram escolhidas de modo que a posição e velocidade ini
 \begin{equation}
 \begin{cases}
 x(0) = 0\\
-y(0) = 0{,}108 \\
-\dot{x}(0) = -\pi/10 \\
+y(0) = 0{,}108 \, m \\
+\dot{x}(0) = -\pi/10 \,m/s \\
 \dot{y}(0) = 0 \\
 \end{cases}
 \end{equation}
@@ -5132,6 +5132,8 @@ Os parâmetros do Controle por Torque Computado foram escolhidos de modo que a d
 \subsubsection{Simulações}
 
 Nas figuras \ref{fig:Torque1_0} a \ref{fig:ey_40} são apresentados os resultados de 3 simulações dinâmicas diretas do mecanismo 5R, considerando 3 níveis de incerteza nos parâmetros inerciais e no coeficiente de atrito viscoso: 0\%, 20\% e 40\%. Todas as simulações são realizadas utilizando a lei de Controle por Torque Computado apresentada na seção \ref{sec:CTC}, utilizando os parâmetros definidos nas tabelas \ref{tab:parametrosSimulacao1} e \ref{tab:parametrosSimulacao2}, sem realizar a compensação de atrito seco.
+
+Nos gráficos pode-se observar o aumento do esforço de controle conforme o nível de incerteza cresce. Também é possível observar que o perfil do erro na coordenada $x$  sofreu pouca influência com o aumento do nível de incerteza, enquanto o perfil do erro em $y$ apresenta uma mudança sutil.
 
 \newpage
 
@@ -5229,8 +5231,6 @@ Nas figuras \ref{fig:Torque1_0} a \ref{fig:ey_40} são apresentados os resultado
 
 \newpage
 
-Nos gráficos pode-se observar o aumento do esforço de controle conforme o nível de incerteza cresce. Também é possível observar que o perfil do erro na coordenada $x$  sofreu pouca influência com o aumento do nível de incerteza, enquanto o perfil do erro em $y$ apresenta uma mudança sutil.
-
 Tendo em vista que o presente trabalho tem caráter experimental, as comparações entre o desempenho de diferentes estratégias de controle serão feitas baseadas nos resultados obtidos experimentalmente.
 
 \section{Ensaios Experimentais}
@@ -5253,7 +5253,7 @@ A bancada é constituída de:
 \end{itemize}
 \item  2 enconders incrementais do modelo E40S com as seguintes características:
 \begin{itemize}
-\item Resolução de $5000 pulsos/volta$.
+\item Resolução de $5000\, pulsos/volta$.
 \item Tensão de alimentação de $12V$ a $24V$
 \item 3 canais de saída A, B e Z
 \end{itemize}
@@ -5306,8 +5306,8 @@ O sistema de controle é constituído de:
 \item Derivadores numéricos para a obtencão da velocidade e aceleração dos motores
 \item Observadores das correntes que passam pelos motores
 %\item Malhas de controles (malha de controle de corrente e malha de controle de posição) 
-\item Malha interna de controle de corrente ($f_s = 1kHz$)
-\item Malha externa de controle de posição ($f_s = 333Hz$)
+\item Malhas internas de controle de corrente ($f_s = 1kHz$)
+\item Uma malha externa de controle de posição ($f_s = 333Hz$)
 \end{itemize} 
 
 Pelos enconders são obtidos os deslocamentos angulares dos motores, e com os derivadores numéricos são obtidos seus sinais de velocidade e acelaração. Esses três sinais juntos com suas respectivas referências são utilizados na malha de controle de posição. Os sinais de velocidade e de tensão que são enviados aos motores são utilizados para estimar as correntes que passam pelos motores. A partir dos erros entre o valores estimados e as correntes de referência, o controlador calcula, a partir da lei de controle, as tensões a serem enviadas aos motores. Representações das arquiteturas de controle implementadas, controle no espaço das juntas e no espaço da tarefa, podem ser vistas nas figuras \ref{fig:ControleEspacoDasJuntas} e \ref{fig:ControleEspacoDaTarefa}.
@@ -5361,7 +5361,7 @@ Para implementar as técnicas de controle baseadas em modelo, é utilizado o alg
 
 Tendo em vista que a matriz de inércia generalizada depende apenas da posição, e que a matriz-coluna de esforços de inérciais giroscópicos pode ser expressa como a soma de matrizes coluna dependentes apenas da posição multiplicados por termos quadráticos das quasi-velocidades independentes, é feita uma discretização da área de trabalho, de modo a calcular o valor destas matrizes em um número finito de pontos e realizar interpolações bilineares em tempo real, de modo a obter um valor estimado desses termos da dinâmica em qualquer ponto não singular pertencente à área de trabalho.
 
-A discretização realizada aplica uma malha quadradiculada de lado $5mm$ na área de trabalho do mecanismo, de modo a calcular os termos da dinâmica comentados em cada ponto não singular pertencente à discretização.
+A discretização realizada aplica uma malha quadriculada de lado $5mm$ na área de trabalho do mecanismo, de modo a calcular os termos da dinâmica comentados em cada ponto não singular pertencente à discretização.
 
 \subsection{Estratégias de controle}
 
@@ -5411,8 +5411,8 @@ Os valores dos parâmetros estimados dos motores são apresentados nas tabelas \
 A primeira trajetória realizada é uma trajetória circular com período de 1 segundo. São realizados 8 ciclos seguidos de uma parada repentina ($x_d(t) = y_d(t) = 0 \text{ para } t > 8s$). Sua expressão é dada por:
 \begin{equation}
 \begin{cases}
-x_d(t) = -0{,}05 \sin(2\pi t) \\
-y_d(t) = 0{,}158 - 0{,}05 \cos(2\pi t) \\
+x_d(t) = -0{,}05 \sin(2\pi t) \;[m] \\
+y_d(t) = 0{,}158 - 0{,}05 \cos(2\pi t) \;[m] \\
 \end{cases}
 \end{equation}
 
@@ -5420,17 +5420,17 @@ A segunda trajetória a ser realizada é uma trajetória triangular cujas coorde
 \begin{equation} \label{eq:zeroMaquina}
 \mx_1 = \begin{bmatrix}
 -0{,}002 & 0{,}108 
-\end{bmatrix}^\msT
+\end{bmatrix}^\msT \,m
 \end{equation}
 \begin{equation}
 \mx_2 = \begin{bmatrix}
 0{,}050 & 0{,}258 
-\end{bmatrix}^\msT
+\end{bmatrix}^\msT \,m
 \end{equation}
 \begin{equation}
 \mx_3 = \begin{bmatrix}
--0{,}050 & 0{,}258 
-\end{bmatrix}^\msT
+-0{,}050 & 0{,}258  
+\end{bmatrix}^\msT \,m
 \end{equation}
 
 São realizados 2 ciclos, sendo que cada lado do triângulo é percorrido em $0{,}75s$, e sendo o trecho I de $\mx_1$ a $\mx_2$, o trecho II de $\mx_2$ a $\mx_3$, e o trecho III de $\mx_3$ a $\mx_1$. Depois de completar os 2 ciclos, é feita uma parada suave. Em cada lado do triângulo, é parametrizada uma trajetória polinomial de sétima ordem, na qual é imposta a posição inicial e final, velocidade nula, aceleração nula e tranco nulo no início e no final da trajetória. A expressão do polinômio é dada por:
@@ -5502,9 +5502,9 @@ Além disso, os controladores de corrente utilizados são controladores lineares
 
 \subsection{Resultados experimentais}
 
-Nesta subseção são apresentados os gráficos de seguimento de trajetória, da evolução temporal dos erros de controle em $x$ e $y$, e da evolução temporal dos esforços de controle para todas as 8 estratégias de controle definidas, tanto para a trajetória circular, quanto para a trajetória triangular (figuras de \ref{fig:PIDq_circulo_xy} a \ref{fig:SMCx_triangulo_tau2}). Também são apresentadas tabelas de comparação de desempenho e é feita a discussão dos resultados.
+Nesta subseção são apresentados os gráficos de seguimento de trajetória, da evolução temporal dos erros de controle em $x$ e $y$, e da evolução temporal dos esforços de controle para todas as 8 estratégias de controle definidas, na seguinte ordem: PDq, PDMDq, TCq, TCMDq, PDx, PDMDx, TCx, TCMDx; primeiramente para a trajetória circular, e depois para a trajetória triangular (figuras de \ref{fig:PIDq_circulo_xy} a \ref{fig:SMCx_triangulo_tau2}). Também são apresentadas tabelas de comparação de desempenho e é feita a discussão dos resultados.
 
-Como já foi comentado anteriormente, ambas as trajetórias partem do ponto $(-0{,}002; 0{,}108)$, sendo a trajetória circular realizada no sentido horário e a trajetória triangular no sentido anti-horário.
+Como já foi comentado anteriormente, ambas as trajetórias partem do ponto \linebreak $(-0{,}002; 0{,}108)\,m$. A trajetória circular termina no ponto $(0; 0{,}108)\,m$ e é realizada no sentido horário, e a trajetória triangular termina no mesmo ponto de partida e é realizada no sentido anti-horário.
 
 \newpage
 
