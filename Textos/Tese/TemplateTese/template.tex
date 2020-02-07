@@ -5402,9 +5402,15 @@ Um diagrama de blocos que representa o caso geral da lei de controle da equaçã
 
 \subsection{Parâmetros do sistema}
 
-Os valores estimados dos parâmetros das cadeias seriais do mecanismo são os mesmos apresentados nas tabelas \ref{tab:parametrosSimulacao1} e \ref{tab:parametrosSimulacao2}. A massa do efetuador é considerada nula. Os comprimentos dos elos e a distância entre os atuadores são os valores de projeto do sistema e estão de acordo com as medições realizadas. Os parâmetros inerciais, ou seja, as massas, momentos de inércia, e posição dos centros de massa, foram obtidos a partir do modelo CAD do mecanismo. Os momentos de inércia $J_{z1}$ já consideram a inércia dos atuadores.
+Os valores estimados dos parâmetros das cadeias seriais do mecanismo são os mesmos apresentados nas tabelas \ref{tab:parametrosSimulacao1} e \ref{tab:parametrosSimulacao2}. A massa do efetuador é considerada nula. Os comprimentos dos elos e a distância entre os atuadores são os valores de projeto do sistema e estão de acordo com as medições realizadas. Os parâmetros inerciais, ou seja, as massas, momentos de inércia, e posição dos centros de massa, foram obtidos a partir do modelo CAD do mecanismo (figura \ref{fig:ModeloCAD}). Os momentos de inércia $J_{z1}$ já consideram a inércia dos atuadores.
 
 Os valores dos parâmetros estimados dos motores são apresentados nas tabelas \ref{parametrosMotor} e \ref{parametrosMotor2}, as quais estão no apêndice \ref{ap:CurvaDosMotores}, juntamente com o processo de identificação utilizado.
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.51]{imagens/mecanismo_completo2.png}  
+	\caption{Modelo CAD do mecanismo 5R}
+	\label{fig:ModeloCAD}
+\end{figure}
 
 \subsection{Trajetórias de referência}
 
@@ -5420,17 +5426,17 @@ A segunda trajetória a ser realizada é uma trajetória triangular cujas coorde
 \begin{equation} \label{eq:zeroMaquina}
 \mx_1 = \begin{bmatrix}
 -0{,}002 & 0{,}108 
-\end{bmatrix}^\msT \,m
+\end{bmatrix}^\msT \,[m]
 \end{equation}
 \begin{equation}
 \mx_2 = \begin{bmatrix}
 0{,}050 & 0{,}258 
-\end{bmatrix}^\msT \,m
+\end{bmatrix}^\msT \,[m]
 \end{equation}
 \begin{equation}
 \mx_3 = \begin{bmatrix}
 -0{,}050 & 0{,}258  
-\end{bmatrix}^\msT \,m
+\end{bmatrix}^\msT \,[m]
 \end{equation}
 
 São realizados 2 ciclos, sendo que cada lado do triângulo é percorrido em $0{,}75s$, e sendo o trecho I de $\mx_1$ a $\mx_2$, o trecho II de $\mx_2$ a $\mx_3$, e o trecho III de $\mx_3$ a $\mx_1$. Depois de completar os 2 ciclos, é feita uma parada suave. Em cada lado do triângulo, é parametrizada uma trajetória polinomial de sétima ordem, na qual é imposta a posição inicial e final, velocidade nula, aceleração nula e tranco nulo no início e no final da trajetória. A expressão do polinômio é dada por:
@@ -5444,8 +5450,8 @@ Sendo $\mx$ a posição atual, $\mx_0$ a posição inicial, $\mx_f$ a posição 
 O mecanismo sempre parte do repouso na posição $\mx_1$, dada pela equação \eqref{eq:zeroMaquina}
 \begin{equation} \label{eq:zeroMaquina}
 \mx_1 = \begin{bmatrix}
--0{,}002 & 0{,}108 
-\end{bmatrix}^\msT
+-0{,}002 & 0{,}108
+\end{bmatrix}^\msT \,[m]
 \end{equation}
 
 \subsection{Parâmetros dos controladores}
