@@ -27,17 +27,19 @@ A. Akbarzadeh, J. Enferadi, M. Sharifnia.
 
 \bibitem{Rynaldo}
 R. Z. H. de Almeida.
-\newblock Modelagem din\^amica e controle e rob\^o manipulador
-de arquitetura paralela assim\'etrica de tr\^es graus de liberdade.
-\newblock {\em Tese (Doutorado) - Escola Polit\'ecnica da Universidade de
-S\~ao Paulo. Departamento de Engenharia Mecatr\^onica e de
-Sistemas Mec\^anicos},
-  2013.
+\newblock Modelagem din\^amica e controle e rob\^o manipulador de arquitetura paralela assim\'etrica de tr\^es graus de liberdade.
+\newblock {\em Tese (Doutorado) - Escola Polit\'ecnica da Universidade de S\~ao Paulo. Departamento de Engenharia Mecatr\^onica e de Sistemas Mec\^anicos}, 2013.
 
 \bibitem{20altuzarra}
 O. Altuzarra, P. M. Eggers, F. J. Campa, C. Roldan-Paraponiaris, C. Pinto.
 \newblock Dynamic Modelling of Lower-Mobility Parallel Manipulators Using the Boltzmann-Hamel Equations.
 \newblock {\em Mechanisms, Transmissions and Applications}, 157--165, Springer, 2015.
+
+\bibitem{Brian}
+B. J. A. de Aquino
+\newblock Avaliação de Erro Estático da Ferramenta de uma Fresadora com Arquitetura Paralela.
+\newblock {\em Dissertação (Mestrado) - Escola Polit\'ecnica da Universidade de S\~ao Paulo. Departamento de Engenharia Mecatr\^onica e de
+Sistemas Mec\^anicos}, 2016.
 
 \bibitem{Baumgarte}
 J. Baumgarte.

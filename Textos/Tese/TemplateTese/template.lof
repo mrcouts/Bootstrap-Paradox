@@ -6,7 +6,7 @@
 \contentsline {figure}{\numberline {5}{\ignorespaces Malha de Controle Preditivo Baseado em Modelo}}{42}
 \contentsline {figure}{\numberline {6}{\ignorespaces Malha de Controle Adaptativo (Adaptado de \cite {Craig})}}{43}
 \contentsline {figure}{\numberline {7}{\ignorespaces Malha Controle por Modos Deslizantes}}{45}
-\contentsline {figure}{\numberline {8}{\ignorespaces Prot\IeC {\'o}tipo do mecanismo 5R}}{49}
+\contentsline {figure}{\numberline {8}{\ignorespaces Bancada experimental - Prot\IeC {\'o}tipo do mecanismo 5R: Rob\IeC {\^o} Clara}}{49}
 \contentsline {figure}{\numberline {9}{\ignorespaces Modelagem de mecanismo serial a partir do modelo de seus ligamentos}}{51}
 \contentsline {figure}{\numberline {10}{\ignorespaces Diagrama de acoplamento de subsistemas}}{52}
 \contentsline {figure}{\numberline {11}{\ignorespaces Diagrama de acoplamento de subsistemas}}{70}
@@ -32,7 +32,7 @@
 \contentsline {figure}{\numberline {31}{\ignorespaces Arquitetura de controle: espa\IeC {\c c}o das juntas}}{123}
 \contentsline {figure}{\numberline {32}{\ignorespaces Arquitetura de controle: espa\IeC {\c c}o da tarefa}}{124}
 \contentsline {figure}{\numberline {33}{\ignorespaces Malha de TCMD}}{127}
-\contentsline {figure}{\numberline {34}{\ignorespaces Modelo CAD do mecanismo 5R}}{127}
+\contentsline {figure}{\numberline {34}{\ignorespaces Modelo CAD do rob\IeC {\^o} Clara}}{127}
 \contentsline {figure}{\numberline {35}{\ignorespaces Trajet\IeC {\'o}ria realizada}}{131}
 \contentsline {figure}{\numberline {36}{\ignorespaces Erro de controle $e_x$}}{131}
 \contentsline {figure}{\numberline {37}{\ignorespaces Erro de controle $e_y$}}{131}
@@ -113,6 +113,6 @@
 \contentsline {figure}{\numberline {112}{\ignorespaces Erro de controle $e_y$}}{146}
 \contentsline {figure}{\numberline {113}{\ignorespaces Esfor\IeC {\c c}o de controle $\tau _1$}}{146}
 \contentsline {figure}{\numberline {114}{\ignorespaces Esfor\IeC {\c c}o de controle $\tau _2$}}{146}
-\contentsline {figure}{\numberline {115}{\ignorespaces Circuito el\IeC {\'e}trico equivalente e modelo mec\IeC {\^a}nico do motor}}{178}
-\contentsline {figure}{\numberline {116}{\ignorespaces Curva de velocidade do motor 1}}{184}
-\contentsline {figure}{\numberline {117}{\ignorespaces Curva de velocidade do motor 2}}{185}
+\contentsline {figure}{\numberline {115}{\ignorespaces Circuito el\IeC {\'e}trico equivalente e modelo mec\IeC {\^a}nico do motor}}{180}
+\contentsline {figure}{\numberline {116}{\ignorespaces Curva de velocidade do motor 1}}{186}
+\contentsline {figure}{\numberline {117}{\ignorespaces Curva de velocidade do motor 2}}{187}
